@@ -31,8 +31,8 @@
 - Windows 보호 저장에는 Windows PowerShell 5.1 이상의 `powershell.exe`와 현재 Windows 사용자 프로필이 필요합니다.
 
 ```powershell
-git clone https://github.com/Lee-SiHyeon/xhr-to-api-only.git
-cd xhr-to-api-only
+git clone https://github.com/Lee-SiHyeon/web-api-playbook.git
+cd web-api-playbook
 npm ci --ignore-scripts
 npm run doctor
 ```
