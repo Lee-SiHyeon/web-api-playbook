@@ -1,0 +1,1280 @@
+[
+  {
+    "event": "response",
+    "method": "POST",
+    "url": "https://nid.naver.com/nidlogin.login",
+    "queryFields": [],
+    "request": {
+      "format": "non-json",
+      "length": 792
+    },
+    "status": 200,
+    "mime": "text/html",
+    "encodedDataLength": 3226,
+    "response": {
+      "availability": "not_json"
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/daily/cv",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 640,
+    "response": {
+      "bytes": 1505,
+      "sha256": "f679eb638527810ae8988dbf4e49f4c321b381b68f95be8e601cf64add5a73ef",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "cv": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "cv_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/cv",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 375,
+    "response": {
+      "bytes": 541,
+      "sha256": "e36f7f66a7d9ad83874ec400421aac84c37b035380116a19b9f8e6a440156fed",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "total": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "etc": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "follow": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/uv",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 375,
+    "response": {
+      "bytes": 541,
+      "sha256": "09bc571eb2966879e3c530265ef6794535dad15596fc54db29e3df6307167356",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "total": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "etc": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "follow": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/visit",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 345,
+    "response": {
+      "bytes": 400,
+      "sha256": "e7d03deb290c9d5c9121400504bd7d6144796254908275dd934d407295c08d3e",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "visit": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/averageVisit",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 385,
+    "response": {
+      "bytes": 534,
+      "sha256": "1558458f9430bbfb5d39112e9e553310ac3a8258bf5e1f1e4c59b0028d278c01",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "total": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "etc": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "follow": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/revisit",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 406,
+    "response": {
+      "bytes": 737,
+      "sha256": "a10ee182f48882f1e5eb4338d88b36fe4ad597617c21ca099fe53060a4a45f60",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "etc_p": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "total": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend_p": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "etc": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "total_p": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "follow": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "follow_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/averageDuration",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 376,
+    "response": {
+      "bytes": 537,
+      "sha256": "915e70ebabf3ee34d9d146bcc1750e3619a8b31859a3e43669f3c052cca4309c",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "total": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "etc": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "follow": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/referer/total",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 370,
+    "response": {
+      "bytes": 362,
+      "sha256": "5af533eefc67e39a5412e754eef94cae450fa5473c9ecb75c13bad7754472df3",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "cv": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "referrerSearchEngine": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "referrerDomain": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "cv_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/hour/cv",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "hour",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 388,
+    "response": {
+      "bytes": 554,
+      "sha256": "d70c609a8d9d2ca2bcd9729894e4b37eb8ce165ccd378df605680d5d0ae2fcc0",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "cv": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "cv_yesterday": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "cv_pmonth": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "cv_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/demoCv",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 380,
+    "response": {
+      "bytes": 1270,
+      "sha256": "f053b515f3ea42fbd7b323e6903f8a4bfb978e66fcae05ccf40d0daffe27349b",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "age": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "m": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "f": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "m_p": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "f_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/device/mobile",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 402,
+    "response": {
+      "bytes": 571,
+      "sha256": "7d441ef0ce4335a3cc7d92cb7f31546db121b56bb3f5bfcaf612021b71881f2e",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "pc_p": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "pc": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "mobile": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "mobile_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/relationVisitCv",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 384,
+    "response": {
+      "bytes": 552,
+      "sha256": "1f4e0a394ebb7fcc6c04271dce49de23224f1764d5ff3fd76e9a32bddf5035c5",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "total": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "etc": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "follow": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/relationDelta",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 370,
+    "response": {
+      "bytes": 504,
+      "sha256": "20609af44e564f32eb477f3ab07d8a82261a0ac7a42ddb076f1b8f1743247f0f",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "add": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "friend": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "delete": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/relationDemoAdd",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 353,
+    "response": {
+      "bytes": 369,
+      "sha256": "a7c7d288cc282c56ecc1bf96295c0ade83cfc816c3ece3625e67b12a2fb0ccce",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "age": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "m": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "f": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "m_p": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "f_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/country",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 318,
+    "response": {
+      "bytes": 222,
+      "sha256": "32754c1aa5abc3edb6ad568be79717e9efd9b7dcb5318497297548d226ef04bc",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "country": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "cv": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "cv_p": {
+                    "type": "array",
+                    "item": "number"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/playCount/play_cnt",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 352,
+    "response": {
+      "bytes": 443,
+      "sha256": "581e1b64a947f512dcdae7ad79d7fbc9e13a05048c96ddba340009a8018a61d1",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "play_cnt": {
+                    "type": "array",
+                    "item": "string"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/playTime/play_time",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 351,
+    "response": {
+      "bytes": 446,
+      "sha256": "37f4722b169ea7171223e18e0056d13b95cb65ec664ad80f17f66fe923cd49f4",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "play_time": {
+                    "type": "array",
+                    "item": "string"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/uniqWatcher/uniq_watcher",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 357,
+    "response": {
+      "bytes": 455,
+      "sha256": "91a3c7b039c5779e1708953ac3b6b187423788089eae48b853765fb5365670cf",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "uniq_watcher": {
+                    "type": "array",
+                    "item": "string"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/rank/cvContentPc",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 341,
+    "response": {
+      "bytes": 272,
+      "sha256": "120c1fb1271c4c8c420c5f9cd9ce99dbc120ff08b1d9ff9b6b2e26113f646284",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "cv": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "rank": {
+                    "type": "array",
+                    "item": "number"
+                  },
+                  "title": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "uri": {
+                    "type": "array",
+                    "item": "string"
+                  },
+                  "createDate": {
+                    "type": "array",
+                    "item": "string"
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/rank/likePc",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 343,
+    "response": {
+      "bytes": 277,
+      "sha256": "d8db78b41885f74e05aad249c21d58e9e5fdb876d46fe9463313c802da3d90d4",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "rank": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "event": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "title": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "type": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "uri": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "createDate": {
+                    "type": "array",
+                    "item": null
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/rank/commentPc",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 343,
+    "response": {
+      "bytes": 280,
+      "sha256": "8d527fcf19686da54b61ca48c54341267a5c906cac50d508146820f48626332a",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {
+                "columnInfo": {
+                  "type": "array",
+                  "item": "string"
+                },
+                "rows": {
+                  "date": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "rank": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "event": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "title": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "type": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "uri": {
+                    "type": "array",
+                    "item": null
+                  },
+                  "createDate": {
+                    "type": "array",
+                    "item": null
+                  }
+                }
+              },
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "event": "response",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/playCount/rank",
+    "queryFields": [
+      "timeDimension",
+      "startDate",
+      "exclude",
+      "_"
+    ],
+    "request": null,
+    "status": 200,
+    "mime": "application/json",
+    "encodedDataLength": 282,
+    "response": {
+      "bytes": 130,
+      "sha256": "8871f1d194602a323867c01cd4a4dfc580554a4e00a67e3835f192be12b8732e",
+      "schema": {
+        "statusCode": "number",
+        "message": "string",
+        "result": {
+          "statDataList": {
+            "type": "array",
+            "item": {
+              "dataId": "string",
+              "data": {},
+              "utime": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+]

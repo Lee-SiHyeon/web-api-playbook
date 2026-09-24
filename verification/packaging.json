@@ -1,0 +1,56 @@
+{
+  "checkedAt": "2026-09-24T08:27:57.637Z",
+  "kind": "packaging_and_static_review",
+  "host": {
+    "platform": "win32",
+    "architecture": "x64",
+    "node": "24.10.0"
+  },
+  "rootInstall": {
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "passed": true
+  },
+  "doctor": {
+    "passed": true,
+    "credentialsRead": false,
+    "serviceSessionVerified": false
+  },
+  "staticJavaScript": {
+    "files": 325,
+    "syntaxFailures": [],
+    "missingRelativeImports": []
+  },
+  "powershellSyntax": {
+    "files": 1,
+    "errors": 0
+  },
+  "syntheticExamples": {
+    "harContracts": 2,
+    "htmlCandidates": 6,
+    "frontierCreated": true,
+    "frontierWholeSiteCoverage": false
+  },
+  "isolatedInstall": {
+    "copied": true,
+    "freshDirectory": true,
+    "dependenciesInstalled": true,
+    "doctorPassed": true,
+    "harContracts": 2,
+    "htmlCandidates": 6,
+    "frontierCreated": true
+  },
+  "serviceTestsRun": false,
+  "unitTestsRun": false,
+  "liveServiceCalls": 0,
+  "otherOperatingSystemsExecuted": [],
+  "secretPatternScan": {
+    "findings": 0,
+    "scope": "High-signal patterns and known sensitive file types; not an exhaustive guarantee"
+  },
+  "limitations": [
+    "Generic transport/store/journal inspected statically; no network or credential lifecycle integration execution in this packaging task",
+    "Service snapshots retain dated historical evidence, not new live verification",
+    "Windows DPAPI is user-bound; other OS persistence requires a provider",
+    "No whole-site crawler or indefinite login guarantee"
+  ]
+}

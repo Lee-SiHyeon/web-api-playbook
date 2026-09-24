@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-19T06:49:15.269Z",
+  "provider": "coupang_partners",
+  "mode": "public_bundle_request_shape_hints",
+  "source": "https://partners.coupang.com/static/js/main.78a66a44.js",
+  "shapeCount": 22,
+  "fullyNamedBodyShapes": 11,
+  "opaqueBodyShapes": 5,
+  "valuesObserved": false,
+  "requestBodyValuesPersisted": false,
+  "executableCount": 0,
+  "shapes": [
+    {
+      "path": "/api/v1/search",
+      "method": "POST",
+      "bodyFields": [
+        "categoryId",
+        "deliveryTypes",
+        "filter",
+        "page.pageNumber",
+        "page.size"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/search/best",
+      "method": "POST",
+      "bodyFields": [
+        "category",
+        "categoryId",
+        "page.pageNumber",
+        "page.size"
+      ],
+      "variantsObserved": 2,
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/banner/iframe/url",
+      "method": "POST",
+      "bodyFields": [
+        "group",
+        "product"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/banner/gen",
+      "method": "POST",
+      "bodyFields": [
+        "group",
+        "options",
+        "product"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/widgets/banners",
+      "method": "POST",
+      "bodyFields": [
+        "datasetId",
+        "height",
+        "width"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/url/any",
+      "method": "GET",
+      "queryFields": [
+        "coupangUrl"
+      ],
+      "bodyFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/url/instant/{categoryId}",
+      "method": "GET",
+      "pathParameters": [
+        "categoryId"
+      ],
+      "bodyFields": [],
+      "queryFields": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/events",
+      "method": "POST",
+      "bodyFields": [
+        "page.pageNumber",
+        "page.size"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/daily",
+      "method": "POST",
+      "bodyFields": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/monthly",
+      "method": "POST",
+      "bodyFields": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/dynamic-banner",
+      "method": "POST",
+      "bodyFields": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/performance/summary",
+      "method": "POST",
+      "bodyFields": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/settlement",
+      "method": "POST",
+      "bodyFields": [
+        "pageNumber",
+        "size"
+      ],
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/settlements",
+      "method": "POST",
+      "bodyFields": [],
+      "opaqueBodyObject": true,
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/settlements/details",
+      "method": "POST",
+      "bodyFields": [],
+      "opaqueBodyObject": true,
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/payouts",
+      "method": "POST",
+      "bodyFields": [],
+      "opaqueBodyObject": true,
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/report/payouts/details",
+      "method": "POST",
+      "bodyFields": [],
+      "opaqueBodyObject": true,
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/widgets/instances/search",
+      "method": "POST",
+      "bodyFields": [],
+      "opaqueBodyObject": true,
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/discovery/goldbox",
+      "method": "GET",
+      "queryFields": [
+        "limit"
+      ],
+      "bodyFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/discovery/fashion",
+      "method": "GET",
+      "queryFields": [
+        "limit"
+      ],
+      "bodyFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/discovery/rocket-fresh",
+      "method": "GET",
+      "queryFields": [
+        "limit"
+      ],
+      "bodyFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    },
+    {
+      "path": "/api/v1/earning/summary/v2",
+      "method": "GET",
+      "bodyFields": [],
+      "queryFields": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "confidence": "public_bundle_direct_call",
+      "valuesObserved": false,
+      "requestBodyValuesPersisted": false,
+      "executable": false
+    }
+  ]
+}

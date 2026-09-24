@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T13:42:25.609Z",
+  "sessionStatus": {
+    "source": "independent_http",
+    "blogId": "aicandoanything",
+    "protectedOwnerVerified": true,
+    "checkedAt": "2026-09-20T13:42:12.019Z",
+    "authState": "verified",
+    "lastOwnerVerifiedAt": "2026-09-20T13:42:12.018Z",
+    "cookieRotationObserved": true,
+    "credentialsPersisted": false,
+    "automaticLoginRenewalVerified": false,
+    "rotationMeasurementScope": "Legacy whole-cookie-header change signal; not proof of authentication-cookie renewal."
+  },
+  "inputProvider": "headless_sdk",
+  "inputEvidence": {
+    "checkedAt": "2026-09-20T13:42:24.254Z",
+    "runtime": {
+      "product": "Chrome/153.0.8010.12",
+      "headless": true,
+      "extensionsDisabled": true,
+      "automationDisclosed": true
+    },
+    "issuer": [
+      {
+        "status": 200,
+        "mime": "application/json",
+        "keys": [
+          "tokenId"
+        ],
+        "tokenType": "string",
+        "tokenLength": 88
+      }
+    ],
+    "sdkAssets": [
+      {
+        "url": "https://ncpt.naver.com/static/ncaptcha-api.js",
+        "status": 200
+      },
+      {
+        "url": "https://wtm.pstatic.net/011fc84/581348ee652d1d7705c9.wasm",
+        "status": 200
+      }
+    ],
+    "blockedBrowserWrites": [
+      {
+        "method": "POST",
+        "path": "/RabbitWrite.naver"
+      }
+    ],
+    "browserPublishCount": 0,
+    "cancelledPublishCount": 1,
+    "browserClosed": true
+  },
+  "httpWrite": {
+    "schemaVersion": 1,
+    "operation": "compiledHeadlessPrivateCreateProbe",
+    "checkedAt": "2026-09-20T13:42:25.599Z",
+    "source": "http_write_with_browser_issued_inputs",
+    "blogId": "aicandoanything",
+    "logNo": "224418067386",
+    "accepted": true,
+    "browserRequestCancelled": true,
+    "handoffAgeMs": 613,
+    "protectedOwnerVerified": true,
+    "privateVisibilityVerified": true,
+    "readbackVerified": true,
+    "paragraphCount": 4,
+    "documentFingerprint": "31087c720febb4dd0dd3e39f2c50b396056631711b5a06b4e3d86060979eca7d",
+    "htmlSha256": "8774d012256357c5f3c0c6e41dc1761fa1d7ca4fd31c65e3fcadd37da86276dc",
+    "browserFreeTokenIssuanceVerified": false,
+    "browserFreeDocumentConstructionVerified": false,
+    "publicationQualityVerified": false
+  },
+  "compiledComponentCount": 5,
+  "completeDocumentReplacementVerified": true,
+  "commercialPublicationQualityVerified": false,
+  "browserEngineFree": false,
+  "credentialsPersisted": false,
+  "executionHost": "home Windows DESKTOP-TO2H6OD",
+  "runtimeReceiptSha256": "d4a20751b679b2aeaf5a93a62bcfac7f3a2303f3a2d3e9fd840f655619d2246c",
+  "earlierAttempts": [
+    {
+      "code": "CREATE_FRESH_PRIVATE_SEED_REQUIRED",
+      "cancelledBrowserCreates": 1,
+      "httpWrites": 0
+    },
+    {
+      "code": "HEADLESS_UI_TIMEOUT",
+      "cancelledBrowserCreates": 0,
+      "httpWrites": 0,
+      "hostMemoryPressure": true
+    },
+    {
+      "code": "CREATE_FRESH_PRIVATE_SEED_REQUIRED",
+      "cancelledBrowserCreates": 1,
+      "httpWrites": 0,
+      "observedBlankOuterDocumentId": true
+    }
+  ],
+  "generalBusinessGateLivePublicationVerified": false,
+  "publicNewPostVerified": false,
+  "authenticationSessionFollowup": {
+    "source": "independent_http",
+    "blogId": "aicandoanything",
+    "protectedOwnerVerified": true,
+    "checkedAt": "2026-09-20T13:52:35.679Z",
+    "authState": "verified",
+    "lastOwnerVerifiedAt": "2026-09-20T13:52:35.672Z",
+    "cookieRotationObserved": false,
+    "credentialsPersisted": false,
+    "automaticLoginRenewalVerified": false,
+    "serverSetCookieNames": [
+      "JSESSIONID"
+    ],
+    "rotationScope": "NID_AUT and NID_SES values only; unrelated cookies excluded"
+  },
+  "authenticationCookieRotationVerified": false
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T14:30:00+09:00",
+  "policy": {
+    "failClosed": true,
+    "processExitZeroIsInsufficient": true,
+    "storedReceiptMustMatchFingerprint": true,
+    "browserAutomationMayNotBeCalledApiOnly": true
+  },
+  "workflowStages": [
+    {"stage":"00-policy","gate":"evaluateStageGate","blocksNext":true},
+    {"stage":"01-trends","gate":"API-only 5-state + coverage + browser-free","blocksNext":true},
+    {"stage":"02-topic-selection","gate":"candidate membership + bounded set","blocksNext":true},
+    {"stage":"03-reference-brief","gate":"5+ unique public reference posts + metrics","blocksNext":true},
+    {"stage":"04-community-radar","gate":"API-only 5-state + privacy + canonical result coverage","blocksNext":true},
+    {"stage":"05-product-comparison","gate":"freshness + relevance + 4+ priced products + link shape + source digests","blocksNext":true},
+    {"stage":"05a-claim-evidence","gate":"claim schema + source resolution + expiry + uncertainty boundary","blocksNext":true},
+    {"stage":"06-format-selection","gate":"allowed format enum","blocksNext":true},
+    {"stage":"07-draft","gate":"length + sections + paragraph structure + disclosure + claim ledger link","blocksNext":true},
+    {"stage":"08-chart","gate":"declared PNG exists and has positive bytes","blocksNext":true},
+    {"stage":"09-quality-gate","gate":"deterministic score/status/hard-block consistency","blocksNext":true},
+    {"stage":"publish-package","gate":"review package consistency; publish authorization must remain false","blocksNext":true}
+  ],
+  "publisherStages": [
+    {"stage":"publisher-job","script":"scripts/gates/validate-publisher-job.mjs","blocksNext":true},
+    {"stage":"smarteditor-dry-run","script":"scripts/gates/validate-publisher-result.mjs","blocksNext":true},
+    {"stage":"claim-evidence","script":"scripts/gates/validate-claim-evidence.mjs","blocksNext":true},
+    {"stage":"commercial-snapshot","script":"scripts/gates/validate-commercial-snapshot.mjs","blocksNext":true},
+    {"stage":"publish-authorization","script":"scripts/gates/authorize-publisher-job.mjs","blocksNext":true},
+    {"stage":"publisher-result","script":"scripts/gates/validate-publisher-result.mjs","blocksNext":true},
+    {"stage":"public-readback","gate":"HTTP 200 + SmartEditor body + required markers + affiliate link + image/paragraph structure","blocksNext":true}
+  ]
+}

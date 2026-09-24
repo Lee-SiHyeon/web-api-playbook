@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "host": "DESKTOP-TO2H6OD",
+  "scope": "Existing public post structural repair",
+  "receipt": {
+    "ok": true,
+    "operation": "reviewedStructureRepair",
+    "repairId": "2026-09-21-twelve-cm-duplicate-prefix",
+    "source": "independent_http",
+    "url": "https://blog.naver.com/PostView.naver?blogId=aicandoanything&logNo=224417664446",
+    "logNo": "224417664446",
+    "accepted": true,
+    "readbackVerified": true,
+    "publicVisibilityVerified": true,
+    "beforeUnits": 96,
+    "afterUnits": 86,
+    "beforeImages": 18,
+    "afterImages": 13,
+    "proseAndLinksPreserved": true,
+    "publicationQualityVerified": false,
+    "limitation": "Structural correction only; current commercial facts were not revalidated.",
+    "checkedAt": "2026-09-20T16:13:22.023Z"
+  },
+  "execution": {
+    "sessionBootstrap": "existing Chrome Canary profile, supported current-origin handoff",
+    "write": "independent_http",
+    "publicReadback": "independent_http",
+    "visualReadback": "anonymous ephemeral headless Chromium",
+    "credentialsPersisted": false,
+    "credentialsCleared": true
+  },
+  "publicAudit": {
+    "checkedAt": "2026-09-20T16:16:18.206Z",
+    "sourceHtmlSha256": "a6d97d7c06e30a74d4c1b08d5985eef224ff9a510b06f6b730900205bb79521a",
+    "unitCount": 86,
+    "imageCount": 13,
+    "uniqueVerifiedImageContents": 13,
+    "checks": {
+      "noDuplicateProse": true,
+      "disclosureFirst": true,
+      "allImagesVerified": true,
+      "noDuplicateImages": true
+    },
+    "duplicateImages": [],
+    "passed": true
+  },
+  "headless": {
+    "ok": true,
+    "checkedAt": "2026-09-20T16:16:23.132Z",
+    "headless": true,
+    "authenticated": false,
+    "results": [
+      {
+        "mode": "desktop",
+        "url": "https://blog.naver.com/PostView.naver?blogId=aicandoanything&logNo=224417664446",
+        "imageCount": 13,
+        "loadedImages": 13,
+        "disclosureVisible": true,
+        "disclosureTop": 85
+      },
+      {
+        "mode": "mobile",
+        "url": "https://m.blog.naver.com/PostView.naver?blogId=aicandoanything&logNo=224417664446&proxyReferer=&noTrackingCode=true",
+        "imageCount": 13,
+        "loadedImages": 13,
+        "disclosureVisible": true,
+        "disclosureTop": 85
+      }
+    ],
+    "publicAudit": {
+      "passed": true,
+      "units": 86,
+      "images": 13,
+      "duplicateImageGroups": 0,
+      "checks": {
+        "noDuplicateProse": true,
+        "disclosureFirst": true,
+        "allImagesVerified": true,
+        "noDuplicateImages": true
+      }
+    }
+  },
+  "implementationSha256": {
+    "apps/naver-blog-api/scripts/api/editor-client.mjs": "336bfce1231f44863b7f837a0800e0e911e59cdbe1850df677cd65264656c6ad",
+    "apps/naver-blog-api/scripts/api/reviewed-structure-repair.mjs": "fc407dd0aa104cfc83cc3d864c99d73670a6289add42f6d01ee87d3ce105d0c5",
+    "apps/naver-blog-api/tools/discovery/repair-published-prefix.mjs": "077be89c5de831e0d14c458af6c4403ce91806eaa7f2453570268a37476c9da7"
+  }
+}

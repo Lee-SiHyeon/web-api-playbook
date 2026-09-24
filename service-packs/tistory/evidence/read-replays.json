@@ -1,0 +1,1382 @@
+[
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/statistics/blog/count",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 224,
+    "sha256": "4f3cf5d3bf426da86ad5e5994a876731b223aba0ed0fb0e1b0beaee5d5cea5b9",
+    "schema": {
+      "status": "string",
+      "data": {
+        "result": {
+          "pv": {
+            "today": "number",
+            "yesterday": "number",
+            "total": "number"
+          },
+          "uv": {
+            "today": "number",
+            "yesterday": "number",
+            "total": "number"
+          },
+          "followerCount": "number"
+        },
+        "timestamp": "string",
+        "lastUpdateTime": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/statistics/dashboard/trend",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 1779,
+    "sha256": "2643bc72640b37dc9f099ac6679227107b61b3319b9d0a40bcf4e917f6d1df34",
+    "schema": {
+      "status": "string",
+      "data": {
+        "type": "array",
+        "length": 30,
+        "item": {
+          "timestamp": "string",
+          "pv": "number",
+          "uv": "number"
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/statistics/dashboard/topEntry.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 3480,
+    "sha256": "5c6c5bfe52f47f8b7fc27c50b65fbe49f6ec1b37ec4b1b498a280bda1cdce694",
+    "schema": {
+      "status": "string",
+      "data": {
+        "timestamp": "string",
+        "result": {
+          "type": "array",
+          "length": 10,
+          "item": {
+            "entryId": "number",
+            "title": "string",
+            "comment": "number",
+            "created": "string",
+            "type": "number",
+            "thumbnail": "null",
+            "thumbnailLabel": "null",
+            "slogan": "string",
+            "count": "number",
+            "permalink": "string"
+          }
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/statistics/dashboard/inflow.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 121,
+    "sha256": "20700d15a6905de4346714e49746e9147ceb00fd2d7827cf8d8e1845c0cf86a4",
+    "schema": {
+      "status": "string",
+      "data": {
+        "timestamp": "string",
+        "result": {
+          "pv": "number",
+          "searchEngine": "number",
+          "sns": "number",
+          "etc": "number"
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/statistics/dashboard/keyword.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 154,
+    "sha256": "b4a2a741f2c108b8f4915e87011d8857e8e6ad975d578f5837beebf3c967ed5c",
+    "schema": {
+      "status": "string",
+      "data": {
+        "result": {
+          "type": "array",
+          "length": 0,
+          "item": null
+        },
+        "timestamp": "string",
+        "startDate": "string",
+        "endDate": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/statistics/dashboard/recentEntry.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 4986,
+    "sha256": "f1e4723a9443d09925bcdee7422c703790836235ab869932a0111d50c0c59ac8",
+    "schema": {
+      "status": "string",
+      "data": {
+        "result": {
+          "type": "array",
+          "length": 4,
+          "item": {
+            "id": "number",
+            "title": "string",
+            "category": "string",
+            "categoryId": "number",
+            "categoryLabel": "string",
+            "visibility": "string",
+            "slogan": "string",
+            "summary": "string",
+            "permalink": "string",
+            "authorId": "number",
+            "isScheduled": "number",
+            "reactionCounter": {
+              "sum": "number",
+              "like": "number",
+              "sad": "number"
+            },
+            "thumbnail": "null",
+            "author": "string",
+            "published": "string",
+            "countOfComments": "number",
+            "editable": "boolean"
+          }
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/setting/blog.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 880,
+    "sha256": "99fd6d5b9079a9b6e2aa26606098f88e023e1cb11e54e3cc24f3b1dc9aae93b0",
+    "schema": {
+      "info": {
+        "blogId": "number",
+        "name": "string",
+        "logoUrl": "string",
+        "title": "string",
+        "description": "string",
+        "iconUrl": "string",
+        "faviconUrl": "string",
+        "visibility": "string",
+        "userTitle": "string",
+        "userDescription": "string",
+        "nicknameWarningMessage": "string",
+        "status": "string",
+        "profileStatus": "string"
+      },
+      "address": {
+        "primaryDomain": "string",
+        "secondaryDomain": "string",
+        "useSecondaryDomain": "boolean",
+        "useSlogan": "boolean",
+        "useSecureProtocol": "boolean",
+        "dnsFailDetected": "boolean",
+        "certStatus": "string",
+        "certExpireDate": "null"
+      },
+      "etc": {
+        "entriesOnRSS": "string",
+        "publishWholeOnRSS": "string",
+        "timezone": "string"
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/category/simple.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 9326,
+    "sha256": "18867ead9f47c3d789e8bc9a05ac1df66b74a35a18e0606ca92ada853c05ffcd",
+    "schema": {
+      "categories": {
+        "type": "array",
+        "length": 20,
+        "item": {
+          "id": "number",
+          "name": "string",
+          "label": "string",
+          "priority": "number",
+          "entries": "number",
+          "visibility": "number",
+          "viewChannel": "string",
+          "children": {
+            "type": "array",
+            "length": 0,
+            "item": null
+          },
+          "leaf": "boolean",
+          "categoryInfo": {
+            "liststyle": "null",
+            "image": "null",
+            "description": "null"
+          }
+        }
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/category.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 14283,
+    "sha256": "d9b9d6d236241e3d983039c7e7d72e0a9864becee0becbea2539849a6ad03ded",
+    "schema": {
+      "categories": {
+        "type": "array",
+        "length": 18,
+        "item": {
+          "id": "number",
+          "name": "string",
+          "label": "string",
+          "priority": "number",
+          "entries": "number",
+          "visibility": "number",
+          "viewChannel": "null",
+          "children": {
+            "type": "array",
+            "length": 0,
+            "item": null
+          },
+          "leaf": "boolean",
+          "categoryInfo": {
+            "liststyle": "string",
+            "image": "string",
+            "description": "string"
+          }
+        }
+      },
+      "rootLabel": "string",
+      "viewChannels": {
+        "type": "array",
+        "length": 7,
+        "item": {
+          "id": "string",
+          "label": "string",
+          "children": {
+            "type": "array",
+            "length": 14,
+            "item": {
+              "id": "string",
+              "label": "string",
+              "active": "boolean",
+              "related": "null"
+            }
+          }
+        }
+      },
+      "settingSelected": {
+        "newMark": "number",
+        "newMarkDays": "string",
+        "labelLengthOnTree": "string",
+        "showValueOnTree": "string"
+      },
+      "settingOptionList": {
+        "labelLengthOnTree": {
+          "type": "array",
+          "length": 40,
+          "item": {
+            "label": "string",
+            "name": "string",
+            "value": "number"
+          }
+        },
+        "newMark": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "label": "string",
+            "name": "string",
+            "value": "number"
+          }
+        },
+        "newMarkDays": {
+          "type": "array",
+          "length": 3,
+          "item": {
+            "label": "string",
+            "name": "string",
+            "value": "number"
+          }
+        },
+        "showValueOnTree": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "label": "string",
+            "name": "string",
+            "value": "number"
+          }
+        }
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/setting/contents.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 836,
+    "sha256": "d8ae9606dbfa7d7a3560637ca558f4501672cf7a2c17c08578a93724ff48e5de",
+    "schema": {
+      "optionList": {
+        "visibilityType": {
+          "type": "array",
+          "length": 3,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        },
+        "useCCL": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        },
+        "CCL_commercial": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        },
+        "contentsModify": {
+          "type": "array",
+          "length": 3,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        },
+        "uselessMargin": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        }
+      },
+      "selected": {
+        "visibilityType": "number",
+        "useCCL": "number",
+        "CCL_commercial": "number",
+        "contentsModify": "number",
+        "uselessMargin": "string"
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/setting/comments.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 646,
+    "sha256": "cbb270b1f79f45b570d42bebea24b81d4e07849c67687e7b5e2abca85cb6e3ac",
+    "schema": {
+      "optionList": {
+        "allowGuestComment": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        },
+        "allowWriteDoubleCommentOnGuestbook": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        },
+        "commentWritePermission": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "number"
+          }
+        }
+      },
+      "selected": {
+        "allowGuestComment": "string",
+        "allowWriteDoubleCommentOnGuestbook": "string",
+        "commentWritePermission": "string"
+      },
+      "useCommentAutoSpamFilter": "boolean",
+      "spamFilter": {
+        "content": {
+          "type": "array",
+          "length": 0,
+          "item": null
+        },
+        "ip": {
+          "type": "array",
+          "length": 0,
+          "item": null
+        },
+        "name": {
+          "type": "array",
+          "length": 0,
+          "item": null
+        },
+        "url": {
+          "type": "array",
+          "length": 0,
+          "item": null
+        }
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/statistics/referrer/top/domain.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 235,
+    "sha256": "5ee7b7dd5eeef654854b7d33061de26eefa73b4bb2553182443704326370a7c4",
+    "schema": {
+      "status": "string",
+      "data": {
+        "result": {
+          "type": "array",
+          "length": 4,
+          "item": {
+            "domain": "string",
+            "pv": "number"
+          }
+        },
+        "lastUpdateTime": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/statistics/referrer/latest/log.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 28742,
+    "sha256": "80a7fc9bc21a58417593bd284d73e9ea547f14e8be555f58119f33b2eff15d30",
+    "schema": {
+      "status": "string",
+      "data": {
+        "result": {
+          "type": "array",
+          "length": 131,
+          "item": {
+            "timestamp": "string",
+            "blogId": "number",
+            "filterTarget": "boolean",
+            "refUrlDomain": "string",
+            "refUrl": "string",
+            "type": "string",
+            "pv": "number",
+            "definedDomain": "string",
+            "keyword": "null"
+          }
+        },
+        "lastUpdateTime": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/expectedEarnings/adfit",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 117,
+    "sha256": "5d79413d460c7186b2b27e5d7299f3d88a724b1a2832f0d4f8a1a7f63bd78670",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "blogId": "number",
+        "myPv": "number",
+        "min": "number",
+        "max": "number"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/tip",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 4664,
+    "sha256": "6c2bc81b7ba4bb9456d96bb2203bd6ca339290ce0c14e10713ae9fc54814dca2",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "type": "array",
+        "length": 28,
+        "item": {
+          "type": "string",
+          "title": "string",
+          "blogTitle": "string",
+          "userName": "string",
+          "link": "string"
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/status/adfit",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 602,
+    "sha256": "8bcbc394f0d98b0170fa13097b5237f58ae55548f25ff016772758c412e0bb2a",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "requirementInfo": {
+          "blogCreatedDays": "number",
+          "entryCount": "number",
+          "avg7DaysPV": "number",
+          "isKakaoAccount": "boolean",
+          "hasHistory": "boolean"
+        },
+        "extraStatusValue": "null",
+        "accountCode": "string",
+        "accountResultCode": "string",
+        "accountResultCodeMsg": "string",
+        "mediaStatusCode": "string",
+        "mediaStatusMsg": "string",
+        "email": "string",
+        "url": "string",
+        "paymentUrl": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/status/adsense",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 446,
+    "sha256": "b25e5b3b7b4c037b40a3901a4a1c7b23831b80cd64e8448901076cfffc09f3b9",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "requirementInfo": {
+          "blogCreatedDays": "number",
+          "entryCount": "number",
+          "avg7DaysPV": "number",
+          "isKakaoAccount": "boolean",
+          "hasHistory": "boolean"
+        },
+        "extraStatusValue": "null",
+        "accountCode": "string",
+        "accountResultCode": "string",
+        "accountResultCodeMsg": "string",
+        "mediaStatusCode": "string",
+        "mediaStatusMsg": "string",
+        "email": "string",
+        "url": "string",
+        "paymentUrl": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/status/dable",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 609,
+    "sha256": "eb306a60b747c518664f505f99f3e37f54b222944126d5b2e447e19c17da94a6",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "requirementInfo": {
+          "blogCreatedDays": "number",
+          "entryCount": "number",
+          "avg7DaysPV": "number",
+          "isKakaoAccount": "boolean",
+          "hasHistory": "boolean"
+        },
+        "extraStatusValue": {
+          "preState": "string"
+        },
+        "accountCode": "string",
+        "accountResultCode": "string",
+        "accountResultCodeMsg": "string",
+        "mediaStatusCode": "string",
+        "mediaStatusMsg": "string",
+        "email": "string",
+        "url": "string",
+        "paymentUrl": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/status/tenping",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 628,
+    "sha256": "a115d78cdd9b30710fc87b2fa9e90c475ebde931ec29e0829b850d7b43cbf63a",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "requirementInfo": {
+          "blogCreatedDays": "number",
+          "entryCount": "number",
+          "avg7DaysPV": "number",
+          "isKakaoAccount": "boolean",
+          "hasHistory": "boolean"
+        },
+        "extraStatusValue": "null",
+        "accountCode": "string",
+        "accountResultCode": "string",
+        "accountResultCodeMsg": "string",
+        "mediaStatusCode": "string",
+        "mediaStatusMsg": "string",
+        "email": "string",
+        "url": "string",
+        "paymentUrl": "string"
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/summary/adsense",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 251,
+    "sha256": "525f9cd32b8aff9c8b3164d6b8416e9189e345e31592861bafb4094e312499d8",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "totalEarningsCurrencySymbol": "string",
+        "totalEarnings": "number",
+        "lastDay": {
+          "value": "number",
+          "variation": "number"
+        },
+        "last7Days": {
+          "value": "number",
+          "variation": "number"
+        },
+        "last30Days": {
+          "value": "number",
+          "variation": "number"
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/adunits/adsense",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 4301,
+    "sha256": "60cd152c6896c22cbdf2071e6e2adf9ad4f88d1d7bab20feac353592c5f14285",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "activateInfo": {
+          "pc_list_upper": "boolean",
+          "pc_list_lower": "boolean",
+          "sidebar": "boolean",
+          "mo_list_upper": "boolean",
+          "mo_list_lower": "boolean"
+        },
+        "list": {
+          "pc_content_upper": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "pc_content_middle": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "pc_content_lower": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "mo_content_upper": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "mo_content_middle": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "mo_content_lower": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "pc_list_upper": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "pc_list_lower": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "mo_list_upper": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "mo_list_lower": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 4,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "sidebar": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": "null",
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 3,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          },
+          "automatic": {
+            "id": "number",
+            "blogId": "number",
+            "vendor": "string",
+            "position": "string",
+            "ordering": "null",
+            "unitId": "string",
+            "type": "string",
+            "activate": "number",
+            "option": {
+              "type": "array",
+              "length": 3,
+              "item": "string"
+            },
+            "created": "string",
+            "updated": "string",
+            "default": "string",
+            "optionList": {
+              "type": "array",
+              "length": 1,
+              "item": "string"
+            },
+            "isActivate": "boolean"
+          }
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/design/skin/skinlist.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 11080,
+    "sha256": "84f968fcf2a0d289ea5a0cc25cbe7b3df7b5b2632600ddfa7fa9af213353d125",
+    "schema": {
+      "currentSkin": {
+        "name": "string",
+        "isCustomized": "boolean",
+        "skinInfo": {
+          "name": "string",
+          "preview": "string",
+          "preview560": "string",
+          "preview1600": "string",
+          "title": "string",
+          "version": "string",
+          "license": "string",
+          "description": "string",
+          "layout": "string",
+          "author": {
+            "name": "string",
+            "email": "string",
+            "homepage": "string"
+          },
+          "useWizard": "boolean",
+          "useBlogmenu": "boolean",
+          "default": "string",
+          "variables": "string",
+          "cover": "string",
+          "liststyle": "string",
+          "demoUrl": "string",
+          "skinUrl": "string"
+        }
+      },
+      "skinList": {
+        "type": "array",
+        "length": 10,
+        "item": {
+          "title": "string",
+          "skinName": "string",
+          "launched": "string",
+          "priority": "string",
+          "tags": {
+            "type": "array",
+            "length": 2,
+            "item": "string"
+          }
+        }
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/design/sidebar.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 3154,
+    "sha256": "0dd4734476e68ac864335059af3d423febce66bcbb5a59eb5207891e78850215",
+    "schema": {
+      "sidebar": {
+        "basicModules": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "moduleId": "number",
+            "title": "string",
+            "type": "string",
+            "plugin": "string",
+            "handler": "null",
+            "parameters": "string",
+            "module": {
+              "type": "string",
+              "title": "string",
+              "display": "string",
+              "data": {
+                "type": "number",
+                "id": {
+                  "plugin": "string",
+                  "handler": "null"
+                },
+                "parameters": "string"
+              }
+            },
+            "editable": "boolean"
+          }
+        },
+        "userModules": {
+          "type": "array",
+          "length": 0,
+          "item": null
+        },
+        "activeModules": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "type": "array",
+            "length": 1,
+            "item": {
+              "moduleId": "number",
+              "title": "string",
+              "type": "string",
+              "plugin": "null",
+              "handler": "null",
+              "parameters": "string",
+              "module": {
+                "container": "number",
+                "index": "number",
+                "type": "string",
+                "title": "string",
+                "data": {
+                  "type": "number",
+                  "id": "string",
+                  "parameters": "string"
+                }
+              },
+              "editable": "boolean"
+            }
+          }
+        },
+        "sidebarCount": "number"
+      },
+      "setting": {
+        "selected": {
+          "entriesOnRecent": "string",
+          "recentEntryLength": "string",
+          "commentsOnRecent": "string",
+          "recentCommentLength": "string",
+          "noticesOnRecent": "string",
+          "recentNoticeLength": "string",
+          "archivesOnPage": "string",
+          "linkLength": "string",
+          "tagsOnTagbox": "string",
+          "tagboxAlign": "string"
+        },
+        "optionList": {
+          "tagboxAlign": {
+            "type": "array",
+            "length": 2,
+            "item": {
+              "name": "string",
+              "label": "string",
+              "value": "number"
+            }
+          }
+        }
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/design/menu.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 991,
+    "sha256": "95b67a3205f2521407abcd983a68b823b9742a01ee479e51362ba4e4f8ded67c",
+    "schema": {
+      "menus": {
+        "type": "array",
+        "length": 3,
+        "item": {
+          "name": "string",
+          "url": "string",
+          "isNewWindow": "number",
+          "priority": "number",
+          "typeId": "number"
+        }
+      },
+      "types": {
+        "type": "array",
+        "length": 13,
+        "item": {
+          "id": "number",
+          "name": "string",
+          "isDefault": "number",
+          "isMultiple": "number"
+        }
+      },
+      "isEditableMenu": "boolean"
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/design/mobile.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 21,
+    "sha256": "0b5178abbec649f051b17e4134fcb1ebff62ab350758650ac05c04a9ebabfd46",
+    "schema": {
+      "useMobileSkin": "string"
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/design/setting.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 997,
+    "sha256": "5acef7605f211cebf2ad8c71764ffc107d88464ada1fcb8f49323e17b70690af",
+    "schema": {
+      "optionList": {
+        "hideMenubar": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "string"
+          }
+        },
+        "menubarType": {
+          "type": "array",
+          "length": 4,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "string"
+          }
+        },
+        "hideSubscriptionButton": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "string"
+          }
+        },
+        "subscriptionButtonType": {
+          "type": "array",
+          "length": 4,
+          "item": {
+            "name": "string",
+            "label": "string",
+            "value": "string"
+          }
+        }
+      },
+      "selected": {
+        "hideSubscriptionButton": "string",
+        "subscriptionButtonType": "string",
+        "hideMenubar": "string",
+        "menubarType": "string"
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/plugins.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 18524,
+    "sha256": "2eb9ee2c82f57654d2144c1ca8cbd42003795b6e336db4e1181cd3a50b66d185",
+    "schema": {
+      "type": "array",
+      "length": 22,
+      "item": {
+        "name": "string",
+        "link": "string",
+        "support": "null",
+        "title": "string",
+        "version": "string",
+        "description": "string",
+        "rawDescription": "string",
+        "authorLink": "string",
+        "author": "string",
+        "category": {
+          "type": "array",
+          "length": 2,
+          "item": "string"
+        },
+        "recommended": "boolean",
+        "active": "boolean",
+        "image": "string",
+        "coverImage": "string",
+        "pc": "boolean",
+        "mobile": "boolean"
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/link/my.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 26,
+    "sha256": "d6de8f6e9a0abbb4670c045965997449b271081eef52f0c9c0052a9bbf72f2e9",
+    "schema": {
+      "links": {
+        "type": "array",
+        "length": 0,
+        "item": null
+      },
+      "ordering": {
+        "type": "array",
+        "length": 0,
+        "item": null
+      }
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/setting/blog/data/backup.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 65,
+    "sha256": "82287299c1fa1053dd2cbe34f5a7347c98d60ab0122f2e6fd4175662e1455d76",
+    "schema": {
+      "status": "string",
+      "size": "number",
+      "items": {
+        "type": "array",
+        "length": 0,
+        "item": null
+      },
+      "expireDate": "null",
+      "id": "null"
+    },
+    "applicationStatus": "NONE"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/v2/revenue/editor/adunits",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 534,
+    "sha256": "a4d9438002786a811095f40374a03dd68ed7d364417f84677497769cd538fd00",
+    "schema": {
+      "status": "string",
+      "cacheTime": "string",
+      "data": {
+        "type": "array",
+        "length": 1,
+        "item": {
+          "vendor": "string",
+          "list": {
+            "type": "array",
+            "length": 2,
+            "item": {
+              "id": "number",
+              "blogId": "number",
+              "vendor": "string",
+              "position": "string",
+              "ordering": "null",
+              "unitId": "string",
+              "type": "string",
+              "activate": "number",
+              "option": "null",
+              "created": "string",
+              "updated": "string"
+            }
+          }
+        }
+      }
+    },
+    "applicationStatus": "ok"
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/autosave",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 23,
+    "sha256": "071dbd1db6baa6ef1b2198522e3f3995d1168ded38c471fe0e4d139f7401b73c",
+    "schema": {
+      "autosavedEntry": "null"
+    },
+    "applicationStatus": null
+  },
+  {
+    "url": "https://i-never-stop-study.tistory.com/manage/design/skin/archivelist.json",
+    "httpStatus": 200,
+    "mime": "application/json;charset=UTF-8",
+    "bytes": 9901,
+    "sha256": "f1b0f1cfee9c9e5eb88239837b791642e7d172f05db09140274ab29d2ac38ea9",
+    "schema": {
+      "currentSkin": {
+        "name": "string",
+        "isCustomized": "boolean",
+        "skinInfo": {
+          "name": "string",
+          "preview": "string",
+          "preview560": "string",
+          "preview1600": "string",
+          "title": "string",
+          "version": "string",
+          "license": "string",
+          "description": "string",
+          "layout": "string",
+          "author": {
+            "name": "string",
+            "email": "string",
+            "homepage": "string"
+          },
+          "useWizard": "boolean",
+          "useBlogmenu": "boolean",
+          "default": "string",
+          "variables": "string",
+          "cover": "string",
+          "liststyle": "string",
+          "demoUrl": "string",
+          "skinUrl": "string"
+        }
+      },
+      "archiveList": {
+        "type": "array",
+        "length": 0,
+        "item": null
+      }
+    },
+    "applicationStatus": null
+  }
+]

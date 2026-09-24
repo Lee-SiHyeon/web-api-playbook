@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "id": "travel",
+  "name": "여행·신혼여행 콘텐츠",
+  "top": 100,
+  "autocompleteSeeds": 50,
+  "contextPatterns": [
+    "여행",
+    "신혼",
+    "유럽",
+    "이탈리아",
+    "밀라노",
+    "베네치아",
+    "피렌체",
+    "로마",
+    "기내",
+    "공항",
+    "수하물",
+    "바티칸",
+    "콜로세움",
+    "우피치",
+    "최후의 만찬",
+    "대마도",
+    "크루즈",
+    "숙소",
+    "호텔",
+    "eSIM",
+    "esim",
+    "로밍",
+    "환전",
+    "캐리어",
+    "멀티어댑터",
+    "보조배터리",
+    "압축파우치",
+    "목베개",
+    "소매치기"
+  ],
+  "seeds": [
+    "이탈리아여행",
+    "신혼여행",
+    "유럽여행",
+    "밀라노여행",
+    "베네치아여행",
+    "피렌체여행",
+    "로마여행",
+    "여행용멀티어댑터",
+    "기내반입보조배터리",
+    "여행용압축파우치",
+    "여행용캐리어",
+    "유럽eSIM",
+    "여행자보험",
+    "소매치기방지가방",
+    "기내용목베개",
+    "유럽환전",
+    "유럽로밍",
+    "유럽기차예약",
+    "바티칸예약",
+    "콜로세움예약",
+    "우피치예약",
+    "최후의만찬예약"
+  ],
+  "clusters": [
+    {
+      "id": "gear",
+      "name": "여행용품",
+      "patterns": ["멀티어댑터", "보조배터리", "압축파우치", "캐리어", "목베개", "소매치기", "가방"],
+      "requiredCapabilities": ["links.create"],
+      "preferredAdapters": ["coupang-travel-gear"]
+    },
+    {
+      "id": "connectivity",
+      "name": "eSIM·로밍",
+      "patterns": ["esim", "eSIM", "이심", "로밍", "유심"],
+      "requiredCapabilities": ["esim.catalog", "links.create"],
+      "preferredAdapters": ["travelpayouts", "klook-affiliate"]
+    },
+    {
+      "id": "lodging",
+      "name": "숙소",
+      "patterns": ["숙소", "호텔", "리조트", "메스트레"],
+      "requiredCapabilities": ["lodging.search", "links.create"],
+      "preferredAdapters": ["booking-demand-api", "expedia-group", "skyscanner-partner-api"]
+    },
+    {
+      "id": "flights",
+      "name": "항공·기내",
+      "patterns": ["항공", "비행", "기내", "공항", "수하물"],
+      "requiredCapabilities": ["flights.search.indicative"],
+      "preferredAdapters": ["travelpayouts", "skyscanner-partner-api", "amadeus-travel-apis"]
+    },
+    {
+      "id": "activities",
+      "name": "관광지·투어",
+      "patterns": ["바티칸", "콜로세움", "우피치", "최후의 만찬", "투어", "입장권"],
+      "requiredCapabilities": ["activities.search", "official_reservation.watch"],
+      "preferredAdapters": ["viator-partner-api", "klook-affiliate", "booking-demand-api", "official-attraction-reservation-watch"]
+    },
+    {
+      "id": "rail_transfer",
+      "name": "철도·이동",
+      "patterns": ["기차", "철도", "트랜스퍼", "공항 이동", "배편"],
+      "requiredCapabilities": ["rail.feed", "transfers.search"],
+      "preferredAdapters": ["travelpayouts", "booking-demand-api", "italy-rail-and-transfer-watch"]
+    },
+    {
+      "id": "money",
+      "name": "환전·예산",
+      "patterns": ["환전", "환율", "경비", "예산"],
+      "requiredCapabilities": ["currency.rates"],
+      "preferredAdapters": ["ecb-exchange-rates"]
+    },
+    {
+      "id": "insurance",
+      "name": "여행자보험",
+      "patterns": ["여행자보험", "보험"],
+      "requiredCapabilities": ["insurance.search"],
+      "preferredAdapters": ["travel-insurance-affiliate", "amadeus-travel-apis"]
+    },
+    {
+      "id": "itinerary",
+      "name": "도시 일정·준비",
+      "patterns": ["이탈리아", "밀라노", "베네치아", "피렌체", "로마", "신혼여행", "여행코스", "여행 일정", "준비물"],
+      "requiredCapabilities": ["destination.content"],
+      "preferredAdapters": ["amadeus-travel-apis", "klook-affiliate", "official-attraction-reservation-watch"]
+    }
+  ]
+}

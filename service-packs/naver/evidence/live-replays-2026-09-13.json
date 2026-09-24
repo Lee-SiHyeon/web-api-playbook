@@ -1,0 +1,1470 @@
+[
+  {
+    "operation": "daily/cv",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/daily/cv",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 1505,
+    "sha256": "f68ad5e86eba192f33450312ef8ef2beca0035adcd3b4b83610ffff3920e2a27",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 7,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 3,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "cv": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "cv_p": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:50:23.473Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "visit/cv",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/cv",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 541,
+    "sha256": "f3def789b82885b69371ab6cb92dd2f87f1214c96a1cee40c8b07dd99c46a8e3",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "total": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "etc": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "follow": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:31.013Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "visit/uv",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/uv",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 541,
+    "sha256": "2902df35f41aa328e7b8e08196db13489627eceb1984542897d554116ca8f95b",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "total": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "etc": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "follow": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:31.221Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "visit/visit",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/visit",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 400,
+    "sha256": "840904b2f317971639ba929017c2a1645224517eb29e9ec3e3702c9954d97568",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 2,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "visit": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:31.421Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "visit/averageVisit",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/averageVisit",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 534,
+    "sha256": "4c409c52e1aa70ad48aeb7b92756ea802922918d2ce9cb2e5389131897dcb56e",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "total": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "etc": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "follow": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "null"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:31.676Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "visit/revisit",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/revisit",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 737,
+    "sha256": "c077891a2d2fbf2c5e7a826006cea76fac113a24869d14424a8f6d5006da0d03",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 9,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "etc_p": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "total": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend_p": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "etc": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "total_p": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "follow": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "follow_p": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "null"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:31.982Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "visit/averageDuration",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/visit/averageDuration",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 537,
+    "sha256": "9b7e13dfffa3c2de18390b1089b3ded0cc44494d3485653d624933ffc797adc8",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "total": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "etc": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "follow": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "null"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:32.270Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/referer/total",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/referer/total",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 362,
+    "sha256": "9aa8955da01455885ebbccc924bcfb5e3683102c04d66c5a17b98294c27b6ec5",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "cv": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "number"
+                },
+                "referrerSearchEngine": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "referrerDomain": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "cv_p": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:58.661Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/hour/cv",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/hour/cv",
+    "queryFields": [
+      "_",
+      "exclude",
+      "hour",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 554,
+    "sha256": "4d3a408fa33f3615d4beedb89111d3d18ee69f4999abc0abb575f239ca111cdd",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 24,
+                  "item": "string"
+                },
+                "cv": {
+                  "type": "array",
+                  "length": 24,
+                  "item": "number"
+                },
+                "cv_yesterday": {
+                  "type": "array",
+                  "length": 24,
+                  "item": "number"
+                },
+                "cv_pmonth": {
+                  "type": "array",
+                  "length": 24,
+                  "item": "number"
+                },
+                "cv_p": {
+                  "type": "array",
+                  "length": 24,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:58.894Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/demoCv",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/demoCv",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 1282,
+    "sha256": "43a9c6790d4f2175619935010ec496eb2c7c68634b4dc641c47bdc0649ec5d64",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 4,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "age": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "string"
+                },
+                "m": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                },
+                "f": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                },
+                "m_p": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                },
+                "f_p": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:59.153Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/device/mobile",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/device/mobile",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 571,
+    "sha256": "9b6a59b1eb5c53f2f996ae780101bb90c8de358296f49bbdeacecf171e467f99",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 2,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "pc_p": {
+                  "type": "array",
+                  "length": 4,
+                  "item": "number"
+                },
+                "pc": {
+                  "type": "array",
+                  "length": 4,
+                  "item": "number"
+                },
+                "mobile": {
+                  "type": "array",
+                  "length": 4,
+                  "item": "number"
+                },
+                "mobile_p": {
+                  "type": "array",
+                  "length": 4,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:59.374Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/relationVisitCv",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/relationVisitCv",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 552,
+    "sha256": "e4ee15bdc3bcc024ed2cee3384c79b539245080a7f9b4945bde21d7d3441d3de",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "total": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "etc": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "follow": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:59.599Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/relationDelta",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/relationDelta",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 504,
+    "sha256": "b4299ef2cebc5059642e72f42d714345287e726ebe6081d5b71b4fbb78bd93ee",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 4,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "add": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "friend": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "delete": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:54:59.836Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/relationDemoAdd",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/relationDemoAdd",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 369,
+    "sha256": "547087bd2092674174c2c9e1fb839dbdbed320033485abd45079d849e2d04f45",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 5,
+                "item": "string"
+              },
+              "rows": {
+                "age": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "string"
+                },
+                "m": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                },
+                "f": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                },
+                "m_p": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                },
+                "f_p": {
+                  "type": "array",
+                  "length": 12,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:00.033Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "user/country",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/user/country",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 222,
+    "sha256": "c16ec3e3ada9d1cc5af1ce3458281a8b197ef7255459cfedc88e8b7004b951da",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 3,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "country": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "cv": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "number"
+                },
+                "cv_p": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:28.804Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "video/playCount/play_cnt",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/playCount/play_cnt",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 443,
+    "sha256": "7c9f9001d88e344da46c7b0f2f9799fbfb25ff1d983d04746d83636058563572",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 2,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "play_cnt": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:29.031Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "video/playTime/play_time",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/playTime/play_time",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 446,
+    "sha256": "1089d60572454d190d9adbb1caf9551b6b33a221bdbfb2868a5089374f2530e8",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 2,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "play_time": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:29.223Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "video/uniqWatcher/uniq_watcher",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/uniqWatcher/uniq_watcher",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 455,
+    "sha256": "74e8ab83f7fb268e337500f460b99a88592c99e2918ab2087c7203d4b4d8cade",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 2,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "uniq_watcher": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:29.423Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "rank/cvContentPc",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/rank/cvContentPc",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 272,
+    "sha256": "167be63d8ad3327a6f50de0a172064a4e4e581ab48aa937c7e160ec1d2bdf399",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 6,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "cv": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "number"
+                },
+                "rank": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "number"
+                },
+                "title": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "uri": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                },
+                "createDate": {
+                  "type": "array",
+                  "length": 1,
+                  "item": "string"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:29.617Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "rank/likePc",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/rank/likePc",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 277,
+    "sha256": "62808035de0e7f08211aa00f518f4467ab448cfc973df728abb2640dc1eec4fc",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 7,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "rank": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "event": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "title": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "type": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "uri": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "createDate": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:29.823Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "rank/commentPc",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/rank/commentPc",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 280,
+    "sha256": "dec2a01d8ee87fc5ebde192e1891675da9efb1dc7626d42aa8230b14a687df08",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 7,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "rank": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "event": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "title": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "type": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "uri": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                },
+                "createDate": {
+                  "type": "array",
+                  "length": 0,
+                  "item": null
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:30.086Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  },
+  {
+    "operation": "video/playCount/rank",
+    "method": "GET",
+    "url": "https://blog.stat.naver.com/api/blog/video/playCount/rank",
+    "queryFields": [
+      "_",
+      "exclude",
+      "startDate",
+      "timeDimension"
+    ],
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "expectedResultPresent": true,
+    "attempts": 1,
+    "mime": "application/json",
+    "bytes": 130,
+    "sha256": "2c82e101fe3339feeaed3d1a2cda7a5ab43c715b9145e3559fc6d61e7e1780fc",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 1,
+          "item": {
+            "dataId": "string",
+            "data": {},
+            "utime": "string"
+          }
+        }
+      }
+    },
+    "checkedAt": "2026-09-13T06:55:30.339Z",
+    "verified": true,
+    "actor": "4053103",
+    "runner": "separate_node_cli_with_runtime_environment"
+  }
+]

@@ -1,0 +1,23 @@
+// Discovery logger: current authorized Chrome only; sanitized metadata, no credential values.
+import * as fsAuth from 'node:fs/promises';
+import * as cryptoCapture from 'node:crypto';
+import path from 'node:path';
+const profile=process.argv[2], output=process.argv[3];if(!profile||!output)throw Error('Pass the existing Chrome User Data directory and task log output path');
+await fsAuth.mkdir(path.dirname(path.resolve(output)),{recursive:true});
+const portInfo=(await fsAuth.readFile(path.join(profile,'DevToolsActivePort'),'utf8')).trim().split(/\r?\n/);
+const cdpWs=new WebSocket('ws://127.0.0.1:'+portInfo[0]+portInfo[1]);
+await new Promise((resolve,reject)=>{cdpWs.addEventListener('open',resolve,{once:true});cdpWs.addEventListener('error',reject,{once:true});});
+let eventSeq=0,eventCount=0;const eventPending=new Map(),eventSessions=new Set(),eventRequests=new Map();
+let eventWrite=Promise.resolve();const eventOut=path.resolve(output);
+const schema=v=>Array.isArray(v)?{type:'array',item:v.length?schema(v[0]):null}:v&&typeof v==='object'?Object.fromEntries(Object.entries(v).map(([k,x])=>[k,schema(x)])):typeof v;
+const bodyShape=function(t){if(!t||t.includes('<not available'))return {availability:'unavailable'};try{return schema(JSON.parse(t))}catch{return {format:/^\s*</.test(t)?'html':'non-json',length:Buffer.byteLength(t)}}};
+const allowedCapture=u=>{try{return /(^|\.)(tistory|kakao)\.com$/.test(new URL(u).hostname)}catch{return false}};
+const eventSend=(method,params={},sessionId)=>new Promise((resolve,reject)=>{const id=++eventSeq;eventPending.set(id,{resolve,reject});cdpWs.send(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})}));});
+const writeEvent=o=>{eventCount++;eventWrite=eventWrite.then(()=>fsAuth.appendFile(eventOut,JSON.stringify(o)+'\n'));};
+const attachTarget=async t=>{if(t.type!=='page'||!allowedCapture(t.url)||eventSessions.has(t.targetId))return;eventSessions.add(t.targetId);const a=await eventSend('Target.attachToTarget',{targetId:t.targetId,flatten:true});await eventSend('Network.enable',{maxTotalBufferSize:20000000,maxResourceBufferSize:5000000,enableDurableMessages:true},a.sessionId);};
+const handler=async data=>{try{const m=JSON.parse(data);if(m.id){const p=eventPending.get(m.id);if(p){eventPending.delete(m.id);m.error?p.reject(Error(m.error.message)):p.resolve(m.result);}return;}const p=m.params,s=m.sessionId;if(m.method==='Target.targetCreated'||m.method==='Target.targetInfoChanged'){await attachTarget(p.targetInfo);return;}const key=s+':'+p?.requestId;if(m.method==='Network.requestWillBeSent'&&allowedCapture(p.request.url)){const u=new URL(p.request.url);eventRequests.set(key,{method:p.request.method,url:u.origin+u.pathname,queryFields:[...u.searchParams.keys()],request:p.request.postData?bodyShape(p.request.postData):null});writeEvent({event:'request',...eventRequests.get(key)});}if(m.method==='Network.responseReceived'&&eventRequests.has(key)){Object.assign(eventRequests.get(key),{status:p.response.status,mime:p.response.mimeType});}if(m.method==='Network.loadingFinished'&&eventRequests.has(key)){const r=eventRequests.get(key);eventRequests.delete(key);let body={availability:'not_json'};if(r.mime?.includes('json')){try{const b=await eventSend('Network.getResponseBody',{requestId:p.requestId},s);const bytes=Buffer.from(b.body,b.base64Encoded?'base64':'utf8');body={bytes:bytes.length,sha256:cryptoCapture.createHash('sha256').update(bytes).digest('hex'),schema:bodyShape(bytes.toString('utf8'))};}catch{body={availability:'unavailable'};}}writeEvent({event:'response',...r,encodedDataLength:p.encodedDataLength,response:body});}}catch(e){writeEvent({event:'capture_error',message:e.message});}};
+cdpWs.addEventListener('message',e=>handler(e.data));
+await eventSend('Target.setDiscoverTargets',{discover:true});
+const targets=await eventSend('Target.getTargets');for(const t of targets.targetInfos)await attachTarget(t);
+console.log('Event capture active; no credential values saved');
+process.on('SIGINT',()=>{cdpWs.close();});

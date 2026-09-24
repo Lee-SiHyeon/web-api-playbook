@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Naver Blog Structured Publisher",
+  "version": "0.1.8",
+  "description": "Publishes an authorized local structured draft through the user's existing Naver Blog session without exporting cookies or credentials.",
+  "permissions": [
+    "debugger",
+    "scripting",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://blog.naver.com/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Run authorized Naver Blog publish job"
+  }
+}

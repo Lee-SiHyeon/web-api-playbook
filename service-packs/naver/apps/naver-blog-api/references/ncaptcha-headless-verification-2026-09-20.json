@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T13:02:35.115Z",
+  "operation": "headlessPrivateCreateProbe",
+  "executionHost": "home Windows DESKTOP-TO2H6OD",
+  "blogId": "aicandoanything",
+  "ownerHTTPVerified": true,
+  "browserRuns": [
+    {
+      "checkedAt": "2026-09-20T13:02:28.439Z",
+      "runtime": {
+        "product": "Chrome/153.0.8010.12",
+        "headless": true,
+        "extensionsDisabled": true,
+        "automationDisclosed": true
+      },
+      "issuer": [
+        {
+          "status": 200,
+          "mime": "application/json",
+          "keys": [
+            "tokenId"
+          ],
+          "tokenType": "string",
+          "tokenLength": 88
+        }
+      ],
+      "sdkAssets": [
+        {
+          "url": "https://ncpt.naver.com/static/ncaptcha-api.js",
+          "status": 200
+        },
+        {
+          "url": "https://wtm.pstatic.net/011fc84/581348ee652d1d7705c9.wasm",
+          "status": 200
+        }
+      ],
+      "blockedBrowserWrites": [
+        {
+          "method": "POST",
+          "path": "/RabbitWrite.naver"
+        }
+      ],
+      "browserPublishCount": 0,
+      "cancelledPublishCount": 1,
+      "browserClosed": true
+    },
+    {
+      "checkedAt": "2026-09-20T13:02:33.698Z",
+      "runtime": {
+        "product": "Chrome/153.0.8010.12",
+        "headless": true,
+        "extensionsDisabled": true,
+        "automationDisclosed": true
+      },
+      "issuer": [
+        {
+          "status": 200,
+          "mime": "application/json",
+          "keys": [
+            "tokenId"
+          ],
+          "tokenType": "string",
+          "tokenLength": 88
+        }
+      ],
+      "sdkAssets": [
+        {
+          "url": "https://ncpt.naver.com/static/ncaptcha-api.js",
+          "status": 200
+        },
+        {
+          "url": "https://wtm.pstatic.net/011fc84/581348ee652d1d7705c9.wasm",
+          "status": 200
+        }
+      ],
+      "blockedBrowserWrites": [
+        {
+          "method": "POST",
+          "path": "/RabbitWrite.naver"
+        }
+      ],
+      "browserPublishCount": 0,
+      "cancelledPublishCount": 1,
+      "browserClosed": true
+    }
+  ],
+  "distinctSdkTokens": true,
+  "headlessRestartReissuanceVerified": true,
+  "browserClosedBeforeHTTPWrite": true,
+  "httpWrite": {
+    "ok": true,
+    "schemaVersion": 1,
+    "operation": "headlessPrivateCreateProbe",
+    "checkedAt": "2026-09-20T13:02:35.092Z",
+    "source": "http_write_with_browser_issued_inputs",
+    "blogId": "aicandoanything",
+    "logNo": "224418033317",
+    "accepted": true,
+    "browserRequestCancelled": true,
+    "handoffAgeMs": 621,
+    "protectedOwnerVerified": true,
+    "privateVisibilityVerified": true,
+    "readbackVerified": true,
+    "paragraphCount": 4,
+    "documentFingerprint": "456d67f6b605fe8a809dde1b114d1607a4725bf17a51827bc8cd0af63723fba1",
+    "htmlSha256": "86df558a91bda3dc5a52c25a6b65ffd1a5e8fac36e8087ab56289e811b24ae9c",
+    "browserFreeTokenIssuanceVerified": false,
+    "browserFreeDocumentConstructionVerified": false,
+    "publicationQualityVerified": false
+  },
+  "initialSessionSource": "authorized_current_browser_cookie_handoff",
+  "passwordLoginVerified": false,
+  "loginSessionRenewalVerified": false,
+  "browserEngineFree": false,
+  "unattendedLongTermRenewalVerified": false,
+  "commercialPublicationQualityVerified": false,
+  "retainedSecrets": false,
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": false,
+    "credential_propagated": true,
+    "live_replay": true
+  },
+  "scope": "Fixed private technical text, two fresh local headless processes with the same initial authorized login session, then one separate Node HTTP write",
+  "runner": "tools/discovery/headless-create-probe-cli.mjs",
+  "headlessInputPreparationUsesExtension": false,
+  "headlessInputPreparationUsesPersistentProfile": false,
+  "sdkTokenIsServerRefreshToken": false,
+  "localHandoffAgeLimitIsServerTTL": false,
+  "sanitizedEvidenceSha256": "96bdece559c48cf8124666858c0fb2ce0963f8f236d1874553d1efce133771b9",
+  "httpReceiptSha256": "1adaf9f736d550bd22c598777dd44eef817d22482f5b5e488050c21f6a56abce",
+  "preWriteDiagnostics": [
+    {
+      "result": "HEADLESS_PROBE_FAILED",
+      "httpWriterStarted": false
+    },
+    {
+      "result": "HEADLESS_UI_TIMEOUT",
+      "step": "open_publication_settings",
+      "httpWriterStarted": false,
+      "resolution": "Wait for late-mounted first-run help before editing and recheck before opening publication settings"
+    }
+  ],
+  "unverified": [
+    "Browser-engine-free token issuance or fresh document construction",
+    "Password login and automatic login-session renewal",
+    "Server token expiry and reuse semantics",
+    "Long-running unattended renewal, another host or another account",
+    "General commercial creation and a complete live commercial quality review"
+  ]
+}

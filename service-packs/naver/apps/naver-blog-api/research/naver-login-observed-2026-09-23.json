@@ -1,0 +1,231 @@
+{
+  "actor": "aicandoanything",
+  "host": "local_windows",
+  "observedAt": "2026-09-23",
+  "browserSubmission": {
+    "method": "POST",
+    "origin": "https://nid.naver.com",
+    "path": "/nidlogin.login",
+    "contentType": "application/x-www-form-urlencoded",
+    "fieldNames": [
+      "dynamicKey",
+      "sessionKey",
+      "show_pk",
+      "wtoken",
+      "svctype",
+      "bvsd",
+      "locale",
+      "url",
+      "eccpw",
+      "template_url",
+      "enctp",
+      "next_step",
+      "template_type",
+      "smart_LEVEL",
+      "id",
+      "pw"
+    ],
+    "encryptedPasswordPresent": true,
+    "plainIdEmpty": true,
+    "plainPasswordEmpty": true,
+    "wtokenPresent": true,
+    "bvsdPresent": false,
+    "httpStatus": 200,
+    "setCookieNames": [
+      "nid_inf",
+      "NID_AUT",
+      "NID_SES",
+      "NID_JKL"
+    ]
+  },
+  "verificationToken": {
+    "observedRequest": "POST https://ncpt.naver.com/v2/tokens",
+    "observedContentType": "text/plain",
+    "observedHttpStatus": 200,
+    "submittedInField": "wtoken",
+    "directHttpIssuerVerified": true,
+    "reuseVerified": false,
+    "issuerRuntime": "node_jsdom_26_1_0_original_sdk_wasm",
+    "browserEngineUsed": false,
+    "callbackLength": 44
+  },
+  "publicKeyBootstrap": {
+    "page": "GET https://nid.naver.com/nidlogin.login?mode=form",
+    "key": "GET https://nid.naver.com/login/dynamicEcKey/{dynamicKey}",
+    "keyFormat": "sessionKey,uncompressed-P256-public-key",
+    "directHttpReplayVerified": true
+  },
+  "finalize": {
+    "method": "GET",
+    "path": "/signin/v3/finalize",
+    "queryFieldNames": [
+      "url",
+      "svctype"
+    ],
+    "httpStatus": 200
+  },
+  "sessionReuse": {
+    "provider": "windows_dpapi_current_user",
+    "independentHttpProcess": true,
+    "protectedOwnerRead": true,
+    "actorMatched": true,
+    "adminShell": true,
+    "httpStatus": 200,
+    "browserUsedForRead": false,
+    "checkedAt": "2026-09-23T11:26:50.028Z",
+    "actor": "aicandoanything",
+    "stored": true,
+    "browserUsed": false,
+    "mime": "text/html",
+    "loginHTML": false,
+    "bytes": 70934,
+    "redirectCount": 0,
+    "userAgentRestored": true,
+    "source": "recovered_browser_session_after_user_password_change",
+    "evidence": "evidence/session-recovered-after-password-change-20260923.json"
+  },
+  "loginHttpReplay": {
+    "mode": "browser_prepared_http_submit",
+    "browserGeneratedInputs": [
+      "eccpw",
+      "wtoken"
+    ],
+    "browserSubmittedLogin": false,
+    "independentHttpPostStatus": 200,
+    "freshAuthCookies": true,
+    "protectedOwnerReadInSubmittingProcess": true,
+    "protectedOwnerReadAfterProcessRestart": true,
+    "restartReadCheckedAt": "2026-09-23T10:13:28.226Z",
+    "imageChallengeInSuccessfulAttempt": false
+  },
+  "loginTransportApiOnly": true,
+  "loginProcessApiOnly": true,
+  "browserlessFeasibility": {
+    "observedAt": "2026-09-23",
+    "loginPageAndPublicScriptsFetchedByDirectHttp": true,
+    "captchaRuntimeAssets": [
+      "loader_js",
+      "adapter_js",
+      "main_js",
+      "webassembly"
+    ],
+    "browserSignalsReferenced": [
+      "document",
+      "navigator",
+      "canvas",
+      "fingerprint_blocker_checks",
+      "keyboard",
+      "mouse"
+    ],
+    "directHttpWtokenIssuanceVerified": true,
+    "nodeGeneratedEccpwLiveLoginVerified": true,
+    "storedPasswordProviderPresent": true,
+    "freshLoginWithoutBrowserVerified": true,
+    "existingSessionDirectHttpProtectedReadVerified": true,
+    "nodeGeneratedEccpwLoginPostVerified": true,
+    "storedPasswordProviderImplemented": true,
+    "reliableUnattendedReloginVerified": false,
+    "postFixPureNodeSessionReuseVerified": false
+  },
+  "reason": "A fresh Node-only login with a manually supplied image answer previously succeeded. Later account protection required user recovery. The restored session now passes login:auto HTTP reuse without any login POST or model call. The default image-only Codex CLI gpt-6-luna provider is connected and passed a real model call on a synthetic receipt. A complete fresh Naver login using this provider is not yet live-verified.",
+  "loginProcessImplementationBrowserIndependent": true,
+  "browserlessLoginAttempt": {
+    "mode": "pure_http",
+    "credentialProvider": "windows_dpapi_current_user",
+    "browserUsedForLoginHttpOrSdk": false,
+    "loginPostCount": 2,
+    "loginPostStatuses": [
+      200,
+      200
+    ],
+    "freshAuthCookies": true,
+    "protectedOwnerRead": true,
+    "challenge": "receipt_image",
+    "answerProvider": "agent_visual_inspection_to_stdin",
+    "sessionStored": true,
+    "independentProcessReusePassed": false,
+    "evidence": "evidence/login-node-browserless-live-v2-20260923.json"
+  },
+  "receiptChallenge": {
+    "source": "live_rcapt_js_captcha_js_and_rendered_form",
+    "readOrigin": "https://rcaptcha.nid.naver.com",
+    "readPaths": [
+      "/rcapt.js",
+      "/rcaptUi",
+      "/question",
+      "/verifyJs"
+    ],
+    "submitOrigin": "https://nid.naver.com",
+    "submitPath": "/nidlogin.rcaptcha",
+    "submitMethod": "POST",
+    "answerField": "captcha",
+    "imageFormat": "data:image/png;base64",
+    "clientExists": true,
+    "directHttpCompletionVerified": true,
+    "browserSubmissionConfirmation": "approved_and_completed",
+    "challengePostStatus": 302,
+    "proofField": "chp",
+    "answerProviderEmbedded": true,
+    "legacyHttpContinuationUpgradedToHttps": true,
+    "defaultAnswerProvider": "codex_cli",
+    "defaultAnswerModel": "gpt-6-luna",
+    "liveNaverCompletionWithDefaultProviderVerified": false
+  },
+  "currentSessionState": {
+    "available": true,
+    "testStoreIsolated": true,
+    "recoveryCompleted": true,
+    "passwordChangedByUser": true,
+    "identityUpdated": true,
+    "protectedOwnerRead": true,
+    "userAgentPreserved": true,
+    "accountProtectionClearedAfterUserRecovery": true,
+    "evidence": "evidence/session-recovered-after-password-change-20260923.json",
+    "latestCheckedAt": "2026-09-23T11:47:28.162Z",
+    "latestEvidence": "evidence/login-auto-final-20260923.json",
+    "independentHttpProcessesVerifiedAfterRecovery": 4
+  },
+  "accountProtection": {
+    "observed": true,
+    "origin": "https://nid.naver.com",
+    "path": "/user2/help/idSafetyRelease",
+    "evidence": "evidence/login-node-browserless-live-v4-20260923.json",
+    "causeConfirmed": false,
+    "userAgentLossFound": true,
+    "automaticLoginBlockedOnDetection": true,
+    "userRecovered": true,
+    "postRecoveryPureNodeLoginRetested": false
+  },
+  "automaticReloginAfterExpiry": {
+    "connected": true,
+    "entrypoint": "npm run login:auto",
+    "reuseVerifiedSessionFirst": true,
+    "passwordLoginOnlyAfterMissingOrExpiredSession": true,
+    "networkOrOwnerFailureStartsPasswordLogin": false,
+    "challengeOnlyModelInvocation": true,
+    "protectedOwnerReadBeforePersist": true,
+    "accountProtectionBlocksFurtherLogin": true,
+    "backgroundScheduleInstalled": false,
+    "liveSessionReuseVerified": true,
+    "unattendedCompletionVerified": false,
+    "evidence": "evidence/login-auto-final-20260923.json"
+  },
+  "imageInterpretation": {
+    "provider": "codex_cli",
+    "model": "gpt-6-luna",
+    "cliVersion": "0.156.1",
+    "questionAndImageOnly": true,
+    "naverCredentialsProvidedToModel": false,
+    "answerFormat": "strict_json_answer_string_or_null",
+    "toolsDisabled": true,
+    "unexpectedToolCallAborts": true,
+    "timeoutMs": 60000,
+    "automaticModelFallback": false,
+    "automaticAnswerRetry": false,
+    "temporaryArtifactsRemoved": true,
+    "sampleLiveInvocationVerified": true,
+    "sampleElapsedMs": 6732,
+    "liveNaverChallengeWithProviderVerified": false,
+    "evidence": "evidence/codex-luna-login-image-provider-v6-20260923.json"
+  }
+}

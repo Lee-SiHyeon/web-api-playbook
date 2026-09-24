@@ -1,0 +1,49 @@
+{
+  "published": [
+    212,
+    213,
+    214
+  ],
+  "updated": [
+    212,
+    213
+  ],
+  "deleted": [
+    212,
+    213,
+    214
+  ],
+  "testPostsRemain": false,
+  "setting": {
+    "field": "menubarType",
+    "before": "",
+    "changed": "lb",
+    "restored": "",
+    "verifiedByReload": true
+  },
+  "http": {
+    "publish": 200,
+    "update": 200,
+    "deletes": [
+      {
+        "id": 213,
+        "httpStatus": 200,
+        "data": {
+          "data": 213
+        }
+      },
+      {
+        "id": 214,
+        "httpStatus": 200,
+        "data": {
+          "data": 214
+        }
+      }
+    ],
+    "settingRestore": 200
+  },
+  "notes": [
+    "A mistaken create request produced test post 214 during update investigation; it was deleted.",
+    "No CAPTCHA token was reused; observed publishing recaptchaValue was empty."
+  ]
+}

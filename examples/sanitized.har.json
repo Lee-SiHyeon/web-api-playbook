@@ -1,0 +1,90 @@
+{
+  "log": {
+    "version": "1.2",
+    "creator": {
+      "name": "sanitized-xhr-example",
+      "version": "1"
+    },
+    "entries": [
+      {
+        "startedDateTime": "2026-09-24T00:00:00.000Z",
+        "time": 18,
+        "request": {
+          "method": "GET",
+          "url": "https://api.example.invalid/v1/accounts/123456?accountId=REDACTED&page=2&cursor=REDACTED",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            { "name": "Accept", "value": "application/json" }
+          ],
+          "queryString": [
+            { "name": "accountId", "value": "REDACTED" },
+            { "name": "page", "value": "2" },
+            { "name": "cursor", "value": "REDACTED" }
+          ],
+          "cookies": [],
+          "headersSize": -1,
+          "bodySize": 0
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            { "name": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 89,
+            "mimeType": "application/json",
+            "text": "{\"data\":{\"items\":[{\"id\":123456,\"name\":\"Example\"}],\"nextCursor\":\"REDACTED\"}}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 89
+        },
+        "cache": {},
+        "timings": { "send": 0, "wait": 18, "receive": 0 }
+      },
+      {
+        "startedDateTime": "2026-09-24T00:00:01.000Z",
+        "time": 22,
+        "request": {
+          "method": "POST",
+          "url": "https://api.example.invalid/v1/search",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            { "name": "Content-Type", "value": "application/json" },
+            { "name": "Accept", "value": "application/json" }
+          ],
+          "queryString": [],
+          "cookies": [],
+          "postData": {
+            "mimeType": "application/json",
+            "text": "{\"operation\":\"search\",\"filters\":{\"active\":true,\"category\":\"REDACTED\"},\"page\":2}"
+          },
+          "headersSize": -1,
+          "bodySize": 87
+        },
+        "response": {
+          "status": 200,
+          "statusText": "OK",
+          "httpVersion": "HTTP/1.1",
+          "headers": [
+            { "name": "Content-Type", "value": "application/json; charset=utf-8" }
+          ],
+          "cookies": [],
+          "content": {
+            "size": 52,
+            "mimeType": "application/json",
+            "text": "{\"result\":{\"count\":2,\"items\":[{\"id\":1},{\"id\":2}]}}"
+          },
+          "redirectURL": "",
+          "headersSize": -1,
+          "bodySize": 52
+        },
+        "cache": {},
+        "timings": { "send": 0, "wait": 22, "receive": 0 }
+      }
+    ]
+  }
+}

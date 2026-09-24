@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Coupang Partners API Metadata Probe",
+  "version": "0.1.0",
+  "description": "Read-only metadata capture for the user's logged-in Coupang Partners tab.",
+  "permissions": [
+    "debugger",
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://partners.coupang.com/*",
+    "https://*.coupang.com/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Run Coupang metadata probe"
+  }
+}

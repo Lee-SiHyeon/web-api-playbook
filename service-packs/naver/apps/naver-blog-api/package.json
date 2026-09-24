@@ -1,0 +1,58 @@
+{
+  "name": "@affiliate-content-operations/naver-blog-api",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "publisher:api": "node scripts/api/publisher-cli.mjs",
+    "publisher:headless": "node scripts/hybrid/publisher-cli.mjs",
+    "publisher:authorize-api": "node scripts/gates/authorize-api-update.mjs",
+    "stats": "node scripts/cli.mjs",
+    "operations": "node scripts/cli.mjs --list",
+    "setup:browser": "playwright install chromium",
+    "discover:editor-read": "node scripts/read-discovery.mjs",
+    "discover:editor-surface": "node scripts/editor-surface-discovery.mjs",
+    "analyze:editor-scripts": "node scripts/analyze-editor-scripts.mjs",
+    "build:editor-contracts": "node scripts/build-editor-contract-candidates.mjs",
+    "editor-contracts": "node scripts/editor-contracts-cli.mjs --list",
+    "research:references": "python -X utf8 research/build-reference-corpus.py",
+    "research:brief": "python -X utf8 research/topic_brief.py",
+    "research:product-comparison": "node research/build-product-comparison-brief.mjs",
+    "research:trends": "node research/trend-radar/run.mjs",
+    "research:community": "python -X utf8 research/community-radar/run.py",
+    "research:affiliate-layouts": "python -X utf8 research/analyze-affiliate-layouts.py",
+    "workflow:affiliate-content": "node workflows/affiliate-content-e2e/run.mjs",
+    "gate:api-only": "node scripts/gates/validate-api-only.mjs",
+    "gate:api-only-boundaries": "node scripts/gates/build-api-only-boundaries.mjs",
+    "gate:workflow-run": "node scripts/gates/validate-workflow-run.mjs",
+    "gate:publisher-job": "node scripts/gates/validate-publisher-job.mjs",
+    "gate:publisher-result": "node scripts/gates/validate-publisher-result.mjs",
+    "gate:authorize-publisher-job": "node scripts/gates/authorize-publisher-job.mjs",
+    "gate:claim-evidence": "node scripts/gates/validate-claim-evidence.mjs",
+    "gate:commercial-snapshot": "node scripts/gates/validate-commercial-snapshot.mjs",
+    "frontier": "node tools/discovery/frontier.mjs",
+    "test": "node --test",
+    "research:travel-trends": "node research/trend-radar/run-vertical.mjs travel",
+    "research:travel-brief": "node research/trend-radar/build-vertical-brief.mjs travel",
+    "credentials": "node scripts/credential-cli.mjs",
+    "login:bootstrap": "node tools/discovery/naver-login-bootstrap.mjs",
+    "login:http": "node scripts/naver-login-cli.mjs",
+    "login:auto": "node scripts/naver-login-cli.mjs --reuse-session --remember-session --challenge-codex",
+    "login:token-probe": "node tools/discovery/naver-ncaptcha-node-probe.mjs",
+    "login:http-handoff": "node tools/discovery/naver-login-http-handoff.mjs --local-form",
+    "session:health": "node scripts/naver-session-health.mjs",
+    "session:handoff": "node tools/discovery/naver-encrypted-handoff.mjs",
+    "publisher:direct": "node scripts/publisher-direct.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  },
+  "dependencies": {
+    "parse5": "^8.0.1",
+    "pngjs": "^7.0.0",
+    "jsdom": "26.1.0"
+  }
+}

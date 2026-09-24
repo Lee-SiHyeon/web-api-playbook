@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "packagedOn": "2026-09-24",
+  "targetBaseCommit": "f549bedd15af687c0166c88447a702c5b3a43b33",
+  "sourceRepository": {
+    "name": "affiliate-content-operations",
+    "baseCommit": "0459174982e7688e0fc115060223310801bd6aad",
+    "workingTreeState": "Included the current uncommitted Tistory implementation from the listed source paths."
+  },
+  "sourcePaths": [
+    "apps/tistory-api/lib/**",
+    "apps/tistory-api/scripts/cli.mjs",
+    "apps/tistory-api/scripts/media-cli.mjs",
+    "apps/tistory-api/tools/session-handoff.mjs",
+    "apps/tistory-api/tests/*.test.mjs",
+    "apps/naver-blog-api/scripts/secure-credential-store.mjs",
+    "apps/naver-blog-api/scripts/secure-credential-store.ps1"
+  ],
+  "adaptations": [
+    "Rewired Tistory credential-store imports to the local scripts directory so the package does not depend on the monorepo.",
+    "Updated statistics and explicit-request CLIs to use the local DPAPI provider by default while retaining the runtime-only cookie compatibility override.",
+    "Merged the existing package scripts with login, session handoff, and media upload commands; pinned jsdom 26.1.0 and tough-cookie 5.1.2.",
+    "Added a generic HTML5 renderVideo helper and videoScript. The helper requires a verified upload receipt with matching source/CDN SHA-256 and byte counts, escapes captions, and resolves the rendered CDN link at runtime without embedding its signed URL."
+  ],
+  "excluded": [
+    "Cookie values, access or refresh tokens, account selectors, and owner/blog identity values",
+    "DPAPI credential files, browser profiles, session bundles, private keys, and raw HAR/network captures",
+    "Signed media URLs, task-specific publication payloads, local source assets, and runtime journals"
+  ],
+  "verification": {
+    "npmLockfileGenerated": true,
+    "staticSyntaxCheck": "passed for package .mjs files",
+    "relativeImportCheck": "all relative imports resolved inside this repository",
+    "testsRun": false,
+    "liveRequestsRun": false,
+    "commitOrPushRun": false
+  }
+}

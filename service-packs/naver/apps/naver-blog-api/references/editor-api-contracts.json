@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-09-20",
+  "origin": "https://blog.naver.com",
+  "captureMethod": "Scoped Chrome XHR discovery on an owner-controlled temporary draft and private test post; no production article write",
+  "normalClient": "scripts/api/publisher-cli.mjs",
+  "operations": [
+    {
+      "operation": "publicPostRead",
+      "method": "GET",
+      "path": "/PostView.naver",
+      "queryFields": [
+        "blogId",
+        "logNo"
+      ],
+      "response": "HTTP 200 text/html; matching post-view id, og:url and se-main-container",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": "not_applicable_public_read",
+      "live_replay": true
+    },
+    {
+      "operation": "editorOptions",
+      "method": "GET",
+      "paths": [
+        "/PostWriteFormSeOptions.naver",
+        "/PostWriteFormManagerOptions.naver"
+      ],
+      "queryFields": [
+        "blogId",
+        "logNo"
+      ],
+      "response": "isSuccess true; owner/target verified; documentModel is a JSON string for existing posts and null for a blank editor",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true
+    },
+    {
+      "operation": "listDrafts",
+      "method": "GET",
+      "path": "/TempPostList.naver",
+      "queryFields": [
+        "blogId",
+        "editorVersion",
+        "onlyCount"
+      ],
+      "observedSelectors": {
+        "editorVersion": 4,
+        "onlyCount": false
+      },
+      "response": "isSuccess true; result.totalCount number; result.tempPostList array",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true
+    },
+    {
+      "operation": "readDraft",
+      "method": "GET",
+      "path": "/RabbitTempPostRead.naver",
+      "queryFields": [
+        "blogId",
+        "logNo"
+      ],
+      "response": "isSuccess true; result.documentModel string; tempPostFormView.postFormMeta.logNo matches",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true
+    },
+    {
+      "operation": "saveDraft",
+      "method": "POST",
+      "path": "/RabbitTempPostUpdate.naver",
+      "contentType": "application/x-www-form-urlencoded",
+      "bodyFields": [
+        "blogId",
+        "documentModel",
+        "forceUpdate",
+        "mediaResources",
+        "modiDate",
+        "populationParams",
+        "productApiVersion"
+      ],
+      "response": "isSuccess true; result.logNo number and modiDate number",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true,
+      "limitation": "Existing drafts only; fresh list modiDate and forceUpdate=false; autosave state omitted. Exact model readback including a newly HTTP-uploaded image verified. Blank draft creation unavailable."
+    },
+    {
+      "operation": "updatePost",
+      "method": "POST",
+      "path": "/RabbitUpdate.naver",
+      "contentType": "application/x-www-form-urlencoded",
+      "bodyFields": [
+        "blogId",
+        "documentModel",
+        "mediaResources",
+        "populationParams",
+        "productApiVersion"
+      ],
+      "response": "isSuccess true; result.redirectUrl string scoped to blog and logNo",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true,
+      "limitation": "Normal CLI authenticated HTTP replay verified on the existing private technical test post: accepted response, full ordered four-paragraph readback and private visibility. This verifies transport, not a commercial publication bundle. Public visibility transitions and schedules remain unsupported."
+    },
+    {
+      "operation": "createPost",
+      "method": "POST",
+      "path": "/RabbitWrite.naver",
+      "contentType": "application/x-www-form-urlencoded",
+      "bodyFields": [
+        "blogId",
+        "documentModel",
+        "mediaResources",
+        "populationParams",
+        "productApiVersion",
+        "tokenId"
+      ],
+      "response": "HTTP 200 application/json; isSuccess true; scoped redirectUrl. Public commercial article, category, complete ordered body and clickable affiliate link independently read back.",
+      "verificationEvidenceFile": "affiliate-publication-2026-09-21.json",
+      "scope": "http_writer_with_explicit_headless_sdk_inputs",
+      "browserIssuedInputProbe": {
+        "operation": "browserIssuedPrivateCreateProbe",
+        "client": "tools/discovery/private-create-probe-cli.mjs",
+        "verificationEvidenceFile": "ncaptcha-handoff-verification-2026-09-20.json",
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": false,
+        "credential_propagated": true,
+        "live_replay": true,
+        "scope": "Fixed private technical text only; current browser SDK token and document supplied in memory; cancelled browser request; one HTTP write and exact private readback"
+      },
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": false,
+      "credential_propagated": true,
+      "live_replay": true,
+      "limitation": "Public commercial creation verified on 2026-09-21 with full business gates, current own-account affiliate redirect verification, fresh headless SDK inputs, cancelled browser POST, closed input browser, separate HTTP writer and journal. Browser engine and current authorized login session remain required; password login, long-term renewal and blank drafts are unverified.",
+      "headlessInputProbe": {
+        "operation": "headlessPrivateCreateProbe",
+        "client": "tools/discovery/headless-create-probe-cli.mjs",
+        "verificationEvidenceFile": "ncaptcha-headless-verification-2026-09-20.json",
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": false,
+        "credential_propagated": true,
+        "live_replay": true,
+        "scope": "Fixed private technical text, two fresh local headless processes with the same initial authorized login session, then one separate Node HTTP write",
+        "browserWindowRequired": false,
+        "browserExtensionRequiredAfterInitialSessionHandoff": false,
+        "browserEngineRequired": true,
+        "headlessRestartReissuanceVerified": true,
+        "loginSessionRenewalVerified": false
+      },
+      "compiledHeadlessInputProbe": {
+        "operation": "compiledHeadlessPrivateCreateProbe",
+        "client": "tools/discovery/compiled-create-probe-cli.mjs",
+        "verificationEvidenceFile": "compiled-headless-verification-2026-09-20.json",
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": false,
+        "credential_propagated": true,
+        "live_replay": true,
+        "scope": "Fixed private technical text through the shared general headless provider and full-document compiler, then HTTP create and exact private readback",
+        "automaticLoginRenewalVerified": false,
+        "authenticationCookieRotationVerified": false,
+        "followupServerSetCookieNames": [
+          "JSESSIONID"
+        ]
+      }
+    },
+    {
+      "operation": "uploadMedia",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true,
+      "limitation": "Non-animated PNG only; 10 MiB and 4096px per side. Current editor token to scoped platform session-key endpoint, upload, SHA-256 byte readback and insertion into existing draft all live verified. No arbitrary upload hosts or browser fallback.",
+      "method": "POST",
+      "origin": "https://blog.upphoto.naver.com",
+      "path": "/<runtime-session-key>/simpleUpload/0",
+      "contentType": "multipart/form-data",
+      "bodyFields": [
+        "image"
+      ]
+    },
+    {
+      "operation": "createDraft",
+      "method": "POST",
+      "path": "/RabbitTempPostWrite.naver",
+      "bodyFields": [
+        "blogId",
+        "documentModel",
+        "mediaResources",
+        "populationParams",
+        "productApiVersion"
+      ],
+      "response": "isSuccess true; result.logNo number and modiDate number",
+      "captured": true,
+      "client_exists": false,
+      "remnant_free": false,
+      "credential_propagated": false,
+      "live_replay": false,
+      "limitation": "Manual new draft without autoSaveNo observed in browser. Blank editor documentModel is null; fresh independent document metadata producer unverified. Existing saveDraft no longer uses this endpoint."
+    },
+    {
+      "operation": "uploadSession",
+      "method": "GET",
+      "origin": "https://platform.editor.naver.com",
+      "path": "/api/blogpc001/v1/photo-uploader/session-key",
+      "headerNames": [
+        "SE-Authorization",
+        "SE-App-Id"
+      ],
+      "response": "isSuccess true; sessionKey string held in memory only",
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true
+    }
+  ],
+  "credentialVerification": {
+    "productionProvider": "NAVER_COOKIE injected only into the normal CLI child process by an explicit authorized provider handoff",
+    "runtimeEnvironmentReady": "verified_in_scoped_child_process_only",
+    "oneTimeSessionHandoff": "Supported origin-scoped CDP cookie read then in-memory allowlisted child environment; standalone debugging port helper was not used for successful replay",
+    "valuesPersisted": false,
+    "unattendedRenewalVerified": false,
+    "restartPersistenceVerified": false,
+    "headlessBrowserRestartWithSameSessionVerified": true,
+    "headlessEvidenceFile": "ncaptcha-headless-verification-2026-09-20.json"
+  },
+  "liveEvidence": "editor-live-replay-2026-09-20.json"
+}

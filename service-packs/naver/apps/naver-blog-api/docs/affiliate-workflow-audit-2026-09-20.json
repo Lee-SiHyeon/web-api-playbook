@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T00:10:00+09:00",
+  "workflow": "affiliate-content-e2e",
+  "assessment": {
+    "boundedDomainPrototypeScore": 6.5,
+    "genericAffiliateEngineScore": 3.0,
+    "unattendedProductionReadinessScore": 2.5,
+    "currentScope": "docking_power_bank_specialized_prototype"
+  },
+  "verifiedGoodRun": "20260919T095453046Z-도킹형-보조배터리",
+  "criticalFindings": [
+    "generic_interface_with_battery_specific_data_and_templates",
+    "topic_product_dataset_mismatch",
+    "stale_trend_cache_could_ignore_requested_seed",
+    "single_option_choice_failed_before_patch",
+    "high_risk_topics_lacked_dedicated_policy_route",
+    "quality_score_is_template_gameable",
+    "community_search_snippets_are_not_consensus",
+    "listing_title_claims_are_not_verified_specs",
+    "affiliate_link_target_and_attribution_not_live_verified",
+    "price_comparison_lacks_variant_coupon_shipping_normalization",
+    "resume_lacks_full_code_and_input_fingerprints",
+    "shared_latest_files_create_concurrency_risk",
+    "no_end_to_end_business_outcome_learning_loop",
+    "no_content_cannibalization_or_update_lifecycle",
+    "visual_asset_rights_and_mobile_rendering_are_not_gated",
+    "dirty_git_tree_has_no_release_baseline"
+  ],
+  "patchesApplied": [
+    "high_risk_topic_policy",
+    "trend_seed_and_freshness_validation",
+    "compact_trend_receipt_with_sha256",
+    "product_freshness_validation",
+    "topic_product_relevance_gate",
+    "single_choice_deterministic_resolution",
+    "resume_option_conflict_detection",
+    "affiliate_link_loaded_from_selected_product_evidence",
+    "product_source_digests"
+  ],
+  "verification": {
+    "nodeTestsPassed": 100,
+    "nodeTestsFailed": 0,
+    "syntaxChecksPassed": true,
+    "gitDiffCheckPassed": true,
+    "medicalTopicBlockedLive": true,
+    "unrelatedProductTopicBlockedLive": true,
+    "passwordFoundInWorkspace": false
+  },
+  "recommendedExistingSkills": [
+    "evidence-learning",
+    "xhr-to-api-only",
+    "jev-decision-supervisor",
+    "baoyu-infographic",
+    "baoyu-article-illustrator",
+    "tistory-api-only"
+  ],
+  "externalSkillsToReviewBeforeInstallation": [
+    "jwynia/agent-skills@claim-investigation",
+    "kostja94/marketing-skills@seo-audit",
+    "rampstackco/claude-skills@seo-content-gap-audit",
+    "rampstackco/claude-skills@experimentation-analytics",
+    "k-dense-ai/scientific-agent-skills@experimental-design",
+    "google/mantis@mantis-threat-model"
+  ],
+  "nextPriority": [
+    "product_provider_registry",
+    "claim_evidence_ledger",
+    "prepublish_link_price_variant_verification",
+    "per_run_source_outputs_and_locking",
+    "full_resume_fingerprints",
+    "business_outcome_measurement_and_learning"
+  ]
+}

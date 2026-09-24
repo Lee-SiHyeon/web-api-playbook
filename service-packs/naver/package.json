@@ -1,0 +1,28 @@
+{
+  "name": "naver-blog-api-only",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "stats": "node apps/naver-blog-api/scripts/cli.mjs",
+    "operations": "node apps/naver-blog-api/scripts/cli.mjs --list",
+    "frontier": "node tools/discovery/frontier.mjs",
+    "test": "node --test",
+    "login:auto": "npm run login:auto -w @affiliate-content-operations/naver-blog-api",
+    "login:http": "npm run login:http -w @affiliate-content-operations/naver-blog-api",
+    "session:health": "npm run session:health -w @affiliate-content-operations/naver-blog-api",
+    "credentials": "npm run credentials -w @affiliate-content-operations/naver-blog-api",
+    "publisher": "node apps/naver-blog-api/scripts/publisher-direct.mjs",
+    "publisher:api": "node apps/naver-blog-api/scripts/publisher-direct.mjs --mode=api",
+    "publisher:headless": "node apps/naver-blog-api/scripts/publisher-direct.mjs --mode=headless",
+    "republish": "node apps/naver-blog-api/scripts/publisher-direct.mjs --mode=republish",
+    "test:publisher": "npm test -w @affiliate-content-operations/naver-blog-api"
+  },
+  "workspaces": [
+    "apps/naver-blog-api",
+    "packages/contracts"
+  ]
+}

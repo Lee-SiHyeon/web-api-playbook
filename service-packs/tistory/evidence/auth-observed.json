@@ -1,0 +1,133 @@
+[
+  {
+    "method": "POST",
+    "url": "https://accounts.kakao.com/api/v2/qr_login/check_token_state.json",
+    "request": {
+      "_csrf": "string",
+      "token": "string"
+    },
+    "response": {
+      "status": "number"
+    },
+    "status": 200
+  },
+  {
+    "requestId": 164,
+    "method": "POST",
+    "url": "https://accounts.kakao.com/api/v2/login/authenticate.json",
+    "request": {
+      "_csrf": "string",
+      "loginId": "string",
+      "password": "string",
+      "staySignedIn": "boolean",
+      "saveSignedIn": "boolean",
+      "loginKey": "string",
+      "loginUrl": "string",
+      "lang": "string",
+      "security_context": {
+        "a": {
+          "type": "array",
+          "item": {
+            "x": "string",
+            "y": "string",
+            "t": "number",
+            "e": "number"
+          }
+        },
+        "b": {
+          "a": "string",
+          "b": "string",
+          "m": "string",
+          "pv": "string",
+          "fvl": {
+            "type": "array",
+            "item": {
+              "br": "string",
+              "vr": "string"
+            }
+          },
+          "mo": "number",
+          "p": "string"
+        },
+        "c": "boolean",
+        "d": {
+          "type": "array",
+          "item": null
+        }
+      },
+      "k": "boolean"
+    },
+    "response": {
+      "availability": "evicted_before_body_capture",
+      "schema": null
+    },
+    "verification": "captured_not_replayed"
+  },
+  {
+    "requestId": 165,
+    "method": "POST",
+    "url": "https://accounts.kakao.com/api/v2/login/authenticate.json",
+    "request": {
+      "_csrf": "string",
+      "loginId": "string",
+      "password": "string",
+      "staySignedIn": "boolean",
+      "saveSignedIn": "boolean",
+      "loginKey": "string",
+      "loginUrl": "string",
+      "lang": "string",
+      "security_context": {
+        "a": {
+          "type": "array",
+          "item": {
+            "x": "string",
+            "y": "string",
+            "t": "number",
+            "e": "number"
+          }
+        },
+        "b": {
+          "a": "string",
+          "b": "string",
+          "m": "string",
+          "pv": "string",
+          "fvl": {
+            "type": "array",
+            "item": {
+              "br": "string",
+              "vr": "string"
+            }
+          },
+          "mo": "number",
+          "p": "string"
+        },
+        "c": "boolean",
+        "d": {
+          "type": "array",
+          "item": null
+        }
+      },
+      "k": "boolean"
+    },
+    "response": {
+      "availability": "evicted_before_body_capture",
+      "schema": null
+    },
+    "verification": "captured_not_replayed"
+  },
+  {
+    "requestId": 168,
+    "method": "POST",
+    "url": "https://accounts.kakao.com/api/v2/two_step_verification/verify_tms_for_login.json",
+    "request": {
+      "_csrf": "string",
+      "token": "string",
+      "isRememberBrowser": "boolean"
+    },
+    "response": {
+      "availability": "evicted_before_body_capture",
+      "schema": null
+    },
+    "verification": "captured_not_replayed"
+  }
+]

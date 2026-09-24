@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T12:12:52.814Z",
+  "executionHost": "home Windows DESKTOP-TO2H6OD",
+  "operation": "browserIssuedPrivateCreateProbe",
+  "scope": "Fresh normal browser SDK output and document metadata transferred to a separate Node HTTP process for one fixed private technical test",
+  "priorEvidenceFile": "ncaptcha-verification-2026-09-20.json",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": false,
+    "credential_propagated": true,
+    "live_replay": true
+  },
+  "tokenIssuance": {
+    "method": "POST",
+    "origin": "https://ncpt.naver.com",
+    "path": "/v2/tokens",
+    "httpStatus": 200,
+    "responseMime": "application/json",
+    "responseSchema": {
+      "tokenId": "string"
+    },
+    "responseBodyObservedInMemory": true,
+    "rawBodyPersisted": false,
+    "observedResponseTokenLength": 88,
+    "observedSdkOutputLength": 44,
+    "responseTokenEqualsSdkOutput": false,
+    "lengthsAreNotContractConstraints": true,
+    "secondSdkOutputDiffersFromFirst": true,
+    "eventBufferTruncated": false,
+    "limitation": "The HTTP writer received the unmodified token field prepared by the normal SDK, not the different tokenId returned by the issuance endpoint. No standalone issuer or SDK transformation was implemented."
+  },
+  "handoff": {
+    "browserWriteInterceptionStage": "Request",
+    "browserWriteCancelled": true,
+    "browserNetworkError": "net::ERR_ABORTED",
+    "browserWriteResponseObserved": false,
+    "cancelledBrowserWriteCount": 2,
+    "httpCreatePostCount": 1,
+    "credentials": "Current origin-scoped NID login cookies passed only through the child environment",
+    "tokenAndDocument": "Fresh captured form transferred through child stdin; no secret arguments or files",
+    "localMaximumHandoffAgeMs": 60000,
+    "localMaximumIsServerTtl": false,
+    "successfulClientReceiveAgeMs": 161,
+    "firstAttempt": {
+      "code": "PROBE_HANDOFF_EXPIRED",
+      "httpWriteSent": false,
+      "receiptSha256": "c0c783e21bcda50cf3e541685c3650ed8aaaf139276119a01178adb61b08d7cd"
+    }
+  },
+  "httpWrite": {
+    "method": "POST",
+    "origin": "https://blog.naver.com",
+    "path": "/RabbitWrite.naver",
+    "httpStatus": 200,
+    "isSuccess": true,
+    "responseRedirectScopeVerified": true,
+    "privateVisibilityVerified": true,
+    "protectedOwnerVerified": true,
+    "readbackVerified": true,
+    "paragraphCount": 4,
+    "documentFingerprint": "e7df1c91eba8747b33dbc6f0f9857cbef7ac5b8fc86f1e39a6e00cbd434f0519",
+    "htmlSha256": "e028b32fcf9684039cc9b6e03ba5015d25c4d784c1c499e01f771ce1eb012a9a",
+    "receiptSha256": "7880dff7e8f1df05c8b93aa726b1650c9ba7906115eee812bfcb8f1bf4b744ed"
+  },
+  "unverified": [
+    "Browser-free token issuance",
+    "Browser-free creation of fresh document metadata",
+    "Server token expiry and reuse semantics",
+    "General commercial new-post publishing and unattended renewal"
+  ],
+  "normalPublisherCreateGuard": "CREATE_TOKEN_PROVIDER_UNVERIFIED",
+  "commercialPublicationQualityVerified": false,
+  "retainedSecrets": false,
+  "followUpEvidenceFile": "ncaptcha-headless-verification-2026-09-20.json"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "tistory-api-only",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "login:auto": "node scripts/cli.mjs login",
+    "session:health": "node scripts/cli.mjs status",
+    "session:handoff": "node tools/session-handoff.mjs",
+    "stats": "node scripts/client.mjs",
+    "request": "node scripts/request.mjs",
+    "capture": "node scripts/event-logger.mjs",
+    "upload:image": "node scripts/media-cli.mjs",
+    "upload:video-attachment": "node scripts/media-cli.mjs --kind=video-attachment",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "jsdom": "26.1.0",
+    "tough-cookie": "5.1.2"
+  }
+}

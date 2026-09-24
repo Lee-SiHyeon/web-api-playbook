@@ -1,0 +1,519 @@
+[
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/auth/logout",
+    "queryFields": [],
+    "status": "302",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://kauth.kakao.com/oauth/logout",
+    "queryFields": [
+      "client_id",
+      "logout_redirect_uri",
+      "state"
+    ],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "format": "html",
+      "schema": "not_applicable"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "https://kauth.kakao.com/oauth/logout",
+    "queryFields": [
+      "client_id",
+      "logout_redirect_uri",
+      "state"
+    ],
+    "status": "302",
+    "request": {
+      "encoding": "form-or-text",
+      "fields": [
+        "stsc",
+        "csts",
+        "auth_tran_id",
+        "logout_with_kakao"
+      ]
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://accounts.kakao.com/logout",
+    "queryFields": [
+      "continue"
+    ],
+    "status": "302",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://kauth.kakao.com/oauth/logout/callback",
+    "queryFields": [
+      "auth_tran_id",
+      "through_account",
+      "state",
+      "logout_redirect_uri",
+      "client_id"
+    ],
+    "status": "302",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/auth/kakao/logout/redirect",
+    "queryFields": [
+      "state"
+    ],
+    "status": "302",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://accounts.kakao.com/login",
+    "queryFields": [
+      "continue",
+      "talk_login"
+    ],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "encoding": "form-or-text",
+      "fields": [
+        "<!doctype html>\n<html lang",
+        " window.kakaotalk.liquidGlass ",
+        "talk_login",
+        "state",
+        "redirect_uri",
+        "response_type",
+        "auth_tran_id",
+        "ka",
+        "is_popup",
+        "through_account",
+        "state",
+        "redirect_uri",
+        "response_type",
+        "auth_tran_id",
+        "ka",
+        "is_popup"
+      ]
+    }
+  },
+  {
+    "method": "POST",
+    "url": "https://accounts.kakao.com/api/v2/banner/get.json",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "_csrf": "string",
+      "continue": "string",
+      "talk_login": "string"
+    },
+    "response": {
+      "status": "number"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "https://accounts.kakao.com/api/v2/passkey/auth/options",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "_csrf": "string",
+      "username": "string",
+      "userVerification": "string"
+    },
+    "response": {
+      "res": {
+        "rpId": "string",
+        "challenge": "string",
+        "timeout": "number",
+        "userVerification": "string",
+        "sessionId": "string",
+        "extensions": {}
+      },
+      "status": "number"
+    }
+  },
+  {
+    "method": "POST",
+    "url": "https://accounts.kakao.com/api/v2/login/authenticate.json",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "_csrf": "string",
+      "loginId": "string",
+      "password": "string",
+      "staySignedIn": "boolean",
+      "saveSignedIn": "boolean",
+      "loginKey": "string",
+      "loginUrl": "string",
+      "lang": "string",
+      "security_context": {
+        "a": {
+          "type": "array",
+          "item": {
+            "x": "string",
+            "y": "string",
+            "t": "number",
+            "e": "number"
+          }
+        },
+        "b": {
+          "a": "string",
+          "b": "string",
+          "m": "string",
+          "pv": "string",
+          "fvl": {
+            "type": "array",
+            "item": {
+              "br": "string",
+              "vr": "string"
+            }
+          },
+          "mo": "number",
+          "p": "string"
+        },
+        "c": "boolean",
+        "d": {
+          "type": "array",
+          "item": null
+        }
+      },
+      "k": "boolean"
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://kauth.kakao.com/oauth/authorize",
+    "queryFields": [
+      "client_id",
+      "state",
+      "redirect_uri",
+      "response_type",
+      "auth_tran_id",
+      "ka",
+      "is_popup",
+      "through_account"
+    ],
+    "status": "302",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/auth/kakao/redirect",
+    "queryFields": [
+      "code",
+      "state"
+    ],
+    "status": "pending",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "availability": "unavailable"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/init",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": {
+        "user": {
+          "accountType": "string",
+          "blogCreateCount": "number",
+          "defaultBlogId": "number",
+          "defaultBlogUrl": "string",
+          "defaultProfileImageUrl": "string",
+          "description": "string",
+          "emailAccepted": "boolean",
+          "id": "number",
+          "appUserId": "number",
+          "imageCache": "boolean",
+          "joined": "object",
+          "level": "number",
+          "loginId": "string",
+          "name": "string",
+          "profileImageUrl": "string",
+          "thirdProvideAgree": "boolean",
+          "isLogin": "boolean"
+        },
+        "userActionLimitation": {
+          "activeBlogLimit": "number",
+          "createBlogLimit": "number",
+          "dailyOpenPublishLimit": "number",
+          "level": "string"
+        }
+      },
+      "code": "string"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/list",
+    "queryFields": [
+      "from",
+      "groupType"
+    ],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": {
+        "hasMore": "boolean",
+        "list": {
+          "type": "array",
+          "item": null
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/init",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": {
+        "user": {
+          "accountType": "string",
+          "blogCreateCount": "number",
+          "defaultBlogId": "number",
+          "defaultBlogUrl": "string",
+          "defaultProfileImageUrl": "string",
+          "description": "string",
+          "emailAccepted": "boolean",
+          "id": "number",
+          "appUserId": "number",
+          "imageCache": "boolean",
+          "joined": "object",
+          "level": "number",
+          "loginId": "string",
+          "name": "string",
+          "profileImageUrl": "string",
+          "thirdProvideAgree": "boolean",
+          "isLogin": "boolean"
+        },
+        "userActionLimitation": {
+          "activeBlogLimit": "number",
+          "createBlogLimit": "number",
+          "dailyOpenPublishLimit": "number",
+          "level": "string"
+        }
+      },
+      "code": "string"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/new",
+    "queryFields": [],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": "number"
+    }
+  },
+  {
+    "method": "GET",
+    "url": "https://www.tistory.com/api/v1/accio/notification/list",
+    "queryFields": [
+      "from",
+      "groupType"
+    ],
+    "status": "200",
+    "request": {
+      "availability": "unavailable"
+    },
+    "response": {
+      "data": {
+        "hasMore": "boolean",
+        "list": {
+          "type": "array",
+          "item": null
+        }
+      }
+    }
+  }
+]

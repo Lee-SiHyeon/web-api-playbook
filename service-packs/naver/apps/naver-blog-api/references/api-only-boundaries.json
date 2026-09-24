@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T13:56:39.579Z",
+  "policy": {
+    "apiOnlyLabelRequiresAllFiveStates": true,
+    "fiveStates": [
+      "captured",
+      "client_exists",
+      "remnant_free",
+      "credential_propagated",
+      "live_replay"
+    ],
+    "browserAutomationMayNotBeLabeledApiOnly": true
+  },
+  "domains": [
+    {
+      "id": "trend-radar",
+      "normalTransport": "independent_http_api_only",
+      "apiOnlyComplete": true,
+      "requiredSources": [
+        "naverShoppingInsight",
+        "naverAutocomplete"
+      ],
+      "inspections": [
+        {
+          "source": "naverShoppingInsight",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "source": "naverAutocomplete",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        }
+      ],
+      "browserRequiredForNormalExecution": false,
+      "evidenceCheckedAt": "2026-09-20T11:33:21.990Z",
+      "evidenceStatus": "historical_only_runtime_receipt_unavailable"
+    },
+    {
+      "id": "community-radar",
+      "normalTransport": "independent_http_public_search",
+      "apiOnlyComplete": true,
+      "inspections": [
+        {
+          "source": "naverPublicCommunitySearch",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        }
+      ],
+      "browserRequiredForNormalExecution": false,
+      "evidenceCheckedAt": "2026-09-20T11:33:21.990Z",
+      "evidenceStatus": "historical_only_runtime_receipt_unavailable"
+    },
+    {
+      "id": "naver-blog-statistics",
+      "normalTransport": "independent_authenticated_http_for_verified_operations",
+      "apiOnlyComplete": false,
+      "verifiedOperationCount": 22,
+      "candidateOperationCount": 55,
+      "incompleteOperations": [
+        "user/referer/search",
+        "user/referer/site",
+        "user/hour/hourCv",
+        "user/hour/referer/total",
+        "user/hour/demo",
+        "user/hour/rankCv",
+        "user/demoUv",
+        "user/device/pc",
+        "user/relationVisitUv",
+        "user/relationDemoDelete",
+        "user/relationDemoFriend",
+        "video/playCount/referrer/total",
+        "video/playCount/searchReferrer/total",
+        "video/playCount/channel/channelTotal",
+        "video/playCount/hour",
+        "video/playCount/demo",
+        "video/playCount/device",
+        "video/playCount/country",
+        "video/playTime/rank",
+        "video/playTime/hour",
+        "video/playTime/demo",
+        "video/playTime/device",
+        "video/retentionUniqWatcher/retention_uniq_watcher",
+        "video/newUniqWatcher/new_uniq_watcher",
+        "video/likeCount/like_cnt",
+        "rank/cvSubjectPc",
+        "video/likeCount/rank",
+        "average/upperGroup",
+        "average/cv",
+        "average/averageDuration",
+        "average/hour",
+        "average/demo",
+        "average/device"
+      ],
+      "browserRequiredForNormalExecution": false
+    },
+    {
+      "id": "coupang-product-refresh",
+      "normalTransport": "authenticated_browser_portal_capture_then_offline_normalization",
+      "apiOnlyComplete": false,
+      "reason": "상품 검색·가격 갱신은 로그인된 쿠팡 파트너스 포털에 의존하며 공식 API key 기반 live replay가 아직 없다.",
+      "browserRequiredForNormalExecution": true
+    },
+    {
+      "id": "naver-smarteditor-publish",
+      "normalTransport": "independent_http_with_explicit_headless_inputs_for_private_creation",
+      "apiOnlyComplete": false,
+      "reason": "기존 수정·초안·PNG 업로드는 HTTP 경로다. 일반 비공개 신규 생성에는 명시적인 헤드리스 SDK 입력을 연결했으며 공유 입력 공급자·문서 컴파일러의 비공개 기술 발행을 실검증했다. 상업용 전체 게이트 발행과 공개 신규 생성은 미검증이며 공개 신규 생성·확장 서버 발행은 차단된다. 로그인 쿠키 연장도 미검증이다.",
+      "browserRequiredForNormalExecution": true,
+      "browserFreeExistingUpdates": true,
+      "operations": [
+        {
+          "operation": "publicPostRead",
+          "source": "publicPostRead",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "operation": "editorOptions",
+          "source": "editorOptions",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "operation": "listDrafts",
+          "source": "listDrafts",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "operation": "readDraft",
+          "source": "readDraft",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "operation": "saveDraft",
+          "source": "saveDraft",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "operation": "updatePost",
+          "source": "updatePost",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "operation": "createPost",
+          "source": "createPost",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": false,
+            "credentialBoundary": false,
+            "liveReplay": false
+          },
+          "passed": false,
+          "failed": [
+            "remnantFree",
+            "credentialBoundary",
+            "liveReplay"
+          ],
+          "reason": null
+        },
+        {
+          "operation": "uploadMedia",
+          "source": "uploadMedia",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        },
+        {
+          "operation": "createDraft",
+          "source": "createDraft",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": false,
+            "remnantFree": false,
+            "credentialBoundary": false,
+            "liveReplay": false
+          },
+          "passed": false,
+          "failed": [
+            "clientExists",
+            "remnantFree",
+            "credentialBoundary",
+            "liveReplay"
+          ],
+          "reason": null
+        },
+        {
+          "operation": "uploadSession",
+          "source": "uploadSession",
+          "optional": false,
+          "checks": {
+            "captured": true,
+            "clientExists": true,
+            "remnantFree": true,
+            "credentialBoundary": true,
+            "liveReplay": true
+          },
+          "passed": true,
+          "failed": [],
+          "reason": null
+        }
+      ],
+      "requiredMechanicalGates": [
+        "publisher-job",
+        "publication-review",
+        "publication-artifacts",
+        "independent-http-preflight",
+        "explicit-publish-authorization",
+        "publisher-result",
+        "exact-public-readback",
+        "post-content-audit"
+      ]
+    }
+  ]
+}

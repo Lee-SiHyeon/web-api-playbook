@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "example",
+  "session": {
+    "cookies": [{ "url": "https://api.example.invalid/", "setCookie": "example_session=REPLACE_IN_MEMORY; Path=/; Secure; HttpOnly" }],
+    "headersByOrigin": { "https://api.example.invalid": { "authorization": "Bearer REPLACE_IN_MEMORY" } }
+  },
+  "identity": { "user-id": "REPLACE_WITH_EXPECTED_OWNER_IN_MEMORY" }
+}

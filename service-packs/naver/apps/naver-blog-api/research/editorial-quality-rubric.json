@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "name": "Naver Affiliate Editorial Quality v2",
+  "publishThreshold": 80,
+  "hardBlocks": [
+    "unsupported_first_person_claim",
+    "missing_affiliate_disclosure",
+    "no_reader_problem_or_search_intent",
+    "copied_product_detail_language",
+    "broken_or_unverified_link",
+    "regulated_or_time_sensitive_claim_without_source_date",
+    "comparison_with_fewer_than_four_products",
+    "universal_winner_claim_without_axis",
+    "title_claim_presented_as_measured_fact",
+    "selected_product_advantage_without_counterexample"
+  ],
+  "dimensions": [
+    {
+      "id": "intent",
+      "points": 15,
+      "checks": [
+        "one_primary_search_intent",
+        "title_matches_reader_question",
+        "intro_names_real_situation"
+      ]
+    },
+    {
+      "id": "evidence",
+      "points": 20,
+      "checks": [
+        "experience_or_sources_declared",
+        "three_specific_proofs",
+        "conditions_and_checked_at_recorded"
+      ]
+    },
+    {
+      "id": "decision_support",
+      "points": 20,
+      "checks": [
+        "selection_criteria",
+        "advantages_and_drawbacks",
+        "recommended_and_not_recommended_users",
+        "at_least_four_comparable_products",
+        "scenario_specific_winners",
+        "selected_compared_with_cheapest_fastest_and_highest_capacity",
+        "evidence_gaps_disclosed"
+      ]
+    },
+    {
+      "id": "visual_structure",
+      "points": 15,
+      "checks": [
+        "mobile_short_paragraphs",
+        "four_or_more_section_breaks",
+        "visual_or_table_evidence",
+        "cta_not_before_trust"
+      ]
+    },
+    {
+      "id": "originality",
+      "points": 15,
+      "checks": [
+        "personal_context_or_unique_analysis",
+        "non_generic_conclusion",
+        "no_keyword_stuffing"
+      ]
+    },
+    {
+      "id": "commercial_safety",
+      "points": 15,
+      "checks": [
+        "affiliate_disclosure_above_fold",
+        "price_inventory_variability_noted",
+        "claims_do_not_overpromise",
+        "links_match_products",
+        "price_checked_at_recorded",
+        "title_claims_separated_from_verified_specs"
+      ]
+    }
+  ]
+}

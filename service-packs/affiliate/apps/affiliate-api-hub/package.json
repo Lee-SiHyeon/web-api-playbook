@@ -1,0 +1,24 @@
+{
+  "name": "@affiliate-content-operations/affiliate-api-hub",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "partners:probe": "node scripts/partner-session-probe.mjs",
+    "myrealtrip": "node scripts/myrealtrip.mjs",
+    "naver:today-deals": "node scripts/naver-shopping-deals.mjs",
+    "coupang:netlog": "node scripts/sanitize-coupang-netlog.mjs",
+    "coupang:scripts": "node scripts/analyze-coupang-public-scripts.mjs",
+    "coupang:shapes": "node scripts/build-coupang-request-shapes.mjs",
+    "coupang:catalog": "node scripts/build-coupang-contract-catalog.mjs",
+    "coupang:capture-products": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/capture-coupang-search-products.ps1",
+    "coupang:compare-products": "node scripts/compare-coupang-products.mjs",
+    "adapters:travel:validate": "node scripts/validate-travel-adapters.mjs",
+    "adapters:ecb:latest": "node adapters/ecb-exchange-rates.mjs",
+    "adapters:travel-domestic:validate": "node scripts/validate-domestic-travel-adapters.mjs"
+  },
+  "dependencies": {
+    "parse5": "^8.0.1"
+  }
+}

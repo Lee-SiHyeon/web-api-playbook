@@ -1,0 +1,19 @@
+{
+  "name": "xhr-to-api-only",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "doctor": "node scripts/doctor.mjs",
+    "install:skill": "node scripts/install-skill.mjs",
+    "har": "node scripts/har-to-contracts.mjs",
+    "discover:html": "node scripts/discover-html.mjs",
+    "frontier": "node scripts/frontier.mjs",
+    "session": "node scripts/session.mjs",
+    "request": "node scripts/request.mjs",
+    "inspect:bundle": "node scripts/inspect-bundle.mjs"
+  },
+  "dependencies": { "parse5": "8.0.1", "tough-cookie": "5.1.2" }
+}

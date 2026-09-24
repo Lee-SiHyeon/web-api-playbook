@@ -1,0 +1,49 @@
+{
+  "ok": true,
+  "evidence": {
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "mime": "application/json;charset=utf-8",
+    "bytes": 1505,
+    "sha256": "0c0be5082abbad3865e90b295ae08390e26ab0c02a66c4f730aee2208a4cdeed",
+    "schema": {
+      "statusCode": "number",
+      "message": "string",
+      "result": {
+        "statDataList": {
+          "type": "array",
+          "length": 7,
+          "item": {
+            "dataId": "string",
+            "data": {
+              "columnInfo": {
+                "type": "array",
+                "length": 3,
+                "item": "string"
+              },
+              "rows": {
+                "date": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "string"
+                },
+                "cv": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                },
+                "cv_p": {
+                  "type": "array",
+                  "length": 15,
+                  "item": "number"
+                }
+              }
+            },
+            "utime": "string"
+          }
+        }
+      }
+    }
+  },
+  "error": null
+}

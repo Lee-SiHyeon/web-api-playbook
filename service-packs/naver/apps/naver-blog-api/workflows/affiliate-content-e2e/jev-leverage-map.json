@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "workflow": "affiliate-content-e2e",
+  "defaultMode": "shadow",
+  "activeConfidenceFloor": 0.82,
+  "implemented": [
+    {
+      "id": "topic-selection",
+      "primitive": "choice",
+      "allowedAnswers": "trend-radar candidate ids",
+      "deterministicFallback": "buyer/problem intent weighted opportunity score",
+      "risk": "medium",
+      "reason": "semantic commercial usefulness is not captured by numeric opportunity score alone"
+    },
+    {
+      "id": "format-selection",
+      "primitive": "choice",
+      "allowedAnswers": [
+        "multi_product_comparison",
+        "problem_solution",
+        "community_consensus"
+      ],
+      "deterministicFallback": "product/community evidence counts",
+      "risk": "low",
+      "reason": "format fit is a bounded editorial judgment"
+    },
+    {
+      "id": "evidence-sufficient",
+      "primitive": "noul",
+      "deterministicFallback": "quality gate pass/fail",
+      "risk": "medium",
+      "reason": "Jev can flag semantic overreach but cannot clear a hard block"
+    },
+    {
+      "id": "editorial-quality",
+      "primitive": "score",
+      "levels": [
+        "unsafe or too thin",
+        "substantial gaps",
+        "reviewable",
+        "exceptionally complete"
+      ],
+      "deterministicFallback": "rubric score bucket",
+      "risk": "low",
+      "reason": "useful as a second opinion beside deterministic rubric checks"
+    },
+    {
+      "id": "next-action",
+      "primitive": "choice",
+      "allowedAnswers": [
+        "ready_for_review",
+        "gather_more_evidence",
+        "revise_draft",
+        "stop"
+      ],
+      "deterministicFallback": "hard blocks and rubric threshold",
+      "risk": "medium",
+      "reason": "bounded semantic routing after evidence collection"
+    }
+  ],
+  "nextCandidates": [
+    {
+      "id": "community-snippet-relevance",
+      "primitive": "noul per snippet in one batched request",
+      "reason": "remove search snippets that merely mention the keyword without describing a purchase concern"
+    },
+    {
+      "id": "headline-angle",
+      "primitive": "choice",
+      "reason": "choose among pre-generated title angles without generating new prose"
+    },
+    {
+      "id": "claim-support-check",
+      "primitive": "choice",
+      "reason": "classify whether a draft claim is supported, contradicted or not addressed by a supplied source excerpt"
+    },
+    {
+      "id": "topic-cluster-deduplication",
+      "primitive": "noul",
+      "reason": "flag whether a proposed topic substantially duplicates an existing published article"
+    }
+  ],
+  "forbidden": [
+    "authentication_or_authorization",
+    "network_success_or_schema_validation",
+    "numeric_counting_or_arithmetic",
+    "factual_product_spec_verification",
+    "hard_policy_override",
+    "automatic_publish_authorization",
+    "retry_after_uncertain_mutation"
+  ]
+}

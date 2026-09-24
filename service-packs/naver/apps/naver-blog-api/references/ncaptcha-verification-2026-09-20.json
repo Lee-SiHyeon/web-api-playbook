@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T11:51:16.494Z",
+  "followUpEvidenceFile": "ncaptcha-handoff-verification-2026-09-20.json",
+  "executionHost": "home Windows DESKTOP-TO2H6OD",
+  "scope": "One new owner-controlled private technical test post through the normal editor; independent authenticated HTTP readback",
+  "conclusion": {
+    "browserTokenFlowObserved": true,
+    "browserCreateAccepted": true,
+    "independentHttpReadbackPassed": true,
+    "independentTokenProviderVerified": false,
+    "independentHttpCreateVerified": false,
+    "commercialPublicationQualityVerified": false
+  },
+  "createPostStates": {
+    "captured": true,
+    "client_exists": false,
+    "remnant_free": false,
+    "credential_propagated": false,
+    "live_replay": false
+  },
+  "featureToggle": {
+    "method": "GET",
+    "origin": "https://section.blog.naver.com",
+    "path": "/api/feature-toggle",
+    "httpStatus": 200,
+    "ncaptchaSDKEnabled": true
+  },
+  "editorSource": {
+    "url": "https://feblog.pstatic.net/real/pc/2026.09.09/js/pc-pages-SEOnePage.dbf4c94032b0dacd0d76.js",
+    "sha256": "a6ffd7bcaacf68d883894158c6cd1213100fc0462f4b2f98e97b9edbf4841d88",
+    "bytes": 189229,
+    "findings": [
+      "Initializes the site SDK in the browser when the new-post feature is enabled",
+      "Requests a token before RabbitWrite; the update branch omits this token request",
+      "Initialization or token errors can produce an encoded FAILURE sentinel; a nonempty token field alone is not proof of success"
+    ]
+  },
+  "loadedSdk": {
+    "origin": "https://ncpt.naver.com",
+    "path": "/static/ncaptcha-api.js",
+    "queryFieldNames": ["ncaptcha-sitekey", "ncaptcha-onload", "ncaptcha-initTimeout"],
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "sha256": "dd3ddc45ffa046b4a17de470a538389ed318e77820eff8466a79bf19529a104d",
+    "bytes": 72560,
+    "wasmAssetObserved": "https://wtm.pstatic.net/011fc84/581348ee652d1d7705c9.wasm",
+    "wasmHttpStatus": 200
+  },
+  "tokenExchange": {
+    "method": "POST",
+    "origin": "https://ncpt.naver.com",
+    "path": "/v2/tokens",
+    "queryFieldNames": ["q", "tid"],
+    "requestBodyPresent": true,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseSchemaRetained": false,
+    "issuedValueComparedWithSubmittedValue": false,
+    "eventBufferTruncated": true,
+    "limitation": "The matching request and response-status events were retained. The response body was unavailable after navigation; this is not a complete issuance contract or a full traffic inventory."
+  },
+  "browserWrite": {
+    "observedAt": "2026-09-20T11:49:10.537Z",
+    "method": "POST",
+    "path": "/RabbitWrite.naver",
+    "bodyFieldNames": ["blogId", "documentModel", "mediaResources", "populationParams", "productApiVersion", "tokenId"],
+    "tokenPresent": true,
+    "observedTokenLength": 44,
+    "tokenLengthIsNotAContract": true,
+    "knownFailureSentinel": false,
+    "privateRequested": true,
+    "httpStatus": 200,
+    "responseMime": "application/json;charset=UTF-8",
+    "responseTopLevelKeys": ["isSuccess", "result"],
+    "isSuccess": true,
+    "resultKeys": ["redirectUrl"],
+    "redirectPath": "/PostView.naver",
+    "visibleChallengePresented": false
+  },
+  "independentReadback": {
+    "receiptSha256": "9b3e9c17799147d8ebe81dcfeec96b5a802223b8df5543048efdb3dfeddd616f",
+    "protectedOwnerVerified": true,
+    "privateVisibilityVerified": true,
+    "editorDocumentExact": true,
+    "htmlDocumentExact": true,
+    "targetIdentityVerified": true,
+    "paragraphCount": 4,
+    "expectedDocumentSha256": "83dac8ac2443e396f7813544622e649113b336d428812f81ad994f20691e09cb",
+    "htmlSha256": "798ecc186c4e30b28806cc1562757ff8243b77ae2ed9e120ca6121aa9cee0079"
+  },
+  "unverified": [
+    "Supported browser-free token issuance",
+    "Token lifetime, one-time-use semantics and cross-process transfer",
+    "Independent HTTP new-post creation",
+    "Fresh blank-document metadata producer"
+  ],
+  "retainedSecrets": false,
+  "normalClientCreateGuard": "CREATE_TOKEN_PROVIDER_UNVERIFIED"
+}

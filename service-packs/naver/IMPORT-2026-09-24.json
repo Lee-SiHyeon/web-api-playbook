@@ -1,0 +1,1974 @@
+{
+  "importedAt": "2026-09-24T07:36:10.008Z",
+  "purpose": "Naver login, protected session reuse, observed APIs and current publisher",
+  "sourcePublisherCommit": "906aeb6c9bdff459eccc39cccdea8dfbdd875454",
+  "sourceLoginBaseCommit": "0459174982e7688e0fc115060223310801bd6aad",
+  "includesUncommittedSourceChanges": true,
+  "credentialsCopied": false,
+  "imported": [
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/model-lint.mjs",
+      "path": "apps/naver-blog-api/scripts/api/model-lint.mjs",
+      "sha256": "47bf9e4c67631b7402c55ffd678ea628b2542298827103de1caf5384f4508458"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/video-upload.mjs",
+      "path": "apps/naver-blog-api/scripts/api/video-upload.mjs",
+      "sha256": "e54fd9a72d331eb64b97291098cddc2f5efc14bdc24ba78d23ecfe029a23925f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/ai-research-article-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/ai-research-article-contract.mjs",
+      "sha256": "7730c65d5de8dd70c2647e1d760a4c062492f9cbc135e072b1ae9b37cfe88adb"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/archived-comparison-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/archived-comparison-contract.mjs",
+      "sha256": "1103db93b7210b6eece6c711101e19d23ee93d87eaf4a1c75e3cf517471ddb19"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/article-block-text.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/article-block-text.mjs",
+      "sha256": "414f1d1bf221ec7c9f494499e9bde7f50e21c8e560d2245a9bd49c736f749b41"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/dynamic-article-gates.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/dynamic-article-gates.mjs",
+      "sha256": "326e72e3387c8113a19d32abba9633241ac8db87df8136dac23777d2cd78b0cd"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/existing-article-update-scope.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/existing-article-update-scope.mjs",
+      "sha256": "c012ccdec2ab96943e90274d637c0cdc48a805e85c378c3ecd5efd7c5ffa301c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/frontier-model-comparison-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/frontier-model-comparison-contract.mjs",
+      "sha256": "9ae9fb0f8a6c1d0c8b9b52bf14516bb2724cebfaec944e2b926eafebe9522195"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/hotel-promotion-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/hotel-promotion-contract.mjs",
+      "sha256": "aca6398fdb89020652eac279db210e9ba32ae25ccccd7214bd9ceec024f61180"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/iclub-hotel-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/iclub-hotel-contract.mjs",
+      "sha256": "8b3fc78a03f5c3348186e8bcf730b81d78f9983a75543106a593c65544fbc239"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/iclub-research-builder.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/iclub-research-builder.mjs",
+      "sha256": "826b21d916baf415ff43f897dbf3977d019982d01555c99e1e81e1e524138868"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/informational-article-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/informational-article-contract.mjs",
+      "sha256": "1cdee2f3b44e8957903bd7a7a5f8d220d31850db48cc14cc8e9c01b68d4a00d9"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/jev-applications-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/jev-applications-contract.mjs",
+      "sha256": "2545e2fc56b760ca5234300694d55b72ee8c51322612b54c11678d2912fa8546"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/market-analysis-article-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/market-analysis-article-contract.mjs",
+      "sha256": "d560b86a03d7a1b3e57ad1efa54d188a3bbc01bffdeb5da04f4ea5c8888b6edb"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/publication-tags.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/publication-tags.mjs",
+      "sha256": "a231cc464cbd6b45e6eaed918206248154290501b5b2cd42b2abb53df6c11736"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/seoul-shilla-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/seoul-shilla-contract.mjs",
+      "sha256": "a56e3d894601fafec87134f969d397fe0eec85ca5ad1f5c8ad97a7627f196c78"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/seoul-shilla-research-builder.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/seoul-shilla-research-builder.mjs",
+      "sha256": "cce01eeed941bc97eeec051a5619cd43a47d11cbe5ab67c2988655394ff602df"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/single-offer-hotdeal-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/single-offer-hotdeal-contract.mjs",
+      "sha256": "0249a56e1383f640c7cfd4832e26e45788ca4ecce0bccd1ecfa66d5955979fe4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/travel-planning-contract.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/travel-planning-contract.mjs",
+      "sha256": "05984e2de143047f3e550efb866bf7a59193aba98235cde23fdd162f2e998616"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/ai-research-article-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/ai-research-article-contract.test.mjs",
+      "sha256": "a8bb953e20331cc3a761587d7848839c819c1a9bb1f26aeb94d6f18a958bceca"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/ai-research-create.test.mjs",
+      "path": "apps/naver-blog-api/tests/ai-research-create.test.mjs",
+      "sha256": "1150d50a3914c0fb6c433ceda0e4e9ed5a5cd9f4442febe4611d02cfdf1e45f2"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/archived-comparison-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/archived-comparison-contract.test.mjs",
+      "sha256": "05d6a838d014804882d7224e06002bbf56a441b5a5541566fb3ce8d5441ee3bf"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/article-table-contracts.test.mjs",
+      "path": "apps/naver-blog-api/tests/article-table-contracts.test.mjs",
+      "sha256": "ca03ccd87e6a9739be7d6cd146b5101ce0f6c07ec0c3b03631065a75f32ed384"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/battery-original-layout.test.mjs",
+      "path": "apps/naver-blog-api/tests/battery-original-layout.test.mjs",
+      "sha256": "0da2db8785c27752f900d17b709c2dd223892862cb8fd6a597bb6a7275e819dc"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/dynamic-article-gates.test.mjs",
+      "path": "apps/naver-blog-api/tests/dynamic-article-gates.test.mjs",
+      "sha256": "e2b3e00b2154deabd4feec89f4bddd68349b6d8bd93155c7f42f152876f13af1"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/editor-preview-images.test.mjs",
+      "path": "apps/naver-blog-api/tests/editor-preview-images.test.mjs",
+      "sha256": "66fb9c08c556b2ca77f278988e687c75de8df52ab46fc16747e5b46d56478999"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/editor-preview-scope.test.mjs",
+      "path": "apps/naver-blog-api/tests/editor-preview-scope.test.mjs",
+      "sha256": "0850d897609821dd7434bc42d19850d78ab1df3b7ab7cde7b15932715273d866"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/existing-article-update-scope.test.mjs",
+      "path": "apps/naver-blog-api/tests/existing-article-update-scope.test.mjs",
+      "sha256": "da60a44611990225738d5d3e7272d34b093d10047fd51cf5ac64899a58eb5b1e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/fixtures/public-video-component.html",
+      "path": "apps/naver-blog-api/tests/fixtures/public-video-component.html",
+      "sha256": "88348510307a719fd2d17a8f7f6598845e6c8725e5c46f4c4dfd9575e298d971"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/grok-update-scope.test.mjs",
+      "path": "apps/naver-blog-api/tests/grok-update-scope.test.mjs",
+      "sha256": "2e40a81be6abf3b7798310823e65c01d8c0f725e01ca0b91c7a7ece165cfdc53"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/hotel-promotion-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/hotel-promotion-contract.test.mjs",
+      "sha256": "e5125a08598b61938d6f60b1561e4f5c2998da6c4c8787ef2bfa5abec5818b24"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/iclub-hotel-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/iclub-hotel-contract.test.mjs",
+      "sha256": "b19d842499d141b3d96752015a9428a020a98da26e5e13b607b0cd1d9994f557"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/jev-applications-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/jev-applications-contract.test.mjs",
+      "sha256": "3d60f2dbc2da6e0d65f7d4bdbb81cd42a87c1143cf67fa525fdc8d200e2d1bef"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/jev-auth.test.mjs",
+      "path": "apps/naver-blog-api/tests/jev-auth.test.mjs",
+      "sha256": "a8a002599d27608d49e6c19c6208c742552789d78c251736be29f095b66ce18a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/jev-quality.test.mjs",
+      "path": "apps/naver-blog-api/tests/jev-quality.test.mjs",
+      "sha256": "c19bcf7193a52f1e6cd56d717390db87c120b3a1e1ebe37ccc54511cd5736a96"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/market-analysis-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/market-analysis-contract.test.mjs",
+      "sha256": "a78922843b2ef90d14989ae8136d2226f48e7b74396cb63151640a53f986ea69"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/market-analysis-create.test.mjs",
+      "path": "apps/naver-blog-api/tests/market-analysis-create.test.mjs",
+      "sha256": "c523cb2546410a89241f3e666648ce1222ccdb6faaa9983fce78e3913c73ad14"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/market-analysis-update.test.mjs",
+      "path": "apps/naver-blog-api/tests/market-analysis-update.test.mjs",
+      "sha256": "07dce24305739f528aba50d92ebeb5e35ca4a37c539b3c510ded056f1754bc81"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/mimo-followup-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/mimo-followup-contract.test.mjs",
+      "sha256": "55532b21212a0deedc8f9830fc7e58cd0cd00bfefb704199fd372091c5ea7783"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/model-lint.test.mjs",
+      "path": "apps/naver-blog-api/tests/model-lint.test.mjs",
+      "sha256": "be1418e6ffe4929e870ed829f0d7ed0039bb030d8723ad72d0a192c54d856b47"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/monogram-current-observation.test.mjs",
+      "path": "apps/naver-blog-api/tests/monogram-current-observation.test.mjs",
+      "sha256": "414c4550f14effc91aa5dc35fa35e5c4b73e5d67fcf98dc5c645566cb88e1be0"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/native-tables.test.mjs",
+      "path": "apps/naver-blog-api/tests/native-tables.test.mjs",
+      "sha256": "9f9c382578d462b3e4cc5f4ccd447cfc6781e3fde8f1f93caa54649798092b51"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/public-document-image-links.test.mjs",
+      "path": "apps/naver-blog-api/tests/public-document-image-links.test.mjs",
+      "sha256": "876ff765e8dfaf4f2603daeec923c41c3dd4b36c6b54cd7ad23066daceaa65d8"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/publication-tags.test.mjs",
+      "path": "apps/naver-blog-api/tests/publication-tags.test.mjs",
+      "sha256": "34bcf37cea9484d9431f0d744dc8d837e0e9ccec215649ffce8a6089080810a5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/reference-jev-quality.test.mjs",
+      "path": "apps/naver-blog-api/tests/reference-jev-quality.test.mjs",
+      "sha256": "e76646462ece68d60ce34b478ee6a7880ed0182691dc5b1bf6abf18fdf2a0893"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/republish-workflow.test.mjs",
+      "path": "apps/naver-blog-api/tests/republish-workflow.test.mjs",
+      "sha256": "530fe2593b08e80ca5c916e690fb51e16c30394de5484d5f786107c45ca3d016"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/seoul-shilla-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/seoul-shilla-contract.test.mjs",
+      "sha256": "bec8a093e60bc4e8ac8e1c02e61b1fb3a5473d16011ac69fd561360b4a423116"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/single-offer-hotdeal-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/single-offer-hotdeal-contract.test.mjs",
+      "sha256": "62e51bf513d7d73818d7909fd06a2778a646158928594f364359e49bfc17d135"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/single-offer-hotdeal-create.test.mjs",
+      "path": "apps/naver-blog-api/tests/single-offer-hotdeal-create.test.mjs",
+      "sha256": "852f47a92eb2cec52ed5c5e77a5070eef62fbbe8e706180a29af122260f025df"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/ai-research-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/ai-research-fixture.mjs",
+      "sha256": "4adef7a7558543703376535fdcf4883b1b97eb5c89b042462628358a497e7623"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/hotel-promotion-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/hotel-promotion-fixture.mjs",
+      "sha256": "2c728ab3234ffd62971a38a38f15820ea3fb1338b6c5e43e3398885201927442"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/iclub-hotel-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/iclub-hotel-fixture.mjs",
+      "sha256": "b48fa7a74260622a066a5d0b03447471ad34d4c1fbf25ca92b4aa1799efab289"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/jev-applications-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/jev-applications-fixture.mjs",
+      "sha256": "085a451d716cf81050aed609a3b2a223fe8b0f4ab40372ec782eb4976cfccf86"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/market-analysis-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/market-analysis-fixture.mjs",
+      "sha256": "52c246b025bd73c6742b2c75306d306165007159804f5ca0de0d57c7cb80dc27"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/seoul-shilla-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/seoul-shilla-fixture.mjs",
+      "sha256": "ee4d761be2c345afe660bf0171dfa94a078209a3062a0d3e3f6691cde3f18e37"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/single-offer-hotdeal-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/single-offer-hotdeal-fixture.mjs",
+      "sha256": "1a0e81c563db206d8957641647806ec8f68f9b57c6b9fdfeafdd0a49397f9c26"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/travel-planning-contract.test.mjs",
+      "path": "apps/naver-blog-api/tests/travel-planning-contract.test.mjs",
+      "sha256": "5f01c2920b086664703c6ae50e5865c9e08ed4337af20c3302082d68fd784790"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/video-upload.test.mjs",
+      "path": "apps/naver-blog-api/tests/video-upload.test.mjs",
+      "sha256": "37653cff105cccda5b8f49c239b84f0ede29c372310c38704d2906aa0cd4fd22"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/create-mp4-fixture.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/create-mp4-fixture.mjs",
+      "sha256": "5ca8ccdd713a6663a992f1eb1db5b88b5b2f57d2fb9c3c6cd575933e628670f8"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/video-native-contract.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/video-native-contract.mjs",
+      "sha256": "6a56cdcca7dacde5776b480cd12a7dcaa103de85899aaf7420377e156d50218a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/video-upload-capture.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/video-upload-capture.mjs",
+      "sha256": "2332cae9ac4b05ba49045b418fe88885ad8bf99990d6a457ae172fc8ab239fc6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/video-upload-completion-capture.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/video-upload-completion-capture.mjs",
+      "sha256": "2a79794306741d5ef6567a89fa2825f4477e76b2750ab2a374c60f44bb48adb6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/video-upload-observe.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/video-upload-observe.mjs",
+      "sha256": "eef3a614ebd5c6dcf2b95d719867c8f8ccc6def05fdf63043f2dbfa4f12845b8"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/adaptive-publish/run.mjs",
+      "path": "apps/naver-blog-api/workflows/adaptive-publish/run.mjs",
+      "sha256": "8007ff504aa61655102d6e4c41499a0475caaedabd478b5f95dcba03899763bd"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/jev-auth.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/jev-auth.mjs",
+      "sha256": "eed9fd1edc323725018c6989970b086b7c66e6f98cad5ca6d8832b7782a95ec3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/model-compare/run.mjs",
+      "path": "apps/naver-blog-api/workflows/model-compare/run.mjs",
+      "sha256": "1eb3d78360882a25e04907e521b693eb9d346bce567f297e24519a8cf0584e39"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/republish/adaptive-article-review.mjs",
+      "path": "apps/naver-blog-api/workflows/republish/adaptive-article-review.mjs",
+      "sha256": "892adda97495700702409f76c3af7559c8c6af935e2015aec9635430d9dfa902"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/republish/core.mjs",
+      "path": "apps/naver-blog-api/workflows/republish/core.mjs",
+      "sha256": "6bc5859e3e1cd5998d48f8a5aad4ff82d8b6a34f9c6559ae7d987086208528ab"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/republish/jev-quality.mjs",
+      "path": "apps/naver-blog-api/workflows/republish/jev-quality.mjs",
+      "sha256": "4f2e2e26d632b8c282f43c484ff85b629a16b53aad40153e3b7fe5408102cc6a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/republish/reference-jev-quality.mjs",
+      "path": "apps/naver-blog-api/workflows/republish/reference-jev-quality.mjs",
+      "sha256": "43179b09e0e82ececc1d1d6ab12d8a9d5bf7baa4dae05ac98b98db80445d8909"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/republish/run.mjs",
+      "path": "apps/naver-blog-api/workflows/republish/run.mjs",
+      "sha256": "853181492c290acea0887626cf3e2271de51bd0aff4299156ff1a29eda3d7df4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/republish/session-handoff.mjs",
+      "path": "apps/naver-blog-api/workflows/republish/session-handoff.mjs",
+      "sha256": "b36d2bd413d49b85acf76c0460b9ed5963222b29557a685bf7349b66a47a44ca"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/.env.example",
+      "path": "apps/naver-blog-api/.env.example",
+      "sha256": "c7bd67a42f5a33b52749f91d3340b4a3738cab5f682e625a514def07781a8d82"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/.gitattributes",
+      "path": "apps/naver-blog-api/.gitattributes",
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/.gitignore",
+      "path": "apps/naver-blog-api/.gitignore",
+      "sha256": "0c7258ca23ef1d3ce8c16658ee01da2ca5d4e28b0d291e65a9cd2d9302fb4a1b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/IMPORT.json",
+      "path": "apps/naver-blog-api/IMPORT.json",
+      "sha256": "895a6594a86ba2c23819c2ea2ec8320c6f005df336ca62b8e9e37cfcd6a17f1a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/README.md",
+      "path": "apps/naver-blog-api/README.md",
+      "sha256": "934e5ea3fdc44f931d9b67351c380ea6417ee3314579b3b46595810d9d52f021"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/coverage.json",
+      "path": "apps/naver-blog-api/discovery/coverage.json",
+      "sha256": "851ea7555b3dab2b6291077902e6b6cbf12e5b1c4ca51f6b0892daa4e261689b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/discovery-map.json",
+      "path": "apps/naver-blog-api/discovery/discovery-map.json",
+      "sha256": "64f607c10c223ffcaa6a777ce64304f4695a2c7bc9fd36276c1830578977da37"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/dom-resume.json",
+      "path": "apps/naver-blog-api/discovery/dom-resume.json",
+      "sha256": "c4673fc8efa5788b3df313e8e35ec11254a7a18f6cb333c3dfbd698e4be32df7"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/frontier.json",
+      "path": "apps/naver-blog-api/discovery/frontier.json",
+      "sha256": "9c57dacd87dc867f96fd254d6d8a4cbaa8e420e7eface89395eccef5db6f51c4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/recursive-map.json",
+      "path": "apps/naver-blog-api/discovery/recursive-map.json",
+      "sha256": "5e0fea45edacd5b5d8503174d7bff50fcb5768226b4ea6985493deaaf1125531"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/resume-status.json",
+      "path": "apps/naver-blog-api/discovery/resume-status.json",
+      "sha256": "d7909c9550b465aca8054d8aa71cba5ec6cf325b7a952a83e1920622ee4e3cf7"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/session-status.json",
+      "path": "apps/naver-blog-api/discovery/session-status.json",
+      "sha256": "6759db951c34f7a2dabbdb258d862c069da30e737981f5b698cff4df0b551137"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/discovery/stat-navigation-2026-09-13.json",
+      "path": "apps/naver-blog-api/discovery/stat-navigation-2026-09-13.json",
+      "sha256": "7bcdbca003c234471c5e79315e673270ab08fff5dacd2d6750625a7585fefabf"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/affiliate-workflow-audit-2026-09-20.json",
+      "path": "apps/naver-blog-api/docs/affiliate-workflow-audit-2026-09-20.json",
+      "sha256": "7bd33740c741d57f28c26e8444c0af694b0aec05bb591816b7d22c682732d9cd"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/affiliate-workflow-audit-2026-09-20.md",
+      "path": "apps/naver-blog-api/docs/affiliate-workflow-audit-2026-09-20.md",
+      "sha256": "ac59e4ef6cf79076ab260d40213dabffb8174a8327e8e89b15321c8e46b19c49"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/editor-api-rework-2026-09-19.md",
+      "path": "apps/naver-blog-api/docs/editor-api-rework-2026-09-19.md",
+      "sha256": "7aa49a73ca9e94fca91efd804453e1f859f48abb2d8e05cd32f2f657b8823647"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/editor-resume-2026-09-13.md",
+      "path": "apps/naver-blog-api/docs/editor-resume-2026-09-13.md",
+      "sha256": "7d041ad81798d5a7034fe7174108ba0fc93d60bf5a62d7f8ee8eedaf1db5b51a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/headless-login-2026-09-13.md",
+      "path": "apps/naver-blog-api/docs/headless-login-2026-09-13.md",
+      "sha256": "7f52b24f5636264a260ff830d7323982219d2f0452e646038691b2d4b08c606d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/history-2026-09-06.md",
+      "path": "apps/naver-blog-api/docs/history-2026-09-06.md",
+      "sha256": "aa401f367b036007020fd02fe4101108635e7e882b4e3aa4a9f242864cabd0b5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/login-http-handoff-2026-09-13.md",
+      "path": "apps/naver-blog-api/docs/login-http-handoff-2026-09-13.md",
+      "sha256": "e03800ebb9c407113ad7e07cbf0530421d43f7aaba559b5f30c1d7bf2b5b60a5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/non-browser-discovery.md",
+      "path": "apps/naver-blog-api/docs/non-browser-discovery.md",
+      "sha256": "5abc864c199932f6e8a73b38da2b300d6fe25e190b86887c5f10798ccf687de0"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/resume-2026-09-13.md",
+      "path": "apps/naver-blog-api/docs/resume-2026-09-13.md",
+      "sha256": "07f0947b46475d78f49ae1f2065cdd61b3b1797e2ac76b48d80d475de424a9d1"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/rework-baseline-2026-09-19.md",
+      "path": "apps/naver-blog-api/docs/rework-baseline-2026-09-19.md",
+      "sha256": "f2637a0ab7819b8e8c65629af2b2d9cf75408baa05f7aae6e52d49e2e9838007"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/package-lock.json",
+      "path": "apps/naver-blog-api/package-lock.json",
+      "sha256": "6a69ff796fe8b67ab585dbda466fdca2231a87449309e63d5bfa4f277dfc96ba"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/package.json",
+      "path": "apps/naver-blog-api/package.json",
+      "sha256": "eb799e13217b3b1a3ed82437d0db252dd3230b1b1037d9032c03e691ff4edb80"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/affiliate-publication-2026-09-21.json",
+      "path": "apps/naver-blog-api/references/affiliate-publication-2026-09-21.json",
+      "sha256": "de3d4619434db3f7ffff68136294089d6b2132724b204cdbce59f684d8d4fbb3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/api-catalog.json",
+      "path": "apps/naver-blog-api/references/api-catalog.json",
+      "sha256": "6104197e08e12d243f7707cbf442f01f691356184b153172fbdc56f5b3357f57"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/api-only-boundaries.json",
+      "path": "apps/naver-blog-api/references/api-only-boundaries.json",
+      "sha256": "42fcefa31a144a836d0144d774969b91e6aeaec2b27575d3690e0f549ba5f27e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/compiled-headless-verification-2026-09-20.json",
+      "path": "apps/naver-blog-api/references/compiled-headless-verification-2026-09-20.json",
+      "sha256": "cc0f38a31e1c7346a2301676b1f4ec3a515e45fa3a13f2ca23dc7b265cd34a7d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/current-contracts.json",
+      "path": "apps/naver-blog-api/references/current-contracts.json",
+      "sha256": "57107e562e51d7ec640c4aa9036c99c74e16bd70926e03f08b8a29dd94b19a36"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/editor-api-contracts.json",
+      "path": "apps/naver-blog-api/references/editor-api-contracts.json",
+      "sha256": "b0811acfed82cbe6507d272f7af58582b3993b0ddaaa4e0f6022f2021f597253"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/editor-contract-candidates.json",
+      "path": "apps/naver-blog-api/references/editor-contract-candidates.json",
+      "sha256": "f1bca52d3faf32faa769d7d7bdaf8f00795febdb7cc5ff8424dc61f07e94ffff"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/editor-live-replay-2026-09-20.json",
+      "path": "apps/naver-blog-api/references/editor-live-replay-2026-09-20.json",
+      "sha256": "93a40a52c8ec350da8700837bce3a19cae77094dc3c5c62344eaeaa0c9303671"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/implemented-operations.json",
+      "path": "apps/naver-blog-api/references/implemented-operations.json",
+      "sha256": "f0b50262b7244584bf8834377ebd923c801c52d7cee96610d6e7abb02b865072"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/mechanical-gate-manifest.json",
+      "path": "apps/naver-blog-api/references/mechanical-gate-manifest.json",
+      "sha256": "4ea8989cf0c19a520f4258c2d8d77f184fc849900fc7440382e51c8e727035b9"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/ncaptcha-handoff-verification-2026-09-20.json",
+      "path": "apps/naver-blog-api/references/ncaptcha-handoff-verification-2026-09-20.json",
+      "sha256": "11b368cad5d43c7b9832d302289cb668fb117a21832329be16d8382b5cd57c42"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/ncaptcha-headless-verification-2026-09-20.json",
+      "path": "apps/naver-blog-api/references/ncaptcha-headless-verification-2026-09-20.json",
+      "sha256": "de51e0d24d2326d2b2272a991e1b6961f13a95b0ad442f120c682dec5777c069"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/ncaptcha-verification-2026-09-20.json",
+      "path": "apps/naver-blog-api/references/ncaptcha-verification-2026-09-20.json",
+      "sha256": "ab977bebdb8ff7ca6358ff87e01ed8de01ddc887f37eb56c2bc9fa7bc740a09a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/published-post-duplication-2026-09-20.json",
+      "path": "apps/naver-blog-api/references/published-post-duplication-2026-09-20.json",
+      "sha256": "1a7d10e9105edf6410b2570f2da05b63872bf60c93b9cafec5b34433aefe9716"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/published-post-repair-2026-09-21.json",
+      "path": "apps/naver-blog-api/references/published-post-repair-2026-09-21.json",
+      "sha256": "2eba23263c8d259342bed8d72c6e5fb19769da3e14d32d920a0d573631be38d5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/references/resumed-contracts.json",
+      "path": "apps/naver-blog-api/references/resumed-contracts.json",
+      "sha256": "1d91d67ecda5dc94335a47e9f522380939e79400d935ffdb8391e31c59548b7f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/analyze-affiliate-layouts.py",
+      "path": "apps/naver-blog-api/research/analyze-affiliate-layouts.py",
+      "sha256": "557522f7dd9f2356e71eb73728be876f780ad739f1fdb0edc3df6eb92277e335"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/build-product-comparison-brief.mjs",
+      "path": "apps/naver-blog-api/research/build-product-comparison-brief.mjs",
+      "sha256": "53e96405e0835157b897a2c07c4a887bb710a5ea59a5a245acf7707a4bb85a0f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/build-reference-corpus.py",
+      "path": "apps/naver-blog-api/research/build-reference-corpus.py",
+      "sha256": "8541733c64b12be1fd01eb6f9ef21ebab5e45588290355a4da6b5ae7e929f380"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/community-radar/profiles/home-storage.json",
+      "path": "apps/naver-blog-api/research/community-radar/profiles/home-storage.json",
+      "sha256": "d6eddcd810b5e5fa78ae8161a132f93262a238b41164017019adf184e99ee41b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/community-radar/run.py",
+      "path": "apps/naver-blog-api/research/community-radar/run.py",
+      "sha256": "50e383cfdce9bbeb397e95c1a24e8535ca9e1b6443d76f92c4b30bb200432ad9"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/editorial-quality-rubric.json",
+      "path": "apps/naver-blog-api/research/editorial-quality-rubric.json",
+      "sha256": "9c6d3fd9d1c5d1b9dad6b36ee322bce9fbe1a5b8206a54cd6c60f37dbc492d4f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/home-storage/render-assets.py",
+      "path": "apps/naver-blog-api/research/home-storage/render-assets.py",
+      "sha256": "aa336aa3f67c3e7ae12283f782e20d489ecf6b7dca502a1f03e86de79b017ccf"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/home-storage/render-upgrade-assets.py",
+      "path": "apps/naver-blog-api/research/home-storage/render-upgrade-assets.py",
+      "sha256": "02bc67cc291d4e44aac394e577077f53229e0b9187e64b2875152a537ef21df3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/image-prompts/build.mjs",
+      "path": "apps/naver-blog-api/research/image-prompts/build.mjs",
+      "sha256": "1be182427f43a1f51b7423e1413548ab68193d974f5fc8dec2360ad1ec9a055d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/image-prompts/home-room-product-snapshot.json",
+      "path": "apps/naver-blog-api/research/image-prompts/home-room-product-snapshot.json",
+      "sha256": "7a30646eaf81f1148ca9be0f58de9a531f2e7f9929a594e1fb923885340c5cfc"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/jev-skill-reference.md",
+      "path": "apps/naver-blog-api/research/jev-skill-reference.md",
+      "sha256": "1d9b95222288795d963f065d6c67361eb5191260823024fbfd4995b6387deae6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/naver-blog-reference-analysis-2026-09-19.md",
+      "path": "apps/naver-blog-api/research/naver-blog-reference-analysis-2026-09-19.md",
+      "sha256": "7be37155d639a48a7e8bb35d452f499883a4f27f41cb80bb21231ce696a7d0bd"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/naver-native-formatting-2026-09-21.md",
+      "path": "apps/naver-blog-api/research/naver-native-formatting-2026-09-21.md",
+      "sha256": "e5c05498f2ce0ddc6bd8cd3851e4bd32c3fa1d1038364cd87c531d70f5f6e553"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/naver-reference-layout-enforcement-2026-09-21.md",
+      "path": "apps/naver-blog-api/research/naver-reference-layout-enforcement-2026-09-21.md",
+      "sha256": "ca97c18d187bd5d2aa0c1ff3110648b54bbd10f114094530924d750e0ab30ccc"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/naver-storage-layout-benchmark-2026-09-20.json",
+      "path": "apps/naver-blog-api/research/naver-storage-layout-benchmark-2026-09-20.json",
+      "sha256": "cd79d1143d8c9e546af1467f5fe1c4695d2e52fa0d326d650e102ac456e80a63"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/naver-storage-layout-benchmark-2026-09-20.md",
+      "path": "apps/naver-blog-api/research/naver-storage-layout-benchmark-2026-09-20.md",
+      "sha256": "278293e8309562f6c686207cf3953352801f6d8da27599f7c374f1f81b1fe97e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/templates/comparison-buying-guide.md",
+      "path": "apps/naver-blog-api/research/templates/comparison-buying-guide.md",
+      "sha256": "774b4ee482084bd7aaba38ffa7c67cac72504c12acb28d11a7775ce17dc6442a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/templates/multi-product-comparison.md",
+      "path": "apps/naver-blog-api/research/templates/multi-product-comparison.md",
+      "sha256": "e873da55b512e9bde12d2c9909c93e242dbc3fa625b2f352a326f1968b2e42d5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/templates/problem-solution-commerce.md",
+      "path": "apps/naver-blog-api/research/templates/problem-solution-commerce.md",
+      "sha256": "3ac4fba3aedceaa3a3bd7e8429e555f377f78f7ab51d18edb0920e89903210ab"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/templates/single-product-tested.md",
+      "path": "apps/naver-blog-api/research/templates/single-product-tested.md",
+      "sha256": "354c27763875c45ad6c97bd3a601f28e2706cffe8f3e1429da673d573ee121f5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/topic-backlog-2026-09-19.md",
+      "path": "apps/naver-blog-api/research/topic-backlog-2026-09-19.md",
+      "sha256": "56a465a8d2d73dccdf4c990ea398b9c715c8b49d8c5527f75bc9cd815b3028da"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/topic_brief.py",
+      "path": "apps/naver-blog-api/research/topic_brief.py",
+      "sha256": "c78e036ed96407fc4d999a6ad5aaab23b693bb01db2de7bb413ff0d677f2b6b2"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/README.md",
+      "path": "apps/naver-blog-api/research/trend-radar/README.md",
+      "sha256": "4e0c637b7fa14f40934e7ad889c2d56cc77aa7934a7ca600ee6cb87e94e5afad"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/build-vertical-brief.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/build-vertical-brief.mjs",
+      "sha256": "181c39090bc89dd0bf30d06486d1b06ce74435c413019248eecb5d4625c97a07"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/lib/http.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/lib/http.mjs",
+      "sha256": "5ff5047ada3abe70176fb613f96efec623442f3864ca2758199f09a5f1c952d9"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/run-vertical.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/run-vertical.mjs",
+      "sha256": "c6548925a4b2040ddb641f388bd6b01adbb7484c0a312bcd5bfd99fd21272e7d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/run.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/run.mjs",
+      "sha256": "8f3b31f0708953c09b562b85224bc16f8cb6959bae2f9fa42fdec7f3b2677ee4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/scoring.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/scoring.mjs",
+      "sha256": "150b6f39604f6f8dca2551f39c057cd1e995c747f22fe66db1bf5bb1016bf215"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs",
+      "sha256": "dc7e9eebf84f07e4aca85f1c4328e4208167a31e6cd801f7263a4e49aff2a14b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/sources/naver-autocomplete.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/sources/naver-autocomplete.mjs",
+      "sha256": "bbcfe0dc3f4e1ec475b0a45bba2d244cb9077524473334e6cf3b8edc38b11b86"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/sources/naver-search-trend.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/sources/naver-search-trend.mjs",
+      "sha256": "0fa70c06a678f5b80953b4a290e889fad04a05e9bc63882ab8dc62d2b85c8cfa"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/sources/naver-shopping-insight.mjs",
+      "path": "apps/naver-blog-api/research/trend-radar/sources/naver-shopping-insight.mjs",
+      "sha256": "578ab3dd677cd4da81748411abed3af97e842cba8163280ffe5b71ac72842aa6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/research/trend-radar/verticals/travel.json",
+      "path": "apps/naver-blog-api/research/trend-radar/verticals/travel.json",
+      "sha256": "48e7662a29a830f55ee1cd77dc4669ab56df793f2a473ce21676f61c4d7f7b90"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/run-editor-discovery.ps1",
+      "path": "apps/naver-blog-api/run-editor-discovery.ps1",
+      "sha256": "35dfb8aa3aa62920bd0b3a956035494cd42ceca242aa2d1cfb72696e975b6cd1"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/run-editor-surface-discovery.ps1",
+      "path": "apps/naver-blog-api/run-editor-surface-discovery.ps1",
+      "sha256": "c24ce3ffe2b8521970dfc6e04bf330ed9ba069f050a8b6a88aa6d2cb95a28596"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/run-naver-post-pilot.ps1",
+      "path": "apps/naver-blog-api/run-naver-post-pilot.ps1",
+      "sha256": "bb22595fc9cf1f040595d7bcc7ed2685c5d3d4931768445f4614fc655f9437b6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/analyze-editor-scripts.mjs",
+      "path": "apps/naver-blog-api/scripts/analyze-editor-scripts.mjs",
+      "sha256": "509ca7bc1e08e0044a5ea957566bd2e18231a837a91fe0b0787ede63fab39630"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/create-envelope.mjs",
+      "path": "apps/naver-blog-api/scripts/api/create-envelope.mjs",
+      "sha256": "df369e390a1fcc871ffe43b10a75aa06f0ea663cc2d4b3c9be373b9d40152d8e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/editor-client.mjs",
+      "path": "apps/naver-blog-api/scripts/api/editor-client.mjs",
+      "sha256": "76fd02b6d57d661ec6672fa1fb66bf54f7a8600d8bc5644e3562aa4297ee0f49"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/editor-model.mjs",
+      "path": "apps/naver-blog-api/scripts/api/editor-model.mjs",
+      "sha256": "dc640d62690b81aabe9778aebdf59a28e2f5a1564a9bb4301451b4e02a5af38d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/environment-session.mjs",
+      "path": "apps/naver-blog-api/scripts/api/environment-session.mjs",
+      "sha256": "b86404521183a35a8892471eda3668857f81d7f863f2a731d9a29f2b2040925b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/media-upload.mjs",
+      "path": "apps/naver-blog-api/scripts/api/media-upload.mjs",
+      "sha256": "13e976a4a80db32ff1796fcd983165e8846bc45469006b1a5e076b694104cea2"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/post-audit.mjs",
+      "path": "apps/naver-blog-api/scripts/api/post-audit.mjs",
+      "sha256": "fcd892f0dfc2af590b394740fa28dfe26aa9c5d44953e95c8a99d3dbe8275b2f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/public-document.mjs",
+      "path": "apps/naver-blog-api/scripts/api/public-document.mjs",
+      "sha256": "41db6939db4b6c0cac02c9407fad92a968eff7a62bf8e40432eac5f888a22d11"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/publisher-cli.mjs",
+      "path": "apps/naver-blog-api/scripts/api/publisher-cli.mjs",
+      "sha256": "140def5f0767ca4185aa8f432d8cff4e20a40f11a9dcb4f93e7aebc3868664d9"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/reviewed-structure-repair.mjs",
+      "path": "apps/naver-blog-api/scripts/api/reviewed-structure-repair.mjs",
+      "sha256": "fc407dd0aa104cfc83cc3d864c99d73670a6289add42f6d01ee87d3ce105d0c5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/api/write-journal.mjs",
+      "path": "apps/naver-blog-api/scripts/api/write-journal.mjs",
+      "sha256": "7c4de89e20c4b1501c504e3480d893f0d7dc31ee0b8843abd6ec0f1fb96ab765"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/build-editor-contract-candidates.mjs",
+      "path": "apps/naver-blog-api/scripts/build-editor-contract-candidates.mjs",
+      "sha256": "0f3585db1df3dfe90ff45ca0b27cf7a986cc93ca9149d9d7d51a9162ca22540a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/cli.mjs",
+      "path": "apps/naver-blog-api/scripts/cli.mjs",
+      "sha256": "d94bd40afd381c93799dc36a6621593c1ff2ae2615f21e6a1f471809865dd9c7"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/client.mjs",
+      "path": "apps/naver-blog-api/scripts/client.mjs",
+      "sha256": "08b6956b7639c4e3d8cd23fff2d1d6d92492706c64144c9720ede46cec7deafe"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/editor-contracts-cli.mjs",
+      "path": "apps/naver-blog-api/scripts/editor-contracts-cli.mjs",
+      "sha256": "8bc8b9765f99810865e47685401d3f72b786c893ceb17746262114938eff7ab3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/editor-contracts.mjs",
+      "path": "apps/naver-blog-api/scripts/editor-contracts.mjs",
+      "sha256": "89ca25f9000df26b7af264beac043719687de25f89cdbeb1bca97ccf8063e142"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/editor-surface-discovery.mjs",
+      "path": "apps/naver-blog-api/scripts/editor-surface-discovery.mjs",
+      "sha256": "0846f1bef5e536c0bdd5f8f8b42f8cc6f35e01ce234063ee657bb7e54bb3978d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/affiliate-link-gate.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/affiliate-link-gate.mjs",
+      "sha256": "0d1049bdcf4f6dba072b2af591a818095241ac62db3cef96f3f0f489ca188395"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/authorize-api-update.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/authorize-api-update.mjs",
+      "sha256": "141a14b0b1f45afa49c6be8ab1a63713bdd9b9e975429c16b49d81dcf4847c74"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/authorize-publisher-job.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/authorize-publisher-job.mjs",
+      "sha256": "c800009633351c0da38d68229c851c19779519693a443e8aff3c3a09f371afb8"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/build-api-only-boundaries.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/build-api-only-boundaries.mjs",
+      "sha256": "04a10af3697cae65995fb5cd9a41f2bbdb4e901fee7035226667e7f8767daa43"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/claim-evidence-gates.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/claim-evidence-gates.mjs",
+      "sha256": "f277da0daa480d941a422e1022c78106e361527925c26d78e968f0b703082fd8"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/commercial-snapshot-gates.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/commercial-snapshot-gates.mjs",
+      "sha256": "855a8b7021d417ac924fd10e27c921de082d30f8f4efd2341de3073308d51090"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/content-duplication.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/content-duplication.mjs",
+      "sha256": "2967b95ad33cdc8f659162303181a65b33c2caed74818f048568ac8928afff68"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/editorial-provenance.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/editorial-provenance.mjs",
+      "sha256": "f59828e4e3008fa54a8c8cea368fc857dafe87cfa624cfa3a4111b1ce137a6d6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/json-io.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/json-io.mjs",
+      "sha256": "3cadc09c614b0a9da0a7d784c3eab3c1f122a38812a0cf7e711362d5e9d6902e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/publication-artifacts.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/publication-artifacts.mjs",
+      "sha256": "ea4c0f6fdfd4a46045d1dcddb8ab13433634115d06cd4b6a019c2775fe9750a4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/publication-document.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/publication-document.mjs",
+      "sha256": "9e3c2a631922808f8976c3901167eddc16f3900c4de3e3355a959dc55f4bcebe"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/publication-review-gates.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/publication-review-gates.mjs",
+      "sha256": "32da783bd540de60b281b9dd6fe4a699e35c505f52e1625407d2ac9c7f712459"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/publisher-gates.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/publisher-gates.mjs",
+      "sha256": "7840f492f37e2d4079f455fb55d5683be7c1d747a11e48264a80804fc21c0c50"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/reference-layout-gate.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/reference-layout-gate.mjs",
+      "sha256": "22792694495694fd8b79e2cdc174a6fdb7a750e13aeabb6bbf0f82a5a3de1556"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/validate-api-only.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/validate-api-only.mjs",
+      "sha256": "242a22ae3b4797e7b5184b71ec7af5abf7fcbe525868dfbe231ebd3b582bd0ad"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/validate-claim-evidence.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/validate-claim-evidence.mjs",
+      "sha256": "1c01c309e0924ea8a4254491abef4d4fcc711a7fa52dcbe9a5dd6b0ba9e4ee60"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/validate-commercial-snapshot.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/validate-commercial-snapshot.mjs",
+      "sha256": "6fc71ff640b5c22f9c3ccdc5a6283388a842944b08c22ec7e27ef57f4c84546d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/validate-publisher-job.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/validate-publisher-job.mjs",
+      "sha256": "569e677fd5c11aa4334ecb4ffc82d8cefd2640435e1df79f545579392176a559"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/validate-publisher-result.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/validate-publisher-result.mjs",
+      "sha256": "709d7c827fa9fdaae4c69aedb3b75c721cc7705f7b41eaaa75303e62be1b4c66"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/gates/validate-workflow-run.mjs",
+      "path": "apps/naver-blog-api/scripts/gates/validate-workflow-run.mjs",
+      "sha256": "b2dd7552e254d56edf294d45d2eff17c2978d33e070b5c00a8c778b703295aa7"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/hybrid/editor-preview.mjs",
+      "path": "apps/naver-blog-api/scripts/hybrid/editor-preview.mjs",
+      "sha256": "2cae62e63f610ebb828b022bc21c5122241aaf398cb532b14aca563cf542c1c6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/hybrid/headless-inputs.mjs",
+      "path": "apps/naver-blog-api/scripts/hybrid/headless-inputs.mjs",
+      "sha256": "b3d14d41d1ca1d526793c27a4ea9a7989935c9233b6d128a7528eceee946f316"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/hybrid/publisher-cli.mjs",
+      "path": "apps/naver-blog-api/scripts/hybrid/publisher-cli.mjs",
+      "sha256": "33e18a7191eba336aa126decec5d9e08ff408686bfa91eb96f343dc19a979d75"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/hybrid/publisher.mjs",
+      "path": "apps/naver-blog-api/scripts/hybrid/publisher.mjs",
+      "sha256": "81965223a1c71044b31ecefefecde6db0294fd7b7da99dbc070a6dbcae5a6a29"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-post-pilot.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-post-pilot.mjs",
+      "sha256": "dfeed4fbd7082468320b89bbbb1656c6712792502a13637af6b7432ce1821bed"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-publisher-server.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-publisher-server.mjs",
+      "sha256": "db62d0d7ab26e28ddec48df4903f9d0764a1390b2651ecea82b86a19ea66399a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/read-discovery.mjs",
+      "path": "apps/naver-blog-api/scripts/read-discovery.mjs",
+      "sha256": "ff4f3f876672b054dd1e8d08043c9b8254731f4d5186e4ad54b08b9862dd85dd"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/replay-publisher-result.ps1",
+      "path": "apps/naver-blog-api/scripts/replay-publisher-result.ps1",
+      "sha256": "79846b1ead6526c022ab483172acbcf96f5e793c2a71b39529769e531b3bb5dd"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/session-client.mjs",
+      "path": "apps/naver-blog-api/scripts/session-client.mjs",
+      "sha256": "6d2d7c29c4a7bc0c4acd0c7f3c28a323b7e6d226ea1d4a9b0d45472e969e82b8"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/stat-client.mjs",
+      "path": "apps/naver-blog-api/scripts/stat-client.mjs",
+      "sha256": "29cfb3550f26c1aed59193b7a2d3e6e9d5c5e543038ec8dfb170f4a3837ad979"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/affiliate-content-workflow.test.mjs",
+      "path": "apps/naver-blog-api/tests/affiliate-content-workflow.test.mjs",
+      "sha256": "7ca708d2912b6d825eb3b6be55010a694603ca27449bcc2262678c54d6a09485"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/affiliate-draft-quality.test.mjs",
+      "path": "apps/naver-blog-api/tests/affiliate-draft-quality.test.mjs",
+      "sha256": "1d5cd8a97e6250d4e0dfb5a5b807c61a82deaf510a2231d183edd4d782df197c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/affiliate-layout-benchmark.test.mjs",
+      "path": "apps/naver-blog-api/tests/affiliate-layout-benchmark.test.mjs",
+      "sha256": "aca18baefc4071d5109409f8fbf4952d3716f2d5fe3de0fb108cd8aeb945a04c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/affiliate-link-gate.test.mjs",
+      "path": "apps/naver-blog-api/tests/affiliate-link-gate.test.mjs",
+      "sha256": "d6874555426852edcbfa5826440633db28dc12b94f748902b7fd1bf5853c2a03"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/api-workflow.test.mjs",
+      "path": "apps/naver-blog-api/tests/api-workflow.test.mjs",
+      "sha256": "e595dfc266345bc556f95951504b8f8bf9e0a13bf6fff337a8733467368deb12"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/authorized-session.test.mjs",
+      "path": "apps/naver-blog-api/tests/authorized-session.test.mjs",
+      "sha256": "cc196f85dc204f7e2c83cc0b4177ef89398d7794d4ec880847afa354130ad993"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/client.test.mjs",
+      "path": "apps/naver-blog-api/tests/client.test.mjs",
+      "sha256": "b9fc7f2502f8050de0aaca5512393a40a0f9ed8089afc5a2205508d6b12e1437"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/community-radar.test.mjs",
+      "path": "apps/naver-blog-api/tests/community-radar.test.mjs",
+      "sha256": "c6d82f134c220e50a94cfeb8a1c7eb9df35da81cf1962b22b9c3d4506f4ab0db"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/content-duplication.test.mjs",
+      "path": "apps/naver-blog-api/tests/content-duplication.test.mjs",
+      "sha256": "1508074b312885bedaa1e344685f4884f8019246759d754b0bd95978f77d56e4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/editor-contract-normalizer.test.mjs",
+      "path": "apps/naver-blog-api/tests/editor-contract-normalizer.test.mjs",
+      "sha256": "95a6c55ca2c3427d31c3f98925f68a6c21cdf1a6e0cc7c31bbe6af6202b51f48"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/editor-contracts.test.mjs",
+      "path": "apps/naver-blog-api/tests/editor-contracts.test.mjs",
+      "sha256": "9ecebb5166e4596ae685a21bbe472f7d0113c6a4edf68c290a38eb2d6a3ca266"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/editor-http-client.test.mjs",
+      "path": "apps/naver-blog-api/tests/editor-http-client.test.mjs",
+      "sha256": "08b9725aab257a6f8a0b323860186cac83d3ccda27e4b2ae6b200a67e6e21a0e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/editor-presentation.test.mjs",
+      "path": "apps/naver-blog-api/tests/editor-presentation.test.mjs",
+      "sha256": "4a9631982a57af38abac85d5dbef20e8be8c88500b048ef155ecb55bbfa16d21"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/editor-surface-discovery.test.mjs",
+      "path": "apps/naver-blog-api/tests/editor-surface-discovery.test.mjs",
+      "sha256": "36aab0e5b74b3d56db489efef91160d8977273b1ac5a15d14881aa499b0daa0f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/environment-session.test.mjs",
+      "path": "apps/naver-blog-api/tests/environment-session.test.mjs",
+      "sha256": "c56d9ad74f9cb76848b64047db470d6c4c51133e1a6d197fa16fd6b39b37ab78"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/evidence-commercial-gates.test.mjs",
+      "path": "apps/naver-blog-api/tests/evidence-commercial-gates.test.mjs",
+      "sha256": "c75b183e71d27a7c0c90518a478269ed1ad76c463fbfdd7c5cbb84139863de3f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/frontier.test.mjs",
+      "path": "apps/naver-blog-api/tests/frontier.test.mjs",
+      "sha256": "7446f47f261b37f089f05a8d0196474f74e2e440329445ddeb1b06ab6c281d5c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/headless-auth.test.mjs",
+      "path": "apps/naver-blog-api/tests/headless-auth.test.mjs",
+      "sha256": "bce9a659e02fa79f80d8decaaa51c5f05ccfbaf427f2db4775ebaa7b194d7a6e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/headless-create-probe.test.mjs",
+      "path": "apps/naver-blog-api/tests/headless-create-probe.test.mjs",
+      "sha256": "95f54dec967b5677f68ffaf0d82bf35e0310e331bc458056de29ae49824b00f3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/headless-publication.test.mjs",
+      "path": "apps/naver-blog-api/tests/headless-publication.test.mjs",
+      "sha256": "e76f596ab9ef542ec5929ad0adb1961e9cd9b77eb57e0a7f5621a00416018966"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/html-parser.test.mjs",
+      "path": "apps/naver-blog-api/tests/html-parser.test.mjs",
+      "sha256": "b39615d17e16b17178bc424199e89e435d96916acfb9035cc5495a3b6fcf7aa2"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/image-prompt-builder.test.mjs",
+      "path": "apps/naver-blog-api/tests/image-prompt-builder.test.mjs",
+      "sha256": "408ce78f6cb9328ac95901bffee2fcd0f5e29c1ed92d5114761bfda29ef4318d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/image-readback-alias.test.mjs",
+      "path": "apps/naver-blog-api/tests/image-readback-alias.test.mjs",
+      "sha256": "795d8a411fc0f6bfc567dec1eb601159f0ab200d76adb969ef48e0d36863176b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/interactive-auth.test.mjs",
+      "path": "apps/naver-blog-api/tests/interactive-auth.test.mjs",
+      "sha256": "5168a9d58ec16906f677c8a76d1aa18475a53eed28685112def233287121b510"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/jev-supervisor.test.mjs",
+      "path": "apps/naver-blog-api/tests/jev-supervisor.test.mjs",
+      "sha256": "d5114c646f95aa15f4e803faa82898ca5e014088539cea0e4b7125210068a83e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/json-io.test.mjs",
+      "path": "apps/naver-blog-api/tests/json-io.test.mjs",
+      "sha256": "1982f47753ecd8d353ae49cac1a010c09e69f4956c149e8b80bd16d809df92be"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/media-upload.test.mjs",
+      "path": "apps/naver-blog-api/tests/media-upload.test.mjs",
+      "sha256": "11a8fe1e32f498874f8dbb19229dde18a7fbf0b4c989b4d48e5857d5b53c31d8"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/naver-publisher-extension.test.mjs",
+      "path": "apps/naver-blog-api/tests/naver-publisher-extension.test.mjs",
+      "sha256": "1c93b204f0337a07c8c9d19358c25de9060fd72b96a5acc0face90d925f12d81"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/private-create-probe.test.mjs",
+      "path": "apps/naver-blog-api/tests/private-create-probe.test.mjs",
+      "sha256": "b6967204a57a7d8c1a67459c7c31ba75e5dc46bb8e92d4dff23f0ba80d8470fe"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/private-http-probe.test.mjs",
+      "path": "apps/naver-blog-api/tests/private-http-probe.test.mjs",
+      "sha256": "fa5e3035100ebdae3f9c41f9097194e04db6e361998dc10be158c40d0b4c48c3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/product-comparison-brief.test.mjs",
+      "path": "apps/naver-blog-api/tests/product-comparison-brief.test.mjs",
+      "sha256": "68f253ccf00784927b63bfef6a5fea762df76fc87f6883febb260de6b85c1d01"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/public-script-analysis.test.mjs",
+      "path": "apps/naver-blog-api/tests/public-script-analysis.test.mjs",
+      "sha256": "4057b3389879964cdb68d63512eebb9dfc26c8ffbb5fcc1da4ad5ae338967c2c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/publication-review.test.mjs",
+      "path": "apps/naver-blog-api/tests/publication-review.test.mjs",
+      "sha256": "585a0e7133a801948f7ce268923840f1234b54ff9adff6e6b8d845f13ee28016"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/publisher-gates.test.mjs",
+      "path": "apps/naver-blog-api/tests/publisher-gates.test.mjs",
+      "sha256": "d2494bac4742f1f68094df0cf53f274acc3f6bcb146d0554e8c68fe263f3a14b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/publisher-runner.test.mjs",
+      "path": "apps/naver-blog-api/tests/publisher-runner.test.mjs",
+      "sha256": "3e878c7125b7f8f3b5ef72b0e939bcf5e4f59a8a700acd64d256fec203689983"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/publisher-session-handoff.test.mjs",
+      "path": "apps/naver-blog-api/tests/publisher-session-handoff.test.mjs",
+      "sha256": "9f4d94994329716eaae0438617ad3e30d2990c5bd38d2cf3d798157052a477a3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/read-discovery.test.mjs",
+      "path": "apps/naver-blog-api/tests/read-discovery.test.mjs",
+      "sha256": "c2e86ece905b290b6479e6bf86720edc0891859d94f3e10318a41e76149b0152"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/read-pages.test.mjs",
+      "path": "apps/naver-blog-api/tests/read-pages.test.mjs",
+      "sha256": "bc43151b6192698abe959e2ba84af3d36bfbdb5a7bc05b9015ce4093153585ea"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/reference-layout-gate.test.mjs",
+      "path": "apps/naver-blog-api/tests/reference-layout-gate.test.mjs",
+      "sha256": "d008cd933d997e628a0dfcf2cf794a31809b03eea386582c69e43c6e65a4be7c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/reviewed-structure-repair.test.mjs",
+      "path": "apps/naver-blog-api/tests/reviewed-structure-repair.test.mjs",
+      "sha256": "99746fe55b495cd1572cfa4a8b6aff35643ed45543b209ba0de07fa4539d55df"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/session-client.test.mjs",
+      "path": "apps/naver-blog-api/tests/session-client.test.mjs",
+      "sha256": "7ff8c8edc0f862e669d36854d59d2195658db61594c453671002a18641dd0135"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/stage-gates.test.mjs",
+      "path": "apps/naver-blog-api/tests/stage-gates.test.mjs",
+      "sha256": "99bdbb3ca143f7a946e94126d422bfdc689e9f1b3751cbeada178ddc891d4c5d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/publication-fixture.mjs",
+      "path": "apps/naver-blog-api/tests/support/publication-fixture.mjs",
+      "sha256": "d667a0e5897d6f27bff4c04f3058a760fe12491cbe596df0a1acb823e4cd47a7"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/support/reviewed-prefix-source.json",
+      "path": "apps/naver-blog-api/tests/support/reviewed-prefix-source.json",
+      "sha256": "39c5d2b36553be15917e924b35d9984851103aaf72217af4a0c300967d5c23ba"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/travel-vertical-profile.test.mjs",
+      "path": "apps/naver-blog-api/tests/travel-vertical-profile.test.mjs",
+      "sha256": "32c0c138c69b2733276e566d3366319cb8bcdc79ecdf56c48f5ce32eceba05e9"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/trend-radar.test.mjs",
+      "path": "apps/naver-blog-api/tests/trend-radar.test.mjs",
+      "sha256": "d87ad4a674d0f213d7d07b5cc1309d5e3be01bd9054bbd978261c49581e83a0b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/workflow-claim-ledger.test.mjs",
+      "path": "apps/naver-blog-api/tests/workflow-claim-ledger.test.mjs",
+      "sha256": "ad17fe95e1b3f64739c9552d543efacacfd5305f14de7f15dd9af4d1c2f38d91"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/workflow-policy.test.mjs",
+      "path": "apps/naver-blog-api/tests/workflow-policy.test.mjs",
+      "sha256": "c2bb07fe6459e62eec96c9bff253ff07d27a1dc0dc99fa21269e03e48af9c97c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/api-workflow.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/api-workflow.mjs",
+      "sha256": "bf340baabb7e7db781b7ec5332bd0104076461dbe9ded78e677ecd03b6db3beb"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/article-worker-handoff.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/article-worker-handoff.mjs",
+      "sha256": "ef0431bbb7081eff372ced094f9c8a5c33247bc2f3bd21df69970f0796b6d68a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/authorized-session.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/authorized-session.mjs",
+      "sha256": "8ec0c9ffb2b173d5b9e8fed960494d7a8edc951f62dd4bff35fa4d22ffbd7556"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/compiled-create-probe-cli.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/compiled-create-probe-cli.mjs",
+      "sha256": "47e7f4cc543f634c20e16ffeda28d6610de7cfec018f6209155e367163334bfc"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/editor-contract-normalizer.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/editor-contract-normalizer.mjs",
+      "sha256": "a4cd60bc0b28e31aa49c4ea0f7ba65556df5b51318ac4fa0d9faa72a76c8a5ec"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/editor-contracts.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/editor-contracts.mjs",
+      "sha256": "d5b7f74f7abb333d67c0b7fdc592b8c2fc998633fd5a301e7b24cd53710a5747"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/editor-worker.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/editor-worker.mjs",
+      "sha256": "77c58d208b1fbe54a5b05ef8f89fba568cdf675bbd1548b245da65fe078cdbb1"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/frontier.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/frontier.mjs",
+      "sha256": "4b707e3233c1e3b04e0d19dab65df1a5fd707b042e4152d85ddbd71fef098d4d"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/headless-auth.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/headless-auth.mjs",
+      "sha256": "5f4d16f3c186feffd23ffb69aa0bd49daa783da0b8d8a6939f7226080086fc10"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/headless-create-probe-cli.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/headless-create-probe-cli.mjs",
+      "sha256": "925aad26f8c9e181517635ff7e19d91e5b85d6bd325958792b7d8c9275c16e7c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/headless-create-probe.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/headless-create-probe.mjs",
+      "sha256": "468192b4f267a129f13936d4c0f3693c00b9dccf5cc1b860e3144becd38eea49"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/headless-worker.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/headless-worker.mjs",
+      "sha256": "f847391656d877313f6a498c63a125ad0842a22856b11ca4db0a7fedee9e58b3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/http-session.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/http-session.mjs",
+      "sha256": "98dcbef2437784e39e48e5fe956a0790776bb0554dbcc8f0879bbbebb2b6a050"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/interactive-auth.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/interactive-auth.mjs",
+      "sha256": "1f26816d776f5efc9b100a10de19f7d88897784320562f9e0c7cca30ec3237c2"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/parse-html.py",
+      "path": "apps/naver-blog-api/tools/discovery/parse-html.py",
+      "sha256": "ad7e5d8f26fb7792daee436dc5934b5c50852af0e16676450090dee21eaffe3b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/private-create-probe-cli.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/private-create-probe-cli.mjs",
+      "sha256": "1457dd5c1f6d48a9f6b680476b7cda3d63a7060dc91b26e1f3a03595859e83e2"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/private-create-probe.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/private-create-probe.mjs",
+      "sha256": "7837491d205bcc9750583b9629b5ff831c49283cd0559bb4de78f41c2967c4e5"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/public-script-analysis.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/public-script-analysis.mjs",
+      "sha256": "bfad3a305075a9138e94f6b3d716e7c97e3224e72738b5c66fe5c0fea3721d2e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/publisher-session-handoff.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/publisher-session-handoff.mjs",
+      "sha256": "33fcd561b4de61c6612e510aaf715b40713be9e092520d2a5da92e5bc2c51a08"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/read-pages.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/read-pages.mjs",
+      "sha256": "0e6c372906dbef2fdefbb31cef608301aebc6951d70e341016e6eb3b628c5c9e"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/repair-published-prefix.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/repair-published-prefix.mjs",
+      "sha256": "568f076790deacdf17922e01c37941919c45a95139ffeec49427ddd6f620f171"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/naver-publisher-extension/background.js",
+      "path": "apps/naver-blog-api/tools/naver-publisher-extension/background.js",
+      "sha256": "c905f781683926f52163a000fc0e7bb4271b440b85b0880cc2b1211e233bc6bc"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/naver-publisher-extension/manifest.json",
+      "path": "apps/naver-blog-api/tools/naver-publisher-extension/manifest.json",
+      "sha256": "443d6f30e4c95d08640b3fd6ad25b1f0c15f7fea544dc30fc39e328f27cc2481"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/README.md",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/README.md",
+      "sha256": "cf2713cb099dcf1238fea4eb49b28b4a586bbadb832f22b37940ac1b49abe4af"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/claim-ledger.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/claim-ledger.mjs",
+      "sha256": "eb954b6d1c928b7cf9c6251d267a60c7c62c9a6f3eda60047910b1cdf0493904"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/draft-generator.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/draft-generator.mjs",
+      "sha256": "56ded0b32ac4f7ace4f0d0c6e0068ef25071619f0770edf1ba097fb693248e0f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/jev-leverage-map.json",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/jev-leverage-map.json",
+      "sha256": "e647cf7bc32951203c260faf7e1ae63ee9a22ee0d49af7c12afef276b3ac2a1a"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/jev-supervisor.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/jev-supervisor.mjs",
+      "sha256": "32effcbcf939a8dfa2cfcb350c41f90313250e2cbf5f00dae1468b8e77804891"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/quality-gate.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/quality-gate.mjs",
+      "sha256": "2444985231274a318bec7048851305471ab2ad47e02e8546b2d696e6c8c09ff3"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/render-comparison-chart.py",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/render-comparison-chart.py",
+      "sha256": "4ff65c2ae5c57d8adede2569ebece37de6d1d45d818de94ce0cb071530ff29e6"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/run.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/run.mjs",
+      "sha256": "4fc35183587d16d765560c0d8e98b9febd5e82f8b156979e7c72a63353c23c3b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/stage-gates.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/stage-gates.mjs",
+      "sha256": "092f5c87e3972cc073874153e702addca3a525c614ecf82838316f00d2189fec"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "apps/naver-blog-api/workflows/affiliate-content-e2e/workflow-policy.mjs",
+      "path": "apps/naver-blog-api/workflows/affiliate-content-e2e/workflow-policy.mjs",
+      "sha256": "37a7b15a650b8349a07b926443853152509f59a066e56680c00b06a707ad0808"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "packages/contracts/package.json",
+      "path": "packages/contracts/package.json",
+      "sha256": "cc72a68dc74fd8418b37c24b3989b6c0a6386b33231b03d57580357f242e3b2c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "packages/contracts/src/index.mjs",
+      "path": "packages/contracts/src/index.mjs",
+      "sha256": "4edb1cbd30a90078af05a87339dfba5162a043916bbd879dba31939624c76837"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "packages/contracts/tests/contracts.test.mjs",
+      "path": "packages/contracts/tests/contracts.test.mjs",
+      "sha256": "c5672798c048481e575084949677493bc24d443bd8cd1c6b6aa87e38d00cb562"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/client.mjs",
+      "path": "apps/naver-blog-api/scripts/client.mjs",
+      "sha256": "e79545521b700a661f64a23a06d7bf38a5f53ee542b52522069960e2aad12338"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/session-client.mjs",
+      "path": "apps/naver-blog-api/scripts/session-client.mjs",
+      "sha256": "daf3a3793e3087f702e95073d45ab36356a02e989e5d07ae7dc1d59cd89cc28f"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/session-vault.mjs",
+      "path": "apps/naver-blog-api/scripts/session-vault.mjs",
+      "sha256": "c4aa11fbfff0778ae0436d218176d114bf5af048870e139ef42e87cbd5b61a1d"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/secure-credential-store.mjs",
+      "path": "apps/naver-blog-api/scripts/secure-credential-store.mjs",
+      "sha256": "971444f263e7293f14c79cb1b55092862e52fad40d026629b12522b9bf88fc1f"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/secure-credential-store.ps1",
+      "path": "apps/naver-blog-api/scripts/secure-credential-store.ps1",
+      "sha256": "75c904f3b691826db93e0e65f5761c79e0424542a6647f1e13705e220bc6a82e"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/credential-cli.mjs",
+      "path": "apps/naver-blog-api/scripts/credential-cli.mjs",
+      "sha256": "2defd13dcf6531f4ee7991b077847ce1d1b7c5d7baa881a450028829a2cce385"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-challenge.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-challenge.mjs",
+      "sha256": "03255c42a4d9168ce3b79d660152483636022c6e3f44ac35aada9439ec3a1499"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-cli.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-cli.mjs",
+      "sha256": "7e11c2d9ca8333a21c7d89fe2b87029860bb6023f24df55038361469e3f8e13d"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-http.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-http.mjs",
+      "sha256": "804f2f495328643afd264645bd8dcc632a1900fcb75749c59ba08acb114db68a"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-identity.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-identity.mjs",
+      "sha256": "f5cf5ec4e7af39b98b7ff8e7115596ff6b691a1f6df2e978211b87e8e2ed1e8b"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-prompt.ps1",
+      "path": "apps/naver-blog-api/scripts/naver-login-prompt.ps1",
+      "sha256": "cdd8b1d59dda0ec54b1c00155c7839d8c74196376faa20f5ee1e963945b7f8a9"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-state.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-state.mjs",
+      "sha256": "fd588cdc40624bfeaa9800032c9133c2fd94681ee7a74ab26bb77a1cf0a15e9d"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-token-client.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-token-client.mjs",
+      "sha256": "a9dae790e5dcda9c4920bb85894331212ce345d20dce58ff30ac6029780cabf2"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-token-provider.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-token-provider.mjs",
+      "sha256": "fbeeb0778911047cece27321cbaf476587f89c26774a068b126d632469fb04f2"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-token-worker.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-token-worker.mjs",
+      "sha256": "6ec92b4ac029bc3aa658ce57fe27b6a59ca9bbfa272e3f56a5a19ce5b7decd72"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-login-vision.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-login-vision.mjs",
+      "sha256": "0090e7c483d9346498c7bbd8fdfd6802f9ce271e5bd9ad05897b0b173fb036d4"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/scripts/naver-session-health.mjs",
+      "path": "apps/naver-blog-api/scripts/naver-session-health.mjs",
+      "sha256": "068119087ec8249680ca06d11034ecd4bed68a0cc79d4a05bfd5c5f9c15285fb"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/authorized-session.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/authorized-session.mjs",
+      "sha256": "b86486436aa202fe49f59da7b7b523db716f0c3bbe754cdc59bbb21ed1e60656"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/http-session.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/http-session.mjs",
+      "sha256": "b473ee20690105fe008817feb51def5a9b9f7b38b1595c50884a7c4a3f8c75b6"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/editor-contracts.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/editor-contracts.mjs",
+      "sha256": "52f840dd5df8ada09b2e8fc18ce91828106153d056739a10610e9c266495ad3e"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/naver-encrypted-handoff.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/naver-encrypted-handoff.mjs",
+      "sha256": "bfe64fdf0f04f8de1d370727414c4ccf2b2a782ebdff0d2eb688cbe122d94dc6"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/naver-login-bootstrap.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/naver-login-bootstrap.mjs",
+      "sha256": "72ee0fec749154d151d9ab073ab15be2d5a05de1474ba70dd63473f13c5f9787"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/naver-login-challenge-inspector.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/naver-login-challenge-inspector.mjs",
+      "sha256": "fe2a0455969a54316f89ab268b1cb12bbf5df6f941dc1b10ddf0c162dbaff064"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/naver-login-http-handoff.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/naver-login-http-handoff.mjs",
+      "sha256": "d921bb1c7ff3e5502b5eba23485d452265430455f807ccf227ef5ab3f45ad691"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/naver-login-identity-handoff.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/naver-login-identity-handoff.mjs",
+      "sha256": "978426cb465ed63fa0396e4fb264e84082a45c15992b69a09691e7916e781b57"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tools/discovery/naver-ncaptcha-node-probe.mjs",
+      "path": "apps/naver-blog-api/tools/discovery/naver-ncaptcha-node-probe.mjs",
+      "sha256": "eadb3a80b4523c03e90bb6cf7b073a91004d0afb99d15049b93872efe9b246ee"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/docs/naver-login-xhr-2026-09-23.md",
+      "path": "apps/naver-blog-api/docs/naver-login-xhr-2026-09-23.md",
+      "sha256": "6e68334f4a0a2d59b22be3fccbb43d6313b64f88495b9bad0e520be96088a149"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/research/naver-login-observed-2026-09-23.json",
+      "path": "apps/naver-blog-api/research/naver-login-observed-2026-09-23.json",
+      "sha256": "1a9710621c9f74808ebf146700ab9030dc5748ae17c30cec11009017bf8c7dc0"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/naver-login-http.test.mjs",
+      "path": "apps/naver-blog-api/tests/naver-login-http.test.mjs",
+      "sha256": "50386ddf2483e1d5a06e8bd182ce7707423e1cd020cc8d8515b4dd726c067800"
+    },
+    {
+      "source": "login-workspace",
+      "sourcePath": "apps/naver-blog-api/tests/authorized-session.test.mjs",
+      "path": "apps/naver-blog-api/tests/authorized-session.test.mjs",
+      "sha256": "dbd04f9a6532b7195015032aa3eddd21250eecfbb5520fc67f52768977faeb81"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/adaptive-blog-publishing.md",
+      "path": "docs/adaptive-blog-publishing.md",
+      "sha256": "9597fe0e987c25cf6864ab1eec65896523e3501ccdfa80244734784d8a08a713"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/ai-research-article-contract.md",
+      "path": "docs/ai-research-article-contract.md",
+      "sha256": "56b9c7bfdf5460b3f70f5488244aa045e5284b1574abc5f1b4eb355ef321e550"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/hotel-promotion-contract.md",
+      "path": "docs/hotel-promotion-contract.md",
+      "sha256": "83d5db9020f698ea1543dc5277e9d7be2ff34ad92ef2262ae2079c6e025a73ae"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/iclub-hotel-contract.md",
+      "path": "docs/iclub-hotel-contract.md",
+      "sha256": "890d12b6c1d7c84af1ac193f4c3613500123ea28aca8ae66e6d1598a441d4647"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/jev-applications-contract.md",
+      "path": "docs/jev-applications-contract.md",
+      "sha256": "490d245b97bdfa859d470c26b9bd992fe8783eeaeee26ba4e565558b8d0802ff"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/market-analysis-article-contract.md",
+      "path": "docs/market-analysis-article-contract.md",
+      "sha256": "5828b63621fd603ecdba4e2502abd24038c665c5df0f05562d489c2ba5113be4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-affiliate-publication-2026-09-21.md",
+      "path": "docs/naver-affiliate-publication-2026-09-21.md",
+      "sha256": "505e8ba0ab3547969d4ebc7abe513eb2f9c062ceb90908d3adaa2705b51e571f"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-duplicate-audit-and-hybrid-publisher-2026-09-20.md",
+      "path": "docs/naver-duplicate-audit-and-hybrid-publisher-2026-09-20.md",
+      "sha256": "b88513a211dd9f026465863e2436219303bcf9d6d8dfbd13e23aa7219409378b"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-http-publisher.md",
+      "path": "docs/naver-http-publisher.md",
+      "sha256": "3190f4192c5bb1e340362a4bf2b5e661dd9fa41919c1a30ec5bc82f3ad0524b4"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-ncaptcha-verification-2026-09-20.md",
+      "path": "docs/naver-ncaptcha-verification-2026-09-20.md",
+      "sha256": "3423d267ade04a1a0f62814d6789d24a5c671fcb867d0647911c851c7638f8f1"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-publication-tags.md",
+      "path": "docs/naver-publication-tags.md",
+      "sha256": "0878cbbdfba1ab8cee6361f653c9feae824b39e05f7ac07d6f08a2dfeb45be17"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-republish.md",
+      "path": "docs/naver-republish.md",
+      "sha256": "b25f8b64e77a5725830710865810f809187e9612ec1d4e01f208f4652f1f2483"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-shopping-expansion-2026-09-21.md",
+      "path": "docs/naver-shopping-expansion-2026-09-21.md",
+      "sha256": "32dcd28abd7acf9ce18d254840c9ad7a6a49a588d2094fc3bcedf713ee0b7f4c"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/naver-structure-repair-2026-09-21.md",
+      "path": "docs/naver-structure-repair-2026-09-21.md",
+      "sha256": "88c13c07d21fce2bbdca199d571c3358d1f1bdb6d94a3ec6edf455353245bdf1"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/seoul-shilla-contract.md",
+      "path": "docs/seoul-shilla-contract.md",
+      "sha256": "dd32ce4fff773c248ef40ab43259744a352993974cd61af80193202dc5765cff"
+    },
+    {
+      "source": "publisher-workspace",
+      "sourcePath": "docs/single-offer-hotdeal-contract.md",
+      "path": "docs/single-offer-hotdeal-contract.md",
+      "sha256": "34fad736c62ab49332bdc14e546b4b146548ad59288446a5fe4d40add2a31f8a"
+    }
+  ],
+  "adaptations": [
+    "Combined protected login SessionClient with the publisher snapshotForProtectedStore interface",
+    "Bound protected session module validation to this checkout",
+    "Bundled a relative publisher-direct launcher",
+    "Preserved workspace topology for contracts imports",
+    "Replaced external workspace and optional tool absolute paths",
+    "Root stats scripts target the maintained DPAPI-capable client"
+  ]
+}

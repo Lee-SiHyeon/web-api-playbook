@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "example",
+  "allowedOrigins": ["https://api.example.invalid"],
+  "cookieOrigins": ["https://api.example.invalid"],
+  "probeOperation": "owner",
+  "operations": {
+    "owner": {
+      "origin": "https://api.example.invalid", "method": "GET", "path": "/api/me",
+      "semantics": "read", "protected": true,
+      "evidence": "SYNTHETIC EXAMPLE: replace with an actual observed owner contract",
+      "expected": { "status": 200, "mime": "application/json", "checks": [
+        { "path": ["ok"], "equals": true },
+        { "path": ["user", "id"], "identity": true, "identityKey": "user-id" }
+      ] }
+    },
+    "items": {
+      "origin": "https://api.example.invalid", "method": "GET", "path": "/api/items",
+      "semantics": "read", "protected": true, "queryFields": ["page"],
+      "evidence": "SYNTHETIC EXAMPLE: replace with actual captured metadata",
+      "expected": { "status": 200, "mime": "application/json", "checks": [
+        { "path": ["ok"], "equals": true }, { "path": ["items"], "type": "array" }
+      ] }
+    },
+    "update-item": {
+      "origin": "https://api.example.invalid", "method": "PUT", "path": "/api/items/{id}",
+      "semantics": "write", "protected": true, "bodyFields": ["title"],
+      "evidence": "SYNTHETIC EXAMPLE: exact update method and schema must be observed",
+      "expected": { "status": 200, "mime": "application/json", "checks": [ { "path": ["ok"], "equals": true } ] }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "service": "oliveyoung-shopping-curator",
+  "checkedAt": "2026-09-21T00:12:43.502Z",
+  "officialPublicApiDocumentation": "not_found_in_checked_official_sources",
+  "officialGuide": "https://m.oliveyoung.co.kr/m/mtn/affiliate/guide",
+  "runtimeOrigin": "https://m.oliveyoung.co.kr",
+  "transport": "independent-node-fetch",
+  "sources": [
+    {
+      "id": "web-app",
+      "url": "https://cf-static.oliveyoung.co.kr/prd/1.184.0/_next/static/chunks/pages/_app-a6cde09e9e1d35ae.js",
+      "sha256": "58e728698202a1c4c6925ed7e38769e52ec4abcd0939021ad7be15f08de86016",
+      "modules": [14063, 24474, 27046, 30306, 48645, 82451, 99917]
+    },
+    {
+      "id": "curator-product-search",
+      "url": "https://cf-static.oliveyoung.co.kr/prd/1.184.0/_next/static/chunks/pages/affiliate/product/search-69ae4f32d74c2ad5.js",
+      "sha256": "26e07cf8ce6cbf04876d626a9aeff7f19836fff653f518694166cc93f644d52d",
+      "modules": [16481, 51512, 52860]
+    },
+    {
+      "id": "official-shortener",
+      "url": "https://cf-static.oliveyoung.co.kr/prd/1.184.0/_next/static/chunks/2243-efefd637544aeda7.js",
+      "sha256": "e5772b525410cf2bdd5fc62aa30422d995be116b5abccf8bd881c9a4815fb708",
+      "modules": [73262]
+    }
+  ],
+  "authentication": {
+    "header": "Authorization",
+    "scheme": "raw decoded linkage token, not Bearer",
+    "source": "web-app modules 14063 and 24474",
+    "refresh": "GET additionalInfo with scoped session cookies; decode nonempty linkageString in memory",
+    "gatewayHeader": "X-OY-GW: Y only if observed in the authenticated request",
+    "cookieAllowlist": ["OYSESSIONID", "linkageString", "__cf_bm", "_cfuvid"],
+    "credentialPersistence": "none"
+  },
+  "contracts": [
+    {
+      "id": "refresh", "method": "GET", "path": "/m/login/additionalInfo.do",
+      "queryKeys": ["refreshYn", "referrer", "reqSystem"],
+      "responseKeys": ["linkageString"], "source": "web-app",
+      "evidence": "browser_request_and_anonymous_response_captured",
+      "captured": true, "client_exists": true, "remnant_free": true,
+      "credential_propagated": false, "live_replay": false
+    },
+    {
+      "id": "status", "method": "GET", "path": "/review/api/affiliate/v1/education/status",
+      "responseDataKeys": ["isAffiliate", "needsEducation", "isFirstActivity"],
+      "source": "curator-product-search", "evidence": "public_source_only",
+      "captured": false, "client_exists": true, "remnant_free": true,
+      "credential_propagated": false, "live_replay": false
+    },
+    {
+      "id": "ranking", "method": "GET", "path": "/review/api/affiliate/v1/activities/ranking",
+      "response": "data array of goods and generatedActivity", "source": "curator-product-search",
+      "evidence": "public_source_only", "captured": false, "client_exists": true,
+      "remnant_free": true, "credential_propagated": false, "live_replay": false
+    },
+    {
+      "id": "search", "method": "GET", "path": "/review/api/affiliate/v1/activities/search",
+      "queryKeys": ["keyword", "pageNumber", "pageSize"],
+      "responseKeys": ["code", "data", "pagination"], "source": "curator-product-search",
+      "evidence": "public_source_only", "captured": false, "client_exists": true,
+      "remnant_free": true, "credential_propagated": false, "live_replay": false
+    },
+    {
+      "id": "generated", "method": "GET", "path": "/review/api/affiliate/v1/activities/generated",
+      "queryKeys": ["pageNumber", "pageSize"], "responseKeys": ["code", "data", "pagination"],
+      "source": "curator-product-search", "evidence": "public_source_only",
+      "captured": false, "client_exists": true, "remnant_free": true,
+      "credential_propagated": false, "live_replay": false
+    },
+    {
+      "id": "landing", "method": "POST", "path": "/review/api/affiliate/v1/activities/landing",
+      "jsonBodyKeys": ["goodsNumber", "categoryNumber"],
+      "responseDataKeys": ["goodsNumber", "affiliateActivityId", "affiliatePartnerId"],
+      "source": "curator-product-search", "evidence": "public_source_only",
+      "captured": false, "client_exists": true, "remnant_free": true,
+      "credential_propagated": false, "live_replay": false
+    },
+    {
+      "id": "shorten", "method": "POST", "path": "/base/shorten/v2/verified",
+      "jsonBody": "array of {originalUrl, registerId}", "additionalHeader": "x-api-key",
+      "response": "data[0].shortenedUrl", "source": "official-shortener",
+      "evidence": "public_source_only", "captured": false, "client_exists": true,
+      "remnant_free": true, "credential_propagated": false, "live_replay": false
+    },
+    {
+      "id": "resolve", "method": "GET", "path": "/base/shorten/detail/{shortCode}",
+      "responseKeys": ["originalUrl"], "source": "official-shortener",
+      "evidence": "public_source_only", "captured": false, "client_exists": true,
+      "remnant_free": true, "credential_propagated": false, "live_replay": false
+    }
+  ],
+  "liveEvidence": {
+    "browser": "Chrome on DESKTOP-TO2H6OD",
+    "linkPage": "redirected to official login form",
+    "browserRefreshResponse": { "responseKeys": ["linkageString"], "hasLinkageString": false },
+    "standaloneUnauthenticatedReads": [
+      { "path": "/review/api/affiliate/v1/education/status", "status": 403, "contentType": "text/html" },
+      { "path": "/review/api/affiliate/v1/activities/ranking", "status": 403, "contentType": "text/html" }
+    ],
+    "inMemoryHandoff": {
+      "cookieCount": 4, "authorizationPresent": false,
+      "transport": "supported CDP to memory to child stdin to independent Node fetch",
+      "operation": "status", "reachedPath": "/m/login/additionalInfo.do",
+      "result": "ACCESS_BLOCKED", "httpStatus": 403
+    },
+    "authenticatedReplayCount": 0,
+    "liveLinksCreated": 0
+  },
+  "scopeExclusions": ["curator enrollment", "education consent", "payout", "posting", "Daiso"],
+  "blockingConditions": ["current browser session is logged out", "independent HTTP returned 403 with the current anonymous session cookies"]
+}

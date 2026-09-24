@@ -1,0 +1,77 @@
+{
+  "checkedAt": "2026-09-13T07:27:36.702076+00:00",
+  "scope": {
+    "requestedRoot": "https://admin.blog.naver.com/4053103",
+    "rootId": "eae47d690730fc226aaf1114",
+    "actor": "4053103",
+    "stages": [
+      "management_navigation",
+      "observed_read_contracts"
+    ],
+    "rootDiscovery": "current_root_management_navigation_observed_descendants_incomplete",
+    "exclusions": [
+      "publishing_and_other_mutations",
+      "unrelated_Naver_services",
+      "bulk_personal_record_export"
+    ]
+  },
+  "checkpoint": "discovery/frontier.json",
+  "navigation": {
+    "sourceNodes": 148,
+    "canonicalNodes": 152,
+    "edges": 344,
+    "states": {
+      "inspected": 32,
+      "candidate": 15,
+      "mutation_excluded": 6,
+      "pending": 99
+    },
+    "unresolved": 114
+  },
+  "conversion": {
+    "captured": {
+      "currentReadContracts": 55,
+      "historicalInitialReadContracts": 22
+    },
+    "client_exists": {
+      "implementedReadOperations": 55
+    },
+    "remnant_free": true,
+    "credential_propagated": {
+      "verifiedIndependentCliOperations": 22,
+      "replacementHttpWorkerReady": false
+    },
+    "live_replay": {
+      "currentVerifiedOperations": 22,
+      "historicalResumeBatch": 10
+    }
+  },
+  "sharedFailureBoundary": {
+    "code": "HTTP_SESSION_HANDOFF_APPROVAL_TIMEOUT",
+    "browserLoginVerified": true,
+    "priorCliTransferVerified": true,
+    "replacementHttpWorkerReady": false,
+    "lastAttempt": "Chrome connection approval timed out after a bounded 300-second request"
+  },
+  "nextWorkItemAfterRecovery": "https://blog.stat.naver.com/blog/user/relationDemo/add?blogId=4053103&isIE8=false",
+  "recoveryPrerequisite": "Browser sign-in is verified. Propagate a current session through an authorized provider, then validate an independent protected API result.",
+  "fullRecursiveCoverage": false,
+  "limitations": [
+    "55 current browser-observed read contracts, 22 independently replayed; remaining operations not live verified",
+    "HTTP-only replacement worker session handoff timed out; worker stopped",
+    "Other management branches and unresolved dynamic controls remain; full recursive coverage is incomplete"
+  ],
+  "currentStatisticsNavigation": {
+    "documentsVisited": 72,
+    "observedIframeDocuments": 24,
+    "observedUrlQueueRemaining": 0,
+    "evidence": "discovery/stat-navigation-2026-09-13.json",
+    "doesNotEstablish": "All filters or complete management-site traversal"
+  },
+  "preferredContinuation": "Independent HTTP traversal; computer-use navigation stopped at user request",
+  "offlineValidation": {
+    "testCount": 11,
+    "passed": 11,
+    "liveHttpTraversalVerified": false
+  }
+}

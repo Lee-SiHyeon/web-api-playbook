@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "home-room-product-snapshot-v1",
+  "purpose": "숙소·객실·주방·욕실·세탁실 안의 생활용품을 일반 사용자가 아이폰 기본 카메라로 기록한 듯한 현실적 공간 이미지 프롬프트를 만든다.",
+  "requiredSlots": [
+    "place",
+    "situation",
+    "subject",
+    "timeWeather",
+    "composition",
+    "colorTone",
+    "siteDetails"
+  ],
+  "optionalSlots": [
+    "cameraPosition",
+    "imperfections",
+    "humanTrace",
+    "aspectRatio"
+  ],
+  "positiveTemplate": "{place}에서 {situation} 중 {subject}를 일반 거주자 또는 여행자가 아이폰 기본 카메라로 직접 기록한 듯한 생활 사진. {timeWeather}의 자연광, {composition}. 과보정 없는 {colorTone}, 자연스러운 스마트폰 HDR, 과도하게 깨끗하지 않은 현실적인 질감. {siteDetails}. 생활감 있는 프레이밍, 즉흥적으로 한두 걸음 물러나 촬영한 거리감, 완벽하게 수평이 맞지 않아도 자연스러운 구도. {cameraPosition} {imperfections} {humanTrace}",
+  "negativePrompt": [
+    "광고용 제품 화보",
+    "쇼핑몰 상세페이지 합성",
+    "스튜디오 조명",
+    "3D 렌더",
+    "CGI",
+    "비현실적인 광원",
+    "과한 HDR",
+    "과도한 선명도",
+    "플라스틱처럼 매끈한 질감",
+    "완벽하게 대칭인 구도",
+    "지나치게 정돈된 공간",
+    "호텔 카탈로그",
+    "AI 일러스트",
+    "왜곡된 선반",
+    "떠 있는 물건",
+    "읽을 수 없는 가짜 글자",
+    "브랜드 로고 변형"
+  ],
+  "defaultValues": {
+    "cameraPosition": "사람 눈높이보다 약간 낮은 위치, 24~28mm 스마트폰 광각 느낌.",
+    "imperfections": "미세한 손떨림과 센서 노이즈, 창가와 실내의 약한 노출 차이를 남긴다.",
+    "humanTrace": "접힌 행주, 반쯤 사용한 생활용품, 작은 물자국이나 케이블처럼 실제 생활 흔적을 소량 포함한다.",
+    "aspectRatio": "4:3"
+  },
+  "variants": {
+    "kitchen_gap": {
+      "place": "작은 아파트 주방의 냉장고와 수납장 사이 좁은 틈",
+      "situation": "조리 전에 양념병과 키친타월을 정리해 둔 상태",
+      "composition": "통로 쪽에서 비스듬히 바라보며 냉장고 모서리와 조리대 일부가 함께 보이는 세로 구도"
+    },
+    "bathroom_gap": {
+      "place": "생활감 있는 아파트 욕실의 세면대 옆 좁은 공간",
+      "situation": "세면용품과 여분 휴지를 가볍게 정리한 상태",
+      "composition": "욕실 문가에서 안쪽을 바라보며 타일 줄눈과 바닥 배수구가 자연스럽게 포함되는 구도"
+    },
+    "laundry_gap": {
+      "place": "세탁기 옆 12~15cm 남짓한 세탁실 틈",
+      "situation": "세탁망과 가벼운 세제 용품을 아래쪽 위주로 정리한 상태",
+      "composition": "세탁기 전면과 벽 사이가 동시에 보이는 약간 높은 사선 구도"
+    },
+    "guest_room": {
+      "place": "여행자가 며칠 머무는 소형 숙소 객실의 벽과 침대 사이 자투리 공간",
+      "situation": "물병, 충전 케이블, 세면 파우치 같은 작은 여행용품을 정리해 둔 상태",
+      "composition": "침대 끝에서 자투리 공간을 향해 찍은 넓지 않은 생활 스냅 구도"
+    }
+  },
+  "disclosurePolicy": {
+    "generatedImageLabel": "AI로 만든 공간 배치 예시 이미지",
+    "mayBeUsedAsDirectExperienceEvidence": false,
+    "mayImplyProductWasOwnedOrTested": false,
+    "mustPreserveListingAndMeasuredFactsSeparation": true
+  }
+}
