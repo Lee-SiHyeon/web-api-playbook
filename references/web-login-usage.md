@@ -106,6 +106,19 @@ DOM 파서는 HTML만 해석하며 브라우저 엔진이나 페이지 JavaScrip
 `nextCursor`, HTTP receipt를 포함한다. 최대 2페이지이며 전체 타임라인이나 최신순 정렬 완료를 보장하지 않는다.
 현재 작성/삭제 API는 이 저장 세션 실행기에 연결하지 않았다.
 
+## 링크프라이스
+
+```powershell
+node scripts/web-login.mjs linkprice ensure
+node scripts/web-login.mjs linkprice sites
+```
+
+저장 비밀번호로 HTTP 로그인하여 Bearer·CSRF를 받고 보호 계정을 대조한다.
+새 프로세스의 저장 세션 재사용과 등록 사이트 조회도 확인했다.
+`ensure`는 토큰의 만료 힌트 또는 서버 401에 따라 동일 비밀번호 로그인으로 복구하도록 구현했다.
+최초 연결, 정확한 요청 필드, `text/html` MIME을 가진 JSON 응답 처리,
+실제 만료 복구의 미관측 경계는 [LinkPrice 사용법](linkprice-login.md)에 있다.
+
 ## 재사용 인터페이스
 
 ```js
@@ -148,6 +161,7 @@ X의 기존 `fetchXXhr`는 playbook 세션이 있으면 같은 계정 조회·HT
 | MyRealTrip | 저장 비밀번호 로그인, refresh, 만료 후 자동 refresh, 계정 확인, 공항 검색 | 최초 이메일 OTP는 브라우저에서 완료. HTTP OTP 상태 머신은 구현되었지만 라이브 제출은 미실행. 메일 코드 공급자 상시 연결은 별도 |
 | Coupang | 웹 세션 import, config 계정 일치, prelogin 경유 재확인, dashboard | 비밀번호부터의 로그인, 완전히 만료된 쿠팡 세션 복구 |
 | X | 직접 생성 transaction ID, 계정 확인, Altman·Musk·Amodei 사용자 타임라인 | 비밀번호·Castle부터의 로그인, auth_token 만료 후 재발급 |
+| LinkPrice | HTTP 비밀번호 로그인, Bearer·CSRF 발급, 최소 필드 계정 대조, 새 프로세스 세션 재사용, 등록 사이트 조회 | 실제 만료/강제 폐기 후 자동 복구와 추가 챌린지 분기는 미관측 |
 | Reddit | 정상 이메일 링크로 브라우저 로그인 후 영구 이용 정지 표시 | 계정 제한 해결 필요. 무인 로그인·수집 미연결 |
 | Adpick | 네이버 OAuth 진입 후 네이버 계정 보호조치 표시 | 본인 확인·비밀번호 변경을 사용자에게 인계. Adpick 세션 미취득 |
 

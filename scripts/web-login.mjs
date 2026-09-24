@@ -1,11 +1,12 @@
 import { createMyrealtripAuth, WebAuthError } from '../lib/web-auth/myrealtrip.mjs';
 import { createCoupangAuth } from '../lib/web-auth/coupang.mjs';
 import { createXAuth } from '../lib/web-auth/x.mjs';
+import { createLinkpriceAuth } from '../lib/web-auth/linkprice.mjs';
 import { stdinJson } from '../lib/cli.mjs';
 
 try {
   const [service, command='status'] = process.argv.slice(2);
-  const factories={myrealtrip:createMyrealtripAuth,coupang:createCoupangAuth,x:createXAuth};
+  const factories={myrealtrip:createMyrealtripAuth,coupang:createCoupangAuth,x:createXAuth,linkprice:createLinkpriceAuth};
   if (!Object.hasOwn(factories,service)) throw new WebAuthError('SERVICE_NOT_IMPLEMENTED');
   const auth=factories[service]();
   let result;
@@ -16,6 +17,7 @@ try {
   else if (command==='refresh' && auth.refresh) result=await auth.refresh();
   else if (command==='renew' && auth.renew) result=await auth.renew();
   else if (command==='dashboard' && auth.dashboard) result=await auth.dashboard();
+  else if (command==='sites' && auth.sites) result=await auth.sites();
   else if (command==='import-session' && auth.importSession) result=await auth.importSession(await stdinJson(128*1024));
   else if (command==='import-tokens' && auth.importTokens) result=await auth.importTokens(await stdinJson(128*1024));
   else if (command==='otp-send' && auth.sendOtp) result=await auth.sendOtp();

@@ -3,6 +3,7 @@
 이 폴더는 새 저장소의 설치/정적 확인과 이후 추가된 실행기의 증거를 기록합니다.
 초기 패키징 결과는 아래 내용과 `packaging.json`, 2026-09-24 웹 인증 구현·라이브 결과는
 [web-login-2026-09-24.json](web-login-2026-09-24.json)을 따릅니다.
+후속 LinkPrice 작업은 [linkprice-login-2026-09-24.json](linkprice-login-2026-09-24.json)에 별도로 기록했습니다.
 
 ## 초기 패키징 확인
 

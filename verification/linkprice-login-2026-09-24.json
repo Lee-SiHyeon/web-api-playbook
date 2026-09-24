@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-09-24",
+  "service": "linkprice",
+  "scope": "Observed first-party login converted to a scoped HTTP client; no account settings or financial operations changed",
+  "client": {
+    "exists": true,
+    "credentialProvider": "Windows DPAPI CurrentUser",
+    "browserUsedForRoutineRequests": false,
+    "allowedApiOrigin": "https://api.linkprice.com",
+    "webOrigin": "https://ac.linkprice.net"
+  },
+  "observedContracts": {
+    "login": {
+      "method": "PUT",
+      "path": "/svc/login",
+      "requestFields": ["dom", "id", "pw"],
+      "responseMime": "text/html; charset=UTF-8",
+      "responseParsedAsJson": true,
+      "returnsBearerAndCsrf": true,
+      "cookiesObservedInLoginResponse": false
+    },
+    "ownerRead": {
+      "method": "PUT",
+      "path": "/svc/query",
+      "operation": "dc_lpop/taccount/v1/GetAccount",
+      "requestedFields": ["account_id"],
+      "exactConfiguredAccountMatch": true
+    },
+    "sitesRead": {
+      "method": "PUT",
+      "path": "/svc/query",
+      "operation": "dc_lpop/taffiliate/v1/GetAffiliates",
+      "requestedFields": ["affiliate_id", "site_url"],
+      "observedResponseShape": "object",
+      "recordsReturned": 1
+    }
+  },
+  "liveReplay": {
+    "browserLoginAndRequestCaptureObserved": true,
+    "freshHttpPasswordLogin": {
+      "succeeded": true,
+      "httpStatus": 200,
+      "checkedAt": "2026-09-24T13:26:45.998Z",
+      "browserUsed": false
+    },
+    "protectedOwnerReadAfterLogin": {
+      "succeeded": true,
+      "httpStatus": 200,
+      "checkedAt": "2026-09-24T13:26:47.057Z",
+      "requestedFields": ["account_id"]
+    },
+    "storedSessionReuseInSeparateProcess": {
+      "succeeded": true,
+      "httpStatus": 200,
+      "checkedAt": "2026-09-24T13:26:52.035Z",
+      "renewal": "stored_session",
+      "browserUsed": false
+    },
+    "consumerRegisteredSitesRead": {
+      "succeeded": true,
+      "httpStatus": 200,
+      "checkedAt": "2026-09-24T13:27:48.767Z",
+      "recordsReturned": 1,
+      "responseShape": "object",
+      "browserUsed": false
+    },
+    "observedServerExpiryRecovery": false,
+    "observedForcedRevocationRecovery": false,
+    "observedAdditionalChallengeBranch": false
+  },
+  "credentialHandling": {
+    "rawCredentialsIncluded": false,
+    "rawTokensIncluded": false,
+    "credentialValuesPassedThroughCommandArgumentsOrEnvironment": false,
+    "persistentStore": "Windows DPAPI CurrentUser outside the repository",
+    "tokenExpiry": "JWT exp is only a scheduling hint; protected owner read is the authentication proof"
+  },
+  "boundaries": [
+    "Automatic password re-login is implemented for the expiry hint and a protected-read HTTP 401, but recovery after real server expiry or forced revocation was not exercised.",
+    "No OTP or CAPTCHA branch was observed during the successful login.",
+    "The sites operation is read-only. No account mutation, link generation, commission withdrawal, or financial operation was performed."
+  ],
+  "localReview": {
+    "syntaxChecks": {
+      "files": [
+        "lib/web-auth/linkprice.mjs",
+        "scripts/web-auth-import.mjs",
+        "scripts/web-login.mjs"
+      ],
+      "failures": 0
+    },
+    "unitOrIntegrationTestsAdded": false,
+    "unitOrIntegrationTestsRun": false
+  }
+}

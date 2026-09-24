@@ -74,6 +74,9 @@ HTTP 생성/갱신은 구현하지 않았다. 기존 저장된 `auth_token` 재�
 
 ## 추가 계정 상태와 미완료 구간
 
+LinkPrice의 후속 비밀번호 로그인·등록 사이트 조회 계약과 독립 HTTP 성공은
+[별도 관측 문서](linkprice-login.md#관측-계약)에 추가했다.
+
 - **Reddit:** `POST /svc/shreddit/account/login/magic_link/initialize`의
   `identifier,csrf_token`, 이어지는 magic-link 로그인 POST의
   `user_id,token,recaptcha_token,recaptcha_action,csrf_token` 필드를 관측했다.

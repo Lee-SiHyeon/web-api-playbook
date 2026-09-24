@@ -12,7 +12,7 @@
 |---|---|
 | [SKILL.md](SKILL.md) | 에이전트가 따르는 전환 절차와 증거 기준 |
 | [공통 도구](references/runtime-modules.md) | origin별 HTTP 세션, 쿠키 회전, DPAPI, 잠금, 쓰기 저널 |
-| [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip 로그인·refresh, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
+| [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
@@ -83,13 +83,14 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 
 ### 웹 로그인·세션 자동 복구
 
-마이리얼트립·쿠팡 파트너스·X의 실제 웹 요청 기반 실행기는 [웹 로그인 사용법](references/web-login-usage.md)을 따른다.
+마이리얼트립·쿠팡 파트너스·X·링크프라이스의 실제 웹 요청 기반 실행기는 [웹 로그인 사용법](references/web-login-usage.md)을 따른다.
 
 ```powershell
 node scripts/web-login.mjs myrealtrip ensure
 node scripts/web-login.mjs coupang ensure
 node scripts/web-login.mjs x ensure
 node scripts/x-read.mjs sama 3
+node scripts/web-login.mjs linkprice ensure
 ```
 
 저장 비밀번호 로그인, 저장 웹 세션 재사용, SSO 복구는 서비스별 지원 범위가 다르다.
