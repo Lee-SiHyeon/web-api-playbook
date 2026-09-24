@@ -1,5 +1,10 @@
 # sns-X — XHR API-only
 
+> 아래는 원본 service-pack의 관측 시점 기록이다. 2026-09-24에 추가한 DPAPI 세션·보호 계정 조회·
+> 브라우저 없는 transaction ID 생성·조회 CLI는 저장소 루트의
+> [웹 로그인 사용법](../../references/web-login-usage.md#x-웹-세션과-수집기)을 따른다.
+> 루트에서 `node scripts/x-read.mjs sama 3`으로 실행한다. 이 pack의 기존 쓰기 CLI에는 자동 연결하지 않았다.
+
 Node.js 22+의 직접 HTTP 클라이언트. 프로필, 원본 게시물 목록, 게시물 상세, 일반 텍스트 글쓰기를 제공합니다. 반복 실행에 브라우저 자동화 라이브러리를 사용하지 않습니다.
 
 ## 현재 검증 범위

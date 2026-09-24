@@ -4,7 +4,9 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "doctor": "node scripts/doctor.mjs",
     "install:skill": "node scripts/install-skill.mjs",
@@ -13,7 +15,15 @@
     "frontier": "node scripts/frontier.mjs",
     "session": "node scripts/session.mjs",
     "request": "node scripts/request.mjs",
-    "inspect:bundle": "node scripts/inspect-bundle.mjs"
+    "inspect:bundle": "node scripts/inspect-bundle.mjs",
+    "web:login": "node scripts/web-login.mjs",
+    "myrealtrip": "node scripts/myrealtrip.mjs",
+    "x:read": "node scripts/x-read.mjs"
   },
-  "dependencies": { "parse5": "8.0.1", "tough-cookie": "5.1.2" }
+  "dependencies": {
+    "linkedom": "0.18.13",
+    "parse5": "8.0.1",
+    "tough-cookie": "5.1.2",
+    "x-client-transaction-id": "0.3.1"
+  }
 }

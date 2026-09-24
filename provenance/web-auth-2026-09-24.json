@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "Lee-SiHyeon/affiliate-content-operations",
+  "sourcePath": "apps/naver-blog-api/research/content-store/x-xhr.mjs",
+  "sourceStatus": "working_tree_with_web_auth_update",
+  "normalizedSourceSha256": "a19af520631c54e3c106a592486166952b1eded10d624f953ef3dbbc33cd7ada",
+  "destination": "lib/web-auth/x-read-client.mjs",
+  "changes": [
+    "Removed main-repository vault/provider imports and CLI",
+    "Removed duplicate cookie rotation; ScopedSession transport owns rotation",
+    "Preserved observed GraphQL discovery, parser, pagination and receipts"
+  ],
+  "newModules": [
+    "lib/web-auth/myrealtrip.mjs",
+    "lib/web-auth/coupang.mjs",
+    "lib/web-auth/x.mjs",
+    "lib/web-auth/x-transaction.mjs"
+  ],
+  "runtimeDependencies": {
+    "x-client-transaction-id": "0.3.1",
+    "linkedom": "0.18.13"
+  },
+  "secretValuesIncluded": false
+}

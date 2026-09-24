@@ -11,6 +11,12 @@ npm ci --ignore-scripts
 
 ## 사용법과 입력
 
+2026-09-24에 추가한 보호 저장·로그인·refresh 실행기는 저장소 루트의
+[웹 로그인 사용법](../../references/web-login-usage.md)을 따른다.
+루트에서 `node scripts/web-login.mjs myrealtrip ensure`를 실행하고,
+업무 JSON을 `node scripts/myrealtrip.mjs` stdin으로 넘기면 session을 따로 입력하지 않는다.
+아래 pack 원본 CLI의 직접 session envelope 경로도 보존되어 있다.
+
 | 기능 | pack 루트 명령 | 입력/계약 문서 |
 |---|---|---|
 | 파트너 보호 조회 | `npm run --silent partners:probe` | [계정 조회 계약](apps/affiliate-api-hub/references/partner-account-contracts.json), [로그인 경계](apps/affiliate-api-hub/docs/partner-login-http-2026-09-21.md) |

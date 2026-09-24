@@ -1,0 +1,200 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-09-24",
+  "executionHost": "current Windows desktop, Asia/Seoul",
+  "scope": "Authorized web login/session conversion; no publishing or account settings changed",
+  "services": {
+    "myrealtrip": {
+      "captured": true,
+      "client_exists": true,
+      "credential_propagated": true,
+      "remnant_free": "not_asserted",
+      "live_replay": {
+        "password_login": true,
+        "refresh_token": true,
+        "automatic_refresh_after_owner_rejection": true,
+        "owner_read": true,
+        "searchAirports": true,
+        "otp_send": false,
+        "otp_verify": false,
+        "legacy_refresh": false
+      },
+      "bootstrap": {
+        "browserUsed": true,
+        "method": "native password login and email OTP"
+      },
+      "routine": {
+        "browserUsed": false,
+        "credentialProvider": "Windows DPAPI CurrentUser",
+        "authRequestOrigin": "https://api3-backoffice.myrealtrip.com"
+      },
+      "businessReceipt": {
+        "operation": "searchAirports",
+        "method": "GET",
+        "path": "/search/flight/v1/ac",
+        "httpStatus": 200,
+        "applicationStatus": 200,
+        "checkedAt": "2026-09-24T13:12:35.707Z",
+        "browserUsed": false,
+        "identityVerified": true,
+        "renewal": "refresh_token"
+      },
+      "boundaries": [
+        "Email OTP send/verify contracts implemented but direct HTTP OTP submission not exercised",
+        "Unattended mailbox code provider not connected",
+        "Legacy refresh route remains source-derived fallback"
+      ]
+    },
+    "coupang": {
+      "captured": true,
+      "client_exists": true,
+      "credential_propagated": true,
+      "remnant_free": "not_asserted",
+      "live_replay": {
+        "session_import": true,
+        "owner_config": true,
+        "prelogin_with_existing_session": true,
+        "dashboard": true,
+        "password_login": false,
+        "fully_expired_session_recovery": false
+      },
+      "bootstrap": {
+        "browserUsed": true,
+        "method": "existing web portal login"
+      },
+      "routine": {
+        "browserUsed": false,
+        "credentialProvider": "Windows DPAPI CurrentUser",
+        "origins": [
+          "https://partners.coupang.com",
+          "https://login.coupang.com"
+        ]
+      },
+      "businessReceipt": {
+        "path": "/api/v1/dashboard",
+        "httpStatus": 200,
+        "ownerVerified": true,
+        "dashboardSchemaMatched": true,
+        "browserUsed": false
+      },
+      "diagnosis": {
+        "cookiesAndUserAgentHttpStatus": 403,
+        "observedHeaderSetHttpStatus": 200
+      },
+      "boundaries": [
+        "Password-from-zero flow not implemented",
+        "SSO pass with existing session is not proof of fully expired-session recovery"
+      ]
+    },
+    "x": {
+      "captured": true,
+      "client_exists": true,
+      "credential_propagated": true,
+      "remnant_free": "not_asserted",
+      "live_replay": {
+        "session_import": true,
+        "owner_read": true,
+        "generated_transaction_id": true,
+        "main_collector": true,
+        "standalone_read_cli": true,
+        "password_login": false
+      },
+      "bootstrap": {
+        "browserUsed": true,
+        "method": "signed-in account request and scoped cookies"
+      },
+      "routine": {
+        "browserUsed": false,
+        "credentialProvider": "Windows DPAPI CurrentUser",
+        "transactionProvider": "fresh HTTP HTML and public JS inputs, pinned x-client-transaction-id 0.3.1"
+      },
+      "sourcesRead": [
+        "sama",
+        "elonmusk",
+        "DarioAmodei"
+      ],
+      "businessReceipt": {
+        "operation": "UserOriginalsTimeline",
+        "method": "GET",
+        "path": "/graphql/Yr8749ieoUptxRqQv766Fw/UserOriginalsTimeline",
+        "httpStatus": 200,
+        "checkedAt": "2026-09-24T13:12:36.424Z",
+        "observedItems": 22,
+        "selectedItems": 3,
+        "browserUsed": false,
+        "fullTimeline": false
+      },
+      "diagnosis": {
+        "missingTransactionIdHttpStatus": 404,
+        "missingTransactionIdServiceCode": 34,
+        "capturedTransactionIdHttpStatus": 200,
+        "generatedTransactionIdHttpStatus": 200
+      },
+      "boundaries": [
+        "Password/Castle sequence not implemented",
+        "Rejected auth_token requires a new authorized login",
+        "New runtime exposes read-only business operations"
+      ]
+    },
+    "reddit": {
+      "captured": "native_magic_link_fields",
+      "client_exists": false,
+      "credential_propagated": false,
+      "remnant_free": "not_asserted",
+      "live_replay": false,
+      "browserLoginSucceeded": true,
+      "lastObservedState": "ACCOUNT_SUSPENDED",
+      "usableForCollection": false,
+      "boundaries": [
+        "Permanent suspension shown on authenticated page",
+        "Magic-link flow also carries browser-issued recaptcha_token",
+        "Consumed one-time link replaced with encrypted consumed-state record"
+      ]
+    },
+    "adpick": {
+      "captured": "naver_oauth_authorize_entry",
+      "client_exists": false,
+      "credential_propagated": false,
+      "remnant_free": "not_asserted",
+      "live_replay": false,
+      "lastObservedState": "NAVER_ACCOUNT_PROTECTED",
+      "callbackCompleted": false,
+      "boundaries": [
+        "Naver normal autofill sign-in shows identity verification and password change requirement",
+        "User must complete account recovery; no password change attempted",
+        "No Naver cookies/password persisted by these web-auth tools"
+      ]
+    },
+    "oliveyoung": {
+      "observedThisRun": false
+    },
+    "naverBrandConnect": {
+      "observedThisRun": false
+    },
+    "naverSearchAds": {
+      "observedThisRun": false
+    }
+  },
+  "localReview": {
+    "syntaxFiles": 18,
+    "syntaxFailures": 0,
+    "gitDiffCheckPassed": true,
+    "unitOrIntegrationTestsAdded": false,
+    "unitOrIntegrationTestsRun": false,
+    "liveLoginAndReadsPerformed": true,
+    "changedFileSecretPatternScan": {
+      "playbookFiles": 22,
+      "consumerFiles": 10,
+      "findings": 0,
+      "scope": "changed and untracked nonignored files; high-confidence patterns only"
+    }
+  },
+  "secrets": {
+    "store": "Windows DPAPI CurrentUser, outside repositories",
+    "rawCaptureFilesCommitted": false,
+    "rawCredentialsIncluded": false,
+    "scopeNote": "No global remnant-free claim. Browser memory cleanup and changed-file static scan are recorded separately.",
+    "browserCaptureMemoryCleared": true,
+    "consumedMagicLinkReplacedWithTombstone": true
+  }
+}

@@ -6,6 +6,7 @@
 | [skill-origin.json](skill-origin.json) | 원래 개인 스킬의 hash와 초기 출처 표기 |
 | [additional-sources.json](additional-sources.json) | Affiliate, OliveYoung, Threads, 기존 스킬 reference의 파일별 원본 hash와 소스 상태 |
 | [non-naver-sources.json](non-naver-sources.json) | 비 Naver 사례별 근거 코드/문서/영수증, 관측 경계 |
+| [web-auth-2026-09-24.json](web-auth-2026-09-24.json) | 웹 인증 실행기와 기존 X 수집기 이식 출처·변경 범위 |
 | [verification](../verification/README.md) | 새 패키지의 설치·정적 확인 범위 |
 
 `sourceSha256`는 **원본에서 읽은 바이트**의 hash입니다. 해당 파일이 이식 과정에서 수정됐다면 패키지 현재 hash와 다를 수 있으며 아래 변경 목록을 함께 봅니다. Git의 package commit 자체가 배포된 내용을 고정합니다.

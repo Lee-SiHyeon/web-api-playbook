@@ -12,6 +12,7 @@
 |---|---|
 | [SKILL.md](SKILL.md) | 에이전트가 따르는 전환 절차와 증거 기준 |
 | [공통 도구](references/runtime-modules.md) | origin별 HTTP 세션, 쿠키 회전, DPAPI, 잠금, 쓰기 저널 |
+| [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip 로그인·refresh, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
@@ -79,6 +80,22 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 `--output`은 **새 파일만** 받습니다. 같은 명령을 다시 실행할 때 `frontier-002.json`처럼 다른 이름을 쓰세요. 상세 옵션과 상태 전이는 [도구 안내](references/discovery-tools.md)에 있습니다.
 
 ## 3. 기존 서비스를 사용할 때
+
+### 웹 로그인·세션 자동 복구
+
+마이리얼트립·쿠팡 파트너스·X의 실제 웹 요청 기반 실행기는 [웹 로그인 사용법](references/web-login-usage.md)을 따른다.
+
+```powershell
+node scripts/web-login.mjs myrealtrip ensure
+node scripts/web-login.mjs coupang ensure
+node scripts/web-login.mjs x ensure
+node scripts/x-read.mjs sama 3
+```
+
+저장 비밀번호 로그인, 저장 웹 세션 재사용, SSO 복구는 서비스별 지원 범위가 다르다.
+위 문서에 최초 연결, OTP 재개, 업무 API 연결과 실제 확인 범위를 구분했다.
+요청 필드와 계정 제한은 [현재 관측 계약](references/web-login-observed-contracts.md),
+실제 HTTP 성공 단계는 [실행 기록](verification/web-login-2026-09-24.json)에 있다.
 
 먼저 [서비스별 실행표](service-packs/README.md)에서 필요한 pack을 고릅니다. 공통 CLI에 서비스 인증을 억지로 변환할 필요 없이, 각 pack의 기존 로그인/발행 런처를 사용할 수 있습니다.
 
