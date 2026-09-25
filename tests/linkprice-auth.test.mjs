@@ -120,3 +120,47 @@ test('merchants are projected; subscriptions map ErrNoRows to NONE and APR to li
   assert.match(link.url, /^https:\/\/click\.linkprice\.com\/click\.php\?m=gmarket&a=A100708014&l=9999/);
   await assert.rejects(h.auth.link({ merchantId: '11st', targetUrl: 'https://www.11st.co.kr/' }), /MERCHANT_NOT_APPROVED/);
 });
+
+test('apply sends one Create per AUT merchant, skips manual and existing, and never resends with a journal record', async t => {
+  const subs = new Map([['lotteon', 'APR']]);
+  const h = await harness(t, { state: storedState('ok-token'), routes: ({ body }) => {
+    const k = body?.orm_key;
+    if (k === 'dc_lpop/taccount/v1/GetAccount') return html({ account_id: 'owner1' });
+    if (k === 'dc_lpop/taffiliate/v1/GetAffiliates') return html('{"affiliate_id":"A100708014","site_url":"https://blog.naver.com/aicandoanything"}\n{"affiliate_id":"A100799999","site_url":"https://i-never-stop-study.tistory.com"}\n');
+    if (k === 'dc_lpop/tmerchant/v1/GetMerchant') return html({ approval_type: body.input.mer_id === '11st' ? 'MAN' : 'AUT' });
+    if (k === 'dc_lpop/tsubscript/v1/GetSubscript') return subs.has(body.input.mer_id + body.input.aff_id) || subs.has(body.input.mer_id)
+      ? html({ subs_status: subs.get(body.input.mer_id + body.input.aff_id) ?? subs.get(body.input.mer_id) }) : html({ error_code: 404, error_message: 'ErrNoRows' });
+    if (k === 'dc_lpop/tsubscript/v1/Create') { subs.set(body.input.merchant_id + body.input.affiliate_id, body.input.subs_status); return html({ last_inserted_id: 7 }); }
+    return html({}, 500);
+  } });
+  await assert.rejects(h.auth.apply({ merchantIds: ['gmarket'] }), /AFFILIATE_AMBIGUOUS/);
+  const r = await h.auth.apply({ merchantIds: ['gmarket', '11st', 'lotteon'], affiliateId: 'A100799999' });
+  assert.deepEqual(r.results.map(x => [x.merchantId, x.outcome, x.status]), [['gmarket', 'written', 'APR'], ['11st', 'skipped_manual_approval', 'NONE'], ['lotteon', 'existing', 'APR']]);
+  const creates = () => h.calls.filter(c => c.orm === 'dc_lpop/tsubscript/v1/Create').length;
+  assert.equal(creates(), 1);
+  subs.delete('gmarketA100799999'); // pretend the row vanished: the journal must stop a second Create
+  const again = await h.auth.apply({ merchantIds: ['gmarket'], affiliateId: 'A100799999' });
+  assert.equal(again.results[0].outcome, 'previous_attempt_not_found'); assert.equal(creates(), 1);
+});
+
+test('addSite registers a website once and reports an existing one without writing', async t => {
+  let tistory = false;
+  const h = await harness(t, { state: storedState('ok-token'), routes: ({ body }) => {
+    const k = body?.orm_key;
+    if (k === 'dc_lpop/taccount/v1/GetAccount') return html({ account_id: 'owner1' });
+    if (k === 'dc_lpop/taffiliate/v1/GetAffiliates') return html('{"affiliate_id":"A100708014","site_url":"https://blog.naver.com/aicandoanything"}\n' +
+      (tistory ? '{"affiliate_id":"A100799999","site_url":"https://i-never-stop-study.tistory.com"}\n' : ''));
+    if (k === 'dc_lpop/taffiliate/v1/Create') {
+      assert.equal(body.input.site_type, 'W'); assert.equal(body.input.account_id, 'owner1'); assert.equal(body.input.kc_category1, '912');
+      tistory = true; return html({ last_inserted_id: 9 });
+    }
+    return html({}, 500);
+  } });
+  const site = { siteName: '아네스의 공부일지', siteUrl: 'https://i-never-stop-study.tistory.com/', category1: '912', category2: '914', siteDesc: 'AI 활용과 여행·쇼핑 특가 정보를 정리하는 블로그' };
+  const first = await h.auth.addSite(site);
+  assert.deepEqual([first.outcome, first.affiliateId], ['written', 'A100799999']);
+  const second = await h.auth.addSite(site);
+  assert.equal(second.outcome, 'existing');
+  assert.equal(h.calls.filter(c => c.orm === 'dc_lpop/taffiliate/v1/Create').length, 1);
+  await assert.rejects(h.auth.addSite({ ...site, category1: 'x' }), /SITE_INPUT_INVALID/);
+});

@@ -120,7 +120,19 @@ const result = await auth.sites();
 만료·무효 토큰은 401이 아니라 **HTTP 200 `{error_code, error_message:"Token is expired"}`**로 온다(2026-09-25 관측). 클라이언트는 이를 재인증 신호로 분류하고, `ErrNoRows`는 빈 결과로 다룬다.
 
 트래킹 링크는 API가 아니라 웹 앱이 직접 조립한다(번들의 `getClickUrl`): `https://click.linkprice.com/click.php?m=<광고주>&a=<사이트ID>&l=9999&l_cd1=3&l_cd2=0&tu=<URL 인코딩한 대상>`. `link` 명령은 승인(APR)된 광고주에만 링크를 만든다.
-승인 신청(`tsubscript/v1/Create`)은 광고주 약관 동의가 따르는 계정 쓰기라 실행기에 넣지 않았다.
+계정 쓰기 두 가지는 사용자가 명시적으로 요청할 때만 실행한다. 둘 다 전송 전에 저널(`<보호 저장소>/journal/linkprice`)을 예약하고, 한 번만 보내며, 응답 뒤 독립 조회로 확인한다. 같은 의도의 저널이 이미 있으면 다시 보내지 않고 조회로 대사한다.
+
+| 목적 | 요청 | 입력 |
+|---|---|---|
+| 광고주 승인 신청 | `PUT /svc/query` `dc_lpop/tsubscript/v1/Create` | `{affiliate_id, merchant_id, subs_status}` — 웹 앱과 같이 기존 APR/REQ/DEN이면 건너뛰고, `GetMerchant.approval_type`이 AUT이면 APR, 아니면 REQ. `apply`는 기본적으로 AUT만 신청 |
+| 웹사이트 등록 | `PUT /svc/query` `dc_lpop/taffiliate/v1/Create` | `{account_id, site_type:"W", site_name, kc_category1, kc_category2, site_desc, mer_forwarding_yn:"S", merchant_error_url:"", site_url, rec_category1..3:"", delete_flag:"N"}` — 카테고리는 `tcode GetCodes`의 ACTIVITY_CATE(912 티스토리 블로그 등)·CONTENTS_CATE(914 특가·이벤트 등) |
+
+```powershell
+'{"siteName":"...","siteUrl":"https://example.tistory.com","category1":"912","category2":"914","siteDesc":"..."}' | node scripts/web-login.mjs linkprice add-site
+'{"merchantIds":["gmarket","auction"],"affiliateId":"A100708029"}' | node scripts/web-login.mjs linkprice apply
+```
+
+사이트가 둘 이상이면 `subscriptions`·`link`·`apply`에 `affiliateId`를 지정해야 한다(승인 상태와 링크는 사이트별).
 
 `/svc/query`의 HTTP 메서드는 PUT이지만 위 두 operation의 의미는 조회다.
 임의 ORM selector, 계정 변경, 커미션 인출 등 쓰기 operation은 실행기에 노출하지 않았다.
