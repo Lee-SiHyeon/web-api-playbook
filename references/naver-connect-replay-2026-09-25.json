@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-09-25",
+  "service": "naver-brandconnect",
+  "discoveryMode": "authorized_authenticated_browser",
+  "apiOrigin": "https://gw-brandconnect.naver.com",
+  "bootstrap": { "accountMatches": true, "creator": true, "activeSpaceMatches": true },
+  "initialIndependentHttpReads": [
+    { "operation": "shopping-detail", "httpStatus": 200, "productEligible": true },
+    { "operation": "travel-detail", "httpStatus": 200, "productEligible": true }
+  ],
+  "browserDiscoveryWrites": [
+    { "operation": "travel-create-link", "count": 1, "httpStatus": 200, "linkId": "999431798877088", "managementReadback": true },
+    { "operation": "shopping-create-link", "count": 1, "httpStatus": 200, "linkId": "999431980698304", "managementReadback": true }
+  ],
+  "credentialValuesIncluded": false,
+  "purchasesOrReservations": 0,
+  "cliReplay": {
+    "sessionImport": "Windows DPAPI CurrentUser",
+    "separateProcessHealth": true,
+    "consumerHealth": true,
+    "browserUsed": false,
+    "readOperationsPassed": ["shopping-search", "shopping-stores", "shopping-featured", "shopping-detail", "shopping-links", "travel-search", "travel-rates", "travel-tabs", "travel-recommend", "travel-detail", "travel-links"],
+    "httpWrites": [
+      {"operation":"travel-create-link","count":1,"resourceId":"999433970756256","httpStatus":200,"independentReadback":true,"repeatOutcome":"already_created","repeatWriteSuppressed":true},
+      {"operation":"shopping-create-link","count":1,"resourceId":"999434063846048","httpStatus":200,"independentReadback":true,"repeatOutcome":"already_created","repeatWriteSuppressed":true}
+    ],
+    "eventualConsistencyObserved": true,
+    "immediateListReadback": "not_found_yet",
+    "followupReadback": "both_exact_ids_and_urls_matched",
+    "automatedTestsRun": false
+  },
+  "automaticLoginRenewalVerified": false
+}

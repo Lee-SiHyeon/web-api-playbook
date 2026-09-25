@@ -13,6 +13,7 @@
 | [SKILL.md](SKILL.md) | 에이전트가 따르는 전환 절차와 증거 기준 |
 | [공통 도구](references/runtime-modules.md) | origin별 HTTP 세션, 쿠키 회전, DPAPI, 잠금, 쓰기 저널 |
 | [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
+| [쇼핑·여행커넥트](references/naver-connect.md) | 네이버 브랜드커넥트 상품 검색·상세·수수료·링크 발급 및 관리, DPAPI 세션 재사용 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
