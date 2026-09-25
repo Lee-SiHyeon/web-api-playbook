@@ -4,6 +4,7 @@ const COMMANDS = new Map([
   ['status', { method: 'status', input: false }],
   ['health', { method: 'health', input: false }],
   ['import-session', { method: 'importSession', input: true }],
+  ['renew-session', { method: 'renewSession', input: true }],
   ['shopping-search', { method: 'shoppingSearch', input: true }],
   ['shopping-stores', { method: 'shoppingStores', input: true }],
   ['shopping-featured', { method: 'shoppingFeatured', input: false }],
