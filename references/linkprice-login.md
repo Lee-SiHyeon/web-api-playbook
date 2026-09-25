@@ -64,9 +64,15 @@ node scripts/web-login.mjs linkprice renew
 
 # 현재 계정에 등록된 사이트 목록
 node scripts/web-login.mjs linkprice sites
+
+# 토큰만 갱신(비밀번호 없이) / 광고주 목록 / 광고주별 승인 상태 / 승인된 광고주의 트래킹 링크
+node scripts/web-login.mjs linkprice refresh
+node scripts/web-login.mjs linkprice merchants cps
+'{"merchantIds":["gmarket","auction"]}' | node scripts/web-login.mjs linkprice subscriptions
+'{"merchantId":"gmarket","targetUrl":"https://www.gmarket.co.kr/"}' | node scripts/web-login.mjs linkprice link
 ```
 
-`renew`는 동일한 관측 비밀번호 로그인 경로를 호출한다. 별도 refresh-token API를 사용하지 않는다.
+`ensure`는 만료 30초 전이거나 서버가 토큰 만료를 알리면 먼저 `PUT /svc/token/refresh`로 갱신하고, 서버가 갱신을 거절하면(최초 발급 3개월 경과 등) 비밀번호 로그인으로 넘어간다. `renew`는 비밀번호 로그인을 직접 호출한다.
 서버 JWT의 `exp`는 재로그인 시점을 고르는 힌트다. JWT를 해석한 것만으로 인증되었다고 보지 않으며,
 항상 보호된 계정 조회로 실제 소유자를 대조한다. 시간 버퍼 30초는 이 클라이언트의 정책이다.
 
@@ -105,7 +111,16 @@ const result = await auth.sites();
 |---|---|---|---|
 | 로그인 | `PUT /svc/login` | JSON `dom:"AC",id,pw` | `success,message,token,csrf,name`; `success=true` 및 토큰 형식 확인 |
 | 계정 대조 | `PUT /svc/query` | `orm_key:"dc_lpop/taccount/v1/GetAccount"`, `input:{acc_id}`, `columns:["account_id"]` | `account_id`가 설정 계정과 일치해야 함 |
+| 토큰 갱신 | `PUT /svc/token/refresh` | 본문 없음, 현재 Bearer | `{tkn}` 새 토큰(CSRF 유지). 거절 시 `{code,msg}` (예: 최초 발급 3개월 경과) |
+| 광고주 목록 | `PUT /svc/query` | `orm_key:"dc_lpop/tmerchant/v1/GetMerchants"`, `input:{hidden_flag:"N",max_pgm_std_end_date:오늘,is_cps:true,orderby}` | NDJSON 행. CLI는 공개 광고주 필드만 투영 |
+| 광고주별 승인 상태 | `PUT /svc/query` | `orm_key:"dc_lpop/tsubscript/v1/GetSubscript"`, `input:{aff_id,mer_id}` (mer_id 필수) | `subs_status` APR 승인·REQ 신청·DEN 거절, `ErrNoRows`=미신청 |
 | 등록 사이트 조회 | `PUT /svc/query` | `orm_key:"dc_lpop/taffiliate/v1/GetAffiliates"`, `input:{account_id}`, `columns:["affiliate_id","site_url"]` | 관측된 단일 사이트 응답은 배열이 아닌 객체. CLI는 목록으로 정규화 |
+
+`/svc/query` 응답은 **NDJSON**(한 줄에 JSON 한 행)이다. 행이 하나면 객체 하나로 보인다.
+만료·무효 토큰은 401이 아니라 **HTTP 200 `{error_code, error_message:"Token is expired"}`**로 온다(2026-09-25 관측). 클라이언트는 이를 재인증 신호로 분류하고, `ErrNoRows`는 빈 결과로 다룬다.
+
+트래킹 링크는 API가 아니라 웹 앱이 직접 조립한다(번들의 `getClickUrl`): `https://click.linkprice.com/click.php?m=<광고주>&a=<사이트ID>&l=9999&l_cd1=3&l_cd2=0&tu=<URL 인코딩한 대상>`. `link` 명령은 승인(APR)된 광고주에만 링크를 만든다.
+승인 신청(`tsubscript/v1/Create`)은 광고주 약관 동의가 따르는 계정 쓰기라 실행기에 넣지 않았다.
 
 `/svc/query`의 HTTP 메서드는 PUT이지만 위 두 operation의 의미는 조회다.
 임의 ORM selector, 계정 변경, 커미션 인출 등 쓰기 operation은 실행기에 노출하지 않았다.

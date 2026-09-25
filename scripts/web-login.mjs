@@ -18,6 +18,9 @@ try {
   else if (command==='renew' && auth.renew) result=await auth.renew();
   else if (command==='dashboard' && auth.dashboard) result=await auth.dashboard();
   else if (command==='sites' && auth.sites) result=await auth.sites();
+  else if (command==='merchants' && auth.merchants) result=await auth.merchants({kind:process.argv[4]||'cps'});
+  else if (command==='subscriptions' && auth.subscriptions) result=await auth.subscriptions((await stdinJson(16*1024)).merchantIds);
+  else if (command==='link' && auth.link) result=await auth.link(await stdinJson(16*1024));
   else if (command==='import-session' && auth.importSession) result=await auth.importSession(await stdinJson(128*1024));
   else if (command==='import-tokens' && auth.importTokens) result=await auth.importTokens(await stdinJson(128*1024));
   else if (command==='otp-send' && auth.sendOtp) result=await auth.sendOtp();
