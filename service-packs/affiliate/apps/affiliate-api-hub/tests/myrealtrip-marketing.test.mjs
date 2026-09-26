@@ -47,6 +47,8 @@ test('unobserved operations, destinations, fields, dates and handoff age fail be
     [env('deleteLink', {}), 'SCOPE'],
     [env('createLink', { targetUrl: 'https://www.myrealtrip.com.attacker.example/offers/123' }), 'TARGET_SCOPE'],
     [env('createLink', { targetUrl: 'https://user:pass@www.myrealtrip.com/offers/123' }), 'URL'],
+    [env('createLink', { targetUrl: 'https://experiences.myrealtrip.com/products/3419212?utm=x' }), 'TARGET_SCOPE'],
+    [env('createLink', { targetUrl: 'https://experiences.myrealtrip.com/offers/3419212' }), 'TARGET_SCOPE'],
     [env('createLink', { targetUrl, headers: { cookie: 'private' } }), 'INPUT'],
     [env('sales', { fromDate: '2026-02-30', toDate: '2026-03-01' }), 'DATE'],
     [env('reservations', { startDate: '2026-09-20', endDate: '2026-09-01' }), 'DATE_RANGE'],

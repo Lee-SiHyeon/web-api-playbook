@@ -46,7 +46,10 @@ function httpsUrl(value) {
 }
 function targetUrl(value) {
   const url = httpsUrl(value);
+  // Tours and tickets live on experiences.myrealtrip.com/products/<id> (their ids differ from /offers/<id>; observed
+  // 2026-09-26 for the "유튜버 따라가기" posts), so those product pages are link targets too.
   if (!(url.origin === 'https://www.myrealtrip.com' && /^\/offers\/\d+$/.test(url.pathname)) &&
+      !(url.origin === 'https://experiences.myrealtrip.com' && /^\/products\/\d+$/.test(url.pathname) && !url.search) &&
       !(url.origin === 'https://air-web.myrealtrip.com' && url.pathname === '/results')) fail('TARGET_SCOPE');
   return url.href;
 }
