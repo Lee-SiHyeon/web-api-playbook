@@ -20,6 +20,13 @@ const COMMANDS = new Map([
   ['travel-create-link', { method: 'travelCreateLink', input: true }],
   ['creator-space', { method: 'creatorSpace', input: false }],
   ['creator-channel', { method: 'creatorChannel', input: true }],
+  ['campaign-search', { method: 'campaignSearch', input: true }],
+  ['campaign-favorites', { method: 'campaignFavorites', input: false }],
+  ['campaign-history', { method: 'campaignHistory', input: false }],
+  ['settlement-info', { method: 'settlementInfo', input: false }],
+  ['earnings-recent', { method: 'earningsRecent', input: false }],
+  ['earning-reports', { method: 'earningReports', input: true }],
+  ['co-purchase-settlement-summary', { method: 'coPurchaseSettlementSummary', input: false }],
 ]);
 
 async function readInput(limit = 256 * 1024) {
