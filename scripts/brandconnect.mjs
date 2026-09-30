@@ -18,6 +18,8 @@ const COMMANDS = new Map([
   ['travel-detail', { method: 'travelDetail', input: true }],
   ['travel-links', { method: 'travelLinks', input: true }],
   ['travel-create-link', { method: 'travelCreateLink', input: true }],
+  ['creator-space', { method: 'creatorSpace', input: false }],
+  ['creator-channel', { method: 'creatorChannel', input: true }],
 ]);
 
 async function readInput(limit = 256 * 1024) {
