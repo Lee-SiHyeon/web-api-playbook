@@ -19,8 +19,9 @@ async function harness(t, { loginId = () => 'owner1' } = {}) {
   const store = new ProtectedStore({ provider: 'memory', directory: dir });
   const calls = [];
   const fetchImpl = async (url, init = {}) => {
-    const u = new URL(url), cookie = new Headers(init.headers).get('cookie') || '';
-    calls.push({ path: u.pathname, aut: /NID_AUT=([^;]+)/.exec(cookie)?.[1] ?? null, space: new Headers(init.headers).get('x-space-id') });
+    const u = new URL(url), headers = new Headers(init.headers), cookie = headers.get('cookie') || '';
+    calls.push({ path: u.pathname, aut: /NID_AUT=([^;]+)/.exec(cookie)?.[1] ?? null,
+      space: headers.get('x-space-id'), userAgent: headers.get('user-agent') });
     if (u.pathname === '/brand-connect/query/me') {
       return new Response(JSON.stringify({ loginId: loginId(), creator: true, partner: false, activeSpaceIds: ['123456'] }),
         { status: 200, headers: { 'content-type': 'application/json' } });
@@ -46,11 +47,46 @@ test('renew-session swaps in fresh Naver cookies after the same account verifies
   assert.ok(!JSON.stringify(saved.session).includes('"old"'));
 });
 
+test('renew-session uses a supplied observed Naver user agent and stores it after owner verification', async t => {
+  const h = await harness(t);
+  const userAgent = `Node.js/${process.versions.node} jsdom/26.1.0 NaverLoginHttpClient/1.0`;
+  await h.auth.renewSession({ cookies: cookies('fresh'), userAgent });
+  assert.equal(h.calls.length, 2);
+  assert.ok(h.calls.every(c => c.aut === 'fresh' && c.space === '123456' && c.userAgent === userAgent));
+  const saved = JSON.parse(h.store.read('brandconnect-state'));
+  assert.equal(saved.session.defaultHeaders['user-agent'], userAgent);
+});
+
+test('renew-session falls back to the previously observed BrandConnect user agent when none is supplied', async t => {
+  const h = await harness(t);
+  const prior = JSON.parse(h.store.read('brandconnect-state'));
+  const priorUserAgent = prior.session.defaultHeaders['user-agent'];
+  await h.auth.renewSession({ cookies: cookies('fresh') });
+  assert.equal(h.calls.length, 2);
+  assert.ok(h.calls.every(c => c.aut === 'fresh' && c.space === '123456' && c.userAgent === priorUserAgent));
+  const saved = JSON.parse(h.store.read('brandconnect-state'));
+  assert.equal(saved.session.defaultHeaders['user-agent'], priorUserAgent);
+});
+
+test('renew-session rejects an invalid supplied user agent before making requests or saving', async t => {
+  const h = await harness(t);
+  const prior = h.store.read('brandconnect-state');
+  await assert.rejects(h.auth.renewSession({ cookies: cookies('fresh'), userAgent: 'invalid\r\nInjected: header' }),
+    e => e.code === 'USER_AGENT_INVALID');
+  assert.equal(h.calls.length, 0);
+  assert.equal(h.store.read('brandconnect-state'), prior);
+});
+
 test('renew-session keeps the stored session when the cookies belong to another account', async t => {
   let id = 'owner1';
   const h = await harness(t, { loginId: () => id });
+  const prior = JSON.parse(h.store.read('brandconnect-state'));
   id = 'someone-else';
-  await assert.rejects(h.auth.renewSession({ cookies: cookies('other') }), e => e.code === 'ACCOUNT_MISMATCH');
-  assert.ok(JSON.stringify(JSON.parse(h.store.read('brandconnect-state')).session).includes('old'));
+  const userAgent = `Node.js/${process.versions.node} jsdom/26.1.0 NaverLoginHttpClient/1.0`;
+  await assert.rejects(h.auth.renewSession({ cookies: cookies('other'), userAgent }),
+    e => e.code === 'ACCOUNT_MISMATCH');
+  const afterMismatch = JSON.parse(h.store.read('brandconnect-state'));
+  assert.ok(JSON.stringify(afterMismatch.session).includes('old'));
+  assert.equal(afterMismatch.session.defaultHeaders['user-agent'], prior.session.defaultHeaders['user-agent']);
   await assert.rejects(h.auth.renewSession({ cookies: cookies('x'), spaceId: '999' }), e => e.code === 'INPUT_INVALID');
 });
