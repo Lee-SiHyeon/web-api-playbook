@@ -1,0 +1,2455 @@
+{
+  "schema": "web-api-capability-audits-v1",
+  "audits": [
+    {
+      "schema": "web-api-capability-audit-v1",
+      "service": "aliexpress",
+      "checkedAt": "2026-10-04T19:37:29.992Z",
+      "networkUsed": "not_measured",
+      "credentialsUsed": "not_measured",
+      "mutationsSent": "not_measured",
+      "testsExecuted": true,
+      "capabilities": [
+        {
+          "id": "catalog.product_seo",
+          "title": "공개 상품 SEO 제목·설명 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "recorded_live",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/retail/aliexpress.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/retail.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/retail-aliexpress.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "http-public-read-v1",
+                "state": "recorded_live",
+                "files": [
+                  "verification/retail-aliexpress-product-seo-cli-live-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T19:33:10.540Z",
+                "freshness": {
+                  "state": "current_code",
+                  "mismatches": []
+                }
+              }
+            ],
+            "source": []
+          },
+          "note": "상품 ID만으로 조회 가능하다. 화면 XHR의 공개 제목 subject는 독립 HTTP 재생에서 생략 가능함을 확인했다. 가격·재고는 포함하지 않는다."
+        },
+        {
+          "id": "catalog.search",
+          "title": "키워드 검색 상품 목록 XHR 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "2026-10-05 익명 검색 페이지는 렌더링됐지만 결과 목록 XHR은 관찰되지 않았다. 문서 렌더링을 XHR로 간주할 수 없다."
+        },
+        {
+          "id": "catalog.offer_price",
+          "title": "상품 가격·통화·재고 XHR 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "상품 화면의 표시 가격은 보였으나 가격·통화·재고를 반환하는 독립 공개 XHR 계약은 확인되지 않았다."
+        },
+        {
+          "id": "catalog.categories",
+          "title": "카테고리 목록·상품 분류 XHR 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "관찰한 익명 화면에서 분류 데이터 XHR 계약을 확인하지 못했다."
+        },
+        {
+          "id": "catalog.pagination",
+          "title": "검색·분류 결과 페이지네이션 XHR 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "검색·분류의 다음 페이지 XHR과 종료 조건을 관찰하지 못했다."
+        },
+        {
+          "id": "auth.login",
+          "title": "계정 로그인",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "사용자가 로그인 없이 공개 상품 조회만 요청한 현재 작업 범위다. 서비스의 로그인 가능 여부 판단이 아니다."
+        },
+        {
+          "id": "profile.write",
+          "title": "프로필 편집",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "사용자 범위가 비로그인 공개 상품 조회이며 계정 변경은 요청하지 않았다."
+        },
+        {
+          "id": "cart.checkout",
+          "title": "장바구니·구매·주문 변경",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "사용자가 공개 상품 조회만 요청했고 구매나 계정 쓰기는 범위에 포함하지 않았다."
+        },
+        {
+          "id": "affiliate.workflow",
+          "title": "제휴 링크 생성·게시",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "사용자는 공개 상품 조회를 요청했으며 제휴 계정이나 제휴 링크 생성은 요청하지 않았다."
+        }
+      ],
+      "summary": {
+        "total": 9,
+        "recordedLive": 1,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "catalog.search",
+          "catalog.offer_price",
+          "catalog.categories",
+          "catalog.pagination"
+        ],
+        "strictPassed": false
+      }
+    },
+    {
+      "schema": "web-api-capability-audit-v1",
+      "service": "amazon",
+      "checkedAt": "2026-10-04T19:37:29.995Z",
+      "networkUsed": "not_measured",
+      "credentialsUsed": "not_measured",
+      "mutationsSent": "not_measured",
+      "testsExecuted": true,
+      "capabilities": [
+        {
+          "id": "catalog.search",
+          "title": "Search products through a reusable anonymous XHR response",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "The observed /s?k=... search results were document HTML; no search result data XHR was captured."
+        },
+        {
+          "id": "catalog.product",
+          "title": "Read a product's title, image and canonical URL from a validated anonymous XHR",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "references/retail-amazon-contracts.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          },
+          "blocker": "A detail-page vendor JSON GET was observed once, but direct replay returned 415. Its exact Accept header was not captured; later detail visits reached Continue shopping."
+        },
+        {
+          "id": "catalog.categories",
+          "title": "List or filter product categories through anonymous XHR",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No category data XHR was observed in the bounded anonymous journey."
+        },
+        {
+          "id": "catalog.pagination",
+          "title": "Page through result data with a verified continuation contract",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No result pagination data XHR or termination contract was observed."
+        },
+        {
+          "id": "catalog.price_availability",
+          "title": "Distinguish current/list price, coupon, currency and stock from product data",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "The product entity was not independently replayed, so no price or availability semantics are verified."
+        },
+        {
+          "id": "home.dynamic_cards",
+          "title": "Read homepage card fragments from anonymous XHR when useful",
+          "priority": "optional",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "The streaming XHR replayed but its 10 encrypted inputs came from the browser page; their engine-free acquisition is unverified, and sampled cards contained no product paths or price nodes."
+        },
+        {
+          "id": "auth.login",
+          "title": "Acquire a personal Amazon login",
+          "priority": "required",
+          "applicability": "not_applicable",
+          "requirement": "live",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The user requested anonymous public reads without login."
+        },
+        {
+          "id": "profile.read_edit",
+          "title": "Read or edit an Amazon account profile",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "live",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "Personal account/profile operations are outside this anonymous public-read scope."
+        },
+        {
+          "id": "cart.write",
+          "title": "Change a cart or address",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "live",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "Cart and address writes are outside the requested read-only scope."
+        },
+        {
+          "id": "orders.write",
+          "title": "Place an order or send a message",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "live",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "Ordering and messaging are outside the requested read-only scope."
+        },
+        {
+          "id": "affiliate.private_api",
+          "title": "Use the credentialed Associates Creators API",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "live",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "Creators API requires Associates eligibility and API credentials; this request is limited to anonymous public XHR."
+        }
+      ],
+      "summary": {
+        "total": 11,
+        "recordedLive": 0,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "catalog.search",
+          "catalog.product",
+          "catalog.categories",
+          "catalog.pagination",
+          "catalog.price_availability"
+        ],
+        "strictPassed": false
+      }
+    },
+    {
+      "schema": "web-api-capability-audit-v1",
+      "service": "ebay",
+      "checkedAt": "2026-10-04T19:37:30.478Z",
+      "networkUsed": "not_measured",
+      "credentialsUsed": "not_measured",
+      "mutationsSent": "not_measured",
+      "testsExecuted": true,
+      "capabilities": [
+        {
+          "id": "suggestions.read",
+          "title": "Read public keyword suggestions and query-linked category hints without a login or developer token",
+          "priority": "optional",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "recorded_live",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/retail/ebay.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/retail.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/retail-ebay.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "http-public-read-v1",
+                "state": "recorded_live",
+                "files": [
+                  "verification/retail-ebay-suggest-cli-live-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T19:33:10.518Z",
+                "freshness": {
+                  "state": "current_code",
+                  "mismatches": []
+                }
+              }
+            ],
+            "source": []
+          },
+          "note": "The live response contains suggestions and optional category hints, not product search results or a complete category taxonomy."
+        },
+        {
+          "id": "search.listings",
+          "title": "Search product listings through an anonymous XHR endpoint",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/retail/ebay-catalog.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/retail-ebay-catalog.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "Current anonymous search page returns item listings in HTML; no independently replayed XHR listing endpoint observed."
+        },
+        {
+          "id": "item.detail",
+          "title": "Read item details and current price through anonymous XHR",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/retail/ebay-catalog.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/retail-ebay-catalog.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No anonymous item-detail XHR response schema and direct replay established."
+        },
+        {
+          "id": "categories.read",
+          "title": "Read browse categories through anonymous XHR",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/retail/ebay-catalog.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/retail-ebay-catalog.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No anonymous category XHR response schema and direct replay established."
+        },
+        {
+          "id": "search.pagination",
+          "title": "Traverse search results with bounded XHR pagination",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/retail/ebay-catalog.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/retail-ebay-catalog.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "Search result pagination is currently a document route, not an observed XHR contract."
+        },
+        {
+          "id": "images.enrich",
+          "title": "Read secondary listing images from the observed auxiliary XHR",
+          "priority": "optional",
+          "applicability": "unknown",
+          "requirement": "live",
+          "status": "scope_unknown",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "references/retail-ebay-contracts.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          },
+          "note": "The browser request includes a pageci value and listing IDs from the HTML page. A standalone anonymous input source and replay are unverified."
+        },
+        {
+          "id": "auth.login",
+          "title": "Sign in to a buyer or seller account",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The user explicitly scoped the marketplace integration to public reads without login."
+        },
+        {
+          "id": "transactions.write",
+          "title": "Cart, bid, order, address or seller mutation",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The user requested only public anonymous reads; account and transaction writes are outside the authorized scope."
+        }
+      ],
+      "summary": {
+        "total": 8,
+        "recordedLive": 1,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "search.listings",
+          "item.detail",
+          "categories.read",
+          "search.pagination"
+        ],
+        "strictPassed": false
+      }
+    },
+    {
+      "schema": "web-api-capability-audit-v1",
+      "service": "inpock",
+      "checkedAt": "2026-10-04T19:37:38.770Z",
+      "networkUsed": "not_measured",
+      "credentialsUsed": "not_measured",
+      "mutationsSent": "not_measured",
+      "testsExecuted": true,
+      "capabilities": [
+        {
+          "id": "auth.login",
+          "title": "비밀번호 로그인과 계정 소유자 대조",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/web-auth/inpock.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-auth.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-auth-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-login-2026-10-04.json",
+                  "verification/inpock-runner-2026-10-04.json"
+                ],
+                "checkedAt": "2026-10-04T14:11:02.929Z",
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          }
+        },
+        {
+          "id": "auth.owner",
+          "title": "보호 계정 조회와 owner ID 고정",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/web-auth/inpock.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-auth.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-auth-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-login-2026-10-04.json",
+                  "verification/inpock-runner-2026-10-04.json"
+                ],
+                "checkedAt": "2026-10-04T14:11:02.929Z",
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          }
+        },
+        {
+          "id": "auth.reuse",
+          "title": "같은 세션 재사용",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/web-auth/inpock.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-auth.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-auth-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-login-2026-10-04.json",
+                  "verification/inpock-runner-2026-10-04.json"
+                ],
+                "checkedAt": "2026-10-04T14:11:02.929Z",
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          }
+        },
+        {
+          "id": "auth.recovery",
+          "title": "401·쿠키 소멸 후 재인증",
+          "priority": "conditional",
+          "applicability": "applicable",
+          "requirement": "local",
+          "status": "verified_local",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/web-auth/inpock.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-auth.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "note": "서버 만료 실측은 없고 모의 401·쿠키 소멸 회귀 테스트 범위다."
+        },
+        {
+          "id": "auth.secret_storage",
+          "title": "Linux 메모리 자격정보 경계",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "local",
+          "status": "verified_local",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/protected-store.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "lib/web-auth/inpock.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-auth.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "note": "Windows DPAPI 복원은 이 Linux 검증 범위에 포함하지 않는다."
+        },
+        {
+          "id": "profile.read",
+          "title": "인증된 프로필 디자인 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "recorded_live",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-profile.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-profile.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-profile-read-v1",
+                "state": "recorded_live",
+                "files": [
+                  "verification/inpock-profile-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T18:19:59.150Z",
+                "freshness": {
+                  "state": "current_code",
+                  "mismatches": []
+                }
+              }
+            ],
+            "source": []
+          },
+          "note": "profile-get의 현재 계정 GET 200만 실측됐다."
+        },
+        {
+          "id": "profile.edit",
+          "title": "프로필 편집·저장·독립 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "pending_live",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-profile.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-profile.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "http-write-v1",
+                "state": "missing",
+                "files": [
+                  "verification/inpock-profile-edit-live.json"
+                ]
+              }
+            ],
+            "source": []
+          },
+          "note": "snapshot/preview 또는 변경 없는 확인은 저장 실증으로 인정하지 않는다."
+        },
+        {
+          "id": "categories.contract",
+          "title": "카테고리 분류와 컬렉션 관계 확인",
+          "priority": "required",
+          "applicability": "unknown",
+          "requirement": "live",
+          "status": "scope_unknown",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-collections.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-collections.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          },
+          "note": "컬렉션 하위 카드 계약은 소스 후보지만 일반 카드의 별도 category/folder API나 소속 필드는 미확인이다."
+        },
+        {
+          "id": "collections.create",
+          "title": "컬렉션 생성",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-collections.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-collections.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "collections.children",
+          "title": "컬렉션 하위 카드 목록·페이지네이션",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-collections.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-collections.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "collections.assign",
+          "title": "카드를 컬렉션으로 분류",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-collections.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-collections.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          },
+          "note": "상품 하위 블록과 일반 링크 분류가 같은 계약인지 미확인이다."
+        },
+        {
+          "id": "cards.read",
+          "title": "관리 카드 목록과 공개 카드 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-read.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-read.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-inventory-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-inventory-2026-10-04.json",
+                  "verification/inpock-publication-proof-2026-10-05.json"
+                ],
+                "checkedAt": null,
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          }
+        },
+        {
+          "id": "cards.create",
+          "title": "공개 simple 링크 카드 생성",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-write.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-write.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-publication-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-publication-proof-2026-10-05.json",
+                  "verification/inpock-publication-first-attempt-2026-10-05.json",
+                  "verification/inpock-publication-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T15:20:24.297Z",
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          },
+          "note": "입증 범위는 공개 simple 링크 1개다."
+        },
+        {
+          "id": "cards.update",
+          "title": "기존 카드 제목·URL 수정",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-card-management.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-card-management.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "cards.delete",
+          "title": "기존 카드 삭제와 공개 상태 확인",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-card-management.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-card-management.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "cards.visibility",
+          "title": "공개·비공개 전환",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-card-management.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-card-management.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "cards.order",
+          "title": "카드 표시 순서 변경",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-card-management.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-card-management.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "cards.archive",
+          "title": "카드 보관·복원",
+          "priority": "conditional",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-card-management.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-card-management.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "cards.schedule",
+          "title": "예약 공개",
+          "priority": "conditional",
+          "applicability": "unknown",
+          "requirement": "live",
+          "status": "scope_unknown",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-card-management.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-card-management.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          },
+          "blocker": "PRO 표시가 확인됐으나 현재 계정 권한과 서버 동작은 미확인이다."
+        },
+        {
+          "id": "content.text",
+          "title": "텍스트 블록 작성",
+          "priority": "conditional",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-content.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-content.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "content.image",
+          "title": "이미지 블록 작성",
+          "priority": "conditional",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-content.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-content.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "media.upload",
+          "title": "이미지 업로드와 참조 무결성",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "source_candidate",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [
+              {
+                "path": "lib/inpock-media.mjs",
+                "state": "missing"
+              },
+              {
+                "path": "tests/inpock-media.test.mjs",
+                "state": "missing",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": [
+              {
+                "files": [
+                  "verification/inpock-features-2026-10-04.json"
+                ],
+                "state": "source_candidate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "publishing.idempotency",
+          "title": "동일 의도 재실행시 POST 0회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-write.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "lib/write-journal.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-write.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-publication-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-publication-proof-2026-10-05.json",
+                  "verification/inpock-publication-first-attempt-2026-10-05.json",
+                  "verification/inpock-publication-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T15:20:24.297Z",
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          }
+        },
+        {
+          "id": "publishing.public_rendering",
+          "title": "익명 공개 화면 데스크톱·모바일 표시",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-write.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-write.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-publication-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-publication-proof-2026-10-05.json",
+                  "verification/inpock-publication-first-attempt-2026-10-05.json",
+                  "verification/inpock-publication-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T15:20:24.297Z",
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          }
+        },
+        {
+          "id": "affiliate.prepare",
+          "title": "제휴 원본 근거 검증과 카드 후보 변환",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "local",
+          "status": "verified_local",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-affiliate.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock-prepare.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-affiliate.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "note": "로컬 준비 기능이며 실제 발행 증거는 별도다."
+        },
+        {
+          "id": "affiliate.workflow",
+          "title": "검증된 원본에서 카드 발행까지 연결",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "pending_live",
+          "gatePassed": false,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-affiliate.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "lib/inpock-write.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-affiliate.test.mjs",
+                "state": "present",
+                "kind": "test"
+              },
+              {
+                "path": "tests/inpock-write.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "note": "한 번의 수동 카드 발행은 전체 제휴 원본 자동 연동 실증이 아니다."
+        },
+        {
+          "id": "stats.read",
+          "title": "방문 통계 조회",
+          "priority": "optional",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/inpock-read.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/inpock.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/inpock-read.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "inpock-inventory-v1",
+                "state": "historical",
+                "files": [
+                  "verification/inpock-inventory-2026-10-04.json",
+                  "verification/inpock-publication-proof-2026-10-05.json"
+                ],
+                "checkedAt": null,
+                "freshness": {
+                  "state": "stale",
+                  "mismatches": [
+                    {
+                      "path": "scripts/inpock.mjs",
+                      "reason": "code_changed"
+                    }
+                  ]
+                }
+              }
+            ],
+            "source": []
+          }
+        }
+      ],
+      "summary": {
+        "total": 27,
+        "recordedLive": 1,
+        "needsReverification": 8,
+        "requiredGaps": [
+          "auth.login",
+          "auth.owner",
+          "auth.reuse",
+          "profile.edit",
+          "categories.contract",
+          "collections.create",
+          "collections.children",
+          "collections.assign",
+          "cards.read",
+          "cards.create",
+          "cards.update",
+          "cards.delete",
+          "cards.visibility",
+          "cards.order",
+          "media.upload",
+          "publishing.idempotency",
+          "publishing.public_rendering",
+          "affiliate.workflow"
+        ],
+        "strictPassed": false
+      }
+    },
+    {
+      "schema": "web-api-capability-audit-v1",
+      "service": "shopify",
+      "checkedAt": "2026-10-04T19:37:39.596Z",
+      "networkUsed": "not_measured",
+      "credentialsUsed": "not_measured",
+      "mutationsSent": "not_measured",
+      "testsExecuted": true,
+      "capabilities": [
+        {
+          "id": "catalog.product_detail",
+          "title": "Read a public product, USD price, availability, variants, and canonical URL",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "recorded_live",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/retail/shopify.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/retail.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/retail-shopify.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "http-public-read-v1",
+                "state": "recorded_live",
+                "files": [
+                  "verification/retail-shopify-product-cli-live-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T19:33:10.520Z",
+                "freshness": {
+                  "state": "current_code",
+                  "mismatches": []
+                }
+              }
+            ],
+            "source": []
+          },
+          "note": "Pinned to the observed default Allbirds storefront context. Product JSON price fields are returned in the presentment currency; /cart.js independently reports USD. The observed product API value 10500 maps to the public $105 display, so this client converts USD minor units with exponent 2 and rejects other currencies/locales."
+        },
+        {
+          "id": "catalog.predictive_search",
+          "title": "Get bounded product suggestions for a keyword",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "recorded_live",
+          "gatePassed": true,
+          "code": {
+            "state": "present",
+            "details": [
+              {
+                "path": "lib/retail/shopify.mjs",
+                "state": "present",
+                "exportsMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "scripts/retail.mjs",
+                "kind": "cli",
+                "state": "present",
+                "tokensMissing": [],
+                "syntax": "valid"
+              },
+              {
+                "path": "tests/retail-shopify.test.mjs",
+                "state": "present",
+                "kind": "test"
+              }
+            ],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "passed",
+          "evidence": {
+            "reports": [
+              {
+                "kind": "http-public-read-v1",
+                "state": "recorded_live",
+                "files": [
+                  "verification/retail-shopify-predictive-search-cli-live-2026-10-05.json"
+                ],
+                "checkedAt": "2026-10-04T19:33:10.520Z",
+                "freshness": {
+                  "state": "current_code",
+                  "mismatches": []
+                }
+              }
+            ],
+            "source": []
+          },
+          "note": "This is Shopify predictive search limited to product suggestions (up to the documented limit of 10), not full result search, collections, or pagination. Search result tracking query values are stripped from returned canonical product URLs."
+        },
+        {
+          "id": "catalog.full_search",
+          "title": "Read complete keyword result pages and continuation state",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "The verified route is predictive search with a maximum of 10 suggestions per type; full result ranking, page navigation, and termination were not established."
+        },
+        {
+          "id": "catalog.collections",
+          "title": "Read collections/categories and their product membership",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "The product and predictive-search routes do not prove a collection listing or membership contract."
+        },
+        {
+          "id": "storefront.localization",
+          "title": "Select locale and presentment currency across markets",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "Only the default root-path anonymous US storefront context was replayed. Locale-aware paths and non-USD minor-unit behavior remain unverified."
+        },
+        {
+          "id": "auth.login",
+          "title": "Customer account login",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The user requested public reads without login."
+        },
+        {
+          "id": "profile.edit",
+          "title": "Edit a customer account profile",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "Account operations are outside the requested anonymous public-read scope."
+        },
+        {
+          "id": "cart.checkout",
+          "title": "Change a cart, checkout, or order",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The user requested read-only product data; cart, checkout, and order changes are outside scope."
+        },
+        {
+          "id": "affiliate.create",
+          "title": "Generate a publisher affiliate link",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "This capability reads one merchant storefront; publisher affiliate-link generation is outside the requested anonymous product-read scope."
+        }
+      ],
+      "summary": {
+        "total": 9,
+        "recordedLive": 2,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "catalog.full_search",
+          "catalog.collections",
+          "storefront.localization"
+        ],
+        "strictPassed": false
+      }
+    },
+    {
+      "schema": "web-api-capability-audit-v1",
+      "service": "walmart",
+      "checkedAt": "2026-10-04T19:37:39.597Z",
+      "networkUsed": "not_measured",
+      "credentialsUsed": "not_measured",
+      "mutationsSent": "not_measured",
+      "testsExecuted": true,
+      "capabilities": [
+        {
+          "id": "catalog.search",
+          "title": "상품 키워드 검색 JSON 조회",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "Anonymous /search reached a Robot or human challenge. See references/retail-walmart-contracts.json and verification/retail-walmart-live-2026-10-05.json."
+        },
+        {
+          "id": "catalog.detail",
+          "title": "상품 상세 JSON 조회와 canonical URL",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No successful anonymous product-detail XHR contract observed; storefront automated retrieval is restricted by Walmart terms."
+        },
+        {
+          "id": "catalog.category",
+          "title": "카테고리 탐색과 상품 목록 연결",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No successful anonymous category JSON contract observed."
+        },
+        {
+          "id": "catalog.pagination",
+          "title": "검색·카테고리 페이지네이션과 종료 조건",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No first-page business JSON response or next-page contract observed."
+        },
+        {
+          "id": "catalog.offer",
+          "title": "가격·통화·가용성 필드를 구분해 검증",
+          "priority": "required",
+          "applicability": "applicable",
+          "requirement": "live",
+          "status": "unimplemented",
+          "gatePassed": false,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "blocker": "No product-offer response schema observed; list, coupon and current prices cannot be mapped safely."
+        },
+        {
+          "id": "auth.login",
+          "title": "고객 계정 로그인",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The user requested anonymous public reads with no login."
+        },
+        {
+          "id": "profile.edit",
+          "title": "고객 프로필 편집",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "Customer account changes are outside the requested anonymous public-read scope."
+        },
+        {
+          "id": "content.crud",
+          "title": "상품·콘텐츠 등록·수정·삭제",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The requested mall integration is read-only; no seller or content writes were authorized."
+        },
+        {
+          "id": "checkout.write",
+          "title": "장바구니·주문·결제 변경",
+          "priority": "optional",
+          "applicability": "not_applicable",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "gatePassed": true,
+          "code": {
+            "state": "missing",
+            "details": [],
+            "note": "Static file, symbol, token and syntax inventory only. Test execution is reported separately."
+          },
+          "test": "failed",
+          "evidence": {
+            "reports": [],
+            "source": []
+          },
+          "applicabilityReason": "The user requested public product reads only; customer writes and checkout are outside scope."
+        }
+      ],
+      "summary": {
+        "total": 9,
+        "recordedLive": 0,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "catalog.search",
+          "catalog.detail",
+          "catalog.category",
+          "catalog.pagination",
+          "catalog.offer"
+        ],
+        "strictPassed": false
+      }
+    }
+  ]
+}

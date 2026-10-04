@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "service": "aliexpress",
+  "description": "익명 공개 상품 카탈로그의 XHR 기반 직접 HTTP 조회. 검색·가격·분류·페이지네이션은 별도 XHR 계약이 확인될 때까지 필수 미완료로 둔다.",
+  "capabilities": [
+    {
+      "id": "catalog.product_seo",
+      "title": "공개 상품 SEO 제목·설명 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/aliexpress.mjs",
+            "exports": [
+              "createAliExpressPublicClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "aliexpress",
+              "product-seo"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://ko.aliexpress.com",
+          "path": "/aeglodetailweb/api/seo/seodata",
+          "files": [
+            "verification/retail-aliexpress-product-seo-cli-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/retail/aliexpress.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs",
+            "lib/scoped-session.mjs",
+            "package-lock.json",
+            "verification/retail-aliexpress-product-seo-cli-result-2026-10-05.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "상품 ID만으로 조회 가능하다. 화면 XHR의 공개 제목 subject는 독립 HTTP 재생에서 생략 가능함을 확인했다. 가격·재고는 포함하지 않는다."
+    },
+    {
+      "id": "catalog.search",
+      "title": "키워드 검색 상품 목록 XHR 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "2026-10-05 익명 검색 페이지는 렌더링됐지만 결과 목록 XHR은 관찰되지 않았다. 문서 렌더링을 XHR로 간주할 수 없다."
+    },
+    {
+      "id": "catalog.offer_price",
+      "title": "상품 가격·통화·재고 XHR 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "상품 화면의 표시 가격은 보였으나 가격·통화·재고를 반환하는 독립 공개 XHR 계약은 확인되지 않았다."
+    },
+    {
+      "id": "catalog.categories",
+      "title": "카테고리 목록·상품 분류 XHR 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "관찰한 익명 화면에서 분류 데이터 XHR 계약을 확인하지 못했다."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "검색·분류 결과 페이지네이션 XHR 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "검색·분류의 다음 페이지 XHR과 종료 조건을 관찰하지 못했다."
+    },
+    {
+      "id": "auth.login",
+      "title": "계정 로그인",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "사용자가 로그인 없이 공개 상품 조회만 요청한 현재 작업 범위다. 서비스의 로그인 가능 여부 판단이 아니다.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "profile.write",
+      "title": "프로필 편집",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "사용자 범위가 비로그인 공개 상품 조회이며 계정 변경은 요청하지 않았다.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "cart.checkout",
+      "title": "장바구니·구매·주문 변경",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "사용자가 공개 상품 조회만 요청했고 구매나 계정 쓰기는 범위에 포함하지 않았다.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.workflow",
+      "title": "제휴 링크 생성·게시",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "사용자는 공개 상품 조회를 요청했으며 제휴 계정이나 제휴 링크 생성은 요청하지 않았다.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "service": "amazon",
+  "observedAt": "2026-10-05",
+  "scope": "Anonymous Amazon.com public product discovery; no account, checkout, cart, profile, or affiliate credential",
+  "secretsPersisted": false,
+  "contracts": [
+    {
+      "method": "GET",
+      "origin": "https://data.amazon.com",
+      "path": "/api/marketplaces/ATVPDKIKX0DER/products/B005EJH6Z4",
+      "queryFields": [],
+      "browserObserved": true,
+      "browserResponse": {
+        "httpStatus": 200,
+        "mime": "application/vnd.com.amazon.api+json",
+        "responseBytes": 4969,
+        "sha256": "f84554ed213d76ff59d0fdb6d047afa769b0a07cbdd9e14663c434a6cb81b3cf",
+        "topLevelKeys": ["entity", "resource", "type"]
+      },
+      "requestAccept": "not captured in first browser observation",
+      "anonymousDirectReplay": {
+        "httpStatus": 415,
+        "mime": "application/vnd.com.amazon.api+json",
+        "responseType": "error/v1",
+        "responseBytes": 938,
+        "sha256": "e4843093aac6200279138e237d11aac83b92af438e6f4447c260fd591b346372",
+        "exactAcceptMatched": false,
+        "interpretation": "The first failed boundary is content negotiation or another unspecified request requirement. The browser's exact Accept value was not captured, and later challenge pages did not issue this XHR. This is not a verified anonymous API operation."
+      }
+    }
+  ],
+  "otherObservedXhr": [
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/hz/rhf",
+      "queryFields": ["cardJSPresent", "currentPageType", "currentSubPageType"],
+      "browserResponse": {"httpStatus": 200, "mime": "application/json", "keys": ["html", "success"], "success": true, "productLinksInHtml": 0, "priceMarkersInHtml": 0},
+      "anonymousDirectReplay": {"httpStatusObserved": [200, 503], "mime": "text/html", "applicationSchemaVerified": false, "challengeOrErrorHtml": true},
+      "classification": "empty recently viewed fragment; no verified product feed"
+    },
+    {
+      "method": "POST",
+      "origin": "https://www.amazon.com",
+      "path": "/dram/renderLazyLoadedStreaming",
+      "queryFields": ["rshVal"],
+      "requestMime": "application/json",
+      "requestShape": "array of 10 objects with encryptedLazyLoadRenderRequest and version",
+      "requestInputSource": "fresh server-issued anonymous browser page data; origin of opaque input for an engine-free runner remains unverified",
+      "browserResponse": {"httpStatus": 200, "mime": "application/json-amazonui-streaming", "bytes": 723832},
+      "anonymousDirectReplay": {"httpStatus": 200, "mime": "application/json-amazonui-streaming", "sameResponseLength": true, "responseSha256Matches": false, "browserCookiesCopied": false},
+      "responseShape": "10 newline-delimited JSON frames separated by three-byte delimiters; each frame is [marker,{cards:[{content:HTML}]}]",
+      "firstCardContentDom": {"asinNodes": 0, "productPaths": 0, "priceClassNodes": 0, "anchors": 5, "images": 4},
+      "classification": "homepage UI cards, not a verified product listing or price operation"
+    }
+  ],
+  "documentObservations": {
+    "search": {"origin": "https://www.amazon.com", "path": "/s", "queryFields": ["k"], "httpStatus": 200, "productLinkCount": 66, "transport": "document HTML, not XHR"},
+    "detail": {"pathPattern": "/.../dp/{ASIN}/...", "oneHttp200ProductPageObserved": true, "laterContinueShoppingGateObserved": true, "transport": "document HTML; auxiliary JSON above was observed only once"}
+  },
+  "officialApi": {
+    "creatorsApi": "https://affiliate-program.amazon.com/creatorsapi/docs/",
+    "creatorPrerequisites": "Associates enrollment, qualifying sales, API registration, and generated credentials",
+    "spApiAuth": "https://developer-docs.amazon.com/sp-api/docs/connecting-to-the-selling-partner-api",
+    "notIncludedInAnonymousScope": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://ir.ebaystatic.com/cr/v/c01/ac-092526175238.dweb.min.js",
+    "sourceSha256": "d3235b522288e3f3defdfe61cdb41670b8025d3737fc58cc8e3e8dbedef4e94b",
+    "sourceObservation": "The eBay-served autocomplete bundle identifies autosug.ebay.com and constructs an XMLHttpRequest to /autosug with kwd and sId. The returned rich suggestion/category schema was independently replayed without credentials. The captured search-page typing did not trigger this XHR.",
+    "currentPageXHRTriggered": false
+  },
+  "result": {
+    "queryMatched": true,
+    "suggestionCount": 10,
+    "categoryHintCount": 2
+  },
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ebay",
+  "capabilityId": "suggestions.read",
+  "checkedAt": "2026-10-04T19:33:10.518Z",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "request": {
+    "method": "GET",
+    "origin": "https://autosug.ebay.com",
+    "path": "/autosug",
+    "queryFields": [
+      "kwd",
+      "sId",
+      "_richres",
+      "callback"
+    ],
+    "browserUsed": false,
+    "anonymous": true,
+    "checkedAt": "2026-10-04T19:33:10.518Z",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 808,
+    "suggestionCount": 10,
+    "categoryHintCount": 2
+  },
+  "implementation": {
+    "lib/retail/ebay.mjs": "b948e6fd9fafab85d02e53f098833a3542ba12ce151b21cb535156ed1805eb55",
+    "scripts/retail.mjs": "a9866e046ce651ecf5f7f802bc644d21ff1c34843f3cc9717d65306106d15fbd",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "verification/retail-ebay-suggest-cli-result-2026-10-05.json": "b123589e8234a9399bd9f13cc0e7659653f541af714704a4a0918763f075e0a7"
+  },
+  "runner": {
+    "entrypoint": "scripts/retail.mjs",
+    "arguments": [
+      "ebay",
+      "suggest",
+      "--query=usb cable"
+    ],
+    "exitStatus": 0,
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "nativeResultFile": "verification/retail-ebay-suggest-cli-result-2026-10-05.json",
+    "nativeResultSha256": "b123589e8234a9399bd9f13cc0e7659653f541af714704a4a0918763f075e0a7"
+  }
+}

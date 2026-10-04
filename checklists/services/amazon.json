@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "service": "amazon",
+  "description": "Anonymous public Amazon.com catalog XHR scope. Search/detail documents and observed UI XHRs do not satisfy the required API operations. See references/retail-amazon-contracts.json and verification/retail-amazon-live-2026-10-05.json.",
+  "capabilities": [
+    {
+      "id": "catalog.search",
+      "title": "Search products through a reusable anonymous XHR response",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The observed /s?k=... search results were document HTML; no search result data XHR was captured."
+    },
+    {
+      "id": "catalog.product",
+      "title": "Read a product's title, image and canonical URL from a validated anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
+      "blocker": "A detail-page vendor JSON GET was observed once, but direct replay returned 415. Its exact Accept header was not captured; later detail visits reached Continue shopping."
+    },
+    {
+      "id": "catalog.categories",
+      "title": "List or filter product categories through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No category data XHR was observed in the bounded anonymous journey."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Page through result data with a verified continuation contract",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No result pagination data XHR or termination contract was observed."
+    },
+    {
+      "id": "catalog.price_availability",
+      "title": "Distinguish current/list price, coupon, currency and stock from product data",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The product entity was not independently replayed, so no price or availability semantics are verified."
+    },
+    {
+      "id": "home.dynamic_cards",
+      "title": "Read homepage card fragments from anonymous XHR when useful",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The streaming XHR replayed but its 10 encrypted inputs came from the browser page; their engine-free acquisition is unverified, and sampled cards contained no product paths or price nodes."
+    },
+    {
+      "id": "auth.login",
+      "title": "Acquire a personal Amazon login",
+      "priority": "required",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested anonymous public reads without login.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "profile.read_edit",
+      "title": "Read or edit an Amazon account profile",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Personal account/profile operations are outside this anonymous public-read scope.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "cart.write",
+      "title": "Change a cart or address",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Cart and address writes are outside the requested read-only scope.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "orders.write",
+      "title": "Place an order or send a message",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Ordering and messaging are outside the requested read-only scope.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.private_api",
+      "title": "Use the credentialed Associates Creators API",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Creators API requires Associates eligibility and API credentials; this request is limited to anonymous public XHR.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

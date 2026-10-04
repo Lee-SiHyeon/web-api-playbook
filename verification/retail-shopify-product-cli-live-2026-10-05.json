@@ -1,0 +1,83 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify",
+  "capabilityId": "catalog.product_detail",
+  "checkedAt": "2026-10-04T19:33:10.520Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "productHandleMatched": true,
+  "variantCount": 13,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://shopify.dev/docs/api/ajax/reference/product"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+    "checkedAt": "2026-10-04T19:33:10.520Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 12210,
+    "responseSha256": "4c38d6cf703971b5ec609f4abf9abadf84129f89d5aac1364097a190bf6ed46c",
+    "schemaVerified": true,
+    "productHandleMatched": true,
+    "currency": "USD",
+    "priceMinorUnitExponent": 2,
+    "priceField": "USD minor units"
+  },
+  "currencyRequest": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/cart.js",
+    "checkedAt": "2026-10-04T19:33:10.829Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 303,
+    "responseSha256": "89b379363abf436d26958c05272e291db0d644dfe9827e1892e4ba7e3441e9a6",
+    "currency": "USD",
+    "itemCount": 0
+  },
+  "result": {
+    "handle": "mens-runner-nz-slip-on-mushroom",
+    "variantCount": 13,
+    "price": {
+      "amount": "105.00",
+      "amountInApiUnits": 10500,
+      "currency": "USD",
+      "minorUnitExponent": 2
+    },
+    "canonicalUrl": "https://www.allbirds.com/products/mens-runner-nz-slip-on-mushroom"
+  },
+  "implementation": {
+    "lib/retail/shopify.mjs": "c20ab94145b15a6a1e19e8f18ff0fe8776e951ad62c282bc52e06e7ff2e224f1",
+    "scripts/retail.mjs": "a9866e046ce651ecf5f7f802bc644d21ff1c34843f3cc9717d65306106d15fbd",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "verification/retail-shopify-product-cli-result-2026-10-05.json": "ef701cad2db46c654f70af234883e50d4d61a980deee1d5a4326458829104b92"
+  },
+  "runner": {
+    "entrypoint": "scripts/retail.mjs",
+    "arguments": [
+      "shopify",
+      "product",
+      "--handle=mens-runner-nz-slip-on-mushroom"
+    ],
+    "exitStatus": 0,
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "nativeResultFile": "verification/retail-shopify-product-cli-result-2026-10-05.json",
+    "nativeResultSha256": "ef701cad2db46c654f70af234883e50d4d61a980deee1d5a4326458829104b92"
+  }
+}

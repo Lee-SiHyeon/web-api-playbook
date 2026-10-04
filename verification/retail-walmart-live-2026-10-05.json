@@ -1,0 +1,71 @@
+{
+  "schema": "retail-public-live-attempt-v1",
+  "service": "walmart",
+  "checkedAt": "2026-10-04T19:05:11.767785Z",
+  "secretsPersistedInEvidence": false,
+  "accountUsed": false,
+  "cookiesSeeded": false,
+  "browserUsedForDiscoveryOnly": true,
+  "browserObservation": {
+    "searchDocumentStatus": 200,
+    "searchFinalOrigin": "https://www.walmart.com",
+    "searchFinalPath": "/blocked",
+    "searchFinalTitle": "Robot or human?",
+    "businessXHRSuccessCount": 0,
+    "otherObservedXHR": {
+      "telemetryProxytownResponses": 86,
+      "locationGraphqlStatus": 412
+    },
+    "responseCollectionCap": 100,
+    "note": "The bounded collector reached its 100-response cap during telemetry. Search document outcome was separately observed from the browser navigation and screenshot; no product JSON schema was captured."
+  },
+  "anonymousHttpDocumentProbe": {
+    "method": "HEAD",
+    "requestedPath": "/search",
+    "finalPath": "/blocked",
+    "finalHttpStatus": 200,
+    "finalMime": "text/html",
+    "isProductApiReplay": false
+  },
+  "operations": {
+    "productSearch": {
+      "captured": false,
+      "client_exists": false,
+      "remnant_free": "not_applicable",
+      "credential_propagated": "not_applicable",
+      "live_replay": false
+    },
+    "productDetail": {
+      "captured": false,
+      "client_exists": false,
+      "remnant_free": "not_applicable",
+      "credential_propagated": "not_applicable",
+      "live_replay": false
+    },
+    "categories": {
+      "captured": false,
+      "client_exists": false,
+      "remnant_free": "not_applicable",
+      "credential_propagated": "not_applicable",
+      "live_replay": false
+    },
+    "pagination": {
+      "captured": false,
+      "client_exists": false,
+      "remnant_free": "not_applicable",
+      "credential_propagated": "not_applicable",
+      "live_replay": false
+    },
+    "offerFields": {
+      "captured": false,
+      "client_exists": false,
+      "remnant_free": "not_applicable",
+      "credential_propagated": "not_applicable",
+      "live_replay": false
+    }
+  },
+  "firstBlocker": "Walmart challenged the anonymous search document; no supported anonymous product XHR contract was observed.",
+  "discoveryArtifact": "/home/worker/inpock-api/retail-discovery/walmart/anonymous-browser-observation.json",
+  "screenshot": "/home/worker/artifacts/retail-api-20261005/walmart-blocked.png",
+  "portableScreenshot": "verification/retail-blockers/walmart.png"
+}

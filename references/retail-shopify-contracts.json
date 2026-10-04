@@ -1,0 +1,215 @@
+{
+  "schema": "retail-public-xhr-contracts-v1",
+  "service": "shopify",
+  "observedAt": "2026-10-04T19:33:48.028Z",
+  "scope": "One concrete merchant storefront, Allbirds default root-path anonymous US context. This is not a Shopify-wide multi-store catalog API or affiliate-link service.",
+  "officialDocumentation": [
+    {
+      "purpose": "Product Ajax API, response schema, presentment-currency behavior, and cart.js currency lookup",
+      "url": "https://shopify.dev/docs/api/ajax/reference/product"
+    },
+    {
+      "purpose": "Ajax API unauthenticated scope, JSON-formatted responses, and GET cart.js behavior",
+      "url": "https://shopify.dev/docs/api/ajax"
+    },
+    {
+      "purpose": "Predictive product-search route, query fields, result shape, ten-item limit, and limitations",
+      "url": "https://shopify.dev/docs/api/ajax/reference/predictive-search"
+    }
+  ],
+  "storeDiscovery": {
+    "origin": "https://www.allbirds.com",
+    "page": {
+      "path": "/collections/all-products-1",
+      "httpStatus": 200,
+      "use": "Rendered collection was used only to find an exact public product handle."
+    },
+    "selectedProduct": {
+      "handle": "mens-runner-nz-slip-on-mushroom",
+      "canonicalUrl": "https://www.allbirds.com/products/mens-runner-nz-slip-on-mushroom",
+      "productId": 7205207343184,
+      "titleSha256": "fb3b51ffa8aa858bff21bd89f88eb2ad8c61750680e1d0966de46faab61c29a5"
+    },
+    "browserProbe": {
+      "runner": "Playwright Chromium, fresh anonymous context",
+      "requestMode": "Explicit page.fetch call to the documented path; this was not a site-initiated XHR capture.",
+      "method": "GET",
+      "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+      "httpStatus": 200,
+      "mime": "text/javascript",
+      "responseBytes": 12210,
+      "requestCookiesSent": false,
+      "authorizationSent": false,
+      "returnedHandleMatched": true,
+      "variantCount": 13
+    }
+  },
+  "contracts": [
+    {
+      "operation": "productDetail",
+      "evidenceLevel": "first_party_documented_api_and_independent_anonymous_node_http_replay",
+      "method": "GET",
+      "origin": "https://www.allbirds.com",
+      "path": "/products/{product-handle}.js",
+      "samplePath": "/products/mens-runner-nz-slip-on-mushroom.js",
+      "queryFields": [],
+      "requestHeaders": {
+        "accept": "application/json"
+      },
+      "requestCredentials": "omit",
+      "redirects": "manual; non-200 and redirect responses are rejected",
+      "actualResponse": {
+        "status": 200,
+        "mime": "text/javascript",
+        "bodyFormat": "JSON",
+        "responseBytes": 12210,
+        "responseSha256": "4c38d6cf703971b5ec609f4abf9abadf84129f89d5aac1364097a190bf6ed46c",
+        "handleMatchesRequestedHandle": true,
+        "productId": 7205207343184,
+        "titleSha256": "fb3b51ffa8aa858bff21bd89f88eb2ad8c61750680e1d0966de46faab61c29a5",
+        "canonicalPath": "/products/mens-runner-nz-slip-on-mushroom",
+        "available": true,
+        "variantCount": 13,
+        "variantAvailability": {
+          "available": 11,
+          "unavailable": 2
+        }
+      },
+      "schema": {
+        "requiredProductFields": [
+          "id",
+          "handle",
+          "title",
+          "vendor",
+          "type",
+          "url",
+          "available",
+          "price",
+          "price_min",
+          "price_max",
+          "variants"
+        ],
+        "requiredVariantFields": [
+          "id",
+          "title",
+          "price",
+          "available",
+          "option1",
+          "option2",
+          "option3"
+        ],
+        "variantLimit": 250,
+        "canonicalUrlRule": "Returned product.url must equal /products/{requested-handle}; caller builds the URL on the fixed https://www.allbirds.com origin."
+      },
+      "priceAndCurrency": {
+        "productApiPrice": 10500,
+        "currencySource": {
+          "method": "GET",
+          "origin": "https://www.allbirds.com",
+          "path": "/cart.js",
+          "status": 200,
+          "mime": "text/javascript",
+          "responseBytes": 303,
+          "responseSha256": "5ee588cca2adff995e1b6853fe9b4d990cd28152ec934937f02a4f9c1db6e956",
+          "currency": "USD",
+          "itemCount": 0,
+          "requestCookiesSent": false
+        },
+        "independentDisplayCrossCheck": {
+          "publicProductPage": "https://www.allbirds.com/products/mens-runner-nz-slip-on-mushroom",
+          "observedPrice": "$105",
+          "conversion": "10500 USD minor units -> 105.00 USD",
+          "minorUnitExponent": 2
+        },
+        "scope": "This adapter accepts only the verified default USD context. Other currencies and locale-aware market paths are rejected or left unimplemented; no zero-decimal currency rule is inferred."
+      },
+      "semantics": "Public product detail with title, canonical URL, USD amount, aggregate availability, and variant availability. It does not provide affiliate links, discounts/coupons, or collection membership.",
+      "independentReplay": {
+        "runner": "Node 24 direct HTTP client",
+        "browserUsedForRequest": false,
+        "productCookieSent": false,
+        "currencyCookieSent": false,
+        "authorizationSent": false,
+        "requests": [
+          {
+            "method": "GET",
+            "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+            "status": 200,
+            "mime": "text/javascript"
+          },
+          {
+            "method": "GET",
+            "path": "/cart.js",
+            "status": 200,
+            "mime": "text/javascript"
+          }
+        ],
+        "cartContentsPersisted": false
+      }
+    },
+    {
+      "operation": "predictiveProductSearch",
+      "evidenceLevel": "first_party_documented_api_and_independent_anonymous_node_http_replay",
+      "method": "GET",
+      "origin": "https://www.allbirds.com",
+      "path": "/search/suggest.json",
+      "query": [
+        {
+          "name": "q",
+          "sampleValue": "runner"
+        },
+        {
+          "name": "resources[type]",
+          "sampleValue": "product"
+        },
+        {
+          "name": "resources[limit]",
+          "sampleValue": "5",
+          "documentedRange": "1-10"
+        },
+        {
+          "name": "resources[options][unavailable_products]",
+          "sampleValue": "hide"
+        }
+      ],
+      "requestCredentials": "omit",
+      "actualResponse": {
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 9565,
+        "responseSha256": "4ed59a5a8ba66e071241e9b807bf76beeeda7e4cd287dfc603caa627b74fe825",
+        "schema": "resources.results.products[]",
+        "sampleResultCount": 5,
+        "canonicalUrlRule": "Each result URL must stay on https://www.allbirds.com and have /products/{same-handle}; search/tracking query and fragment are removed."
+      },
+      "productFields": [
+        "id",
+        "handle",
+        "title",
+        "vendor",
+        "type",
+        "url",
+        "available",
+        "price",
+        "price_min",
+        "price_max"
+      ],
+      "priceAndCurrency": {
+        "searchPriceFormat": "USD decimal strings such as 100.00",
+        "currencySource": "GET /cart.js returned USD in the same anonymous default storefront context.",
+        "minorUnitExponent": 2
+      },
+      "semantics": "Predictive product suggestions only. The documented maximum is 10 suggestions per requested resource type. This does not establish full storefront result search, category traversal, or pagination.",
+      "independentReplay": {
+        "runner": "Node 24 direct HTTP client",
+        "browserUsedForRequest": false,
+        "searchCookieSent": false,
+        "currencyCookieSent": false,
+        "authorizationSent": false,
+        "status": 200,
+        "resultCount": 5
+      }
+    }
+  ],
+  "secretsPersistedInEvidence": false
+}

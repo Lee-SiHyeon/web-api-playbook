@@ -50,3 +50,9 @@ node scripts/checklist.mjs --service=inpock --run-tests --strict
 쓰기 영수증은 `http-write-v1` 검증기와 함께 manifest에 정확한 API `origin`, `writeSent:true`, `postAttempts:1`, 서로 다른 `beforeHash`·`afterHash`(두 상태의 SHA-256), `writeReceipt`의 실제 method/path/2xx status/`application/json` MIME/시각, `readback`의 독립 GET method/path/200 status/`application/json` MIME/시각, `ownerMatched:true`, `fieldsMatched:true`, `stateChanged:true`, 빈 배열이 아닌 `matchedFields`를 기록한다. 실제 저장 응답 코드가 알려진 서비스만 manifest에 `acceptedStatuses:[200,201]`처럼 지정한다. 생략하면 모든 2xx를 허용한다. `implementation`에는 manifest의 `hashPaths`에 기재한 파일 해시를 넣는다. 실제 서비스 요청 전에 원본과 대상 계정, 읽기 전·후 상태를 확인하고 비밀을 기록하지 않는다. 영수증은 감사 가능한 기록일 뿐, 오프라인 검사만으로 현재 원격 상태를 새로 증명할 수는 없다.
 
 소스 후보만 있는 새 서비스는 `sourceEvidence`에 `schema:"web-api-source-candidate-v1"`, `classification:"source_candidate"`, `contracts:[{method,path,...}]`를 담은 JSON 파일을 연결할 수 있다. 소스 후보는 필수 기능 통과에 쓰이지 않는다.
+
+비로그인 공개 조회는 별도 `http-public-read-v1` 검증기와 `web-api-public-read-receipt-v1` 영수증을 쓴다. `anonymous:true`, `credentialsUsed:false`, `secretsPersistedInEvidence:false`, `schemaVerified:true`, `expectedResultVerified:true`와 정확한 method/origin/path, HTTP 200, MIME, 응답 바이트 수, 시각, `browserUsed:false`를 기록한다. 기본 MIME은 `application/json`이다. 관찰한 HTML 조각이나 스트리밍 응답은 manifest에 정확한 `mime`을 지정하고 비즈니스 데이터를 검증해야 한다. 조회용 POST는 `method:"POST",readOnly:true`가 필요하다.
+
+같은 기능에 통화 등 보조 조회가 꼭 필요하면 evidence 항목의 `companionReads`에 `{key:"currencyRequest",origin,path,mime}`처럼 선언한다. 검증기는 영수증의 해당 조회도 독립적으로 검사한다. Shopify 상품 Ajax의 JSON 본문은 `text/javascript` MIME으로 관찰됐으므로 실제 MIME을 그대로 지정한다.
+
+`contractProvenance`는 실제 UI XHR인 `browser_xhr_observed`, 공식 API 문서인 `first_party_documented_api`, 배포된 자사 JS에서 확인한 `first_party_bundle_contract`를 구별하고 `sourceURL`을 연결한다. JS 계약에는 `sourceSha256`도 필요하다. SSR 상품 문서, 텔레메트리, 후보 엔드포인트, MIME/상태만 맞는 응답은 공개 상품 API 실증으로 기록하지 않는다. 체크리스트 자체는 오프라인 필드·해시 검사이므로 원 출처와 실제 실행은 리뷰와 독립 재생으로 확인한다.

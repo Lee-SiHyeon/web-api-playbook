@@ -1,0 +1,71 @@
+{
+  "schema": "retail-public-contract-inventory-v1",
+  "service": "walmart",
+  "checkedAt": "2026-10-04T19:05:11.767785Z",
+  "scope": "Anonymous, read-only storefront product search, detail, categories, pagination, links, and offer fields",
+  "classification": "blocked_no_observed_product_xhr_contract",
+  "observed": [
+    {
+      "source": "fresh_anonymous_chromium",
+      "method": "GET",
+      "origin": "https://www.walmart.com",
+      "path": "/search",
+      "queryFields": ["q"],
+      "finalPath": "/blocked",
+      "finalMime": "text/html",
+      "finalTitle": "Robot or human?",
+      "classification": "challenge_document_not_product_api"
+    },
+    {
+      "source": "fresh_anonymous_chromium",
+      "method": "GET",
+      "origin": "https://www.walmart.com",
+      "path": "/orchestra/home/graphql/Location/:operation_hash",
+      "httpStatus": 412,
+      "mime": "application/json",
+      "classification": "observed_non_product_read_failure_not_replayed"
+    },
+    {
+      "source": "fresh_anonymous_chromium",
+      "method": "POST",
+      "origin": "https://www.walmart.com",
+      "path": "/~partytown/proxytown",
+      "observedResponses": 86,
+      "mime": "application/json",
+      "classification": "browser_telemetry_not_product_contract"
+    }
+  ],
+  "notObserved": [
+    "anonymous_product_search_json_success",
+    "anonymous_product_detail_json_success",
+    "category_json_success",
+    "pagination_contract",
+    "offer_price_and_currency_schema",
+    "availability_schema"
+  ],
+  "documentedAlternatives": [
+    {
+      "name": "Walmart Marketplace item search",
+      "method": "GET",
+      "origin": "https://marketplace.walmartapis.com",
+      "path": "/v3/items/walmart/search",
+      "access": "requires Marketplace onboarding and WM_SEC.ACCESS_TOKEN",
+      "scopeFit": "seller item-setup catalog; cannot satisfy anonymous storefront request",
+      "documentation": "https://developer.walmart.com/us-marketplace/reference/getsearchresult"
+    },
+    {
+      "name": "Walmart I/O Affiliate Product Catalog Snapshot",
+      "access": "approved affiliate credentials and program-specific permitted use",
+      "scopeFit": "conditional partner option; not anonymous storefront XHR",
+      "documentation": "https://www.walmart.io/docs/opd/recipe-register/catalog-product-snapshot"
+    }
+  ],
+  "accessRules": {
+    "robotsTxt": "https://www.walmart.com/robots.txt",
+    "robotsDisallowExamples": ["/search", "/api/", "/search/api/wpa", "/store/ajax/search", "/typeahead/"],
+    "terms": "https://www.walmart.com/help/article/walmart-com-terms-of-use/3b75080af40340d6bbd596f116fae5a0",
+    "note": "Walmart terms restrict automated retrieval and collection of product listings/prices without prior written consent. No challenge bypass or private storefront API replay was attempted."
+  },
+  "selectedProductContracts": [],
+  "firstBlocker": "Anonymous search returned a challenge document before a usable product XHR contract could be captured."
+}

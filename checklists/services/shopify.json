@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "service": "shopify",
+  "description": "Anonymous Ajax reads proved for the Allbirds default storefront only. Shopify Ajax is a storefront API surface, not a multi-store mall or an affiliate-link provider. Predictive suggestions are not full catalog search or pagination.",
+  "capabilities": [
+    {
+      "id": "catalog.product_detail",
+      "title": "Read a public product, USD price, availability, variants, and canonical URL",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/shopify.mjs",
+            "exports": [
+              "createAllbirdsPublicClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "shopify",
+              "product"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-shopify.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.allbirds.com",
+          "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/retail-shopify-product-cli-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/retail/shopify.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs",
+            "verification/retail-shopify-product-cli-result-2026-10-05.json"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://www.allbirds.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Pinned to the observed default Allbirds storefront context. Product JSON price fields are returned in the presentment currency; /cart.js independently reports USD. The observed product API value 10500 maps to the public $105 display, so this client converts USD minor units with exponent 2 and rejects other currencies/locales."
+    },
+    {
+      "id": "catalog.predictive_search",
+      "title": "Get bounded product suggestions for a keyword",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/shopify.mjs",
+            "exports": [
+              "createAllbirdsPublicClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "shopify",
+              "predictive-search"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-shopify.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.allbirds.com",
+          "path": "/search/suggest.json",
+          "mime": "application/json",
+          "files": [
+            "verification/retail-shopify-predictive-search-cli-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/retail/shopify.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs",
+            "verification/retail-shopify-predictive-search-cli-result-2026-10-05.json"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://www.allbirds.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "This is Shopify predictive search limited to product suggestions (up to the documented limit of 10), not full result search, collections, or pagination. Search result tracking query values are stripped from returned canonical product URLs."
+    },
+    {
+      "id": "catalog.full_search",
+      "title": "Read complete keyword result pages and continuation state",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The verified route is predictive search with a maximum of 10 suggestions per type; full result ranking, page navigation, and termination were not established."
+    },
+    {
+      "id": "catalog.collections",
+      "title": "Read collections/categories and their product membership",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The product and predictive-search routes do not prove a collection listing or membership contract."
+    },
+    {
+      "id": "storefront.localization",
+      "title": "Select locale and presentment currency across markets",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Only the default root-path anonymous US storefront context was replayed. Locale-aware paths and non-USD minor-unit behavior remain unverified."
+    },
+    {
+      "id": "auth.login",
+      "title": "Customer account login",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested public reads without login.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "profile.edit",
+      "title": "Edit a customer account profile",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Account operations are outside the requested anonymous public-read scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "cart.checkout",
+      "title": "Change a cart, checkout, or order",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested read-only product data; cart, checkout, and order changes are outside scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.create",
+      "title": "Generate a publisher affiliate link",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This capability reads one merchant storefront; publisher affiliate-link generation is outside the requested anonymous product-read scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

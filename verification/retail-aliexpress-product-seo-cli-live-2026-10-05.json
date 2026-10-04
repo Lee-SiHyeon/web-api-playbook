@@ -1,0 +1,59 @@
+{
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://ko.aliexpress.com/item/1005011947482958.html"
+  },
+  "productIdMatched": true,
+  "result": {
+    "publicProductId": "1005011947482958",
+    "titleSha256": "7f1972f7fe4d2a2af58ba8d493eac1048850e415e3eba8a0c33f5a620db6f8fe",
+    "canonicalUrl": "https://ko.aliexpress.com/item/1005011947482958.html",
+    "price": null,
+    "currency": null
+  },
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "aliexpress",
+  "capabilityId": "catalog.product_seo",
+  "checkedAt": "2026-10-04T19:33:10.540Z",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "request": {
+    "method": "GET",
+    "origin": "https://ko.aliexpress.com",
+    "path": "/aeglodetailweb/api/seo/seodata",
+    "checkedAt": "2026-10-04T19:33:10.540Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 6338,
+    "schemaVerified": true,
+    "productIdMatched": true
+  },
+  "implementation": {
+    "lib/retail/aliexpress.mjs": "2bf83ac31cded20fafb1877b479cd685407af6b16145fd5c342fda239d1349f1",
+    "scripts/retail.mjs": "a9866e046ce651ecf5f7f802bc644d21ff1c34843f3cc9717d65306106d15fbd",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "lib/scoped-session.mjs": "b63014bd3bc88221aa108248c4f3d538216b2ca330b774c8d423db423f3d2dda",
+    "package-lock.json": "5ce5b94ddbeca47d288e2f90dc51874e6f644e5c0d2a9870db76c515fb4bf092",
+    "verification/retail-aliexpress-product-seo-cli-result-2026-10-05.json": "b17e876b35f809079f70b14c61d55ed5abe4fc8261e0832677874fe7b4c79e53"
+  },
+  "runner": {
+    "entrypoint": "scripts/retail.mjs",
+    "arguments": [
+      "aliexpress",
+      "product-seo",
+      "--product-id=1005011947482958"
+    ],
+    "exitStatus": 0,
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "nativeResultFile": "verification/retail-aliexpress-product-seo-cli-result-2026-10-05.json",
+    "nativeResultSha256": "b17e876b35f809079f70b14c61d55ed5abe4fc8261e0832677874fe7b4c79e53"
+  }
+}

@@ -14,6 +14,7 @@
 | [공통 도구](references/runtime-modules.md) | origin별 HTTP 세션, 쿠키 회전, DPAPI, 잠금, 쓰기 저널 |
 | [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice·[Inpock](references/inpock-login.md) 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
 | [쇼핑·여행커넥트](references/naver-connect.md) | 네이버 브랜드커넥트 상품 검색·상세·수수료·링크 발급 및 관리, DPAPI 세션 재사용 |
+| [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
@@ -81,6 +82,17 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 `--output`은 **새 파일만** 받습니다. 같은 명령을 다시 실행할 때 `frontier-002.json`처럼 다른 이름을 쓰세요. 상세 옵션과 상태 전이는 [도구 안내](references/discovery-tools.md)에 있습니다.
 
 ## 3. 기존 서비스를 사용할 때
+
+### 해외 쇼핑몰 비로그인 조회
+
+```bash
+npm run retail -- aliexpress product-seo --product-id=1005011947482958
+npm run retail -- ebay suggest --query="usb cable"
+npm run retail -- shopify predictive-search --query=runner --limit=5
+npm run retail -- status
+```
+
+지원 명령은 브라우저 없이 HTTP로 실행한다. 검색 제안, SEO 정보, 가격·재고, 상품 목록을 별도 기능으로 구분하며 [현재 지원 범위와 차단 지점](references/retail-public-apis.md)을 확인한다. 새 서비스의 기능은 자동 [체크리스트](checklists/README.md)에 포함한다.
 
 ### 웹 로그인·세션 자동 복구
 

@@ -1,0 +1,106 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify",
+  "capabilityId": "catalog.predictive_search",
+  "checkedAt": "2026-10-04T19:33:47.594Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "queryAccepted": true,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://shopify.dev/docs/api/ajax/reference/predictive-search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/search/suggest.json",
+    "checkedAt": "2026-10-04T19:33:47.594Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "queryFields": [
+      "q",
+      "resources[type]",
+      "resources[limit]",
+      "resources[options][unavailable_products]"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 9565,
+    "responseSha256": "4ed59a5a8ba66e071241e9b807bf76beeeda7e4cd287dfc603caa627b74fe825",
+    "schemaVerified": true,
+    "resultArrayVerified": true,
+    "productCount": 5
+  },
+  "currencyRequest": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/cart.js",
+    "checkedAt": "2026-10-04T19:33:48.028Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 303,
+    "responseSha256": "abd063723f6d771e3678a51d0e1ce940f9bb5df00a1d1ab386fe83fcbabd26fc",
+    "currency": "USD",
+    "itemCount": 0
+  },
+  "result": {
+    "querySample": "runner",
+    "productCount": 5,
+    "allIdsAndHandlesUnique": true,
+    "sampleProducts": [
+      {
+        "id": 4870548062288,
+        "handle": "womens-tree-runners-navy-night",
+        "canonicalUrl": "https://www.allbirds.com/products/womens-tree-runners-navy-night",
+        "titleUtf8Bytes": 45,
+        "titleSha256": "a9752cf4c59fefd51d3396fbf72606f2b3b85adc9cbb651f77c8fc9578ccba1b",
+        "price": {
+          "amount": "100.00",
+          "currency": "USD",
+          "minorUnitExponent": 2
+        },
+        "available": true
+      },
+      {
+        "id": 1878275686469,
+        "handle": "womens-wool-runners-natural-black",
+        "canonicalUrl": "https://www.allbirds.com/products/womens-wool-runners-natural-black",
+        "titleUtf8Bytes": 48,
+        "titleSha256": "53fd97c1a7bad2440f58c852261f27701600a01698f41afd38b61bf0c8efd5f1",
+        "price": {
+          "amount": "110.00",
+          "currency": "USD",
+          "minorUnitExponent": 2
+        },
+        "available": true
+      },
+      {
+        "id": 4826197655632,
+        "handle": "mens-wool-runners-true-black",
+        "canonicalUrl": "https://www.allbirds.com/products/mens-wool-runners-true-black",
+        "titleUtf8Bytes": 43,
+        "titleSha256": "6682cd2a5da97930dcfddf1f3a52b174207e5149426aa88fa34f374e827748d6",
+        "price": {
+          "amount": "110.00",
+          "currency": "USD",
+          "minorUnitExponent": 2
+        },
+        "available": false
+      }
+    ]
+  },
+  "scope": "Predictive product suggestions only; this does not verify complete catalog search or pagination.",
+  "implementation": {
+    "lib/retail/shopify.mjs": "c20ab94145b15a6a1e19e8f18ff0fe8776e951ad62c282bc52e06e7ff2e224f1"
+  }
+}

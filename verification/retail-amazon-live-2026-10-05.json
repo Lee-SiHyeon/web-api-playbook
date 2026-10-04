@@ -1,0 +1,83 @@
+{
+  "schema": "retail-api-verification-v1",
+  "service": "amazon",
+  "checkedAt": "2026-10-05T04:25:21+09:00",
+  "scope": "anonymous public HTTP/XHR only",
+  "secretsPersistedInEvidence": false,
+  "browserCookiesCopiedToReplay": false,
+  "captureEvidence": "/home/worker/inpock-api/retail-discovery/amazon/capture.json",
+  "captureEvidenceSha256": "abeb55ba2478d145b939b3ad4dc643b8f09daa45cc54de1a98a13fe75e6ded21",
+  "businessProbeEvidence": "/home/worker/inpock-api/retail-discovery/amazon/business-probe.json",
+  "businessProbeEvidenceSha256": "4ec8c091eee6277d16e446eea49c09bed8908cb737e95b4274c3ca57692060a9",
+  "challengeScreenshot": "/home/worker/artifacts/retail-api-20261005/amazon-blocked.png",
+  "challengeScreenshotSha256AtCapture": "811d314c188dd14dc2c21b0fac2d3c276f133f69afae96673d0e69dcbf00f938",
+  "states": {
+    "catalog.search": {
+      "captured": false,
+      "client_exists": false,
+      "credential_propagated": "not_applicable",
+      "remnant_free": false,
+      "live_replay": false,
+      "firstFailedBoundary": "search results were a document; no search result data XHR was observed"
+    },
+    "catalog.product": {
+      "captured": true,
+      "client_exists": false,
+      "credential_propagated": "not_applicable",
+      "remnant_free": false,
+      "live_replay": false,
+      "firstFailedBoundary": "browser vendor JSON 200; direct HTTP 415 with browser Accept unknown"
+    },
+    "catalog.categories": {
+      "captured": false,
+      "client_exists": false,
+      "credential_propagated": "not_applicable",
+      "remnant_free": false,
+      "live_replay": false,
+      "firstFailedBoundary": "no category data XHR observed"
+    },
+    "catalog.pagination": {
+      "captured": false,
+      "client_exists": false,
+      "credential_propagated": "not_applicable",
+      "remnant_free": false,
+      "live_replay": false,
+      "firstFailedBoundary": "no pagination data XHR observed"
+    },
+    "catalog.price_availability": {
+      "captured": false,
+      "client_exists": false,
+      "credential_propagated": "not_applicable",
+      "remnant_free": false,
+      "live_replay": false,
+      "firstFailedBoundary": "current/list price, coupon, currency, stock schema not observed and replayed"
+    },
+    "home.dynamic_cards": {
+      "captured": true,
+      "client_exists": false,
+      "credential_propagated": "not_applicable",
+      "remnant_free": false,
+      "live_replay": false,
+      "browserBodyReplay": true,
+      "expectedProductResultVerified": false,
+      "firstFailedBoundary": "opaque server-issued encrypted request input has no verified engine-free preparation; returned cards had no product paths or price nodes"
+    }
+  },
+  "independentHttpApplicationSuccessCount": 0,
+  "http200ButNotAccepted": [
+    "/hz/rhf challenge HTML",
+    "/dram/renderLazyLoadedStreaming homepage UI cards"
+  ],
+  "nextResumePoint": "Capture exact data.amazon.com Accept/media-type and product entity schema on a legitimate detail page, then independently replay without browser cookies; separately trace fresh /dram opaque inputs from an anonymous HTTP source if homepage cards are useful.",
+  "portableScreenshot": "verification/retail-blockers/amazon.png",
+  "boundedFirstPartySourceReview": {
+    "capturedAssetCount": 18,
+    "bytesReadApproximate": 1960000,
+    "cookiesUsed": false,
+    "exactPublicProductAcceptFound": false,
+    "otherAssociateOperationFound": true,
+    "associateHeadersReused": false,
+    "followupRequestSent": false,
+    "conclusion": "The observed associate operation uses different media type and authenticated token inputs; it was not reused for the public product endpoint."
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "schema": "retail-public-xhr-contracts-v1",
+  "service": "aliexpress",
+  "observedAt": "2026-10-04T19:07:08.198Z",
+  "scope": "Anonymous desktop public catalog reads; no account, cart, order, or affiliate mutation",
+  "discovery": {
+    "browser": "Playwright Chromium, anonymous fresh context, discovery only",
+    "pages": [
+      { "kind": "home", "origin": "https://www.aliexpress.com", "status": 200, "redirectedOrigin": "https://ko.aliexpress.com" },
+      { "kind": "search", "origin": "https://www.aliexpress.com", "path": "/w/wholesale-usb-cable.html", "status": 200, "visibleResults": true },
+      { "kind": "item", "origin": "https://ko.aliexpress.com", "path": "/item/1005011947482958.html", "status": 200, "visibleTitle": true, "visiblePrice": true }
+    ],
+    "searchResultXhrObserved": false,
+    "priceXhrObserved": false,
+    "categoryXhrObserved": false,
+    "paginationXhrObserved": false,
+    "notes": "The visible search result and price do not establish an XHR contract. First-party recommendation MTOP POSTs were observed but require a signed request and were not independently replayed."
+  },
+  "contracts": [
+    {
+      "operation": "productSeo",
+      "evidenceLevel": "observed_xhr_and_independent_anonymous_http_replay",
+      "method": "GET",
+      "origin": "https://ko.aliexpress.com",
+      "path": "/aeglodetailweb/api/seo/seodata",
+      "resourceType": "xhr",
+      "query": {
+        "channel": "detail",
+        "device": "pc",
+        "productId": "numeric public item ID",
+        "subject": "public visible listing title in observed browser XHR; optional in verified independent HTTP replay"
+      },
+      "requestHeaders": { "referer": "https://ko.aliexpress.com/item/{productId}.html" },
+      "encoding": "URL query string",
+      "response": {
+        "status": 200,
+        "mime": "application/json",
+        "applicationChecks": ["code=200", "success=true", "body.title nonempty", "body.description string", "body.canonical matches item ID"],
+        "sampleResponseBytes": 6338,
+        "observedResponseSha256": "6d8e8813e7298c0bf42ca1bbd81803b318d64f817c8f851131eaa0ee85cba12f"
+      },
+      "semantics": "SEO metadata only; price, currency, stock, variants, and search result ranking are not part of this response",
+      "independentReplay": {
+        "cookiesSent": false,
+        "browserUsedForRequest": false,
+        "status": 200,
+        "applicationSchemaPassed": true,
+        "withoutSubject": "200 JSON with the same server title and canonical product ID",
+        "withoutReferer": "302 to /p/error/404.html"
+      },
+      "counterexamples": {
+        "sameIdChangedSubject": "200 JSON with the same server product title and canonical URL; the supplied unrelated title was not echoed",
+        "nonexistentNumericId": "200 JSON, 311 bytes, with no product title or matching canonical URL; client schema rejects it"
+      }
+    }
+  ],
+  "secretsPersistedInEvidence": false
+}

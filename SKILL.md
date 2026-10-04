@@ -46,6 +46,16 @@ For Google/Grok/ChatGPT/Flow gates, consult
 blocker screenshots when requested, record whether a password was submitted,
 and do not treat public-page UA compatibility as protected login proof.
 
+For anonymous foreign storefront reads, reuse
+[the public retail clients and exact limits](references/retail-public-apis.md).
+No login is needed for their supported operations. Keep SEO metadata,
+suggestions/category hints, actual product offers and full catalog search as
+separate capabilities. Use `scripts/retail.mjs` and each service checklist;
+unsupported operations must remain explicit gaps. Never relabel SSR documents
+as XHR or an immediate replay of captured opaque browser inputs as a durable
+engine-free workflow. Official API documentation, first-party shipped JS
+contracts and UI-observed XHR have distinct provenance fields.
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.
