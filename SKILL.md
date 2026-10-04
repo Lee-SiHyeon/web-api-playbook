@@ -9,6 +9,18 @@ Carry an observed workflow from discovery to an independently executable HTTP cl
 
 ## Start from the existing evidence
 
+The default scope for a new service includes a capability checklist, not only login.
+Read `checklists/template.json`, register the applicable functions in
+`checklists/services/<service>.json`, and run `npm run checklist` before delivery.
+Track profile, categorization, content/link CRUD, visibility/order, media, source
+integration and authenticated/public readback when applicable. Continue missing
+in-scope implementation without requiring the user to request each function again.
+Record real constraints or missing essential input explicitly; do not invent N/A
+or an authenticated success to make the checklist green. Use `checklist:strict`
+for required completion checks. Auditing performs no login or external mutation.
+Source candidates and no-op calls do not count as live save evidence; report
+historical proof and current implementation-hash freshness separately.
+
 1. Read the project contract, runner and latest relevant receipt. Identify the actual host, account scope, requested operations, and allowed side effects. Prefer a working service pack or project adapter over rediscovery.
 2. Read [login phases and recovery](references/browserless-login-flow.md) and [credential propagation](references/runtime-credential-propagation.md) before opening a browser or requesting another login.
 3. Distinguish provider readiness from authentication. Use the same protected owner read through the same runner that will perform the business operation. Repair the first failed boundary: provider → consumer → transport → authentication → entitlement → schema.

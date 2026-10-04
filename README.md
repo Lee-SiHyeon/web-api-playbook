@@ -146,6 +146,27 @@ npm ci --ignore-scripts
 
 ## 4. 새 서비스를 HTTP로 전환할 때
 
+### 기능 체크리스트 자동 검사
+
+```bash
+npm run checklist
+node scripts/checklist.mjs --service=inpock --run-tests
+npm run checklist:strict
+```
+
+첫 명령은 등록된 모든 서비스의 코드·테스트·저장된 실측 증거를 검사한다.
+로그인이나 사이트 쓰기는 수행하지 않는다. 마지막 명령은 필수 기능이 누락되거나
+실측/현재 revision 확인이 부족하면 실패 코드로 종료한다.
+관측한 소스 후보, 구현, 실제 요청, 결과 대사, 증거의 코드 버전 일치를 분리한다.
+[체크리스트 작성·확장 방법](checklists/README.md)을 따른다.
+
+새 서비스 작업은 스킬의 기본 종료 조건으로 이 검사를 사용한다.
+로그인 하나만 만든 뒤 프로필·분류·등록/수정/삭제·이미지 같은 누락 기능을 잊지 않도록 목록에 남긴다.
+새 서비스는 `checklists/template.json`을 기반으로 기능 적용 범위를 명시한다.
+
+인포크 [프로필 편집 실행기](references/inpock-profile.md)는 `profile-get`, `profile-preview`, `profile-edit`를 제공한다.
+현재 코드·테스트·실제 조회는 확인했으며, 지정된 새 값으로 저장하는 API 실증은 아직 대기 상태다.
+
 ### 4-1. 관측 자료에서 계약 만들기
 
 1. 기존 코드·계약·최근 영수증에서 재사용할 수 있는 요청을 찾습니다.

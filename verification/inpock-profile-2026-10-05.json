@@ -1,0 +1,107 @@
+{
+  "schema": "inpock-profile-verification-v1",
+  "scope": "profile read + preview + unchanged request only",
+  "profileRead": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "isDraft": false,
+    "snapshotHash": "f980bfa94a77f3b742a9a8fddd3dd1b57f5e887f0d6421c9766749ce127ccb47",
+    "profileFieldNames": [
+      "allow_offers",
+      "background_color",
+      "background_image",
+      "background_type",
+      "bio",
+      "block_alignment",
+      "block_animation",
+      "block_shadow",
+      "block_shape",
+      "brand_image",
+      "brand_image_policy",
+      "brand_url",
+      "cover_image",
+      "layout_type",
+      "notice",
+      "profile_alignment",
+      "profile_image",
+      "profile_size",
+      "show_tiktok_browser_popup",
+      "sns",
+      "sns_position",
+      "theme",
+      "title",
+      "typography",
+      "using_search",
+      "using_short_link"
+    ],
+    "nullFieldNames": [
+      "background_image",
+      "background_type",
+      "block_animation",
+      "block_shadow",
+      "brand_image",
+      "brand_url",
+      "cover_image",
+      "profile_image",
+      "theme"
+    ],
+    "receipt": {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users/design",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 755,
+      "checkedAt": "2026-10-04T18:19:59.150Z",
+      "browserUsed": false
+    },
+    "actualRunner": "scripts/inpock.mjs profile-get --credentials-stdin"
+  },
+  "liveSavePerformed": false,
+  "liveSaveVerified": false,
+  "postAttempts": 0,
+  "preview": {
+    "changedFields": [],
+    "snapshotHash": "f980bfa94a77f3b742a9a8fddd3dd1b57f5e887f0d6421c9766749ce127ccb47",
+    "targetHash": "6d5f91530a409706b31d5466151edfaad87d38801bca3ef8871b594f36c793b1",
+    "actualRunner": "scripts/inpock.mjs profile-preview --input=<same-current-bio> --credentials-stdin"
+  },
+  "unchangedEdit": {
+    "ok": true,
+    "service": "inpock",
+    "command": "profile-edit",
+    "credentialProvider": "process-memory",
+    "persistent": false,
+    "status": "unchanged",
+    "editPerformed": false,
+    "writeSent": false,
+    "writeSuppressed": true,
+    "postAttempts": 0,
+    "readbackVerified": false,
+    "publicVerified": false,
+    "ownerVerified": true,
+    "snapshotHash": "f980bfa94a77f3b742a9a8fddd3dd1b57f5e887f0d6421c9766749ce127ccb47",
+    "browserUsed": false
+  },
+  "implementation": {
+    "lib/inpock-profile.mjs": "614c29ab6a2e1e87a6f7d4f25468a4a77c6e824aaff699186fd9fbf4a2a26be1",
+    "scripts/inpock.mjs": "d9958678e8fe850c45af76228f16da18666a3f41cc485a6f49772e4fac8c7fcd"
+  },
+  "states": {
+    "profileRead": {
+      "captured": true,
+      "client_exists": true,
+      "credential_propagated": true,
+      "remnant_free": true,
+      "live_replay": true
+    },
+    "profileEdit": {
+      "captured": "source_contract_and_blocked_draft_request",
+      "client_exists": true,
+      "credential_propagated": "read_verified_write_not_attempted",
+      "remnant_free": true,
+      "live_replay": false
+    }
+  },
+  "secretsPersistedInEvidence": false
+}
