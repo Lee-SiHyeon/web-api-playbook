@@ -106,7 +106,10 @@ node scripts/web-login.mjs inpock ensure
 
 인포크의 [블록·프로필·통계 조회와 제휴 발행 준비](references/inpock-features.md)는
 `scripts/inpock.mjs inventory --credentials-stdin`, `scripts/inpock-prepare.mjs`를 사용한다.
-발행 준비 도구는 후보 JSON만 만들며 실제 카드 생성은 아직 수행하지 않았다.
+발행 준비 도구는 후보 JSON만 만든다. 실제 공개 카드 등록은
+`scripts/inpock.mjs publish --input=CARD.json --credentials-stdin`으로 실행하며,
+쓰기 저널·중복 방지·쿠키 없는 public readback과 실제 공개 화면까지 검증했다.
+[발행 증거](verification/inpock-publication-proof-2026-10-05.json)를 참고한다.
 
 외부 Gemini·Grok·ChatGPT·Google Flow 클라이언트의 로그인 producer 경계와
 Google UA/Cloudflare 실측은 [로그인 진단 기록](references/provider-login-diagnostics.md)을 참고한다.

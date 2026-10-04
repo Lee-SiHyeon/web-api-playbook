@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "service": "inpock",
+  "command": "publish",
+  "credentialProvider": "process-memory",
+  "persistent": false,
+  "status": "already_verified",
+  "publicationPerformed": false,
+  "writeSent": false,
+  "writeSuppressed": true,
+  "postAttempts": 0,
+  "authenticated": true,
+  "ownerVerified": true,
+  "readbackVerified": true,
+  "publicVerified": true,
+  "browserUsed": false,
+  "anonymousPublicVerified": true,
+  "publicCredentialsSent": false,
+  "blockId": 7818106,
+  "blockIdSource": "independent_readback",
+  "publicProfileUrl": "https://link.inpock.co.kr/lifehack__ailab",
+  "sourceHash": "41e62cc959b4d2b16561d8370ea0b3d2d968e5da561e751d47d3114d6712bb26",
+  "payloadFingerprint": "444f1dc756b2288ba497cada0f3541717cf9746d1f7fdfc69d1ffc851b9f341b",
+  "journalKey": "02bdc9b4b2179e328be530eca16be32a8b9ae615d26f169fa8bd2dee9ed83919",
+  "writeReceipt": null,
+  "readReceipts": {
+    "owner": [
+      {
+        "method": "GET",
+        "origin": "https://link-rest.inpock.co.kr",
+        "path": "/v2/blocks",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 520,
+        "checkedAt": "2026-10-04T15:20:24.267Z",
+        "browserUsed": false,
+        "operation": "blocks",
+        "recordCount": 1,
+        "hasNext": false
+      }
+    ],
+    "public": {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users/:username/public",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 1100,
+      "checkedAt": "2026-10-04T15:20:24.296Z",
+      "browserUsed": false,
+      "operation": "public-profile",
+      "ownerMatched": true,
+      "recordCount": 1
+    }
+  },
+  "checkedAt": "2026-10-04T15:20:24.297Z",
+  "actual_runner": "scripts/inpock.mjs publish --credentials-stdin",
+  "platform": "Linux vBee worker",
+  "node_version": "v24.21.0",
+  "browser_launched_by_runner": false
+}

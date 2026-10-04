@@ -24,6 +24,11 @@ Link/content editing and live expired-session recovery remain outside its verifi
 For Inpock block/profile/stat reads and offline affiliate card preparation,
 use [the feature inventory](references/inpock-features.md). A prepared candidate
 is not a published card; caller-supplied source receipts need current validation.
+The named `publish` operation supports explicit, actor-bound public simple cards.
+Reserve its owner/source journal before sending, never resend an uncertain intent,
+and require full owner plus cookie-free public readback. Reuse the observed
+`{block:{id,...}}` ACK contract; separate actual POST evidence, readback-derived IDs,
+and anonymous web rendering. Update/hide/upload operations remain unverified.
 For Google/Grok/ChatGPT/Flow gates, consult
 [the dated diagnostics](references/provider-login-diagnostics.md). Capture actual
 blocker screenshots when requested, record whether a password was submitted,
