@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "packagedOn": "2026-10-04",
+  "verificationReport": "verification/coupang-debug-pack-2026-10-04.json",
+  "pack": "affiliate/coupang",
+  "sourceRepository": "https://github.com/Lee-SiHyeon/affiliate-content-operations",
+  "sourceBaseCommit": "c6c8c146ad3e1e4cfbb169dd2ccab12ba202018e",
+  "sourceScope": "Reviewed Coupang implementation snapshot and new portable diagnostics; no runtime credentials",
+  "sharedAuthenticationCommit": "0907cb699bfaf46d7bf9a143b186c605fb72fdab",
+  "transformations": [
+    "Move consumer/WOW/session dependencies into the affiliate service pack",
+    "Resolve protected storage and attested Partners auth from this repository",
+    "Move public Goldbox and shipping helpers from the Naver app into this pack",
+    "Extract the public general-price selector without unrelated market-search dependencies",
+    "Relocate Flash Sale inventory and preserve anonymous GET contracts and partial coverage",
+    "Replace fixed historical read/cooldown scripts with one bounded same-context diagnostic",
+    "Add native-process mocked Partners restart regression and an offline regression runner",
+    "Use a bounded 180-second DPAPI helper deadline and redact provider failure details"
+  ],
+  "excluded": [
+    "Credentials and raw captures",
+    "403 evasion or visitor cycling",
+    "Fixed historical Flash Sale batch cardinality",
+    "Personal checkout paths and browser handoff workers"
+  ],
+  "verificationBoundary": {
+    "regression": "offline_mocked",
+    "liveReplay": "not_implied_by_regression",
+    "initialPasswordPureHttpLogin": "unverified",
+    "expiredAfatkRenewal": "unverified",
+    "independentAffiliateClickReadback": false
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 16951,
+      "sha256": "49869b971bab9303cfeae62e5728c09c495089cbcd4b471630fb7835f681d852"
+    },
+    {
+      "path": "case-studies/coupang.md",
+      "bytes": 4120,
+      "sha256": "f358bd8df332863b3e7b9da3e19f1d3521342cbde3d5fa9a70de32a418cc7274"
+    },
+    {
+      "path": "lib/protected-store.mjs",
+      "bytes": 5885,
+      "sha256": "9198a545fe948882e0e3d7cf7186bd84a354ef0fa520a6fc008fdfa7166e99a2"
+    },
+    {
+      "path": "package.json",
+      "bytes": 941,
+      "sha256": "c5155fd8e40a64c14a10d075d0d82d3f50603b9a7ccd5dcc0c424707974a4309"
+    },
+    {
+      "path": "references/coupang-debugging.md",
+      "bytes": 8973,
+      "sha256": "e517ea37e6385434d2f05c4e30cb59fea6d4e5a5a871af0b497cbedbada4155f"
+    },
+    {
+      "path": "scripts/coupang-offline-guard.mjs",
+      "bytes": 681,
+      "sha256": "2a10f8647b7c4d74cd45a05fa1f46668b9f46a8739c7f9eb317c6b7d8d2dcf37"
+    },
+    {
+      "path": "scripts/coupang-regression.mjs",
+      "bytes": 6555,
+      "sha256": "fbb2fe602736fa19e8fb100e472fbe1fcbbe229de6ee27eb80709eeca0b2ceac"
+    },
+    {
+      "path": "service-packs/affiliate/README.md",
+      "bytes": 5430,
+      "sha256": "68959aa20d047ec98cfe78cd700cb99fdea2960927419365cf6d91de47f1d913"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/coupang-consumer-offers.mjs",
+      "bytes": 27759,
+      "sha256": "875bfcff9843c3dd655961778e3106045312b0fdf7dcd6931e9b0f47bf177adb"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/coupang-consumer.mjs",
+      "bytes": 32062,
+      "sha256": "884b3c7b5858466dedb7bc34db93eb585a627b7c4825316486c2a639b3153d65"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/coupang-goldbox-widget.mjs",
+      "bytes": 34079,
+      "sha256": "9fd5a942f5b357089c1319ae7fc85b9210c16fd50d111a9f4cb759b76e87d4ed"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/coupang-partners-link.mjs",
+      "bytes": 37651,
+      "sha256": "445c4dc211992a3ef5d17323b5a911ed5d93cff7cbd2baca318bdf01f53939b9"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/coupang-wow-prices.mjs",
+      "bytes": 13348,
+      "sha256": "5598bc62182d63460dfa40946214f51cc9d04a2feafe812036cdae6ce88c638b"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-comparison-shipping.mjs",
+      "bytes": 4691,
+      "sha256": "cb833acace4e52ebb3ae843fdb2c3566d284b568272f0826cebf2e7fd6e2c50c"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-goldbox-price.mjs",
+      "bytes": 1761,
+      "sha256": "b7f39adc49a718b37f5b037b5a9d7f44b1a11974e2b819bd44a5585ee6d589f2"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-goldbox-public.mjs",
+      "bytes": 54909,
+      "sha256": "2c401a3397d87e684aaa09fb8c68e7832a36f7eb4d456bf27b8e75ab81ea2ac7"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-goldbox.mjs",
+      "bytes": 27330,
+      "sha256": "b9cfc0fa72e6fd0c76ee8f109afaaf86bf26144da32d15f57fd87514f51deb3b"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-public-price-verification.mjs",
+      "bytes": 15872,
+      "sha256": "b445d74045e64a7e76773dd14ce1033f206c6f8ac3f6ee70b5f7d7e61ae292c7"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-read-proof.mjs",
+      "bytes": 8995,
+      "sha256": "eade07dbf9a9da327de8b6fd21c72f503e777e812fff958fe287ea5741ed0a88"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-visitor-context.mjs",
+      "bytes": 19402,
+      "sha256": "3db7c6bfe21643533d7afb56ce8f4b7326774e8af346df5ae7b2d1521f849d1c"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-wow-price-verification.mjs",
+      "bytes": 19341,
+      "sha256": "dbdd7d21c9490cd4f540e7bb03f522d53c00f4c25e237097b9fdd76e3b1cd6ca"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/cps-public-reader.mjs",
+      "bytes": 36243,
+      "sha256": "1daefebbbed06b7e2848f7fee1da0bdc45676235d7b2cbcb78b5d3e4090c8239"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/process-run-lock.mjs",
+      "bytes": 1695,
+      "sha256": "48d4a0c7ce1c7d0e8e611b4caebeb6323d02c693bdebb24d3b44057ea7c66714"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/lib/shopping-session-store.mjs",
+      "bytes": 38023,
+      "sha256": "4572a47ac9f97b391e032c5f4df9c5b934b5bcb8fdf73d5ca303e6ca0357378f"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/package.json",
+      "bytes": 1613,
+      "sha256": "6f05121746b4c92b34071bcfe1222f14cce3a0aa2f395914cf0930aa839ee319"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/scripts/coupang-consumer.mjs",
+      "bytes": 3459,
+      "sha256": "8a112981dc66d500f5b8e48b59f1ccf2ff1dc71729c8730aeab81e8b2dcabda1"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/scripts/coupang-flash-sale-inventory.mjs",
+      "bytes": 21863,
+      "sha256": "f7ee7dd4ed993067920d2dd7fa5adf78597d4ef10fc86cb0ae1c54c0e33d2df1"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/scripts/coupang-partners-check.mjs",
+      "bytes": 4143,
+      "sha256": "738e8089f2c86b5fd84740cd4f6236e5377bd60be1464da52a8d8ea62149def4"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/scripts/coupang-read-diagnostic.mjs",
+      "bytes": 15868,
+      "sha256": "54c34edced71bfac021a4d04f9b0a99a3fb0e63ea730db0ff852167ea9fab740"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/scripts/verify-coupang-goldbox.mjs",
+      "bytes": 16512,
+      "sha256": "02043b3aa381d2581641409fcb3ea9ed3acb7f0f3df303b6908f0f6becd3d9f5"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/scripts/verify-coupang-public-prices.mjs",
+      "bytes": 6078,
+      "sha256": "889c9a61dacbbbe0dc92c09d14272adc08dcf9d05fc7d536fbdfeb7e56476ad3"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/scripts/verify-coupang-wow-price.mjs",
+      "bytes": 7698,
+      "sha256": "bbd8277c599f5d77995bb9045da57b5c544082838d602b5f040804da276d7930"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-comparison-shipping.test.mjs",
+      "bytes": 5340,
+      "sha256": "7198cfad5a484bb088112cc7e666302e016fbfa9ec800f568587e67760d2cc34"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-consumer-offers.test.mjs",
+      "bytes": 39469,
+      "sha256": "44fb9ec4b8c06a4bd9980c77504e56e928818532efb20e7eee3e8905a340354f"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-consumer.test.mjs",
+      "bytes": 32338,
+      "sha256": "5b94e4563a27f882073b5c0dfd2ed5883f30e08cb3fa096be7f1427126ed3bca"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-flash-sale-inventory.test.mjs",
+      "bytes": 2065,
+      "sha256": "1910c6ff84ac6ac8ed579ed03a6a43c5f055bb412ebf3d5039c7cf74cffc34a6"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-goldbox-catalog.test.mjs",
+      "bytes": 12699,
+      "sha256": "48c80297316ae3baf08ed9bd232d6f259399f8355c939c44b5fef88a11d810bc"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-goldbox-public.test.mjs",
+      "bytes": 2177,
+      "sha256": "f87d40bcb26858eec8b17edd3ea7565f2bd8c94299cc63d038318bb87a6df595"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-goldbox-widget.test.mjs",
+      "bytes": 18143,
+      "sha256": "fbff232b94f53626f89f2905bb4149d489457920c618ade843da35104fd2ccd6"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-partners-link.test.mjs",
+      "bytes": 49386,
+      "sha256": "a23bf1d1e9da319e67a7272209401bd53b06fdbef3ee51c0e8c00e6d2b1fee5d"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-partners-owner-binding-persistence.test.mjs",
+      "bytes": 19371,
+      "sha256": "4359069d3ac6789a83fbaf757488ea57371a12e5e67a4cd4d6a225643ace457d"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-partners-provider-failure.test.mjs",
+      "bytes": 1151,
+      "sha256": "03498a4671ff717b8c88d4ce0c5c2888bc618066bc615eb6bc4dc00c687c54e9"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-read-diagnostic.test.mjs",
+      "bytes": 13250,
+      "sha256": "9121a451441537c7f78f8df2d363a09fddbe27cf5d0dc14c4831593ac36e32e1"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-read-proof.test.mjs",
+      "bytes": 7623,
+      "sha256": "90cb0baa1c421bed90ece1ce4679ea52a911fbcc572124f402695e6335b24c9e"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-shopping-session.test.mjs",
+      "bytes": 15630,
+      "sha256": "11dbda24d5570e9c7f23da0591f1862a8a27098149592d92578f512f47d25692"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-visitor-context.test.mjs",
+      "bytes": 32233,
+      "sha256": "a64b2bcc98363d8aef0390c4eac6fadd17e938f12e34f60a6af60943faa878e7"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-wow-prices.test.mjs",
+      "bytes": 30783,
+      "sha256": "8f3703fec0b03634b8876b0492d50156691774dc34b84aa5e6ba28029924d201"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/verify-coupang-goldbox.test.mjs",
+      "bytes": 15133,
+      "sha256": "1a968aa76867df998efc79259a2a90f27fde8884cdd79d94ef8c0cc6c4d32f7b"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/verify-coupang-public-prices.test.mjs",
+      "bytes": 16466,
+      "sha256": "13b2e2b5091439f46a6dd0b38023d1fd642dbb411b82d4ddfb4d0b455644d5a7"
+    },
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/tests/verify-coupang-wow-price.test.mjs",
+      "bytes": 40065,
+      "sha256": "52ccb141f2bfa84eb5420aeaa7ce62f3ba758e5c16c8c20f02d1a8b28cefdd8e"
+    },
+    {
+      "path": "service-packs/affiliate/package.json",
+      "bytes": 1227,
+      "sha256": "40b6dc083fb972d236188dec5239f6939f827d965edc6b0d4f125573d2ba5262"
+    },
+    {
+      "path": "tests/coupang-regression-guard.test.mjs",
+      "bytes": 1401,
+      "sha256": "e2b28cabc4359cfd7ba4651efe927de5e77141c08c0dacaca5a02d96c1d21599"
+    }
+  ]
+}

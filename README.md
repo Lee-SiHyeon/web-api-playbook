@@ -17,7 +17,7 @@
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
-| [제휴 API](service-packs/affiliate/README.md) | 마이리얼트립, 애드픽, 쇼핑커넥트, 쿠팡 계약 분석, 올리브영 구현 |
+| [제휴 API](service-packs/affiliate/README.md) | 마이리얼트립, 애드픽, 쇼핑커넥트, 쿠팡 HTTP 가격·배송비·행사·파트너스 [반복 진단](references/coupang-debugging.md), 올리브영 구현 |
 | [X·Reddit](service-packs/social-x/README.md), [Threads](service-packs/threads/README.md) | 서비스별 세션·요청 계약과 공개 자료 수집 경계 |
 | [사례](case-studies/README.md) | 무엇이 됐고 어디서 실패했는지, 다른 서비스에 적용할 교훈 |
 | [출처](provenance/README.md) | 원본 저장소 commit, 미커밋 스냅샷, 파일 SHA-256, 이식 변경 |

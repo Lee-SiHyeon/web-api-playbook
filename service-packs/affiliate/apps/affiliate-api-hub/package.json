@@ -16,7 +16,14 @@
     "coupang:compare-products": "node scripts/compare-coupang-products.mjs",
     "adapters:travel:validate": "node scripts/validate-travel-adapters.mjs",
     "adapters:ecb:latest": "node adapters/ecb-exchange-rates.mjs",
-    "adapters:travel-domestic:validate": "node scripts/validate-domestic-travel-adapters.mjs"
+    "adapters:travel-domestic:validate": "node scripts/validate-domestic-travel-adapters.mjs",
+    "coupang:consumer": "node scripts/coupang-consumer.mjs",
+    "coupang:wow": "node scripts/verify-coupang-wow-price.mjs",
+    "coupang:prices": "node scripts/verify-coupang-public-prices.mjs",
+    "coupang:goldbox": "node scripts/verify-coupang-goldbox.mjs",
+    "coupang:flash-sale": "node scripts/coupang-flash-sale-inventory.mjs",
+    "coupang:read-diagnostic": "node scripts/coupang-read-diagnostic.mjs",
+    "coupang:partners": "node scripts/coupang-partners-check.mjs"
   },
   "dependencies": {
     "parse5": "^8.0.1"

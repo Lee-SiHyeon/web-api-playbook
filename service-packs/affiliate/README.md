@@ -25,6 +25,11 @@ npm ci --ignore-scripts
 | 네이버 공개 오늘의 딜 | `npm run naver:today-deals -- <옵션>` | [관측 계약](apps/affiliate-api-hub/references/naver-shopping-observed-contracts-2026-09-21.json) |
 | Adpick 공개 카탈로그 | `apps/affiliate-api-hub/tools/research/adpick-affiliate-catalog.mjs` | [과거 공개 replay](apps/affiliate-api-hub/references/adpick-public-malls-replay-2026-09-21.json) |
 | Coupang 캡처 분석 | `apps/affiliate-api-hub/scripts/sanitize-coupang-netlog.mjs` 등 | [원래 허브 README](apps/affiliate-api-hub/README.md), [관측 기록](apps/affiliate-api-hub/docs/coupang-partners-api-discovery-2026-09-19.md) |
+| Coupang 상품·와우·배송비 | `npm run --silent coupang:consumer -- offers --url='<정확한 SKU URL>' --visitor`, `npm run --silent coupang:wow -- <옵션>` | [반복 진단과 가격 범위](../../references/coupang-debugging.md) |
+| Coupang 공개 가격 목록 검증 | `npm run --silent coupang:prices -- --manifest=<파일> --dry-run` | 같은 문서의 manifest·차단 중단 규칙 |
+| Coupang 골드박스·반짝세일 | `npm run --silent coupang:goldbox -- <옵션>`, `npm run --silent coupang:flash-sale` | 정확한 옵션과 공개 행사 가격; 회원 자격과 별도 |
+| Coupang 네 번째 조회·쿨다운 진단 | `npm run --silent coupang:read-diagnostic` | 최대 4회, stdin JSON, 같은 문맥, 첫 실패에서 중단 |
+| Coupang Partners 보호 상태·링크 | `npm run --silent coupang:partners -- [정확한 SKU URL]` | 무인자는 소유자 조회, URL은 캐시 또는 단일 journaled 발급 |
 
 보호 조회 CLI는 fresh envelope JSON을 **stdin**으로 받습니다. shell에 실제 토큰을 직접 입력해 기록하지 말고 기존 보관함/provider에서 pipe로 전달하세요. 각 adapter의 envelope 계약이 다르므로 core session JSON을 그대로 보내지 않습니다.
 
@@ -39,3 +44,9 @@ npm ci --ignore-scripts
 - 별도 로그인 도구와 일부 캡처 스크립트는 Windows 전용입니다. 포터블한 공통 수집은 저장소 루트의 HAR/HTML 도구를 사용할 수 있습니다.
 
 다른 OS에서 실행했다는 주장이나 사이트 전체 로그인 자동화 완료 주장은 이 스냅샷에 포함하지 않습니다.
+
+## 2026-10-04 쿠팡 런타임 보완
+
+최근 디버깅의 consumer·와우·배송비·골드박스·반짝세일·파트너스 구현과 회귀검증을 추가했다. Naver 앱이나 원래 개인 checkout에 의존하던 경로는 pack 내부 및 이 저장소의 공통 보호 인증 런타임으로 연결한다. 최초 로그인 획득과 반복 HTTP 실행, 공개 표시가와 회원 적용가, 가격과 배송비의 완료 여부는 각각 구분한다.
+
+저장소 루트의 `npm run coupang:regress -- --write`는 네트워크와 실제 보호 저장소를 사용하지 않는 회귀검증이다. 현재 인증·상품 가격의 라이브 확인은 별도 CLI 결과로 판정한다. 과거 반짝세일 목록의 고정 SKU 개수나 403 후 방문자 교체를 운영 규칙으로 배포하지 않는다. [진단 문서](../../references/coupang-debugging.md)와 [배포 근거](../../provenance/coupang-debug-pack.json)를 함께 확인한다.

@@ -1,11 +1,27 @@
 {
-  "name": "xhr-affiliate-service-pack", "version": "1.0.0", "private": true, "type": "module",
-  "license": "UNLICENSED", "engines": { "node": ">=24" },
-  "workspaces": ["apps/affiliate-api-hub", "packages/contracts"],
+  "name": "xhr-affiliate-service-pack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=24"
+  },
+  "workspaces": [
+    "apps/affiliate-api-hub",
+    "packages/contracts"
+  ],
   "scripts": {
     "partners:probe": "node apps/affiliate-api-hub/scripts/partner-session-probe.mjs",
     "myrealtrip": "node apps/affiliate-api-hub/scripts/myrealtrip.mjs",
     "oliveyoung": "node apps/affiliate-api-hub/scripts/oliveyoung.mjs",
-    "naver:today-deals": "node apps/affiliate-api-hub/scripts/naver-shopping-deals.mjs"
+    "naver:today-deals": "node apps/affiliate-api-hub/scripts/naver-shopping-deals.mjs",
+    "coupang:consumer": "node apps/affiliate-api-hub/scripts/coupang-consumer.mjs",
+    "coupang:wow": "node apps/affiliate-api-hub/scripts/verify-coupang-wow-price.mjs",
+    "coupang:prices": "node apps/affiliate-api-hub/scripts/verify-coupang-public-prices.mjs",
+    "coupang:goldbox": "node apps/affiliate-api-hub/scripts/verify-coupang-goldbox.mjs",
+    "coupang:flash-sale": "node apps/affiliate-api-hub/scripts/coupang-flash-sale-inventory.mjs",
+    "coupang:read-diagnostic": "node apps/affiliate-api-hub/scripts/coupang-read-diagnostic.mjs",
+    "coupang:partners": "node apps/affiliate-api-hub/scripts/coupang-partners-check.mjs"
   }
 }

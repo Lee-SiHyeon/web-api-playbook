@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T14:21:14.923Z",
+  "scope": "portable_coupang_debug_pack_exact_staged_snapshot",
+  "regression": {
+    "mode": "offline_mocked",
+    "passed": true,
+    "testFiles": 25,
+    "tests": 294,
+    "passedTests": 294,
+    "failedTests": 0,
+    "skippedTests": 0,
+    "syntaxFiles": 26,
+    "syntaxFailures": 0,
+    "defaultFetchBlocked": true,
+    "dpapiHelperExecFileSyncBlocked": true,
+    "isolation": "in_process_guards_not_os_sandbox",
+    "liveReplayImplied": false
+  },
+  "nativeProcessRegression": {
+    "mockedHttpAndStore": true,
+    "separateNodeProcesses": true,
+    "firstProcessGeneratesOnce": true,
+    "secondProcessUsesCacheWithoutGeneration": true
+  },
+  "livePartnersCheck": {
+    "checkedAt": "2026-10-04T14:21:09.002Z",
+    "execution": "pure_http",
+    "browserUsed": false,
+    "credentialProvider": "windows_dpapi_current_user",
+    "ownerRequest": {
+      "method": "GET",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/dashboard",
+      "httpStatus": 200
+    },
+    "ownerVerified": true,
+    "freshHttpIdentityRead": false,
+    "linkReturned": true,
+    "cached": true,
+    "generationRequests": 0,
+    "destinationVerified": true,
+    "destinationVerification": "generation_response_only",
+    "attributionVerified": true,
+    "independentReadbackVerified": false,
+    "shortLinksOpened": 0
+  },
+  "earlierProviderFailure": {
+    "code": "PROTECTED_STORE_OPERATION_FAILED",
+    "ownerHttpStatus": 200,
+    "generationRequests": 0,
+    "phase": "protected_state_persistence_before_link_operation",
+    "timeoutFlag": "not_recorded_by_earlier_cli",
+    "changes": ["bounded_180_second_helper_deadline", "allowlisted_provider_failure_metadata"]
+  },
+  "limits": {
+    "consumerPricesLiveVerifiedThisRun": false,
+    "wowMemberEligibilityLiveVerifiedThisRun": false,
+    "allProductCoverageClaimed": false,
+    "universal403RecoveryClaimed": false,
+    "initialPasswordPureHttpLogin": "unverified",
+    "expiredAfatkRenewal": "unverified"
+  },
+  "runtimeCredentialsIncluded": false
+}
