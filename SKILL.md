@@ -16,6 +16,19 @@ Carry an observed workflow from discovery to an independently executable HTTP cl
 
 For commands and installation, start with [README](README.md). For service-specific code and limits, open [service-packs](service-packs/README.md). Historical success is scoped to its date, account, operation and revision; it is not a current session check.
 
+For Inpock password login and the protected owner probe, reuse
+[the HTTP login adapter](references/inpock-login.md) before starting discovery.
+Its Linux/macOS stdin mode is process-memory only; Windows uses the existing DPAPI store.
+Link/content editing and live expired-session recovery remain outside its verified scope.
+
+For Inpock block/profile/stat reads and offline affiliate card preparation,
+use [the feature inventory](references/inpock-features.md). A prepared candidate
+is not a published card; caller-supplied source receipts need current validation.
+For Google/Grok/ChatGPT/Flow gates, consult
+[the dated diagnostics](references/provider-login-diagnostics.md). Capture actual
+blocker screenshots when requested, record whether a password was submitted,
+and do not treat public-page UA compatibility as protected login proof.
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.

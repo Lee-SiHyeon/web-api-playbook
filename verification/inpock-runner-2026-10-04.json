@@ -1,0 +1,108 @@
+{
+  "ok": true,
+  "service": "inpock",
+  "command": "verify",
+  "credentialProvider": "process-memory",
+  "persistent": false,
+  "login": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "browserUsed": false,
+    "user": {
+      "ownerValuesRedacted": true,
+      "fields": [
+        "plan",
+        "username"
+      ]
+    },
+    "receipt": {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 1094,
+      "checkedAt": "2026-10-04T14:11:02.778Z",
+      "browserUsed": false,
+      "operation": "owner",
+      "fieldsReturned": [
+        "username",
+        "plan"
+      ]
+    },
+    "renewal": "password_login",
+    "reason": "session_missing",
+    "loginReceipt": {
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/login",
+      "httpStatus": 201,
+      "mime": "application/json",
+      "responseBytes": 81,
+      "checkedAt": "2026-10-04T14:11:02.658Z",
+      "browserUsed": false,
+      "applicationSuccess": true
+    },
+    "expiresAt": null
+  },
+  "health": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "browserUsed": false,
+    "user": {
+      "ownerValuesRedacted": true,
+      "fields": [
+        "plan",
+        "username"
+      ]
+    },
+    "receipt": {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 1094,
+      "checkedAt": "2026-10-04T14:11:02.852Z",
+      "browserUsed": false,
+      "operation": "owner",
+      "fieldsReturned": [
+        "username",
+        "plan"
+      ]
+    }
+  },
+  "reuse": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "browserUsed": false,
+    "user": {
+      "ownerValuesRedacted": true,
+      "fields": [
+        "plan",
+        "username"
+      ]
+    },
+    "receipt": {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 1094,
+      "checkedAt": "2026-10-04T14:11:02.929Z",
+      "browserUsed": false,
+      "operation": "owner",
+      "fieldsReturned": [
+        "username",
+        "plan"
+      ]
+    },
+    "renewal": "stored_session",
+    "expiresAt": null
+  },
+  "actual_runner": "scripts/inpock.mjs verify --credentials-stdin",
+  "platform": "Linux vBee worker",
+  "node_version": "v24.21.0",
+  "browser_launched_by_runner": false
+}

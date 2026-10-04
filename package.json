@@ -17,9 +17,10 @@
     "request": "node scripts/request.mjs",
     "inspect:bundle": "node scripts/inspect-bundle.mjs",
     "web:login": "node scripts/web-login.mjs",
+    "inpock": "node scripts/inpock.mjs",
     "myrealtrip": "node scripts/myrealtrip.mjs",
     "x:read": "node scripts/x-read.mjs",
-    "test": "node --test tests/"
+    "test": "node --test \"tests/*.test.mjs\""
   },
   "dependencies": {
     "linkedom": "0.18.13",

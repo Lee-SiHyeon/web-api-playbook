@@ -1,0 +1,158 @@
+{
+  "schema": "provider-login-diagnostics-v1",
+  "checkedAt": "2026-10-04T14:25:09.500379+00:00",
+  "repositories": [
+    {
+      "repository": "Lee-SiHyeon/gemini-web-xhr-client",
+      "head": "bcd5249dae4513396422bc794c91ef7c02381743",
+      "branch": "main",
+      "clean": true
+    },
+    {
+      "repository": "Lee-SiHyeon/grok-web-xhr-client",
+      "head": "1eaa9d7d87a25212fd9b2f333849e20945eea5f8",
+      "branch": "main",
+      "clean": true
+    },
+    {
+      "repository": "Lee-SiHyeon/chatgpt-web-xhr-client",
+      "head": "9c0b60ce60e39c329df8623389b220a89fb9c6ad",
+      "branch": "main",
+      "clean": true
+    },
+    {
+      "repository": "Lee-SiHyeon/google-flow-xhr-client",
+      "head": "85d0f71919db8dd12117efd1f9abb4158ab4abd1",
+      "branch": "main",
+      "clean": true
+    }
+  ],
+  "loginResults": {
+    "gemini": {
+      "stage": "google_browser_rejected",
+      "authenticated": false,
+      "emailSubmitted": true,
+      "passwordSubmitted": false
+    },
+    "flow": {
+      "stage": "google_identifier_required",
+      "authenticated": false,
+      "passwordSubmitted": false
+    },
+    "chatgpt": {
+      "stage": "chatgpt_email_to_google_sso_then_google_browser_rejected",
+      "authenticated": false,
+      "passwordSubmitted": false,
+      "nativeChatVerified": false
+    },
+    "grok": {
+      "stage": "native_email_check_forbidden",
+      "authenticated": false,
+      "passwordSubmitted": false,
+      "request": {
+        "method": "POST",
+        "origin": "https://accounts.x.ai",
+        "path": "/api/auth/sso/check",
+        "httpStatus": 403,
+        "mime": "text/html"
+      },
+      "knownUiError": "Something went wrong. Please try again.",
+      "forbiddenHtmlClassification": "unknown_body_not_retained"
+    }
+  },
+  "googleUaExperiment": {
+    "experiment": "Google same-platform genuine installed Chrome UA compatibility",
+    "checkedAt": "2026-10-04T14:25:09.500379+00:00",
+    "engine": "Playwright Chromium",
+    "headless": false,
+    "browserSandboxEnabled": true,
+    "customDeviceIdentity": false,
+    "webdriverOverrideApplied": false,
+    "emailSubmitted": true,
+    "passwordSubmitted": false,
+    "authenticated": false,
+    "passwordMismatchObserved": false,
+    "sourceBrowserVersion": "149.0.7827.55",
+    "sourceUa": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+    "engineBrowserVersion": "151.0.7922.34",
+    "observedUa": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36",
+    "webdriver": true,
+    "passwordStageReached": false,
+    "browserRejected": true,
+    "challengeObserved": false,
+    "finalPage": {
+      "origin": "https://accounts.google.com",
+      "path": "/v3/signin/rejected"
+    },
+    "title": "Couldn’t sign you in",
+    "knownErrorText": "This browser or app may not be secure.",
+    "secretsPersisted": false,
+    "ordinaryUserAgentChangeOnly": true
+  },
+  "grokPublicUaExperiment": {
+    "observedAtUtc": "2026-10-04T14:11:29.963893+00:00",
+    "method": "GET",
+    "url": "https://accounts.x.ai/sign-in",
+    "sameNetworkEnvironment": true,
+    "sameHttpTransport": "Python urllib with default environment proxy/CA settings; fresh opener per case",
+    "genuineUaSource": "navigator.userAgent from unmodified sandbox-enabled headed Chromium on about:blank",
+    "browserVisitedService": false,
+    "cookiesSent": false,
+    "credentialsSubmitted": false,
+    "results": [
+      {
+        "uaMode": "default_http_user_agent",
+        "httpStatus": 403,
+        "mime": "text/html",
+        "bodyBytes": 5838,
+        "bodyLengthLimited": false,
+        "recognizedHtmlTitle": "Attention Required! | Cloudflare",
+        "titleClass": "cloudflare_attention_required",
+        "cloudflareBlockedPhrase": true,
+        "cloudflareUnavailablePhrase": true,
+        "cloudflareChallengeMarker": true,
+        "captchaMarker": true,
+        "cookiesSent": false,
+        "redirectFollowed": false,
+        "requestCount": 1
+      },
+      {
+        "uaMode": "genuine_current_headed_chromium_user_agent",
+        "httpStatus": 200,
+        "mime": "text/html",
+        "bodyBytes": 170132,
+        "bodyLengthLimited": false,
+        "recognizedHtmlTitle": null,
+        "titleClass": "unrecognized",
+        "cloudflareBlockedPhrase": false,
+        "cloudflareUnavailablePhrase": false,
+        "cloudflareChallengeMarker": true,
+        "captchaMarker": false,
+        "cookiesSent": false,
+        "redirectFollowed": false,
+        "requestCount": 1
+      }
+    ],
+    "publicStatusOrTitleChanged": true,
+    "limitations": [
+      "Two sequential public GET observations only; transient service behavior is not isolated by repetition",
+      "No authenticated account, SSO POST, identity read, protected request, or successful login was tested",
+      "No security-control solving, stealth, fabricated device identity or security-disabled browser flag was used"
+    ],
+    "uaValuePersisted": false,
+    "secretMaterialPersisted": false
+  },
+  "protectedUserVerified": false,
+  "authenticatedIndependentHttpReplay": false,
+  "passwordMismatchObserved": false,
+  "passwordMismatchConclusion": "untested_no_password_submission",
+  "contentMessagesOrGenerationsSent": 0,
+  "secretsPersistedInEvidence": false,
+  "screenshots": {
+    "googleBrowserRejection": "actual rejected page captured",
+    "googleUaResult": "actual rejected page after UA149 setting",
+    "flowGate": "actual empty identifier input",
+    "grokSignIn": "actual current sign-in choices",
+    "grokEmailCheckpoint": "current form after transient toast dismissed; email cleared"
+  }
+}

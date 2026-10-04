@@ -74,6 +74,9 @@ HTTP 생성/갱신은 구현하지 않았다. 기존 저장된 `auth_token` 재�
 
 ## 추가 계정 상태와 미완료 구간
 
+인포크의 후속 multipart 비밀번호 로그인·token 쿠키·보호 계정 조회 계약과
+2026-10-04 독립 HTTP 성공은 [Inpock 관측 문서](inpock-login.md)에 추가했다.
+
 LinkPrice의 후속 비밀번호 로그인·등록 사이트 조회 계약과 독립 HTTP 성공은
 [별도 관측 문서](linkprice-login.md#관측-계약)에 추가했다.
 

@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "service": "inpock",
+  "command": "inventory",
+  "credentialProvider": "process-memory",
+  "persistent": false,
+  "blocks": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "browserUsed": false,
+    "recordCount": 0,
+    "complete": true,
+    "pages": 1,
+    "stopReason": "server_end",
+    "receipts": [
+      {
+        "method": "GET",
+        "origin": "https://link-rest.inpock.co.kr",
+        "path": "/v2/blocks",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 49,
+        "checkedAt": "2026-10-04T14:04:28.713Z",
+        "browserUsed": false,
+        "operation": "blocks",
+        "recordCount": 0,
+        "hasNext": false
+      }
+    ]
+  },
+  "public": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "browserUsed": false,
+    "recordCount": 0,
+    "receipt": {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users/:username/public",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 767,
+      "checkedAt": "2026-10-04T14:04:28.820Z",
+      "browserUsed": false,
+      "operation": "public-profile",
+      "ownerMatched": true,
+      "recordCount": 0
+    },
+    "profileFields": [
+      "user_id",
+      "username",
+      "design",
+      "slug"
+    ]
+  },
+  "stats": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "browserUsed": false,
+    "stats": {
+      "today": 2,
+      "accumulated": 2,
+      "realtime": 0,
+      "subscribers": 0
+    },
+    "updatedAt": "2026-10-04T23:04:28",
+    "receipt": {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/stats/mini",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 103,
+      "checkedAt": "2026-10-04T14:04:28.996Z",
+      "browserUsed": false,
+      "operation": "mini-stats",
+      "fieldsReturned": [
+        "today",
+        "accumulated",
+        "realtime",
+        "subscribers"
+      ]
+    }
+  },
+  "actual_runner": "scripts/inpock.mjs inventory --credentials-stdin",
+  "platform": "Linux vBee worker",
+  "node_version": "v24.21.0",
+  "browser_launched_by_runner": false
+}

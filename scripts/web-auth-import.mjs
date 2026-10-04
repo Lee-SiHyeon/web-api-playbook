@@ -3,6 +3,7 @@ import { ProtectedStore } from '../lib/protected-store.mjs';
 import { withSessionLock } from '../lib/session-lock.mjs';
 import { stdinJson } from '../lib/cli.mjs';
 import path from 'node:path';
+import { validateInpockLogin } from '../lib/web-auth/inpock.mjs';
 
 try {
   const [service] = process.argv.slice(2);
@@ -23,6 +24,10 @@ try {
     name = service;
     lockKey = 'linkprice-state';
     value = { version: 1, username: input.username, password: input.password };
+  } else if (service === 'inpock-login') {
+    name = service;
+    lockKey = 'inpock-state';
+    value = validateInpockLogin(input);
   } else {
     throw Error();
   }

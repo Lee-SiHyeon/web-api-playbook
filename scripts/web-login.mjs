@@ -2,11 +2,12 @@ import { createMyrealtripAuth, WebAuthError } from '../lib/web-auth/myrealtrip.m
 import { createCoupangAuth } from '../lib/web-auth/coupang.mjs';
 import { createXAuth } from '../lib/web-auth/x.mjs';
 import { createLinkpriceAuth } from '../lib/web-auth/linkprice.mjs';
+import { createInpockAuth } from '../lib/web-auth/inpock.mjs';
 import { stdinJson } from '../lib/cli.mjs';
 
 try {
   const [service, command='status'] = process.argv.slice(2);
-  const factories={myrealtrip:createMyrealtripAuth,coupang:createCoupangAuth,x:createXAuth,linkprice:createLinkpriceAuth};
+  const factories={myrealtrip:createMyrealtripAuth,coupang:createCoupangAuth,x:createXAuth,linkprice:createLinkpriceAuth,inpock:createInpockAuth};
   if (!Object.hasOwn(factories,service)) throw new WebAuthError('SERVICE_NOT_IMPLEMENTED');
   const auth=factories[service]();
   let result;
@@ -14,6 +15,7 @@ try {
   else if (command==='login' && auth.login) result=await auth.login();
   else if (command==='ensure') result=await auth.ensure();
   else if (command==='health') result=await auth.health();
+  else if (command==='owner' && auth.owner) result=await auth.owner();
   else if (command==='refresh' && auth.refresh) result=await auth.refresh();
   else if (command==='renew' && auth.renew) result=await auth.renew();
   else if (command==='dashboard' && auth.dashboard) result=await auth.dashboard();

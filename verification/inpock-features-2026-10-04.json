@@ -1,0 +1,965 @@
+{
+  "schema": "inpock-feature-discovery-v1",
+  "checkedAt": "2026-10-04T14:17:32.118009+00:00",
+  "scope": "owner link-management and affiliate publication preparation",
+  "scopeCompletion": "bounded_relevant_screens_complete_other_apps_deferred",
+  "pageBudget": 8,
+  "inspectedPages": [
+    "/inpockhome",
+    "/admin",
+    "/admin/block/link/post",
+    "/admin/block/text/post",
+    "/admin/block/image/post",
+    "/admin/block/collection/post"
+  ],
+  "frontier": [
+    {
+      "path": "/inpockhome",
+      "parent": null,
+      "state": "inspected"
+    },
+    {
+      "path": "/admin",
+      "parent": "/inpockhome",
+      "state": "inspected"
+    },
+    {
+      "path": "/admin/block/link/post",
+      "parent": "/admin",
+      "state": "inspected"
+    },
+    {
+      "path": "/admin/block/text/post",
+      "parent": "/admin",
+      "state": "inspected"
+    },
+    {
+      "path": "/admin/block/image/post",
+      "parent": "/admin",
+      "state": "inspected"
+    },
+    {
+      "path": "/admin/block/collection/post",
+      "parent": "/admin",
+      "state": "inspected"
+    },
+    {
+      "label": "manager",
+      "parent": "/inpockhome",
+      "state": "budget_deferred",
+      "stopReason": "outside_affiliate_link_publication_preparation"
+    },
+    {
+      "label": "partners",
+      "parent": "/inpockhome",
+      "state": "budget_deferred",
+      "stopReason": "outside_affiliate_link_publication_preparation"
+    },
+    {
+      "label": "deal",
+      "parent": "/inpockhome",
+      "state": "budget_deferred",
+      "stopReason": "outside_affiliate_link_publication_preparation"
+    },
+    {
+      "label": "chat",
+      "parent": "/inpockhome",
+      "state": "budget_deferred",
+      "stopReason": "outside_affiliate_link_publication_preparation"
+    },
+    {
+      "label": "AI",
+      "parent": "/inpockhome",
+      "state": "budget_deferred",
+      "stopReason": "outside_affiliate_link_publication_preparation"
+    },
+    {
+      "label": "market",
+      "parent": "/inpockhome",
+      "state": "budget_deferred",
+      "stopReason": "outside_affiliate_link_publication_preparation"
+    }
+  ],
+  "observedReadAndLoginContracts": [
+    {
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/login",
+      "query_fields": [],
+      "request_content_type": "multipart/form-data",
+      "request_fields": {
+        "username": "str",
+        "password": "str"
+      },
+      "status": 201,
+      "mime": "application/json",
+      "response_bytes": 81,
+      "response_schema": {
+        "username": "str",
+        "token": "str"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/feature-flags/S100",
+      "query_fields": [],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 25,
+      "response_schema": {
+        "type": "array",
+        "length": 3,
+        "items": "str"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/subscriptions/current-version",
+      "query_fields": [],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 16,
+      "response_schema": {
+        "version": "str"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users",
+      "query_fields": [],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 1094,
+      "response_schema": {
+        "id": "int",
+        "username": "str",
+        "email": "str",
+        "phone": "str",
+        "country_code": "str",
+        "num_subscribers": "int",
+        "design": {
+          "title": "str",
+          "bio": "str",
+          "sns_position": "str",
+          "profile_image": "str",
+          "cover_image": "str",
+          "layout_type": "str",
+          "profile_alignment": "str",
+          "profile_size": "str",
+          "theme": "NoneType",
+          "typography": "str",
+          "background_type": "NoneType",
+          "background_color": "str",
+          "background_image": "str",
+          "block_shape": "str",
+          "block_animation": "NoneType",
+          "block_shadow": "NoneType",
+          "block_alignment": "str",
+          "sns": {
+            "type": "array",
+            "length": 0,
+            "items": null
+          },
+          "notice": {
+            "id": "int",
+            "background_color": "NoneType",
+            "text_color": "NoneType",
+            "contents": "NoneType"
+          }
+        },
+        "plan": "str",
+        "kakao_credits": "int",
+        "badges": {
+          "type": "array",
+          "length": 0,
+          "items": null
+        },
+        "has_calendar_block": "bool",
+        "pro_plan_option": "NoneType",
+        "market_permission": {
+          "is_seller": "bool",
+          "has_market": "bool"
+        },
+        "is_in_wishlist": "bool",
+        "is_smart_store_user": "bool",
+        "is_manager_user": "bool",
+        "is_internal_tester": "bool",
+        "is_onboarded": "bool",
+        "purpose": "str",
+        "interests": {
+          "type": "array",
+          "length": 3,
+          "items": "str"
+        },
+        "categories": {
+          "type": "array",
+          "length": 3,
+          "items": "str"
+        },
+        "created_at": "str"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/subscriptions",
+      "query_fields": [
+        "service_type"
+      ],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 0,
+      "response_schema": "NoneType",
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/users/todo",
+      "query_fields": [
+        "key"
+      ],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 446,
+      "response_schema": {
+        "DEAL_CAMPAIGN_REQUEST_RESPOND": "bool",
+        "DEAL_OFFER_RESPOND": "bool",
+        "MANAGER_INSTAGRAM": "bool",
+        "MANAGER_REFERRAL": "bool",
+        "MARKETING_AGREE": "bool",
+        "LINK_DESIGN_SETTING": "bool",
+        "LINK_BLOCK": "bool",
+        "LINK_KAKAO_NOTI": "bool",
+        "MANAGER_TRIGGER": "bool",
+        "AI_CHAT": "bool",
+        "AI_IDEA_BOOKMARK": "bool",
+        "AI_IMAGE": "bool",
+        "DEAL_ONBOARDING": "bool",
+        "DEAL_CAMPAIGN_REQUEST": "bool",
+        "DEAL_OFFER": "bool",
+        "deal_campaign_request_respond": "bool",
+        "deal_offer_respond": "bool",
+        "manager_instagram": "bool"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/blocks",
+      "query_fields": [],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 49,
+      "response_schema": {
+        "blocks": {
+          "type": "array",
+          "length": 0,
+          "items": null
+        },
+        "has_next": "bool",
+        "next_cursor": "NoneType"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users/:username/public",
+      "query_fields": [],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 767,
+      "response_schema": {
+        "user": {
+          "user_id": "int",
+          "username": "str",
+          "design": {
+            "title": "str",
+            "bio": "str",
+            "sns_position": "str",
+            "layout_type": "str",
+            "profile_alignment": "str",
+            "profile_size": "str",
+            "profile_image": "str",
+            "cover_image": "str",
+            "theme": "NoneType",
+            "typography": "str",
+            "background_type": "NoneType",
+            "background_color": "str",
+            "background_image": "str",
+            "block_shape": "str",
+            "block_animation": "NoneType",
+            "block_shadow": "NoneType",
+            "block_alignment": "str",
+            "sns": {
+              "type": "array",
+              "length": 0,
+              "items": null
+            },
+            "notice": {
+              "id": "int",
+              "background_color": "NoneType",
+              "text_color": "NoneType",
+              "contents": "NoneType"
+            },
+            "brand_image": "NoneType",
+            "brand_url": "NoneType",
+            "brand_image_policy": "str",
+            "using_short_link": "bool",
+            "allow_offers": "bool",
+            "using_search": "bool",
+            "show_tiktok_browser_popup": "bool"
+          },
+          "slug": "str"
+        },
+        "blocks": {
+          "type": "array",
+          "length": 0,
+          "items": null
+        },
+        "cta_block": "NoneType"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users/me/slug",
+      "query_fields": [],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 94,
+      "response_schema": {
+        "slug": "str",
+        "can_change_now": "bool",
+        "reason": "NoneType",
+        "next_change_available_at": "NoneType"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/creators/ad-campaigns/:id",
+      "query_fields": [],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 4771,
+      "response_schema": {
+        "id": "int",
+        "name": "str",
+        "product_image_url": "str",
+        "product_name": "str",
+        "product_description": "str",
+        "product_link": "str",
+        "service_join_url": "NoneType",
+        "is_retrieval": "bool",
+        "product_price_label": "NoneType",
+        "ai_brief": "NoneType",
+        "recruitment_count": "int",
+        "reward_amount": "int",
+        "minimum_follower_count": "int",
+        "first_application_recommendation_priority": "int",
+        "application_count": "int",
+        "status": "str",
+        "brand_name": "str",
+        "recruitment_open_at": "str",
+        "recruitment_close_at": "str",
+        "selection_announcement_at": "NoneType",
+        "sample_type": "str",
+        "sample_delivery_business_days": "NoneType",
+        "upload_start_at": "str",
+        "upload_end_at": "str",
+        "contents_upload_start_at": "str",
+        "contents_upload_end_at": "str",
+        "contents_types": "str",
+        "contents_guide_url": "NoneType",
+        "contents_guide_type": "str",
+        "creator_requirements": {
+          "type": "array",
+          "length": 4,
+          "items": {
+            "id": "int",
+            "type": "str",
+            "content": "str",
+            "sort_order": "int"
+          }
+        },
+        "contents_guide": {
+          "id": "int",
+          "min_video_duration": "int",
+          "brand_instagram_id": "str",
+          "hashtags": {
+            "type": "array",
+            "length": 0,
+            "items": null
+          },
+          "reference_urls": {
+            "type": "array",
+            "length": 5,
+            "items": "str"
+          },
+          "tones": {
+            "type": "array",
+            "length": 0,
+            "items": null
+          },
+          "additional_note": "str",
+          "attachment_urls": {
+            "type": "array",
+            "length": 0,
+            "items": null
+          },
+          "items": {
+            "type": "array",
+            "length": 4,
+            "items": {
+              "id": "int",
+              "type": "str",
+              "content": "str",
+              "image_url": "NoneType",
+              "sort_order": "int"
+            }
+          }
+        },
+        "is_guide_public": "bool",
+        "is_qa_preview": "bool",
+        "is_listed": "bool",
+        "creator_access_scope": "str",
+        "campaign_group": "NoneType",
+        "manager": {
+          "id": "int",
+          "profile_image": "str",
+          "company_name": "str",
+          "brand_type": "str",
+          "introduction": "str",
+          "site_url": "str",
+          "sns_url": "NoneType"
+        }
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/stats/mini",
+      "query_fields": [
+        "username"
+      ],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 200,
+      "mime": "application/json",
+      "response_bytes": 103,
+      "response_schema": {
+        "results": {
+          "today": "int",
+          "accumulated": "int",
+          "realtime": "int",
+          "subscribers": "int"
+        },
+        "updated_at": "str"
+      },
+      "state": "request_observed"
+    },
+    {
+      "method": "GET",
+      "origin": "https://link.inpock.co.kr",
+      "path": "/api/link-metadata",
+      "query_fields": [
+        "url"
+      ],
+      "request_content_type": null,
+      "request_fields": null,
+      "status": 400,
+      "mime": "application/json; charset=utf-8",
+      "response_bytes": 60,
+      "response_schema": {
+        "errorMessage": "str",
+        "errorType": "str"
+      },
+      "state": "request_observed"
+    }
+  ],
+  "sourceCandidateContracts": [
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "purpose": "List owner blocks",
+      "response_use": "Response object .blocks",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 4113
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/blocks",
+      "purpose": "Cursor paginated owner blocks",
+      "response_use": "has_next, next_cursor; sends params.cursor if supplied",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 4113
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/{block_id}",
+      "purpose": "Read block detail",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 4113
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "purpose": "Create link card",
+      "payload": {
+        "block_type": "link",
+        "url": "https://example.com/affiliate-url",
+        "title": "Affiliate product title",
+        "style": "simple",
+        "image": "",
+        "button_text": "",
+        "is_open": true
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "PUT",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/{block_id}",
+      "purpose": "Update full link card",
+      "payload": {
+        "block_type": "link",
+        "url": "<URL>",
+        "title": "<title>",
+        "style": "<style>",
+        "image": "<URL or empty>",
+        "button_text": "<text or empty>",
+        "is_open": "<boolean>"
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "PATCH",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/{block_id}/open",
+      "purpose": "Change visibility",
+      "payload": {
+        "is_open": "<boolean>"
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "PATCH",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/{block_id}/sequence",
+      "purpose": "Change placement relative to next block",
+      "payload": {
+        "new_next_id": "<next block ID or null; null semantics require live verification>"
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "PATCH",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/{block_id}",
+      "purpose": "Pin/unpin block",
+      "payload": {
+        "is_fixation": "<boolean>"
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/{block_id}/duplicate",
+      "purpose": "Duplicate existing card",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/archive",
+      "purpose": "Archive existing blocks",
+      "payload": {
+        "id_list": [
+          "<block ID>"
+        ]
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "PATCH",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/archive",
+      "purpose": "Unarchive blocks",
+      "payload": {
+        "id_list": [
+          "<block ID>"
+        ]
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "DELETE",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "purpose": "Delete selected blocks",
+      "payload": {
+        "id_list": [
+          "<block ID>"
+        ]
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/archive?keyword={keyword}",
+      "purpose": "List archived blocks with optional keyword",
+      "response_use": "Response .archive.blocks",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 4113
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/blocks/{collection_id}/collection-links",
+      "purpose": "Read collection child cards, cursor paginated",
+      "response_use": "has_next/next_cursor and params.cursor",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 4113
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "purpose": "Create collection parent",
+      "payload": {
+        "block_type": "collection",
+        "title": "<optional collection title>",
+        "collection_style": "grid_2",
+        "is_open": false
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/collection/post-99abe6340b077a2b.js",
+        "module_id": 3724
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "purpose": "Create collection product card",
+      "payload": {
+        "block_type": "collection_link",
+        "collection_id": "<parent ID>",
+        "title": "<max150>",
+        "url": "<affiliate URL>",
+        "image": "<image URL>",
+        "description": "<max50 or empty>",
+        "original_price": null,
+        "price": null
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/collection/link/post-5d05628b0fae9510.js",
+        "module_id": 9623
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "purpose": "Create text block, useful for affiliate disclosure",
+      "payload": {
+        "block_type": "text",
+        "title": "<multiline content, max500 UI>",
+        "is_open": true
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/text/post-65a04111fd3b7483.js",
+        "module_id": 4748
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "purpose": "Create image block with optional outbound link",
+      "payload": {
+        "block_type": "image",
+        "image_list": [
+          {
+            "sequence": 0,
+            "image": "<image URL>",
+            "title": "<caption>",
+            "url": "<affiliate URL or empty>"
+          }
+        ],
+        "is_open": true
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/image/post-57b5a8c0835a051f.js",
+        "module_id": 7011
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/stats/links/{block_id}/today",
+      "purpose": "Read today card stats",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 4113
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/cta",
+      "purpose": "Read call to action status",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 4113
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "PATCH",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks/{block_id}/cta",
+      "purpose": "Set card CTA status",
+      "payload": {
+        "is_cta": "<boolean>"
+      },
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/pages/admin/block/link/post-797da70e91fc8b62.js",
+        "module_id": 1710
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users/{username}/public",
+      "purpose": "Read public visitor profile data (public card read-back candidate)",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/6541-6490b32049596a0e.js",
+        "module_id": 6118
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/v2/users/design",
+      "purpose": "Read profile design",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/6541-6490b32049596a0e.js",
+        "module_id": 6118
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "GET",
+      "origin": "https://link.inpock.co.kr",
+      "path": "/api/link-metadata?url={encoded_url}",
+      "purpose": "Fetch optional outbound link title/image metadata",
+      "response_use": "title may be array; image.url may be array; error -> null",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/6541-6490b32049596a0e.js",
+        "module_id": 3311
+      }
+    },
+    {
+      "evidence_level": "public_source_candidate_not_replayed",
+      "method": "POST",
+      "origin": "https://upload-image.inpock.co.kr",
+      "path": "/upload",
+      "purpose": "Upload image for card",
+      "payload": {
+        "file": "<image binary>"
+      },
+      "response_use": "JSON .data (value interpreted as image upload URL by callers)",
+      "source": {
+        "source_url": "https://d3f1g377pcunjx.cloudfront.net/_next/static/chunks/5974-e75840b6dd9614e8.js",
+        "module_id": 4501
+      }
+    }
+  ],
+  "preparedMutationRequests": [
+    {
+      "method": "POST",
+      "origin": "https://link-rest.inpock.co.kr",
+      "path": "/blocks",
+      "query_fields": [],
+      "request_content_type": "application/json",
+      "request_fields": {
+        "block_type": "str",
+        "url": "str",
+        "title": "str",
+        "style": "str",
+        "image": "str",
+        "button_text": "str",
+        "is_open": "bool"
+      },
+      "state": "mutation_excluded",
+      "server_request_sent": false,
+      "page": {
+        "origin": "https://link.inpock.co.kr",
+        "path": "/admin/block/link/post",
+        "query_fields": []
+      }
+    }
+  ],
+  "businessMutationsSent": 0,
+  "independentHttpReadOperations": [
+    {
+      "operation": "blocks",
+      "path": "/v2/blocks",
+      "liveReplay": true,
+      "recordCount": 0,
+      "pagination": "first_empty_page_server_end"
+    },
+    {
+      "operation": "public-profile",
+      "path": "/v2/users/:username/public",
+      "liveReplay": true,
+      "recordCount": 0,
+      "numericOwnerMatched": true
+    },
+    {
+      "operation": "mini-stats",
+      "path": "/stats/mini",
+      "queryFields": [
+        "username"
+      ],
+      "liveReplay": true
+    }
+  ],
+  "statesByScope": {
+    "login_and_named_reads": {
+      "captured": true,
+      "client_exists": true,
+      "credential_propagated": true,
+      "remnant_free": true,
+      "live_replay": true
+    },
+    "link_publication": {
+      "requestFieldsCapturedBeforeSend": true,
+      "responseCaptured": false,
+      "client_exists": "offline_preparation_only",
+      "credential_propagated": "not_verified_for_write",
+      "remnant_free": "not_applicable_no_write_client",
+      "live_replay": false
+    }
+  },
+  "inventoryReceipt": "inpock-inventory-2026-10-04.json",
+  "limits": [
+    "no card writes or uploads",
+    "multi-page live traversal not exercised because no blocks exist",
+    "other Inpock app menus deferred",
+    "offline source receipts are caller assertions and need current revalidation"
+  ],
+  "secretsPersistedInEvidence": false,
+  "validation": {
+    "command": "npm test / node --test tests/*.test.mjs",
+    "exitStatus": 0,
+    "summary": [
+      "✔ a successful server deletion prevents the expired AFATK from being sent again (1.87163ms)",
+      "ℹ tests 99",
+      "ℹ suites 0",
+      "ℹ pass 99",
+      "ℹ fail 0",
+      "ℹ cancelled 0",
+      "ℹ skipped 0",
+      "ℹ todo 0",
+      "ℹ duration_ms 991.483227"
+    ]
+  }
+}
