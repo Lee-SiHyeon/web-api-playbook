@@ -67,6 +67,16 @@ credentialed clients pending live until the real runner returns validated
 business data. Unknown feed envelopes, partial pages and source limits stay
 explicit; support price snapshot/CSV readback and same-context comparisons.
 
+For Olive Young, Shopee Indonesia, Sephora/Ulta and Rakuten, reuse
+[the program adapters](references/affiliate-program-adapters.md).
+Keep Rakuten Japan and global Rakuten Advertising separate. Validate an approved
+brand catalog/MID from the caller's account rather than guessing it. Preserve
+API-returned affiliate URLs apart from retailer URLs, do not click tracking links
+to verify them, and do not claim attribution or current commission from a public
+estimated range. Reuse the existing Curator adapter; a membership flag alone is
+not a matched member identity for link creation. Country/price-basis differences,
+reported sale windows and unverified Shopee currency stay explicit.
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.

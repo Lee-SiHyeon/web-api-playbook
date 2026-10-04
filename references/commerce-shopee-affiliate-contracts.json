@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "service": "shopee-affiliate-id",
+  "scope": "Shopee Indonesia Affiliate Open API product offer search and item lookup. Read-only. No shopper session, seller APIs, carts, purchases, link creation, account registration, or program writes.",
+  "market": {
+    "country": "Indonesia",
+    "countryCode": "ID",
+    "apiOrigin": "https://open-api.affiliate.shopee.co.id",
+    "currency": null,
+    "currencyCandidate": "IDR",
+    "currencySource": "market-inference",
+    "currencyVerified": false,
+    "priceSemantics": "The official ProductOfferV2 schema describes price, priceMin, priceMax, and commission as decimal strings in local currency. The API schema does not return a currency code or a scale/unit example. Preserve decimal strings verbatim; do not divide, round, or label them as verified IDR."
+  },
+  "transport": {
+    "method": "POST",
+    "path": "/graphql",
+    "contentType": "application/json",
+    "requestBody": "JSON.stringify({query: <GraphQL query>})",
+    "redirects": "manual; never followed",
+    "cookiePolicy": "The durable client sends no cookies or user session. The official Explorer's in-page fetch sets credentials: include; server acceptance without cookies remains unverified because no live App ID/Secret was available.",
+    "readOnly": true
+  },
+  "authentication": {
+    "scheme": "Shopee Affiliate Open API SHA256 signature",
+    "requiredCredentials": ["App ID", "App Secret"],
+    "header": "Authorization: SHA256 Credential={AppId}, Timestamp={UnixSeconds}, Signature={HexSha256}",
+    "timestamp": "ceil(current_epoch_milliseconds / 1000)",
+    "signature": {
+      "algorithm": "SHA-256",
+      "input": "AppId + Timestamp + exact serialized JSON body + AppSecret",
+      "encoding": "lowercase hexadecimal",
+      "notHmac": true
+    },
+    "userLogin": "No browser login flow is implemented. The request still requires a registered Shopee Affiliate App ID and App Secret."
+  },
+  "operations": [
+    {
+      "name": "searchProducts",
+      "graphQlOperation": "productOfferV2",
+      "kind": "query",
+      "argumentsUsed": {
+        "listType": { "type": "Int", "value": 0, "meaning": "ALL" },
+        "keyword": { "type": "String", "requiredByClient": true },
+        "sortType": { "type": "Int", "default": 1, "documentedValues": { "1": "relevance", "2": "sold count descending", "3": "price descending", "4": "price ascending", "5": "commission rate descending" } },
+        "page": { "type": "Int", "default": 1 },
+        "limit": { "type": "Int", "default": 20, "clientMaximum": 20 }
+      },
+      "responsePath": "data.productOfferV2.nodes[]",
+      "paginationPath": "data.productOfferV2.pageInfo",
+      "nodeFieldsRequested": [
+        "itemId", "productName", "price", "priceMin", "priceMax", "commissionRate",
+        "sellerCommissionRate", "shopeeCommissionRate", "appExistRate", "appNewRate",
+        "webExistRate", "webNewRate", "commission", "sales", "imageUrl", "productLink",
+        "shopId", "shopName", "productCatIds", "ratingStar", "priceDiscountRate",
+        "shopType", "periodStartTime", "periodEndTime"
+      ],
+      "priceFields": {
+        "price": "String; local-currency unit per Explorer schema",
+        "priceMin": "String; local-currency unit per Explorer schema",
+        "priceMax": "String; local-currency unit per Explorer schema",
+        "commission": "String; local-currency unit per Explorer schema",
+        "precision": "Preserved as server-provided decimal strings; no IEEE-754 conversion or scaling"
+      },
+      "commissionFields": {
+        "commissionRate": "String fraction; Explorer describes 0.0123 as 1.23%",
+        "sellerCommissionRate": "String fraction",
+        "shopeeCommissionRate": "String fraction",
+        "appExistRate": "String fraction for existing app users",
+        "appNewRate": "String fraction for new app users",
+        "webExistRate": "String fraction for existing web users",
+        "webNewRate": "String fraction for new web users",
+        "rule": "Return current item-specific API values. Do not hardcode a platform-wide commission range."
+      }
+    },
+    {
+      "name": "getProductById",
+      "graphQlOperation": "productOfferV2",
+      "kind": "query",
+      "argumentsUsed": {
+        "itemId": { "type": "Int64", "requiredByClient": true },
+        "page": { "type": "Int", "value": 1 },
+        "limit": { "type": "Int", "value": 1 }
+      },
+      "responsePath": "data.productOfferV2.nodes[]",
+      "identityRule": "Every returned node itemId must match the requested itemId."
+    }
+  ],
+  "clientBoundary": {
+    "module": "lib/commerce/shopee-affiliate.mjs",
+    "factory": "createShopeeAffiliateClient({appId, appSecret, fetchImpl, now})",
+    "methods": ["searchProducts({keyword,page,limit,sortType})", "getProductById({itemId})"],
+    "credentials": "App ID/Secret are held only in the caller's process memory and request Authorization header. They are excluded from the return value, receipt, and errors.",
+    "notImplemented": ["seller Open Platform APIs", "seller-owned catalog", "affiliate link mutation/generation", "conversion reports", "cart/order/purchase", "country switching", "unobserved product detail XHR fallback"]
+  },
+  "firstPartySources": [
+    {
+      "title": "Shopee Indonesia Affiliate Open API Explorer V2",
+      "url": "https://open-api.affiliate.shopee.co.id/explorer/v2",
+      "authority": "Shopee first-party API Explorer",
+      "facts": ["ProductOfferV2 arguments and types", "ProductOfferV2 response fields", "PageInfo fields", "exact SHA256 signature construction", "GraphQL endpoint is same Explorer origin /graphql"]
+    },
+    {
+      "title": "Shopee Singapore Affiliate API Access",
+      "url": "https://help.shopee.sg/portal/10/article/191702-API-Access",
+      "authority": "Shopee first-party Help Center",
+      "facts": ["Affiliate API supports Shopee, brand, and product offer lists; short links; conversion and validated reports"]
+    },
+    {
+      "title": "Shopee Indonesia Affiliate Commission Scheme",
+      "url": "https://help.shopee.co.id/portal/10/article/147677-%5BShopee-Affiliate-Program%5D-Apa-itu-Skema-Komisi-Baru-Shopee-Affiliate",
+      "authority": "Shopee first-party Help Center",
+      "facts": ["Commission scheme depends on channel/program conditions; this client reports live per-product API rate fields instead of declaring one universal rate"]
+    },
+    {
+      "title": "Shopee Indonesia Affiliate Program enrollment",
+      "url": "https://help.shopee.co.id/portal/4/article/72050-%5BShopee-Affiliate-Program%5D-Bagaimana-cara-mendaftar-Shopee-Affiliate-Program",
+      "authority": "Shopee first-party Help Center",
+      "facts": ["Affiliate program signup is a separate account/program step and is not performed by this client"]
+    }
+  ],
+  "evidenceBoundary": {
+    "contractObserved": true,
+    "actualStorefrontXhrCaptured": true,
+    "affiliateProductXhrSuccess": false,
+    "independentCredentialedReplay": false,
+    "currencyUnitVerified": false,
+    "credentialsAvailable": false,
+    "anonymousStorefront": "The public product URL led to Shopee's traffic verification/login-required screen. Its observed GET /api/v4/pdp/get_pc returned an error envelope without product data. This is recorded only as a blocker; it is not a Shopee Affiliate product API replacement.",
+    "apiControl": "A direct POST to the official /graphql endpoint with a read-only productOfferV2 query, no App ID, no signature, no cookies, and no user session returned HTTP 200 JSON GraphQL error code 10020 with no data. HTTP 200 is not a product success.",
+    "affiliateApiClientStatus": "Implemented and locally contract-tested; catalog business data remains unverified until valid App ID/Secret and API access are supplied."
+  }
+}

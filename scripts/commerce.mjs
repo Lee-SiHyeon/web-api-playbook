@@ -4,6 +4,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { options, stdinJson, reserveOutput, report, safeError } from '../lib/cli.mjs';
 import { COMMERCE_PROVIDERS, createCommerceReader } from '../lib/commerce/providers.mjs';
 import { collectOfferSnapshot, comparePriceSnapshots, snapshotCsv } from '../lib/commerce/snapshots.mjs';
+import { assertCredentialFreeResult } from '../lib/commerce/credential-output.mjs';
 
 const fail = code => { throw Object.assign(new Error(code), { code }); };
 const ARGUMENTS = {
@@ -13,10 +14,14 @@ const ARGUMENTS = {
   'amazon-partner': ['id', 'query', 'currency', 'marketplace', 'pageSize'], cjdropshipping: ['id', 'query', 'country', 'categoryId', 'pageSize'],
   banggood: ['id', 'query', 'currency', 'categoryId'], awin: ['id', 'query', 'locale', 'advertiserId', 'pageSize'],
   impact: ['id', 'query', 'catalogId', 'pageSize'], 'printful-api': ['id', 'region', 'currency', 'productionCurrency', 'pageSize'],
+  oliveyoung: ['query', 'pageSize'], 'shopee-id': ['id', 'query', 'pageSize'],
+  'rakuten-ichiba': ['id', 'query', 'shopCode', 'genreId', 'pageSize'],
+  'rakuten-advertising': ['query', 'merchantId', 'pageSize'], 'sephora-affiliate': ['query', 'merchantId', 'pageSize'],
+  'ulta-affiliate': ['id', 'query', 'catalogId', 'pageSize'], sephora: ['query', 'pageSize'], ulta: ['query', 'pageSize'],
 };
 const FLAGS = ['input', 'output', 'csv', 'baseline', 'credentials-stdin', 'limit', 'max-pages', 'id', 'query', 'store', 'region',
-  'currency', 'marketplace', 'category-id', 'country', 'language', 'locale', 'advertiser-id', 'catalog-id', 'page-size', 'production-currency'];
-const FLAG_ARGS = { 'category-id': 'categoryId', 'advertiser-id': 'advertiserId', 'catalog-id': 'catalogId', 'page-size': 'pageSize', 'production-currency': 'productionCurrency' };
+  'currency', 'marketplace', 'category-id', 'country', 'language', 'locale', 'advertiser-id', 'catalog-id', 'page-size', 'production-currency', 'shop-code', 'genre-id', 'merchant-id'];
+const FLAG_ARGS = { 'category-id': 'categoryId', 'advertiser-id': 'advertiserId', 'catalog-id': 'catalogId', 'page-size': 'pageSize', 'production-currency': 'productionCurrency', 'shop-code': 'shopCode', 'genre-id': 'genreId', 'merchant-id': 'merchantId' };
 const object = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 const integer = (value, fallback, maximum) => {
   const n = value === undefined ? fallback : typeof value === 'string' && /^[1-9]\d*$/.test(value) ? Number(value) : value;
@@ -29,13 +34,6 @@ async function readJson(file, limit) {
   if (!info.isFile() || info.size > limit) fail('COMMERCE_FILE_TOO_LARGE');
   try { return JSON.parse(await readFile(file, 'utf8')); } catch { fail('COMMERCE_JSON_INVALID'); }
 }
-function assertNoCredentialLeak(value, credentials) {
-  const serialized = JSON.stringify(value);
-  for (const [key, secret] of Object.entries(credentials)) {
-    if (/secret|token|key|credentialid/i.test(key) && typeof secret === 'string' && secret.length >= 8 && serialized.includes(secret)) fail('COMMERCE_SECRET_IN_RESULT');
-  }
-}
-
 let jsonOutput, csvOutput;
 try {
   const [providerArg, operationArg, ...tail] = process.argv.slice(2);
@@ -85,7 +83,7 @@ try {
     snapshot.credentialsUsed = snapshot.receipts.some(receipt => receipt.credentialsUsed === true);
     snapshot.secretsPersistedInEvidence = false;
     if (baseline) snapshot.comparison = comparePriceSnapshots(baseline, snapshot);
-    assertNoCredentialLeak(snapshot, credentials);
+    assertCredentialFreeResult(snapshot, credentials);
     const csv = opts.csv ? snapshotCsv(snapshot) : null;
     if (jsonOutput) await jsonOutput.writeFile(JSON.stringify(snapshot, null, 2) + '\n');
     if (csvOutput) await csvOutput.writeFile(csv);

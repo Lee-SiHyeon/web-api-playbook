@@ -1,0 +1,49 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "sephora",
+  "capabilityId": "catalog.search",
+  "checkedAt": "2026-10-04T21:57:07.408Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.sephora.com/search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.sephora.com",
+    "path": "/api/v2/catalog/search/",
+    "checkedAt": "2026-10-04T21:57:07.408Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "type",
+      "q",
+      "page",
+      "currentPage",
+      "countryCode"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 104057,
+    "schemaVerified": true
+  },
+  "implementation": {
+    "lib/commerce/sephora.mjs": "f46e223c0c77dd4e7274976f4e04e24c3f5388700d5fd0f16dccfdf52e3bc934",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "queryMatched": true,
+  "matchedResult": {
+    "totalProducts": 164,
+    "returnedProducts": 60,
+    "pricedProducts": 60,
+    "productUrls": 60,
+    "currency": "USD"
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "schemaVersion": 1,
+  "service": "oliveyoung",
+  "description": "Shopping Curator HTTP adapter reuse. Source inspection supports product search price fields, but authenticated live search, product-detail XHR, and member-bound link creation remain unverified.",
+  "capabilities": [
+    {
+      "id": "catalog.search_prices",
+      "title": "Search Curator products and normalize current/list KRW prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung.mjs",
+            "exports": [
+              "createOliveyoungCommerceClient"
+            ]
+          },
+          {
+            "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/oliveyoung-curator.mjs",
+            "exports": [
+              "createOliveyoungClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "oliveyoung"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "The existing route is an authenticated Curator search. No current Olive Young session was supplied, and the anonymous direct replay returned 403 text/html; live KRW product values remain unverified."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Read one Olive Young product through a standalone product-detail XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "No standalone product-detail XHR schema or independent HTTP replay was observed. The product page route is not counted as an API."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Traverse product-search pages with verified continuation and termination",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "The source bundle passes pageNumber and pageSize, but product-search continuation semantics and the terminal page contract have not been verified."
+    },
+    {
+      "id": "curator.link_creation",
+      "title": "Create and verify an own-account Curator short link",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/oliveyoung-curator.mjs",
+            "exports": [
+              "createOliveyoungClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/oliveyoung.mjs",
+            "exports": [
+              "createOliveyoungCommerceClient"
+            ]
+          }
+        ],
+        "tests": [
+          "service-packs/affiliate/apps/affiliate-api-hub/tests/oliveyoung-curator.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "oliveyoung"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "No live account session was supplied. The known membership/education status response does not identify the current member, so the new commerce surface refuses link creation until an authenticated member identity is read and matched before mutation."
+    },
+    {
+      "id": "program.commission_terms",
+      "title": "Read the current official Shopping Curator commission terms",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-contracts.json"
+          ]
+        }
+      ],
+      "note": "The official guide currently states 7% direct / 3% indirect for external product links and 3% direct / no indirect credit for Shutter tags. Promotional rates can change; values are documented with a checked date and not embedded in runtime logic."
+    },
+    {
+      "id": "auth.customer_login",
+      "title": "Sign in or register a customer account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This task concerns product price collection and the Curator integration; customer account signup/login, consent, and terms acceptance were not requested. Authenticated Curator API use still requires a scoped session supplied by the owner.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "account.profile_payout",
+      "title": "Change a member profile, payout data, or settlement request",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested API integration and product price lookup, not account or payout changes.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

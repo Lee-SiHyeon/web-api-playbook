@@ -1,0 +1,35 @@
+{
+  "schema": "web-api-live-attempt-v1",
+  "service": "oliveyoung-shopping-curator",
+  "capabilityId": "curator.product_search",
+  "checkedAt": "2026-10-05",
+  "attempted": true,
+  "success": false,
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "contractProvenance": {
+    "kind": "first_party_web_bundle_source",
+    "sourceURL": "https://cf-static.oliveyoung.co.kr/prd/1.184.0/_next/static/chunks/pages/affiliate/product/search-69ae4f32d74c2ad5.js",
+    "sourceSha256": "26e07cf8ce6cbf04876d626a9aeff7f19836fff653f518694166cc93f644d52d"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://m.oliveyoung.co.kr",
+    "path": "/review/api/affiliate/v1/activities/search",
+    "httpStatus": 403,
+    "mime": "text/html",
+    "responseBytes": 49211,
+    "redirectFollowed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "browserUsed": false,
+    "queryFields": ["keyword", "pageNumber", "pageSize"]
+  },
+  "result": "ACCESS_BLOCKED",
+  "interpretation": "This was an anonymous negative control. It does not test the authenticated Curator search response or verify product prices.",
+  "authenticatedReplay": "not_performed_no_scoped_oliveyoung_session",
+  "productDetailXhr": "not_observed",
+  "linkCreation": "not_attempted",
+  "blockerScreenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-blocked.png"
+}

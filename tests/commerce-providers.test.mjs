@@ -67,3 +67,54 @@ test('Amazon partial pages remain partial snapshots, and first returned quote is
   assert.equal(result.offers[0].price.amount,'20.00');assert.equal(result.collection.partialResponses,1);
   assert.equal(result.collection.complete,false);
 });
+
+test('Shopee raw price strings and null currency retain range and follow the actual page number',async()=>{
+  const calls=[];
+  const loadPage=await createCommerceReader({provider:'shopee-id',args:{query:'shoes'},credentials:{appId:'fixture-id',appSecret:'fixture-secret'},
+    factories:{'shopee-id':()=>({searchProducts:async input=>{
+      calls.push(input.page);return{products:[{itemId:String(input.page),title:'Shoes',url:'https://shopee.co.id/product/1/'+input.page,
+        price:{amount:'15000',currency:null},priceRange:{min:'10000',max:'15000'}}],pageInfo:{page:null,hasNextPage:input.page===1},
+        request:{...receipt,credentialsUsed:true}};
+    }})}});
+  const result=await collectOfferSnapshot({provider:'shopee-id',loadPage,maxPages:3});
+  assert.deepEqual(calls,[1,2]);assert.equal(result.offers[0].price.amount,'15000');
+  assert.equal(result.offers[0].priceRange.min.amount,'10000');assert.equal(result.collection.currencyUnverifiedCount,2);
+  assert.equal(result.collection.complete,false);assert.equal(result.receipts[0].credentialsUsed,true);
+});
+
+test('Rakuten Advertising keeps retailer list and reported sale quotes distinct without inferred URL',async()=>{
+  const loadPage=await createCommerceReader({provider:'rakuten-advertising',args:{query:'lipstick',merchantId:'123'},credentials:{accessToken:'fixture-token'},
+    factories:{'rakuten-advertising':()=>({searchProducts:async input=>{
+      assert.equal(input.keyword,'lipstick');assert.equal(input.advertiserMid,'123');
+      return{items:[{productId:'123:456',variantId:'SKU',title:'Lipstick',canonicalURL:null,affiliateURL:'https://tracking.example/click?pub=owned',
+        price:{amount:'30.00',currency:'USD',kind:'retail_list'},salePrice:{amount:'25.00',currency:'USD'},source:{advertiserId:'123'}}],
+        pagination:{page:1,pageSize:20,totalPages:1,conservativeResultCap:1000},receipt};
+    }})}});
+  const result=await collectOfferSnapshot({provider:'rakuten-advertising',loadPage});
+  assert.deepEqual(result.offers.map(o=>o.price.kind),['retail_list','reported_sale']);
+  assert.equal(result.offers[0].url,null);assert.equal(result.offers[0].affiliateLink.attributionVerified,false);
+});
+
+test('Sephora product-level ranges do not pretend to be a selected-SKU scalar quote',async()=>{
+  const loadPage=await createCommerceReader({provider:'sephora',args:{query:'lipstick'},factories:{sephora:()=>({searchProducts:async()=>({
+    page:1,pageSize:20,totalProducts:1,products:[{productId:'P1234',variantId:'123456',brandName:'Brand',productName:'Lipstick',price:null,
+      priceScope:'product_range',productUrl:'https://www.sephora.com/product/item-P1234',priceRange:{min:{amount:'20.00',currency:'USD'},max:{amount:'25.00',currency:'USD'}}}],receipt,
+  })})}});
+  const result=await collectOfferSnapshot({provider:'sephora',loadPage});
+  assert.equal(result.offers[0].variantId,null);assert.equal(result.offers[0].price,null);
+  assert.equal(result.offers[0].priceRange.min.kind,'retail_list');assert.equal(result.offers[0].context.priceBasis,'product_range');
+});
+
+test('Ulta traverses upstream pages without discarding sponsored cards through a local result cap',async()=>{
+  const inputs=[];
+  const loadPage=await createCommerceReader({provider:'ulta',args:{query:'lipstick',pageSize:20},factories:{ulta:()=>({searchProducts:async input=>{
+    inputs.push(input);
+    return{page:input.page,pageCount:2,pageSize:64,products:Array.from({length:input.page===1?74:64},(_,i)=>({
+      productId:String(input.page*1000+i),variantId:String(input.page*1000+i),brandName:'Brand',productName:'Lipstick',productUrl:null,
+      price:{amount:'25.00',currency:'USD',kind:'retail_sale'},salePrice:{minAmount:'25.00',maxAmount:'25.00',currency:'USD'},
+    })),receipt};
+  }})}});
+  const result=await collectOfferSnapshot({provider:'ulta',loadPage,maxOffers:500});
+  assert.deepEqual(inputs.map(i=>[i.page,i.pageSize]),[[1,100],[2,100]]);assert.equal(result.offers.length,138);
+  assert.equal(result.offers[0].price.kind,'retail_current');assert.equal(result.collection.complete,false);
+});

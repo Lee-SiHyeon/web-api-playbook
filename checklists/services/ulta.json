@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "service": "ulta",
+  "description": "The US en-US public product search now uses a browser-free DXL GraphQL client. It derives the current ProductListingResults content ID, query, locale and public headers from each anonymous first-party page response; no cookies, auth, or retailer visitor ID are sent. Product detail and affiliate-network account reads remain separate capabilities.",
+  "capabilities": [
+    {
+      "id": "catalog.search",
+      "title": "Search Ulta products through a stable anonymous direct API client",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ulta.mjs",
+            "exports": [
+              "createUltaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-ulta.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "ulta"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.ulta.com",
+          "path": "/dxl/graphql",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-ulta-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ulta.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "bootstrapRequest",
+              "origin": "https://www.ulta.com",
+              "path": "/search",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The client obtains the current query and ProductListingResults content ID from the public first-party page state, then calls the observed /dxl/graphql endpoint directly over HTTP."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Read Ulta product details, current prices, and SKU options through a stable anonymous API client",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "An anonymous product page rendered a visible price and the page-data GraphQL contract was observed. A stable no-browser request recipe and direct product-specific replay were not established."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Read later Ulta product-search pages and verify result termination",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ulta.mjs",
+            "exports": [
+              "createUltaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-ulta.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "ulta"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.ulta.com",
+          "path": "/dxl/graphql",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-ulta-pagination-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ulta.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "bootstrapRequest",
+              "origin": "https://www.ulta.com",
+              "path": "/search",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The client follows the returned same-origin loadMoreUrl in order and refreshes the page bootstrap/content ID for each page. Anonymous direct replay reached page 4 of 4; promoted rows can make returned card count exceed Ulta's pageSize."
+    },
+    {
+      "id": "catalog.sale_price",
+      "title": "Read sale price separately from list price and verify currency",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ulta.mjs",
+            "exports": [
+              "createUltaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-ulta.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "ulta"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.ulta.com",
+          "path": "/dxl/graphql",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-ulta-sale-price-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ulta.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "bootstrapRequest",
+              "origin": "https://www.ulta.com",
+              "path": "/search",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The live result included distinct listPrice and salePrice fields; a non-null USD sale price was observed and parsed separately from list price."
+    },
+    {
+      "id": "partner_program.commission",
+      "title": "Read current Ulta affiliate commission rates and program terms",
+      "priority": "optional",
+      "applicability": "unknown",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Ulta's official page lists its publisher Impact Program but does not publish a fixed numeric commission rate. Current terms depend on the program dashboard."
+    },
+    {
+      "id": "auth.login",
+      "title": "Sign in to a customer account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested catalog collector is limited to anonymous public reads and does not need a customer login.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "cart.write",
+      "title": "Mutate basket, checkout, or order state",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested client is read-only and limited to product data and prices.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.impact_brand_catalog",
+      "title": "Account catalog -> verified Ulta US publisher products/prices and returned tracking URL",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/brand-affiliates.mjs",
+            "exports": [
+              "createUltaImpactCatalogClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/impact.mjs",
+            "exports": [
+              "createImpactPartnerCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "ulta-affiliate"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-brand-affiliates.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No own Impact SID/AuthToken or catalog ID supplied. US/USD exact advertiser+catalog verification is required before items; returned item response has no established exhaustive pagination."
+    },
+    {
+      "id": "catalog.common_collector",
+      "title": "Actual commerce CLI -> price JSON/CSV with independent readback",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ulta.mjs",
+            "exports": [
+              "createUltaPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "ulta"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://www.ulta.com",
+          "path": "/dxl/graphql",
+          "mime": "application/json",
+          "files": [
+            "verification/affiliate-ulta-common-collector-live-2026-10-05.json",
+            "verification/affiliate-ulta-collection-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/ulta.mjs",
+            "verification/affiliate-ulta-collection-sample-2026-10-05.csv"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "API field price kind and range preserved. Ulta sponsored cards are not identical to organic resultCount; provider_limited stays incomplete."
+    }
+  ]
+}

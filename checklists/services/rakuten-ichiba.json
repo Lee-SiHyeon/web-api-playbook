@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 1,
+  "service": "rakuten-ichiba",
+  "description": "Rakuten Ichiba / Rakuten Affiliate Japan catalog adapter. Uses the documented v2026-07-01 Rakuten Web Service Search and Genre APIs. Requires a caller registered applicationId plus accessKey; the optional affiliateId is supplied by the caller. Distinct from Rakuten Advertising global publisher APIs.",
+  "capabilities": [
+    {
+      "id": "auth.application_credentials",
+      "title": "Use a matching Rakuten Web Service applicationId and accessKey in process memory",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Current endpoints require both values. applicationId is a required query parameter; accessKey is transmitted only through its documented HTTP header. Live authenticated replay awaits caller-owned credentials."
+    },
+    {
+      "id": "catalog.search",
+      "title": "Search by keyword, shopCode, itemCode, or genreId with exact current API request fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "GET /ichibams/api/IchibaItem/Search/20260701 uses format=json and formatVersion=2. Search request shape has local fixture coverage only."
+    },
+    {
+      "id": "catalog.current_price_jpy",
+      "title": "Collect listing-level itemPrice as a decimal JPY amount and preserve price-basis ranges bound to itemCode and shopCode",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The API documents itemPrice plus itemPriceBaseField and separate all-item (Min/Max1), searchable-item (Min/Max2), and purchasable-item (Min/Max3) bounds. The normalized itemPrice is explicitly listing-level and is not claimed to be a selected SKU/variant price."
+    },
+    {
+      "id": "catalog.item_detail",
+      "title": "Retrieve one exact listing by its documented shopCode:item identifier",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The documentation supplies itemCode as an Item Search selector; this adapter reuses that endpoint, requests one hit, then binds exact itemCode and shopCode. It does not invent a separate detail route."
+    },
+    {
+      "id": "catalog.category_lookup",
+      "title": "Filter product results by Rakuten Ichiba genreId and read genre hierarchy",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Item search accepts genreId; getGenre uses documented GET /ichibagt/api/IchibaGenre/Search/20260701."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Read documented 1-based page results within hits 1-30 and pages 1-100",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The adapter reports API pageCount and nextPage only when another documented page exists."
+    },
+    {
+      "id": "affiliate.link_generation",
+      "title": "Request affiliateUrl only when a caller explicitly supplies its own Rakuten Affiliate ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Affiliate ID is never inferred, looked up, or stored. Rakuten docs state itemUrl can equal affiliateUrl when affiliateId is supplied; the adapter preserves affiliateUrl separately and only reports a canonical URL when a static direct or pc/m target verifies the Rakuten host, shopCode path, and an exact path segment matching the API itemCode suffix. It never follows a tracking URL or synthesizes an item URL."
+    },
+    {
+      "id": "catalog.canonical_url_verification",
+      "title": "Resolve a canonical merchant URL only from a verified API itemUrl or static affiliate pc/m target",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Targets lacking a literal itemCode path-segment match return canonicalUrl:null and targetVerified:false; itemCode/shopCode and the affiliateUrl are still preserved. The client does not infer URL slug transformations or assume leaf equality."
+    },
+    {
+      "id": "affiliate.item_rate_metadata",
+      "title": "Preserve item-specific affiliateRate percentages when returned by the official API",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-ichiba.mjs",
+            "exports": [
+              "createRakutenIchibaClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-ichiba.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-ichiba"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The current item-search docs expose affiliateRate. It is returned as observed item-specific metadata and is never replaced with a fixed 2-4% assumption."
+    },
+    {
+      "id": "auth.browser_login_registration",
+      "title": "Interactive Rakuten login and application registration flow",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This adapter accepts already registered app credentials supplied by its caller; it does not sign in, register an app, or request affiliate enrollment.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.rakuten_advertising_global",
+      "title": "Rakuten Advertising global publisher network catalog or program enrollment",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This service entry is specifically Rakuten Ichiba and Rakuten Affiliate for Japan; Rakuten Advertising global publisher APIs are a distinct integration.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "retail.cart_orders_write",
+      "title": "Change a Rakuten cart, place an order, or alter account/profile settings",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested Rakuten Ichiba work is limited to catalog, price, category, and optional affiliate URL reads.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

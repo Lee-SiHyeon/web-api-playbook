@@ -1,0 +1,197 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ulta",
+  "capabilityId": "catalog.pagination",
+  "checkedAt": "2026-10-04T22:28:39.333Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.ulta.com/search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/dxl/graphql",
+    "checkedAt": "2026-10-04T22:28:39.333Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "ultasite",
+      "user-agent",
+      "operationName",
+      "query",
+      "variables"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 780428,
+    "responseSha256": "3284da859a231a667be9c8ba5e8cc8458c0182a01b428897b387e8a40f9b262f"
+  },
+  "bootstrapRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/search",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1249244,
+    "checkedAt": "2026-10-04T22:28:38.496Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "search",
+      "page"
+    ]
+  },
+  "bootstrapRequests": [
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/search",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1249259,
+      "checkedAt": "2026-10-04T22:28:32.861Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "search"
+      ]
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/search",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1249244,
+      "checkedAt": "2026-10-04T22:28:34.915Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "search",
+        "page"
+      ]
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/search",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1251399,
+      "checkedAt": "2026-10-04T22:28:36.719Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "search",
+        "page"
+      ]
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/search",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1249244,
+      "checkedAt": "2026-10-04T22:28:38.496Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "search",
+        "page"
+      ]
+    }
+  ],
+  "result": {
+    "queryMatched": true,
+    "page": 4,
+    "pageSize": 64,
+    "requestedPageSize": 100,
+    "pageCount": 4,
+    "resultCount": 250,
+    "pagesTraversed": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "sourceItemCount": 58,
+    "returnedProductCount": 58,
+    "pricedProductCount": 58,
+    "listPriceFieldVerified": true,
+    "salePriceFieldVerified": true,
+    "salePriceNonNullCount": 3,
+    "currency": "USD",
+    "market": "US",
+    "hasNextPage": false,
+    "firstProduct": {
+      "productId": "mkt77010290",
+      "skuId": "77016027",
+      "brandName": "Rude",
+      "productName": "The Roaring 20's + Teeny Weeny Lip Duo",
+      "listPriceText": "$10.95",
+      "salePriceText": null,
+      "price": {
+        "amount": "10.95",
+        "currency": "USD",
+        "kind": "retail_list"
+      },
+      "priceRange": null
+    },
+    "salePriceSample": {
+      "productId": "mkt77011594",
+      "skuId": "77018316",
+      "brandName": "SIIA Cosmetics",
+      "productName": "Change Agent Magnetic Original Lipstick",
+      "listPriceText": "$19.00",
+      "salePriceText": "$17.00 - $19.00",
+      "listPrice": {
+        "minAmount": "19.00",
+        "maxAmount": "19.00",
+        "currency": "USD",
+        "kind": "retail_list"
+      },
+      "salePrice": {
+        "minAmount": "17.00",
+        "maxAmount": "19.00",
+        "currency": "USD",
+        "kind": "retail_sale"
+      },
+      "price": null
+    }
+  },
+  "execution": {
+    "runner": "Node 24 direct HTTP client",
+    "browserUsed": false,
+    "cookiesSupplied": false,
+    "authorizationSupplied": false,
+    "redirectFollowed": false
+  },
+  "implementation": {
+    "lib/commerce/ulta.mjs": "3b007ea6061f4bf046b6f4bc69758b632a350b3510567cae6a921d13c23c6615"
+  }
+}

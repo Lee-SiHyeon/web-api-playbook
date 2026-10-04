@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "service": "ulta",
+  "capturedAt": "2026-10-05",
+  "publicCatalog": {
+    "status": "anonymous_direct_xhr_replay_verified",
+    "contractProvenance": "browser_xhr_observed_and_first_party_source_reconstructed",
+    "sourceURL": "https://www.ulta.com/search",
+    "market": "US",
+    "locale": "en-US",
+    "currency": "USD",
+    "browserUsedByClient": false,
+    "credentialsUsed": false,
+    "cookiesUsed": false,
+    "authorizationUsed": false,
+    "xhr": {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/dxl/graphql",
+      "mime": "application/json",
+      "operationName": "NonCachedPage",
+      "queryIdHeader": "NonCachedPage",
+      "graphTypeHeader": "query",
+      "graphSubTypeHeader": "noncachedpage",
+      "moduleNameHeader": "ProductListingResults",
+      "clientChannel": "web",
+      "clientCountry": "US",
+      "clientLocale": "en-US",
+      "queryParameterNames": [
+        "ultasite",
+        "user-agent",
+        "operationName",
+        "query",
+        "variables"
+      ],
+      "responseFields": [
+        "data.Page.content.items[].productId",
+        "data.Page.content.items[].skuId",
+        "data.Page.content.items[].brandName",
+        "data.Page.content.items[].productName",
+        "data.Page.content.items[].listPrice",
+        "data.Page.content.items[].salePrice",
+        "data.Page.content.items[].sponsored",
+        "data.Page.content.page",
+        "data.Page.content.pageSize",
+        "data.Page.content.resultCount",
+        "data.Page.content.loadMoreUrl"
+      ]
+    },
+    "requestConstruction": {
+      "pageBootstrap": "Anonymous GET /search?search=<term>[&page=<n>] returns first-party Apollo state with ProductListingResults.meta.initAction.graphql and current contentId.",
+      "querySource": "The client uses the current first-party initAction GraphQL text and validates that its embedded URL matches the requested search/page. It does not persist the dynamic contentId.",
+      "queryIdDerivation": "The first-party client derives X-ULTA-DXL-QUERY-ID from the GraphQL operation name. This NonCachedPage query has no variables.url.path, so the observed value is NonCachedPage.",
+      "firstPartyClientSource": {
+        "url": "https://www.ulta.com/ux/assets/js/client.fa640546.js",
+        "sha256": "4f8fb445dbf097260ce1a08e3e4872422742130e75860d49c5f4a399d848b506",
+        "httpStatus": 200,
+        "responseBytes": 2044499,
+        "observedRules": [
+          "The action builder creates moduleParams only from first-party action.params and current app context.",
+          "The query ID builder uses the operation name and only adds a URL suffix when variables.url.path is supplied.",
+          "The request-header builder emits the operation query ID and action customHeaders."
+        ]
+      },
+      "graphqlBase": "Derived from public window.__GRAPHQL_DOMAIN__ and window.__GRAPHQL_GET_URI__ assignments in the HTML response; the current US response points to the same-origin /dxl/graphql route and supplies public query defaults.",
+      "siteHeader": "Derived from public window.__REQUEST_HEADERS__.X_ULTA_SITE.",
+      "moduleParams": {
+        "gti": "empty string; no visitor/account value is copied",
+        "loginStatus": "anonymous",
+        "breakpoint": "desktop",
+        "retailerVisitorId": "omitted; no cookie, visitor ID, or browser session is sent"
+      },
+      "pageHeaders": [
+        "accept: application/json",
+        "x-ulta-client-country: US",
+        "x-ulta-client-locale: en-US",
+        "x-ulta-client-channel: web",
+        "x-ulta-graph-type: query",
+        "x-ulta-graph-sub-type: noncachedpage",
+        "x-ulta-graph-module-name: ProductListingResults",
+        "x-forwarded-proto: https",
+        "x_ulta_site: current first-party public page configuration"
+      ]
+    },
+    "pagination": {
+      "status": "direct_page_1_2_and_4_verified",
+      "nextPageSource": "data.Page.content.loadMoreUrl returned by the observed GraphQL XHR",
+      "method": "The client validates the same-origin /search URL, matching search term, and consecutive page number, then fetches that page's public bootstrap to derive its current contentId before replaying its XHR.",
+      "observedPageSize": 64,
+      "pageSizeArgument": "Local maximum number of returned cards, capped at 100; it does not change Ulta's upstream pageSize.",
+      "maximumPageArgument": 10
+    },
+    "priceSemantics": {
+      "listPriceField": "items[].listPrice",
+      "salePriceField": "items[].salePrice",
+      "priceAmounts": "Dollar strings are parsed into decimal-string min/max amounts. Ranges are retained as ranges; raw source strings are preserved.",
+      "normalizedOfferFields": "Fixed current price is exposed as price.amount/currency/kind; a returned range is exposed as priceRange. Current price uses salePrice only when Ulta supplies a non-null salePrice, otherwise listPrice.",
+      "currencyEvidence": "US client-country header, en-US locale, and dollar price strings. USD is assigned only when a dollar amount parses successfully.",
+      "saleObservation": "The field was present on all 73–74 returned card rows per page. A live non-null salePrice was observed for a sampled product and parsed separately from listPrice; other rows returned null."
+    },
+    "productIdentity": {
+      "idsObserved": [
+        "pimprod plus digits",
+        "xlsImpprod plus digits",
+        "mkt plus digits",
+        "numeric IDs"
+      ],
+      "productURL": "Same-origin /p/ action URL whose final path segment is bound to productId; an sku query value is retained only when it equals skuId.",
+      "trackingQueryValues": "Dropped from normalized product URLs."
+    },
+    "limitations": [
+      "Product detail XHR and variant-specific detail prices are not implemented.",
+      "Only the US en-US public storefront is supported.",
+      "A response can contain more card rows than its pageSize because promoted rows are included; sourceItemCount reports returned rows.",
+      "Affiliate commission rates are not public in this contract and remain separate from catalog pricing."
+    ]
+  }
+}

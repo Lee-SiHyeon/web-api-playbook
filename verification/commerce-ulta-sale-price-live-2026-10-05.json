@@ -1,0 +1,143 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ulta",
+  "capabilityId": "catalog.sale_price",
+  "checkedAt": "2026-10-04T22:28:31.769Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.ulta.com/search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/dxl/graphql",
+    "checkedAt": "2026-10-04T22:28:31.769Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "ultasite",
+      "user-agent",
+      "operationName",
+      "query",
+      "variables"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 938232,
+    "responseSha256": "14296b81bb6ee1768b412d8bc36f5ce880d44b61f50c43b2cdb905b5f1cbdd39"
+  },
+  "bootstrapRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/search",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1237951,
+    "checkedAt": "2026-10-04T22:28:30.347Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "search"
+    ]
+  },
+  "bootstrapRequests": [
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/search",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1237951,
+      "checkedAt": "2026-10-04T22:28:30.347Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "search"
+      ]
+    }
+  ],
+  "result": {
+    "queryMatched": true,
+    "page": 1,
+    "pageSize": 64,
+    "requestedPageSize": 100,
+    "pageCount": 4,
+    "resultCount": 250,
+    "pagesTraversed": [
+      1
+    ],
+    "sourceItemCount": 73,
+    "returnedProductCount": 73,
+    "pricedProductCount": 73,
+    "listPriceFieldVerified": true,
+    "salePriceFieldVerified": true,
+    "salePriceNonNullCount": 1,
+    "currency": "USD",
+    "market": "US",
+    "hasNextPage": true,
+    "firstProduct": {
+      "productId": "pimprod2057119",
+      "skuId": "2648428",
+      "brandName": "Maybelline",
+      "productName": "Serum Lipstick",
+      "listPriceText": "$9.99",
+      "salePriceText": null,
+      "price": {
+        "amount": "9.99",
+        "currency": "USD",
+        "kind": "retail_list"
+      },
+      "priceRange": null
+    },
+    "salePriceSample": {
+      "productId": "pimprod2047199",
+      "skuId": "2629734",
+      "brandName": "ILIA",
+      "productName": "Multi-Stick Cream Blush + Highlighter + Lip Tint",
+      "listPriceText": "$36.00",
+      "salePriceText": "$25.20",
+      "listPrice": {
+        "minAmount": "36.00",
+        "maxAmount": "36.00",
+        "currency": "USD",
+        "kind": "retail_list"
+      },
+      "salePrice": {
+        "minAmount": "25.20",
+        "maxAmount": "25.20",
+        "currency": "USD",
+        "kind": "retail_sale"
+      },
+      "price": {
+        "amount": "25.20",
+        "currency": "USD",
+        "kind": "retail_sale"
+      }
+    }
+  },
+  "execution": {
+    "runner": "Node 24 direct HTTP client",
+    "browserUsed": false,
+    "cookiesSupplied": false,
+    "authorizationSupplied": false,
+    "redirectFollowed": false
+  },
+  "implementation": {
+    "lib/commerce/ulta.mjs": "3b007ea6061f4bf046b6f4bc69758b632a350b3510567cae6a921d13c23c6615"
+  }
+}

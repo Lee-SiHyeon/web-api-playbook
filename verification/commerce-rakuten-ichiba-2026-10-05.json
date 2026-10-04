@@ -1,0 +1,74 @@
+{
+  "schema": "web-api-rakuten-ichiba-verification-v1",
+  "service": "rakuten-ichiba",
+  "checkedAt": "2026-10-04T21:48:10.000Z",
+  "scope": "Rakuten Ichiba / Rakuten Affiliate Japan catalog reads; distinct from Rakuten Advertising global.",
+  "states": {
+    "officialCurrentContractReviewed": true,
+    "clientExists": true,
+    "localContractTests": { "state": "passed", "passed": 10, "failed": 0,
+      "command": "node --test tests/commerce-rakuten-ichiba.test.mjs" },
+    "liveReplay": false,
+    "credentialPropagation": "not_tested"
+  },
+  "credentialInputs": {
+    "applicationIdProvidedToThisTask": false,
+    "accessKeyProvidedToThisTask": false,
+    "affiliateIdProvidedToThisTask": false,
+    "credentialsPersisted": false
+  },
+  "liveReplayBlocker": "The current official Rakuten Web Service Item Search and Genre Search endpoints require a registered app applicationId and accessKey. No caller-owned app credentials or Rakuten Affiliate ID were supplied to this task; no authenticated request was sent.",
+  "sourceReview": {
+    "itemSearch": {
+      "url": "https://webservice.rakuten.co.jp/documentation/ichiba-item-search",
+      "currentVersion": "2026-07-01",
+      "endpoint": "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701",
+      "auth": "applicationId query + required accessKey; header is supported for accessKey and is used by this client",
+      "selectors": ["keyword", "shopCode", "itemCode", "genreId"],
+      "paging": { "hitsMin": 1, "hitsMax": 30, "pageMin": 1, "pageMax": 100 },
+      "price": {
+        "itemPrice": "Listing-level JPY decimal integer string; not asserted to be a selected variant/SKU price.",
+        "itemPriceBaseField": "item_price_min1 => all-item minimum basis; item_price_min2 => searchable-item minimum basis; item_price_min3 => purchasable-item minimum basis.",
+        "ranges": { "all": ["itemPriceMin1", "itemPriceMax1"], "searchable": ["itemPriceMin2", "itemPriceMax2"], "purchasable": ["itemPriceMin3", "itemPriceMax3"] }
+      },
+      "commission": "affiliateRate is read as item-specific API data when present; no fixed fee is assumed",
+      "affiliate": "affiliateId optional; affiliateUrl returned only when caller supplies it. The docs note itemUrl can equal affiliateUrl when affiliateId is included.",
+      "affiliateTargetPatternSource": "https://webservice.rakuten.co.jp/documentation/ichiba-product-search",
+      "affiliateTargetPatternFinding": "Rakuten documents affiliate URLs with pc and m item URL targets in its Product Search API. The Ichiba Item Search adapter only parses such targets if they are present in its own response; it does not compose a URL from the separate Product Search contract.",
+      "priorPublishedVersion": "2026-04-01"
+    },
+    "genreSearch": {
+      "url": "https://webservice.rakuten.co.jp/documentation/ichiba-genre-search",
+      "version": "2026-07-01",
+      "endpoint": "https://openapi.rakuten.co.jp/ichibagt/api/IchibaGenre/Search/20260701"
+    },
+    "appRegistration": {
+      "url": "https://webservice.rakuten.co.jp/guide",
+      "finding": "A Rakuten account login is needed to register an application. Each app receives its paired applicationId and accessKey; the guide says one Affiliate ID is issued per developer."
+    },
+    "attribution": {
+      "url": "https://webservice.rakuten.co.jp/guide/credit",
+      "finding": "Rakuten Web Services requires an unmodified supplied branding/credit snippet on apps using its API."
+    }
+  },
+  "client": {
+    "module": "lib/commerce/rakuten-ichiba.mjs",
+    "factory": "createRakutenIchibaClient",
+    "operations": ["searchItems", "getItem", "getGenre"],
+    "transport": "direct HTTPS GET; accessKey header-only; applicationId query required by Rakuten; redirects manual; no browser or cookies",
+    "canonicalTarget": "Checks direct API itemUrl or static pc/m target from the same API item row against HTTPS Rakuten Ichiba host, matching shopCode path, and an exact path segment matching the itemCode suffix. A target lacking that literal comparable item key yields canonicalUrl=null and targetVerified=false. The affiliateUrl is retained separately; no tracking URL is fetched and no path is synthesized. No slug transformation or leaf equivalence is assumed.",
+    "secretHandling": "No credentials, raw URLs, query values, response bodies, or affiliate IDs are persisted in this evidence file."
+  },
+  "implementationSha256": {
+    "lib/commerce/rakuten-ichiba.mjs": "8ce28d53260ef48d83a9b2fe5965806559034a78ec569a2ed399ec6473d0dc48",
+    "tests/commerce-rakuten-ichiba.test.mjs": "df665a5a42b6dae08dc71883949c93b13a90e1eef8ca8603e2f9d8f61371d87e"
+  },
+  "supportingSha256": {
+    "references/commerce-rakuten-ichiba-contracts.json": "b81dfeb1d3ceeda53a1ce472084b27bc6b4e3aca6822855ad9adb14f93e7de54",
+    "checklists/services/rakuten-ichiba.json": "472c234992ff2ef5254157702df83a531c4f4dfabd4a8b6667dfe4ffd90dc899"
+  },
+  "noLiveEvidenceClaimed": true,
+  "noCredentialedRequestSent": true,
+  "noSignupOrAccountAction": true,
+  "noCartOrOrderWrite": true
+}

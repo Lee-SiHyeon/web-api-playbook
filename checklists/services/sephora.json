@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "service": "sephora",
+  "description": "Anonymous US-market catalog search and complete result pagination over the observed Sephora catalog XHR. Product-detail and sale-price fields remain separate, explicit gaps. Affiliate terms are recorded independently from product API access.",
+  "capabilities": [
+    {
+      "id": "catalog.search",
+      "title": "Search Sephora US products and read current SKU list-price data",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-beauty-sephora-search-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/http.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Returns currentSku.skuId as variantId and a productUrl taken from a same-origin targetUrl bound to productId/currentSku.skuId. A single list price is normalized to USD money; ranges remain explicit min/max money. listPrice is not represented as a sale price."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Collect every page of a search response and verify termination against totalProducts",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-beauty-sephora-pagination-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/http.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The live sample completed pages 1–3 (60, 60, and 44 records) against totalProducts=164 with unique product IDs. The client stops at ceil(totalProducts/pageSize) and rejects count drift or duplicates."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Read a Sephora product detail and option-specific prices through an anonymous API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The observed search XHR includes products[].url as a first-party detail API candidate, but an independent cookie-free Node request timed out after 20 seconds before response headers. Direct product-page navigation also returned an Akamai Access Denied page. No reusable product-detail response, option-level price contract, or full-detail client is verified."
+    },
+    {
+      "id": "catalog.sale_price",
+      "title": "Read current promotional or sale price separately from list price",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The observed first-party search XHR provides currentSku.listPrice and onSaleData but no salePrice amount. The sampled results reported onSaleData=NONE. No sale amount is inferred."
+    },
+    {
+      "id": "storefront.localization",
+      "title": "Collect prices for a non-US Sephora market and verify its currency",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Only the US market contract and USD price formatting were independently replayed. Other country, locale, and currency mappings remain unverified."
+    },
+    {
+      "id": "partner_program.commission",
+      "title": "Read the current Sephora affiliate commission rate and terms",
+      "priority": "optional",
+      "applicability": "unknown",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Sephora's public affiliate page names Rakuten Advertising but does not publish a fixed numeric commission rate. The current rate depends on publisher program terms."
+    },
+    {
+      "id": "auth.login",
+      "title": "Sign in to a customer account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested catalog collector uses anonymous public reads and does not need a customer login.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "cart.write",
+      "title": "Mutate basket, checkout, or order state",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested client is read-only and limited to product search and prices.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.rakuten_brand_catalog",
+      "title": "Account MID -> verified Sephora US publisher catalog and returned tracking URL",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/brand-affiliates.mjs",
+            "exports": [
+              "createSephoraRakutenClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/rakuten-advertising.mjs",
+            "exports": [
+              "createRakutenAdvertisingProductSearchClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora-affiliate"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-brand-affiliates.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No approved publisher token or account-owned Sephora MID supplied. Exact-name/US/USD validation is implemented locally; affiliate attribution and final target are unverified."
+    },
+    {
+      "id": "catalog.common_collector",
+      "title": "Actual commerce CLI -> price JSON/CSV with independent readback",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "mime": "application/json",
+          "files": [
+            "verification/affiliate-sephora-common-collector-live-2026-10-05.json",
+            "verification/affiliate-sephora-collection-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/http.mjs",
+            "verification/affiliate-sephora-collection-sample-2026-10-05.csv"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "API field price kind and range preserved. Ulta sponsored cards are not identical to organic resultCount; provider_limited stays incomplete."
+    }
+  ]
+}

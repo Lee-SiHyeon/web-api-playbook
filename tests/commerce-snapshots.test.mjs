@@ -94,3 +94,10 @@ test('ambiguous currency quotes retain changes without asserting a monetary rise
   const result=comparePriceSnapshots(snapshot([a]),snapshot([b]));
   assert.equal(result.changes[0].priceDirection,'currency_unverified');
 });
+
+test('returned affiliate URLs survive JSON/CSV without asserting publisher attribution or final target',()=>{
+  const value=normalizeOffer(offer('a','10.00',{affiliateUrl:'https://network.example/click?publisher=owned'}));
+  assert.equal(value.affiliateLink.source,'api_returned');assert.equal(value.affiliateLink.attributionVerified,false);
+  assert.equal(value.affiliateLink.finalTargetVerified,false);
+  assert.ok(snapshotCsv(snapshot([value])).includes('https://network.example/click?publisher=owned'));
+});
