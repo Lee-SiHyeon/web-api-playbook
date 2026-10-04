@@ -15,6 +15,7 @@
 | [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice·[Inpock](references/inpock-login.md) 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
 | [쇼핑·여행커넥트](references/naver-connect.md) | 네이버 브랜드커넥트 상품 검색·상세·수수료·링크 발급 및 관리, DPAPI 세션 재사용 |
 | [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
+| [해외 제휴·드랍쉬핑 상품 수집](references/commerce-collection.md) | 공식 제휴/공급사 API, Printful 공개 가격 피드, Allbirds·ColourPop, JSON·CSV 수집과 가격 변화 비교 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
@@ -84,6 +85,8 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 ## 3. 기존 서비스를 사용할 때
 
 ### 해외 쇼핑몰 비로그인 조회
+
+해외 제휴·드랍쉬핑 상품과 가격 수집은 [commerce 실행법](references/commerce-collection.md)을 사용한다. `npm run commerce -- providers`로 공개 피드·스토어와 자격 정보가 필요한 공식 API 구현을 구분하고, 결과를 JSON·CSV로 수집할 수 있다. 실제 인증 조회를 확인하지 못한 서비스는 체크리스트에 미완료로 남긴다.
 
 ```bash
 npm run retail -- aliexpress product-seo --product-id=1005011947482958

@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "service": "aliexpress-partner",
+  "description": "AliExpress partner product lookup via official signed TOP APIs. Affiliate search/detail need developer AppKey and AppSecret but no user Session; dropship product/SKU reads are separate OAuth-gated APIs. No valid partner app credentials or dropship authorization were provided, so no live product result is claimed.",
+  "capabilities": [
+    {
+      "id": "affiliate.search_products",
+      "title": "Search affiliate-eligible product records with distinct sale/list/app/target prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/aliexpress-affiliate.mjs",
+            "exports": [
+              "createAliExpressAffiliateClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "aliexpress-partner"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-aliexpress-affiliate.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-aliexpress-affiliate-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "The adapter is implemented, but independent live business replay requires the user's registered AliExpress/TOP app_key and app_secret. No placeholder key or documentation demo key is treated as credentials."
+    },
+    {
+      "id": "affiliate.product_detail",
+      "title": "Read affiliate product detail/prices by product ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/aliexpress-affiliate.mjs",
+            "exports": [
+              "createAliExpressAffiliateClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "aliexpress-partner"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-aliexpress-affiliate.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-aliexpress-affiliate-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Live detail read needs the user's registered AliExpress/TOP app_key and app_secret; these were not supplied. No user Session is required by this Affiliate method."
+    },
+    {
+      "id": "affiliate.social_catalog_search",
+      "title": "Search AliExpress social affiliate catalog with bounded USD price ranges",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/aliexpress-affiliate.mjs",
+            "exports": [
+              "createAliExpressAffiliateClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "aliexpress-partner"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-aliexpress-affiliate.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-aliexpress-affiliate-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "This official API returns locale-formatted price ranges. The implementation currently accepts only the documented en_US/USD form and still requires app_key/app_secret for a live signed request."
+    },
+    {
+      "id": "dropshipping.product_detail",
+      "title": "Read a dropshipper-eligible product using the AliExpress dropship API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-aliexpress-affiliate-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Official aliexpress.ds.product.get requires a user-authorized dropshipper Session and API entitlement. No such authorization was supplied or verified."
+    },
+    {
+      "id": "dropshipping.sku_price_inventory",
+      "title": "Read dropship SKU prices, stock, and listing status",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-aliexpress-affiliate-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Official aliexpress.offer.ds.product.simplequery requires authorization and is restricted to certain buyers. Affiliate API app credentials do not prove this dropship entitlement."
+    },
+    {
+      "id": "partner.app_credentials",
+      "title": "Supply an AliExpress/TOP app key and app secret for signed Affiliate reads",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-aliexpress-affiliate-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Credential material is absent from this task. Runtime configuration must inject it in process memory and must not persist it in Git or receipts."
+    },
+    {
+      "id": "affiliate.user_session",
+      "title": "User login Session for the documented Affiliate query/search methods",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Official TOP API references mark the Affiliate product query, Affiliate product detail, and social item search methods as not requiring user authorization. Developer AppKey/AppSecret signature remains required.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-aliexpress-affiliate-contracts.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "partner.publication_or_orders",
+      "title": "Create affiliate links, place orders, or modify partner account state",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The assigned scope is read-only product discovery, detail and price collection. Affiliate link generation, cart/order, signup, and partner-account writes are outside scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

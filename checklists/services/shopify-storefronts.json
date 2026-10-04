@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "service": "shopify-storefronts",
+  "description": "Anonymous direct HTTP product detail, USD price, availability, variants, and up to 10 predictive product suggestions for two pinned Shopify storefronts: Allbirds and ColourPop. This is a bounded catalog client; it does not imply partner, affiliate, resale, dropship, or feed rights.",
+  "capabilities": [
+    {
+      "id": "allbirds.catalog.product_detail",
+      "title": "Read an Allbirds product, USD price, availability, and variants",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopify-storefronts.mjs",
+            "exports": [
+              "createShopifyStorefrontClient"
+            ]
+          },
+          {
+            "path": "lib/retail/shopify.mjs",
+            "exports": [
+              "createAllbirdsPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopify-storefronts.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopify-storefronts"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.allbirds.com",
+          "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/commerce-shopify-storefronts-allbirds-product-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://www.allbirds.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The facade delegates to the existing Allbirds XHR/API client. The receipt is normalized for the multi-store collector while the product output shape stays compatible. Only the verified default USD context is handled."
+    },
+    {
+      "id": "allbirds.catalog.predictive_search",
+      "title": "Read up to 10 Allbirds predictive product suggestions and prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopify-storefronts.mjs",
+            "exports": [
+              "createShopifyStorefrontClient"
+            ]
+          },
+          {
+            "path": "lib/retail/shopify.mjs",
+            "exports": [
+              "createAllbirdsPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopify-storefronts.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopify-storefronts"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.allbirds.com",
+          "path": "/search/suggest.json",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-shopify-storefronts-allbirds-search-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://www.allbirds.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Predictive suggestions only; this does not establish complete ranked search or pagination."
+    },
+    {
+      "id": "colourpop.catalog.product_detail",
+      "title": "Read a ColourPop product, USD price, availability, and variants",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopify-storefronts.mjs",
+            "exports": [
+              "createColourPopPublicClient",
+              "createShopifyStorefrontClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopify-storefronts.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopify-storefronts"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://colourpop.com",
+          "path": "/products/eeveelution-shadow-palette.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/commerce-shopify-storefronts-colourpop-product-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://colourpop.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The browser confirmed a Shopify-hosted storefront. An independent anonymous Node HTTP replay returned the product detail with USD presentment verified through cart.js."
+    },
+    {
+      "id": "colourpop.catalog.predictive_search",
+      "title": "Read up to 10 ColourPop predictive product suggestions and prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopify-storefronts.mjs",
+            "exports": [
+              "createColourPopPublicClient",
+              "createShopifyStorefrontClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopify-storefronts.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopify-storefronts"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://colourpop.com",
+          "path": "/search/suggest.json",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-shopify-storefronts-colourpop-search-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://colourpop.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "This operation follows Shopify's official Ajax Predictive Search contract and independently returns product records and price. No site-initiated search XHR was observed on the ColourPop header form, which navigated to a full HTML results page."
+    },
+    {
+      "id": "catalog.full_search_pagination",
+      "title": "Traverse complete product search results and later pages",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The Shopify Predictive Search API is explicitly capped at 10 suggestions per requested resource type. Full result ranking, continuation parameters, and page termination were not established for these storefronts."
+    },
+    {
+      "id": "catalog.collections",
+      "title": "Read collection/category membership and traverse collection products",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Product detail and predictive search do not establish the collection feed, membership, or pagination contract. No undocumented products.json route was guessed."
+    },
+    {
+      "id": "storefront.localization",
+      "title": "Select locale/market and collect a verified non-USD presentment price",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Only the anonymous default US storefront context was independently replayed. Locale-aware paths, region selection, and other currency minor-unit rules remain unverified."
+    },
+    {
+      "id": "partner_program.entitlement",
+      "title": "Verify affiliate acceptance, dropship authorization, or product-feed rights",
+      "priority": "optional",
+      "applicability": "unknown",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "A public Shopify product response does not state merchant partner acceptance, affiliate attribution entitlement, resale/dropship permission, or feed rights."
+    },
+    {
+      "id": "auth.login",
+      "title": "Customer account login",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested anonymous public catalog and price reads for this adapter.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "cart.order_mutation",
+      "title": "Change a cart, checkout, or order",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested adapter is read-only; cart, checkout, and order mutations are outside its scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

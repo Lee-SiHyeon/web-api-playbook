@@ -1,0 +1,160 @@
+{
+  "schema": "web-api-commerce-supplier-contracts-v1",
+  "checkedAt": "2026-10-05T05:12:53.956+09:00",
+  "scope": "Read-only supplier product discovery and price collection; no sign-up, order, listing, or store mutation.",
+  "services": {
+    "cjdropshipping": {
+      "contractStatus": "first_party_documented_api",
+      "origin": "https://developers.cjdropshipping.com",
+      "authentication": {
+        "required": true,
+        "type": "CJ-Access-Token header",
+        "clientInput": "createCjDropshippingClient({accessToken})",
+        "storage": "caller supplies token in process memory; client does not persist it",
+        "documentation": "https://developers.cjdropshipping.com/en/api/api2/api/auth.html"
+      },
+      "operations": [
+        {
+          "capability": "catalog.search",
+          "method": "GET",
+          "path": "/api2.0/v1/product/listV2",
+          "query": ["keyWord", "page", "size", "categoryId", "countryCode", "startSellPrice", "endSellPrice"],
+          "pagination": { "pageMinimum": 1, "pageMaximum": 1000, "sizeMinimum": 1, "sizeMaximum": 100, "maximumSearchRecords": 6000 },
+          "price": { "field": "sellPrice", "currency": "USD", "meaning": "CJ catalog sell price; not the distinct direct wholesale amount" },
+          "documentation": "https://developers.cjdropshipping.com/en/api/api2/api/product.html"
+        },
+        {
+          "capability": "catalog.product_detail",
+          "method": "POST",
+          "path": "/api2.0/v1/product/productDetail/query",
+          "body": { "id": "productId" },
+          "readOnly": true,
+          "variants": "stanProducts[].id is the variant ID; lower-case sellprice is the variant catalog sell price in USD.",
+          "wholesale": "stanProducts[].wholesalePrice exposes cjWholesalePrice and directWholesalePrice arrays. The documentation does not specify amount units/currency for those arrays; preserve raw records without converting or relabeling them.",
+          "inventory": "variantInventory[] is keyed by vid and contains countryCode, cjInventory (actual CJ stock), factoryInventory (virtual/factory stock), totalInventory, and verifiedWarehouse.",
+          "documentation": "https://developers.cjdropshipping.com/en/api/api2/api/product.html"
+        },
+        {
+          "capability": "catalog.categories",
+          "method": "GET",
+          "path": "/api2.0/v1/product/getCategory",
+          "documentation": "https://developers.cjdropshipping.com/en/api/api2/api/product.html"
+        }
+      ],
+      "noCredentialProbe": {
+        "checkedAt": "2026-10-05T00:00:00+09:00",
+        "method": "GET",
+        "path": "/api2.0/v1/product/listV2",
+        "httpStatus": 401,
+        "mime": "application/json",
+        "responseBytes": 165,
+        "businessCode": 1600002,
+        "classification": "authentication_required"
+      },
+      "rateHandling": "The client makes one request per method invocation and does not retry 402/406/429 responses. The documented listV2 paging bounds are enforced locally."
+    },
+    "printful": {
+      "api": {
+        "contractStatus": "first_party_documented_api",
+        "origin": "https://api.printful.com",
+        "authentication": {
+          "required": true,
+          "type": "OAuth Bearer token",
+          "clientInput": "createPrintfulCatalogClient({accessToken})",
+          "storage": "caller supplies token in process memory; client does not persist it",
+          "documentation": "https://developers.printful.com/docs/v2-beta/"
+        },
+        "operations": [
+          { "capability": "catalog.search", "method": "GET", "path": "/v2/catalog-products", "pagination": "limit 1-100 and offset", "documentedFilters": ["category_ids", "colors", "selling_region_name"] },
+          { "capability": "catalog.product_detail", "method": "GET", "path": "/v2/catalog-products/{id}" },
+          { "capability": "catalog.variants", "method": "GET", "path": "/v2/catalog-products/{id}/catalog-variants", "pagination": "limit 1-100 and offset" },
+          { "capability": "catalog.product_prices", "method": "GET", "path": "/v2/catalog-products/{id}/prices", "query": ["selling_region_name", "currency", "production_currency", "limit", "offset"] },
+          { "capability": "catalog.categories", "method": "GET", "path": "/v2/catalog-categories", "pagination": "limit 1-100 and offset" }
+        ],
+        "priceSemantics": {
+          "apiCurrency": "ISO 4217 data.currency; caller pins currency and production_currency, with worldwide default region",
+          "priceFields": ["variant technique price", "variant technique discounted_price", "placement price", "placement discounted_price", "option/layer additional prices"],
+          "meaning": "Printful production/base price. Technique, variant, placement and quantity affect the amount; shipping and taxes are separate. This is not the merchant retail price.",
+          "officialPricingSource": "https://help.printful.com/hc/en-us/articles/50262099109777-How-does-Printful-s-product-pricing-work"
+        },
+        "noCredentialProbe": {
+          "checkedAt": "2026-10-05T00:00:00+09:00",
+          "method": "GET",
+          "path": "/v2/catalog-products?limit=1&offset=0",
+          "httpStatus": 401,
+          "mime": "application/json",
+          "responseBytes": 146,
+          "classification": "authentication_required"
+        }
+      },
+      "publicFeed": {
+        "contractStatus": "first_party_documented_feed_live_replay",
+        "helpPage": "https://help.printful.com/hc/en-us/articles/50263594032401-Can-I-download-a-list-of-all-Printful-products",
+        "downloadURL": "https://www.printful.com/custom-products/export",
+        "redirect": {
+          "httpStatus": 302,
+          "targetOrigin": "https://printful.s3.us-west-1.amazonaws.com",
+          "targetPath": "/productExport/printful_products.zip"
+        },
+        "archive": {
+          "httpStatus": 200,
+          "mime": "application/zip",
+          "compressedBytes": 447095,
+          "sha256": "63942c3f81ccc5148c3978e0bd2520d6707255051902a11b723ce07dd8b0610a",
+          "lastModified": "Sun, 04 Oct 2026 00:10:10 GMT",
+          "browserUsed": false,
+          "cookieSent": false,
+          "authorizationSent": false
+        },
+        "regionalFiles": [
+          { "region": "USA", "file": "USA_printful_products.csv", "rows": 11279, "currency": "USD" },
+          { "region": "Europe", "file": "Europe_printful_products.csv", "rows": 4915, "currency": "EUR" },
+          { "region": "Australia", "file": "Australia_printful_products.csv", "rows": 1250, "currency": "AUD" },
+          { "region": "Japan", "file": "Japan_printful_products.csv", "rows": 601, "currency": "JPY" },
+          { "region": "Canada", "file": "Canada_printful_products.csv", "rows": 1063, "currency": "CAD" },
+          { "region": "Brazil", "file": "Brazil_printful_products.csv", "rows": 119, "currency": "BRL" },
+          { "region": "UK", "file": "UK_printful_products.csv", "rows": 2905, "currency": "GBP" },
+          { "region": "China", "file": "China_printful_products.csv", "rows": 503, "currency": null, "currencyNote": "The feed displays $ without an unambiguous ISO currency marker; do not infer USD or CNY." }
+        ],
+        "csvHeader": ["Variant ID", "Product Name", "Product Type", "Product Color", "Product Size", "Product Image", "Product Weight (oz)", "Height (In)", "Length (In)", "Width (In)", "Categories", "Product Price", "Notes"],
+        "priceSemantics": "The regional Product Price is the supplier's regional base product price, not merchant retail price. Standard base includes the blank plus one standard customization; shipping, taxes, and extra placements are separate.",
+        "kind": "public data feed, not captured XHR"
+      }
+    },
+    "printify": {
+      "contractStatus": "first_party_documented_api_contract_gap",
+      "origin": "https://api.printify.com",
+      "authentication": {
+        "required": true,
+        "type": "Bearer Personal Access Token or OAuth token",
+        "minimumCatalogScope": "catalog.read",
+        "source": "https://developers.printify.com/API-Doc-RREdits.html/1000"
+      },
+      "noCredentialProbe": {
+        "checkedAt": "2026-10-05",
+        "method": "GET",
+        "path": "/v1/catalog/blueprints.json",
+        "httpStatus": 401,
+        "mime": "application/json",
+        "responseBytes": 90,
+        "classification": "authentication_required"
+      },
+      "catalogReadOperations": [
+        "GET /v1/catalog/blueprints.json",
+        "GET /v1/catalog/blueprints/{blueprint_id}.json",
+        "GET /v1/catalog/blueprints/{blueprint_id}/print_providers.json",
+        "GET /v1/catalog/blueprints/{blueprint_id}/print_providers/{print_provider_id}/variants.json"
+      ],
+      "variantResponse": "The official catalog variants example provides ID, title, options, placeholders, and decoration methods, but no supplier product cost or retail price.",
+      "shippingQuote": {
+        "path": "/v2/catalog/blueprints/{blueprint_id}/print_providers/{print_provider_id}/shipping/{method}.json",
+        "methods": ["standard", "priority", "express", "economy"],
+        "price": "shippingCost first/additional item amount is in cents and contains an explicit ISO currency"
+      },
+      "pricingBoundary": "The price/cost cents fields documented on store product variants apply to merchant-owned sync products. They are not a generic supplier catalog quote. No authenticated catalog cost endpoint was found in the official contract reviewed.",
+      "implementation": "No client shipped in this scope; product catalog contract and base-cost limitation are recorded for future work."
+    }
+  },
+  "verificationFile": "verification/printful-public-feed-live-2026-10-05.json",
+  "secretsPersistedInEvidence": false
+}

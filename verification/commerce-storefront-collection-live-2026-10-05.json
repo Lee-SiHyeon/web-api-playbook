@@ -1,0 +1,71 @@
+{
+  "schema": "web-api-commerce-collection-proof-v1",
+  "service": "commerce",
+  "capabilityId": "collection.public_storefront",
+  "checkedAt": "2026-10-04T20:34:28.564Z",
+  "secretsPersistedInEvidence": false,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "sourceRequest": {
+    "method": "GET",
+    "origin": "https://colourpop.com",
+    "path": "/products/eeveelution-shadow-palette.js",
+    "checkedAt": "2026-10-04T20:34:27.134Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 8288,
+    "responseSha256": "9fed29f63796c8deccbee8c3c4e2abc9959328b9fde469dc654009cf52ff4b29",
+    "schemaVerified": true
+  },
+  "sampleOfferCount": 1,
+  "fullOfferCount": 1,
+  "csvDataRows": 1,
+  "jsonReadbackMatched": true,
+  "csvReadbackMatched": true,
+  "fullJsonSha256": "548d1ab9bfe38d799c3b28020a5ce0fa272f8abe343f0c2140775d78d364f40a",
+  "fullCsvSha256": "bd8352dfbf5081fdf5679daac017055fd952db1d63e10a89b7c4af2d5b17193d",
+  "fullOutputs": {
+    "json": "/home/worker/artifacts/commerce-20261005/storefront-final.json",
+    "csv": "/home/worker/artifacts/commerce-20261005/storefront-final.csv"
+  },
+  "collection": {
+    "pagesRead": 1,
+    "rowsSeen": 1,
+    "offersStored": 1,
+    "maxPages": 1,
+    "maxOffers": 100,
+    "coverage": "product_detail",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": true
+  },
+  "sameContextComparisonChanges": 0,
+  "actualRunner": {
+    "entrypoint": "scripts/commerce.mjs",
+    "arguments": [
+      "shopify-storefronts",
+      "product",
+      "--store=colourpop",
+      "--id=eeveelution-shadow-palette"
+    ],
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/commerce.mjs": "268436fa358c48dc739c2c39e8f89dd5577b2f4801fd261787d41410af4c0083",
+    "lib/commerce/providers.mjs": "a0321f0f1b7f7c7b6b9a4dae1ee6a25565def787e953287b55827b8d133df054",
+    "lib/commerce/snapshots.mjs": "472f926c977ee3e39effe26db420920c4fa3e21cc7c405b360542e4fc1346d67",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "lib/commerce/shopify-storefronts.mjs": "d7999c5cc32eeaa2c70ec22fc295b4078a167f18d502cad8851509c570b50445",
+    "lib/retail/shopify.mjs": "c20ab94145b15a6a1e19e8f18ff0fe8776e951ad62c282bc52e06e7ff2e224f1",
+    "verification/commerce-storefront-sample-2026-10-05.csv": "3e26ada610a461b526387187639cffaf145d2857010353974c60c5635c16da70"
+  },
+  "portableSampleCsvLineEndings": "LF; full native CSV retained unchanged and hashed separately"
+}

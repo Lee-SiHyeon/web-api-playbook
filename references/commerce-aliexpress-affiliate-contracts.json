@@ -1,0 +1,147 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "contracts": [
+    { "method": "POST", "path": "/router/rest", "apiMethod": "aliexpress.affiliate.product.query", "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=45803" },
+    { "method": "POST", "path": "/router/rest", "apiMethod": "aliexpress.affiliate.productdetail.get", "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=48595" },
+    { "method": "POST", "path": "/router/rest", "apiMethod": "aliexpress.social.item.search", "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=47556" },
+    { "method": "POST", "path": "/router/rest", "apiMethod": "aliexpress.ds.product.get", "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=60452" },
+    { "method": "POST", "path": "/router/rest", "apiMethod": "aliexpress.offer.ds.product.simplequery", "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=40657" }
+  ],
+  "schemaVersion": 1,
+  "service": "aliexpress-affiliate-and-dropship",
+  "checkedAt": "2026-10-04T19:54:21Z",
+  "provenance": "first_party_documented_api",
+  "browserRequestObserved": false,
+  "networkMode": "direct_http",
+  "system": {
+    "origin": "https://eco.taobao.com",
+    "path": "/router/rest",
+    "transport": "HTTPS POST application/x-www-form-urlencoded;charset=utf-8",
+    "protocol": "Alibaba TOP v2.0",
+    "commonParameters": [
+      "app_key",
+      "format=json",
+      "method",
+      "sign_method=hmac",
+      "timestamp=yyyy-MM-dd HH:mm:ss Asia/Shanghai",
+      "v=2.0",
+      "sign"
+    ],
+    "signature": {
+      "method": "HMAC-MD5",
+      "source": "https://developer.alibaba.com/docs/doc.htm?articleId=101617&docType=1&treeId=153",
+      "steps": "Sort every common and business parameter name in ASCII order, omit sign, concatenate each name and value without separators, HMAC-MD5 with the registered AppSecret, uppercase hex.",
+      "session": "No user Session is sent for the affiliate methods marked no authorization.",
+      "credentials": "Registered AppKey and AppSecret are still required; this is not an anonymous API call.",
+      "persistence": "Credentials are injected into the client in process memory. The adapter does not write them to disk, logs, receipts, or exception messages."
+    }
+  },
+  "apis": [
+    {
+      "kind": "affiliate_search",
+      "method": "aliexpress.affiliate.product.query",
+      "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=45803",
+      "userAuthorization": "not_required",
+      "appKeySignature": "required",
+      "readOnly": true,
+      "parameters": {
+        "requiredByAdapter": ["keywords", "page_no", "page_size", "ship_to_country", "sort", "platform_product_type", "fields", "target_currency", "target_language"],
+        "optionalDocumented": ["category_ids", "min_sale_price", "max_sale_price", "delivery_days", "tracking_id", "app_signature"]
+      },
+      "response": {
+        "envelope": "aliexpress_affiliate_product_query_response.resp_result.result",
+        "pagination": ["current_page_no", "current_record_count", "total_page_no", "total_record_count"],
+        "productFields": [
+          "product_id", "product_title", "product_detail_url", "product_main_image_url",
+          "sale_price", "sale_price_currency", "original_price", "original_price_currency",
+          "app_sale_price", "app_sale_price_currency", "target_sale_price", "target_sale_price_currency",
+          "target_original_price", "target_original_price_currency", "target_app_sale_price",
+          "target_app_sale_price_currency", "commission_rate", "lastest_volume",
+          "first_level_category_id", "first_level_category_name", "second_level_category_id", "second_level_category_name"
+        ],
+        "priceMapping": {
+          "salePrice": ["sale_price", "sale_price_currency"],
+          "listPrice": ["original_price", "original_price_currency"],
+          "appSalePrice": ["app_sale_price", "app_sale_price_currency"],
+          "targetSalePrice": ["target_sale_price", "target_sale_price_currency"],
+          "targetListPrice": ["target_original_price", "target_original_price_currency"],
+          "targetAppSalePrice": ["target_app_sale_price", "target_app_sale_price_currency"]
+        },
+        "priceAmounts": "Decimal strings are preserved; binary floating point is not used for normalized price amounts."
+      },
+      "affiliateLinks": "The adapter does not request or return promotion_link. Optional tracking_id is forwarded only when supplied by the caller; no publisher or affiliate ID is generated."
+    },
+    {
+      "kind": "affiliate_detail",
+      "method": "aliexpress.affiliate.productdetail.get",
+      "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=48595",
+      "userAuthorization": "not_required",
+      "appKeySignature": "required",
+      "readOnly": true,
+      "parameters": {
+        "requiredByAdapter": ["product_ids", "country", "fields", "target_currency", "target_language"],
+        "optionalDocumented": ["tracking_id", "app_signature"]
+      },
+      "response": {
+        "envelope": "aliexpress_affiliate_productdetail_get_response.resp_result.result.products.product[]",
+        "priceFields": [
+          "sale_price", "sale_price_currency", "original_price", "original_price_currency",
+          "app_sale_price", "app_sale_price_currency", "target_sale_price", "target_sale_price_currency",
+          "target_original_price", "target_original_price_currency", "target_app_sale_price", "target_app_sale_price_currency"
+        ],
+        "productIdMustMatchRequested": true
+      },
+      "affiliateLinks": "The adapter requests a field list without promotion_link and does not claim publisher-link ownership."
+    },
+    {
+      "kind": "social_affiliate_search",
+      "method": "aliexpress.social.item.search",
+      "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=47556",
+      "userAuthorization": "not_required",
+      "appKeySignature": "required",
+      "readOnly": true,
+      "parameters": {
+        "requiredByAdapter": ["page_no", "page_size", "ship_to", "currency=USD", "locale=en_US", "alliance_item", "order_by=sales", "desc"],
+        "optionalDocumented": ["keyword", "cate_id", "min_price", "max_price", "is_ship_free", "has_video", "commission_rate_min", "commission_rate_max", "logistics_time", "comment_score"]
+      },
+      "response": {
+        "envelope": "aliexpress_social_item_search_response.result",
+        "pagination": ["page_no", "page_size", "total_count", "success"],
+        "productFields": ["item_id", "item_title", "item_url", "item_main_pic", "item_origin_price_min", "item_origin_price_max", "item_price_discount_min", "item_price_discount_max", "item_discount_rate", "commission_rate"],
+        "priceParsing": "Only the documented en_US USD display form `US $<decimal>` is normalized. Other locales/currencies are rejected by this adapter path rather than guessed.",
+        "prices": "Per-product minimum and maximum original prices and minimum and maximum discounted prices; these are ranges, not one SKU's exact price."
+      }
+    },
+    {
+      "kind": "dropship_product",
+      "method": "aliexpress.ds.product.get",
+      "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=60452",
+      "userAuthorization": "required",
+      "appKeySignature": "required",
+      "readOnly": true,
+      "parameters": ["product_id", "ship_to_country", "target_currency", "target_language"],
+      "response": "Product details, including item identity and market fields, per the official API reference.",
+      "status": "not_implemented",
+      "blocker": "Official API marks this method as authorization-required. A dropshipper Session and API entitlement have not been provided or verified."
+    },
+    {
+      "kind": "dropship_sku_inventory_price",
+      "method": "aliexpress.offer.ds.product.simplequery",
+      "sourceURL": "https://developer.alibaba.com/docs/api.htm?apiId=40657",
+      "userAuthorization": "required",
+      "appKeySignature": "required",
+      "readOnly": true,
+      "parameters": ["product_id", "local_country", "local_language"],
+      "response": ["SKU IDs and prices", "SKU and total stock", "product status"],
+      "status": "not_implemented",
+      "blocker": "Official API marks this method as authorization-required and says only certain buyers can use it. Access cannot be inferred from public listing or affiliate membership."
+    }
+  ],
+  "boundary": {
+    "notCapturedXhr": "These contracts come from first-party API documentation. No storefront page XHR was captured for the TOP endpoints in this task.",
+    "noAnonymousAffiliateBusinessReplay": "The no-AppKey control is an application-error response and contains no product result. It is not a product-search success.",
+    "noPriceEquivalence": "Affiliate listing prices, app-only prices, target-currency prices, and dropship SKU prices are separate fields and must stay separate.",
+    "noDropshipOrderCalls": true
+  }
+}

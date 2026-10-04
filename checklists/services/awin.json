@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 1,
+  "service": "awin",
+  "description": "Awin Publisher Enhanced/Google product feed over authenticated direct HTTP. Search, pagination, and item lookup scan a complete authorized JSONL feed; price and stock are advertiser-supplied consumer retail values, not supplier wholesale costs.",
+  "capabilities": [
+    {
+      "id": "catalog.search",
+      "title": "Search Awin publisher feed products by keyword",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/awin.mjs",
+            "exports": [
+              "createAwinPublisherFeedClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "awin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/awin-feed-row-envelope-candidate-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "Two gates remain: an authorized Publisher ID/Bearer token/feed entitlement is missing, and Awin's current primary documentation gives conflicting JSONL row shapes without mapping the nested examples to the flat Google product fields. The adapter accepts only flat rows and rejects unknown wrappers. Awin has no remote keyword query in this route."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Resolve one feed product or variant by exact feed ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/awin.mjs",
+            "exports": [
+              "createAwinPublisherFeedClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "awin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/awin-feed-row-envelope-candidate-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "Live account/feed entitlement is not available, and the actual feed row envelope remains ambiguous in the primary documentation. Lookup is an exact local scan only after a documented flat product row is parsed, not a separate remote detail endpoint."
+    },
+    {
+      "id": "catalog.offer_price",
+      "title": "Collect consumer retail price, sale price, currency, and availability from feed entries",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/awin.mjs",
+            "exports": [
+              "createAwinPublisherFeedClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "awin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/awin-feed-row-envelope-candidate-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "Official flat field semantics are documented, but the returned feed envelope has not been confirmed and no publisher credentials/feed entitlement were supplied. Do not treat this as live price collection. These are consumer prices, not a dropship supplier's acquisition cost."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Return a bounded page of keyword matches from the full feed scan",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/awin.mjs",
+            "exports": [
+              "createAwinPublisherFeedClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "awin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/awin-feed-row-envelope-candidate-2026-10-05.json"
+          ]
+        }
+      ],
+      "note": "This is local page slicing after reading a complete fresh feed; the documented Awin feed endpoint has no page parameter. Each page request downloads the feed again, under Awin's five-per-minute and single-download constraints.",
+      "blocker": "The local path is fixture-tested, but no live feed was available to validate its size and publisher-specific content."
+    },
+    {
+      "id": "catalog.taxonomy",
+      "title": "Read advertiser product-type and Google product-category fields when supplied",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/awin.mjs",
+            "exports": [
+              "createAwinPublisherFeedClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "awin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/awin-feed-row-envelope-candidate-2026-10-05.json"
+          ]
+        }
+      ],
+      "note": "Both feed category fields are advertiser-provided and can be absent. This does not expose a complete Awin category tree.",
+      "blocker": "No authorized live advertiser feed was available to inspect category coverage."
+    },
+    {
+      "id": "auth.login",
+      "title": "Interactive Awin login flow",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This task implements the documented Publisher API Bearer-token read client only; browser login/token issuance is outside the authorized work. A Bearer token and publisher/feed entitlements are still required.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "supplier.wholesale_cost",
+      "title": "Read dropshipping supplier acquisition cost or fulfillment terms",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Awin's documented publisher feed carries advertiser consumer retail price and stock fields. It is not a wholesale procurement, dropship fulfillment, or supplier-cost API.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.link_generation",
+      "title": "Create Awin tracking links or apply to advertiser programs",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested scope for this service adapter is read-only product and price collection; affiliate link creation and program changes are outside it.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

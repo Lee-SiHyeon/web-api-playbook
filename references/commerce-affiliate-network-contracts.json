@@ -1,0 +1,133 @@
+{
+  "schema": "commerce-affiliate-network-contracts-v1",
+  "reviewedAt": "2026-10-05",
+  "scope": "Authenticated read-only publisher catalog access for Awin and impact.com Partner API. No login acquisition, program application, link creation, order, or marketplace write is implemented.",
+  "sources": [
+    {
+      "provider": "awin",
+      "title": "Get Enhanced Feed (Google Format)",
+      "url": "https://help.awin.com/apidocs/retail-publisher-productapidocumentation-1",
+      "updatedAt": "2026-09-08",
+      "authority": "Awin publisher API documentation"
+    },
+    {
+      "provider": "awin",
+      "title": "Authentication",
+      "url": "https://help.awin.com/apidocs/api-authentication",
+      "updatedAt": "2026-03-12",
+      "authority": "Awin API documentation"
+    },
+    {
+      "provider": "awin",
+      "title": "How to access a product data feed",
+      "url": "https://success.awin.com/articles/en_US/Knowledge/How-can-I-access-a-Product-Feed",
+      "updatedAt": "2026-07-20",
+      "authority": "Awin Publisher Help"
+    },
+    {
+      "provider": "impact",
+      "title": "Partner Catalogs API",
+      "url": "https://integrations.impact.com/partner-api-reference/reference/catalogs/catalogs",
+      "referenceVersion": "16",
+      "authority": "impact.com Partner API reference"
+    },
+    {
+      "provider": "impact",
+      "title": "Partner API Authentication",
+      "url": "https://integrations.impact.com/partner-api-reference/readme/authentication",
+      "authority": "impact.com Partner API reference"
+    },
+    {
+      "provider": "impact",
+      "title": "Create an API Key",
+      "url": "https://integrations.impact.com/rest-apis/api-quick-start/create-an-api-key",
+      "authority": "impact.com API documentation"
+    }
+  ],
+  "contracts": {
+    "awin": {
+      "surface": "Publisher Enhanced/Google Product Feed download",
+      "apiOrigin": "https://api.awin.com",
+      "request": {
+        "method": "GET",
+        "pathTemplate": "/publishers/{PUBLISHER_ID}/awinfeeds/download/{ADVERTISER_ID}-retail-{LOCALE}.jsonl",
+        "publisherId": "Publisher account identifier",
+        "advertiserId": "Feed advertiser identifier",
+        "vertical": "retail",
+        "localeExamples": ["en_GB", "fr_FR", "de_DE", "en_NL", "en_US"],
+        "authentication": "Authorization: Bearer <Awin API token>",
+        "responseFormat": "UTF-8 JSON Lines; one JSON object per line",
+        "rowEnvelopeStatus": "UNRESOLVED IN CURRENT FIRST-PARTY DOCUMENTATION. The success sample is {product_details:\"..\"}; a separate final-line example shows a nested meta/product_basic row; the Enhanced Google Product example and field table show a flat id/title/link/price/availability product. The documentation does not map the nested envelope to flat product fields.",
+        "implementedParserBoundary": "The adapter currently accepts a top-level flat Enhanced Google product object and rejects product_details or nested meta/product_basic records with AWIN_PRODUCT_SCHEMA_UNSUPPORTED. This parser fixture does not establish the actual row envelope returned by an authorized publisher feed.",
+        "rowEnvelopeVerifiedByLiveReplay": false,
+        "serverSearch": false,
+        "serverPagination": false
+      },
+      "publisherProductFields": {
+        "identity": ["id", "item_group_id"],
+        "titleAndDetails": ["title", "description", "brand", "product_type", "google_product_category"],
+        "sourceUrl": "link (Awin documentation describes this as a non-trackable direct product URL)",
+        "price": ["price", "sale_price", "sale_price_effective_date"],
+        "priceSemantics": "Consumer-facing retail price. `price` is base/list price; a sale price is selected as the current consumer price only when its effective window is active. No wholesale/supplier acquisition cost is documented on this Publisher feed.",
+        "currencyEncoding": "Price string includes an ISO 4217 currency code, e.g. `15.00 GBP`.",
+        "availability": ["availability", "availability_date"],
+        "availabilityValues": ["in_stock", "out_of_stock", "preorder", "backorder"],
+        "categoryFields": ["google_product_category", "product_type"]
+      },
+      "feedIntegrity": {
+        "terminalErrorRule": "Awin says to inspect the final JSONL line; a final object containing an error means the download is incomplete even when the HTTP response has already begun.",
+        "rateGuidance": "No more than five publisher download requests per minute; concurrent downloads to the same advertiser feed are not supported.",
+        "implementedBehavior": "Client consumes and validates the full bounded feed, checks terminal error objects, serializes downloads in one client instance, and enforces at least 12 seconds between requests. Keyword matching and page slicing happen locally by reading a complete fresh feed. Separate client instances and processes are not coordinated. Default response cap is 128 MiB (caller may raise it up to 512 MiB); larger feeds fail closed."
+      },
+      "separateLegacyFeedMethod": {
+        "urlTemplate": "https://productdata.awin.com/datafeed/list/apikey/{PRODUCT_FEED_KEY}",
+        "note": "Awin documents this as a separate product feed key/download route. It is not the Publisher API Bearer token route and is not implemented here. The publisher product-feed help describes CSV downloads and Create-a-Feed selection; neither is misrepresented as an XHR search endpoint."
+      },
+      "currentEvidenceBoundary": "Official endpoint/auth/JSONL contract reviewed; no authenticated live request was attempted because no Awin publisher token or account/feed identifiers were supplied. The primary document does not unambiguously establish the feed row envelope or map its nested examples to the flat Google product fields."
+    },
+    "impact": {
+      "surface": "impact.com Partner Catalogs API (catalog reference identifies version 16)",
+      "apiOrigin": "https://api.impact.com",
+      "authentication": {
+        "scheme": "HTTP Basic",
+        "username": "Account SID",
+        "password": "Auth Token",
+        "storage": "The client receives both values as arguments and builds the Authorization header in process memory. No login flow or credential persistence is implemented."
+      },
+      "readRoutes": [
+        { "operation": "list catalogs", "method": "GET", "pathTemplate": "/Mediapartners/{AccountSID}/Catalogs", "query": ["CampaignId"] },
+        { "operation": "retrieve catalog", "method": "GET", "pathTemplate": "/Mediapartners/{AccountSID}/Catalogs/{Id}" },
+        { "operation": "list catalog items", "method": "GET", "pathTemplate": "/Mediapartners/{AccountSID}/Catalogs/{CatalogId}/Items", "query": ["Query"] },
+        { "operation": "retrieve catalog item", "method": "GET", "pathTemplate": "/Mediapartners/{AccountSID}/Catalogs/{CatalogId}/Items/{Id}" },
+        { "operation": "search catalog items", "method": "GET", "pathTemplate": "/Mediapartners/{AccountSID}/Catalogs/ItemSearch", "query": ["Keyword", "PageSize", "Page", "Query"] }
+      ],
+      "searchPagination": {
+        "pageParameter": "Page",
+        "pageNumbering": "1-based",
+        "pageSizeParameter": "PageSize",
+        "documentedDefaultPageSize": 100,
+        "clientSafetyBound": "PageSize 1-1000; the official reference does not state a maximum",
+        "responseEnvelope": "Items array",
+        "totalCountOrNextPageField": "Not documented in the Catalogs response schema; client makes one requested page and marks continuation unknown/possible rather than inventing a total."
+      },
+      "itemFields": {
+        "identity": ["Id", "CatalogId", "CatalogItemId", "ItemGroupId"],
+        "titleAndDetails": ["Name", "Description", "Manufacturer", "Category", "SubCategory", "Bullets", "Labels"],
+        "urlSemantics": "Url is documented as a tracking URL unique to the partner account. The client returns it to the caller but never puts it in sanitized evidence.",
+        "price": ["CurrentPrice", "OriginalPrice", "DiscountPercentage", "Currency"],
+        "priceSemantics": "CurrentPrice is the consumer selling price; OriginalPrice is the price before a discount. No wholesale/supplier acquisition cost is in the current Partner Item model.",
+        "availability": ["StockAvailability", "EstimatedShipDate"],
+        "availabilityExamples": ["InStock", "OutOfStock", "BackOrder", "PreOrder", "LimitedAvailability"],
+        "normalizedAvailability": "InStock/LimitedAvailability -> available; OutOfStock -> unavailable; BackOrder/PreOrder/unknown -> unknown because those states do not establish on-hand inventory. Raw status remains in source metadata.",
+        "missingPriceHandling": "If CurrentPrice or ISO currency is absent, the normalized offer has price amount null and kind unknown; exclude it from numeric price snapshots."
+      },
+      "credentialDataHandling": "Catalog FTPLocations are documented to include authentication credentials. The client intentionally discards FTPLocations and other download-location fields from returned catalog records.",
+      "currentEvidenceBoundary": "Official current Partner API contract reviewed; no authenticated live request was attempted because no impact.com Partner Account SID/Auth Token were supplied. Brand API and advertiser/admin endpoints are not used."
+    }
+  },
+  "productDiscoveryScope": {
+    "supportedConcept": "Publisher affiliate product discovery and current consumer retail price/stock collection where the network supplies a partner catalog/feed.",
+    "notEstablished": "Wholesale acquisition price, dropshipping fulfillment, inventory reservation, shipping guarantee, or supplier terms. These need a separate supplier/merchant API and account entitlement.",
+    "credentialNote": "These official partner catalog APIs are credentialed HTTP reads; they do not require an interactive browser login on each request, but they do require the corresponding authorized Awin or impact.com partner API credentials."
+  }
+}

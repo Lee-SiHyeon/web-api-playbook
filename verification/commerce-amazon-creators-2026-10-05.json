@@ -1,0 +1,99 @@
+{
+  "schema": "amazon-creators-api-verification-v1",
+  "service": "amazon-partner",
+  "checkedAt": "2026-10-04T20:14:18.659Z",
+  "scope": "official Creators API read-only SearchItems and GetItems contract",
+  "secretsPersistedInEvidence": false,
+  "credentialsProvidedToThisExecution": false,
+  "requestSent": false,
+  "states": {
+    "primary_contract_reviewed": true,
+    "client_exists": true,
+    "local_contract_tests": "passed",
+    "credential_propagated": false,
+    "remnant_free": true,
+    "live_replay": false
+  },
+  "localValidation": {
+    "testFile": "tests/commerce-amazon-creators.test.mjs",
+    "testsPassed": 7,
+    "testsFailed": 0,
+    "networkUsed": false,
+    "credentialsUsed": false,
+    "mutationsSent": false,
+    "implementationSha256": "a3eb04a1c431900cb5a5c8953cb47cb62e202fa5b78998ad967860c81701bc29",
+    "testFileSha256": "e99ff45b2f60d5464efe7d108c826f10c61b4549bf7d4530945c4f5403b42cf8"
+  },
+  "localChecklistAudit": {
+    "checkedAt": "2026-10-04T20:14:18.659Z",
+    "service": "amazon-partner",
+    "requiredCapabilities": [
+      "auth.creators_api_token",
+      "catalog.search",
+      "catalog.product_detail",
+      "catalog.price_availability",
+      "catalog.pagination",
+      "affiliate.link_generation"
+    ],
+    "recordedLive": 0,
+    "strictPassed": false,
+    "liveEvidenceAdded": false
+  },
+  "authentication": {
+    "mechanism": "LwA OAuth 2.0 client credentials",
+    "credentialVersionEndpoints": {
+      "3.1": "https://api.amazon.com/auth/o2/token",
+      "3.2": "https://api.amazon.co.uk/auth/o2/token",
+      "3.3": "https://api.amazon.co.jp/auth/o2/token"
+    },
+    "catalogScope": "creatorsapi::default",
+    "interactiveLoginPerformed": false,
+    "credentialValuesRecorded": false,
+    "blocker": "No approved Creators API Credential ID/Secret/version and caller-owned PartnerTag were supplied to this execution."
+  },
+  "operations": {
+    "catalog.search": {
+      "method": "POST",
+      "origin": "https://creatorsapi.amazon",
+      "path": "/catalog/v1/searchItems",
+      "client": "lib/commerce/amazon-creators.mjs#createAmazonCreatorsClient.searchItems",
+      "liveReplay": false
+    },
+    "catalog.product_detail": {
+      "method": "POST",
+      "origin": "https://creatorsapi.amazon",
+      "path": "/catalog/v1/getItems",
+      "client": "lib/commerce/amazon-creators.mjs#createAmazonCreatorsClient.getItems",
+      "liveReplay": false
+    }
+  },
+  "priceSemantics": {
+    "current": "offersV2.listings[].price.money.amount + currency",
+    "reference": "offersV2.listings[].price.savingBasis.money plus original savingBasisType and savingBasisTypeLabel",
+    "availability": "offersV2.listings[].availability.type",
+    "offerScope": "Featured offer listings only; not all sellers or legacy Offers.Summaries",
+    "currencyOfPreference": "Caller may supply a documented ISO 4217 preference; returned offer currency is preserved."
+  },
+  "partialSearchResponseHandling": {
+    "itemsPreserved": true,
+    "sanitizedErrorCodesPreserved": true,
+    "searchItemsPartialFlag": true,
+    "searchReceiptExpectedResultVerified": false,
+    "searchPagesPartialResponsesAggregated": true,
+    "livePartialResponseObserved": false
+  },
+  "pagination": {
+    "itemCountPerPageMax": 10,
+    "itemPageMax": 10,
+    "pageRunner": "sequential, explicit bounds, no automatic retries"
+  },
+  "primarySources": [
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/get-started/using-curl",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/search-items",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/offersV2",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/concepts/understanding-versions",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/register-for-creators-api",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/migrating-to-creatorsapi-from-paapi"
+  ]
+}

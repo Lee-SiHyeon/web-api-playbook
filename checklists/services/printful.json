@@ -1,0 +1,224 @@
+{
+  "schemaVersion": 1,
+  "service": "printful",
+  "description": "Printful has a fully public official regional product/variant price feed and an OAuth-protected v2 catalog API. The feed is a ZIP/CSV download, not captured XHR; authenticated API methods are implemented but await a token for live replay.",
+  "capabilities": [
+    {
+      "id": "catalog.public_price_feed",
+      "title": "Collect public product variants and regional supplier base prices for all eight supported markets",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/printful.mjs",
+            "exports": [
+              "createPrintfulCatalogClient",
+              "parsePrintfulCatalogCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "printful-feed"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://printful.s3.us-west-1.amazonaws.com",
+          "path": "/productExport/printful_products.zip",
+          "mime": "application/zip",
+          "files": [
+            "verification/printful-public-feed-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/printful.mjs",
+            "lib/commerce/http.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The anonymous archive is linked from the official Help Center page and downloaded through a pinned 302 destination. Its eight regional CSVs expose product/variant IDs, options, dimensions, category, and Product Price. Product Price is supplier base price; shipping and taxes are separate. China's $ marker remains currency-null because the feed does not disambiguate it. The feed is not an XHR API."
+    },
+    {
+      "id": "catalog.api_search",
+      "title": "Search and page through catalog products with region and category/color filters",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/printful.mjs",
+            "exports": [
+              "createPrintfulCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "printful-feed"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "OAuth token required by the documented catalog endpoint. No token was supplied; the no-credential API probe returned HTTP 401."
+    },
+    {
+      "id": "catalog.api_product_variants",
+      "title": "Read catalog product details and paginated color/size variants",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/printful.mjs",
+            "exports": [
+              "createPrintfulCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "printful-feed"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "OAuth token required by the documented catalog endpoints; live product/variant replay is pending."
+    },
+    {
+      "id": "catalog.api_production_prices",
+      "title": "Collect paginated variant production/base prices by technique, production region, and explicit currency",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/printful.mjs",
+            "exports": [
+              "createPrintfulCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "printful-feed"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "OAuth token required by the documented price endpoint; live price replay is pending.",
+      "note": "Price output preserves Printful's price/discounted_price pairs and currency. The amount depends on product variant, technique, placement and quantity. It is not the merchant's retail price; shipping and tax are excluded."
+    },
+    {
+      "id": "catalog.api_categories",
+      "title": "Read paginated catalog categories",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/printful.mjs",
+            "exports": [
+              "createPrintfulCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "printful-feed"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "OAuth token required by the documented category endpoint; live category replay is pending."
+    },
+    {
+      "id": "auth.api_credentials",
+      "title": "Use an OAuth token for Printful catalog API calls",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/printful.mjs",
+            "exports": [
+              "createPrintfulCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "printful-feed"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No token was supplied in this read-only task. Public Help-linked regional feed remains usable without this API credential; no account enrollment was attempted."
+    },
+    {
+      "id": "account.orders.writes",
+      "title": "Create or modify a store product, order, or account setting",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested product lookup and price collection only; account and store mutations are outside scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

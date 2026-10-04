@@ -1,0 +1,23 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "service": "awin",
+  "reviewedAt": "2026-10-05",
+  "sourceURL": "https://help.awin.com/apidocs/retail-publisher-productapidocumentation-1",
+  "secretsPersistedInEvidence": false,
+  "contracts": [
+    {
+      "method": "GET",
+      "path": "/publishers/{PUBLISHER_ID}/awinfeeds/download/{ADVERTISER_ID}-retail-{LOCALE}.jsonl",
+      "classification": "official_endpoint_documented_but_feed_row_envelope_unresolved",
+      "bodyFormat": "JSON Lines",
+      "conflictingDocumentedShapes": [
+        "Successful response placeholder: {product_details:\"..\"}",
+        "Last-line product example: nested meta and product_basic objects (truncated before price/link mapping)",
+        "Enhanced Google product sample and field table: flat id/title/link/price/sale_price/availability properties"
+      ],
+      "flatParserStatus": "The client parses the documented flat Google-product fields only and rejects other envelope shapes. Fixture mapping is not a live feed replay.",
+      "requiredNextEvidence": "One authorized bounded Awin Publisher Feed HTTP replay that captures sanitized row-key names, preserves JSONL termination, and confirms where ID/title/link/price/currency/availability live. Do not store bearer token or copy the full product feed into Git."
+    }
+  ]
+}

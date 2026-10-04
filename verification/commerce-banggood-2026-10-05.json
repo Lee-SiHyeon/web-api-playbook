@@ -1,0 +1,52 @@
+{
+  "schema": "banggood-commerce-api-implementation-verification-v1",
+  "service": "banggood",
+  "checkedAt": "2026-10-04T20:16:16Z",
+  "secretsPersistedInEvidence": false,
+  "contract": {
+    "sourceUrl": "https://imgs3.banggood.com/affiliate/banggood-affiliate-apidoc-v1.2.2.pdf",
+    "documentationVersion": "1.2.2",
+    "documentUpdatesThrough": "2021",
+    "credentialedProductApiRequired": true,
+    "implementationUsesDocumentedTokenContract": true
+  },
+  "anonymousNoTokenControl": {
+    "method": "GET",
+    "origin": "https://affapi.banggood.com",
+    "path": "/product/detail",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 59,
+    "applicationCode": 401,
+    "browserUsed": false,
+    "cookiesSent": false,
+    "accessTokenSent": false,
+    "responseBodyPersisted": false,
+    "meaning": "The endpoint returned an API-level unauthorized code in a successful JSON transport response. This verifies the credential boundary only; it is not an authenticated product read."
+  },
+  "localVerification": {
+    "runner": "Node 24 node:test with mocked HTTP responses",
+    "testFile": "tests/commerce-banggood.test.mjs",
+    "testsPassed": 6,
+    "testsFailed": 0,
+    "covers": [
+      "official published MD5 signature sample",
+      "secret omitted from token request and all returned results",
+      "in-memory access-token header and bounded documented expiry",
+      "detail response identity and separate USD warehouse prices",
+      "optional sale_price and unchanged raw sale date values, with timezone and active-sale state left undetermined",
+      "documented search filters and decimal prices without guessed pagination",
+      "category tree, currency mismatch, and missing credential handling"
+    ],
+    "isLiveApiEvidence": false
+  },
+  "liveCredentialedReplay": {
+    "status": "pending_live",
+    "attempted": false,
+    "reason": "No partner-issued Banggood AppID/AppSecret (API api_key/api_secret) was present as injected process-memory credentials. No consumer password was reused and no credential was guessed."
+  },
+  "implementation": {
+    "lib/commerce/banggood.mjs": "d288b257c39071ee1c4e36142c53dbce254fd5b3506d3621dced7bcd94feb88c",
+    "tests/commerce-banggood.test.mjs": "945644f9de5bdb1243990901d75f9de1da1de52adb87f6f283310b7aebabad04"
+  }
+}

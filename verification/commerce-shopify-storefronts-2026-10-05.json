@@ -1,0 +1,390 @@
+{
+  "schema": "commerce-shopify-storefronts-verification-v1",
+  "checkedAt": "2026-10-04T19:58:17.959Z",
+  "mode": "independent_direct_http_replay",
+  "browserUsedForApiReplay": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "cookiesSent": false,
+  "authorizationSent": false,
+  "cartWritesSent": false,
+  "orderWritesSent": false,
+  "credentialsOrCartContentsPersisted": false,
+  "codeImplementationHashes": {
+    "lib/commerce/shopify-storefronts.mjs": "d7999c5cc32eeaa2c70ec22fc295b4078a167f18d502cad8851509c570b50445",
+    "lib/retail/shopify.mjs": "c20ab94145b15a6a1e19e8f18ff0fe8776e951ad62c282bc52e06e7ff2e224f1"
+  },
+  "browserDiscovery": {
+    "runner": "Playwright Chromium, fresh anonymous context",
+    "page": "https://colourpop.com/",
+    "documentStatus": 200,
+    "shopifyThemeGlobalPresent": true,
+    "browserSeededCookies": false,
+    "blockedPostRequests": true,
+    "siteInitiatedRead": {
+      "method": "GET",
+      "path": "/cart.js",
+      "status": 200,
+      "mime": "text/javascript",
+      "returnedCurrency": "USD",
+      "itemCount": 0,
+      "requestCookieHeaderPresent": true,
+      "note": "The storefront created an anonymous browser session cookie; its value was not read or saved. The independent Node replay below sent no cookies."
+    },
+    "searchUi": "The visible header form navigated to the full HTML search results page; no site-initiated search XHR was observed. Predictive search uses only the official documented Ajax contract replayed directly below."
+  },
+  "independentReplay": {
+    "runtime": "Node.js 24 direct fetch",
+    "client": "createShopifyStorefrontClient",
+    "requestsPerStore": 4,
+    "scopes": [
+      "GET product JSON",
+      "GET predictive product suggestions",
+      "GET cart.js for presentment currency"
+    ],
+    "stores": [
+      {
+        "store": "allbirds",
+        "origin": "https://www.allbirds.com",
+        "product": {
+          "id": 7205207343184,
+          "handle": "mens-runner-nz-slip-on-mushroom",
+          "titleSha256": "fb3b51ffa8aa858bff21bd89f88eb2ad8c61750680e1d0966de46faab61c29a5",
+          "canonicalUrl": "https://www.allbirds.com/products/mens-runner-nz-slip-on-mushroom",
+          "price": {
+            "amount": "105.00",
+            "amountInApiUnits": 10500,
+            "currency": "USD",
+            "minorUnitExponent": 2
+          },
+          "priceRange": {
+            "min": {
+              "amount": "105.00",
+              "amountInApiUnits": 10500,
+              "currency": "USD",
+              "minorUnitExponent": 2
+            },
+            "max": {
+              "amount": "105.00",
+              "amountInApiUnits": 10500,
+              "currency": "USD",
+              "minorUnitExponent": 2
+            }
+          },
+          "available": true,
+          "variantCount": 13,
+          "currencyItemCount": 0,
+          "request": {
+            "method": "GET",
+            "origin": "https://www.allbirds.com",
+            "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+            "checkedAt": "2026-10-04T19:58:16.381Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "httpStatus": 200,
+            "mime": "text/javascript",
+            "responseBytes": 12210,
+            "responseSha256": "4c38d6cf703971b5ec609f4abf9abadf84129f89d5aac1364097a190bf6ed46c",
+            "schemaVerified": true,
+            "productHandleMatched": true,
+            "currency": "USD",
+            "priceMinorUnitExponent": 2,
+            "priceField": "USD minor units"
+          },
+          "currencyRequest": {
+            "method": "GET",
+            "origin": "https://www.allbirds.com",
+            "path": "/cart.js",
+            "checkedAt": "2026-10-04T19:58:16.657Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "httpStatus": 200,
+            "mime": "text/javascript",
+            "responseBytes": 303,
+            "currency": "USD",
+            "itemCount": 0
+          }
+        },
+        "search": {
+          "query": "runner",
+          "resultCount": 5,
+          "products": [
+            {
+              "id": 4870548062288,
+              "handle": "womens-tree-runners-navy-night",
+              "titleSha256": "a9752cf4c59fefd51d3396fbf72606f2b3b85adc9cbb651f77c8fc9578ccba1b",
+              "price": {
+                "amount": "100.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            },
+            {
+              "id": 1878275686469,
+              "handle": "womens-wool-runners-natural-black",
+              "titleSha256": "53fd97c1a7bad2440f58c852261f27701600a01698f41afd38b61bf0c8efd5f1",
+              "price": {
+                "amount": "110.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            },
+            {
+              "id": 4826197655632,
+              "handle": "mens-wool-runners-true-black",
+              "titleSha256": "6682cd2a5da97930dcfddf1f3a52b174207e5149426aa88fa34f374e827748d6",
+              "price": {
+                "amount": "110.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": false
+            },
+            {
+              "id": 4873015754832,
+              "handle": "mens-tree-runners-mist",
+              "titleSha256": "1f9b85cfb9d2bf19ada1d366096cf2af46091de2bce141117787e0848cc9347a",
+              "price": {
+                "amount": "100.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            },
+            {
+              "id": 1878193471557,
+              "handle": "mens-wool-runners",
+              "titleSha256": "c8bc480e5f35bda830dce087966a3e6148ca83706020405df9ff3261b926d6d2",
+              "price": {
+                "amount": "110.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "origin": "https://www.allbirds.com",
+            "path": "/search/suggest.json",
+            "checkedAt": "2026-10-04T19:58:16.793Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "queryFields": [
+              "q",
+              "resources[type]",
+              "resources[limit]",
+              "resources[options][unavailable_products]"
+            ],
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 9565,
+            "responseSha256": "efa7fc55a8c5f2b3ab34cc8e5648e0b73f87f4ffb15ac7438f05c6914e786743",
+            "schemaVerified": true,
+            "resultArrayVerified": true,
+            "productCount": 5
+          },
+          "currencyRequest": {
+            "method": "GET",
+            "origin": "https://www.allbirds.com",
+            "path": "/cart.js",
+            "checkedAt": "2026-10-04T19:58:17.041Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "httpStatus": 200,
+            "mime": "text/javascript",
+            "responseBytes": 303,
+            "currency": "USD",
+            "itemCount": 0
+          }
+        }
+      },
+      {
+        "store": "colourpop",
+        "origin": "https://colourpop.com",
+        "product": {
+          "id": 7593200615506,
+          "handle": "eeveelution-shadow-palette",
+          "titleSha256": "952d8110a435abe91c70d2d64e55204a5d25bcd69cd524cf2bcb3245af5f9187",
+          "canonicalUrl": "https://colourpop.com/products/eeveelution-shadow-palette",
+          "price": {
+            "amount": "24.00",
+            "amountInApiUnits": 2400,
+            "currency": "USD",
+            "minorUnitExponent": 2
+          },
+          "priceRange": {
+            "min": {
+              "amount": "24.00",
+              "amountInApiUnits": 2400,
+              "currency": "USD",
+              "minorUnitExponent": 2
+            },
+            "max": {
+              "amount": "24.00",
+              "amountInApiUnits": 2400,
+              "currency": "USD",
+              "minorUnitExponent": 2
+            }
+          },
+          "available": true,
+          "variantCount": 1,
+          "currencyItemCount": 0,
+          "request": {
+            "method": "GET",
+            "origin": "https://colourpop.com",
+            "path": "/products/eeveelution-shadow-palette.js",
+            "checkedAt": "2026-10-04T19:58:17.181Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "httpStatus": 200,
+            "mime": "text/javascript",
+            "responseBytes": 8288,
+            "responseSha256": "a44bca7fa0e01a37763da66df9e8c61930a040f3742500150d6a1fab13529d20",
+            "schemaVerified": true
+          },
+          "currencyRequest": {
+            "method": "GET",
+            "origin": "https://colourpop.com",
+            "path": "/cart.js",
+            "checkedAt": "2026-10-04T19:58:17.413Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "httpStatus": 200,
+            "mime": "text/javascript",
+            "responseBytes": 303,
+            "currency": "USD",
+            "itemCount": 0
+          }
+        },
+        "search": {
+          "query": "eeveelution",
+          "resultCount": 5,
+          "products": [
+            {
+              "id": 7593247277138,
+              "handle": "cinder-surge-and-tide-shadow-stix-trio",
+              "titleSha256": "01e4c64cd3b11827d0e8a1525d5aae20cd6afb1c61aa0ec97bd436ae4412e21e",
+              "price": {
+                "amount": "32.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            },
+            {
+              "id": 7593200615506,
+              "handle": "eeveelution-shadow-palette",
+              "titleSha256": "952d8110a435abe91c70d2d64e55204a5d25bcd69cd524cf2bcb3245af5f9187",
+              "price": {
+                "amount": "24.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            },
+            {
+              "id": 7593244688466,
+              "handle": "vaporeon-shadow-stix",
+              "titleSha256": "751114ce0e7d4765d7c535ba9e2b356e4410322af42520334019277f103905ae",
+              "price": {
+                "amount": "12.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            },
+            {
+              "id": 7593244262482,
+              "handle": "jolteon-shadow-stix",
+              "titleSha256": "81a67ad9e577f8193701e3a1217d596ace664808e02eef4052a5898ce7c17986",
+              "price": {
+                "amount": "12.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            },
+            {
+              "id": 7593248915538,
+              "handle": "glacial-forest-bff-liquid-liner-duo",
+              "titleSha256": "1a15e4469d1b40f8913854e722bcd73640798969635f311fa6bba3a6f2fd65a7",
+              "price": {
+                "amount": "19.00",
+                "currency": "USD",
+                "minorUnitExponent": 2
+              },
+              "available": true
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "origin": "https://colourpop.com",
+            "path": "/search/suggest.json",
+            "checkedAt": "2026-10-04T19:58:17.568Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "queryFields": [
+              "q",
+              "resources[type]",
+              "resources[limit]",
+              "resources[options][unavailable_products]"
+            ],
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 9927,
+            "responseSha256": "a3c0b324416c004ddab08d85aaadc7c495d9f4919dfc70fcf505a39451f5222b",
+            "schemaVerified": true
+          },
+          "currencyRequest": {
+            "method": "GET",
+            "origin": "https://colourpop.com",
+            "path": "/cart.js",
+            "checkedAt": "2026-10-04T19:58:17.808Z",
+            "browserUsed": false,
+            "anonymous": true,
+            "cookieSent": false,
+            "credentialsUsed": false,
+            "httpStatus": 200,
+            "mime": "text/javascript",
+            "responseBytes": 303,
+            "currency": "USD",
+            "itemCount": 0
+          }
+        }
+      }
+    ],
+    "receiptFiles": {
+      "allbirds": {
+        "product": "commerce-shopify-storefronts-allbirds-product-2026-10-05.json",
+        "search": "commerce-shopify-storefronts-allbirds-search-2026-10-05.json"
+      },
+      "colourpop": {
+        "product": "commerce-shopify-storefronts-colourpop-product-2026-10-05.json",
+        "search": "commerce-shopify-storefronts-colourpop-search-2026-10-05.json"
+      }
+    }
+  },
+  "limitations": [
+    "Search support is limited to up to 10 predictive product suggestions per query; this is not full result search or page traversal.",
+    "Only each store's anonymous default US storefront context and USD currency were verified.",
+    "No collections/category membership or feed export contract was verified.",
+    "A Shopify public catalog response does not prove partner-program acceptance, affiliate attribution rights, dropship authorization, or feed-license rights."
+  ]
+}

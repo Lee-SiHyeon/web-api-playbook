@@ -1,0 +1,175 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "printful",
+  "capabilityId": "catalog.public_price_feed",
+  "checkedAt": "2026-10-04T20:12:53.956Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_documented_feed",
+    "sourceURL": "https://help.printful.com/hc/en-us/articles/50263594032401-Can-I-download-a-list-of-all-Printful-products"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://printful.s3.us-west-1.amazonaws.com",
+    "path": "/productExport/printful_products.zip",
+    "checkedAt": "2026-10-04T20:12:53.956Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/zip",
+    "responseBytes": 447095,
+    "responseSha256": "63942c3f81ccc5148c3978e0bd2520d6707255051902a11b723ce07dd8b0610a",
+    "lastModified": "Sun, 04 Oct 2026 00:10:10 GMT"
+  },
+  "redirectRequest": {
+    "method": "GET",
+    "origin": "https://www.printful.com",
+    "path": "/custom-products/export",
+    "checkedAt": "2026-10-04T20:12:53.956Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 302,
+    "mime": "text/html"
+  },
+  "regions": [
+    {
+      "region": "USA",
+      "priceCurrency": "USD"
+    },
+    {
+      "region": "Europe",
+      "priceCurrency": "EUR"
+    },
+    {
+      "region": "Australia",
+      "priceCurrency": "AUD"
+    },
+    {
+      "region": "Japan",
+      "priceCurrency": "JPY"
+    },
+    {
+      "region": "Canada",
+      "priceCurrency": "CAD"
+    },
+    {
+      "region": "Brazil",
+      "priceCurrency": "BRL"
+    },
+    {
+      "region": "UK",
+      "priceCurrency": "GBP"
+    },
+    {
+      "region": "China",
+      "priceCurrency": null
+    }
+  ],
+  "priceRole": "regional supplier base product price; shipping and taxes are separate",
+  "implementation": {
+    "lib/commerce/printful.mjs": "f41bf663590860d2245663e41fea09e92d5db9ed6049f15340dd1daa718806b2",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "liveReplay": true,
+  "execution": {
+    "runner": "Node 24.21 direct HTTP client",
+    "browserUsed": false,
+    "credentialsUsed": false,
+    "cookieSent": false
+  },
+  "dataset": {
+    "totalVariants": 22635,
+    "regionCount": 8,
+    "regions": [
+      {
+        "region": "USA",
+        "productCount": 11279,
+        "currency": "USD",
+        "firstProductVariantId": 1,
+        "firstPriceDisplay": "$13.15",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 11279,
+        "titlePersistedInEvidence": false
+      },
+      {
+        "region": "Europe",
+        "productCount": 4915,
+        "currency": "EUR",
+        "firstProductVariantId": 1,
+        "firstPriceDisplay": "€11.73",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 4915,
+        "titlePersistedInEvidence": false
+      },
+      {
+        "region": "Australia",
+        "productCount": 1250,
+        "currency": "AUD",
+        "firstProductVariantId": 473,
+        "firstPriceDisplay": "AU$ 17.85",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 1250,
+        "titlePersistedInEvidence": false
+      },
+      {
+        "region": "Japan",
+        "productCount": 601,
+        "currency": "JPY",
+        "firstProductVariantId": 1,
+        "firstPriceDisplay": "¥1867",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 601,
+        "titlePersistedInEvidence": false
+      },
+      {
+        "region": "Canada",
+        "productCount": 1063,
+        "currency": "CAD",
+        "firstProductVariantId": 1,
+        "firstPriceDisplay": "C$ 19.12",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 1063,
+        "titlePersistedInEvidence": false
+      },
+      {
+        "region": "Brazil",
+        "productCount": 119,
+        "currency": "BRL",
+        "firstProductVariantId": 483,
+        "firstPriceDisplay": "R$ 54.95",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 119,
+        "titlePersistedInEvidence": false
+      },
+      {
+        "region": "UK",
+        "productCount": 2905,
+        "currency": "GBP",
+        "firstProductVariantId": 1,
+        "firstPriceDisplay": "£11.17",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 2905,
+        "titlePersistedInEvidence": false
+      },
+      {
+        "region": "China",
+        "productCount": 503,
+        "currency": null,
+        "firstProductVariantId": 12903,
+        "firstPriceDisplay": "$43.86",
+        "unparsedPriceCount": 0,
+        "unambiguousCurrencyCount": 0,
+        "titlePersistedInEvidence": false
+      }
+    ]
+  }
+}

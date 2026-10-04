@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 1,
+  "service": "banggood",
+  "description": "Banggood's official Affiliate Data API provides read-only products, categories, prices and per-warehouse USD price fields. It requires partner-issued AppID/AppSecret mapped to api_key/api_secret, a documented MD5 token exchange, and a short-lived access-token. The documentation is version 1.2.2 with updates through 2021; no partner-issued credentials were available for independent live replay. See references/commerce-banggood-contracts.json.",
+  "capabilities": [
+    {
+      "id": "catalog.product_search",
+      "title": "Search product data by keyword or category and collect requested-currency prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/banggood.mjs",
+            "exports": [
+              "createBanggoodClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "banggood"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-banggood.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The client and signed-token path are implemented from the official API reference, but no partner-issued API key and secret were available for an independent authenticated HTTP replay. Page totals are returned; the official document does not specify a page request parameter, so full-catalog pagination is not claimed."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Read a product by ID with per-warehouse prices, optional sale fields, and canonical product URL",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/banggood.mjs",
+            "exports": [
+              "createBanggoodClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "banggood"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-banggood.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official contract documents product detail and warehouse price fields. Independent live authentication and response validation await partner-issued API credentials. Warehouse prices and market prices are explicitly represented as USD decimal amounts, not stock availability or minor units. Optional sale_price and date fields are preserved raw; currency, timezone, and active-sale semantics are not inferred."
+    },
+    {
+      "id": "pricing.sale_window",
+      "title": "Preserve optional warehouse sale price and raw sale date boundaries",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/banggood.mjs",
+            "exports": [
+              "createBanggoodClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "banggood"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-banggood.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official detail example contains sale_price, sale_date_start, and sale_date_end, but no partner-key response has been replayed. Date strings are retained as raw values; the PDF does not specify timezone or active-sale boundary semantics."
+    },
+    {
+      "id": "catalog.categories",
+      "title": "Read the product category tree or a category by ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/banggood.mjs",
+            "exports": [
+              "createBanggoodClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "banggood"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-banggood.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official category contract is implemented locally, but no partner-issued API key and secret were available for independent live replay."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Collect every product page using a documented continuation parameter",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official API PDF returns page_total but does not specify a page index or page-size request field. No page parameter is sent or guessed."
+    },
+    {
+      "id": "catalog.warehouse_stock",
+      "title": "Read available quantity or in-stock status per warehouse",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The documented product-detail warehouse fields provide warehouse_price and market_price but do not define quantity or an in-stock signal. Price presence is not treated as stock evidence."
+    },
+    {
+      "id": "pricing.multicurrency",
+      "title": "Validate product-list prices across supported currencies",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/banggood.mjs",
+            "exports": [
+              "createBanggoodClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "banggood"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-banggood.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The client accepts the documented currency parameter and preserves decimal amounts, but only USD is documented as the warehouse-price unit and no currency has been live-replayed."
+    },
+    {
+      "id": "affiliate.link_generation",
+      "title": "Generate and verify a publisher-attributed affiliate link",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "This read-only product-data client strips the product_url query string and does not claim link generation or publisher attribution."
+    },
+    {
+      "id": "auth.consumer_login",
+      "title": "Sign in to a Banggood consumer account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested commerce data path uses partner API credentials, and customer-account login is outside this read-only product and price collection scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "profile.edit",
+      "title": "Edit a Banggood consumer account profile",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Consumer profile operations are outside this read-only product and price collection scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "commerce.order_write",
+      "title": "Create or pay for a dropshipping order",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested product lookup and price collection; ordering and payment changes are outside this read-only API scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

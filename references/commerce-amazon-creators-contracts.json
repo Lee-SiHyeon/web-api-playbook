@@ -1,0 +1,113 @@
+{
+  "schema": "commerce-api-contract-v1",
+  "service": "amazon-partner",
+  "classification": "first_party_documented_credentialed_api",
+  "sources": [
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/get-started/using-curl",
+      "supports": ["LwA OAuth token request", "credential-version regional token endpoints", "token response", "catalog headers", "GetItems request example"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/search-items",
+      "supports": ["SearchItems request and response schema", "itemCount 1-10", "itemPage 1-10", "offersV2 price and availability resources"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items",
+      "supports": ["GetItems request schema", "ASIN itemIds maximum 10", "item result schema"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/offersV2",
+      "supports": ["current buying amount", "currency", "saving basis and label", "featured-offer limitation", "availability fields"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/concepts/understanding-versions",
+      "supports": ["credential version interpretation and regional selection"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/register-for-creators-api",
+      "supports": ["Associates eligibility", "application and credential creation requirements"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/migrating-to-creatorsapi-from-paapi",
+      "supports": ["Creators API endpoint", "OAuth bearer authentication", "lowerCamelCase request fields", "PartnerTag requirement", "PA-API credentials are incompatible"]
+    }
+  ],
+  "authentication": {
+    "type": "oauth2_client_credentials_lwa",
+    "interactiveAmazonConsumerLoginUsed": false,
+    "requiresAssociatesCreatorsApiRegistrationAndCredentials": true,
+    "registrationEligibility": "Amazon's official registration documentation requires an Associates account that has been reviewed and finally accepted before Creators API registration.",
+    "credentialVersionAssignment": "Automatically assigned from the Associates store home region: NA 3.1, EU 3.2, FE 3.3.",
+    "tokenPath": "/auth/o2/token",
+    "grantType": "client_credentials",
+    "scope": "creatorsapi::default",
+    "requestContentType": "application/json",
+    "response": {
+      "access_token": "bearer token; kept only in process memory",
+      "token_type": "bearer",
+      "scope": "creatorsapi::default",
+      "expires_in": 3600
+    },
+    "credentialVersionEndpoints": {
+      "3.1": "https://api.amazon.com/auth/o2/token",
+      "3.2": "https://api.amazon.co.uk/auth/o2/token",
+      "3.3": "https://api.amazon.co.jp/auth/o2/token"
+    },
+    "credentialFields": ["credentialId", "credentialSecret", "credentialVersion"],
+    "credentialFieldNamesInTokenJson": ["client_id", "client_secret", "grant_type", "scope"],
+    "persistence": "credentials and bearer token are accepted in memory; client does not persist either"
+  },
+  "catalog": {
+    "origin": "https://creatorsapi.amazon",
+    "authorization": "Authorization: Bearer <access_token>",
+    "marketplaceHeader": "x-marketplace",
+    "requiredBodyFields": ["marketplace", "partnerTag"],
+    "marketplacesDocumentedByCurlGuide": [
+      "www.amazon.com", "www.amazon.ca", "www.amazon.com.mx", "www.amazon.com.br",
+      "www.amazon.co.uk", "www.amazon.de", "www.amazon.fr", "www.amazon.it", "www.amazon.es",
+      "www.amazon.nl", "www.amazon.com.be", "www.amazon.eg", "www.amazon.in", "www.amazon.ie",
+      "www.amazon.pl", "www.amazon.sa", "www.amazon.se", "www.amazon.com.tr", "www.amazon.ae",
+      "www.amazon.co.jp", "www.amazon.sg", "www.amazon.com.au"
+    ],
+    "searchItems": {
+      "method": "POST",
+      "path": "/catalog/v1/searchItems",
+      "fields": "lowerCamelCase",
+      "searchTerms": ["keywords", "actor", "artist", "author", "brand", "title"],
+      "itemCountRange": [1, 10],
+      "itemPageRange": [1, 10],
+      "responseContainer": "searchResult",
+      "responseItems": "searchResult.items",
+      "responseTotal": "searchResult.totalResultCount"
+    },
+    "getItems": {
+      "method": "POST",
+      "path": "/catalog/v1/getItems",
+      "idType": "ASIN",
+      "maxIds": 10,
+      "responseContainer": "itemsResult",
+      "responseItems": "itemsResult.items"
+    },
+    "priceAndAvailability": {
+      "resources": [
+        "offersV2.listings.price",
+        "offersV2.listings.availability",
+        "offersV2.listings.condition",
+        "offersV2.listings.isBuyBoxWinner",
+        "offersV2.listings.merchantInfo"
+      ],
+      "currentAmountPath": "offersV2.listings[].price.money.amount",
+      "currencyPath": "offersV2.listings[].price.money.currency",
+      "displayAmountPath": "offersV2.listings[].price.money.displayAmount",
+      "referenceAmountPath": "offersV2.listings[].price.savingBasis.money.amount",
+      "referenceBasisLabelPath": "offersV2.listings[].price.savingBasis.savingBasisTypeLabel",
+      "availabilityPath": "offersV2.listings[].availability.type",
+      "semanticLimit": "OffersV2 contains featured listings; it is not an all-seller offer listing or legacy Offers.Summaries feed. Preserve savingBasis type and label; do not rename every reference price to regular/list price."
+    }
+  },
+  "liveStatus": {
+    "requestSent": false,
+    "credentialsProvidedToExecution": false,
+    "reason": "No Creators API Credential ID, Credential Secret, version, or marketplace PartnerTag was supplied to this execution. The code cannot claim authenticated live search or price data without them."
+  }
+}

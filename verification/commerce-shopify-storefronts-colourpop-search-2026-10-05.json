@@ -1,0 +1,57 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify-storefronts",
+  "capabilityId": "colourpop.catalog.predictive_search",
+  "checkedAt": "2026-10-04T19:58:17.568Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://shopify.dev/docs/api/ajax/reference/predictive-search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://colourpop.com",
+    "path": "/search/suggest.json",
+    "checkedAt": "2026-10-04T19:58:17.568Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "queryFields": [
+      "q",
+      "resources[type]",
+      "resources[limit]",
+      "resources[options][unavailable_products]"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 9927,
+    "responseSha256": "a3c0b324416c004ddab08d85aaadc7c495d9f4919dfc70fcf505a39451f5222b",
+    "schemaVerified": true
+  },
+  "productCount": 5,
+  "currencyRequest": {
+    "method": "GET",
+    "origin": "https://colourpop.com",
+    "path": "/cart.js",
+    "checkedAt": "2026-10-04T19:58:17.808Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 303,
+    "currency": "USD",
+    "itemCount": 0
+  },
+  "implementation": {
+    "lib/commerce/shopify-storefronts.mjs": "d7999c5cc32eeaa2c70ec22fc295b4078a167f18d502cad8851509c570b50445",
+    "lib/retail/shopify.mjs": "c20ab94145b15a6a1e19e8f18ff0fe8776e951ad62c282bc52e06e7ff2e224f1"
+  }
+}

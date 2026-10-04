@@ -1,0 +1,90 @@
+{
+  "schema": "web-api-contract-reference-v1",
+  "service": "ebay-partner",
+  "reviewedAt": "2026-10-04T20:06:44Z",
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sources": [
+      "https://developer.ebay.com/api-docs/buy/browse/resources/item_summary/methods/search",
+      "https://developer.ebay.com/api-docs/buy/browse/resources/item/methods/getItem",
+      "https://developer.ebay.com/api-docs/buy/static/api-browse.html",
+      "https://developer.ebay.com/api-docs/buy/ref-marketplace-supported.html",
+      "https://developer.ebay.com/api-docs/buy/static/buy-requirements.html",
+      "https://developer.ebay.com/develop/guides/sell/authorization"
+    ],
+    "note": "The operations below are official documented REST API calls. A UI-initiated XHR capture was not used or claimed."
+  },
+  "api": {
+    "environment": "production",
+    "origin": "https://api.ebay.com",
+    "browseScope": "https://api.ebay.com/oauth/api_scope",
+    "applicationToken": {
+      "method": "POST",
+      "path": "/identity/v1/oauth2/token",
+      "headers": ["Authorization: Basic base64(client_id:client_secret)", "Content-Type: application/x-www-form-urlencoded"],
+      "formFields": { "grant_type": "client_credentials", "scope": "https://api.ebay.com/oauth/api_scope" },
+      "responseFields": ["access_token", "expires_in", "token_type"],
+      "persistence": "Process memory only; caller supplies credentials directly and owns secure acquisition."
+    },
+    "search": {
+      "method": "GET",
+      "path": "/buy/browse/v1/item_summary/search",
+      "requiredHeaders": ["Authorization: Bearer <application_access_token>", "X-EBAY-C-MARKETPLACE-ID"],
+      "query": ["q", "filter", "limit", "offset", "category_ids"],
+      "filter": "buyingOptions:{FIXED_PRICE}",
+      "responseFields": ["href", "total", "limit", "offset", "next", "itemSummaries", "categorySuggestions"],
+      "pagination": { "maximumPageSize": 200, "maximumOffsetExclusive": 10000, "offsetMustBeMultipleOfLimit": true },
+      "price": "Each item summary's price.value is a decimal string and price.currency is the marketplace currency. Preserve it without floating-point conversion."
+    },
+    "itemDetail": {
+      "method": "GET",
+      "path": "/buy/browse/v1/item/{item_id}",
+      "itemIdFormat": "v1|{numeric_item_id}|{numeric_variation_id}",
+      "responseFieldsUsed": ["itemId", "title", "itemWebUrl", "price", "currentBidPrice", "estimatedAvailabilityStatus", "estimatedAvailabilities", "shippingOptions", "categories"],
+      "moneySemantics": "Item price, auction current bid, and shipping cost stay separate. No landed or all-in total is synthesized. VAT inclusion depends on requested marketplace/context."
+    },
+    "affiliate": {
+      "contextHeader": "X-EBAY-C-ENDUSERCTX",
+      "fields": ["affiliateCampaignId", "affiliateReferenceId"],
+      "requirements": "An ePN campaign ID is supplied by the publisher's own EPN account. The client sends a 10-digit campaign ID only when its caller explicitly provides one and returns only an API-provided affiliate URL whose campid matches it.",
+      "enrollment": "Unknown for this account; no campaign value is stored in this repository."
+    }
+  },
+  "marketplaces": {
+    "source": "Buy API Support by Marketplace, item_summary and item rows",
+    "ids": {
+      "EBAY_AT": { "currency": "EUR", "host": "www.ebay.at" },
+      "EBAY_AU": { "currency": "AUD", "host": "www.ebay.com.au" },
+      "EBAY_BE": { "currency": "EUR", "host": "www.ebay.com.be" },
+      "EBAY_CA": { "currency": "CAD", "host": "www.ebay.ca" },
+      "EBAY_CH": { "currency": "CHF", "host": "www.ebay.ch" },
+      "EBAY_DE": { "currency": "EUR", "host": "www.ebay.de" },
+      "EBAY_ES": { "currency": "EUR", "host": "www.ebay.es" },
+      "EBAY_FR": { "currency": "EUR", "host": "www.ebay.fr" },
+      "EBAY_GB": { "currency": "GBP", "host": "www.ebay.co.uk" },
+      "EBAY_HK": { "currency": "HKD", "host": "www.ebay.com.hk" },
+      "EBAY_IE": { "currency": "EUR", "host": "www.ebay.ie" },
+      "EBAY_IT": { "currency": "EUR", "host": "www.ebay.it" },
+      "EBAY_NL": { "currency": "EUR", "host": "www.ebay.nl" },
+      "EBAY_PL": { "currency": "PLN", "host": "www.ebay.pl" },
+      "EBAY_SG": { "currency": "SGD", "host": "www.ebay.com.sg" },
+      "EBAY_US": { "currency": "USD", "host": "www.ebay.com" }
+    },
+    "notable": "Supported marketplaces do not imply production approval. The API reference notes that searchByImage is limited to US, DE, GB, and AU; this client does not implement image search."
+  },
+  "accessBoundary": {
+    "applicationTokenRequired": true,
+    "userLoginRequiredForBrowseRead": false,
+    "buyApiProductionApprovalRequired": true,
+    "epnCampaignRequiredForTrackedAffiliateUrl": true,
+    "productDataKind": "Marketplace listings, not wholesale supplier inventory or guaranteed dropship fulfillment."
+  },
+  "notImplemented": [
+    "get_items_by_item_group variation enumeration",
+    "Buy API Taxonomy category-tree traversal",
+    "item-group product identity mapping",
+    "inventory or price change feed synchronization",
+    "shipping quote based on destination and quantity",
+    "orders, checkout, purchase, seller inventory writes, and fulfillment"
+  ]
+}

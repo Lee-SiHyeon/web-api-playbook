@@ -56,6 +56,17 @@ as XHR or an immediate replay of captured opaque browser inputs as a durable
 engine-free workflow. Official API documentation, first-party shipped JS
 contracts and UI-observed XHR have distinct provenance fields.
 
+For foreign affiliate/dropshipping product and price collection, use
+[the commerce collector](references/commerce-collection.md), its fixed provider
+registry and the official-source matrix. Classify browser XHR, documented REST
+APIs and static HTTP feeds distinctly. Preserve price kind, variant, destination,
+marketplace, currency, production technique and unknown currency; do not infer
+landed cost or stock from aggregate/virtual counts. Read credentials from a
+service-bound memory/stdin provider, never reuse unrelated passwords. Keep
+credentialed clients pending live until the real runner returns validated
+business data. Unknown feed envelopes, partial pages and source limits stay
+explicit; support price snapshot/CSV readback and same-context comparisons.
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.

@@ -39,7 +39,7 @@ function testResultMap(initialAudit) {
   const results = Object.fromEntries(files.map(file => [file, runTestFile(file)]));
   return Object.fromEntries(initialAudit.capabilities.map(cap => {
     const tests = cap.code.details.filter(item => item.kind === 'test');
-    return [cap.id, tests.length && tests.every(item => item.state === 'present' && results[item.path] === 'passed') ? 'passed' : 'failed'];
+    return [cap.id, tests.length === 0 ? 'not_run' : tests.every(item => item.state === 'present' && results[item.path] === 'passed') ? 'passed' : 'failed'];
   }));
 }
 

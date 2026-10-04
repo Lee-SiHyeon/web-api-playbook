@@ -1,0 +1,81 @@
+{
+  "schema": "web-api-product-price-snapshot-v1",
+  "checkedAt": "2026-10-04T20:34:28.564Z",
+  "provider": "shopify-storefronts",
+  "context": {
+    "store": "colourpop",
+    "operation": "product"
+  },
+  "executionMode": "pure_http",
+  "offers": [
+    {
+      "schema": "web-api-product-offer-v1",
+      "provider": "shopify-storefronts",
+      "productId": "7593200615506",
+      "variantId": "42459323203666",
+      "title": "Eeveelution / Default Title",
+      "url": "https://colourpop.com/products/eeveelution-shadow-palette",
+      "price": {
+        "amount": "24.00",
+        "currency": "USD",
+        "kind": "retail_current"
+      },
+      "priceRange": null,
+      "availability": "available",
+      "context": {
+        "store": "colourpop",
+        "operation": "product"
+      },
+      "observedAt": "2026-10-04T20:34:28.562Z",
+      "source": "shopify-storefronts_documented_response"
+    }
+  ],
+  "receipts": [
+    {
+      "method": "GET",
+      "origin": "https://colourpop.com",
+      "path": "/products/eeveelution-shadow-palette.js",
+      "checkedAt": "2026-10-04T20:34:27.134Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "cookieSent": false,
+      "credentialsUsed": false,
+      "httpStatus": 200,
+      "mime": "text/javascript",
+      "responseBytes": 8288,
+      "responseSha256": "9fed29f63796c8deccbee8c3c4e2abc9959328b9fde469dc654009cf52ff4b29",
+      "schemaVerified": true
+    },
+    {
+      "method": "GET",
+      "origin": "https://colourpop.com",
+      "path": "/cart.js",
+      "checkedAt": "2026-10-04T20:34:28.347Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "cookieSent": false,
+      "credentialsUsed": false,
+      "httpStatus": 200,
+      "mime": "text/javascript",
+      "responseBytes": 303,
+      "currency": "USD"
+    }
+  ],
+  "collection": {
+    "pagesRead": 1,
+    "rowsSeen": 1,
+    "offersStored": 1,
+    "maxPages": 1,
+    "maxOffers": 1,
+    "coverage": "product_detail",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": true
+  },
+  "credentialsUsed": false,
+  "secretsPersistedInEvidence": false,
+  "sampleOfFullCollection": false
+}

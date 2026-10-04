@@ -1,0 +1,222 @@
+{
+  "schemaVersion": 1,
+  "service": "amazon-partner",
+  "description": "Amazon Associates Creators API reads. This is an official credentialed product API and requires approved Creators API credentials plus a marketplace PartnerTag; it is distinct from anonymous Amazon storefront XHR and legacy PA-API 5 signing.",
+  "capabilities": [
+    {
+      "id": "auth.creators_api_token",
+      "title": "Acquire and cache an LwA Creators API bearer token in process memory",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/amazon-creators.mjs",
+            "exports": [
+              "createAmazonCreatorsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-amazon-creators.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "amazon-partner"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The client contract is implemented, but no approved Creators API Credential ID/Secret/version was supplied to this execution for an authenticated token exchange."
+    },
+    {
+      "id": "catalog.search",
+      "title": "Search Amazon catalog products with bounded page and result limits",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/amazon-creators.mjs",
+            "exports": [
+              "createAmazonCreatorsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-amazon-creators.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "amazon-partner"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No live SearchItems request was sent because registered Creators API credentials and a valid caller-owned PartnerTag were not supplied.",
+      "note": "If Amazon returns items with response-level errors, the adapter retains the items and sanitized error codes, sets partial=true, and sets expectedResultVerified=false."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Read up to ten ASIN product records and bind each result to requested IDs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/amazon-creators.mjs",
+            "exports": [
+              "createAmazonCreatorsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-amazon-creators.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "amazon-partner"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No live GetItems request was sent because registered Creators API credentials and a valid caller-owned PartnerTag were not supplied."
+    },
+    {
+      "id": "catalog.price_availability",
+      "title": "Collect current offer price, currency, reference-price basis, and availability separately",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/amazon-creators.mjs",
+            "exports": [
+              "createAmazonCreatorsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-amazon-creators.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "amazon-partner"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Offer parsing has local contract tests, but Amazon returned no live offer data in this execution. OffersV2 documents featured offers only; it does not provide legacy Offers.Summaries or all seller listings."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Read sequential SearchItems pages within the documented ten-page and ten-item limits",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/amazon-creators.mjs",
+            "exports": [
+              "createAmazonCreatorsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-amazon-creators.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "amazon-partner"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Pagination boundaries and sequential execution have local contract tests; no authenticated pagination run was available."
+    },
+    {
+      "id": "catalog.category_navigation",
+      "title": "Enumerate marketplace categories and their BrowseNode hierarchy",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "SearchIndex can be passed when known, but GetBrowseNodes enumeration and its response contract are outside this implementation."
+    },
+    {
+      "id": "affiliate.link_generation",
+      "title": "Use the caller-supplied marketplace PartnerTag in Creators API links",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/amazon-creators.mjs",
+            "exports": [
+              "createAmazonCreatorsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-amazon-creators.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "amazon-partner"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "PartnerTag is caller-supplied and is never invented. No Amazon marketplace PartnerTag was supplied to this execution."
+    },
+    {
+      "id": "cart.orders.write",
+      "title": "Modify a retail cart, purchase, order, or delivery address",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This implementation is limited to read-only Associates product and offer data; retail cart and order changes were not requested.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

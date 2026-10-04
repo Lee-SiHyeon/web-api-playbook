@@ -56,3 +56,5 @@ node scripts/checklist.mjs --service=inpock --run-tests --strict
 같은 기능에 통화 등 보조 조회가 꼭 필요하면 evidence 항목의 `companionReads`에 `{key:"currencyRequest",origin,path,mime}`처럼 선언한다. 검증기는 영수증의 해당 조회도 독립적으로 검사한다. Shopify 상품 Ajax의 JSON 본문은 `text/javascript` MIME으로 관찰됐으므로 실제 MIME을 그대로 지정한다.
 
 `contractProvenance`는 실제 UI XHR인 `browser_xhr_observed`, 공식 API 문서인 `first_party_documented_api`, 배포된 자사 JS에서 확인한 `first_party_bundle_contract`를 구별하고 `sourceURL`을 연결한다. JS 계약에는 `sourceSha256`도 필요하다. SSR 상품 문서, 텔레메트리, 후보 엔드포인트, MIME/상태만 맞는 응답은 공개 상품 API 실증으로 기록하지 않는다. 체크리스트 자체는 오프라인 필드·해시 검사이므로 원 출처와 실제 실행은 리뷰와 독립 재생으로 확인한다.
+
+공식 정적 상품 피드는 `first_party_documented_feed`로 표시하고 실제 ZIP/CSV MIME을 선언한다. `http-credentialed-read-v1`은 API 키·앱 OAuth·서명·Basic 인증으로 읽는 상품 API에 사용한다. 고객 프로필의 owner 조회를 꾸며 내지 않고, 프로세스 메모리의 서비스/origin 바인딩·HTTP 결과·상품 스키마·기대 결과를 검증한다. 자격 정보가 없으면 영수증을 생성하지 않고 라이브 미확인으로 남긴다. `commerce-collection-v1`은 원 HTTP 조회와 실제 공통 실행기, JSON/CSV 독립 읽기 일치, 전체/샘플 건수, 결과 해시와 구현 해시를 함께 검사한다. 테스트가 정의되지 않은 항목은 `not_run`이며 테스트 실패로 표시하지 않는다.

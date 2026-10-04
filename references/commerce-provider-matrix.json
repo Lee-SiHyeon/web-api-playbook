@@ -1,0 +1,507 @@
+{
+  "schema": "commerce-provider-capability-matrix-v1",
+  "checkedAt": "2026-10-05",
+  "purpose": "Official-source inventory for API-only product discovery and price/cost collection across affiliate publishers, retail marketplaces, and dropshipping suppliers.",
+  "scope": {
+    "included": [
+      "Read-only product, offer, price, shipping, and stock metadata where officially exposed",
+      "Publisher/affiliate API versus seller/merchant API distinction",
+      "Interactive account login versus app credentials or bearer tokens",
+      "Documented HTTP API versus CSV/XML/SFTP feed versus in-product dashboard workflow"
+    ],
+    "excluded": [
+      "Account creation, applications, API-key issuance, or advertiser/seller approvals",
+      "Orders, purchases, checkout, listing writes, price writes, affiliate-link creation, or account changes",
+      "Undocumented private endpoints and browser-bypass techniques"
+    ],
+    "provenanceRule": "Official documentation is a documented contract, not evidence of a current live replay. Historical feed specs and inaccessible developer-portal references remain pending current HTTP validation.",
+    "termsRule": "Affiliate permission to display/use product data is not general permission to aggregate, resell, redistribute, or competitively analyze that data."
+  },
+  "summary": {
+    "credentialFreeAnonymousCatalog": "No broad marketplace-wide anonymous product-and-price API was confirmed among the reviewed services. Public Shopify storefront Ajax reads are anonymous but are scoped to one known Shopify store and product handles/search suggestions.",
+    "bestDocumentedPublisherCandidates": [
+      "AliExpress TOP affiliate/social product search: no user session, but requires a registered app key and signed requests.",
+      "Banggood Affiliate Data API: product search/detail/category and warehouse prices, but requires affiliate enrollment and app credentials.",
+      "Amazon Creators API: broad catalog search/details/offers, but final Associates acceptance, at least 10 qualified sales in the trailing 30 days, credentials, and marketplace PartnerTag are required.",
+      "Rakuten Product Search and CJ Product Feed: useful publisher catalogs behind publisher API tokens and advertiser relationship/offer rules.",
+      "Admitad product feeds: products and affiliate links across partner programs, delivered through the registered publisher account; direct public endpoint contract is not exposed in the reviewed sources."
+    ],
+    "bestSupplierCostCandidates": [
+      "Banggood Affiliate Data API reports product and warehouse costs/prices by currency/warehouse.",
+      "Printify Catalog API reports fulfillment cost, variants, availability and destination-specific shipping, but requires merchant/API authorization and is POD-only.",
+      "Zendrop documents a scoped catalog API through its MCP endpoint, but requires a token/OAuth and is not an anonymous XHR contract."
+    ],
+    "noPublicProductApiOrInsufficientContract": [
+      "DHgate direct affiliate/catalog API: not found in reviewed official public docs; an Admitad DHgate WW offer exists, but its feed/API entitlement and schema are unknown.",
+      "Temu affiliate catalog: affiliate tools provide campaign/product links after registration, but no public affiliate product-search API contract was found.",
+      "DSers and Spocket: documented app/dashboard/extension or supplier CSV flows; no public external product-catalog API contract was found.",
+      "Shopify Collabs: product discovery/linking is inside the Collabs app; no public Collabs product API contract was found."
+    ]
+  },
+  "providers": [
+    {
+      "id": "aliexpress-top-affiliate-search",
+      "brand": "AliExpress",
+      "businessRole": "publisher_affiliate_product_discovery",
+      "sourceOwner": "Alibaba Open Platform / AliExpress social product pool",
+      "routeKind": "documented_signed_http_api",
+      "noInteractiveUserSession": true,
+      "credentialsAndApproval": "The method is marked free and does not require user authorization/session. The common TOP API envelope still requires an app_key, sign, sign_method, timestamp and app secret for signing; an app must be registered in the Alibaba Open Platform. This is app authentication, not credential-free anonymous access.",
+      "exactReadContract": {
+        "method": "POST",
+        "url": "https://eco.taobao.com/router/rest",
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "methodParameter": "aliexpress.social.item.search",
+        "commonParameters": ["app_key", "method", "sign", "sign_method", "timestamp", "v", "format"],
+        "searchParameters": ["keyword", "cate_id", "min_price", "max_price", "ship_to", "currency", "locale", "alliance_item", "page_no", "page_size", "order_by", "desc", "is_ship_free", "logistics_time", "commission_rate_min", "commission_rate_max", "comment_score", "has_video"],
+        "responseFields": ["item_id", "item_title", "item_url", "item_origin_price_min", "item_origin_price_max", "item_price_discount_min", "item_price_discount_max", "item_discount_rate", "commission_rate", "seller_layer", "sales30_day_semantic", "page_no", "page_size", "total_count"]
+      },
+      "priceStockAndPaging": "Price is min/max across variants and is formatted with the requested currency; discounted min/max is separate. `ship_to`, `currency`, and locale can be specified. `page_no`, `page_size`, and total_count are documented. The response shows semantic sales counts, not on-hand inventory quantity; no exact stock count is documented.",
+      "freshnessAndLimits": "No rate limit or live freshness interval was established from the API reference inspected. Product pool eligibility and current API availability need live confirmation before claiming a working client.",
+      "blockers": ["No app credentials are present in this repository or task context.", "This is an affiliate/social discovery pool; it does not establish supplier fulfillment terms or inventory quantity.", "The existing AliExpress SEO metadata endpoint is a separate operation and does not expose current price."],
+      "primarySources": [
+        "https://developer.alibaba.com/docs/api.htm?apiId=47556",
+        "https://ads.alibaba.com/help/getcode.htm?id=4"
+      ]
+    },
+    {
+      "id": "amazon-associates-creators-api",
+      "brand": "Amazon Associates",
+      "businessRole": "publisher_affiliate_catalog",
+      "sourceOwner": "Amazon Associates Central",
+      "routeKind": "documented_authenticated_http_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Requires a reviewed and finally accepted Amazon Associates account for the marketplace, at least 10 qualifying sales in the prior 30 days, Creators API registration by the primary account owner, generated Credential ID/Secret/Version, and a valid marketplace PartnerTag. API calls use OAuth 2.0 client credentials and a bearer token; the API access requirement is sales-gated.",
+      "exactReadContract": {
+        "tokenMethod": "POST",
+        "tokenPath": "/auth/o2/token",
+        "tokenHosts": {
+          "Credential Version 3.1 (NA)": "https://api.amazon.com",
+          "Credential Version 3.2 (EU)": "https://api.amazon.co.uk",
+          "Credential Version 3.3 (FE)": "https://api.amazon.co.jp"
+        },
+        "credentialVersion": "Automatically assigned from the Associates store home region; selects the LwA token host, but does not restrict target marketplaces. API endpoint version is separately `v1`.",
+        "tokenBodyFields": ["grant_type=client_credentials", "client_id", "client_secret", "scope=creatorsapi::default"],
+        "tokenLifetimeSeconds": 3600,
+        "apiBase": "https://creatorsapi.amazon",
+        "operations": [
+          "POST /catalog/v1/searchItems",
+          "POST /catalog/v1/getItems",
+          "POST /catalog/v1/getVariations",
+          "POST /catalog/v1/getBrowseNodes"
+        ],
+        "requiredHeaders": ["Authorization: Bearer <access_token>", "Content-Type: application/json", "x-marketplace"],
+        "commonRequiredBodyFields": ["marketplace", "partnerTag"],
+        "offerResource": "offersV2.listings.price"
+      },
+      "priceStockAndPaging": "Price may be requested in a preferred ISO currency; otherwise it is the marketplace default. Search supports price filters, sort, category/browse-node filters, and availability (available or include out-of-stock). Search returns at most 10 items per request and ItemPage is 1-10. Offer availability resource describes maximum purchasable quantity, not a general warehouse stock count. Locale-specific parameter support varies.",
+      "freshnessAndLimits": "API rate limits are account/revenue-dependent; initial allowance is documented as up to 1 TPS and 8,640 requests/day for the first 30 days after credential creation. Access can be lost after a consecutive 30-day period without qualified referred sales.",
+      "blockers": ["Not anonymous and not available without Associates enrollment and qualifying sales.", "Product data calls require valid PartnerTag and are purpose-bound to driving Associate sales.", "Current repository Amazon browser/API probes do not constitute Creators API credentials or replay."],
+      "primarySources": [
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/register-for-creators-api",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/get-started/using-curl",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/concepts/understanding-versions",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/migrating-to-creatorsapi-from-paapi",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/search-items",
+        "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/concepts/api-rates"
+      ]
+    },
+    {
+      "id": "amazon-selling-partner-api",
+      "brand": "Amazon Marketplace",
+      "businessRole": "seller_catalog_and_offer_management",
+      "sourceOwner": "Amazon Selling Partner API",
+      "routeKind": "documented_seller_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Requires an Amazon seller/vendor or approved Solution Provider integration, application authorization, and operation-specific roles. OAuth/LWA and seller authorization are required. This is not the Associates publisher catalog API.",
+      "exactReadContract": "SP-API contains catalog, pricing, inventory, reports and feeds, but the reviewed onboarding source is role/use-case oriented; no public universal product-discovery endpoint was identified for unaffiliated publishers.",
+      "priceStockAndPaging": "Access concerns seller/vendor data and marketplace workflows. Do not treat seller pricing/inventory endpoints as public Amazon market catalog search.",
+      "blockers": ["Wrong account role for a publisher looking to promote unrelated Amazon products.", "Seller authorization and API role approval required."],
+      "primarySources": [
+        "https://developer-docs.amazon/sp-api/lang-en_EN/docs/onboarding-overview",
+        "https://developer-docs.amazon/sp-api/lang-en_EN/docs/welcome"
+      ]
+    },
+    {
+      "id": "walmart-affiliate-catalog-snapshot",
+      "brand": "Walmart.com Affiliate Program / Walmart I/O",
+      "businessRole": "publisher_affiliate_product_feed",
+      "sourceOwner": "Walmart Affiliate Operations / legacy Walmart I/O",
+      "routeKind": "documented_historical_partner_api_and_feed",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Walmart says affiliate membership uses Impact Radius; application approval is required. Legacy Walmart I/O requires a Walmart affiliate relationship and client credentials (Walmart Consumer ID, client ID, IAM client secret), OAuth token, and requested access to product-feed categories. Affiliate API terms say the feed API is restricted/request-based. Current token issuance and endpoint availability have not been live-verified.",
+      "exactReadContract": {
+        "oauth": "POST https://developer.api.walmart.com/api-proxy/service/identity/oauth/v1/token (client_credentials)",
+        "feed": "GET https://developer.api.walmart.com/api-proxy/service/affil/catalog-api/v2/product/feeds/items?categoryId=<optional>&feedType=catalog",
+        "feedType": "Omit feedType for Walmart offers only; `catalog` requests Walmart plus marketplace offers.",
+        "response": "Daily snapshot metadata with signed GCS URLs for gzip JSON parts."
+      },
+      "priceStockAndPaging": "The historical sample feed includes item name/id, MSRP, salePrice, unitPrice in USD, category, availableOnline, qualitative stock status, marketplace seller/price, and update timestamp. Feed snapshots are daily; no request-level pagination is documented—the API returns part URLs. Per current terms, API use is limited to affiliate advertising, not competitive price/availability analysis or redistribution.",
+      "freshnessAndLimits": "The API terms dated 2020 state 5,000 calls/day; the catalog snapshot example contains 2021-dated data. Treat current API operation and token grants as unconfirmed.",
+      "blockers": ["Historic documentation may no longer describe a currently provisioned API.", "Feed access requires request/approval by category and an affiliate account.", "Terms prohibit competitor price/availability analysis, third-party redistribution, and using affiliate API data outside approved Walmart advertising.", "Separate live anonymous Walmart search was challenged; it is not evidence for this API."],
+      "primarySources": [
+        "https://affiliates.walmart.com/page/faqs",
+        "https://affiliates.walmart.com/terms",
+        "https://walmart.io/docs/opd/recipe-register/catalog-product-snapshot",
+        "https://walmart.io/termsandcondition"
+      ]
+    },
+    {
+      "id": "walmart-marketplace-seller-api",
+      "brand": "Walmart Marketplace",
+      "businessRole": "seller_own_listing_pricing_and_inventory",
+      "sourceOwner": "Walmart Marketplace Developer Platform",
+      "routeKind": "documented_seller_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Requires Walmart Marketplace seller or approved Solution Provider access, Developer Portal clientId/clientSecret, OAuth 2.0 token and relevant onboarding/roles.",
+      "exactReadContract": {
+        "sellerCatalogSearch": "POST https://marketplace.walmartapis.com/v3/items/catalog/search",
+        "pricingInsights": "POST https://marketplace.walmartapis.com/v3/price/getPricingInsights",
+        "inventoryOneSku": "GET https://marketplace.walmartapis.com/v3/inventory?sku=<seller-sku>&shipNode=<optional>"
+      },
+      "priceStockAndPaging": "Pricing Insights returns prices and seller competitive metrics for seller items, supports pageNumber starting at zero. Catalog search returns seller catalog items, up to 100 per page. Inventory reads seller SKU quantities by ship node; omitting shipNode uses the default or all linked nodes depending on the documented endpoint.",
+      "blockers": ["These are seller-facing own-catalog operations, not affiliate publisher discovery of all Walmart products.", "OAuth, seller account, app/client credentials and seller SKU knowledge are required."],
+      "primarySources": [
+        "https://developer.walmart.com/us-marketplace/docs/introduction-to-marketplace-apis",
+        "https://developer.walmart.com/us-marketplace/docs/limit-and-pagination",
+        "https://developer.walmart.com/us-marketplace/docs/get-pricing-insights",
+        "https://developer.walmart.com/us-marketplace/reference/getinventory"
+      ]
+    },
+    {
+      "id": "cj-publisher-product-feed-api",
+      "brand": "CJ Affiliate",
+      "businessRole": "publisher_affiliate_product_catalog",
+      "sourceOwner": "Commission Junction Publisher API Suite",
+      "routeKind": "documented_graphql_api_contract_details_partially_gated",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Requires a CJ publisher account and personal access token (Bearer). Publisher must apply to individual advertiser programs; active partnership/advertiser terms are required before using that advertiser's tracking links. A product search can identify offers separately from the partnership approval needed to monetize them.",
+      "exactReadContract": {
+        "documentedOperation": "Product Feed API (GraphQL), Publisher API Suite",
+        "endpoint": "Not exposed by the public reference page captured in this research; do not infer it from another CJ GraphQL service.",
+        "searchCriteriaExplicitlyDocumented": ["price", "currency", "country", "serviceable area", "UPC"],
+        "authHeader": "Authorization: Bearer <CJ personal access token>"
+      },
+      "priceStockAndPaging": "API directory describes product feed search by price, currency, country, serviceable area, and UPC. Exact returned price/stock fields, currency conversion, page arguments and limits were not recoverable from the public reference page; treat these as unknown pending authenticated docs/live replay.",
+      "blockers": ["No CJ publisher account or PAT supplied.", "The product-feed GraphQL explorer/reference is not publicly rendered in the current browser search result.", "Do not claim product price collection is implemented until a direct authenticated read is independently replayed."],
+      "primarySources": [
+        "https://developers.cj.com/",
+        "https://developers.cj.com/authentication/overview",
+        "https://developers.cj.com/account/personal-access-tokens",
+        "https://developers.cj.com/graphql/reference/Product%20Feed",
+        "https://docs.cj.com/docs/finding-your-path",
+        "https://signup.cj.com/member/signup/publisher/"
+      ]
+    },
+    {
+      "id": "rakuten-product-search",
+      "brand": "Rakuten Advertising",
+      "businessRole": "publisher_affiliate_product_search",
+      "sourceOwner": "Rakuten Advertising Developer Portal",
+      "routeKind": "documented_authenticated_http_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Requires Rakuten publisher account/dashboard credentials to obtain an API access token (Bearer). Search returns products from advertiser partners; using affiliate links requires an active advertiser partnership. Product Catalog bulk feeds add separate technical SFTP setup and per-advertiser approval.",
+      "exactReadContract": {
+        "method": "GET",
+        "url": "https://api.linksynergy.com/productsearch/1.0",
+        "exampleQuery": "?keyword=dress&cat=Women&language=en_US&max=10&sort=productname&sorttype=asc",
+        "authHeader": "Authorization: Bearer <publisher API token>",
+        "filters": ["keyword", "exact", "one", "none", "cat", "language", "max", "pagenumber", "mid", "sort", "sorttype"]
+      },
+      "priceStockAndPaging": "XML only. Response includes product name, SKU, category, price and saleprice with currency attribute, UPC, descriptions, product link and image link. The Publisher Help article says at most 5,000 results, while the API reference says a query returns at most 1,000; the effective maximum is inconsistent in official docs. Both document 100 calls/minute and page/page-count fields. A numeric on-hand inventory field is not documented. Bulk catalog files are available via SFTP and dynamically generated on retrieval, but update recency depends on the advertiser.",
+      "blockers": ["Requires authenticated publisher token and active advertiser partnerships for promotional use.", "Advertiser data freshness is controlled by each advertiser.", "SFTP Product Catalog additionally needs customer-support technical setup and advertiser feed approval."],
+      "primarySources": [
+        "https://developers.rakutenadvertising.com/guides/product_search",
+        "https://developers.rakutenadvertising.com/guides/product_search/reference",
+        "https://pubhelp.rakutenadvertising.com/hc/en-us/articles/5949953174029-Product-Search-API",
+        "https://pubhelp.rakutenadvertising.com/hc/en-us/articles/5949799815053-Advertisers-API",
+        "https://pubhelp.rakutenadvertising.com/hc/en-us/articles/4412243880333-Download-Product-Catalog-Data-Feed-Files",
+        "https://pubhelp.rakutenadvertising.com/hc/en-us/articles/10623933503373-Product-Links"
+      ]
+    },
+    {
+      "id": "admitad-publisher-product-feeds",
+      "brand": "Admitad",
+      "businessRole": "publisher_affiliate_product_feeds",
+      "sourceOwner": "Admitad publisher network and each advertiser",
+      "routeKind": "account_gated_feed; direct_api_contract_unknown",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Requires Admitad publisher registration and access to the specific advertiser offer; some offers require individual advertiser approval. Feed download/API entitlement and the tracking URLs are account/offer scoped.",
+      "exactReadContract": {
+        "publiclyDocumented": "Product feeds are offered in the publisher platform; XML feeds are described for product data. Product feeds are listed for some offers including AliExpress and DHgate WW.",
+        "directApiEndpoint": "Unknown: no current official public API route, query, credential grant flow or downloadable link format was established from the reviewed public docs.",
+        "aliExpressOffer": "AliExpress Hot Products / Product Feed entries are advertiser-provided affiliate products with product-specific affiliate links."
+      },
+      "priceStockAndPaging": "Official network material describes feeds as product cards with pricing and inventory/availability information generally; exact field schema, currency policy, stock fidelity, update cadence and pagination are offer-specific and not publicly documented here. Do not normalize currencies or claim live stock.",
+      "blockers": ["Account and offer approval are required.", "Feed/API schema is not public to unauthenticated visitors.", "A product URL without the offer-specific tracking link may not be commissionable."],
+      "primarySources": [
+        "https://www.admitad.com/en-in/affiliates/",
+        "https://www.admitad.com/academy/what-are-product-feeds-and-how-publishers-can-benefit-from-it/",
+        "https://www.admitad.com/store/offers/aliexpress-ww/",
+        "https://www.admitad.com/store/offers/dhgate-ww/",
+        "https://www.admitad.com/store/product-feed/"
+      ]
+    },
+    {
+      "id": "alibaba-affiliate-hot-product-feed",
+      "brand": "Alibaba.com Affiliates",
+      "businessRole": "publisher_affiliate_product_feed",
+      "sourceOwner": "Alibaba.com Affiliate Platform",
+      "routeKind": "account_gated_dashboard_feed; api_manual_not_publicly_resolved",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Affiliate registration and logged-in Affiliate Platform access are required. Program-specific links copied from the account carry the publisher identity. Public Help Center advertises an API Manual but its current product retrieval operation/contract was not exposed in the public page.",
+      "exactReadContract": {
+        "feedAccess": "Affiliate Platform > Programs > Hot Products; feed is described as daily updated and contains hot products, coupons/discounts, best sellers/searches.",
+        "deepLinks": "Account Deep Link Generator can link product, category, supplier and promotion URLs.",
+        "apiEndpoint": "Unknown; do not infer a TOP API product route or reuse AliExpress APIs for Alibaba.com."
+      },
+      "priceStockAndPaging": "Public help documents feed categories and daily update cadence, not the current feed's columns, price currency, stock quantity, pagination or download transport. Product classes include Ready-to-Ship in-stock items and customized Contact Supplier offers; these are materially different purchase paths.",
+      "blockers": ["Requires affiliate account and account-scoped tracking feed/link.", "Current API Manual method, credentials and schema are not publicly readable.", "Alibaba.com Open Platform GGS seller APIs are separate and are not a general buyer catalog API."],
+      "primarySources": [
+        "https://ads.alibaba.com/help/getcode.htm?id=4",
+        "https://ads.alibaba.com/help/getcode.htm?id=6",
+        "https://ads.alibaba.com/help/index.htm",
+        "https://openapi.alibaba.com/doc/doc.htm"
+      ]
+    },
+    {
+      "id": "alibaba-ggs-seller-open-api",
+      "brand": "Alibaba.com Open Platform GGS",
+      "businessRole": "supplier_seller_catalog_management",
+      "sourceOwner": "Alibaba.com Open Platform",
+      "routeKind": "approved_seller_app_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Developer must register and enroll as GGS developer, submit an application category for admin approval, obtain App Key/Secret and API permissions, then obtain seller authorization for supplier business data.",
+      "exactReadContract": "Public overview documents product listing and buyer-sourcing integration themes, but the documented example is listing/management of the authorizing seller's products. No public marketplace-wide product-search query or price/stock schema was verified in this research.",
+      "priceStockAndPaging": "Unknown for generic buyer discovery; do not conflate seller product-listing permissions with affiliate/search offers.",
+      "blockers": ["Seller app approval and supplier authorization are required.", "No anonymous marketplace-wide product catalog query was documented."],
+      "primarySources": ["https://openapi.alibaba.com/doc/doc.htm", "https://openapi.alibaba.com/"]
+    },
+    {
+      "id": "dhgate-affiliate-via-admitad",
+      "brand": "DHgate WW (via Admitad) ",
+      "businessRole": "publisher_affiliate_offer",
+      "sourceOwner": "DHgate program listed on Admitad",
+      "routeKind": "network_offer; direct_feed_api_unknown",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "An official Admitad offer page lists DHgate WW; publisher must register with Admitad and join/apply to the offer. No official direct DHgate publisher API or public product-feed endpoint was found in the reviewed sources.",
+      "exactReadContract": "No exact product query endpoint, feed file URL, or API method can be named from the official public sources reviewed. Do not infer one from DHgate public website calls.",
+      "priceStockAndPaging": "DHgate offer page describes wholesale/retail marketplace and wide product assortment, but not a feed schema, price currency, inventory/stock fields or pagination. Feed access for this offer remains unknown.",
+      "blockers": ["Specific feed/API availability for DHgate WW was not established.", "Affiliate approval and tracked link generation are separate from access to ordinary DHgate product pages."],
+      "primarySources": ["https://www.admitad.com/store/offers/dhgate-ww/"]
+    },
+    {
+      "id": "banggood-affiliate-data-api",
+      "brand": "Banggood Affiliate Program",
+      "businessRole": "publisher_affiliate_product_search_and_price_feed",
+      "sourceOwner": "Banggood Affiliate Data API",
+      "routeKind": "documented_signed_http_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Affiliate must register with Banggood, apply to become a partner and receive AppID/AppSecret. The app API key is unique to the affiliate; access token is signed with the secret. Product endpoints require the short-lived access-token header; account may lack access/quota and receive 403.",
+      "exactReadContract": {
+        "token": "GET https://affapi.banggood.com/getAccessToken",
+        "tokenInputs": ["api_key", "noncestr (PDF uses a nonce spelling variation in prose)", "timestamp (epoch seconds)", "signature"],
+        "signature": "Sort string values of api_key, api_secret, noncestr, timestamp lexicographically; join as key=value pairs with ampersands; MD5. api_secret is required to sign but should not be persisted in evidence.",
+        "tokenLifetimeSeconds": "Response says expires_in up to 7200 seconds.",
+        "productList": "GET https://affapi.banggood.com/product/list?category_id=<optional>&currency=<optional, default USD>&keyword=<optional>&lang=<optional, default en-GB>",
+        "productDetail": "GET https://affapi.banggood.com/product/detail?product_id=<required>&currency=<optional, default USD>&lang=<optional, default en-GB>",
+        "categories": "GET https://affapi.banggood.com/product/category?category_id=<optional>&lang=<optional>",
+        "authHeader": "access-token: <short-lived token>"
+      },
+      "priceStockAndPaging": "Product list exposes product id/URL/name, formatted product_price and coupon price, commission, images, modify_date and page_total. Product detail exposes warehouse_list with warehouse, warehouse_price, market_price and sale price/date fields; warehouse and market prices are documented in USD. Category returns nested children. Product list page_total is known, but the exact page index/page-size request parameter is not clear in the reference; no numeric stock quantity field was documented.",
+      "freshnessAndLimits": "Documentation PDF version 1.2.2 has update notes through 2021; product examples include 2018 modification timestamps. Current live endpoint and freshness are not established by documentation alone. API can return expired-token, no-right or quota-exceeded errors.",
+      "blockers": ["Requires Banggood partner application and private AppID/AppSecret.", "Pagination request controls and current feed recency need confirmation.", "Old API specification should be independently replayed and checked for current endpoint support before implementation completion."],
+      "primarySources": [
+        "https://imgs3.banggood.com/affiliate/banggood-affiliate-apidoc-v1.2.2.pdf",
+        "https://es.banggood.com/Affiliate-promo-tools-api.html",
+        "https://tr.banggood.com/Affiliate-promo-tools-api.html"
+      ]
+    },
+    {
+      "id": "temu-affiliate-program",
+      "brand": "Temu Affiliate / Influencer Program",
+      "businessRole": "publisher_affiliate_product_campaigns",
+      "sourceOwner": "Temu Affiliate Platform",
+      "routeKind": "account_dashboard_tools; public_catalog_api_unknown",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Affiliate registration gives access to referral tools; traffic verification is required before payouts and requirements vary by market. Product links/codes are selected through affiliate tools or Temu app; program availability and eligible products vary by region/campaign.",
+      "exactReadContract": "Official affiliate FAQ documents campaign/product-based links, coupons, hot-product links and a performance dashboard after signup. No public HTTP/XHR product-search or current-price API contract was found.",
+      "priceStockAndPaging": "No public field schema, currency behavior, stock data, pagination or price freshness is documented for affiliate product tools.",
+      "blockers": ["No anonymous affiliate catalog endpoint was documented.", "Affiliate product availability is market- and campaign-specific.", "Temu Partner Platform is a separate seller/ISV API and must not be presented as publisher catalog access."],
+      "primarySources": [
+        "https://www.temu.com/ca/affiliate_question.html",
+        "https://www.temu.com/jo-en/affiliate_question.html",
+        "https://www.temu.com/influencer-recruit.html",
+        "https://partner.temu.com/documentation"
+      ]
+    },
+    {
+      "id": "temu-partner-seller-api",
+      "brand": "Temu Partner Platform",
+      "businessRole": "seller_authorized_own_catalog_and_operations",
+      "sourceOwner": "Temu Partner Platform / Open API",
+      "routeKind": "signed_seller_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "An ISV must register, create an app, pass compliance/security assessment and publish. The seller authorizes the application with product-specific permissions, producing an access token. Requests require app_key, access_token, timestamp within ±300 seconds and MD5 signature with app_secret. API permission scopes are seller-authorized.",
+      "exactReadContract": {
+        "method": "POST",
+        "regionalHosts": ["https://openapi-b-us.temu.com/openapi/router", "https://openapi-b-eu.temu.com/openapi/router", "https://openapi-b-global.temu.com/openapi/router"],
+        "commonRequestFields": ["type", "app_key", "access_token", "sign", "timestamp", "data_type", "version"],
+        "productScopesSeen": ["bg.local.goods.list.query", "bg.local.goods.sku.list.query", "bg.local.goods.sku.list.price.query"],
+        "exactSearchContract": "Not confirmed from the selected product endpoint pages; scope names are seller catalog operations and refer to the authorizing seller's mall.",
+        "signature": "Parameters sorted by ASCII key order; concatenate key and value without separators; prefix/suffix app_secret; MD5 uppercase."
+      },
+      "priceStockAndPaging": "Temu documentation lists regional product base/retail currencies (for example USD, CAD, GBP, AUD). This is seller catalog management, not independent Temu marketplace offers. Exact read response schema/pagination for seller goods was not collected in this research.",
+      "blockers": ["Requires Temu seller account authorization and published/approved developer app.", "Seller APIs expose only authorized mall product data, not a public global Temu catalog.", "Researcher role is mentioned on the partner platform homepage, but no public researcher endpoint/query contract was found."],
+      "primarySources": [
+        "https://partner.temu.com/documentation?menu_code=38e79b35d2cb463d85619c1c786dd303",
+        "https://partner.temu.com/documentation?menu_code=38e79b35d2cb463d85619c1c786dd303&sub_menu_code=8311de2b2d434e4d805e88413ab815d8",
+        "https://partner.temu.com/documentation?menu_code=38e79b35d2cb463d85619c1c786dd303&sub_menu_code=4a821c90d06442a09e061b0d4316fbf3",
+        "https://partner.temu.com/documentation?menu_code=fb16b05f7a904765aac4af3a24b87d4a&sub_menu_code=dbf95d09e514491f8685013824cecc76",
+        "https://partner.temu.com/app/app-mgmt"
+      ]
+    },
+    {
+      "id": "dsers-aliexpress-sourcing",
+      "brand": "DSers",
+      "businessRole": "dropshipping_product_import_and_cost_sync",
+      "sourceOwner": "DSers + selected AliExpress/Alibaba/1688/agent supplier",
+      "routeKind": "browser_extension_and_logged_in_web_app; external_api_not_documented",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Product import workflow uses the DSers app/Chrome Extension and requires AliExpress product pages; DSers documentation instructs the user to log in to AliExpress. No public developer API for external product catalog search was found in reviewed official documentation.",
+      "exactReadContract": "Official workflow imports from an AliExpress product page or search results using the DSers Chrome Extension. Cost and shipping are viewed from the DSers Import List and Shipping Info UI. This is not a documented direct HTTP API contract.",
+      "priceStockAndPaging": "Product cost depends on the configured ship-to country and supplier shipping method; cost is displayed in USD by the documented feature. DSers says AliExpress product cost updates every 24 hours. If shipping method/destination mapping is absent or unsupported, calculated shipping can default to zero. API pagination/response fields are not applicable because no public API contract was found.",
+      "blockers": ["Browser extension and supplier/DSers login are integral to documented workflow.", "No supported direct HTTP endpoint, token flow or public schema found.", "Twenty-four-hour sync is not an on-demand live supplier quote."],
+      "primarySources": [
+        "https://help.dsers.com/dsers-chrome-extension-sourcing-and-product-import-tools-guide/",
+        "https://help.dsers.com/import-product-cost/",
+        "https://help.dsers.com/products-issues-different-product-costs-on-dsers-from-aliexpress/",
+        "https://help.dsers.com/basic-pricing-rule-how-to-add-shipping-cost-to-your-pricing-rule/"
+      ]
+    },
+    {
+      "id": "spocket-dropship-catalog",
+      "brand": "Spocket",
+      "businessRole": "dropshipper_catalog_and_supplier_marketplace",
+      "sourceOwner": "Spocket marketplace and individual supplier",
+      "routeKind": "authenticated_dashboard_and_supplier_csv; public_read_api_not_found",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Retailer discovers products in the Spocket application; Basic plan is documented as allowing signup and product viewing, while importing products to a store requires a premium plan. Supplier-side product ingestion is through Shopify integration, CSV datafeed or manual upload; suppliers apply and are vetted/approved.",
+      "exactReadContract": "No public external HTTP catalog/search API was found in official docs. Supplier CSV is a supplier-to-Spocket upload format, not a third-party retailer feed endpoint.",
+      "priceStockAndPaging": "Supplier listings can carry inventory, listing price, suggested retail price, SKU and variants; search filters can constrain supplier country, ship-to, cost and supplier. Exact public export schema, currencies, freshness and pagination are not documented for the retailer catalog.",
+      "blockers": ["Product discovery is account/dashboard based.", "CSV datafeed docs are for suppliers publishing their own catalog into Spocket, not for extracting the marketplace catalog.", "No direct API-only query has been established."],
+      "primarySources": [
+        "https://help.spocket.co/en/articles/3030927-how-do-i-add-products-to-spocket",
+        "https://help.spocket.co/en/articles/3030937-how-do-i-integrate-my-shopify-store-with-spocket-for-suppliers",
+        "https://help.spocket.co/en/articles/5179463-how-do-i-filter-my-product-search-on-spocket",
+        "https://help.spocket.co/en/articles/3371366-why-am-i-unable-to-push-products-to-my-shopify-store",
+        "https://help.spocket.co/en/articles/3018457-how-does-spocket-vet-its-suppliers"
+      ]
+    },
+    {
+      "id": "zendrop-catalog-mcp",
+      "brand": "Zendrop",
+      "businessRole": "dropshipping_supplier_catalog_and_shipping",
+      "sourceOwner": "Zendrop MCP Server / Zendrop catalog",
+      "routeKind": "documented_authenticated_json_mcp_api; not_observed_xhr",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Zendrop documentation requires an access token or OAuth 2.0 Authorization Code with PKCE and explicit scopes. `catalog:read` is listed for product search/retrieval. API token acquisition still requires a Zendrop account/app access; no credentials were supplied or used.",
+      "exactReadContract": {
+        "method": "POST",
+        "url": "https://app.zendrop.com/mcp/v1",
+        "headers": ["Authorization: Bearer <token>", "Content-Type: application/json"],
+        "documentedActions": ["get_catalog_product", "get_catalog_trending_products"],
+        "exampleArguments": ["product_id", "filters.category", "filters.price_max"]
+      },
+      "priceStockAndPaging": "Documentation describes keyword/trending/filter search, product detail with price/images/variants, inventory/status checks, and destination-specific shipping estimates. The simplified example prices are string amounts without an explicit currency code; field semantics, stock quantities, pagination and stable query schema need direct contract confirmation. Read rate limit is 120/minute per the page.",
+      "blockers": ["Requires authorized API token/OAuth scope; not anonymous.", "This is a documented MCP-over-HTTP interface, not captured browser XHR.", "Live endpoint behavior and schemas have not been independently replayed in this project."],
+      "primarySources": [
+        "https://support.zendrop.com/en/articles/14461568-zendrop-mcp-developer-documentation",
+        "https://support.zendrop.com/en/articles/8166993-how-to-obtain-additional-product-details-from-the-zendrop-catalog"
+      ]
+    },
+    {
+      "id": "printify-catalog-api",
+      "brand": "Printify",
+      "businessRole": "print_on_demand_supplier_catalog_and_fulfillment_cost",
+      "sourceOwner": "Printify Public API",
+      "routeKind": "documented_authenticated_http_api",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Individual merchant access requires a Printify account and Personal Access Token from profile connections. Platform integration requires an app and OAuth 2.0 merchant authorization. API endpoints require Bearer authorization unless an endpoint says otherwise; catalog endpoints are separately rate limited.",
+      "exactReadContract": {
+        "base": "https://api.printify.com/v1",
+        "endpoints": [
+          "GET /catalog/blueprints.json",
+          "GET /catalog/blueprints/{blueprint_id}.json",
+          "GET /catalog/blueprints/{blueprint_id}/print_providers.json",
+          "GET /catalog/blueprints/{blueprint_id}/print_providers/{print_provider_id}/variants.json",
+          "GET /catalog/blueprints/{blueprint_id}/print_providers/{print_provider_id}/shipping.json"
+        ],
+        "authHeader": "Authorization: Bearer <PAT or OAuth token>",
+        "requiredUserAgent": true
+      },
+      "priceStockAndPaging": "Catalog covers POD blueprints/providers/variants. Variant records expose integer-cent fulfillment cost/price and `is_available`; shipping endpoints expose first/additional item amount, currency (examples USD), country and handling time. It is not a conventional stocked-inventory quantity API. Catalog endpoints are limited to 100 requests/minute per integration; general API limit 600/minute. API pagination uses page/limit where applicable; max page size for products was reduced to 50 in 2024.",
+      "blockers": ["Requires merchant account/token or merchant OAuth; no anonymous catalog access is documented.", "Catalog is POD-only; pricing varies by print provider, blueprint variant and shipping destination.", "Catalog APIs are documented, but no live replay has been performed here."],
+      "primarySources": [
+        "https://developers.printify.com/",
+        "https://developers.printify.com/#catalog",
+        "https://developers.printify.com/#authentication",
+        "https://developers.printify.com/#api-pagination"
+      ]
+    },
+    {
+      "id": "shopify-public-storefront-ajax",
+      "brand": "Shopify storefronts (store by store)",
+      "businessRole": "public_storefront_product_read",
+      "sourceOwner": "The individual merchant's Shopify-hosted theme storefront",
+      "routeKind": "documented_unauthenticated_http_api",
+      "noInteractiveUserSession": true,
+      "credentialsAndApproval": "No access token or client ID for Shopify Ajax API. The route only applies to a Shopify-hosted theme storefront; it is not a Shopify-wide marketplace catalog and does not expose products for arbitrary stores in a global search.",
+      "exactReadContract": {
+        "product": "GET https://{store}/{locale}/products/{product-handle}.js",
+        "predictiveSearch": "GET https://{store}/{locale}/search/suggest.json?q=<query>&resources[type]=product",
+        "currency": "Product prices are in customer presentment currency; check `/{locale}/cart.js` currency field to identify it."
+      },
+      "priceStockAndPaging": "Product JSON contains variant prices, availability, SKU and up to 250 variants. Predictive search returns suggestions, not a full paginated catalog. Product JSON has no numeric inventory count. Prices depend on selected store locale/presentment currency. Shopify documents no hard Ajax rate limit but standard abuse prevention applies.",
+      "blockers": ["Requires a known store domain and public product handle/search; no global store discovery.", "Ajax API only works on Shopify-hosted themes, not custom storefronts.", "Public product read is distinct from affiliate program enrollment or commission link attribution."],
+      "primarySources": [
+        "https://shopify.dev/docs/api/ajax/reference/product",
+        "https://shopify.dev/docs/api/ajax/reference/index",
+        "https://shopify.dev/docs/api/ajax"
+      ]
+    },
+    {
+      "id": "shopify-collabs",
+      "brand": "Shopify Collabs",
+      "businessRole": "publisher_affiliate_product_discovery_and_links",
+      "sourceOwner": "Shopify Collabs and each participating merchant",
+      "routeKind": "authenticated_app_workflow; public_collabs_api_not_found",
+      "noInteractiveUserSession": false,
+      "credentialsAndApproval": "Creators need an existing Collabs account and merchant access/open-access eligibility. Shopify Help says new creator signups are not currently being accepted; existing partners can still access the app. Open access product links are available only for participating merchant programs; regional creator eligibility is listed for US, UK and Canada.",
+      "exactReadContract": "Official docs describe in-app product search and commission-link generation, but no public external HTTP/XHR Collabs product-feed API contract was found. Shopify storefront Ajax reads remain a separate public store-product source and do not grant Collabs commissions.",
+      "priceStockAndPaging": "Merchant program configuration applies commissions to all products or selected collections; public Collabs API price/stock/paging fields are not documented.",
+      "blockers": ["Creator signups currently closed to new creators according to Shopify Help Center.", "Existing account/app UI required for affiliate discovery and links.", "No public Collabs product API was identified."],
+      "primarySources": [
+        "https://help.shopify.com/en/manual/promoting-marketing/collabs",
+        "https://help.shopify.com/en/manual/promoting-marketing/collabs/merchants/collabs-programs"
+      ]
+    }
+  ],
+  "implementationCoverageAtResearchStart": {
+    "aliexpress": "Existing project client exposes product SEO title/description/canonical URL only; it does not yet expose affiliate social product search, price ranges, currency, destination or pagination. A new TOP API client is independently scoped in this workstream.",
+    "amazon": "No Creators API credentials, enrollment proof or live API client. Prior anonymous storefront probe is separate and was blocked/gated.",
+    "walmart": "No live public catalog API replay. Prior public site search hit a robot challenge; Marketplace seller API and historical affiliate snapshot route are separate.",
+    "ebay": "Existing project client exposes suggestions/category hints only; not product offer search or Browse API.",
+    "shopify": "Existing project client is pinned to public Allbirds store product JSON and predictive search; this does not cover other Shopify stores or Collabs affiliate tracking.",
+    "other_listed_providers": "No current live client or account credentials were present for the documented publisher, supplier or seller API paths in this research."
+  },
+  "recommendedSequence": [
+    "Implement and independently replay AliExpress TOP affiliate item search using a user-owned Open Platform app credential; verify destination, currency, affiliate eligibility, price ranges and page fields.",
+    "Implement and replay Banggood Affiliate Data API only after the user obtains partner AppID/AppSecret; first confirm the legacy endpoint still operates and determine actual page request parameter names.",
+    "Add Printify POD catalog only if POD sourcing is in scope; use its documented bearer-auth catalog endpoints and destination-specific shipping profiles.",
+    "Treat Amazon Creators API as contingent on Associates acceptance and its 10-qualified-sales eligibility, not as an anonymous client.",
+    "For broader brand coverage, add one publisher-network API after the user has a publisher account/token and approved advertiser relationships; Rakuten has the clearest public search contract, while CJ Product Feed schema is portal-gated.",
+    "Do not start public-page scraping for DSers/Spocket/Temu or use Walmart's historical feed outside current affiliate-authorized display scope."
+  ]
+}

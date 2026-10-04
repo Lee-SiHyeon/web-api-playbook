@@ -1,0 +1,107 @@
+{
+  "schema": "commerce-partner-api-contract-v1",
+  "service": "banggood",
+  "observedAt": "2026-10-04T19:54:13Z",
+  "scope": "Banggood official affiliate data API, read-only product listing, category tree, product detail, and warehouse prices. The API is partner-key authenticated; this is not an anonymous storefront API.",
+  "officialDocumentation": [
+    {
+      "purpose": "Affiliate Data API v1.2.2: access token, signatures, product categories, product list, product detail, currencies, and warehouse price units",
+      "url": "https://imgs3.banggood.com/affiliate/banggood-affiliate-apidoc-v1.2.2.pdf",
+      "version": "1.2.2",
+      "documentUpdatesThrough": "2021"
+    },
+    {
+      "purpose": "Banggood affiliate API partner onboarding and AppID/AppSecret issuance",
+      "url": "https://www.banggood.com/Affiliate-promo-tools-api.html"
+    }
+  ],
+  "authentication": {
+    "type": "partner API key and secret, exchanged for a short-lived API access token",
+    "credentialNamesInOfficialApiPdf": ["api_key", "api_secret"],
+    "partnerPortalNames": ["AppID", "AppSecret"],
+    "partnerOnboarding": ["register with Banggood", "apply to be a partner", "obtain AppID and AppSecret"],
+    "tokenRequest": {
+      "method": "GET",
+      "origin": "https://affapi.banggood.com",
+      "path": "/getAccessToken",
+      "queryFields": ["api_key", "noncestr", "timestamp", "signature"],
+      "signatureAlgorithm": "lowercase hexadecimal MD5",
+      "signatureInput": "api_key=<key>&api_secret=<secret>&noncestr=<nonce>&timestamp=<epoch-seconds>",
+      "signatureParameterOrder": ["api_key", "api_secret", "noncestr", "timestamp"],
+      "signatureParameterClarification": "The PDF's parameter table spells the request field noncestr; its prose once says nonce_str, while the published signature example uses noncestr in the signed string. The implementation follows the table and exact example. Confirm with Banggood if the partner token exchange rejects this documented form.",
+      "secretTransmission": "api_secret is used only in the local MD5 input and is not sent in the request URL or header.",
+      "response": {
+        "code": 200,
+        "result.access_token": "short-lived token; value is never persisted or included in output",
+        "result.expires_in": "integer seconds, at most 7200"
+      }
+    },
+    "businessRequestHeader": "access-token",
+    "storage": "Credentials and access token remain in process memory. No cookies, browser state, files, or environment variables are used by the adapter."
+  },
+  "contracts": [
+    {
+      "operation": "productCategories",
+      "evidenceLevel": "first_party_documented_api; live credential replay pending",
+      "method": "GET",
+      "origin": "https://affapi.banggood.com",
+      "path": "/product/category",
+      "queryFields": [
+        {"name": "category_id", "required": false, "meaning": "optional category filter"},
+        {"name": "lang", "required": false, "default": "en-GB"}
+      ],
+      "headers": ["access-token"],
+      "response": "code=200; result is a category or array of category objects with category_id, category_name, and children.",
+      "pagination": "No pagination contract is documented for this endpoint."
+    },
+    {
+      "operation": "productList",
+      "evidenceLevel": "first_party_documented_api; live credential replay pending",
+      "method": "GET",
+      "origin": "https://affapi.banggood.com",
+      "path": "/product/list",
+      "queryFields": [
+        {"name": "category_id", "required": false},
+        {"name": "currency", "required": false, "default": "USD"},
+        {"name": "keyword", "required": false, "meaning": "search product name"},
+        {"name": "lang", "required": false, "default": "en-GB"}
+      ],
+      "headers": ["access-token"],
+      "response": "code=200; result.page_total and result.product_list; product rows include product_id, product_url, category_id, product_name, product_price, product_coupon_price, commission, coupon fields, image URLs, and modify_date.",
+      "priceUnits": "The API accepts a currency code and returns product price fields in a currency-formatted decimal representation. The adapter returns decimal strings and the requested currency; it does not convert to minor units.",
+      "pagination": "The PDF reports page_total but does not specify a page index or page-size request parameter. The adapter does not invent one or claim complete catalog traversal."
+    },
+    {
+      "operation": "productDetailAndWarehousePrices",
+      "evidenceLevel": "first_party_documented_api; live credential replay pending",
+      "method": "GET",
+      "origin": "https://affapi.banggood.com",
+      "path": "/product/detail",
+      "queryFields": [
+        {"name": "product_id", "required": true},
+        {"name": "currency", "required": false, "default": "USD"},
+        {"name": "lang", "required": false, "default": "en-GB"}
+      ],
+      "headers": ["access-token"],
+      "response": "code=200; result contains product_id, product_url, category_id, product_name, warehouse_list, image URLs, and modify_date.",
+      "warehouseFields": [
+        {"name": "warehouse", "meaning": "warehouse identifier, examples in official document include CN, USA, UK and others"},
+        {"name": "warehouse_price", "type": "decimal amount", "currency": "USD"},
+        {"name": "market_price", "type": "decimal amount", "currency": "USD"},
+        {"name": "sale_price", "presence": "optional in the official detail response example; omitted from the field-description table", "clientTreatment": "preserved as its original JSON scalar, without assigning currency or sale semantics"},
+        {"name": "sale_date_start", "presence": "optional in the official detail response example; omitted from the field-description table", "documentedSample": "2018-09-06 14:55:14", "clientTreatment": "preserved as a raw value"},
+        {"name": "sale_date_end", "presence": "optional in the official detail response example; omitted from the field-description table", "documentedSample": "2018-10-06 14:55:14", "clientTreatment": "preserved as a raw value"}
+      ],
+      "priceUnits": "warehouse_price and market_price are USD decimal amounts, not minor units. sale_price is preserved without an inferred currency or unit. Each warehouse is retained as a separate supplier catalog row.",
+      "saleTiming": "The PDF sample uses YYYY-MM-DD HH:mm:ss text but does not specify timezone or whether boundaries are inclusive. The client preserves both raw values and does not decide whether a sale is active."
+    }
+  ],
+  "safetyAndBoundaries": {
+    "http": "HTTPS only; one fixed API origin; manual redirects with zero redirect hops; bounded response size and timeout.",
+    "writes": "No cart, checkout, order, account, or profile operation is implemented.",
+    "publicProductUrl": "The API's product_url query string is removed before returning the destination because the documented sample includes an attribution query value. Affiliate-link creation/tracking is not claimed by this client.",
+    "inventory": "Warehouse prices are not stock quantity or a guaranteed in-stock signal; the documented detail contract does not define quantity/availability semantics.",
+    "currency": "Warehouse prices are documented in USD. Product-list currency behavior is requested by currency parameter but has not been live-replayed across currencies."
+  },
+  "secretsPersistedInEvidence": false
+}
