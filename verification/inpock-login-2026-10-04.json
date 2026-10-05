@@ -1,0 +1,269 @@
+{
+  "schema": "inpock-login-verification-v1",
+  "checkedAt": "2026-10-04T14:11:02.929Z",
+  "scope": {
+    "platform": "Linux vBee worker",
+    "node": "v24.21.0",
+    "operations": [
+      "password-login",
+      "owner",
+      "health",
+      "ensure"
+    ],
+    "executionMode": "pure_http",
+    "credentialProvider": "stdin -> ProtectedStore memory",
+    "persistent": false
+  },
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "credential_propagated": true,
+    "remnant_free": true,
+    "live_replay": true
+  },
+  "browserDiscovery": {
+    "purpose": "contract acquisition only",
+    "finalPath": "/inpockhome",
+    "authenticatedOwnerObserved": true,
+    "authCookieMapping": {
+      "cookie_name": "token",
+      "login_response_field": "token",
+      "matches": true
+    },
+    "observedUniqueContracts": [
+      {
+        "method": "POST",
+        "host": "link-rest.inpock.co.kr",
+        "path": "/login",
+        "query_fields": [],
+        "request_content_type": "multipart/form-data",
+        "request_fields": {
+          "username": "str",
+          "password": "str"
+        },
+        "origin": "https://link.inpock.co.kr",
+        "referer": "https://link.inpock.co.kr/",
+        "status": 201,
+        "response_content_type": "application/json",
+        "response_bytes": 81,
+        "response_schema": {
+          "username": "str",
+          "token": "str"
+        }
+      },
+      {
+        "method": "GET",
+        "host": "link-rest.inpock.co.kr",
+        "path": "/feature-flags/S100",
+        "query_fields": [],
+        "request_content_type": null,
+        "request_fields": "NoneType",
+        "origin": "https://link.inpock.co.kr",
+        "referer": "https://link.inpock.co.kr/",
+        "status": 200,
+        "response_content_type": "application/json",
+        "response_bytes": 25,
+        "response_schema": {
+          "type": "array",
+          "length": 3,
+          "items": "str"
+        }
+      },
+      {
+        "method": "GET",
+        "host": "link-rest.inpock.co.kr",
+        "path": "/subscriptions/current-version",
+        "query_fields": [],
+        "request_content_type": null,
+        "request_fields": "NoneType",
+        "origin": "https://link.inpock.co.kr",
+        "referer": "https://link.inpock.co.kr/",
+        "status": 200,
+        "response_content_type": "application/json",
+        "response_bytes": 16,
+        "response_schema": {
+          "version": "str"
+        }
+      },
+      {
+        "method": "GET",
+        "host": "link-rest.inpock.co.kr",
+        "path": "/v2/users",
+        "query_fields": [],
+        "request_content_type": null,
+        "request_fields": "NoneType",
+        "origin": "https://link.inpock.co.kr",
+        "referer": "https://link.inpock.co.kr/",
+        "status": 200,
+        "response_content_type": "application/json",
+        "response_bytes": 1094,
+        "response_schema": {
+          "id": "int",
+          "username": "str",
+          "email": "str",
+          "phone": "str",
+          "country_code": "str",
+          "num_subscribers": "int",
+          "design": {
+            "title": "str",
+            "bio": "str",
+            "sns_position": "str",
+            "profile_image": "str",
+            "cover_image": "str",
+            "layout_type": "str",
+            "profile_alignment": "str",
+            "profile_size": "str",
+            "theme": "NoneType",
+            "typography": "str",
+            "background_type": "NoneType",
+            "background_color": "str",
+            "background_image": "str",
+            "block_shape": "str",
+            "block_animation": "NoneType",
+            "block_shadow": "NoneType",
+            "block_alignment": "str",
+            "sns": {
+              "type": "array",
+              "length": 0,
+              "items": null
+            },
+            "notice": {
+              "id": "int",
+              "background_color": "NoneType",
+              "text_color": "NoneType",
+              "contents": "NoneType"
+            }
+          },
+          "plan": "str",
+          "kakao_credits": "int",
+          "badges": {
+            "type": "array",
+            "length": 0,
+            "items": null
+          },
+          "has_calendar_block": "bool",
+          "pro_plan_option": "NoneType",
+          "market_permission": {
+            "is_seller": "bool",
+            "has_market": "bool"
+          },
+          "is_in_wishlist": "bool",
+          "is_smart_store_user": "bool",
+          "is_manager_user": "bool",
+          "is_internal_tester": "bool",
+          "is_onboarded": "bool",
+          "purpose": "str",
+          "interests": {
+            "type": "array",
+            "length": 3,
+            "items": "str"
+          },
+          "categories": {
+            "type": "array",
+            "length": 3,
+            "items": "str"
+          },
+          "created_at": "str"
+        }
+      },
+      {
+        "method": "GET",
+        "host": "link-rest.inpock.co.kr",
+        "path": "/v2/subscriptions",
+        "query_fields": [
+          "service_type"
+        ],
+        "request_content_type": null,
+        "request_fields": "NoneType",
+        "origin": "https://link.inpock.co.kr",
+        "referer": "https://link.inpock.co.kr/",
+        "status": 200,
+        "response_content_type": "application/json",
+        "response_bytes": 0,
+        "response_schema": "NoneType"
+      },
+      {
+        "method": "GET",
+        "host": "link-rest.inpock.co.kr",
+        "path": "/users/todo",
+        "query_fields": [
+          "key"
+        ],
+        "request_content_type": null,
+        "request_fields": "NoneType",
+        "origin": "https://link.inpock.co.kr",
+        "referer": "https://link.inpock.co.kr/",
+        "status": 200,
+        "response_content_type": "application/json",
+        "response_bytes": 446,
+        "response_schema": {
+          "DEAL_CAMPAIGN_REQUEST_RESPOND": "bool",
+          "DEAL_OFFER_RESPOND": "bool",
+          "MANAGER_INSTAGRAM": "bool",
+          "MANAGER_REFERRAL": "bool",
+          "MARKETING_AGREE": "bool",
+          "LINK_DESIGN_SETTING": "bool",
+          "LINK_BLOCK": "bool",
+          "LINK_KAKAO_NOTI": "bool",
+          "MANAGER_TRIGGER": "bool",
+          "AI_CHAT": "bool",
+          "AI_IDEA_BOOKMARK": "bool",
+          "AI_IMAGE": "bool",
+          "DEAL_ONBOARDING": "bool",
+          "DEAL_CAMPAIGN_REQUEST": "bool",
+          "DEAL_OFFER": "bool",
+          "deal_campaign_request_respond": "bool",
+          "deal_offer_respond": "bool",
+          "manager_instagram": "bool"
+        }
+      }
+    ]
+  },
+  "independentHttp": {
+    "browserCookiesCopied": false,
+    "passwordLoginStatus": 201,
+    "ownerStatus": 200,
+    "loginUsernameMatched": true,
+    "ownerUsernameMatched": true,
+    "ownerMatchedBrowser": true
+  },
+  "actualRunner": {
+    "command": "scripts/inpock.mjs verify --credentials-stdin",
+    "exitStatus": 0,
+    "credentialReachedConsumer": true,
+    "browserUsed": false,
+    "loginStatus": 201,
+    "protectedOwnerStatuses": [
+      200,
+      200,
+      200
+    ],
+    "reuse": "stored_session",
+    "receipt": "inpock-runner-2026-10-04.json"
+  },
+  "unauthenticatedControl": {
+    "method": "GET",
+    "path": "/v2/users",
+    "httpStatus": 401,
+    "mime": "application/json",
+    "responseFields": [
+      "detail"
+    ],
+    "credentialsSent": false
+  },
+  "implementation": {
+    "lib/web-auth/inpock.mjs": "64e197fac3ad1e526ce7361bffd103bee6c192ff950495b66822b609e900fcc5",
+    "scripts/inpock.mjs": "546aace240930dc60b89f0d65af0abee6824c17eed9426673d831e068cfeb9c6",
+    "lib/inpock-read.mjs": "d2335ae16af0557cb6a6e260a6f2c6acacd88136a62dc5a36ec69516fd5bff66"
+  },
+  "limits": {
+    "windowsDpapiLive": "not_verified",
+    "crossProcessSessionRestoreLive": "not_verified",
+    "serverTokenLifetime": "unknown",
+    "refreshEndpoint": "not_observed",
+    "liveExpiredSessionRecovery": "not_verified",
+    "expiredSessionRecoveryTests": "mock_401_and_cookie_deletion",
+    "linkOrContentWrites": "not_implemented"
+  },
+  "secretsPersistedInEvidence": false
+}

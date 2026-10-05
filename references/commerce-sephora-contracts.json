@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "service": "sephora",
+  "capturedAt": "2026-10-05",
+  "affiliateProgram": {
+    "programName": "Sephora Affiliates",
+    "network": "Rakuten Advertising",
+    "officialSource": "https://www.sephora.com/beauty/affiliates/",
+    "commissionRate": null,
+    "commissionRateStatus": "not_published_on_official_public_page",
+    "note": "Current program terms require the publisher dashboard; unverified community/user-reported ranges are not treated as official rates."
+  },
+  "storefront": {
+    "origin": "https://www.sephora.com",
+    "market": "US",
+    "currency": "USD",
+    "loginRequired": false
+  },
+  "contracts": {
+    "catalog.search": {
+      "provenance": "browser_xhr_observed",
+      "sourceURL": "https://www.sephora.com/search",
+      "method": "GET",
+      "origin": "https://www.sephora.com",
+      "path": "/api/v2/catalog/search/",
+      "mime": "application/json",
+      "minimalDirectReplayParameters": {
+        "type": "keyword",
+        "q": "search phrase",
+        "page": "page size, observed and replayed at 60",
+        "currentPage": "1-based result page",
+        "countryCode": "US"
+      },
+      "browserObservedAdditionalParameterNames": [
+        "includeEDD", "content", "includeRegionsMap", "loc", "ch", "user-segment",
+        "callAdSvc", "adSvcSlot", "adSvcSession", "constructorSessionID",
+        "constructorClientID", "targetSearchEngine", "nearbyStoresEnabled", "includeNearbyStores"
+      ],
+      "responseFields": [
+        "keyword", "totalProducts", "products[].productId", "products[].productName",
+        "products[].brandName", "products[].targetUrl", "products[].currentSku.skuId",
+        "products[].currentSku.listPrice", "products[].currentSku.salePrice", "products[].onSaleData"
+      ],
+      "priceNote": "Search listPrice may be a product-level min/max range; salePrice appears only on some on-sale currentSku records."
+    },
+    "catalog.product_detail": {
+      "provenance": "first_party_bundle_contract",
+      "sourceURL": "https://www.sephora.com/js/ufe/isomorphic/main.bundle.B22CoriginmasterD20260922192852.js",
+      "sourceSha256": "5c69df88c12e129005fb796a1067876bc3df65096aa0fdf6f457373513cf5763",
+      "method": "GET",
+      "origin": "https://www.sephora.com",
+      "pathTemplate": "/gway/v1/dotcom/productservice/v3/catalog/products/{productId}/lite",
+      "sourceBuilder": "Sephora product router calls ProductService.getProductDetails(productId, skuId, options, requestConfig).",
+      "parameters": {
+        "addCurrentSkuToProductChildSkus": "true",
+        "includeRegionsMap": "true",
+        "showContent": "true",
+        "includeConfigurableSku": "true",
+        "channel": "RWD",
+        "loc": "en_US",
+        "countryCode": "US",
+        "preferredSku": "selected SKU ID when supplied",
+        "removePersonalizedData": "true",
+        "includeReviewFilters": "true",
+        "includeReviewImages": "true"
+      },
+      "responseFields": [
+        "productId", "productDetails.productId", "productDetails.displayName", "productDetails.brand",
+        "currentSku.skuId", "currentSku.listPrice", "currentSku.salePrice", "regularChildSkus[]",
+        "onSaleChildSkus[]", "skuRefinements", "skuImages", "isOutOfStock", "targetUrl"
+      ],
+      "descriptionBoundary": "The live response's productDetails contained only productId, displayName, and brand for the sampled products."
+    },
+    "catalog.product_copy": {
+      "provenance": "first_party_bundle_contract",
+      "sourceURL": "https://www.sephora.com/js/ufe/isomorphic/main.bundle.B22CoriginmasterD20260922192852.js",
+      "sourceSha256": "5c69df88c12e129005fb796a1067876bc3df65096aa0fdf6f457373513cf5763",
+      "method": "GET",
+      "origin": "https://www.sephora.com",
+      "pathTemplate": "/api/content/pageProduct?ch=web&loc={language}-{country}",
+      "headers": {"x-requested-source": "RWD"},
+      "sourceBuilder": "Product router calls content helper with path=/pageProduct, language and country only; it passes no productId or SKU.",
+      "observedDirectReplay": {
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 551,
+        "responseDataFields": ["sid", "slug", "similarProductsComparison"],
+        "productSpecificDescriptionReturned": false
+      }
+    },
+    "catalog.reviews": {
+      "provenance": "first_party_bundle_contract",
+      "sourceURL": "https://www.sephora.com/js/ufe/isomorphic/commons.chunk.B22CoriginmasterD20260922192852.js",
+      "sourceSha256": "42da169b63c165086d4a6203752123dca4bee1db30b76a6f208c19bcfb3bec42",
+      "bootstrapURL": "https://www.sephora.com/",
+      "bootstrapField": "Sephora.configurationSettings.bvApi_rwdRating_desktop_read",
+      "bootstrapFieldsUsed": ["host", "token", "version"],
+      "bootstrapPolicy": "Read with anonymous direct HTTP into process memory only. Never persist or emit the public passkey value.",
+      "method": "GET",
+      "origin": "https://api.bazaarvoice.com",
+      "path": "/data/reviews.json",
+      "parameters": {
+        "Filter": ["ProductId:{productId}", "contentlocale:en*"],
+        "Limit": "page size",
+        "Offset": "(page - 1) * pageSize",
+        "Include": "Products,Comments",
+        "Stats": "Reviews",
+        "Locale": "en_US",
+        "apiversion": "public first-party configuration",
+        "passkey": "public first-party configuration"
+      },
+      "responseFields": [
+        "TotalResults", "Limit", "Offset", "Results[].Id", "Results[].ProductId", "Results[].ReviewText",
+        "Results[].Rating", "Results[].SubmissionTime", "Results[].Title", "Results[].Photos[].Sizes",
+        "Includes.Products[skuId].Attributes.BV_FE_FAMILY.Values[].Value"
+      ],
+      "identityBinding": "Review ProductId commonly identifies a SKU. Products include BV_FE_FAMILY metadata; every row must map back to the requested Sephora productId before it is returned.",
+      "pagination": "Offset/Limit. A 100-item first page and a final 73-item page were independently replayed against TotalResults=1773."
+    }
+  },
+  "knownBoundaries": [
+    "Anonymous browser navigation to a product document returned HTTP 403 Access Denied for P281411; the source-derived product and review APIs independently replayed successfully with no browser or account cookies.",
+    "The sampled product service does not return long product-description copy. The pageProduct CXS route is shared page content without a productId/SKU input and its direct response contained no product-specific description.",
+    "Only the US storefront and USD prices were verified. Other market and currency contracts are not implemented.",
+    "The official public Sephora affiliate page identifies Rakuten Advertising but does not publish a fixed numeric commission rate."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "reviews.summary",
+  "checkedAt": "2026-10-05T02:59:09.585Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/product/detail?prdtNo=GA240824996"
+  },
+  "request": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/review-summary",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:09.585Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "filterYn",
+      "prdtNo",
+      "prdtGbnCode",
+      "movReviewYn",
+      "photoReviewYn",
+      "optnYn",
+      "transUseYn",
+      "filterUseYn"
+    ],
+    "responseBytes": 2547,
+    "responseSha256": "e02a016b32738b218d489f6e29a6c3fbbfacbfa81374710efadb423c0c094062"
+  },
+  "productIdMatched": true,
+  "totalReviews": 9662,
+  "averageRating": 4.9,
+  "totalMediaReviews": 3983,
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7465d9a636ebef870a2818e5dbe59a255c0edf366dc5875e1752406e21e55357"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "service": "catalog",
+  "description": "Common non-affiliate-link catalog/detail/review execution. Local collector tests do not prove every platform API is live; platform checklists own those live gates.",
+  "capabilities": [
+    {
+      "id": "catalog.full_detail_output",
+      "title": "Preserve validated product detail fields apart from price-only snapshots",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/catalog-readers.mjs",
+            "exports": [
+              "createCatalogReader",
+              "catalogOnly"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-catalog.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "product",
+              "credentials-stdin"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "reviews.content_and_images",
+      "title": "Normalize full review body/photo data without reviewer account/profile data",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/reviews.mjs",
+            "exports": [
+              "normalizeReview"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-reviews.test.mjs"
+        ],
+        "cli": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "reviews.bounded_pagination",
+      "title": "Bound pages/rows/bytes, deduplicate, detect cursor loops and incomplete totals",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/reviews.mjs",
+            "exports": [
+              "collectReviews"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-reviews.test.mjs"
+        ],
+        "cli": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "reviews.csv_readback",
+      "title": "Keep multiline review bodies and photo URLs in safe JSON/CSV",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/reviews.mjs",
+            "exports": [
+              "reviewsCsv"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-reviews.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "reviews",
+              "csv",
+              "max-pages"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "catalog.scope_excludes_affiliate_links",
+      "title": "Audit catalog reads while preserving the original state of excluded link operations",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/catalog-checklist-scope.mjs",
+            "exports": [
+              "catalogScopeAudit"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-catalog-scope.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/checklist.mjs",
+            "tokens": [
+              "scope=catalog"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "service": "commerce",
+  "description": "Actual browserless product-price collection, safe service-bound credential input, JSON/CSV persistence and bounded same-context price history. Credentialed catalog replays remain incomplete until real API credentials and entitlement pass.",
+  "capabilities": [
+    {
+      "id": "collection.public_feed",
+      "title": "Public regional price feed -> normalized JSON/CSV with readback",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          },
+          {
+            "path": "lib/commerce/snapshots.mjs",
+            "exports": [
+              "collectOfferSnapshot",
+              "comparePriceSnapshots",
+              "snapshotCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "collect",
+              "credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-snapshots.test.mjs",
+          "tests/commerce-providers.test.mjs",
+          "tests/commerce-cli.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://printful.s3.us-west-1.amazonaws.com",
+          "path": "/productExport/printful_products.zip",
+          "mime": "application/zip",
+          "files": [
+            "verification/commerce-collection-live-2026-10-05.json",
+            "verification/commerce-collection-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/printful.mjs",
+            "lib/commerce/http.mjs",
+            "verification/commerce-collection-sample-2026-10-05.csv"
+          ]
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://printful.s3.us-west-1.amazonaws.com",
+          "path": "/productExport/printful_products.zip",
+          "mime": "application/zip",
+          "files": [
+            "verification/catalog-price-printful-live-2026-10-05.json",
+            "verification/catalog-price-printful-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/commerce/printful.mjs",
+            "lib/commerce/http.mjs",
+            "verification/catalog-price-printful-sample-2026-10-05.csv"
+          ],
+          "note": "Printful official USA regional feed replayed via current Node 24 CLI; 11,279 priced variants; regional-feed coverage."
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "collection.public_storefront",
+      "title": "Anonymous storefront variant price -> JSON/CSV with readback",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          },
+          {
+            "path": "lib/commerce/snapshots.mjs",
+            "exports": [
+              "collectOfferSnapshot",
+              "comparePriceSnapshots",
+              "snapshotCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "collect",
+              "credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-snapshots.test.mjs",
+          "tests/commerce-providers.test.mjs",
+          "tests/commerce-cli.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://colourpop.com",
+          "path": "/products/eeveelution-shadow-palette.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/commerce-storefront-collection-live-2026-10-05.json",
+            "verification/commerce-storefront-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs",
+            "verification/commerce-storefront-sample-2026-10-05.csv"
+          ]
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://colourpop.com",
+          "path": "/search/suggest.json",
+          "mime": "application/json",
+          "files": [
+            "verification/catalog-price-shopify-search-live-2026-10-05.json",
+            "verification/catalog-price-shopify-search-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs",
+            "verification/catalog-price-shopify-search-sample-2026-10-05.csv"
+          ],
+          "note": "Current CLI reached ColourPop predictive search; 10 returned offers are a suggestion sample, not full-catalog coverage."
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://colourpop.com",
+          "path": "/products/eeveelution-shadow-palette.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/catalog-price-shopify-product-live-2026-10-05.json",
+            "verification/catalog-price-shopify-product-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs",
+            "verification/catalog-price-shopify-product-sample-2026-10-05.csv"
+          ],
+          "note": "Current CLI re-read the previously proven product handle and confirmed its USD variant price; evidence is scoped to this product."
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "collection.pagination",
+      "title": "Bounded cursors, overlap deduplication, source truncation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          },
+          {
+            "path": "lib/commerce/snapshots.mjs",
+            "exports": [
+              "collectOfferSnapshot",
+              "comparePriceSnapshots",
+              "snapshotCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "collect",
+              "credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-snapshots.test.mjs",
+          "tests/commerce-providers.test.mjs",
+          "tests/commerce-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "collection.price_semantics",
+      "title": "Decimal price kinds and market/currency/variant context isolation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          },
+          {
+            "path": "lib/commerce/snapshots.mjs",
+            "exports": [
+              "collectOfferSnapshot",
+              "comparePriceSnapshots",
+              "snapshotCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "collect",
+              "credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-snapshots.test.mjs",
+          "tests/commerce-providers.test.mjs",
+          "tests/commerce-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "collection.history",
+      "title": "Snapshot comparison without false FX or missing-as-stock inference",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          },
+          {
+            "path": "lib/commerce/snapshots.mjs",
+            "exports": [
+              "collectOfferSnapshot",
+              "comparePriceSnapshots",
+              "snapshotCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "collect",
+              "credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-snapshots.test.mjs",
+          "tests/commerce-providers.test.mjs",
+          "tests/commerce-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "collection.credentials",
+      "title": "Service-bound memory/stdin input and sanitized results",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          },
+          {
+            "path": "lib/commerce/snapshots.mjs",
+            "exports": [
+              "collectOfferSnapshot",
+              "comparePriceSnapshots",
+              "snapshotCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "collect",
+              "credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-snapshots.test.mjs",
+          "tests/commerce-providers.test.mjs",
+          "tests/commerce-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "collection.private_prices",
+      "title": "Credentialed partner/supplier price collection through actual runner",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/providers.mjs",
+            "exports": [
+              "createCommerceReader"
+            ]
+          },
+          {
+            "path": "lib/commerce/snapshots.mjs",
+            "exports": [
+              "collectOfferSnapshot",
+              "comparePriceSnapshots",
+              "snapshotCsv"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "collect",
+              "credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-snapshots.test.mjs",
+          "tests/commerce-providers.test.mjs",
+          "tests/commerce-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No real partner API credentials were supplied. Local clients and fixtures do not prove entitlement, authentication or returned product prices."
+    }
+  ]
+}

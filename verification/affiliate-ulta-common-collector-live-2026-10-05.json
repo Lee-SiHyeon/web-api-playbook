@@ -1,0 +1,67 @@
+{
+  "schema": "web-api-commerce-collection-proof-v1",
+  "service": "ulta",
+  "capabilityId": "catalog.common_collector",
+  "checkedAt": "2026-10-04T22:31:06.005Z",
+  "secretsPersistedInEvidence": false,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "sourceRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/dxl/graphql",
+    "checkedAt": "2026-10-04T22:30:46.560Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 938522,
+    "responseSha256": "01632816c4a4f9182c515698f6b9cc8966fc22ba6a8cdb8e81e9e8efca5b93d6"
+  },
+  "sampleOfferCount": 20,
+  "fullOfferCount": 264,
+  "csvDataRows": 264,
+  "jsonReadbackMatched": true,
+  "csvReadbackMatched": true,
+  "fullJsonSha256": "60b328826dd0808dab2887b0bac5028007377c9133011ecd2bde024ce7ca2127",
+  "fullCsvSha256": "c379f7ad0a46bc46e1280feef97a78cb0caae5c34614591faafe9028f48791bd",
+  "fullOutputs": {
+    "json": "/home/worker/artifacts/affiliate-expansion-20261005/ulta-prices.json",
+    "csv": "/home/worker/artifacts/affiliate-expansion-20261005/ulta-prices.csv"
+  },
+  "collection": {
+    "pagesRead": 4,
+    "rowsSeen": 269,
+    "offersStored": 264,
+    "maxPages": 4,
+    "maxOffers": 500,
+    "coverage": "provider_limited",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": false
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/commerce.mjs",
+    "arguments": [
+      "ulta",
+      "collect",
+      "--query=lipstick"
+    ],
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/commerce.mjs": "87854b996a94718720014850f51eed3fa235b4dcaf0ba22d1400680427cb6458",
+    "lib/commerce/providers.mjs": "86072eefb1d1efa1e218adf6d01de3684927e3e4dc83d475868486f54dbaa244",
+    "lib/commerce/snapshots.mjs": "f59158c31e1490e2124de595d68f5e5cc87cd020f73184d5046258144b45d659",
+    "lib/commerce/credential-output.mjs": "89b5f640422cf9dbf5a3d2679099842264ae6d30b6a924ad9308af6432e485db",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "lib/commerce/ulta.mjs": "3b007ea6061f4bf046b6f4bc69758b632a350b3510567cae6a921d13c23c6615",
+    "verification/affiliate-ulta-collection-sample-2026-10-05.csv": "c1e606dec25b36fade405f4a9b03edce3258a669e8471d45e0fa2b9020844a9e"
+  }
+}

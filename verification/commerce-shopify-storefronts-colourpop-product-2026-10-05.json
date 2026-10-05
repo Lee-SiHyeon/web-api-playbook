@@ -1,0 +1,63 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify-storefronts",
+  "capabilityId": "colourpop.catalog.product_detail",
+  "checkedAt": "2026-10-05T02:38:20.089Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://shopify.dev/docs/api/ajax/reference/product"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://colourpop.com",
+    "path": "/products/eeveelution-shadow-palette.js",
+    "checkedAt": "2026-10-05T02:38:20.089Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 8288,
+    "responseSha256": "1ea74090cf007217f30e1b8e1d9c69af1db5a0ebb57dda606c4863f1ddb834a2",
+    "schemaVerified": true
+  },
+  "productHandleMatched": true,
+  "variantCount": 1,
+  "currencyRequest": {
+    "method": "GET",
+    "origin": "https://colourpop.com",
+    "path": "/cart.js",
+    "checkedAt": "2026-10-05T02:38:20.326Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 303,
+    "currency": "USD",
+    "itemCount": 0
+  },
+  "productDataSummary": {
+    "descriptionHtmlBytes": 1101,
+    "imageCount": 8,
+    "optionCount": 1,
+    "variantCount": 1,
+    "variantsWithSku": 1,
+    "variantsWithInventoryQuantity": 1,
+    "variantsWithOptions": 1,
+    "inventoryQuantitySnapshot": true,
+    "currency": "USD"
+  },
+  "implementation": {
+    "lib/commerce/shopify-storefronts.mjs": "e50784065f0807c149e053f5bae32efbcd2ad3ee45d95f229318fcaf93b0ed2a",
+    "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb"
+  }
+}

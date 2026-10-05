@@ -1,0 +1,503 @@
+{
+  "schemaVersion": "commerce-affiliate-program-facts-v1",
+  "asOf": "2026-10-05",
+  "purpose": "Source-backed reference facts for affiliate program planning. This file is informational metadata, not a runtime commission table, payout promise, tax opinion, or approval guarantee.",
+  "interpretationRules": [
+    "A published base rate applies only to the stated country, channel, product class, attribution condition, and effective period.",
+    "An advertised maximum or promotional rate is not a guaranteed standard commission. Record the live rate shown in the applicable partner dashboard or insertion order before estimating revenue.",
+    "Programs run by the same company may be separate by country, platform, publisher tier, creator channel, advertiser approval, or campaign.",
+    "No commission or payment rate in this reference should be embedded as a product price, guaranteed earning, or durable runtime constant.",
+    "Tax handling and eligibility depend on the participant, country, and current program terms. This reference does not give tax or legal advice."
+  ],
+  "sources": [
+    {
+      "id": "oliveyoung_kr_guide",
+      "publisher": "CJ Olive Young",
+      "title": "Olive Young Shopping Curator Activity Guide",
+      "url": "https://m.oliveyoung.co.kr/m/mtn/affiliate/guide",
+      "retrievedAt": "2026-10-05",
+      "scope": "Korea domestic Shopping Curator program; external product links, Shutter product tags, attribution, settlement thresholds and payout steps."
+    },
+    {
+      "id": "oliveyoung_global_affiliate",
+      "publisher": "OLIVE YOUNG Global",
+      "title": "OLIVE YOUNG Affiliate Program",
+      "url": "https://global.oliveyoung.com/influencer/main",
+      "retrievedAt": "2026-10-05",
+      "scope": "Global affiliate program marketing page; headline rate, qualified-sales qualification, social accounts and PayPal withdrawal."
+    },
+    {
+      "id": "amazon_us_rates",
+      "publisher": "Amazon Associates Central",
+      "title": "Associates Program Standard Commission Income Statement",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GRXPHT8U84RAYDXZ",
+      "retrievedAt": "2026-10-05",
+      "scope": "Amazon.com US standard commission category schedule; the page is the controlling current rate card and may change."
+    },
+    {
+      "id": "amazon_associates_review",
+      "publisher": "Amazon Associates Central",
+      "title": "Application Review Process",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8TW5AE9XL2VX9VM",
+      "retrievedAt": "2026-10-05",
+      "scope": "Amazon.com Associates application review and qualifying-sale condition."
+    },
+    {
+      "id": "amazon_creators_api_eligibility",
+      "publisher": "Amazon Associates Central",
+      "title": "Creators API Introduction and Prerequisites",
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/introduction",
+      "retrievedAt": "2026-10-05",
+      "scope": "Separate Creators API access prerequisites, including Associates enrollment, trailing qualifying sales, API registration, and credentials."
+    },
+    {
+      "id": "amazon_us_payment_options",
+      "publisher": "Amazon Associates Central",
+      "title": "Payment Options",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/GGD9H76RMDDNEWAE",
+      "retrievedAt": "2026-10-05",
+      "scope": "US and international payment option categories and minimum balances."
+    },
+    {
+      "id": "amazon_fx4cash",
+      "publisher": "Amazon Associates Central",
+      "title": "FAQ: Fx4Cash International Transfers",
+      "url": "https://affiliate-program.amazon.com/help/node/topic/G8VUMS6GTBCR9RGV",
+      "retrievedAt": "2026-10-05",
+      "scope": "Supported cross-border bank-transfer markets/currencies for listed Amazon Associates programs."
+    },
+    {
+      "id": "aliexpress_affiliate_agreement",
+      "publisher": "AliExpress / Alibaba Group",
+      "title": "AliExpress Affiliate Program Service Agreement",
+      "url": "https://terms.alicdn.com/legal-agreement/terms/suit_bu1_aliexpress/suit_bu1_aliexpress202003132026_84536.html",
+      "retrievedAt": "2026-10-05",
+      "scope": "Portals enrollment, rates governed by the portal and insertion order, monthly reporting/payment, and bank remittance threshold. Agreement identifies version effective 2022-03-31; live portal terms can supersede it."
+    },
+    {
+      "id": "shopee_sg_commissions_2026",
+      "publisher": "Shopee Singapore Help Center",
+      "title": "Commissions Structure (with effect from 2 January 2026)",
+      "url": "https://help.shopee.sg/portal/10/article/191914-Commissions-Structure-%28W.e.f.-2-January-2026%29",
+      "retrievedAt": "2026-10-05",
+      "scope": "Singapore channel/tier commission schedule, publisher vs seller-funded CommissionsXtra, and order caps."
+    },
+    {
+      "id": "shopee_my_eligibility",
+      "publisher": "Shopee Malaysia Help Center",
+      "title": "What is the Shopee Affiliate Program?",
+      "url": "https://help.shopee.com.my/portal/10/article/206059-What-is-the-Shopee-Affiliate-Program",
+      "retrievedAt": "2026-10-05",
+      "scope": "Malaysia program participation, local-user eligibility, public social account, age, channels and affiliate account types."
+    },
+    {
+      "id": "shopee_id_program",
+      "publisher": "Shopee Indonesia",
+      "title": "Shopee Affiliate Program: commission and requirements",
+      "url": "https://shopee.co.id/m/affiliates",
+      "retrievedAt": "2026-10-05",
+      "scope": "Indonesia program description, published base maximum, XTRA seller bonus, eligible product/order classes and payment route thresholds; no schedule effective date shown in the captured page."
+    },
+    {
+      "id": "shopee_ph_program",
+      "publisher": "Shopee Philippines Help Center",
+      "title": "What is the Shopee Affiliate Program (SAP)?",
+      "url": "https://help.shopee.ph/portal/10/article/123886-What-is-the-Shopee-Affiliate-Program-(SAP)",
+      "retrievedAt": "2026-10-05",
+      "scope": "Philippines program participation requires public social media and submitted payment/tax details; does not publish a universal commission rate."
+    },
+    {
+      "id": "sephora_us_affiliate",
+      "publisher": "Sephora US",
+      "title": "Sephora Affiliates",
+      "url": "https://www.sephora.com/beauty/affiliates/",
+      "retrievedAt": "2026-10-05",
+      "scope": "US publisher affiliate enrollment via Rakuten Advertising, application/approval, product coverage and current network attribution. No commission percentage is published."
+    },
+    {
+      "id": "sephora_creator_storefront",
+      "publisher": "Sephora",
+      "title": "My Sephora Storefront",
+      "url": "https://creators.sephora.com/",
+      "retrievedAt": "2026-10-05",
+      "scope": "Separate creator storefront application, curation and commissions on qualifying sales; no commission percentage is published."
+    },
+    {
+      "id": "impact_sephora_case",
+      "publisher": "impact.com",
+      "title": "Affiliate management software solution for enterprise brands",
+      "url": "https://impact.com/partnerships/affiliate-management-software-enterprise/",
+      "retrievedAt": "2026-10-05",
+      "scope": "Platform-provider account of Sephora affiliate operations across 29 countries and platform consolidation. It does not map current country-by-country network contracts or payout rates."
+    },
+    {
+      "id": "rakuten_advertising_brand_access",
+      "publisher": "Rakuten Advertising Publisher Help Center",
+      "title": "Brands and Advertisers in the Network",
+      "url": "https://pubhelp.rakutenadvertising.com/hc/en-us/articles/13214712392205-Brands-and-Advertisers-in-the-Network",
+      "retrievedAt": "2026-10-05",
+      "scope": "Advertiser list, commission rates and terms are viewed in a publisher dashboard after registration; publishers apply to advertiser programs."
+    },
+    {
+      "id": "impact_apply_brands",
+      "publisher": "impact.com Partner Help Center",
+      "title": "Find and Apply to Brands",
+      "url": "https://help.impact.com/partner/what-would-you-like-to-learn-about/platform-features/working-with-brands/applying-to-brands/find-and-apply-to-brands",
+      "retrievedAt": "2026-10-05",
+      "scope": "Brand programs can be separate by region or partner type; partner approval and eligibility are advertiser-specific."
+    },
+    {
+      "id": "ulta_affiliate",
+      "publisher": "Ulta Beauty",
+      "title": "Affiliates & Creators",
+      "url": "https://www.ulta.com/company/affiliate",
+      "retrievedAt": "2026-10-05",
+      "scope": "Current publisher Impact program, UB Creates creator program, associate ambassador program, free application, channel fit. No commission percentage is published."
+    },
+    {
+      "id": "rakuten_jp_rates",
+      "publisher": "Rakuten Affiliate Japan",
+      "title": "Rates and Commission Payment Rules",
+      "url": "https://affiliate.rakuten.co.jp/guideline/rule/",
+      "retrievedAt": "2026-10-05",
+      "scope": "Japan Rakuten Ichiba category base rates, eligible rate-up items, attribution windows, rate update cadence and caps."
+    },
+    {
+      "id": "rakuten_jp_payout",
+      "publisher": "Rakuten Affiliate Japan",
+      "title": "Rakuten Affiliate overview and payment FAQ",
+      "url": "https://affiliate.rakuten.co.jp/guides/begin/",
+      "retrievedAt": "2026-10-05",
+      "scope": "Japan payout in Rakuten Cash/points, eligibility and review conditions for full bank-transfer payout."
+    }
+  ],
+  "programs": [
+    {
+      "id": "oliveyoung_kr_shopping_curator",
+      "market": "KR",
+      "program": "Olive Young Shopping Curator",
+      "relationshipType": "retailer affiliate / creator product-link and in-app tagged-content monetization",
+      "rateFacts": [
+        {
+          "surface": "external product link",
+          "attribution": "direct purchase of the linked product",
+          "value": 7,
+          "unit": "percent",
+          "rateType": "published base rate",
+          "qualifiedCondition": "The referred user completes an order within 24 hours and this is the last qualifying link before order; event rates may be added or changed under program policy.",
+          "sourceIds": ["oliveyoung_kr_guide"],
+          "runtimeConstant": false
+        },
+        {
+          "surface": "external product link",
+          "attribution": "indirect purchase of a different product",
+          "value": 3,
+          "unit": "percent",
+          "rateType": "published base rate",
+          "qualifiedCondition": "Same last-link and 24-hour attribution conditions; applies to other products bought after the link visit.",
+          "sourceIds": ["oliveyoung_kr_guide"],
+          "runtimeConstant": false
+        },
+        {
+          "surface": "in-app Shutter product tag",
+          "attribution": "direct purchase only",
+          "value": 3,
+          "unit": "percent",
+          "rateType": "published base rate",
+          "qualifiedCondition": "Indirect product purchases are not credited for Shutter tags.",
+          "sourceIds": ["oliveyoung_kr_guide"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "entry": "Olive Young membership can start the activity, but final settlement approval requires submitted channel and post evidence.",
+        "payout": "KRW to a valid bank account in the participant's own name; first payout request starts at KRW 5,000 accumulated, later requests at KRW 10,000; payout is scheduled for the second month after activity, up to 45 days after request under the guide.",
+        "businessParticipants": "Individual business operators must issue an electronic tax invoice in the stated settlement window.",
+        "withholdingClaim": {
+          "claim": "A blanket automatic 3.3% withholding for all domestic affiliate programs/participants.",
+          "status": "not established by this official program guide",
+          "note": "The guide describes approval, own-name bank payment and a tax-invoice requirement for individual business operators, but does not state a universal 3.3% withholding rate. Do not apply the claim to all programs or participant types.",
+          "sourceIds": ["oliveyoung_kr_guide"]
+        }
+      },
+      "sourceIds": ["oliveyoung_kr_guide"]
+    },
+    {
+      "id": "oliveyoung_global_affiliate",
+      "market": "global / market eligibility subject to Olive Young Global terms",
+      "program": "OLIVE YOUNG Global Affiliate Program",
+      "relationshipType": "retailer affiliate / social content",
+      "rateFacts": [
+        {
+          "surface": "global social affiliate sales",
+          "value": 13,
+          "unit": "percent",
+          "rateType": "marketing-page headline only; not a guaranteed base rate",
+          "qualifiedCondition": "The same official page says actual rate is determined by qualified sales amount. Confirm the individual live tier in the account before use.",
+          "sourceIds": ["oliveyoung_global_affiliate"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "entry": "The page says Olive Young Global members with social accounts can participate.",
+        "payout": "Cash withdrawal through PayPal once commission points exceed USD 20; page says monthly withdrawal. The page also offers shoppers a 5% discount through the unique link.",
+        "commissionFinalization": "The page says points are issued three days after delivery and can change after cancellations or returns."
+      },
+      "sourceIds": ["oliveyoung_global_affiliate"]
+    },
+    {
+      "id": "amazon_associates_us",
+      "market": "US marketplace (other Amazon country programs require separate locale review)",
+      "program": "Amazon Associates",
+      "relationshipType": "retailer affiliate / tagged product referrals",
+      "rateFacts": [
+        {
+          "surface": "Amazon.com standard qualifying purchase categories",
+          "categories": {
+            "Luxury Beauty and Luxury Stores Beauty": 10,
+            "Apparel and listed Amazon Fashion categories": 4,
+            "Home, Furniture, Beauty and most listed consumer categories": 3,
+            "PC and PC Components": 2.5,
+            "Televisions": 2,
+            "Grocery and Health & Personal Care": 1,
+            "All Other Categories": 4
+          },
+          "unit": "percent",
+          "rateType": "published US standard category schedule",
+          "qualifiedCondition": "Actual product classification controls; this is not a simple rule that all beauty, fashion, or electronics items share one rate. A current special promotion may add or replace rates.",
+          "sourceIds": ["amazon_us_rates"],
+          "runtimeConstant": false
+        }
+      ],
+      "eligibility": {
+        "associates_review": "The official review guide requires at least three qualifying sales within the first 180 days after signup; personal orders do not qualify. This is the Associates application-review gate.",
+        "creators_api": "Separate gate: enrolled and accepted Associates account, at least 10 qualifying sales in the trailing 30 days, API registration and credentials. The 10-sales/30-day condition is API access, not the same as the Associates 3-sales/180-day review condition.",
+        "sourceIds": ["amazon_associates_review", "amazon_creators_api_eligibility"]
+      },
+      "enrollmentAndPayment": {
+        "paymentOptions": "Amazon lists direct deposit, gift certificate and check for domestic users; international options include direct deposit where available, gift certificate and check. The US portal lists USD 10 minimum for direct deposit/gift certificate and USD 100 for check.",
+        "internationalBanking": "The Fx4Cash page describes bank transfer for specified Associates programs and supported USD, GBP or EUR bank-account countries; this is not universal across countries. South Korea is not in the listed 52-country set on that page.",
+        "payoneerClaim": "The official US portal does not state that Payoneer is universally required. Payment methods and country availability must be checked in the target marketplace account.",
+        "sourceIds": ["amazon_us_payment_options", "amazon_fx4cash"]
+      },
+      "sourceIds": ["amazon_us_rates", "amazon_associates_review", "amazon_creators_api_eligibility", "amazon_us_payment_options", "amazon_fx4cash"]
+    },
+    {
+      "id": "aliexpress_portals_affiliate",
+      "market": "international markets defined by live AliExpress Portals campaign terms",
+      "program": "AliExpress Affiliate Program / Portals",
+      "relationshipType": "retailer affiliate / publisher or network",
+      "rateFacts": [
+        {
+          "surface": "qualifying sales or other campaign actions",
+          "value": null,
+          "unit": "campaign-specific",
+          "rateType": "not publicly verifiable as a universal standard rate",
+          "qualifiedCondition": "Specific fee and action terms come from the live Portals rules and/or the participant's Insertion Order; seller/category/product/campaign rates may differ and may change.",
+          "sourceIds": ["aliexpress_affiliate_agreement"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "entry": "Participant registers in AliExpress Portals, accepts its rules, and may be rejected at AliExpress discretion.",
+        "payout": "Agreement describes monthly reporting/payment credit to Portals balance, then participant-requested bank remittance when the remittance amount exceeds USD 15; bank handling charges can apply.",
+        "taxNote": "Agreement assigns participant responsibility for applicable tax compliance; it does not establish a universal tax withholding rate or Payoneer requirement."
+      },
+      "unsupportedClaims": [
+        "The pasted 3%–9% rate range was not verified in current public official materials.",
+        "The pasted 10%–20% Hot Products claim was not verified in current public official materials. Do not infer that the garbled '39%' means 3%–9% or use either range as a rate card."
+      ],
+      "sourceIds": ["aliexpress_affiliate_agreement"]
+    },
+    {
+      "id": "shopee_singapore_affiliate",
+      "market": "SG",
+      "program": "Shopee Affiliate Program Singapore",
+      "relationshipType": "marketplace affiliate; standard Shopee commission plus seller-funded CommissionsXtra where eligible",
+      "rateFacts": [
+        {
+          "surface": "social link/code sharing, direct non-CommissionsXtra order",
+          "valuesByPublisherTier": {"Affiliate": 2, "KOC": 3, "KOL": 3, "Top KOL": "up to 4"},
+          "unit": "percent",
+          "rateType": "published Singapore schedule effective 2026-01-02",
+          "sourceIds": ["shopee_sg_commissions_2026"],
+          "runtimeConstant": false
+        },
+        {
+          "surface": "social link/code sharing, direct CommissionsXtra order",
+          "valuesByPublisherTier": {"Affiliate": 5, "KOC": 6, "KOL": 6, "Top KOL": 7},
+          "unit": "percent",
+          "rateType": "published Singapore schedule effective 2026-01-02; table specifies a S$5-per-order cap for applicable rows",
+          "qualifiedCondition": "CommissionsXtra is seller-funded and only applies to eligible tagged products/orders.",
+          "sourceIds": ["shopee_sg_commissions_2026"],
+          "runtimeConstant": false
+        },
+        {
+          "surface": "Shopee Live direct CommissionsXtra order",
+          "value": "up to 10",
+          "unit": "percent",
+          "rateType": "published channel maximum, with order cap in the schedule",
+          "sourceIds": ["shopee_sg_commissions_2026"],
+          "runtimeConstant": false
+        },
+        {
+          "surface": "seller-funded CommissionsXtra brand commission",
+          "value": "up to 40 direct / up to 12 indirect",
+          "unit": "percent",
+          "rateType": "published maximums, not standard Shopee-funded rates",
+          "qualifiedCondition": "The source describes the combined potential as up to 50% only when applicable standard and seller-funded components both qualify.",
+          "sourceIds": ["shopee_sg_commissions_2026"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "note": "These rates and thresholds are Singapore-only. They do not imply a Korean account can participate or that other Shopee country programs use the same tiers."
+      },
+      "sourceIds": ["shopee_sg_commissions_2026"]
+    },
+    {
+      "id": "shopee_malaysia_affiliate",
+      "market": "MY",
+      "program": "Shopee Affiliate Programme Malaysia",
+      "relationshipType": "marketplace affiliate",
+      "rateFacts": [],
+      "enrollmentAndPayment": {
+        "entry": "Official help requires a public social account, a local user in Malaysia, age 18 or above, and suitable content. The same page lists Local Individual/Enterprise and Overseas Individual/Enterprise account types, but this should not be taken as overriding the stated local-user eligibility without checking the live application route.",
+        "payout": "Market-specific; the public eligibility page does not publish a universal commission rate or a full current payout schedule."
+      },
+      "sourceIds": ["shopee_my_eligibility"]
+    },
+    {
+      "id": "shopee_indonesia_affiliate",
+      "market": "ID",
+      "program": "Shopee Affiliate Program Indonesia",
+      "relationshipType": "marketplace affiliate",
+      "rateFacts": [
+        {
+          "surface": "eligible social orders outside Shopee Live and Video",
+          "value": "up to 4",
+          "unit": "percent",
+          "rateType": "current official landing-page maximum; page does not state an effective date",
+          "qualifiedCondition": "The page limits the described valid orders to eligible non-digital products from Shopee Mall, Shopee Supermarket, Star+ and Star Sellers; seller CommissionsXTRA can add more than 5% on tagged products.",
+          "sourceIds": ["shopee_id_program"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "payout": "The official page says balances below IDR 500,000 are paid through ShopeePay and amounts above IDR 500,000 through bank transfer. Verify the current dashboard because the page gives no effective date and the schedule may change.",
+        "note": "Indonesia's rates and payout rules are not transferable to Singapore, Malaysia, the Philippines, or Korea."
+      },
+      "sourceIds": ["shopee_id_program"]
+    },
+    {
+      "id": "shopee_philippines_affiliate",
+      "market": "PH",
+      "program": "Shopee Affiliate Program Philippines",
+      "relationshipType": "marketplace affiliate",
+      "rateFacts": [],
+      "enrollmentAndPayment": {
+        "entry": "The official Help Center describes registration of an active public social media account and submission of payment and tax details before payouts.",
+        "rate": "The cited public page does not disclose a general current percentage schedule."
+      },
+      "sourceIds": ["shopee_ph_program"]
+    },
+    {
+      "id": "sephora_us_affiliate",
+      "market": "US program page; market scope of any other Sephora program must be checked separately",
+      "program": "Sephora Affiliate Program via Rakuten Advertising",
+      "relationshipType": "retailer affiliate network; advertiser approval required",
+      "rateFacts": [
+        {
+          "surface": "qualifying sales",
+          "value": null,
+          "unit": "advertiser terms",
+          "rateType": "not published on official public enrollment page",
+          "qualifiedCondition": "Sephora directs publishers to join Rakuten Advertising and apply to its advertiser program. Check current program terms after publisher registration and approval.",
+          "sourceIds": ["sephora_us_affiliate", "rakuten_advertising_brand_access"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "entry": "The US affiliate page explicitly identifies Rakuten Advertising; an application to the Sephora advertiser program is required.",
+        "other_program": "Sephora separately offers My Sephora Storefront for creators. The public storefront page says commission is earned on qualifying sales but does not state a percentage.",
+        "network_scope": "Impact.com reports that it consolidated Sephora affiliate operations spanning 29 countries, while Sephora's current US affiliate page names Rakuten. These sources do not provide a current country-by-country network map; do not assume every country uses Rakuten or Impact."
+      },
+      "unsupportedClaims": ["The quoted 5%–10% Sephora rate was not found on the current official public program page."],
+      "sourceIds": ["sephora_us_affiliate", "sephora_creator_storefront", "impact_sephora_case", "rakuten_advertising_brand_access"]
+    },
+    {
+      "id": "ulta_beauty_affiliate",
+      "market": "US retailer program; confirm eligible publisher/country requirements in the current application",
+      "program": "Ulta Beauty Impact Program / UB Creates",
+      "relationshipType": "Impact publisher affiliate or separate social creator program",
+      "rateFacts": [
+        {
+          "surface": "qualifying sales",
+          "value": null,
+          "unit": "advertiser terms",
+          "rateType": "not published on Ulta's current public enrollment page",
+          "qualifiedCondition": "Ulta directs publishers to its Impact program and social creators to UB Creates. Approved offer terms are program-specific.",
+          "sourceIds": ["ulta_affiliate", "impact_apply_brands"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "entry": "Ulta says there is no cost to apply; publishers use Impact and social creators use UB Creates. A separate Associate Ambassador program is limited to Ulta associates.",
+        "payment": "The official public affiliate page does not publish the advertiser's payout schedule or payment method; use current accepted offer terms after application."
+      },
+      "unsupportedClaims": ["The quoted 2%–5% Ulta rate was not found on the current official public program page."],
+      "sourceIds": ["ulta_affiliate", "impact_apply_brands"]
+    },
+    {
+      "id": "rakuten_ichiba_japan_affiliate",
+      "market": "JP",
+      "program": "Rakuten Affiliate / Rakuten Ichiba",
+      "relationshipType": "marketplace affiliate",
+      "rateFacts": [
+        {
+          "surface": "Rakuten Ichiba standard qualifying product categories",
+          "value": "2–4",
+          "unit": "percent",
+          "rateType": "published category base rate",
+          "qualifiedCondition": "Category controls; most standard products have a per-item JPY 1,000 commission cap and JPY 3,000 monthly per-user cap. Track click must lead to cart within 24 hours and completed purchase within 89 days.",
+          "sourceIds": ["rakuten_jp_rates"],
+          "runtimeConstant": false
+        },
+        {
+          "surface": "eligible selected rate-up products",
+          "value": "5–20",
+          "unit": "percent",
+          "rateType": "published rate-up range for eligible partners and selected shop/category products, not the standard rate",
+          "qualifiedCondition": "Eligibility can vary by partner and month. Rates and participating shops update daily; eligible products are shown in the affiliate product search. Rate-up products are exempt from the cited standard payout caps.",
+          "sourceIds": ["rakuten_jp_rates"],
+          "runtimeConstant": false
+        }
+      ],
+      "enrollmentAndPayment": {
+        "payout": "Standard compensation is paid in Rakuten Points/Rakuten Cash under the applicable program rules. The Japan guide says full bank transfer is available only after at least JPY 3,001 qualifying commission in each of three consecutive months and review; higher cash payment conditions also require the applicable Rakuten ID/card or linked Rakuten Bank setup.",
+        "note": "This is Rakuten Japan, not Rakuten Advertising's international affiliate network. Do not conflate points, Rakuten Cash and bank-transfer conditions."
+      },
+      "sourceIds": ["rakuten_jp_rates", "rakuten_jp_payout"]
+    }
+  ],
+  "crossProgramClaimChecks": [
+    {
+      "claim": "Domestic programs automatically pay KRW after universal 3.3% withholding.",
+      "status": "unsupported_as_a_general_rule",
+      "finding": "The Olive Young domestic guide uses participant approval and own-name bank details, and requires an electronic tax invoice from individual business operators. It does not establish that every participant or domestic affiliate program has a universal 3.3% withholding rule.",
+      "sourceIds": ["oliveyoung_kr_guide"]
+    },
+    {
+      "claim": "Foreign affiliate payouts universally require a foreign-currency account or Payoneer.",
+      "status": "false_as_a_universal_claim",
+      "finding": "Official methods differ: Olive Young Global lists PayPal; Amazon lists direct deposit where supported, gift certificate and check; AliExpress Portals describes remittance to a designated bank account; Rakuten Japan pays program-specific points/cash and offers conditional bank transfer. Country and account eligibility must be checked per program.",
+      "sourceIds": ["oliveyoung_global_affiliate", "amazon_us_payment_options", "amazon_fx4cash", "aliexpress_affiliate_agreement", "rakuten_jp_payout"]
+    },
+    {
+      "claim": "Affiliate program rates can be summarized once as one rate per company.",
+      "status": "not_supported",
+      "finding": "The verified programs vary rates or enrollment by market, category, product, channel, creator tier, campaign, network approval, and current dashboard terms. Keep verified public facts descriptive and resolve the live offer for the exact participant/account before revenue estimates.",
+      "sourceIds": ["amazon_us_rates", "aliexpress_affiliate_agreement", "shopee_sg_commissions_2026", "rakuten_jp_rates", "impact_apply_brands"]
+    }
+  ]
+}

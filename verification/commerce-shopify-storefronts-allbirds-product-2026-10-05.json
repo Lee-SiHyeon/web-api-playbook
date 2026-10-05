@@ -1,0 +1,67 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify-storefronts",
+  "capabilityId": "allbirds.catalog.product_detail",
+  "checkedAt": "2026-10-05T02:38:19.575Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "productHandleMatched": true,
+  "variantCount": 13,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://shopify.dev/docs/api/ajax/reference/product"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+    "checkedAt": "2026-10-05T02:38:19.575Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 12210,
+    "responseSha256": "6337f2ee6d717b7d85519c6bfa65638c81d0de5b9319a29330c47a09f188e10e",
+    "schemaVerified": true,
+    "productHandleMatched": true,
+    "currency": "USD",
+    "priceMinorUnitExponent": 2,
+    "priceField": "USD minor units"
+  },
+  "currencyRequest": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/cart.js",
+    "checkedAt": "2026-10-05T02:38:19.902Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 303,
+    "currency": "USD",
+    "itemCount": 0
+  },
+  "productDataSummary": {
+    "descriptionHtmlBytes": 261,
+    "imageCount": 5,
+    "optionCount": 1,
+    "variantCount": 13,
+    "variantsWithSku": 13,
+    "variantsWithInventoryQuantity": 13,
+    "variantsWithOptions": 13,
+    "inventoryQuantitySnapshot": true,
+    "currency": "USD"
+  },
+  "implementation": {
+    "lib/commerce/shopify-storefronts.mjs": "e50784065f0807c149e053f5bae32efbcd2ad3ee45d95f229318fcaf93b0ed2a",
+    "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb"
+  }
+}

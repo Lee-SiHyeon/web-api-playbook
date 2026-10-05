@@ -1,0 +1,298 @@
+{
+  "schema": "commerce-shopify-storefront-contracts-v1",
+  "observedAt": "2026-10-05T02:32:21.710Z",
+  "service": "shopify-storefronts",
+  "scope": "Two explicit anonymous public storefront adapters: Allbirds and ColourPop. This does not represent every Shopify merchant.",
+  "officialDocumentation": [
+    {
+      "purpose": "Unauthenticated Ajax API scope, read-only GET behavior, locale-aware roots and JSON response contract",
+      "url": "https://shopify.dev/docs/api/ajax"
+    },
+    {
+      "purpose": "Product JSON by handle and presentment currency via cart.js",
+      "url": "https://shopify.dev/docs/api/ajax/reference/product"
+    },
+    {
+      "purpose": "Predictive product search JSON fields and 1-to-10 suggestion bound",
+      "url": "https://shopify.dev/docs/api/ajax/reference/predictive-search"
+    }
+  ],
+  "sharedContract": {
+    "product": {
+      "method": "GET",
+      "path": "/products/{handle}.js",
+      "requestCredentials": "omit",
+      "observedMimes": [
+        "text/javascript"
+      ],
+      "responseFormat": "JSON",
+      "price": "Product Ajax API numeric monetary values are minor units. The client currently accepts only verified USD and uses exponent 2.",
+      "currencySource": {
+        "method": "GET",
+        "path": "/cart.js",
+        "allowedFields": [
+          "currency",
+          "item_count"
+        ],
+        "discardedResponseFields": [
+          "token",
+          "items",
+          "all other cart fields"
+        ]
+      },
+      "variantLimit": 250,
+      "additionalProductFields": [
+        "description",
+        "featured_image",
+        "images[]",
+        "options[]",
+        "tags[]",
+        "requires_selling_plan"
+      ],
+      "additionalVariantFields": [
+        "sku",
+        "options[]",
+        "compare_at_price",
+        "inventory_quantity",
+        "inventory_management",
+        "inventory_policy",
+        "featured_image",
+        "weight",
+        "requires_shipping",
+        "taxable"
+      ],
+      "clientMapping": {
+        "description": "descriptionHtml",
+        "images": "images[]",
+        "options": "options[]",
+        "sku": "variants[].sku",
+        "compare_at_price": "variants[].compareAtPrice",
+        "inventory_quantity": "variants[].inventoryQuantity",
+        "availability": "variants[].available"
+      }
+    },
+    "predictiveSearch": {
+      "method": "GET",
+      "path": "/search/suggest.json",
+      "queryFields": [
+        "q",
+        "resources[type]",
+        "resources[limit]",
+        "resources[options][unavailable_products]"
+      ],
+      "resourceType": "product",
+      "limit": {
+        "minimum": 1,
+        "maximum": 10
+      },
+      "observedMimes": [
+        "application/json"
+      ],
+      "responseArray": "resources.results.products",
+      "semantics": "Predictive suggestions only; not full search results or pagination."
+    },
+    "securityAndPersistence": {
+      "fixedOriginsOnly": true,
+      "accountCredentialsUsed": false,
+      "authorizationHeaderSent": false,
+      "cookiesSentByNodeClient": false,
+      "redirectsFollowed": false,
+      "cartOrOrderWritesSent": false,
+      "rawCartBodyPersisted": false,
+      "affiliateOrFeedRightsInferred": false
+    }
+  },
+  "storeContracts": [
+    {
+      "store": "allbirds",
+      "origin": "https://www.allbirds.com",
+      "basis": "Existing first-party documented Shopify Ajax adapter, wrapped by the new allowlisted storefront selector; see references/retail-shopify-contracts.json.",
+      "product": {
+        "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "responseBytes": 12210,
+        "responseSha256": "4c38d6cf703971b5ec609f4abf9abadf84129f89d5aac1364097a190bf6ed46c",
+        "productId": 7205207343184,
+        "price": {
+          "amount": "105.00",
+          "currency": "USD",
+          "minorUnitExponent": 2
+        },
+        "variantCount": 13,
+        "independentCurrencyRead": {
+          "path": "/cart.js",
+          "httpStatus": 200,
+          "currency": "USD",
+          "itemCount": 0
+        },
+        "detailEnrichment": {
+          "directNodeReplayStatus": 200,
+          "descriptionBytes": 261,
+          "imageCount": 5,
+          "optionCount": 1,
+          "variantCount": 13,
+          "variantsWithSku": 13,
+          "variantsWithInventoryQuantity": 13,
+          "currency": "USD"
+        }
+      },
+      "predictiveSearch": {
+        "path": "/search/suggest.json",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 9565,
+        "resultCount": 5,
+        "independentCurrencyRead": {
+          "path": "/cart.js",
+          "httpStatus": 200,
+          "currency": "USD",
+          "itemCount": 0
+        }
+      },
+      "reviews": {
+        "providerObserved": "Yotpo",
+        "sourceDocument": "https://www.allbirds.com/products/mens-runner-nz-slip-on-mushroom",
+        "sourceSha": "5e20f02943746f03b8b672921e16e3b65d15c8fe9202181f8114ae2871b5768a",
+        "pageStatus": 200,
+        "yotpoEnabled": false,
+        "widgetPlaceholderCount": 3,
+        "reviewRootVisibleText": "",
+        "jsonLdReviewCountOnly": "7",
+        "observedVendorReviewXhr": false,
+        "result": "Full review bodies, photos, dates, rating rows, and pagination remain unavailable on the current live storefront."
+      }
+    },
+    {
+      "store": "colourpop",
+      "origin": "https://colourpop.com",
+      "storeDiscovery": {
+        "publicHomeStatus": 200,
+        "browser": "Playwright Chromium, fresh anonymous context",
+        "shopifyThemeGlobalPresent": true,
+        "siteInitiatedRead": {
+          "method": "GET",
+          "path": "/cart.js",
+          "httpStatus": 200,
+          "mime": "text/javascript",
+          "currency": "USD",
+          "itemCount": 0,
+          "requestCookieHeaderPresent": true,
+          "cookieValuePersisted": false,
+          "postRequestsBlockedDuringThisProbe": true
+        },
+        "searchInteraction": "The visible header form navigated to a full HTML search-results document. No site-initiated predictive-search XHR was captured; search support below is based on Shopify's published Ajax contract plus independent direct HTTP replay."
+      },
+      "product": {
+        "method": "GET",
+        "path": "/products/eeveelution-shadow-palette.js",
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "responseBytes": 8288,
+        "responseSha256": "a44bca7fa0e01a37763da66df9e8c61930a040f3742500150d6a1fab13529d20",
+        "productId": 7593200615506,
+        "price": {
+          "amount": "24.00",
+          "amountInApiUnits": 2400,
+          "currency": "USD",
+          "minorUnitExponent": 2
+        },
+        "variantCount": 1,
+        "independentCurrencyRead": {
+          "path": "/cart.js",
+          "httpStatus": 200,
+          "mime": "text/javascript",
+          "currency": "USD",
+          "itemCount": 0
+        },
+        "displayCrossCheck": {
+          "publicProductPage": "https://colourpop.com/products/eeveelution-shadow-palette",
+          "httpStatus": 200,
+          "schema": "Product JSON-LD offer",
+          "price": "24.00",
+          "currency": "USD",
+          "usedAsApi": false
+        },
+        "detailEnrichment": {
+          "directNodeReplayStatus": 200,
+          "descriptionBytes": 1101,
+          "imageCount": 8,
+          "optionCount": 1,
+          "variantCount": 1,
+          "variantsWithSku": 1,
+          "variantsWithInventoryQuantity": 1,
+          "currency": "USD"
+        }
+      },
+      "predictiveSearch": {
+        "method": "GET",
+        "path": "/search/suggest.json",
+        "queryFields": [
+          "q",
+          "resources[type]",
+          "resources[limit]",
+          "resources[options][unavailable_products]"
+        ],
+        "sampleQuery": "eeveelution",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 9927,
+        "responseSha256": "a3c0b324416c004ddab08d85aaadc7c495d9f4919dfc70fcf505a39451f5222b",
+        "resultCount": 5,
+        "independentCurrencyRead": {
+          "path": "/cart.js",
+          "httpStatus": 200,
+          "mime": "text/javascript",
+          "currency": "USD",
+          "itemCount": 0
+        }
+      },
+      "reviews": {
+        "provider": "Okendo",
+        "storeId": "5419d3a5-7ff7-4bcf-ace6-31f3fa34803d",
+        "productId": "shopify-7593200615506",
+        "sourceDocument": "https://colourpop.com/products/eeveelution-shadow-palette",
+        "sourceSha": "e2ef2d47fd999831dba203b628e09301cdc3bc78a121ff2505f68076d914f10e",
+        "browserObservedXhr": {
+          "method": "GET",
+          "origin": "https://api.okendo.io",
+          "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+          "queryFields": [
+            "lastEvaluated",
+            "limit",
+            "orderBy"
+          ],
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 10245,
+          "reviewCount": 5,
+          "nextUrlPresent": true
+        },
+        "aggregatePath": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/review_aggregate",
+        "nativeHttpReplay": {
+          "status": 200,
+          "reviewCount": 32,
+          "averageRating": 4.97,
+          "pages": 7,
+          "distinctReviewIds": 32,
+          "nonemptyBodies": 32,
+          "datedReviews": 32,
+          "ratedReviews": 32,
+          "imageCount": 11,
+          "cursorChainCompleted": true
+        },
+        "cursor": "Preserve the supplier response nextUrl string as opaque nextCursor; request it only after validating the same Okendo origin, store UUID, Shopify product id, and path.",
+        "verificationFlag": "reviewer.isVerified is retained as sourceVerification; verifiedPurchase is null because its exact semantics were not established."
+      }
+    }
+  ],
+  "notEstablished": [
+    "Full ranked storefront search and next-page traversal",
+    "Collection/category inventory and product membership",
+    "Non-US locale, market selection, and non-USD price-unit behavior",
+    "Affiliate-program enrollment or attribution entitlement",
+    "Merchant permission to resell, dropship, or export a product feed",
+    "Allbirds full review-body/photo retrieval and pagination: current Yotpo storefront widget is disabled; only a JSON-LD review count is visible."
+  ],
+  "secretsPersistedInEvidence": false
+}

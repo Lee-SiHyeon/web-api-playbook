@@ -1,0 +1,76 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ulta",
+  "checkedAt": "2026-10-05T03:09:58.179Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.ulta.com/search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/dxl/graphql",
+    "checkedAt": "2026-10-05T03:09:58.179Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "ultasite",
+      "user-agent",
+      "operationName",
+      "query",
+      "variables"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 780427,
+    "responseSha256": "78796f0e8db6c7920424eb8128ae94ae5bcf39ddf1b0e37fac89f7fee2226202"
+  },
+  "bootstrapRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/search",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1246740,
+    "checkedAt": "2026-10-05T03:09:57.343Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "search",
+      "page"
+    ]
+  },
+  "implementation": {
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  },
+  "capabilityId": "catalog.pagination",
+  "result": {
+    "queryMatched": true,
+    "page": 4,
+    "pagesTraversed": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "pageSize": 64,
+    "resultCount": 250,
+    "pageCount": 4,
+    "sourceItemCount": 58,
+    "returnedProductCount": 58,
+    "hasNextPage": false,
+    "terminationBoundToResultCount": true
+  }
+}

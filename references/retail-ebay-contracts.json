@@ -1,0 +1,101 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "service": "ebay",
+  "observedAt": "2026-10-04T19:06:43Z",
+  "browserEvidence": {
+    "path": "/home/worker/inpock-api/retail-discovery/ebay/research-20261005/browser-xhr-contracts.json",
+    "screenshot": "/home/worker/inpock-api/retail-discovery/ebay/research-20261005/browser-page.png",
+    "context": "pre-existing Chrome context; account state not inspected",
+    "searchDocumentStatus": 200,
+    "searchResultsSource": "HTML document, 1849276 bytes; no listing XHR observed",
+    "typedQuerySuggestionXHRObserved": false
+  },
+  "contracts": [
+    {
+      "method": "GET",
+      "origin": "https://www.ebay.com",
+      "path": "/sch/ajax/autocomplete",
+      "requestFields": [],
+      "browserResponse": { "httpStatus": 200, "mime": "application/json", "responseBytes": 91,
+        "fields": { "url": "string", "activeFactors": "object" } },
+      "independentAnonymousReplay": { "httpStatus": 403, "mime": "text/html", "responseBytes": 1831 },
+      "purpose": "Search configuration bootstrap, not product results or keyword suggestions",
+      "status": "observed_but_not_replayable_anonymously"
+    },
+    {
+      "method": "POST",
+      "origin": "https://www.ebay.com",
+      "path": "/sch/ajax/multiple_images_expsvc",
+      "requestFields": ["fetchOnly", "imageSize", "listingIds", "pageci"],
+      "browserResponse": { "httpStatus": 200, "mime": "application/json", "responseBytes": 79000,
+        "fields": { "items": "object[]", "provider": "string" },
+        "itemFields": ["listingId", "secondaryImages"] },
+      "independentAnonymousReplay": "not_attempted_without_an_observed_safe_standalone_input_source",
+      "purpose": "Secondary-image enrichment for listing IDs sourced from the HTML page",
+      "status": "browser_observed_auxiliary_only"
+    }
+  ],
+  "separatePublicEndpoint": {
+    "origin": "https://autosug.ebay.com",
+    "path": "/autosug",
+    "method": "GET",
+    "queryFields": ["kwd", "sId", "_richres", "callback"],
+    "responseShape": "{prefix:string, dict:string, res:object, richRes:{sug:[{kwd:string, categories?:[{catId:string,catName:string}]}]}}",
+    "anonymousDirectReplay": "HTTP 200 application/json, 10 suggestions and 2 category hints",
+    "currentEbayPageXHRObserved": false,
+    "firstPartySourceURL": "https://ir.ebaystatic.com/cr/v/c01/ac-092526175238.dweb.min.js",
+    "firstPartySourceSha256": "d3235b522288e3f3defdfe61cdb41670b8025d3737fc58cc8e3e8dbedef4e94b",
+    "note": "The eBay-served autocomplete bundle builds an XHR to the same host/path with kwd and sId. Its optional flags differ from the minimal independently replayed rich-response request. Current page typing did not trigger it in the observed lifecycle."
+  },
+  "expandedProductDiscovery": {
+    "observedAt": "2026-10-05T02:13:50.414810Z",
+    "artifact": "/home/worker/inpock-api/retail-discovery/ebay/product-20261005/findings.json",
+    "screenshot": "/home/worker/inpock-api/retail-discovery/ebay/product-20261005/listing-page-existing-chrome.png",
+    "requestedListingId": "306337924086",
+    "finalProductId": "12067005012",
+    "navigationStatus": 200,
+    "browserContext": "pre-existing Chrome; account and session state uninspected",
+    "xhrFetchRequestCount": 13,
+    "productDetailXhrCount": 0,
+    "observedFieldsFromDocument": ["title", "sold_out", "product_information", "ratings_link"],
+    "missingJsonContracts": ["listing_price_and_currency", "full_description", "primary_and_secondary_images", "options_and_variant_prices"],
+    "independentAnonymousReplay": {
+      "path": "/sch/ajax/autocomplete",
+      "status": 403,
+      "mime": "text/html",
+      "purpose": "header bootstrap; no product fields"
+    },
+    "status": "no_product_detail_xhr_contract_verified"
+  },
+  "expandedReviewDiscovery": {
+    "artifacts": [
+      "/home/worker/inpock-api/retail-discovery/ebay/reviews-20261005/browser-review-summary.json",
+      "/home/worker/inpock-api/retail-discovery/ebay/reviews-20261005/review-source-check.json",
+      "/home/worker/inpock-api/retail-discovery/ebay/reviews-20261005/node-replay.json"
+    ],
+    "observedProductId": "25056255340",
+    "listingIdFieldObservedSeparately": true,
+    "reviewRouteTemplate": "/urw/{product-slug}/product-reviews/{ePID}?pgn={page}",
+    "browserDocumentStatus": 200,
+    "browserPageTwoReviewCards": 5,
+    "reviewFieldsInDocument": ["rating", "author", "date", "title", "text", "purchase_or_condition_attributes"],
+    "visiblePageLinks": [1, 2, 3, 4, 5, 6, 7],
+    "reviewPhotoNodesOnSampledProduct": 0,
+    "dedicatedReviewDataXhrObserved": false,
+    "useracquisitionXhrHtmlContainsReviewMarkers": false,
+    "independentAnonymousDocumentReplay": {
+      "httpStatus": 200,
+      "mime": "text/html",
+      "reviewFieldsInNonScriptHtml": true
+    },
+    "status": "public_reviews_visible_in_document_only; no_review_data_xhr_contract_verified"
+  },
+  "officialBrowseApi": {
+    "documentation": "https://developer.ebay.com/develop/api/buy",
+    "requiresApplicationOAuthToken": true,
+    "includedInAnonymousScope": false
+  },
+  "scopeBoundary": "No SSR HTML extraction, login, account or transaction mutation in the runtime client.",
+  "secretsPersistedInEvidence": false
+}

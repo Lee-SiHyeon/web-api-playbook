@@ -1,0 +1,84 @@
+{
+  "schema": "commerce-api-live-boundary-v1",
+  "service": "ebay-partner",
+  "checkedAt": "2026-10-04T20:06:44Z",
+  "codeReviewedAt": "2026-10-05T02:40:43Z",
+  "credentialsUsed": false,
+  "secretsPersistedInEvidence": false,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://developer.ebay.com/api-docs/buy/static/api-browse.html",
+    "currentDocsReviewed": [
+      "https://developer.ebay.com/api-docs/buy/browse/resources/item_summary/methods/search",
+      "https://developer.ebay.com/api-docs/buy/browse/resources/item/methods/getItem",
+      "https://edp.ebay.com/api-docs/buy/browse/resources/item/methods/getItem",
+      "https://developer.ebay.com/api-docs/buy/browse/resources/item/methods/getItemsByItemGroup",
+      "https://developer.ebay.com/api-docs/buy/ref-marketplace-supported.html",
+      "https://developer.ebay.com/api-docs/buy/static/buy-requirements.html",
+      "https://developer.ebay.com/develop/guides/sell/authorization"
+    ],
+    "uiXHRObserved": false
+  },
+  "implemented": {
+    "exports": ["acquireEbayAppToken", "createEbayBrowseClient"],
+    "searchPath": "/buy/browse/v1/item_summary/search",
+    "detailPath": "/buy/browse/v1/item/{item_id}",
+    "detailQuery": "fieldgroups=PRODUCT",
+    "itemGroupPath": "/buy/browse/v1/item/get_items_by_item_group",
+    "marketplaceCount": 16,
+    "priceType": "decimal string plus ISO currency, no floating point conversion",
+    "shipping": "separate from item price",
+    "affiliate": "10-digit caller-supplied campaign only; returned affiliate URL must echo the matching campid",
+    "tokenPersistence": "caller receives token in process memory; receipts omit token and client secret",
+    "detailFieldsNormalized": ["listing description", "product description", "listing and product images", "localized aspects", "category ID path", "GTIN", "MPN", "ePID", "variation group ID", "product review rating summary"],
+    "variationGroup": "separate per-variant item records and exact shared-description itemId mapping"
+  },
+  "liveBoundary": {
+    "businessReplay": false,
+    "tokenAcquisitionAttempted": false,
+    "reason": "No eBay Developer Program client credentials or production Browse API token were supplied.",
+    "anonymousControl": {
+      "method": "GET",
+      "origin": "https://api.ebay.com",
+      "path": "/buy/browse/v1/item_summary/search",
+      "queryFields": ["q", "limit", "offset"],
+      "marketplaceId": "EBAY_US",
+      "authorizationSent": false,
+      "cookieSent": false,
+      "browserUsed": false,
+      "httpStatus": 403,
+      "mime": "text/html",
+      "responseBytes": 566,
+      "interpretation": "Anonymous control only. HTML response cause is unknown; this does not prove the application-token or production-entitlement behavior and contains no product result."
+    },
+    "productionAccess": {
+      "accountApprovalState": "unknown",
+      "officialRequirement": "eBay states Buy API production use requires partner application, approval and contracts; sandbox access is available to developer accounts.",
+      "sourceURL": "https://developer.ebay.com/api-docs/buy/static/buy-requirements.html"
+    },
+    "affiliateEnrollment": "unknown",
+    "affiliateCampaignIdAvailable": false
+  },
+  "localVerification": {
+    "command": "node --test tests/commerce-ebay-browse.test.mjs",
+    "checkedAt": "2026-10-05T02:40:43Z",
+    "testsPassed": 15,
+    "testsFailed": 0,
+    "liveCredentialsUsed": false,
+    "networkUsedByTests": false
+  },
+  "remainingGaps": [
+    "Credentialed live OAuth and product-search replay",
+    "Production Buy API entitlement",
+    "Full Taxonomy category traversal",
+    "Full product review bodies, photos and review API pagination",
+    "Destination-specific shipping estimate",
+    "EPN enrollment and campaign readback",
+    "Price or availability change-feed synchronization",
+    "Orders, checkout, purchases, inventory writes, and fulfillment"
+  ],
+  "implementation": {
+    "lib/commerce/ebay-browse.mjs": "22367e4df286b52217108ff7f3288db53597c91724f349bfed07b89ace120c06",
+    "tests/commerce-ebay-browse.test.mjs": "2bea454a19853c433469705d0f2c68856c07e769846b26df2095dadc584d427a"
+  }
+}

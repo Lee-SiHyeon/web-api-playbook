@@ -1,0 +1,101 @@
+{
+  "schema": "commerce-rakuten-advertising-contract-v1",
+  "checkedAt": "2026-10-05",
+  "provider": "rakuten-advertising",
+  "businessRole": "publisher affiliate product search",
+  "identity": {
+    "productId": "retailer advertiser MID + product link ID",
+    "compositeEncoding": "productId = <mid>:<linkid>; source.compositeProductKey = JSON.stringify([mid, linkid])",
+    "variantId": "SKU when the response includes a non-empty sku",
+    "advertiserFilter": "The caller may supply an advertiser MID after confirming it is a relevant publisher partner. No advertiser MID is hardcoded."
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://api.linksynergy.com",
+    "path": "/productsearch/1.0",
+    "authentication": "Authorization: Bearer <publisher API access token>",
+    "interactiveLoginInClient": false,
+    "tokenInput": "Caller supplies the publisher token to the client in process memory. This module does not create an application, acquire a token, persist credentials, send cookies or generate tracking links.",
+    "tokenLifecycle": "The Developer Portal guide says a publisher application is created before generating an API access token; generated tokens remain valid for 60 minutes. No app or token was created in this task.",
+    "responseMime": "application/xml",
+    "documentedQueryFields": {
+      "keyword": "Search all terms",
+      "exact": "Search an exact phrase",
+      "one": "Search for at least one term",
+      "none": "Exclude products with terms",
+      "cat": "Primary or secondary category",
+      "language": "Language filter; currently documented values include en_US, fr_FR, de_DE and pt_BR",
+      "max": "Items per page; maximum 100",
+      "pagenumber": "One-based result page",
+      "mid": "Advertiser MID",
+      "sort": "retailprice, productname, categoryname or mid",
+      "sorttype": "asc or dsc"
+    },
+    "unsupportedSearchCharacters": "& = ? { } backslash ( ) [ ] - ; ~ | $ ! > < * %",
+    "queryTermRule": "At most one of keyword, exact, one or none per request. Product Search supports category, language, page size, page, advertiser MID and one sort field."
+  },
+  "response": {
+    "root": "result",
+    "paginationFields": ["TotalMatches", "TotalPages", "PageNumber"],
+    "productElement": "item",
+    "itemFields": {
+      "mid": "Advertiser MID",
+      "merchantname": "Advertiser name",
+      "linkid": "Product link ID",
+      "sku": "Merchant product SKU",
+      "productname": "Product name",
+      "category.primary": "Primary category",
+      "category.secondary": "Secondary category",
+      "price[@currency]": "Reported retail price and its currency",
+      "saleprice[@currency]": "Reported sale price and its currency, returned separately",
+      "upccode": "UPC",
+      "description.short": "Short description",
+      "description.long": "Long description",
+      "keywords": "Advertiser-provided keywords",
+      "linkurl": "Publisher product/tracking URL; kept distinct from canonical merchant URL",
+      "imageurl": "Product image URL"
+    },
+    "fieldsNotExposedByThisContract": ["On-hand stock quantity", "Sale effective dates", "Commission rate", "Canonical merchant URL"],
+    "priceSemantics": "The client preserves price and saleprice as separate reported values. It does not infer whether a sale is currently active or calculate a landed price.",
+    "inventorySemantics": "Availability is unknown; Product Search does not document an on-hand stock field."
+  },
+  "paginationAndRateLimits": {
+    "callsPerMinute": 100,
+    "maxItemsPerPage": 100,
+    "officialMaximumConflict": {
+      "apiReference": 1000,
+      "publisherHelpArticle": 5000,
+      "handling": "The client conservatively caps full collection at 1000 results and marks any larger TotalMatches as potentially truncated. It does not claim the result set is exhausted."
+    }
+  },
+  "sephora": {
+    "region": "US",
+    "programEvidence": "Sephora's US affiliate page directs publishers to Rakuten Advertising.",
+    "officialProgramPage": "https://www.sephora.com/beauty/affiliates/",
+    "separateCreatorProgram": "My Sephora Storefront is also listed on the same page as a separate creator storefront program.",
+    "advertiserMid": null,
+    "midPolicy": "No MID is guessed or embedded. The caller must supply the MID associated with their applicable, approved advertiser partnership.",
+    "commissionRate": null,
+    "commissionRatePolicy": "No public percentage is inferred. Product Search does not return commission rates."
+  },
+  "entitlement": {
+    "publisherAccountAndAccessTokenRequired": true,
+    "partneredAdvertiserData": true,
+    "advertiserApplicationSubmitted": false,
+    "applicationOrApprovalPerformed": false,
+    "sephoraPartnershipVerifiedForCurrentPublisher": false,
+    "note": "The official API searches partner-advertiser product data. The supplied MID filter narrows a catalog query; it is not an advertiser application."
+  },
+  "primarySources": [
+    "https://developers.rakutenadvertising.com/guides/product_search",
+    "https://developers.rakutenadvertising.com/guides/product_search/reference",
+    "https://pubhelp.rakutenadvertising.com/hc/en-us/articles/5949953174029-Product-Search-API",
+    "https://developers.rakutenadvertising.com/guides/try_out_apis",
+    "https://www.sephora.com/beauty/affiliates/"
+  ],
+  "limits": [
+    "A local contract test is not an authenticated catalog replay.",
+    "A successful publisher token alone would not establish the current publisher's Sephora partnership or advertiser MID.",
+    "No account signup, app creation, advertiser application or link-generation write is implemented here."
+  ]
+}

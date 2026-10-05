@@ -1,0 +1,103 @@
+{
+  "schema": "aliexpress-commerce-api-verification-v1",
+  "service": "aliexpress-partner",
+  "checkedAt": "2026-10-05T02:26:18.552Z",
+  "secretsPersistedInEvidence": false,
+  "states": {
+    "official_contract_documented": true,
+    "client_implemented": true,
+    "affiliate_business_live_replay": false,
+    "dropship_business_live_replay": false,
+    "actual_storefront_xhr_captured": false
+  },
+  "implementation": {
+    "module": "lib/commerce/aliexpress-affiliate.mjs",
+    "moduleSha256": "d412a9188e33ff87eda615c709c49aab57c604c4a69e62ac3ea3b0d7718b27ee",
+    "exports": ["createAliExpressAffiliateClient"],
+    "pureHttp": true,
+    "browserUsed": false,
+    "allowedOrigin": "https://eco.taobao.com",
+    "path": "/router/rest",
+    "writesImplemented": false,
+    "redirectsFollowed": false,
+    "automaticRetries": false,
+    "appKeyOrSecretPersisted": false,
+    "userSessionSent": false,
+    "returnedPromotionLink": false,
+    "returnedLinkOwnershipClaimed": false,
+    "pricePrecision": "Decimal strings kept as decimal strings; no IEEE-754 conversion for output amounts."
+  },
+  "credentialFreeControl": {
+    "checkedAt": "2026-10-04T19:46:29.042Z",
+    "method": "POST",
+    "origin": "https://eco.taobao.com",
+    "path": "/router/rest",
+    "request": "One read-only POST with method=aliexpress.affiliate.product.query and format=json; no app_key, sign, cookies, authorization header, or user session.",
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 176,
+    "jsonParsed": true,
+    "applicationErrorCode": 32,
+    "productResultPresent": false,
+    "businessSuccess": false,
+    "credentialsUsed": false,
+    "userSessionSent": false,
+    "browserUsed": false,
+    "secretsPersistedInEvidence": false,
+    "interpretation": "HTTP 200 was only a platform-level error envelope. No product data was returned and this is not a catalog live pass."
+  },
+  "localValidation": {
+    "checkedAt": "2026-10-05T02:26:18.552Z",
+    "command": "node --check lib/commerce/aliexpress-affiliate.mjs && node --test tests/commerce-aliexpress-affiliate.test.mjs",
+    "result": "passed",
+    "testsPassed": 8,
+    "testsFailed": 0,
+    "testFileSha256": "2baad4f8883b48809e8e2fb352a5d18ffb4f63e08f9dd882588d0e9ee9e1cf98",
+    "contractFileSha256": "dd9352ae1d41abebbc859387576acb5833d7003bf14fed3990c2b8c28673ee42",
+    "checklistSha256": "cd051bb76a33d816f25abb42884f0d67134cf9f6dabf570dbdb8d75b34665191",
+    "networkMocksOnly": true,
+    "processMemoryCredentialsOnly": true,
+    "productMetadataTests": "passed"
+  },
+  "localChecklistAudit": {
+    "checkedAt": "2026-10-05T02:26:18.552Z",
+    "service": "aliexpress-partner",
+    "totalCapabilities": 11,
+    "recordedLive": 0,
+    "requiredGaps": [
+      "affiliate.search_products",
+      "affiliate.product_detail",
+      "affiliate.social_catalog_search",
+      "affiliate.product_media_and_ratings",
+      "dropshipping.product_detail",
+      "dropshipping.sku_price_inventory",
+      "partner.app_credentials"
+    ],
+    "strictPassed": false,
+    "liveEvidenceAdded": false
+  },
+  "documentedFieldAvailability": {
+    "images": "available: primary plus product_small_image_urls[]",
+    "productVideo": "available when a valid source URL is returned",
+    "sellerAndCategory": "available: shop ID/URL, platform product type, and category IDs/names",
+    "priceVariants": "available: sale/list/app and target-currency values remain separate",
+    "positiveReviewRate": "available through evaluate_rate as a percent string; not average stars or a review count",
+    "socialRating": "available through comment_score with scale unknown and through semantic recent-comment metadata",
+    "descriptionFeaturesOptionsSkuStock": "unavailable on Affiliate query/detail and Social item search",
+    "reviewBodiesAndReviewPhotos": "unavailable; product image galleries are not customer review photos",
+    "dropshipSkuInventory": "separate authorization-gated operations remain unimplemented"
+  },
+  "liveBlockers": [
+    "Affiliate methods require a registered AliExpress/TOP app_key and matching app_secret, even though their official references mark user Session authorization as not required. No usable app credentials were available in the authorized task input.",
+    "Dropship aliexpress.ds.product.get requires a user-authorized dropshipper Session.",
+    "Dropship aliexpress.offer.ds.product.simplequery requires authorization and is documented for selected buyers only."
+  ],
+  "sourceReferences": [
+    "https://developer.alibaba.com/docs/api.htm?apiId=45803",
+    "https://developer.alibaba.com/docs/api.htm?apiId=48595",
+    "https://developer.alibaba.com/docs/api.htm?apiId=47556",
+    "https://developer.alibaba.com/docs/doc.htm?articleId=101617&docType=1&treeId=153",
+    "https://developer.alibaba.com/docs/api.htm?apiId=60452",
+    "https://developer.alibaba.com/docs/api.htm?apiId=40657"
+  ]
+}

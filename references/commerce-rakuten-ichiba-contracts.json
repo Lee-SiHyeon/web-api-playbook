@@ -1,0 +1,180 @@
+{
+  "schema": "web-api-rakuten-ichiba-contracts-v1",
+  "service": "rakuten-ichiba",
+  "reviewedAt": "2026-10-05",
+  "programBoundary": {
+    "service": "Rakuten Ichiba / Rakuten Affiliate (Japan)",
+    "not": "Rakuten Advertising global publisher network",
+    "purpose": "Read Rakuten Japan marketplace listings and optionally request an Ichiba affiliate URL using a caller-owned Rakuten Affiliate ID."
+  },
+  "authentication": {
+    "type": "Rakuten Web Service registered application",
+    "applicationId": {
+      "required": true,
+      "transport": "query parameter applicationId",
+      "source": "caller supplied registered app credential"
+    },
+    "accessKey": {
+      "required": true,
+      "transport": "accessKey HTTP header preferred; official documentation also permits query parameter",
+      "clientBehavior": "sent only as the accessKey header; never appended to a URL or receipt"
+    },
+    "affiliateId": {
+      "required": false,
+      "transport": "query parameter affiliateId",
+      "source": "explicit caller supplied Rakuten Affiliate ID only",
+      "result": "affiliateUrl may be present only when this value is supplied"
+    },
+    "applicationRegistration": {
+      "requiresRakutenAccountLogin": true,
+      "perAppCredentials": "Application ID and access key are issued separately for each app and must be paired.",
+      "maximumAppsPerDeveloper": 5,
+      "affiliateIdCardinality": "The official usage guide says one Affiliate ID is issued per developer and may be used across registered apps."
+    },
+    "sources": [
+      "https://webservice.rakuten.co.jp/guide",
+      "https://webservice.rakuten.co.jp/documentation/ichiba-item-search"
+    ]
+  },
+  "itemSearch": {
+    "method": "GET",
+    "origin": "https://openapi.rakuten.co.jp",
+    "path": "/ichibams/api/IchibaItem/Search/20260701",
+    "currentVersionAtReview": "2026-07-01",
+    "previousDocumentedVersion": "2026-04-01",
+    "versionChangeBoundary": "The current July version and previous April version both document required applicationId plus accessKey. The client pins the current versioned path and does not fall back to a legacy route.",
+    "requiredSelector": "At least one of keyword, shopCode, itemCode, or genreId.",
+    "selectors": {
+      "keyword": "UTF-8 text, max 128 single-byte characters; multiple terms default to AND.",
+      "shopCode": "The shop path code from Rakuten shop URLs.",
+      "itemCode": "Marketplace item key in shopCode:itemIdentifier form; usable for exact item detail lookup through this same Search API.",
+      "genreId": "Rakuten Ichiba genre identifier."
+    },
+    "filters": {
+      "minPrice": "Positive integer JPY; less than 999999999.",
+      "maxPrice": "Positive integer JPY; less than 999999999 and greater than minPrice.",
+      "availability": "0 all listings, 1 available listings only.",
+      "imageFlag": "0 all listings, 1 image listings only."
+    },
+    "pagination": {
+      "hits": "1 through 30",
+      "page": "1 through 100",
+      "pageCount": "API reports up to 100 pages"
+    },
+    "sort": [
+      "standard", "+affiliateRate", "-affiliateRate", "+reviewCount", "-reviewCount",
+      "+reviewAverage", "-reviewAverage", "+itemPrice", "-itemPrice",
+      "+updateTimestamp", "-updateTimestamp"
+    ],
+    "response": {
+      "format": "json",
+      "formatVersion": 2,
+      "outputFields": [
+        "itemName", "catchcopy", "itemCaption", "itemCode", "shopCode", "shopName", "shopUrl",
+        "shopAffiliateUrl", "smallImageUrls", "mediumImageUrls", "reviewCount", "reviewAverage", "itemPrice",
+        "itemPriceBaseField", "itemPriceMin1", "itemPriceMax1", "itemPriceMin2",
+        "itemPriceMax2", "itemPriceMin3", "itemPriceMax3", "itemUrl", "affiliateUrl",
+        "genreId", "availability", "taxFlag", "postageFlag", "updateTimestamp", "affiliateRate"
+      ],
+      "price": {
+        "sourceField": "itemPrice",
+        "basis": "listing-level API itemPrice; it is not asserted to be a selected SKU/variant price",
+        "normalizedAmount": "decimal string with no fraction (Rakuten Ichiba JPY amount)",
+        "normalizedCurrency": "JPY",
+        "priceBasis": "Preserved separately from itemPrice as {field,meaning}: itemPriceBaseField may be item_price_min1 (all-item minimum basis), item_price_min2 (searchable-item minimum basis), item_price_min3 (purchasable-item minimum basis), or null/not specified.",
+        "ranges": {
+          "all": ["itemPriceMin1", "itemPriceMax1"],
+          "searchable": ["itemPriceMin2", "itemPriceMax2"],
+          "purchasable": ["itemPriceMin3", "itemPriceMax3"]
+        },
+        "rateMetadata": "affiliateRate is preserved as an item-specific API percentage when returned; the client has no fixed commission assumption."
+      },
+      "identity": "Each result is checked so the shopCode prefix of itemCode matches the returned shopCode. Detail lookup additionally matches the requested itemCode exactly.",
+      "canonicalUrl": "A clean HTTPS Rakuten merchant URL is returned only when itemUrl itself or a static pc/m target in the API-returned itemUrl/affiliateUrl has a recognized Rakuten Ichiba item host, a path beginning with the row's shopCode, and an exact path segment matching the itemCode suffix. This is a literal match; the adapter does not assume a transformed URL slug. Query and fragment are removed. If the URL does not expose the exact item key, canonicalUrl is null and targetVerified is false while affiliateUrl remains separate.",
+      "affiliateTargetHandling": "affiliateId may make itemUrl equal affiliateUrl. When a static pc/m target is present, it is inspected without fetching/following the affiliate URL. Redirect-only or unrecognized targets remain unverified; no URL is synthesized.",
+      "affiliateTargetFormatSource": "https://webservice.rakuten.co.jp/documentation/ichiba-product-search",
+      "sourceNote": "The current Item Search page documents the itemUrl/affiliateUrl relation; the current Rakuten Product Search API documents the affiliate link shape with pc and m targets. This implementation only parses target parameters actually present in Item Search API response URLs; it does not construct an affiliate URL from that other API's format."
+    },
+    "source": "https://webservice.rakuten.co.jp/documentation/ichiba-item-search"
+  },
+  "genreSearch": {
+    "method": "GET",
+    "origin": "https://openapi.rakuten.co.jp",
+    "path": "/ichibagt/api/IchibaGenre/Search/20260701",
+    "requiredParameters": ["applicationId", "genreId"],
+    "authentication": "Same required accessKey header as the item-search API.",
+    "schemaFields": ["ancestors", "genre", "siblings", "children", "attributes", "genreId", "nameJa", "level", "itemCount", "attributeId"],
+    "source": "https://webservice.rakuten.co.jp/documentation/ichiba-genre-search"
+  },
+  "publicReviewXhr": {
+    "method": "POST",
+    "origin": "https://web-gateway.rakuten.co.jp",
+    "path": "/review/itemshopreviewlist/get/v1",
+    "observedPageURL": "https://review.rakuten.co.jp/item/1/{shopId}_{itemId}/1.1/",
+    "contentType": "application/json; charset=UTF-8",
+    "successHttpStatus": 207,
+    "successEnvelope": {
+      "status": "SUCCESS",
+      "component": "body.itemReviewList.data",
+      "fields": ["reviews", "count", "hasNextPage"]
+    },
+    "pagination": { "page": "string, 1-based", "hits": 30, "hasNextPage": "boolean from the response" },
+    "requestBody": {
+      "common": { "params": { "device": "pc" }, "include": ["itemReviewList"] },
+      "features.itemReviewList.params": ["shopId", "itemId", "sort", "page", "hits", "filter"]
+    },
+    "filters": {
+      "rating": "Observed as an empty string for no filter; the user-visible rating filter is represented in the same request field.",
+      "mediaOnly": "Observed on the public UI as the string \"true\" when the user selects images/videos; \"false\" otherwise.",
+      "ageRange": "Observed as an empty string when unfiltered.",
+      "sex": "Observed as an empty string when unfiltered."
+    },
+    "reviewFields": {
+      "observed": ["revSubkey", "rating", "title", "body", "postDate", "orderDate", "helpfulCount", "media"],
+      "normalizedFields": ["reviewId", "identityKind", "rating", "title", "body", "postDate", "orderDate", "helpfulCount", "media"],
+      "nativeIdentity": "revSubkey is a 10-digit string in the live sample and is the review subkey component used by current first-party review route patterns. It was unique within each tested page and across tested page 1 and page 2. The adapter maps revSubkey to reviewId with identityKind=native_review_id and reviewIdSource=revSubkey, while omitting encryptedRevKey/key. If revSubkey is absent, it returns identityKind=content_fingerprint and marks exact deduplication/filter completeness false because identical text can belong to distinct reviewers.",
+      "sensitiveFieldsOmitted": ["encryptedRevKey", "key", "nickname", "sex", "ageRange", "userBanzuke"],
+      "media": { "rowField": "media", "fields": ["thumbnail", "type"], "normalizedAs": ["thumbnailUrl", "type", "mediaKind"], "thumbnailHostObserved": "image.space.rakuten.co.jp", "typeMeaning": { "1": "image, observed on returned media-only rows", "2": "video, as mapped by the current first-party review UI bundle", "other": "unknown; do not count as an image" } }
+    },
+    "frontendKeyBootstrap": {
+      "userLoginRequired": false,
+      "userCookiesRequiredForIndependentReplay": false,
+      "header": "authkey",
+      "source": "Fetch the current review page, read its current pc-{version}.bundle.js under r.r10s.jp, and extract REVIEW_FEATURES.public.endpoints.bff.itemShopReviewList.authkey only when that object is bound to the exact observed review endpoint.",
+      "storage": "Value stays in client-instance memory only; it is not read from environment, saved, included in receipts, or logged.",
+      "classification": "Public first-party frontend API key, distinct from a Rakuten account credential or Rakuten Web Service application key."
+    },
+    "provenance": [
+      "https://review.rakuten.co.jp/item/1/319501_10000000/1.1/",
+      "https://r.r10s.jp/com/review/front/assets/app/pages/review/javascript/pc-{current-version}.bundle.js"
+    ]
+  },
+  "publicReviewTargetBootstrap": {
+    "method": "GET",
+    "origin": "https://item.rakuten.co.jp",
+    "examplePath": "/kinujo/001/",
+    "classification": "Public HTML document used only to resolve its embedded review URL and matching hidden shop_bid/item_id. This page read is not claimed as a product detail API or used to populate product-description, option, or price fields.",
+    "exampleReviewTarget": {
+      "reviewUrl": "https://review.rakuten.co.jp/item/1/319501_10000000/1.1/",
+      "shopId": "319501",
+      "itemId": "10000000"
+    }
+  },
+  "clientImplementation": {
+    "module": "lib/commerce/rakuten-ichiba.mjs",
+    "factory": "createRakutenIchibaClient({ applicationId, accessKey, affiliateId?, fetchImpl?, now? })",
+    "operations": ["searchItems", "getItem", "getGenre"],
+    "delivery": "Pure direct HTTPS GET; manual redirects; cookies omitted; credentials injected in process memory."
+  },
+  "publicClientImplementation": {
+    "module": "lib/commerce/rakuten-ichiba-public.mjs",
+    "factory": "createRakutenIchibaPublicClient({ fetchImpl?, now? })",
+    "operations": ["resolveReviewTarget", "getReviews"],
+    "delivery": "Pure direct Node HTTPS reads; current public bundle key bootstrapped in memory; no browser, account credentials, affiliate ID, or cookies."
+  },
+  "termsAndAttribution": {
+    "brandingRequired": true,
+    "note": "Rakuten Web Services says apps using its API must display one of the provided branding/credit badges using its HTML snippet unchanged.",
+    "source": "https://webservice.rakuten.co.jp/guide/credit"
+  }
+}

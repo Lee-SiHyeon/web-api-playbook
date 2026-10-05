@@ -1,0 +1,39 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "aliexpress",
+  "capabilityId": "catalog.product_seo",
+  "checkedAt": "2026-10-05T03:15:07.502Z",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "request": {
+    "method": "GET",
+    "origin": "https://ko.aliexpress.com",
+    "path": "/aeglodetailweb/api/seo/seodata",
+    "checkedAt": "2026-10-05T03:15:07.502Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 5674,
+    "schemaVerified": true,
+    "productIdMatched": true
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://ko.aliexpress.com/item/1005011667478296.html"
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/retail.mjs",
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/retail.mjs": "1860b6a871e5e9b80b5bd2de7cf5176815a94908e2d2ad8305058b3c8299b496",
+    "lib/retail/aliexpress.mjs": "2bf83ac31cded20fafb1877b479cd685407af6b16145fd5c342fda239d1349f1",
+    "lib/scoped-session.mjs": "b63014bd3bc88221aa108248c4f3d538216b2ca330b774c8d423db423f3d2dda"
+  }
+}

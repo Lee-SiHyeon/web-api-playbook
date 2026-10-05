@@ -1,0 +1,60 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify-storefronts",
+  "capabilityId": "allbirds.catalog.predictive_search",
+  "checkedAt": "2026-10-05T02:39:05.045Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "productCount": 5,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://shopify.dev/docs/api/ajax/reference/predictive-search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/search/suggest.json",
+    "checkedAt": "2026-10-05T02:39:05.045Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "queryFields": [
+      "q",
+      "resources[type]",
+      "resources[limit]",
+      "resources[options][unavailable_products]"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 9565,
+    "responseSha256": "fc5d4177ac91853035e37c73c532e7da2fa83a72fff6044ba58dc1587b4bbb6e",
+    "schemaVerified": true,
+    "resultArrayVerified": true,
+    "productCount": 5
+  },
+  "currencyRequest": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/cart.js",
+    "checkedAt": "2026-10-05T02:39:05.453Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 303,
+    "currency": "USD",
+    "itemCount": 0
+  },
+  "implementation": {
+    "lib/commerce/shopify-storefronts.mjs": "e50784065f0807c149e053f5bae32efbcd2ad3ee45d95f229318fcaf93b0ed2a",
+    "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb"
+  },
+  "queryUsedForReplay": "runner"
+}

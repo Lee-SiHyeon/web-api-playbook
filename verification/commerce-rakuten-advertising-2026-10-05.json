@@ -1,0 +1,73 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "service": "rakuten-advertising",
+  "checkedAt": "2026-10-04T21:23:15.996Z",
+  "classification": "source_candidate",
+  "secretsPersistedInEvidence": false,
+  "contractReviewed": true,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://developers.rakutenadvertising.com/guides/product_search"
+  },
+  "contracts": [
+    {
+      "method": "GET",
+      "origin": "https://api.linksynergy.com",
+      "path": "/productsearch/1.0",
+      "auth": "Authorization: Bearer <publisher API access token>",
+      "mime": "application/xml",
+      "provenance": "first_party_documented_api",
+      "pagination": ["max <= 100", "pagenumber", "TotalMatches", "TotalPages", "PageNumber"],
+      "priceFields": ["price[@currency]", "saleprice[@currency]"],
+      "identity": ["mid", "linkid", "sku"]
+    }
+  ],
+  "anonymousControl": {
+    "method": "GET",
+    "origin": "https://api.linksynergy.com",
+    "path": "/productsearch/1.0",
+    "httpStatus": 401,
+    "mime": "application/json",
+    "responseBytes": 77,
+    "responseSha256": "06e2f6cbcc0deb0567f1042be112eb0d3dfc9eaa1a8d9acf3e8a3ae380e806c2",
+    "queryFields": ["keyword", "max"],
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "classification": "authentication_control_only_not_catalog_evidence"
+  },
+  "states": {
+    "documented_contract": "reviewed",
+    "client": "implemented",
+    "local_tests": "passed",
+    "publisher_token_supplied": false,
+    "authenticated_live_catalog_replay": false,
+    "live_price_readback": false,
+    "sephora_advertiser_mid_verified": false,
+    "advertiser_application_submitted": false,
+    "affiliate_link_created": false
+  },
+  "localValidation": {
+    "testFile": "tests/commerce-rakuten-advertising.test.mjs",
+    "testsPassed": 10,
+    "testsFailed": 0,
+    "networkUsed": false,
+    "credentialsUsed": false,
+    "mutationsSent": false,
+    "implementationSha256": "cff815590b94db2380a63dcf9f3a6e2d5c5101cd49aad730fb5d8b22fbe897a4",
+    "testFileSha256": "387a4d4f5f623cba1977919be6208d8b14ebef589fc34de53688beb9af6156f1"
+  },
+  "documentationConflict": {
+    "apiReferenceMaximumResults": 1000,
+    "publisherHelpMaximumResults": 5000,
+    "implementationPolicy": "Cap collection at 1000 and preserve a truncation state when TotalMatches is larger."
+  },
+  "merchantEvidence": {
+    "sephoraUsAffiliateProgramPage": "https://www.sephora.com/beauty/affiliates/",
+    "rakutenProgramIdentifiedByMerchant": true,
+    "specificAdvertiserMid": null,
+    "publisherPartnershipVerified": false,
+    "commissionRateVerified": false
+  }
+}

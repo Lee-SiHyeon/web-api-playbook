@@ -1,0 +1,157 @@
+{
+  "schema": "retail-public-xhr-contracts-v1",
+  "service": "aliexpress",
+  "observedAt": "2026-10-04T19:07:08.198Z",
+  "scope": "Anonymous desktop public catalog reads; no account, cart, order, or affiliate mutation",
+  "discovery": {
+    "browser": "Playwright Chromium, anonymous fresh context, discovery only",
+    "pages": [
+      { "kind": "home", "origin": "https://www.aliexpress.com", "status": 200, "redirectedOrigin": "https://ko.aliexpress.com" },
+      { "kind": "search", "origin": "https://www.aliexpress.com", "path": "/w/wholesale-usb-cable.html", "status": 200, "visibleResults": true },
+      { "kind": "item", "origin": "https://ko.aliexpress.com", "path": "/item/1005011947482958.html", "status": 200, "visibleTitle": true, "visiblePrice": true }
+    ],
+    "searchResultXhrObserved": false,
+    "priceXhrObserved": false,
+    "categoryXhrObserved": false,
+    "paginationXhrObserved": false,
+    "notes": "The visible search result and price do not establish an XHR contract. First-party recommendation MTOP POSTs were observed but require a signed request and were not independently replayed.",
+    "followUpObservedAt": "2026-10-05T02:19:40Z",
+    "currentSearchDocument": {
+      "origin": "https://www.aliexpress.com",
+      "path": "/w/wholesale-usb-cable.html",
+      "method": "GET",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 848237,
+      "uniqueProductLinks": 60,
+      "productIdsUsedForDetailProbe": ["1005011667478296", "1005006510589628", "1005009561948552"],
+      "apiResult": false,
+      "meaning": "Public HTML discovery only; not a search XHR replay"
+    },
+    "detailPageFollowUp": {
+      "browser": "Playwright Chromium, fresh anonymous context, no supplied cookies, standard browser defaults",
+      "pageStatus": 200,
+      "pageOrigin": "https://ko.aliexpress.com",
+      "pagePath": "/item/{productId}.html",
+      "pageTitle": "empty",
+      "pageBusinessDataRendered": false,
+      "firstPartyApiRequestObserved": true,
+      "reviewRequestObserved": false,
+      "captchaChallenge": true,
+      "challengeFramePath": "/h5/mtop.aliexpress.pdp.pc.query/1.0/_____tmd_____/punish",
+      "screenshot": "verification/retail-blockers/aliexpress-detail-2026-10-05.png",
+      "screenshotSha256": "d595309619f55b5ae7eecfdd0a603f5a7e7b2bb4021d7cd7452779dc76cd7355"
+    }
+  },
+  "contracts": [
+    {
+      "operation": "productSeo",
+      "evidenceLevel": "observed_xhr_and_independent_anonymous_http_replay",
+      "method": "GET",
+      "origin": "https://ko.aliexpress.com",
+      "path": "/aeglodetailweb/api/seo/seodata",
+      "resourceType": "xhr",
+      "query": {
+        "channel": "detail",
+        "device": "pc",
+        "productId": "numeric public item ID",
+        "subject": "public visible listing title in observed browser XHR; optional in verified independent HTTP replay"
+      },
+      "requestHeaders": { "referer": "https://ko.aliexpress.com/item/{productId}.html" },
+      "encoding": "URL query string",
+      "response": {
+        "status": 200,
+        "mime": "application/json",
+        "applicationChecks": ["code=200", "success=true", "body.title nonempty", "body.description string", "body.canonical matches item ID"],
+        "sampleResponseBytes": 6338,
+        "observedResponseSha256": "6d8e8813e7298c0bf42ca1bbd81803b318d64f817c8f851131eaa0ee85cba12f"
+      },
+      "semantics": "SEO metadata only; price, currency, stock, variants, and search result ranking are not part of this response",
+      "independentReplay": {
+        "cookiesSent": false,
+        "browserUsedForRequest": false,
+        "status": 200,
+        "applicationSchemaPassed": true,
+        "withoutSubject": "200 JSON with the same server title and canonical product ID",
+        "withoutReferer": "302 to /p/error/404.html"
+      },
+      "counterexamples": {
+        "sameIdChangedSubject": "200 JSON with the same server product title and canonical URL; the supplied unrelated title was not echoed",
+        "nonexistentNumericId": "200 JSON, 311 bytes, with no product title or matching canonical URL; client schema rejects it"
+      }
+    },
+    {
+      "operation": "productDetail",
+      "evidenceLevel": "first_party_js_contract_and_browser_request_observed_but_challenged_before_business_data",
+      "method": "GET",
+      "origin": "https://acs.aliexpress.com",
+      "path": "/h5/mtop.aliexpress.pdp.pc.query/1.0/",
+      "resourceType": "script",
+      "encoding": "MTop JSONP query string",
+      "firstPartySource": {
+        "origin": "https://assets.aliexpress-media.com",
+        "path": "/g/ae-fe/pdp-pc/0.2.140/js/index.js",
+        "sha256": "0a355a12e177ca42ef4fb88e859e8c1c69889213d4f8f0a35ac578db3019e164"
+      },
+      "request": {
+        "api": "mtop.aliexpress.pdp.pc.query",
+        "version": "1.0",
+        "method": "GET",
+        "type": "originaljsonp",
+        "dataKeys": ["productId", "_lang", "_currency", "country", "province", "city", "channel", "pdp_ext_f", "pdpNPI", "sourceType", "clientType", "ext"],
+        "clientType": "pc"
+      },
+      "observedOutcome": {
+        "businessResponseReceived": false,
+        "challengeObserved": true,
+        "challengePath": "/h5/mtop.aliexpress.pdp.pc.query/1.0/_____tmd_____/punish",
+        "independentHttpReplay": {
+          "browserUsed": false,
+          "userSessionUsed": false,
+          "httpStatus": 200,
+          "mime": "application/json",
+          "topLevelKeys": ["data", "dialogSize", "ret"],
+          "businessPayloadReceived": false,
+          "challengeDetected": true,
+          "responseCookieNamesOnly": ["x5secdata"],
+          "mtopTokenAvailableFromFreshHtmlBootstrap": false
+        },
+        "screenshot": "verification/retail-blockers/aliexpress-detail-2026-10-05.png",
+        "screenshotSha256": "d595309619f55b5ae7eecfdd0a603f5a7e7b2bb4021d7cd7452779dc76cd7355",
+        "anonymousHtmlBootstrapIssuedMtopToken": false,
+        "userSessionUsed": false,
+        "captchaBypassed": false
+      },
+      "semantics": "First-party product-detail candidate only. No product title, variants, price, currency, stock, or detail fields were accepted from the challenged response. The emitted JSONP script request is not described as XHR."
+    },
+    {
+      "operation": "productReviews",
+      "evidenceLevel": "not_observed",
+      "firstPartyRendererInspection": {
+        "htmlScriptAssets": [
+        "/g/ae-fe/global/0.0.3/index.js",
+        "/g/ae-fe/cosmos/0.0.451/pc/index.js",
+        "/g/lzd_sec/LWSC-G/index.js",
+          "/g/ae-fe/page-header-ui/0.0.94/js/index.js",
+          "/g/code/npm/@alife/nano-cross-page-loader/0.0.51/_cross_page_loader_.js",
+          "/g/ae-fe/pdp-pc/0.2.140/js/index.js"
+        ],
+        "productReviewHyperlink": null,
+        "globalFooterReviewLink": "/reviews.html",
+        "reviewSectionAnchorInBundle": "#nav-review",
+        "aggregateRatingAndReviewCountInBundle": true,
+        "reviewBodyServiceOriginOrRouteFound": false
+      },
+      "runtimeObservation": {
+        "captchaBlockedRenderer": true,
+        "reviewRequestObserved": false,
+        "reviewBodyReceived": false,
+        "reviewImagesReceived": false,
+        "reviewDateReceived": false,
+        "reviewPaginationObserved": false
+      },
+      "semantics": "No review endpoint, review record schema, photo schema, or pagination contract is inferred from the summary rating UI or global reviews landing-page footer."
+    }
+  ],
+  "secretsPersistedInEvidence": false
+}

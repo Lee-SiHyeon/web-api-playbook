@@ -1,0 +1,191 @@
+{
+  "schema": "oliveyoung-global-contracts-v1",
+  "schemaVersion": 1,
+  "service": "oliveyoung-global",
+  "checkedAt": "2026-10-05",
+  "scope": "Public Global-storefront product detail, prices after current selected-currency verification, option/image data, reviews and review photos. Search-results access is blocked and explicitly unsupported.",
+  "marketSeparation": {
+    "origin": "https://global.oliveyoung.com",
+    "koreanShoppingCurator": "separate service and module; no session, KRW price, affiliate activity or link API is reused",
+    "affiliateLinkCreation": "out of scope"
+  },
+  "transport": {
+    "runtime": "Node fetch only",
+    "credentials": "omit",
+    "redirects": "manual; reject redirects",
+    "cookiesSent": false,
+    "authorizationSent": false
+  },
+  "contracts": [
+    {
+      "id": "homepage-best-sellers",
+      "provenance": "captured first-party browser XHR and independently replayed by cookie-free Node HTTP",
+      "method": "GET",
+      "path": "/display/product/best-seller/order-best",
+      "query": {
+        "curLangCode": "en",
+        "langCode": "en",
+        "mbrNo": "empty on anonymous page",
+        "acesCntryCode": "00",
+        "accParam": "empty on anonymous page",
+        "mrgnCntryCode": "9999",
+        "dlvCntryCode": "1230",
+        "limit": "20",
+        "showSoldoutProduct": "true"
+      },
+      "response": {
+        "id": "prdtNo",
+        "name": "prdtName",
+        "brand": "brandName",
+        "listAmount": "nrmlAmt",
+        "saleAmount": "saleAmt",
+        "discountPercent": "eventSlprcDscntRt",
+        "reviewCount": "reviewCnt",
+        "averageRating": "avgScore",
+        "imagePath": "imagePath"
+      },
+      "coverage": "Exactly the observed 20-item homepage best-seller list. It is not a complete catalog or keyword search."
+    },
+    {
+      "id": "product-detail-data",
+      "provenance": "captured first-party browser XHR and independently replayed by cookie-free Node HTTP",
+      "method": "POST",
+      "path": "/product/detail-data",
+      "body": {"prdtNo": "requested public product id"},
+      "response": {
+        "product": {
+          "id": "prdtNo",
+          "name": "prdtName",
+          "brand": "brandName",
+          "listAmount": "nrmlAmt",
+          "saleAmount": "saleAmt",
+          "options": "optionList[]",
+          "thumbnails": "thumbnailList[]",
+          "categoryNames": ["gdsLclsNm", "gdsMclsNm", "gdsSclsNm"]
+        }
+      },
+      "sample": {
+        "prdtNo": "GA240824996",
+        "nrmlAmt": 27,
+        "saleAmt": 13.5,
+        "currency": null,
+        "optionCount": 7,
+        "thumbnailCount": 1
+      }
+    },
+    {
+      "id": "product-description",
+      "provenance": "captured first-party browser XHR and independently replayed by cookie-free Node HTTP",
+      "method": "POST",
+      "path": "/product/details-info",
+      "body": {"prdtNo": "requested public product id"},
+      "response": {
+        "htmlFields": ["details.dtlDesc", "details.dtlAddDesc"],
+        "structuredTextFields": ["details.sellingPointText", "details.whyWeLoveItText", "details.ftrdIngrdText", "details.howToUseText"],
+        "descriptionImages": "Extracted from the returned JSON HTML fragment and restricted to the observed cdn-image.oliveyoung.com origin."
+      }
+    },
+    {
+      "id": "review-summary",
+      "provenance": "captured first-party browser XHR and independently replayed by cookie-free Node HTTP",
+      "method": "POST",
+      "path": "/product/review-summary",
+      "body": {
+        "filterYn": "N",
+        "prdtNo": "requested public product id",
+        "prdtGbnCode": "10",
+        "movReviewYn": "N",
+        "photoReviewYn": "N",
+        "optnYn": "Y",
+        "transUseYn": "N",
+        "filterUseYn": "Y"
+      },
+      "response": {
+        "count": "totalReviewCount",
+        "averageRating": "totalStarRate",
+        "mediaCount": "totalMediaReviewCount",
+        "ratingDistribution": "scores[]",
+        "evaluationScores": "evltScores[]"
+      }
+    },
+    {
+      "id": "review-body-list",
+      "provenance": "captured first-party browser XHR and independently replayed by cookie-free Node HTTP",
+      "method": "POST",
+      "path": "/product/review-list",
+      "body": {
+        "filterYn": "N",
+        "prdtNo": "requested public product id",
+        "prdtGbnCode": "10",
+        "movReviewYn": "N",
+        "photoReviewYn": "N",
+        "optnYn": "Y",
+        "transUseYn": "N",
+        "pageNum": "1-based observed page",
+        "rowsPerPage": "10 observed, 5 also directly replayed",
+        "sort": "10 observed default sort"
+      },
+      "response": {
+        "list": "reviewList[]",
+        "total": "totalCount",
+        "reviewId": "prdtReviewNo",
+        "body": "conText",
+        "rating": "previewScore",
+        "date": "reviewRgstYmd YYYYMMDD",
+        "option": "snglOptnName",
+        "images": "reviewMediaList[].imagePath",
+        "associatedReviews": "A differing reviewList[].prdtNo is retained only when assocReviewYn is Y."
+      },
+      "privacy": "loginId and mbrNo are omitted from returned review records."
+    },
+    {
+      "id": "review-media-list",
+      "provenance": "captured first-party browser XHR and independently replayed by cookie-free Node HTTP",
+      "method": "POST",
+      "path": "/product/review-media-list",
+      "body": {
+        "prdtNo": "requested public product id",
+        "prdtGbnCode": "10",
+        "pageNum": "1-based observed page",
+        "rowsPerPage": "15 observed",
+        "photoReviewYn": "N",
+        "movReviewYn": "N"
+      },
+      "response": {
+        "list": "mediaList[]",
+        "total": "totalCount",
+        "reviewId": "prdtReviewNo",
+        "sequence": "seq",
+        "videoFlag": "videoYn",
+        "imagePath": "imagePath"
+      },
+      "limit": "This route returns media metadata and URLs, not review body text."
+    }
+  ],
+  "currencyContext": {
+    "bootstrapRequest": {
+      "method": "GET",
+      "path": "/product/detail?prdtNo=<the same requested product id>",
+      "purpose": "Only the selected currency/destination config is parsed; product and review fields still come from JSON XHRs.",
+      "response": "A selected-option currency node, inline currency config, dlvCntry config and requested product id are all checked on each product-price read."
+    },
+    "verifiedDefault": {"currency": "USD", "currencySymbol": "US$", "country": "KR", "deliveryCountryCode": "1230"},
+    "apiJsonCurrency": null,
+    "guard": "Different requested country or currency is rejected until a separately selected and replayed context is implemented. Shipping eligibility is not inferred from stock status."
+  },
+  "imageDelivery": {
+    "origin": "https://cdn-image.oliveyoung.com",
+    "productPrefixes": ["/prdtImg/", "/editor/", "/display/"],
+    "reviewPrefixes": ["/prdt_review/", "/prdt_review_mov/"],
+    "directReadbackEvidence": "verification/commerce-oliveyoung-global-image-readbacks-2026-10-05.json"
+  },
+  "search": {
+    "status": "blocked_unimplemented",
+    "observed": [
+      {"method": "GET", "path": "/display/search/search-word", "status": 403, "mime": "text/html"},
+      {"method": "GET", "path": "/kr/search/results?query=mask", "statusSequence": [307, 403], "mime": "text/html"}
+    ],
+    "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-global-search-blocked.png",
+    "fallbackBoundary": "Homepage best sellers are a separately named 20-item browse operation; they are not presented as full keyword search."
+  }
+}

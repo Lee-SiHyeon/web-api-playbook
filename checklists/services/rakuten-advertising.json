@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 1,
+  "service": "rakuten-advertising",
+  "description": "Publisher product search and reported retail/sale price fields through the Rakuten Advertising Product Search API. No account setup, advertiser application, affiliate-link creation or transaction write is included.",
+  "capabilities": [
+    {
+      "id": "publisher.access_token",
+      "title": "Supply a Rakuten publisher API access token to the HTTP client",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/commerce-rakuten-advertising-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "No publisher token was supplied. The client accepts one in process memory but does not create an account/application or retrieve credentials."
+    },
+    {
+      "id": "catalog.product_search",
+      "title": "Search advertiser products and return validated product price fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-advertising.mjs",
+            "exports": [
+              "createRakutenAdvertisingProductSearchClient",
+              "rakutenAdvertisingContract"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-advertising"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-advertising.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/commerce-rakuten-advertising-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "Only a single anonymous no-token control request was made; it returned HTTP 401 JSON. No authenticated publisher catalog request was possible without a publisher token."
+    },
+    {
+      "id": "catalog.price_currency_stock",
+      "title": "Keep retail price, listed sale price and currency separate; avoid inventing stock",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-advertising.mjs",
+            "exports": [
+              "createRakutenAdvertisingProductSearchClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-advertising"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-advertising.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/commerce-rakuten-advertising-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "Field normalization has local fixtures only. Live currency/price values and advertiser feed freshness are unverified; stock and sale-active dates are not returned by the documented Product Search response."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Page through at most 1000 products while preserving reported totals and truncation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-advertising.mjs",
+            "exports": [
+              "createRakutenAdvertisingProductSearchClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-advertising"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-advertising.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/commerce-rakuten-advertising-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "The API reference states 1000 results per query while the Publisher Help article states 5000. The implementation caps collection at the lower bound and never marks a larger query exhausted."
+    },
+    {
+      "id": "publisher.affiliate_url",
+      "title": "Preserve the returned publisher product/tracking URL without constructing new links",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-advertising.mjs",
+            "exports": [
+              "createRakutenAdvertisingProductSearchClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-advertising"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-advertising.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/commerce-rakuten-advertising-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "The documented linkurl field is normalized as affiliateURL and kept separate from a canonical merchant URL. It has only local fixture evidence."
+    },
+    {
+      "id": "publisher.sephora_partner_mid",
+      "title": "Search a Sephora advertiser MID after the publisher confirms its applicable partnership",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/rakuten-advertising.mjs",
+            "exports": [
+              "createRakutenAdvertisingProductSearchClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "rakuten-advertising"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-rakuten-advertising.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/commerce-rakuten-advertising-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "Sephora US identifies Rakuten Advertising for its affiliate program, but the current publisher's partnership and advertiser MID are unknown. No MID is guessed and no application is submitted."
+    },
+    {
+      "id": "publisher.commission_terms",
+      "title": "Verify commission terms from current advertiser offers",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/commerce-rakuten-advertising-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "Product Search does not return commission rates. No generic Sephora percentage is asserted; current publisher-specific offer terms require an approved advertiser relationship and another documented operation."
+    }
+  ]
+}

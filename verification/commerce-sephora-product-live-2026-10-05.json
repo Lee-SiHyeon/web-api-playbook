@@ -1,0 +1,60 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "sephora",
+  "capabilityId": "catalog.product_detail",
+  "checkedAt": "2026-10-05T02:49:28.718Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://www.sephora.com/js/ufe/isomorphic/main.bundle.B22CoriginmasterD20260922192852.js",
+    "sourceSha256": "5c69df88c12e129005fb796a1067876bc3df65096aa0fdf6f457373513cf5763"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.sephora.com",
+    "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P281411/lite",
+    "checkedAt": "2026-10-05T02:49:28.718Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "addCurrentSkuToProductChildSkus",
+      "includeRegionsMap",
+      "showContent",
+      "includeConfigurableSku",
+      "channel",
+      "loc",
+      "countryCode",
+      "preferredSku",
+      "removePersonalizedData",
+      "includeReviewFilters",
+      "includeReviewImages"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 118806,
+    "schemaVerified": true
+  },
+  "requestedProductId": "P281411",
+  "productIdMatched": true,
+  "requestedSkuId": "2760981",
+  "currentSkuMatched": true,
+  "implementation": {
+    "lib/commerce/sephora.mjs": "3a5a24cc95c75ff0de0f05eb20d61f661116822c3404f540f0be0789c8b837f6",
+    "lib/commerce/sephora-reviews.mjs": "031a64aa4e98fbfb1ec9c638df0ddf96474c0bf92cc45eb9edad411678d2dc2f",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "matchedResult": {
+    "productId": "P281411",
+    "currentSkuId": "2760981",
+    "variantCount": 50,
+    "images": 3,
+    "descriptionReturned": false
+  }
+}

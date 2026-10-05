@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "service": "printify",
+  "description": "Official Printify catalog contracts were inspected. The generic catalog exposes blueprints, print providers and variants, but its variant response does not contain the production cost needed for supplier comparison. No client was added without a usable base-price contract.",
+  "capabilities": [
+    {
+      "id": "auth.catalog_read",
+      "title": "Use a Printify token with catalog.read access",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official API requires a Bearer token. PAT creation requires a Printify account; OAuth requires a registered app and merchant grant. No token or account was supplied, and no enrollment was attempted."
+    },
+    {
+      "id": "catalog.product_variants",
+      "title": "Read Printify blueprints, providers, and provider-specific variants",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Official V1 endpoints exist under /v1/catalog/blueprints, but require catalog credentials; their catalog variant response includes identity/options/print areas/decoration methods only. No live token-backed replay was available. See references/commerce-suppliers-contracts.json."
+    },
+    {
+      "id": "catalog.supplier_base_cost",
+      "title": "Read generic catalog variant fulfillment cost with explicit currency",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The documented catalog variants response omits supplier base cost and currency. The documented price/cost fields belong to merchant-owned shop product variants, not the generic supplier catalog. A generic supplier cost must not be inferred from those fields."
+    },
+    {
+      "id": "catalog.shipping_prices",
+      "title": "Read variant shipping costs by destination and shipping method",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "V2 shipping quote endpoints document per-variant first/additional item amounts with currency, but no caller token was available for replay or implementation in this scoped pass."
+    },
+    {
+      "id": "account.orders.writes",
+      "title": "Create products, submit orders, or change account settings",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested read-only supplier lookup and price collection; account and order writes are outside scope.",
+      "requirement": "inventory",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

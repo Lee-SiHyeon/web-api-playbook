@@ -1,0 +1,139 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "catalog.product_detail",
+  "checkedAt": "2026-10-05T02:59:09.225Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/product/detail?prdtNo=GA240824996"
+  },
+  "request": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/detail-data",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:09.225Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "prdtNo"
+    ],
+    "responseBytes": 17539,
+    "responseSha256": "22ad70e7ce4376808c85903a06a370601a42a6de80021a7f5668b95aa30b61b5"
+  },
+  "productIdMatched": true,
+  "currencyContextVerified": true,
+  "currencyContextRequest": {
+    "method": "GET",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/detail",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "checkedAt": "2026-10-05T02:59:08.847Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "queryFields": [
+      "prdtNo"
+    ],
+    "contextOnly": true,
+    "responseBytes": 432777,
+    "responseSha256": "9f2a7bba83f87a02d95dae9be571b19c2dba9bfbb41c8927dea701e1d153f045",
+    "productIdMatched": true,
+    "currencyCode": "USD",
+    "currencySelectedInPage": true,
+    "currencyConfirmedByInlineConfig": true,
+    "deliveryCountryCode": "1230"
+  },
+  "detailsRequest": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/details-info",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:09.487Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "prdtNo"
+    ],
+    "responseBytes": 5975,
+    "responseSha256": "60bc67438ee5c741af865ffe6a9edf4e458806f5c78fbab65e96cf742c96d79a"
+  },
+  "reviewSummaryRequest": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/review-summary",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:09.585Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "filterYn",
+      "prdtNo",
+      "prdtGbnCode",
+      "movReviewYn",
+      "photoReviewYn",
+      "optnYn",
+      "transUseYn",
+      "filterUseYn"
+    ],
+    "responseBytes": 2547,
+    "responseSha256": "e02a016b32738b218d489f6e29a6c3fbbfacbfa81374710efadb423c0c094062"
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7465d9a636ebef870a2818e5dbe59a255c0edf366dc5875e1752406e21e55357"
+  },
+  "priceReadback": {
+    "productId": "GA240824996",
+    "price": {
+      "amount": "13.50",
+      "currency": "USD",
+      "minorUnitExponent": 2,
+      "kind": "retail_sale",
+      "sourceField": "product.saleAmt"
+    },
+    "listPrice": {
+      "amount": "27.00",
+      "currency": "USD",
+      "minorUnitExponent": 2,
+      "kind": "retail_list",
+      "sourceField": "product.nrmlAmt"
+    },
+    "optionsCount": 7,
+    "imageCount": 1,
+    "descriptionTextLength": 1352,
+    "reviewSummary": {
+      "totalReviews": 9662,
+      "averageRating": 4.9,
+      "totalMediaReviews": 3983
+    }
+  },
+  "uiCurrencyEvidence": {
+    "productId": "GA240824996",
+    "sourceURL": "https://global.oliveyoung.com/product/detail?prdtNo=GA240824996",
+    "browserUsed": true,
+    "anonymousFreshContext": true,
+    "selectedCountryLabel": "KOREA, REPUBLIC OF (SOUTH K.)",
+    "selectedCurrency": "USD",
+    "normalPriceDisplayed": "US$27.00",
+    "salePriceDisplayed": "US$13.50",
+    "detailApiAmountMatched": true,
+    "detailsJsonCurrencyField": null
+  }
+}

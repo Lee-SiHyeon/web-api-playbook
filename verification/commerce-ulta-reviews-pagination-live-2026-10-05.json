@@ -1,0 +1,141 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ulta",
+  "capabilityId": "reviews.pagination",
+  "checkedAt": "2026-10-05T03:09:59.418Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "publicFrontendKeyUsed": true,
+  "userCredentialsUsed": false,
+  "noUserCredentials": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://ui.powerreviews.com/tag-builds/10578/4.0/reviews.engine.js",
+    "sourceSha256": "c5962864e32a3b9eb466c968d870d0f112631d37e82c57d0d0741625628ee9f3"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://display.powerreviews.com",
+    "path": "/m/6406/l/en_US/product/pimprod2057119/reviews",
+    "checkedAt": "2026-10-05T03:09:59.418Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "paging.from",
+      "paging.size",
+      "filters",
+      "search",
+      "sort",
+      "image_only",
+      "page_locale",
+      "apikey"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 43532,
+    "responseSha256": "3b8211f92bcebe7df33d556719365fd4a9e8921f09f7e58737914b4fd37a4634",
+    "readOnly": true,
+    "publicFrontendKeyUsed": true,
+    "userCredentialsUsed": false,
+    "noUserCredentials": true
+  },
+  "bootstrapRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/p/serum-lipstick-pimprod2057119",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1497738,
+    "checkedAt": "2026-10-05T03:09:59.021Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "sku"
+    ]
+  },
+  "bootstrapRequests": [
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/p/serum-lipstick-pimprod2057119",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1497738,
+      "checkedAt": "2026-10-05T03:09:59.021Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "sku"
+      ]
+    }
+  ],
+  "productIdMatched": true,
+  "pagination": {
+    "page": 2,
+    "pageSize": 20,
+    "total": 429,
+    "pagesTotal": 22,
+    "hasMore": true,
+    "paginationVerified": true
+  },
+  "implementation": {
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  },
+  "result": {
+    "productIdMatched": true,
+    "paginationVerified": true,
+    "page": 2,
+    "pageSize": 20,
+    "total": 429,
+    "pagesTotal": 22,
+    "returnedReviewCount": 20,
+    "bodyCount": 20,
+    "ratingCount": 20,
+    "photoCount": 12,
+    "hasMore": true,
+    "nextPage": 3,
+    "serverContinuationUsed": true,
+    "reviewerProfilesReturned": false,
+    "publicKeyValuePersisted": false,
+    "publicFrontendKeyUsed": true
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/catalog.mjs",
+    "provider": "ulta",
+    "operation": "reviews",
+    "exitStatus": 0,
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "credentialsUsed": false,
+    "outputPath": "/home/worker/artifacts/catalog-expansion-20261005/ulta-reviews-full-current-cli.json",
+    "outputSha256": "d11f4991638abbc622073625eb02abb7f9a0ed2dc382c641301d1e2c22018250"
+  },
+  "fullCollection": {
+    "count": 429,
+    "total": 429,
+    "totalMatched": true,
+    "pagesRead": 22,
+    "rowsSeen": 429,
+    "sourceExhausted": true,
+    "paginationVerified": true,
+    "capHit": false,
+    "complete": true,
+    "bodyCount": 429,
+    "imageReviewCount": 231,
+    "identityUnverifiedCount": 0,
+    "reviewerProfilesReturned": false
+  }
+}

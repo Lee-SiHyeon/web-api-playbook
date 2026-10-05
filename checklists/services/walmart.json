@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "service": "walmart",
+  "description": "Anonymous, read-only Walmart storefront catalog integration. Blocked operations remain required gaps until a supported contract and independent HTTP replay exist; official partner APIs require separate authorization and scope review.",
+  "capabilities": [
+    {
+      "id": "catalog.search", "title": "상품 키워드 검색 JSON 조회", "priority": "required", "applicability": "applicable", "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
+      "blocker": "Anonymous /search reached a Robot or human challenge. See references/retail-walmart-contracts.json and verification/retail-walmart-live-2026-10-05.json."
+    },
+    {
+      "id": "catalog.detail", "title": "상품 상세 JSON 조회와 canonical URL", "priority": "required", "applicability": "applicable", "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
+      "blocker": "No successful anonymous product-detail XHR contract observed; storefront automated retrieval is restricted by Walmart terms."
+    },
+    {
+      "id": "catalog.category", "title": "카테고리 탐색과 상품 목록 연결", "priority": "required", "applicability": "applicable", "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
+      "blocker": "No successful anonymous category JSON contract observed."
+    },
+    {
+      "id": "catalog.pagination", "title": "검색·카테고리 페이지네이션과 종료 조건", "priority": "required", "applicability": "applicable", "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
+      "blocker": "No first-page business JSON response or next-page contract observed."
+    },
+    {
+      "id": "catalog.offer", "title": "가격·통화·가용성 필드를 구분해 검증", "priority": "required", "applicability": "applicable", "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
+      "blocker": "No product-offer response schema observed; list, coupon and current prices cannot be mapped safely."
+    },
+    {
+      "id": "auth.login", "title": "고객 계정 로그인", "priority": "optional", "applicability": "not_applicable", "applicabilityReason": "The user requested anonymous public reads with no login.", "requirement": "inventory",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "profile.edit", "title": "고객 프로필 편집", "priority": "optional", "applicability": "not_applicable", "applicabilityReason": "Customer account changes are outside the requested anonymous public-read scope.", "requirement": "inventory",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "content.crud", "title": "상품·콘텐츠 등록·수정·삭제", "priority": "optional", "applicability": "not_applicable", "applicabilityReason": "The requested mall integration is read-only; no seller or content writes were authorized.", "requirement": "inventory",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "checkout.write", "title": "장바구니·주문·결제 변경", "priority": "optional", "applicability": "not_applicable", "applicabilityReason": "The user requested public product reads only; customer writes and checkout are outside scope.", "requirement": "inventory",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": []
+    }
+  ]
+}

@@ -142,6 +142,23 @@ node scripts/web-login.mjs linkprice sites
 최초 연결, 정확한 요청 필드, `text/html` MIME을 가진 JSON 응답 처리,
 실제 만료 복구의 미관측 경계는 [LinkPrice 사용법](linkprice-login.md)에 있다.
 
+## 인포크
+
+`POST /login`의 multipart 비밀번호 로그인과 `GET /v2/users` 보호 계정 대조를 사용한다.
+Windows에서는 `web-auth-import.mjs inpock-login`의 stdin으로 최초 정보를 보호 저장한 뒤 실행한다.
+
+```powershell
+node scripts/web-login.mjs inpock ensure
+node scripts/web-login.mjs inpock health
+node scripts/web-login.mjs inpock owner
+```
+
+Linux/macOS에서는 `node scripts/inpock.mjs verify --credentials-stdin`에
+승인된 `{username,password}` JSON을 stdin으로 전달한다. 이 모드는 메모리 보관이며
+프로세스 종료 후 세션을 유지하지 않는다. [전체 사용법과 경계](inpock-login.md)를 참고한다.
+2026-10-04에 비밀번호 로그인, 보호 owner 확인과 같은 프로세스의 세션 재사용을 실제 확인했다.
+링크·콘텐츠 편집과 실제 세션 만료 후 복구는 아직 확인 범위 밖이다.
+
 ## 재사용 인터페이스
 
 ```js

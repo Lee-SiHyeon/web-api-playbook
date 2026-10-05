@@ -1,0 +1,76 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "reviews.media_pagination",
+  "checkedAt": "2026-10-05T02:59:11.287Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/product/detail?prdtNo=GA240824996"
+  },
+  "request": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/review-media-list",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:11.287Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "prdtNo",
+      "prdtGbnCode",
+      "pageNum",
+      "rowsPerPage",
+      "photoReviewYn",
+      "movReviewYn"
+    ],
+    "responseBytes": 2022,
+    "responseSha256": "9041dca861835eeebe7a0b2999f34694dc1a4936f7220020182b6112eeb84579"
+  },
+  "productIdMatched": true,
+  "paginationVerified": true,
+  "pageNum": 1,
+  "rowsPerPage": 15,
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7465d9a636ebef870a2818e5dbe59a255c0edf366dc5875e1752406e21e55357"
+  },
+  "initialPage": {
+    "pageNum": 1,
+    "returnedCount": 15,
+    "totalCount": 3984,
+    "nextPage": 2
+  },
+  "nextPageProbe": {
+    "pageNum": 2,
+    "returnedCount": 15,
+    "totalCount": 3984
+  },
+  "terminalPageProbe": {
+    "pageNum": 266,
+    "returnedCount": 9,
+    "totalCount": 3984,
+    "nextPage": null
+  },
+  "beyondTerminalProbe": {
+    "pageNum": 267,
+    "returnedCount": 0,
+    "totalCount": 3984,
+    "nextPage": null
+  },
+  "fields": [
+    "prdtReviewNo",
+    "seq",
+    "bestYn",
+    "videoYn",
+    "imagePath"
+  ],
+  "reviewBodiesReturned": false
+}

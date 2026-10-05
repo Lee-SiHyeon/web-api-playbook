@@ -1,0 +1,120 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "service": "amazon",
+  "observedAt": "2026-10-05",
+  "scope": "Anonymous Amazon.com public product discovery; no account, checkout, cart, profile, or affiliate credential",
+  "secretsPersisted": false,
+  "contracts": [
+    {
+      "method": "POST",
+      "origin": "https://www.amazon.com",
+      "path": "/s/query",
+      "queryFields": ["k", "page", "qid", "ref", "xpid"],
+      "minimalReplayedQueryFields": ["k", "page"],
+      "requestMime": "application/json",
+      "requestBody": {"customer-action": "pagination"},
+      "requestAccept": "text/html,image/webp,*/*",
+      "originHeader": "https://www.amazon.com",
+      "browserObserved": true,
+      "browserResponse": {"httpStatus": 200, "mime": "application/json-amazonui-streaming"},
+      "page2DomDistinctAsinsObserved": 16,
+      "page2DomProductLinkElementCountsObserved": [27, 68],
+      "streamFraming": "Pretty JSON dispatch frames separated by &&&; data-search-metadata carries keywords, page, marketplaceId and asinOnPageCount; data-main-slot search-result frames carry asin, index, html and data",
+      "validatedProductFields": ["asin", "title", "product URL path", "displayed current price text", "a-text-price reference text", "search thumbnail URL"],
+      "priceScope": "search-card display only; current price is not verified Buy Box/SKU/checkout price; a-text-price meaning and coupon/availability are unverified",
+      "priceParsing": {"amount": "single fixed numeric display value only, decimal string in displayed major currency units", "currencyCode": "only explicit three-letter code recognized by Intl.supportedValuesOf(currency)", "symbolOnlyCurrency": "unknown", "rangeAmount": "unknown"},
+      "independentReplay": {"anonymous": true, "browserCookiesCopied": false, "browserUsed": false, "pagesVerified": [1, 2, 3], "otherKeywordVerified": true, "mainCardCountPerVerifiedPage": 16, "extraPageAsinsMayBeUncovered": true, "catalogTerminationVerified": false, "page20ObservedMainCards": 2, "page21FirstObservedMainCards": 0, "page21SecondObservedMainCards": 6, "samePageMayChangeBetweenRequests": true},
+      "liveReceipts": ["verification/retail-amazon-search-live-2026-10-05.json", "verification/retail-amazon-pagination-live-2026-10-05.json"],
+      "classification": "verified anonymous XHR for main search cards and pagination within the tested page bounds"
+    },
+    {
+      "method": "GET",
+      "origin": "https://data.amazon.com",
+      "path": "/api/marketplaces/ATVPDKIKX0DER/products/B005EJH6Z4",
+      "queryFields": [],
+      "browserObserved": true,
+      "browserDetailAsin": "B004YAVF8I",
+      "identityMatchedCurrentDetailPage": false,
+      "browserResponse": {
+        "httpStatus": 200,
+        "mime": "application/vnd.com.amazon.api+json",
+        "responseBytes": 4969,
+        "sha256": "f84554ed213d76ff59d0fdb6d047afa769b0a07cbdd9e14663c434a6cb81b3cf",
+        "topLevelKeys": ["entity", "resource", "type"]
+      },
+      "requestAccept": "not captured in first browser observation",
+      "anonymousDirectReplay": {
+        "httpStatus": 415,
+        "mime": "application/vnd.com.amazon.api+json",
+        "responseType": "error/v1",
+        "responseBytes": 938,
+        "sha256": "e4843093aac6200279138e237d11aac83b92af438e6f4447c260fd591b346372",
+        "exactAcceptMatched": false,
+        "interpretation": "The first failed boundary is content negotiation or another unspecified request requirement. The browser's exact Accept value was not captured, and later challenge pages did not issue this XHR. This is not a verified anonymous API operation."
+      },
+      "sourceBackedHttpFollowup": {
+        "firstPartyJsDeclares": "GET product/v2 with optional expand subresources; some clients add fresh page CSRF, encrypted slate token and anonymous cookie jar",
+        "acceptBase": "application/vnd.com.amazon.api+json; type=\"product/v2\"",
+        "baseAcceptNoCookieStatuses": [406, 503],
+        "freshAnonymousDocumentBootstrap": {"documentHttpStatus": 200, "slateTokenPresentInMemory": true, "csrfPresentInMemory": true, "browserUsed": false, "nodeDocumentMime": "text/html", "nodeDocumentBytes": 1170833},
+        "imageExpandStatus": 404,
+        "imageExpandMime": "",
+        "imageExpandResponseBytes": 0,
+        "nodeImageExpandStatus": 404,
+        "applicationProductEntityVerified": false
+      }
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/gp/product/ajax/twisterDimensionSlotsDefault",
+      "queryFields": ["_", "asin", "asinList", "deviceOs", "deviceType", "isDimensionSlotsAjax", "isPrime", "keywords", "landingAsin", "parentAsin", "productGroupId", "productTypeDefinition", "qid", "showFancyPrice", "sr", "twisterFlavor", "vs"],
+      "browserObserved": true,
+      "browserResponse": {"httpStatus": 200, "mime": "application/amazonui-streaming-json", "responseBytes": 8209},
+      "requestValuesCaptured": false,
+      "independentReplay": false,
+      "classification": "variation slot candidate only; child-ASIN mapping and selected option semantics unverified"
+    }
+  ],
+  "otherObservedXhr": [
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/hz/rhf",
+      "queryFields": ["cardJSPresent", "currentPageType", "currentSubPageType"],
+      "browserResponse": {"httpStatus": 200, "mime": "application/json", "keys": ["html", "success"], "success": true, "productLinksInHtml": 0, "priceMarkersInHtml": 0},
+      "anonymousDirectReplay": {"httpStatusObserved": [200, 503], "mime": "text/html", "applicationSchemaVerified": false, "challengeOrErrorHtml": true},
+      "classification": "empty recently viewed fragment; no verified product feed"
+    },
+    {
+      "method": "POST",
+      "origin": "https://www.amazon.com",
+      "path": "/dram/renderLazyLoadedStreaming",
+      "queryFields": ["rshVal"],
+      "requestMime": "application/json",
+      "requestShape": "array of 10 objects with encryptedLazyLoadRenderRequest and version",
+      "requestInputSource": "fresh server-issued anonymous browser page data; origin of opaque input for an engine-free runner remains unverified",
+      "browserResponse": {"httpStatus": 200, "mime": "application/json-amazonui-streaming", "bytes": 723832},
+      "anonymousDirectReplay": {"httpStatus": 200, "mime": "application/json-amazonui-streaming", "sameResponseLength": true, "responseSha256Matches": false, "browserCookiesCopied": false},
+      "responseShape": "10 newline-delimited JSON frames separated by three-byte delimiters; each frame is [marker,{cards:[{content:HTML}]}]",
+      "firstCardContentDom": {"asinNodes": 0, "productPaths": 0, "priceClassNodes": 0, "anchors": 5, "images": 4},
+      "classification": "homepage UI cards, not a verified product listing or price operation"
+    }
+  ],
+  "documentObservations": {
+    "search": {"origin": "https://www.amazon.com", "path": "/s", "queryFields": ["k"], "httpStatus": 200, "productLinkCount": 66, "transport": "initial UI document HTML; direct /s/query XHR independently works for page 1 and later pages"},
+    "detail": {"pathPattern": "/.../dp/{ASIN}/...", "oneHttp200ProductPageObserved": true, "laterContinueShoppingGateObserved": true, "latestFreshBrowserDetailsGated": 3, "directHttpDocument": {"asin": "B004YAVF8I", "status": 200, "bytes": 1671765, "sha256": "2b6626d8ecd63c4ce69ecfa42e8b312065e7cc31d126585c41a8390a1f8ac10b", "descriptionAndImageMarkupPresent": true, "rawBodyDeleted": true}, "transport": "document HTML; auxiliary JSON above was observed only once and belonged to another ASIN"},
+    "reviews": {"directHttpDocument": {"path": "/product-reviews/B004YAVF8I/", "status": 503, "mime": "text/html"}, "freshBrowserDocument": {"path": "/product-reviews/B005EJH6Z4/", "status": 200, "title": "Sign in", "reviewBodyNodes": 0, "reviewPaginationLinks": 0, "reviewDataXhrCount": 0, "loginSubmitted": false}, "fullReviewBodyVerified": false}
+  },
+  "firstPartyAssetScan": {"productPageJsAssetsRead": 77, "bytesRead": 8780123, "sourceType": "current Amazon-hosted JavaScript", "productV2GetContractFound": true, "customerReviewsSummaryResourceFound": true, "reviewBodyGetContractFound": false, "capturedSuccessfulProductGetAcceptFound": false},
+  "officialApi": {
+    "creatorsApi": "https://affiliate-program.amazon.com/creatorsapi/docs/",
+    "creatorPrerequisites": "Associates enrollment, qualifying sales, API registration, and generated credentials",
+    "spApiAuth": "https://developer-docs.amazon.com/sp-api/docs/connecting-to-the-selling-partner-api",
+    "notIncludedInAnonymousScope": true,
+    "documentedCatalogReads": ["SearchItems", "GetItems", "GetVariations", "GetBrowseNodes", "Images", "ItemInfo", "OffersV2"],
+    "fullReviewBodyResourceListed": false,
+    "resourceReference": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources"
+  }
+}

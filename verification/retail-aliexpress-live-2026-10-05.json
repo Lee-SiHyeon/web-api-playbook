@@ -1,0 +1,89 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "aliexpress",
+  "capabilityId": "catalog.product_seo",
+  "checkedAt": "2026-10-04T19:14:28.671Z",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsedForRequest": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "productIdMatched": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://ko.aliexpress.com/item/1005011947482958.html"
+  },
+  "browserObservation": {
+    "observedAt": "2026-10-04T19:07:08.198Z",
+    "resourceType": "xhr",
+    "method": "GET",
+    "origin": "https://ko.aliexpress.com",
+    "path": "/aeglodetailweb/api/seo/seodata",
+    "queryFieldNames": [
+      "channel",
+      "device",
+      "productId",
+      "subject"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 6338,
+    "responseSha256": "6d8e8813e7298c0bf42ca1bbd81803b318d64f817c8f851131eaa0ee85cba12f",
+    "responseTopLevelKeys": [
+      "body",
+      "code",
+      "cost",
+      "success"
+    ],
+    "applicationCode": 200,
+    "applicationSuccess": true
+  },
+  "queryFieldNames": [
+    "channel",
+    "device",
+    "productId"
+  ],
+  "publicProductId": "1005011947482958",
+  "canonicalUrl": "https://ko.aliexpress.com/item/1005011947482958.html",
+  "titleBytes": 163,
+  "descriptionBytes": 197,
+  "titleSha256": "7f1972f7fe4d2a2af58ba8d493eac1048850e415e3eba8a0c33f5a620db6f8fe",
+  "price": null,
+  "currency": null,
+  "counterexamples": {
+    "sameIdChangedSubject": {
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 6338,
+      "suppliedSubjectEchoed": false,
+      "originalProductCanonicalMatched": true
+    },
+    "nonexistentNumericId": {
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 311,
+      "productTitlePresent": false,
+      "canonicalMatched": false
+    }
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://ko.aliexpress.com",
+    "path": "/aeglodetailweb/api/seo/seodata",
+    "checkedAt": "2026-10-04T19:14:28.671Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 6338,
+    "schemaVerified": true,
+    "productIdMatched": true
+  },
+  "implementation": {
+    "lib/retail/aliexpress.mjs": "2bf83ac31cded20fafb1877b479cd685407af6b16145fd5c342fda239d1349f1"
+  },
+  "independentReplaySubjectOmitted": true
+}

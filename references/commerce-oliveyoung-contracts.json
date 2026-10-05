@@ -1,0 +1,139 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "schemaVersion": 1,
+  "service": "oliveyoung",
+  "checkedAt": "2026-10-05",
+  "scope": "Shopping Curator product search and current/list prices; API-only link creation remains gated until a live scoped member identity can be read and bound.",
+  "contracts": [
+    {
+      "id": "curator-status",
+      "method": "GET",
+      "path": "/review/api/affiliate/v1/education/status",
+      "evidenceLevel": "first_party_bundle_contract_not_authenticated_replayed"
+    },
+    {
+      "id": "curator-ranking",
+      "method": "GET",
+      "path": "/review/api/affiliate/v1/activities/ranking",
+      "evidenceLevel": "first_party_bundle_contract_not_authenticated_replayed"
+    },
+    {
+      "id": "curator-product-search",
+      "method": "GET",
+      "path": "/review/api/affiliate/v1/activities/search",
+      "evidenceLevel": "first_party_bundle_contract_not_authenticated_replayed"
+    },
+    {
+      "id": "curator-generated-links",
+      "method": "GET",
+      "path": "/review/api/affiliate/v1/activities/generated",
+      "evidenceLevel": "first_party_bundle_contract_not_authenticated_replayed"
+    },
+    {
+      "id": "curator-landing-write",
+      "method": "POST",
+      "path": "/review/api/affiliate/v1/activities/landing",
+      "evidenceLevel": "first_party_bundle_contract_not_authenticated_replayed"
+    },
+    {
+      "id": "curator-official-shortener-write",
+      "method": "POST",
+      "path": "/base/shorten/v2/verified",
+      "evidenceLevel": "first_party_bundle_contract_not_authenticated_replayed"
+    },
+    {
+      "id": "curator-shortlink-resolve",
+      "method": "GET",
+      "path": "/base/shorten/detail/{shortCode}",
+      "evidenceLevel": "first_party_bundle_contract_not_authenticated_replayed"
+    }
+  ],
+  "program": {
+    "name": "Olive Young Shopping Curator",
+    "officialGuide": "https://m.oliveyoung.co.kr/m/mtn/affiliate/guide",
+    "officialGuideCheckedAt": "2026-10-05",
+    "sourceLines": [133, 147],
+    "commission": {
+      "externalProductLink": {
+        "directContributionPercent": 7,
+        "indirectContributionPercent": 3,
+        "windowHours": 24
+      },
+      "shutterProductTag": {
+        "directContributionPercent": 3,
+        "indirectContributionPercent": null
+      },
+      "qualification": "Official guide labels these basic rates; promotional commission may change them. No rate is hard-coded into the product API client."
+    }
+  },
+  "catalogSearch": {
+    "contractProvenance": {
+      "kind": "first_party_web_bundle_source",
+      "sourceURL": "https://cf-static.oliveyoung.co.kr/prd/1.184.0/_next/static/chunks/pages/affiliate/product/search-69ae4f32d74c2ad5.js",
+      "httpStatus": 200,
+      "mime": "application/javascript",
+      "responseBytes": 73134,
+      "sha256": "26e07cf8ce6cbf04876d626a9aeff7f19836fff653f518694166cc93f644d52d",
+      "observedAt": "2026-10-05"
+    },
+    "request": {
+      "method": "GET",
+      "origin": "https://m.oliveyoung.co.kr",
+      "path": "/review/api/affiliate/v1/activities/search",
+      "query": {
+        "keyword": "search term",
+        "pageNumber": "0-based page number",
+        "pageSize": "1 through 50"
+      },
+      "authentication": "Curator Authorization/session required by the existing adapter; no public anonymous contract is established."
+    },
+    "response": {
+      "topLevelKeys": ["code", "data", "pagination"],
+      "productFieldsUsedByOfficialComponent": {
+        "productId": "goods.goodsNumber",
+        "title": "goods.goodsName",
+        "currentDisplayedPrice": "goods.priceToPay",
+        "listPrice": "goods.originalPrice",
+        "discountRate": "goods.discountRate",
+        "availability": "goods.soldOutFlag",
+        "categoryNumber": "goods.displayCategory.leafCategoryNumber"
+      },
+      "paginationSemantics": "Unknown for product search; page request parameters are accepted by the bundle, but no next-page or total-count guarantee is included in the adapter."
+    },
+    "priceNormalization": {
+      "currency": "KRW",
+      "minorUnitExponent": 0,
+      "currentPriceMeaning": "The official Curator result card maps priceToPay to its currentPrice display prop.",
+      "listPriceMeaning": "The same card maps originalPrice separately; it is not recomputed from discountRate."
+    },
+    "liveStatus": "not_verified_authenticated",
+    "blocker": "The current worker has no Olive Young Curator session. Anonymous direct search returned 403 text/html."
+  },
+  "productDetail": {
+    "status": "unsupported",
+    "blocker": "A scoped anonymous Playwright navigation and cookie-free direct Node GET of an official product-detail URL both returned 403 before storefront scripts or product XHRs loaded. The HTML document is not represented as an API operation.",
+    "attemptedDocumentURL": "https://m.oliveyoung.co.kr/m/goods/getGoodsDetail.do?goodsNo=A000000107218",
+    "evidenceFile": "verification/commerce-oliveyoung-detail-live-2026-10-05.json"
+  },
+  "reviews": {
+    "status": "not_observed_document_blocked",
+    "body": "No review-list request or review-body response was observed.",
+    "photos": "No review-photo request or response schema was observed.",
+    "pagination": "No review page request parameters, continuation token, or termination condition were observed.",
+    "noEndpointGuessed": true,
+    "evidenceFile": "verification/commerce-oliveyoung-reviews-live-2026-10-05.json"
+  },
+  "curatorLinkCreation": {
+    "existingImplementation": "service-packs/affiliate/apps/affiliate-api-hub/adapters/oliveyoung-curator.mjs",
+    "statusEndpoint": "/review/api/affiliate/v1/education/status",
+    "statusFields": ["isAffiliate", "needsEducation", "isFirstActivity"],
+    "memberBinding": "The observed status response has no member identifier. The new commerce surface refuses createLink until an authenticated member identity read and expected-member match are available.",
+    "writeOutcome": "No link was created in this run."
+  },
+  "officialGuideTerms": {
+    "advertisingDisclosure": "The official guide requires an economic-interest disclosure for externally shared product links.",
+    "attribution": "The official guide describes a 24-hour attribution window and last-click qualification.",
+    "sourceURL": "https://m.oliveyoung.co.kr/m/mtn/affiliate/guide"
+  }
+}

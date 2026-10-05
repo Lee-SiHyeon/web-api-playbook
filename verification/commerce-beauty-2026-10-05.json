@@ -1,0 +1,298 @@
+{
+  "schema": "commerce-beauty-live-proof-v1",
+  "checkedAt": "2026-10-04T21:57:09.448Z",
+  "service": "sephora",
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.sephora.com/search"
+  },
+  "implementation": {
+    "lib/commerce/sephora.mjs": "f46e223c0c77dd4e7274976f4e04e24c3f5388700d5fd0f16dccfdf52e3bc934",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "catalogSearch": {
+    "status": "verified_live",
+    "executionMode": "pure_http",
+    "runtime": "v24.21.0",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "query": "lipstick",
+    "countryCode": "US",
+    "currency": "USD",
+    "totalProducts": 164,
+    "pageSize": 60,
+    "pageCount": 3,
+    "returnedProducts": 164,
+    "uniqueProductIds": 164,
+    "pricedProducts": 164,
+    "validatedProductUrls": 164,
+    "paginationComplete": true,
+    "paginationTermination": "The service reported totalProducts=164; pages 1–3 returned 60, 60, and 44 records; all 164 product IDs were unique.",
+    "pages": [
+      {
+        "page": 1,
+        "pageSize": 60,
+        "totalProducts": 164,
+        "returnedProducts": 60,
+        "pricedProducts": 60,
+        "sampleProductIds": [
+          "P510799",
+          "P480576",
+          "P281411"
+        ],
+        "sampleProductUrls": [
+          "https://www.sephora.com/product/mac-cosmetics-m-a-cximal-silky-matte-lipstick-P510799?skuId=2837425",
+          "https://www.sephora.com/product/anastasia-beverly-hills-matte-satin-velvet-lipstick-P480576?skuId=2882280"
+        ],
+        "request": {
+          "method": "GET",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "checkedAt": "2026-10-04T21:57:07.408Z",
+          "browserUsed": false,
+          "anonymous": true,
+          "credentialsUsed": false,
+          "cookieSent": false,
+          "queryFields": [
+            "type",
+            "q",
+            "page",
+            "currentPage",
+            "countryCode"
+          ],
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 104057,
+          "schemaVerified": true
+        }
+      },
+      {
+        "page": 2,
+        "pageSize": 60,
+        "totalProducts": 164,
+        "returnedProducts": 60,
+        "pricedProducts": 60,
+        "sampleProductIds": [
+          "P472977",
+          "P526424",
+          "P505364"
+        ],
+        "sampleProductUrls": [
+          "https://www.sephora.com/product/dior-rouge-dior-forever-liquid-transfer-proof-lipstick-P472977?skuId=2571453",
+          "https://www.sephora.com/product/prism-lite-metallic-lipstick-lip-liner-crayon-P526424?skuId=2996825"
+        ],
+        "request": {
+          "method": "GET",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "checkedAt": "2026-10-04T21:57:08.380Z",
+          "browserUsed": false,
+          "anonymous": true,
+          "credentialsUsed": false,
+          "cookieSent": false,
+          "queryFields": [
+            "type",
+            "q",
+            "page",
+            "currentPage",
+            "countryCode"
+          ],
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 103392,
+          "schemaVerified": true
+        }
+      },
+      {
+        "page": 3,
+        "pageSize": 60,
+        "totalProducts": 164,
+        "returnedProducts": 44,
+        "pricedProducts": 44,
+        "sampleProductIds": [
+          "P501504",
+          "P525421",
+          "P516420"
+        ],
+        "sampleProductUrls": [
+          "https://www.sephora.com/product/petal-soft-lip-crayon-P501504?skuId=2306959",
+          "https://www.sephora.com/product/precision-sculpture-stylo-contour-stick-P525421?skuId=2996841"
+        ],
+        "request": {
+          "method": "GET",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "checkedAt": "2026-10-04T21:57:08.986Z",
+          "browserUsed": false,
+          "anonymous": true,
+          "credentialsUsed": false,
+          "cookieSent": false,
+          "queryFields": [
+            "type",
+            "q",
+            "page",
+            "currentPage",
+            "countryCode"
+          ],
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 81996,
+          "schemaVerified": true
+        }
+      }
+    ]
+  },
+  "productDetail": {
+    "status": "partial_candidate_timeout",
+    "anonymousContext": true,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "sourceReturnedApiUrlPattern": "https://www.sephora.com/api/catalog/products/{productId}?preferedSku={skuId}",
+    "directReplay": {
+      "runtime": "v24.21.0",
+      "httpStatus": null,
+      "cause": "TimeoutError",
+      "timeoutMs": 20000,
+      "responseHeadersReceived": false,
+      "cookieSent": false,
+      "authorizationSent": false
+    },
+    "browserPdp": {
+      "status": "Akamai Access Denied",
+      "screenshot": "/home/worker/artifacts/commerce-beauty-2026-10-05/sephora-pdp-direct.png"
+    }
+  },
+  "pricing": {
+    "status": "partial",
+    "sourceField": "products[].currentSku.listPrice",
+    "normalized": true,
+    "currency": "USD",
+    "kind": "retail_list",
+    "rangeScope": "Ranges remain product-level min/max values; the linked currentSku ID does not imply every option-specific amount.",
+    "salePriceFieldObserved": false,
+    "onSaleData": "NONE on all 60 sampled page-one lipstick results"
+  },
+  "ulta": {
+    "status": "partial",
+    "anonymousBrowserDiscovery": {
+      "searchUrl": "https://www.ulta.com/search?search=lipstick",
+      "searchPageHttpStatus": 200,
+      "searchScreenshot": "/home/worker/artifacts/commerce-beauty-2026-10-05/ulta-search.png",
+      "productPageVisiblePrice": "$9.99",
+      "productPageScreenshot": "/home/worker/artifacts/commerce-beauty-2026-10-05/ulta-detail.png",
+      "xhr": {
+        "method": "GET",
+        "origin": "https://www.ulta.com",
+        "path": "/dxl/graphql",
+        "mime": "application/json",
+        "resourceType": "fetch",
+        "browserHttpStatus": 200,
+        "queryParameterNames": [
+          "operationName",
+          "query",
+          "ultasite",
+          "user-agent",
+          "variables"
+        ],
+        "variablesKeys": [
+          "moduleParams"
+        ],
+        "moduleParamsEncodedBytes": 166,
+        "browserHeaderNames": [
+          "x-ulta-client-channel",
+          "x-ulta-client-country",
+          "x-ulta-client-locale",
+          "x-ulta-dxl-query-id",
+          "x-ulta-graph-module-name",
+          "x-ulta-graph-sub-type",
+          "x-ulta-graph-type",
+          "x_ulta_site"
+        ],
+        "cookieHeaderObserved": false,
+        "authorizationHeaderObserved": false,
+        "responseFields": [
+          "data.Page.content.items[].productId",
+          "data.Page.content.items[].skuId",
+          "data.Page.content.items[].brandName",
+          "data.Page.content.items[].productName",
+          "data.Page.content.items[].listPrice",
+          "data.Page.content.items[].salePrice",
+          "data.Page.content.page",
+          "data.Page.content.pageSize",
+          "data.Page.content.resultCount"
+        ]
+      }
+    },
+    "independentDirectHttpReplay": {
+      "status": "observed_success_but_not_a_durable_client",
+      "runtime": "Python requests",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 30142,
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "page": 1,
+      "pageSize": 64,
+      "resultCount": 250,
+      "note": "Replay used the exact browser-captured public GraphQL URL and non-cookie request headers. The source-built operation/variables were not reconstructed in Node."
+    },
+    "anonymousHttpBootstrap": {
+      "url": "https://www.ulta.com/search?search=lipstick",
+      "runtime": "Node fetch",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1246056,
+      "browserUsed": false,
+      "cookieSent": false,
+      "credentialsUsed": false,
+      "contentIdLiteralCount": 3,
+      "allPreviouslyObservedContentIdsFound": true,
+      "moduleParamsMarkerPresent": true,
+      "dxlGraphqlMarkerPresent": true,
+      "opaqueValuesPersisted": false,
+      "interpretation": "Content IDs can be sourced from public first-party page HTML. Stability/build scope and the matching moduleParams/header builder were not established."
+    },
+    "clientStatus": "No reusable Ulta client is claimed. Required GraphQL query and moduleParams construction are not yet independently generated from stable public inputs."
+  },
+  "browserDiscovery": {
+    "searchUrl": "https://www.sephora.com/search?keyword=lipstick",
+    "documentHttpStatus": 200,
+    "screenshot": "/home/worker/artifacts/commerce-beauty-2026-10-05/sephora-search.png",
+    "xhr": {
+      "method": "GET",
+      "origin": "https://www.sephora.com",
+      "path": "/api/v2/catalog/search/",
+      "resourceType": "xhr",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "browserCookieHeaderObserved": false,
+      "apiKeyHeaderObserved": false,
+      "queryFieldNames": [
+        "type",
+        "q",
+        "includeEDD",
+        "content",
+        "includeRegionsMap",
+        "page",
+        "currentPage",
+        "loc",
+        "ch",
+        "user-segment",
+        "countryCode",
+        "callAdSvc",
+        "adSvcSlot",
+        "adSvcSession",
+        "constructorSessionID",
+        "constructorClientID",
+        "targetSearchEngine",
+        "nearbyStoresEnabled",
+        "includeNearbyStores"
+      ]
+    }
+  }
+}

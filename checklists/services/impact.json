@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "service": "impact",
+  "description": "Read-only impact.com Partner Catalogs API. Direct Partner API reads return partner-eligible catalog items, tracking URLs, consumer current/list prices, currency, and stock. This is an affiliate catalog, not a wholesale dropship supplier service.",
+  "capabilities": [
+    {
+      "id": "catalog.search",
+      "title": "Search partner-visible catalog products by keyword and documented filter",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/impact.mjs",
+            "exports": [
+              "createImpactPartnerCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "impact"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Client code is present; live replay needs an authorized Partner Account SID/Auth Token with Catalog read scope and at least one visible catalog. No such credentials were supplied."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Read one catalog item by catalog ID and item ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/impact.mjs",
+            "exports": [
+              "createImpactPartnerCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "impact"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official Partner detail route and identity fields are documented. Live data requires an authorized partner token plus a catalog/item visible to that account."
+    },
+    {
+      "id": "catalog.offer_price",
+      "title": "Collect current consumer price, original price, currency, discount, and stock status",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/impact.mjs",
+            "exports": [
+              "createImpactPartnerCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "impact"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Schema mapping is implemented and fixture-tested; the current price and inventory values have not been independently replayed for an authorized Impact partner account."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Read search results using the documented 1-based Page and PageSize parameters",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/impact.mjs",
+            "exports": [
+              "createImpactPartnerCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "impact"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The API documents Page as 1-based and PageSize default 100. The response schema does not document a total count/next-page marker, so the client returns continuation as possible or unknown rather than claiming complete traversal.",
+      "blocker": "No live partner response has established account-specific page behavior or a full-feed stopping condition."
+    },
+    {
+      "id": "catalog.list",
+      "title": "List partner-visible product catalogs and metadata",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/impact.mjs",
+            "exports": [
+              "createImpactPartnerCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "impact"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Credential-bearing FTPLocations and download-location fields are deliberately discarded from result objects.",
+      "blocker": "Requires an authorized Partner API token with Catalog read access."
+    },
+    {
+      "id": "catalog.taxonomy",
+      "title": "Return item categories included in each catalog result",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/impact.mjs",
+            "exports": [
+              "createImpactPartnerCatalogClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "impact"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-affiliate-networks.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Item Category/SubCategory values are merchant/catalog supplied; a complete taxonomy endpoint is not claimed.",
+      "blocker": "No authorized live partner catalog was available to inspect category coverage."
+    },
+    {
+      "id": "auth.login",
+      "title": "Interactive impact.com login flow",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This task implements only the documented Partner API HTTP Basic read client; browser login and token issuance are outside this scope. An Account SID/Auth Token with Catalog read scope are still required.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "supplier.wholesale_cost",
+      "title": "Read dropshipping supplier acquisition cost or fulfillment terms",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The current documented Partner Item model exposes consumer CurrentPrice/OriginalPrice, stock, and shipping fields. It does not expose partner wholesale acquisition cost, supplier checkout, or fulfillment terms.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.program_write",
+      "title": "Apply to a brand program or create/update an affiliate link",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This service adapter is scoped to read-only product discovery and price collection; program applications and link writes are outside it.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

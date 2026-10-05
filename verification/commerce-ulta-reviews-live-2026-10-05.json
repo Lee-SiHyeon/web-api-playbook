@@ -1,0 +1,126 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ulta",
+  "capabilityId": "reviews.read",
+  "checkedAt": "2026-10-05T03:09:59.220Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "publicFrontendKeyUsed": true,
+  "userCredentialsUsed": false,
+  "noUserCredentials": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://ui.powerreviews.com/tag-builds/10578/4.0/reviews.engine.js",
+    "sourceSha256": "c5962864e32a3b9eb466c968d870d0f112631d37e82c57d0d0741625628ee9f3"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://display.powerreviews.com",
+    "path": "/m/6406/l/en_US/product/pimprod2057119/reviews",
+    "checkedAt": "2026-10-05T03:09:59.220Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "apikey",
+      "_noconfig",
+      "paging.size"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 147906,
+    "responseSha256": "7f31613feb2cf33b74466a3f5bc335bc88b2ac572a857d9580ff0c5db6d021ee",
+    "readOnly": true,
+    "publicFrontendKeyUsed": true,
+    "userCredentialsUsed": false,
+    "noUserCredentials": true
+  },
+  "bootstrapRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/p/serum-lipstick-pimprod2057119",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1497738,
+    "checkedAt": "2026-10-05T03:09:59.021Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "sku"
+    ]
+  },
+  "bootstrapRequests": [
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/p/serum-lipstick-pimprod2057119",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1497738,
+      "checkedAt": "2026-10-05T03:09:59.021Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "sku"
+      ]
+    }
+  ],
+  "productIdMatched": true,
+  "pagination": {
+    "page": 1,
+    "pageSize": 20,
+    "total": 429,
+    "pagesTotal": 22,
+    "hasMore": true,
+    "paginationVerified": true
+  },
+  "implementation": {
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  },
+  "result": {
+    "productIdMatched": true,
+    "paginationVerified": true,
+    "page": 1,
+    "pageSize": 20,
+    "total": 429,
+    "pagesTotal": 22,
+    "returnedReviewCount": 20,
+    "bodyCount": 20,
+    "ratingCount": 20,
+    "postedAtCount": 20,
+    "photoCount": 5,
+    "photoHosts": [
+      "https://res.cloudinary.com"
+    ],
+    "hasMore": true,
+    "nextPage": 2,
+    "reviewerProfilesReturned": false,
+    "publicKeyValuePersisted": false,
+    "publicFrontendKeyUsed": true,
+    "photoRead": {
+      "method": "GET",
+      "origin": "https://res.cloudinary.com",
+      "path": "/powerreviews/image/upload/f_auto,q_auto,h_768,w_auto/d_portal-no-product-image_ttlfpi.svg/prod/ommyclekaf0muekrhj4a.jpg",
+      "httpStatus": 200,
+      "mime": "image/jpeg",
+      "responseBytes": 67179,
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false
+    }
+  }
+}

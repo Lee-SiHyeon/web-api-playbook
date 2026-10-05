@@ -12,9 +12,13 @@
 |---|---|
 | [SKILL.md](SKILL.md) | 에이전트가 따르는 전환 절차와 증거 기준 |
 | [공통 도구](references/runtime-modules.md) | origin별 HTTP 세션, 쿠키 회전, DPAPI, 잠금, 쓰기 저널 |
-| [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
+| [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice·[Inpock](references/inpock-login.md) 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
 | [아고다 공개 요금·행사](references/agoda-http.md) | 알려진 16개 숙소의 날짜별 KRW 요금과 행사 카드 direct HTTP, 독립 계약·부분 제공 범위 표시 |
 | [쇼핑·여행커넥트](references/naver-connect.md) | 네이버 브랜드커넥트 상품 검색·상세·수수료·링크 발급 및 관리, DPAPI 세션 재사용 |
+| [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
+| [해외 제휴·드랍쉬핑 상품 수집](references/commerce-collection.md) | 공식 제휴/공급사 API, Printful 공개 가격 피드, Allbirds·ColourPop, JSON·CSV 수집과 가격 변화 비교 |
+| [제휴 프로그램별 연결](references/affiliate-program-adapters.md) | Olive Young·Shopee·Sephora·Ulta·Rakuten, 브랜드 카탈로그 확인과 제휴 링크·수수료의 검증 범위 |
+| [상품 상세·리뷰 조회](references/catalog-read-apis.md) | 상세 설명·이미지·옵션, 리뷰 본문·사진·페이지 조회와 제휴 링크를 제외한 기능 감사 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
@@ -83,9 +87,22 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 
 ## 3. 기존 서비스를 사용할 때
 
+### 해외 쇼핑몰 비로그인 조회
+
+해외 제휴·드랍쉬핑 상품과 가격 수집은 [commerce 실행법](references/commerce-collection.md)을 사용한다. `npm run commerce -- providers`로 공개 피드·스토어와 자격 정보가 필요한 공식 API 구현을 구분하고, 결과를 JSON·CSV로 수집할 수 있다. 실제 인증 조회를 확인하지 못한 서비스는 체크리스트에 미완료로 남긴다.
+
+```bash
+npm run retail -- aliexpress product-seo --product-id=1005011947482958
+npm run retail -- ebay suggest --query="usb cable"
+npm run retail -- shopify predictive-search --query=runner --limit=5
+npm run retail -- status
+```
+
+지원 명령은 브라우저 없이 HTTP로 실행한다. 검색 제안, SEO 정보, 가격·재고, 상품 목록을 별도 기능으로 구분하며 [현재 지원 범위와 차단 지점](references/retail-public-apis.md)을 확인한다. 새 서비스의 기능은 자동 [체크리스트](checklists/README.md)에 포함한다.
+
 ### 웹 로그인·세션 자동 복구
 
-마이리얼트립·쿠팡 파트너스·X·링크프라이스의 실제 웹 요청 기반 실행기는 [웹 로그인 사용법](references/web-login-usage.md)을 따른다.
+마이리얼트립·쿠팡 파트너스·X·링크프라이스·인포크의 실제 웹 요청 기반 실행기는 [웹 로그인 사용법](references/web-login-usage.md)을 따른다.
 
 ```powershell
 node scripts/web-login.mjs myrealtrip ensure
@@ -93,12 +110,27 @@ node scripts/web-login.mjs coupang ensure
 node scripts/web-login.mjs x ensure
 node scripts/x-read.mjs sama 3
 node scripts/web-login.mjs linkprice ensure
+node scripts/web-login.mjs inpock ensure
 ```
 
 저장 비밀번호 로그인, 저장 웹 세션 재사용, SSO 복구는 서비스별 지원 범위가 다르다.
 위 문서에 최초 연결, OTP 재개, 업무 API 연결과 실제 확인 범위를 구분했다.
 요청 필드와 계정 제한은 [현재 관측 계약](references/web-login-observed-contracts.md),
 실제 HTTP 성공 단계는 [실행 기록](verification/web-login-2026-09-24.json)에 있다.
+
+인포크의 Linux/macOS 메모리 stdin 실행과 Windows 보호 저장 연결은
+[Inpock 사용법](references/inpock-login.md)을 따른다. 비밀번호 로그인과 보호 계정 조회를 추가했으며,
+실제 HTTP 확인 범위는 [2026-10-04 검증 기록](verification/inpock-login-2026-10-04.json)에 있다.
+
+인포크의 [블록·프로필·통계 조회와 제휴 발행 준비](references/inpock-features.md)는
+`scripts/inpock.mjs inventory --credentials-stdin`, `scripts/inpock-prepare.mjs`를 사용한다.
+발행 준비 도구는 후보 JSON만 만든다. 실제 공개 카드 등록은
+`scripts/inpock.mjs publish --input=CARD.json --credentials-stdin`으로 실행하며,
+쓰기 저널·중복 방지·쿠키 없는 public readback과 실제 공개 화면까지 검증했다.
+[발행 증거](verification/inpock-publication-proof-2026-10-05.json)를 참고한다.
+
+외부 Gemini·Grok·ChatGPT·Google Flow 클라이언트의 로그인 producer 경계와
+Google UA/Cloudflare 실측은 [로그인 진단 기록](references/provider-login-diagnostics.md)을 참고한다.
 
 먼저 [서비스별 실행표](service-packs/README.md)에서 필요한 pack을 고릅니다. 공통 CLI에 서비스 인증을 억지로 변환할 필요 없이, 각 pack의 기존 로그인/발행 런처를 사용할 수 있습니다.
 
@@ -142,6 +174,27 @@ npm ci --ignore-scripts
 - Threads: 루트 의존성을 사용합니다. [사용법](service-packs/threads/README.md). 익명 HTTP bootstrap과 로그인 계정 인증을 구분합니다.
 
 ## 4. 새 서비스를 HTTP로 전환할 때
+
+### 기능 체크리스트 자동 검사
+
+```bash
+npm run checklist
+node scripts/checklist.mjs --service=inpock --run-tests
+npm run checklist:strict
+```
+
+첫 명령은 등록된 모든 서비스의 코드·테스트·저장된 실측 증거를 검사한다.
+로그인이나 사이트 쓰기는 수행하지 않는다. 마지막 명령은 필수 기능이 누락되거나
+실측/현재 revision 확인이 부족하면 실패 코드로 종료한다.
+관측한 소스 후보, 구현, 실제 요청, 결과 대사, 증거의 코드 버전 일치를 분리한다.
+[체크리스트 작성·확장 방법](checklists/README.md)을 따른다.
+
+새 서비스 작업은 스킬의 기본 종료 조건으로 이 검사를 사용한다.
+로그인 하나만 만든 뒤 프로필·분류·등록/수정/삭제·이미지 같은 누락 기능을 잊지 않도록 목록에 남긴다.
+새 서비스는 `checklists/template.json`을 기반으로 기능 적용 범위를 명시한다.
+
+인포크 [프로필 편집 실행기](references/inpock-profile.md)는 `profile-get`, `profile-preview`, `profile-edit`를 제공한다.
+현재 코드·테스트·실제 조회는 확인했으며, 지정된 새 값으로 저장하는 API 실증은 아직 대기 상태다.
 
 ### 4-1. 관측 자료에서 계약 만들기
 

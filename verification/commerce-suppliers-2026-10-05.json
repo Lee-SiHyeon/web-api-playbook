@@ -1,0 +1,104 @@
+{
+  "schema": "web-api-commerce-suppliers-verification-v1",
+  "checkedAt": "2026-10-04T20:12:53.956Z",
+  "secretsPersistedInEvidence": false,
+  "services": {
+    "cjdropshipping": {
+      "contract": "first_party_documented_api",
+      "documentedReadOperations": [
+        "product/listV2",
+        "product/productDetail/query",
+        "product/getCategory"
+      ],
+      "authentication": "CJ-Access-Token required",
+      "noCredentialProbe": {
+        "method": "GET",
+        "path": "/api2.0/v1/product/listV2",
+        "httpStatus": 401,
+        "mime": "application/json",
+        "responseBytes": 165,
+        "businessCode": 1600002,
+        "classification": "authentication_required"
+      },
+      "authenticatedLiveReplay": false,
+      "reason": "No token supplied; no account enrollment or token acquisition was attempted."
+    },
+    "printful": {
+      "catalogApi": {
+        "contract": "first_party_documented_api",
+        "authentication": "OAuth Bearer required",
+        "noCredentialProbe": {
+          "method": "GET",
+          "path": "/v2/catalog-products?limit=1&offset=0",
+          "httpStatus": 401,
+          "mime": "application/json",
+          "responseBytes": 146,
+          "classification": "authentication_required"
+        },
+        "authenticatedLiveReplay": false,
+        "reason": "No token supplied."
+      },
+      "publicFeed": {
+        "classification": "first_party_documented_feed_not_xhr",
+        "liveProof": "verification/printful-public-feed-live-2026-10-05.json",
+        "archiveBytes": 447095,
+        "archiveSha256": "63942c3f81ccc5148c3978e0bd2520d6707255051902a11b723ce07dd8b0610a",
+        "lastModified": "Sun, 04 Oct 2026 00:10:10 GMT",
+        "redirectStatus": 302,
+        "finalStatus": 200,
+        "totalVariants": 22635,
+        "regionCount": 8,
+        "regionSummaries": [
+          {
+            "region": "USA",
+            "productCount": 11279,
+            "currency": "USD"
+          },
+          {
+            "region": "Europe",
+            "productCount": 4915,
+            "currency": "EUR"
+          },
+          {
+            "region": "Australia",
+            "productCount": 1250,
+            "currency": "AUD"
+          },
+          {
+            "region": "Japan",
+            "productCount": 601,
+            "currency": "JPY"
+          },
+          {
+            "region": "Canada",
+            "productCount": 1063,
+            "currency": "CAD"
+          },
+          {
+            "region": "Brazil",
+            "productCount": 119,
+            "currency": "BRL"
+          },
+          {
+            "region": "UK",
+            "productCount": 2905,
+            "currency": "GBP"
+          },
+          {
+            "region": "China",
+            "productCount": 503,
+            "currency": null
+          }
+        ]
+      }
+    },
+    "printify": {
+      "contract": "first_party_documented_api",
+      "authentication": "Bearer token with catalog.read scope required",
+      "baseCatalogPrice": "not available in the reviewed generic catalog variants response; no amount/currency is returned",
+      "shippingPrice": "V2 documents per-variant regional shipping amounts and ISO currency",
+      "liveReplay": false,
+      "reason": "No token supplied; no account/app enrollment attempted."
+    }
+  }
+}

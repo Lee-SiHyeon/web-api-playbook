@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-10-05",
+  "services": {
+    "sephora": {
+      "affiliateProgram": {
+        "programName": "Sephora Affiliates",
+        "network": "Rakuten Advertising",
+        "officialSource": "https://www.sephora.com/beauty/affiliates/",
+        "commissionRate": null,
+        "commissionRateStatus": "not_published_on_official_public_page",
+        "note": "Current terms and rates require the publisher program dashboard; user-provided ranges are not treated as verified rates."
+      },
+      "publicCatalog": {
+        "contractProvenance": "browser_xhr_observed",
+        "sourceURL": "https://www.sephora.com/search",
+        "method": "GET",
+        "origin": "https://www.sephora.com",
+        "path": "/api/v2/catalog/search/",
+        "mime": "application/json",
+        "queryFields": {
+          "type": "keyword",
+          "q": "search phrase",
+          "page": "page size, observed at 60",
+          "currentPage": "1-based result page",
+          "countryCode": "US"
+        },
+        "responseFields": {
+          "keyword": "matches the normalized query",
+          "totalProducts": "total matching products",
+          "products[].productId": "product entity identifier",
+          "products[].productName": "product name",
+          "products[].brandName": "brand name",
+          "products[].currentSku.skuId": "current SKU identifier",
+          "products[].currentSku.listPrice": "displayed list-price string; may be a range",
+          "products[].onSaleData": "sale metadata; observed value NONE for the sampled lipstick pages",
+          "products[].targetUrl": "retailer product URL; normalized to same-origin path and bound to productId/currentSku.skuId"
+        },
+        "currencyScope": "US market only; USD is the observed price currency",
+        "salePrice": "not returned in the observed search response; do not infer a discount from listPrice",
+        "productDetailApiCandidate": {
+          "sourceField": "products[].url",
+          "observedPattern": "https://www.sephora.com/api/catalog/products/{productId}?preferedSku={skuId}",
+          "provenance": "returned by the observed catalog-search XHR",
+          "directReplay": "A cookie-free Node request to the exact observed candidate timed out after 20 seconds before receiving response headers; not implemented as a supported detail operation."
+        }
+      },
+      "unverified": [
+        "Product-detail XHR: anonymous PDP navigation returned an Akamai Access Denied page.",
+        "Non-US locale and currency contracts are not implemented."
+      ]
+    },
+    "ulta": {
+      "affiliateProgram": {
+        "programName": "Ulta Beauty Impact Program",
+        "network": "Impact",
+        "officialSource": "https://www.ulta.com/company/affiliate",
+        "commissionRate": null,
+        "commissionRateStatus": "not_published_on_official_public_page",
+        "note": "Current terms and rates require the publisher program dashboard; user-provided ranges are not treated as verified rates."
+      },
+      "publicCatalog": {
+        "contractProvenance": "browser_xhr_observed",
+        "sourceURL": "https://www.ulta.com/search",
+        "method": "GET",
+        "origin": "https://www.ulta.com",
+        "path": "/dxl/graphql",
+        "mime": "application/json",
+        "operation": "Page / NonCachedPage GraphQL page-data requests were observed during anonymous search and product-detail journeys.",
+        "status": "direct anonymous response observed for the exact captured request, but durable request construction from stable first-party inputs is not yet verified; no Ulta client is claimed.",
+        "observedFields": [
+          "data.Page.content.items[].productId",
+          "data.Page.content.items[].skuId",
+          "data.Page.content.items[].brandName",
+          "data.Page.content.items[].productName",
+          "data.Page.content.items[].listPrice",
+          "data.Page.content.items[].salePrice",
+          "data.Page.content.page",
+          "data.Page.content.pageSize",
+          "data.Page.content.resultCount"
+        ],
+        "salePrice": "present in the returned schema; field values must be preserved separately when a durable request is established"
+      },
+      "unverified": [
+        "A reusable pure-HTTP search/detail client: direct calls depend on request query/header inputs that have not been shown to be stable first-party data rather than browser-generated opaque inputs.",
+        "Ulta country/locale price semantics and currency code were not independently bound to the observed price values."
+      ]
+    }
+  }
+}

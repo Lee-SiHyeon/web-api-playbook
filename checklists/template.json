@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "service": "example",
+  "description": "Copy into checklists/services/<service>.json and replace the examples with the service's real operations. Keep unsupported operations as gaps or mark them conditional with a reason.",
+  "capabilities": [
+    {
+      "id": "auth.owner",
+      "title": "Read the authenticated owner and bind it to the intended account",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/example-auth.mjs", "exports": ["createExampleAuth"] }],
+        "cli": [{ "path": "scripts/example.mjs", "tokens": ["login"] }],
+        "tests": ["tests/example-auth.test.mjs"]
+      },
+      "evidence": [{
+        "kind": "http-read-v1",
+        "origin": "https://example.com",
+        "path": "/v1/me",
+        "files": ["verification/example-owner-live.json"],
+        "hashPaths": ["lib/example-auth.mjs", "scripts/example.mjs"]
+      }],
+      "sourceEvidence": []
+    },
+    {
+      "id": "profile.read",
+      "title": "Read the owner's profile",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "profile.edit",
+      "title": "Edit the profile and independently read it back",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "categories.contract",
+      "title": "Identify the actual category or collection contract",
+      "priority": "required",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": [],
+      "note": "Whether this product has a distinct category or folder API is unknown."
+    },
+    {
+      "id": "content.crud",
+      "title": "Create, read, update and delete managed content",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "content.order_visibility",
+      "title": "Control order and visibility",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "content.schedule_archive",
+      "title": "Schedule or archive when the product and account support it",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "Check product support and current account entitlement."
+    },
+    {
+      "id": "media.upload",
+      "title": "Upload media and verify stored references",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "publishing.idempotency",
+      "title": "Suppress duplicate writes on the same intent and read back the result",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "publishing.public_readback",
+      "title": "Verify the public result as an anonymous visitor",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.workflow",
+      "title": "Connect a verified source to prepared content and publication",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "service": "ebay",
+  "description": "Anonymous, read-only eBay public XHR scope. Search suggestions and query-linked category hints are live-replayed. Product listings, item detail, category browsing and result pagination require a separate observed and independently replayed XHR contract; eBay's SSR pages do not satisfy the API-only gate.",
+  "capabilities": [
+    {
+      "id": "suggestions.read",
+      "title": "Read public keyword suggestions and query-linked category hints without a login or developer token",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/ebay.mjs",
+            "exports": [
+              "createEbayPublicClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "ebay",
+              "suggest"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-ebay.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://autosug.ebay.com",
+          "path": "/autosug",
+          "files": [
+            "verification/retail-ebay-suggest-cli-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/retail/ebay.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs",
+            "verification/retail-ebay-suggest-cli-result-2026-10-05.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The live response contains suggestions and optional category hints, not product search results or a complete category taxonomy."
+    },
+    {
+      "id": "search.listings",
+      "title": "Search product listings through an anonymous XHR endpoint",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/ebay-catalog.mjs",
+            "exports": [
+              "createEbayCatalogClient"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "tests/retail-ebay-catalog.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Current anonymous search page returns item listings in HTML; no independently replayed XHR listing endpoint observed."
+    },
+    {
+      "id": "item.detail",
+      "title": "Read a listing-bound item identity and complete detail object through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/ebay-catalog.mjs",
+            "exports": [
+              "createEbayCatalogClient"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "tests/retail-ebay-catalog.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed item 306337924086 opened a sold-out ePID hub; 13 XHR/fetch requests supplied no product-detail JSON, and no direct replayable detail route was established."
+    },
+    {
+      "id": "item.price",
+      "title": "Read current listing price and currency through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The sampled listing redirected to a sold-out product hub; no listing-specific price and currency XHR was observed or replayed."
+    },
+    {
+      "id": "item.description",
+      "title": "Read full listing description through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Product information was visible in the document; no listing description XHR or independently replayed fragment was verified."
+    },
+    {
+      "id": "item.images",
+      "title": "Read primary and secondary listing images through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [{ "files": ["references/retail-ebay-contracts.json"] }],
+      "blocker": "The observed secondary-image request needs pageci and listing IDs derived from the document; no standalone direct replay has been verified."
+    },
+    {
+      "id": "item.options",
+      "title": "Read listing options and variant-specific selection data through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The sampled product hub showed variation controls, but no variant-selection XHR schema or direct replay was verified."
+    },
+    {
+      "id": "reviews.identity",
+      "title": "Map listing ID to the correct review-bearing product identity",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "One product page linked listing iid to ePID 25056255340, but no reusable XHR contract maps arbitrary listing IDs to review-bearing ePIDs. Seller feedback is a separate scope."
+    },
+    {
+      "id": "reviews.rating",
+      "title": "Read product review count and rating distribution",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "A sampled ePID page showed 558 ratings in its document; no rating-summary XHR or independent JSON replay was observed."
+    },
+    {
+      "id": "reviews.list",
+      "title": "Read full public product review text and metadata",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Review cards and text were in non-script HTML from a 200 document GET; the observed JSON component XHR contained no review fields. No review-data XHR was observed."
+    },
+    {
+      "id": "reviews.photos",
+      "title": "Read photos attached to public product reviews",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No review photos appeared on the sampled ePID, so photo fields and media URLs remain unverified; no review-data XHR was observed."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Traverse all public review pages with a bounded stopping condition",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The sampled page linked pgn=1–7 as HTML documents; no review-data XHR pagination or terminal condition was verified."
+    },
+    {
+      "id": "categories.read",
+      "title": "Read browse categories through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/ebay-catalog.mjs",
+            "exports": [
+              "createEbayCatalogClient"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "tests/retail-ebay-catalog.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No anonymous category XHR response schema and direct replay established."
+    },
+    {
+      "id": "search.pagination",
+      "title": "Traverse search results with bounded XHR pagination",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/ebay-catalog.mjs",
+            "exports": [
+              "createEbayCatalogClient"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "tests/retail-ebay-catalog.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Search result pagination is currently a document route, not an observed XHR contract."
+    },
+    {
+      "id": "images.enrich",
+      "title": "Read secondary listing images from the observed auxiliary XHR",
+      "priority": "optional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/retail-ebay-contracts.json"
+          ]
+        }
+      ],
+      "note": "The browser request includes a pageci value and listing IDs from the HTML page. A standalone anonymous input source and replay are unverified."
+    },
+    {
+      "id": "auth.login",
+      "title": "Sign in to a buyer or seller account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user explicitly scoped the marketplace integration to public reads without login.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "transactions.write",
+      "title": "Cart, bid, order, address or seller mutation",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested only public anonymous reads; account and transaction writes are outside the authorized scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

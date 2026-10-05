@@ -1,0 +1,194 @@
+{
+  "schemaVersion": 1,
+  "service": "amazon",
+  "description": "Anonymous public Amazon.com catalog XHR scope. Search/detail documents and observed UI XHRs do not satisfy the required API operations. See references/retail-amazon-contracts.json and verification/retail-amazon-live-2026-10-05.json.",
+  "capabilities": [
+    {
+      "id": "catalog.search",
+      "title": "Search validated main product cards with displayed price and thumbnail through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [{"path": "lib/retail/amazon.mjs", "exports": ["createAmazonPublicClient", "parseAmazonSearchStream"]}], "cli": [], "tests": ["tests/retail-amazon.test.mjs"]},
+      "evidence": [{"kind": "http-public-read-v1", "method": "POST", "readOnly": true, "origin": "https://www.amazon.com", "path": "/s/query", "mime": "application/json-amazonui-streaming", "files": ["verification/retail-amazon-search-live-2026-10-05.json"], "hashPaths": ["lib/retail/amazon.mjs"]}],
+      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
+      "note": "Direct POST /s/query works for page 1 without cookies or qid/xpid. Result scope is validated main cards; some responses report additional ASINs and are marked partial."
+    },
+    {
+      "id": "catalog.product",
+      "title": "Read full product detail by ASIN from a validated anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
+      "blocker": "A related-product vendor JSON GET was observed once, but its ASIN did not match the current detail page. Direct replay returned 415 without the browser's exact Accept; source-backed anonymous HTTP attempts returned 406, 503 or 404."
+    },
+    {
+      "id": "catalog.categories",
+      "title": "List or filter product categories through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No category data XHR was observed in the bounded anonymous journey."
+    },
+    {
+      "id": "catalog.pagination",
+      "title": "Page through validated main search cards using the anonymous XHR page parameter",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [{"path": "lib/retail/amazon.mjs", "exports": ["createAmazonPublicClient"]}], "cli": [], "tests": ["tests/retail-amazon.test.mjs"]},
+      "evidence": [{"kind": "http-public-read-v1", "method": "POST", "readOnly": true, "origin": "https://www.amazon.com", "path": "/s/query", "mime": "application/json-amazonui-streaming", "files": ["verification/retail-amazon-pagination-live-2026-10-05.json"], "hashPaths": ["lib/retail/amazon.mjs"]}],
+      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
+      "note": "Pages 1, 2 and 3 yielded distinct verified main cards without cookies. Full catalog coverage and last-page termination remain separate gaps."
+    },
+    {
+      "id": "catalog.pagination_termination",
+      "title": "Detect the last accessible search page and report full result coverage",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The streaming metadata's total/ASIN counts do not prove all products or last-page access; termination has not been replayed."
+    },
+    {
+      "id": "catalog.price_availability",
+      "title": "Distinguish current/list price, coupon, currency and stock from product data",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Search-card displayed current price and explicit KRW amount are verified. Full product offer/list price, coupon, checkout price and stock semantics are not replayed."
+    },
+    {
+      "id": "catalog.description",
+      "title": "Read product description, features and specifications through a validated anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "A public product document contained description markup, but no independently replayed XHR for full description or specifications was found."
+    },
+    {
+      "id": "catalog.photos",
+      "title": "Read all product image URLs, sizes and variants through a validated anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Search-card thumbnail URLs are verified. Full gallery images, sizes and variants remain unverified because the anonymous product/v2 XHR did not return a product entity."
+    },
+    {
+      "id": "catalog.options",
+      "title": "Read selectable variations and child ASIN mappings through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
+      "blocker": "A twisterDimensionSlotsDefault XHR was observed once, but its exact query values and result schema were not captured or independently replayed."
+    },
+    {
+      "id": "reviews.full_body",
+      "title": "Read individual full review bodies, rating and date through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "An anonymous browser visit to a product-reviews page showed Sign in, with zero review-body nodes and no review-data XHR. Rating counts are not full review text."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Page through complete review bodies with a verified continuation contract",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No anonymous review-body page or review pagination XHR was observed; the visited review page displayed Sign in."
+    },
+    {
+      "id": "home.dynamic_cards",
+      "title": "Read homepage card fragments from anonymous XHR when useful",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The streaming XHR replayed but its 10 encrypted inputs came from the browser page; their engine-free acquisition is unverified, and sampled cards contained no product paths or price nodes."
+    },
+    {
+      "id": "auth.login",
+      "title": "Acquire a personal Amazon login",
+      "priority": "required",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested anonymous public reads without login.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "profile.read_edit",
+      "title": "Read or edit an Amazon account profile",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Personal account/profile operations are outside this anonymous public-read scope.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "cart.write",
+      "title": "Change a cart or address",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Cart and address writes are outside the requested read-only scope.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "orders.write",
+      "title": "Place an order or send a message",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Ordering and messaging are outside the requested read-only scope.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.private_api",
+      "title": "Use the credentialed Associates Creators API",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "Creators API requires Associates eligibility and API credentials; this request is limited to anonymous public XHR.",
+      "requirement": "live",
+      "implementation": {"files": [], "cli": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

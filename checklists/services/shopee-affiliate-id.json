@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "service": "shopee-affiliate-id",
+  "description": "Shopee Indonesia Affiliate Open API product offer and commission reads, with signed App ID/Secret support. The requested storefront descriptions, gallery, SKU stock/prices, and review bodies/photos/pages are separate surfaces; the public item-detail XHR currently returns access-gate error 90309999, so those features remain explicitly unimplemented.",
+  "capabilities": [
+    {
+      "id": "affiliate.catalog_search",
+      "title": "Search Indonesia affiliate product offers by keyword with current price and rate fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopee-affiliate.mjs",
+            "exports": [
+              "createShopeeAffiliateClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopee.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopee-id"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No valid Shopee Affiliate App ID/Secret or API entitlement was available, so the signed productOfferV2 query returned no catalog business data. The unsigned control error code 10020 is not a live search result."
+    },
+    {
+      "id": "affiliate.product_lookup",
+      "title": "Read an affiliate product by itemId and bind both response IDs to a canonical productLink",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopee-affiliate.mjs",
+            "exports": [
+              "createShopeeAffiliateClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopee.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopee-id"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Exact App ID signed query and itemId binding are contract-tested locally; an authenticated item lookup remains unverified without an authorized App ID/Secret.",
+      "note": "The two documented Shopee-ID product URL layouts are accepted only when both shopId and itemId match the returned node. Query and fragment tracking are stripped; affiliate redirect wrappers are rejected."
+    },
+    {
+      "id": "affiliate.price_and_commission_fields",
+      "title": "Preserve product price ranges, local commission amount, and rate tiers without guessed scaling",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopee-affiliate.mjs",
+            "exports": [
+              "createShopeeAffiliateClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopee.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopee-id"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official schema labels amounts as local currency but does not return a currency code or scaling example. Amounts remain raw strings with currency=null, candidate IDR, and currencyVerified=false until a real business response establishes units."
+    },
+    {
+      "id": "auth.app_id_secret",
+      "title": "Supply official Shopee Affiliate App ID and App Secret in process memory",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The Shopee Explorer uses App ID and Secret. No credentials were available. Credentials must be provided by a runtime secret channel and never saved in the repository or receipts."
+    },
+    {
+      "id": "auth.user_session",
+      "title": "Keep Shopee shopper login cookies out of the signed affiliate API request",
+      "priority": "optional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopee-affiliate.mjs",
+            "exports": [
+              "createShopeeAffiliateClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopee.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "shopee-id"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The client sends no cookies, but the official Explorer includes browser credentials in its fetch. With no valid App ID/Secret, a successful cookie-free request could not be verified."
+    },
+    {
+      "id": "storefront.anonymous_product_detail",
+      "title": "Reach the observed public product-detail XHR without the Shopee traffic/access gate",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The observed GET /api/v4/pdp/get_pc returned an error-only JSON envelope (HTTP 200, error 90309999, no data). Exact cookie-free replay returned HTTP 403 with the same error and is_login=false. The UI fallback says login required, but the API flag does not establish normal account authentication as the cause; access-gate semantics remain unknown."
+    },
+    {
+      "id": "account.login_or_writes",
+      "title": "Sign in, enroll in an affiliate program, create links, modify carts, or place orders",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The requested Shopee subtask covers read-only product and price collection. Account signup, affiliate enrollment, link creation, cart, purchase, seller, and order actions are outside the authorized scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "storefront.product_description_and_images",
+      "title": "Read full item description and product media from a current Shopee-ID detail XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The product page hit the traffic/access gate before a product payload was returned. The captured pdp/get_pc response contained no data. The Affiliate productOfferV2 schema exposes a title and image URL only; it does not expose the full description/gallery content. No detail API is claimed."
+    },
+    {
+      "id": "storefront.item_options_sku_price_stock",
+      "title": "Read product options, per-SKU prices, and stock with exact option-to-SKU binding",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The gated detail flow emitted no option/SKU request with a product result. Affiliate productOfferV2 provides product-level price/price ranges but no options, SKU prices, or stock. No seller-owned-product API is substituted for marketplace catalog reads."
+    },
+    {
+      "id": "storefront.review_bodies_and_pagination",
+      "title": "Read full review text and traverse review pages using observed pagination fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The browser was gated before a review section or review XHR was reached, so no review-list path, query contract, body schema, or page cursor was observed. The Affiliate GraphQL schema contains no review body or review pagination fields."
+    },
+    {
+      "id": "storefront.review_photos",
+      "title": "Read photo URLs attached to individual product reviews",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The review UI/API was not reached because the public product detail request was gated. No review-photo field or media request was captured or independently replayed; no guessed endpoint or image URL mapping is implemented."
+    }
+  ]
+}

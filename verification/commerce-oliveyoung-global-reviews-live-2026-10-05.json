@@ -1,0 +1,91 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "reviews.body",
+  "checkedAt": "2026-10-05T02:59:09.627Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/product/detail?prdtNo=GA240824996"
+  },
+  "request": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/review-list",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:09.627Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "filterYn",
+      "prdtNo",
+      "prdtGbnCode",
+      "movReviewYn",
+      "photoReviewYn",
+      "optnYn",
+      "transUseYn",
+      "pageNum",
+      "rowsPerPage",
+      "sort"
+    ],
+    "responseBytes": 13818,
+    "responseSha256": "fcf0a263529e1095aba1c1826e8d83fe9789e1ce30cb5312a5ad5121701bfebc"
+  },
+  "productIdMatched": true,
+  "paginationVerified": true,
+  "totalReviews": 9663,
+  "pageNum": 1,
+  "rowsPerPage": 10,
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7465d9a636ebef870a2818e5dbe59a255c0edf366dc5875e1752406e21e55357"
+  },
+  "initialPage": {
+    "pageNum": 1,
+    "returnedCount": 10,
+    "totalCount": 9663,
+    "nextPage": 2,
+    "productIdMatched": true
+  },
+  "nextPageProbe": {
+    "pageNum": 2,
+    "returnedCount": 10,
+    "totalCount": 9663
+  },
+  "terminalPageProbe": {
+    "pageNum": 967,
+    "returnedCount": 3,
+    "totalCount": 9663,
+    "nextPage": null
+  },
+  "beyondTerminalProbe": {
+    "pageNum": 968,
+    "returnedCount": 0,
+    "totalCount": 9663,
+    "nextPage": null
+  },
+  "rowPageSizeProbe": {
+    "rowsPerPage": 5,
+    "returnedCount": 5
+  },
+  "reviewFields": [
+    "prdtReviewNo",
+    "conText",
+    "previewScore",
+    "reviewRgstYmd",
+    "snglOptnName",
+    "reviewMediaList"
+  ],
+  "privateReviewerFieldsExcluded": [
+    "loginId",
+    "mbrNo"
+  ],
+  "associatedReviewRows": 4
+}

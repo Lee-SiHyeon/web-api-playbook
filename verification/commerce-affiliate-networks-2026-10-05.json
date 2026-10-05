@@ -1,0 +1,66 @@
+{
+  "schema": "commerce-affiliate-catalog-review-v1",
+  "reviewedAt": "2026-10-05",
+  "services": ["awin", "impact"],
+  "secretsPersistedInEvidence": false,
+  "credentialBoundary": "Client factories accept credentials only as runtime arguments; no credentials are bundled in source, manifests, test fixtures beyond explicit fake sentinels, or this review. No production credentials were supplied.",
+  "liveReplay": {
+    "attempted": false,
+    "state": "pending_credentials_and_partner_entitlement",
+    "awin": {
+      "attempted": false,
+      "missingInputs": ["authorized Awin Publisher ID", "Awin API Bearer token", "advertiser feed ID/locale visible to the publisher"]
+    },
+    "impact": {
+      "attempted": false,
+      "missingInputs": ["impact.com Partner Account SID", "impact.com Auth Token with Partner Catalog read scope", "a catalog/item visible to that partner"]
+    },
+    "httpStatuses": [],
+    "responseSamplesPersisted": false
+  },
+  "contractReview": {
+    "awin": {
+      "state": "first_party_documentation_reviewed",
+      "api": "Publisher Enhanced/Google product feed download",
+      "route": "GET https://api.awin.com/publishers/{PUBLISHER_ID}/awinfeeds/download/{ADVERTISER_ID}-retail-{LOCALE}.jsonl",
+      "authentication": "Bearer token",
+      "response": "UTF-8 JSONL is documented and the Enhanced Google product field schema includes id/title/direct link/price/sale price/currency/availability/category; current primary documentation does not resolve the actual JSONL row envelope or map nested example wrappers to that flat schema",
+      "searchAndPagination": "No remote keyword/paging inputs on this route; implementation downloads a complete feed and filters/pages locally",
+      "rowEnvelope": {
+        "state": "unresolved_from_current_primary_docs",
+        "evidence": [
+          "Success JSONL sample uses a product_details wrapper placeholder",
+          "Last-line product illustration uses nested meta/product_basic objects and truncates before price/link",
+          "The Enhanced Google Product example and field reference describe flat Google product fields"
+        ],
+        "implementationBoundary": "The adapter parses only the flat Enhanced Google product object and fails closed on either undocumented wrapper. Fixture mapping does not resolve which row shape the real feed returns.",
+        "liveReplayRequired": true
+      },
+      "documents": [
+        "https://help.awin.com/apidocs/retail-publisher-productapidocumentation-1",
+        "https://help.awin.com/apidocs/api-authentication",
+        "https://success.awin.com/articles/en_US/Knowledge/How-can-I-access-a-Product-Feed"
+      ]
+    },
+    "impact": {
+      "state": "first_party_endpoint_documented_row_schema_ambiguous",
+      "api": "Current impact.com Partner Catalogs API reference, version 16",
+      "routes": [
+        "GET https://api.impact.com/Mediapartners/{AccountSID}/Catalogs",
+        "GET https://api.impact.com/Mediapartners/{AccountSID}/Catalogs/{CatalogId}/Items",
+        "GET https://api.impact.com/Mediapartners/{AccountSID}/Catalogs/{CatalogId}/Items/{Id}",
+        "GET https://api.impact.com/Mediapartners/{AccountSID}/Catalogs/ItemSearch?Keyword=&PageSize=&Page=&Query="
+      ],
+      "authentication": "HTTP Basic Account SID and Auth Token",
+      "itemFields": ["Id", "Name", "Url", "CurrentPrice", "OriginalPrice", "Currency", "StockAvailability", "Category", "EstimatedShipDate"],
+      "documents": [
+        "https://integrations.impact.com/partner-api-reference/reference/catalogs/catalogs",
+        "https://integrations.impact.com/partner-api-reference/readme/authentication",
+        "https://integrations.impact.com/rest-apis/api-quick-start/create-an-api-key"
+      ],
+      "secretBearingFieldHandling": "Catalog FTPLocations are explicitly documented to include authentication credentials and are omitted from normalized client results."
+    }
+  },
+  "commerceBoundary": "Awin and Impact provide affiliate publisher catalog/current consumer-price data in these documented surfaces. Their reviewed Partner feed models do not establish supplier wholesale acquisition costs, dropship orders, fulfillment, or inventory reservation.",
+  "localTests": { "state": "passed", "command": "node --test tests/commerce-affiliate-networks.test.mjs", "cases": 9, "liveProof": false }
+}

@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "service": "cjdropshipping",
+  "description": "CJ API V2 read-only catalog search, product/variant detail, USD catalog prices and country inventory. Calls require a CJ-Access-Token supplied in memory; no token was available for live authenticated replay.",
+  "capabilities": [
+    {
+      "id": "auth.api_credentials",
+      "title": "Use a valid CJ API V2 access token for catalog reads",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/cjdropshipping.mjs",
+            "exports": [
+              "createCjDropshippingClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "cjdropshipping"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The documented endpoints require CJ-Access-Token. No token was supplied in this read-only task; unauthenticated GET returned 401. No account enrollment or token acquisition was attempted.",
+      "note": "This is API-token authorization, not an interactive browser-login flow. See references/commerce-suppliers-contracts.json."
+    },
+    {
+      "id": "catalog.search",
+      "title": "Search products and collect sell price, category, stock summary and paging",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/cjdropshipping.mjs",
+            "exports": [
+              "createCjDropshippingClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "cjdropshipping"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Client request and schema behavior have fixture coverage from the official contract, but a credentialed live catalog search has not run.",
+      "note": "GET /api2.0/v1/product/listV2. The documented sellPrice is USD and is not the same field as direct wholesale pricing. Page and size are bounded to 1-1000 and 1-100."
+    },
+    {
+      "id": "catalog.product_detail_variants",
+      "title": "Read product details, variant prices, wholesale arrays and country-specific inventory",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/cjdropshipping.mjs",
+            "exports": [
+              "createCjDropshippingClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "cjdropshipping"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The documented read endpoint is implemented and fixture-tested; an authenticated live read needs a CJ access token.",
+      "note": "POST /api2.0/v1/product/productDetail/query is a read operation with body {id}. sellprice/variant sell prices are USD. Preserve wholesalePrice arrays without currency conversion because the reviewed array schema does not state their currency. variantInventory distinguishes actual CJ-held stock and virtual factory stock by country."
+    },
+    {
+      "id": "catalog.categories",
+      "title": "Read the CJ product category tree",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/cjdropshipping.mjs",
+            "exports": [
+              "createCjDropshippingClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "cjdropshipping"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-suppliers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The documented category endpoint has not been replayed with an access token."
+    },
+    {
+      "id": "cart.orders.writes",
+      "title": "Add products to a store, submit orders or change account settings",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested read-only supplier product and price collection; store writes, orders, and account changes are outside scope.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

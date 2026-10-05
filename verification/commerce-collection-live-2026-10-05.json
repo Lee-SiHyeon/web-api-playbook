@@ -1,0 +1,72 @@
+{
+  "schema": "web-api-commerce-collection-proof-v1",
+  "service": "commerce",
+  "capabilityId": "collection.public_feed",
+  "checkedAt": "2026-10-04T20:34:26.236Z",
+  "secretsPersistedInEvidence": false,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "sourceRequest": {
+    "method": "GET",
+    "origin": "https://printful.s3.us-west-1.amazonaws.com",
+    "path": "/productExport/printful_products.zip",
+    "checkedAt": "2026-10-04T20:34:24.165Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/zip",
+    "responseBytes": 447095,
+    "responseSha256": "63942c3f81ccc5148c3978e0bd2520d6707255051902a11b723ce07dd8b0610a",
+    "lastModified": "Sun, 04 Oct 2026 00:10:10 GMT"
+  },
+  "sampleOfferCount": 20,
+  "fullOfferCount": 11279,
+  "csvDataRows": 11279,
+  "jsonReadbackMatched": true,
+  "csvReadbackMatched": true,
+  "fullJsonSha256": "660821afa9ef5063697941665fabd9d94488d29bab6276ebd2c87c72db3636a1",
+  "fullCsvSha256": "3499cb77c225b1a9b74db5bb7d1ad873ced1d748614a8db00f453fce8ed58a59",
+  "fullOutputs": {
+    "json": "/home/worker/artifacts/commerce-20261005/feed-final.json",
+    "csv": "/home/worker/artifacts/commerce-20261005/feed-final.csv"
+  },
+  "collection": {
+    "pagesRead": 1,
+    "rowsSeen": 11279,
+    "offersStored": 11279,
+    "maxPages": 3,
+    "maxOffers": 50000,
+    "coverage": "regional_feed",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": true
+  },
+  "sameContextComparisonChanges": 0,
+  "actualRunner": {
+    "entrypoint": "scripts/commerce.mjs",
+    "arguments": [
+      "printful-feed",
+      "collect",
+      "--region=USA",
+      "--limit=50000",
+      "--baseline=/home/worker/artifacts/commerce-20261005/printful-usa-verified.json"
+    ],
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/commerce.mjs": "268436fa358c48dc739c2c39e8f89dd5577b2f4801fd261787d41410af4c0083",
+    "lib/commerce/providers.mjs": "a0321f0f1b7f7c7b6b9a4dae1ee6a25565def787e953287b55827b8d133df054",
+    "lib/commerce/snapshots.mjs": "472f926c977ee3e39effe26db420920c4fa3e21cc7c405b360542e4fc1346d67",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "lib/commerce/printful.mjs": "f41bf663590860d2245663e41fea09e92d5db9ed6049f15340dd1daa718806b2",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "verification/commerce-collection-sample-2026-10-05.csv": "1f8298bd926cf86db622fda9ed249ef0653a6a5a115f50adf83a617308e538f6"
+  },
+  "portableSampleCsvLineEndings": "LF; full native CSV retained unchanged and hashed separately"
+}

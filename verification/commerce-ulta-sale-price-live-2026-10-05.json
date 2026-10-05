@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ulta",
+  "checkedAt": "2026-10-05T03:09:50.526Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.ulta.com/search"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/dxl/graphql",
+    "checkedAt": "2026-10-05T03:09:50.526Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "ultasite",
+      "user-agent",
+      "operationName",
+      "query",
+      "variables"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 896184,
+    "responseSha256": "721454b0861c37314abbc15962cced1e6a54103c806bcedebdb0014c29791bf5"
+  },
+  "bootstrapRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/search",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1252714,
+    "checkedAt": "2026-10-05T03:09:49.346Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "search"
+    ]
+  },
+  "implementation": {
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  },
+  "capabilityId": "catalog.sale_price",
+  "result": {
+    "queryMatched": true,
+    "page": 1,
+    "resultCount": 250,
+    "pageSize": 64,
+    "currency": "USD",
+    "listPriceFieldVerified": true,
+    "salePriceFieldVerified": true,
+    "pricedProductCount": 70,
+    "salePriceNonNullCount": 1,
+    "salePriceSample": {
+      "productId": "pimprod2047199",
+      "skuId": "2629734",
+      "brandName": "ILIA",
+      "productName": "Multi-Stick Cream Blush + Highlighter + Lip Tint",
+      "listPriceText": "$36.00",
+      "salePriceText": "$25.20",
+      "price": {
+        "amount": "25.20",
+        "currency": "USD",
+        "kind": "retail_sale"
+      }
+    }
+  }
+}
