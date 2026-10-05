@@ -53,6 +53,9 @@ function targetUrl(value) {
       !(url.origin === 'https://air-web.myrealtrip.com' && url.pathname === '/results')) fail('TARGET_SCOPE');
   return url.href;
 }
+// Shared with the journaled link flow so idempotency keys use the same normalized,
+// allowlisted target that the POST client sends.
+export function normalizeMyrealtripLinkTarget(value) { return targetUrl(value); }
 function flightInput(input) {
   const keys = ['depAirportCd', 'arrAirportCd', 'airline', 'depDate', 'arrDate', 'tripTypeCd', 'adult', 'child', 'infant', 'cabinClass'];
   fields(input, keys);
@@ -190,7 +193,7 @@ export async function createMyrealtripClient(session, dependencies = {}) {
     }
   }
   return {
-    account, execute,
+    account, ownerId: session.expectedPartnerId, execute,
     async createFlightLink(input) {
       const landing = await execute('createFlightLanding', input);
       try {

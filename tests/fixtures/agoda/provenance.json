@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-05T01:48:52.340Z",
+  "fixtures": [
+    {
+      "file": "property-summary-vietnam.json",
+      "operation": "propertySummarySearch",
+      "capturedRequest": true,
+      "source": "direct_native_fetch",
+      "status": 200,
+      "propertyCount": 16,
+      "pricedKrwProperties": 14,
+      "dates": {
+        "checkIn": "2026-10-13",
+        "checkOut": "2026-10-14"
+      },
+      "occupancy": {
+        "adults": 2,
+        "children": 0,
+        "rooms": 1
+      },
+      "query": "reduced selections from browser observed document; no new endpoint or schema guessed",
+      "sanitization": "only selected factual fields; propertyPage query/hash removed; runtime anonymous IDs absent"
+    },
+    {
+      "file": "campaigns.json",
+      "operation": "campaignCards",
+      "path": "/api/card/campaigns",
+      "status": 200,
+      "cards": 9,
+      "hotelCategoryCards": 7,
+      "couponCategoryCards": 2,
+      "sanitization": "card text and category fields only, allowed URL path without query; context, requestId and meta info omitted"
+    }
+  ],
+  "scope": {
+    "browserUsedForDiscovery": true,
+    "recurringTransport": "pure_http",
+    "cookiesSent": "none on verified GraphQL/cards recurring requests; one separate same-origin own-anonymous-cookie Document diagnostic, still shell-only",
+    "userAgentOverride": false,
+    "browserIdentifiersReused": false,
+    "couponsClaimed": 0,
+    "bookingsCreated": 0
+  }
+}

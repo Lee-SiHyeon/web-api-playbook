@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T23:19:29.547Z",
+  "service": "myrealtrip",
+  "authentication": {
+    "login": "password_and_email_otp",
+    "ownerVerified": true,
+    "credentialProvider": "Windows DPAPI CurrentUser",
+    "renewal": "refresh_token",
+    "freshProcessHealth": true,
+    "browserUsed": false,
+    "credentialValuesRecorded": false
+  },
+  "canary": {
+    "targetUrl": "https://experiences.myrealtrip.com/products/5856370",
+    "targetUiVerified": true,
+    "catalogPriceVerified": false
+  },
+  "create": {
+    "ok": true,
+    "operation": "createLink",
+    "identityVerified": true,
+    "data": {
+      "id": 5524860,
+      "mylink": "https://myrealt.rip/u7M6f2",
+      "expirationMinutes": 604800
+    },
+    "receipt": {
+      "httpStatus": 200,
+      "responseBytes": 159,
+      "checkedAt": "2026-10-04T23:18:48.418Z"
+    },
+    "verification": {
+      "verified": true,
+      "destinationMatches": true,
+      "attributionMatches": true,
+      "credentialSent": false,
+      "followedRedirect": false,
+      "httpStatus": 301
+    },
+    "outcome": "created",
+    "writeAttempted": true,
+    "journal": {
+      "status": "reconciled",
+      "reused": false
+    },
+    "execution": {
+      "mode": "pure_http",
+      "browserUsed": false,
+      "credentialProvider": "Windows DPAPI CurrentUser",
+      "renewal": "stored_session",
+      "writeJournalCoverage": "createLink_only"
+    }
+  },
+  "pendingFix": {
+    "explicitCommand": "node scripts/web-login.mjs myrealtrip login-new",
+    "routineOtpWaitPreserved": true,
+    "outcomeUnknownNeverRearmed": true,
+    "testsPassed": 7
+  },
+  "reuse": {
+    "ok": true,
+    "operation": "createLink",
+    "identityVerified": true,
+    "data": {
+      "id": 5524860,
+      "mylink": "https://myrealt.rip/u7M6f2",
+      "expirationMinutes": 604800
+    },
+    "receipt": {
+      "httpStatus": 200,
+      "responseBytes": 159,
+      "checkedAt": "2026-10-04T23:18:48.418Z"
+    },
+    "verification": {
+      "verified": true,
+      "destinationMatches": true,
+      "attributionMatches": true,
+      "credentialSent": false,
+      "followedRedirect": false,
+      "httpStatus": 301
+    },
+    "outcome": "created",
+    "writeAttempted": false,
+    "journal": {
+      "status": "reconciled",
+      "reused": true
+    },
+    "execution": {
+      "mode": "pure_http",
+      "browserUsed": false,
+      "credentialProvider": "Windows DPAPI CurrentUser",
+      "renewal": "refresh_token",
+      "writeJournalCoverage": "createLink_only"
+    }
+  }
+}

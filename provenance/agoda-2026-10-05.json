@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-05T02:27:36Z",
+  "sourceSnapshot": {
+    "repository": "affiliate-content-operations",
+    "path": "apps/naver-blog-api/research/content-store/travel-price/seller-adapters/agoda.mjs",
+    "gitState": "uncommitted_worktree_snapshot",
+    "commit": null,
+    "sha256": "aa9bda9636112b8f45649e8f6599bb51da52ae30b039c833ce89bcf710e9039f"
+  },
+  "port": {
+    "path": "lib/travel/agoda.mjs",
+    "sha256": "a3789897fddde6c3b18462123291d04f8fdd9aeddbe8c1c4d1e8d067957b4378",
+    "changes": [
+      "Replaced jsdom static script enumeration with parse5 tree traversal; no script execution was added.",
+      "Moved the observed request template and GraphQL query under lib/travel/contracts/agoda/.",
+      "Kept pricing validation, request bounds, retry behavior, and safe result projection from the source snapshot."
+    ],
+    "runtimeDependency": "parse5 8.0.1, already pinned in the canonical root package"
+  },
+  "runtimeContracts": [
+    {
+      "sourcePath": "apps/naver-blog-api/research/content-store/travel-price/fixtures/agoda/public-request-template.json",
+      "sourceSha256": "8e585efbf769f56effb4cc3f79bd0e20960f6004dcca4b363a60db959fdb46ca",
+      "portPath": "lib/travel/contracts/agoda/public-request-template.json",
+      "portSha256": "8e585efbf769f56effb4cc3f79bd0e20960f6004dcca4b363a60db959fdb46ca"
+    },
+    {
+      "sourcePath": "apps/naver-blog-api/research/content-store/travel-price/fixtures/agoda/property-summary-query.graphql",
+      "sourceSha256": "0986d8ed3c4f43f6d10404a2686b1d8e771f703063ef5f4a7bf01744f451459a",
+      "portPath": "lib/travel/contracts/agoda/property-summary-query.graphql",
+      "portSha256": "0986d8ed3c4f43f6d10404a2686b1d8e771f703063ef5f4a7bf01744f451459a"
+    }
+  ],
+  "sanitizedResponseFixtures": [
+    {
+      "sourcePath": "apps/naver-blog-api/research/content-store/travel-price/fixtures/agoda/property-summary-vietnam.json",
+      "sourceSha256": "7cb49406a22405adc69b01537aaae8c356a28a328f36633e77f47ac0bba02057",
+      "portPath": "tests/fixtures/agoda/property-summary-vietnam.json",
+      "portSha256": "7cb49406a22405adc69b01537aaae8c356a28a328f36633e77f47ac0bba02057"
+    },
+    {
+      "sourcePath": "apps/naver-blog-api/research/content-store/travel-price/fixtures/agoda/campaigns.json",
+      "sourceSha256": "3b2dcf5cab25d4673e3c0c7409c77c94e3024a6df66dd00669a3be8ec9c48974",
+      "portPath": "tests/fixtures/agoda/campaigns.json",
+      "portSha256": "3b2dcf5cab25d4673e3c0c7409c77c94e3024a6df66dd00669a3be8ec9c48974"
+    },
+    {
+      "sourcePath": "apps/naver-blog-api/research/content-store/travel-price/fixtures/agoda/provenance.json",
+      "sourceSha256": "2b273762dac32395098034e69d479c7ba1ac6ab76d392c35dface272984dbd54",
+      "portPath": "tests/fixtures/agoda/provenance.json",
+      "portSha256": "2b273762dac32395098034e69d479c7ba1ac6ab76d392c35dface272984dbd54"
+    }
+  ],
+  "sourceObservation": {
+    "checkedAt": "2026-10-05T01:48:52.340Z",
+    "rates": {
+      "source": "direct_native_fetch",
+      "status": 200,
+      "selectedPropertyCount": 16,
+      "pricedKrwPropertyCount": 14,
+      "checkIn": "2026-10-13",
+      "checkOut": "2026-10-14",
+      "occupancy": {
+        "adults": 2,
+        "children": 0,
+        "rooms": 1
+      }
+    },
+    "campaignCards": {
+      "path": "/api/card/campaigns",
+      "status": 200,
+      "cardCount": 9,
+      "hotelCategoryCards": 7,
+      "couponCategoryCards": 2
+    },
+    "scope": {
+      "recurringTransport": "pure_http",
+      "recurringRequestCookies": "none",
+      "userAgentOverride": false,
+      "browserIdentifiersReused": false,
+      "couponsClaimed": 0,
+      "bookingsCreated": 0
+    },
+    "fixtureSanitization": {
+      "propertyUrls": "query and fragment removed",
+      "runtimeAnonymousIdentifiers": "omitted",
+      "campaigns": "card projection only; query strings and fragments removed from URLs"
+    }
+  },
+  "verification": {
+    "command": "node --test tests/agoda.test.mjs",
+    "mode": "offline_fixtures_and_mock_http",
+    "passed": 12,
+    "failed": 0,
+    "canonicalLiveReplayPerformed": true,
+    "liveEvidence": "../verification/agoda-http-2026-10-05.json"
+  }
+}

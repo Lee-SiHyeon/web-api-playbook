@@ -28,6 +28,9 @@ node scripts/web-login.mjs myrealtrip ensure
 node scripts/web-login.mjs myrealtrip health
 node scripts/web-login.mjs myrealtrip login
 node scripts/web-login.mjs myrealtrip refresh
+
+# 사용자 요청에 따라 오래된, 응답이 확정된 OTP 대기를 새 로그인으로 교체
+node scripts/web-login.mjs myrealtrip login-new
 ```
 
 최초 로그인 정보는 `scripts/web-auth-import.mjs myrealtrip-login`의 stdin으로 전달한다.
@@ -50,6 +53,8 @@ node scripts/web-login.mjs myrealtrip otp-send
 비밀번호 로그인·refresh도 전송 전에 같은 방식으로 기록한다. 다음 CLI 실행이 자동 재전송하는 것도 막는다.
 이 경우 보호 조회로 기존 세션을 확인하고 관측 증거를 대조한다. 상태 파일을 지워 성공으로 처리하지 않는다.
 OTP 입력이 진행 중이면 `ensure`가 기존 `otp-send`/`otp-verify` 단계를 반환한다.
+`login-new`는 응답이 확정된 OTP 대기를 명시적으로 교체한다. `*_outcome_unknown` 상태는
+이 명령으로도 다시 전송할 수 없으며 기존 시도를 대사해야 한다.
 
 업무 API도 같은 저장소를 쓴다. 기존 service-pack의 operation/input 형식을 유지하며 session은 넣지 않는다.
 
@@ -59,6 +64,24 @@ OTP 입력이 진행 중이면 `ensure`가 기존 `otp-send`/`otp-verify` 단계
 
 `createLink`, `createFlightLink`는 실제 제휴 링크를 만드는 쓰기다. 해당 업무 지시와 입력이 있을 때만 실행한다.
 기존 응답 모호성·링크 리드백 규칙이 그대로 적용된다.
+
+canonical MyRealTrip CLI는 DPAPI 세션을 불러오므로 입력에 `session`이나 토큰을 넣지 않는다.
+일반 상품 링크 `createLink`는 owner ID와 정규화된 전체 목적지 URL로 사용자 범위의 SHA-256 키를 만들고,
+`%USERPROFILE%\.config\xhr-to-api-only\write-journals\myrealtrip`에 메타데이터만 저널링한 뒤 POST를 한 번 보낸다.
+저널에는 URL 대신 owner/target 지문, 응답의 링크 ID와 단축 경로만 남긴다. 같은 키가 이미 있으면 생성하지 않는다.
+응답이 불명확하거나 POST 직후 프로세스가 중단된 항목은 자동 재시도하지 않는다. 알려진 링크 ID와 경로가 저널에 있으면
+같은 링크를 GET으로만 다시 검증하며, verification 실패도 링크 메타데이터와 함께 대사 대기로 보존한다.
+MyRealTrip 링크 관리 목록 API는 이 경로에 연결되어 있지 않으며 not-found를 근거로 자동 재무장하지 않는다.
+
+```powershell
+# web-api-playbook repository root
+'{"operation":"createLink","input":{"targetUrl":"<current observed allowlisted MyRealTrip URL>"}}' | node scripts/myrealtrip.mjs
+# affiliate-content-operations repository root
+'{"operation":"createLink","input":{"targetUrl":"<current observed allowlisted MyRealTrip URL>"}}' | node apps/affiliate-api-hub/scripts/myrealtrip.mjs
+```
+
+`createFlightLink`는 아직 두 단계 전체를 journal guard로 감싸지 않았다. 실행 결과의
+`writeJournalCoverage: "uncovered_composite_createLink"` 표시는 이 제한을 나타낸다.
 
 ## 쿠팡 파트너스 웹 포털
 
@@ -167,3 +190,11 @@ X의 기존 `fetchXXhr`는 playbook 세션이 있으면 같은 계정 조회·HT
 
 원본 쿠키·토큰·메일 코드는 이 문서나 관측 기록에 기록하지 않는다.
 위 기록은 해당 날짜의 결과다. 상세 단계별 증거는 [실행 기록](../verification/web-login-2026-09-24.json)을 참조한다.
+
+## 2026-10-05 MyRealTrip 재검증
+
+비밀번호 로그인 → 이메일 OTP 제출 → owner 보호 조회 → refresh → 새 프로세스 DPAPI 세션 확인을
+독립 HTTP로 확인했다. `createLink`는 한 번 생성했고 독립 301 Location으로 목적지와 attribution을 대조했다.
+같은 입력을 새 프로세스에서 실행했을 때 GET 검증만 수행하고 POST를 재전송하지 않았다.
+이는 로그인·일반 링크 범위의 확인이며 상품 가격 수집이나 `createFlightLink` 전체 저널 검증을 뜻하지 않는다.
+비밀값을 제외한 [확인 기록](../verification/myrealtrip-flow-2026-10-05.json)을 참조한다.

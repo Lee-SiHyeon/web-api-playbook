@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-05T02:28:33.613Z",
+  "runner": "scripts/agoda.mjs",
+  "rates": {
+    "method": "POST",
+    "path": "/graphql/search",
+    "httpStatus": 200,
+    "requestedPropertyCount": 16,
+    "returnedPropertyCount": 16,
+    "pricedPropertyCount": 14,
+    "priceCoverage": {
+      "status": "partial",
+      "pricedPropertyCount": 14,
+      "unpricedPropertyCount": 2,
+      "quoteCount": 14,
+      "unsupportedCurrencyCount": 0,
+      "invalidAmountCount": 0,
+      "unsupportedCurrencies": [],
+      "unpricedReasonCounts": {
+        "pricing_missing_or_no_offers": 2
+      },
+      "byProperty": [
+        {
+          "propertyId": 25575116,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 78339970,
+          "quoted": false,
+          "reason": "pricing_missing_or_no_offers",
+          "currenciesObserved": []
+        },
+        {
+          "propertyId": 25752166,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 443153,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 86430488,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 80114572,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 5240465,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 5663756,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 87333704,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 89418023,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 36643898,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 28736622,
+          "quoted": false,
+          "reason": "pricing_missing_or_no_offers",
+          "currenciesObserved": []
+        },
+        {
+          "propertyId": 64235957,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 72534957,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 90617314,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        },
+        {
+          "propertyId": 93047103,
+          "quoted": true,
+          "reason": null,
+          "currenciesObserved": [
+            "KRW",
+            "USD",
+            "VND"
+          ]
+        }
+      ]
+    },
+    "stay": {
+      "checkIn": "2026-10-13",
+      "checkOut": "2026-10-14",
+      "adults": 2,
+      "children": 0,
+      "rooms": 1,
+      "currency": "KRW"
+    },
+    "liveReplay": true
+  },
+  "campaigns": {
+    "method": "POST",
+    "path": "/api/card/campaigns",
+    "httpStatus": 200,
+    "returnedCardCount": 9,
+    "liveReplay": true
+  },
+  "execution": {
+    "mode": "pure_http",
+    "htmlParser": "parse5",
+    "browserUsed": false,
+    "cookiesSent": false,
+    "userAgentOverride": false,
+    "runtimeIdentifiersPersisted": false,
+    "automaticRetries": false
+  },
+  "coverage": {
+    "propertyIdSet": "fixed 16 previously observed Vietnam properties",
+    "fullInventoryVerified": false,
+    "checkoutVerified": false,
+    "couponsClaimed": 0,
+    "bookingsCreated": 0
+  },
+  "verification": {
+    "offlineFocusedTestsPassed": 12,
+    "fixtureSuccessSeparateFromLive": true
+  }
+}

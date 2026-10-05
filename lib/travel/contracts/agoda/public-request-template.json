@@ -1,0 +1,226 @@
+{
+  "PropertySummarySearchRequest": {
+    "propertyIds": [
+      25575116,
+      78339970,
+      25752166,
+      443153,
+      86430488,
+      80114572,
+      5240465,
+      5663756,
+      87333704,
+      89418023,
+      36643898,
+      28736622,
+      64235957,
+      72534957,
+      90617314,
+      93047103
+    ]
+  },
+  "ContentSummaryRequest": {
+    "context": {
+      "memberId": 0,
+      "userOrigin": "KR",
+      "locale": "ko-kr",
+      "apo": false,
+      "searchCriteria": {},
+      "platform": {
+        "id": 1
+      },
+      "storeFrontId": 3,
+      "cid": "1901817",
+      "occupancy": {
+        "numberOfAdults": 2,
+        "numberOfChildren": 0,
+        "travelerType": 1
+      },
+      "deviceTypeId": 1,
+      "whiteLabelKey": "",
+      "correlationId": "",
+      "forceExperimentsByIdNew": []
+    },
+    "summary": {
+      "highlightedFeaturesOrderPriority": null,
+      "description": false
+    },
+    "reviews": {
+      "commentary": null,
+      "demographics": {
+        "providerIds": null,
+        "filter": {
+          "defaultProviderOnly": true
+        }
+      },
+      "summaries": {
+        "providerIds": null,
+        "apo": true,
+        "limit": 1,
+        "travellerType": 1
+      },
+      "cumulative": {
+        "providerIds": null
+      },
+      "filters": null
+    },
+    "images": {
+      "page": null,
+      "maxWidth": 0,
+      "maxHeight": 0,
+      "imageSizes": null,
+      "indexOffset": null
+    },
+    "rooms": {
+      "images": null,
+      "featureLimit": 0,
+      "filterCriteria": null,
+      "includeMissing": false,
+      "includeSoldOut": false,
+      "includeDmcRoomId": false,
+      "soldOutRoomCriteria": null,
+      "showRoomSize": true,
+      "showRoomFacilities": true
+    },
+    "nonHotelAccommodation": true,
+    "engagement": true,
+    "highlights": {
+      "maxNumberOfItems": 0,
+      "images": {
+        "imageSizes": [
+          {
+            "key": "HOME",
+            "size": {
+              "width": 0,
+              "height": 0
+            }
+          }
+        ]
+      }
+    },
+    "localInformation": {
+      "images": null
+    },
+    "rateCategories": false,
+    "contentRateCategories": null,
+    "synopsis": true
+  },
+  "PricingSummaryRequest": {
+    "cheapestOnly": true,
+    "context": {
+      "isAllowBookOnRequest": true,
+      "clientInfo": {
+        "cid": 1901817,
+        "languageId": 9,
+        "languageUse": 1,
+        "origin": "KR",
+        "platform": 1,
+        "storefront": 3
+      },
+      "isDebug": false,
+      "sessionInfo": {
+        "isLogin": false,
+        "memberId": 0,
+        "sessionId": 1
+      },
+      "abTests": [
+        {
+          "testId": 9021,
+          "abUser": "B"
+        },
+        {
+          "testId": 9023,
+          "abUser": "B"
+        },
+        {
+          "testId": 9024,
+          "abUser": "B"
+        },
+        {
+          "testId": 9025,
+          "abUser": "B"
+        },
+        {
+          "testId": 9027,
+          "abUser": "B"
+        },
+        {
+          "testId": 9029,
+          "abUser": "B"
+        }
+      ],
+      "experiment": []
+    },
+    "isSSR": true,
+    "pricing": {
+      "bookingDate": null,
+      "checkIn": "2026-10-13T00:00:00.000Z",
+      "checkout": "2026-10-14T00:00:00.000Z",
+      "localCheckInDate": "2026-10-13",
+      "localCheckoutDate": "2026-10-14",
+      "currency": "KRW",
+      "details": {
+        "cheapestPriceOnly": false,
+        "itemBreakdown": false,
+        "priceBreakdown": false
+      },
+      "featureFlag": [
+        "ClientDiscount",
+        "PriceHistory",
+        "VipPlatinum"
+      ],
+      "features": {
+        "priusId": 0,
+        "crossOutRate": false,
+        "isAPSPeek": false,
+        "isAllOcc": false,
+        "isApsEnabled": false,
+        "isIncludeUsdAndLocalCurrency": true,
+        "isMSE": true,
+        "isRPM2Included": true,
+        "maxSuggestions": 0,
+        "newRateModel": false,
+        "overrideOccupancy": false,
+        "filterCheapestRoomEscapesPackage": false,
+        "synchronous": false,
+        "enableRichContentOffer": true,
+        "showCouponAmountInUserCurrency": false,
+        "disableEscapesPackage": false,
+        "returnCheapestEscapesOfferOnSSR": false,
+        "enablePushDayUseRates": false,
+        "enableEscapesPackage": false,
+        "enableSuggestPriceExclusiveWithFees": true
+      },
+      "filters": {
+        "cheapestRoomFilters": [],
+        "filterAPO": false,
+        "ratePlans": [
+          1
+        ],
+        "secretDealOnly": false,
+        "suppliers": [],
+        "nosOfBedrooms": []
+      },
+      "includedPriceInfo": false,
+      "occupancy": {
+        "adults": 2,
+        "children": 0,
+        "childAges": [],
+        "rooms": 1,
+        "childrenTypes": []
+      },
+      "supplierPullMetadata": {
+        "requiredPrecheckAccuracyLevel": 0
+      },
+      "mseHotelIds": [],
+      "ppLandingHotelIds": [],
+      "searchedHotelIds": [],
+      "paymentId": -1,
+      "bookingDurationType": [
+        "nightly"
+      ],
+      "requiredBasis": "PRPN"
+    },
+    "suggestedPrice": "Exclusive"
+  }
+}

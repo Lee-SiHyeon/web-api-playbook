@@ -12,6 +12,7 @@ try {
   let result;
   if (command==='status') result=auth.status();
   else if (command==='login' && auth.login) result=await auth.login();
+  else if (service==='myrealtrip' && command==='login-new') result=await auth.login({restartPending:true});
   else if (command==='ensure') result=await auth.ensure();
   else if (command==='health') result=await auth.health();
   else if (command==='refresh' && auth.refresh) result=await auth.refresh();

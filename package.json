@@ -19,8 +19,9 @@
     "web:login": "node scripts/web-login.mjs",
     "myrealtrip": "node scripts/myrealtrip.mjs",
     "x:read": "node scripts/x-read.mjs",
-    "test": "node --test tests/",
-    "coupang:regress": "node scripts/coupang-regression.mjs"
+    "test": "node --test \"tests/*.test.mjs\"",
+    "coupang:regress": "node scripts/coupang-regression.mjs",
+    "agoda": "node scripts/agoda.mjs"
   },
   "dependencies": {
     "linkedom": "0.18.13",
