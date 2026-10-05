@@ -143,6 +143,26 @@ test('update edits an own card in place once, verifies owner and public copies, 
   await assert.rejects(h.publisher.update({ ...input, blockId: 999 }), { code: 'INPOCK_CARD_NOT_FOUND' });
 });
 
+test('setVisibility hides an own card once and verifies it left the public page', async t => {
+  const patches = [];
+  const h = await harness(t, { handle: async ({ url, method, init, state }) => {
+    if (method === 'PATCH') {
+      assert.equal(url.pathname, '/blocks/101/open');
+      patches.push(JSON.parse(init.body));
+      state.owned = [{ ...state.owned[0], is_open: false }]; state.public = [];
+      return response({}, 200);
+    }
+    return undefined;
+  } });
+  h.state.owned = [{ ...card().payload, id: 101 }]; h.state.public = [{ ...card().payload, id: 101 }];
+  const input = { confirm: true, ownerUsername: actor.username, blockId: 101, isOpen: false };
+  assert.equal((await h.publisher.setVisibility(input)).status, 'visibility_verified');
+  assert.deepEqual(patches, [{ is_open: false }]);
+  assert.equal((await h.publisher.setVisibility(input)).status, 'already_in_state');
+  assert.equal(patches.length, 1);
+  await assert.rejects(h.publisher.setVisibility({ ...input, blockId: 5 }), { code: 'INPOCK_CARD_NOT_FOUND' });
+});
+
 test('one successful publication durably saves ACK ID before readback and acquires auth only once', async t => {
   const h = await harness(t);
   const result = await h.publisher.publish(card());

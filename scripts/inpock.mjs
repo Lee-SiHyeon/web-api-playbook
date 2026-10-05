@@ -9,9 +9,9 @@ import { createInpockProfileClient } from '../lib/inpock-profile.mjs';
 try {
   const [command = 'status', ...args] = process.argv.slice(2);
   const inputOptions = options(args, ['credentials-stdin', 'input']);
-  const inputCommands = ['publish', 'update', 'profile-preview', 'profile-edit'];
+  const inputCommands = ['publish', 'update', 'visibility', 'profile-preview', 'profile-edit'];
   if (!['status', 'login', 'ensure', 'owner', 'health', 'verify', 'blocks', 'public', 'stats', 'inventory',
-        'publish', 'update', 'profile-get', 'profile-preview', 'profile-edit'].includes(command) ||
+        'publish', 'update', 'visibility', 'profile-get', 'profile-preview', 'profile-edit'].includes(command) ||
       (!inputCommands.includes(command) && inputOptions.input !== undefined) ||
       (inputCommands.includes(command) && typeof inputOptions.input !== 'string') ||
       (inputOptions['credentials-stdin'] !== undefined && inputOptions['credentials-stdin'] !== true)) {
@@ -35,6 +35,7 @@ try {
   };
   else if (command === 'publish') result = await createInpockPublisher({ auth }).publish(await jsonFile(inputOptions.input));
   else if (command === 'update') result = await createInpockPublisher({ auth }).update(await jsonFile(inputOptions.input));
+  else if (command === 'visibility') result = await createInpockPublisher({ auth }).setVisibility(await jsonFile(inputOptions.input));
   else if (command === 'profile-get') result = await createInpockProfileClient({ auth }).snapshot();
   else if (command === 'profile-preview') result = await createInpockProfileClient({ auth }).preview(await jsonFile(inputOptions.input));
   else if (command === 'profile-edit') result = await createInpockProfileClient({ auth }).edit(await jsonFile(inputOptions.input));
