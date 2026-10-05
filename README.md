@@ -21,6 +21,7 @@
 | [상품 상세·리뷰 조회](references/catalog-read-apis.md) | 상세 설명·이미지·옵션, 리뷰 본문·사진·페이지 조회와 제휴 링크를 제외한 기능 감사 |
 | [유튜버 콜라보·할인 출처](references/creator-promotions-youtube.md) | 공식 YouTube API·공개 피드와 명시적인 HTTP 페이지 메타데이터 조회, 수집 근거와 제한 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
+| [Google Flow HTTP 경계와 실측](references/google-flow-http.md) | 실제 UI 생성 처리 단계, 직접 HTTP 미디어 다운로드, 480p 변환 및 미검증 pure-HTTP 생성 경계 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
 | [제휴 API](service-packs/affiliate/README.md) | 마이리얼트립, 애드픽, 쇼핑커넥트, 쿠팡 HTTP 가격·배송비·행사·파트너스 [반복 진단](references/coupang-debugging.md), 올리브영 구현 |

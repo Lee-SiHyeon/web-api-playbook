@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-05",
+  "service": "Google Flow consumer web app",
+  "operation": "video_generation_and_media_download",
+  "result": "one_browser_ui_generation_completed_and_downloaded_over_http",
+  "directHttpDiagnostic": {
+    "operation": "YhhmEf",
+    "inputMode": "missing_sdk_input_diagnostic",
+    "postCount": 1,
+    "httpStatus": 200,
+    "responseMime": "application/json",
+    "responseBytes": 228,
+    "rpcStatus": 7,
+    "publicError": "PUBLIC_ERROR_UNUSUAL_ACTIVITY",
+    "publicErrorEnum": 49,
+    "mediaRecordReturned": false,
+    "journalRequestIdRecorded": false,
+    "ownerReadback": {
+      "exactRequestCorrelationAvailable": false,
+      "mediaCountBefore": 35,
+      "mediaCountAfter": 35,
+      "creditsBefore": 1050,
+      "creditsAfter": 1050,
+      "note": "Delayed project snapshot only; this is not exact-request readback. The legacy client-ID comparison is not valid correlation evidence."
+    },
+    "reconciliation": "intent_manually_reconciled_as_rejected_from_explicit_server_error_and_unchanged_delayed_project_snapshot",
+    "retryCount": 0,
+    "interpretation": "Enum 49 is broad unusual activity and differs from PUBLIC_ERROR_UNUSUAL_ACTIVITY_TOO_MUCH_TRAFFIC enum 50. This does not establish traffic throttling or prove missing SDK input was the sole cause."
+  },
+  "normalUiGeneration": {
+    "browserRuntimeUsed": true,
+    "model": "Omni 1.1 Flash",
+    "resolution": "720p",
+    "durationSeconds": 8,
+    "aspectRatio": "16:9",
+    "copies": 1,
+    "promptSummary": "Red origami boat moving across a calm garden pond at sunrise.",
+    "displayedCreditCost": 12,
+    "recaptchaEnterpriseSdkInputPresent": true,
+    "observedRecaptchaCalls": [
+      { "name": "reload", "httpStatus": 200 },
+      { "name": "clr", "httpStatus": 200 }
+    ],
+    "create": {
+      "operation": "YhhmEf",
+      "requestCount": 1,
+      "sentAt": "2026-10-05T07:57:51.238Z",
+      "acknowledgement": "CAE",
+      "mediaRecordReturned": true
+    },
+    "processing": {
+      "pollOperation": "jwpduf",
+      "stateSequence": [6, 2, 3],
+      "completedState": 3,
+      "completedAt": "2026-10-05T07:58:30.863Z",
+      "secondsFromCreateToCompletion": 39.625,
+      "mediaUrlReadyOperation": "as29s",
+      "mediaUrlReadyAt": "2026-10-05T07:58:34.383Z"
+    },
+    "ownerReadback": {
+      "exactSceneRequestMatched": true,
+      "requestIdMapping": {
+        "requestField": "freq[2][0]",
+        "sceneField": "scene[3][5]",
+        "earlierIncorrectClientField": "freq[0][0][4]"
+      },
+      "mediaCountBefore": 35,
+      "mediaCountAfter": 36,
+      "creditsBefore": 1050,
+      "creditsAfter": 1038,
+      "clientReconciliationCompleted": true
+    },
+    "nativeMediaDownload": {
+      "transport": "direct_http",
+      "responseOk": true,
+      "mimeValidated": true,
+      "validatedMimeValues": ["video/mp4", "application/octet-stream"],
+      "exactHttpStatusRecorded": false,
+      "bytes": 4385072,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "width": 1280,
+      "height": 720,
+      "durationSeconds": 8
+    },
+    "flowUiDownload": {
+      "clickAttempted": true,
+      "completionVerified": false,
+      "reason": "Tab identifier changed after the click and subsequent read-only snapshots timed out; the independent HTTP download was verified instead."
+    },
+    "local480pDerivative": {
+      "tool": "FFmpeg",
+      "artifactName": "flow-origami-8s-480p.mp4",
+      "bytes": 1682551,
+      "videoCodec": "h264",
+      "audioCodec": "aac",
+      "width": 854,
+      "height": 480,
+      "durationSeconds": 8,
+      "note": "Locally converted from the native 720p Flow result; Flow did not generate native 480p output.",
+      "retainedOutsideRepository": true
+    },
+    "additionalCreateCount": 0
+  },
+  "capabilityBoundary": {
+    "normalUiGenerationLiveVerified": true,
+    "directHttpProjectReadbackLiveVerified": true,
+    "directHttpMediaDownloadLiveVerified": true,
+    "pureHttpGenerationIssuerLiveVerified": false,
+    "browserSdkTokenAcquisitionByNodeLiveVerified": false,
+    "classification": "browser_runtime_required_for_create; direct_http_for_project_readback_and_media_download"
+  },
+  "redaction": {
+    "cookiesOrCredentialsIncluded": false,
+    "sdkTokenIncluded": false,
+    "rawRequestOrResponseBodiesIncluded": false,
+    "clientIdentifiersIncluded": false,
+    "signedMediaUrlIncluded": false
+  }
+}
