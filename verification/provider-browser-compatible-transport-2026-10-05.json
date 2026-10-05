@@ -1,0 +1,68 @@
+{
+  "schema": "provider-browser-compatible-transport-diagnostics-v1",
+  "executionHost": "linux_worker",
+  "publicReads": [
+    {
+      "service": "gemini",
+      "checkedAt": "2026-10-05T13:01:56.605401+00:00",
+      "transport": "curl_cffi_chrome150",
+      "browserUsed": false,
+      "requestCookieInput": false,
+      "httpStatus": 200,
+      "mime": "text/html; charset=utf-8",
+      "responseBytes": 857129,
+      "responseSha256": "e66cfb773e68d8d1b30dfbc2b56aa5a6f03866a87a72d30347f726549580fc32",
+      "issuedCookieNames": [
+        "COMPASS",
+        "NID"
+      ],
+      "authenticatedOwnerVerified": false
+    },
+    {
+      "service": "grok",
+      "checkedAt": "2026-10-05T13:01:56.932123+00:00",
+      "transport": "curl_cffi_chrome150",
+      "browserUsed": false,
+      "requestCookieInput": false,
+      "httpStatus": 200,
+      "mime": "text/html; charset=utf-8",
+      "responseBytes": 170131,
+      "responseSha256": "0e13295e071b28400b8a94fcdb34695863314c85a20432b949ebf5b3618fe7e8",
+      "issuedCookieNames": [
+        "__cf_bm",
+        "gb_anon_id",
+        "mp_0b4055a12491884bcb6f34a5aa2718b6_mixpanel"
+      ],
+      "authenticatedOwnerVerified": false
+    }
+  ],
+  "grokAuthInput": {
+    "service": "grok_auth",
+    "checkedAt": "2026-10-05",
+    "sourceOrigin": "https://accounts.x.ai",
+    "sourcePath": "/_next/static/chunks/1f-co9f_lhfa9.js",
+    "sourceStatus": 200,
+    "sourceBytes": 38139,
+    "sourceSha256": "62386da4f17c50f3d6faab65cd9cf7445585bd2eb900f2b0bc719ed427a9e538",
+    "markersPresent": {
+      "castleRequestToken": true,
+      "createRequestToken": true,
+      "signIn.checkSSO": true,
+      "sso/check": true
+    },
+    "requestPath": "/api/auth/sso/check",
+    "fieldNamesObserved": [
+      "email",
+      "castleRequestToken"
+    ],
+    "producerChainObserved": "checkSSO first awaits a normal login/sso SDK input and then calls sso/check with castleRequestToken",
+    "authenticatedReplayVerified": false,
+    "missingTokenProbeSent": false,
+    "tokenValuesPersisted": false,
+    "rawSourcePersisted": false,
+    "rootCauseOf403Established": false
+  },
+  "authenticatedLoginVerified": false,
+  "contentGenerationSent": 0,
+  "secretValuesIncluded": false
+}

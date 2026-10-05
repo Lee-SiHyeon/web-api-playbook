@@ -1,5 +1,22 @@
 # 외부 XHR 클라이언트 로그인 실측 (2026-10-04)
 
+## Linux 브라우저 호환 HTTP 전송 대조 (2026-10-05)
+
+`curl_cffi 0.16.3`의 Chrome150 TLS/HTTP 호환 프로필과 새 익명 메모리 세션으로
+Gemini 공개 문서와 Grok 로그인 문서를 각각 조회했고 모두200 HTML이었다.
+공개 문서 접근이며 계정 인증이나 대화·이미지 생성 성공으로 분류하지 않는다.
+
+현재 Grok 로그인 첫-party JavaScript의 `checkSSO`는 정상 웹 SDK 입력을 먼저 기다린 뒤
+`sso/check`에 `castleRequestToken`을 포함한다. 이 필드가 관측됐다는 사실은 값을
+발급·재발급하거나 로그인 HTTP 재현에 성공했다는 증거가 아니다. 정상 발급 흐름과
+소유자 확인을 독립 검증하기 전까지 요청 계약은 미완료이며, 토큰을 임의 제작하거나
+누락시킨 로그인 POST를 성공 가능성 확인용으로 보내지 않는다. 현재403의 단독 원인이
+이 입력이라고 확정하지 않는다.
+
+[전송·SDK 입력 대조 기록](../verification/provider-browser-compatible-transport-2026-10-05.json)
+에는 상태·MIME·길이·해시·쿠키 이름·정적 소스 필드명만 남겼다. 비밀번호·쿠키 값·
+SDK 토큰·원문 응답은 포함하지 않는다.
+
 2026-10-05 Linux 워커에서 다시 정상 headed Chromium을 실행하고 실제 로그인 화면에서
 이메일 단계까지 진행했다. Gemini는 Google `/v3/signin/rejected`로 이동하며 브라우저
 보안 거부를 표시했고, Grok의 `POST /api/auth/sso/check`는403과 오류 토스트를 반환했다.
