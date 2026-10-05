@@ -83,3 +83,13 @@ test('CSV keeps newline/photo payloads, and neutralizes spreadsheet formulas', (
   assert.ok(csv.includes('https://images.example.com/review.jpg')); assert.equal(csv.includes('excluded-profile'), false);
   assert.throws(() => normalizeReview({ ...item('r'), images: ['https://user:pass@example.com/a'] }), { code: 'REVIEW_IMAGE_INVALID' });
 });
+
+test('associated Olive Young reviews preserve the original product identity through JSON and CSV', async () => {
+  const row = { ...item('r'), sourceProductId: 'GA999', variantId: 'sku-1', associatedProductReview: true, helpfulCount: 7 };
+  const result = await collectReviews({ provider: 'oliveyoung-global', productId: 'p1', loadPage: async () => page([row], null) });
+  assert.equal(result.reviews[0].sourceProductId, 'GA999'); assert.equal(result.reviews[0].associatedProductReview, true);
+  assert.equal(result.collection.associatedProductReviewCount, 1);
+  const csv = reviewsCsv(result);
+  assert.ok(csv.includes('source_product_id,variant_id,associated_product_review,helpful_count'));
+  assert.ok(csv.includes('GA999,sku-1,true,7'));
+});

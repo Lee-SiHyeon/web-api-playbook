@@ -1,0 +1,298 @@
+{
+  "schema": "oliveyoung-korea-public-xhr-proof-v1",
+  "service": "oliveyoung-public",
+  "capabilities": [
+    "catalog.search_prices",
+    "catalog.product_detail",
+    "catalog.product_description",
+    "catalog.options",
+    "catalog.product_images",
+    "reviews.summary",
+    "reviews.body",
+    "reviews.images",
+    "reviews.pagination"
+  ],
+  "checkedAt": "2026-10-05",
+  "success": false,
+  "anonymousFreshBrowserContext": true,
+  "credentialsUsed": false,
+  "accountLoginAttempted": false,
+  "browserMode": "headed",
+  "uaOverridden": false,
+  "stealthOrFingerprintOverrides": false,
+  "challengeInteraction": "none; ordinary challenge page script completed on the public homepage",
+  "journey": [
+    {
+      "name": "homepage",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/main/main.do",
+      "status": 200
+    },
+    {
+      "name": "search",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/search/getSearchMain.do",
+      "queryFields": [
+        "giftYn",
+        "query",
+        "t_click",
+        "t_page",
+        "t_search_name"
+      ],
+      "status": "loaded",
+      "xhr": "POST /store/search/NewMainSearchApi.do",
+      "xhrStatus": 200,
+      "xhrMime": "application/json",
+      "requestFieldNames": [
+        "collection",
+        "displayMediaTypes",
+        "goods_sort",
+        "listnum",
+        "query",
+        "quickYn",
+        "sort",
+        "startCount",
+        "typeChk"
+      ],
+      "responseTopLevelKeys": [
+        "Data",
+        "Parameter"
+      ]
+    },
+    {
+      "name": "product_detail",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/goods/getGoodsDetail.do",
+      "status": 200,
+      "sampleProductId": "A000000263510",
+      "xhr": [
+        {
+          "method": "GET",
+          "path": "/goods/api/v1/description",
+          "queryFieldNames": [
+            "goodsNumber"
+          ],
+          "status": 200,
+          "mime": "application/json",
+          "responseDataKeys": [
+            "descriptionContents",
+            "descriptionTypeCode",
+            "goodsDetailImages"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/goods/api/v1/extra",
+          "status": 200,
+          "mime": "application/json",
+          "requestBodyFieldNames": "not recovered by field-name parser",
+          "responseDataKeys": [
+            "goodsNumber",
+            "optionDetail",
+            "reviewInfoDto"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "reviews",
+      "origin": "https://m.oliveyoung.co.kr",
+      "control": "visible review-more button",
+      "xhr": [
+        {
+          "method": "GET",
+          "path": "/review/api/v2/reviews/options/A000000263510/count",
+          "status": 200,
+          "mime": "application/json",
+          "responseDataKeys": [
+            "hasZeroReviewOption",
+            "isReviewSkinFilterAvailability",
+            "productItemReviewCountList",
+            "relatedProductReviewCountList"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/review/api/v2/reviews/A000000263510/stats",
+          "status": 200,
+          "mime": "application/json",
+          "responseDataKeys": [
+            "goodsImg",
+            "goodsName",
+            "goodsNumber",
+            "ratingDistribution",
+            "reviewCount",
+            "satisfactionStats"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/review/api/v2/reviews/photo-reviews",
+          "status": 200,
+          "mime": "application/json",
+          "requestFieldNames": [
+            "goodsNumber",
+            "page",
+            "size"
+          ],
+          "responseDataArrayLength": 10,
+          "responseRecordKeys": [
+            "createdDateTime",
+            "photoReviewList",
+            "reviewId"
+          ]
+        },
+        {
+          "method": "POST",
+          "path": "/review/api/v2/reviews/cursor",
+          "status": 200,
+          "mime": "application/json",
+          "requestFieldNames": [
+            "goodsNumber",
+            "page",
+            "reviewType",
+            "size",
+            "sortType"
+          ],
+          "responseDataRecordCount": 10,
+          "responseDataKeys": [
+            "goodsReviewList",
+            "hasNext",
+            "nextCursorCount",
+            "nextCursorId",
+            "nextCursorScore"
+          ]
+        },
+        {
+          "method": "GET",
+          "path": "/review/api/v1/reviews/A000000263510/summary",
+          "status": 200,
+          "mime": "application/json",
+          "responseDataKeys": [
+            "feature1Description",
+            "feature1Title",
+            "feature2Description",
+            "feature2Title",
+            "feature3Description",
+            "feature3Title",
+            "negativeRatio",
+            "positiveRatio"
+          ]
+        }
+      ]
+    }
+  ],
+  "directNodeAttempts": [
+    {
+      "origin": "https://www.oliveyoung.co.kr",
+      "method": "POST",
+      "path": "/store/search/NewMainSearchApi.do",
+      "result": "403 text/html",
+      "modes": [
+        "cookie_free",
+        "actual_default_UA_and_full_observed_headers",
+        "same_plus_current_anonymous_cookies_in_memory"
+      ]
+    },
+    {
+      "origin": "https://www.oliveyoung.co.kr",
+      "method": "GET",
+      "path": "/goods/api/v1/description",
+      "result": "403 text/html",
+      "modes": [
+        "cookie_free",
+        "actual_default_UA_and_full_observed_headers",
+        "same_plus_current_anonymous_cookies_in_memory"
+      ]
+    },
+    {
+      "origin": "https://www.oliveyoung.co.kr",
+      "method": "POST",
+      "path": "/goods/api/v1/extra",
+      "result": "403 text/html",
+      "modes": [
+        "cookie_free",
+        "actual_default_UA_and_full_observed_headers",
+        "same_plus_current_anonymous_cookies_in_memory"
+      ]
+    },
+    {
+      "origin": "https://m.oliveyoung.co.kr",
+      "method": "GET",
+      "path": "/review/api/v2/reviews/A000000263510/stats",
+      "result": "403 text/html",
+      "mode": "cookie_free"
+    }
+  ],
+  "liveEvidence": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json",
+  "directNodeReplayEvidence": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-full-header-node-replay-2026-10-05.json",
+  "blocker": "Browser-visible XHRs returned JSON 200, while independent Node direct requests returned Cloudflare 403 HTML. Actual default UA, full observed www-origin request headers and anonymous browser cookies did not resolve it. No account-login requirement is established. The m-origin review call has a cookie-free Node 403 negative control; full-header/cookie replay was not completed.",
+  "unknownEndpointsSent": 0,
+  "secretsPersistedInEvidence": false,
+  "cookieValuesPersisted": false,
+  "rawReviewBodiesPersisted": false,
+  "directNativeTransports": {
+    "browserDescription": {
+      "status": 200,
+      "mime": "application/json",
+      "responseBytes": 6479,
+      "responseKeys": [
+        "code",
+        "data",
+        "isSuccess",
+        "message",
+        "pagination",
+        "status"
+      ],
+      "dataKeys": [
+        "descriptionContents",
+        "descriptionTypeCode",
+        "goodsDetailImages"
+      ],
+      "requestedGoodsNumberInQuery": true,
+      "goodsNumberEchoed": false
+    },
+    "pythonRequests": [
+      {
+        "mode": "cookie_free",
+        "status": 403,
+        "mime": "text/html",
+        "httpVersion": "HTTP/1.1"
+      },
+      {
+        "mode": "current___cf_bm__cfuvid_and_actualUserAgent_memory_only",
+        "status": 403,
+        "mime": "text/html",
+        "httpVersion": "HTTP/1.1"
+      }
+    ],
+    "systemCurl": [
+      {
+        "mode": "cookie_free_default_TLS_and_protocol_negotiation",
+        "status": 403,
+        "mime": "text/html",
+        "httpVersion": "HTTP/2",
+        "bytes": 48899,
+        "sha256": "a552841ef392b0bab405ab72044bde07360fca50fa216cc1419ce9e08082ea73"
+      },
+      {
+        "mode": "current_CF_cookies_and_actual_UserAgent",
+        "status": "unknown",
+        "reason": "An initial cookie-enabled curl request ran, but its write-out metadata parser failed."
+      }
+    ]
+  },
+  "sourceContractFile": "/home/worker/artifacts/oliveyoung-focused-20261005/korea-firstparty-source-contracts.json",
+  "implementation": {
+    "file": "lib/commerce/oliveyoung-korea-public.mjs",
+    "sha256": "3bd0dfdd336d0b5fa3558d68e213362e5c379bcd26d62a3de661b23f86b80d16",
+    "export": "createOliveyoungKoreaPublicClient",
+    "localTestFile": "tests/commerce-oliveyoung-korea-public.test.mjs",
+    "localTestSha256": "4c62eec222dcacb0960583ddf62785fd304e19448851dc7fd091f21e54cf97da",
+    "localTestsPassed": 12,
+    "liveReplay": false,
+    "defaultRuntime": "direct HTTP only; no Playwright import"
+  },
+  "classification": "browser_xhr_and_source_contract_captured; direct_http_client_implemented; independent_live_replay_blocked",
+  "detailExtraBoundary": "Exact detail request/caller fields are source mapped. The live browser capture did not include /goods/api/v1/detail. Limited reservation predicate remains fail-closed for option records where limitedInfoDto is present and reservationFlag is false."
+}

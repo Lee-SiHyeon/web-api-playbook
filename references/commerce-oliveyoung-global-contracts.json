@@ -3,7 +3,7 @@
   "schemaVersion": 1,
   "service": "oliveyoung-global",
   "checkedAt": "2026-10-05",
-  "scope": "Public Global-storefront product detail, prices after current selected-currency verification, option/image data, reviews and review photos. Search-results access is blocked and explicitly unsupported.",
+  "scope": "Public Global-storefront product detail, category browsing, prices after current selected-currency verification, option/image data, reviews and review photos. Keyword product-search results remain blocked and explicitly unsupported.",
   "marketSeparation": {
     "origin": "https://global.oliveyoung.com",
     "koreanShoppingCurator": "separate service and module; no session, KRW price, affiliate activity or link API is reused",
@@ -17,6 +17,35 @@
     "authorizationSent": false
   },
   "contracts": [
+    {
+      "id": "search-suggestions",
+      "provenance": "first-party header-search bundle source plus cookie-free Node HTTP replay",
+      "sourceURL": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.v2.js",
+      "sourceSha256": "78f0d60ebfcbbfdf49317faa3332d1280dd4b33d85727cd81a2e4754f9882f43",
+      "method": "GET",
+      "path": "/api/v1/search/keywords/auto-complete",
+      "query": {"query": "bounded nonempty text, up to 100 characters"},
+      "response": {
+        "brands": "brands[]: brandNumber, brandName, pcImagePath, mobileImagePath",
+        "categories": "categories[]: categoryNumber, categoryName, fullCategoryName",
+        "keywords": "keywords[]: keyword"
+      },
+      "limit": "Suggestions only. The response contains no product ids, offers, prices, or result pagination."
+    },
+    {
+      "id": "popular-search-keywords",
+      "provenance": "first-party header-search-tab-layer bundle source plus cookie-free Node HTTP replay",
+      "sourceURL": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.tab-layer.v2.js",
+      "sourceSha256": "59f983cf706b1f2f0d789a823c178b6b58df7b38fea3b6f3f80be7f7b603bb9c",
+      "method": "GET",
+      "path": "/api/v1/search/keywords/popular",
+      "query": {"size": "10, pinned by shipped client"},
+      "response": {
+        "popularKeywords": "popularKeywords[]: keyword, rank, rankDiff, count, countDiff",
+        "aggregationTime": "aggregatedAt"
+      },
+      "limit": "Aggregated trend metadata, not product search results or product prices."
+    },
     {
       "id": "homepage-best-sellers",
       "provenance": "captured first-party browser XHR and independently replayed by cookie-free Node HTTP",
@@ -45,6 +74,60 @@
         "imagePath": "imagePath"
       },
       "coverage": "Exactly the observed 20-item homepage best-seller list. It is not a complete catalog or keyword search."
+    },
+    {
+      "id": "category-products",
+      "provenance": "Captured from the live category page's first-party XHR and independently replayed by the implemented cookie-free Node client; input builder and supported page sizes cross-checked against the linked first-party category bundle.",
+      "sourceURL": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/category/shop.new.category.js",
+      "sourceSha256": "0816b4115dfa1b7bfb8efd1cd1e2fb200d172ef9b86d3408df565ee7ec693445",
+      "method": "POST",
+      "path": "/display/category/product-data/",
+      "contentType": "application/json; charset=utf-8",
+      "body": {
+        "accParam": "",
+        "langCode": "en",
+        "previewDate": "",
+        "encKey": "",
+        "encText": "",
+        "dlvCntry": "1230",
+        "mrgnCntryCode": "9999",
+        "attrValNo": "",
+        "ctgrNo": "requested category id",
+        "prdtSortStdrCode": "10",
+        "pageNum": "1-based page number",
+        "rowsPerPage": "24, 36, or 48 observed in page UI and category bundle",
+        "attrValNoList": {},
+        "brandNoList": [],
+        "ctgrNoList": [],
+        "eventSlprcDscntRt": [],
+        "reviewScore": [],
+        "scrollY": 0
+      },
+      "response": {
+        "pagination": "hits.found is the total, hits.start is the zero-based offset, and hits.hit is the current page; start equals (pageNum - 1) * rowsPerPage.",
+        "product": "hits.hit[].fields supplies prdtNo, prdtName, brandNo, ctgrNo, ctgrName, allPathCtgrNoList, rating/count and image fields.",
+        "categoryBinding": "A row is accepted only if at least one allPathCtgrNoList path contains the requested ctgrNo.",
+        "prices": "productPriceMap[prdtNo] is id-bound and supplies minNrmlAmt, maxNrmlAmt, minSaleAmt, maxSaleAmt; each nonempty page binds USD to the same first product via a fresh selected-currency HTML context read.",
+        "brandName": "hits.brandInfo keyed by brandNo is the fallback label when fields.brandName is absent."
+      },
+      "liveReplay": {
+        "categoryId": "1000000008",
+        "categoryTitle": "Skincare",
+        "categoryTotal": 3674,
+        "pageSize24": {"page1": 24, "page2": 24, "page154": 2, "page155": 0},
+        "otherPageSizes": {"pageSize36": 36, "pageSize48": 48},
+        "sample": {"productId": "GA260136559", "productCategoryId": "1000000016", "listPriceUSD": "27.00", "salePriceUSD": "20.52"},
+        "currencyContext": {"selected": "USD", "deliveryCountryCode": "1230", "emptyPageCurrencyVerified": false},
+        "evidenceFiles": [
+          "verification/commerce-oliveyoung-global-category-page1-2026-10-05.json",
+          "verification/commerce-oliveyoung-global-category-page2-2026-10-05.json",
+          "verification/commerce-oliveyoung-global-category-last-page-2026-10-05.json",
+          "verification/commerce-oliveyoung-global-category-after-last-page-2026-10-05.json",
+          "verification/commerce-oliveyoung-global-category-page-size-36-2026-10-05.json",
+          "verification/commerce-oliveyoung-global-category-page-size-48-2026-10-05.json"
+        ]
+      },
+      "limit": "This is a category-id browse endpoint with category filters and no proven keyword-search input. It does not complete or replace catalog.keyword_search."
     },
     {
       "id": "product-detail-data",
@@ -181,11 +264,107 @@
   },
   "search": {
     "status": "blocked_unimplemented",
+    "reachableHomeAssetFrontier": {
+      "homeDocument": {"status": 200, "bytes": 406224, "browserUsed": false, "credentialsUsed": false},
+      "firstPartyJavaScript": {"scriptTags": 54, "uniqueFilesFetched": 54, "allHttpStatus": 200, "aggregateBytes": 2955488,
+        "bounds": {"maxConcurrent": 4, "maxBytesPerFile": 1048576, "maxAggregateBytes": 15728640}},
+      "routeMapping": {
+        "asset": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/common/urlmapping.js",
+        "sha256": "74fc443726a5a55d74201e2bc57addab91e62aaed90c05055c74d70feae23d15",
+        "finding": "The /search/results route is documented in this first-party JS as the new oyg-cbe-fe search-results service; its frontend bundle was not present in the reachable homepage asset frontier."
+      }
+    },
+    "reachableCategoryAssetFrontier": {
+      "rootLinkedCategoryPage": {
+        "url": "https://global.oliveyoung.com/display/category?ctgrNo=1000000008",
+        "httpStatus": 200,
+        "mime": "text/html",
+        "responseBytes": 279154,
+        "title": "Skincare"
+      },
+      "categoryBundles": [
+        {
+          "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/category/shop.new.category.js",
+          "httpStatus": 200,
+          "responseBytes": 48237,
+          "sha256": "0816b4115dfa1b7bfb8efd1cd1e2fb200d172ef9b86d3408df565ee7ec693445"
+        },
+        {
+          "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/category/shop.new.category.filter.js",
+          "httpStatus": 200,
+          "responseBytes": 6259,
+          "sha256": "cdc07576a7a377443eb391916eb8b293826d397654951d170b818a857b766ee8"
+        },
+        {
+          "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/category/shop.new.category.filter.pc.js",
+          "httpStatus": 200,
+          "responseBytes": 25321,
+          "sha256": "b4a8b8c2d4356f0d66fa4ec7fb3314afaac11189b986a5cf017b06e8f77067b1"
+        },
+        {
+          "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/category/shop.new.category.filter.mo.js",
+          "httpStatus": 200,
+          "responseBytes": 23017,
+          "sha256": "e68c594cfb8751a8af1c5feeaf2b42bfe63b50ef8583024312fc916c23c03302"
+        }
+      ],
+      "categoryProductSourceCandidate": {
+        "method": "POST",
+        "path": "/display/category/product-data/",
+        "contentType": "application/json; charset=utf-8",
+        "inputConstruction": "The bundle sends its category filter/paging parameter object after currency conversion; no keyword-search field was identified in the reachable category bundle.",
+        "independentReplay": true,
+        "notKeywordSearch": true
+      },
+      "brandPage": {
+        "observedPath": "/gb/brands/vt",
+        "httpStatus": 403,
+        "mime": "text/html",
+        "responseBytes": 43229,
+        "pageTitle": "Access restricted | OLIVE YOUNG"
+      }
+    },
+    "firstPartySearchBundles": [
+      {
+        "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.v2.js",
+        "httpStatus": 200,
+        "bytes": 18021,
+        "sha256": "78f0d60ebfcbbfdf49317faa3332d1280dd4b33d85727cd81a2e4754f9882f43",
+        "contract": {"method": "GET", "path": "/api/v1/search/keywords/auto-complete", "query": ["query"]}
+      },
+      {
+        "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.tab-layer.v2.js",
+        "httpStatus": 200,
+        "bytes": 11895,
+        "sha256": "59f983cf706b1f2f0d789a823c178b6b58df7b38fea3b6f3f80be7f7b603bb9c",
+        "contract": {"method": "GET", "path": "/api/v1/search/keywords/popular", "query": {"size": 10}}
+      }
+    ],
+    "verifiedFirstPartySuggestionReads": {
+      "autoComplete": {
+        "cookieFreeNodeStatus": 200,
+        "mime": "application/json",
+        "responseTopKeys": ["brands", "categories", "keywords"],
+        "normalizedBrandFields": ["brandNumber", "brandName", "pcImagePath", "mobileImagePath"],
+        "normalizedCategoryFields": ["categoryNumber", "categoryName", "fullCategoryName"],
+        "keywordItemField": "keyword",
+        "noProductRowsOrPrices": true,
+        "evidenceFile": "verification/commerce-oliveyoung-global-search-suggestions-live-2026-10-05.json"
+      },
+      "popularKeywords": {
+        "cookieFreeNodeStatus": 200,
+        "mime": "application/json",
+        "responseTopKeys": ["popularKeywords", "aggregatedAt"],
+        "popularKeywordFields": ["keyword", "rank", "rankDiff", "count", "countDiff"],
+        "noProductRowsOrPrices": true,
+        "evidenceFile": "verification/commerce-oliveyoung-global-popular-keywords-live-2026-10-05.json"
+      }
+    },
     "observed": [
       {"method": "GET", "path": "/display/search/search-word", "status": 403, "mime": "text/html"},
       {"method": "GET", "path": "/kr/search/results?query=mask", "statusSequence": [307, 403], "mime": "text/html"}
     ],
     "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-global-search-blocked.png",
-    "fallbackBoundary": "Homepage best sellers are a separately named 20-item browse operation; they are not presented as full keyword search."
+    "fallbackBoundary": "Reachable header assets expose suggestion and aggregate popular-keyword APIs only. They return no product offer rows, prices or result pagination. A separate category-id product-data XHR is implemented and directly replayed with ID-bound price ranges and verified paging; it has no proven keyword-search input. The homepage best-seller response remains limited to 20 rows. The mapped oyg-cbe-fe search-results bundle remained outside the bounded reachable home/category asset frontier."
   }
 }

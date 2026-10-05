@@ -1,0 +1,74 @@
+{
+  "schema": "oliveyoung-focused-cli-proof-v1",
+  "service": "oliveyoung-global",
+  "checkedAt": "2026-10-05T06:22:43.813Z",
+  "apiOnly": true,
+  "browserUsed": false,
+  "userCredentialsUsed": false,
+  "records": [
+    {
+      "name": "final-category-prices",
+      "jsonPath": "/home/worker/artifacts/oliveyoung-focused-20261005/final-category-prices.json",
+      "csvPath": "/home/worker/artifacts/oliveyoung-focused-20261005/final-category-prices.csv",
+      "jsonSha256": "92c09798a2b365c3d20f695f5cb35559fb88413587267abffa5aad738096302a",
+      "csvSha256": "1ace46ffc6c2f6c2e26c17f68f2a3367f43c2ca4d6e49061b750f5c0996adff4",
+      "count": 96,
+      "jsonCsvReadbackMatched": true,
+      "collection": {
+        "pagesRead": 2,
+        "rowsSeen": 96,
+        "offersStored": 96,
+        "maxPages": 2,
+        "maxOffers": 200,
+        "coverage": "paged_result",
+        "capHit": false,
+        "priceUnavailableCount": 0,
+        "currencyUnverifiedCount": 0,
+        "partialResponses": 0,
+        "sourceExhausted": false,
+        "complete": false
+      }
+    },
+    {
+      "name": "final-associated-reviews",
+      "jsonPath": "/home/worker/artifacts/oliveyoung-focused-20261005/final-associated-reviews.json",
+      "csvPath": "/home/worker/artifacts/oliveyoung-focused-20261005/final-associated-reviews.csv",
+      "jsonSha256": "d08472837063d27c73a6618a1259ddbdf5a0c5f177828779d0b4b76e0bda12d9",
+      "csvSha256": "d67f6c6b0bfd7766de5660eb4d29661198f7cd10c0430ea96f3708bf3e65977b",
+      "count": 20,
+      "jsonCsvReadbackMatched": true,
+      "collection": {
+        "count": 20,
+        "pagesRead": 2,
+        "rowsSeen": 20,
+        "total": 9671,
+        "totalMatched": false,
+        "sourceExhausted": false,
+        "paginationVerified": true,
+        "capHit": true,
+        "bytesStored": 13089,
+        "maxBytes": 33554432,
+        "startedAtBeginning": true,
+        "nextCursor": 3,
+        "continuation": {
+          "cursor": 3,
+          "skipReviewIds": []
+        },
+        "conflictingDuplicateCount": 0,
+        "bodyCount": 20,
+        "imageReviewCount": 13,
+        "identityUnverifiedCount": 0,
+        "associatedProductReviewCount": 6,
+        "complete": false
+      }
+    }
+  ],
+  "implementation": {
+    "scripts/catalog.mjs": "160382fa2818e9bf7b247032cf3cf2926ec69167395c02dbe68b0bf6243a2380",
+    "scripts/commerce.mjs": "c401b3aad7fa3c2e1344414845536cb24a9994247472427f0527e0dd97a6480c",
+    "lib/commerce/catalog-readers.mjs": "a7a3c2530c64ff8c3fdf9d6484031b8e263e22f4d289691c6979d5e850077326",
+    "lib/commerce/providers.mjs": "3cd559f235f035e5f5b88ec9cc8f91a894fa59490f03cd95f372a2648f3cbae1",
+    "lib/commerce/reviews.mjs": "3efb7bff27fa4102fcce840105e7e6a67922d1af1c61a7b99fb8943e592810c4",
+    "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0"
+  }
+}

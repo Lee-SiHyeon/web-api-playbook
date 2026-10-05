@@ -4,6 +4,7 @@ import { createOliveyoungGlobalClient } from '../lib/commerce/oliveyoung-global.
 
 const PRODUCT_ID = 'GA240824996';
 const OTHER_PRODUCT_ID = 'GA250128210';
+const CATEGORY_ID = '1000000008';
 const product = (id = PRODUCT_ID) => ({
   prdtNo: id,
   prdtName: 'MEDIHEAL Essential Mask Sheet 10ea Set',
@@ -50,7 +51,8 @@ function createClient({ replies = {}, defaultReply } = {}) {
     assert.equal(init.headers.Cookie, undefined);
     assert.equal(init.headers.accept, init.method === 'GET' && url.pathname === '/product/detail' ? 'text/html' : 'application/json');
     if (init.method === 'POST') {
-      assert.equal(init.headers['content-type'], 'application/json');
+      assert.equal(init.headers['content-type'], url.pathname === '/display/category/product-data/'
+        ? 'application/json; charset=utf-8' : 'application/json');
     }
     const key = `${init.method} ${url.pathname}`;
     const reply = replies[key] ?? defaultReply;
@@ -74,6 +76,26 @@ function productClient() {
     }),
     'POST /product/review-summary': json(summary()),
   } });
+}
+
+function categoryPage({ pageNum, categoryId = CATEGORY_ID, found = 25, rowCount = 24, wrongPriceId = false } = {}) {
+  const start = (pageNum - 1) * 24;
+  const hit = [];
+  const productPriceMap = {};
+  for (let index = 0; index < rowCount; index++) {
+    const productId = `GA2600${String(start + index).padStart(5, '0')}`;
+    hit.push({ fields: {
+      prdtNo: productId, prdtName: `Category product ${start + index}`, brandNo: 'B00592',
+      brandName: 'Example Brand', ctgrNo: '1000000016', ctgrName: 'Cream',
+      allPathCtgrNoList: [`${categoryId}^1000000016`], reviewCnt: '17', reviewScore: '4.8',
+      sellStatCode: '10', soldOutYn: 'N', stockQty: null, imagePath: 'prdtImg/1000/category.png',
+    } });
+    productPriceMap[productId] = {
+      prdtNo: wrongPriceId && index === 0 ? OTHER_PRODUCT_ID : productId,
+      minNrmlAmt: '27.00', maxNrmlAmt: '27.00', minSaleAmt: '20.52', maxSaleAmt: '20.52',
+    };
+  }
+  return { hits: { found, start, hit, brandInfo: { B00592: 'Example Brand' } }, productPriceMap };
 }
 
 test('Global product detail reads prices, options, product and description image URLs without cookies', async () => {
@@ -142,7 +164,7 @@ test('Global reviews preserve bodies, rating/date, associated-product flags and 
       bestYn: 'Y', mediaReviewYn: 'Y', reviewRgstYmd: '20261005', snglOptnName: 'Rose', goodCnt: 4, badCnt: 0,
       loginId: 'must-not-escape', mbrNo: 123456, reviewMediaList: [{ seq: 1, videoYn: 'N', imagePath: 'prdt_review/1000/review.jpg' }] },
     { prdtNo: OTHER_PRODUCT_ID, assocReviewYn: 'Y', prdtReviewNo: 1002, previewScore: 4, conText: 'Associated review',
-      bestYn: 'N', mediaReviewYn: 'N', reviewRgstYmd: '20260901', snglOptnName: 'Single', goodCnt: 1, badCnt: 0,
+      bestYn: 'N', mediaReviewYn: 'N', reviewRgstYmd: '20260901', snglOptnName: 'Single', goodCnt: null, badCnt: 0,
       loginId: 'another-private-id', mbrNo: 654321, reviewMediaList: [] },
   ];
   const { client, calls } = createClient({ replies: {
@@ -162,6 +184,7 @@ test('Global reviews preserve bodies, rating/date, associated-product flags and 
   assert.equal(result.reviews[0].images[0].imageUrl, 'https://cdn-image.oliveyoung.com/prdt_review/1000/review.jpg');
   assert.equal(result.reviews[1].associatedProductReview, true);
   assert.equal(result.reviews[1].sourceProductId, OTHER_PRODUCT_ID);
+  assert.equal(result.reviews[1].helpfulCount, null);
   assert.deepEqual(result.pagination, { pageNum: 2, pageSize: 10, totalCount: 21,
     totalPages: 3, isLastPage: false, nextPage: 3 });
   assert.equal(JSON.stringify(result).includes('must-not-escape'), false);
@@ -231,6 +254,162 @@ test('Global best-seller XHR is a bounded browse list and validates the observed
     await assert.rejects(client.getBestSellers(options), error =>
       ['OLIVEYOUNG_GLOBAL_COUNTRY_UNVERIFIED', 'OLIVEYOUNG_GLOBAL_CURRENCY_UNVERIFIED'].includes(error.code));
   }
+});
+
+test('Missing stock and review counts stay unknown instead of being converted to zero', async () => {
+  const fixtureProduct = product();
+  fixtureProduct.optionList[0].buyStockQty = null;
+  const { client } = createClient({ replies: {
+    'GET /product/detail': () => contextHtml(PRODUCT_ID),
+    'POST /product/detail-data': json({ product: fixtureProduct }),
+    'POST /product/details-info': json({ details: { prdtNo: PRODUCT_ID, dtlDesc: '' } }),
+    'POST /product/review-summary': json(summary()),
+    'GET /display/product/best-seller/order-best': json([{
+      prdtNo: PRODUCT_ID, prdtName: 'Mask set', nrmlAmt: '27.00', saleAmt: '13.50',
+      reviewCnt: null, avgScore: null,
+    }]),
+  } });
+  const detailed = await client.getProduct({ id: PRODUCT_ID });
+  assert.equal(detailed.product.options[0].stockQuantity, null);
+  const best = await client.getBestSellers();
+  assert.equal(best.products[0].reviewCount, null);
+  assert.equal(best.products[0].averageRating, null);
+});
+
+test('Category browse replays observed JSON XHR fields, binds USD prices, and follows result paging', async () => {
+  const { client, calls } = createClient({ defaultReply: async ({ url, init }) => {
+    if (init.method === 'GET' && url.pathname === '/product/detail') {
+      return contextHtml(url.searchParams.get('prdtNo'));
+    }
+    assert.equal(url.pathname, '/display/category/product-data/');
+    const body = JSON.parse(init.body);
+    return json(categoryPage({ pageNum: body.pageNum,
+      rowCount: body.pageNum === 1 ? 24 : body.pageNum === 2 ? 1 : 0 }));
+  } });
+
+  const first = await client.getCategoryProducts({ categoryId: CATEGORY_ID, pageNum: 1 });
+  const last = await client.getCategoryProducts({ categoryId: CATEGORY_ID, pageNum: 2 });
+  const beyond = await client.getCategoryProducts({ categoryId: CATEGORY_ID, pageNum: 3 });
+  assert.equal(calls.filter(call => call.url.pathname === '/display/category/product-data/').length, 3);
+  const body = JSON.parse(calls[0].init.body);
+  assert.deepEqual(body, {
+    accParam: '', langCode: 'en', previewDate: '', encKey: '', encText: '', dlvCntry: '1230',
+    mrgnCntryCode: '9999', attrValNo: '', ctgrNo: CATEGORY_ID, prdtSortStdrCode: '10',
+    pageNum: 1, rowsPerPage: '24', attrValNoList: {}, brandNoList: [], ctgrNoList: [],
+    eventSlprcDscntRt: [], reviewScore: [], scrollY: 0,
+  });
+  assert.equal(calls[0].init.headers['content-type'], 'application/json; charset=utf-8');
+  assert.equal(first.products.length, 24);
+  assert.equal(first.products[0].id, 'GA260000000');
+  assert.equal(first.products[0].price.amount, '20.52');
+  assert.equal(first.products[0].price.currency, 'USD');
+  assert.equal(first.products[0].listPrice.amount, '27.00');
+  assert.equal(first.products[0].categoryId, CATEGORY_ID);
+  assert.deepEqual(first.products[0].categoryPathIds, [[CATEGORY_ID, '1000000016']]);
+  assert.equal(first.products[0].stockQuantity, null);
+  assert.equal(first.marketContext.currencyVerified, true);
+  assert.equal(first.isLastPage, false);
+  assert.equal(first.pagination.nextPage, 2);
+  assert.equal(first.receipt.capabilityId, 'catalog.category_products');
+  assert.equal(first.receipt.categoryIdMatched, true);
+  assert.equal(last.products.length, 1);
+  assert.equal(last.isLastPage, true);
+  assert.equal(last.pagination.isLastPage, true);
+  assert.equal(last.pagination.nextPage, null);
+  assert.equal(Object.hasOwn(last, 'completeCategory'), false);
+  assert.equal(beyond.products.length, 0);
+  assert.equal(beyond.pagination.isLastPage, true);
+  assert.deepEqual(beyond.marketContext, { currency: null, currencyVerified: false,
+    reason: 'Empty page had no product id to bind a fresh currency context.' });
+});
+
+test('Category browse only sends source-observed page sizes and fails closed on category or price-map mismatch', async () => {
+  const { client, calls } = createClient({ defaultReply: async ({ url, init }) => {
+    if (url.pathname === '/product/detail') return contextHtml(url.searchParams.get('prdtNo'));
+    const body = JSON.parse(init.body);
+    return json(categoryPage({ pageNum: body.pageNum, found: 0, rowCount: 0 }));
+  } });
+  for (const input of [{ page: 1, pageSize: 36 }, { pageNum: 1, pageSize: 48 }]) {
+    const result = await client.getCategoryProducts({ categoryId: CATEGORY_ID, ...input });
+    const pageSize = input.pageSize;
+    assert.equal(result.pagination.pageSize, pageSize);
+    assert.equal(JSON.parse(calls.at(-1).init.body).rowsPerPage, String(pageSize));
+    assert.equal(result.marketContext.currencyVerified, false);
+  }
+  await assert.rejects(client.getCategoryProducts({ categoryId: 'bad' }),
+    { code: 'OLIVEYOUNG_GLOBAL_CATEGORY_ID_INVALID' });
+  await assert.rejects(client.getCategoryProducts({ categoryId: CATEGORY_ID, pageSize: 12 }),
+    { code: 'OLIVEYOUNG_GLOBAL_CATEGORY_PAGE_INPUT_INVALID' });
+  await assert.rejects(client.getCategoryProducts({ categoryId: CATEGORY_ID, page: 1, pageNum: 2 }),
+    { code: 'OLIVEYOUNG_GLOBAL_CATEGORY_PAGE_INPUT_INVALID' });
+  assert.equal(calls.length, 2);
+
+  const wrongCategory = createClient({ replies: {
+    'POST /display/category/product-data/': json({ ...categoryPage({ pageNum: 1, rowCount: 1 }),
+      hits: { ...categoryPage({ pageNum: 1, rowCount: 1 }).hits,
+        hit: [{ fields: { ...categoryPage({ pageNum: 1, rowCount: 1 }).hits.hit[0].fields,
+          allPathCtgrNoList: ['1000000001^1000000016'] } }] } }),
+  } });
+  await assert.rejects(wrongCategory.client.getCategoryProducts({ categoryId: CATEGORY_ID }),
+    { code: 'OLIVEYOUNG_GLOBAL_CATEGORY_PRODUCT_SCHEMA_INVALID' });
+
+  const wrongPrice = createClient({ replies: {
+    'POST /display/category/product-data/': json(categoryPage({ pageNum: 1, rowCount: 1, wrongPriceId: true })),
+  } });
+  await assert.rejects(wrongPrice.client.getCategoryProducts({ categoryId: CATEGORY_ID }),
+    { code: 'OLIVEYOUNG_GLOBAL_CATEGORY_PRICE_MAP_MISMATCH' });
+});
+
+test('Search suggestions stay separate from product search and normalize only observed brand/category/keyword fields', async () => {
+  const { client, calls } = createClient({ replies: {
+    'GET /api/v1/search/keywords/auto-complete': json({
+      brands: [{ brandNumber: 'B00592', brandName: 'masklab', pcImagePath: 'null', mobileImagePath: 'null' }],
+      categories: [{ categoryNumber: '1000000013', categoryName: 'Toner',
+        fullCategoryName: 'OliveYoungGlobal &gt; Skincare &gt; Moisturizers &gt; Toner' }],
+      keywords: [{ keyword: 'Toner Product Name' }],
+    }),
+  } });
+  const result = await client.getSearchSuggestions({ query: 'toner' });
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].url.pathname, '/api/v1/search/keywords/auto-complete');
+  assert.equal(calls[0].url.searchParams.get('query'), 'toner');
+  assert.deepEqual(result.brands, [{ brandId: 'B00592', name: 'masklab', pcImageUrl: null, mobileImageUrl: null }]);
+  assert.deepEqual(result.categories, [{ categoryId: '1000000013', name: 'Toner',
+    fullPath: 'OliveYoungGlobal > Skincare > Moisturizers > Toner' }]);
+  assert.deepEqual(result.keywords, ['Toner Product Name']);
+  assert.equal(result.containsProducts, false);
+  assert.equal(result.containsProductPrices, false);
+  assert.equal(result.receipt.contractProvenance.kind, 'first_party_bundle_contract');
+  assert.equal(result.receipt.capabilityId, 'search.suggestions');
+  assert.deepEqual(result.receipt.request.queryFields, ['query']);
+});
+
+test('Popular keyword endpoint is source-backed and does not become catalog data', async () => {
+  const { client, calls } = createClient({ replies: {
+    'GET /api/v1/search/keywords/popular': json({ aggregatedAt: '2026-10-05T04:00:00Z', popularKeywords: [
+      { keyword: 'Anua', rank: 1, rankDiff: 0, count: 34, countDiff: 19 },
+      { keyword: 'Lador', rank: 2, rankDiff: -1, count: 12, countDiff: 2 },
+      { keyword: 'Arocell', rank: 3, rankDiff: null, count: 9, countDiff: null },
+    ] }),
+  } });
+  const result = await client.getPopularKeywords();
+  assert.equal(calls[0].url.pathname, '/api/v1/search/keywords/popular');
+  assert.equal(calls[0].url.searchParams.get('size'), '10');
+  assert.deepEqual(result.popularKeywords[0], { keyword: 'Anua', rank: 1, rankDiff: 0, searchCount: 34, searchCountDiff: 19 });
+  assert.deepEqual(result.popularKeywords[2], { keyword: 'Arocell', rank: 3, rankDiff: null, searchCount: 9, searchCountDiff: null });
+  assert.equal(result.aggregatedAt, '2026-10-05T04:00:00Z');
+  assert.equal(result.isProductCatalog, false);
+  assert.equal(result.receipt.capabilityId, 'search.popular_keywords');
+  assert.equal(result.receipt.contractProvenance.kind, 'first_party_bundle_contract');
+});
+
+test('An empty bestseller response does not trigger a currency bootstrap without a product identity', async () => {
+  const { client, calls } = createClient({ replies: {
+    'GET /display/product/best-seller/order-best': json([]),
+  } });
+  await assert.rejects(client.getBestSellers({ country: 'KR', currency: 'USD' }),
+    { code: 'OLIVEYOUNG_GLOBAL_BESTSELLER_EMPTY' });
+  assert.equal(calls.length, 1);
 });
 
 test('Search-results access stays blocked instead of using product-page HTML or guessed APIs', async () => {

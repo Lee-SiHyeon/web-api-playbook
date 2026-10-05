@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 1,
+  "service": "oliveyoung-public",
+  "description": "Anonymous non-affiliate Korean storefront direct HTTP client with source-backed search, product/detail, options and review reads. The client is implemented and 12 focused tests pass; browser XHRs returned JSON 200, while direct Node/Python/curl calls currently receive Cloudflare 403 HTML. Account login is not established as the remedy.",
+  "capabilities": [
+    {
+      "id": "catalog.search_prices",
+      "title": "Independent direct-HTTP search and KRW price mapping",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Source-backed product detail and option reads",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. The GET /goods/api/v1/detail response was source inspected but absent from the browser capture; its live response envelope is unverified.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "catalog.product_description",
+      "title": "Product description and image references",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "catalog.options",
+      "title": "Product option and availability fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Limited option reservation decoding remains fail-closed when limitedInfoDto is present and reservationFlag is false.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "catalog.product_images",
+      "title": "Product image metadata and references",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Product/review image metadata is mapped; direct image-byte retrieval is unverified.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "reviews.summary",
+      "title": "Review statistics, option counts and summary fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "reviews.body",
+      "title": "Review bodies with product association and reviewer identifiers omitted",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "reviews.images",
+      "title": "Review photo metadata and image paths",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Review cursor continuation and bounded collection",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Cursor triplets and hasNext behavior are source mapped and locally tested; live Node page replay is blocked.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    },
+    {
+      "id": "auth.customer_login",
+      "title": "Sign in or register a customer account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This service scope is anonymous public catalog and review reads; account creation and customer login are outside the requested work.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.link_creation",
+      "title": "Create an Olive Young affiliate link",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This checklist covers non-affiliate storefront reads only. Shopping Curator link creation is a separate authenticated workflow.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "catalog.search_pagination",
+      "title": "Traverse search result offsets using OLIVE_GOODS TotalCount and listnum",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Source maps offset/list-size/TotalCount, but no exact terminal or provider-cap contract was observed.",
+      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+    }
+  ]
+}

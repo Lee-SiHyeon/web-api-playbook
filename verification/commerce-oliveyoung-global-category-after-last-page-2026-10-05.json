@@ -1,0 +1,85 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "catalog.category_products",
+  "checkedAt": "2026-10-05T05:48:03.324Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/display/category?ctgrNo=1000000008"
+  },
+  "request": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/display/category/product-data/",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T05:48:03.324Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "accParam",
+      "langCode",
+      "previewDate",
+      "encKey",
+      "encText",
+      "dlvCntry",
+      "mrgnCntryCode",
+      "attrValNo",
+      "ctgrNo",
+      "prdtSortStdrCode",
+      "pageNum",
+      "rowsPerPage",
+      "attrValNoList",
+      "brandNoList",
+      "ctgrNoList",
+      "eventSlprcDscntRt",
+      "reviewScore",
+      "scrollY"
+    ],
+    "responseBytes": 45366,
+    "responseSha256": "07e64f9440a019021397c37d8c1efa739baf8c76dd63d3b2f76c7acc3f4ec2f4"
+  },
+  "categoryIdMatched": true,
+  "productIdCount": 0,
+  "page": {
+    "pageNum": 155,
+    "pageSize": 24,
+    "totalCount": 3674,
+    "totalPages": 154,
+    "isLastPage": true,
+    "nextPage": null
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0"
+  },
+  "isLastPage": true,
+  "normalizedResult": {
+    "categoryId": "1000000008",
+    "productCount": 0,
+    "totalCount": 3674,
+    "pagination": {
+      "pageNum": 155,
+      "pageSize": 24,
+      "totalCount": 3674,
+      "totalPages": 154,
+      "isLastPage": true,
+      "nextPage": null
+    },
+    "pageSizeSupported": [
+      24,
+      36,
+      48
+    ],
+    "isLastPage": true,
+    "currencyVerified": false,
+    "sampleProduct": null
+  }
+}
