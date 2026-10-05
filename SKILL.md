@@ -87,6 +87,15 @@ unexposed operation. Acquire public frontend keys through current HTTP bootstrap
 and keep their values only in memory. Preserve safe bounded continuations;
 a partial collection or resumed tail is not complete review coverage.
 
+For domestic Olive Young sales rankings, use `commerce oliveyoung-public ranking`
+and [the ranking contract](references/commerce-oliveyoung-korea-ranking.md).
+Preserve the site's displayed rank and category; do not assign ranks from array
+positions, omit sold-out ranked products, or replace a missing rank with rank 11.
+The current sales ranking is served as an HTML document. Its direct HTTP reader
+must declare that source format and must not be reported as a JSON/XHR endpoint.
+Use the explicit Python HTTP transport dependency, with no browser fallback, and
+keep search/detail/review readiness separate from a successful ranking request.
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.

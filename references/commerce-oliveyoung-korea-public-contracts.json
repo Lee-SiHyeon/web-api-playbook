@@ -62,7 +62,10 @@
         "TotalCount"
       ],
       "evidenceLevel": "anonymous_headed_browser_xhr_200",
-      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json",
+      "normalizedCategoryField": "categoryIds",
+      "categoryFieldSemantics": "DISP_CAT_NO may contain comma-delimited category IDs; the client splits and preserves every ID and emits no singular categoryId.",
+      "liveSchemaReplay": "verification/commerce-oliveyoung-korea-live-schema-2026-10-05.json"
     },
     {
       "id": "catalog-search-categories",
@@ -198,8 +201,16 @@
           "cursorScore",
           "cursorCount"
         ],
-        "evidenceLevel": "source_inspected_from_live_loaded_bundle; next_page_http_replay_not_verified"
-      }
+        "evidenceLevel": "source_inspected_from_live_loaded_bundle; cookie_free_curl_cffi_http_200_pages_1_2_and_exact_cursor_round_trip_verified"
+      },
+      "observedNextCursorTypes": {
+        "nextCursorId": "number",
+        "nextCursorScore": "number",
+        "nextCursorCount": "null",
+        "observedHasNext": true
+      },
+      "cursorRoundTrip": "The exact source cursor types and null are preserved in the next request; pages 1 and 2 independently returned HTTP 200.",
+      "liveSchemaReplay": "verification/commerce-oliveyoung-korea-live-schema-2026-10-05.json"
     },
     {
       "id": "photo-review-list",
@@ -350,17 +361,17 @@
   "runtimeStatus": {
     "captured": true,
     "clientExists": true,
-    "localTests": 12,
+    "localTests": 15,
     "remnantFree": true,
-    "credentialPropagation": "optional in-memory service-scoped cookie/User-Agent input only; no CLI wiring in this slice",
-    "liveReplay": false
+    "credentialPropagation": "optional in-memory service-scoped cookie/User-Agent input only; live replay used no cookies or account credentials",
+    "liveReplay": true,
+    "liveReplayTransport": "curl_cffi 0.16.3 chrome profile through the bounded injected fetch adapter",
+    "liveReplayProof": "verification/commerce-oliveyoung-korea-live-schema-2026-10-05.json"
   },
   "unverified": [
-    "The exact search builder has dynamic form-state fields; the live request values were intentionally not persisted. The source maps its form fields, result groups, price branches and offset/TotalCount page inputs.",
-    "GET /goods/api/v1/detail is source mapped but absent from the current browser request/response capture, so its live response envelope is not established.",
-    "The extra request body source is mapped, but its live request values were not persisted; option reservation calculation remains fail-closed when limitedInfoDto is present and reservationFlag is false because the imported isLimited predicate was not recovered.",
-    "Review browser response/page data is captured as schema-only metadata. Direct Node page replay was blocked; cursor values and cross-transport review result binding were not independently read back.",
-    "No repeatable pure-HTTP API success has been established from this worker; direct Node, Python requests and cookie-free curl returned Cloudflare 403 HTML on the tested exact description endpoint."
+    "GET /goods/api/v1/detail is source mapped but absent from the current browser request/response capture, so its live response envelope remains unestablished.",
+    "The extra request body source is mapped, but live request values were not persisted; option reservation calculation remains fail-closed when limitedInfoDto is present and reservationFlag is false because the imported isLimited predicate was not recovered.",
+    "Review page 2 returned hasNext=true in the recorded two-page replay; further pages and a source-terminal hasNext=false remain unverified."
   ],
   "firstPartySourceContract": {
     "file": "/home/worker/artifacts/oliveyoung-focused-20261005/korea-firstparty-source-contracts.json",
@@ -419,11 +430,58 @@
   },
   "implementation": {
     "file": "lib/commerce/oliveyoung-korea-public.mjs",
-    "sha256": "3bd0dfdd336d0b5fa3558d68e213362e5c379bcd26d62a3de661b23f86b80d16",
+    "sha256": "4397ce4e35dca93218eebf007d5d219e1617dc3cec7437d65b406e20c391b894",
     "export": "createOliveyoungKoreaPublicClient",
     "testFile": "tests/commerce-oliveyoung-korea-public.test.mjs",
-    "testSha256": "4c62eec222dcacb0960583ddf62785fd304e19448851dc7fd091f21e54cf97da",
-    "localTestCount": 12,
-    "liveStatus": "direct HTTP is still blocked; local tests do not prove remote replay"
+    "testSha256": "52def9649962b433c9c825e7c381638c64bb7a4c66c2b4e40397091053232fe4",
+    "localTestCount": 15,
+    "liveStatus": "cookie-free direct HTTP schema replay passed for search pages 1-2 and review cursor pages 1-2; review terminal not reached",
+    "liveProofSha256": "413888de6260225ed6ccdcadd6bbc67d4c9b8902b4fc2175fe5cae450e619674"
+  },
+  "browserlessHttpReplay": {
+    "proofFile": "verification/commerce-oliveyoung-korea-live-schema-2026-10-05.json",
+    "proofSha256": "413888de6260225ed6ccdcadd6bbc67d4c9b8902b4fc2175fe5cae450e619674",
+    "transport": {
+      "library": "curl_cffi",
+      "version": "0.16.3",
+      "profile": "chrome"
+    },
+    "browserUsed": false,
+    "accountAuthentication": "not_used",
+    "cookiesSent": false,
+    "search": {
+      "path": "/store/search/NewMainSearchApi.do",
+      "query": "선크림",
+      "pageSize": 10,
+      "pages": [
+        1,
+        2
+      ],
+      "httpStatus": 200,
+      "rowsPerPage": 10,
+      "totalProducts": 618,
+      "categoryNormalization": "DISP_CAT_NO comma-delimited values preserved in categoryIds arrays"
+    },
+    "reviews": {
+      "path": "/review/api/v2/reviews/cursor",
+      "productId": "A000000263510",
+      "pages": [
+        1,
+        2
+      ],
+      "httpStatus": 200,
+      "rowsPerPage": 10,
+      "cursorPrimitiveTypes": [
+        "number",
+        "number",
+        "null"
+      ],
+      "exactCursorRoundTripVerified": true,
+      "page2HasNext": true,
+      "terminalVerified": false,
+      "rawReviewBodiesPersisted": false
+    },
+    "implementationSha256": "4397ce4e35dca93218eebf007d5d219e1617dc3cec7437d65b406e20c391b894",
+    "testSha256": "52def9649962b433c9c825e7c381638c64bb7a4c66c2b4e40397091053232fe4"
   }
 }

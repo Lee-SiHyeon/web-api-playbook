@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "oliveyoung-public",
-  "description": "Anonymous non-affiliate Korean storefront direct HTTP client with source-backed search, product/detail, options and review reads. The client is implemented and 12 focused tests pass; browser XHRs returned JSON 200, while direct Node/Python/curl calls currently receive Cloudflare 403 HTML. Account login is not established as the remedy.",
+  "description": "Anonymous Korean storefront: native HTTP search/KRW prices and bounded review cursor pages are verified with curl_cffi. Best Store rankings are HTTP HTML documents, not XHR. Product detail/options/images, full termination and all-category replays remain unverified; the category sweep stopped on HTTP429.",
   "capabilities": [
     {
       "id": "catalog.search_prices",
@@ -22,7 +22,24 @@
           "tests/commerce-oliveyoung-korea-public.test.mjs"
         ]
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/search/NewMainSearchApi.do",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-catalog-search_prices-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
       "sourceEvidence": [
         {
           "files": [
@@ -30,8 +47,7 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "note": "Native default commerce CLI read two search pages/20 KRW offers. The actual total was618; source exhaustion/terminal traversal is unverified. Source category IDs may be multiple; displayed current/reference roles remain distinct."
     },
     {
       "id": "catalog.product_detail",
@@ -60,8 +76,8 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. The GET /goods/api/v1/detail response was source inspected but absent from the browser capture; its live response envelope is unverified.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
     },
     {
       "id": "catalog.product_description",
@@ -90,8 +106,8 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
     },
     {
       "id": "catalog.options",
@@ -120,8 +136,8 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Limited option reservation decoding remains fail-closed when limitedInfoDto is present and reservationFlag is false.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
     },
     {
       "id": "catalog.product_images",
@@ -150,8 +166,8 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Product/review image metadata is mapped; direct image-byte retrieval is unverified.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
     },
     {
       "id": "reviews.summary",
@@ -180,8 +196,8 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
     },
     {
       "id": "reviews.body",
@@ -202,7 +218,24 @@
           "tests/commerce-oliveyoung-korea-public.test.mjs"
         ]
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/cursor",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-reviews-body-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
       "sourceEvidence": [
         {
           "files": [
@@ -210,8 +243,7 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "note": "Native default catalog CLI read two cursor pages/20 source rows, deduplicating to15 reviews with9 associated-product rows. Numeric cursor ID/score and null count preserved. hasNext remainedtrue; full review collection is not complete."
     },
     {
       "id": "reviews.images",
@@ -240,8 +272,8 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
     },
     {
       "id": "reviews.pagination",
@@ -262,7 +294,24 @@
           "tests/commerce-oliveyoung-korea-public.test.mjs"
         ]
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/cursor",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-reviews-pagination-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
       "sourceEvidence": [
         {
           "files": [
@@ -270,8 +319,7 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Cursor triplets and hasNext behavior are source mapped and locally tested; live Node page replay is blocked.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "note": "Native default catalog CLI read two cursor pages/20 source rows, deduplicating to15 reviews with9 associated-product rows. Numeric cursor ID/score and null count preserved. hasNext remainedtrue; full review collection is not complete."
     },
     {
       "id": "auth.customer_login",
@@ -320,7 +368,24 @@
           "tests/commerce-oliveyoung-korea-public.test.mjs"
         ]
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/search/NewMainSearchApi.do",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-catalog-search_pagination-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
       "sourceEvidence": [
         {
           "files": [
@@ -328,8 +393,71 @@
           ]
         }
       ],
-      "blocker": "Client and focused local tests exist; anonymous browser XHRs returned JSON 200 and first-party request builders are source mapped. Independent HTTP is still blocked: Node requests to search/detail/extra returned 403 HTML even with captured browser UA, observed headers and anonymous cookies; Python requests returned 403 both cookie-free and with current CF cookies plus actual UA; native curl returned cookie-free 403 over HTTP/2. The cookie-enabled curl retry status is unknown because its metadata parser failed. This does not establish an account-login requirement. See the transport receipt. Source maps offset/list-size/TotalCount, but no exact terminal or provider-cap contract was observed.",
-      "note": "Client code and 12 focused local tests are present. The required live gate remains blocked until direct HTTP replay succeeds; optional cookies accept only Cloudflare challenge names and the client has no browser fallback."
+      "note": "Native default commerce CLI read two search pages/20 KRW offers. The actual total was618; source exhaustion/terminal traversal is unverified. Source category IDs may be multiple; displayed current/reference roles remain distinct."
+    },
+    {
+      "id": "ranking.top_products",
+      "title": "Read explicit top product ranks from the Korean Best Store page",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-ranking.mjs",
+            "exports": [
+              "createOliveyoungKoreaRankingClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-ranking.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/main/getBestList.do",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/oliveyoung-ranking-top_products-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-ranking.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Recorded cookie-free HTTP200 top10. HTML document source, isXhr=false. 21 controls observed; only skincare replayed. Later requests were HTTP429; no automatic retry. Recorded live does not mean a current remote health check."
+    },
+    {
+      "id": "ranking.category_filters",
+      "title": "Apply a visible Best Store category filter and read back the selected form state",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-ranking.mjs",
+            "exports": [
+              "createOliveyoungKoreaRankingClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-ranking.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "21 ranking filter controls observed and skincare independently replayed. The all-category sweep hitHTTP429 before its first category-specific read; the other20 filters remain unverified. Headed source/readback is in verification/commerce-oliveyoung-korea-ranking-category-live-2026-10-05.json.",
+      "note": "Category selection uses the page's observed hidden dispCatNo and sets fltDispCatNo to a visible ranking control's data-ref-dispCatNo. The filter is a GET document navigation, not an XHR."
     }
   ]
 }

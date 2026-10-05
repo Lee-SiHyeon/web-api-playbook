@@ -1,0 +1,174 @@
+{
+  "schema": "commerce-oliveyoung-http-transport-contracts-v1",
+  "checkedAt": "2026-10-05",
+  "description": "Fixed public Olive Young read origins and routes accepted by the browserless curl_cffi transport.",
+  "origins": [
+    "https://www.oliveyoung.co.kr",
+    "https://m.oliveyoung.co.kr"
+  ],
+  "requestHeaders": [
+    "accept",
+    "accept-language",
+    "content-type",
+    "origin",
+    "referer",
+    "x-requested-with"
+  ],
+  "refererPaths": [
+    "/store/goods/getGoodsDetail.do",
+    "/store/search/getSearchMain.do",
+    "/store/main/getBestList.do"
+  ],
+  "routes": [
+    {
+      "id": "rankings-page",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/main/getBestList.do",
+      "methods": ["GET"],
+      "queryFields": ["dispCatNo", "fltDispCatNo", "pageIdx", "rowsPerPage", "t_click", "t_page"],
+      "bodyFormat": null,
+      "allowedContentTypes": [],
+      "bodyFields": [],
+      "responseKind": "html",
+      "evidence": "cookie_free_curl_cffi_http_200_2026-10-05"
+    },
+    {
+      "id": "home-curation-products",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/curation/getCurationJsonCallBack.do",
+      "methods": ["POST"],
+      "queryFields": [],
+      "bodyFormat": "form",
+      "allowedContentTypes": ["application/x-www-form-urlencoded"],
+      "bodyFields": ["goodsNoStr", "rankStr", "viewCntStr"],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "catalog-search-results",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/search/NewMainSearchApi.do",
+      "methods": ["POST"],
+      "queryFields": [],
+      "bodyFormat": "form",
+      "allowedContentTypes": ["application/x-www-form-urlencoded"],
+      "bodyFields": [
+        "reQuery", "rt", "sort", "goods_sort", "disPlayCateId", "cateId", "cateId2",
+        "sale_below_price", "sale_over_price", "brandCheck", "benefitCheck", "attrCheck0",
+        "attrCheck1", "attrCheck2", "attrCheck3", "attrCheck4", "authenticYn", "typeChk",
+        "onlyOneBrand", "quickYn", "query", "collection", "displayMediaTypes", "listnum", "startCount"
+      ],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "catalog-search-categories",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/search/NewCateSearchApi.do",
+      "methods": ["POST"],
+      "queryFields": [],
+      "bodyFormat": "form",
+      "allowedContentTypes": ["application/x-www-form-urlencoded"],
+      "bodyFields": ["collection", "goods_sort", "query", "quickYn", "realQuery", "startCount"],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "product-description",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/goods/api/v1/description",
+      "methods": ["GET"],
+      "queryFields": ["goodsNumber"],
+      "bodyFormat": null,
+      "allowedContentTypes": [],
+      "bodyFields": [],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "product-extra-options-review-summary",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/goods/api/v1/extra",
+      "methods": ["POST"],
+      "queryFields": [],
+      "bodyFormat": "json",
+      "allowedContentTypes": ["application/json"],
+      "bodyFields": [
+        "appFlag", "deliveryFreeFlag", "deliveryPolicyNumber", "goodsNumber", "goodsSectionCode",
+        "goodsTypeCode", "leadTime", "onlineBrand", "options", "orderableMinimumQuantity",
+        "supplier", "todayDeliveryCheckedFlag", "tradeCode"
+      ],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "review-cursor-list",
+      "origin": "https://m.oliveyoung.co.kr",
+      "path": "/review/api/v2/reviews/cursor",
+      "methods": ["POST"],
+      "queryFields": [],
+      "bodyFormat": "json",
+      "allowedContentTypes": ["application/json"],
+      "bodyFields": [
+        "goodsNumber", "page", "size", "sortType", "reviewType", "cursorId", "cursorScore",
+        "cursorCount", "itemNumber", "skinType", "skinTone", "skinTrouble", "cacheAvailable",
+        "itemNumberList", "relateGoodsList"
+      ],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "photo-review-list",
+      "origin": "https://m.oliveyoung.co.kr",
+      "path": "/review/api/v2/reviews/photo-reviews",
+      "methods": ["POST"],
+      "queryFields": [],
+      "bodyFormat": "json",
+      "allowedContentTypes": ["application/json"],
+      "bodyFields": ["goodsNumber", "page", "size", "itemNumber"],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "review-statistics",
+      "origin": "https://m.oliveyoung.co.kr",
+      "pathPattern": "^/review/api/v2/reviews/[A-Za-z0-9_-]{1,64}/stats$",
+      "methods": ["GET"],
+      "queryFields": ["itemNumber"],
+      "bodyFormat": null,
+      "allowedContentTypes": [],
+      "bodyFields": [],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "review-option-counts",
+      "origin": "https://m.oliveyoung.co.kr",
+      "pathPattern": "^/review/api/v2/reviews/options/[A-Za-z0-9_-]{1,64}/count$",
+      "methods": ["GET"],
+      "queryFields": [],
+      "bodyFormat": null,
+      "allowedContentTypes": [],
+      "bodyFields": [],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    },
+    {
+      "id": "review-summary",
+      "origin": "https://m.oliveyoung.co.kr",
+      "pathPattern": "^/review/api/v1/reviews/[A-Za-z0-9_-]{1,64}/summary$",
+      "methods": ["GET"],
+      "queryFields": [],
+      "bodyFormat": null,
+      "allowedContentTypes": [],
+      "bodyFields": [],
+      "responseKind": "json",
+      "evidence": "anonymous_headed_browser_xhr_200_source_candidate"
+    }
+  ],
+  "blockedExamples": [
+    { "origin": "https://www.oliveyoung.co.kr", "path": "/goods/api/v1/detail", "reason": "no captured network response in the current source evidence" },
+    { "origin": "https://www.oliveyoung.co.kr", "path": "/store/main/loginCheckJson.do", "reason": "authentication state is outside this public read transport" },
+    { "origin": "https://www.oliveyoung.co.kr", "path": "/store/goods/getLinkUrl.do", "reason": "affiliate short-link write is outside this public read transport" }
+  ]
+}
