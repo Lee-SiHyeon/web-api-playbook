@@ -1,0 +1,67 @@
+{
+  "schema": "provider-linux-login-diagnostics-v1",
+  "checkedAt": "2026-10-05T12:52:42.196090+00:00",
+  "executionHost": "linux_worker",
+  "browserRuntime": "task_owned_headed_Chromium151",
+  "sandboxDisableRequested": false,
+  "webdriverOverrideApplied": false,
+  "accountsOrCredentialsPersistedInEvidence": false,
+  "passwordMismatchTested": false,
+  "contentGenerationSent": 0,
+  "results": [
+    {
+      "service": "gemini",
+      "executionHost": "linux_worker",
+      "emailSubmitted": true,
+      "passwordStageReached": false,
+      "passwordSubmitted": false,
+      "finalOrigin": "https://accounts.google.com",
+      "finalPath": "/v3/signin/rejected",
+      "knownErrorOrCheckpoint": [
+        "This browser or app may not be secure"
+      ],
+      "authRequests": [
+        {
+          "method": "POST",
+          "origin": "https://accounts.google.com",
+          "path": "/v3/signin/_/AccountsSignInUi/browserinfo",
+          "httpStatus": 200
+        },
+        {
+          "method": "POST",
+          "origin": "https://accounts.google.com",
+          "path": "/v3/signin/_/AccountsSignInUi/data/batchexecute",
+          "httpStatus": 200
+        },
+        {
+          "method": "POST",
+          "origin": "https://accounts.google.com",
+          "path": "/v3/signin/_/AccountsSignInUi/data/batchexecute",
+          "httpStatus": 200
+        }
+      ],
+      "authenticatedOwnerVerified": false
+    },
+    {
+      "service": "grok",
+      "executionHost": "linux_worker",
+      "emailSubmitted": true,
+      "passwordStageReached": false,
+      "passwordSubmitted": false,
+      "finalOrigin": "https://accounts.x.ai",
+      "finalPath": "/sign-in",
+      "knownErrorOrCheckpoint": [
+        "Something went wrong. Please try again."
+      ],
+      "authRequests": [
+        {
+          "method": "POST",
+          "origin": "https://accounts.x.ai",
+          "path": "/api/auth/sso/check",
+          "httpStatus": 403
+        }
+      ],
+      "authenticatedOwnerVerified": false
+    }
+  ]
+}
