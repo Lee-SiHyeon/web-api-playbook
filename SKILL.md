@@ -93,7 +93,12 @@ Preserve the site's displayed rank and category; do not assign ranks from array
 positions, omit sold-out ranked products, or replace a missing rank with rank 11.
 The current sales ranking is served as an HTML document. Its direct HTTP reader
 must declare that source format and must not be reported as a JSON/XHR endpoint.
-Use the explicit Python HTTP transport dependency, with no browser fallback, and
+The default ranking flow first gets the observed homepage to issue an anonymous
+session, keeps only approved server-issued CF cookies in memory, reuses the same
+HTTP context with a five-second minimum request interval, and closes it after the
+CLI job. Record the bootstrap and actual sent-cookie names separately. Do not
+rebootstrap or retry a rate-limited job. Use the explicit Python HTTP transport
+dependency, with no browser fallback, and
 keep search/detail/review readiness separate from a successful ranking request.
 
 ## Establish the execution mode by phase

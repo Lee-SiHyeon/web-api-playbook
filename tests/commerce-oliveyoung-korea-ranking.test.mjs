@@ -186,3 +186,38 @@ test('403 HTML remains a transport error and the receipt identifies a pure HTTP 
   assert.equal(error.receipt.isXhr, false);
   assert.equal(error.receipt.executionMode, 'pure_http');
 });
+
+test('429 retains server wait metadata and makes no automatic retry', async () => {
+  let calls = 0;
+  const client = createOliveyoungKoreaRankingClient({ fetchImpl: async () => {
+    calls++;
+    return new Response('<html>limited</html>', { status: 429,
+      headers: { 'content-type': 'text/html', 'retry-after': '60' } });
+  } });
+  await assert.rejects(client.getRanking(), error => {
+    assert.equal(error.code, 'OLIVEYOUNG_RANKING_RATE_LIMITED');
+    assert.equal(error.receipt.retryAfter, '60');
+    assert.equal(error.receipt.automaticRetries, 0);
+    return true;
+  });
+  assert.equal(calls, 1);
+  await client.close();
+});
+
+test('a failed homepage bootstrap is reported as bootstrap rather than a ranking HTTP request', async () => {
+  const response = new Response('<html>limited</html>', { status: 429,
+    headers: { 'content-type': 'text/html', 'retry-after': '90' } });
+  Object.defineProperty(response, 'anonymousSessionReceipt', { value: {
+    phase: 'bootstrap', request: null,
+    bootstrapRequest: { method: 'GET', origin: 'https://www.oliveyoung.co.kr',
+      path: '/store/main/main.do', httpStatus: 429, cookieSent: false },
+  } });
+  const client = createOliveyoungKoreaRankingClient({ fetchImpl: async () => response });
+  await assert.rejects(client.getRanking(), error => {
+    assert.equal(error.code, 'OLIVEYOUNG_ANONYMOUS_BOOTSTRAP_RATE_LIMITED');
+    assert.equal(error.receipt.path, '/store/main/main.do');
+    assert.equal(error.receipt.failurePhase, 'bootstrap');
+    assert.equal(error.receipt.requestedPath, '/store/main/getBestList.do');
+    return true;
+  });
+});
