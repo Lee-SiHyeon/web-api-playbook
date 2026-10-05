@@ -1,0 +1,56 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-public",
+  "capabilityId": "ranking.top_products",
+  "checkedAt": "2026-10-05T07:13:11.242Z",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "executionMode": "pure_http",
+  "request": {
+    "schema": "http-public-read-v1",
+    "service": "oliveyoung-public",
+    "capabilityId": "ranking.top_products",
+    "method": "GET",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/main/getBestList.do",
+    "queryFields": [],
+    "categoryId": null,
+    "httpStatus": 200,
+    "mime": "text/html",
+    "readOnly": true,
+    "browserUsed": false,
+    "sessionUsed": false,
+    "cookieSent": false,
+    "sourceFormat": "html_document",
+    "isXhr": false,
+    "executionMode": "pure_http",
+    "checkedAt": "2026-10-05T07:13:11.242Z",
+    "responseBytes": 428469,
+    "responseSha256": "6f43272927bd9eacffb0ffaebb2b457548eb0963861eba3438f761bf592f0dba",
+    "anonymous": true,
+    "credentialsUsed": false
+  },
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://static.oliveyoung.co.kr/pc-static-root/js/main/best.js",
+    "sourceSha256": "27f10217e8d1b981adbab30b4e54c488d0774dfcccb47680c7f951900e9f32e2"
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-korea-ranking.mjs": "eaa56662ba842b40769003e07d5e3684d6b9084a661b82bf67b21ccab5e36337",
+    "lib/commerce/oliveyoung-http-transport.mjs": "0371014feb8c17a491860654cbfe44749b9b8f93da9cf44ec1ad95d46ef9ffa9",
+    "scripts/oliveyoung-http-transport.py": "38eaf645bc506797977ee876412b215ab7ab563b275621c0672000c84b853d69"
+  },
+  "sourceMtimeNotAfterRead": true,
+  "resultSummary": {
+    "topRanksVerified": true,
+    "productsStored": 10,
+    "categoriesObserved": 21,
+    "sourceFormat": "html_document",
+    "isXhr": false,
+    "allCategoryFiltersVerified": false
+  }
+}

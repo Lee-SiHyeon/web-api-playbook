@@ -89,11 +89,20 @@ test('search sends the observed form contract and maps price branches without se
     amount: '25000', currency: 'KRW', minorUnitExponent: 0,
     kind: 'retail_list', sourceField: 'SUP_PRC',
   });
+  assert.equal(result.products[0].listPrice.kind, 'retail_list');
+  assert.equal(result.products[0].normalPrice.kind, 'market_reference');
   assert.equal(result.products[0].discountRate, '18.33');
   assert.equal(result.products[0].priceContext.optionRangeHint, true);
   assert.equal(result.products[0].priceContext.selectedVariantPrice, false);
-  assert.equal(result.products[1].price.sourceField, 'NORM_PRC');
-  assert.equal(result.products[2].price.sourceField, 'SUP_PRC');
+  assert.deepEqual(result.products[1].price, {
+    amount: '10000', currency: 'KRW', minorUnitExponent: 0,
+    kind: 'retail_current', sourceField: 'NORM_PRC',
+  });
+  assert.deepEqual(result.products[2].price, {
+    amount: '12000', currency: 'KRW', minorUnitExponent: 0,
+    kind: 'retail_current', sourceField: 'SUP_PRC',
+  });
+  assert.equal(result.products[2].normalPrice.kind, 'market_reference');
   assert.equal(result.products[2].listPrice, undefined);
   assert.equal(result.totalProducts, 30);
   assert.equal(result.pagination.hasNext, true);
@@ -102,6 +111,24 @@ test('search sends the observed form contract and maps price branches without se
   assert.equal(result.complete, false);
   assert.equal(result.receipts[0].request.responseProductMatched, null);
   assert.equal(JSON.stringify(result.receipts).includes('선크림'), false);
+});
+
+test('search preserves numeric prices and every comma-delimited display category ID', async () => {
+  const categories = '1000001000800050004,1000001001100060001';
+  const { client } = createClient({
+    'POST https://www.oliveyoung.co.kr/store/search/NewMainSearchApi.do': json({
+      Data: [{
+        CollName: 'OLIVE_GOODS', TotalCount: 1, Count: 1,
+        Result: [row(GOODS, { DISP_CAT_NO: categories, SALE_PRC: 24500, NORM_PRC: 25000 })],
+      }],
+      Parameter: [],
+    }),
+  });
+  const result = await client.searchProducts({ query: '선크림', pageSize: 10 });
+  assert.deepEqual(result.products[0].categoryIds, categories.split(','));
+  assert.equal(result.products[0].categoryId, undefined);
+  assert.equal(result.products[0].price.amount, '24500');
+  assert.equal(result.products[0].listPrice.amount, '25000');
 });
 
 test('detail binds IDs, fetches source-backed description and extras, and strips active description content', async () => {
@@ -268,6 +295,49 @@ test('review continuation uses cursor fields and omits the first-page offset', a
   });
   assert.equal(result.continuation, null);
   assert.equal(result.hasNext, false);
+});
+
+test('review cursor retains a numeric ID and null count across the continuation request', async () => {
+  const pages = [
+    json({
+      totalCnt: 54_540,
+      data: {
+        goodsReviewList: [{ reviewId: 'R1', content: 'first', goodsDto: { goodsNumber: GOODS }, reviewScore: 5 }],
+        hasNext: true, nextCursorId: 123456789, nextCursorScore: 4.8, nextCursorCount: null,
+      },
+    }),
+    json({
+      totalCnt: 54_540,
+      data: {
+        goodsReviewList: [{ reviewId: 'R2', content: 'second', goodsDto: { goodsNumber: GOODS }, reviewScore: 4 }],
+        hasNext: false,
+      },
+    }),
+  ];
+  const { client, calls } = createClient({
+    'POST https://m.oliveyoung.co.kr/review/api/v2/reviews/cursor': () => pages.shift(),
+  });
+  const first = await client.getReviews({ goodsNumber: GOODS });
+  assert.deepEqual(first.continuation, { cursorId: 123456789, cursorScore: 4.8, cursorCount: null });
+  assert.equal(first.hasNext, true);
+  const second = await client.getReviews({ goodsNumber: GOODS, continuation: first.continuation });
+  assert.deepEqual(JSON.parse(calls[1].init.body), {
+    goodsNumber: GOODS, size: 10, sortType: 'USEFUL_SCORE_DESC', reviewType: 'ALL',
+    cursorId: 123456789, cursorScore: 4.8, cursorCount: null,
+  });
+  assert.equal(second.hasNext, false);
+  assert.equal(second.continuation, null);
+});
+
+test('review cursor schema rejects object values rather than stringifying opaque cursor fields', async () => {
+  const { client } = createClient({
+    'POST https://m.oliveyoung.co.kr/review/api/v2/reviews/cursor': json({
+      totalCnt: 0,
+      data: { goodsReviewList: [], hasNext: true, nextCursorId: { id: 1 }, nextCursorScore: 2, nextCursorCount: null },
+    }),
+  });
+  await assert.rejects(client.getReviews({ goodsNumber: GOODS }),
+    { code: 'OLIVEYOUNG_KOREA_PUBLIC_REVIEW_PAGINATION_SCHEMA_INVALID' });
 });
 
 test('review collection deduplicates cursor pages and stops only at hasNext false', async () => {

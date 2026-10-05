@@ -1,0 +1,50 @@
+{
+  "schema": "commerce-api-live-http-replay-v1",
+  "service": "oliveyoung-public",
+  "capability": "rankings.top_100",
+  "checkedAt": "2026-10-05T07:05:11.926Z",
+  "evidenceLevel": "live_direct_http_replay",
+  "request": {
+    "method": "GET",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/main/getBestList.do",
+    "queryFieldNames": [],
+    "browserUsed": false,
+    "requestCookieHeaderPresent": false,
+    "customerCredentialsForwarded": false,
+    "redirectsFollowed": false
+  },
+  "response": {
+    "httpStatus": 200,
+    "mime": "text/html",
+    "contentType": "text/html;charset=UTF-8",
+    "bodyBytes": 428120,
+    "bodySha256": "85dc7c3d21ef093d0710d97b1a0931574482038f2696f684054071c92ef8c890",
+    "pageTitle": "랭킹 | 올리브영",
+    "rankMarkerPresent": true,
+    "rankedProductCardCount": 100,
+    "visibleGlobalNavigationCategoryCount": 19
+  },
+  "transport": {
+    "library": "curl_cffi",
+    "libraryVersion": "0.16.3",
+    "tlsImpersonationProfile": "chrome",
+    "certificateVerification": true,
+    "cookiesDiscarded": true,
+    "outgoingCookieHeaderPresent": false,
+    "redirectPolicy": "manual_no_follow",
+    "runtimeAutoInstall": false,
+    "fallbackTransport": false,
+    "pythonSelection": "repository_local_venv"
+  },
+  "secretsPersisted": false,
+  "rawResponsePersisted": false,
+  "sourceFileSha256": {
+    "lib/commerce/oliveyoung-http-transport.mjs": "0371014feb8c17a491860654cbfe44749b9b8f93da9cf44ec1ad95d46ef9ffa9",
+    "scripts/oliveyoung-http-transport.py": "38eaf645bc506797977ee876412b215ab7ab563b275621c0672000c84b853d69",
+    "requirements/oliveyoung-http.txt": "1c026501cb11e5bdbabbaeb38855c16582399d16462a5d8e8809cc4388483b59",
+    "references/commerce-oliveyoung-http-transport-contracts.json": "3097d1e088f534bc89fc579897536f691e3d2048b48354f336f64c74a65e660c",
+    "tests/commerce-oliveyoung-http-transport.test.mjs": "b15d51574bfdeff714984d6c97f5337840b668e65414e8e421f81e613ad8e190",
+    "docs/commerce-oliveyoung-http-transport.md": "a3c93ad98f2214ea155fc634763ef0bc369fe8bcf08e0f84d5ef05b14083196d"
+  }
+}

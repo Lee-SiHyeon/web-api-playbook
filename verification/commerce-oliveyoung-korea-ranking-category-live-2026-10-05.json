@@ -1,0 +1,46 @@
+{
+  "schema": "commerce-oliveyoung-korea-ranking-category-navigation-v1",
+  "checkedAt": "2026-10-05T07:10:24Z",
+  "scope": "one normal headed public storefront flow: home, ranking link, one visible Best Store category control",
+  "browser": {
+    "mode": "headed",
+    "headless": false,
+    "uaOverridden": false,
+    "stealth": false,
+    "loginAttempted": false,
+    "challengeInteraction": "none",
+    "chromiumVersion": "151.0.7922.34"
+  },
+  "sourceFormat": "html_document",
+  "isXhr": false,
+  "selector": ".best-area .common-menu button",
+  "observedRankingControlCount": 22,
+  "clickedControl": {
+    "categoryId": "10000010001",
+    "categoryName": "스킨케어"
+  },
+  "initialFormState": {
+    "dispCatNo": "900000100100001",
+    "fltDispCatNo": "",
+    "pageIdx": "1",
+    "rowsPerPage": "8"
+  },
+  "submittedDocumentRequest": {
+    "method": "GET",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/main/getBestList.do",
+    "query": {
+      "dispCatNo": "900000100100001",
+      "fltDispCatNo": "10000010001",
+      "pageIdx": "1",
+      "rowsPerPage": "8"
+    }
+  },
+  "responseFormState": {
+    "dispCatNo": "900000100100001",
+    "fltDispCatNo": "10000010001",
+    "pageIdx": "1",
+    "rowsPerPage": "8"
+  },
+  "result": "verified: the public category filter uses the observed current form parent and updates fltDispCatNo; this is a full-document GET, not an XHR"
+}

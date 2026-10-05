@@ -2,7 +2,7 @@
 
 이번 범위는 제휴 링크를 제외한 검색·가격·상세·옵션·상품 이미지·리뷰 본문·리뷰 사진·페이지 이동이다. 기존 `commerce`는 가격 스냅샷을 만든다. `catalog`는 SDK가 검증한 상세 필드를 보존하고 리뷰를 별도 JSON/CSV로 수집한다.
 
-Olive Young 집중 보강에서는 한국 공개몰을 `oliveyoung-public`, 인증 Curator를 `oliveyoung`, 글로벌몰을 `oliveyoung-global`로 구분한다. 한국몰은 정상 headed 브라우저에서 검색·상세·리뷰 XHR을 관측하고 요청 클라이언트/테스트를 구현했지만, 현재 워커의 독립 Node/curl/Python HTTP는 403이다. 해당 클라이언트는 `implemented_pending_live`이며 로그인만 하면 해결된다고 판단하지 않는다. 반복 데이터 조회 클라이언트에는 브라우저를 포함하지 않는다.
+Olive Young 한국 공개몰은 `oliveyoung-public`, 인증 Curator는 `oliveyoung`, 글로벌몰은 `oliveyoung-global`이다. 한국 검색·KRW 가격과 리뷰 커서 두 페이지는 쿠키 없는 `curl_cffi` HTTP 전송기로 재생했고 기본 commerce/catalog 명령에 연결했다. 숫자 ID·널 값을 포함한 리뷰 커서와 여러 카테고리 ID를 보존한다. 전체 리뷰 종료와 상품 상세·옵션은 미확인이다. 국내 판매 랭킹은 [별도 HTML 문서 수집기](commerce-oliveyoung-korea-ranking.md)이며 XHR로 분류하지 않는다. 추가 카테고리 일괄검증은 429에서 중단했다. 반복 조회에는 브라우저를 포함하지 않는다.
 
 글로벌몰은 카테고리 상품을 JSON API로 읽고 USD 설정을 별도 현재 HTTP 페이지에서 확인한다. 한 카테고리의 당시 전체 결과 수는 3,674건이며 24/36/48개 페이지 크기와 마지막/빈 페이지를 검증했다. 카테고리 조회, 자동완성, 인기 검색어, 베스트셀러는 별도 명령이며 전체 키워드 상품 검색으로 표시하지 않는다.
 
