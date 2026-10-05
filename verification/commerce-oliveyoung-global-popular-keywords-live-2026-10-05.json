@@ -1,0 +1,53 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "search.popular_keywords",
+  "checkedAt": "2026-10-05T05:48:01.899Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.tab-layer.v2.js",
+    "sourceSha256": "59f983cf706b1f2f0d789a823c178b6b58df7b38fea3b6f3f80be7f7b603bb9c"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/api/v1/search/keywords/popular",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T05:48:01.899Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "size"
+    ],
+    "queryFields": [
+      "size"
+    ],
+    "responseBytes": 754,
+    "responseSha256": "205f3ce6fb8d3de69eb433fb4f6e22fb694e5b1b2edfe7ce533c39b5cd588724"
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0"
+  },
+  "rowCount": 10,
+  "aggregatedAt": "2026-10-05T05:00:00Z",
+  "fields": [
+    "keyword",
+    "rank",
+    "rankDiff",
+    "searchCount",
+    "searchCountDiff"
+  ],
+  "keywordValuesPersisted": false,
+  "containsProducts": false,
+  "containsProductPrices": false,
+  "nullableDeltasObserved": true
+}

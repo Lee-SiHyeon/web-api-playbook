@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "service": "oliveyoung-public",
+  "description": "Anonymous Korean storefront: native HTTP search/KRW prices and bounded review cursor pages are verified with curl_cffi. Best Store rankings are HTTP HTML documents, not XHR. Product detail/options/images, full termination and all-category replays remain unverified; the category sweep stopped on HTTP429.",
+  "capabilities": [
+    {
+      "id": "catalog.search_prices",
+      "title": "Independent direct-HTTP search and KRW price mapping",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/search/NewMainSearchApi.do",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-catalog-search_prices-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "note": "Native default commerce CLI read two search pages/20 KRW offers. The actual total was618; source exhaustion/terminal traversal is unverified. Source category IDs may be multiple; displayed current/reference roles remain distinct."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "Source-backed product detail and option reads",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
+    },
+    {
+      "id": "catalog.product_description",
+      "title": "Product description and image references",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
+    },
+    {
+      "id": "catalog.options",
+      "title": "Product option and availability fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
+    },
+    {
+      "id": "catalog.product_images",
+      "title": "Product image metadata and references",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
+    },
+    {
+      "id": "reviews.summary",
+      "title": "Review statistics, option counts and summary fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
+    },
+    {
+      "id": "reviews.body",
+      "title": "Review bodies with product association and reviewer identifiers omitted",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/cursor",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-reviews-body-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "note": "Native default catalog CLI read two cursor pages/20 source rows, deduplicating to15 reviews with9 associated-product rows. Numeric cursor ID/score and null count preserved. hasNext remainedtrue; full review collection is not complete."
+    },
+    {
+      "id": "reviews.images",
+      "title": "Review photo metadata and image paths",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Search and bounded review cursor reads now succeed through the cookie-free HTTP transport. This capability is not independently verified as a complete client operation. getProduct still starts with an uncaptured /goods/api/v1/detail response contract; options/images/review summary and full termination remain separate gaps.",
+      "note": "Historical Node/Python/curl403 does not establish a customer-login requirement. Do not reuse the ranking/search/review result as proof of this capability."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Review cursor continuation and bounded collection",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/cursor",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-reviews-pagination-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "note": "Native default catalog CLI read two cursor pages/20 source rows, deduplicating to15 reviews with9 associated-product rows. Numeric cursor ID/score and null count preserved. hasNext remainedtrue; full review collection is not complete."
+    },
+    {
+      "id": "auth.customer_login",
+      "title": "Sign in or register a customer account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This service scope is anonymous public catalog and review reads; account creation and customer login are outside the requested work.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.link_creation",
+      "title": "Create an Olive Young affiliate link",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This checklist covers non-affiliate storefront reads only. Shopping Curator link creation is a separate authenticated workflow.",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "catalog.search_pagination",
+      "title": "Traverse search result offsets using OLIVE_GOODS TotalCount and listnum",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-public.mjs",
+            "exports": [
+              "createOliveyoungKoreaPublicClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-public.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/search/NewMainSearchApi.do",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/oliveyoung-catalog-search_pagination-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-public.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/commerce-oliveyoung-korea-public-contracts.json"
+          ]
+        }
+      ],
+      "note": "Native default commerce CLI read two search pages/20 KRW offers. The actual total was618; source exhaustion/terminal traversal is unverified. Source category IDs may be multiple; displayed current/reference roles remain distinct."
+    },
+    {
+      "id": "ranking.top_products",
+      "title": "Read explicit top product ranks from the Korean Best Store page",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-ranking.mjs",
+            "exports": [
+              "createOliveyoungKoreaRankingClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-ranking.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/main/getBestList.do",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/oliveyoung-ranking-top_products-checklist-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-ranking.mjs",
+            "lib/commerce/oliveyoung-http-transport.mjs",
+            "scripts/oliveyoung-http-transport.py"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Recorded cookie-free HTTP200 top10. HTML document source, isXhr=false. 21 controls observed; only skincare replayed. Later requests were HTTP429; no automatic retry. Recorded live does not mean a current remote health check."
+    },
+    {
+      "id": "ranking.category_filters",
+      "title": "Apply a visible Best Store category filter and read back the selected form state",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/oliveyoung-korea-ranking.mjs",
+            "exports": [
+              "createOliveyoungKoreaRankingClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-oliveyoung-korea-ranking.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "21 ranking filter controls observed and skincare independently replayed. The all-category sweep hitHTTP429 before its first category-specific read; the other20 filters remain unverified. Headed source/readback is in verification/commerce-oliveyoung-korea-ranking-category-live-2026-10-05.json.",
+      "note": "Category selection uses the page's observed hidden dispCatNo and sets fltDispCatNo to a visible ranking control's data-ref-dispCatNo. The filter is a GET document navigation, not an XHR."
+    }
+  ]
+}

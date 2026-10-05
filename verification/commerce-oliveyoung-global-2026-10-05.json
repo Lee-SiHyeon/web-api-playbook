@@ -5,7 +5,16 @@
   "implementation": {
     "module": "lib/commerce/oliveyoung-global.mjs",
     "export": "createOliveyoungGlobalClient",
-    "operations": ["getProduct", "getReviewSummary", "getReviews", "getReviewMedia", "getBestSellers"],
+    "operations": [
+      "getProduct",
+      "getReviewSummary",
+      "getReviews",
+      "getReviewMedia",
+      "getBestSellers",
+      "getCategoryProducts",
+      "getSearchSuggestions",
+      "getPopularKeywords"
+    ],
     "keywordSearch": "explicitly blocked; no results API is implemented"
   },
   "marketSeparation": {
@@ -27,17 +36,51 @@
     "verification/commerce-oliveyoung-global-review-pagination-live-2026-10-05.json",
     "verification/commerce-oliveyoung-global-review-media-pagination-live-2026-10-05.json",
     "verification/commerce-oliveyoung-global-image-readbacks-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-search-suggestions-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-popular-keywords-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-category-page1-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-category-page2-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-category-last-page-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-category-after-last-page-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-category-page-size-36-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-category-page-size-48-2026-10-05.json",
     "verification/commerce-oliveyoung-global-search-live-2026-10-05.json"
   ],
   "sampleReadback": {
     "publicProductId": "GA240824996",
-    "currentPrice": {"amount": "13.50", "currency": "USD"},
-    "listPrice": {"amount": "27.00", "currency": "USD"},
+    "currentPrice": {
+      "amount": "13.50",
+      "currency": "USD",
+      "minorUnitExponent": 2,
+      "kind": "retail_sale",
+      "sourceField": "product.saleAmt"
+    },
+    "listPrice": {
+      "amount": "27.00",
+      "currency": "USD",
+      "minorUnitExponent": 2,
+      "kind": "retail_list",
+      "sourceField": "product.nrmlAmt"
+    },
     "options": 7,
     "descriptionTextLength": 1352,
-    "reviewSummary": {"totalReviews": 9662, "averageRating": 4.9, "mediaReviews": 3983},
-    "reviewsPage": {"pageSize": 10, "totalCount": 9663, "lastPageCount": 3, "beyondLastPageCount": 0},
-    "reviewMediaPage": {"pageSize": 15, "totalCount": 3984, "lastPageCount": 9, "beyondLastPageCount": 0},
+    "reviewSummary": {
+      "totalReviews": 9665,
+      "averageRating": 4.9,
+      "mediaReviews": 3986
+    },
+    "reviewsPage": {
+      "pageSize": 10,
+      "totalCount": 9668,
+      "lastPageCount": 8,
+      "beyondLastPageCount": 0
+    },
+    "reviewMediaPage": {
+      "pageSize": 15,
+      "totalCount": 3986,
+      "lastPageCount": 11,
+      "beyondLastPageCount": 0
+    },
     "productAndReviewImagesDirectlyRetrieved": 2,
     "currencyEvidence": "A fresh cookie-free product-page HTML bootstrap bound to the same product id selected USD in both its currency dropdown and inline currency config; raw product JSON price amounts matched the US$ display. Other currencies and country selections are rejected."
   },
@@ -45,7 +88,46 @@
     "status": "unimplemented_blocked",
     "evidence": "verification/commerce-oliveyoung-global-search-live-2026-10-05.json",
     "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-global-search-blocked.png",
+    "workingSuggestionOperations": [
+      "getSearchSuggestions",
+      "getPopularKeywords"
+    ],
+    "suggestionDataAreProductOffers": false,
     "bestsellersAreCompleteCatalog": false
+  },
+  "categoryBrowse": {
+    "capability": "catalog.category_products",
+    "categoryId": "1000000008",
+    "categoryTitle": "Skincare",
+    "totalProductsObserved": 3674,
+    "pageSizesDirectlyReplayed": [
+      24,
+      36,
+      48
+    ],
+    "pageSize24": {
+      "page1": 24,
+      "page2": 24,
+      "lastPageNum": 154,
+      "lastPageRows": 2,
+      "page155Rows": 0
+    },
+    "sampleProduct": {
+      "id": "GA260136559",
+      "categoryId": "1000000008",
+      "productCategoryId": "1000000016",
+      "currentPrice": {
+        "amount": "20.52",
+        "currency": "USD"
+      },
+      "listPrice": {
+        "amount": "27.00",
+        "currency": "USD"
+      }
+    },
+    "priceCurrencyProof": "Fresh cookie-free HTML was read for the first product on each nonempty page and selected USD in the dropdown and inline configuration; the JSON API itself has no currency field.",
+    "isKeywordSearch": false,
+    "pageSemantics": "isLastPage describes only whether this response page is terminal; it does not claim the complete category was collected."
   },
   "securityBoundary": {
     "browserUsedForDataTransport": false,
@@ -57,8 +139,29 @@
   },
   "localValidation": {
     "tests": "tests/commerce-oliveyoung-global.test.mjs",
-    "passed": 8,
+    "passed": 14,
     "failed": 0,
     "fixturesSynthetic": true
+  },
+  "currentProducerReplay": {
+    "modulePath": "lib/commerce/oliveyoung-global.mjs",
+    "hashBefore": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0",
+    "hashAfter": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0",
+    "hashUnchanged": true,
+    "nativeReadFamilies": [
+      "product/detail-data",
+      "product/details-info",
+      "product/review-summary",
+      "product/review-list",
+      "product/review-media-list",
+      "display/product/best-seller/order-best",
+      "display/category/product-data",
+      "search/keywords/auto-complete",
+      "search/keywords/popular",
+      "cdn product image",
+      "cdn review image"
+    ],
+    "sourceSearchProbeCount": 2,
+    "replayedAt": "2026-10-05T05:48:01.899Z"
   }
 }

@@ -133,6 +133,41 @@
       "blocker": "This is a 20-product homepage best-seller response, not a complete or keyword-searchable catalog."
     },
     {
+      "id": "catalog.category_products",
+      "title": "Browse category products with current/list price ranges and verified pagination",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/display/category/product-data/",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-oliveyoung-global-category-page1-2026-10-05.json",
+            "verification/commerce-oliveyoung-global-category-page2-2026-10-05.json",
+            "verification/commerce-oliveyoung-global-category-last-page-2026-10-05.json",
+            "verification/commerce-oliveyoung-global-category-after-last-page-2026-10-05.json",
+            "verification/commerce-oliveyoung-global-category-page-size-36-2026-10-05.json",
+            "verification/commerce-oliveyoung-global-category-page-size-48-2026-10-05.json"
+          ],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"],
+          "companionReads": [
+            {"key": "currencyContextRequest", "origin": "https://global.oliveyoung.com", "path": "/product/detail", "mime": "text/html"}
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Directly replayed category browse for category 1000000008: 3674 products, page sizes 24/36/48, 154 pages at 24 rows, final page 2 rows and page 155 empty. Currency is attached only after a fresh same-product USD context check; empty-page currency remains unverified. This operation does not implement keyword search."
+    },
+    {
       "id": "catalog.keyword_search",
       "title": "Search the Global product catalog by keyword through a JSON result API",
       "priority": "required",
@@ -141,7 +176,53 @@
       "implementation": {"files": [], "tests": []},
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "The observed search suggestion XHR returned 403 text/html and the search-results document redirected then returned 403. No reusable product-results JSON XHR was captured; see verification/commerce-oliveyoung-global-search-live-2026-10-05.json."
+      "blocker": "The observed search-results document redirected then returned 403, and the reachable header suggestions endpoint returns no product results. Category browsing is a separate category-id operation with no proven keyword input. No reusable keyword product-results JSON XHR was captured; see verification/commerce-oliveyoung-global-search-live-2026-10-05.json."
+    },
+    {
+      "id": "search.suggestions",
+      "title": "Read first-party query suggestions grouped by brand, category and keyword",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/api/v1/search/keywords/auto-complete",
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-search-suggestions-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Suggestions only. Results contain no product IDs, prices, or product-result pagination; catalog.keyword_search remains incomplete."
+    },
+    {
+      "id": "search.popular_keywords",
+      "title": "Read the official top ten aggregate search keywords",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/api/v1/search/keywords/popular",
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-popular-keywords-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Aggregate keyword trends only; this response is not a product catalog."
     },
     {
       "id": "reviews.summary",

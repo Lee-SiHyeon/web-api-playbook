@@ -1,0 +1,59 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "search.suggestions",
+  "checkedAt": "2026-10-05T05:48:01.821Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.v2.js",
+    "sourceSha256": "78f0d60ebfcbbfdf49317faa3332d1280dd4b33d85727cd81a2e4754f9882f43"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/api/v1/search/keywords/auto-complete",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T05:48:01.821Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "query"
+    ],
+    "queryFields": [
+      "query"
+    ],
+    "responseBytes": 495,
+    "responseSha256": "114505b9a3804f9d63fb6fa84277262592715990b265236e7016ae3979af7385"
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0"
+  },
+  "queryValuesPersisted": false,
+  "normalizedShape": {
+    "brands": 3,
+    "categories": 0,
+    "keywords": 3
+  },
+  "categoryShapeProbe": {
+    "queryValuePersisted": false,
+    "brands": 0,
+    "categories": 1,
+    "keywords": 0,
+    "categoryFields": [
+      "categoryNumber",
+      "categoryName",
+      "fullCategoryName"
+    ]
+  },
+  "containsProducts": false,
+  "containsProductPrices": false
+}

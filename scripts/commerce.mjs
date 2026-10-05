@@ -5,6 +5,7 @@ import { options, stdinJson, reserveOutput, report, safeError } from '../lib/cli
 import { COMMERCE_PROVIDERS, createCommerceReader } from '../lib/commerce/providers.mjs';
 import { collectOfferSnapshot, comparePriceSnapshots, snapshotCsv } from '../lib/commerce/snapshots.mjs';
 import { assertCredentialFreeResult } from '../lib/commerce/credential-output.mjs';
+import { rankingSnapshot, rankingCsv } from '../lib/commerce/rankings.mjs';
 
 const fail = code => { throw Object.assign(new Error(code), { code }); };
 const ARGUMENTS = {
@@ -16,6 +17,8 @@ const ARGUMENTS = {
   banggood: ['id', 'query', 'currency', 'categoryId'], awin: ['id', 'query', 'locale', 'advertiserId', 'pageSize'],
   impact: ['id', 'query', 'catalogId', 'pageSize'], 'printful-api': ['id', 'region', 'currency', 'productionCurrency', 'pageSize'],
   oliveyoung: ['query', 'pageSize'], 'shopee-id': ['id', 'query', 'pageSize'],
+  'oliveyoung-public': ['query', 'pageSize', 'categoryId'],
+  'oliveyoung-global': ['id', 'country', 'currency', 'categoryId', 'pageSize'],
   'rakuten-ichiba': ['id', 'query', 'shopCode', 'genreId', 'pageSize'],
   'rakuten-advertising': ['query', 'merchantId', 'pageSize'], 'sephora-affiliate': ['query', 'merchantId', 'pageSize'],
   'ulta-affiliate': ['id', 'query', 'catalogId', 'pageSize'], sephora: ['query', 'pageSize'], ulta: ['query', 'pageSize'],
@@ -63,6 +66,11 @@ try {
     if (provider === 'cjdropshipping' && args.id && args.country) fail('COMMERCE_DESTINATION_UNSUPPORTED_FOR_DETAIL');
     if (operation === 'product' && !args.id) fail('COMMERCE_PRODUCT_ID_REQUIRED');
     if (operation === 'search' && args.id) fail('COMMERCE_JOB_INVALID');
+    if (provider === 'oliveyoung-global' && operation === 'best-sellers' && args.id) fail('COMMERCE_JOB_INVALID');
+    if (provider === 'oliveyoung-global' && operation === 'category' && !args.categoryId) fail('COMMERCE_CATEGORY_ID_REQUIRED');
+    if (provider === 'oliveyoung-public' && operation === 'ranking' &&
+        (args.query !== undefined || args.pageSize !== undefined || opts.baseline !== undefined)) fail('COMMERCE_RANKING_ARGUMENT_INVALID');
+    if (provider === 'oliveyoung-public' && operation !== 'ranking' && args.categoryId !== undefined) fail('COMMERCE_JOB_INVALID');
     const maxOffers = integer(opts.limit ?? job?.maxOffers, 100, 50_000);
     const maxPages = integer(opts['max-pages'] ?? job?.maxPages, operation === 'product' ? 1 : 3, 100);
     if (maxOffers > 200 && !opts.output) fail('COMMERCE_OUTPUT_REQUIRED');
@@ -79,13 +87,23 @@ try {
     jsonOutput = await reserveOutput(opts.output); csvOutput = await reserveOutput(opts.csv);
     const context = Object.fromEntries(['store', 'region', 'marketplace', 'locale', 'currency', 'country', 'productionCurrency', 'advertiserId', 'catalogId', 'query']
       .filter(key => args[key] !== undefined).map(key => [key, args[key]]));
-    const loadPage = await createCommerceReader({ provider, args, credentials });
-    const snapshot = await collectOfferSnapshot({ provider, context: { ...context, operation }, loadPage, maxPages, maxOffers });
+    let snapshot;
+    if (provider === 'oliveyoung-public' && operation === 'ranking') {
+      if (Object.keys(credentials).some(key => !COMMERCE_PROVIDERS[provider].credentials.includes(key))) fail('COMMERCE_CREDENTIAL_FIELDS_INVALID');
+      if (Object.keys(credentials).length) fail('COMMERCE_RANKING_CREDENTIALS_UNSUPPORTED');
+      const limit = integer(opts.limit ?? job?.maxOffers, 10, 100);
+      const { createOliveyoungKoreaRankingClient } = await import('../lib/commerce/oliveyoung-korea-ranking.mjs');
+      const result = await createOliveyoungKoreaRankingClient(credentials).getRanking({ categoryId: args.categoryId, limit });
+      snapshot = rankingSnapshot(result, { provider, limit });
+    } else {
+      const loadPage = await createCommerceReader({ provider, args, credentials });
+      snapshot = await collectOfferSnapshot({ provider, context: { ...context, operation }, loadPage, maxPages, maxOffers });
+    }
     snapshot.credentialsUsed = snapshot.receipts.some(receipt => receipt.credentialsUsed === true);
     snapshot.secretsPersistedInEvidence = false;
     if (baseline) snapshot.comparison = comparePriceSnapshots(baseline, snapshot);
     assertCredentialFreeResult(snapshot, credentials);
-    const csv = opts.csv ? snapshotCsv(snapshot) : null;
+    const csv = opts.csv ? snapshot.schema === 'web-api-product-ranking-snapshot-v1' ? rankingCsv(snapshot) : snapshotCsv(snapshot) : null;
     if (jsonOutput) await jsonOutput.writeFile(JSON.stringify(snapshot, null, 2) + '\n');
     if (csvOutput) await csvOutput.writeFile(csv);
     if (jsonOutput) await report({ ok: true, schema: 'web-api-commerce-collection-result-v1', provider,
@@ -95,7 +113,8 @@ try {
     else await report(snapshot);
   }
 } catch (error) {
-  const result = { ok: false, code: safeError(error) };
+  const result = { ok: false, code: safeError(error),
+    ...(error?.receipt?.httpStatus === 429 ? { code: 'COMMERCE_RATE_LIMITED', httpStatus: 429, retryAutomatic: false } : {}) };
   if (jsonOutput) await jsonOutput.writeFile(JSON.stringify(result) + '\n');
   await report(result); process.exitCode = 1;
 } finally { await Promise.all([jsonOutput?.close(), csvOutput?.close()]); }

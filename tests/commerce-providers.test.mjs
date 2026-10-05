@@ -133,3 +133,20 @@ test('Amazon public search keeps explicit KRW major units and never infers USD f
   assert.equal(result.offers[0].context.priceBasis, 'displayed_search_card');
   assert.equal(result.collection.complete, false); assert.equal(result.collection.currencyUnverifiedCount, 1);
 });
+
+test('Olive Young price collection binds USD to the actual market context and preserves variant and price kinds', async () => {
+  const product = { id: 'GA1', name: 'Mask', url: 'https://global.oliveyoung.com/product/detail?prdtNo=GA1',
+    price: { amount: '13.50', currency: 'USD' }, listPrice: { amount: '27.00', currency: 'USD' },
+    options: [{ variantId: 'sku-1', name: 'Green', price: { amount: '14.00', currency: 'USD' } }], marketContext: { currencyVerified: true } };
+  const factory = { 'oliveyoung-global': () => ({ getProduct: async () => ({ product, receipt }),
+    getBestSellers: async () => ({ products: [product], marketContext: { currencyVerified: true }, receipt }) }) };
+  const loadPage = await createCommerceReader({ provider: 'oliveyoung-global', args: { id: 'GA1' }, factories: factory });
+  const result = await collectOfferSnapshot({ provider: 'oliveyoung-global', loadPage });
+  assert.deepEqual(result.offers.map(row => [row.variantId, row.price.kind, row.price.amount]),
+    [[null, 'retail_current', '13.50'], [null, 'retail_list', '27.00'], ['sku-1', 'retail_current', '14.00']]);
+  const browse = await createCommerceReader({ provider: 'oliveyoung-global', factories: factory });
+  assert.equal((await collectOfferSnapshot({ provider: 'oliveyoung-global', loadPage: browse })).collection.complete, false);
+  const unbound = await createCommerceReader({ provider: 'oliveyoung-global', args: { id: 'GA1' }, factories: {
+    'oliveyoung-global': () => ({ getProduct: async () => ({ product: { ...product, marketContext: { currencyVerified: false } } }) }) } });
+  await assert.rejects(unbound(), { code: 'OLIVEYOUNG_GLOBAL_CURRENCY_CONTEXT_UNVERIFIED' });
+});

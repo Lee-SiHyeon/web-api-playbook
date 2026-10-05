@@ -2,6 +2,20 @@
 
 이번 범위는 제휴 링크를 제외한 검색·가격·상세·옵션·상품 이미지·리뷰 본문·리뷰 사진·페이지 이동이다. 기존 `commerce`는 가격 스냅샷을 만든다. `catalog`는 SDK가 검증한 상세 필드를 보존하고 리뷰를 별도 JSON/CSV로 수집한다.
 
+Olive Young 한국 공개몰은 `oliveyoung-public`, 인증 Curator는 `oliveyoung`, 글로벌몰은 `oliveyoung-global`이다. 한국 검색·KRW 가격과 리뷰 커서 두 페이지는 쿠키 없는 `curl_cffi` HTTP 전송기로 재생했고 기본 commerce/catalog 명령에 연결했다. 숫자 ID·널 값을 포함한 리뷰 커서와 여러 카테고리 ID를 보존한다. 전체 리뷰 종료와 상품 상세·옵션은 미확인이다. 국내 판매 랭킹은 [별도 HTML 문서 수집기](commerce-oliveyoung-korea-ranking.md)이며 XHR로 분류하지 않는다. 추가 카테고리 일괄검증은 429에서 중단했다. 반복 조회에는 브라우저를 포함하지 않는다.
+
+글로벌몰은 카테고리 상품을 JSON API로 읽고 USD 설정을 별도 현재 HTTP 페이지에서 확인한다. 한 카테고리의 당시 전체 결과 수는 3,674건이며 24/36/48개 페이지 크기와 마지막/빈 페이지를 검증했다. 카테고리 조회, 자동완성, 인기 검색어, 베스트셀러는 별도 명령이며 전체 키워드 상품 검색으로 표시하지 않는다.
+
+```bash
+npm run catalog -- oliveyoung-global suggest --query=mask --output=work/oy-suggestions.json
+npm run catalog -- oliveyoung-global popular-keywords --output=work/oy-keywords.json
+npm run catalog -- oliveyoung-global best-sellers --output=work/oy-bestsellers.json
+npm run catalog -- oliveyoung-global category-products --category-id=1000000008 --page=1 --catalog-page-size=24 --output=work/oy-category.json
+npm run commerce -- oliveyoung-global category --category-id=1000000008 --page-size=24 --max-pages=2 --limit=200 --output=work/oy-prices.json --csv=work/oy-prices.csv
+```
+
+정가/현재가와 상품 전체/옵션 가격은 서로 다른 레코드다. `reviews` JSON·CSV는 연관 상품의 후기 여부와 실제 원 상품 ID도 유지한다. 연관 상품 후기를 요청 상품의 직접 후기라고 바꾸지 않는다.
+
 2026-10-05 현재 코드의 독립 CLI 실증과 JSON/CSV 대조는 [실행 기록](../verification/catalog-native-cli-2026-10-05.json)에 있다. 선택 상품의 전체 리뷰는 Sephora 1,773건(본문 1,771건), Ulta 429건, Rakuten Japan 427건, ColourPop 32건이다. 이는 해당 상품·필터의 당시 결과이며 전체 쇼핑몰 데이터 수가 아니다. Olive Young Global은 상품 상세와 리뷰/사진 API 및 후속 페이지를 검증했고 공통 실행기로 20건을 샘플 수집했다.
 
 | 플랫폼 | 실제 조회 또는 구현 범위 | 남은 범위 |

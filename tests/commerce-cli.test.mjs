@@ -31,3 +31,13 @@ test('the registry never exposes credential fields as available anonymous APIs',
   assert.equal(data.providers['amazon-partner'].readiness,'credentialed_live_pending');
   assert.equal(data.providers.awin.readiness,'feed_row_envelope_unconfirmed');
 });
+
+test('ranking rejects a search query instead of silently returning another collection',()=>{
+  const result=run(['oliveyoung-public','ranking','--query=cream']);
+  assert.equal(result.status,1);assert.equal(JSON.parse(result.stdout).code,'COMMERCE_RANKING_ARGUMENT_INVALID');
+});
+
+test('ranking-only category IDs cannot silently become ordinary search inputs',()=>{
+  const result=run(['oliveyoung-public','search','--query=cream','--category-id=10000010001']);
+  assert.equal(result.status,1);assert.equal(JSON.parse(result.stdout).code,'COMMERCE_JOB_INVALID');
+});

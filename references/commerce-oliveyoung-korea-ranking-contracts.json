@@ -1,0 +1,107 @@
+{
+  "schema": "commerce-oliveyoung-korea-ranking-contracts-v1",
+  "checkedAt": "2026-10-05",
+  "service": "oliveyoung-public",
+  "capability": "ranking.top_products",
+  "scope": "anonymous Korean Olive Young Best Store public ranking reads; no affiliate/Curator pages and no account session",
+  "source": {
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/main/getBestList.do",
+    "method": "GET",
+    "sourceFormat": "html_document",
+    "isXhr": false,
+    "executionMode": "pure_http",
+    "transport": "createOliveyoungHttpFetch; cookie-free curl_cffi Chrome-compatible HTTP session"
+  },
+  "requestContract": {
+    "default": "GET /store/main/getBestList.do with no query parameters",
+    "categoryNavigation": {
+      "controlSelector": ".best-area .common-menu button",
+      "controlIdAttribute": "data-ref-dispCatNo",
+      "formId": "initForm",
+      "method": "GET document navigation",
+      "observedFields": ["dispCatNo", "fltDispCatNo", "pageIdx", "rowsPerPage"],
+      "semantics": "The clicked category id becomes fltDispCatNo. The current hidden dispCatNo is carried through unchanged. The returned hidden form must echo the requested fltDispCatNo.",
+      "verifiedExample": {
+        "categoryId": "10000010001",
+        "categoryName": "스킨케어",
+        "initialForm": {
+          "dispCatNo": "900000100100001",
+          "fltDispCatNo": "",
+          "pageIdx": "1",
+          "rowsPerPage": "8"
+        },
+        "submittedQuery": {
+          "dispCatNo": "900000100100001",
+          "fltDispCatNo": "10000010001",
+          "pageIdx": "1",
+          "rowsPerPage": "8"
+        },
+        "responseForm": {
+          "dispCatNo": "900000100100001",
+          "fltDispCatNo": "10000010001",
+          "pageIdx": "1",
+          "rowsPerPage": "8"
+        }
+      }
+    }
+  },
+  "responseContract": {
+    "documentTitleContains": "랭킹",
+    "categorySelector": ".best-area .common-menu button[data-ref-dispCatNo]",
+    "rankMarker": ".best-area .TabsConts.on .prd_thumb .thumb_flag.best",
+    "rankBinding": "The numeric rank marker and the unique same-li product detail link goodsNo must agree in one rendered card; only explicit ranks 1 through 100 are accepted.",
+    "productId": "Same-card link query parameter goodsNo",
+    "titleSelector": ".prd_info .prd_name .tx_name",
+    "brandSelector": ".prd_info .prd_name .tx_brand",
+    "currentPrice": {
+      "selector": ".prd_info .prd_price .tx_cur",
+      "kind": "retail_current",
+      "currency": "KRW"
+    },
+    "referencePrice": {
+      "selector": ".prd_info .prd_price .tx_org",
+      "kind": "retail_list",
+      "currency": "KRW"
+    },
+    "optionRangeHint": "A visible ~ suffix is preserved on both displayed price values; it indicates a product-level range/starting-price cue, not a selected option price.",
+    "availability": "Only an explicit visible 품절 marker sets unavailable. Missing status remains unknown.",
+    "freshness": "The source has no captured as-of timestamp; checkedAt is retrieval time and sourceAsOf remains null."
+  },
+  "observedCategories": [
+    {"categoryId":"10000010001","categoryName":"스킨케어"},
+    {"categoryId":"10000010009","categoryName":"마스크팩"},
+    {"categoryId":"10000010010","categoryName":"클렌징"},
+    {"categoryId":"10000010011","categoryName":"선케어"},
+    {"categoryId":"10000010002","categoryName":"메이크업"},
+    {"categoryId":"10000010012","categoryName":"네일"},
+    {"categoryId":"10000010006","categoryName":"뷰티소품"},
+    {"categoryId":"10000010008","categoryName":"더모 코스메틱"},
+    {"categoryId":"10000010005","categoryName":"향수/디퓨저"},
+    {"categoryId":"10000010004","categoryName":"헤어케어"},
+    {"categoryId":"10000010003","categoryName":"바디케어"},
+    {"categoryId":"10000060001","categoryName":"럭스에딧"},
+    {"categoryId":"10000060002","categoryName":"맨즈에딧"},
+    {"categoryId":"10000020001","categoryName":"건강식품"},
+    {"categoryId":"10000020002","categoryName":"푸드"},
+    {"categoryId":"10000020003","categoryName":"구강용품"},
+    {"categoryId":"10000020005","categoryName":"헬스/건강용품"},
+    {"categoryId":"10000020004","categoryName":"위생용품"},
+    {"categoryId":"10000030007","categoryName":"패션"},
+    {"categoryId":"10000030005","categoryName":"홈리빙/가전"},
+    {"categoryId":"10000030006","categoryName":"취미/팬시"}
+  ],
+  "evidence": [
+    "verification/commerce-oliveyoung-korea-ranking-category-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-korea-ranking-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-korea-ranking-category-sweep-boundary-2026-10-05.json",
+    "verification/commerce-oliveyoung-http-transport-live-2026-10-05.json"
+  ],
+  "limitations": [
+    "This capability reads the server-rendered Best Store document; it is not an XHR endpoint.",
+    "The UI exposes page-level dispCatNo and category fltDispCatNo separately; only values observed in the current form are sent.",
+    "All 21 current category controls were observed, but only the skincare filter has a successful live request/readback. A bounded serial verification sweep encountered HTTP 429 before its first category-specific request and stopped without retrying.",
+    "A product-level range cue is not an option-specific price.",
+    "Availability is not inferred from sale, promotion or missing flags."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema": "commerce-oliveyoung-korea-ranking-category-sweep-boundary-v1",
+  "checkedAt": "2026-10-05T07:16:45.983Z",
+  "scope": "bounded serial category-filter validation stopped at the first HTTP 429; no retries were made",
+  "source": {
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/main/getBestList.do",
+    "method": "GET",
+    "sourceFormat": "html_document",
+    "isXhr": false
+  },
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "cookieSent": false,
+  "categoryControlsObserved": 21,
+  "categoryFilterCallsCompletedInSweep": 0,
+  "sweep": {
+    "initialDefaultPage": "succeeded; 21 observed category controls were available for iteration",
+    "firstCategoryIdScheduled": "10000010001",
+    "failureStage": "the next getRanking call's default-page preflight request, before its category-specific request",
+    "httpStatus": 429,
+    "mime": "text/html",
+    "queryFields": [],
+    "responseBodyPersisted": false,
+    "retryCount": 0
+  },
+  "result": "No all-category filter claim is made. The current category selector set was observed; only the separately recorded skincare request has a successful filter submit and form readback."
+}

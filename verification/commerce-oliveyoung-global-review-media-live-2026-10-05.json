@@ -2,7 +2,7 @@
   "schema": "web-api-public-read-receipt-v1",
   "service": "oliveyoung-global",
   "capabilityId": "reviews.media",
-  "checkedAt": "2026-10-05T02:59:11.287Z",
+  "checkedAt": "2026-10-05T05:47:59.810Z",
   "secretsPersistedInEvidence": false,
   "anonymous": true,
   "credentialsUsed": false,
@@ -19,7 +19,7 @@
     "path": "/product/review-media-list",
     "httpStatus": 200,
     "mime": "application/json",
-    "checkedAt": "2026-10-05T02:59:11.287Z",
+    "checkedAt": "2026-10-05T05:47:59.810Z",
     "browserUsed": false,
     "anonymous": true,
     "cookieSent": false,
@@ -32,37 +32,37 @@
       "photoReviewYn",
       "movReviewYn"
     ],
-    "responseBytes": 2022,
-    "responseSha256": "9041dca861835eeebe7a0b2999f34694dc1a4936f7220020182b6112eeb84579"
+    "responseBytes": 2021,
+    "responseSha256": "d62f5954676ec0de3a8b77033da28e673dd5bef3ab37080e67b58447408f4afe"
   },
   "productIdMatched": true,
   "paginationVerified": true,
   "pageNum": 1,
   "rowsPerPage": 15,
   "implementation": {
-    "lib/commerce/oliveyoung-global.mjs": "7465d9a636ebef870a2818e5dbe59a255c0edf366dc5875e1752406e21e55357"
+    "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0"
   },
   "initialPage": {
     "pageNum": 1,
     "returnedCount": 15,
-    "totalCount": 3984,
+    "totalCount": 3986,
     "nextPage": 2
   },
   "nextPageProbe": {
     "pageNum": 2,
     "returnedCount": 15,
-    "totalCount": 3984
+    "totalCount": 3986
   },
   "terminalPageProbe": {
     "pageNum": 266,
-    "returnedCount": 9,
-    "totalCount": 3984,
+    "returnedCount": 11,
+    "totalCount": 3986,
     "nextPage": null
   },
   "beyondTerminalProbe": {
     "pageNum": 267,
     "returnedCount": 0,
-    "totalCount": 3984,
+    "totalCount": 3986,
     "nextPage": null
   },
   "fields": [
@@ -72,5 +72,7 @@
     "videoYn",
     "imagePath"
   ],
-  "reviewBodiesReturned": false
+  "reviewBodiesReturned": false,
+  "mediaCount": 15,
+  "imageReadbackEvidence": "verification/commerce-oliveyoung-global-image-readbacks-2026-10-05.json"
 }
