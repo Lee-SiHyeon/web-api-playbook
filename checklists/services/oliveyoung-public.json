@@ -430,10 +430,28 @@
             "lib/commerce/oliveyoung-http-transport.mjs",
             "scripts/oliveyoung-http-transport.py"
           ]
+        },
+        {
+          "kind": "http-anonymous-session-read-v1",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/main/getBestList.do",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/oliveyoung-ranking-anonymous-session-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/oliveyoung-korea-ranking.mjs",
+            "lib/commerce/oliveyoung-anonymous-ranking-transport.mjs",
+            "scripts/oliveyoung-anonymous-ranking-session.py",
+            "lib/commerce/rankings.mjs",
+            "scripts/commerce.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
-      "note": "Recorded cookie-free HTTP200 top10. HTML document source, isXhr=false. 21 controls observed; only skincare replayed. Later requests were HTTP429; no automatic retry. Recorded live does not mean a current remote health check."
+      "note": "Current default prepares a server-issued anonymous CF session via homepage GET, keeps approved cookies only in worker memory, reuses and paces the same context, and closes it. Native CLI top10 and same-session default+skincare reads returned200. Earlier cookie-free429 and later cookie-free200 are both recorded: the sole cause of recovery is unproven. HTML document source, isXhr=false; the remaining category filters stay unverified."
     },
     {
       "id": "ranking.category_filters",

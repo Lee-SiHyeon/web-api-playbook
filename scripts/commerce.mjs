@@ -93,7 +93,10 @@ try {
       if (Object.keys(credentials).length) fail('COMMERCE_RANKING_CREDENTIALS_UNSUPPORTED');
       const limit = integer(opts.limit ?? job?.maxOffers, 10, 100);
       const { createOliveyoungKoreaRankingClient } = await import('../lib/commerce/oliveyoung-korea-ranking.mjs');
-      const result = await createOliveyoungKoreaRankingClient(credentials).getRanking({ categoryId: args.categoryId, limit });
+      const client = createOliveyoungKoreaRankingClient(credentials);
+      let result;
+      try { result = await client.getRanking({ categoryId: args.categoryId, limit }); }
+      finally { await client.close(); }
       snapshot = rankingSnapshot(result, { provider, limit });
     } else {
       const loadPage = await createCommerceReader({ provider, args, credentials });
@@ -113,7 +116,19 @@ try {
     else await report(snapshot);
   }
 } catch (error) {
+  const receipt = error?.receipt;
+  const failureContext = receipt?.origin === 'https://www.oliveyoung.co.kr' &&
+    ['/store/main/main.do', '/store/main/getBestList.do'].includes(receipt.path) ? {
+      origin: receipt.origin, path: receipt.path,
+      phase: ['bootstrap', 'ranking'].includes(receipt.failurePhase) ? receipt.failurePhase : 'ranking',
+      httpStatus: Number.isInteger(receipt.httpStatus) ? receipt.httpStatus : null,
+      cookieSent: typeof receipt.cookieSent === 'boolean' ? receipt.cookieSent : null,
+      retryAfter: typeof receipt.retryAfter === 'string' &&
+        (/^\d{1,10}$/.test(receipt.retryAfter) || /^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} [A-Z][a-z]{2} \d{4} \d{2}:\d{2}:\d{2} GMT$/.test(receipt.retryAfter))
+        ? receipt.retryAfter : null,
+    } : null;
   const result = { ok: false, code: safeError(error),
+    ...(failureContext ? { failureContext } : {}),
     ...(error?.receipt?.httpStatus === 429 ? { code: 'COMMERCE_RATE_LIMITED', httpStatus: 429, retryAutomatic: false } : {}) };
   if (jsonOutput) await jsonOutput.writeFile(JSON.stringify(result) + '\n');
   await report(result); process.exitCode = 1;
