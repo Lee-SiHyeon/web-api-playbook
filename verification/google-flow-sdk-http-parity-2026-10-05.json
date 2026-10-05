@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-05",
+  "service": "Google Flow consumer web app",
+  "result": "read_lifecycle_and_artifact_verified_pure_http_generation_still_unverified",
+  "comparison": {
+    "observedAt": "2026-10-05T08:41:37.964Z",
+    "generationPostCount": 0,
+    "browserWriteCancelled": true,
+    "normalizedBusinessPayloadMatches": true,
+    "model": "abra_t2v_8s",
+    "queryKeySetMatches": true,
+    "formKeySetMatches": true,
+    "documentSessionAndRequestTokenDiffer": true,
+    "observedSdkReferer": "https://flow.google.com/",
+    "browserIdentityHeadersFabricated": false,
+    "inputIssuerVerified": false
+  },
+  "protectedReadAndReadiness": {
+    "observedAt": "2026-10-05T09:03:29.222Z",
+    "generationPostCount": 0,
+    "downloadCount": 0,
+    "projectMediaCount": 36,
+    "exactSceneRequestMatch": true,
+    "observations": [
+      {
+        "phase": "generation_state",
+        "observedStateCode": 3,
+        "videoBytes": 4385072,
+        "observedAt": "2026-10-05T09:03:23.104Z"
+      },
+      {
+        "phase": "download_ready",
+        "observedStateCode": 3,
+        "videoBytes": 4385072,
+        "observedAt": "2026-10-05T09:03:29.092Z"
+      }
+    ],
+    "signedUrlReady": true,
+    "cookieFiltering": {
+      "metadataCheckedAt": "2026-10-05T09:11:00.880Z",
+      "storedCookieCount": 21,
+      "observedOnWireCookieCount": 19,
+      "expiredRefreshCookieNames": [
+        "__Secure-1PSIDRTS",
+        "__Secure-3PSIDRTS"
+      ],
+      "expiredCookiesExcludedAsExpected": true,
+      "noRawValuesRecorded": true
+    }
+  },
+  "rootRefererDiagnostic": {
+    "sentAt": "2026-10-05T09:08:00.507Z",
+    "executionMode": "pure_http",
+    "inputMode": "absent_probe",
+    "postCount": 1,
+    "httpStatus": 200,
+    "rpcStatus": 7,
+    "publicError": "PUBLIC_ERROR_UNUSUAL_ACTIVITY",
+    "accepted": false,
+    "requestIdPersisted": true,
+    "ownerReadbacks": [
+      {
+        "at": "2026-10-05T09:08:04.126Z",
+        "mediaCount": 36,
+        "creditBalance": 1038,
+        "exactRequestMatch": false
+      },
+      {
+        "at": "2026-10-05T09:08:22.534Z",
+        "mediaCount": 36,
+        "creditBalance": 1038,
+        "exactRequestMatch": false
+      },
+      {
+        "at": "2026-10-05T09:11:00.456Z",
+        "mediaCount": 36,
+        "creditBalance": 1038,
+        "exactRequestMatch": false,
+        "elapsedSecondsAfterCreate": 179.949
+      }
+    ],
+    "journalState": "needs_reconciliation",
+    "generationFenceHeld": true,
+    "retransmissionPerformed": false,
+    "interpretation": "The observed root Referer did not make the absent-input request succeed. Explicit RPC error plus unchanged protected readbacks did not yield a media acknowledgement; the conservative journal hold remains and no retry was sent. This does not prove a sole anti-abuse input cause."
+  },
+  "shortsQualityCheck": {
+    "observedAt": "2026-10-05T09:04:10.986Z",
+    "generationPostCount": 0,
+    "downloadCount": 0,
+    "existingArtifactReused": true,
+    "passed": true,
+    "artifacts": [
+      {
+        "kind": "native",
+        "basename": "live-ui-origami-8s-native720.mp4",
+        "bytes": 4385072,
+        "duration": 8,
+        "width": 1280,
+        "height": 720,
+        "fps": 24,
+        "videoCodec": "h264",
+        "audioCodec": "aac",
+        "decodedAllFrames": true,
+        "blackSpans": [],
+        "frozenSpans": [],
+        "loudness": {
+          "integratedLufs": -32,
+          "loudnessRangeLu": 7.8,
+          "truePeakDbfs": -16.2
+        },
+        "verified": true
+      },
+      {
+        "kind": "delivery",
+        "basename": "flow-origami-8s-480p.mp4",
+        "bytes": 1682551,
+        "duration": 8,
+        "width": 854,
+        "height": 480,
+        "fps": 24,
+        "videoCodec": "h264",
+        "audioCodec": "aac",
+        "decodedAllFrames": true,
+        "blackSpans": [],
+        "frozenSpans": [],
+        "loudness": {
+          "integratedLufs": -32,
+          "loudnessRangeLu": 7.8,
+          "truePeakDbfs": -16.2
+        },
+        "verified": true
+      }
+    ]
+  },
+  "changes": [
+    "Observed Flow root Referer",
+    "New scoped first-party Set-Cookie rotation",
+    "Matching-scope auth deletion detection",
+    "jwpduf complete state with positive bytes before as29s",
+    "Safe durable generation observations"
+  ],
+  "tests": {
+    "offlineRegressionPassed": 74,
+    "offlineRegressionFailed": 0,
+    "liveGenerationSuccessImpliedByTests": false
+  },
+  "operationStates": {
+    "projectStateAndMediaRead": {
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true,
+      "scope": "recurring HTTP reads after authorized session bootstrap"
+    },
+    "completedVideoDownload": {
+      "captured": true,
+      "client_exists": true,
+      "remnant_free": true,
+      "credential_propagated": true,
+      "live_replay": true,
+      "scope": "previous verified direct download; this quality check did not download again"
+    },
+    "pureHttpVideoGeneration": {
+      "captured": true,
+      "client_exists": false,
+      "writerExists": true,
+      "freshIssuerExists": false,
+      "remnant_free": null,
+      "credential_propagated": true,
+      "credentialScope": "Flow session only; new generation input unavailable",
+      "live_replay": false,
+      "successfulCreateCount": 0
+    }
+  },
+  "redaction": {
+    "cookieValuesIncluded": false,
+    "sdkInputIncluded": false,
+    "rawRequestOrResponseBodiesIncluded": false,
+    "clientIdentifiersIncluded": false,
+    "signedMediaUrlIncluded": false,
+    "credentialsIncluded": false
+  }
+}

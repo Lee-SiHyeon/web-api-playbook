@@ -61,3 +61,17 @@ test('browser observations cannot be relabeled as independent HTTP ranking snaps
   assert.throws(() => rankingSnapshot({ ...result([product(1)]), isXhr: true }), { code: 'RANKING_RESULT_INVALID' });
   assert.throws(() => rankingSnapshot({ ...result([product(1)]), receipt: undefined }), { code: 'RANKING_RESULT_INVALID' });
 });
+
+test('anonymous bootstrap metadata retains approved names and strips Cookie values', () => {
+  const sample = result([product(1)]);
+  sample.receipts = [{ ...sample.receipt, sessionKind: 'server_issued_anonymous',
+    cookieSent: true, inputCookiesAccepted: false, sentCookieNames: ['__cf_bm'],
+    bootstrapRequest: { method: 'GET', origin: 'https://www.oliveyoung.co.kr',
+      path: '/store/main/main.do', httpStatus: 200, browserUsed: false, cookieSent: false,
+      issuedCookieNames: ['__cf_bm'], cookieValue: 'SENTINEL_MUST_NOT_BE_STORED' } }];
+  const snapshot = rankingSnapshot(sample);
+  assert.deepEqual(snapshot.anonymousSession.sentCookieNames, ['__cf_bm']);
+  assert.equal(JSON.stringify(snapshot).includes('SENTINEL_MUST_NOT_BE_STORED'), false);
+  sample.receipts[0].sentCookieNames = ['customer_session'];
+  assert.throws(() => rankingSnapshot(sample), { code: 'RANKING_SESSION_METADATA_INVALID' });
+});

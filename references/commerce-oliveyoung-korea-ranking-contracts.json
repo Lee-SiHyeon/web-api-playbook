@@ -11,7 +11,7 @@
     "sourceFormat": "html_document",
     "isXhr": false,
     "executionMode": "pure_http",
-    "transport": "createOliveyoungHttpFetch; cookie-free curl_cffi Chrome-compatible HTTP session"
+    "transport": "createOliveyoungAnonymousRankingFetch; pinned curl_cffi chrome150; direct HTTP server-issued anonymous context"
   },
   "requestContract": {
     "default": "GET /store/main/getBestList.do with no query parameters",
@@ -20,7 +20,12 @@
       "controlIdAttribute": "data-ref-dispCatNo",
       "formId": "initForm",
       "method": "GET document navigation",
-      "observedFields": ["dispCatNo", "fltDispCatNo", "pageIdx", "rowsPerPage"],
+      "observedFields": [
+        "dispCatNo",
+        "fltDispCatNo",
+        "pageIdx",
+        "rowsPerPage"
+      ],
       "semantics": "The clicked category id becomes fltDispCatNo. The current hidden dispCatNo is carried through unchanged. The returned hidden form must echo the requested fltDispCatNo.",
       "verifiedExample": {
         "categoryId": "10000010001",
@@ -69,27 +74,90 @@
     "freshness": "The source has no captured as-of timestamp; checkedAt is retrieval time and sourceAsOf remains null."
   },
   "observedCategories": [
-    {"categoryId":"10000010001","categoryName":"스킨케어"},
-    {"categoryId":"10000010009","categoryName":"마스크팩"},
-    {"categoryId":"10000010010","categoryName":"클렌징"},
-    {"categoryId":"10000010011","categoryName":"선케어"},
-    {"categoryId":"10000010002","categoryName":"메이크업"},
-    {"categoryId":"10000010012","categoryName":"네일"},
-    {"categoryId":"10000010006","categoryName":"뷰티소품"},
-    {"categoryId":"10000010008","categoryName":"더모 코스메틱"},
-    {"categoryId":"10000010005","categoryName":"향수/디퓨저"},
-    {"categoryId":"10000010004","categoryName":"헤어케어"},
-    {"categoryId":"10000010003","categoryName":"바디케어"},
-    {"categoryId":"10000060001","categoryName":"럭스에딧"},
-    {"categoryId":"10000060002","categoryName":"맨즈에딧"},
-    {"categoryId":"10000020001","categoryName":"건강식품"},
-    {"categoryId":"10000020002","categoryName":"푸드"},
-    {"categoryId":"10000020003","categoryName":"구강용품"},
-    {"categoryId":"10000020005","categoryName":"헬스/건강용품"},
-    {"categoryId":"10000020004","categoryName":"위생용품"},
-    {"categoryId":"10000030007","categoryName":"패션"},
-    {"categoryId":"10000030005","categoryName":"홈리빙/가전"},
-    {"categoryId":"10000030006","categoryName":"취미/팬시"}
+    {
+      "categoryId": "10000010001",
+      "categoryName": "스킨케어"
+    },
+    {
+      "categoryId": "10000010009",
+      "categoryName": "마스크팩"
+    },
+    {
+      "categoryId": "10000010010",
+      "categoryName": "클렌징"
+    },
+    {
+      "categoryId": "10000010011",
+      "categoryName": "선케어"
+    },
+    {
+      "categoryId": "10000010002",
+      "categoryName": "메이크업"
+    },
+    {
+      "categoryId": "10000010012",
+      "categoryName": "네일"
+    },
+    {
+      "categoryId": "10000010006",
+      "categoryName": "뷰티소품"
+    },
+    {
+      "categoryId": "10000010008",
+      "categoryName": "더모 코스메틱"
+    },
+    {
+      "categoryId": "10000010005",
+      "categoryName": "향수/디퓨저"
+    },
+    {
+      "categoryId": "10000010004",
+      "categoryName": "헤어케어"
+    },
+    {
+      "categoryId": "10000010003",
+      "categoryName": "바디케어"
+    },
+    {
+      "categoryId": "10000060001",
+      "categoryName": "럭스에딧"
+    },
+    {
+      "categoryId": "10000060002",
+      "categoryName": "맨즈에딧"
+    },
+    {
+      "categoryId": "10000020001",
+      "categoryName": "건강식품"
+    },
+    {
+      "categoryId": "10000020002",
+      "categoryName": "푸드"
+    },
+    {
+      "categoryId": "10000020003",
+      "categoryName": "구강용품"
+    },
+    {
+      "categoryId": "10000020005",
+      "categoryName": "헬스/건강용품"
+    },
+    {
+      "categoryId": "10000020004",
+      "categoryName": "위생용품"
+    },
+    {
+      "categoryId": "10000030007",
+      "categoryName": "패션"
+    },
+    {
+      "categoryId": "10000030005",
+      "categoryName": "홈리빙/가전"
+    },
+    {
+      "categoryId": "10000030006",
+      "categoryName": "취미/팬시"
+    }
   ],
   "evidence": [
     "verification/commerce-oliveyoung-korea-ranking-category-live-2026-10-05.json",
@@ -103,5 +171,25 @@
     "All 21 current category controls were observed, but only the skincare filter has a successful live request/readback. A bounded serial verification sweep encountered HTTP 429 before its first category-specific request and stopped without retrying.",
     "A product-level range cue is not an option-specific price.",
     "Availability is not inferred from sale, promotion or missing flags."
-  ]
+  ],
+  "anonymousRequestPreparation": {
+    "method": "GET",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/main/main.do",
+    "sourceFormat": "html_document",
+    "isXhr": false,
+    "approvedCookieNames": [
+      "__cf_bm",
+      "_cfuvid",
+      "cf_clearance"
+    ],
+    "cookieValueSource": "server Set-Cookie only; caller cookies rejected",
+    "storage": "worker memory; values never in IPC metadata, logs or evidence",
+    "requestIntervalMs": 5000,
+    "intervalIsPublishedServiceQuota": false,
+    "contextReuse": "one worker/session per client; server cookie jar expiry/domain/path rules",
+    "rateLimitPolicy": "HTTP429 stops the job; no automatic retry or rebootstrap",
+    "closePolicy": "CLI finally closes worker and clears memory jar",
+    "proofScope": "anonymous bootstrap plus rank reads; not account login or whole-site quota bypass"
+  }
 }
