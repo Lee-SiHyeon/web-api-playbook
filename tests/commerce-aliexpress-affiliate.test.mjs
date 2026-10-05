@@ -13,6 +13,10 @@ function product(productId = '1005001234567890') {
     product_title: 'Sample product',
     product_detail_url: `https://www.aliexpress.com/item/${productId}.html?spm=tracking`,
     product_main_image_url: 'https://ae01.alicdn.com/kf/sample.jpg',
+    product_small_image_urls: { string: ['https://ae01.alicdn.com/kf/sample.jpg', 'https://ae01.alicdn.com/kf/sample-alt.jpg'] },
+    product_video_url: 'https://ae01.alicdn.com/kf/sample.mp4',
+    shop_id: 12345, shop_url: 'https://www.aliexpress.com/store/12345',
+    platform_product_type: 'TMALL', discount: '20%', evaluate_rate: '92.1%', ship_to_days: 'ship to US in 7 days',
     sale_price: '15.90', sale_price_currency: 'USD',
     original_price: '22.00', original_price_currency: 'USD',
     app_sale_price: '14.90', app_sale_price_currency: 'USD',
@@ -41,10 +45,15 @@ function queryResponse(products = [product()]) {
 }
 
 function detailResponse(products = [product()]) {
+  const detailProducts = products.map(value => {
+    const copy = { ...value };
+    delete copy.ship_to_days;
+    return copy;
+  });
   return {
     aliexpress_affiliate_productdetail_get_response: {
       resp_result: { resp_code: 200, resp_msg: 'success', result: {
-        current_record_count: products.length, products: { product: products },
+        current_record_count: detailProducts.length, products: { product: detailProducts },
       } },
     },
   };
@@ -58,9 +67,13 @@ function socialResponse() {
         item_title: 'Social catalog sample',
         item_url: 'https://www.aliexpress.com/item/-/10000021628274.html',
         item_main_pic: 'https://ae01.alicdn.com/kf/example.jpg',
+        item_pics: 'https://ae01.alicdn.com/kf/example.jpg,https://ae01.alicdn.com/kf/example-2.jpg',
+        item_videos: 'https://ae01.alicdn.com/kf/example.mp4',
+        shop_url: 'https://www.aliexpress.com/store/12345', pub_time: '1710000000000',
         item_origin_price_min: 'US $1.36', item_origin_price_max: 'US $5.33',
         item_price_discount_min: 'US $1.09', item_price_discount_max: 'US $4.26',
         item_discount_rate: '20', commission_rate: '3', comment_score: '4.5',
+        seller_layer: 'Good', sales30_day_semantic: '100+', comment30_day_semantic: '20+', favorite_cnt_semantic: '300+',
       }] },
       page_no: 1, page_size: 1, total_count: 100, success: true, error_code: '', error_msg: '',
     } },
@@ -94,8 +107,14 @@ test('searches the documented Affiliate product API with an exact signed POST an
     assert.equal(params.get('ship_to_country'), 'US');
     assert.equal(params.get('target_currency'), 'USD');
     assert.equal(params.get('target_language'), 'EN');
+    const fields = params.get('fields').split(',');
+    for (const field of ['evaluate_rate', 'product_small_image_urls', 'product_video_url', 'shop_id', 'shop_url', 'discount']) {
+      assert.ok(fields.includes(field), `documented product field requested: ${field}`);
+    }
+    assert.equal(fields.includes('promotion_link'), false);
+    assert.equal(fields.includes('code_promotionurl'), false);
     assert.equal(params.get('tracking_id'), null);
-    assert.equal(params.get('sign'), 'B2F7014B9FFF6E2505F0191F10A9BA11');
+    assert.equal(params.get('sign'), '9AFD0F430F83FC4238FF8193F3B396EA');
     assert.equal(params.has('session'), false);
     assert.equal(params.has('app_secret'), false);
     return Response.json(queryResponse());
@@ -112,6 +131,24 @@ test('searches the documented Affiliate product API with an exact signed POST an
   assert.deepEqual(result.products[0].appSalePrice, { amount: '14.90', currency: 'USD' });
   assert.deepEqual(result.products[0].targetSalePrice, { amount: '15.90', currency: 'USD' });
   assert.equal(result.products[0].url, 'https://www.aliexpress.com/item/1005001234567890.html');
+  assert.deepEqual(result.products[0].images, [
+    { role: 'primary', url: 'https://ae01.alicdn.com/kf/sample.jpg' },
+    { role: 'gallery', url: 'https://ae01.alicdn.com/kf/sample-alt.jpg' },
+  ]);
+  assert.equal(result.products[0].videoUrl, 'https://ae01.alicdn.com/kf/sample.mp4');
+  assert.deepEqual(result.products[0].store, { id: '12345', url: 'https://www.aliexpress.com/store/12345' });
+  assert.equal(result.products[0].platformProductType, 'TMALL');
+  assert.equal(result.products[0].discountRate, '20%');
+  assert.deepEqual(result.products[0].ratingMetadata, {
+    value: '92.1', unit: 'percent_positive_reviews', sourceField: 'evaluate_rate',
+  });
+  assert.equal(result.products[0].shippingEstimate, 'ship to US in 7 days');
+  assert.equal(result.products[0].description, null);
+  assert.equal(result.products[0].options, null);
+  assert.equal(result.products[0].sku, null);
+  assert.equal(result.products[0].availability, null);
+  assert.equal(result.products[0].reviewPhotos, null);
+  assert.ok(result.products[0].unavailableFields.includes('stockQuantity'));
   assert.equal(Object.hasOwn(result.products[0], 'promotionLink'), false);
   assert.equal(result.receipt.browserUsed, false);
   assert.equal(result.receipt.cookiesSent, false);
@@ -154,6 +191,10 @@ test('retrieves details by product ID and binds the response to that requested I
   assert.equal(calls, 1);
   assert.equal(result.product.productId, '1005001234567890');
   assert.deepEqual(result.product.salePrice, { amount: '15.90', currency: 'USD' });
+  assert.deepEqual(result.product.ratingMetadata, {
+    value: '92.1', unit: 'percent_positive_reviews', sourceField: 'evaluate_rate',
+  });
+  assert.equal(result.product.shippingEstimate, null);
   assert.equal(result.receipt.productIdMatched, true);
 });
 
@@ -181,10 +222,21 @@ test('searches official social affiliate catalog and parses only its documented 
   assert.deepEqual(result.products[0].listPriceRange, {
     min: { amount: '1.36', currency: 'USD' }, max: { amount: '5.33', currency: 'USD' },
   });
-  assert.deepEqual(result.products[0].salePriceRange, {
+    assert.deepEqual(result.products[0].salePriceRange, {
     min: { amount: '1.09', currency: 'USD' }, max: { amount: '4.26', currency: 'USD' },
   });
-  assert.equal(result.products[0].url, 'https://www.aliexpress.com/item/10000021628274.html');
+    assert.equal(result.products[0].url, 'https://www.aliexpress.com/item/10000021628274.html');
+  assert.deepEqual(result.products[0].images, [
+    { role: 'primary', url: 'https://ae01.alicdn.com/kf/example.jpg' },
+    { role: 'gallery', url: 'https://ae01.alicdn.com/kf/example-2.jpg' },
+  ]);
+  assert.equal(result.products[0].videoUrl, 'https://ae01.alicdn.com/kf/example.mp4');
+  assert.deepEqual(result.products[0].ratingMetadata, { score: '4.5', scale: null, sourceField: 'comment_score' });
+  assert.equal(result.products[0].recentSalesSemantic, '100+');
+  assert.equal(result.products[0].recentCommentsSemantic, '20+');
+  assert.equal(result.products[0].favoritesSemantic, '300+');
+  assert.equal(result.products[0].description, null);
+  assert.equal(result.products[0].reviewPhotos, null);
   assert.equal(result.receipt.currencyParser, 'documented_USD_en_US_prefix');
 });
 

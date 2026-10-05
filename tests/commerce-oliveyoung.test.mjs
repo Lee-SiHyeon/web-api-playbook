@@ -58,6 +58,7 @@ test('OliveYoung product search uses the existing Curator XHR contract and separ
   }]);
   assert.deepEqual(result.requestedPage, { pageNumber: 0, pageSize: 10 });
   assert.equal(result.pagination, null);
+  assert.equal(result.paginationVerified, false);
   assert.equal(result.receipt.request.httpStatus, 200);
   assert.equal(result.receipt.request.mime, 'application/json');
   assert.equal(result.receipt.request.browserUsed, false);
@@ -96,14 +97,20 @@ test('bad prices, unsafe product identifiers, and non-boolean stock flags fail c
   }
 });
 
-test('detail and link writes remain blocked until live contracts and member identity binding exist', async () => {
+test('detail, reviews, photos, pagination and link writes fail closed without observed contracts', async () => {
   let calls = 0;
   const client = createOliveyoungCommerceClient({ session: SESSION, fetchImpl: async () => {
     calls++;
     throw new Error('unexpected request');
   } });
-  await assert.rejects(client.getProduct({ productId: 'A000000123456' }),
+  await assert.rejects(client.getProduct({ goodsNumber: 'A000000123456' }),
     { code: 'OLIVEYOUNG_PRODUCT_DETAIL_XHR_UNVERIFIED' });
+  await assert.rejects(client.getReviews({ goodsNumber: 'A000000123456', pageNumber: 1 }),
+    { code: 'OLIVEYOUNG_REVIEW_XHR_UNVERIFIED' });
+  await assert.rejects(client.getReviewImages({ goodsNumber: 'A000000123456', reviewId: 'R123' }),
+    { code: 'OLIVEYOUNG_REVIEW_IMAGES_XHR_UNVERIFIED' });
+  await assert.rejects(client.searchAllProducts({ keyword: '크림', maxPages: 2 }),
+    { code: 'OLIVEYOUNG_SEARCH_PAGINATION_XHR_UNVERIFIED' });
   await assert.rejects(client.createLink({ productId: 'A000000123456' }),
     { code: 'OLIVEYOUNG_ACTOR_BINDING_REQUIRED' });
   assert.equal(calls, 0);

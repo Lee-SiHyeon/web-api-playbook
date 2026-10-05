@@ -1,8 +1,8 @@
 {
   "schema": "amazon-creators-api-verification-v1",
   "service": "amazon-partner",
-  "checkedAt": "2026-10-04T20:14:18.659Z",
-  "scope": "official Creators API read-only SearchItems and GetItems contract",
+  "checkedAt": "2026-10-05T03:12:04.035Z",
+  "scope": "official Creators API read-only SearchItems, GetItems, and GetVariations contract",
   "secretsPersistedInEvidence": false,
   "credentialsProvidedToThisExecution": false,
   "requestSent": false,
@@ -16,25 +16,30 @@
   },
   "localValidation": {
     "testFile": "tests/commerce-amazon-creators.test.mjs",
-    "testsPassed": 7,
+    "testsPassed": 13,
     "testsFailed": 0,
     "networkUsed": false,
     "credentialsUsed": false,
     "mutationsSent": false,
-    "implementationSha256": "a3eb04a1c431900cb5a5c8953cb47cb62e202fa5b78998ad967860c81701bc29",
-    "testFileSha256": "e99ff45b2f60d5464efe7d108c826f10c61b4549bf7d4530945c4f5403b42cf8"
+    "implementationSha256": "2f7b08447bd0a2a8c1edde72cac37db252580b419481451163cf9c4a2c283f6c",
+    "testFileSha256": "2f6920fa08e6c504202e0928f941ace2ed695ccd91f20d37e992086bc98f25be",
+    "contractFileSha256": "05531be23640bbc429b563cd784bb2c3b502c3d6fa60850c541f49e5b1dbcf93",
+    "checklistSha256": "ac5575d274738d13df97ed5d2670af63722334672b0260747b959da486396357"
   },
   "localChecklistAudit": {
-    "checkedAt": "2026-10-04T20:14:18.659Z",
+    "checkedAt": "2026-10-05T03:12:04.035Z",
     "service": "amazon-partner",
     "requiredCapabilities": [
       "auth.creators_api_token",
       "catalog.search",
       "catalog.product_detail",
+      "catalog.product_metadata",
+      "catalog.product_variations",
       "catalog.price_availability",
       "catalog.pagination",
       "affiliate.link_generation"
     ],
+    "totalCapabilities": 13,
     "recordedLive": 0,
     "strictPassed": false,
     "liveEvidenceAdded": false
@@ -65,7 +70,33 @@
       "path": "/catalog/v1/getItems",
       "client": "lib/commerce/amazon-creators.mjs#createAmazonCreatorsClient.getItems",
       "liveReplay": false
+    },
+    "catalog.product_variations": {
+      "method": "POST",
+      "origin": "https://creatorsapi.amazon",
+      "path": "/catalog/v1/getVariations",
+      "client": "lib/commerce/amazon-creators.mjs#createAmazonCreatorsClient.getVariations",
+      "boundedCollector": "getAllVariations caps at ten sequential pages, verifies child/parent ASIN family binding, detects duplicate ASINs and summary drift, and reports incomplete enumeration",
+      "liveReplay": false
     }
+  },
+  "documentedFieldAvailability": {
+    "description": "unavailable: no dedicated long-description resource in current ItemInfo schema",
+    "featuresAndProductAttributes": "available in requested ItemInfo resources; captured in local fixtures only",
+    "images": "available: primary and variant small/medium/large with dimensions; captured in local fixtures only",
+    "options": "available through GetVariations child ASIN attributes; captured in local fixtures only",
+    "identifiers": "available: ASIN/parent ASIN and optional EAN/ISBN/UPC/itemPartNumber; seller SKU unavailable",
+    "priceAndAvailability": "available through OffersV2; availability and order limits do not equal exact on-hand stock",
+    "customerReviewScoreCountBodiesPhotos": "unavailable: no current Creators API customer-review resource documented"
+  },
+  "variationIntegrity": {
+    "directRequestedAsinInReturnedItems": "family binding verified against exact ASIN; parentAsin remains null if API omitted it",
+    "requestedParentAsinMatchesReturnedChildren": "family binding verified from returned parentASIN values",
+    "requestedChildAsinNotInCurrentPage": "GetItems resolves the requested ASIN parentASIN before accepting a common returned family",
+    "unboundRequestOrMissingParentData": "family binding inconclusive and expectedResultVerified=false",
+    "conflictingParentFamilies": "request rejected with AMAZON_CREATORS_VARIATION_FAMILY_MISMATCH",
+    "crossPageDuplicateAsinsOrSummaryDrift": "items are deduplicated for collection output, integrity issue recorded, complete=false",
+    "completeRequires": "all reported pages, stable pageCount/variationCount, unique child ASIN count equal to variationCount, verified family binding and no API partial errors"
   },
   "priceSemantics": {
     "current": "offersV2.listings[].price.money.amount + currency",
@@ -85,13 +116,17 @@
   "pagination": {
     "itemCountPerPageMax": 10,
     "itemPageMax": 10,
-    "pageRunner": "sequential, explicit bounds, no automatic retries"
+    "pageRunner": "SearchItems sequential pages are bounded by the API at ten. GetVariations uses API pageCount and the collector caps one run at ten pages. `complete=true` requires consistent summary counts, unique child ASINs, bound family membership and no partial API errors; otherwise it reports incomplete/inconclusive. No automatic retries."
   },
   "primarySources": [
     "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/get-started/using-curl",
     "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/search-items",
     "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-items",
     "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/offersV2",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/item-info",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/images",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-variations",
+    "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/variation-summary",
     "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/concepts/understanding-versions",
     "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/onboarding/register-for-creators-api",
     "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/migrating-to-creatorsapi-from-paapi"

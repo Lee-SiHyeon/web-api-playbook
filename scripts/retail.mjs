@@ -5,9 +5,10 @@ import { options, reserveOutput, report, safeError } from '../lib/cli.mjs';
 import { createAliExpressPublicClient } from '../lib/retail/aliexpress.mjs';
 import { createEbayPublicClient } from '../lib/retail/ebay.mjs';
 import { createAllbirdsPublicClient } from '../lib/retail/shopify.mjs';
+import { createAmazonPublicClient } from '../lib/retail/amazon.mjs';
 
 const services = ['aliexpress', 'amazon', 'ebay', 'walmart', 'shopify'];
-const supported = { aliexpress: ['product-seo'], ebay: ['suggest'], shopify: ['product', 'predictive-search'], amazon: [], walmart: [] };
+const supported = { aliexpress: ['product-seo'], ebay: ['suggest'], shopify: ['product', 'predictive-search'], amazon: ['search'], walmart: [] };
 let output;
 try {
   const [service, operation, ...args] = process.argv.slice(2);
@@ -29,6 +30,7 @@ try {
       process.exitCode = 2;
     } else {
       const flags = service === 'aliexpress' ? ['product-id', 'subject', 'output']
+        : service === 'amazon' ? ['query', 'page', 'output']
         : service === 'ebay' ? ['query', 'output']
           : operation === 'product' ? ['handle', 'output'] : ['query', 'limit', 'output'];
       const opts = options(args, flags);
@@ -37,6 +39,12 @@ try {
       let data;
       if (service === 'aliexpress') data = await createAliExpressPublicClient().getProductSeo({ productId: opts['product-id'], subject: opts.subject });
       else if (service === 'ebay') data = await createEbayPublicClient().suggestCatalogHints({ query: opts.query });
+      else if (service === 'amazon') {
+        if (opts.page !== undefined && (typeof opts.page !== 'string' || !/^(?:[1-9]|1[0-9]|20)$/.test(opts.page))) {
+          throw Object.assign(new Error(), { code: 'RETAIL_ARGUMENT_INVALID' });
+        }
+        data = await createAmazonPublicClient().searchProducts({ query: opts.query, page: opts.page === undefined ? 1 : Number(opts.page) });
+      }
       else if (operation === 'product') data = await createAllbirdsPublicClient().getProduct({ handle: opts.handle });
       else {
         if (opts.limit !== undefined && (typeof opts.limit !== 'string' || !/^(?:[1-9]|10)$/.test(opts.limit))) {

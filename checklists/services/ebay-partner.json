@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "ebay-partner",
-  "description": "eBay Browse API client for official marketplace listing search, item details, prices and category hints. Requires an application OAuth token. The current account has no recorded API credentials or EPN campaign, and an anonymous production probe returned 403 HTML; product reads remain unverified.",
+  "description": "eBay Browse API client for official marketplace listing search, full item/product detail, prices, variations, category hints and aggregate product ratings. Requires an application OAuth token. Full review bodies/photos are not in the documented Browse response. No credentialed production replay is recorded.",
   "capabilities": [
     {
       "id": "auth.application_token",
@@ -67,7 +67,7 @@
     },
     {
       "id": "catalog.item_detail",
-      "title": "Read one purchasable listing by its Browse item ID",
+      "title": "Read one purchasable listing and PRODUCT metadata by its Browse item ID",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -94,7 +94,63 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "note": "The method accepts only the RESTful v1|item_id|variation_id form returned by Browse. It does not accept an unconverted legacy listing ID."
+      "note": "The method accepts only the RESTful v1|item_id|variation_id form returned by Browse and requests fieldgroups=PRODUCT. Legacy listing ID and ePID remain distinct from the REST itemId. Live replay remains pending."
+    },
+    {
+      "id": "catalog.description",
+      "title": "Preserve full listing description and separate product description",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/ebay-browse.mjs", "exports": ["createEbayBrowseClient"] }],
+        "tests": ["tests/commerce-ebay-browse.test.mjs"],
+        "cli": []
+      },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "The listing description and PRODUCT product description are normalized locally, but no credentialed production item replay has verified them."
+    },
+    {
+      "id": "catalog.images",
+      "title": "Preserve primary and additional listing and product image URLs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/ebay-browse.mjs", "exports": ["createEbayBrowseClient"] }],
+        "tests": ["tests/commerce-ebay-browse.test.mjs"],
+        "cli": []
+      },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "The Image object fields are normalized locally, but no credentialed production item replay has verified the gallery."
+    },
+    {
+      "id": "catalog.product_metadata",
+      "title": "Preserve ePID, GTIN, MPN, category ID path and product specification groups",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/ebay-browse.mjs", "exports": ["createEbayBrowseClient"] }],
+        "tests": ["tests/commerce-ebay-browse.test.mjs"],
+        "cli": []
+      },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "PRODUCT metadata is conditional and has no credentialed production readback for this account."
+    },
+    {
+      "id": "catalog.product_review_summary",
+      "title": "Read aggregate product review count, average rating and histogram",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/ebay-browse.mjs", "exports": ["createEbayBrowseClient"] }],
+        "tests": ["tests/commerce-ebay-browse.test.mjs"],
+        "cli": []
+      },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "The official getItem PRODUCT field group exposes an optional aggregate only; no credentialed production item replay has verified it."
     },
     {
       "id": "catalog.prices",
@@ -196,12 +252,43 @@
       "applicability": "applicable",
       "requirement": "live",
       "implementation": {
-        "files": [],
-        "tests": []
+        "files": [{ "path": "lib/commerce/ebay-browse.mjs", "exports": ["createEbayBrowseClient"] }],
+        "tests": ["tests/commerce-ebay-browse.test.mjs"],
+        "cli": []
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "The official get_items_by_item_group endpoint is documented but has not been implemented or replayed."
+      "blocker": "The official get_items_by_item_group endpoint, variant-price normalization and shared-description mapping are implemented locally; no credentialed production group replay has verified them."
+    },
+    {
+      "id": "reviews.full_text",
+      "title": "Read complete eBay product review bodies and metadata through an API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "tests": [], "cli": [] },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "Browse getItem exposes aggregate primaryProductReviewRating, not review records; the public web review records were observed in an HTML document, with no review-data XHR contract."
+    },
+    {
+      "id": "reviews.photos",
+      "title": "Read eBay product-review photos through an API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "tests": [], "cli": [] },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "Neither Browse getItem nor the sampled public review XHR exposes review photo records; the sampled ePID had no visible review photo nodes."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Traverse product review pages through an API with a terminal condition",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "tests": [], "cli": [] },
+      "evidence": [], "sourceEvidence": [],
+      "blocker": "The public review pgn links navigate HTML documents; no review-data XHR pagination contract has been observed."
     },
     {
       "id": "affiliate.tracking_url",

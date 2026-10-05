@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "aliexpress",
-  "description": "익명 공개 상품 카탈로그의 XHR 기반 직접 HTTP 조회. 검색·가격·분류·페이지네이션은 별도 XHR 계약이 확인될 때까지 필수 미완료로 둔다.",
+  "description": "익명 공개 상품 카탈로그의 직접 HTTP 조회. SEO 제목·설명만 독립 재생 완료. 상품 검색은 현재 HTML 문서만 확인됐고, 상세 MTop 요청은 reCAPTCHA에 막혀 있으며 리뷰 API 계약은 관찰되지 않아 필수 미완료로 둔다.",
   "capabilities": [
     {
       "id": "catalog.product_seo",
@@ -47,10 +47,46 @@
             "package-lock.json",
             "verification/retail-aliexpress-product-seo-cli-result-2026-10-05.json"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://ko.aliexpress.com",
+          "path": "/aeglodetailweb/api/seo/seodata",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/retail-aliexpress-seo-current-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/retail.mjs",
+            "lib/retail/aliexpress.mjs",
+            "lib/scoped-session.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
       "note": "상품 ID만으로 조회 가능하다. 화면 XHR의 공개 제목 subject는 독립 HTTP 재생에서 생략 가능함을 확인했다. 가격·재고는 포함하지 않는다."
+    },
+    {
+      "id": "catalog.product_detail",
+      "title": "공개 상품 상세·이미지·옵션 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/retail-aliexpress-detail-source-candidate-2026-10-05.json"
+          ]
+        }
+      ],
+      "blocker": "현재 검색 HTML에서 얻은 상품 ID 3개의 PDP 문서는 HTTP 200이었으나 상품 데이터가 렌더링되지 않았다. 첫 ID `1005011667478296`에서 first-party GET MTop `mtop.aliexpress.pdp.pc.query/1.0` 브라우저 요청을 확인했고, 익명 HTTP 재생은 200 JSON `data/dialogSize/ret` 봉투만 돌려주고 상품 데이터를 주지 않았다. 브라우저는 `_____tmd_____/punish`와 reCAPTCHA 화면으로 전환됐다. 익명 HTML 부트스트랩에 `_m_h5_tk`가 없었다. Captcha 해결이나 우회는 하지 않았다."
     },
     {
       "id": "catalog.search",
@@ -65,7 +101,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "2026-10-05 익명 검색 페이지는 렌더링됐지만 결과 목록 XHR은 관찰되지 않았다. 문서 렌더링을 XHR로 간주할 수 없다."
+      "blocker": "현재 검색 URL의 익명 HTTP 응답은 상품 링크 60개가 든 `text/html` 문서다. 이를 검색 API로 표시하지 않는다. 상품 목록 JSON XHR 및 순위·필터 계약은 미확인이다."
     },
     {
       "id": "catalog.offer_price",
@@ -80,7 +116,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "상품 화면의 표시 가격은 보였으나 가격·통화·재고를 반환하는 독립 공개 XHR 계약은 확인되지 않았다."
+      "blocker": "가격은 first-party MTop 상세 응답에서 받을 수 있는지 확인해야 하나 현재 요청이 reCAPTCHA에 막혀 상품 JSON이 오지 않았다. SEO 응답은 가격·통화·재고를 반환하지 않는다."
     },
     {
       "id": "catalog.categories",
@@ -110,7 +146,22 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "검색·분류의 다음 페이지 XHR과 종료 조건을 관찰하지 못했다."
+      "blocker": "검색 결과 문서에는 상품 링크 60개가 있었지만 페이지 이동 API, 다음 페이지 입력, 종료 조건은 확인하지 못했다."
+    },
+    {
+      "id": "catalog.reviews",
+      "title": "상품 리뷰 본문·평점·작성일·사진 및 페이지네이션 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "상품 상세 렌더러가 reCAPTCHA 화면으로 막혀 리뷰 섹션과 리뷰 요청이 로드되지 않았다. 확인한 HTML의 `/reviews.html`은 사이트 공통 푸터 링크이고 상품 리뷰 링크가 아니다. 현재 PDP 번들은 평점·리뷰 수 요약과 `#nav-review` UI만 제공하며, 리뷰 본문·사진·작성일·페이지 입력을 반환하는 요청/응답은 관찰하지 못했다."
     },
     {
       "id": "auth.login",

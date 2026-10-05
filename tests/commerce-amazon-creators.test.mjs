@@ -116,6 +116,193 @@ test('gets up to ten ASINs and binds each returned item ID to the request', asyn
   assert.deepEqual(result.items[1].offers[0].currentPrice, { amount: '14.99', currency: 'USD', displayAmount: '$14.99' });
 });
 
+test('preserves documented ItemInfo features, product identifiers, image sizes, image variants, and availability metadata', async () => {
+  const full = item();
+  full.images = {
+    primary: {
+      small: { url: 'https://m.media-amazon.com/images/I/primary-small.jpg', height: 75, width: 75 },
+      medium: { url: 'https://m.media-amazon.com/images/I/primary-medium.jpg', height: 160, width: 160 },
+      large: { url: 'https://m.media-amazon.com/images/I/primary-large.jpg', height: 500, width: 500 },
+    },
+    variants: [{
+      small: { url: 'https://m.media-amazon.com/images/I/variant-small.jpg', height: 75, width: 75 },
+      medium: { url: 'https://m.media-amazon.com/images/I/variant-medium.jpg', height: 160, width: 160 },
+      large: { url: 'https://m.media-amazon.com/images/I/variant-large.jpg', height: 500, width: 500 },
+    }],
+  };
+  full.itemInfo = {
+    title: { displayValue: 'Sample item', label: 'Title', locale: 'en_US' },
+    features: { displayValues: ['First feature', 'Second feature'], label: 'Features', locale: 'en_US' },
+    byLineInfo: { brand: { displayValue: 'Acme', label: 'Brand', locale: 'en_US' } },
+    externalIds: { upcs: { displayValues: ['123456789012'], label: 'UPC', locale: 'en_US' } },
+    manufactureInfo: { itemPartNumber: { displayValue: 'MODEL-1', label: 'PartNumber', locale: 'en_US' } },
+    productInfo: { color: { displayValue: 'Blue', label: 'Color', locale: 'en_US' },
+      itemDimensions: { weight: { displayValue: 2.5, unit: 'pounds', label: 'Weight', locale: 'en_US' } } },
+  };
+  full.browseNodeInfo = { browseNodes: [{ id: '123', displayName: 'Kitchen', contextFreeName: 'Kitchen', isRoot: false }] };
+  const fetchImpl = async url => String(url).endsWith('/auth/o2/token')
+    ? Response.json(tokenResponse())
+    : Response.json({ itemsResult: { items: [full] } });
+  const result = await makeClient(fetchImpl).getItems({ itemIds: ['B012345678'] });
+  const output = result.items[0];
+  assert.deepEqual(output.features, ['First feature', 'Second feature']);
+  assert.equal(output.itemInfo.byLineInfo.brand.displayValue, 'Acme');
+  assert.equal(output.browseNodeInfo.browseNodes[0].displayName, 'Kitchen');
+  assert.deepEqual(output.identifiers.externalIds.upcs.displayValues, ['123456789012']);
+  assert.equal(output.identifiers.itemPartNumber.displayValue, 'MODEL-1');
+  assert.equal(output.identifiers.sku, null);
+  assert.equal(output.description, null);
+  assert.deepEqual(output.unavailableFields, [
+    'description', 'sku', 'customerReviewRating', 'customerReviewCount', 'reviewBodies', 'reviewPhotos', 'stockQuantity',
+  ]);
+  assert.deepEqual(output.images.map(value => [value.role, value.size]), [
+    ['primary', 'small'], ['primary', 'medium'], ['primary', 'large'],
+    ['variant', 'small'], ['variant', 'medium'], ['variant', 'large'],
+  ]);
+  assert.equal(output.imageUrl, 'https://m.media-amazon.com/images/I/primary-medium.jpg');
+  assert.equal(output.offers[0].availability.type, 'IN_STOCK');
+  assert.equal(output.availability.type, 'IN_STOCK');
+  assert.equal(output.ratings, null);
+});
+
+test('GetVariations reads options and variation pages without claiming reviews or seller SKUs', async () => {
+  const sentPages = [];
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/auth/o2/token')) return Response.json(tokenResponse());
+    assert.equal(String(url), 'https://creatorsapi.amazon/catalog/v1/getVariations');
+    const body = JSON.parse(init.body);
+    assert.equal(body.asin, 'B012345678');
+    assert.equal(body.marketplace, 'www.amazon.com');
+    assert.equal(body.partnerTag, 'caller-tag-20');
+    assert.equal(body.resources.includes('variationSummary.variationDimension'), true);
+    assert.equal(Object.hasOwn(body, 'Operation'), false);
+    sentPages.push(body.variationPage);
+    const child = item(body.variationPage === 1 ? 'B111111111' : 'B222222222');
+    child.parentASIN = 'B012345678';
+    child.variationAttributes = [{ name: 'color_name', value: body.variationPage === 1 ? 'Black' : 'Blue' },
+      { name: 'size_name', value: 'Medium' }];
+    const summary = { pageCount: 2, variationCount: 2,
+      variationDimensions: [{ name: 'color_name', displayName: 'Color', locale: 'en_US', values: ['Black', 'Blue'] }],
+      price: { lowestPrice: { amount: 14.99, currency: 'USD', displayAmount: '$14.99' },
+        highestPrice: { amount: 24.99, currency: 'USD', displayAmount: '$24.99' } } };
+    return Response.json({ variationsResult: { items: [child], variationSummary: summary,
+      ...(body.variationPage === 2 ? { errors: [{ code: 'SomeVariationUnavailable', message: 'partial' }] } : {}) } });
+  };
+  const client = makeClient(fetchImpl);
+  const onePage = await client.getVariations({ asin: 'B012345678', variationPage: 1, variationCount: 1 });
+  assert.deepEqual(onePage.items[0].options, [
+    { name: 'color_name', value: 'Black' }, { name: 'size_name', value: 'Medium' },
+  ]);
+  assert.deepEqual(onePage.summary.prices.lowestPrice, { amount: '14.99', currency: 'USD', displayAmount: '$14.99' });
+  assert.equal(onePage.pagination.hasNext, true);
+  assert.equal(onePage.receipt.expectedResultVerified, true);
+  const all = await client.getAllVariations({ asin: 'B012345678', maxPages: 10, variationCount: 1 });
+  assert.deepEqual(sentPages, [1, 1, 2]);
+  assert.deepEqual(all.items.map(value => value.asin), ['B111111111', 'B222222222']);
+  assert.equal(all.partial, true);
+  assert.deepEqual(all.partialResponses, [{ page: 2, errors: [{ code: 'SomeVariationUnavailable' }] }]);
+  assert.equal(all.pagination.complete, false);
+  assert.equal(all.pages[1].receipt.expectedResultVerified, false);
+  assert.equal(all.items[0].identifiers.sku, null);
+  assert.equal(all.items[0].ratings, null);
+  assert.equal(all.inconclusive, false);
+  assert.deepEqual(all.integrityIssues, []);
+});
+
+test('GetVariations rejects a family whose parent conflicts with the requested child ASIN readback', async () => {
+  let getItemsCalls = 0;
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/auth/o2/token')) return Response.json(tokenResponse());
+    const body = JSON.parse(init.body);
+    if (String(url).endsWith('/getVariations')) {
+      const child = item('B999999999');
+      child.parentASIN = 'B888888888';
+      child.variationAttributes = [{ name: 'color_name', value: 'Red' }];
+      return Response.json({ variationsResult: { items: [child], variationSummary: {
+        pageCount: 1, variationCount: 1, variationDimension: [],
+      } } });
+    }
+    getItemsCalls++;
+    assert.equal(String(url), 'https://creatorsapi.amazon/catalog/v1/getItems');
+    assert.deepEqual(body.itemIds, ['B012345678']);
+    const requested = item('B012345678');
+    requested.parentASIN = 'B777777777';
+    return Response.json({ itemsResult: { items: [requested] } });
+  };
+  await assert.rejects(makeClient(fetchImpl).getVariations({ asin: 'B012345678' }),
+    error => error.code === 'AMAZON_CREATORS_VARIATION_FAMILY_MISMATCH');
+  assert.equal(getItemsCalls, 1);
+});
+
+test('GetVariations binds an omitted child page through that ASIN\'s GetItems parent ASIN', async () => {
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/auth/o2/token')) return Response.json(tokenResponse());
+    const body = JSON.parse(init.body);
+    if (String(url).endsWith('/getVariations')) {
+      const sibling = item('B999999999');
+      sibling.parentASIN = 'B777777777';
+      sibling.variationAttributes = [{ name: 'color_name', value: 'Blue' }];
+      return Response.json({ variationsResult: { items: [sibling], variationSummary: {
+        pageCount: 1, variationCount: 1, variationDimensions: [],
+      } } });
+    }
+    assert.equal(String(url), 'https://creatorsapi.amazon/catalog/v1/getItems');
+    assert.deepEqual(body.itemIds, ['B012345678']);
+    const requested = item('B012345678');
+    requested.parentASIN = 'B777777777';
+    return Response.json({ itemsResult: { items: [requested] } });
+  };
+  const result = await makeClient(fetchImpl).getVariations({ asin: 'B012345678' });
+  assert.deepEqual(result.familyBinding, {
+    status: 'verified', requestedAsin: 'B012345678', familyAsin: 'B777777777',
+    method: 'get_items_parent_asin_match',
+  });
+  assert.equal(result.receipt.expectedResultVerified, true);
+});
+
+test('GetVariations does not claim a family when the requested ASIN and response omit binding identifiers', async () => {
+  const fetchImpl = async url => {
+    if (String(url).endsWith('/auth/o2/token')) return Response.json(tokenResponse());
+    const child = item('B999999999');
+    delete child.parentASIN;
+    child.variationAttributes = [{ name: 'color_name', value: 'Red' }];
+    return Response.json({ variationsResult: { items: [child], variationSummary: {
+      pageCount: 1, variationCount: 1, variationDimensions: [],
+    } } });
+  };
+  const result = await makeClient(fetchImpl).getVariations({ asin: 'B012345678' });
+  assert.equal(result.items[0].asin, 'B999999999');
+  assert.equal(result.items[0].parentAsin, null);
+  assert.deepEqual(result.familyBinding, {
+    status: 'inconclusive', requestedAsin: 'B012345678', familyAsin: null, method: 'requested_asin_absent',
+  });
+  assert.equal(result.inconclusive, true);
+  assert.equal(result.receipt.expectedResultVerified, false);
+});
+
+test('multi-page GetVariations marks summary drift and duplicate child ASINs incomplete', async () => {
+  const fetchImpl = async (url, init) => {
+    if (String(url).endsWith('/auth/o2/token')) return Response.json(tokenResponse());
+    const body = JSON.parse(init.body);
+    const child = item('B111111111');
+    child.parentASIN = 'B012345678';
+    child.variationAttributes = [{ name: 'color_name', value: 'Black' }];
+    const variationSummary = body.variationPage === 1
+      ? { pageCount: 2, variationCount: 2, variationDimensions: [] }
+      : { pageCount: 3, variationCount: 3, variationDimensions: [] };
+    return Response.json({ variationsResult: { items: [child], variationSummary } });
+  };
+  const result = await makeClient(fetchImpl).getAllVariations({ asin: 'B012345678', maxPages: 10, variationCount: 1 });
+  assert.deepEqual(result.pages.map(page => page.pagination.page), [1, 2]);
+  assert.equal(result.items.length, 1);
+  assert.deepEqual(result.integrityIssues.map(issue => issue.code), [
+    'VARIATION_SUMMARY_DRIFT', 'DUPLICATE_ASIN_ACROSS_VARIATION_PAGES', 'VARIATION_COUNT_MISMATCH',
+  ]);
+  assert.equal(result.inconclusive, true);
+  assert.equal(result.pagination.complete, false);
+  assert.equal(result.pagination.truncated, true);
+});
+
 test('preserves useful SearchItems results and sanitized errors while marking the result partial', async () => {
   const fetchImpl = async url => String(url).endsWith('/auth/o2/token')
     ? Response.json(tokenResponse())

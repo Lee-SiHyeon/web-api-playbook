@@ -60,6 +60,27 @@
             "lib/commerce/http.mjs",
             "verification/commerce-collection-sample-2026-10-05.csv"
           ]
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://printful.s3.us-west-1.amazonaws.com",
+          "path": "/productExport/printful_products.zip",
+          "mime": "application/zip",
+          "files": [
+            "verification/catalog-price-printful-live-2026-10-05.json",
+            "verification/catalog-price-printful-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/commerce/printful.mjs",
+            "lib/commerce/http.mjs",
+            "verification/catalog-price-printful-sample-2026-10-05.csv"
+          ],
+          "note": "Printful official USA regional feed replayed via current Node 24 CLI; 11,279 priced variants; regional-feed coverage."
         }
       ],
       "sourceEvidence": []
@@ -121,6 +142,48 @@
             "lib/retail/shopify.mjs",
             "verification/commerce-storefront-sample-2026-10-05.csv"
           ]
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://colourpop.com",
+          "path": "/search/suggest.json",
+          "mime": "application/json",
+          "files": [
+            "verification/catalog-price-shopify-search-live-2026-10-05.json",
+            "verification/catalog-price-shopify-search-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs",
+            "verification/catalog-price-shopify-search-sample-2026-10-05.csv"
+          ],
+          "note": "Current CLI reached ColourPop predictive search; 10 returned offers are a suggestion sample, not full-catalog coverage."
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://colourpop.com",
+          "path": "/products/eeveelution-shadow-palette.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/catalog-price-shopify-product-live-2026-10-05.json",
+            "verification/catalog-price-shopify-product-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs",
+            "verification/catalog-price-shopify-product-sample-2026-10-05.csv"
+          ],
+          "note": "Current CLI re-read the previously proven product handle and confirmed its USD variant price; evidence is scoped to this product."
         }
       ],
       "sourceEvidence": []

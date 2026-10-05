@@ -1,12 +1,15 @@
 {
   "schema": "web-api-contract-reference-v1",
   "service": "ebay-partner",
-  "reviewedAt": "2026-10-04T20:06:44Z",
+  "reviewedAt": "2026-10-05T02:34:48Z",
   "contractProvenance": {
     "kind": "first_party_documented_api",
     "sources": [
       "https://developer.ebay.com/api-docs/buy/browse/resources/item_summary/methods/search",
       "https://developer.ebay.com/api-docs/buy/browse/resources/item/methods/getItem",
+      "https://edp.ebay.com/api-docs/buy/browse/resources/item/methods/getItem",
+      "https://developer.ebay.com/api-docs/buy/browse/resources/item/methods/getItemsByItemGroup",
+      "https://developer.ebay.com/api-docs/buy/browse/types/gct%3AItemGroup",
       "https://developer.ebay.com/api-docs/buy/static/api-browse.html",
       "https://developer.ebay.com/api-docs/buy/ref-marketplace-supported.html",
       "https://developer.ebay.com/api-docs/buy/static/buy-requirements.html",
@@ -39,9 +42,24 @@
     "itemDetail": {
       "method": "GET",
       "path": "/buy/browse/v1/item/{item_id}",
+      "query": ["fieldgroups=PRODUCT"],
       "itemIdFormat": "v1|{numeric_item_id}|{numeric_variation_id}",
-      "responseFieldsUsed": ["itemId", "title", "itemWebUrl", "price", "currentBidPrice", "estimatedAvailabilityStatus", "estimatedAvailabilities", "shippingOptions", "categories"],
+      "responseFieldsUsed": ["itemId", "legacyItemId", "title", "subtitle", "shortDescription", "description", "itemWebUrl", "price", "currentBidPrice", "categoryId", "categoryIdPath", "categoryPath", "image", "additionalImages", "localizedAspects", "brand", "gtin", "mpn", "epid", "primaryItemGroup", "primaryProductReviewRating", "product", "estimatedAvailabilityStatus", "estimatedAvailabilities", "shippingOptions", "categories"],
+      "normalization": "Listing description is separate from product.description; listing images are separate from product images. PRODUCT fields include product brand, GTINs, MPNs, aspect groups and additional identities when returned. categoryIdPath is split root-to-leaf while categoryPath stays a label path. Missing conditional fields remain absent. primaryItemGroup identifies a variant group and can carry group title/images but does not itself contain every option.",
       "moneySemantics": "Item price, auction current bid, and shipping cost stay separate. No landed or all-in total is synthesized. VAT inclusion depends on requested marketplace/context."
+    },
+    "itemGroup": {
+      "method": "GET",
+      "path": "/buy/browse/v1/item/get_items_by_item_group",
+      "queryFields": ["item_group_id"],
+      "responseFieldsUsed": ["items", "commonDescriptions", "warnings"],
+      "normalization": "Each returned variant remains a separate REST item ID with its own price, images and localized aspects. Shared descriptions are assigned only to the exact returned itemIds named by commonDescriptions. Nonfatal server warnings are counted in the receipt without persisting their messages."
+    },
+    "reviews": {
+      "aggregateSource": "getItem.primaryProductReviewRating with fieldgroups=PRODUCT",
+      "fieldsUsed": ["reviewCount", "averageRating", "ratingHistograms.rating", "ratingHistograms.count"],
+      "identityBoundary": "An ePID-linked product rating aggregate is distinct from seller feedback and from full product review records.",
+      "fullReviewRecords": "No Browse getItem product review text, reviewer metadata, photo or review-page continuation contract. Public review pages observed as HTML documents only."
     },
     "affiliate": {
       "contextHeader": "X-EBAY-C-ENDUSERCTX",
@@ -80,9 +98,8 @@
     "productDataKind": "Marketplace listings, not wholesale supplier inventory or guaranteed dropship fulfillment."
   },
   "notImplemented": [
-    "get_items_by_item_group variation enumeration",
     "Buy API Taxonomy category-tree traversal",
-    "item-group product identity mapping",
+    "full product review bodies, photos and API pagination",
     "inventory or price change feed synchronization",
     "shipping quote based on destination and quantity",
     "orders, checkout, purchase, seller inventory writes, and fulfillment"

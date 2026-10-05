@@ -1,7 +1,7 @@
 {
   "schema": "aliexpress-commerce-api-verification-v1",
   "service": "aliexpress-partner",
-  "checkedAt": "2026-10-04T19:58:21Z",
+  "checkedAt": "2026-10-05T02:26:18.552Z",
   "secretsPersistedInEvidence": false,
   "states": {
     "official_contract_documented": true,
@@ -12,7 +12,7 @@
   },
   "implementation": {
     "module": "lib/commerce/aliexpress-affiliate.mjs",
-    "moduleSha256": "e95a63150453e9720a2268abb456136d7e1fafcab2812b515d5f469eaf6fd032",
+    "moduleSha256": "d412a9188e33ff87eda615c709c49aab57c604c4a69e62ac3ea3b0d7718b27ee",
     "exports": ["createAliExpressAffiliateClient"],
     "pureHttp": true,
     "browserUsed": false,
@@ -47,16 +47,45 @@
     "interpretation": "HTTP 200 was only a platform-level error envelope. No product data was returned and this is not a catalog live pass."
   },
   "localValidation": {
-    "checkedAt": "2026-10-04T19:57:06Z",
+    "checkedAt": "2026-10-05T02:26:18.552Z",
     "command": "node --check lib/commerce/aliexpress-affiliate.mjs && node --test tests/commerce-aliexpress-affiliate.test.mjs",
     "result": "passed",
     "testsPassed": 8,
     "testsFailed": 0,
-    "testFileSha256": "b8653ccc9d75ab29510e38e181b2b8146949f129bc5fb6664f20a29504ea5a3e",
-    "contractFileSha256": "b80f85ca2ed05fd5a3de832f9ea4b67356fe53290bdf17f2825ceb676672d0d0",
-    "checklistSha256": "9bb061d6743311e880188e313cf4be7852a2dfaa02ba627dea31bd39c4f6378e",
+    "testFileSha256": "2baad4f8883b48809e8e2fb352a5d18ffb4f63e08f9dd882588d0e9ee9e1cf98",
+    "contractFileSha256": "dd9352ae1d41abebbc859387576acb5833d7003bf14fed3990c2b8c28673ee42",
+    "checklistSha256": "cd051bb76a33d816f25abb42884f0d67134cf9f6dabf570dbdb8d75b34665191",
     "networkMocksOnly": true,
-    "processMemoryCredentialsOnly": true
+    "processMemoryCredentialsOnly": true,
+    "productMetadataTests": "passed"
+  },
+  "localChecklistAudit": {
+    "checkedAt": "2026-10-05T02:26:18.552Z",
+    "service": "aliexpress-partner",
+    "totalCapabilities": 11,
+    "recordedLive": 0,
+    "requiredGaps": [
+      "affiliate.search_products",
+      "affiliate.product_detail",
+      "affiliate.social_catalog_search",
+      "affiliate.product_media_and_ratings",
+      "dropshipping.product_detail",
+      "dropshipping.sku_price_inventory",
+      "partner.app_credentials"
+    ],
+    "strictPassed": false,
+    "liveEvidenceAdded": false
+  },
+  "documentedFieldAvailability": {
+    "images": "available: primary plus product_small_image_urls[]",
+    "productVideo": "available when a valid source URL is returned",
+    "sellerAndCategory": "available: shop ID/URL, platform product type, and category IDs/names",
+    "priceVariants": "available: sale/list/app and target-currency values remain separate",
+    "positiveReviewRate": "available through evaluate_rate as a percent string; not average stars or a review count",
+    "socialRating": "available through comment_score with scale unknown and through semantic recent-comment metadata",
+    "descriptionFeaturesOptionsSkuStock": "unavailable on Affiliate query/detail and Social item search",
+    "reviewBodiesAndReviewPhotos": "unavailable; product image galleries are not customer review photos",
+    "dropshipSkuInventory": "separate authorization-gated operations remain unimplemented"
   },
   "liveBlockers": [
     "Affiliate methods require a registered AliExpress/TOP app_key and matching app_secret, even though their official references mark user Session authorization as not required. No usable app credentials were available in the authorized task input.",

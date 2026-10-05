@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { auditCapabilityChecklist, renderCapabilityMarkdown, safeRelativePath } from '../lib/capability-checklist.mjs';
+import { CATALOG_SERVICES, catalogScopeAudit } from '../lib/commerce/catalog-checklist-scope.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -15,6 +16,7 @@ function parseArgs(args) {
     else if (arg === '--strict') out.strict = true;
     else if (arg === '--json') out.json = true;
     else if (arg === '--run-tests') out.runTests = true;
+    else if (arg === '--scope=catalog') out.scope = 'catalog';
     else if (arg === '--help') out.help = true;
     else throw new Error('CHECKLIST_ARGUMENT_INVALID');
   }
@@ -46,18 +48,20 @@ function testResultMap(initialAudit) {
 try {
   const args = parseArgs(process.argv.slice(2));
   if (args.help) {
-    console.log('Usage: node scripts/checklist.mjs [--service=inpock | --all] [--strict] [--json] [--run-tests]');
+    console.log('Usage: node scripts/checklist.mjs [--service=inpock | --all] [--scope=catalog] [--strict] [--json] [--run-tests]');
     console.log('Default is --all. Offline static and recorded-evidence audit; --run-tests explicitly executes local test files.');
     process.exit(0);
   }
-  const services = args.service ? [args.service] :
-    (await readdir(path.join(root, 'checklists', 'services'))).filter(name => name.endsWith('.json')).map(name => name.slice(0, -5)).sort();
+  const availableServices = (await readdir(path.join(root, 'checklists', 'services'))).filter(name => name.endsWith('.json')).map(name => name.slice(0, -5)).sort();
+  const services = args.service ? [args.service] : args.scope === 'catalog'
+    ? availableServices.filter(service => CATALOG_SERVICES.includes(service)) : availableServices;
   if (!services.length) throw new Error('CHECKLIST_SERVICE_MISSING');
   const audits = [];
   for (const service of services) {
     const initialAudit = await auditCapabilityChecklist({ root, service });
     const testResults = args.runTests ? testResultMap(initialAudit) : null;
-    audits.push(await auditCapabilityChecklist({ root, service, testResults }));
+    const audit = await auditCapabilityChecklist({ root, service, testResults });
+    audits.push(args.scope === 'catalog' ? catalogScopeAudit(audit) : audit);
   }
   if (args.json) console.log(JSON.stringify({ schema: 'web-api-capability-audits-v1', audits }));
   else console.log(renderCapabilityMarkdown(audits));

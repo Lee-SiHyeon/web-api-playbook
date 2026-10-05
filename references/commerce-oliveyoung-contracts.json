@@ -112,7 +112,17 @@
   },
   "productDetail": {
     "status": "unsupported",
-    "blocker": "No standalone product-detail XHR contract was observed or independently replayed. The web route is not represented as an API operation."
+    "blocker": "A scoped anonymous Playwright navigation and cookie-free direct Node GET of an official product-detail URL both returned 403 before storefront scripts or product XHRs loaded. The HTML document is not represented as an API operation.",
+    "attemptedDocumentURL": "https://m.oliveyoung.co.kr/m/goods/getGoodsDetail.do?goodsNo=A000000107218",
+    "evidenceFile": "verification/commerce-oliveyoung-detail-live-2026-10-05.json"
+  },
+  "reviews": {
+    "status": "not_observed_document_blocked",
+    "body": "No review-list request or review-body response was observed.",
+    "photos": "No review-photo request or response schema was observed.",
+    "pagination": "No review page request parameters, continuation token, or termination condition were observed.",
+    "noEndpointGuessed": true,
+    "evidenceFile": "verification/commerce-oliveyoung-reviews-live-2026-10-05.json"
   },
   "curatorLinkCreation": {
     "existingImplementation": "service-packs/affiliate/apps/affiliate-api-hub/adapters/oliveyoung-curator.mjs",

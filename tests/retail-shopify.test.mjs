@@ -8,14 +8,26 @@ const productFixture = handle => ({
   title: 'Men’s Runner NZ Slip On',
   vendor: 'Allbirds',
   type: 'Shoes',
+  description: '<p>No laces, lightweight comfort.</p>',
+  featured_image: '//cdn.shopify.com/s/files/1/test/allbirds-main.jpg?v=1',
+  images: ['//cdn.shopify.com/s/files/1/test/allbirds-main.jpg?v=1',
+    'https://cdn.shopify.com/s/files/1/test/allbirds-side.jpg?v=2'],
+  options: [{ name: 'Size', position: 1, values: ['8', '8.5'] }],
+  tags: ['shoes', 'runner'],
+  requires_selling_plan: false,
   url: '/products/' + handle,
   available: true,
   price: 10500,
   price_min: 10500,
   price_max: 10500,
   variants: [
-    { id: 41271264378960, title: '8', price: 10500, available: true, option1: '8', option2: null, option3: null },
-    { id: 41271264411728, title: '8.5', price: 10500, available: false, option1: '8.5', option2: null, option3: null },
+    { id: 41271264378960, title: '8', price: 10500, available: true, option1: '8', option2: null, option3: null,
+      options: ['8'], sku: 'A12633M080', compare_at_price: 12000, inventory_quantity: 22,
+      inventory_management: 'shopify', inventory_policy: 'deny', weight: 681,
+      requires_shipping: true, taxable: true, featured_image: null },
+    { id: 41271264411728, title: '8.5', price: 10500, available: false, option1: '8.5', option2: null, option3: null,
+      options: ['8.5'], sku: 'A12633M085', compare_at_price: null, inventory_quantity: 0,
+      inventory_management: 'shopify', inventory_policy: 'deny' },
   ],
 });
 
@@ -68,8 +80,18 @@ test('Allbirds product detail and presentment currency use bounded anonymous GET
     amount: '105.00', amountInApiUnits: 10500, currency: 'USD', minorUnitExponent: 2,
   });
   assert.equal(result.product.title, 'Men’s Runner NZ Slip On');
+  assert.equal(result.product.descriptionHtml, '<p>No laces, lightweight comfort.</p>');
+  assert.deepEqual(result.product.images, [
+    'https://cdn.shopify.com/s/files/1/test/allbirds-main.jpg?v=1',
+    'https://cdn.shopify.com/s/files/1/test/allbirds-side.jpg?v=2',
+  ]);
+  assert.deepEqual(result.product.options[0], { name: 'Size', position: 1, values: ['8', '8.5'] });
   assert.equal(result.product.variants.length, 2);
   assert.equal(result.product.variants[1].available, false);
+  assert.equal(result.product.variants[0].sku, 'A12633M080');
+  assert.equal(result.product.variants[0].compareAtPrice.amount, '120.00');
+  assert.equal(result.product.variants[0].inventoryQuantity, 22);
+  assert.equal(result.product.variants[1].inventoryQuantity, 0);
   assert.equal(result.receipt.schema, 'web-api-public-read-receipt-v1');
   assert.equal(result.receipt.anonymous, true);
   assert.equal(result.receipt.credentialsUsed, false);
@@ -103,6 +125,8 @@ test('responses for a different handle, incomplete products, or duplicate varian
     value => { value.available = 'true'; },
     value => { value.variants[0].id = value.variants[1].id; },
     value => { value.variants[0].available = 1; },
+    value => { value.images[0] = 'https://attacker.example/image.png'; },
+    value => { value.variants[0].inventory_quantity = '22'; },
   ]) {
     const invalid = productFixture(handle);
     mutate(invalid);

@@ -23,7 +23,10 @@
   },
   "authentication": {
     "scheme": "Shopee Affiliate Open API SHA256 signature",
-    "requiredCredentials": ["App ID", "App Secret"],
+    "requiredCredentials": [
+      "App ID",
+      "App Secret"
+    ],
     "header": "Authorization: SHA256 Credential={AppId}, Timestamp={UnixSeconds}, Signature={HexSha256}",
     "timestamp": "ceil(current_epoch_milliseconds / 1000)",
     "signature": {
@@ -40,20 +43,63 @@
       "graphQlOperation": "productOfferV2",
       "kind": "query",
       "argumentsUsed": {
-        "listType": { "type": "Int", "value": 0, "meaning": "ALL" },
-        "keyword": { "type": "String", "requiredByClient": true },
-        "sortType": { "type": "Int", "default": 1, "documentedValues": { "1": "relevance", "2": "sold count descending", "3": "price descending", "4": "price ascending", "5": "commission rate descending" } },
-        "page": { "type": "Int", "default": 1 },
-        "limit": { "type": "Int", "default": 20, "clientMaximum": 20 }
+        "listType": {
+          "type": "Int",
+          "value": 0,
+          "meaning": "ALL"
+        },
+        "keyword": {
+          "type": "String",
+          "requiredByClient": true
+        },
+        "sortType": {
+          "type": "Int",
+          "default": 1,
+          "documentedValues": {
+            "1": "relevance",
+            "2": "sold count descending",
+            "3": "price descending",
+            "4": "price ascending",
+            "5": "commission rate descending"
+          }
+        },
+        "page": {
+          "type": "Int",
+          "default": 1
+        },
+        "limit": {
+          "type": "Int",
+          "default": 20,
+          "clientMaximum": 20
+        }
       },
       "responsePath": "data.productOfferV2.nodes[]",
       "paginationPath": "data.productOfferV2.pageInfo",
       "nodeFieldsRequested": [
-        "itemId", "productName", "price", "priceMin", "priceMax", "commissionRate",
-        "sellerCommissionRate", "shopeeCommissionRate", "appExistRate", "appNewRate",
-        "webExistRate", "webNewRate", "commission", "sales", "imageUrl", "productLink",
-        "shopId", "shopName", "productCatIds", "ratingStar", "priceDiscountRate",
-        "shopType", "periodStartTime", "periodEndTime"
+        "itemId",
+        "productName",
+        "price",
+        "priceMin",
+        "priceMax",
+        "commissionRate",
+        "sellerCommissionRate",
+        "shopeeCommissionRate",
+        "appExistRate",
+        "appNewRate",
+        "webExistRate",
+        "webNewRate",
+        "commission",
+        "sales",
+        "imageUrl",
+        "productLink",
+        "shopId",
+        "shopName",
+        "productCatIds",
+        "ratingStar",
+        "priceDiscountRate",
+        "shopType",
+        "periodStartTime",
+        "periodEndTime"
       ],
       "priceFields": {
         "price": "String; local-currency unit per Explorer schema",
@@ -71,52 +117,114 @@
         "webExistRate": "String fraction for existing web users",
         "webNewRate": "String fraction for new web users",
         "rule": "Return current item-specific API values. Do not hardcode a platform-wide commission range."
-      }
+      },
+      "productLinkRule": "A returned productLink is usable only after its supported Shopee-ID URL path binds both returned shopId and itemId; output is canonicalized without query or fragment."
     },
     {
       "name": "getProductById",
       "graphQlOperation": "productOfferV2",
       "kind": "query",
       "argumentsUsed": {
-        "itemId": { "type": "Int64", "requiredByClient": true },
-        "page": { "type": "Int", "value": 1 },
-        "limit": { "type": "Int", "value": 1 }
+        "itemId": {
+          "type": "Int64",
+          "requiredByClient": true
+        },
+        "page": {
+          "type": "Int",
+          "value": 1
+        },
+        "limit": {
+          "type": "Int",
+          "value": 1
+        }
       },
       "responsePath": "data.productOfferV2.nodes[]",
-      "identityRule": "Every returned node itemId must match the requested itemId."
+      "identityRule": "Every returned node itemId must match the requested itemId.",
+      "productLinkRule": "A returned productLink is usable only after its supported Shopee-ID URL path binds both returned shopId and itemId; output is canonicalized without query or fragment."
     }
   ],
   "clientBoundary": {
     "module": "lib/commerce/shopee-affiliate.mjs",
     "factory": "createShopeeAffiliateClient({appId, appSecret, fetchImpl, now})",
-    "methods": ["searchProducts({keyword,page,limit,sortType})", "getProductById({itemId})"],
+    "methods": [
+      "searchProducts({keyword,page,limit,sortType})",
+      "getProductById({itemId})"
+    ],
     "credentials": "App ID/Secret are held only in the caller's process memory and request Authorization header. They are excluded from the return value, receipt, and errors.",
-    "notImplemented": ["seller Open Platform APIs", "seller-owned catalog", "affiliate link mutation/generation", "conversion reports", "cart/order/purchase", "country switching", "unobserved product detail XHR fallback"]
+    "notImplemented": [
+      "seller Open Platform APIs",
+      "seller-owned catalog",
+      "affiliate link mutation/generation",
+      "conversion reports",
+      "cart/order/purchase",
+      "country switching",
+      "unobserved product detail XHR fallback",
+      "full product descriptions or gallery media",
+      "product option/variation enumeration",
+      "per-SKU price and inventory/stock",
+      "product review bodies and pagination",
+      "review-attached photos"
+    ],
+    "productLinkIdentityBinding": {
+      "sourceField": "ProductOfferV2.productLink",
+      "requiresResponseIds": [
+        "shopId",
+        "itemId"
+      ],
+      "acceptedFirstPartyLayouts": [
+        "https://shopee.co.id/{slug}-i.{shopId}.{itemId}",
+        "https://shopee.co.id/product/{shopId}/{itemId}"
+      ],
+      "identityRule": "The path shopId and itemId must exactly equal the response node shopId and itemId before a product URL is returned.",
+      "canonicalization": "Exact https://shopee.co.id host only. Strip query and fragment before returning the path so tracking parameters are not propagated.",
+      "rejected": "Affiliate redirect wrappers, other hosts/subdomains, malformed paths, missing IDs, and paths naming a different item or shop.",
+      "affiliateLinkBoundary": "The productLink field is not treated as offerLink or as proof of caller affiliate-link ownership."
+    }
   },
   "firstPartySources": [
     {
       "title": "Shopee Indonesia Affiliate Open API Explorer V2",
       "url": "https://open-api.affiliate.shopee.co.id/explorer/v2",
       "authority": "Shopee first-party API Explorer",
-      "facts": ["ProductOfferV2 arguments and types", "ProductOfferV2 response fields", "PageInfo fields", "exact SHA256 signature construction", "GraphQL endpoint is same Explorer origin /graphql"]
+      "facts": [
+        "ProductOfferV2 arguments and types",
+        "ProductOfferV2 response fields",
+        "PageInfo fields",
+        "exact SHA256 signature construction",
+        "GraphQL endpoint is same Explorer origin /graphql"
+      ]
     },
     {
       "title": "Shopee Singapore Affiliate API Access",
       "url": "https://help.shopee.sg/portal/10/article/191702-API-Access",
       "authority": "Shopee first-party Help Center",
-      "facts": ["Affiliate API supports Shopee, brand, and product offer lists; short links; conversion and validated reports"]
+      "facts": [
+        "Affiliate API supports Shopee, brand, and product offer lists; short links; conversion and validated reports"
+      ]
     },
     {
       "title": "Shopee Indonesia Affiliate Commission Scheme",
       "url": "https://help.shopee.co.id/portal/10/article/147677-%5BShopee-Affiliate-Program%5D-Apa-itu-Skema-Komisi-Baru-Shopee-Affiliate",
       "authority": "Shopee first-party Help Center",
-      "facts": ["Commission scheme depends on channel/program conditions; this client reports live per-product API rate fields instead of declaring one universal rate"]
+      "facts": [
+        "Commission scheme depends on channel/program conditions; this client reports live per-product API rate fields instead of declaring one universal rate"
+      ]
     },
     {
       "title": "Shopee Indonesia Affiliate Program enrollment",
       "url": "https://help.shopee.co.id/portal/4/article/72050-%5BShopee-Affiliate-Program%5D-Bagaimana-cara-mendaftar-Shopee-Affiliate-Program",
       "authority": "Shopee first-party Help Center",
-      "facts": ["Affiliate program signup is a separate account/program step and is not performed by this client"]
+      "facts": [
+        "Affiliate program signup is a separate account/program step and is not performed by this client"
+      ]
+    },
+    {
+      "title": "Shopee Indonesia Affiliate Short Link guide",
+      "url": "https://help.shopee.co.id/portal/10/article/184879-%5BShopee-Affiliate-Program%5D-Pedoman-Pembuatan-Link-Pendek-Affiliate",
+      "authority": "Shopee first-party Help Center",
+      "facts": [
+        "Provides a Shopee-ID product URL example containing shop and item IDs; used to choose a real public product URL for XHR discovery."
+      ]
     }
   ],
   "evidenceBoundary": {
@@ -129,5 +237,80 @@
     "anonymousStorefront": "The public product URL led to Shopee's traffic verification/login-required screen. Its observed GET /api/v4/pdp/get_pc returned an error envelope without product data. This is recorded only as a blocker; it is not a Shopee Affiliate product API replacement.",
     "apiControl": "A direct POST to the official /graphql endpoint with a read-only productOfferV2 query, no App ID, no signature, no cookies, and no user session returned HTTP 200 JSON GraphQL error code 10020 with no data. HTTP 200 is not a product success.",
     "affiliateApiClientStatus": "Implemented and locally contract-tested; catalog business data remains unverified until valid App ID/Secret and API access are supplied."
+  },
+  "affiliateSchemaLimits": {
+    "source": "Shopee Indonesia Affiliate Open API Explorer V2 productOfferV2 schema",
+    "includedMetadataFields": [
+      "productName",
+      "imageUrl",
+      "productLink",
+      "price",
+      "priceMin",
+      "priceMax",
+      "commissionRate",
+      "sales",
+      "ratingStar",
+      "productCatIds"
+    ],
+    "notPresentInProductOfferV2": [
+      "fullDescription",
+      "imageGallery",
+      "variationOptions",
+      "skuIds",
+      "skuPrice",
+      "skuStock",
+      "reviewBody",
+      "reviewPhotos",
+      "reviewPageCursor"
+    ],
+    "interpretation": "Affiliate offers are listing/commission metadata. This response schema cannot be stretched into detailed product, inventory, or review content."
+  },
+  "expandedPublicReadScope": {
+    "requestedReadFamilies": [
+      "full item details and descriptions",
+      "product images/gallery",
+      "option/variation values",
+      "per-SKU prices",
+      "per-SKU stock",
+      "review bodies",
+      "review photo URLs",
+      "review pagination"
+    ],
+    "observedProductDetailXhr": {
+      "method": "GET",
+      "origin": "https://shopee.co.id",
+      "path": "/api/v4/pdp/get_pc",
+      "queryFieldNames": [
+        "detail_level",
+        "incoming_pdp_page_scenario",
+        "incoming_pdp_page_source",
+        "item_id",
+        "shop_id",
+        "tz_offset_in_minutes"
+      ],
+      "browserStatus": 200,
+      "browserResponseBytes": 119,
+      "browserResponseErrorCode": 90309999,
+      "browserDataPresent": false,
+      "browserIsLogin": null,
+      "cookieHeaderPresent": false,
+      "directReplayStatus": 403,
+      "directReplayErrorCode": 90309999,
+      "directReplayIsLogin": false,
+      "interpretation": "The detail XHR is observed but returned no item data. Shopee UI falls back to a generic login-required message; response is_login=false, so the evidence does not establish that ordinary account login is the cause. A traffic/access gate is confirmed; its cause is unresolved."
+    },
+    "optionSkuRequestsObserved": false,
+    "reviewListRequestsObserved": false,
+    "reviewPhotoRequestsObserved": false,
+    "paginationContractObserved": false,
+    "reachabilityBoundary": "The review and variant widgets were not reached before the traffic/access gate. Their paths and request/response schemas remain unknown; no endpoint is guessed.",
+    "screenshot": "/home/worker/artifacts/shopee-read-scope-2026-10-05/product-review-gate.png",
+    "implementationState": "Existing Affiliate productOfferV2 metadata client remains implemented and separately blocked from live business verification by absent App ID/Secret. Storefront detail/variant/review clients are not implemented because there is no successful observed/replayable contract.",
+    "sourceProductIdentifiers": {
+      "shopId": "33594331",
+      "itemId": "44310514031",
+      "source": "Official Shopee-ID product URL path from Shopee Help Center short-link example; `...i.33594331.44310514031`."
+    },
+    "capturedXhrIdentityNote": "The captured GET exposed item_id and shop_id fields and was replayed using its exact URL while held only in memory; only the public source-page IDs and query field names are saved."
   }
 }

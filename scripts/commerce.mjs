@@ -12,6 +12,7 @@ const ARGUMENTS = {
   'aliexpress-partner': ['id', 'query', 'currency', 'country', 'language', 'categoryId', 'pageSize'],
   'aliexpress-social': ['query', 'country', 'pageSize'], 'ebay-partner': ['id', 'query', 'marketplace', 'categoryId', 'pageSize'],
   'amazon-partner': ['id', 'query', 'currency', 'marketplace', 'pageSize'], cjdropshipping: ['id', 'query', 'country', 'categoryId', 'pageSize'],
+  'amazon-public': ['query', 'pageSize'],
   banggood: ['id', 'query', 'currency', 'categoryId'], awin: ['id', 'query', 'locale', 'advertiserId', 'pageSize'],
   impact: ['id', 'query', 'catalogId', 'pageSize'], 'printful-api': ['id', 'region', 'currency', 'productionCurrency', 'pageSize'],
   oliveyoung: ['query', 'pageSize'], 'shopee-id': ['id', 'query', 'pageSize'],

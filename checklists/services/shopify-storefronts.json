@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "service": "shopify-storefronts",
-  "description": "Anonymous direct HTTP product detail, USD price, availability, variants, and up to 10 predictive product suggestions for two pinned Shopify storefronts: Allbirds and ColourPop. This is a bounded catalog client; it does not imply partner, affiliate, resale, dropship, or feed rights.",
+  "description": "Anonymous direct HTTP catalog details, USD prices, options, SKUs, inventory snapshots, predictive search, and public reviews for only two pinned Shopify storefronts: Allbirds and ColourPop. This does not imply partner, affiliate, resale, dropship, or feed rights.",
   "capabilities": [
     {
       "id": "allbirds.catalog.product_detail",
-      "title": "Read an Allbirds product, USD price, availability, and variants",
+      "title": "Read Allbirds descriptions, images, options, USD prices, SKU, stock snapshot, and variants",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -32,6 +32,13 @@
             "path": "scripts/commerce.mjs",
             "tokens": [
               "shopify-storefronts"
+            ]
+          },
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "credentials-stdin",
+              "product"
             ]
           }
         ]
@@ -60,7 +67,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "The facade delegates to the existing Allbirds XHR/API client. The receipt is normalized for the multi-store collector while the product output shape stays compatible. Only the verified default USD context is handled."
+      "note": "Product Ajax includes the returned description, image URLs, option values, SKU, compare-at price, availability, and inventory quantity snapshot. Quantity is time-bound to the request."
     },
     {
       "id": "allbirds.catalog.predictive_search",
@@ -123,7 +130,7 @@
     },
     {
       "id": "colourpop.catalog.product_detail",
-      "title": "Read a ColourPop product, USD price, availability, and variants",
+      "title": "Read ColourPop descriptions, images, options, USD prices, SKU, stock snapshot, and variants",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -145,6 +152,13 @@
             "path": "scripts/commerce.mjs",
             "tokens": [
               "shopify-storefronts"
+            ]
+          },
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "credentials-stdin",
+              "product"
             ]
           }
         ]
@@ -173,7 +187,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "The browser confirmed a Shopify-hosted storefront. An independent anonymous Node HTTP replay returned the product detail with USD presentment verified through cart.js."
+      "note": "Product Ajax includes the returned description, image URLs, option values, SKU, compare-at price, availability, and inventory quantity snapshot. Quantity is time-bound to the request."
     },
     {
       "id": "colourpop.catalog.predictive_search",
@@ -228,6 +242,96 @@
       ],
       "sourceEvidence": [],
       "note": "This operation follows Shopify's official Ajax Predictive Search contract and independently returns product records and price. No site-initiated search XHR was observed on the ColourPop header form, which navigated to a full HTML results page."
+    },
+    {
+      "id": "allbirds.catalog.reviews",
+      "title": "Read Allbirds full review bodies, dates, ratings, photos, and pagination",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopify-storefronts.mjs",
+            "exports": [
+              "createShopifyStorefrontClient",
+              "createShopifyStorefronts"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopify-storefronts.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "credentials-stdin",
+              "reviews"
+            ]
+          }
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Live browser source declares yotpoEnabled=false; the review root is empty/zero-height, and no Yotpo/vendor review XHR was observed. JSON-LD contains a count of 7 only. Details: verification/shopify-allbirds-reviews-disabled-2026-10-05.json.",
+      "note": "The API returns SHOPIFY_REVIEW_SOURCE_DISABLED instead of guessing an undocumented Yotpo endpoint."
+    },
+    {
+      "id": "colourpop.catalog.reviews",
+      "title": "Read ColourPop review bodies, ratings, dates, photo URLs, and all cursor pages",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/shopify-storefronts.mjs",
+            "exports": [
+              "createColourPopPublicClient",
+              "createShopifyStorefrontClient",
+              "createShopifyStorefronts"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-shopify-storefronts.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "credentials-stdin",
+              "reviews"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.okendo.io",
+          "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-shopify-storefronts-colourpop-reviews-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "aggregateRequest",
+              "origin": "https://api.okendo.io",
+              "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/review_aggregate",
+              "mime": "application/json"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Playwright observed the real Okendo GET after Show more. Independent cookie-free Node replay traversed 7 source-cursor pages, matched 32/32 unique product reviews, and read 11 review image URLs. The source cursor is returned unchanged; verifiedPurchase remains null because reviewer.isVerified semantics were not established."
     },
     {
       "id": "catalog.full_search_pagination",

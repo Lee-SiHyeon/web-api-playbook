@@ -77,6 +77,16 @@ estimated range. Reuse the existing Curator adapter; a membership flag alone is
 not a matched member identity for link creation. Country/price-basis differences,
 reported sale windows and unverified Shopee currency stay explicit.
 
+For non-affiliate product detail and full review reads, use
+[the catalog reader](references/catalog-read-apis.md) and `scripts/catalog.mjs`.
+Keep price snapshots separate from full descriptions, images and options.
+Review summaries/positive-rating percentages are not review bodies or photos.
+Run `npm run catalog:check` for this read scope; retain missing required reads
+and access gates. An account cannot supply an unimplemented or officially
+unexposed operation. Acquire public frontend keys through current HTTP bootstrap
+and keep their values only in memory. Preserve safe bounded continuations;
+a partial collection or resumed tail is not complete review coverage.
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.

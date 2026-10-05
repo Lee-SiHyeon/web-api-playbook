@@ -1,7 +1,7 @@
 {
   "schema": "shopee-affiliate-commerce-verification-v1",
   "service": "shopee-affiliate-id",
-  "checkedAt": "2026-10-04T21:39:31.693Z",
+  "checkedAt": "2026-10-05T03:08:43Z",
   "secretsPersistedInEvidence": false,
   "market": {
     "country": "Indonesia",
@@ -74,7 +74,15 @@
     },
     "appIdAndSecretRequired": true,
     "browserUserSessionRequirementDocumented": false,
-    "explorerCredentialsMode": "credentials: include; no successful cookie-free signed replay was available to determine whether cookies are also required"
+    "explorerCredentialsMode": "credentials: include; no successful cookie-free signed replay was available to determine whether cookies are also required",
+    "productLinkPathContracts": {
+      "source": "https://help.shopee.co.id/portal/10/article/184879-%5BShopee-Affiliate-Program%5D-Pedoman-Pembuatan-Link-Pendek-Affiliate",
+      "patterns": [
+        "https://shopee.co.id/{slug}-i.{shopId}.{itemId}",
+        "https://shopee.co.id/product/{shopId}/{itemId}"
+      ],
+      "binding": "Both shopId and itemId must exactly match ProductOfferV2 node IDs."
+    }
   },
   "anonymousApiControl": {
     "checkedDateLocal": "2026-10-05",
@@ -150,7 +158,7 @@
   },
   "implementation": {
     "module": "lib/commerce/shopee-affiliate.mjs",
-    "moduleSha256": "45e473c1aab592a97e3b3fc3d6d9908533e8cd94521a90f0b229d26c9e52085e",
+    "moduleSha256": "2115302b541c86cd2233843d1b87e62895610c1bed17c6b7cedfa1df09c229dd",
     "exports": [
       "createShopeeAffiliateClient",
       "ShopeeAffiliateError"
@@ -173,21 +181,39 @@
     "currencyCandidate": "IDR",
     "currencySource": "market-inference",
     "currencyVerified": false,
-    "testsSha256": "15e1cfbbe0a9a03449828a0df99b6f0c7b46d012473cbd8d9c3fec177048e64d",
-    "contractSha256": "7173652e66b7c63834cfb80da30a0a911401aa9a0a7988760ca6f9f2d032ffab",
-    "checklistSha256": "d55ec5b9ec9d1b0f135c917c8533cff60ce906bc04d2a17a03f464dfbf85e3f4"
+    "testsSha256": "62e09b7c651e75d4597b922e0b0dccb6db577a7cff6e1e80cb776db638c14892",
+    "contractSha256": "24cd63b2209d0435570c25d76d4b6282d64a09bf45dcc7c0f0af642fb637d004",
+    "checklistSha256": "55ed04592ebee63b60d64b9e9bfc5ccde2c85c7066137b1d80740a46c6d61201",
+    "currentContractSha256": "24cd63b2209d0435570c25d76d4b6282d64a09bf45dcc7c0f0af642fb637d004",
+    "currentChecklistSha256": "55ed04592ebee63b60d64b9e9bfc5ccde2c85c7066137b1d80740a46c6d61201",
+    "currentReferenceMarkdownSha256": "597eb21b367c0ca200e1db2eeda4ecd73da6dc59b2ba53d444a81668dce84974",
+    "productLinkIdentityBinding": true,
+    "supportedProductLinkPatterns": [
+      "/{slug}-i.{shopId}.{itemId}",
+      "/product/{shopId}/{itemId}"
+    ],
+    "queryAndFragmentTracking": "stripped from canonical product URLs",
+    "affiliateRedirectWrappers": "rejected; offerLink is not requested or substituted"
   },
   "localValidation": {
-    "checkedAt": "2026-10-04T21:39:31.693Z",
+    "checkedAt": "2026-10-05T03:08:43Z",
     "command": "node --check lib/commerce/shopee-affiliate.mjs && node --test tests/commerce-shopee.test.mjs",
     "result": "passed",
-    "testsPassed": 8,
+    "testsPassed": 9,
     "testsFailed": 0,
-    "testFileSha256": "15e1cfbbe0a9a03449828a0df99b6f0c7b46d012473cbd8d9c3fec177048e64d",
+    "testFileSha256": "62e09b7c651e75d4597b922e0b0dccb6db577a7cff6e1e80cb776db638c14892",
     "networkMocksOnly": true,
-    "moduleSha256": "45e473c1aab592a97e3b3fc3d6d9908533e8cd94521a90f0b229d26c9e52085e",
-    "contractSha256": "7173652e66b7c63834cfb80da30a0a911401aa9a0a7988760ca6f9f2d032ffab",
-    "checklistSha256": "d55ec5b9ec9d1b0f135c917c8533cff60ce906bc04d2a17a03f464dfbf85e3f4"
+    "moduleSha256": "2115302b541c86cd2233843d1b87e62895610c1bed17c6b7cedfa1df09c229dd",
+    "contractSha256": "24cd63b2209d0435570c25d76d4b6282d64a09bf45dcc7c0f0af642fb637d004",
+    "checklistSha256": "55ed04592ebee63b60d64b9e9bfc5ccde2c85c7066137b1d80740a46c6d61201",
+    "referenceMarkdownSha256": "597eb21b367c0ca200e1db2eeda4ecd73da6dc59b2ba53d444a81668dce84974",
+    "urlIdentityCases": [
+      "SEO slug path bound to shopId/itemId",
+      "/product/{shopId}/{itemId} path bound to IDs",
+      "wrong shop and item rejected",
+      "redirect wrapper rejected",
+      "query and fragment omitted from returned canonical URL"
+    ]
   },
   "liveBusinessReplay": {
     "affiliateSearch": false,
@@ -200,6 +226,128 @@
     "https://open-api.affiliate.shopee.co.id/explorer/v2",
     "https://help.shopee.sg/portal/10/article/191702-API-Access",
     "https://help.shopee.co.id/portal/10/article/147677-%5BShopee-Affiliate-Program%5D-Apa-itu-Skema-Komisi-Baru-Shopee-Affiliate",
-    "https://help.shopee.co.id/portal/4/article/72050-%5BShopee-Affiliate-Program%5D-Bagaimana-cara-mendaftar-Shopee-Affiliate-Program"
-  ]
+    "https://help.shopee.co.id/portal/4/article/72050-%5BShopee-Affiliate-Program%5D-Bagaimana-cara-mendaftar-Shopee-Affiliate-Program",
+    "https://help.shopee.co.id/portal/10/article/184879-%5BShopee-Affiliate-Program%5D-Pedoman-Pembuatan-Link-Pendek-Affiliate"
+  ],
+  "expandedReadScopeDiscovery": {
+    "checkedAt": "2026-10-05T02:06:12Z",
+    "sourceProductPage": "https://shopee.co.id/WARDAH-Airbrush-Lip-Tint-Lip-Tint-Soft-Blur-Finish-Longlasting-Lightweight-Hydrates-Tahan-Lama-12-Jam-HenecoBeauty-i.33594331.44310514031",
+    "browser": "Playwright Chromium 1234, fresh context, no account login",
+    "navigationStatus": 200,
+    "finalPath": "/verify/traffic/error",
+    "visibleFallback": "Masuk Diperlukan (login required)",
+    "screenshot": "/home/worker/artifacts/shopee-read-scope-2026-10-05/product-review-gate.png",
+    "detailXhr": {
+      "method": "GET",
+      "origin": "https://shopee.co.id",
+      "path": "/api/v4/pdp/get_pc",
+      "queryFieldNames": [
+        "detail_level",
+        "incoming_pdp_page_scenario",
+        "incoming_pdp_page_source",
+        "item_id",
+        "shop_id",
+        "tz_offset_in_minutes"
+      ],
+      "cookieHeaderPresent": false,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 119,
+      "responseSha256": "5360bc3ba992877aacdead58660b32774c4f1120565cb2c0b7dbf07997a353b8",
+      "topLevelKeys": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "9",
+        "error"
+      ],
+      "applicationErrorCode": 90309999,
+      "dataPresent": false,
+      "isLogin": null
+    },
+    "independentDirectReplay": {
+      "method": "GET",
+      "origin": "https://shopee.co.id",
+      "path": "/api/v4/pdp/get_pc",
+      "contract": "Exact observed browser XHR URL and public product-page Referer; no browser cookies or account session",
+      "cookieJarSizeBeforeRequest": 0,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "browserUsed": false,
+      "redirectsFollowed": false,
+      "httpStatus": 403,
+      "mime": "application/json",
+      "responseBytes": 160,
+      "responseSha256": "1f1177fe607bb8711f2517f53b6d91fb59a451eadde2821c89eb6f89d1aa4a8d",
+      "topLevelKeys": [
+        "action_type",
+        "error",
+        "is_customized",
+        "is_login",
+        "redirect_to_error_page",
+        "tracking_id"
+      ],
+      "applicationErrorCode": 90309999,
+      "isLogin": false,
+      "dataPresent": false
+    },
+    "reachability": {
+      "fullDescriptionAndGalleryReached": false,
+      "variationOrSkuRequestObserved": false,
+      "reviewListOrBodyRequestObserved": false,
+      "reviewPhotoRequestObserved": false,
+      "reviewPaginationObserved": false,
+      "reason": "The browser was stopped by the detail traffic/access gate before these widgets or requests were reached.",
+      "authBoundary": "The generic page asks the visitor to log in, but the XHR error contains is_login=false. Evidence confirms an access gate and does not prove ordinary user authentication is the cause."
+    },
+    "affiliateProductOfferV2SchemaLimits": {
+      "reviewBodies": false,
+      "reviewPhotos": false,
+      "reviewPagination": false,
+      "fullDescription": false,
+      "imageGallery": false,
+      "variantOptions": false,
+      "skuPrice": false,
+      "skuStock": false,
+      "note": "The first-party affiliate schema is product-offer metadata and cannot supply the requested detail/review reads."
+    },
+    "sourceProductIdentifiers": {
+      "shopId": "33594331",
+      "itemId": "44310514031",
+      "source": "The official public product URL path includes `.i.33594331.44310514031`."
+    },
+    "directReplayUsedExactCapturedBrowserXhrUrl": true,
+    "capturedFullQueryValuesPersisted": false,
+    "capturedFullQueryValuesNote": "Only query field names and non-sensitive product identifiers are retained. The exact captured URL was held in memory for direct replay and was not saved.",
+    "contractSha256": "24cd63b2209d0435570c25d76d4b6282d64a09bf45dcc7c0f0af642fb637d004",
+    "checklistSha256": "55ed04592ebee63b60d64b9e9bfc5ccde2c85c7066137b1d80740a46c6d61201",
+    "screenshotSha256": "172f915e3feb4cd74559da20f55d433f8896f1f1fc14c896cb451b00f993e798"
+  },
+  "expandedReadScopeStatus": {
+    "requestedReads": [
+      "full product descriptions",
+      "product gallery/photos",
+      "options/variations",
+      "per-SKU prices",
+      "per-SKU stock",
+      "full review bodies",
+      "review photos",
+      "review pagination"
+    ],
+    "implementedAndLiveVerified": [],
+    "blockedByObservedAccessGate": [
+      "Shopee-ID product detail XHR"
+    ],
+    "notImplementedBecauseNoContractWasObserved": [
+      "description/gallery",
+      "options/SKU price/stock",
+      "review body/pagination",
+      "review photos"
+    ],
+    "ordinaryLoginRequirement": "unknown; storefront fallback says login required, but observed API error is 90309999 with is_login=false",
+    "bypassAttempted": false
+  }
 }

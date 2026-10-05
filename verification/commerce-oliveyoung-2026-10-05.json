@@ -5,7 +5,12 @@
   "implementation": {
     "module": "lib/commerce/oliveyoung.mjs",
     "operations": ["searchProducts", "curatorStatus", "ranking", "generated"],
-    "productDetail": "explicitly unsupported until a standalone XHR is observed and replayed",
+    "unsupportedReadMethods": ["getProduct", "getReviews", "getReviewImages", "searchAllProducts"],
+    "productDetail": "unimplemented; method returns an explicit blocker code because no standalone XHR contract was observed",
+    "reviewBodies": "unimplemented; method returns an explicit blocker code because no review XHR contract was observed",
+    "reviewPhotos": "unimplemented; method returns an explicit blocker code because no review-photo XHR contract was observed",
+    "reviewPagination": "unimplemented; no review pagination contract was observed",
+    "searchPagination": "unimplemented; searchProducts accepts the observed page request fields but page continuation is not verified",
     "linkCreation": "refused until current-member identity can be read and matched before a write"
   },
   "sourceContracts": {
@@ -25,6 +30,8 @@
   },
   "liveEvidence": {
     "anonymousSearchAttempt": "verification/commerce-oliveyoung-search-live-2026-10-05.json",
+    "detailBrowserAndHttpAttempt": "verification/commerce-oliveyoung-detail-live-2026-10-05.json",
+    "reviewDiscoveryAttempt": "verification/commerce-oliveyoung-reviews-live-2026-10-05.json",
     "publicStorefront": {
       "url": "https://www.oliveyoung.co.kr/store/main/main.do",
       "httpStatus": 403,
@@ -32,6 +39,10 @@
       "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-blocked.png"
     },
     "authenticatedSearchReplay": "not_performed_no_scoped_oliveyoung_session",
+    "detailOrReviewXhrObserved": false,
+    "desktopDetail403": true,
+    "mobileDetail403": true,
+    "unknownEndpointsSent": 0,
     "productPricesVerifiedAgainstLiveAuthenticatedResponse": false,
     "linkCreated": false,
     "memberIdentityBound": false

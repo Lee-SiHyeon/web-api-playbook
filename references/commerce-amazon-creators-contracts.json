@@ -20,6 +20,22 @@
       "supports": ["current buying amount", "currency", "saving basis and label", "featured-offer limitation", "availability fields"]
     },
     {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/item-info",
+      "supports": ["brand/manufacturer", "classifications", "external identifiers", "features", "model/part number", "product and technical attributes", "content rating and trade-in fields"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/images",
+      "supports": ["primary and variant product images in small/medium/large sizes with dimensions"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/operations/get-variations",
+      "supports": ["child ASIN options/dimensions", "variation pages", "variation summary and min/max prices", "partial variation errors"]
+    },
+    {
+      "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/api-reference/resources/variation-summary",
+      "supports": ["variation page count", "child count", "price range", "option dimensions"]
+    },
+    {
       "url": "https://affiliate-program.amazon.com/creatorsapi/docs/en-us/concepts/understanding-versions",
       "supports": ["credential version interpretation and regional selection"]
     },
@@ -80,6 +96,20 @@
       "responseItems": "searchResult.items",
       "responseTotal": "searchResult.totalResultCount"
     },
+    "getVariations": {
+      "method": "POST",
+      "path": "/catalog/v1/getVariations",
+      "requestFields": ["asin", "condition", "currencyOfPreference", "languagesOfPreference", "marketplace", "partnerTag", "resources", "variationCount", "variationPage"],
+      "responseContainer": "variationsResult",
+      "responseItems": "variationsResult.items",
+      "optionPath": "variationsResult.items[].variationAttributes[{name,value}]",
+      "pageSummary": "variationsResult.variationSummary.pageCount",
+      "clientBound": "The collector fetches pages sequentially and caps one collection at 10 pages; API page count remains authoritative.",
+      "documentationNotes": [
+        "Some GetVariations example payloads include a PascalCase `Operation` member although it is absent from the documented request parameter table and the versioned operation path already names getVariations; the client does not send this unlisted legacy-style field.",
+        "The variationCount prose says less than 10 while its default and examples use 10; the client permits the concretely documented default/example value of 10. Live account replay remains pending."
+      ]
+    },
     "getItems": {
       "method": "POST",
       "path": "/catalog/v1/getItems",
@@ -103,6 +133,18 @@
       "referenceBasisLabelPath": "offersV2.listings[].price.savingBasis.savingBasisTypeLabel",
       "availabilityPath": "offersV2.listings[].availability.type",
       "semanticLimit": "OffersV2 contains featured listings; it is not an all-seller offer listing or legacy Offers.Summaries feed. Preserve savingBasis type and label; do not rename every reference price to regular/list price."
+    },
+    "productMetadata": {
+      "resources": [
+        "itemInfo.byLineInfo", "itemInfo.classifications", "itemInfo.contentInfo",
+        "itemInfo.contentRating", "itemInfo.externalIds", "itemInfo.features",
+        "itemInfo.manufactureInfo", "itemInfo.productInfo", "itemInfo.technicalInfo",
+        "itemInfo.title", "itemInfo.tradeInInfo"
+      ],
+      "images": ["images.primary.{small,medium,large}", "images.variants.{small,medium,large}"],
+      "identifiers": ["asin", "parentASIN", "itemInfo.externalIds.{eans,isbns,upcs}", "itemInfo.manufactureInfo.itemPartNumber"],
+      "notDocumented": ["itemInfo.description", "merchantSellerSku", "customerReviewRating", "customerReviewCount", "reviewBody", "reviewPhotos", "inventoryQuantity"],
+      "notes": "ASIN/UPC/EAN/ISBN/itemPartNumber are distinct identifiers. OffersV2 availability describes offer availability and order quantities, not exact on-hand stock. Image variants are catalog imagery, not review photos. ItemInfo.contentRating is a media/audience classification, not a customer review score."
     }
   },
   "liveStatus": {

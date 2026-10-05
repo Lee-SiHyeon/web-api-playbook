@@ -1,0 +1,74 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "amazon",
+  "capabilityId": "catalog.search",
+  "checkedAt": "2026-10-05T02:43:25.023Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "request": {
+    "method": "POST",
+    "origin": "https://www.amazon.com",
+    "path": "/s/query",
+    "httpStatus": 200,
+    "mime": "application/json-amazonui-streaming",
+    "responseBytes": 883831,
+    "responseSha256": "6c261adb8b51c1245c0bbea6abecea2727495ec3584ad85adf75608cb21d7956",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "readOnly": true,
+    "credentialsUsed": false,
+    "checkedAt": "2026-10-05T02:43:25.023Z",
+    "schemaVerified": true,
+    "expectedResultVerified": true,
+    "resultScope": "validated_main_search_cards",
+    "partial": true,
+    "allAsinsOnPageCovered": false
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.amazon.com/s/query"
+  },
+  "result": {
+    "query": "wireless mouse",
+    "page": 1,
+    "itemCount": 16,
+    "reportedAsinsOnPage": 22,
+    "namedResultFrameCount": 22,
+    "observedAsinCount": 25,
+    "sampleAsins": [
+      "B07CMS5Q6P",
+      "B004YAVF8I",
+      "B0G12HGHGM",
+      "B0GF1VMNJP",
+      "B015NBTAOW"
+    ],
+    "pricedItemCount": 13,
+    "sampleCurrentDisplayPrice": {
+      "asin": "B07CMS5Q6P",
+      "displayText": "KRW 40,278",
+      "amount": "40278",
+      "currencyCode": "KRW",
+      "currencyCodeExplicit": true,
+      "currencyVerified": true
+    },
+    "struckPriceItemCount": 8,
+    "thumbnailItemCount": 16,
+    "explicitCurrencyCodes": [
+      "KRW"
+    ],
+    "partial": true,
+    "allAsinsOnPageCovered": false,
+    "resultScope": "validated_main_search_cards",
+    "identityVerified": true,
+    "expectedResultVerified": true,
+    "transport": "anonymous_xhr_http"
+  },
+  "implementation": {
+    "lib/retail/amazon.mjs": "7bbefa2fe44bc430184b4a16f0e57fa87eee0d84c7dbfdb04e8915ed02f1fa91"
+  }
+}

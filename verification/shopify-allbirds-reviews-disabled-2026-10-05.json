@@ -1,0 +1,30 @@
+{
+  "schema": "shopify-review-source-status-v1",
+  "service": "shopify-storefronts",
+  "capabilityId": "allbirds.catalog.reviews",
+  "checkedAt": "2026-10-05T02:33:24.814Z",
+  "browser": "Playwright Chromium fresh context",
+  "sourceDocument": {
+    "url": "https://www.allbirds.com/products/mens-runner-nz-slip-on-mushroom",
+    "status": 200,
+    "responseBytes": 758552,
+    "sourceSha": "5e20f02943746f03b8b672921e16e3b65d15c8fe9202181f8114ae2871b5768a"
+  },
+  "observation": {
+    "yotpoEnabled": false,
+    "yotpoWidgetPlaceholderCount": 3,
+    "reviewWidgetVisibleText": "",
+    "jsonLdReviewCountOnly": "7",
+    "supplierReviewXhrObserved": false,
+    "matchingRequests": [
+      {
+        "method": "GET",
+        "origin": "https://www.allbirds.com",
+        "path": "/cdn/shop/t/4159/assets/use-yotpo-composable.js"
+      }
+    ]
+  },
+  "blocker": "The page explicitly disables Yotpo, and the review area has no rendered body or observed vendor XHR. JSON-LD contains only a rating count; it does not expose review bodies/photos/cursors.",
+  "screenshot": "not useful: the Yotpo review root has zero height while disabled; source and network observation are recorded instead.",
+  "secretsPersistedInEvidence": false
+}

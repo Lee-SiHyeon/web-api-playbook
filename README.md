@@ -17,6 +17,7 @@
 | [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
 | [해외 제휴·드랍쉬핑 상품 수집](references/commerce-collection.md) | 공식 제휴/공급사 API, Printful 공개 가격 피드, Allbirds·ColourPop, JSON·CSV 수집과 가격 변화 비교 |
 | [제휴 프로그램별 연결](references/affiliate-program-adapters.md) | Olive Young·Shopee·Sephora·Ulta·Rakuten, 브랜드 카탈로그 확인과 제휴 링크·수수료의 검증 범위 |
+| [상품 상세·리뷰 조회](references/catalog-read-apis.md) | 상세 설명·이미지·옵션, 리뷰 본문·사진·페이지 조회와 제휴 링크를 제외한 기능 감사 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |

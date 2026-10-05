@@ -1,0 +1,80 @@
+{
+  "schema": "retail-aliexpress-detail-review-discovery-v1",
+  "checkedAt": "2026-10-05T02:19:40Z",
+  "service": "aliexpress",
+  "scope": "Anonymous product detail, price and review discovery; no user login, affiliate links, purchases, or writes",
+  "secretsPersistedInEvidence": false,
+  "states": {
+    "captured": true,
+    "client_exists": false,
+    "credential_propagated": false,
+    "remnant_free": "unimplemented",
+    "live_replay": false
+  },
+  "searchDocument": {
+    "method": "GET",
+    "origin": "https://www.aliexpress.com",
+    "path": "/w/wholesale-usb-cable.html",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 848237,
+    "browserUsed": false,
+    "userSessionUsed": false,
+    "uniqueItemLinks": 60,
+    "sampleProductIds": ["1005011667478296", "1005006510589628", "1005009561948552"],
+    "countsAsSearchApi": false
+  },
+  "productDetail": {
+    "anonymousHtmlBootstrap": {
+      "httpStatus": 200,
+      "cookieNamesOnly": ["JSESSIONID", "XSRF-TOKEN", "acs_usuc_t", "aep_usuc_f", "ali_apache_id", "xman_f", "xman_t", "xman_us_f"],
+      "issuedMtopToken": false,
+      "cookieValuesPersisted": false
+    },
+    "firstPartyApiCandidate": {
+      "method": "GET",
+      "origin": "https://acs.aliexpress.com",
+      "path": "/h5/mtop.aliexpress.pdp.pc.query/1.0/",
+      "resourceType": "script",
+      "api": "mtop.aliexpress.pdp.pc.query",
+      "version": "1.0",
+      "type": "originaljsonp",
+      "firstPartyBundleSha256": "0a355a12e177ca42ef4fb88e859e8c1c69889213d4f8f0a35ac578db3019e164",
+      "dataKeys": ["productId", "_lang", "_currency", "country", "province", "city", "channel", "pdp_ext_f", "pdpNPI", "sourceType", "clientType", "ext"],
+      "businessResponseReceived": false,
+      "businessResponseFieldsAccepted": false
+    },
+    "independentHttpReplay": {
+      "browserUsed": false,
+      "userSessionUsed": false,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "topLevelKeys": ["data", "dialogSize", "ret"],
+      "businessPayloadReceived": false,
+      "challengeDetected": true,
+      "responseCookieNamesOnly": ["x5secdata"],
+      "mtopTokenAvailableFromFreshHtmlBootstrap": false
+    },
+    "blocker": {
+      "kind": "captcha_challenge",
+      "challengeFramePath": "/h5/mtop.aliexpress.pdp.pc.query/1.0/_____tmd_____/punish",
+      "screenshot": "verification/retail-blockers/aliexpress-detail-2026-10-05.png",
+      "screenshotSha256": "d595309619f55b5ae7eecfdd0a603f5a7e7b2bb4021d7cd7452779dc76cd7355",
+      "bypassed": false
+    }
+  },
+  "reviews": {
+    "productReviewHyperlink": null,
+    "globalFooterReviewLink": "/reviews.html",
+    "pdpBundleShowsAggregateRatingAndReviewCount": true,
+    "reviewBodyServiceOriginOrRouteFound": false,
+    "requestObserved": false,
+    "bodyReceived": false,
+    "imagesReceived": false,
+    "postedAtReceived": false,
+    "ratingRecordsReceived": false,
+    "paginationObserved": false,
+    "userIdsOrProfilesPersisted": false
+  },
+  "followUp": "Resolve the challenge through the site's normal user flow or provide a documented/approved public API contract. Then capture the actual review request/response and independently replay it through HTTP before implementing detail/review clients."
+}

@@ -122,10 +122,24 @@ test('gets one product by Int64 item ID and binds the response ID to that reques
   const requestedId = '9007199254740993';
   const result = await makeClient(async (_url, init) => {
     actualQuery = JSON.parse(init.body).query;
-    return response(graph([product({ itemId: requestedId })], { page: 1, limit: 1, hasNextPage: false }));
+    return response(graph([product({ itemId: requestedId,
+      productLink: `https://shopee.co.id/sample-product-i.33594331.${requestedId}` })],
+    { page: 1, limit: 1, hasNextPage: false }));
   }).getProductById({ itemId: requestedId });
   assert.match(actualQuery, /itemId: 9007199254740993, page: 1, limit: 1/);
   assert.equal(result.products[0].itemId, requestedId);
+});
+
+test('binds both documented Shopee product URL layouts to shopId/itemId and strips query tracking and fragments', async () => {
+  const slug = await makeClient(async () => response(graph([product({
+    productLink: 'https://shopee.co.id/sample-product-i.33594331.44310514031?utm_source=affiliate&click_id=external#reviews',
+  })]))).searchProducts({ keyword: 'lip tint' });
+  assert.equal(slug.products[0].url, 'https://shopee.co.id/sample-product-i.33594331.44310514031');
+
+  const itemPath = await makeClient(async () => response(graph([product({
+    productLink: 'https://shopee.co.id/product/33594331/44310514031?gads_t_sig=opaque#detail',
+  })]))).searchProducts({ keyword: 'lip tint' });
+  assert.equal(itemPath.products[0].url, 'https://shopee.co.id/product/33594331/44310514031');
 });
 
 test('rejects missing developer credentials and invalid inputs before network access', async () => {
@@ -158,7 +172,8 @@ test('does not accept a success-looking HTTP 200 response with Shopee credential
 });
 
 test('rejects wrong IDs, malformed prices, invalid result URLs, and malformed GraphQL shapes', async () => {
-  const wrongId = makeClient(async () => response(graph([product({ itemId: '44310514032' })])));
+  const wrongId = makeClient(async () => response(graph([product({ itemId: '44310514032',
+    productLink: 'https://shopee.co.id/sample-product-i.33594331.44310514032' })])));
   await assert.rejects(wrongId.getProductById({ itemId: '44310514031' }),
     error => error.code === 'SHOPEE_AFFILIATE_ITEM_ID_MISMATCH');
   const missing = makeClient(async () => response(graph([])));
@@ -172,6 +187,10 @@ test('rejects wrong IDs, malformed prices, invalid result URLs, and malformed Gr
   for (const badProduct of [
     product({ price: 'NaN' }),
     product({ productLink: 'https://example.com/item' }),
+    product({ productLink: 'https://shopee.co.id/sample-product-i.33594332.44310514031' }),
+    product({ productLink: 'https://shopee.co.id/product/33594331/44310514032' }),
+    product({ productLink: 'https://s.shopee.co.id/an_redir?origin_link=https%3A%2F%2Fshopee.co.id%2Fproduct%2F33594331%2F44310514031' }),
+    product({ shopId: null }),
     product({ commissionRate: '1.2' }),
     product({ productCatIds: ['not-an-int'] }),
   ]) {

@@ -1,7 +1,7 @@
 {
   "schema": "retail-api-verification-v1",
   "service": "amazon",
-  "checkedAt": "2026-10-05T04:25:21+09:00",
+  "checkedAt": "2026-10-05T11:43:42+09:00",
   "scope": "anonymous public HTTP/XHR only",
   "secretsPersistedInEvidence": false,
   "browserCookiesCopiedToReplay": false,
@@ -9,16 +9,35 @@
   "captureEvidenceSha256": "abeb55ba2478d145b939b3ad4dc643b8f09daa45cc54de1a98a13fe75e6ded21",
   "businessProbeEvidence": "/home/worker/inpock-api/retail-discovery/amazon/business-probe.json",
   "businessProbeEvidenceSha256": "4ec8c091eee6277d16e446eea49c09bed8908cb737e95b4274c3ca57692060a9",
+  "catalogProbeEvidence": "/home/worker/inpock-api/retail-discovery/amazon/catalog-probe.json",
+  "catalogProbeEvidenceSha256": "2b4744fd799fba0a66d6752baf14848c9626ace898b03765549a208fa58d4d85",
+  "reviewProbeEvidence": "/home/worker/inpock-api/retail-discovery/amazon/review-probe.json",
+  "reviewProbeEvidenceSha256": "63544ff1698a2efa44e2274830acbc2171a6b370c574c3ec0fea87efee04bd58",
+  "firstPartyAssetScanEvidence": "/home/worker/inpock-api/retail-discovery/amazon/asset-scan.json",
+  "firstPartyAssetScanEvidenceSha256": "d3f83f9ea47b1f235609f4e3bc59cbb264d3a8972e9346ee40725f137fb4178f",
+  "anonymousProductHttpBootstrapEvidence": "/home/worker/inpock-api/retail-discovery/amazon/product-http-session-probe.json",
+  "anonymousProductHttpBootstrapEvidenceSha256": "be88e4acdc2976a27724c149b75ca1cc2f2e53dcd66abfbbd8e7f8e4114eca18",
   "challengeScreenshot": "/home/worker/artifacts/retail-api-20261005/amazon-blocked.png",
   "challengeScreenshotSha256AtCapture": "811d314c188dd14dc2c21b0fac2d3c276f133f69afae96673d0e69dcbf00f938",
+  "latestProductChallengeScreenshot": "/home/worker/artifacts/retail-api-20261005/amazon-product-latest.png",
+  "latestProductChallengeScreenshotSha256": "9cc7543901675707d08e213ab84346d0c4a73b1a1431e6ec9658eabc1eeff75b",
+  "reviewSigninScreenshot": "/home/worker/artifacts/retail-api-20261005/amazon-reviews-blocked.png",
+  "reviewSigninScreenshotSha256": "14f8f7c561b53690b3d0d03d6c31564bf043e8afd5e1ad222544c91031715211",
+  "searchLiveReceipt": "verification/retail-amazon-search-live-2026-10-05.json",
+  "paginationLiveReceipt": "verification/retail-amazon-pagination-live-2026-10-05.json",
   "states": {
     "catalog.search": {
-      "captured": false,
-      "client_exists": false,
+      "captured": true,
+      "client_exists": true,
       "credential_propagated": "not_applicable",
-      "remnant_free": false,
-      "live_replay": false,
-      "firstFailedBoundary": "search results were a document; no search result data XHR was observed"
+      "remnant_free": true,
+      "live_replay": true,
+      "resultScope": "validated_main_search_cards",
+      "partial": true,
+      "allAsinsOnPageCovered": false,
+      "completeCoverageObservedOnOtherRuns": true,
+      "verifiedResultCount": 16,
+      "note": "POST /s/query replayed from a fresh Node process for page 1 without browser cookies or server-issued qid/xpid; ASIN, title, displayed price and thumbnail were validated. Some responses report 22 page ASINs while 16 main cards are parsed."
     },
     "catalog.product": {
       "captured": true,
@@ -26,7 +45,7 @@
       "credential_propagated": "not_applicable",
       "remnant_free": false,
       "live_replay": false,
-      "firstFailedBoundary": "browser vendor JSON 200; direct HTTP 415 with browser Accept unknown"
+      "firstFailedBoundary": "browser vendor JSON 200 belonged to another ASIN; direct HTTP 415 lacked captured Accept; source-backed product/v2 replay with fresh anonymous HTTP tokens did not return product JSON"
     },
     "catalog.categories": {
       "captured": false,
@@ -37,12 +56,25 @@
       "firstFailedBoundary": "no category data XHR observed"
     },
     "catalog.pagination": {
+      "captured": true,
+      "client_exists": true,
+      "credential_propagated": "not_applicable",
+      "remnant_free": true,
+      "live_replay": true,
+      "resultScope": "validated_main_search_cards",
+      "partial": true,
+      "allAsinsOnPageCovered": false,
+      "completeCoverageObservedOnOtherRuns": true,
+      "verifiedPages": [1, 2, 3],
+      "note": "Page number changes the returned main-card ASIN set; cookie-free page 2 used only k and page query fields. Last-page termination remains unverified."
+    },
+    "catalog.pagination_termination": {
       "captured": false,
       "client_exists": false,
       "credential_propagated": "not_applicable",
       "remnant_free": false,
       "live_replay": false,
-      "firstFailedBoundary": "no pagination data XHR observed"
+      "firstFailedBoundary": "page 21 returned 0 validated cards and then 6 cards on an identical request; no stable last-page or complete-ASIN coverage contract"
     },
     "catalog.price_availability": {
       "captured": false,
@@ -50,8 +82,14 @@
       "credential_propagated": "not_applicable",
       "remnant_free": false,
       "live_replay": false,
-      "firstFailedBoundary": "current/list price, coupon, currency, stock schema not observed and replayed"
+      "searchCardDisplayPriceVerified": true,
+      "firstFailedBoundary": "search-card displayed KRW amount is verified; product current/list price, coupon, stock and checkout price semantics are not"
     },
+    "catalog.description": {"captured": false, "client_exists": false, "credential_propagated": "not_applicable", "remnant_free": false, "live_replay": false, "firstFailedBoundary": "description was found in a document; no validated anonymous XHR for full description/specifications"},
+    "catalog.photos": {"captured": false, "client_exists": false, "credential_propagated": "not_applicable", "remnant_free": false, "live_replay": false, "searchThumbnailVerified": true, "firstFailedBoundary": "search-card thumbnail is verified; full gallery/variant image set and same-ASIN product entity through XHR are not"},
+    "catalog.options": {"captured": true, "client_exists": false, "credential_propagated": "not_applicable", "remnant_free": false, "live_replay": false, "firstFailedBoundary": "twister XHR observed once; exact request values and result schema not captured or independently replayed"},
+    "reviews.full_body": {"captured": false, "client_exists": false, "credential_propagated": "not_applicable", "remnant_free": false, "live_replay": false, "firstFailedBoundary": "fresh anonymous review-page browser showed Sign in and zero review-body nodes; no full-review data XHR"},
+    "reviews.pagination": {"captured": false, "client_exists": false, "credential_propagated": "not_applicable", "remnant_free": false, "live_replay": false, "firstFailedBoundary": "no review body page or pagination XHR observed; review-page sign-in gate"},
     "home.dynamic_cards": {
       "captured": true,
       "client_exists": false,
@@ -63,12 +101,13 @@
       "firstFailedBoundary": "opaque server-issued encrypted request input has no verified engine-free preparation; returned cards had no product paths or price nodes"
     }
   },
-  "independentHttpApplicationSuccessCount": 0,
+  "independentHttpApplicationSuccessCount": 3,
+  "searchCardPriceSemantics": {"basis": "displayed_search_card", "explicitCurrencyObserved": "KRW", "amountUnit": "major currency units from a single fixed display value", "ambiguousCurrencyInferred": false, "struckOrReferenceDisplayMeaningVerified": false, "couponStockCheckoutPriceVerified": false},
   "http200ButNotAccepted": [
     "/hz/rhf challenge HTML",
     "/dram/renderLazyLoadedStreaming homepage UI cards"
   ],
-  "nextResumePoint": "Capture exact data.amazon.com Accept/media-type and product entity schema on a legitimate detail page, then independently replay without browser cookies; separately trace fresh /dram opaque inputs from an anonymous HTTP source if homepage cards are useful.",
+  "nextResumePoint": "Explain reported page ASINs outside the validated main cards and unstable empty-page results before claiming full pagination; capture same-ASIN product XHR with exact Accept/header fields on a legitimate detail page and replay its details/images/options/prices. Full review bodies need an observed read route beyond the current Sign in document gate.",
   "portableScreenshot": "verification/retail-blockers/amazon.png",
   "boundedFirstPartySourceReview": {
     "capturedAssetCount": 18,

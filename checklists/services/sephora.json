@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "service": "sephora",
-  "description": "Anonymous US-market catalog search and complete result pagination over the observed Sephora catalog XHR. Product-detail and sale-price fields remain separate, explicit gaps. Affiliate terms are recorded independently from product API access.",
+  "description": "Anonymous US-market Sephora catalog, product-service, SKU pricing, and Bazaarvoice reviews. Public review API configuration is read from first-party HTML in process memory only. Long product descriptions and non-US locale support remain explicit gaps.",
   "capabilities": [
     {
       "id": "catalog.search",
-      "title": "Search Sephora US products and read current SKU list-price data",
+      "title": "Search anonymous Sephora US products with rating summaries, image, list/sale prices and retailer URL",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -16,10 +16,17 @@
             "exports": [
               "createSephoraPublicClient"
             ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs"
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
         ],
         "cli": [
           {
@@ -38,20 +45,21 @@
           "method": "GET",
           "mime": "application/json",
           "files": [
-            "verification/commerce-beauty-sephora-search-2026-10-05.json"
+            "verification/commerce-sephora-search-live-2026-10-05.json"
           ],
           "hashPaths": [
             "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ]
         }
       ],
       "sourceEvidence": [],
-      "note": "Returns currentSku.skuId as variantId and a productUrl taken from a same-origin targetUrl bound to productId/currentSku.skuId. A single list price is normalized to USD money; ranges remain explicit min/max money. listPrice is not represented as a sale price."
+      "note": "A fresh Node direct HTTP collection returned 164 products over 3 pages; the source product and SKU IDs, price text, and same-origin target URLs are validated."
     },
     {
       "id": "catalog.pagination",
-      "title": "Collect every page of a search response and verify termination against totalProducts",
+      "title": "Traverse catalog search pages and verify terminal page against totalProducts",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -62,10 +70,17 @@
             "exports": [
               "createSephoraPublicClient"
             ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs"
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
         ],
         "cli": [
           {
@@ -84,34 +99,372 @@
           "method": "GET",
           "mime": "application/json",
           "files": [
-            "verification/commerce-beauty-sephora-pagination-2026-10-05.json"
+            "verification/commerce-sephora-pagination-live-2026-10-05.json"
           ],
           "hashPaths": [
             "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ]
         }
       ],
       "sourceEvidence": [],
-      "note": "The live sample completed pages 1–3 (60, 60, and 44 records) against totalProducts=164 with unique product IDs. The client stops at ceil(totalProducts/pageSize) and rejects count drift or duplicates."
+      "note": "Observed page counts are 60, 60, and 44, with 164 unique product IDs and no remaining page after page 3."
     },
     {
       "id": "catalog.product_detail",
-      "title": "Read a Sephora product detail and option-specific prices through an anonymous API",
+      "title": "Read product identity, selected SKU, images, availability and current price",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
       "implementation": {
-        "files": [],
-        "tests": []
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P281411/lite",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-sephora-product-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ]
+        }
+      ],
       "sourceEvidence": [],
-      "blocker": "The observed search XHR includes products[].url as a first-party detail API candidate, but an independent cookie-free Node request timed out after 20 seconds before response headers. Direct product-page navigation also returned an Akamai Access Denied page. No reusable product-detail response, option-level price contract, or full-detail client is verified."
+      "note": "The first-party product-service contract replays with credentials omitted and binds both productId and preferredSku to the response."
+    },
+    {
+      "id": "catalog.variants",
+      "title": "Read all regular and on-sale SKU options with option labels, list/sale price, stock and images",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P281411/lite",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-sephora-variants-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "P281411 returned 50 regular color SKUs; P417985 returned 5 regular plus 2 sale SKUs. Every SKU is unique and bound to the requested product."
     },
     {
       "id": "catalog.sale_price",
-      "title": "Read current promotional or sale price separately from list price",
+      "title": "Read salePrice separately from listPrice on discounted products",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P417985/lite",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-sephora-sale-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "P417985 SKU 2234219 reports USD listPrice 15.00 and salePrice 7.50. replenishmentAdjusterPrice is not labelled as a sale price."
+    },
+    {
+      "id": "catalog.reviews.read",
+      "title": "Read rating, review body, submitted date and public photo URLs, bound to the product family",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.bazaarvoice.com",
+          "path": "/data/reviews.json",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-sephora-reviews-page1-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "publicKeyBootstrap",
+              "origin": "https://www.sephora.com",
+              "path": "/",
+              "method": "GET",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The publicly embedded Bazaarvoice passkey is obtained from Sephora’s anonymous homepage in memory only; it is not an account credential and is never persisted or returned. ProductId SKU rows are mapped through Includes.Products BV_FE_FAMILY before returning."
+    },
+    {
+      "id": "catalog.reviews.pagination",
+      "title": "Page through Bazaarvoice reviews with verified Offset/Limit and final-page termination",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.bazaarvoice.com",
+          "path": "/data/reviews.json",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-sephora-reviews-last-page-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "publicKeyBootstrap",
+              "origin": "https://www.sephora.com",
+              "path": "/",
+              "method": "GET",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "TotalResults=1773 at Limit=100; offset 1700 returns the final 73 family-bound entries with hasMore=false and nextPage=null."
+    },
+    {
+      "id": "catalog.reviews.variant_filter",
+      "title": "Filter review pages to one selected SKU and exclude the remaining family SKUs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/sephora-reviews.mjs",
+            "exports": [
+              "createSephoraReviewsClient"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs",
+          "tests/commerce-sephora-reviews.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/commerce.mjs",
+            "tokens": [
+              "sephora"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.bazaarvoice.com",
+          "path": "/data/reviews.json",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-sephora-reviews-sku-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "publicKeyBootstrap",
+              "origin": "https://www.sephora.com",
+              "path": "/",
+              "method": "GET",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The source-supported ProductId:<skuId> plus ExcludeFamily=True filter returned only review rows mapped to the selected SKU."
+    },
+    {
+      "id": "catalog.product_description",
+      "title": "Read product-specific long description and ingredient copy through a public API",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -121,11 +474,11 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "The observed first-party search XHR provides currentSku.listPrice and onSaleData but no salePrice amount. The sampled results reported onSaleData=NONE. No sale amount is inferred."
+      "blocker": "The first-party product-lite endpoint returns productDetails with only productId, displayName and brand for the tested items. Sephora’s source-linked /api/content/pageProduct helper accepts only shared page path/language/country and its anonymous response contains generic comparison content, not product-specific copy. Product-page documents return 403, so description text and ingredients remain unavailable; none is fabricated."
     },
     {
       "id": "storefront.localization",
-      "title": "Collect prices for a non-US Sephora market and verify its currency",
+      "title": "Read price and review data for a non-US locale and verify its currency",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -135,144 +488,49 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Only the US market contract and USD price formatting were independently replayed. Other country, locale, and currency mappings remain unverified."
+      "blocker": "Only countryCode=US / loc=en_US / USD was independently replayed. Other market and currency contracts remain unverified."
     },
     {
       "id": "partner_program.commission",
-      "title": "Read the current Sephora affiliate commission rate and terms",
+      "title": "Read current Sephora affiliate commission terms and rates",
       "priority": "optional",
       "applicability": "unknown",
-      "requirement": "inventory",
+      "requirement": "live",
       "implementation": {
         "files": [],
         "tests": []
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Sephora's public affiliate page names Rakuten Advertising but does not publish a fixed numeric commission rate. The current rate depends on publisher program terms."
+      "blocker": "The public Sephora Affiliates page identifies Rakuten Advertising but does not publish a fixed numeric rate. Current commission depends on publisher program terms."
     },
     {
       "id": "auth.login",
       "title": "Sign in to a customer account",
       "priority": "optional",
       "applicability": "not_applicable",
-      "applicabilityReason": "The requested catalog collector uses anonymous public reads and does not need a customer login.",
-      "requirement": "inventory",
+      "requirement": "live",
       "implementation": {
         "files": [],
         "tests": []
       },
       "evidence": [],
-      "sourceEvidence": []
+      "sourceEvidence": [],
+      "applicabilityReason": "The requested catalog and review clients use anonymous public reads and do not require customer login."
     },
     {
       "id": "cart.write",
-      "title": "Mutate basket, checkout, or order state",
+      "title": "Mutate cart, checkout, account or order state",
       "priority": "optional",
       "applicability": "not_applicable",
-      "applicabilityReason": "The requested client is read-only and limited to product search and prices.",
-      "requirement": "inventory",
+      "requirement": "live",
       "implementation": {
         "files": [],
         "tests": []
       },
       "evidence": [],
-      "sourceEvidence": []
-    },
-    {
-      "id": "affiliate.rakuten_brand_catalog",
-      "title": "Account MID -> verified Sephora US publisher catalog and returned tracking URL",
-      "priority": "required",
-      "applicability": "applicable",
-      "requirement": "live",
-      "implementation": {
-        "files": [
-          {
-            "path": "lib/commerce/brand-affiliates.mjs",
-            "exports": [
-              "createSephoraRakutenClient"
-            ]
-          },
-          {
-            "path": "lib/commerce/rakuten-advertising.mjs",
-            "exports": [
-              "createRakutenAdvertisingProductSearchClient"
-            ]
-          }
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora-affiliate"
-            ]
-          }
-        ],
-        "tests": [
-          "tests/commerce-brand-affiliates.test.mjs"
-        ]
-      },
-      "evidence": [],
       "sourceEvidence": [],
-      "blocker": "No approved publisher token or account-owned Sephora MID supplied. Exact-name/US/USD validation is implemented locally; affiliate attribution and final target are unverified."
-    },
-    {
-      "id": "catalog.common_collector",
-      "title": "Actual commerce CLI -> price JSON/CSV with independent readback",
-      "priority": "required",
-      "applicability": "applicable",
-      "requirement": "live",
-      "implementation": {
-        "files": [
-          {
-            "path": "lib/commerce/sephora.mjs",
-            "exports": [
-              "createSephoraPublicClient"
-            ]
-          },
-          {
-            "path": "lib/commerce/providers.mjs",
-            "exports": [
-              "createCommerceReader"
-            ]
-          }
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
-        ],
-        "tests": [
-          "tests/commerce-providers.test.mjs"
-        ]
-      },
-      "evidence": [
-        {
-          "kind": "commerce-collection-v1",
-          "origin": "https://www.sephora.com",
-          "path": "/api/v2/catalog/search/",
-          "mime": "application/json",
-          "files": [
-            "verification/affiliate-sephora-common-collector-live-2026-10-05.json",
-            "verification/affiliate-sephora-collection-sample-2026-10-05.json"
-          ],
-          "hashPaths": [
-            "scripts/commerce.mjs",
-            "lib/commerce/providers.mjs",
-            "lib/commerce/snapshots.mjs",
-            "lib/commerce/credential-output.mjs",
-            "lib/cli.mjs",
-            "lib/commerce/sephora.mjs",
-            "lib/commerce/http.mjs",
-            "verification/affiliate-sephora-collection-sample-2026-10-05.csv"
-          ]
-        }
-      ],
-      "sourceEvidence": [],
-      "note": "API field price kind and range preserved. Ulta sponsored cards are not identical to organic resultCount; provider_limited stays incomplete."
+      "applicabilityReason": "The requested adapter is read-only; account and order writes are outside scope."
     }
   ]
 }

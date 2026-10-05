@@ -1,0 +1,162 @@
+{
+  "schema": "web-api-public-read-boundary-proof-v1",
+  "service": "ulta",
+  "capabilityId": "reviews.page_size_boundary",
+  "checkedAt": "2026-10-05T03:06:02.658Z",
+  "secretsPersistedInEvidence": false,
+  "publicFrontendKeyUsed": true,
+  "publicKeyValuePersisted": false,
+  "userCredentialsUsed": false,
+  "cookieSent": false,
+  "authorizationSent": false,
+  "browserUsed": false,
+  "contractProvenance": {
+    "sourceURL": "https://ui.powerreviews.com/tag-builds/10578/4.0/reviews.engine.js",
+    "sourceSha256": "c5962864e32a3b9eb466c968d870d0f112631d37e82c57d0d0741625628ee9f3",
+    "requestPathTemplate": "/m/{merchant_id}/l/{locale}/product/{page_id}/reviews",
+    "pageSizeParameter": "paging.size"
+  },
+  "maximumAccepted": 25,
+  "lowestRejected": 26,
+  "observations": [
+    {
+      "method": "GET",
+      "origin": "https://display.powerreviews.com",
+      "path": "/m/{merchant_id}/l/en_US/product/pimprod2057119/reviews",
+      "queryFields": [
+        "apikey",
+        "_noconfig",
+        "paging.size"
+      ],
+      "requestedPageSize": 20,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 147906,
+      "checkedAt": "2026-10-05T03:06:02.538Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "responseFieldNames": [
+        "name",
+        "paging",
+        "results"
+      ],
+      "returnedReviewCount": 20,
+      "pageSize": 20,
+      "totalReviews": 429,
+      "pagesTotal": 22
+    },
+    {
+      "method": "GET",
+      "origin": "https://display.powerreviews.com",
+      "path": "/m/{merchant_id}/l/en_US/product/pimprod2057119/reviews",
+      "queryFields": [
+        "apikey",
+        "_noconfig",
+        "paging.size"
+      ],
+      "requestedPageSize": 25,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 152765,
+      "checkedAt": "2026-10-05T03:06:02.567Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "responseFieldNames": [
+        "name",
+        "paging",
+        "results"
+      ],
+      "returnedReviewCount": 25,
+      "pageSize": 25,
+      "totalReviews": 429,
+      "pagesTotal": 18
+    },
+    {
+      "method": "GET",
+      "origin": "https://display.powerreviews.com",
+      "path": "/m/{merchant_id}/l/en_US/product/pimprod2057119/reviews",
+      "queryFields": [
+        "apikey",
+        "_noconfig",
+        "paging.size"
+      ],
+      "requestedPageSize": 26,
+      "httpStatus": 400,
+      "mime": "application/json",
+      "responseBytes": 63,
+      "checkedAt": "2026-10-05T03:06:02.585Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "responseFieldNames": [
+        "message",
+        "status_code"
+      ],
+      "statusCode": 400,
+      "message": "paging.size maximum value is 25"
+    },
+    {
+      "method": "GET",
+      "origin": "https://display.powerreviews.com",
+      "path": "/m/{merchant_id}/l/en_US/product/pimprod2057119/reviews",
+      "queryFields": [
+        "apikey",
+        "_noconfig",
+        "paging.size"
+      ],
+      "requestedPageSize": 50,
+      "httpStatus": 400,
+      "mime": "application/json",
+      "responseBytes": 63,
+      "checkedAt": "2026-10-05T03:06:02.641Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "responseFieldNames": [
+        "message",
+        "status_code"
+      ],
+      "statusCode": 400,
+      "message": "paging.size maximum value is 25"
+    },
+    {
+      "method": "GET",
+      "origin": "https://display.powerreviews.com",
+      "path": "/m/{merchant_id}/l/en_US/product/pimprod2057119/reviews",
+      "queryFields": [
+        "apikey",
+        "_noconfig",
+        "paging.size"
+      ],
+      "requestedPageSize": 100,
+      "httpStatus": 400,
+      "mime": "application/json",
+      "responseBytes": 63,
+      "checkedAt": "2026-10-05T03:06:02.658Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "responseFieldNames": [
+        "message",
+        "status_code"
+      ],
+      "statusCode": 400,
+      "message": "paging.size maximum value is 25"
+    }
+  ],
+  "implementation": {
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  }
+}

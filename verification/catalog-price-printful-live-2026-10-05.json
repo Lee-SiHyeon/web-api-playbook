@@ -1,0 +1,92 @@
+{
+  "schema": "web-api-commerce-collection-proof-v1",
+  "service": "commerce",
+  "capabilityId": "collection.public_feed",
+  "checkedAt": "2026-10-05T03:05:02.460Z",
+  "secretsPersistedInEvidence": false,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "sourceRequest": {
+    "method": "GET",
+    "origin": "https://printful.s3.us-west-1.amazonaws.com",
+    "path": "/productExport/printful_products.zip",
+    "checkedAt": "2026-10-05T03:05:00.403Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/zip",
+    "responseBytes": 447115,
+    "responseSha256": "e41f4869588ee41f9037bb21560b808032fba88dc8d69d0b80737c935ba02964",
+    "lastModified": "Mon, 05 Oct 2026 00:10:09 GMT"
+  },
+  "sourceRequests": [
+    {
+      "method": "GET",
+      "origin": "https://printful.s3.us-west-1.amazonaws.com",
+      "path": "/productExport/printful_products.zip",
+      "checkedAt": "2026-10-05T03:05:00.403Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "httpStatus": 200,
+      "mime": "application/zip",
+      "responseBytes": 447115,
+      "responseSha256": "e41f4869588ee41f9037bb21560b808032fba88dc8d69d0b80737c935ba02964",
+      "lastModified": "Mon, 05 Oct 2026 00:10:09 GMT"
+    }
+  ],
+  "sampleOfferCount": 20,
+  "fullOfferCount": 11279,
+  "csvDataRows": 11279,
+  "jsonReadbackMatched": true,
+  "csvReadbackMatched": true,
+  "fullJsonSha256": "bd4f8516635b454d9745e6a69f06896f962af669d23a518c27b46e74f6d28069",
+  "fullCsvSha256": "a2a7e2749a2dbbfc53fcf57d73eb5d466a868813ddf938704fbcce817a859dc4",
+  "fullOutputs": {
+    "json": "/home/worker/artifacts/catalog-expansion-20261005/printful-usa-current.json",
+    "csv": "/home/worker/artifacts/catalog-expansion-20261005/printful-usa-current.csv"
+  },
+  "collection": {
+    "pagesRead": 1,
+    "rowsSeen": 11279,
+    "offersStored": 11279,
+    "maxPages": 1,
+    "maxOffers": 50000,
+    "coverage": "regional_feed",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": true
+  },
+  "sameContextComparisonChanges": null,
+  "actualRunner": {
+    "entrypoint": "scripts/commerce.mjs",
+    "arguments": [
+      "printful-feed",
+      "collect",
+      "--region=USA",
+      "--max-pages=1",
+      "--limit=50000",
+      "--output=/home/worker/artifacts/catalog-expansion-20261005/printful-usa-current.json",
+      "--csv=/home/worker/artifacts/catalog-expansion-20261005/printful-usa-current.csv"
+    ],
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/commerce.mjs": "8b133a7cf46d8076a6db80518a417492e34419ccd690ecd0cb5739326759b474",
+    "lib/commerce/providers.mjs": "829788e1c58ada0e260050d6fc34d97847dcb32187afffac8aeed5df2661d035",
+    "lib/commerce/snapshots.mjs": "f59158c31e1490e2124de595d68f5e5cc87cd020f73184d5046258144b45d659",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "lib/commerce/credential-output.mjs": "89b5f640422cf9dbf5a3d2679099842264ae6d30b6a924ad9308af6432e485db",
+    "lib/commerce/printful.mjs": "f41bf663590860d2245663e41fea09e92d5db9ed6049f15340dd1daa718806b2",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "verification/catalog-price-printful-sample-2026-10-05.csv": "97871e48ddf817e4a3c4a1c6e62f1a0c06b1026409bf7df7276a438aaa63b86c"
+  },
+  "portableSampleCsvLineEndings": "LF; full native CSV retained unchanged and hashed separately"
+}

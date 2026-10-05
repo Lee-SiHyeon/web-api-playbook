@@ -1,0 +1,131 @@
+{
+  "schema": "web-api-commerce-collection-proof-v1",
+  "service": "ulta",
+  "capabilityId": "catalog.common_collector",
+  "checkedAt": "2026-10-05T03:11:05.447Z",
+  "secretsPersistedInEvidence": false,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "sourceRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/dxl/graphql",
+    "checkedAt": "2026-10-05T03:10:45.926Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 896181,
+    "responseSha256": "ddb32f9585def6f8c7285ea5560be242e8e7ef097f0d72fc56fa3b02187a41b0"
+  },
+  "sourceRequests": [
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/dxl/graphql",
+      "checkedAt": "2026-10-05T03:10:45.926Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 896181,
+      "responseSha256": "ddb32f9585def6f8c7285ea5560be242e8e7ef097f0d72fc56fa3b02187a41b0"
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/dxl/graphql",
+      "checkedAt": "2026-10-05T03:10:49.888Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 823748,
+      "responseSha256": "163a0500cff80e18ebb964e43fa658da4c3fa1ebba8c92ea9c50d13ba95f7cee"
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/dxl/graphql",
+      "checkedAt": "2026-10-05T03:10:56.148Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 829391,
+      "responseSha256": "184c4e1b287d59ac08f8cdaffc22612e124e5f8d25210e6ba3c02380669f8bb8"
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/dxl/graphql",
+      "checkedAt": "2026-10-05T03:11:04.584Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 780427,
+      "responseSha256": "78796f0e8db6c7920424eb8128ae94ae5bcf39ddf1b0e37fac89f7fee2226202"
+    }
+  ],
+  "sampleOfferCount": 20,
+  "fullOfferCount": 255,
+  "csvDataRows": 255,
+  "jsonReadbackMatched": true,
+  "csvReadbackMatched": true,
+  "fullJsonSha256": "8fc5fd41a4da10199ccba8a7b7c71199e95d85776c7430d98b07b8f85df7d468",
+  "fullCsvSha256": "a90bbd29da423ddc1bde19019264e9ae7fbe7e360296b3d3f832ddbf593b9ee0",
+  "fullOutputs": {
+    "json": "/home/worker/artifacts/catalog-expansion-20261005/ulta-lipstick-current-final.json",
+    "csv": "/home/worker/artifacts/catalog-expansion-20261005/ulta-lipstick-current-final.csv"
+  },
+  "collection": {
+    "pagesRead": 4,
+    "rowsSeen": 256,
+    "offersStored": 255,
+    "maxPages": 4,
+    "maxOffers": 50000,
+    "coverage": "provider_limited",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": false
+  },
+  "sameContextComparisonChanges": null,
+  "actualRunner": {
+    "entrypoint": "scripts/commerce.mjs",
+    "arguments": [
+      "ulta",
+      "collect",
+      "--query=lipstick",
+      "--max-pages=4",
+      "--limit=50000",
+      "--output=/home/worker/artifacts/catalog-expansion-20261005/ulta-lipstick-current-final.json",
+      "--csv=/home/worker/artifacts/catalog-expansion-20261005/ulta-lipstick-current-final.csv"
+    ],
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/commerce.mjs": "8b133a7cf46d8076a6db80518a417492e34419ccd690ecd0cb5739326759b474",
+    "lib/commerce/providers.mjs": "829788e1c58ada0e260050d6fc34d97847dcb32187afffac8aeed5df2661d035",
+    "lib/commerce/snapshots.mjs": "f59158c31e1490e2124de595d68f5e5cc87cd020f73184d5046258144b45d659",
+    "lib/commerce/credential-output.mjs": "89b5f640422cf9dbf5a3d2679099842264ae6d30b6a924ad9308af6432e485db",
+    "lib/cli.mjs": "09cd4305f2a7b84f15ce70cc20597cdddfb750f2c4f368d542c1895032ba5f04",
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622",
+    "verification/catalog-price-ulta-sample-2026-10-05.csv": "f6bc0756c6f3b667860c8c464cac890cfdc8e24c2263dc3711735959c7adc91d"
+  },
+  "portableSampleCsvLineEndings": "LF; full native CSV retained unchanged and hashed separately"
+}

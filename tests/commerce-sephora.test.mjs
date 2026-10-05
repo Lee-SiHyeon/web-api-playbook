@@ -162,3 +162,90 @@ test('Sephora rejects redirects, access gates, non-JSON pages, and throttling', 
     });
   }
 });
+
+const variant = ({ skuId, listPrice = '$15.00', salePrice, outOfStock = false, color }) => ({
+  skuId,
+  targetUrl: `/product/fixture-P12345?skuId=${skuId}`,
+  isOutOfStock: outOfStock,
+  listPrice,
+  ...(salePrice === undefined ? {} : { salePrice }),
+  productName: 'Sample Plumping Gloss',
+  brandName: 'Beauty Brand',
+  displayName: `${skuId} ${color}`,
+  variationValue: color,
+  variationTypeDisplayName: 'Color',
+  variationDesc: 'high shine',
+  skuRefinements: [{ key: 'colorFamily', values: ['pink'] }],
+  skuImages: { imageUrl: `https://www.sephora.com/productimages/sku/s${skuId}-main.jpg`,
+    image250: `https://www.sephora.com/productimages/sku/s${skuId}-main.jpg?imwidth=250`,
+    altText: `Sample gloss ${color}` },
+  smallImage: `https://www.sephora.com/productimages/sku/s${skuId}+sw.jpg`,
+});
+
+function productDetail({ productId = 'P12345', currentSku, regularChildSkus, onSaleChildSkus } = {}) {
+  return {
+    productId,
+    targetUrl: `/product/fixture-${productId}`,
+    productDetails: { productId, displayName: 'Sample Plumping Gloss', brand: { displayName: 'Beauty Brand' } },
+    currentSku,
+    regularChildSkus,
+    ...(onSaleChildSkus === undefined ? {} : { onSaleChildSkus }),
+    skuSelectorType: 'Color',
+    variationType: 'color',
+    variationTypeDisplayName: 'Color',
+  };
+}
+
+test('Sephora product detail returns identity-bound SKU options, list price, sale price, images and availability', async () => {
+  const current = variant({ skuId: '123450', listPrice: '$15.00', salePrice: '$7.50', color: 'Coral Flash' });
+  const regular = variant({ skuId: '123451', color: 'Universal Clear' });
+  const fetchImpl = async (url, init) => {
+    assert.equal(url.origin, 'https://www.sephora.com');
+    assert.equal(url.pathname, '/gway/v1/dotcom/productservice/v3/catalog/products/P12345/lite');
+    assert.deepEqual([...url.searchParams], [
+      ['addCurrentSkuToProductChildSkus', 'true'], ['includeRegionsMap', 'true'],
+      ['showContent', 'true'], ['includeConfigurableSku', 'true'], ['channel', 'RWD'],
+      ['loc', 'en_US'], ['countryCode', 'US'], ['preferredSku', '123450'],
+      ['removePersonalizedData', 'true'], ['includeReviewFilters', 'true'], ['includeReviewImages', 'true'],
+    ]);
+    assert.equal(init.method, 'GET');
+    assert.equal(init.redirect, 'manual');
+    assert.equal(init.credentials, 'omit');
+    assert.equal(init.headers.get('cookie'), null);
+    assert.equal(init.headers.get('authorization'), null);
+    return jsonResponse(productDetail({ currentSku: current, regularChildSkus: [regular], onSaleChildSkus: [current] }));
+  };
+  const result = await createSephoraPublicClient({ fetchImpl }).getProduct({ productId: 'P12345', skuId: '123450' });
+  assert.equal(result.product.productId, 'P12345');
+  assert.equal(result.product.currentSku.skuId, '123450');
+  assert.equal(result.product.description, null);
+  assert.equal(result.product.descriptionStatus, 'not_returned_by_observed_product_api');
+  assert.equal(result.product.currentSku.price.amount, '7.50');
+  assert.equal(result.product.currentSku.price.kind, 'sale');
+  assert.equal(result.product.currentSku.listPrice.amount, '15.00');
+  assert.equal(result.product.currentSku.salePrice.amount, '7.50');
+  assert.deepEqual(result.product.currentSku.options, [{ name: 'colorFamily', value: 'pink' }]);
+  assert.equal(result.product.currentSku.images.length, 3);
+  assert.equal(result.product.variants.length, 2);
+  assert.equal(result.product.onSaleVariantCount, 1);
+  assert.equal(result.product.variants.some(item => item.skuId === '123450' && item.salePrice?.amount === '7.50'), true);
+  assert.equal(result.receipt.capabilityId, 'catalog.product_detail');
+  assert.equal(result.receipt.request.cookieSent, false);
+  assert.equal(result.receipt.request.httpStatus, 200);
+  assert.equal(result.receipt.request.browserUsed, false);
+  assert.equal(result.receipt.contractProvenance.kind, 'first_party_bundle_contract');
+});
+
+test('Sephora product detail rejects input and response identity mismatches', async () => {
+  let calls = 0;
+  const client = createSephoraPublicClient({ fetchImpl: async () => {
+    calls++;
+    return jsonResponse(productDetail({ productId: 'P99999', currentSku: variant({ skuId: '123450', color: 'Red' }),
+      regularChildSkus: [variant({ skuId: '123450', color: 'Red' })] }));
+  } });
+  await assert.rejects(client.getProduct({ productId: 'bad-id' }), { code: 'SEPHORA_PRODUCT_INPUT_INVALID' });
+  await assert.rejects(client.getProduct({ productId: 'P12345', skuId: '123450' }), {
+    code: 'SEPHORA_PRODUCT_SCHEMA_INVALID',
+  });
+  assert.equal(calls, 1);
+});

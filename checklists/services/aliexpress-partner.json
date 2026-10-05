@@ -42,7 +42,7 @@
     },
     {
       "id": "affiliate.product_detail",
-      "title": "Read affiliate product detail/prices by product ID",
+      "title": "Read affiliate product detail/prices, catalog images/video, seller and positive-review percentage by product ID",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -75,7 +75,8 @@
           ]
         }
       ],
-      "blocker": "Live detail read needs the user's registered AliExpress/TOP app_key and app_secret; these were not supplied. No user Session is required by this Affiliate method."
+      "blocker": "Live detail read needs the user's registered AliExpress/TOP app_key and app_secret; these were not supplied. No user Session is required by this Affiliate method.",
+      "note": "Preserves all documented product image URLs, product video URL, seller/store and evaluate_rate. The API does not return structured long description, options, SKU, or stock."
     },
     {
       "id": "affiliate.social_catalog_search",
@@ -113,6 +114,44 @@
         }
       ],
       "blocker": "This official API returns locale-formatted price ranges. The implementation currently accepts only the documented en_US/USD form and still requires app_key/app_secret for a live signed request."
+    },
+    {
+      "id": "affiliate.product_media_and_ratings",
+      "title": "Preserve product gallery images, product video, seller signals, and sourced rating metadata",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/aliexpress-affiliate.mjs", "exports": ["createAliExpressAffiliateClient"]}],
+        "cli": [{"path": "scripts/commerce.mjs", "tokens": ["aliexpress-partner"]}],
+        "tests": ["tests/commerce-aliexpress-affiliate.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [{"files": ["references/commerce-aliexpress-affiliate-contracts.json"]}],
+      "blocker": "Local response fixtures cover the documented Affiliate gallery/video/evaluate_rate and Social item_pics/comment_score fields. No valid app credentials were supplied for live replay.",
+      "note": "evaluate_rate is a positive-review percentage; Social comment_score is preserved with its scale unknown. Product item_pics are catalog images, not review photos."
+    },
+    {
+      "id": "affiliate.review_content",
+      "title": "Read customer review bodies, customer-submitted photos, or overall review count",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The documented Affiliate product query/detail responses provide evaluate_rate; Social item search provides comment_score and semantic recent-comment metadata. None of these methods returns review bodies/photos or an overall review count.",
+      "requirement": "inventory",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [{"files": ["references/commerce-aliexpress-affiliate-contracts.json"]}]
+    },
+    {
+      "id": "affiliate.description_options_sku_stock",
+      "title": "Read structured description, sale options/SKUs, or inventory from affiliate product calls",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The documented Affiliate query/detail fields contain no long description, option/SKU matrix, availability, or stock. Dropship product and SKU APIs are separately listed as authorization-gated capabilities.",
+      "requirement": "inventory",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [{"files": ["references/commerce-aliexpress-affiliate-contracts.json"]}]
     },
     {
       "id": "dropshipping.product_detail",

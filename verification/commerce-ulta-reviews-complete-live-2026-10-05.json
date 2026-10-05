@@ -1,0 +1,139 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ulta",
+  "capabilityId": "reviews.read",
+  "checkedAt": "2026-10-05T03:09:59.580Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "publicFrontendKeyUsed": true,
+  "userCredentialsUsed": false,
+  "noUserCredentials": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://ui.powerreviews.com/tag-builds/10578/4.0/reviews.engine.js",
+    "sourceSha256": "c5962864e32a3b9eb466c968d870d0f112631d37e82c57d0d0741625628ee9f3"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://display.powerreviews.com",
+    "path": "/m/6406/l/en_US/product/pimprod2061191/reviews",
+    "checkedAt": "2026-10-05T03:09:59.580Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "apikey",
+      "_noconfig",
+      "paging.size"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 1514,
+    "responseSha256": "044a51d0d5f1ed44790ca93b31d6165bcf22e969ad46eb9003e5e62e7c2c5516",
+    "readOnly": true,
+    "publicFrontendKeyUsed": true,
+    "userCredentialsUsed": false,
+    "noUserCredentials": true
+  },
+  "bootstrapRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/p/velvety-matte-mousse-lip-cream-pimprod2061191",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1447064,
+    "checkedAt": "2026-10-05T03:09:59.441Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "queryFields": [
+      "sku"
+    ]
+  },
+  "bootstrapRequests": [
+    {
+      "method": "GET",
+      "origin": "https://www.ulta.com",
+      "path": "/p/velvety-matte-mousse-lip-cream-pimprod2061191",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 1447064,
+      "checkedAt": "2026-10-05T03:09:59.441Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "authorizationSent": false,
+      "queryFields": [
+        "sku"
+      ]
+    }
+  ],
+  "productIdMatched": true,
+  "pagination": {
+    "page": 1,
+    "pageSize": 20,
+    "total": 1,
+    "pagesTotal": 1,
+    "hasMore": false,
+    "paginationVerified": true
+  },
+  "implementation": {
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  },
+  "result": {
+    "productIdMatched": true,
+    "paginationVerified": true,
+    "page": 1,
+    "pageSize": 20,
+    "total": 1,
+    "pagesTotal": 1,
+    "returnedReviewCount": 1,
+    "bodyCount": 1,
+    "photoCount": 0,
+    "hasMore": false,
+    "complete": true,
+    "reviewerProfilesReturned": false,
+    "publicKeyValuePersisted": false,
+    "publicFrontendKeyUsed": true
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/catalog.mjs",
+    "provider": "ulta",
+    "operation": "reviews",
+    "exitStatus": 0,
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "credentialsUsed": false,
+    "outputPath": "/home/worker/artifacts/catalog-expansion-20261005/ulta-review-small-cli.json",
+    "outputSha256": "7dbc7797d75f831c84bea6fb5c145f37ddaaee37bde598c45f1992a68a49c0aa",
+    "collection": {
+      "count": 1,
+      "pagesRead": 1,
+      "rowsSeen": 1,
+      "total": 1,
+      "totalMatched": true,
+      "sourceExhausted": true,
+      "paginationVerified": true,
+      "capHit": false,
+      "bytesStored": 484,
+      "maxBytes": 33554432,
+      "startedAtBeginning": true,
+      "nextCursor": null,
+      "continuation": null,
+      "conflictingDuplicateCount": 0,
+      "bodyCount": 1,
+      "imageReviewCount": 0,
+      "identityUnverifiedCount": 0,
+      "complete": true
+    }
+  }
+}

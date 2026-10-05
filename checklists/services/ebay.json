@@ -76,7 +76,7 @@
     },
     {
       "id": "item.detail",
-      "title": "Read item details and current price through anonymous XHR",
+      "title": "Read a listing-bound item identity and complete detail object through anonymous XHR",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -96,7 +96,106 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "No anonymous item-detail XHR response schema and direct replay established."
+      "blocker": "Observed item 306337924086 opened a sold-out ePID hub; 13 XHR/fetch requests supplied no product-detail JSON, and no direct replayable detail route was established."
+    },
+    {
+      "id": "item.price",
+      "title": "Read current listing price and currency through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The sampled listing redirected to a sold-out product hub; no listing-specific price and currency XHR was observed or replayed."
+    },
+    {
+      "id": "item.description",
+      "title": "Read full listing description through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Product information was visible in the document; no listing description XHR or independently replayed fragment was verified."
+    },
+    {
+      "id": "item.images",
+      "title": "Read primary and secondary listing images through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [{ "files": ["references/retail-ebay-contracts.json"] }],
+      "blocker": "The observed secondary-image request needs pageci and listing IDs derived from the document; no standalone direct replay has been verified."
+    },
+    {
+      "id": "item.options",
+      "title": "Read listing options and variant-specific selection data through anonymous XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The sampled product hub showed variation controls, but no variant-selection XHR schema or direct replay was verified."
+    },
+    {
+      "id": "reviews.identity",
+      "title": "Map listing ID to the correct review-bearing product identity",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "One product page linked listing iid to ePID 25056255340, but no reusable XHR contract maps arbitrary listing IDs to review-bearing ePIDs. Seller feedback is a separate scope."
+    },
+    {
+      "id": "reviews.rating",
+      "title": "Read product review count and rating distribution",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "A sampled ePID page showed 558 ratings in its document; no rating-summary XHR or independent JSON replay was observed."
+    },
+    {
+      "id": "reviews.list",
+      "title": "Read full public product review text and metadata",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Review cards and text were in non-script HTML from a 200 document GET; the observed JSON component XHR contained no review fields. No review-data XHR was observed."
+    },
+    {
+      "id": "reviews.photos",
+      "title": "Read photos attached to public product reviews",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No review photos appeared on the sampled ePID, so photo fields and media URLs remain unverified; no review-data XHR was observed."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Traverse all public review pages with a bounded stopping condition",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The sampled page linked pgn=1–7 as HTML documents; no review-data XHR pagination or terminal condition was verified."
     },
     {
       "id": "categories.read",

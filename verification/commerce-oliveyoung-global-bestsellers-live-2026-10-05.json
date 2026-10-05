@@ -1,0 +1,98 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "catalog.bestsellers",
+  "checkedAt": "2026-10-05T02:59:12.882Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/display/product/best-seller/order-best",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:12.882Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "curLangCode",
+      "langCode",
+      "mbrNo",
+      "acesCntryCode",
+      "accParam",
+      "mrgnCntryCode",
+      "dlvCntryCode",
+      "limit",
+      "showSoldoutProduct"
+    ],
+    "queryFields": [
+      "curLangCode",
+      "langCode",
+      "mbrNo",
+      "acesCntryCode",
+      "accParam",
+      "mrgnCntryCode",
+      "dlvCntryCode",
+      "limit",
+      "showSoldoutProduct"
+    ],
+    "responseBytes": 45409,
+    "responseSha256": "a69423badecf4b5fb37c39e95c1467afb37d0832560f01d7686bb9f953531df0"
+  },
+  "currencyContextVerified": true,
+  "currencyContextRequest": {
+    "method": "GET",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/detail",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "checkedAt": "2026-10-05T02:59:12.945Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "queryFields": [
+      "prdtNo"
+    ],
+    "contextOnly": true,
+    "responseBytes": 432777,
+    "responseSha256": "b8885a8e508ec9bcb634c00c60cf7dc627e1da50358a18498320d917cdb80942",
+    "productIdMatched": true,
+    "currencyCode": "USD",
+    "currencySelectedInPage": true,
+    "currencyConfirmedByInlineConfig": true,
+    "deliveryCountryCode": "1230"
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7465d9a636ebef870a2818e5dbe59a255c0edf366dc5875e1752406e21e55357"
+  },
+  "productCount": 20,
+  "firstProductId": "GA240824996",
+  "priceFields": {
+    "saleAmt": "present",
+    "nrmlAmt": "present",
+    "apiCurrencyField": "omitted"
+  },
+  "uiCurrencyEvidence": {
+    "productId": "GA240824996",
+    "sourceURL": "https://global.oliveyoung.com/product/detail?prdtNo=GA240824996",
+    "browserUsed": true,
+    "anonymousFreshContext": true,
+    "selectedCountryLabel": "KOREA, REPUBLIC OF (SOUTH K.)",
+    "selectedCurrency": "USD",
+    "normalPriceDisplayed": "US$27.00",
+    "salePriceDisplayed": "US$13.50",
+    "detailApiAmountMatched": true,
+    "detailsJsonCurrencyField": null
+  }
+}

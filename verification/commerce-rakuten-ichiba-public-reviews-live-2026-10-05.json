@@ -1,0 +1,78 @@
+{
+  "schema": "web-api-rakuten-ichiba-public-review-live-v1",
+  "service": "rakuten-ichiba",
+  "checkedAt": "2026-10-05T03:08:30.750Z",
+  "scope": "Anonymous public review XHR only; public item HTML is used only to resolve IDs and review target. No SSR product detail, price, or option data is claimed.",
+  "identity": {
+    "itemCode": "kinujo:001",
+    "productUrl": "https://item.rakuten.co.jp/kinujo/001/",
+    "targetKey": "319501:10000000",
+    "reviewUrl": "https://review.rakuten.co.jp/item/1/319501_10000000/1.1/",
+    "shopId": "319501",
+    "itemId": "10000000",
+    "matched": true,
+    "basis": "same_product_page_hidden_shop_bid_item_id_and_review_href"
+  },
+  "publicFrontendKey": {
+    "source": "current first-party review page HTML and current pc bundle",
+    "sourceObject": "itemShopReviewList.authkey",
+    "requestHeader": "authkey",
+    "endpoint": "https://web-gateway.rakuten.co.jp/review/itemshopreviewlist/get/v1",
+    "usedInMemory": true,
+    "valuePersisted": false,
+    "valueLogged": false,
+    "userAccountCredential": false
+  },
+  "transport": {
+    "mode": "native_node_fetch",
+    "browserUsed": false,
+    "userCredentialsUsed": false,
+    "affiliateIdUsed": false,
+    "cookiesSent": false,
+    "redirectsFollowed": false
+  },
+  "observations": {
+    "page1": {
+      "httpStatus": 207,
+      "returned": 30,
+      "totalReviews": 427,
+      "hasNextPage": true,
+      "nextPage": 2,
+      "nativeReviewIdField": "revSubkey",
+      "nativeIdCount": 30,
+      "nativeIdsUnique": true
+    },
+    "page2": {
+      "httpStatus": 207,
+      "returned": 30,
+      "totalReviews": 427,
+      "hasNextPage": true,
+      "nextPage": 3,
+      "nativeReviewIdField": "revSubkey",
+      "nativeIdCount": 30,
+      "nativeIdsUnique": true,
+      "crossPageNativeIdOverlap": 0
+    },
+    "mediaOnly": {
+      "httpStatus": 207,
+      "returned": 18,
+      "totalReviews": 18,
+      "hasNextPage": false,
+      "thumbnailCount": 27,
+      "mediaKindCounts": {
+        "image": 27
+      }
+    }
+  },
+  "receipts": [
+    "verification/commerce-rakuten-ichiba-review-page1-2026-10-05.json",
+    "verification/commerce-rakuten-ichiba-review-page2-2026-10-05.json",
+    "verification/commerce-rakuten-ichiba-review-media-2026-10-05.json"
+  ],
+  "implementationSha256": "707e2bb864e59889a715669b026cee406e9163ed060c881bfdecc8ea91f1a11f",
+  "rawReviewBodiesPersisted": false,
+  "reviewerNamesPersisted": false,
+  "reviewerDemographicsPersisted": false,
+  "mediaUrlsPersisted": false,
+  "frontendKeyValuePersisted": false
+}

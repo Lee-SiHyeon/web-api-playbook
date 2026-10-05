@@ -140,7 +140,7 @@ test('detail read confirms the Browse ID and keeps item price and shipping separ
       calls++;
       assert.equal(url.origin, ebayBrowseContract.apiOrigin);
       assert.equal(url.pathname, `${ebayBrowseContract.itemPath}/v1%7C285012345678%7C0`);
-      assert.equal(url.search, '');
+      assert.deepEqual([...url.searchParams], [['fieldgroups', 'PRODUCT']]);
       assert.equal(init.headers.authorization, 'Bearer opaque-token');
       return json(payload);
     } }).getItem({ itemId: requestedId });
@@ -152,6 +152,185 @@ test('detail read confirms the Browse ID and keeps item price and shipping separ
     estimatedRemainingQuantity: 4 }]);
   assert.equal('allInTotal' in result.item, false);
   assert.equal(result.receipt.itemIdMatched, true);
+  assert.equal(result.receipt.productFieldgroupRequested, true);
+});
+
+test('getItem preserves documented description, image, aspects, variation identity and product rating summary', async () => {
+  const payload = itemSummary({
+    subtitle: 'Compact charger',
+    shortDescription: 'A compact 65W charger.',
+    description: '<p>USB-C 65W<br>Fast charge</p>\n<p>Two ports</p>',
+    image: { imageUrl: 'https://i.ebayimg.com/images/g/primary/s-l1600.jpg', width: 1600, height: 1600 },
+    additionalImages: [{ imageUrl: 'https://i.ebayimg.com/images/g/side/s-l1600.jpg' }],
+    localizedAspects: [{ type: 'STRING', name: 'Color', value: 'White' },
+      { type: 'STRING', name: 'Power', value: '65 W' }],
+    brand: 'Example Brand', gtin: '1234567890123', mpn: 'CHG-65W', epid: '25056255340',
+    legacyItemId: '285012345678', categoryIdPath: '293|9394',
+    primaryItemGroup: { itemGroupId: '285012345678', itemGroupType: 'SELLER_DEFINED_VARIATIONS',
+      itemGroupTitle: 'Example Charger Model 65',
+      itemGroupImage: { imageUrl: 'https://i.ebayimg.com/images/g/group/s-l1600.jpg' } },
+    primaryProductReviewRating: { reviewCount: 177, averageRating: '4.85', ratingHistograms: [
+      { rating: '5', count: 140 }, { rating: '4', count: 20 }, { rating: '3', count: 10 },
+      { rating: '2', count: 5 }, { rating: '1', count: 2 },
+    ] },
+    product: {
+      title: 'Example Charger Model 65', description: 'Product-level model description', brand: 'Example Brand',
+      image: { imageUrl: 'https://i.ebayimg.com/images/g/catalog/s-l1600.jpg' },
+      gtins: ['1234567890123'], mpns: ['CHG-65W'],
+      aspectGroups: [{ localizedGroupName: 'Power', aspects: [
+        { localizedName: 'Wattage', localizedValues: ['65 W'] },
+      ] }],
+      additionalProductIdentities: [{ productIdentity: [
+        { identifierType: 'EAN', identifierValue: '1234567890123' },
+      ] }],
+    },
+    seller: { username: 'unrelated_seller', feedbackScore: 9999 },
+  });
+  const client = createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () => json(payload) });
+  const result = await client.getItem({ itemId: payload.itemId });
+  assert.equal(result.item.shortDescription, payload.shortDescription);
+  assert.equal(result.item.description, payload.description);
+  assert.deepEqual(result.item.images, [
+    { role: 'primary', url: payload.image.imageUrl, width: 1600, height: 1600 },
+    { role: 'additional', url: payload.additionalImages[0].imageUrl },
+  ]);
+  assert.deepEqual(result.item.localizedAspects, payload.localizedAspects);
+  assert.deepEqual(result.item.categoryIds, ['293', '9394']);
+  assert.equal(result.item.leafCategoryId, '9394');
+  assert.equal(result.item.legacyItemId, '285012345678');
+  assert.equal(result.item.epid, '25056255340');
+  assert.equal(result.item.mpn, 'CHG-65W');
+  assert.deepEqual(result.item.variationGroup, { id: '285012345678',
+    type: 'SELLER_DEFINED_VARIATIONS', optionsComplete: false,
+    title: 'Example Charger Model 65',
+    images: [{ role: 'primary', url: 'https://i.ebayimg.com/images/g/group/s-l1600.jpg' }] });
+  assert.deepEqual(result.item.productReviewSummary, {
+    source: 'primaryProductReviewRating', reviewCount: 177, averageRating: '4.85',
+    ratingHistograms: payload.primaryProductReviewRating.ratingHistograms,
+  });
+  assert.deepEqual(result.item.product, {
+    title: 'Example Charger Model 65', description: 'Product-level model description', brand: 'Example Brand',
+    images: [{ role: 'primary', url: 'https://i.ebayimg.com/images/g/catalog/s-l1600.jpg' }],
+    gtins: ['1234567890123'], mpns: ['CHG-65W'],
+    aspectGroups: [{ name: 'Power', aspects: [{ name: 'Wattage', values: ['65 W'] }] }],
+    additionalProductIdentities: [{ productIdentity: [{ type: 'EAN', value: '1234567890123' }] }],
+  });
+  assert.equal(result.receipt.productContainerReturned, true);
+  assert.equal(result.receipt.productReviewSummaryReturned, true);
+  assert.equal('reviews' in result.item, false);
+  assert.equal('reviewPhotos' in result.item, false);
+  assert.equal('sellerFeedbackScore' in result.item, false);
+  const search = await createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () =>
+    json(itemPage({ items: [payload], total: 1, nextOffset: 20 })) }).searchItems({ query: 'usb-c charger' });
+  assert.equal('description' in search.items[0], false);
+  assert.equal('productReviewSummary' in search.items[0], false);
+});
+
+test('getItem rejects malformed detail fields without losing the item identity gate', async () => {
+  const badFields = [
+    { image: { imageUrl: 'https://evil.example/image.jpg' } },
+    { additionalImages: [{ imageUrl: 'javascript:alert(1)' }] },
+    { localizedAspects: [{ name: 'Color', value: null }] },
+    { description: '<p>bad\u0000control</p>' },
+    { categoryIdPath: '293|../9394' },
+    { product: { aspectGroups: [{ localizedGroupName: 'Power', aspects: [
+      { localizedName: 'Wattage', localizedValues: [null] },
+    ] }] } },
+    { primaryItemGroup: { itemGroupId: '../group', itemGroupType: 'SELLER_DEFINED_VARIATIONS' } },
+    { primaryProductReviewRating: { reviewCount: 2, averageRating: '5.50', ratingHistograms: [] } },
+    { primaryProductReviewRating: { reviewCount: 2, averageRating: '4.5', ratingHistograms: [
+      { rating: '5', count: 1 }, { rating: '5', count: 1 },
+    ] } },
+  ];
+  for (const fields of badFields) {
+    const client = createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () =>
+      json(itemSummary(fields)) });
+    await assert.rejects(client.getItem({ itemId: 'v1|285012345678|0' }), { code: 'EBAY_ITEM_SCHEMA_INVALID' });
+  }
+});
+
+test('getItem omits unavailable review histogram and detail fields rather than inventing empty values', async () => {
+  const item = itemSummary({ primaryProductReviewRating: { reviewCount: 3, averageRating: '4.0' } });
+  const result = await createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () => json(item) })
+    .getItem({ itemId: item.itemId });
+  assert.deepEqual(result.item.productReviewSummary, {
+    source: 'primaryProductReviewRating', reviewCount: 3, averageRating: '4.0',
+  });
+  assert.equal('images' in result.item, false);
+  assert.equal('description' in result.item, false);
+  assert.equal('variationGroup' in result.item, false);
+  assert.equal(result.receipt.productContainerReturned, false);
+});
+
+test('zero product reviews are preserved as known zero and absent reviews stay unknown', async () => {
+  const withZero = itemSummary({ primaryProductReviewRating: {
+    reviewCount: 0, averageRating: '0.0', ratingHistograms: [],
+  } });
+  const zero = await createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () => json(withZero) })
+    .getItem({ itemId: withZero.itemId });
+  assert.deepEqual(zero.item.productReviewSummary, {
+    source: 'primaryProductReviewRating', reviewCount: 0, averageRating: '0.0', ratingHistograms: [],
+  });
+  const absent = await createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () => json(itemSummary()) })
+    .getItem({ itemId: withZero.itemId });
+  assert.equal('productReviewSummary' in absent.item, false);
+  assert.equal(absent.receipt.productReviewSummaryReturned, false);
+});
+
+test('getItemGroup returns all documented variant item records and maps shared descriptions by exact REST item ID', async () => {
+  const groupId = '285012345678';
+  const variants = [
+    itemSummary({ itemId: 'v1|285012345678|111', price: { value: '24.99', currency: 'USD' },
+      localizedAspects: [{ name: 'Color', value: 'White' }],
+      primaryItemGroup: { itemGroupId: groupId, itemGroupType: 'SELLER_DEFINED_VARIATIONS' } }),
+    itemSummary({ itemId: 'v1|285012345678|222', price: { value: '26.99', currency: 'USD' },
+      localizedAspects: [{ name: 'Color', value: 'Black' }],
+      primaryItemGroup: { itemGroupId: groupId, itemGroupType: 'SELLER_DEFINED_VARIATIONS' } }),
+  ];
+  const client = createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async (url, init) => {
+    assert.equal(url.origin, 'https://api.ebay.com');
+    assert.equal(url.pathname, ebayBrowseContract.itemGroupPath);
+    assert.deepEqual([...url.searchParams], [['item_group_id', groupId]]);
+    assert.equal(init.headers.authorization, 'Bearer opaque-token');
+    assert.equal(init.headers['x-ebay-c-marketplace-id'], 'EBAY_US');
+    return json({ items: variants, warnings: [{ errorId: 11510, message: 'shipping estimate unavailable' }], commonDescriptions: [{
+      description: '<p>Shared 65W charger description.</p>', itemIds: variants.map(item => item.itemId),
+    }] });
+  } });
+  const result = await client.getItemGroup({ itemGroupId: groupId });
+  assert.equal(result.items.length, 2);
+  assert.deepEqual(result.items.map(item => item.price.amount), ['24.99', '26.99']);
+  assert.deepEqual(result.items.map(item => item.localizedAspects[0].value), ['White', 'Black']);
+  assert.equal(result.items.every(item => item.description === '<p>Shared 65W charger description.</p>'), true);
+  assert.equal(result.receipt.itemGroupIdMatched, true);
+  assert.equal(result.receipt.descriptionMappings, 2);
+  assert.equal(result.receipt.warningCount, 1);
+  assert.deepEqual(result.receipt.request.queryFields, ['item_group_id']);
+  assert.equal(result.receipt.contractProvenance.sourceURL.endsWith('/getItemsByItemGroup'), true);
+});
+
+test('item group rejects guessed IDs, cross-group records and unrelated shared descriptions', async () => {
+  const groupId = '285012345678';
+  const variant = itemSummary({ itemId: 'v1|285012345678|111',
+    primaryItemGroup: { itemGroupId: groupId, itemGroupType: 'SELLER_DEFINED_VARIATIONS' } });
+  const noNetwork = createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () =>
+    assert.fail('invalid group ID must not reach network') });
+  for (const id of ['', '../285012345678', 'v1|285012345678|0', 'https://evil.example']) {
+    await assert.rejects(noNetwork.getItemGroup({ itemGroupId: id }), { code: 'EBAY_ITEM_GROUP_ID_INVALID' });
+  }
+  const wrongGroup = createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () =>
+    json({ items: [{ ...variant, primaryItemGroup: { ...variant.primaryItemGroup,
+      itemGroupId: '999999999999' } }] }) });
+  await assert.rejects(wrongGroup.getItemGroup({ itemGroupId: groupId }), { code: 'EBAY_ITEM_GROUP_ID_MISMATCH' });
+  const unknownDescriptionId = createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () =>
+    json({ items: [variant], commonDescriptions: [{ description: '<p>Shared</p>',
+      itemIds: ['v1|999999999999|0'] }] }) });
+  await assert.rejects(unknownDescriptionId.getItemGroup({ itemGroupId: groupId }),
+    { code: 'EBAY_ITEM_GROUP_SCHEMA_INVALID' });
+  const malformedWarning = createEbayBrowseClient({ accessToken: 'opaque-token', fetchImpl: async () =>
+    json({ items: [variant], warnings: [null] }) });
+  await assert.rejects(malformedWarning.getItemGroup({ itemGroupId: groupId }),
+    { code: 'EBAY_ITEM_GROUP_SCHEMA_INVALID' });
 });
 
 test('an EPN campaign is only sent when supplied and only a matching returned affiliate URL is exposed', async () => {

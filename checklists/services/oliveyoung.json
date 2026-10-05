@@ -57,14 +57,19 @@
         "tests": []
       },
       "evidence": [],
-      "sourceEvidence": [
-        {
-          "files": [
-            "references/commerce-oliveyoung-contracts.json"
-          ]
-        }
-      ],
-      "blocker": "No standalone product-detail XHR schema or independent HTTP replay was observed. The product page route is not counted as an API."
+      "sourceEvidence": [],
+      "blocker": "Anonymous desktop and mobile product-detail page requests returned 403 before any product XHR loaded. No standalone product-detail API is implemented. See verification/commerce-oliveyoung-detail-live-2026-10-05.json."
+    },
+    {
+      "id": "catalog.product_images",
+      "title": "Read product image metadata and image URLs from a verified product-detail response",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The anonymous product-detail page was blocked before product-image metadata loaded. Search-indexed image links are not counted as API evidence. See verification/commerce-oliveyoung-detail-live-2026-10-05.json."
     },
     {
       "id": "catalog.pagination",
@@ -85,6 +90,39 @@
         }
       ],
       "blocker": "The source bundle passes pageNumber and pageSize, but product-search continuation semantics and the terminal page contract have not been verified."
+    },
+    {
+      "id": "reviews.body",
+      "title": "Read review text, rating, date, and product association through an observed review API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The product page returned 403 before a review request could be observed. No review route or response schema is guessed. See verification/commerce-oliveyoung-reviews-live-2026-10-05.json."
+    },
+    {
+      "id": "reviews.images",
+      "title": "Read review-attached photo metadata and image URLs through an observed API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No review-photo request or response was observed because the anonymous product detail was blocked before the review UI loaded. See verification/commerce-oliveyoung-reviews-live-2026-10-05.json."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Traverse review results with verified page parameters and a terminal condition",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No review page parameters, continuation token, or terminal response was observed. See verification/commerce-oliveyoung-reviews-live-2026-10-05.json."
     },
     {
       "id": "curator.link_creation",

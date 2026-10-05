@@ -1,8 +1,7 @@
 {
   "schema": "web-api-public-read-receipt-v1",
   "service": "ulta",
-  "capabilityId": "catalog.sale_price",
-  "checkedAt": "2026-10-04T22:28:31.769Z",
+  "checkedAt": "2026-10-05T03:09:50.526Z",
   "secretsPersistedInEvidence": false,
   "anonymous": true,
   "credentialsUsed": false,
@@ -17,7 +16,7 @@
     "method": "GET",
     "origin": "https://www.ulta.com",
     "path": "/dxl/graphql",
-    "checkedAt": "2026-10-04T22:28:31.769Z",
+    "checkedAt": "2026-10-05T03:09:50.526Z",
     "browserUsed": false,
     "anonymous": true,
     "credentialsUsed": false,
@@ -32,8 +31,8 @@
     ],
     "httpStatus": 200,
     "mime": "application/json",
-    "responseBytes": 938232,
-    "responseSha256": "14296b81bb6ee1768b412d8bc36f5ce880d44b61f50c43b2cdb905b5f1cbdd39"
+    "responseBytes": 896184,
+    "responseSha256": "721454b0861c37314abbc15962cced1e6a54103c806bcedebdb0014c29791bf5"
   },
   "bootstrapRequest": {
     "method": "GET",
@@ -41,8 +40,8 @@
     "path": "/search",
     "httpStatus": 200,
     "mime": "text/html",
-    "responseBytes": 1237951,
-    "checkedAt": "2026-10-04T22:28:30.347Z",
+    "responseBytes": 1252714,
+    "checkedAt": "2026-10-05T03:09:49.346Z",
     "browserUsed": false,
     "anonymous": true,
     "credentialsUsed": false,
@@ -52,58 +51,20 @@
       "search"
     ]
   },
-  "bootstrapRequests": [
-    {
-      "method": "GET",
-      "origin": "https://www.ulta.com",
-      "path": "/search",
-      "httpStatus": 200,
-      "mime": "text/html",
-      "responseBytes": 1237951,
-      "checkedAt": "2026-10-04T22:28:30.347Z",
-      "browserUsed": false,
-      "anonymous": true,
-      "credentialsUsed": false,
-      "cookieSent": false,
-      "authorizationSent": false,
-      "queryFields": [
-        "search"
-      ]
-    }
-  ],
+  "implementation": {
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  },
+  "capabilityId": "catalog.sale_price",
   "result": {
     "queryMatched": true,
     "page": 1,
-    "pageSize": 64,
-    "requestedPageSize": 100,
-    "pageCount": 4,
     "resultCount": 250,
-    "pagesTraversed": [
-      1
-    ],
-    "sourceItemCount": 73,
-    "returnedProductCount": 73,
-    "pricedProductCount": 73,
+    "pageSize": 64,
+    "currency": "USD",
     "listPriceFieldVerified": true,
     "salePriceFieldVerified": true,
+    "pricedProductCount": 70,
     "salePriceNonNullCount": 1,
-    "currency": "USD",
-    "market": "US",
-    "hasNextPage": true,
-    "firstProduct": {
-      "productId": "pimprod2057119",
-      "skuId": "2648428",
-      "brandName": "Maybelline",
-      "productName": "Serum Lipstick",
-      "listPriceText": "$9.99",
-      "salePriceText": null,
-      "price": {
-        "amount": "9.99",
-        "currency": "USD",
-        "kind": "retail_list"
-      },
-      "priceRange": null
-    },
     "salePriceSample": {
       "productId": "pimprod2047199",
       "skuId": "2629734",
@@ -111,33 +72,11 @@
       "productName": "Multi-Stick Cream Blush + Highlighter + Lip Tint",
       "listPriceText": "$36.00",
       "salePriceText": "$25.20",
-      "listPrice": {
-        "minAmount": "36.00",
-        "maxAmount": "36.00",
-        "currency": "USD",
-        "kind": "retail_list"
-      },
-      "salePrice": {
-        "minAmount": "25.20",
-        "maxAmount": "25.20",
-        "currency": "USD",
-        "kind": "retail_sale"
-      },
       "price": {
         "amount": "25.20",
         "currency": "USD",
         "kind": "retail_sale"
       }
     }
-  },
-  "execution": {
-    "runner": "Node 24 direct HTTP client",
-    "browserUsed": false,
-    "cookiesSupplied": false,
-    "authorizationSupplied": false,
-    "redirectFollowed": false
-  },
-  "implementation": {
-    "lib/commerce/ulta.mjs": "3b007ea6061f4bf046b6f4bc69758b632a350b3510567cae6a921d13c23c6615"
   }
 }

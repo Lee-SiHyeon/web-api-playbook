@@ -1,23 +1,27 @@
 {
   "schema": "web-api-rakuten-ichiba-verification-v1",
   "service": "rakuten-ichiba",
-  "checkedAt": "2026-10-04T21:48:10.000Z",
+  "checkedAt": "2026-10-05T03:09:06.000Z",
   "scope": "Rakuten Ichiba / Rakuten Affiliate Japan catalog reads; distinct from Rakuten Advertising global.",
   "states": {
     "officialCurrentContractReviewed": true,
-    "clientExists": true,
-    "localContractTests": { "state": "passed", "passed": 10, "failed": 0,
-      "command": "node --test tests/commerce-rakuten-ichiba.test.mjs" },
-    "liveReplay": false,
-    "credentialPropagation": "not_tested"
+    "officialCredentialedItemSearchLiveReplay": false,
+    "publicReviewXhrLiveReplay": true,
+    "localContractTests": { "state": "passed", "passed": 19, "failed": 0,
+      "command": "node --test tests/commerce-rakuten-ichiba-public.test.mjs tests/commerce-rakuten-ichiba.test.mjs" },
+    "credentialPropagation": "not_applicable_for_public_reviews; app-key API credentials not supplied"
   },
   "credentialInputs": {
     "applicationIdProvidedToThisTask": false,
     "accessKeyProvidedToThisTask": false,
     "affiliateIdProvidedToThisTask": false,
-    "credentialsPersisted": false
+    "credentialsPersisted": false,
+    "publicFrontendKeyUsedForReviewXhr": true,
+    "publicFrontendKeyPersisted": false,
+    "userCredentialsUsedForReviewXhr": false,
+    "cookiesSentForReviewXhr": false
   },
-  "liveReplayBlocker": "The current official Rakuten Web Service Item Search and Genre Search endpoints require a registered app applicationId and accessKey. No caller-owned app credentials or Rakuten Affiliate ID were supplied to this task; no authenticated request was sent.",
+  "officialItemSearchLiveReplayBlocker": "The current official Rakuten Web Service Item Search and Genre Search endpoints require a registered app applicationId and accessKey. No caller-owned app credentials or Rakuten Affiliate ID were supplied; authenticated product catalog/detail and affiliate-link reads remain pending.",
   "sourceReview": {
     "itemSearch": {
       "url": "https://webservice.rakuten.co.jp/documentation/ichiba-item-search",
@@ -25,6 +29,7 @@
       "endpoint": "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701",
       "auth": "applicationId query + required accessKey; header is supported for accessKey and is used by this client",
       "selectors": ["keyword", "shopCode", "itemCode", "genreId"],
+      "preservedOutputFields": ["itemCaption", "smallImageUrls", "mediumImageUrls", "reviewCount", "reviewAverage", "shopName", "shopCode", "shopUrl", "genreId"],
       "paging": { "hitsMin": 1, "hitsMax": 30, "pageMin": 1, "pageMax": 100 },
       "price": {
         "itemPrice": "Listing-level JPY decimal integer string; not asserted to be a selected variant/SKU price.",
@@ -51,24 +56,52 @@
       "finding": "Rakuten Web Services requires an unmodified supplied branding/credit snippet on apps using its API."
     }
   },
+  "publicReviewLiveRead": {
+    "receiptSource": "verification/commerce-rakuten-ichiba-public-reviews-live-2026-10-05.json",
+    "productPageRole": "Direct item-page HTML is used only to resolve the matching review link and numeric IDs; SSR product description, options, images and prices are not claimed as API output.",
+    "endpoint": "POST https://web-gateway.rakuten.co.jp/review/itemshopreviewlist/get/v1",
+    "apiSuccess": { "httpStatus": 207, "mime": "application/json", "status": "SUCCESS", "component": "body.itemReviewList.data" },
+    "observedReads": {
+      "page1": { "rows": 30, "totalReviews": 427, "hasNextPage": true, "nativeRevSubkeyIds": 30, "uniqueWithinPage": true },
+      "page2": { "rows": 30, "totalReviews": 427, "hasNextPage": true, "nativeRevSubkeyIds": 30, "uniqueWithinPage": true, "overlapWithPage1": 0 },
+      "mediaOnlyPage1": { "rows": 18, "totalReviews": 18, "hasNextPage": false, "thumbnails": 27, "mediaTypeCounts": { "image": 27 } }
+    },
+    "frontendAuthBoundary": {
+      "source": "Current review HTML points at a versioned first-party r.r10s.jp pc bundle; the exact itemShopReviewList.authkey field associated with the observed endpoint is extracted in memory.",
+      "publicFrontendKeyUsed": true,
+      "userCredentialsUsed": false,
+      "cookiesSent": false,
+      "keyValuePersistedOrLogged": false
+    },
+    "dataPersisted": { "reviewBodies": false, "reviewerNames": false, "reviewerDemographics": false, "mediaUrls": false, "keyValues": false }
+  },
   "client": {
     "module": "lib/commerce/rakuten-ichiba.mjs",
     "factory": "createRakutenIchibaClient",
     "operations": ["searchItems", "getItem", "getGenre"],
     "transport": "direct HTTPS GET; accessKey header-only; applicationId query required by Rakuten; redirects manual; no browser or cookies",
     "canonicalTarget": "Checks direct API itemUrl or static pc/m target from the same API item row against HTTPS Rakuten Ichiba host, matching shopCode path, and an exact path segment matching the itemCode suffix. A target lacking that literal comparable item key yields canonicalUrl=null and targetVerified=false. The affiliateUrl is retained separately; no tracking URL is fetched and no path is synthesized. No slug transformation or leaf equivalence is assumed.",
-    "secretHandling": "No credentials, raw URLs, query values, response bodies, or affiliate IDs are persisted in this evidence file."
+    "secretHandling": "No app credentials, public frontend key values, affiliate IDs, raw request bodies, review bodies, reviewer names, or media URLs are persisted in this evidence file."
+  },
+  "publicClient": {
+    "module": "lib/commerce/rakuten-ichiba-public.mjs",
+    "factory": "createRakutenIchibaPublicClient",
+    "operations": ["resolveReviewTarget", "getReviews"],
+    "transport": "Native Node HTTPS; review key bootstrapped from the current anonymous page and first-party bundle; no browser or cookies.",
+    "reviewIdentity": "Maps native revSubkey to reviewId and omits encryptedRevKey/key; missing revSubkey uses a content fingerprint and flags deduplication/full-filter coverage as uncertain."
   },
   "implementationSha256": {
-    "lib/commerce/rakuten-ichiba.mjs": "8ce28d53260ef48d83a9b2fe5965806559034a78ec569a2ed399ec6473d0dc48",
-    "tests/commerce-rakuten-ichiba.test.mjs": "df665a5a42b6dae08dc71883949c93b13a90e1eef8ca8603e2f9d8f61371d87e"
+    "lib/commerce/rakuten-ichiba.mjs": "9f04206db5ec8cb73a3c7bf4b3aef8d0324d1f4338eeb3827fb59ecfb11d30bb",
+    "tests/commerce-rakuten-ichiba.test.mjs": "0abb1af725e10b3dafd3db8f02502c4456c50d1a4e42fddaba8e8b2d819f3b2f",
+    "lib/commerce/rakuten-ichiba-public.mjs": "707e2bb864e59889a715669b026cee406e9163ed060c881bfdecc8ea91f1a11f",
+    "tests/commerce-rakuten-ichiba-public.test.mjs": "485271eb1010d97d4751e14e1227589bafd849940ea6af6e6f388b3a46c5df4b"
   },
   "supportingSha256": {
-    "references/commerce-rakuten-ichiba-contracts.json": "b81dfeb1d3ceeda53a1ce472084b27bc6b4e3aca6822855ad9adb14f93e7de54",
-    "checklists/services/rakuten-ichiba.json": "472c234992ff2ef5254157702df83a531c4f4dfabd4a8b6667dfe4ffd90dc899"
+    "references/commerce-rakuten-ichiba-contracts.json": "c492de3a8ef8df6bea936af4596a68d031010ec988ff93cb9af44bd23aa4464e",
+    "checklists/services/rakuten-ichiba.json": "5a51a0755fd4d6a0cae21c86a18c7ebb37ef1188fcb5290fe1cb86239da2d7f3"
   },
-  "noLiveEvidenceClaimed": true,
-  "noCredentialedRequestSent": true,
+  "publicReviewLiveEvidenceClaimed": true,
+  "noUserCredentialedRequestSent": true,
   "noSignupOrAccountAction": true,
   "noCartOrOrderWrite": true
 }

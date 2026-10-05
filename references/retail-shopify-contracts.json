@@ -1,7 +1,7 @@
 {
   "schema": "retail-public-xhr-contracts-v1",
   "service": "shopify",
-  "observedAt": "2026-10-04T19:33:48.028Z",
+  "observedAt": "2026-10-05T02:32:21.159Z",
   "scope": "One concrete merchant storefront, Allbirds default root-path anonymous US context. This is not a Shopify-wide multi-store catalog API or affiliate-link service.",
   "officialDocumentation": [
     {
@@ -73,6 +73,16 @@
         "variantAvailability": {
           "available": 11,
           "unavailable": 2
+        },
+        "detailFields": {
+          "descriptionBytes": 261,
+          "imageCount": 5,
+          "optionCount": 1,
+          "variantCount": 13,
+          "skuVariants": 13,
+          "inventoryQuantityVariants": 13,
+          "optionValueField": "options[]",
+          "inventoryBasis": "The value is exposed by the public product JSON response; it is a snapshot at request time."
         }
       },
       "schema": {
@@ -99,7 +109,27 @@
           "option3"
         ],
         "variantLimit": 250,
-        "canonicalUrlRule": "Returned product.url must equal /products/{requested-handle}; caller builds the URL on the fixed https://www.allbirds.com origin."
+        "canonicalUrlRule": "Returned product.url must equal /products/{requested-handle}; caller builds the URL on the fixed https://www.allbirds.com origin.",
+        "additionalProductFields": [
+          "description",
+          "featured_image",
+          "images[]",
+          "options[]",
+          "tags[]",
+          "requires_selling_plan"
+        ],
+        "additionalVariantFields": [
+          "sku",
+          "options[]",
+          "compare_at_price",
+          "inventory_quantity",
+          "inventory_management",
+          "inventory_policy",
+          "featured_image",
+          "weight",
+          "requires_shipping",
+          "taxable"
+        ]
       },
       "priceAndCurrency": {
         "productApiPrice": 10500,
@@ -123,7 +153,7 @@
         },
         "scope": "This adapter accepts only the verified default USD context. Other currencies and locale-aware market paths are rejected or left unimplemented; no zero-decimal currency rule is inferred."
       },
-      "semantics": "Public product detail with title, canonical URL, USD amount, aggregate availability, and variant availability. It does not provide affiliate links, discounts/coupons, or collection membership.",
+      "semantics": "Public product detail with HTML description, image URLs, named option/value sets, USD price, variant SKU/option/compare-at price/availability, and the inventory quantity returned by the public product JSON at request time. The quantity is a point-in-time snapshot.",
       "independentReplay": {
         "runner": "Node 24 direct HTTP client",
         "browserUsedForRequest": false,
@@ -211,5 +241,18 @@
       }
     }
   ],
-  "secretsPersistedInEvidence": false
+  "secretsPersistedInEvidence": false,
+  "reviewSourceCheck": {
+    "page": "https://www.allbirds.com/products/mens-runner-nz-slip-on-mushroom",
+    "status": 200,
+    "sourceBytes": 758552,
+    "sourceSha": "5e20f02943746f03b8b672921e16e3b65d15c8fe9202181f8114ae2871b5768a",
+    "yotpoEnabled": false,
+    "widgetPlaceholderCount": 3,
+    "reviewWidgetVisibleText": "",
+    "jsonLdReviewCountOnly": "7",
+    "vendorReviewXhrObserved": false,
+    "blocker": "No full review-body endpoint can be safely implemented from this live storefront; the page flags Yotpo disabled and exposes no review rows/cursor.",
+    "verificationFile": "verification/shopify-allbirds-reviews-disabled-2026-10-05.json"
+  }
 }

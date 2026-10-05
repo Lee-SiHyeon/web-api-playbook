@@ -1,0 +1,64 @@
+{
+  "schema": "oliveyoung-global-integration-verification-v1",
+  "checkedAt": "2026-10-05",
+  "service": "oliveyoung-global",
+  "implementation": {
+    "module": "lib/commerce/oliveyoung-global.mjs",
+    "export": "createOliveyoungGlobalClient",
+    "operations": ["getProduct", "getReviewSummary", "getReviews", "getReviewMedia", "getBestSellers"],
+    "keywordSearch": "explicitly blocked; no results API is implemented"
+  },
+  "marketSeparation": {
+    "globalOrigin": "https://global.oliveyoung.com",
+    "koreaCuratorOrigin": "https://m.oliveyoung.co.kr",
+    "koreaCuratorModuleUsed": false,
+    "koreaCuratorSessionUsed": false,
+    "affiliateLinksCreated": 0
+  },
+  "liveEvidenceFiles": [
+    "verification/commerce-oliveyoung-global-product-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-bestsellers-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-description-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-currency-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-review-summary-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-reviews-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-review-media-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-review-images-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-review-pagination-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-review-media-pagination-live-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-image-readbacks-2026-10-05.json",
+    "verification/commerce-oliveyoung-global-search-live-2026-10-05.json"
+  ],
+  "sampleReadback": {
+    "publicProductId": "GA240824996",
+    "currentPrice": {"amount": "13.50", "currency": "USD"},
+    "listPrice": {"amount": "27.00", "currency": "USD"},
+    "options": 7,
+    "descriptionTextLength": 1352,
+    "reviewSummary": {"totalReviews": 9662, "averageRating": 4.9, "mediaReviews": 3983},
+    "reviewsPage": {"pageSize": 10, "totalCount": 9663, "lastPageCount": 3, "beyondLastPageCount": 0},
+    "reviewMediaPage": {"pageSize": 15, "totalCount": 3984, "lastPageCount": 9, "beyondLastPageCount": 0},
+    "productAndReviewImagesDirectlyRetrieved": 2,
+    "currencyEvidence": "A fresh cookie-free product-page HTML bootstrap bound to the same product id selected USD in both its currency dropdown and inline currency config; raw product JSON price amounts matched the US$ display. Other currencies and country selections are rejected."
+  },
+  "searchBoundary": {
+    "status": "unimplemented_blocked",
+    "evidence": "verification/commerce-oliveyoung-global-search-live-2026-10-05.json",
+    "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-global-search-blocked.png",
+    "bestsellersAreCompleteCatalog": false
+  },
+  "securityBoundary": {
+    "browserUsedForDataTransport": false,
+    "credentialsUsed": false,
+    "cookiesSentByNodeReads": false,
+    "orderOrCartWrites": 0,
+    "reviewerLoginIdentifiersReturned": false,
+    "affiliateMutations": 0
+  },
+  "localValidation": {
+    "tests": "tests/commerce-oliveyoung-global.test.mjs",
+    "passed": 8,
+    "failed": 0,
+    "fixturesSynthetic": true
+  }
+}

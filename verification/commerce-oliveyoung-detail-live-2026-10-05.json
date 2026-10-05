@@ -1,0 +1,84 @@
+{
+  "schema": "oliveyoung-public-discovery-v1",
+  "service": "oliveyoung",
+  "capabilityId": "catalog.product_detail",
+  "checkedAt": "2026-10-05",
+  "attempted": true,
+  "success": false,
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "sampleGoodsNumber": "A000000107218",
+  "browserJourneys": [
+    {
+      "browser": "Playwright Chromium 1234, fresh context, mobile viewport",
+      "method": "GET",
+      "origin": "https://m.oliveyoung.co.kr",
+      "path": "/m/goods/getGoodsDetail.do",
+      "queryFields": ["goodsNo"],
+      "documentStatus": 403,
+      "mime": "text/html",
+      "pageTitle": "잠시만 기다리십시오…",
+      "xhrFetchEvents": [
+        {"host": "m.oliveyoung.co.kr", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "POST", "status": 200, "mime": "text/plain"},
+        {"host": "challenges.cloudflare.com", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "POST", "status": 200, "mime": "text/plain"},
+        {"host": "challenges.cloudflare.com", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "GET", "status": 401, "mime": "text/plain"},
+        {"host": "challenges.cloudflare.com", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "POST", "status": 200, "mime": "text/plain"}
+      ],
+      "oliveYoungProductOrReviewXhrCount": 0,
+      "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-detail-blocked.png"
+    },
+    {
+      "browser": "Playwright Chromium 1234, fresh context, desktop viewport",
+      "method": "GET",
+      "origin": "https://www.oliveyoung.co.kr",
+      "path": "/store/goods/getGoodsDetail.do",
+      "queryFields": ["goodsNo"],
+      "documentStatus": 403,
+      "mime": "text/html",
+      "pageTitle": "잠시만 기다리십시오…",
+      "xhrFetchEvents": [
+        {"host": "www.oliveyoung.co.kr", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "POST", "status": 200, "mime": "text/plain"},
+        {"host": "challenges.cloudflare.com", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "POST", "status": 200, "mime": "text/plain"},
+        {"host": "challenges.cloudflare.com", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "GET", "status": 401, "mime": "text/plain"},
+        {"host": "challenges.cloudflare.com", "path": "/cdn-cgi/challenge-platform/<opaque>", "method": "POST", "status": 200, "mime": "text/plain"}
+      ],
+      "oliveYoungProductOrReviewXhrCount": 0,
+      "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-desktop-detail-blocked.png"
+    }
+  ],
+  "independentHttp": {
+    "method": "GET",
+    "origin": "https://m.oliveyoung.co.kr",
+    "path": "/m/goods/getGoodsDetail.do",
+    "httpStatus": 403,
+    "mime": "text/html",
+    "responseBytes": 48931,
+    "redirectFollowed": false,
+    "browserUsed": false,
+    "cookieSent": false,
+    "authorizationSent": false,
+    "classification": "document_html_attempt_only"
+  },
+  "firstPartyBundleInspection": [
+    {
+      "url": "https://cf-static.oliveyoung.co.kr/prd/1.184.0/_next/static/chunks/pages/_app-a6cde09e9e1d35ae.js",
+      "httpStatus": 200,
+      "mime": "application/javascript",
+      "responseBytes": 1417102,
+      "sha256": "58e728698202a1c4c6925ed7e38769e52ec4abcd0939021ad7be15f08de86016",
+      "finding": "Review-named identifier constants were present, but no product-review request path or request builder was extracted from this bundle."
+    },
+    {
+      "url": "https://cf-static.oliveyoung.co.kr/prd/1.184.0/_next/static/chunks/pages/affiliate/product/search-69ae4f32d74c2ad5.js",
+      "httpStatus": 200,
+      "mime": "application/javascript",
+      "responseBytes": 73134,
+      "sha256": "26e07cf8ce6cbf04876d626a9aeff7f19836fff653f518694166cc93f644d52d",
+      "finding": "The only review-related API prefix string observed in this chunk was /review/api/affiliate/v1 for the authenticated Curator workflow; no public product-review request was found."
+    }
+  ],
+  "unknownEndpointsSent": 0,
+  "authenticatedRequests": 0,
+  "interpretation": "The mobile and desktop storefront gates prevented public detail scripts and product/review XHR discovery. The direct request was a document-only negative control, not an API replay."
+}

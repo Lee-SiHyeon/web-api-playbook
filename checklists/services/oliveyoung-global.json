@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "service": "oliveyoung-global",
+  "description": "Anonymous Global storefront JSON XHRs for product detail, USD prices after a fresh selected-currency context check, review summaries/bodies/photos and verified page termination. Separate from Korea Shopping Curator.",
+  "capabilities": [
+    {
+      "id": "catalog.product_detail",
+      "title": "Read product title, current/list USD prices, variants, category and description",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/detail-data",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-product-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"],
+          "companionReads": [
+            {"key": "currencyContextRequest", "origin": "https://global.oliveyoung.com", "path": "/product/detail", "mime": "text/html"},
+            {"key": "detailsRequest", "origin": "https://global.oliveyoung.com", "path": "/product/details-info", "method": "POST", "readOnly": true, "mime": "application/json"},
+            {"key": "reviewSummaryRequest", "origin": "https://global.oliveyoung.com", "path": "/product/review-summary", "method": "POST", "readOnly": true, "mime": "application/json"}
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Product details come from JSON XHRs. A fresh cookie-free HTML read is used only to verify selected USD and delivery-context configuration before attaching USD; HTML is not used for product fields. Shipping eligibility stays unverified."
+    },
+    {
+      "id": "catalog.product_description",
+      "title": "Read product description content and image references",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/details-info",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-description-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The API returns HTML fragments inside JSON; the client strips executable/active elements and only returns approved HTTPS CDN image URLs. Separate image-file reads are recorded in the image-readback evidence file."
+    },
+    {
+      "id": "catalog.currency_context",
+      "title": "Bind raw product amounts to the selected USD context before normalizing currency",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/detail",
+          "mime": "text/html",
+          "files": ["verification/commerce-oliveyoung-global-currency-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The selected dropdown and inline config both reported USD for the same requested product id; the JSON detail price fields themselves omit currency. The current default KR/USD context is the only implemented country/currency. Other contexts fail closed."
+    },
+    {
+      "id": "catalog.product_images",
+      "title": "Read product thumbnail URLs and verify direct CDN image retrieval",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/detail-data",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-product-images-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Product image paths are bound to the requested product response; cookie-free image-byte readback status and hashes are in verification/commerce-oliveyoung-global-image-readbacks-2026-10-05.json."
+    },
+    {
+      "id": "catalog.bestsellers",
+      "title": "Read the bounded homepage best-seller list and USD prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/display/product/best-seller/order-best",
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-bestsellers-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"],
+          "companionReads": [
+            {"key": "currencyContextRequest", "origin": "https://global.oliveyoung.com", "path": "/product/detail", "mime": "text/html"}
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "blocker": "This is a 20-product homepage best-seller response, not a complete or keyword-searchable catalog."
+    },
+    {
+      "id": "catalog.keyword_search",
+      "title": "Search the Global product catalog by keyword through a JSON result API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The observed search suggestion XHR returned 403 text/html and the search-results document redirected then returned 403. No reusable product-results JSON XHR was captured; see verification/commerce-oliveyoung-global-search-live-2026-10-05.json."
+    },
+    {
+      "id": "reviews.summary",
+      "title": "Read rating average, distribution, evaluation scores and review/media totals",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/review-summary",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-review-summary-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "reviews.body",
+      "title": "Read review text, rating, option, date, associated-product and per-review photo fields",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/review-list",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-reviews-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Reviewer loginId and mbrNo are omitted. Associated-product rows are accepted only with assocReviewYn=Y and retain sourceProductId."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Read review result pages with a verified 1-based page number and terminal page",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/review-list",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-review-pagination-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Direct HTTP replay fetched page 1, page 2, the live terminal page and one page beyond it. totalCount is time-varying and recorded per response."
+    },
+    {
+      "id": "reviews.images",
+      "title": "Read review photo metadata and return validated CDN image URLs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/review-media-list",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-review-images-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Media records contain image-only metadata, not review bodies. One returned review image was independently fetched anonymously; see image-readback evidence."
+    },
+    {
+      "id": "reviews.media_pagination",
+      "title": "Traverse review-media result pages to the verified last page",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/oliveyoung-global.mjs", "exports": ["createOliveyoungGlobalClient"]}],
+        "tests": ["tests/commerce-oliveyoung-global.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://global.oliveyoung.com",
+          "path": "/product/review-media-list",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "files": ["verification/commerce-oliveyoung-global-review-media-pagination-live-2026-10-05.json"],
+          "hashPaths": ["lib/commerce/oliveyoung-global.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Direct HTTP replay fetched page 1, page 2, the live last page and one page beyond; media totalCount can change between requests."
+    },
+    {
+      "id": "auth.customer_login",
+      "title": "Sign in or create a customer account",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The user requested public Global catalog/review reads without login; signup, terms acceptance and customer account changes are out of scope.",
+      "requirement": "inventory",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "affiliate.link_creation",
+      "title": "Create a Global affiliate link or change publisher settings",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "This subtask explicitly covers non-affiliate-link reads only. Affiliate enrollment, link creation and publisher account writes are separate workflows.",
+      "requirement": "inventory",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    }
+  ]
+}

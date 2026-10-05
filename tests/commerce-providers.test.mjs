@@ -118,3 +118,18 @@ test('Ulta traverses upstream pages without discarding sponsored cards through a
   assert.deepEqual(inputs.map(i=>[i.page,i.pageSize]),[[1,100],[2,100]]);assert.equal(result.offers.length,138);
   assert.equal(result.offers[0].price.kind,'retail_current');assert.equal(result.collection.complete,false);
 });
+
+test('Amazon public search keeps explicit KRW major units and never infers USD from the host or dollar symbol', async () => {
+  const loadPage = await createCommerceReader({ provider: 'amazon-public', args: { query: 'charger' }, factories: {
+    'amazon-public': () => ({ searchProducts: async ({ page }) => ({ page, items: [
+      { asin: 'B012345678', title: 'Charger', productUrl: 'https://www.amazon.com/dp/B012345678',
+        currentDisplayPrice: { displayText: 'KRW 20,011', amount: '20011', currencyCode: 'KRW' } },
+      { asin: 'B012345679', title: 'Other charger', productUrl: 'https://www.amazon.com/dp/B012345679',
+        currentDisplayPrice: { displayText: '$10.00', amount: '10.00', currencyCode: null } },
+    ], receipt }) }),
+  } });
+  const result = await collectOfferSnapshot({ provider: 'amazon-public', loadPage, maxPages: 1 });
+  assert.deepEqual(result.offers.map(offer => [offer.price.amount, offer.price.currency]), [['20011', 'KRW'], ['10.00', null]]);
+  assert.equal(result.offers[0].context.priceBasis, 'displayed_search_card');
+  assert.equal(result.collection.complete, false); assert.equal(result.collection.currencyUnverifiedCount, 1);
+});

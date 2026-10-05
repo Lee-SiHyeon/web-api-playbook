@@ -1,0 +1,199 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify-storefronts",
+  "capabilityId": "colourpop.catalog.reviews",
+  "checkedAt": "2026-10-05T02:38:20.760Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "productHandleMatched": true,
+  "productIdMatched": true,
+  "reviewProductTargetMatched": true,
+  "reviewCount": 5,
+  "totalReviews": 32,
+  "nextCursorPresent": true,
+  "paginationVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://colourpop.com/products/eeveelution-shadow-palette",
+    "sourceSha": "e2ef2d47fd999831dba203b628e09301cdc3bc78a121ff2505f68076d914f10e",
+    "vendor": "Okendo"
+  },
+  "productRequest": {
+    "method": "GET",
+    "origin": "https://colourpop.com",
+    "path": "/products/eeveelution-shadow-palette.js",
+    "checkedAt": "2026-10-05T02:38:20.503Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 8288,
+    "responseSha256": "1ea74090cf007217f30e1b8e1d9c69af1db5a0ebb57dda606c4863f1ddb834a2",
+    "schemaVerified": true,
+    "productHandleMatched": true
+  },
+  "aggregateRequest": {
+    "method": "GET",
+    "origin": "https://api.okendo.io",
+    "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/review_aggregate",
+    "checkedAt": "2026-10-05T02:38:20.757Z",
+    "queryFields": [],
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "capabilityId": "colourpop.catalog.review_aggregate",
+    "responseBytes": 654,
+    "responseSha256": "87c1629009ad4dfa724b80bb12effcc3eb30b606f332407bd2f5d9445342839d",
+    "schemaVerified": true,
+    "productIdMatched": true
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://api.okendo.io",
+    "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+    "checkedAt": "2026-10-05T02:38:20.760Z",
+    "queryFields": [
+      "limit",
+      "orderBy"
+    ],
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "capabilityId": "colourpop.catalog.reviews",
+    "responseBytes": 7592,
+    "responseSha256": "f1e55e1d59073824cd89d1a09c07136f1e1ce4548cdf1523ac1d83c9c6377721",
+    "schemaVerified": true,
+    "productIdMatched": true,
+    "reviewArrayVerified": true,
+    "returnedReviewCount": 5
+  },
+  "averageRating": 4.97,
+  "collection": {
+    "pages": 7,
+    "reviewCount": 32,
+    "distinctReviewCount": 32,
+    "allPagesBoundToProduct": true,
+    "allRowsContainBody": true,
+    "rowsWithNonemptyBody": 32,
+    "rowsWithDate": 32,
+    "rowsWithRating": 32,
+    "imageCount": 11,
+    "cursorChainCompleted": true,
+    "duplicateReviewIds": 0,
+    "pagesEvidence": [
+      {
+        "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+        "origin": "https://api.okendo.io",
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 7592,
+        "responseSha256": "f1e55e1d59073824cd89d1a09c07136f1e1ce4548cdf1523ac1d83c9c6377721",
+        "queryFields": [
+          "limit",
+          "orderBy"
+        ],
+        "nextCursorPresent": true
+      },
+      {
+        "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+        "origin": "https://api.okendo.io",
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 10245,
+        "responseSha256": "47fd9bac41e229adcddf631521679e2b61b95c0d6880fb82baa78b8ab0bacfa2",
+        "queryFields": [
+          "lastEvaluated",
+          "limit",
+          "orderBy"
+        ],
+        "nextCursorPresent": true
+      },
+      {
+        "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+        "origin": "https://api.okendo.io",
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 7273,
+        "responseSha256": "fbf8931d58e383ac1ff5252b9381194c6d8d7ebce91564478cbc35d6e92c118d",
+        "queryFields": [
+          "lastEvaluated",
+          "limit",
+          "orderBy"
+        ],
+        "nextCursorPresent": true
+      },
+      {
+        "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+        "origin": "https://api.okendo.io",
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 7282,
+        "responseSha256": "7fa35edb9a2a1efba7764a32ba33efc81dcd16ae70d6f51fa3488687cae7e18a",
+        "queryFields": [
+          "lastEvaluated",
+          "limit",
+          "orderBy"
+        ],
+        "nextCursorPresent": true
+      },
+      {
+        "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+        "origin": "https://api.okendo.io",
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 5639,
+        "responseSha256": "cf6ae7ea76b1de78443d722b0a035f0c7c437f5202d06d7aa92556333e719ba4",
+        "queryFields": [
+          "lastEvaluated",
+          "limit",
+          "orderBy"
+        ],
+        "nextCursorPresent": true
+      },
+      {
+        "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+        "origin": "https://api.okendo.io",
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 5377,
+        "responseSha256": "2c5832e5225e6386ccae8ce2b637b2356b32239eb9b6b4f0f66e1dfcdf456072",
+        "queryFields": [
+          "lastEvaluated",
+          "limit",
+          "orderBy"
+        ],
+        "nextCursorPresent": true
+      },
+      {
+        "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+        "origin": "https://api.okendo.io",
+        "status": 200,
+        "mime": "application/json",
+        "responseBytes": 4257,
+        "responseSha256": "83d405a25c98271cc9db91fa99d366b7b266e8c53a50fb09a6c28f6bef0e8f0f",
+        "queryFields": [
+          "lastEvaluated",
+          "limit",
+          "orderBy"
+        ],
+        "nextCursorPresent": false
+      }
+    ]
+  },
+  "implementation": {
+    "lib/commerce/shopify-storefronts.mjs": "e50784065f0807c149e053f5bae32efbcd2ad3ee45d95f229318fcaf93b0ed2a",
+    "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb"
+  }
+}

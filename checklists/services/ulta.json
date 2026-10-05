@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "ulta",
-  "description": "The US en-US public product search now uses a browser-free DXL GraphQL client. It derives the current ProductListingResults content ID, query, locale and public headers from each anonymous first-party page response; no cookies, auth, or retailer visitor ID are sent. Product detail and affiliate-network account reads remain separate capabilities.",
+  "description": "US en-US search, prices, product details/options/images, and PowerReviews bodies/photos/rating pagination are read through anonymous direct HTTP APIs. Current first-party page configuration is held in process memory; no customer account or reviewer-profile data is used.",
   "capabilities": [
     {
       "id": "catalog.search",
@@ -57,17 +57,62 @@
     },
     {
       "id": "catalog.product_detail",
-      "title": "Read Ulta product details, current prices, and SKU options through a stable anonymous API client",
+      "title": "Read Ulta product description, current prices, SKU options, images, and rating summary",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
       "implementation": {
-        "files": [],
-        "tests": []
+        "files": [
+          {
+            "path": "lib/commerce/ulta.mjs",
+            "exports": [
+              "createUltaPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/catalog-readers.mjs",
+            "exports": [
+              "createCatalogReader"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-ulta.test.mjs",
+          "tests/commerce-catalog.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "product"
+            ]
+          }
+        ]
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.ulta.com",
+          "path": "/dxl/graphql",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-ulta-product-detail-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ulta.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "bootstrapRequest",
+              "origin": "https://www.ulta.com",
+              "path": "/p/serum-lipstick-pimprod2057119",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
       "sourceEvidence": [],
-      "blocker": "An anonymous product page rendered a visible price and the page-data GraphQL contract was observed. A stable no-browser request recipe and direct product-specific replay were not established."
+      "note": "The product URL must come from a same-origin search result and is checked against productId and SKU. Product-page HTML supplies only request context; description, price, variants and image data come from a direct Page GraphQL JSON response."
     },
     {
       "id": "catalog.pagination",
@@ -172,6 +217,144 @@
       ],
       "sourceEvidence": [],
       "note": "The live result included distinct listPrice and salePrice fields; a non-null USD sale price was observed and parsed separately from list price."
+    },
+    {
+      "id": "reviews.read",
+      "title": "Read public Ulta review bodies, ratings, dates, and customer photos without reviewer profiles",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ulta.mjs",
+            "exports": [
+              "createUltaPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/catalog-readers.mjs",
+            "exports": [
+              "createCatalogReader"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-ulta.test.mjs",
+          "tests/commerce-catalog.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "reviews"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://display.powerreviews.com",
+          "path": "/m/6406/l/en_US/product/pimprod2057119/reviews",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-ulta-reviews-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ulta.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "bootstrapRequest",
+              "origin": "https://www.ulta.com",
+              "path": "/p/serum-lipstick-pimprod2057119",
+              "mime": "text/html"
+            }
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://display.powerreviews.com",
+          "path": "/m/6406/l/en_US/product/pimprod2061191/reviews",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-ulta-reviews-complete-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ulta.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "bootstrapRequest",
+              "origin": "https://www.ulta.com",
+              "path": "/p/velvety-matte-mousse-lip-cream-pimprod2061191",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The live public API returned review text, numeric ratings, timestamps and photo URLs; one returned photo fetched as image/jpeg. Output omits nickname, location and reviewer IDs. The public PowerReviews key is used only in process memory. verifiedPurchase is omitted because no source field was present."
+    },
+    {
+      "id": "reviews.pagination",
+      "title": "Follow and verify PowerReviews review pages against product ID, page size, and server continuation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ulta.mjs",
+            "exports": [
+              "createUltaPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/catalog-readers.mjs",
+            "exports": [
+              "createCatalogReader"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-ulta.test.mjs",
+          "tests/commerce-catalog.test.mjs"
+        ],
+        "cli": [
+          {
+            "path": "scripts/catalog.mjs",
+            "tokens": [
+              "reviews"
+            ]
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://display.powerreviews.com",
+          "path": "/m/6406/l/en_US/product/pimprod2057119/reviews",
+          "mime": "application/json",
+          "files": [
+            "verification/commerce-ulta-reviews-pagination-live-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ulta.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "bootstrapRequest",
+              "origin": "https://www.ulta.com",
+              "path": "/p/serum-lipstick-pimprod2057119",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Page 1 and page 2 replayed through the SDK's server next_page_url and matched the same productId. The SDK accepted size 25 and rejected 26 with HTTP 400 'paging.size maximum value is 25'; the client caps pageSize at 25. A separate 1-review product ended at page 1 with total 1 and hasMore false."
     },
     {
       "id": "partner_program.commission",
@@ -304,10 +487,29 @@
             "lib/commerce/ulta.mjs",
             "verification/affiliate-ulta-collection-sample-2026-10-05.csv"
           ]
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://www.ulta.com",
+          "path": "/dxl/graphql",
+          "mime": "application/json",
+          "files": [
+            "verification/catalog-price-ulta-live-2026-10-05.json",
+            "verification/catalog-price-ulta-sample-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/ulta.mjs",
+            "verification/catalog-price-ulta-sample-2026-10-05.csv"
+          ]
         }
       ],
       "sourceEvidence": [],
-      "note": "API field price kind and range preserved. Ulta sponsored cards are not identical to organic resultCount; provider_limited stays incomplete."
+      "note": "Current Node 24 CLI replay read four lipstick search pages and independently matched 255 deduplicated offer rows to JSON and CSV. Twenty native scalar USD offers are sampled; 13 product-range offers are retained in the full output. Provider coverage remains limited and complete=false."
     }
   ]
 }

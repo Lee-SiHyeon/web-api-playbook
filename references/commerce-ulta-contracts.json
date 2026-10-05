@@ -108,11 +108,95 @@
       "productURL": "Same-origin /p/ action URL whose final path segment is bound to productId; an sku query value is retained only when it equals skuId.",
       "trackingQueryValues": "Dropped from normalized product URLs."
     },
+    "productDetail": {
+      "status": "anonymous_direct_page_graphql_replay_verified",
+      "productUrlInput": "Required from a same-origin URL previously returned by the search XHR. The product ID must be the final /p/ path suffix and an optional sku query must match skuId. The client does not invent a product slug.",
+      "xhr": {
+        "method": "GET",
+        "origin": "https://www.ulta.com",
+        "path": "/dxl/graphql",
+        "operationName": "Page",
+        "queryIdHeader": "Page::<same-origin pathname>",
+        "moduleNameHeader": "RouteContainer",
+        "subTypeHeader": "page",
+        "querySource": "The first-party client bundle exports query Page($url: JSON, $stagingHost: String, $contentId: String, $previewOptions: JSON, $moduleParams: JSON). Variables bind url.path to the observed product path and moduleParams.sku to the verified SKU when present.",
+        "sourceURL": "https://www.ulta.com/ux/assets/js/client.fa640546.js",
+        "sourceSha256": "4f8fb445dbf097260ce1a08e3e4872422742130e75860d49c5f4a399d848b506",
+        "responseFields": [
+          "data.Page.content.modules[].ProductPricing.productId/skuId/listPrice/salePrice",
+          "data.Page.content.modules[].ProductInformation.productName/rating/reviewCount",
+          "data.Page.content.modules[].MediaGallery.items[].imageUrl/altText",
+          "data.Page.content.modules[].ProductVariant.variants[].skuId/name/shadeDescription/mainImage/swatchImage/smooshImage",
+          "data.Page.content.modules[].ProductDetail.description/usage/ingredients/restrictions",
+          "data.Page.content.modules[].ProductReviews.priceCurrency/rating/reviewCount"
+        ],
+        "identity": "Returned ProductPricing productId and skuId are matched against the requested product and optional SKU; ProductReviews productId and productSku are independently checked."
+      },
+      "priceSemantics": {
+        "currency": "USD, bound to the response ProductReviews.priceCurrency field and the US/en-US storefront.",
+        "listAndSale": "ProductPricing productListPrice/listPrice and productSalePrice/salePrice are retained separately; amounts remain decimal strings and price ranges remain explicit."
+      },
+      "images": "Direct Page GraphQL response returns product gallery URLs on the observed media.ulta.com or media.ultainc.com hosts. Variant image links are separately bound to the variant SKU."
+    },
+    "reviews": {
+      "status": "anonymous_powerreviews_json_replay_and_pagination_verified",
+      "configSource": "The product page's first-party ProductReviews module supplies current prApiKey, prMerchantId, locale and productId. The client keeps the public frontend key in process memory only and never returns or records its value.",
+      "sdkSource": {
+        "entryURL": "https://ui.powerreviews.com/stable/4.0/ui.js",
+        "entrySha256": "7f80233e4ddb9b1625cad4d9b5d5d2ae07dfb58fbd4c8f4aed959bdf5084c69d",
+        "engineURL": "https://ui.powerreviews.com/tag-builds/10578/4.0/reviews.engine.js",
+        "engineSha256": "c5962864e32a3b9eb466c968d870d0f112631d37e82c57d0d0741625628ee9f3",
+        "merchantComponentURL": "https://www.ulta.com/ux/assets/js/ulta-modules-ProductReviews-ProductReviews-js.e3964001.chunk.js",
+        "merchantComponentSha256": "005360d718d664bff69120d420110166e760b5a8df6ec7e452fb5908dd0fc1bc"
+      },
+      "http": {
+        "method": "GET",
+        "origin": "https://display.powerreviews.com",
+        "pathTemplate": "/m/{merchant_id}/l/{locale}/product/{page_id}/reviews",
+        "localeBinding": "en-US is converted to the SDK's en_US path segment.",
+        "pageIdBinding": "The API results[].page_id must exactly match the Ulta productId.",
+        "queryFields": [
+          "apikey",
+          "_noconfig",
+          "paging.size",
+          "paging.from",
+          "filters",
+          "search",
+          "sort",
+          "image_only",
+          "page_locale"
+        ],
+        "pagination": "The first page uses paging.size. Subsequent pages follow the exact server paging.next_page_url after validating same origin, merchant, locale, productId, offset and page size. The SDK computes paging.from=(page-1)*pageSize.",
+        "verifiedResponseFields": [
+          "paging.total_results",
+          "paging.pages_total",
+          "paging.page_size",
+          "paging.current_page_number",
+          "paging.next_page_url",
+          "results[].page_id",
+          "results[].reviews[].review_id",
+          "results[].reviews[].details.comments",
+          "results[].reviews[].details.created_date",
+          "results[].reviews[].metrics.rating",
+          "results[].reviews[].media[].uri"
+        ]
+      },
+      "pageSizeBoundary": {
+        "maximumAccepted": 25,
+        "acceptedLiveSamples": [20, 25],
+        "rejectedLiveSamples": [26, 50, 100],
+        "rejection": "HTTP 400 JSON status_code=400 with message 'paging.size maximum value is 25'. The client rejects pageSize>25 before sending.",
+        "verifiedPurchase": "Not exposed on the sampled public review records; omitted without inference.",
+        "reviewerProfile": "nickname, location and other reviewer profile fields are omitted from returned review objects.",
+        "imageURL": "Protocol-relative media[].uri is normalized to HTTPS only after host validation; observed images use res.cloudinary.com. One returned photo URL replayed as HTTP 200 image/jpeg."
+      }
+    },
     "limitations": [
-      "Product detail XHR and variant-specific detail prices are not implemented.",
-      "Only the US en-US public storefront is supported.",
-      "A response can contain more card rows than its pageSize because promoted rows are included; sourceItemCount reports returned rows.",
-      "Affiliate commission rates are not public in this contract and remain separate from catalog pricing."
+      "Only the US en-US public storefront and its currently referenced first-party bundle contracts are supported.",
+      "A product slug URL must come from search output; productId alone does not reveal a slug and is rejected without productUrl.",
+      "Search result rows can exceed the store pageSize because promoted rows are included; sourceItemCount reports returned rows.",
+      "The PowerReviews frontend key is public page configuration; it is used in memory and omitted from receipts and results.",
+      "Affiliate commission rates and publisher tracking links remain separate from these public catalog and review APIs."
     ]
   }
 }

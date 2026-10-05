@@ -59,6 +59,33 @@ test('source-only and missing implementation remain a required gap', async t => 
   assert.deepEqual(result.summary.requiredGaps, ['item.update']);
 });
 
+test('public multi-status reads require explicit status, verified business data, and exact JSON origin', async t => {
+  const context = await fixture(t, { kind: 'http-public-read-v1' });
+  const evidence = context.manifest.capabilities[0].evidence[0];
+  evidence.readOnly = true; evidence.mime = 'application/json';
+  const saveManifest = () => writeFile(path.join(context.root, 'checklists/services/demo.json'), JSON.stringify(context.manifest));
+  await saveManifest();
+  const receipt = { schema: 'web-api-public-read-receipt-v1', service: 'demo', capabilityId: 'item.update',
+    checkedAt: later, anonymous: true, credentialsUsed: false, authenticated: false,
+    schemaVerified: true, expectedResultVerified: true, secretsPersistedInEvidence: false,
+    contractProvenance: { kind: 'browser_xhr_observed', sourceURL: 'https://example.test/reviews' },
+    request: { method: 'POST', origin: 'https://example.test', path: '/v1/item', httpStatus: 207,
+      mime: 'application/json', responseBytes: 123, checkedAt: time, browserUsed: false, anonymous: true, cookieSent: false },
+    implementation: context.receipt.implementation };
+  await context.save(receipt);
+  assert.equal((await context.audit()).capabilities[0].status, 'evidence_invalid');
+  evidence.acceptedStatuses = [207]; await saveManifest();
+  assert.equal((await context.audit()).capabilities[0].status, 'recorded_live');
+  await context.save({ ...receipt, expectedResultVerified: false });
+  assert.equal((await context.audit()).capabilities[0].status, 'evidence_invalid');
+  await context.save({ ...receipt, request: { ...receipt.request, mime: 'text/html' } });
+  assert.equal((await context.audit()).capabilities[0].status, 'evidence_invalid');
+  await context.save({ ...receipt, request: { ...receipt.request, httpStatus: 200 } });
+  assert.equal((await context.audit()).capabilities[0].status, 'evidence_invalid');
+  evidence.acceptedStatuses = [403]; await saveManifest();
+  await assert.rejects(context.audit(), /CHECKLIST_SCHEMA_INVALID/);
+});
+
 test('full write and independent readback receipt is recorded only with matching code hash', async t => {
   const context = await fixture(t);
   assert.equal((await context.audit()).capabilities[0].status, 'recorded_live');

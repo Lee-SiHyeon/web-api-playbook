@@ -1,0 +1,37 @@
+{
+  "schema": "shopify-vendor-xhr-observation-v1",
+  "service": "shopify-storefronts",
+  "capabilityId": "colourpop.catalog.reviews",
+  "checkedAt": "2026-10-05T02:33:24.814Z",
+  "browser": "Playwright Chromium fresh anonymous context",
+  "sourceDocument": {
+    "url": "https://colourpop.com/products/eeveelution-shadow-palette",
+    "status": 200,
+    "responseBytes": 958164,
+    "sourceSha": "e2ef2d47fd999831dba203b628e09301cdc3bc78a121ff2505f68076d914f10e"
+  },
+  "interaction": "Clicked the rendered Okendo \u201cshow more\u201d review control; no write endpoints were allowed.",
+  "request": {
+    "method": "GET",
+    "origin": "https://api.okendo.io",
+    "path": "/v1/stores/5419d3a5-7ff7-4bcf-ace6-31f3fa34803d/products/shopify-7593200615506/reviews",
+    "queryFields": [
+      "lastEvaluated",
+      "limit",
+      "orderBy"
+    ],
+    "status": 200,
+    "mime": "application/json",
+    "responseBytes": 10245,
+    "responseSha256": "724910547479a7a72f0f23ec76b91f4137a8a17b4fc222b665bfd66f1f37816f",
+    "responseKeys": [
+      "areReviewsGrouped",
+      "nextUrl",
+      "reviews"
+    ],
+    "reviewCount": 5,
+    "nextUrlPresent": true
+  },
+  "secretsPersistedInEvidence": false,
+  "reviewBodiesOrAuthorNamesPersisted": false
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "rakuten-ichiba",
-  "description": "Rakuten Ichiba / Rakuten Affiliate Japan catalog adapter. Uses the documented v2026-07-01 Rakuten Web Service Search and Genre APIs. Requires a caller registered applicationId plus accessKey; the optional affiliateId is supplied by the caller. Distinct from Rakuten Advertising global publisher APIs.",
+  "description": "Rakuten Ichiba / Rakuten Affiliate Japan. Official catalog/detail Search and Genre calls use documented v2026-07-01 APIs and require a caller registered applicationId plus accessKey; affiliateId is caller supplied. The separate public Reviews page API returns individual review bodies, dates, ratings, pagination and review-photo thumbnails without a user account, using a short-lived in-memory key bootstrapped from current first-party page JS. Distinct from Rakuten Advertising global publisher APIs.",
   "capabilities": [
     {
       "id": "auth.application_credentials",
@@ -125,7 +125,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "note": "The documentation supplies itemCode as an Item Search selector; this adapter reuses that endpoint, requests one hit, then binds exact itemCode and shopCode. It does not invent a separate detail route."
+      "note": "The documentation supplies itemCode as an Item Search selector; this adapter reuses that endpoint, requests one hit, then binds exact itemCode and shopCode. It preserves documented itemCaption, small/medium image URLs, reviewAverage/reviewCount, shop metadata, categories, and price-basis ranges. The live detail read remains pending registered app credentials. It does not invent a separate detail route."
     },
     {
       "id": "catalog.category_lookup",
@@ -281,6 +281,92 @@
       "evidence": [],
       "sourceEvidence": [],
       "note": "The current item-search docs expose affiliateRate. It is returned as observed item-specific metadata and is never replaced with a fixed 2-4% assumption."
+    },
+    {
+      "id": "catalog.public_review_target_bootstrap",
+      "title": "Resolve a product page's exact public review URL and numeric shop/item IDs",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/rakuten-ichiba-public.mjs", "exports": ["createRakutenIchibaPublicClient"] }],
+        "tests": ["tests/commerce-rakuten-ichiba-public.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Direct anonymous item-page HTML is used only to match embedded shop_bid/item_id fields to that page's review link. The module does not present this SSR HTML as product-detail API data."
+    },
+    {
+      "id": "catalog.public_review_page",
+      "title": "Read full public product-review rows with reviewId, rating, title, body, dates and media thumbnails",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/rakuten-ichiba-public.mjs", "exports": ["createRakutenIchibaPublicClient"] }],
+        "tests": ["tests/commerce-rakuten-ichiba-public.test.mjs"]
+      },
+      "evidence": [{
+        "kind": "http-public-read-v1",
+        "origin": "https://web-gateway.rakuten.co.jp",
+        "path": "/review/itemshopreviewlist/get/v1",
+        "method": "POST",
+        "readOnly": true,
+        "acceptedStatuses": [207],
+        "mime": "application/json",
+        "files": ["verification/commerce-rakuten-ichiba-review-page1-2026-10-05.json"],
+        "hashPaths": ["lib/commerce/rakuten-ichiba-public.mjs"]
+      }],
+      "sourceEvidence": [],
+      "note": "Uses the current public first-party review-page XHR, validates HTTP 207 + application JSON + top-level SUCCESS + itemReviewList.data schema, and returns 30 bounded records per page. User/account credentials and cookies are not used. The first-party frontend authkey is dynamically bootstrapped in memory and is not persisted or written into receipts."
+    },
+    {
+      "id": "catalog.public_review_pagination",
+      "title": "Read successive review pages from response hasNextPage and total count",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/rakuten-ichiba-public.mjs", "exports": ["createRakutenIchibaPublicClient"] }],
+        "tests": ["tests/commerce-rakuten-ichiba-public.test.mjs"]
+      },
+      "evidence": [{
+        "kind": "http-public-read-v1",
+        "origin": "https://web-gateway.rakuten.co.jp",
+        "path": "/review/itemshopreviewlist/get/v1",
+        "method": "POST",
+        "readOnly": true,
+        "acceptedStatuses": [207],
+        "mime": "application/json",
+        "files": ["verification/commerce-rakuten-ichiba-review-page2-2026-10-05.json"],
+        "hashPaths": ["lib/commerce/rakuten-ichiba-public.mjs"]
+      }],
+      "sourceEvidence": [],
+      "note": "Observed page 1 and page 2 are distinct native reads. The API returns total count and hasNextPage; the client returns nextPage only when hasNextPage is true."
+    },
+    {
+      "id": "catalog.public_review_photos",
+      "title": "Filter public reviews with images/videos and preserve safe thumbnail URLs and media type",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/commerce/rakuten-ichiba-public.mjs", "exports": ["createRakutenIchibaPublicClient"] }],
+        "tests": ["tests/commerce-rakuten-ichiba-public.test.mjs"]
+      },
+      "evidence": [{
+        "kind": "http-public-read-v1",
+        "origin": "https://web-gateway.rakuten.co.jp",
+        "path": "/review/itemshopreviewlist/get/v1",
+        "method": "POST",
+        "readOnly": true,
+        "acceptedStatuses": [207],
+        "mime": "application/json",
+        "files": ["verification/commerce-rakuten-ichiba-review-media-2026-10-05.json"],
+        "hashPaths": ["lib/commerce/rakuten-ichiba-public.mjs"]
+      }],
+      "sourceEvidence": [],
+      "note": "A public UI filter produced 18 image-bearing reviews and 27 thumbnail references for the sample item. The adapter keeps only HTTPS Rakuten/R10s thumbnail URLs, preserves type, maps observed type 1 to image and first-party UI type 2 to video, and leaves other values unknown; it omits reviewer names and internal media keys."
     },
     {
       "id": "auth.browser_login_registration",

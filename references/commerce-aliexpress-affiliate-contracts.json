@@ -54,6 +54,8 @@
         "pagination": ["current_page_no", "current_record_count", "total_page_no", "total_record_count"],
         "productFields": [
           "product_id", "product_title", "product_detail_url", "product_main_image_url",
+          "product_small_image_urls", "product_video_url", "shop_id", "shop_url",
+          "platform_product_type", "discount", "evaluate_rate", "ship_to_days",
           "sale_price", "sale_price_currency", "original_price", "original_price_currency",
           "app_sale_price", "app_sale_price_currency", "target_sale_price", "target_sale_price_currency",
           "target_original_price", "target_original_price_currency", "target_app_sale_price",
@@ -69,6 +71,13 @@
           "targetAppSalePrice": ["target_app_sale_price", "target_app_sale_price_currency"]
         },
         "priceAmounts": "Decimal strings are preserved; binary floating point is not used for normalized price amounts."
+      },
+      "productMetadata": {
+        "images": ["product_main_image_url", "product_small_image_urls[]"],
+        "video": "product_video_url",
+        "seller": ["shop_id", "shop_url"],
+        "rating": "evaluate_rate is a positive-review percentage, not an average star score or review count.",
+        "shippingEstimate": "ship_to_days is a localized estimate string on product.query only; it is not stock/availability proof."
       },
       "affiliateLinks": "The adapter does not request or return promotion_link. Optional tracking_id is forwarded only when supplied by the caller; no publisher or affiliate ID is generated."
     },
@@ -90,7 +99,14 @@
           "app_sale_price", "app_sale_price_currency", "target_sale_price", "target_sale_price_currency",
           "target_original_price", "target_original_price_currency", "target_app_sale_price", "target_app_sale_price_currency"
         ],
+        "otherDocumentedFields": ["discount", "evaluate_rate", "platform_product_type", "product_small_image_urls", "product_video_url", "shop_id", "shop_url"],
         "productIdMustMatchRequested": true
+      },
+      "productMetadata": {
+        "images": ["product_main_image_url", "product_small_image_urls[]"],
+        "video": "product_video_url",
+        "seller": ["shop_id", "shop_url"],
+        "rating": "evaluate_rate is the documented positive-review percentage."
       },
       "affiliateLinks": "The adapter requests a field list without promotion_link and does not claim publisher-link ownership."
     },
@@ -108,9 +124,10 @@
       "response": {
         "envelope": "aliexpress_social_item_search_response.result",
         "pagination": ["page_no", "page_size", "total_count", "success"],
-        "productFields": ["item_id", "item_title", "item_url", "item_main_pic", "item_origin_price_min", "item_origin_price_max", "item_price_discount_min", "item_price_discount_max", "item_discount_rate", "commission_rate"],
+        "productFields": ["item_id", "item_title", "item_url", "item_main_pic", "item_pics", "item_videos", "pub_time", "shop_url", "comment_score", "seller_layer", "sales30_day_semantic", "comment30_day_semantic", "favorite_cnt_semantic", "item_origin_price_min", "item_origin_price_max", "item_price_discount_min", "item_price_discount_max", "item_discount_rate", "commission_rate"],
         "priceParsing": "Only the documented en_US USD display form `US $<decimal>` is normalized. Other locales/currencies are rejected by this adapter path rather than guessed.",
-        "prices": "Per-product minimum and maximum original prices and minimum and maximum discounted prices; these are ranges, not one SKU's exact price."
+        "prices": "Per-product minimum and maximum original prices and minimum and maximum discounted prices; these are ranges, not one SKU's exact price.",
+        "ratingAndMedia": "comment_score is a source-provided score with no documented scale or overall count. item_pics is the product image gallery, not customer review photos; item_videos is product media."
       }
     },
     {
@@ -142,6 +159,9 @@
     "notCapturedXhr": "These contracts come from first-party API documentation. No storefront page XHR was captured for the TOP endpoints in this task.",
     "noAnonymousAffiliateBusinessReplay": "The no-AppKey control is an application-error response and contains no product result. It is not a product-search success.",
     "noPriceEquivalence": "Affiliate listing prices, app-only prices, target-currency prices, and dropship SKU prices are separate fields and must stay separate.",
+    "affiliateDetailUnavailable": ["long description", "structured feature list", "options/variants", "SKU IDs", "stock quantity/availability", "review bodies", "review photos", "overall review count"],
+    "ratingSemantics": "Affiliate evaluate_rate is a positive-review percentage; Social comment_score is a number with unspecified scale; neither supplies review text/photos.",
+    "imageSemantics": "product_small_image_urls and Social item_pics are catalog product image galleries, not customer-submitted review photos.",
     "noDropshipOrderCalls": true
   }
 }

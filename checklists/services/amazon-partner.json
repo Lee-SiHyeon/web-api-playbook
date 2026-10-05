@@ -98,6 +98,37 @@
       "blocker": "No live GetItems request was sent because registered Creators API credentials and a valid caller-owned PartnerTag were not supplied."
     },
     {
+      "id": "catalog.product_metadata",
+      "title": "Preserve documented ItemInfo, categories, identifiers, and all product image sizes/variants",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/amazon-creators.mjs", "exports": ["createAmazonCreatorsClient"]}],
+        "tests": ["tests/commerce-amazon-creators.test.mjs"],
+        "cli": [{"path": "scripts/commerce.mjs", "tokens": ["amazon-partner"]}]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Local fixtures cover ItemInfo, EAN/UPC identifiers, item part number, primary and variant images. A credentialed product response was unavailable, so field availability for real catalog entries is not live-verified.",
+      "note": "API output distinguishes supported catalog metadata from unavailable long description and seller SKU. itemPartNumber is preserved under that name; it is not relabeled SKU."
+    },
+    {
+      "id": "catalog.product_variations",
+      "title": "Read child ASIN options, variation dimensions, price range, and bounded pages",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{"path": "lib/commerce/amazon-creators.mjs", "exports": ["createAmazonCreatorsClient"]}],
+        "tests": ["tests/commerce-amazon-creators.test.mjs"],
+        "cli": [{"path": "scripts/commerce.mjs", "tokens": ["amazon-partner"]}]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The documented GetVariations contract and a sequential 10-page local cap are implemented. No live variation request was sent without Creators API credentials and PartnerTag."
+    },
+    {
       "id": "catalog.price_availability",
       "title": "Collect current offer price, currency, reference-price basis, and availability separately",
       "priority": "required",
@@ -172,6 +203,39 @@
       "evidence": [],
       "sourceEvidence": [],
       "blocker": "SearchIndex can be passed when known, but GetBrowseNodes enumeration and its response contract are outside this implementation."
+    },
+    {
+      "id": "catalog.customer_review_content",
+      "title": "Read customer review score/count, review bodies, and review photos",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The current official Creators API reference does not define a customer-review resource or review-body/photo operation. Product gallery images and ItemInfo.contentRating are different fields.",
+      "requirement": "inventory",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "catalog.seller_sku",
+      "title": "Read seller-assigned SKU for an Amazon catalog item",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "The official catalog contract exposes ASIN, parent ASIN, external IDs and sometimes itemPartNumber/model; it does not define a merchant seller SKU field.",
+      "requirement": "inventory",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "catalog.exact_stock_quantity",
+      "title": "Read exact on-hand inventory quantity",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "applicabilityReason": "OffersV2 exposes offer availability status and minimum/maximum order quantities, but not on-hand inventory count.",
+      "requirement": "inventory",
+      "implementation": {"files": [], "tests": []},
+      "evidence": [],
+      "sourceEvidence": []
     },
     {
       "id": "affiliate.link_generation",

@@ -1,0 +1,46 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "catalog.product_description",
+  "checkedAt": "2026-10-05T02:59:09.487Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/product/detail?prdtNo=GA240824996"
+  },
+  "request": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/details-info",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T02:59:09.487Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "prdtNo"
+    ],
+    "responseBytes": 5975,
+    "responseSha256": "60bc67438ee5c741af865ffe6a9edf4e458806f5c78fbab65e96cf742c96d79a"
+  },
+  "productIdMatched": true,
+  "descriptionFields": [
+    "dtlDesc",
+    "dtlAddDesc",
+    "sellingPointText",
+    "whyWeLoveItText",
+    "ftrdIngrdText",
+    "howToUseText"
+  ],
+  "descriptionTextLength": 1352,
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7465d9a636ebef870a2818e5dbe59a255c0edf366dc5875e1752406e21e55357"
+  }
+}

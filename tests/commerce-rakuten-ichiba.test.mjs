@@ -20,6 +20,13 @@ function item(itemCode = 'shop-one:sku-100', extra = {}) {
     itemCode,
     shopCode: itemCode.split(':')[0],
     itemName: '日本語の商品名',
+    itemCaption: '<p>商品説明の本文です。\n保証条件も記載します。</p>',
+    shopName: 'Rakuten shop',
+    shopUrl: `https://www.rakuten.co.jp/${itemCode.split(':')[0]}/`,
+    smallImageUrls: ['https://thumbnail.image.rakuten.co.jp/@0_mall/shop-one/cabinet/main.jpg'],
+    mediumImageUrls: ['https://thumbnail.image.rakuten.co.jp/@0_mall/shop-one/cabinet/main_128.jpg'],
+    reviewCount: 427,
+    reviewAverage: 4.51,
     itemPrice: 1980,
     itemPriceBaseField: 'item_price_min3',
     itemPriceMin1: 1500,
@@ -75,7 +82,7 @@ test('uses the current documented v2026-07-01 item-search route and exact select
       maxPrice: '5000',
       format: 'json',
       formatVersion: '2',
-      elements: 'itemName,catchcopy,itemCode,shopCode,itemPrice,itemPriceBaseField,itemPriceMin1,itemPriceMax1,itemPriceMin2,itemPriceMax2,itemPriceMin3,itemPriceMax3,itemUrl,affiliateUrl,genreId,availability,taxFlag,postageFlag,updateTimestamp,affiliateRate',
+      elements: 'itemName,catchcopy,itemCaption,itemCode,shopCode,shopName,shopUrl,shopAffiliateUrl,smallImageUrls,mediumImageUrls,reviewCount,reviewAverage,itemPrice,itemPriceBaseField,itemPriceMin1,itemPriceMax1,itemPriceMin2,itemPriceMax2,itemPriceMin3,itemPriceMax3,itemUrl,affiliateUrl,genreId,availability,taxFlag,postageFlag,updateTimestamp,affiliateRate',
       hits: '2',
       page: '2',
       sort: '+itemPrice',
@@ -105,6 +112,13 @@ test('uses the current documented v2026-07-01 item-search route and exact select
   });
   assert.equal(result.products[0].itemCode, 'shop-one:sku-100');
   assert.equal(result.products[0].shopCode, 'shop-one');
+  assert.equal(result.products[0].itemCaption, '<p>商品説明の本文です。\n保証条件も記載します。</p>');
+  assert.equal(result.products[0].shopName, 'Rakuten shop');
+  assert.equal(result.products[0].shopUrl, 'https://www.rakuten.co.jp/shop-one/');
+  assert.deepEqual(result.products[0].smallImageUrls, ['https://thumbnail.image.rakuten.co.jp/@0_mall/shop-one/cabinet/main.jpg']);
+  assert.deepEqual(result.products[0].mediumImageUrls, ['https://thumbnail.image.rakuten.co.jp/@0_mall/shop-one/cabinet/main_128.jpg']);
+  assert.equal(result.products[0].reviewCount, 427);
+  assert.equal(result.products[0].reviewAverage, '4.51');
   assert.equal(result.products[0].canonicalUrl, 'https://item.rakuten.co.jp/shop-one/sku-100/');
   assert.equal(result.products[0].availability, 'available');
   assert.equal(result.products[0].taxIncluded, true);
