@@ -119,6 +119,30 @@ test('a thumbnail card carries an https product image; image rules are checked b
   }
 });
 
+test('update edits an own card in place once, verifies owner and public copies, and never changes the URL', async t => {
+  const thumb = { ...card().payload, style: 'thumbnail', image: 'https://shopping.toss.im/live/temp/x.png' };
+  const puts = [];
+  const h = await harness(t, { handle: async ({ url, method, init, state }) => {
+    if (method === 'PUT') {
+      assert.equal(url.pathname, '/blocks/101');
+      puts.push(JSON.parse(init.body));
+      state.owned = [{ ...JSON.parse(init.body), id: 101 }]; state.public = [{ ...state.owned[0] }];
+      return response({ block: state.owned[0] });
+    }
+    return undefined;
+  } });
+  h.state.owned = [{ ...card().payload, id: 101 }]; h.state.public = [{ ...card().payload, id: 101 }];
+  const input = { ...card(), blockId: 101, payload: thumb };
+  const first = await h.publisher.update(input);
+  assert.equal(first.status, 'updated_verified');
+  assert.deepEqual(puts, [thumb]);
+  const again = await h.publisher.update(input);
+  assert.equal(again.status, 'already_verified');
+  assert.equal(puts.length, 1, 'no second PUT');
+  await assert.rejects(h.publisher.update({ ...input, payload: { ...thumb, url: 'https://example.com/other' } }), { code: 'INPOCK_CARD_URL_CHANGE_NOT_ALLOWED' });
+  await assert.rejects(h.publisher.update({ ...input, blockId: 999 }), { code: 'INPOCK_CARD_NOT_FOUND' });
+});
+
 test('one successful publication durably saves ACK ID before readback and acquires auth only once', async t => {
   const h = await harness(t);
   const result = await h.publisher.publish(card());
