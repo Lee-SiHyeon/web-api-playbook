@@ -12,9 +12,10 @@ const positive = (value, fallback, maximum) => {
   if (!Number.isSafeInteger(number) || number < 1 || number > maximum) fail('CATALOG_LIMIT_INVALID');
   return number;
 };
-const flags = ['id', 'store', 'marketplace', 'currency', 'country', 'language', 'sku-id', 'shop-id', 'item-id', 'review-url', 'product-url', 'page',
-  'output', 'csv', 'credentials-stdin', 'page-size', 'max-pages', 'limit', 'resume-input'];
-const argsByFlag = { 'sku-id': 'skuId', 'shop-id': 'shopId', 'item-id': 'itemId', 'review-url': 'reviewUrl', 'product-url': 'productUrl' };
+const flags = ['id', 'query', 'store', 'marketplace', 'currency', 'country', 'language', 'sku-id', 'shop-id', 'item-id', 'review-url', 'product-url', 'page',
+  'output', 'csv', 'credentials-stdin', 'page-size', 'catalog-page-size', 'category-id', 'max-pages', 'limit', 'resume-input'];
+const argsByFlag = { 'sku-id': 'skuId', 'shop-id': 'shopId', 'item-id': 'itemId', 'review-url': 'reviewUrl', 'product-url': 'productUrl',
+  'category-id': 'categoryId', 'catalog-page-size': 'pageSize' };
 let output, csvOutput;
 try {
   const [provider, operation, ...tail] = process.argv.slice(2);
@@ -22,12 +23,13 @@ try {
     await report({ schema: 'web-api-catalog-readers-v1', networkUsed: false, affiliateLinkGeneration: false, providers: CATALOG_READERS });
   } else {
     const opts = options(tail, flags), args = {};
-    for (const flag of ['id', 'store', 'marketplace', 'currency', 'country', 'language', 'sku-id', 'shop-id', 'item-id', 'review-url', 'product-url', 'page']) {
+    for (const flag of ['id', 'query', 'store', 'marketplace', 'currency', 'country', 'language', 'sku-id', 'shop-id', 'item-id', 'review-url', 'product-url', 'page', 'category-id', 'catalog-page-size']) {
       if (opts[flag] === undefined) continue;
       const value = opts[flag];
       if (typeof value !== 'string' || !value.trim() || value.length > (flag.endsWith('-url') ? 4096 : 256) ||
           /[\x00-\x1f\x7f]/.test(value)) fail('CATALOG_ARGUMENT_INVALID');
-      args[argsByFlag[flag] ?? flag] = flag === 'page' ? positive(value, 1, 10_000) : value;
+      args[argsByFlag[flag] ?? flag] = flag === 'page' ? positive(value, 1, 10_000)
+        : flag === 'catalog-page-size' ? positive(value, 24, 48) : value;
     }
     if (opts.csv && (!opts.output || operation !== 'reviews')) fail('CATALOG_CSV_REQUIRES_REVIEW_OUTPUT');
     for (const flag of ['output', 'csv']) if (opts[flag] !== undefined && typeof opts[flag] !== 'string') fail('CATALOG_OUTPUT_INVALID');

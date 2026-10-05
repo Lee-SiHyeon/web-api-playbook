@@ -1,0 +1,116 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-global",
+  "capabilityId": "catalog.category_products",
+  "checkedAt": "2026-10-05T05:48:03.419Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://global.oliveyoung.com/display/category?ctgrNo=1000000008"
+  },
+  "request": {
+    "method": "POST",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/display/category/product-data/",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "checkedAt": "2026-10-05T05:48:03.419Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "bodyFields": [
+      "accParam",
+      "langCode",
+      "previewDate",
+      "encKey",
+      "encText",
+      "dlvCntry",
+      "mrgnCntryCode",
+      "attrValNo",
+      "ctgrNo",
+      "prdtSortStdrCode",
+      "pageNum",
+      "rowsPerPage",
+      "attrValNoList",
+      "brandNoList",
+      "ctgrNoList",
+      "eventSlprcDscntRt",
+      "reviewScore",
+      "scrollY"
+    ],
+    "responseBytes": 102446,
+    "responseSha256": "7106131951d19114460455251167a2bef68ddfc19ee238fc1170eaa339c4407d"
+  },
+  "categoryIdMatched": true,
+  "productIdCount": 36,
+  "page": {
+    "pageNum": 1,
+    "pageSize": 36,
+    "totalCount": 3674,
+    "totalPages": 103,
+    "isLastPage": false,
+    "nextPage": 2
+  },
+  "currencyContextVerified": true,
+  "currencyContextRequest": {
+    "method": "GET",
+    "origin": "https://global.oliveyoung.com",
+    "path": "/product/detail",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "checkedAt": "2026-10-05T05:48:03.530Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "queryFields": [
+      "prdtNo"
+    ],
+    "contextOnly": true,
+    "responseBytes": 432667,
+    "responseSha256": "81c142750a6d5a78ac397c2d55a4f216cfdb0aef5c68050b10d8b02dc2ed62c6",
+    "productIdMatched": true,
+    "currencyCode": "USD",
+    "currencySelectedInPage": true,
+    "currencyConfirmedByInlineConfig": true,
+    "deliveryCountryCode": "1230"
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0"
+  },
+  "isLastPage": false,
+  "normalizedResult": {
+    "categoryId": "1000000008",
+    "productCount": 36,
+    "totalCount": 3674,
+    "pagination": {
+      "pageNum": 1,
+      "pageSize": 36,
+      "totalCount": 3674,
+      "totalPages": 103,
+      "isLastPage": false,
+      "nextPage": 2
+    },
+    "pageSizeSupported": [
+      24,
+      36,
+      48
+    ],
+    "isLastPage": false,
+    "currencyVerified": true,
+    "sampleProduct": {
+      "id": "GA260136559",
+      "categoryId": "1000000008",
+      "productCategoryId": "1000000016",
+      "currentPrice": "20.52",
+      "listPrice": "27.00",
+      "currency": "USD"
+    }
+  }
+}

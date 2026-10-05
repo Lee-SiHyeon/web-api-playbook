@@ -1,0 +1,429 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "schemaVersion": 1,
+  "service": "oliveyoung-public",
+  "checkedAt": "2026-10-05",
+  "scope": "Anonymous Korean Olive Young storefront reads only: search/prices, product detail/description/options/images, and review summary/body/photos/pages. Shopping Curator and Olive Young Global remain separate.",
+  "contracts": [
+    {
+      "id": "home-curation-products",
+      "method": "POST",
+      "path": "/store/curation/getCurationJsonCallBack.do",
+      "origin": "https://www.oliveyoung.co.kr",
+      "requestFields": [
+        "goodsNoStr",
+        "rankStr",
+        "viewCntStr"
+      ],
+      "responseKeys": [
+        "data",
+        "message",
+        "succeeded"
+      ],
+      "productFields": [
+        "goodsNo",
+        "goodsNm",
+        "salePrc",
+        "normPrc",
+        "gdasCnt",
+        "gdasScrVal",
+        "thnlPathNm",
+        "imgPathNm",
+        "soldOutYn"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+    },
+    {
+      "id": "catalog-search-results",
+      "method": "POST",
+      "path": "/store/search/NewMainSearchApi.do",
+      "origin": "https://www.oliveyoung.co.kr",
+      "requestFields": [
+        "collection",
+        "displayMediaTypes",
+        "goods_sort",
+        "listnum",
+        "query",
+        "quickYn",
+        "sort",
+        "startCount",
+        "typeChk"
+      ],
+      "responseKeys": [
+        "Data",
+        "Parameter"
+      ],
+      "responseDataFields": [
+        "CollName",
+        "Count",
+        "Result",
+        "TotalCount"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+    },
+    {
+      "id": "catalog-search-categories",
+      "method": "POST",
+      "path": "/store/search/NewCateSearchApi.do",
+      "origin": "https://www.oliveyoung.co.kr",
+      "requestFields": [
+        "collection",
+        "goods_sort",
+        "query",
+        "quickYn",
+        "realQuery",
+        "startCount"
+      ],
+      "responseKeys": [
+        "category"
+      ],
+      "responseCategoryFields": [
+        "name",
+        "cateGoods"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+    },
+    {
+      "id": "product-description",
+      "method": "GET",
+      "path": "/goods/api/v1/description",
+      "origin": "https://www.oliveyoung.co.kr",
+      "queryFields": [
+        "goodsNumber"
+      ],
+      "responseKeys": [
+        "code",
+        "data",
+        "isSuccess",
+        "message",
+        "pagination",
+        "status"
+      ],
+      "responseDataFields": [
+        "descriptionContents",
+        "descriptionTypeCode",
+        "goodsDetailImages"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+    },
+    {
+      "id": "product-extra-options-review-summary",
+      "method": "POST",
+      "path": "/goods/api/v1/extra",
+      "origin": "https://www.oliveyoung.co.kr",
+      "requestFields": "not captured by the sanitized request-field parser; payload not persisted",
+      "responseKeys": [
+        "code",
+        "data",
+        "isSuccess",
+        "message",
+        "pagination",
+        "status"
+      ],
+      "responseDataFields": [
+        "goodsNumber",
+        "optionDetail",
+        "reviewInfoDto"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json",
+      "implementationGuard": "Do not synthesize this POST body until its first-party caller source is inspected.",
+      "implementationBoundary": "The extra caller body is source mapped. getProduct fails closed when a limitedInfoDto is present with reservationFlag false because the imported isLimited predicate was not recovered."
+    },
+    {
+      "id": "review-option-counts",
+      "method": "GET",
+      "path": "/review/api/v2/reviews/options/A000000263510/count",
+      "origin": "https://m.oliveyoung.co.kr",
+      "pathProductId": "A000000263510",
+      "responseDataFields": [
+        "hasZeroReviewOption",
+        "isReviewSkinFilterAvailability",
+        "productItemReviewCountList",
+        "relatedProductReviewCountList"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+    },
+    {
+      "id": "review-statistics",
+      "method": "GET",
+      "path": "/review/api/v2/reviews/A000000263510/stats",
+      "origin": "https://m.oliveyoung.co.kr",
+      "pathProductId": "A000000263510",
+      "responseDataFields": [
+        "goodsImg",
+        "goodsName",
+        "goodsNumber",
+        "ratingDistribution",
+        "reviewCount",
+        "satisfactionStats"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+    },
+    {
+      "id": "review-cursor-list",
+      "method": "POST",
+      "path": "/review/api/v2/reviews/cursor",
+      "origin": "https://m.oliveyoung.co.kr",
+      "requestFields": [
+        "goodsNumber",
+        "page",
+        "reviewType",
+        "size",
+        "sortType"
+      ],
+      "responseDataFields": [
+        "goodsReviewList",
+        "hasNext",
+        "nextCursorCount",
+        "nextCursorId",
+        "nextCursorScore"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json",
+      "cursorDefaultsSourceInspected": {
+        "sortType": "USEFUL_SCORE_DESC",
+        "page": 0,
+        "size": 10,
+        "reviewType": "ALL",
+        "nextPageRequestFields": [
+          "cursorId",
+          "cursorScore",
+          "cursorCount"
+        ],
+        "evidenceLevel": "source_inspected_from_live_loaded_bundle; next_page_http_replay_not_verified"
+      }
+    },
+    {
+      "id": "photo-review-list",
+      "method": "POST",
+      "path": "/review/api/v2/reviews/photo-reviews",
+      "origin": "https://m.oliveyoung.co.kr",
+      "requestFields": [
+        "goodsNumber",
+        "page",
+        "size"
+      ],
+      "responseDataFields": [
+        "createdDateTime",
+        "photoReviewList",
+        "reviewId"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json",
+      "requestDefaultsSourceInspected": {
+        "itemNumber": "selected item id",
+        "page": "max(0,pageNumber-1)",
+        "size": 10,
+        "evidenceLevel": "source_inspected_from_live_loaded_bundle"
+      }
+    },
+    {
+      "id": "review-summary",
+      "method": "GET",
+      "path": "/review/api/v1/reviews/A000000263510/summary",
+      "origin": "https://m.oliveyoung.co.kr",
+      "pathProductId": "A000000263510",
+      "responseDataFields": [
+        "feature1Description",
+        "feature1Title",
+        "feature2Description",
+        "feature2Title",
+        "feature3Description",
+        "feature3Title",
+        "negativeRatio",
+        "positiveRatio"
+      ],
+      "evidenceLevel": "anonymous_headed_browser_xhr_200",
+      "liveReceipt": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json"
+    }
+  ],
+  "browserDiscovery": {
+    "mode": "headed Chromium, fresh anonymous context, ordinary default UA, no stealth/fingerprint overrides, no login, no CAPTCHA click or bypass",
+    "challenge": "The standard Cloudflare check completed during ordinary page loading; the official homepage returned HTTP 200 and loaded its storefront app. No challenge-solving action was taken.",
+    "homepage": {
+      "url": "https://www.oliveyoung.co.kr/store/main/main.do",
+      "status": 200,
+      "title": "올리브영 온라인몰"
+    },
+    "searchJourney": {
+      "uiInput": "#query",
+      "action": "submitted one public keyword through the visible search form",
+      "resultDocument": "/store/search/getSearchMain.do",
+      "resultStatus": "loaded",
+      "detailLinkCount": 1,
+      "sampleProductId": "A000000263510"
+    },
+    "detailJourney": {
+      "documentPath": "/store/goods/getGoodsDetail.do",
+      "status": 200,
+      "descriptionXhr": 200,
+      "extraXhr": 200
+    },
+    "reviewJourney": {
+      "action": "clicked visible 리뷰 더보기 control",
+      "reviewOrigin": "https://m.oliveyoung.co.kr",
+      "observedJsonRequests": 5,
+      "cursorPageRecords": 10,
+      "photoReviewRecords": 10,
+      "paginationFields": [
+        "hasNext",
+        "nextCursorCount",
+        "nextCursorId",
+        "nextCursorScore"
+      ]
+    },
+    "evidenceFiles": [
+      "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-catalog-xhr-discovery-2026-10-05-v3.json",
+      "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-browser-boundary-2026-10-05.json"
+    ],
+    "screenshot": "/home/worker/artifacts/oliveyoung-korea-public-20261005/headed-product-reviews-top.png",
+    "security": {
+      "accountLoginAttempted": false,
+      "credentialValuesUsed": false,
+      "cookieValuesPersisted": false,
+      "cookieValuesInNodeHandoffMemoryOnly": true,
+      "browserSandboxEnabled": false,
+      "reason": "Playwright Chromium command line included --no-sandbox even though sandbox was requested; the proof is reported as headed browser but not sandbox-enabled."
+    }
+  },
+  "independentHttpReplay": {
+    "browserReplayAndNodeAreSeparate": true,
+    "wwwCatalogCalls": [
+      {
+        "method": "POST",
+        "path": "/store/search/NewMainSearchApi.do",
+        "browserStatus": 200,
+        "nodeStatus": 403,
+        "nodeMime": "text/html",
+        "nodeReplayModes": [
+          "cookie_free",
+          "captured_default_browser_ua_and_observed_headers_cookie_free",
+          "captured_default_browser_ua_observed_headers_and_current_anonymous_browser_cookies_memory_only"
+        ]
+      },
+      {
+        "method": "GET",
+        "path": "/goods/api/v1/description",
+        "browserStatus": 200,
+        "nodeStatus": 403,
+        "nodeMime": "text/html",
+        "nodeReplayModes": [
+          "cookie_free",
+          "captured_default_browser_ua_and_observed_headers_cookie_free",
+          "captured_default_browser_ua_observed_headers_and_current_anonymous_browser_cookies_memory_only"
+        ]
+      },
+      {
+        "method": "POST",
+        "path": "/goods/api/v1/extra",
+        "browserStatus": 200,
+        "nodeStatus": 403,
+        "nodeMime": "text/html",
+        "nodeReplayModes": [
+          "cookie_free",
+          "captured_default_browser_ua_and_observed_headers_cookie_free",
+          "captured_default_browser_ua_observed_headers_and_current_anonymous_browser_cookies_memory_only"
+        ]
+      }
+    ],
+    "mReviewCall": {
+      "method": "GET",
+      "path": "/review/api/v2/reviews/A000000263510/stats",
+      "browserStatus": 200,
+      "nodeStatus": 403,
+      "nodeMime": "text/html",
+      "browser": false,
+      "cookiesSent": false
+    },
+    "interpretation": "The endpoint contracts were observed in a normal anonymous browser session. Direct Node business reads did not succeed; passing the actual default UA, observed request headers, and current anonymous cookies did not clear the 403 on www-origin requests. A login/account requirement is not established. The separate m-origin review call only had a cookie-free Node negative-control replay; its full-header replay is unverified.",
+    "firstFailure": "direct_node_http_response_is_cloudflare_html_403",
+    "noEndpointGuessed": true
+  },
+  "runtimeStatus": {
+    "captured": true,
+    "clientExists": true,
+    "localTests": 12,
+    "remnantFree": true,
+    "credentialPropagation": "optional in-memory service-scoped cookie/User-Agent input only; no CLI wiring in this slice",
+    "liveReplay": false
+  },
+  "unverified": [
+    "The exact search builder has dynamic form-state fields; the live request values were intentionally not persisted. The source maps its form fields, result groups, price branches and offset/TotalCount page inputs.",
+    "GET /goods/api/v1/detail is source mapped but absent from the current browser request/response capture, so its live response envelope is not established.",
+    "The extra request body source is mapped, but its live request values were not persisted; option reservation calculation remains fail-closed when limitedInfoDto is present and reservationFlag is false because the imported isLimited predicate was not recovered.",
+    "Review browser response/page data is captured as schema-only metadata. Direct Node page replay was blocked; cursor values and cross-transport review result binding were not independently read back.",
+    "No repeatable pure-HTTP API success has been established from this worker; direct Node, Python requests and cookie-free curl returned Cloudflare 403 HTML on the tested exact description endpoint."
+  ],
+  "firstPartySourceContract": {
+    "file": "/home/worker/artifacts/oliveyoung-focused-20261005/korea-firstparty-source-contracts.json",
+    "sha256": "11cb5149ea5655d5715c7a9e24f5fc2c70565681558f2f974863e8cad8ccd98d",
+    "reviewedExactAssets": 42,
+    "searchBundleSha256": "faa35cec0ffb312b8c8bd1f08a3ad5bd42c26ee90e21e342326fe6744bf098b0",
+    "currentDetailBundleSha256": "ba5d6e93d150e15a93f6f297cc67b95582226aa4bae9fed01bb7e801697a52e9",
+    "reviewCursorBundleSha256": "80feddd680c100ca9b30f512edd70ebdf1070cd279689976d8fc5baf90d9d9fd",
+    "reviewSchemaBundleSha256": "1b4be1923e5eb26b103dc409120bb10eb9ea8a1f0e8890b61d42a611c4e2c3f1",
+    "searchPriceMapping": {
+      "productId": "GOODS_NO",
+      "title": "GOODS_NM",
+      "brand": "ONL_BRND_NM",
+      "category": "DISP_CAT_NO",
+      "soldOut": "GOODS_SOUT_INFO == Y",
+      "currentPrice": "SALE_PRC when NORM_PRC differs; NORM_PRC when equal and DSCNT_YN=Y; otherwise SUP_PRC",
+      "referencePrice": "SUP_PRC when rendered as tx_org",
+      "rangeHint": "ITEM_CNT > 1 appends a tilde; this is not a selected option quote",
+      "currency": "KRW from the Korean storefront display"
+    },
+    "detailBoundary": "GET /goods/api/v1/detail request query and page-consumed fields are source mapped, but no matching request/response appears in the sanitized current browser capture; live response schema remains unverified.",
+    "extraBodyBoundary": "POST /goods/api/v1/extra caller body and appFlag:false are source mapped. For an option whose limitedInfoDto is present and reservationFlag is false, the client fails closed because the imported isLimited predicate was not recovered."
+  },
+  "independentHttpTransport": {
+    "browserDescriptionGet": {
+      "status": 200,
+      "mime": "application/json",
+      "bytes": 6479,
+      "requestedGoodsNumberInQuery": true,
+      "goodsNumberEchoedInResponse": false
+    },
+    "pythonRequests": {
+      "cookieFree": {
+        "status": 403,
+        "mime": "text/html",
+        "protocol": "HTTP/1.1"
+      },
+      "currentCfCookiesAndActualUserAgent": {
+        "status": 403,
+        "mime": "text/html",
+        "protocol": "HTTP/1.1"
+      }
+    },
+    "systemCurl": {
+      "cookieFree": {
+        "status": 403,
+        "mime": "text/html",
+        "protocol": "HTTP/2"
+      },
+      "currentCfCookiesAndActualUserAgent": "unknown_due_metadata_parser_failure"
+    },
+    "nodeSearchDetailExtra": "403 text/html for captured contracts including actual browser User-Agent, observed www request headers, and current anonymous cookies in memory",
+    "reviewMOrigin": "browser XHR 200; cookie-free Node GET stats negative control 403 text/html; full-header native replay unverified",
+    "accountLoginRequirement": "not established",
+    "curlCookieMode": "unknown_due_initial_writeout_metadata_parser_failure; cookie-free corrected curl is recorded as HTTP/2 403"
+  },
+  "implementation": {
+    "file": "lib/commerce/oliveyoung-korea-public.mjs",
+    "sha256": "3bd0dfdd336d0b5fa3558d68e213362e5c379bcd26d62a3de661b23f86b80d16",
+    "export": "createOliveyoungKoreaPublicClient",
+    "testFile": "tests/commerce-oliveyoung-korea-public.test.mjs",
+    "testSha256": "4c62eec222dcacb0960583ddf62785fd304e19448851dc7fd091f21e54cf97da",
+    "localTestCount": 12,
+    "liveStatus": "direct HTTP is still blocked; local tests do not prove remote replay"
+  }
+}

@@ -65,3 +65,14 @@ test('review paging records the real provider size and rejects Ulta sizes above 
   assert.equal(effectiveReviewPageSize('ulta', 25), 25);
   assert.throws(() => effectiveReviewPageSize('ulta', 26), { code: 'ULTA_REVIEW_INPUT_INVALID' });
 });
+
+test('Olive Young suggestions and best sellers stay separate from product keyword search', async () => {
+  const factory = { 'oliveyoung-global': () => ({ getSearchSuggestions: async ({ query }) =>
+    ({ query, keywords: ['mask'], categories: [], brands: [] }), getBestSellers: async () => ({ products: [], page: { completeCatalog: false } }) }) };
+  const reader = await createCatalogReader({ provider: 'oliveyoung-global', operation: 'suggest', args: { query: 'mask' }, factories: factory });
+  const result = await reader.product(); assert.deepEqual(result.data.keywords, ['mask']); assert.equal(result.requestedId, null);
+  const browse = await createCatalogReader({ provider: 'oliveyoung-global', operation: 'best-sellers', factories: factory });
+  assert.equal((await browse.product()).data.page.completeCatalog, false);
+  await assert.rejects(createCatalogReader({ provider: 'oliveyoung-global', operation: 'best-sellers', args: { query: 'mask' } }), { code: 'CATALOG_JOB_INVALID' });
+  await assert.rejects(createCatalogReader({ provider: 'oliveyoung-global', operation: 'product', args: {} }), { code: 'CATALOG_PRODUCT_ID_REQUIRED' });
+});

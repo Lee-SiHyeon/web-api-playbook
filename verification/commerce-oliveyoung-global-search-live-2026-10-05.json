@@ -16,7 +16,10 @@
       "method": "GET",
       "origin": "https://global.oliveyoung.com",
       "path": "/kr/search/results",
-      "httpStatuses": [307, 403],
+      "httpStatuses": [
+        307,
+        403
+      ],
       "mime": "text/html",
       "title": "Just a moment..."
     },
@@ -30,5 +33,157 @@
     "productResultsXhrCount": 0,
     "screenshot": "/home/worker/artifacts/affiliate-expansion-20261005/oliveyoung-global-search-blocked.png"
   },
-  "interpretation": "No reusable product search XHR was observed. The anonymous public homepage best-seller XHR is implemented separately and does not claim complete or keyword search coverage."
+  "reachableFirstPartyHomeAssetFrontier": {
+    "homeDocument": {
+      "status": 200,
+      "bytes": 406224
+    },
+    "scriptTags": 54,
+    "uniqueScriptsFetched": 54,
+    "scriptFetchStatus": 200,
+    "aggregateScriptBytes": 2955488,
+    "bounds": {
+      "concurrency": 4,
+      "perAssetBytes": 1048576,
+      "aggregateBytes": 15728640
+    },
+    "routeMapping": {
+      "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/common/urlmapping.js",
+      "sha256": "74fc443726a5a55d74201e2bc57addab91e62aaed90c05055c74d70feae23d15",
+      "finding": "The route mapping labels /search/results as the oyg-cbe-fe search-results service, but no such app bundle was referenced from the reachable homepage script frontier."
+    }
+  },
+  "firstPartySearchSource": [
+    {
+      "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.v2.js",
+      "httpStatus": 200,
+      "responseBytes": 18021,
+      "sha256": "78f0d60ebfcbbfdf49317faa3332d1280dd4b33d85727cd81a2e4754f9882f43",
+      "operation": {
+        "method": "GET",
+        "path": "/api/v1/search/keywords/auto-complete",
+        "queryFields": [
+          "query"
+        ]
+      }
+    },
+    {
+      "url": "https://dist.oliveyoung.com/fo/be92e76367/resources/js/biz/display/header-search.tab-layer.v2.js",
+      "httpStatus": 200,
+      "responseBytes": 11895,
+      "sha256": "59f983cf706b1f2f0d789a823c178b6b58df7b38fea3b6f3f80be7f7b603bb9c",
+      "operation": {
+        "method": "GET",
+        "path": "/api/v1/search/keywords/popular",
+        "query": {
+          "size": 10
+        }
+      }
+    }
+  ],
+  "cookieFreeNodeReplays": [
+    {
+      "method": "GET",
+      "origin": "https://global.oliveyoung.com",
+      "path": "/api/v1/search/keywords/auto-complete",
+      "queryFields": [
+        "query"
+      ],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 495,
+      "responseKeys": [
+        "brands",
+        "categories",
+        "keywords"
+      ],
+      "shape": {
+        "brands": 3,
+        "categories": 0,
+        "keywords": 3
+      },
+      "productRows": 0,
+      "priceFields": 0,
+      "credentialsUsed": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://global.oliveyoung.com",
+      "path": "/api/v1/search/keywords/auto-complete",
+      "queryFields": [
+        "query"
+      ],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 178,
+      "responseKeys": [
+        "brands",
+        "categories",
+        "keywords"
+      ],
+      "shape": {
+        "brands": 0,
+        "categories": 1,
+        "keywords": 0
+      },
+      "productRows": 0,
+      "priceFields": 0,
+      "credentialsUsed": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://global.oliveyoung.com",
+      "path": "/api/v1/search/keywords/popular",
+      "queryFields": [
+        "size"
+      ],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 744,
+      "responseKeys": [
+        "popularKeywords",
+        "aggregatedAt"
+      ],
+      "rows": 10,
+      "productRows": 0,
+      "priceFields": 0,
+      "credentialsUsed": false
+    }
+  ],
+  "productResultsApi": "not_observed_or_independently_replayed",
+  "interpretation": "The new suggestions and popular-keyword JSON APIs are independently replayable, but return no product IDs, offers, prices or product-result pagination. Product keyword search remains a real blocker; the 20-item homepage best-seller XHR is a separately named bounded browse operation.",
+  "freshAnonymousNodeProbe": {
+    "checkedAt": "2026-10-05T05:48:04.732Z",
+    "browserUsed": false,
+    "credentialsUsed": false,
+    "cookiesSent": false,
+    "implementationHashBefore": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0",
+    "implementationHashAfter": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0",
+    "requests": [
+      {
+        "method": "GET",
+        "origin": "https://global.oliveyoung.com",
+        "path": "/kr/search/results",
+        "httpStatus": 403,
+        "mime": "text/html",
+        "redirectLocationPresent": false,
+        "browserUsed": false,
+        "anonymous": true,
+        "cookieSent": false,
+        "credentialsUsed": false
+      },
+      {
+        "method": "GET",
+        "origin": "https://global.oliveyoung.com",
+        "path": "/display/search/search-word",
+        "httpStatus": 403,
+        "mime": "text/html",
+        "redirectLocationPresent": false,
+        "browserUsed": false,
+        "anonymous": true,
+        "cookieSent": false,
+        "credentialsUsed": false
+      }
+    ]
+  }
 }

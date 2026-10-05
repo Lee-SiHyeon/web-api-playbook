@@ -16,6 +16,8 @@ const ARGUMENTS = {
   banggood: ['id', 'query', 'currency', 'categoryId'], awin: ['id', 'query', 'locale', 'advertiserId', 'pageSize'],
   impact: ['id', 'query', 'catalogId', 'pageSize'], 'printful-api': ['id', 'region', 'currency', 'productionCurrency', 'pageSize'],
   oliveyoung: ['query', 'pageSize'], 'shopee-id': ['id', 'query', 'pageSize'],
+  'oliveyoung-public': ['query', 'pageSize'],
+  'oliveyoung-global': ['id', 'country', 'currency', 'categoryId', 'pageSize'],
   'rakuten-ichiba': ['id', 'query', 'shopCode', 'genreId', 'pageSize'],
   'rakuten-advertising': ['query', 'merchantId', 'pageSize'], 'sephora-affiliate': ['query', 'merchantId', 'pageSize'],
   'ulta-affiliate': ['id', 'query', 'catalogId', 'pageSize'], sephora: ['query', 'pageSize'], ulta: ['query', 'pageSize'],
@@ -63,6 +65,8 @@ try {
     if (provider === 'cjdropshipping' && args.id && args.country) fail('COMMERCE_DESTINATION_UNSUPPORTED_FOR_DETAIL');
     if (operation === 'product' && !args.id) fail('COMMERCE_PRODUCT_ID_REQUIRED');
     if (operation === 'search' && args.id) fail('COMMERCE_JOB_INVALID');
+    if (provider === 'oliveyoung-global' && operation === 'best-sellers' && args.id) fail('COMMERCE_JOB_INVALID');
+    if (provider === 'oliveyoung-global' && operation === 'category' && !args.categoryId) fail('COMMERCE_CATEGORY_ID_REQUIRED');
     const maxOffers = integer(opts.limit ?? job?.maxOffers, 100, 50_000);
     const maxPages = integer(opts['max-pages'] ?? job?.maxPages, operation === 'product' ? 1 : 3, 100);
     if (maxOffers > 200 && !opts.output) fail('COMMERCE_OUTPUT_REQUIRED');
