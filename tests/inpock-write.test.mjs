@@ -20,7 +20,7 @@ const ordered = value => Object.fromEntries(Object.keys(value).sort().map(key =>
 const hash = value => createHash('sha256').update(JSON.stringify(ordered(value))).digest('hex');
 const response = (value, status = 200) => ({ status, headers: { 'content-type': 'application/json' }, raw: JSON.stringify(value) });
 
-async function harness(t, { handle, actorValue = actor, ownerValue = owner, wrapJournal } = {}) {
+async function harness(t, { handle, actorValue = actor, ownerValue = owner, wrapJournal, expectedPayload = card().payload } = {}) {
   const scratch = process.env.TMPDIR || path.join(os.homedir(), '.nad-scratch', 'tmp');
   await fs.mkdir(scratch, { recursive: true });
   const root = await fs.mkdtemp(path.join(scratch, 'inpock-write-tests-'));
@@ -37,7 +37,7 @@ async function harness(t, { handle, actorValue = actor, ownerValue = owner, wrap
       state.postCalls++;
       assert.equal(parsed.pathname, '/blocks');
       assert.deepEqual(init.headers, { 'content-type': 'application/json' });
-      assert.deepEqual(JSON.parse(init.body), card().payload);
+      assert.deepEqual(JSON.parse(init.body), expectedPayload);
     }
     const custom = await handle?.({ url: parsed, method, init, state, calls, events });
     if (custom !== undefined) return custom;
@@ -104,6 +104,18 @@ test('confirmation and actor mismatches prevent POST and invalid confirmation ne
     await assert.rejects(h.publisher.publish(input), { code: 'OWNER_MISMATCH' });
     assert.equal(h.state.postCalls, 0);
     assert.equal(h.calls.length, 0);
+  }
+});
+
+test('a thumbnail card carries an https product image; image rules are checked before any request', async t => {
+  const thumb = { ...card(), payload: { ...card().payload, style: 'thumbnail', image: 'https://shopping.toss.im/live/temp/x.png' } };
+  const h = await harness(t, { expectedPayload: thumb.payload });
+  const result = await h.publisher.publish(thumb);
+  assert.equal(result.readbackVerified, true);
+  for (const payload of [{ ...thumb.payload, image: '' }, { ...thumb.payload, image: 'http://example.com/x.png' }, { ...card().payload, image: 'https://example.com/x.png' }, { ...card().payload, style: 'big' }]) {
+    const bad = await harness(t);
+    await assert.rejects(bad.publisher.publish({ ...thumb, payload }), { code: 'INPOCK_CARD_INPUT_INVALID' });
+    assert.equal(bad.calls.length, 0);
   }
 });
 
