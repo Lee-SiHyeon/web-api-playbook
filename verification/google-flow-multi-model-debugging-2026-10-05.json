@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-05T10:05:35.253Z",
+  "scope": "Multi-model debugging, offline serialization, protected HTTP read provenance",
+  "consultations": [
+    {
+      "provider": "Claude Code configured first-party CLI",
+      "configuredModel": "claude-opus-5-5",
+      "actualResponses": [
+        "initial diagnosis",
+        "narrow static parser review"
+      ],
+      "advertisedTools": 0,
+      "toolCalls": 0,
+      "excludedResponse": "cross-review response reported safety-classifier clipping; substantive content unavailable"
+    },
+    {
+      "provider": "Antigravity configured CLI",
+      "configuredModel": "gemini-3.8-flash-medium",
+      "jobs": [
+        "staffer-muv23kty-788477fc",
+        "staffer-muv2hamj-05ddb2f8"
+      ],
+      "unexpectedMutation": "Companion reported a protocol.mjs edit despite no-edit instruction; final scoped diff was independently inspected and tests required before acceptance"
+    },
+    {
+      "provider": "Grok normal web conversation",
+      "exactModelVerified": false,
+      "actualResponseObserved": true,
+      "responseSavedOutsideGit": true
+    }
+  ],
+  "liveReadProvenance": {
+    "startedAt": "2026-10-05T10:04:26.660Z",
+    "finishedAt": "2026-10-05T10:04:45.411Z",
+    "passed": true,
+    "documentHttpStatus": 200,
+    "readRpcCount": 5,
+    "allReadRpcHttp200": true,
+    "allConstructedRequestsUseSameDocumentPair": true,
+    "mediaCount": 36,
+    "creditBalance": 1038,
+    "generationGuardReason": "FLOW_GENERATION_UNRESOLVED",
+    "generationPostCount": 0,
+    "downloadCount": 0,
+    "browserUsedForRecurringReads": false
+  },
+  "offlineSerialization": {
+    "version": 1,
+    "checkedAt": "2026-10-05T09:58:55.803Z",
+    "mode": "offline_only",
+    "generationPostCount": 0,
+    "networkRequestCount": 0,
+    "downloadCount": 0,
+    "fixture": "non-secret synthetic prompt and identifiers; no first-party input",
+    "checks": {
+      "formRoundtripPreservesNestedJson": true,
+      "unicodeNewlineReservedCharacterPromptPreserved": true,
+      "uniqueFormFieldCount": 2,
+      "formFieldsUnique": true,
+      "fullContextLength": 11,
+      "omittedContextLength": 10,
+      "omittedDeltaIsFinalContextSlotRemovalOnly": true
+    },
+    "passed": true,
+    "interpretation": "Checks native URLSearchParams encoder fidelity and the exact omission delta; does not establish server acceptance or valid-input HTTP generation."
+  },
+  "parserEvidence": {
+    "candidateErrorInfoTupleCaptured": false,
+    "historicalRawResponseRetained": false,
+    "diagnosticTestsSynthetic": true,
+    "candidateReasonAuthoritative": false,
+    "arbitraryUppercaseValueSelectionRemoved": true,
+    "duplicateMatchingRpcFramesBecomeAmbiguous": true,
+    "candidateMetadataValuesRecorded": false
+  },
+  "validation": {
+    "flowTestsPassed": 89,
+    "flowTestsFailed": 0,
+    "diffWhitespaceCheckPassed": true
+  },
+  "heldWriteReadback": {
+    "state": "needs_reconciliation",
+    "unchangedUpdatedAt": "2026-10-05T09:08:00.966Z",
+    "generationFencePresent": true,
+    "fenceMatchesJob": true,
+    "lastObservedHttpStatus": 200,
+    "lastObservedNumericRpcStatus": 7,
+    "newReconciliationEventWritten": false
+  },
+  "conclusions": {
+    "missingVerifiedPureHttpIssuerIsImplementationBlocker": true,
+    "omittedInputProbesIsolateSingleValue": false,
+    "captchaOrFingerprintSoleCauseProven": false,
+    "validSdkInputHttpSufficiencyTested": false,
+    "ordinaryHttpIssuerObserved": false,
+    "ordinaryHttpIssuerProvenAbsentEverywhere": false,
+    "pureHttpCreateLiveReplay": false,
+    "unresolvedJournalAndProjectFenceRetained": true,
+    "resendPerformed": false
+  },
+  "interpretation": "Read provenance and local encoder fidelity are verified. They do not establish write authorization, input sufficiency, or a complete pure-HTTP generation route. No additional Flow create or download was performed during these consultations."
+}

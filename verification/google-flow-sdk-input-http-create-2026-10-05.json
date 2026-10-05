@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-05T12:29:26.177Z",
+  "mode": "captured_browser_request_over_node_http_diagnostic",
+  "wholeOperationPureHttp": false,
+  "createTransport": "Node fetch, ordinary HTTP",
+  "inputProducer": "normal Flow browser SDK, VIDEO_GENERATION",
+  "inputIssuerPureHttpVerified": false,
+  "operation": "YhhmEf",
+  "projectIdRecorded": false,
+  "requestIdsRecorded": false,
+  "mediaIdRecorded": false,
+  "promptRecorded": false,
+  "cookiesOrTokensRecorded": false,
+  "signedUrlRecorded": false,
+  "rawResponseRecorded": false,
+  "browser": {
+    "createCancelledBeforeSend": true,
+    "loadingFailedCancelled": true,
+    "createResponseObserved": false,
+    "helperClosedBeforeHttpPost": true
+  },
+  "session": {
+    "scopedCookieCount": 21,
+    "postAndReadCookieSetVerified": true,
+    "browserIdentityHeadersCopied": false,
+    "preflightCookieRotationObserved": true,
+    "protectedReadbackUsedCapturedSession": true
+  },
+  "generation": {
+    "postCount": 1,
+    "createAt": "2026-10-05T12:23:39.546Z",
+    "inputAgeAtSendMs": 8419,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 1462,
+    "matchingRpcFrameCount": 1,
+    "acknowledgementAndMediaId": true,
+    "publicErrorLiteralCount": 0,
+    "exactRequestOwnerReadback": true,
+    "ownerReadbackAt": "2026-10-05T12:23:55.334Z",
+    "projectMediaBefore": 36,
+    "projectMediaAfter": 37,
+    "completedState": 3,
+    "positiveVideoBytes": true,
+    "downloadReadyAt": "2026-10-05T12:24:30.064Z",
+    "downloadedAt": "2026-10-05T12:24:32.884Z",
+    "downloadCount": 1,
+    "finalJournalState": "downloaded",
+    "newWriteCount": 1,
+    "retries": 0
+  },
+  "native": {
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": 8,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "bytes": 4172459,
+    "sha256": "d452ce5b647f5831e46a1ce1e39040f193919a9709e81ae812f6d82c336a3b9e",
+    "fullDecodePassed": true
+  },
+  "derivative480p": {
+    "generatedBy": "local FFmpeg conversion of this new HTTP-created native clip",
+    "width": 854,
+    "height": 480,
+    "durationSeconds": 8,
+    "fps": 24,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "bytes": 1598075,
+    "sha256": "2257b1704cc476f2acb15b79ded3825dfc8f66377cfd6fa287e4cec3b6b106bc",
+    "fullDecodePassed": true,
+    "blackdetect": {
+      "minimumDurationSeconds": 0.5,
+      "pixelThreshold": 0.1,
+      "detectedSpans": 0
+    },
+    "freezedetect": {
+      "noiseDb": -50,
+      "minimumDurationSeconds": 1,
+      "detectedSpans": 0
+    }
+  },
+  "oldProbeReconciliation": {
+    "checkedAt": "2026-10-05T11:51:13.553Z",
+    "mediaCount": 36,
+    "creditBalance": 1050,
+    "exactRequestMatch": false,
+    "explicitRpcErrorInOriginalReceipt": true,
+    "originalAcknowledgementAbsent": true,
+    "originalRequestElapsedSeconds": 9792,
+    "reportedCreditValueChanged": true,
+    "creditValueUsedAsAbsenceProof": false,
+    "newCreateCount": 0,
+    "decision": "manual_explicit_denial_reconciled_with_delayed_exact_owner_readback",
+    "fenceReleased": true
+  },
+  "conclusion": {
+    "ordinaryNodeHttpCanCreateWithFreshSdkInput": true,
+    "nodeTransportAloneInevitablyRejected": false,
+    "pureHttpInputIssuanceImplemented": false,
+    "normalPureHttpCliStillFailsBeforePost": true,
+    "omissionDenialSoleCauseIsolated": false,
+    "omissionContextLengthDelta": [
+      11,
+      10
+    ],
+    "automaticRpcErrorFenceReleaseAuthorized": false
+  },
+  "postDownloadJournalValidation": {
+    "checkedAt": "2026-10-05T12:45:32.863Z",
+    "journalState": "downloaded",
+    "inputMode": "browser_sdk_diagnostic",
+    "journalSchemaReadable": true,
+    "unresolvedProjectJob": false,
+    "generationFencePresent": false,
+    "createCount": 0,
+    "downloadCount": 0,
+    "provenanceRelabeled": false,
+    "offlineRegressionTests": {
+      "passed": 93,
+      "total": 93
+    }
+  }
+}
