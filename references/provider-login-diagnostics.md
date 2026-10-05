@@ -1,5 +1,43 @@
 # 외부 XHR 클라이언트 로그인 실측 (2026-10-04)
 
+## Linux 브라우저 요청 재현과 클라이언트 반영 (2026-10-05)
+
+두 원본 클라이언트에 선택 가능한 Linux Chrome 호환 HTTP 전송을 반영했다.
+[Gemini 변경](https://github.com/Lee-SiHyeon/gemini-web-xhr-client/commit/e0732e7)과
+[Grok 변경](https://github.com/Lee-SiHyeon/grok-web-xhr-client/commit/a850248)은
+`curl_cffi 0.16.3`의 `chrome150` TLS 프로필과 Linux Chrome150 UA·client hints를
+사용한다. 기존 공개 문서·모델 조회 계약만 실행하며, 브라우저와 보호 저장소를 사용하지
+않는다. 두 CLI를 실제 워커에서 실행해 Gemini HTML200·867269바이트와 Grok JSON200·
+898바이트·모델3개를 검증했고, 두 요청의 협상 결과는 모두 HTTP/2였다.
+Gemini39개·Grok26개 테스트와 문법 검사가 통과했다.
+
+각 checkout에서 Python 환경에 `curl-cffi==0.16.3`을 설치하고 다음처럼 실행한다.
+`--python`에는 설치한 환경의 실행 파일 절대 경로를 지정한다.
+
+```text
+Gemini: node src/cli.mjs public-status --transport chrome --python /absolute/venv/bin/python
+Grok:   node src/cli.mjs models --transport chrome --python /absolute/venv/bin/python
+```
+
+로그인은 별도 경계다. 정상 Grok 화면에서 `email`과 비어 있지 않은
+`castleRequestToken` 필드가 있는 실제 요청을 관측하고 브라우저 전송을 취소했다.
+현재 origin의 실행 중 세션을 메모리로 전달해 직접 HTTP POST를1회 보냈으나,
+`/api/auth/sso/check`는 Cloudflare 차단 표식이 있는 HTML403을 반환했다.
+SDK 필드 관측과 SDK 토큰 유효성 검증은 구분하며,403의 서버 판정 원인은 미확정이다.
+SDK 입력 획득에는 브라우저를 사용했고, 공개 조회용 전송이 로그인 producer를 구현한
+것으로 표시하지 않는다. Chrome150 호환 프로필이 실제 Chromium151 또는 Chrome154의
+패킷과 완전히 같다는 검증도 없다.
+
+Google 배포 Linux Chrome154에서도 일반 보안 설정과 동일한 작업용 프로필로 Gemini
+이메일을 제출했다. 최종 `/v3/signin/rejected`와 `This browser or app may not be secure`를
+확인했다. Grok의 일반 Chrome154 로그인 문서도 Cloudflare403으로 막혔다.
+두 서비스의 비밀번호 제출은0회이며, 계정 인증·대화·이미지·영상의 HTTP 실증은 미완료다.
+
+[현재 실행·코드 해시·인증 경계 기록](../verification/provider-linux-browser-compatible-replay-2026-10-05.json)과
+[현재 첫-party SDK producer 경로](../verification/grok-castle-sdk-producer-chain-2026-10-05.json)에
+필드명·상태·길이·해시만 남겼다. 원본 클라이언트의 `discovery`에도 공개 조회와 로그인
+경계 영수증을 저장했다. 쿠키 값·SDK 토큰·이메일·비밀번호·원문 인증 응답은 포함하지 않았다.
+
 ## Linux 브라우저 호환 HTTP 전송 대조 (2026-10-05)
 
 `curl_cffi 0.16.3`의 Chrome150 TLS/HTTP 호환 프로필과 새 익명 메모리 세션으로
