@@ -153,3 +153,5 @@ The live run exposed and fixed three local integration issues: jsdom `ResourceLo
 요청 토큰 누락은 이제 FLOW_DOCUMENT_REQUEST_TOKEN_MISSING·sessionStatus=undetermined로 보고하고, CLI에는 상태 코드·허용된 MIME·경로 종류·마커 존재 여부만 남깁니다. 인증 쿠키 삭제는 리다이렉트 상태와 함께 별도 코드로 우선 보고하며 리다이렉트 자동 추적은 하지 않습니다. 정상 로그인 제출 계약은 아직 캡처하지 못했습니다. 지원 브라우저의 DOM·스크린샷·scoped 쿠키 조회가 시간 초과이고, 당시 PC 여유 메모리는 140MB였습니다. 자원 부족이 시간 초과의 원인이라고 확정하지 않습니다. 브라우저 연결이 응답하면 정상 Google 로그인 요청 순서를 관찰해 HTTP 복구 구현을 이어가야 합니다.
 
 [로그인 복구 조사 근거](../verification/google-flow-login-recovery-investigation-2026-10-06.json)
+
+2026-10-06T06:51Z 추가 소스 점검: 비로그인 홈과 현재 프로젝트 HTML이 참조한 공개 Flow JS(995,891바이트)는 동일했고, 기존 보호 RPC 식별자 YhhmEf·Zzl0ze·jwpduf가 없었습니다. 다른 관측된 공개 스크립트(79,905바이트)에서도 로그인·RTS 갱신 계약은 찾지 못했습니다. 이 파일들의 결과를 전체 인증 앱의 기능 부재로 확대하지 않습니다. 프로젝트 문서는 계속 HTTP 200·SNlM0e 누락으로 세션 상태 미정이며, 지원 DOM·프레임 조회·네트워크 이벤트 조회도 시간 초과였습니다. 이번 소스 점검의 보호 RPC·로그인 제출·생성·보호 저장소 쓰기는 모두 0회입니다. 정상 로그인 흐름 관측에는 응답하는 브라우저 연결이 필요합니다.

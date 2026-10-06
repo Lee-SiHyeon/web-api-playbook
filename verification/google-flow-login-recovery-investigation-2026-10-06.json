@@ -297,7 +297,13 @@
     "domSnapshotTimedOut": true,
     "screenshotTimedOut": true,
     "supportedScopedCookieReadTimedOut": true,
-    "newOwnerOrProStateObserved": false
+    "newOwnerOrProStateObserved": false,
+    "latestRecheck": {
+      "domFocusCommandTimedOut": true,
+      "supportedPageFrameReadTimedOut": true,
+      "supportedNetworkEventReadTimedOut": true,
+      "loginSequenceCaptured": false
+    }
   },
   "hostResources": {
     "freeMemoryMB": 140,
@@ -328,5 +334,137 @@
     "credentialFingerprintsRecorded": false,
     "signInQueryValuesRecorded": false
   },
-  "goalComplete": false
+  "goalComplete": false,
+  "latestObservationAt": "2026-10-06T06:51:10.366Z",
+  "publicSourceFollowup": {
+    "anonymousRootInspection": {
+      "checkedAt": "2026-10-06T06:39:08.060Z",
+      "operation": "public_first_party_auth_source_inspection",
+      "rows": [
+        {
+          "method": "GET",
+          "host": "flow.google.com",
+          "path": "/",
+          "httpStatus": 200,
+          "mime": "text/html",
+          "bytes": 155243,
+          "cookiesSent": false
+        },
+        {
+          "method": "GET",
+          "host": "www.gstatic.com",
+          "pathKind": "observed_public_flow_application_bundle",
+          "httpStatus": 200,
+          "mime": "text/javascript",
+          "bytes": 995891,
+          "cookiesSent": false
+        }
+      ],
+      "flowApplicationBundleObserved": true,
+      "authIdentifierPresence": {
+        "IdentityRotateCookiesHttp": false,
+        "RotateCookiesPage": false,
+        "RotateCookies": false,
+        "PSIDRTS": false,
+        "PSIDTS": false,
+        "ServiceLogin": false,
+        "CheckCookie": false,
+        "ListAccounts": false
+      },
+      "authenticated": false,
+      "protectedStoreReads": 0,
+      "protectedStoreWrites": 0,
+      "loginSubmissions": 0,
+      "flowCreates": 0,
+      "htmlPersisted": false,
+      "staticSourceSaved": true,
+      "credentialValuesRecorded": false
+    },
+    "scopedProjectInspection": {
+      "checkedAt": "2026-10-06T06:48:23.243Z",
+      "operation": "scoped_project_document_public_source_inspection",
+      "documentStatus": 200,
+      "documentMime": "text/html",
+      "documentError": {
+        "code": "FLOW_DOCUMENT_REQUEST_TOKEN_MISSING",
+        "sessionStatus": "undetermined"
+      },
+      "scriptReferenceCount": 2,
+      "referencedFlowApplicationBundle": true,
+      "publicBundle": {
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "bytes": 995891,
+        "cookiesSent": false,
+        "authIdentifierPresence": {
+          "IdentityRotateCookiesHttp": false,
+          "RotateCookiesPage": false,
+          "RotateCookies": false,
+          "PSIDRTS": false,
+          "PSIDTS": false,
+          "ServiceLogin": false,
+          "CheckCookie": false,
+          "ListAccounts": false
+        }
+      },
+      "protectedStoreWrites": 0,
+      "flowRpcCount": 0,
+      "flowCreateCount": 0,
+      "htmlPersisted": false,
+      "credentialValuesRecorded": false
+    },
+    "otherObservedScriptInspection": {
+      "checkedAt": "2026-10-06T06:51:10.366Z",
+      "operation": "scoped_project_document_other_observed_public_source_inspection",
+      "documentStatus": 200,
+      "documentMime": "text/html",
+      "documentError": {
+        "code": "FLOW_DOCUMENT_REQUEST_TOKEN_MISSING",
+        "sessionStatus": "undetermined"
+      },
+      "scriptReferenceCount": 2,
+      "scriptReferenceMetadata": [
+        {
+          "host": "www.gstatic.com",
+          "isFlowApplication": false,
+          "isAccountWidgetPath": false
+        },
+        {
+          "host": "www.gstatic.com",
+          "isFlowApplication": true,
+          "isAccountWidgetPath": false
+        }
+      ],
+      "publicBundle": {
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "bytes": 79905,
+        "cookiesSent": false,
+        "authIdentifierPresence": {
+          "IdentityRotateCookiesHttp": false,
+          "RotateCookiesPage": false,
+          "RotateCookies": false,
+          "PSIDRTS": false,
+          "PSIDTS": false,
+          "ServiceLogin": false,
+          "CheckCookie": false,
+          "ListAccounts": false
+        }
+      },
+      "protectedStoreWrites": 0,
+      "flowRpcCount": 0,
+      "flowCreateCount": 0,
+      "htmlPersisted": false,
+      "credentialValuesRecorded": false,
+      "referencedOtherPublicScript": true
+    },
+    "rootAndProjectBundlesByteEquivalent": true,
+    "knownProtectedFlowRpcIdentifiersPresent": {
+      "YhhmEf": false,
+      "Zzl0ze": false,
+      "jwpduf": false
+    },
+    "scope": "Only the public scripts referenced by these documents were inspected. Their absence of auth/RPC producers does not rule out separately loaded authenticated code.",
+    "firstPartyLoginSubmitContractCaptured": false
+  }
 }
