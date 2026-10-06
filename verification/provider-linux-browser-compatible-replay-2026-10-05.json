@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "scope": "Linux provider browser-compatible HTTP and current login boundaries",
+  "gemini": {
+    "publicRead": {
+      "schemaVersion": 1,
+      "service": "gemini",
+      "executionHost": "linux_worker",
+      "secretsPersistedInEvidence": false,
+      "testsPassed": 39,
+      "publicRead": {
+        "operation": "public_document_metadata",
+        "checkedAt": "2026-10-05T13:54:18.312Z",
+        "executionMode": "chrome_compatible_http",
+        "status": 200,
+        "contentType": "text/html; charset=utf-8",
+        "bodyBytes": 867269,
+        "bodySha256": "1f2d3175b988ab5292e8386f26f13208629b90915b6e9603f26f25824c84a13f",
+        "credentialsSent": false,
+        "directReadVerified": true,
+        "title": "Google Gemini",
+        "lang": "en-US",
+        "scripts": 18,
+        "externalScripts": 3,
+        "appElements": 1,
+        "layoutMatched": true,
+        "challengeDocument": false,
+        "bootstrapMarkers": {
+          "AF_initDataCallback": true,
+          "WIZ_global_data": true,
+          "FdrFJe": true,
+          "cfb2h": true
+        },
+        "authenticationVerified": false,
+        "browserCaptured": false,
+        "chatLiveReplay": false,
+        "imageLiveReplay": false,
+        "videoLiveReplay": false,
+        "transport": {
+          "library": "curl_cffi",
+          "libraryVersion": "0.16.3",
+          "browserProfile": "chrome150",
+          "platform": "Linux x86_64",
+          "negotiatedHttpVersion": "h2",
+          "responseHeaderBytes": 28854
+        }
+      },
+      "authenticatedOwnerVerified": false,
+      "implementationSha256": {
+        "src/cli.mjs": "71507b1d9781f892cd10c323e603c6511207f4b9cfabab389927ace203d6166a",
+        "src/public-document.mjs": "9b81f4957c4dc6596aafcd85262ee333b40980be0267a5e9f3df36deff66631c",
+        "src/chrome-public-document-transport.mjs": "fa4a464e47aee7c61794046ca83380924378df5fa98d4e018b04038d50826c2f",
+        "scripts/gemini-public-document-chrome.py": "4795a8d308b2f81b49be24b69889f8c51da096ef099151b011b697342ab1b9fe"
+      }
+    },
+    "login": {
+      "checkedAt": "2026-10-05T13:47:42.730936+00:00",
+      "host": "linux_worker",
+      "service": "gemini",
+      "browserDistribution": "Google Chrome stable",
+      "emailSubmitted": true,
+      "passwordSubmitted": false,
+      "authenticatedOwnerVerified": false,
+      "driverOverrideApplied": false,
+      "browserFacts": {
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+        "webdriver": true,
+        "platform": "Linux x86_64"
+      },
+      "passwordStageReached": false,
+      "knownErrorOrCheckpoint": [
+        "This browser or app may not be secure"
+      ],
+      "finalOrigin": "https://accounts.google.com",
+      "finalPath": "/v3/signin/rejected",
+      "settledAt": "2026-10-05T13:49:07.341857+00:00",
+      "secretsPersistedInEvidence": false
+    },
+    "sourceRepository": {
+      "url": "https://github.com/Lee-SiHyeon/gemini-web-xhr-client",
+      "commit": "e0732e7"
+    }
+  },
+  "grok": {
+    "publicRead": {
+      "schemaVersion": 1,
+      "service": "grok",
+      "checkedAt": "2026-10-05T13:55:02.268Z",
+      "executionHost": "linux_worker",
+      "secretsPersistedInEvidence": false,
+      "testsPassed": 26,
+      "publicRead": {
+        "data": {
+          "models": [
+            {
+              "modelId": "grok-3",
+              "name": "",
+              "description": ""
+            },
+            {
+              "modelId": "grok-420",
+              "name": "",
+              "description": ""
+            },
+            {
+              "modelId": "grok-4-1-thinking-1129",
+              "name": "",
+              "description": ""
+            }
+          ],
+          "unavailableModels": [],
+          "defaults": {
+            "defaultAnonModel": "grok-3",
+            "defaultFreeModel": "grok-3",
+            "defaultProModel": "grok-4",
+            "defaultHeavyModel": "grok-4",
+            "defaultAnonMode": "MODEL_MODE_AUTO",
+            "defaultFreeMode": "MODEL_MODE_AUTO",
+            "defaultProMode": "MODEL_MODE_AUTO",
+            "defaultHeavyMode": "MODEL_MODE_AUTO"
+          }
+        },
+        "evidence": {
+          "operationId": "public.models",
+          "sourceDerived": true,
+          "browserCaptured": false,
+          "transport": "curl_cffi_chrome150_linux",
+          "credentialPropagated": "not_applicable",
+          "credentialsUsed": false,
+          "directReadVerified": true,
+          "requestSucceeded": true,
+          "liveReplay": true,
+          "liveResponseStatus": 200,
+          "httpVersion": "h2",
+          "liveResponseBytes": 898,
+          "liveResponseSha256": "7b751e71ddb6a5e035763763736374683fae683abe45d519fda6d6ec69ad37ce",
+          "sourceFile": "https://cdn.grok.com/_next/static/chunks/35ntlely29ab3.js",
+          "sourceFunction": "modelsGetModelsRaw",
+          "sourceSha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316",
+          "priorDirectReplay": {
+            "observedAt": "2026-10-03",
+            "status": 200,
+            "responseContentType": "application/json",
+            "responseBytes": 898,
+            "responseSha256": "7b751e71ddb6a5e035763763736374683fae683abe45d519fda6d6ec69ad37ce",
+            "availableModelIds": [
+              "grok-3",
+              "grok-420",
+              "grok-4-1-thinking-1129"
+            ],
+            "unavailableModelCount": 0,
+            "credentialFree": true,
+            "browserCaptured": false
+          }
+        }
+      },
+      "authenticatedOwnerVerified": false,
+      "implementationSha256": {
+        "src/cli.mjs": "291a840499c7bfff54e1577f1450e8a5e112e02c2cc8cb579bd8ab9f4f5e2b4a",
+        "src/public-models.mjs": "27bc9b7fd5c38b092d410a875744a66e785a04de33942900af8f2cebfc5299e3",
+        "src/chrome-http-fetch.mjs": "2d2cc9d1bc1ceda6a96dbb39a4b3bc04ae9f1e628acabe1bec98d4803f179ab9",
+        "scripts/chrome-http-transport.py": "330bb4617b1866cd6d426ea09c7a2d7ebce81c468ba66e6bfa06c581e3e6e084",
+        "scripts/requirements-chrome-transport.txt": "d5ee14158341721db5e28522b0e121050d2b98f54726657175462e00fad3a14c"
+      }
+    },
+    "login": {
+      "checkedAt": "2026-10-05T13:42:53.538297+00:00",
+      "host": "linux_worker",
+      "mode": "browser_assisted_http",
+      "actualBrowserUA": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+      "document": {
+        "status": 200,
+        "mime": "text/html; charset=utf-8",
+        "bytes": 170131,
+        "sha256": "09e0ff536613b439d189cc8a5d721fe6948ad4c06bdc7e0151c16dd3cd265b8a"
+      },
+      "capturedBodyShape": {
+        "email": "str",
+        "castleRequestToken": "str"
+      },
+      "browserAuthRequestCancelled": true,
+      "httpEmailCheckSent": true,
+      "passwordSubmitted": false,
+      "authenticatedOwnerVerified": false,
+      "httpResult": {
+        "status": 403,
+        "mime": "text/html; charset=UTF-8",
+        "bytes": 4539,
+        "bodySha256": "4983e5dfae4827cf797f6e6ae6c0ca46acd7364fcf5c97460940f9864c13001b",
+        "recognizedChallengeMarkup": true
+      },
+      "normalPageSdkInputFieldObserved": true,
+      "sdkTokenValidityVerified": false,
+      "sdkTokenFabricated": false,
+      "authPostAttempts": 1,
+      "secretsPersistedInEvidence": false,
+      "browserCookieDatabaseRead": false,
+      "server403CauseEstablished": false
+    },
+    "stableBrowser": {
+      "checkedAt": "2026-10-05T13:58:36.370631+00:00",
+      "origin": "https://accounts.x.ai",
+      "path": "/sign-in",
+      "title": "Attention Required! | Cloudflare",
+      "navigationResponseStatus": 403,
+      "browserFacts": {
+        "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+        "webdriver": true,
+        "platform": "Linux x86_64"
+      },
+      "credentialSubmitted": false
+    },
+    "sourceRepository": {
+      "url": "https://github.com/Lee-SiHyeon/grok-web-xhr-client",
+      "commit": "a850248"
+    }
+  },
+  "privateChatImageVideoLiveVerified": false,
+  "secretsPersistedInEvidence": false
+}

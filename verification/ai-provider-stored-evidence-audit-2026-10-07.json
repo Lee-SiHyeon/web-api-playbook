@@ -1,0 +1,163 @@
+{
+  "schema": "web-api-ai-provider-check-v1",
+  "checkedAt": "2026-10-06T06:29:45.450Z",
+  "evidenceScope": "stored_receipt_consistency",
+  "currentNetworkVerified": false,
+  "strictPass": false,
+  "providers": [
+    {
+      "provider": "gemini",
+      "status": "stored_receipt_consistency",
+      "sourceStatus": "incomplete",
+      "strictPass": false,
+      "accepted": 0,
+      "required": 15,
+      "unresolved": 15,
+      "features": [
+        {
+          "id": "login",
+          "status": "live_evidence_missing"
+        },
+        {
+          "id": "identity",
+          "status": "needs_reverification"
+        },
+        {
+          "id": "text_generation",
+          "status": "needs_reverification"
+        },
+        {
+          "id": "history",
+          "status": "needs_reverification"
+        },
+        {
+          "id": "readbacks",
+          "status": "captured_contract_missing"
+        },
+        {
+          "id": "edit",
+          "status": "applicability_unresolved"
+        },
+        {
+          "id": "delete",
+          "status": "live_evidence_missing"
+        },
+        {
+          "id": "share",
+          "status": "live_evidence_missing"
+        },
+        {
+          "id": "attachments_upload",
+          "status": "captured_contract_missing"
+        },
+        {
+          "id": "attachments_download",
+          "status": "applicability_unresolved"
+        },
+        {
+          "id": "model_selection",
+          "status": "applicability_unresolved"
+        },
+        {
+          "id": "settings",
+          "status": "applicability_unresolved"
+        },
+        {
+          "id": "image_generation",
+          "status": "needs_reverification"
+        },
+        {
+          "id": "video_generation",
+          "status": "needs_reverification"
+        },
+        {
+          "id": "session_renewal",
+          "status": "applicability_unresolved"
+        }
+      ]
+    },
+    {
+      "provider": "grok",
+      "status": "stored_receipt_consistency",
+      "sourceStatus": "incomplete",
+      "strictPass": false,
+      "accepted": 2,
+      "required": 18,
+      "unresolved": 16,
+      "features": [
+        {
+          "id": "auth.login",
+          "status": "incomplete"
+        },
+        {
+          "id": "auth.owner-identity",
+          "status": "stored_receipt_consistent"
+        },
+        {
+          "id": "auth.session-renewal",
+          "status": "incomplete"
+        },
+        {
+          "id": "chat.text-generation",
+          "status": "incomplete"
+        },
+        {
+          "id": "chat.regenerate",
+          "status": "incomplete"
+        },
+        {
+          "id": "conversation.crud",
+          "status": "incomplete"
+        },
+        {
+          "id": "conversation.list",
+          "status": "stored_receipt_consistent"
+        },
+        {
+          "id": "conversation.history",
+          "status": "incomplete"
+        },
+        {
+          "id": "conversation.sharing",
+          "status": "incomplete"
+        },
+        {
+          "id": "conversation.uploads",
+          "status": "incomplete"
+        },
+        {
+          "id": "models.public-catalog",
+          "status": "incomplete"
+        },
+        {
+          "id": "models.private-selection",
+          "status": "incomplete"
+        },
+        {
+          "id": "user-settings",
+          "status": "incomplete"
+        },
+        {
+          "id": "image-generation",
+          "status": "incomplete"
+        },
+        {
+          "id": "video-generation",
+          "status": "incomplete"
+        },
+        {
+          "id": "task-polling",
+          "status": "incomplete"
+        },
+        {
+          "id": "artifact-download",
+          "status": "incomplete"
+        },
+        {
+          "id": "workspaces",
+          "status": "incomplete"
+        }
+      ]
+    }
+  ]
+}

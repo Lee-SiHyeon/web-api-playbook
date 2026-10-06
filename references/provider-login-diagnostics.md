@@ -1,5 +1,85 @@
 # 외부 XHR 클라이언트 로그인 실측 (2026-10-04)
 
+## 후속 인증과 현재 실행 경계 (2026-10-06 KST)
+
+후속 일반 Linux Chrome154 실행에서 Google 비밀번호 단계와 기존 xAI 계정의 이메일
+코드 로그인을 통과했다. 인증 후 같은 작업 프로필에서 얻은 service-scoped session으로
+Grok protected identity를 독립 Python/Node/client 요청에서 확인했다. 아래2026-10-04~05
+거부 기록은 당시 실행의 이력이며 현재 로그인 실패 상태를 뜻하지 않는다.
+
+로그인 성공은 전체 기능 완료가 아니다. 생성 요청200 이후의 response 판정과 독립
+결과 조회가 필요하다. 실제 credential 전달 결함, Gemini 다국어 frame 처리,
+WSS와 HTTP 구분, 브라우저 재시도 취소와 CLI 연결은
+[인증 이후 디버깅 절차](provider-authenticated-runtime.md)에 정리했다.
+
+## Linux 브라우저 요청 재현과 클라이언트 반영 (2026-10-05)
+
+두 원본 클라이언트에 선택 가능한 Linux Chrome 호환 HTTP 전송을 반영했다.
+[Gemini 변경](https://github.com/Lee-SiHyeon/gemini-web-xhr-client/commit/e0732e7)과
+[Grok 변경](https://github.com/Lee-SiHyeon/grok-web-xhr-client/commit/a850248)은
+`curl_cffi 0.16.3`의 `chrome150` TLS 프로필과 Linux Chrome150 UA·client hints를
+사용한다. 기존 공개 문서·모델 조회 계약만 실행하며, 브라우저와 보호 저장소를 사용하지
+않는다. 두 CLI를 실제 워커에서 실행해 Gemini HTML200·867269바이트와 Grok JSON200·
+898바이트·모델3개를 검증했고, 두 요청의 협상 결과는 모두 HTTP/2였다.
+Gemini39개·Grok26개 테스트와 문법 검사가 통과했다.
+
+각 checkout에서 Python 환경에 `curl-cffi==0.16.3`을 설치하고 다음처럼 실행한다.
+`--python`에는 설치한 환경의 실행 파일 절대 경로를 지정한다.
+
+```text
+Gemini: node src/cli.mjs public-status --transport chrome --python /absolute/venv/bin/python
+Grok:   node src/cli.mjs models --transport chrome --python /absolute/venv/bin/python
+```
+
+로그인은 별도 경계다. 정상 Grok 화면에서 `email`과 비어 있지 않은
+`castleRequestToken` 필드가 있는 실제 요청을 관측하고 브라우저 전송을 취소했다.
+현재 origin의 실행 중 세션을 메모리로 전달해 직접 HTTP POST를1회 보냈으나,
+`/api/auth/sso/check`는 Cloudflare 차단 표식이 있는 HTML403을 반환했다.
+SDK 필드 관측과 SDK 토큰 유효성 검증은 구분하며,403의 서버 판정 원인은 미확정이다.
+SDK 입력 획득에는 브라우저를 사용했고, 공개 조회용 전송이 로그인 producer를 구현한
+것으로 표시하지 않는다. Chrome150 호환 프로필이 실제 Chromium151 또는 Chrome154의
+패킷과 완전히 같다는 검증도 없다.
+
+Google 배포 Linux Chrome154에서도 일반 보안 설정과 동일한 작업용 프로필로 Gemini
+이메일을 제출했다. 최종 `/v3/signin/rejected`와 `This browser or app may not be secure`를
+확인했다. Grok의 일반 Chrome154 로그인 문서도 Cloudflare403으로 막혔다.
+두 서비스의 비밀번호 제출은0회이며, 계정 인증·대화·이미지·영상의 HTTP 실증은 미완료다.
+
+[현재 실행·코드 해시·인증 경계 기록](../verification/provider-linux-browser-compatible-replay-2026-10-05.json)과
+[현재 첫-party SDK producer 경로](../verification/grok-castle-sdk-producer-chain-2026-10-05.json)에
+필드명·상태·길이·해시만 남겼다. 원본 클라이언트의 `discovery`에도 공개 조회와 로그인
+경계 영수증을 저장했다. 쿠키 값·SDK 토큰·이메일·비밀번호·원문 인증 응답은 포함하지 않았다.
+
+## Linux 브라우저 호환 HTTP 전송 대조 (2026-10-05)
+
+`curl_cffi 0.16.3`의 Chrome150 TLS/HTTP 호환 프로필과 새 익명 메모리 세션으로
+Gemini 공개 문서와 Grok 로그인 문서를 각각 조회했고 모두200 HTML이었다.
+공개 문서 접근이며 계정 인증이나 대화·이미지 생성 성공으로 분류하지 않는다.
+
+현재 Grok 로그인 첫-party JavaScript의 `checkSSO`는 정상 웹 SDK 입력을 먼저 기다린 뒤
+`sso/check`에 `castleRequestToken`을 포함한다. 이 필드가 관측됐다는 사실은 값을
+발급·재발급하거나 로그인 HTTP 재현에 성공했다는 증거가 아니다. 정상 발급 흐름과
+소유자 확인을 독립 검증하기 전까지 요청 계약은 미완료이며, 토큰을 임의 제작하거나
+누락시킨 로그인 POST를 성공 가능성 확인용으로 보내지 않는다. 현재403의 단독 원인이
+이 입력이라고 확정하지 않는다.
+
+[전송·SDK 입력 대조 기록](../verification/provider-browser-compatible-transport-2026-10-05.json)
+에는 상태·MIME·길이·해시·쿠키 이름·정적 소스 필드명만 남겼다. 비밀번호·쿠키 값·
+SDK 토큰·원문 응답은 포함하지 않는다.
+
+2026-10-05 Linux 워커에서 다시 정상 headed Chromium을 실행하고 실제 로그인 화면에서
+이메일 단계까지 진행했다. Gemini는 Google `/v3/signin/rejected`로 이동하며 브라우저
+보안 거부를 표시했고, Grok의 `POST /api/auth/sso/check`는403과 오류 토스트를 반환했다.
+두 서비스 모두 비밀번호 단계에 도달하지 않아 비밀번호 제출은0회였다. 이 결과를
+Windows 연결 문제나 비밀번호 불일치로 해석하지 않는다. 현재 증거는
+[Linux 로그인 재검증](../verification/provider-linux-login-2026-10-05.json)에 있다.
+
+Linux를 현재 실행 호스트로 사용한다. Windows DPAPI를 지원하는 원본 클라이언트가
+있다는 사실은 Windows를 로그인 필수 호스트로 만들지 않는다. 실행 환경 복구와
+사이트의 인증 거부를 구분하고, 다른 사람의 브라우저나 임의 포트로 전환하지 않는다.
+Grok의 정적 `operations` 진단은 보호 저장소·저널을 생성하지 않도록 원본 클라이언트에서
+분리했다. 공개 모델 조회200은 대화·생성·계정 인증 완료의 증거가 아니다.
+
 사용자가 지정한 네 레포를 Linux 워커에 clone하고 기존 인증 코드를 확인했다.
 로그인과 안전한 계정 조회만 진행했고 콘텐츠 생성·대화 전송·계정 생성은 수행하지 않았다.
 
