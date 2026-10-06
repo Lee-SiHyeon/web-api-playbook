@@ -155,3 +155,28 @@ The live run exposed and fixed three local integration issues: jsdom `ResourceLo
 [로그인 복구 조사 근거](../verification/google-flow-login-recovery-investigation-2026-10-06.json)
 
 2026-10-06T06:51Z 추가 소스 점검: 비로그인 홈과 현재 프로젝트 HTML이 참조한 공개 Flow JS(995,891바이트)는 동일했고, 기존 보호 RPC 식별자 YhhmEf·Zzl0ze·jwpduf가 없었습니다. 다른 관측된 공개 스크립트(79,905바이트)에서도 로그인·RTS 갱신 계약은 찾지 못했습니다. 이 파일들의 결과를 전체 인증 앱의 기능 부재로 확대하지 않습니다. 프로젝트 문서는 계속 HTTP 200·SNlM0e 누락으로 세션 상태 미정이며, 지원 DOM·프레임 조회·네트워크 이벤트 조회도 시간 초과였습니다. 이번 소스 점검의 보호 RPC·로그인 제출·생성·보호 저장소 쓰기는 모두 0회입니다. 정상 로그인 흐름 관측에는 응답하는 브라우저 연결이 필요합니다.
+
+### Later Google SSO read recovery (2026-10-06)
+
+A later live Node HTTP observation supersedes the 06:28 and 06:51 findings for the tested current Google session. It does not erase those dated failures: the old Flow cookie bundle still produced HTTP 200 HTML without `SNlM0e`, and the public-bundle scan still found no login flow in those particular files. The new run used a separate Google authentication broker backed by Windows CurrentUser DPAPI. Its 25 Google-scoped cookies were available to the fresh Node process; the first Flow project request had no Flow-host cookies.
+
+The observed read-only redirect chain was:
+
+1. `GET /project/{projectId}` on `flow.google.com` returned HTTP 302 to the Google `ServiceLogin` flow. The observed redirect query contained the keys `passive`, `osid`, `continue`, `followup`, and `authuser`.
+2. The first-party SSO flow reached `/accounts/SetOSID` with the observed keys `authuser`, `continue`, and `osidt`. Its response issued new Flow-host OSID cookies.
+3. The same project GET then returned HTTP 200 with `?pli=1`; the document contained `SNlM0e` and the exact active-owner field `oPEP7c`.
+4. A protected project RPC readback succeeded and returned 41 media records.
+
+This proves an HTTP SSO handoff from an already authenticated Google account session into a usable Flow document and protected read. It does not prove password or MFA submission, recovery of an expired Google primary login, or an indefinitely renewable session. Subsequent maintained CLI verification below establishes the implemented recovery and new video create/download after that recovery. `RotateCookiesPage` remains a distinct cookie-rotation endpoint: its observed SIDCC-family updates did not perform this `ServiceLogin` → `SetOSID` handoff.
+
+The sanitized playbook receipt is available at [the 2026-10-06 live SSO recovery verification](../verification/google-flow-login-recovery-live-2026-10-06.json); the affiliate app README links its discovery receipt. No cookie values, response bodies, account identifiers, or redirect values are stored in the prose.
+
+### Maintained recovery and new generation verified (2026-10-06T09:54Z)
+
+`src/cli.mjs recover-session` completed the fresh redirect sequence, issued new Flow OSID cookies, matched the active `oPEP7c` owner and verified 41 project media before committing the Flow and Google broker records to Windows DPAPI. It never reused a saved callback ticket. Startup recovery is attempted once before create when the Flow document lacks its request token, deletes authentication cookies, redirects to Google login or returns 401/403. A controlled in-memory omission of Flow-host cookies triggered that maintained wrapper once; the protected project read then returned 42 media. Setup did not mutate the real credential record.
+
+The recovered session completed one fresh maintained CLI generation using the unmodified first-party SDK in Node/jsdom, one verified HTTP reload, one create, completion state 3, and download. Journal `ac48516e-ea4f-44bc-8130-777ec26cb08e` reached `downloaded`, media `d30b0746-269a-44e7-84a2-1a08c3b53af1`, with no create retry. The downloaded native MP4 was 1,514,421 bytes. The local 480p delivery is 854×480, eight seconds, 24 fps, 192 frames and 436,496 bytes; full FFmpeg decode passed. Eight sampled frames show the orange tabby moving its paws and stepping sideways. Final app tests passed 153/153 and syntax checks passed for 21 JS modules.
+
+Valid Google primary authentication remains a prerequisite. Omitting its shared SID/PSID credentials in an isolated jar did not recover a protected session; the normal account identifier flow was reached and no credentials were overwritten. This implementation does not solve or bypass password, MFA or interactive challenges.
+
+The DPAPI updates are sequential, with an optimistic raw-state comparison before commit. This is not a cross-process CAS transaction. A second-record failure reports `FLOW_SSO_RECOVERY_PARTIAL_COMMIT` with `flowStored=true` and `googleAuthStored=false`, retaining the already verified new Flow session. Broker mutation, first-write failure and partial-write failure tests cover these outcomes. No tokens, cookie values, raw bodies, identities or redirect query values are included in the committed receipt.
