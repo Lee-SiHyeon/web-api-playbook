@@ -502,3 +502,32 @@ Grok `autoWrapLongLinesCode`의 현재 검증은 소유자 GET, 설정 GET, 변�
 검증한다. 무관한 변경 때문에 매번 원격 설정을 바꾸는 일을 줄이려면 기능별 계약과
 실제 인증·요청·해석·조회 코드의 범위를 따로 기록한다. 과거 증거의 해시만 새 코드로
 바꿔 통과시키지 않는다.
+
+## 실제 브라우저로 guard 종료를 재현
+
+격리된 Linux Chromium과 localhost WebSocket 서버에서 양성 대조를 둔다. 페이지가
+살아 있는 상태에서 guard를 제거한 대조군은 지연 프레임을 서버로 전달했다. 수정 경로는
+socket 생성 전에 guard를 설치하고 control/ACK만 전달한 뒤 business frame을 차단한다.
+그 guard를 유지한 채 정확한 소유 target을 blank·marker·quiet로 정리하면 지연 프레임의
+서버 수신은 0이었다. 가짜 Page 테스트만으로 Playwright driver 종료 순서를 증명하지
+않는다. 최종 정리는 `AsyncExitStack` 또는 driver가 살아 있는 내부 `finally`에서 실행한다.
+
+## 동일 Linux 호스트의 대용량 파일 입력
+
+원격 CDP로 연결한 Playwright의 파일 전송에는 50 MiB 제한이 있었다. 브라우저와 워커가
+실제로 같은 Linux 파일시스템을 쓰는 것을 확인한 뒤, HOME 아래의 검증된 파일 경로와
+정확한 file input node를 `DOM.setFileInputFiles`에 전달했다. 바이트를 CDP로 직렬화하지
+않는다. 149 MiB 시험에서도 서버가 `single_put`을 선택했으므로 multipart만 요구한
+검증은 PUT·complete 전에 중단했다. 발급된 해당 upload reference 하나를 abort하고
+status의 ABORTED를 확인했다. SDK에 multipart 코드가 있다는 사실과 실제 선택·실행은
+별도로 기록한다.
+
+## 구조화된 답변과 citation 중복
+
+Gemini의 같은 작업에서 21바이트 `Ya.vda`와 12바이트 렌더링 답변은 서로 다른 값이었다.
+실제 runtime의 `Ya.structuredContent.children[0].children[0].text`와 hNv의 특정 leaf를
+길이·해시로 대조하고, 해당 leaf가 `model-response-content` 내부에 표시되는 것을 확인했다.
+같은 문자열이 citation/source metadata에도 있으므로 모든 문자열 검색으로 답변을
+판정하지 않는다. 관측한 wrapper·node 형태와 typed child path만 해석하고 새로운 형태는
+미확인으로 남긴다. 별도의 turnId·draftId 값 비교가 StreamGenerate ID의 의미를 증명하지
+않으며, 과거에 잃어버린 writer ID를 이 조회로 복원했다고 주장하지 않는다.
