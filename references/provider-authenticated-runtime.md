@@ -487,3 +487,18 @@ Grok의 task-owned CSV는 content GET200/22바이트였고, FilesService ZIP GET
 두 API를 같은 파일 다운로드의 대체 경로로 완료 처리하지 않는다. octet-stream 허용은
 실제 source-resolved workspace ZIP 경로에 한정하고 ZIP signature와 archive entries를
 검사한다. 일반 파일 fetcher의 MIME 허용 범위를 넓혀 해결하지 않는다.
+
+## 설정 변경의 현재 코드 검증
+
+Grok `autoWrapLongLinesCode`의 현재 검증은 소유자 GET, 설정 GET, 변경 POST,
+독립 GET, 원복 POST, 독립 GET을 각각 기록한다. 실제 변경·원복은 한 번씩이며,
+모든 응답은 HTTP 200이었다. 837·838바이트 POST의 원본 응답 해시를 별도 GET과
+대조하고 최종 설정 전체가 초기값으로 돌아온 것을 확인했다. 원본 응답 해시와
+파싱된 JSON 해시의 종류를 구분하고, 실행 전 import 이전에 기록한 소스 해시가
+종료까지 같아야 현재 코드 검증으로 인정한다.
+
+실행 후 인증 함수의 출력 필드가 두 줄 추가되어도 전체 파일 해시로 묶인 증거는
+현재 검사에서 drift가 될 수 있다. 기존 실행 결과는 보존하고 변경된 코드는 다시
+검증한다. 무관한 변경 때문에 매번 원격 설정을 바꾸는 일을 줄이려면 기능별 계약과
+실제 인증·요청·해석·조회 코드의 범위를 따로 기록한다. 과거 증거의 해시만 새 코드로
+바꿔 통과시키지 않는다.
