@@ -464,3 +464,26 @@ task에서 직접 decoder의 21바이트 문자열과 실제 model-response-cont
 request/response 입력, 구조화된 content와 렌더링 leaf를 연결하고 ID가 turnId·draftId·
 clientTurnId·request-context ID 중 어느 범위인지 따로 확인한다. 서로 다른 ID의 equality를
 검증 gate로 만들거나, source에 없는 numeric slot을 role로 이름 붙이지 않는다.
+
+## Capture 종료와 실제 브라우저 전달
+
+Grok file/attachment capture에서는 page counter가 HTTP/WSS 전달0이라고 보고했지만,
+이후 exact owned CID의 history에 승인한 prompt와 assistant child가 나타났다. 그 counter는
+수집 창 안에서 관측한 값이며 전체 브라우저 전달0의 증거가 아니다. 실제 transport host,
+기존 connection, worker 소유권과 guard 해제 시점을 조사하고 그 작업을 재전송하지 않는다.
+
+[Playwright Page API](https://playwright.dev/python/docs/api/class-page)는 WebSocket routing이
+등록 이후 생성된 socket에만 적용된다고 설명한다. HTTP page routing은 Service Worker가
+처리한 요청을 놓칠 수 있다. 해당 한계는 가능한 원인이며, 실제 case의 원인 확정과
+구분한다. task target을 blank·marker·quiet 상태로 확인하기 전에 unroute하거나 driver를
+종료하면 queued SDK action이 나중에 전달될 수 있다. 실패 경로도 같은 fail-closed
+정리를 실행하며, 현재 source-owned target만 종료하는 fallback을 둔다.
+
+## FilesService ZIP과 workspace ZIP
+
+Grok의 task-owned CSV는 content GET200/22바이트였고, FilesService ZIP GET200/194바이트의
+유일한 entry가 CSV와 크기·SHA-256까지 같았다. 별도 workspace ZIP은 GET200,
+`application/octet-stream`, ZIP magic과 CRC를 확인했지만 해당 CSV entry가 없었다.
+두 API를 같은 파일 다운로드의 대체 경로로 완료 처리하지 않는다. octet-stream 허용은
+실제 source-resolved workspace ZIP 경로에 한정하고 ZIP signature와 archive entries를
+검사한다. 일반 파일 fetcher의 MIME 허용 범위를 넓혀 해결하지 않는다.
