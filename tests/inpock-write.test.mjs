@@ -20,7 +20,7 @@ const ordered = value => Object.fromEntries(Object.keys(value).sort().map(key =>
 const hash = value => createHash('sha256').update(JSON.stringify(ordered(value))).digest('hex');
 const response = (value, status = 200) => ({ status, headers: { 'content-type': 'application/json' }, raw: JSON.stringify(value) });
 
-async function harness(t, { handle, actorValue = actor, ownerValue = owner, wrapJournal } = {}) {
+async function harness(t, { handle, actorValue = actor, ownerValue = owner, wrapJournal, expectedPayload = card().payload } = {}) {
   const scratch = process.env.TMPDIR || path.join(os.homedir(), '.nad-scratch', 'tmp');
   await fs.mkdir(scratch, { recursive: true });
   const root = await fs.mkdtemp(path.join(scratch, 'inpock-write-tests-'));
@@ -37,7 +37,7 @@ async function harness(t, { handle, actorValue = actor, ownerValue = owner, wrap
       state.postCalls++;
       assert.equal(parsed.pathname, '/blocks');
       assert.deepEqual(init.headers, { 'content-type': 'application/json' });
-      assert.deepEqual(JSON.parse(init.body), card().payload);
+      assert.deepEqual(JSON.parse(init.body), expectedPayload);
     }
     const custom = await handle?.({ url: parsed, method, init, state, calls, events });
     if (custom !== undefined) return custom;
@@ -105,6 +105,62 @@ test('confirmation and actor mismatches prevent POST and invalid confirmation ne
     assert.equal(h.state.postCalls, 0);
     assert.equal(h.calls.length, 0);
   }
+});
+
+test('a thumbnail card carries an https product image; image rules are checked before any request', async t => {
+  const thumb = { ...card(), payload: { ...card().payload, style: 'thumbnail', image: 'https://shopping.toss.im/live/temp/x.png' } };
+  const h = await harness(t, { expectedPayload: thumb.payload });
+  const result = await h.publisher.publish(thumb);
+  assert.equal(result.readbackVerified, true);
+  for (const payload of [{ ...thumb.payload, image: '' }, { ...thumb.payload, image: 'http://example.com/x.png' }, { ...card().payload, image: 'https://example.com/x.png' }, { ...card().payload, style: 'big' }]) {
+    const bad = await harness(t);
+    await assert.rejects(bad.publisher.publish({ ...thumb, payload }), { code: 'INPOCK_CARD_INPUT_INVALID' });
+    assert.equal(bad.calls.length, 0);
+  }
+});
+
+test('update edits an own card in place once, verifies owner and public copies, and never changes the URL', async t => {
+  const thumb = { ...card().payload, style: 'thumbnail', image: 'https://shopping.toss.im/live/temp/x.png' };
+  const puts = [];
+  const h = await harness(t, { handle: async ({ url, method, init, state }) => {
+    if (method === 'PUT') {
+      assert.equal(url.pathname, '/blocks/101');
+      puts.push(JSON.parse(init.body));
+      state.owned = [{ ...JSON.parse(init.body), id: 101 }]; state.public = [{ ...state.owned[0] }];
+      return response({ block: state.owned[0] });
+    }
+    return undefined;
+  } });
+  h.state.owned = [{ ...card().payload, id: 101 }]; h.state.public = [{ ...card().payload, id: 101 }];
+  const input = { ...card(), blockId: 101, payload: thumb };
+  const first = await h.publisher.update(input);
+  assert.equal(first.status, 'updated_verified');
+  assert.deepEqual(puts, [thumb]);
+  const again = await h.publisher.update(input);
+  assert.equal(again.status, 'already_verified');
+  assert.equal(puts.length, 1, 'no second PUT');
+  await assert.rejects(h.publisher.update({ ...input, payload: { ...thumb, url: 'https://example.com/other' } }), { code: 'INPOCK_CARD_URL_CHANGE_NOT_ALLOWED' });
+  await assert.rejects(h.publisher.update({ ...input, blockId: 999 }), { code: 'INPOCK_CARD_NOT_FOUND' });
+});
+
+test('setVisibility hides an own card once and verifies it left the public page', async t => {
+  const patches = [];
+  const h = await harness(t, { handle: async ({ url, method, init, state }) => {
+    if (method === 'PATCH') {
+      assert.equal(url.pathname, '/blocks/101/open');
+      patches.push(JSON.parse(init.body));
+      state.owned = [{ ...state.owned[0], is_open: false }]; state.public = [];
+      return response({}, 200);
+    }
+    return undefined;
+  } });
+  h.state.owned = [{ ...card().payload, id: 101 }]; h.state.public = [{ ...card().payload, id: 101 }];
+  const input = { confirm: true, ownerUsername: actor.username, blockId: 101, isOpen: false };
+  assert.equal((await h.publisher.setVisibility(input)).status, 'visibility_verified');
+  assert.deepEqual(patches, [{ is_open: false }]);
+  assert.equal((await h.publisher.setVisibility(input)).status, 'already_in_state');
+  assert.equal(patches.length, 1);
+  await assert.rejects(h.publisher.setVisibility({ ...input, blockId: 5 }), { code: 'INPOCK_CARD_NOT_FOUND' });
 });
 
 test('one successful publication durably saves ACK ID before readback and acquires auth only once', async t => {

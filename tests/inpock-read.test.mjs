@@ -62,6 +62,17 @@ test('pagination safely encodes opaque cursors and follows the server end', asyn
   assert.equal(JSON.stringify(result.receipts).includes(next), false);
 });
 
+test('the live numeric cursor (last block ID, seen 2026-10-05 past 20 cards) pages on', async () => {
+  const h = harness(url => (!url.search ? response(page([{ id: 7823160 }], 7818106)) : (assert.equal(url.searchParams.get('cursor'), '7818106'), response(page([{ id: 7818106 }])))));
+  const result = await h.reader.listBlocks({ maxPages: 2 });
+  assert.deepEqual(result.blocks.map(block => block.id), [7823160, 7818106]);
+  assert.equal(result.complete, true);
+  for (const bad of [0, -1, 1.5]) {
+    const b = harness(() => response(page([], bad)));
+    await assert.rejects(b.reader.listBlocks(), { code: 'INPOCK_BLOCKS_SCHEMA_INVALID' });
+  }
+});
+
 test('a bounded traversal keeps partial records and reports incomplete coverage', async () => {
   const h = harness(() => response(page([{ id: 1 }], 'next-page')));
   const result = await h.reader.listBlocks({ maxPages: 1 });
