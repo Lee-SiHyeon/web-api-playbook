@@ -146,3 +146,10 @@ The live run exposed and fixed three local integration issues: jsdom `ResourceLo
 2026-10-06T04:09Z 후속 복구 및 고양이 영상 검증: 새 공식 Google 로그인 세션의 현재 소유자·PRO 상태를 확인하고, 지원 CUA CDP로 얻은 유효한 서비스 범위 쿠키 21개를 암호화해 Windows DPAPI에 다시 저장했습니다. 같은 유지 관리 CLI의 보호 HTTP 조회는 인증됨·프로젝트 미디어 40개를 반환했습니다. 이어 기본 Node issuer로 새 입력을 발급하고 고양이 춤 8초 영상을 한 번 생성해, 보호 프로젝트 재확인·서버 완료 조회 4회·HTTP 200 MP4 다운로드를 완료했습니다. 생성 재시도는 없습니다. 720p 원본을 로컬에서 480p로 변환했고 854×480·8초·24fps·192프레임, 전체 디코드 및 video-kit 검사를 통과했습니다. 32개 표본 프레임의 독립 검토에서 외형과 춤을 확인했지만, 회전 각도는 계획보다 크고 흰 반짝임 표식이 남습니다. 이전 요청 토큰 누락과 진단 연결 실패는 과거 관측으로 보존하며, 이번 새 부트스트랩·보호 읽기·새 생성으로 현재 경로를 재검증했습니다. 비밀번호 로그인 자체, 만료 로그인 복구, 무기한 세션 유지나 광고 성과는 입증하지 않습니다.
 
 [고양이 영상 HTTP 검증 영수증](../verification/google-flow-cat-dance-generation-2026-10-06.json)
+
+
+2026-10-06T06:28Z 로그인 복구 조사: 05:55Z에는 동일한 전체 DPAPI 번들로 보호 프로젝트 조회(미디어 41개)가 성공했지만, 이후 전체 번들 문서 GET은 HTTP 200 HTML에서 SNlM0e가 누락됐습니다. 현재 쿠키 21개 중 __Secure-1PSIDRTS·__Secure-3PSIDRTS 두 개의 만료를 확인했으나, 만료가 원인이라는 인과관계는 검증하지 않았습니다. 격리 메모리의 활성 shared Google 쿠키 17개로 관측된 GET 리다이렉트를 따라가면 ServiceLogin → 계정 입력 화면에 도달합니다. 관측된 RotateCookiesPage GET은 HTTP 200으로 SIDCC 계열 세 쿠키를 회전시켰지만, 이후 부분 번들은 여전히 계정 입력 화면에 머물렀습니다. 전체 번들 요청은 프로젝트 HTML 200을 받았지만 SNlM0e 누락으로 세션 상태가 미정이고 보호 RPC readback은 실행되지 않았습니다. 시험에서 보호 저장소를 덮어쓰거나 로그인 폼을 POST하거나 영상을 생성하지 않았습니다. 기존 Node 발급·영상 생성 성공과 이번 로그인 복구 실패를 구분합니다.
+
+요청 토큰 누락은 이제 FLOW_DOCUMENT_REQUEST_TOKEN_MISSING·sessionStatus=undetermined로 보고하고, CLI에는 상태 코드·허용된 MIME·경로 종류·마커 존재 여부만 남깁니다. 인증 쿠키 삭제는 리다이렉트 상태와 함께 별도 코드로 우선 보고하며 리다이렉트 자동 추적은 하지 않습니다. 정상 로그인 제출 계약은 아직 캡처하지 못했습니다. 지원 브라우저의 DOM·스크린샷·scoped 쿠키 조회가 시간 초과이고, 당시 PC 여유 메모리는 140MB였습니다. 자원 부족이 시간 초과의 원인이라고 확정하지 않습니다. 브라우저 연결이 응답하면 정상 Google 로그인 요청 순서를 관찰해 HTTP 복구 구현을 이어가야 합니다.
+
+[로그인 복구 조사 근거](../verification/google-flow-login-recovery-investigation-2026-10-06.json)
