@@ -430,3 +430,37 @@ readiness 조건을 수정한 별도 진단에서 준비를 다시 한다. busin
 증거가 아니다. 첨부 metadata와 assistant response subtree를 구분하고 실제 응답 ID에
 묶인 본문을 비교한다. exact raw file-text 비교, 마지막 newline 차이와 명시적 format
 wrapper 비교는 별도 결과로 남기며, 실패한 원 비교를 뒤늦게 true로 덮어쓰지 않는다.
+
+## 공유 링크의 공개 ID와 내부 ID
+
+Grok의 share 생성 응답 `shareLinkId`는 공개 URL alias였고, scoped sharing 조회의
+`publicId`와 일치했다. 같은 응답의 `sharing.shareLinkId`는 다른 owner record ID였다.
+현재 first-party share dialog도 URL에는 `publicId`, 삭제에는 owner record ID를 쓴다.
+생성 응답의 발급 ID를 먼저 보존하고 그 공개 링크의 conversation·response·indexing
+상태를 조회한다. scoped publicId와 연결한 뒤 삭제는 그 same-owner record ID에 보낸다.
+서로 다른 ID라는 이유만으로 생성 실패로 판정하거나, 관계를 확인하지 않고 다른
+scoped 링크를 생성 결과로 바꾸지 않는다.
+
+실제 neutral test에서는 create HTTP200, 공개 링크 조회200·같은 conversation/response,
+`allowIndexing:false`, 내부 ID에 대한 DELETE200과 별도 scoped 조회의 링크 없음까지
+확인했다. 초기 ID 비교 실패 영수증은 보존하고 read-only 관계 검증과 삭제를 supplement로
+연결했다. 최종 결과를 출력하는 wrapper의 오류는 이미 완료된 삭제를 반복하는 근거가
+아니다. journal과 저장된 원 응답 metadata를 먼저 확인한다.
+
+## 현재 UI의 구조화된 답변과 ID 범위
+
+현재 Gemini 웹의 실행 script는 `gemini.gstatic.com/_/mss/boq-gemini-web-uiserver`에도
+있었다. 예전 `www.gstatic.com`만 허용하면 일반 계정 메뉴 bundle만 보고 답변 renderer를
+놓친다. 실제 scriptParsed·network에서 관측한 first-party static asset origin을 사용하고
+credential-free GET 또는 그 정확한 target의 Debugger.getScriptSource로 소스를 확인한다.
+inline bootstrap은 자격정보가 섞일 수 있으므로 원문을 저장하지 않고 필요한 schema만
+메모리에서 검사한다.
+
+현재 renderer 소스는 user query를 `turn.request.textQuery`에서, model response를
+`turn.response.Ya.structuredContent`에서 읽으며 `Ya.id`는 draftId로 전달했다. 한 file
+task에서 직접 decoder의 21바이트 문자열과 실제 model-response-content의 12바이트
+문자열이 달랐다. hNv에는 두 문자열이 모두 있었다. 따라서 배열 아래의 첫 문자열이나
+예상 답이 포함된 문자열을 선택해 assistant 답변으로 판정하지 않는다. 실제 같은 turn의
+request/response 입력, 구조화된 content와 렌더링 leaf를 연결하고 ID가 turnId·draftId·
+clientTurnId·request-context ID 중 어느 범위인지 따로 확인한다. 서로 다른 ID의 equality를
+검증 gate로 만들거나, source에 없는 numeric slot을 role로 이름 붙이지 않는다.
