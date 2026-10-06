@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "service": "toss-sharelink",
+  "capabilityId": "auth.owner-and-curation",
+  "checkedAt": "2026-10-06T22:12:39.803Z",
+  "authenticated": true,
+  "ownerMatched": true,
+  "httpStatus": 200,
+  "resultType": "SUCCESS",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialScope": "https://sharelink.toss.im",
+  "provider": "Windows DPAPI CurrentUser",
+  "stored": true,
+  "secretsPersistedInEvidence": false,
+  "passwordPersisted": false,
+  "loginPostCount": 1,
+  "linkIssueCount": 0,
+  "curation": { "sectionCount": 7 },
+  "steps": [
+    { "method": "GET", "origin": "https://business.toss.im", "path": "/account/sign-in", "httpStatus": 200 },
+    { "method": "POST", "origin": "https://business-accounts.toss.im", "path": "/v1/sign-in", "httpStatus": 302 },
+    { "method": "GET", "origin": "https://business-accounts.toss.im", "path": "/oauth2/authorize", "httpStatus": 302 },
+    { "method": "GET", "origin": "https://sharelink.toss.im", "path": "/signup-start", "httpStatus": 200 },
+    { "method": "GET", "origin": "https://sharelink.toss.im", "path": "/api-public/v3/shopping-growth/sharelink/member", "httpStatus": 200 }
+  ],
+  "sourceRepository": "affiliate-content-operations",
+  "sourceRevision": "5e0a676351cbc17fa12172d5c62dfda27bc8fe4e",
+  "playbookImplementationLiveVerified": false,
+  "revisionCaveat": "This is a sanitized prior live receipt from affiliate-content-operations. It does not establish live login for the fixed web-api-playbook copy added afterward."
+}

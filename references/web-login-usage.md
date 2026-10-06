@@ -142,6 +142,34 @@ node scripts/web-login.mjs linkprice sites
 최초 연결, 정확한 요청 필드, `text/html` MIME을 가진 JSON 응답 처리,
 실제 만료 복구의 미관측 경계는 [LinkPrice 사용법](linkprice-login.md)에 있다.
 
+## 토스 쇼핑 Sharelink
+
+```powershell
+node scripts/web-login.mjs toss status
+node scripts/web-login.mjs toss health
+node scripts/web-login.mjs toss ensure
+node scripts/web-login.mjs toss login
+```
+
+`status`는 `toss-sharelink-state` DPAPI 보관 여부만 보여준다. `health`는 저장 세션으로 Sharelink 회원 조회에서
+기존 소유자를 대조한 뒤 큐레이션의 섹션·상품·당일특가 항목 수만 출력한다. 이름·이메일·소유자 식별값은 출력하지 않는다.
+`ensure`도 같은 읽기 확인만 하며 비밀번호 로그인이나 갱신을 자동으로 시도하지 않는다.
+
+`login`은 먼저 기존 세션을 확인한다. 이미 건강하면 로그인을 다시 보내지 않는다. 세션이 `TOSS_REAUTH_REQUIRED`로
+거절된 경우에만 실제 first-party 이메일/비밀번호 로그인 요청을 한 번 보내며, 새 세션을 저장하기 전에 저장된 owner와
+회원 응답을 대조한다. owner 기준이 되는 이전 보호 상태가 없으면 `TOSS_LOGIN_OWNER_BASELINE_REQUIRED`로 멈춘다.
+인증 입력은 `{email,password}` JSON을 stdin으로 전달하며, TTY 입력은 echo를 끈다. 인수·환경변수·파일·로그에
+인증값을 넣지 않는다. 비밀번호는 DPAPI에 저장하지 않는다. 로그인 응답이 불명확하거나 거절되면 자동으로 다시 보내지 않는다.
+SMS·본인 확인·계정 전환·동의·비밀번호 변경 화면으로 넘어가면 자동 완료로 간주하지 않는다.
+
+Sharelink HTTP reader와 로그인 코드는 `lib/web-auth/toss/`에 이식한 고정 사본이며 다른 checkout을 실행 중에 import하지 않는다.
+관측된 로그인 경계와 저장 계약은 [Toss Sharelink 인증 노트](toss-sharelink-auth.md)에 정리했다.
+2026-10-06의 실제 로그인과 2026-10-07 KST 최종 코드의 `ensure`는 각각 별도 영수증으로 기록했다.
+최종 `ensure`는 기존 DPAPI 세션을 재사용해 owner 일치와 HTTP 200을 확인했고, 큐레이션 7개 섹션·84개 상품·당일특가 항목 9개를 읽었다.
+이는 읽기 전용 확인이며 로그인 POST는 보내지 않았다. 재고 여부는 판정하지 않는다.
+비밀 없는 [실제 로그인 기록](../verification/toss-web-login-live-2026-10-07.json)과
+[playbook ensure 기록](../verification/toss-web-login-cli-live-2026-10-07.json)을 구분해서 본다.
+
 ## 인포크
 
 `POST /login`의 multipart 비밀번호 로그인과 `GET /v2/users` 보호 계정 대조를 사용한다.

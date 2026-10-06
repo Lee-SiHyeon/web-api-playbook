@@ -3,15 +3,36 @@ import { createCoupangAuth } from '../lib/web-auth/coupang.mjs';
 import { createXAuth } from '../lib/web-auth/x.mjs';
 import { createLinkpriceAuth } from '../lib/web-auth/linkprice.mjs';
 import { createInpockAuth } from '../lib/web-auth/inpock.mjs';
-import { stdinJson } from '../lib/cli.mjs';
+import { createTossAuth } from '../lib/web-auth/toss.mjs';
+import { stdinJson, stdinJsonNoEcho } from '../lib/cli.mjs';
 
 try {
   const [service, command='status'] = process.argv.slice(2);
-  const factories={myrealtrip:createMyrealtripAuth,coupang:createCoupangAuth,x:createXAuth,linkprice:createLinkpriceAuth,inpock:createInpockAuth};
+  const factories={myrealtrip:createMyrealtripAuth,coupang:createCoupangAuth,x:createXAuth,linkprice:createLinkpriceAuth,inpock:createInpockAuth,toss:createTossAuth};
   if (!Object.hasOwn(factories,service)) throw new WebAuthError('SERVICE_NOT_IMPLEMENTED');
   const auth=factories[service]();
   let result;
   if (command==='status') result=auth.status();
+  else if (service==='toss' && command==='login') {
+    if (!auth.status().available) {
+      const error = new Error('TOSS_LOGIN_OWNER_BASELINE_REQUIRED'); error.name = 'WebAuthError'; error.code = 'TOSS_LOGIN_OWNER_BASELINE_REQUIRED'; throw error;
+    }
+    try { result={...(await auth.ensure()),loginAttempted:false}; }
+    catch (error) {
+      if (error.code !== 'TOSS_REAUTH_REQUIRED') throw error;
+      let identity;
+      try { identity=await stdinJsonNoEcho(8192); }
+      catch (inputError) {
+        const inputCodes={INPUT_SIZE:'TOSS_LOGIN_INPUT_TOO_LARGE',INPUT_TIMEOUT:'TOSS_LOGIN_INPUT_TIMEOUT',
+          INPUT_JSON_INVALID:'TOSS_LOGIN_INPUT_INVALID',INPUT_CANCELLED:'TOSS_LOGIN_INPUT_CANCELLED',
+          STDIN_TTY_RAW_UNAVAILABLE:'TOSS_LOGIN_INPUT_NOECHO_UNAVAILABLE',STDIN_READ_FAILED:'TOSS_LOGIN_INPUT_FAILED'};
+        const code=inputCodes[inputError.code]||'TOSS_LOGIN_INPUT_FAILED';
+        const safeError=new Error(code); safeError.name='WebAuthError'; safeError.code=code; throw safeError;
+      }
+      try { result=await auth.login(identity); }
+      finally { if (identity && typeof identity==='object') { identity.email=''; identity.password=''; } }
+    }
+  }
   else if (command==='login' && auth.login) result=await auth.login();
   else if (service==='myrealtrip' && command==='login-new') result=await auth.login({restartPending:true});
   else if (command==='ensure') result=await auth.ensure();
@@ -33,6 +54,7 @@ try {
   else throw new WebAuthError('COMMAND_NOT_ALLOWED');
   console.log(JSON.stringify({ok:true,service,command,...result}));
 } catch(e) {
-  console.log(JSON.stringify({ok:false,code:e instanceof WebAuthError ? e.code : 'WEB_LOGIN_FAILED',...(e instanceof WebAuthError && e.receipt ? {receipt:e.receipt}:{})}));
+  const authError=e instanceof WebAuthError || (e?.name==='WebAuthError' && /^[A-Z][A-Z0-9_]{1,100}$/.test(e.code||''));
+  console.log(JSON.stringify({ok:false,code:authError ? e.code : 'WEB_LOGIN_FAILED',...(authError && e.receipt ? {receipt:e.receipt}:{})}));
   process.exitCode=2;
 }

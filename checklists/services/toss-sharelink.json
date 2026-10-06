@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "service": "toss-sharelink",
+  "description": "Toss Sharelink protected session integration in the shared web-login CLI. Local tests verify login guards; the final CLI owner and curation GETs have a separate current live receipt. The successful password-login receipt belongs to the source checkout revision.",
+  "capabilities": [
+    {
+      "id": "auth.owner_curation",
+      "title": "Read Sharelink owner and curation counts without exposing profile data",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          { "path": "lib/web-auth/toss.mjs", "exports": ["createTossAuth"] },
+          { "path": "lib/web-auth/toss/client-core.mjs", "exports": ["validateBundle", "requestWithDependencies"] }
+        ],
+        "cli": [{ "path": "scripts/web-login.mjs", "tokens": ["toss", "status", "health", "ensure"] }],
+        "tests": ["tests/toss-web-auth.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "A sanitized final live ensure receipt is recorded separately, but the current checklist has no validator for its combined member-and-curation receipt shape. This capability remains locally verified; it is not counted as recorded_live."
+    },
+    {
+      "id": "auth.login_once",
+      "title": "Accept one first-party login attempt from hidden stdin and preserve owner binding",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          { "path": "lib/web-auth/toss/login-http.mjs", "exports": ["loginHttp"] },
+          { "path": "lib/web-auth/toss/client-core.mjs", "exports": ["validateBundle", "requestWithDependencies"] },
+          { "path": "lib/cli.mjs", "exports": ["stdinJsonNoEcho"] },
+          { "path": "lib/web-auth/toss.mjs", "exports": ["createTossAuth"] }
+        ],
+        "cli": [{ "path": "scripts/web-login.mjs", "tokens": ["toss", "login"] }],
+        "tests": ["tests/toss-web-auth.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The successful password-login receipt at verification/toss-web-login-live-2026-10-07.json belongs to the affiliate-content-operations source checkout; it is not a live replay of this playbook CLI's credential POST. This capability is locally verified by offline tests only."
+    }
+  ]
+}

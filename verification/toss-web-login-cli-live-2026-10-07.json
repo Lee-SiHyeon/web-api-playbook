@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "service": "toss-sharelink",
+  "capabilityId": "auth.owner_curation",
+  "checkedAt": "2026-10-06T22:50:04.279Z",
+  "authenticated": true,
+  "ownerMatched": true,
+  "httpStatus": 200,
+  "resultType": "SUCCESS",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialScope": "https://sharelink.toss.im",
+  "provider": "Windows DPAPI CurrentUser",
+  "stored": true,
+  "secretsPersistedInEvidence": false,
+  "loginAttempted": false,
+  "loginPostCount": 0,
+  "curation": {
+    "sectionCount": 7,
+    "itemCount": 84,
+    "todayDealEntryCount": 9
+  },
+  "steps": [
+    {
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/member",
+      "httpStatus": 200
+    },
+    {
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping/sharelink/curation-sections",
+      "httpStatus": 200
+    }
+  ],
+  "implementationAtCheck": {
+    "lib/web-auth/toss.mjs": "1A421419E6E422EEDFA8E0AF53BC7E8C1BE1506DFD4935C07EDF92C953B19F84",
+    "lib/web-auth/toss/client-core.mjs": "827440FE5517941CC002E72787D0B58192DDB8991F156131EB733F9F43B67ACD",
+    "lib/web-auth/toss/client.mjs": "EF7C4092AA1D6875C81250AE1AF4DE8BBAB762AFEDA79BC4C167B30B50D1BC39",
+    "lib/web-auth/toss/login-http.mjs": "142DBB3881C333ACE0756B7B230AE5C13F6F1CBB17481BABE70A3A4DE58650A9",
+    "scripts/web-login.mjs": "8B13F04705DE87CA9B447AC83D7026434B0E56BED722CDBDBB67EBB5D9CF1345",
+    "lib/cli.mjs": "8E82F66E2EA7D1087BEECD86B14DD5BB23855DCA664B47A495617F865F83F190"
+  },
+  "verificationNote": "Fresh final-scope ensure reused the existing DPAPI session, matched the protected owner, returned HTTP 200, and read curation counts. Ensure is GET-only and sent no login POST. Hashes above identify the exact implementation checked; the projection makes no stock availability claim.",
+  "transport": "node-fetch",
+  "command": "node scripts/web-login.mjs toss ensure"
+}
