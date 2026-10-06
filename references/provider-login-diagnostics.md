@@ -1,5 +1,17 @@
 # 외부 XHR 클라이언트 로그인 실측 (2026-10-04)
 
+## 후속 인증과 현재 실행 경계 (2026-10-06 KST)
+
+후속 일반 Linux Chrome154 실행에서 Google 비밀번호 단계와 기존 xAI 계정의 이메일
+코드 로그인을 통과했다. 인증 후 같은 작업 프로필에서 얻은 service-scoped session으로
+Grok protected identity를 독립 Python/Node/client 요청에서 확인했다. 아래2026-10-04~05
+거부 기록은 당시 실행의 이력이며 현재 로그인 실패 상태를 뜻하지 않는다.
+
+로그인 성공은 전체 기능 완료가 아니다. 생성 요청200 이후의 response 판정과 독립
+결과 조회가 필요하다. 실제 credential 전달 결함, Gemini 다국어 frame 처리,
+WSS와 HTTP 구분, 브라우저 재시도 취소와 CLI 연결은
+[인증 이후 디버깅 절차](provider-authenticated-runtime.md)에 정리했다.
+
 ## Linux 브라우저 요청 재현과 클라이언트 반영 (2026-10-05)
 
 두 원본 클라이언트에 선택 가능한 Linux Chrome 호환 HTTP 전송을 반영했다.
