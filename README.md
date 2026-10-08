@@ -13,6 +13,7 @@
 | [SKILL.md](SKILL.md) | 에이전트가 따르는 전환 절차와 증거 기준 |
 | [공통 도구](references/runtime-modules.md) | origin별 HTTP 세션, 쿠키 회전, DPAPI, 잠금, 쓰기 저널 |
 | [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice·[Inpock](references/inpock-login.md) 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
+| [Gabia 도메인·DNS](references/gabia-login-dns.md) | 정상 Google UI 로그인 뒤 메모리 내 세션 handoff, owner-bound pure HTTP 도메인·DNS 조회, 공개 recursive DNS와 로컬 레코드 계획 |
 | [아고다 공개 요금·행사](references/agoda-http.md) | 알려진 16개 숙소의 날짜별 KRW 요금과 행사 카드 direct HTTP, 독립 계약·부분 제공 범위 표시 |
 | [쇼핑·여행커넥트](references/naver-connect.md) | 네이버 브랜드커넥트 상품 검색·상세·수수료·링크 발급 및 관리, DPAPI 세션 재사용 |
 | [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
@@ -88,6 +89,17 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 `--output`은 **새 파일만** 받습니다. 같은 명령을 다시 실행할 때 `frontier-002.json`처럼 다른 이름을 쓰세요. 상세 옵션과 상태 전이는 [도구 안내](references/discovery-tools.md)에 있습니다.
 
 ## 3. 기존 서비스를 사용할 때
+
+### Gabia 도메인과 DNS
+
+```bash
+npm run gabia -- status
+npm run gabia -- prepare --input=examples/gabia/lifehackailab-records.json
+npm run gabia:read -- status
+node scripts/gabia-read.mjs read --credentials-stdin
+```
+
+`prepare`는 로컬 입력 계획만 만들고 Gabia에 변경을 보내지 않습니다. `gabia`의 공개 검증은 고정된 재귀 DNS resolver를 확인하며 권한 DNS 직접 조회와 구별합니다. 인증 DNS 읽기는 먼저 같은 사용자의 현재 Gabia owner 응답에서 받은 `user_id` pin과, 현재 Google 로그인 세션의 Gabia 쿠키를 process-memory stdin으로 전달해야 합니다. 일반 Google UI 로그인은 별도 `browser_automation` 단계이고 세 DNS 조회는 pure Node HTTP입니다. 세션을 파일이나 인수로 전달하지 않습니다. CLI가 로그인이나 만료 세션 복구를 자동 수행하지 않으며 DNS write 경로도 없습니다. 세부 계약과 제한은 [Gabia playbook](references/gabia-login-dns.md)을 따릅니다.
 
 ### 해외 쇼핑몰 비로그인 조회
 

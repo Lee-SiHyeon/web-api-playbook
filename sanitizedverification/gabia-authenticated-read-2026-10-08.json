@@ -1,0 +1,237 @@
+{
+  "ok": true,
+  "schema": "gabia-authenticated-read-v1",
+  "service": "gabia",
+  "targetDomain": "lifehackailab.com",
+  "status": "verified",
+  "authentication": {
+    "loginAcquisition": "browser_automation_google_login",
+    "credentialHandoff": "process_memory_stdin",
+    "businessRequests": "pure_http_node_fetch",
+    "readback": "pure_http_node_fetch",
+    "browserUsedForBusiness": false,
+    "sessionPersisted": false,
+    "renewal": "not_tested"
+  },
+  "owner": {
+    "authenticated": true,
+    "ownerVerified": true,
+    "identityMatch": true,
+    "identityField": "user_id",
+    "emailReturned": false,
+    "fields": [
+      "user_id",
+      "user_name",
+      "user_type",
+      "registration_site",
+      "registration_date"
+    ],
+    "receipt": {
+      "method": "GET",
+      "origin": "https://gabia-user-api.gabia.com",
+      "path": "/v1/users/me",
+      "queryNames": [],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 166,
+      "checkedAt": "2026-10-07T22:55:04.624Z",
+      "browserUsed": false,
+      "identityMatch": true,
+      "responseKeys": [
+        "data"
+      ],
+      "ownerFields": [
+        "user_id",
+        "user_name",
+        "user_type",
+        "registration_site",
+        "registration_date"
+      ]
+    }
+  },
+  "domainList": {
+    "targetDomainPresent": true,
+    "responseKeys": [
+      "list",
+      "last_flag",
+      "domain_cnt",
+      "request_view_cnt",
+      "request_view_page"
+    ],
+    "rowFields": [
+      "num",
+      "domain",
+      "type",
+      "status",
+      "tbl",
+      "owner_approval",
+      "domain_seqno",
+      "domain_addition",
+      "expire_date",
+      "disabled",
+      "ssl_target"
+    ],
+    "receipt": {
+      "method": "GET",
+      "origin": "https://dns.gabia.com",
+      "path": "/dns/ajax/domain",
+      "queryNames": [
+        "_",
+        "domain",
+        "kind",
+        "sorting_method",
+        "sorting_val",
+        "view_cnt",
+        "view_page"
+      ],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 313,
+      "checkedAt": "2026-10-07T22:55:05.052Z",
+      "browserUsed": false,
+      "targetDomainPresent": true,
+      "responseKeys": [
+        "list",
+        "last_flag",
+        "domain_cnt",
+        "request_view_cnt",
+        "request_view_page"
+      ],
+      "rowFields": [
+        "num",
+        "domain",
+        "type",
+        "status",
+        "tbl",
+        "owner_approval",
+        "domain_seqno",
+        "domain_addition",
+        "expire_date",
+        "disabled",
+        "ssl_target"
+      ]
+    },
+    "pagination": "target-filtered-first-page; full-inventory-exhaustiveness-not-verified"
+  },
+  "dns": {
+    "targetDomainPresent": true,
+    "responseKeys": [
+      "update_date",
+      "record",
+      "nameserver",
+      "addition",
+      "hasDomainConn",
+      "hasService",
+      "option",
+      "forwardingInfo"
+    ],
+    "recordFields": [
+      "ttl",
+      "services_idx",
+      "seqno",
+      "domain",
+      "host",
+      "type",
+      "data",
+      "service",
+      "protocol",
+      "priority",
+      "weight",
+      "port",
+      "target",
+      "is_layer",
+      "services_name",
+      "addition_service_name",
+      "action"
+    ],
+    "records": [
+      {
+        "type": "A",
+        "host": "@",
+        "value": "216.150.1.1",
+        "ttl": 600
+      },
+      {
+        "type": "A",
+        "host": "@",
+        "value": "216.150.16.1",
+        "ttl": 600
+      },
+      {
+        "type": "CNAME",
+        "host": "www",
+        "value": "f2b6c708ceb0ac50.vercel-dns-016.com.",
+        "ttl": 600
+      }
+    ],
+    "receipt": {
+      "method": "GET",
+      "origin": "https://dns.gabia.com",
+      "path": "/dns/ajax/dns",
+      "queryNames": [
+        "_",
+        "domain"
+      ],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 1147,
+      "checkedAt": "2026-10-07T22:55:05.168Z",
+      "browserUsed": false,
+      "targetDomainPresent": true,
+      "responseKeys": [
+        "update_date",
+        "record",
+        "nameserver",
+        "addition",
+        "hasDomainConn",
+        "hasService",
+        "option",
+        "forwardingInfo"
+      ],
+      "recordFields": [
+        "ttl",
+        "services_idx",
+        "seqno",
+        "domain",
+        "host",
+        "type",
+        "data",
+        "service",
+        "protocol",
+        "priority",
+        "weight",
+        "port",
+        "target",
+        "is_layer",
+        "services_name",
+        "addition_service_name",
+        "action"
+      ],
+      "records": [
+        {
+          "type": "A",
+          "host": "@",
+          "value": "216.150.1.1",
+          "ttl": 600
+        },
+        {
+          "type": "A",
+          "host": "@",
+          "value": "216.150.16.1",
+          "ttl": 600
+        },
+        {
+          "type": "CNAME",
+          "host": "www",
+          "value": "f2b6c708ceb0ac50.vercel-dns-016.com.",
+          "ttl": 600
+        }
+      ]
+    }
+  },
+  "write": {
+    "dispatched": false,
+    "candidateStatus": "source_observed_unverified",
+    "readbackAfterWrite": "not_tested"
+  }
+}

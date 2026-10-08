@@ -9,6 +9,7 @@
 | [affiliate](affiliate/README.md) | 해당 폴더에서 `npm ci --ignore-scripts` | MyRealTrip, Adpick, Brand Connect, Coupang 분석, OliveYoung | 사이트별 로그인/가입/연동 상태가 다름. OliveYoung 보호 replay 미완료 |
 | [social-x](social-x/README.md) | 해당 폴더에서 `npm ci --ignore-scripts` | X GraphQL·conversation·텍스트 게시, Reddit OAuth read | 요청별 transaction ID 공급자 및 갱신은 별도. X 보호 owner 검증 미구현 경계 유지 |
 | [threads](threads/README.md) | 저장소 루트 의존성 사용 | 공개 HTML parser, 익명 HTTP bootstrap + GraphQL profile/view | 익명 CSRF가 로그인 계정 인증은 아님. doc ID와 schema는 재관측 필요 |
+| [gabia](gabia/README.md) | 저장소 루트 Node 24 의존성, `npm run gabia` / `npm run gabia:read` | 로컬 DNS 계획, 공개 recursive DNS·HTTPS 검사, Google UI 로그인 뒤 memory-stdin owner/domain/DNS HTTP reads | Gabia first-party UI에서 관측한 API routes이며 published API 보장이 없음. 로그인은 browser_automation, reads는 pure HTTP. 이메일 대조·만료 복구 미검증, DNS writes 미구현 |
 
 ## 고정 버전
 
