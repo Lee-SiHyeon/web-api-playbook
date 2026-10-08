@@ -129,7 +129,7 @@
       "sourceEvidence": [
         { "files": ["references/gabia-dns-write-candidate.json"] }
       ],
-      "note": "The source candidate is not an observed write request. No POST was sent, no writer exists, and no mutation/readback evidence is claimed."
+      "note": "An approved native UI Save added the requested TXT; Gabia UI, delegated authoritative DNS, Google/Cloudflare recursive resolvers, and Search Console Domain-property readback confirmed ownership. See sanitizedverification/gabia-dns-native-ui-write-readback-2026-10-08.json. The browser XHR route and field names were observed, but the URL-encoded value match and HTTP response status were not captured in the sanitized receipt. No durable pure-HTTP writer is implemented, so this is not API-write completion."
     },
     {
       "id": "dns.public_recursive_check",

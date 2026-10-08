@@ -8,7 +8,9 @@
 - HTTPS 확인: 구현됨. 기본 Node TLS 검증을 유지하고 apex 또는 `www`에서만 확인합니다. 리디렉션도 해당 두 호스트 안에서만 따라갑니다. 응답 본문은 읽지 않습니다.
 - 입력 계획: A, AAAA, CNAME, MX, TXT 입력의 형식·TTL·중복·CNAME 충돌을 로컬에서 검사합니다.
 - Google 로그인과 인증된 가비아 DNS 읽기: 별도 읽기 전용 adapter가 처리합니다. 로그인, 메모리 내 세션 전달과 검증된 GET 계약은 [인증된 DNS 읽기 playbook](../../references/gabia-login-dns.md)을 참고하세요. 이 public checker는 그 세션을 사용하지 않습니다.
-- 가비아 DNS 쓰기: 구현하지 않았습니다. 관찰한 쓰기 요청과 독립 read-back 계약이 확인되기 전에는 실행 경로가 없습니다.
+- CLI DNS 쓰기: 구현하지 않았습니다. 일반 실행 경로는 DNS를 변경하지 않습니다.
+- 이번 운영 작업에서만 Google Search Console Domain-property TXT를 Gabia native UI로 추가했고, Gabia UI·delegated authoritative nameservers·Google/Cloudflare recursive DNS에서 readback을 확인했습니다. Search Console UI도 소유권 확인을 표시했습니다. [값을 제거한 UI write/readback 요약](../../sanitizedverification/gabia-dns-native-ui-write-readback-2026-10-08.json)을 참고하세요.
+- UI Save에서 `POST /dns/ajax/dns` XHR와 URL-encoded field names를 관측했지만, request body의 encoded TXT value-match와 HTTP response status를 sanitized evidence로 남기지 않았습니다. 이 실행 결과는 reusable pure-HTTP write contract나 CLI writer를 의미하지 않습니다.
 
 ## Lifehack AILab 예시
 
