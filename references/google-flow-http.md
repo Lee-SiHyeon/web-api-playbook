@@ -2,7 +2,7 @@
 
 Checked 2026-10-05 on the owner's Windows runner. The maintained consumer client is in affiliate-content-operations/apps/google-flow-api. These observations use the Flow web project and existing web credits; they are not Gemini Developer API or Vertex AI evidence.
 
-Current status as of 2026-10-06: the maintained CLI's default Node/jsdom issuer completed a fresh HTTP issuance → one accepted create → protected job readback → server completion → HTTP media download. The requested 480p derivative passed full decode and visual-frame inspection. The isolated earlier Node/jsdom proof remains a distinct experiment; the latest maintained CLI receipt is linked below.
+Current status as of 2026-10-08: the maintained CLI completed seven portrait 720×1280, eight-second videos through fresh Node/jsdom SDK issuance and pure-HTTP create, poll, and download. The final live verifier passed: the project showed 49 media records, all document pairs matched their read requests, the signed URL was verified, and the verifier made zero creates. The scoped Google SSO recovery and its limits are recorded below.
 
 ## Login visible in Chrome, HTTP redirected to Google sign-in
 
@@ -138,6 +138,28 @@ Protected `Zzl0ze` readback matched the job against a 39-media baseline. Five `j
 Flow's source was 1280×720, 24 fps, 192 frames, eight seconds, and 3,083,154 bytes. FFmpeg produced the requested 854×480, 24 fps, 192-frame, eight-second MP4 at 1,373,017 bytes. Its full decode and visual-frame inspection passed. Both filenames and SHA-256 values are recorded in the [sanitized maintained CLI receipt](../verification/google-flow-maintained-cli-generation-2026-10-06.json), which records `wholeOperationPureHttp: true` and `productionCliLiveVerified: true`.
 
 The live run exposed and fixed three local integration issues: jsdom `ResourceLoader` response metadata compatibility, source/origin bookkeeping across shared frame message realms, and the transport's default Node HTTPS agent being incorrectly rejected. The observed default agent is now accepted; custom, proxy, and TLS-weak agents remain blocked. This run verifies the maintained CLI path end to end, while the separate 2026-10-06 isolated yellow-boat run above remains a distinct HTTP experiment and the 2026-10-05 SDK-assisted receipt remains a browser-token-assisted transport test.
+
+## Scoped session recovery and five-run batch (2026-10-08)
+
+The earlier saved Flow bootstrap and Google broker startup were rejected. Existing CUA tabs had no attached debugger, while a fresh Flow tab matched the intended owner and project. A new encrypted handoff of 21 current Flow-scoped cookies into Windows DPAPI restored a `pure_http` protected project read with 42 media. This valid Flow session alone did not satisfy the Google broker: using 19 shared cookies, of which 17 unexpired cookies were sent, still reached `LOGIN_REQUIRED` after the Google sign-in redirect and wrote no credentials. The official Accounts/MyAccount UI was already authenticated.
+
+A separate encrypted handoff of 27 Accounts-origin cookies captured through the already-authenticated official browser UI let the maintained CLI's `recover-session` complete the observed HTTP sequence: Flow document 302 → Google sign-in 302 → Flow session-cookie issuance 302 → Flow document 200 → protected project read 200. The final read verified the owner and project and showed 47 media records; the Flow bundle (21 cookies) and Accounts bundle (27 cookies) were both stored in DPAPI. The browser was used for this scoped authentication handoff; the recovery requests and all seven media issuance/create/poll/download runs used direct HTTP. This establishes current HTTP SSO session recovery for an account already authenticated in the official UI. It does not prove an indefinitely valid primary login, password or MFA submission, or that any one cookie caused the result. The cookie bundles changed between checks, so do not attribute recovery to GAPS alone or to one individual cookie.
+
+The Accounts-origin cookie handoff and `recover-session` were a separate authentication bootstrap completed before generation. All seven media runs then used fresh inputs from the unmodified Node v24.10.0/jsdom 26.1.0 SDK issuer and pure-HTTP create, poll, and download operations. The maintained CLI first completed five sequential portrait 720×1280, eight-second videos, then created two distinct prompt revisions as new jobs. Each of the seven sent one create, reached server state `3`, and was downloaded; the revisions were not retries. The safe identifiers and downloaded byte counts are:
+
+| Run | Job ID | Media ID | Download bytes |
+|---:|---|---|---:|
+| 1 | `3ee590f0-583a-4acf-a36c-b878ba0675f4` | `f36f7ea8-2805-4478-b3cd-d8bcecb21465` | 2,526,878 |
+| 2 | `8f57e181-f3c1-4b3f-92b8-6e81c7a0c35a` | `14f0b9f8-d912-4eaa-8c14-77f5ffcf9952` | 3,964,381 |
+| 3 | `ed045950-77a5-41c9-bf19-390cdd1099bb` | `8387f0f5-be43-4fb9-9c54-2477a1073eae` | 5,136,282 |
+| 4 | `59e59d97-936f-40ab-b15a-48f2b4887fa9` | `5da98a96-1752-4539-959a-793df3a8fd3d` | 4,004,414 |
+| 5 | `2cd32ecf-a0c5-4433-a8c9-5d2db649a1e2` | `f3486bd9-f754-4e57-8361-aa29b0c949dd` | 3,915,496 |
+| 6 (revision) | `914b4758-a7ce-4a7c-b32c-dd5b69b1563e` | `05cd1f87-b508-4e43-8ad6-124979fbc399` | 3,035,420 |
+| 7 (revision) | `3eca4200-7b57-4ba0-9221-8a7a9872e9f2` | `89a6d28c-0af4-4cb3-aa2c-017a5ae875c9` | 2,332,359 |
+
+A protected owner/project check after the first five jobs verified 47 media records. The two distinct prompt revisions then completed, and the final live verifier passed with 49 project media records. It verified that all document pairs matched their read requests and that the signed URL was valid; the verifier itself made zero generation requests. The sanitized [2026-10-08 recovery and generation receipt](../verification/google-flow-recovery-debug-2026-10-08.json) contains no identities, cookie values, tokens, raw URL queries, or private paths.
+
+The diagnostic work now preserves safe document markers and the sequence of recovery hops, and distinguishes DPAPI helper status, read, write, and timeout failures. A sign-in origin typo was corrected. Pending-media selection now requires state `3` plus positive video bytes and returns an explicit unavailable result when no media is complete. The focused regression suite passed 161/161, and the final live verifier passed with zero generation requests.
 
 2026-10-06T03:14Z 배포 후 세션 점검: 앞서 정식 CLI의 HTTP 전용 발급·생성·완료 관찰·다운로드 성공은 그대로 유효합니다. 이후 문서 GET은 HTTP 200과 Flow 설정 마커를 반환했지만 SNlM0e 요청 토큰이 없었습니다. 저장된 19개 쿠키는 만료되지 않았으며, 이것만으로 로그아웃이나 세션 만료를 판정할 수 없습니다. 관측된 RotateCookiesPage GET의 정상 회전은 HTTP 200으로 끝나 DPAPI에 반영됐지만 Flow 보호 읽기 검증은 통과하지 못했습니다. 진단 중 Flow RPC와 추가 생성은 모두 0회입니다. 현재 세션 재사용 가능 여부는 미확인으로 남기며, 요청 토큰이 있는 정상 문서와 보호 읽기를 확보하기 전에는 다음 생성으로 진행하지 않습니다. 지원 CUA 진단도 focus emulation 시간 초과로 현재 UI 상태를 확인하지 못했습니다. 별도 post-delivery-session-readback-2026-10-06.json에 안전한 점검 메타데이터를 기록했습니다.
 
