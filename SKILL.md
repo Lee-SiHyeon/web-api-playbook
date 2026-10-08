@@ -46,6 +46,21 @@ For Google/Grok/ChatGPT/Flow gates, consult
 blocker screenshots when requested, record whether a password was submitted,
 and do not treat public-page UA compatibility as protected login proof.
 
+For Gabia domain and DNS work, use `scripts/gabia.mjs` for local record-plan
+preparation and public recursive-DNS/HTTPS checks, and the
+[Gabia read adapter](references/gabia-login-dns.md) for authenticated
+owner/domain/record reads. Google sign-in is a normal visible UI bootstrap in the
+current Linux Chrome profile (`browser_automation`); the authenticated reads
+then run as Node HTTP (`pure_http_node_fetch`) after a current-origin,
+process-memory stdin handoff. Do not call the whole login flow engine-free.
+The read routes are first-party UI-observed application contracts, not a
+published Gabia API. No DNS writer or automatic session renewal is implemented.
+The owner response has no email field, so pin the protected `user_id` in memory
+and keep cross-service email equality unverified. Full domain-inventory
+pagination and the record-write candidate remain explicit gaps. See
+[`references/gabia-login-dns.md`](references/gabia-login-dns.md) and
+[`checklists/services/gabia.json`](checklists/services/gabia.json).
+
 For anonymous foreign storefront reads, reuse
 [the public retail clients and exact limits](references/retail-public-apis.md).
 No login is needed for their supported operations. Keep SEO metadata,
