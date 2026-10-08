@@ -76,6 +76,50 @@ Get-Content -Raw -Encoding UTF8 .\diagnostic.json | npm run --silent coupang:rea
 
 보호 세션의 최초 획득과 이후 HTTP 업무 실행도 구분한다. 최초 비밀번호 로그인 전체의 순수 HTTP 구현과 만료 AFATK의 자동 갱신은 검증되지 않았다. 정상 갱신 계약이 없으면 재인증 필요로 종료한다. HTTP 200 로그인 페이지나 이전 성공 영수증으로 현재 인증을 대신하지 않는다.
 
+## Linux process-memory provider
+
+`coupang-partners-check.mjs`는 Windows에서 기존 DPAPI 기본 흐름을 유지한다. Linux에서는 저장소를 암묵적으로 만들지 않고 명시적인 provider를 요구한다.
+
+```bash
+npm run --silent coupang:partners -- --provider memory
+```
+
+비어 있는 memory store라면 실제 인증 요청을 보내지 않고 다음 상태를 반환한다:
+`credentialProvider=process-memory`, `authenticationStatus=session_missing`, `httpStatus=0`, `requests=[]`.
+이는 현재 메모리 영역에 `coupang-web-state`가 없다는 뜻이지, HTTP 403·로그아웃·잘못된 owner 증거가 아니다.
+
+현재 Linux 호스트의 보호 세션 제공자는 완성된 version 1 또는 owner-bound version 2 JSON 상태를 same-host pipe의 stdin으로 넘길 수 있다. CLI는 `--state-stdin`을 받으면 TTY 입력을 거부하고 UTF-8/JSON 입력을 1 MiB로 제한하며, version·email·affiliateCode·session scope·cookie-jar shape를 먼저 검사한다. 이후 `createCoupangAuth`가 실제 owner health를 검증하고, 상품 URL을 받은 경우 원래 `issueCoupangLink` 어댑터도 같은 memory store와 bound-session dependency를 사용한다. JSON·쿠키·owner 이메일·affiliateCode는 출력하거나 파일로 저장하지 않는다. stdin state를 임시 JSON 파일·명령행 인자·환경변수로 우회하지 않는다.
+
+운영 입력 형태는 다음과 같다. `<same-host-protected-state-provider>`는 설치돼 검토된 경우에만 그 실제 명령으로 바꾸며,
+state 자체나 credentials를 터미널·파일·명령행에 입력하지 않는다. 현재 checkout에는 이 외부 provider가 포함되지 않았으므로
+provider 준비 전에는 memory health가 `SESSION_MISSING`으로 끝나는 것이 맞다.
+
+```bash
+<same-host-protected-state-provider> | npm run --silent coupang:partners -- --provider memory --state-stdin '<정확한 상품 URL>'
+```
+
+Memory provider에서 issue/journal 재진입을 위해 저장하는 것은 전용 `$HOME/.nad-scratch/web-api-playbook/coupang-partners/` 아래의 링크 cache/journal과 sanitized run receipt뿐이다. 디렉터리 권한은 0700, 파일은 0600으로 낮춘다. Session state 자체는 process-local memory에만 남는다. Memory provider의 stdout와 receipt에서 product URL 및 단축 URL 값은 생략하고 검증 상태만 기록한다. 기존 Windows DPAPI 명령의 receipt 형식과 저장 흐름은 바꾸지 않았다.
+
+Linux memory provider에 실제 owner 세션이 공급되지 않은 실행은 `SESSION_MISSING`과 HTTP 0으로 끝난다. 이 상태에서 인증 성공이나 파트너 링크 발급을 주장하지 않는다.
+
+2026-10-08 07:36 UTC의 실제 Linux CLI 실행은 `--provider memory`에 빈 process-memory store를 사용했다. 결과는 `SESSION_MISSING`,
+`httpStatus=0`, 요청 0건, `credentialProvider=process-memory`, `sessionStatePersisted=false`였다. 쿠팡 요청·링크 발급은 전혀 발생하지 않았고,
+실제 계정 인증은 아직 제공되지 않았으므로 이 영수증은 provider 누락 상태만 입증한다.
+
+## Linux 런타임과 인증 건강 확인 경계
+
+이 서비스팩에는 Linux용 영구 Coupang 인증 저장소가 포함되어 있지 않다. `ProtectedStore`는 Windows에서 현재 사용자 DPAPI를 기본 사용하고, 다른 플랫폼에서는 provider를 명시해야 한다. `provider: "memory"`는 현재 Node 프로세스 메모리만 사용하므로 새 프로세스에서 비어 있으며 재시작 사이에 세션을 보존하지 않는다.
+
+인증 CLI의 `status()`는 저장된 세션의 존재만 알려 주며 `currentAuthentication: "not_checked"`를 반환한다. 명시적 빈 Memory provider의 `health()`는 `SESSION_MISSING`으로 끝나고 파트너 API 요청을 보내지 않는다. 이 결과는 파트너 API가 401/403을 반환했다는 증거가 아니다. `scripts/coupang-partners-check.mjs`의 기본 경로도 Linux에서 `PROTECTED_STORE_PROVIDER_REQUIRED`로 HTTP 전에 끝날 수 있다. 현재 체크 스크립트의 `credentialProvider` 표시는 `windows_dpapi_current_user`로 고정되어 있어 Linux 진단에서는 실제 사용 provider로 해석하면 안 된다. `requests`가 비어 있으면 해당 실행은 파트너 HTTP 경계에 도달하지 않은 것이다.
+
+위 내용 가운데 CLI 기본 provider와 `credentialProvider` 표시는 과거 상태다. 현재 Linux CLI는 `--provider memory`를 요구하고 actual provider를 `process-memory`로 표시한다. 빈 store의 실제 결과는 위에 기록한 대로 `SESSION_MISSING`/HTTP 0/요청 0건이다. `--state-stdin`은 same-host의 trusted state provider가 주는 bounded record을 이번 process의 memory store에만 넣는다.
+
+라이브러리 수준의 주입점은 `createCoupangAuth({ store, fetchImpl })`이며 `store`는 `directory`, 동기 `read(name)`, `write(name, value)`, `status(name)` 계약을 제공해야 한다. 링크 어댑터는 `issueCoupangLink(productUrl, { dependencies })`로 저장소·세션 역직렬화·잠금·소유자 검증 의존성을 받는다. 체크 CLI는 이를 사용해 동일 store로 owner health를 확인한 다음 link adapter에 같은 process-memory store를 넘긴다. 이 API와 provider flag가 있어도 현재 쿠팡 세션 존재나 owner 인증을 뜻하지 않는다.
+
+브라우저의 로그인 제출에서 `/login/v2/signin` 403을 관측한 경우에는 그 로그인 경계의 실패로 기록한다. 해당 실행의 요청 기록에 `/api/v1/config` 또는 `/api/v1/dashboard`가 없으면 파트너 업무 API의 응답 상태는 미확인이다. v1 소유자 검증은 파트너 `/api/v1/config`의 실제 이메일·제휴 코드를 기대 소유자와 비교한다. v2는 직전의 승인된 config 응답에서 수집한 증거와 HMAC 소유자 바인딩, AFATK 유효성, `/api/v1/dashboard` 응답을 결합하며 `freshHttpIdentityRead`를 `false`로 보고한다.
+
+이 체크 CLI는 개발·디버그용이다. 세션/cookie/state를 Vercel 환경 변수나 배포 런타임으로 복사하지 않으며, Vercel 운영 크론에서 실행하지 않는다. 현재 Linux account session이 없으면 memory 검사는 계속 `SESSION_MISSING`으로 끝나고 파트너 link operation은 실행되지 않는다.
+
 ## 보존 범위
 
 원본은 `affiliate-content-operations`의 2026-10-04 커밋 `c6c8c146ad3e1e4cfbb169dd2ccab12ba202018e`까지의 쿠팡 구현이다. 공통 세션 수정은 이 저장소 커밋 `0907cb699bfaf46d7bf9a143b186c605fb72fdab`에 있다. 상대 경로와 공통 런타임 연결을 조정했고, 일회성 고정 목록·개인 경로·브라우저 handoff worker는 반복 실행 필수 의존성에서 제외했다. 배포 파일의 hash와 변환 내역은 `provenance/coupang-debug-pack.json`에 기록한다.

@@ -1,0 +1,52 @@
+{
+  "schema": "web-api-capability-receipt-v1",
+  "service": "gabia",
+  "capabilityId": "auth.owner",
+  "checkedAt": "2026-10-07T22:55:04.624Z",
+  "secretsPersistedInEvidence": false,
+  "authenticated": true,
+  "ownerVerified": true,
+  "request": {
+    "method": "GET",
+    "origin": "https://gabia-user-api.gabia.com",
+    "path": "/v1/users/me",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 166,
+    "browserUsed": false,
+    "ownerMatched": true,
+    "checkedAt": "2026-10-07T22:55:04.624Z",
+    "queryNames": [],
+    "responseKeys": [
+      "data"
+    ],
+    "fieldNames": [
+      "user_id",
+      "user_name",
+      "user_type",
+      "registration_site",
+      "registration_date"
+    ]
+  },
+  "implementation": {
+    "lib/gabia-read.mjs": "a48b284272d76cf8da07c78c2ea1c8a353d9105e01983cb873d716818eeda6e2",
+    "scripts/gabia-read.mjs": "87656466caf7bf07989ee83322012b12c24d6706455ffcad43f8b62654ab46c1"
+  },
+  "derivation": {
+    "sourceReceipt": "sanitizedverification/gabia-authenticated-read-2026-10-08.json",
+    "sourceSchema": "gabia-authenticated-read-v1",
+    "targetDomainPresent": true,
+    "identityPinMatched": true
+  },
+  "authenticationPhases": {
+    "loginAcquisition": "browser_automation_google_login",
+    "credentialHandoff": "process_memory_stdin",
+    "businessRequests": "pure_http_node_fetch",
+    "readback": "pure_http_node_fetch",
+    "browserUsedForBusiness": false,
+    "sessionPersisted": false,
+    "renewal": "not_tested",
+    "emailComparison": "unavailable"
+  },
+  "userIdValuePersisted": false
+}

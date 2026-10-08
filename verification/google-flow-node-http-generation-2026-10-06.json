@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-05T23:05:59.270Z",
+  "operation": "generate_video",
+  "wholeOperationPureHttp": true,
+  "scope": "Flow-configured unmodified Enterprise SDK in Node/jsdom -> one direct HTTP create -> project readback -> server polling -> download -> local 480p conversion",
+  "initialAuthenticatedSession": "Windows DPAPI scoped first-party bootstrap, prerequisite outside generation",
+  "browserEngineUsedForIssuanceOrGeneration": false,
+  "chromeIdentityFabricated": false,
+  "sdkSourceModified": false,
+  "secretsPersistedInReceipt": false,
+  "issuer": {
+    "mode": "node_jsdom_no_browser_engine",
+    "sdkRuntime": {
+      "host": "www.gstatic.com",
+      "path": "/recaptcha/releases/guXhH0v-XMxlzmbTwqkaT4i5/recaptcha__en.js",
+      "locale": "en",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 850516,
+      "sha256": "c179033168f7b2b948eb1eb42b149e93ce638499680f360413102471e38c765e"
+    },
+    "executeCallCount": 1,
+    "reload": {
+      "origin": "https://www.google.com",
+      "path": "/recaptcha/enterprise/reload",
+      "method": "POST",
+      "requestCreatedAt": "2026-10-05T22:48:15.801Z",
+      "requestBytes": 9399,
+      "sendFinishedAt": "2026-10-05T22:48:15.975Z",
+      "status": 200,
+      "mime": "application/json",
+      "contentEncoding": "gzip",
+      "responseBytes": 2328,
+      "responseEndedAt": "2026-10-05T22:48:16.098Z",
+      "decodedResponseBytes": 3023,
+      "arrayLength": 17,
+      "expectedReplyFrame": true,
+      "tokenPresent": true,
+      "tokenLength": 2404,
+      "responseSchemaValid": true
+    },
+    "sdkTokenMatchesReloadResponse": true,
+    "reloadRequestAttempts": 1,
+    "clearRequestAttempts": 0,
+    "clearRequestsBlocked": 1
+  },
+  "create": {
+    "origin": "https://flow.google.com",
+    "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+    "method": "POST",
+    "sendStartedAt": "2026-10-05T22:48:19.411Z",
+    "status": 200,
+    "mime": "application/json",
+    "attemptCount": 1,
+    "requestId": "5C194F81-33C6-44C6-9B19-830754CD13A6",
+    "mediaId": "6da12ed1-5671-41cf-a4b1-a1aba895acd8"
+  },
+  "projectReadback": {
+    "protected": true,
+    "rpcId": "Zzl0ze",
+    "baselineMediaCount": 38,
+    "sameRequestJournalMatched": true
+  },
+  "serverCompletion": {
+    "pollRpcId": "jwpduf",
+    "pollReadCount": 4,
+    "phase": "download_ready",
+    "mediaId": "6da12ed1-5671-41cf-a4b1-a1aba895acd8",
+    "observedStateCode": 3,
+    "videoBytes": 3186756,
+    "at": "2026-10-05T22:52:17.792Z"
+  },
+  "download": {
+    "mode": "maintained direct HTTP CLI same-journal reconcile",
+    "journalId": "ce2223f4-96b8-4cd7-978c-4288fcfac5b9",
+    "state": "downloaded",
+    "bytes": 3186756,
+    "httpSuccessfulAndMimeValidatedByClient": true,
+    "exactHttpStatusNotRetained": true,
+    "createRetries": 0,
+    "earlierFailure": "Diagnostic download allowlist used the wrong media host; corrected flow-content.google and resumed the same job."
+  },
+  "artifacts": [
+    {
+      "name": "flow-pure-http-yellow-boat-8s-native720.mp4",
+      "bytes": 3186756,
+      "sha256": "5382b5e5f5242644b1f1035eea1db98dcc0d331b79120ab8caa90ce8511ddebc",
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "seconds": 8,
+      "frames": 192,
+      "fps": 24
+    },
+    {
+      "name": "flow-pure-http-yellow-boat-8s-480p.mp4",
+      "bytes": 1195544,
+      "sha256": "03bf6d959d0cb404264c88af9fdb6ede6185c7a505bde6c39a766afdf2dfd40a",
+      "codec": "h264",
+      "width": 854,
+      "height": 480,
+      "seconds": 8,
+      "frames": 192,
+      "fps": 24
+    }
+  ],
+  "requestedArtifact": "flow-pure-http-yellow-boat-8s-480p.mp4",
+  "requested480pIsLocalConversionOfNative720p": true,
+  "verification": {
+    "mp4SignaturesVerified": true,
+    "requestedArtifactFullDecodePassed": true,
+    "visualFrameInspected": true
+  },
+  "productionCliValidation": "pending integration/live verification; this receipt proves the isolated maintained-client experiment"
+}

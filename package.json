@@ -18,6 +18,7 @@
     "inspect:bundle": "node scripts/inspect-bundle.mjs",
     "checklist": "node scripts/checklist.mjs --all --run-tests",
     "checklist:strict": "node scripts/checklist.mjs --all --run-tests --strict",
+    "check:ai": "node scripts/check-ai-providers.mjs",
     "web:login": "node scripts/web-login.mjs",
     "inpock": "node scripts/inpock.mjs",
     "retail": "node scripts/retail.mjs",
@@ -26,6 +27,8 @@
     "catalog:check": "node scripts/checklist.mjs --scope=catalog --json --strict",
     "myrealtrip": "node scripts/myrealtrip.mjs",
     "x:read": "node scripts/x-read.mjs",
+    "gabia": "node scripts/gabia.mjs",
+    "gabia:read": "node scripts/gabia-read.mjs",
     "test": "node --test \"tests/*.test.mjs\"",
     "coupang:regress": "node scripts/coupang-regression.mjs",
     "agoda": "node scripts/agoda.mjs"

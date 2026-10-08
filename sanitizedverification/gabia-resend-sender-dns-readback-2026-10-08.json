@@ -1,0 +1,85 @@
+{
+  "schema": "gabia-sender-dns-readback-v1",
+  "checkedAt": "2026-10-08T02:34:40+00:00",
+  "domain": "lifehackailab.com",
+  "senderSubdomain": "auth.lifehackailab.com",
+  "provider": "Resend",
+  "providerRegion": "ap-northeast-1",
+  "secretsPersistedInEvidence": false,
+  "rawRecordValuesPersisted": false,
+  "browserCookiesPersisted": false,
+  "saveActorAttribution": "unconfirmed; this readback records persisted state, not who clicked Save",
+  "nativeUiReadback": {
+    "authenticatedAfterReload": true,
+    "recordCount": 8,
+    "senderRows": [
+      {
+        "type": "TXT",
+        "host": "resend._domainkey.auth",
+        "ttl": 600,
+        "valueMatchedInMemory": true
+      },
+      {
+        "type": "CNAME",
+        "host": "rsend.auth",
+        "ttl": 600,
+        "valueMatchedInMemory": true
+      },
+      {
+        "type": "CNAME",
+        "host": "send.auth",
+        "ttl": 600,
+        "valueMatchedInMemory": true
+      },
+      {
+        "type": "TXT",
+        "host": "_dmarc.auth",
+        "ttl": 600,
+        "valueMatchedInMemory": true
+      }
+    ],
+    "existingApexA1PreservedTtl600": true,
+    "existingApexA2PreservedTtl600": true,
+    "existingWwwCnamePreservedTtl600": true,
+    "existingGoogleVerificationTxtApexPreservedTtl600": true,
+    "existingApexMxCount": 0,
+    "noRowsDeleted": true
+  },
+  "authoritativeDnsReadback": {
+    "delegatedNameservers": [
+      "ns1.gabia.co.kr",
+      "ns.gabia.co.kr",
+      "ns.gabia.net"
+    ],
+    "serverIps": [
+      "20.200.205.248",
+      "43.201.170.100",
+      "211.234.124.90",
+      "121.78.117.39"
+    ],
+    "allAuthoritativeAnswersHaveAA": true,
+    "allFourSenderRowsExactMatchOnEveryAuthoritativeServer": true,
+    "answerTtlSeconds": 600,
+    "apexMxAnswerCount": 0,
+    "authSubdomainMx": "NXDOMAIN",
+    "inboundMxAdded": false
+  },
+  "recursiveDnsReadback": {
+    "resolvers": [
+      "Google Public DNS DoH",
+      "Cloudflare DoH"
+    ],
+    "allFourSenderRowsExactMatchOnBothResolvers": true,
+    "answerTtlSeconds": 600,
+    "apexMxAnswerCount": 0,
+    "authSubdomainMx": "NXDOMAIN"
+  },
+  "writeEvidenceBoundary": {
+    "recordsObservedPersistedAfterReload": true,
+    "saveActionObservedInThisResume": false,
+    "requestBodyCaptured": false,
+    "pureHttpDnsWriterImplemented": false,
+    "nativeUiWriteContractClaimed": false,
+    "notes": "Authenticated Gabia UI readback plus direct authoritative and recursive DNS verification only. This receipt does not attribute the prior Save action or claim a durable HTTP writer."
+  }
+}

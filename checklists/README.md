@@ -11,6 +11,34 @@ node scripts/checklist.mjs --service=inpock --run-tests --strict
 
 `--strict`는 필수 기능에 미충족 항목이 있으면 종료 코드 2를 반환한다. 형식·경로 오류는 종료 코드 1이다. 기본 실행은 **오프라인**이다. 코드 파일·내보낸 이름·CLI 토큰·문법·테스트 파일 존재 여부와 저장된 영수증만 검사한다. 로그인, 네트워크 요청, 외부 쓰기, 테스트 실행은 하지 않는다. `--run-tests`는 명시했을 때만 지정된 로컬 테스트를 실행하고 자격정보 관련 환경변수는 자식 프로세스에 전달하지 않는다. 테스트가 네트워크를 사용하지 않는지까지 이 감사 스크립트가 보증하지는 않는다.
 
+Gemini·Grok 원본 checkout의 기능 점검을 한 명령으로 모으려면 다음을 실행한다.
+
+```bash
+npm run check:ai -- --gemini-repo /absolute/gemini-web-xhr-client --grok-repo /absolute/grok-web-xhr-client --strict
+```
+
+매번 경로를 넣지 않으려면 저장소 루트의 `ai-providers.local.json`에 한 번 설정한다.
+이 파일은 Git에서 제외되며 자격정보를 넣지 않는다.
+
+```json
+{
+  "schema": "web-api-ai-provider-repos-v1",
+  "repos": {
+    "gemini": "/absolute/gemini-web-xhr-client",
+    "grok": "/absolute/grok-web-xhr-client"
+  }
+}
+```
+
+이후 `npm run check:ai -- --strict`로 점검한다. 다른 설정 파일은 `--config /absolute/file.json`
+으로 지정하고, 명령줄의 개별 repo 경로는 설정 파일보다 우선한다.
+
+이 명령은 두 원본의 `scripts/check-features.mjs --json --strict`만 실행한다. 자격정보
+환경변수를 전달하지 않으며 네트워크·로그인·외부 쓰기를 수행하지 않는다. 결과는 저장된
+영수증과 현재 checkout의 일치 검사이고 현재 원격 인증·기능 실행 증거가 아니다.
+원본이 없거나 필수 기능이 남으면 strict 종료 코드는2, 원본 검사 결과가 잘못되면1이다.
+원문 child 출력은 전달하지 않고 검증한 기능 ID·상태·건수만 반환한다.
+
 상태는 다음처럼 읽는다.
 
 | 상태 | 의미 |

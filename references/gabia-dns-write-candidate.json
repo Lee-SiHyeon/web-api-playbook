@@ -1,0 +1,40 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "service": "gabia",
+  "classification": "source_candidate",
+  "observedDate": "2026-10-08",
+  "sourceURL": "https://dns.gabia.com/assets/javaScript/dns/addition_service/dns_set.js",
+  "uiPath": "/dns/internals/total_set",
+  "contracts": [
+    {
+      "method": "POST",
+      "path": "/dns/ajax/dns",
+      "sourceHandler": "saveRecordEvent",
+      "evidenceLevel": "browser_xhr_observed_field_names_and_content_type",
+      "contentType": "application/x-www-form-urlencoded",
+      "requestFieldNames": [
+        "domain", "data[0][data]", "data[0][hasdns]", "data[0][host]", "data[0][port]",
+        "data[0][priority]", "data[0][protocol]", "data[0][seqno]", "data[0][service]",
+        "data[0][services_idx]", "data[0][services_name]", "data[0][status]", "data[0][target]",
+        "data[0][ttl]", "data[0][type]", "data[0][weight]"
+      ],
+      "requestObserved": true,
+      "nativeUiWriteReadback": "sanitizedverification/gabia-dns-native-ui-write-readback-2026-10-08.json",
+      "exactUrlEncodedBodyValueMatch": "unverified",
+      "httpResponseStatusCaptured": false,
+      "durablePureHttpWriterImplemented": false,
+      "evidenceBoundary": "The native UI XHR route and field names were observed during the approved Save. The URL-encoded value was not retained or decoded for evidence, so this is not a complete reusable write contract or a supported CLI writer."
+    },
+    {
+      "method": "POST",
+      "path": "/dns/internals/total_set",
+      "sourceHandler": "document.noReload.submit",
+      "evidenceLevel": "post-write-page-refresh-observed",
+      "requestFieldNames": ["domain", "domain_seqno", "owner", "tbl"],
+      "requestObserved": true,
+      "recordMutationSemantics": false,
+      "evidenceBoundary": "The page submits this form after the DNS XHR success callback to refresh the settings view; do not treat it as the DNS record write."
+    }
+  ],
+  "implementationBoundary": "The source candidate remains open until a safe durable HTTP writer can validate the complete request/response contract and independent readback."
+}

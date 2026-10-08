@@ -1,0 +1,149 @@
+{
+  "schema": "gabia-dns-native-ui-write-readback-v1",
+  "checkedAt": "2026-10-08T01:31:00.396Z",
+  "service": "gabia",
+  "domain": "lifehackailab.com",
+  "secretsPersistedInEvidence": false,
+  "verificationValuePersisted": false,
+  "browserCookiesPersisted": false,
+  "authentication": {
+    "loginAcquisition": "browser_automation_google_login",
+    "accountIdentity": "approved existing Linux Chrome profile",
+    "credentialHandoff": "same browser profile; no cookie copy",
+    "pureHttpReader": "separate existing Node reader; no writer used"
+  },
+  "preSaveReview": {
+    "type": "TXT",
+    "host": "@",
+    "ttl": 600,
+    "googleGeneratedValueMatchedInMemory": true,
+    "existingTxtRowsBefore": 0,
+    "existingA1Preserved": true,
+    "existingA2Preserved": true,
+    "existingCnamePreserved": true,
+    "oldRecordsDeleted": false
+  },
+  "nativeUiWrite": {
+    "dispatched": true,
+    "uiSuccessAlertObserved": true,
+    "writeMode": "browser_automation_native_ui",
+    "request": {
+      "method": "POST",
+      "origin": "https://dns.gabia.com",
+      "path": "/dns/ajax/dns",
+      "resourceType": "xhr",
+      "contentType": "application/x-www-form-urlencoded",
+      "fieldNames": [
+        "data[0][data]",
+        "data[0][hasdns]",
+        "data[0][host]",
+        "data[0][port]",
+        "data[0][priority]",
+        "data[0][protocol]",
+        "data[0][seqno]",
+        "data[0][service]",
+        "data[0][services_idx]",
+        "data[0][services_name]",
+        "data[0][status]",
+        "data[0][target]",
+        "data[0][ttl]",
+        "data[0][type]",
+        "data[0][weight]",
+        "domain"
+      ],
+      "requestValueMatch": "not_verified_capture_used_raw_urlencoded_body",
+      "httpStatusObserved": false
+    },
+    "pureHttpWriterImplemented": false,
+    "requestValuePersisted": false
+  },
+  "gabiaUiReadback": {
+    "afterReload": true,
+    "authenticated": true,
+    "domainPresent": true,
+    "txtDataRows": 1,
+    "txtTypeMatch": true,
+    "txtHostApex": true,
+    "txtValueMatchesGoogleGeneratedValue": true,
+    "txtTtl600": true,
+    "existingA1PresentTtl600": true,
+    "existingA2PresentTtl600": true,
+    "existingCnamePresentTtl600": true
+  },
+  "authoritativeDnsReadback": {
+    "queryType": "TXT",
+    "nameserverQueries": [
+      {
+        "nameserver": "ns1.gabia.co.kr",
+        "serverIp": "20.200.205.248",
+        "authoritativeAnswer": true,
+        "rcode": "NOERROR",
+        "answerCount": 1,
+        "googleValueMatch": true,
+        "ttl": [
+          600
+        ]
+      },
+      {
+        "nameserver": "ns.gabia.co.kr",
+        "serverIp": "43.201.170.100",
+        "authoritativeAnswer": true,
+        "rcode": "NOERROR",
+        "answerCount": 1,
+        "googleValueMatch": true,
+        "ttl": [
+          600
+        ]
+      },
+      {
+        "nameserver": "ns.gabia.net",
+        "serverIp": "121.78.117.39",
+        "authoritativeAnswer": true,
+        "rcode": "NOERROR",
+        "answerCount": 1,
+        "googleValueMatch": true,
+        "ttl": [
+          600
+        ]
+      },
+      {
+        "nameserver": "ns.gabia.net",
+        "serverIp": "211.234.124.90",
+        "authoritativeAnswer": true,
+        "rcode": "NOERROR",
+        "answerCount": 1,
+        "googleValueMatch": true,
+        "ttl": [
+          600
+        ]
+      }
+    ]
+  },
+  "recursiveDnsReadback": {
+    "resolvers": [
+      {
+        "resolver": "Google Public DNS DoH",
+        "httpStatus": 200,
+        "rcode": 0,
+        "txtAnswerCount": 1,
+        "googleValueMatch": true
+      },
+      {
+        "resolver": "Cloudflare DNS DoH",
+        "httpStatus": 200,
+        "rcode": 0,
+        "txtAnswerCount": 1,
+        "googleValueMatch": true
+      }
+    ]
+  },
+  "searchConsole": {
+    "status": "verified",
+    "propertyType": "domain",
+    "propertyMatchesTarget": true,
+    "ownershipReadback": "소유권이 확인됨",
+    "verificationValuePersisted": false,
+    "screenshotRetainedByRegistrationAgent": true
+  },
+  "evidenceBoundary": "Native Gabia UI write and independent UI/authoritative/recursive readback are verified. The XHR request field names were observed, but exact URL-encoded body value and HTTP response status were not retained or independently matched; no durable pure-HTTP DNS writer is claimed."
+}

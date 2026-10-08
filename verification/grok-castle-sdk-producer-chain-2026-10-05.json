@@ -1,0 +1,128 @@
+{
+  "checkedAt": "2026-10-05",
+  "service": "grok_auth",
+  "sourcePage": {
+    "origin": "https://accounts.x.ai",
+    "path": "/sign-in",
+    "status": 200,
+    "observedFirstPartyScriptUrls": 48
+  },
+  "assets": [
+    {
+      "path": "/_next/static/chunks/1f-co9f_lhfa9.js",
+      "status": 200,
+      "bytes": 38139,
+      "sha256": "62386da4f17c50f3d6faab65cd9cf7445585bd2eb900f2b0bc719ed427a9e538",
+      "role": "signIn.checkSSO callsite"
+    },
+    {
+      "path": "/_next/static/chunks/2k4507byot2ho.js",
+      "status": 200,
+      "bytes": 18553,
+      "sha256": "ee90e318289931114eec0d3618519f8c348a609c799c7514498461946904d8f7",
+      "role": "sign-in UI hook and token request callsites"
+    },
+    {
+      "path": "/_next/static/chunks/1pj7cj84weix5.js",
+      "status": 200,
+      "bytes": 33369,
+      "sha256": "049b0203b08b83b7a235b75dcc76d91f3d8e4cdd31fb7e07f176d16c0307acd0",
+      "role": "CastleProvider and createRequestToken helper"
+    },
+    {
+      "path": "/_next/static/chunks/0aq4mmq8z_i8c.js",
+      "status": 200,
+      "bytes": 348716,
+      "sha256": "6a4835680aab7ec0f91e522af4e1a6eb8ee1156855991923671e88be8f609b91",
+      "role": "application provider wiring"
+    },
+    {
+      "path": "/_next/static/chunks/2m2oh0c94bkor.js",
+      "status": 200,
+      "bytes": 22042,
+      "sha256": "b816a812afa7c32e11eef4fa12b7d2fa78160b54b0591720e8a8714603bcb060",
+      "role": "auth provider context"
+    },
+    {
+      "path": "/_next/static/chunks/2s62g27ww0cp6.js",
+      "status": 200,
+      "bytes": 32803,
+      "sha256": "db93d54ad71575b9e57a9d5f0a68c3cdd4fa61dbe6f40ad84541c2b9af44543f",
+      "role": "Castle SDK feature flag names"
+    }
+  ],
+  "observedFlow": {
+    "sso": {
+      "tokenProducer": "createRequestToken",
+      "arguments": [
+        "method=sso",
+        "flow=login",
+        "email"
+      ],
+      "consumer": "signIn.checkSSO",
+      "endpoint": "POST https://accounts.x.ai/api/auth/sso/check",
+      "tokenField": "castleRequestToken"
+    },
+    "providerInputs": [
+      "pk",
+      "enableCastle",
+      "sdk",
+      "logger",
+      "onEvent"
+    ],
+    "appConfigFields": [
+      "castlePk",
+      "enableCastle",
+      "castleSdk"
+    ],
+    "providerEnvironment": [
+      "document.visibilityState must be visible before normal mint path"
+    ],
+    "providerFailureEvents": [
+      "init_timeout",
+      "init_failed",
+      "empty_token",
+      "mint_timeout",
+      "mint_error",
+      "mint_failed"
+    ],
+    "alternateEmailPasswordProducer": {
+      "method": "email_password",
+      "flow": "login",
+      "arguments": [
+        "email"
+      ],
+      "additionalSessionRequestFields": [
+        "email",
+        "clearTextPassword",
+        "turnstileToken",
+        "castleRequestToken"
+      ]
+    }
+  },
+  "sdkIdentification": {
+    "vendorMarker": "Castle",
+    "featureFlagNames": [
+      "ENABLE_CASTLE",
+      "CASTLE_SDK_NEXT",
+      "ACCOUNT_IMPROVED_CASTLE_FLOW"
+    ],
+    "literalPackageImportObserved": false,
+    "sdkSemanticVersionObserved": false,
+    "sdkInitializationNetworkOriginResolved": false,
+    "notes": "The app passes an initialized sdk object and public-key/config fields into its provider, but these current first-party bundles do not expose a literal package import, SDK version, or resolved SDK loader origin."
+  },
+  "browserBoundary": {
+    "browserPageApi": "document.visibilityState",
+    "turnstileResourceDeclaredByHtml": "https://challenges.cloudflare.com/turnstile/v0/api.js",
+    "turnstileExecutionVerified": false,
+    "tokenMintObserved": false,
+    "authPostSent": false,
+    "missingTokenProbeSent": false,
+    "authenticatedReplayVerified": false,
+    "rootCauseOfPrior403Established": false
+  },
+  "rawSourcePersisted": false,
+  "tokenValuesPersisted": false,
+  "credentialValuesPersisted": false
+}

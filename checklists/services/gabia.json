@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "service": "gabia",
+  "description": "Gabia authenticated account-scoped domain and DNS reads, plus separate public recursive DNS/HTTPS checks and local record-plan preparation. Authenticated mutations are not implemented.",
+  "capabilities": [
+    {
+      "id": "auth.owner",
+      "title": "보호 owner 조회와 현재 로그인 세션 pin 대조",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          { "path": "lib/gabia-read.mjs", "exports": ["createGabiaReadClient"] }
+        ],
+        "cli": [
+          { "path": "scripts/gabia-read.mjs", "tokens": ["read", "credentials-stdin"] }
+        ],
+        "tests": ["tests/gabia-read.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://gabia-user-api.gabia.com",
+          "path": "/v1/users/me",
+          "files": ["sanitizedverification/gabia-auth-owner-2026-10-08.json"],
+          "hashPaths": ["lib/gabia-read.mjs", "scripts/gabia-read.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "same-session user_id pin matched and lifehackailab.com was present in that owner's protected listing. The owner response contains no email; Google/GitHub email equality is unverified. The complete sanitized reader proof remains separate."
+    },
+    {
+      "id": "domains.read",
+      "title": "현재 owner의 도메인 목록에서 요청 도메인 확인",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          { "path": "lib/gabia-read.mjs", "exports": ["createGabiaReadClient"] }
+        ],
+        "cli": [
+          { "path": "scripts/gabia-read.mjs", "tokens": ["/dns/ajax/domain", "read"] }
+        ],
+        "tests": ["tests/gabia-read.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://dns.gabia.com",
+          "path": "/dns/ajax/domain",
+          "files": ["sanitizedverification/gabia-domains-read-2026-10-08.json"],
+          "hashPaths": ["lib/gabia-read.mjs", "scripts/gabia-read.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The exact filtered target appeared on page 1. Exhaustive pagination of the full account domain inventory is not implemented or verified."
+    },
+    {
+      "id": "dns.records.read",
+      "title": "owner 확인 후 해당 도메인의 A·AAAA·CNAME 설정 조회",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          { "path": "lib/gabia-read.mjs", "exports": ["createGabiaReadClient"] }
+        ],
+        "cli": [
+          { "path": "scripts/gabia-read.mjs", "tokens": ["/dns/ajax/dns", "read"] }
+        ],
+        "tests": ["tests/gabia-read.test.mjs"]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://dns.gabia.com",
+          "path": "/dns/ajax/dns",
+          "files": ["sanitizedverification/gabia-dns-records-read-2026-10-08.json"],
+          "hashPaths": ["lib/gabia-read.mjs", "scripts/gabia-read.mjs"]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The derived receipt binds the owner pin and target-domain listing assertion to this same Node HTTP read. It records the two apex A rows and www CNAME at TTL 600. Gabia JSON may include or omit the final CNAME dot. Other record types are not returned by this adapter."
+    },
+    {
+      "id": "auth.google_login",
+      "title": "일반 Google UI 로그인으로 새 세션 확보",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "A normal visible Google login was used in the existing Linux Chrome profile. This repository has no automated login/bootstrap helper; account selection was not shown and the Gabia response has no email for cross-account comparison. Session acquisition remains browser_automation.",
+      "note": "The implemented reader begins after a current session has been handed to it over stdin in memory."
+    },
+    {
+      "id": "auth.session_renewal",
+      "title": "세션 만료 후 Google 로그인 재개·갱신",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "A current session was verified; expiry, cold restart, automatic refresh, cookie rotation recovery, and unattended renewal were not tested. Repeat the normal UI login and memory handoff when the session is rejected."
+    },
+    {
+      "id": "domains.pagination",
+      "title": "전체 계정 도메인 목록 페이지네이션 종료 확인",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The named read searches one target domain on page 1. Full account inventory traversal and its terminal condition are not implemented or verified."
+    },
+    {
+      "id": "dns.records.write",
+      "title": "DNS 레코드 추가·수정과 독립 readback",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [
+        { "files": ["references/gabia-dns-write-candidate.json"] }
+      ],
+      "note": "An approved native UI Save added the requested TXT; Gabia UI, delegated authoritative DNS, Google/Cloudflare recursive resolvers, and Search Console Domain-property readback confirmed ownership. See sanitizedverification/gabia-dns-native-ui-write-readback-2026-10-08.json. The browser XHR route and field names were observed, but the URL-encoded value match and HTTP response status were not captured in the sanitized receipt. No durable pure-HTTP writer is implemented, so this is not API-write completion."
+    },
+    {
+      "id": "dns.public_recursive_check",
+      "title": "Google·Cloudflare 공개 재귀 resolver로 DNS 상태 확인",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [
+          { "path": "lib/gabia-dns.mjs", "exports": ["verifyPublicDns"] }
+        ],
+        "cli": [
+          { "path": "scripts/gabia.mjs", "tokens": ["verify", "verifyPublicDns"] }
+        ],
+        "tests": ["tests/gabia-dns.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The supplemental sanitized snapshot sanitizedverification/gabia-public-domain-check-2026-10-08.json reports both recursive resolvers matching A/CNAME records. This inventory capability is not a recorded_live checklist receipt and is not an authoritative DNS or Gabia account read."
+    },
+    {
+      "id": "dns.record_plan.prepare",
+      "title": "DNS 입력 계획의 형식·중복·CNAME 충돌 검사",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [
+          { "path": "lib/gabia-dns.mjs", "exports": ["prepareRecordPlan", "validateRecordSet"] }
+        ],
+        "cli": [
+          { "path": "scripts/gabia.mjs", "tokens": ["prepare", "prepareRecordPlan"] }
+        ],
+        "tests": ["tests/gabia-dns.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Preparation is local-only and does not submit DNS changes."
+    },
+    {
+      "id": "web.https_reachability",
+      "title": "도메인 HTTPS 응답 도달성 확인",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [
+          { "path": "lib/gabia-dns.mjs", "exports": ["verifyPublicHttps"] }
+        ],
+        "cli": [
+          { "path": "scripts/gabia.mjs", "tokens": ["verify", "verifyPublicHttps"] }
+        ],
+        "tests": ["tests/gabia-dns.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "HTTPS status is separate from DNS matching. The supplemental public check reported HTTP 429; its cause is unknown. This inventory capability does not assert a reachable HTTPS result."
+    }
+  ]
+}
