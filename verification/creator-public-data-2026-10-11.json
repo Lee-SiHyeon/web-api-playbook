@@ -1,0 +1,493 @@
+{
+  "schema": "creator-public-data-documentary-replays-v1",
+  "scope": "Earlier dated independent public HTTP reads through20:41; not automatic checklist live receipts or deployment proof. Later20:49/20:50 web replay is separate.",
+  "secretsPersistedInEvidence": false,
+  "rawContentPersisted": false,
+  "productionPersistenceVerified": false,
+  "googleNative": {
+    "schema": "creator-google-rss-native-replay-v1",
+    "checkedAt": "2026-10-11T20:41:32.831Z",
+    "sourceFormat": "rss_xml",
+    "isXhr": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "executionMode": "pure_http",
+    "requestCount": 1,
+    "transport": {
+      "method": "GET",
+      "origin": "https://trends.google.com",
+      "path": "/trending/rss",
+      "query": {
+        "geo": "KR"
+      },
+      "httpStatus": 200,
+      "mime": "text/xml; charset=utf-8",
+      "responseBytes": 20928,
+      "responseSha256": "698c0ba2bac282fab8c5fbb67cf2d1c420457da85516d3c58232ada714cf1f12",
+      "checkedAt": "2026-10-11T20:41:33.278Z",
+      "browserUsed": false,
+      "cookieSent": false,
+      "credentialsUsed": false,
+      "redirectFollowed": false
+    },
+    "itemCount": 10,
+    "keywordFieldsVerified": true,
+    "trafficLabelsPreserved": true,
+    "metricPeriod": null,
+    "explicitRank": null,
+    "fullCoverage": false,
+    "implementation": {
+      "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs": "dc7e9eebf84f07e4aca85f1c4328e4208167a31e6cd801f7263a4e49aff2a14b",
+      "service-packs/naver/apps/naver-blog-api/research/trend-radar/lib/http.mjs": "5ff5047ada3abe70176fb613f96efec623442f3864ca2758199f09a5f1c952d9"
+    },
+    "rawFeedPersisted": false,
+    "rawItemsPersisted": false
+  },
+  "googleOtherMarketReads": [
+    {
+      "checkedAt": "2026-10-11T20:31:34.084Z",
+      "origin": "https://trends.google.com",
+      "path": "/trending/rss",
+      "query": {
+        "geo": "US"
+      },
+      "httpStatus": 200,
+      "mime": "text/xml; charset=utf-8",
+      "responseBytes": 21689,
+      "itemCount": 10,
+      "browserUsed": false,
+      "responseSha256": "b298fee4903d7cae3b0c646dfe219b4a2f6f6ba5320ef39720b342dc18839807"
+    },
+    {
+      "checkedAt": "2026-10-11T20:31:34.537Z",
+      "origin": "https://trends.google.com",
+      "path": "/trending/rss",
+      "query": {
+        "geo": "TW"
+      },
+      "httpStatus": 200,
+      "mime": "text/xml; charset=utf-8",
+      "responseBytes": 13921,
+      "itemCount": 10,
+      "browserUsed": false,
+      "responseSha256": "1e3bed6140ad4f6f9c152968a9c748fcd6e3887daeb15b4ce9dd4483262575ed"
+    },
+    {
+      "checkedAt": "2026-10-11T20:31:35.112Z",
+      "origin": "https://trends.google.com",
+      "path": "/trending/rss",
+      "query": {
+        "geo": "CN"
+      },
+      "httpStatus": 400,
+      "mime": "text/html; charset=utf-8",
+      "responseBytes": 1695,
+      "itemCount": 0,
+      "browserUsed": false,
+      "responseSha256": "7c28b22d0ac277e26774317f383c27897ec53689d284cea0157191a2817f17e1"
+    }
+  ],
+  "threadsNative": {
+    "checkedAt": "2026-10-11T20:31:29.093Z",
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "accountAuthenticated": false,
+    "anonymousSessionBootstrap": "fresh_http_anonymous_csrf",
+    "anonymousSessionPropagationVerified": true,
+    "cookieValuePersisted": false,
+    "operation": "BarcelonaProfileThreadsTabDirectQuery",
+    "request": {
+      "method": "POST",
+      "origin": "https://www.threads.com",
+      "path": "/api/graphql",
+      "httpStatus": 200,
+      "mime": "text/javascript; charset=utf-8",
+      "responseBytes": 33222,
+      "responseSha256": "ccaf4f4a53a2300f3bf6f416e576f227793f20be51b1d1af6ba89ada5e2a5241",
+      "browserUsed": false,
+      "anonymousCookieSent": true
+    },
+    "observedItems": 5,
+    "fullTimeline": false,
+    "bootstrapContentUsed": false,
+    "implementation": {
+      "service-packs/threads/threads-xhr.mjs": "3808c8796cf2b4c0f37aae362963dfc73a371d61dc32e46608d1fa47613a1205",
+      "service-packs/threads/threads-public.mjs": "d73f5266b8f245ea99fde4c38bfc8613de152950b52fc1899b19df7658d5a336",
+      "service-packs/threads/session-vault.mjs": "5a72f6c51aa99da079745b85a16b194b9f25b3c6a2504d04543303a5b2a028f6",
+      "lib/protected-store.mjs": "9198a545fe948882e0e3d7cf7186bd84a354ef0fa520a6fc008fdfa7166e99a2",
+      "lib/session-lock.mjs": "94de05aa582b6b22ee2683ddeea000695f1c029bcfbbee305638a20f3b66429a"
+    },
+    "automaticChecklistValidator": "not_supported; receipt is documentary rather than canonical cookie-free public-read proof"
+  },
+  "metaPublicReads": [
+    {
+      "id": "meta-newsroom-current-posts",
+      "url": "https://about.fb.com/wp-json/wp/v2/posts?per_page=20&orderby=date&order=desc",
+      "checkedAt": "2026-10-11T20:29:58.621910+00:00",
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "contractProvenance": "first_party_discovered_api_index_GET_schema",
+      "signalKind": "official_publication_recency",
+      "globalTrendRank": null,
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "bytes": 689461,
+      "bodySha256": "8fef3ae670bf2349e2f6fcb8fffe6e5d944afbb492eb9b2aa2b23ca51a0d25e8",
+      "total": "2626",
+      "totalPages": "132",
+      "observedRows": 20
+    },
+    {
+      "id": "meta-newsroom-categories",
+      "url": "https://about.fb.com/wp-json/wp/v2/categories?per_page=100",
+      "checkedAt": "2026-10-11T20:29:58.622600+00:00",
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "contractProvenance": "first_party_discovered_api_index_GET_schema",
+      "signalKind": "official_publication_recency",
+      "globalTrendRank": null,
+      "status": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "bytes": 297206,
+      "bodySha256": "0e3d3b805a7f9145e66ecb0d387310f68f015af96ce8143526dc659beff44955",
+      "total": "46",
+      "totalPages": "1",
+      "observedRows": 46
+    }
+  ],
+  "webCollectorReads": {
+    "tiktok": {
+      "checkedAt": "2026-10-11T20:40:20.993Z",
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "replayedImplementationSha256": "a9bbc0c5ce96b502a69f0ef4c8942df64ab5ec8a3caca1a334a2c34ebb13c95f",
+      "latestLocalImplementationSha256": "6fa960780ec776a7f339dc7c2a79e34644bcf7be0307672d7ebab7e3d2f1acd1",
+      "latestLocalChange": "3-day overview staleness guard",
+      "latestLocalFocusedTests": 6,
+      "results": [
+        {
+          "source": "tiktok_trends_JP",
+          "fetched": 4,
+          "snapshotComplete": false,
+          "requestDiagnostics": {
+            "requestCount": 2,
+            "retryCount": 0,
+            "lastRetryCode": null
+          },
+          "responseSha256": [
+            "29b189815538c365ad9bef6b66c49547c425318c7c80a22658a7db19d115a2c2"
+          ]
+        },
+        {
+          "source": "tiktok_trends_US",
+          "fetched": 4,
+          "snapshotComplete": false,
+          "requestDiagnostics": {
+            "requestCount": 2,
+            "retryCount": 0,
+            "lastRetryCode": null
+          },
+          "responseSha256": [
+            "5838bdfb15f0f12cd3447f5063a91e6b5952b939685efce97e8d99babece7c52"
+          ]
+        }
+      ],
+      "latestLocalReplayedInThisRecord": false
+    },
+    "meta": {
+      "observedAt": "2026-10-11T20:38:57.133Z",
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "replayedImplementationSha256": "9ee96682cc855b9a6a6cfd1b6a9ac446d7016d8a223835825c52b12cc76494da",
+      "fetched": 20,
+      "sourceCoverage": {
+        "requestedLimit": 20,
+        "observedRows": 20,
+        "upstreamTotal": 2626,
+        "upstreamTotalPages": 132,
+        "hasMore": true,
+        "eligibleRows": 3,
+        "rejectedRows": 0,
+        "excludedRows": 17,
+        "staleRows": 0
+      },
+      "snapshotComplete": false,
+      "requestDiagnostics": {
+        "requestCount": 1,
+        "retryCount": 0,
+        "lastRetryCode": null
+      }
+    },
+    "threads": {
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "fetched": 5,
+      "requestCount": 2,
+      "retryCount": 0,
+      "responseSha256": "5fe6b82b15abe8847746457bd37155e9f63b4ce217cf5e11e833523ee4644e11",
+      "snapshotComplete": false,
+      "latestWorkingSourceSha256": "dc08303e21932a33baf944c211cc13bbbad100a914b84dbed8891f56429d40aa",
+      "replayedImplementationSha256": null,
+      "note": "Minimal web port replay validated5; exact port implementation SHA was not recorded with that earlier replay; latest working SHA is inventory only"
+    }
+  },
+  "laterIndependentWebReplayFile": "verification/creator-public-data-web-fresh-2026-10-11.json",
+  "packageValidation": {
+    "checkedAt": "2026-10-11T20:55:24.228337+00:00",
+    "runtime": "Node24.19.0/Linux",
+    "doctorPassed": true,
+    "doctorCredentialsRead": false,
+    "rootRegression": {
+      "passed": 560,
+      "failed": 0,
+      "skipped": 0
+    },
+    "existingTrendPackTests": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    "fullOfflineChecklist": {
+      "services": 33,
+      "exitCode": 0,
+      "runTests": true,
+      "creatorRequiredGaps": 7,
+      "preExistingMissingTestPathReports": [
+        {
+          "service": "ebay",
+          "capabilityId": "search.listings",
+          "missingTestFiles": [
+            "tests/retail-ebay-catalog.test.mjs"
+          ],
+          "capabilityStatus": "unimplemented"
+        },
+        {
+          "service": "ebay",
+          "capabilityId": "item.detail",
+          "missingTestFiles": [
+            "tests/retail-ebay-catalog.test.mjs"
+          ],
+          "capabilityStatus": "unimplemented"
+        },
+        {
+          "service": "ebay",
+          "capabilityId": "categories.read",
+          "missingTestFiles": [
+            "tests/retail-ebay-catalog.test.mjs"
+          ],
+          "capabilityStatus": "unimplemented"
+        },
+        {
+          "service": "ebay",
+          "capabilityId": "search.pagination",
+          "missingTestFiles": [
+            "tests/retail-ebay-catalog.test.mjs"
+          ],
+          "capabilityStatus": "unimplemented"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "categories.contract",
+          "missingTestFiles": [
+            "tests/inpock-collections.test.mjs"
+          ],
+          "capabilityStatus": "scope_unknown"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "collections.create",
+          "missingTestFiles": [
+            "tests/inpock-collections.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "collections.children",
+          "missingTestFiles": [
+            "tests/inpock-collections.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "collections.assign",
+          "missingTestFiles": [
+            "tests/inpock-collections.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "cards.update",
+          "missingTestFiles": [
+            "tests/inpock-card-management.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "cards.delete",
+          "missingTestFiles": [
+            "tests/inpock-card-management.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "cards.visibility",
+          "missingTestFiles": [
+            "tests/inpock-card-management.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "cards.order",
+          "missingTestFiles": [
+            "tests/inpock-card-management.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "cards.archive",
+          "missingTestFiles": [
+            "tests/inpock-card-management.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "cards.schedule",
+          "missingTestFiles": [
+            "tests/inpock-card-management.test.mjs"
+          ],
+          "capabilityStatus": "scope_unknown"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "content.text",
+          "missingTestFiles": [
+            "tests/inpock-content.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "content.image",
+          "missingTestFiles": [
+            "tests/inpock-content.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        },
+        {
+          "service": "inpock",
+          "capabilityId": "media.upload",
+          "missingTestFiles": [
+            "tests/inpock-media.test.mjs"
+          ],
+          "capabilityStatus": "source_candidate"
+        }
+      ],
+      "note": "These existing manifest references are absent/planned files, not failing executed tests; overall default exit0 is not strict completion"
+    },
+    "creatorStrictAudits": [
+      {
+        "service": "creator-google",
+        "exitCode": 2,
+        "summary": {
+          "total": 2,
+          "recordedLive": 0,
+          "needsReverification": 0,
+          "requiredGaps": [
+            "rss.public"
+          ],
+          "strictPassed": false
+        },
+        "states": {
+          "rss.public": "pending_live",
+          "rss.cn": "blocked"
+        }
+      },
+      {
+        "service": "creator-threads",
+        "exitCode": 2,
+        "summary": {
+          "total": 2,
+          "recordedLive": 0,
+          "needsReverification": 0,
+          "requiredGaps": [
+            "profile.public"
+          ],
+          "strictPassed": false
+        },
+        "states": {
+          "profile.public": "pending_live",
+          "keyword.public": "source_candidate"
+        }
+      },
+      {
+        "service": "creator-tiktok",
+        "exitCode": 2,
+        "summary": {
+          "total": 3,
+          "recordedLive": 0,
+          "needsReverification": 0,
+          "requiredGaps": [
+            "video.preview"
+          ],
+          "strictPassed": false
+        },
+        "states": {
+          "video.preview": "source_candidate",
+          "hashtag.preview": "source_candidate",
+          "filter.config": "source_candidate"
+        }
+      },
+      {
+        "service": "creator-meta",
+        "exitCode": 2,
+        "summary": {
+          "total": 2,
+          "recordedLive": 0,
+          "needsReverification": 0,
+          "requiredGaps": [
+            "publication.public",
+            "categories.public"
+          ],
+          "strictPassed": false
+        },
+        "states": {
+          "publication.public": "source_candidate",
+          "categories.public": "source_candidate"
+        }
+      },
+      {
+        "service": "creator-access-gaps",
+        "exitCode": 2,
+        "summary": {
+          "total": 4,
+          "recordedLive": 0,
+          "needsReverification": 0,
+          "requiredGaps": [
+            "youtube.chart",
+            "naver.shopping"
+          ],
+          "strictPassed": false
+        },
+        "states": {
+          "youtube.chart": "source_candidate",
+          "naver.shopping": "blocked",
+          "naver.datalab": "source_candidate",
+          "naver.advisor": "source_candidate"
+        }
+      }
+    ],
+    "relativeLinksVerified": true,
+    "jsonParsingPassed": true,
+    "gitDiffCheckPassed": true,
+    "newFilesHighConfidenceSecretPatternsFound": 0
+  }
+}

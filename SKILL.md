@@ -42,6 +42,15 @@ documents, protected workspaces, documented APIs, legacy replacements and real
 account metrics separate. A login redirect does not verify owner access; a guide
 does not supply traffic or monetization data. Do not bypass access gates.
 
+For creator public data, reuse [the existing native clients and observed read
+contracts](references/creator-public-data.md) before rediscovery. Google RSS is XML,
+Threads profile GraphQL uses a fresh anonymous bootstrap, and TikTok/Meta web
+collectors are external implementations, not native Playbook clients. Register the
+`creator-*` checklists and preserve market, source kind, original publication time,
+metric period, partial coverage and provider errors. Keep five readiness states,
+browser XHR capture, dated replay hashes and deployment proof separate. Do not
+promote undocumented feeds or anonymous cookies to incompatible live validators.
+
 For MyRealTrip link creation, use
 [link reconciliation](references/myrealtrip-link-reconciliation.md) and the existing
 owner-bound flow. Web partner sessions and official API keys/response fields differ;

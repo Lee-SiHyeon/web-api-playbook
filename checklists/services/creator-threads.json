@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "service": "creator-threads",
+  "description": "Existing native anonymous profile client was independently replayed for5 official public posts; no approved keyword token/account login is asserted. Current public-read validator excludes its anonymous session cookie.",
+  "capabilities": [
+    {
+      "id": "profile.public",
+      "title": "Read one bounded public profile through fresh bootstrap and GraphQL",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/threads/threads-xhr.mjs",
+            "exports": [
+              "fetchThreadsXhr"
+            ]
+          },
+          {
+            "path": "service-packs/threads/threads-public.mjs",
+            "exports": [
+              "parseThreadsPayload"
+            ]
+          },
+          {
+            "path": "service-packs/threads/session-vault.mjs",
+            "exports": [
+              "loadThreadsSession",
+              "storeThreadsSession"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "note": "Native200 text/javascript JSON/5 posts confirmed. Automatic pending_live is a typed anonymous-cookie evidence-validator gap. Fresh anonymous CSRF delivery is not protected owner authentication. No HTML fallback/full timeline/national trend claim."
+    },
+    {
+      "id": "keyword.public",
+      "title": "Search public keywords through the official approved Threads API",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Official docs current200 markdown; approved app + threads_keyword_search token provider not wired. No keyword/national search-volume replay."
+    }
+  ]
+}

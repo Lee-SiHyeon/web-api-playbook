@@ -1,0 +1,458 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "observedAt": "2026-10-11",
+  "scope": "Contracts and package inventory; live success is separately scoped in verification/creator-public-data-2026-10-11.json",
+  "noCompletePlatformClaim": true,
+  "secretsPersistedInEvidence": false,
+  "rawContentPersisted": false,
+  "contracts": [
+    {
+      "service": "creator-google",
+      "capabilityId": "rss.public",
+      "method": "GET",
+      "origin": "https://trends.google.com",
+      "path": "/trending/rss",
+      "semantic": "read",
+      "queryFields": [
+        "geo"
+      ],
+      "sourceFormat": "rss_xml",
+      "contractProvenance": "first_party_observed_feed",
+      "observedMarkets": [
+        "KR",
+        "US",
+        "JP",
+        "TW",
+        "ES",
+        "FR",
+        "DE",
+        "BR"
+      ],
+      "unsupportedObservedMarket": "CN",
+      "fields": [
+        "title",
+        "ht:approx_traffic",
+        "pubDate",
+        "ht:news_item"
+      ],
+      "scope": "bounded public RSS keywords; not JSON XHR"
+    },
+    {
+      "service": "creator-threads",
+      "capabilityId": "profile.public",
+      "method": "GET",
+      "origin": "https://www.threads.com",
+      "path": "/@threads",
+      "semantic": "read",
+      "sourceFormat": "html_bootstrap",
+      "scope": "anonymous CSRF + current server Relay contract only; no post-body fallback"
+    },
+    {
+      "service": "creator-threads",
+      "capabilityId": "profile.public",
+      "method": "POST",
+      "origin": "https://www.threads.com",
+      "path": "/api/graphql",
+      "semantic": "read",
+      "readOnly": true,
+      "sourceFormat": "graphql_json",
+      "contractProvenance": "server_relay_preloader_then_independent_replay",
+      "operation": "BarcelonaProfileThreadsTabDirectQuery",
+      "bodyFieldNames": [
+        "av",
+        "__user",
+        "__a",
+        "dpr",
+        "__ccg",
+        "__comet_req",
+        "fb_api_caller_class",
+        "fb_api_req_friendly_name",
+        "server_timestamps",
+        "variables",
+        "doc_id",
+        "lsd",
+        "__rev",
+        "__hs",
+        "__hsi",
+        "__spin_r",
+        "__spin_b",
+        "__spin_t"
+      ],
+      "sensitiveDynamicValuesPersisted": false,
+      "scope": "one public profile, bounded5 posts; not full timeline/national/keyword trends"
+    },
+    {
+      "service": "creator-threads",
+      "capabilityId": "keyword.public",
+      "method": "GET",
+      "origin": "https://graph.threads.net",
+      "path": "/v1.0/keyword_search",
+      "semantic": "read",
+      "contractProvenance": "first_party_documented_api",
+      "sourceURL": "https://developers.facebook.com/documentation/threads/keyword-search",
+      "tokenProvider": "not_wired",
+      "liveReplay": false,
+      "scope": "documented public keyword/topic-tag search; no verified market/search-volume field",
+      "permissions": [
+        "threads_basic",
+        "threads_keyword_search"
+      ],
+      "queryFields": [
+        "q",
+        "search_type",
+        "search_mode",
+        "media_type",
+        "fields",
+        "access_token"
+      ],
+      "appApprovalScope": "unapproved search restricted to authenticated user owned posts; approved permission required for public search"
+    },
+    {
+      "service": "creator-tiktok",
+      "capabilityId": "video.preview",
+      "method": "GET",
+      "origin": "https://ads.tiktok.com",
+      "path": "/CreativeOne/Report/GetTopContentsOverview",
+      "semantic": "read",
+      "originsByMarket": {
+        "JP": "https://ads.tiktok.com",
+        "US": "https://ads.us.tiktok.com"
+      },
+      "contractProvenance": "first_party_bundle_contract",
+      "requiredResultFields": [
+        "BaseResp.StatusCode=0",
+        "lastDailyEndTimestamp"
+      ]
+    },
+    {
+      "service": "creator-tiktok",
+      "capabilityId": "video.preview",
+      "method": "GET",
+      "origin": "https://ads.tiktok.com",
+      "path": "/CreativeOne/Report/CreativeCenterGetTopContentsList",
+      "semantic": "read",
+      "originsByMarket": {
+        "JP": "https://ads.tiktok.com",
+        "US": "https://ads.us.tiktok.com"
+      },
+      "queryFields": [
+        "periodDimension",
+        "periodEndTimestamp",
+        "orderByMetric",
+        "countryCode",
+        "contentLabelIDs",
+        "organicOnly",
+        "limit",
+        "page"
+      ],
+      "sourceSelectors": {
+        "periodDimension": 3,
+        "orderByMetric": 1,
+        "contentLabelIDs": "",
+        "organicOnly": false,
+        "limit": 20,
+        "page": 1
+      },
+      "dynamicSelector": "periodEndTimestamp from fresh same-origin overview",
+      "headerNames": [
+        "Accept",
+        "Agw-Js-Conv"
+      ],
+      "headerPublicValues": {
+        "Agw-Js-Conv": "str"
+      },
+      "contractProvenance": "first_party_bundle_contract",
+      "requiredResultFields": [
+        "BaseResp.StatusCode=0",
+        "entityInfos",
+        "pagination"
+      ],
+      "scope": "JP/US anonymous first-page preview, actual4 rows/market; no next page"
+    },
+    {
+      "service": "creator-tiktok",
+      "capabilityId": "hashtag.preview",
+      "method": "POST",
+      "origin": "https://ads.tiktok.com",
+      "path": "/CreativeOne/KnowledgeAPI/GetHashtagList",
+      "semantic": "read",
+      "readOnly": true,
+      "bodyFieldNames": [
+        "timeRange",
+        "countryCode",
+        "page",
+        "limit"
+      ],
+      "sourceSelectors": {
+        "timeRange": 7,
+        "countryCode": "KR",
+        "page": 1,
+        "limit": 20
+      },
+      "httpStatus": 200,
+      "applicationStatus": 50000,
+      "liveReplaySuccessful": false,
+      "runtimeCollectorEnabled": false,
+      "scope": "provider missing-ranking-index error; not healthy empty"
+    },
+    {
+      "service": "creator-tiktok",
+      "capabilityId": "filter.config",
+      "method": "GET",
+      "origin": "https://ads.tiktok.com",
+      "path": "/cc_portal_api/api/trendsTcc",
+      "semantic": "read",
+      "httpStatus": 500,
+      "liveReplaySuccessful": false,
+      "runtimeCollectorEnabled": false
+    },
+    {
+      "service": "creator-meta",
+      "capabilityId": "publication.public",
+      "method": "GET",
+      "origin": "https://about.fb.com",
+      "path": "/wp-json/wp/v2/posts",
+      "semantic": "read",
+      "queryFields": [
+        "per_page",
+        "orderby",
+        "order"
+      ],
+      "sourceSelectors": {
+        "per_page": 20,
+        "orderby": "date",
+        "order": "desc"
+      },
+      "sourceFormat": "json_array",
+      "contractProvenance": "first_party_discovered_api_index_GET_schema",
+      "responseFields": [
+        "id",
+        "link",
+        "date_gmt",
+        "modified_gmt",
+        "categories",
+        "title.rendered",
+        "excerpt.rendered"
+      ],
+      "paginationHeaderNames": [
+        "X-WP-Total",
+        "X-WP-TotalPages"
+      ],
+      "scope": "official publication recency; not national trends/search volume"
+    },
+    {
+      "service": "creator-meta",
+      "capabilityId": "categories.public",
+      "method": "GET",
+      "origin": "https://about.fb.com",
+      "path": "/wp-json/wp/v2/categories",
+      "semantic": "read",
+      "sourceSelectors": {
+        "per_page": 100
+      },
+      "contractProvenance": "first_party_discovered_api_index_GET_schema",
+      "verifiedCategoryIds": {
+        "facebook-app": 12,
+        "instagram": 14,
+        "threads": 331
+      },
+      "scope": "46 of46 categories, taxonomy snapshot only"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "youtube.chart",
+      "method": "GET",
+      "origin": "https://www.googleapis.com",
+      "path": "/youtube/v3/videos",
+      "semantic": "read",
+      "sourceURL": "https://developers.google.com/youtube/v3/docs/videos/list",
+      "contractProvenance": "first_party_documented_api",
+      "queryFields": [
+        "part",
+        "chart",
+        "regionCode",
+        "videoCategoryId",
+        "maxResults",
+        "pageToken",
+        "key"
+      ],
+      "sourceSelectors": {
+        "chart": "mostPopular"
+      },
+      "credentialKind": "caller-owned API key; value not supplied",
+      "liveReplay": false,
+      "scope": "Music/Movies/Gaming charts since2025-07-21; cumulative statistics not chart-period volume"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.shopping",
+      "method": "GET",
+      "origin": "https://lcs.naver.com",
+      "path": "/m",
+      "semantic": "read",
+      "queryFields": [
+        "u"
+      ],
+      "sourceSelectors": {
+        "u": "https://datalab.naver.com/"
+      },
+      "requiredAnonymousCookieNames": [
+        "NNB",
+        "BUC"
+      ],
+      "currentlyObservedCookieNames": [
+        "NNB"
+      ],
+      "cookieValuesPersisted": false,
+      "liveReplaySuccessful": false
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.shopping",
+      "method": "POST",
+      "origin": "https://datalab.naver.com",
+      "path": "/shoppingInsight/getKeywordRank.naver",
+      "semantic": "read",
+      "readOnly": true,
+      "queryFields": [
+        "timeUnit",
+        "cid"
+      ],
+      "bodyFieldNames": [],
+      "responseFields": [
+        "statusCode",
+        "returnCode",
+        "date",
+        "datetime",
+        "range",
+        "ranks[].rank",
+        "ranks[].keyword"
+      ],
+      "liveReplaySuccessful": false,
+      "scope": "public shopping category rankings, not all-topic issues; current HTML response is not JSON"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.datalab",
+      "method": "POST",
+      "origin": "https://openapi.naver.com",
+      "path": "/v1/datalab/search",
+      "semantic": "read",
+      "readOnly": true,
+      "sourceURL": "https://developers.naver.com/docs/serviceapi/datalab/search/search.md",
+      "contractProvenance": "first_party_documented_api",
+      "credentialKind": "developer ClientID/Secret, provider unavailable",
+      "liveReplay": false,
+      "scope": "relative interest of supplied keyword groups; not keyword discovery/absolute search volume"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.advisor",
+      "method": "GET",
+      "origin": "https://creator-advisor.naver.com",
+      "path": "/api/v6/trend/category",
+      "semantic": "read",
+      "contractProvenance": "first_party_bundle_contract_and_historical_receipts",
+      "sourceURL": "https://creator-advisor.naver.com/assets/index-BC1GUPug.js",
+      "queryFields": [
+        "service",
+        "contentType",
+        "interval",
+        "date",
+        "categories",
+        "age",
+        "gender",
+        "metric",
+        "hasRankChange",
+        "limit",
+        "keyword",
+        "startDate",
+        "endDate"
+      ],
+      "liveReplay": false,
+      "scope": "service aggregate requiring owner-authorized session/signature; private channel analytics excluded"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.advisor",
+      "method": "GET",
+      "origin": "https://creator-advisor.naver.com",
+      "path": "/api/v6/trend/demo",
+      "semantic": "read",
+      "contractProvenance": "first_party_bundle_contract_and_historical_receipts",
+      "sourceURL": "https://creator-advisor.naver.com/assets/index-BC1GUPug.js",
+      "queryFields": [
+        "service",
+        "contentType",
+        "interval",
+        "date",
+        "categories",
+        "age",
+        "gender",
+        "metric",
+        "hasRankChange",
+        "limit",
+        "keyword",
+        "startDate",
+        "endDate"
+      ],
+      "liveReplay": false,
+      "scope": "service aggregate requiring owner-authorized session/signature; private channel analytics excluded"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.advisor",
+      "method": "GET",
+      "origin": "https://creator-advisor.naver.com",
+      "path": "/api/v6/trend/trend-contents",
+      "semantic": "read",
+      "contractProvenance": "first_party_bundle_contract_and_historical_receipts",
+      "sourceURL": "https://creator-advisor.naver.com/assets/index-BC1GUPug.js",
+      "queryFields": [
+        "service",
+        "contentType",
+        "interval",
+        "date",
+        "categories",
+        "age",
+        "gender",
+        "metric",
+        "hasRankChange",
+        "limit",
+        "keyword",
+        "startDate",
+        "endDate"
+      ],
+      "liveReplay": false,
+      "scope": "service aggregate requiring owner-authorized session/signature; private channel analytics excluded"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.advisor",
+      "method": "GET",
+      "origin": "https://creator-advisor.naver.com",
+      "path": "/api/v6/trend/search-inflow-trend",
+      "semantic": "read",
+      "contractProvenance": "first_party_bundle_contract_and_historical_receipts",
+      "sourceURL": "https://creator-advisor.naver.com/assets/index-BC1GUPug.js",
+      "queryFields": [
+        "service",
+        "contentType",
+        "interval",
+        "date",
+        "categories",
+        "age",
+        "gender",
+        "metric",
+        "hasRankChange",
+        "limit",
+        "keyword",
+        "startDate",
+        "endDate"
+      ],
+      "liveReplay": false,
+      "scope": "service aggregate requiring owner-authorized session/signature; private channel analytics excluded"
+    }
+  ]
+}

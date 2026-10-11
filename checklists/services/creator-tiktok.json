@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 1,
+  "service": "creator-tiktok",
+  "description": "First-party JS contracts and bounded JP/US anonymous video data replay verified. Implemented client is in the separate web project; this Playbook package has no native adapter.",
+  "capabilities": [
+    {
+      "id": "video.preview",
+      "title": "Read first-page anonymous JP/US video previews",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "note": "External web src/lib/hub/ontology/creator-tiktok.ts final3-day staleness guard SHA replayed4+4 via4GET requests at20:49. Focused6 local tests also passed. Earlier20:40 pre-guard SHA replay is preserved separately. Source candidate is package-native implementation status; browser XHR capture failed403. Paid-inclusive, windowVerifiedfalse, no inferred rank."
+    },
+    {
+      "id": "hashtag.preview",
+      "title": "Read public hashtag preview with application status verification",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "HTTP200 JSON carried BaseResp.StatusCode50000/missing provider ranking index, so no healthy data. Runtime collector disabled."
+    },
+    {
+      "id": "filter.config",
+      "title": "Read current public trend filter configuration",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Current native GET returned500 text; disabled. Existing candidate does not demonstrate current filter success."
+    }
+  ]
+}

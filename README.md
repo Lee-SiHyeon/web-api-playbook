@@ -40,6 +40,8 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 
 서비스 구현은 저장소 안에 포함된 **고정 버전 사본**입니다. 예전 작업 폴더나 다른 개인 레포를 다시 받아야 코드를 읽을 수 있는 구조가 아닙니다. 각 서비스의 설치 의존성과 실행 경계는 해당 README를 따릅니다.
 
+크리에이터의 실제 공개 데이터는 [HTTP 데이터 계약과 검증 범위](references/creator-public-data.md)를 참고하세요. 기존 Google RSS·Threads native client와 별도 웹 프로젝트의 TikTok·Meta client, 부분 수집·공급자 오류·미연결 권한을 구분합니다. [creator 체크리스트](checklists/README.md)는 실제 재생 기록과 automatic gate의 남은 부분도 별도로 표시합니다.
+
 ## 1. 설치
 
 ### 공통 요구사항

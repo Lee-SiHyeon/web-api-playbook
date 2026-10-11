@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "service": "creator-access-gaps",
+  "description": "Additional data sources stay scoped to observed/public API contracts and actual access failures; no speculative credential propagation or zero-volume substitutes.",
+  "capabilities": [
+    {
+      "id": "youtube.chart",
+      "title": "Read documented region/category charts using an actual API-key provider",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Native chart client/key provider/current replay absent. Since2025-07-21 mostPopular is Music/Movies/Gaming charts; not all-topic trending. Cumulative statistics do not prove chart-period volume."
+    },
+    {
+      "id": "naver.shopping",
+      "title": "Read actual public Shopping Insight rank JSON after anonymous bootstrap",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/naver-shopping-insight.mjs",
+            "exports": [
+              "bootstrapAnonymousNaverSession",
+              "fetchShoppingRanks",
+              "parseShoppingRankResponse"
+            ]
+          },
+          {
+            "path": "service-packs/naver/apps/naver-blog-api/research/trend-radar/lib/http.mjs",
+            "exports": [
+              "fetchText"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "service-packs/naver/apps/naver-blog-api/tests/trend-radar.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Current bootstrap emittedNNB but no requiredBUC, so SESSION_BOOTSTRAP stops. Current direct200HTML is not valid rankingJSON. This public client does not depend on DPAPI or account login."
+    },
+    {
+      "id": "naver.datalab",
+      "title": "Read documented relative interest for supplied keyword groups",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Developer ClientID/Secret provider and current replay unavailable. Relative max100 score is not keyword discovery/absolute search volume."
+    },
+    {
+      "id": "naver.advisor",
+      "title": "Read authorized service aggregate with current owner-bound session/signature",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "Current first-party JS/historical contracts only; existing WindowsDPAPI provider unavailable on Linux, no current native owner-bound aggregate JSON replay. Exclude channel-bound private analytics."
+    }
+  ]
+}

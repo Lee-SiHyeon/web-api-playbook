@@ -79,6 +79,8 @@ npm run check:ai -- --gemini-repo /absolute/gemini-web-xhr-client --grok-repo /a
 
 소스 후보만 있는 새 서비스는 `sourceEvidence`에 `schema:"web-api-source-candidate-v1"`, `classification:"source_candidate"`, `contracts:[{method,path,...}]`를 담은 JSON 파일을 연결할 수 있다. 소스 후보는 필수 기능 통과에 쓰이지 않는다.
 
+`creator-google`, `creator-threads`, `creator-tiktok`, `creator-meta`, `creator-access-gaps`는 [현재 공개 데이터 계약](../references/creator-public-data.md)을 따릅니다. 기존 native Google RSS·Threads HTTP 재생은 [별도 documentary 기록](../verification/creator-public-data-2026-10-11.json)에 있지만, 현재 검증기가 undocumented observed RSS provenance와 익명 cookie bootstrap을 지원하지 않아 automatic 상태는 `pending_live`입니다. 이 두 경우 `pending_live`는 typed evidence gate의 미구현을 뜻합니다. 별도 웹 프로젝트 TikTok·Meta client는 package implementation으로 세지 않으므로 `source_candidate`입니다. 모든 current replay를 `recorded_live`로 꾸미지 않으며 strict의 남은 required gaps를 보고합니다. 이 목록은 로그인된 개인 스튜디오 계정이 아니라 공개 DATA 읽기 범위입니다.
+
 비로그인 공개 조회는 별도 `http-public-read-v1` 검증기와 `web-api-public-read-receipt-v1` 영수증을 쓴다. `anonymous:true`, `credentialsUsed:false`, `secretsPersistedInEvidence:false`, `schemaVerified:true`, `expectedResultVerified:true`와 정확한 method/origin/path, HTTP 200, MIME, 응답 바이트 수, 시각, `browserUsed:false`를 기록한다. 기본 MIME은 `application/json`이다. 관찰한 HTML 조각이나 스트리밍 응답은 manifest에 정확한 `mime`을 지정하고 비즈니스 데이터를 검증해야 한다. 조회용 POST는 `method:"POST",readOnly:true`가 필요하다.
 
 같은 기능에 통화 등 보조 조회가 꼭 필요하면 evidence 항목의 `companionReads`에 `{key:"currencyRequest",origin,path,mime}`처럼 선언한다. 검증기는 영수증의 해당 조회도 독립적으로 검사한다. Shopify 상품 Ajax의 JSON 본문은 `text/javascript` MIME으로 관찰됐으므로 실제 MIME을 그대로 지정한다.

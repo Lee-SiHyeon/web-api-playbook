@@ -4,6 +4,8 @@
 
 현재 로그인·소유자 확인 대상은 `aicandoanything`입니다. 여러 계정에 바로 적용하는 범용 SDK는 아니며, `NAVER_BLOG_ID` 하나를 바꾼다고 로그인·발행 대상까지 전환되지는 않습니다.
 
+공개 데이터 research 모듈의 Google RSS client는 위 블로그 로그인·Windows 요구와 별개입니다. `research/trend-radar/sources/google-trends-rss.mjs`의 `fetchGoogleTrending`은 Node HTTP만 사용하며 2026-10-11 KR XML/10개 재생을 검증했습니다. 같은 research의 NAVER Shopping Insight는 현재 익명 bootstrap에서 BUC가 빠져 실패합니다. [재사용 방법·현재 계약·검증 경계](../../references/creator-public-data.md)를 먼저 읽으세요.
+
 ## 사용 순서
 
 1. [설치](#1-설치)

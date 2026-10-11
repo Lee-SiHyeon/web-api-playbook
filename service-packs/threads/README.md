@@ -31,3 +31,5 @@ const result = await fetchThreadsXhr('PUBLIC_HANDLE', 5);
 - 계정 로그인 쿠키를 읽거나 다른 서비스의 인증을 복사하지 않습니다.
 
 public function은 limited items를 반환하며 `fullTimeline:false`입니다. 페이지 전체/계정 전체를 수집했다고 보고하지 않습니다. 과거 원본 관측/이식 변경 hash는 [추가 출처](../../provenance/additional-sources.json)에 있습니다.
+
+2026-10-11에는 이 기존 client를 Linux Node HTTP로 실제 재생해 `@threads`의 공개 5개를 검증했습니다. 초기 패키징 당시의 미실행 범위와 별도 기록입니다. [현재 공개 데이터 recipe](../../references/creator-public-data.md)와 [원문 없는 실행 기록](../../verification/creator-public-data-2026-10-11.json)을 참고하세요. 익명 CSRF 전달은 account authentication이 아니며 공식 keyword search의 approved token provider는 별도로 미연결입니다.

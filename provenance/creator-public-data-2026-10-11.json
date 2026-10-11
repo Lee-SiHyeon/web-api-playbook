@@ -1,0 +1,151 @@
+{
+  "schema": "creator-public-data-provenance-v1",
+  "createdAt": "2026-10-11",
+  "playbookBaselineCommit": "23fae8cac808f69e778f18a24bb50105d9ced184",
+  "secretsPersistedInEvidence": false,
+  "rawContentPersisted": false,
+  "scope": "Public creator data read contracts and bounded independent replay metadata; no account login/token/owner export or full feed",
+  "firstPartyBundleSources": [
+    {
+      "sourceURL": "https://sf16-website.neutral.ttwstatic.com/obj/tiktok_web_static/ad/one/server/static/js/async/2424.7fa18601.js",
+      "sourceSha256": "d6b111e21b378b5061604b233db9f08f5a2b5dda5da2df9d04cd3fd24025f33d",
+      "observedAt": "2026-10-11T20:27:56.915Z",
+      "httpStatus": 200,
+      "responseBytes": 13597,
+      "browserXhrCaptured": false
+    },
+    {
+      "sourceURL": "https://sf16-website.neutral.ttwstatic.com/obj/tiktok_web_static/ad/one/server/static/js/async/8465.9d60569c.js",
+      "sourceSha256": "8a6a1bcf326ac9cb95ec53cbe4e961adebc37bdd427fc9076dec9d864c2a20b0",
+      "observedAt": "2026-10-11T20:28:24.161Z",
+      "httpStatus": 200,
+      "responseBytes": 22649,
+      "browserXhrCaptured": false
+    }
+  ],
+  "threadsKeywordGuide": {
+    "url": "https://developers.facebook.com/documentation/threads/keyword-search",
+    "checkedAt": "2026-10-11T20:31:49.445218+00:00",
+    "status": 200,
+    "contentType": "text/markdown; charset=utf-8",
+    "bytes": 8526,
+    "bodySha256": "20690e8ee4e2febdf27aa5450b4a57a1e228d022cc5c2bfffdab0ca9c40a7b08",
+    "documentVerified": true,
+    "liveMetricRows": false
+  },
+  "nativeClients": {
+    "google": {
+      "path": "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs",
+      "dependencies": [
+        "service-packs/naver/apps/naver-blog-api/research/trend-radar/lib/http.mjs"
+      ],
+      "implementation": {
+        "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs": "dc7e9eebf84f07e4aca85f1c4328e4208167a31e6cd801f7263a4e49aff2a14b",
+        "service-packs/naver/apps/naver-blog-api/research/trend-radar/lib/http.mjs": "5ff5047ada3abe70176fb613f96efec623442f3864ca2758199f09a5f1c952d9"
+      },
+      "fiveStates": {
+        "captured": true,
+        "client_exists": true,
+        "credential_propagated": "not_applicable",
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "captureKind": "observed_rss_xml_http_not_xhr",
+      "automaticLiveGate": "pending_live: undocumented observed-feed provenance is not accepted by current validator"
+    },
+    "threads": {
+      "path": "service-packs/threads/threads-xhr.mjs",
+      "implementation": {
+        "service-packs/threads/threads-xhr.mjs": "3808c8796cf2b4c0f37aae362963dfc73a371d61dc32e46608d1fa47613a1205",
+        "service-packs/threads/threads-public.mjs": "d73f5266b8f245ea99fde4c38bfc8613de152950b52fc1899b19df7658d5a336",
+        "service-packs/threads/session-vault.mjs": "5a72f6c51aa99da079745b85a16b194b9f25b3c6a2504d04543303a5b2a028f6",
+        "lib/protected-store.mjs": "9198a545fe948882e0e3d7cf7186bd84a354ef0fa520a6fc008fdfa7166e99a2",
+        "lib/session-lock.mjs": "94de05aa582b6b22ee2683ddeea000695f1c029bcfbbee305638a20f3b66429a"
+      },
+      "fiveStates": {
+        "captured": true,
+        "client_exists": true,
+        "credential_propagated": "not_applicable",
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "captureKind": "server_relay_preloader_plus_independent_graphql_http",
+      "anonymousSessionPropagationVerified": true,
+      "automaticLiveGate": "pending_live: anonymous cookie bootstrap is not accepted by cookie-free public-read validator"
+    }
+  },
+  "externalWebClients": {
+    "repository": "Lee-SiHyeon/lifehackailab-web",
+    "sourceState": "working_tree_snapshot_not_playbook_runtime_dependency",
+    "deploymentVerified": false,
+    "currentWorkingSourceSha256": {
+      "src/lib/hub/ontology/creator-tiktok.ts": "6fa960780ec776a7f339dc7c2a79e34644bcf7be0307672d7ebab7e3d2f1acd1",
+      "src/lib/hub/ontology/creator-meta.ts": "9ee96682cc855b9a6a6cfd1b6a9ac446d7016d8a223835825c52b12cc76494da",
+      "src/lib/hub/ontology/creator-threads.ts": "dc08303e21932a33baf944c211cc13bbbad100a914b84dbed8891f56429d40aa"
+    },
+    "tiktok": {
+      "fiveStates": {
+        "captured": false,
+        "client_exists": true,
+        "credential_propagated": "not_applicable",
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "captureNote": "Browser XHR403; first-party JS and independent pure HTTP replay instead",
+      "replayedSourceSha256": "a9bbc0c5ce96b502a69f0ef4c8942df64ab5ec8a3caca1a334a2c34ebb13c95f",
+      "latestSourceSha256": "6fa960780ec776a7f339dc7c2a79e34644bcf7be0307672d7ebab7e3d2f1acd1",
+      "latestRevisionLiveReplay": true,
+      "nativePlaybookClientExists": false,
+      "latestRevisionReplayFile": "verification/creator-public-data-web-fresh-2026-10-11.json"
+    },
+    "meta": {
+      "fiveStates": {
+        "captured": true,
+        "client_exists": true,
+        "credential_propagated": "not_applicable",
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "replayedSourceSha256": "9ee96682cc855b9a6a6cfd1b6a9ac446d7016d8a223835825c52b12cc76494da",
+      "nativePlaybookClientExists": false
+    },
+    "threads": {
+      "webPortExists": true,
+      "nativePlaybookClientExists": true,
+      "latestWorkingSourceSha256": "dc08303e21932a33baf944c211cc13bbbad100a914b84dbed8891f56429d40aa",
+      "latestHashIsReplayProof": true,
+      "latestRevisionReplayFile": "verification/creator-public-data-web-fresh-2026-10-11.json"
+    },
+    "google": {
+      "clientFile": "src/lib/hub/ontology/trend.ts",
+      "replayedSourceSha256": "599480aa8b280748864eb02fc95264d34c0163d999e79ff9868a7dc479a9a75f",
+      "markets": [
+        "KR",
+        "US",
+        "JP",
+        "TW",
+        "ES",
+        "FR",
+        "DE",
+        "BR"
+      ],
+      "keywordRows": 80,
+      "relatedIssueProjections": 218,
+      "nativePlaybookReplay": "Separate KR only; do not merge evidence"
+    }
+  },
+  "sourceContractFile": "references/creator-public-data-contracts.json",
+  "documentaryReplayFile": "verification/creator-public-data-2026-10-11.json",
+  "unresolved": [
+    "Typed native RSS observed-feed and anonymous-cookie GraphQL checklist validators",
+    "Native Playbook TikTok/Meta client packaging",
+    "YouTube chart API-key provider/current replay",
+    "NAVER public shopping BUC bootstrap/current JSON",
+    "NAVER Creator Advisor Linux provider/owner-bound public-aggregate read",
+    "NAVER DataLab developer entitlement/current replay",
+    "Threads approved keyword-search token provider/current replay",
+    "X national aggregate implementation/current replay",
+    "Web production persistence/deployment readback"
+  ],
+  "freshExternalWebReplayFile": "verification/creator-public-data-web-fresh-2026-10-11.json"
+}

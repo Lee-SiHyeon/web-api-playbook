@@ -28,3 +28,5 @@ Toss legacy client의 import 시 native store를 생성하던 결함은 lazy loa
 기존 canary의 익명 no-follow 301 재검증 하나이며 신규 로그인·링크 발급 증거가 아닙니다.
 offline GitHub CI는 main push 뒤 실제 결과와 SHA를 확인해야 합니다. 새 workflow를 추가한 것만으로
 cloud CI 통과라고 기록하지 않습니다.
+
+[크리에이터 공개 데이터 기록](creator-public-data-2026-10-11.json)은 기존 Google RSS native client의 KR 1회 재생, 기존 Threads native client의 공개 5개 재생, 외부 웹 collector와 US/TW/CN 관측을 원문 없이 기록합니다. 자동 체크리스트의 typed live receipt와 다른 documentary 기록이며 owner 로그인·전체 플랫폼·production persistence 증거가 아닙니다. TikTok의 이전 SHA와 이후 3일 staleness guard SHA를 별도로 보존합니다. [후속 웹 fresh replay](creator-public-data-web-fresh-2026-10-11.json)는 최종 웹 SHA의 Google 8개 시장·TikTok·Meta·Threads 314개 후보와 16개 실제 HTTP 요청을 따로 기록합니다. native Playbook 재생·cloud 배포·DB 저장에 합산하지 않습니다. 범위와 current gaps는 [공개 데이터 recipe](../references/creator-public-data.md)를 따릅니다.

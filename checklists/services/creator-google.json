@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "service": "creator-google",
+  "description": "Existing native RSS XML client; current KR direct HTTP replay is documented separately. The current checker cannot promote undocumented observed-feed provenance into automatic recorded_live.",
+  "capabilities": [
+    {
+      "id": "rss.public",
+      "title": "Read bounded public Google RSS keywords without browser/login",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs",
+            "exports": [
+              "fetchGoogleTrending",
+              "parseGoogleTrendsRss",
+              "parseApproxTraffic"
+            ]
+          },
+          {
+            "path": "service-packs/naver/apps/naver-blog-api/research/trend-radar/lib/http.mjs",
+            "exports": [
+              "fetchText"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "service-packs/naver/apps/naver-blog-api/tests/trend-radar.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "note": "Native Playbook KR200 XML/10 items current code verified. Automatic pending_live is a typed evidence-validator gap, not absence of actual replay. Separate web runtime fresh8markets produced80 keywords/218 related issue projections, not8native pack replays. No explicit rank/metric period; traffic remains approximate."
+    },
+    {
+      "id": "rss.cn",
+      "title": "Read a supported CN market feed",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs",
+            "exports": [
+              "fetchGoogleTrending"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
+      "blocker": "CN responded400 HTML in the current independent read. Do not convert to zero trends; geo syntax acceptance is not market support."
+    }
+  ]
+}
