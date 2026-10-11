@@ -41,6 +41,9 @@ npm ci --ignore-scripts
 - OliveYoung 파일들은 원본 worktree의 **미커밋 코드 스냅샷**입니다. 구현과 보호 인증 성공은 별개이며, 당시 403/미연동 경계를 그대로 남겼습니다.
 - Coupang의 소스 문자열·요청 형태·관측 계약은 분리되어 있습니다. 소스 후보를 곧바로 재현 가능한 SDK operation으로 취급하지 않습니다.
 - 개발자 공식 API와 웹 파트너 세션 API는 인증/가입 조건이 다릅니다.
+- MyRealTrip의 [링크 대사](../../references/myrealtrip-link-reconciliation.md)는 원 옵션·ID와
+  관측한 tracking만 허용합니다. 2026-10-11 snapshot verifier 보강은 공식 v1 API client를
+  이 pack에 추가한 것이 아니며 과거 원본 hash와 [변경 provenance](../../provenance/playbook-strengthening-2026-10-11.json)를 함께 확인합니다.
 - 별도 로그인 도구와 일부 캡처 스크립트는 Windows 전용입니다. 포터블한 공통 수집은 저장소 루트의 HAR/HTML 도구를 사용할 수 있습니다.
 
 다른 OS에서 실행했다는 주장이나 사이트 전체 로그인 자동화 완료 주장은 이 스냅샷에 포함하지 않습니다.

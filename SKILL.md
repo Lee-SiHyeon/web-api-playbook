@@ -28,6 +28,28 @@ historical proof and current implementation-hash freshness separately.
 
 For commands and installation, start with [README](README.md). For service-specific code and limits, open [service-packs](service-packs/README.md). Historical success is scoped to its date, account, operation and revision; it is not a current session check.
 
+For existing Vercel/Supabase native CLI credentials, follow
+[native cloud operations](references/native-cloud-operations.md). Preserve provider
+storage and unrelated user-wide settings. CLI identity, MCP OAuth, team/project
+entitlement and deployment/domain readback are independent. Resume only the current
+pending OAuth callback after exact endpoint/state validation; never archive codes
+or replace native credentials with repository files. This package does not ship
+cloud login/deployment adapters.
+
+For official creator tools and guides, use
+[source capabilities](references/official-source-capabilities.md). Keep public
+documents, protected workspaces, documented APIs, legacy replacements and real
+account metrics separate. A login redirect does not verify owner access; a guide
+does not supply traffic or monetization data. Do not bypass access gates.
+
+For MyRealTrip link creation, use
+[link reconciliation](references/myrealtrip-link-reconciliation.md) and the existing
+owner-bound flow. Web partner sessions and official API keys/response fields differ;
+public health is not key validity. Preserve original repeated options and reject
+unknown added tracking. A failed verification resumes read-only, never reissues the
+link. Its observed anonymous no-follow short-link read is service-specific and
+does not prove conversions or current commission.
+
 For Inpock password login and the protected owner probe, reuse
 [the HTTP login adapter](references/inpock-login.md) before starting discovery.
 Its Linux/macOS stdin mode is process-memory only; Windows uses the existing DPAPI store.

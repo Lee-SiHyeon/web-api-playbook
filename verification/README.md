@@ -18,3 +18,13 @@
 최종 수치와 결과는 [packaging.json](packaging.json)에 남깁니다. 예제 결과는 `work/`에 저장하며 Git에 포함하지 않습니다. 인벤토리 검사는 private key/GitHub/API key/JWT/일부 signed query/cookie/temporary tunnel 패턴을 찾아 **파일명·줄·종류만** 보고합니다. 모든 종류의 비밀 부재를 수학적으로 증명하는 검사는 아닙니다.
 
 이 작업에서는 **unit/integration test suite를 추가하거나 실행하지 않았고**, 실제 계정 로그인·게시·업로드도 실행하지 않았습니다. 새 generic transport/store/journal은 코드와 정적 검토까지이며, 서비스 전체 end-to-end 완료로 확대하지 않습니다. macOS/Linux 실행은 이 Windows 패키징 확인에 포함되지 않습니다.
+
+## 2026-10-11 보강
+
+[보강 기록](playbook-strengthening-2026-10-11.json)은 Linux·Node 24의 설치·doctor,
+root 560개 회귀, MyRealTrip/Toss focused 38개, 새 설치 사본의 9개 검사를 별도로 기록합니다.
+Toss legacy client의 import 시 native store를 생성하던 결함은 lazy loading으로 수정했으며
+실제 저장 요청의 provider 요구는 유지합니다. [MyRealTrip 읽기 영수증](myrealtrip-link-readback-2026-10-11.json)은
+기존 canary의 익명 no-follow 301 재검증 하나이며 신규 로그인·링크 발급 증거가 아닙니다.
+offline GitHub CI는 main push 뒤 실제 결과와 SHA를 확인해야 합니다. 새 workflow를 추가한 것만으로
+cloud CI 통과라고 기록하지 않습니다.

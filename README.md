@@ -6,6 +6,10 @@
 
 실제 계정 비밀번호·쿠키·토큰·브라우저 프로필은 포함하지 않습니다. **이들을 로컬에서 보호 저장하고 재사용하는 구현은 포함**합니다. Git clone과 인증 이전은 별개입니다.
 
+`main`의 [offline CI](.github/workflows/offline-checks.yml)는 Ubuntu·Node 24에서 설치·doctor·
+root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 로그인·제휴 발급은 실행하지 않으며,
+현재 계정 인증과 native Windows 저장소의 라이브 확인은 별도입니다.
+
 ## 무엇이 들어 있나
 
 | 구성 | 용도 |
@@ -21,6 +25,10 @@
 | [제휴 프로그램별 연결](references/affiliate-program-adapters.md) | Olive Young·Shopee·Sephora·Ulta·Rakuten, 브랜드 카탈로그 확인과 제휴 링크·수수료의 검증 범위 |
 | [상품 상세·리뷰 조회](references/catalog-read-apis.md) | 상세 설명·이미지·옵션, 리뷰 본문·사진·페이지 조회와 제휴 링크를 제외한 기능 감사 |
 | [유튜버 콜라보·할인 출처](references/creator-promotions-youtube.md) | 공식 YouTube API·공개 피드와 명시적인 HTTP 페이지 메타데이터 조회, 수집 근거와 제한 |
+| [공식 creator 도구·소스 확보](references/official-source-capabilities.md) | 공개 guide·로그인 workspace·API 계약·legacy 변경과 계정 성과 데이터의 근거를 구분 |
+| [Native cloud 운영](references/native-cloud-operations.md) | 기존 Vercel/Supabase CLI 재사용, MCP 별도 권한, 현재 OAuth callback과 정확 배포·DB readback |
+| [MyRealTrip 링크 대사](references/myrealtrip-link-reconciliation.md) | 웹 파트너/공식 API 구분, 원 옵션·제휴 ID·허용 tracking만 검증, 발급 재시도 금지 |
+| [MyRealTrip 공식 투어·티켓 검색](references/myrealtrip-official-catalog-search.md) | 실제 인증 조회한 read-only POST, 1-based page·시작가 KRW·안전한 실행 한도 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [Google Flow HTTP 경계와 실측](references/google-flow-http.md) | 실제 UI 생성 처리 단계, 직접 HTTP 미디어 다운로드, 480p 변환 및 미검증 pure-HTTP 생성 경계 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |

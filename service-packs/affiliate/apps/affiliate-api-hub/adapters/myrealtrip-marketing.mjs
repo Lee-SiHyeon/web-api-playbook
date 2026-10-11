@@ -224,6 +224,15 @@ export async function verifyMyrealtripLink(link, expectedTarget, { fetchImpl = g
     for (const key of new Set(target.searchParams.keys())) {
       if (JSON.stringify(destination.searchParams.getAll(key)) !== JSON.stringify(target.searchParams.getAll(key))) fail('LINK_DESTINATION');
     }
+    // Preserve every original option and reject unobserved additions. The browser
+    // marketing flow uses t_scope=web; the official partner v1 API uses 604800.
+    for (const key of new Set(destination.searchParams.keys())) {
+      if (!target.searchParams.has(key) && !['mylink_id', 't_scope', 'utm_source'].includes(key)) fail('LINK_DESTINATION');
+    }
+    if (destination.searchParams.has('t_scope') && (destination.searchParams.getAll('t_scope').length !== 1
+      || !['web', '604800'].includes(destination.searchParams.get('t_scope')))) fail('LINK_DESTINATION');
+    if (destination.searchParams.has('utm_source') && (destination.searchParams.getAll('utm_source').length !== 1
+      || destination.searchParams.get('utm_source') !== 'mktpartner')) fail('LINK_DESTINATION');
     if (destination.searchParams.getAll('mylink_id').length !== 1 || destination.searchParams.get('mylink_id') !== String(expectedLinkId)) fail('LINK_ATTRIBUTION');
     return { verified: true, destinationMatches: true, attributionMatches: true, credentialSent: false, followedRedirect: false, httpStatus: response.status };
   } catch (error) { if (error instanceof MyrealtripError) throw error; fail('LINK_TRANSPORT'); }

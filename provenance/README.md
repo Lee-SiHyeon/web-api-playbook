@@ -7,6 +7,8 @@
 | [additional-sources.json](additional-sources.json) | Affiliate, OliveYoung, Threads, 기존 스킬 reference의 파일별 원본 hash와 소스 상태 |
 | [non-naver-sources.json](non-naver-sources.json) | 비 Naver 사례별 근거 코드/문서/영수증, 관측 경계 |
 | [web-auth-2026-09-24.json](web-auth-2026-09-24.json) | 웹 인증 실행기와 기존 X 수집기 이식 출처·변경 범위 |
+| [playbook-strengthening-2026-10-11.json](playbook-strengthening-2026-10-11.json) | 기존 MyRealTrip snapshot의 검증 보강·Toss import 경계 수정과 운영 절차 출처 |
+| [myrealtrip-official-search-2026-10-11.json](myrealtrip-official-search-2026-10-11.json) | 현재 공식 TNA 검색 계약·실제 인증 조회·시작가 KRW와 읽기/발급 경계 |
 | [verification](../verification/README.md) | 새 패키지의 설치·정적 확인 범위 |
 
 `sourceSha256`는 **원본에서 읽은 바이트**의 hash입니다. 해당 파일이 이식 과정에서 수정됐다면 패키지 현재 hash와 다를 수 있으며 아래 변경 목록을 함께 봅니다. Git의 package commit 자체가 배포된 내용을 고정합니다.

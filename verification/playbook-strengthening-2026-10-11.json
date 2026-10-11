@@ -1,0 +1,202 @@
+{
+  "schema": "web-api-playbook-strengthening-verification-v1",
+  "checkedAt": "2026-10-11T19:47:18.997807Z",
+  "baseCommit": "48921f3cd74f8db9288d3f32d5e6ca284920508a",
+  "environment": {
+    "platform": "linux",
+    "node": "24.19.0"
+  },
+  "credentialValuesRecorded": false,
+  "rawCallbacksRecorded": false,
+  "rawAccountExportsRecorded": false,
+  "firstFailure": {
+    "scope": "unmodified baseline npm test",
+    "passed": 534,
+    "failed": 1,
+    "code": "PROTECTED_STORE_PROVIDER_REQUIRED",
+    "path": "lib/web-auth/toss/client.mjs",
+    "phase": "module import before injected Toss tests",
+    "externalRequestsSent": false
+  },
+  "localChecks": {
+    "dependencyInstall": {
+      "command": "npm ci --ignore-scripts",
+      "passed": true
+    },
+    "doctor": {
+      "command": "npm run doctor",
+      "passed": true,
+      "dpapiAvailable": false,
+      "credentialsRead": false,
+      "serviceSessionVerified": false
+    },
+    "focusedTests": {
+      "command": "node --test tests/myrealtrip-link-verification.test.mjs tests/toss-client-import.test.mjs tests/toss-web-auth.test.mjs service-packs/affiliate/apps/affiliate-api-hub/tests/myrealtrip-marketing.test.mjs",
+      "passed": 38,
+      "failed": 0
+    },
+    "rootTests": {
+      "command": "npm test",
+      "passed": 560,
+      "failed": 0,
+      "skipped": 0
+    },
+    "diffCheck": {
+      "command": "git diff --check",
+      "passed": true
+    },
+    "capabilityChecklist": {
+      "command": "npm run checklist",
+      "exitCode": 0,
+      "testsRequested": true,
+      "services": 28,
+      "strictCompletionClaimed": false,
+      "note": "Existing unimplemented/blocked/stale live capabilities remain explicit; Toss local tests are verified_local, not recorded_live"
+    },
+    "staticChecklistInventory": {
+      "command": "node scripts/checklist.mjs --all --json",
+      "services": 28,
+      "requiredGapsWithoutRunningTests": 170,
+      "networkUsed": false,
+      "credentialsUsed": false,
+      "mutationsSent": false
+    },
+    "skillInstallation": {
+      "command": "node scripts/install-skill.mjs --target=<new temporary directory>",
+      "copiedFiles": 1050,
+      "dependenciesInstalledSeparately": true,
+      "doctorPassed": true,
+      "focusedTestsPassed": 9,
+      "focusedTestsFailed": 0,
+      "credentialsCopied": false,
+      "finalPackagingCopiedFiles": 1051,
+      "finalInstalledCodeMatches": 5
+    },
+    "relativeDocumentationLinks": {
+      "checked": 119,
+      "missing": 0
+    },
+    "highConfidenceSecretScan": {
+      "filesChecked": 16,
+      "findings": 0,
+      "scope": "Private key, GitHub token, Supabase PAT, JWT and actual OAuth callback patterns; not an exhaustive secret-absence proof"
+    },
+    "workflowStructure": {
+      "parsed": true,
+      "commitPinnedActions": true,
+      "readOnlyRepositoryPermissions": true,
+      "persistCredentials": false,
+      "partnerSecretsReferenced": false
+    }
+  },
+  "officialDocumentReads": [
+    {
+      "name": "vercel-get-started",
+      "url": "https://vercel.com/get-started.md",
+      "status": 200,
+      "mime": "text/markdown; charset=utf-8",
+      "responseBytes": 7704,
+      "sha256": "b93281fec6903dc34f324e0a00abbf9817e5d086d2e2601f684354ed4dc2d45f",
+      "finalUrl": "https://vercel.com/get-started.md"
+    },
+    {
+      "name": "vercel-mcp",
+      "url": "https://vercel.com/docs/mcp/vercel-mcp",
+      "status": 200,
+      "mime": "text/markdown; charset=utf-8",
+      "responseBytes": 17293,
+      "sha256": "746a0b5411c6accd7be33193cfe8de898fe7301e4cf9fa6081b5d5bfd90ea012",
+      "finalUrl": "https://vercel.com/docs/agent-resources/vercel-mcp"
+    },
+    {
+      "name": "supabase-login",
+      "url": "https://supabase.com/docs/reference/cli/supabase-login",
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "responseBytes": 2063511,
+      "sha256": "250fd8b164db1c3a37bf71b19b343a481f2442d9b612ae8a3e89356be9a7c487",
+      "finalUrl": "https://supabase.com/docs/reference/cli/supabase-login"
+    },
+    {
+      "name": "supabase-query",
+      "url": "https://supabase.com/docs/reference/api/v1-run-a-query",
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "responseBytes": 261962,
+      "sha256": "783f8a751c6b33a4a3a878b4426cb10fb0ca38dd69bc965175e95cca7988a7aa",
+      "finalUrl": "https://supabase.com/docs/reference/api/v1-run-a-query"
+    },
+    {
+      "name": "myrealtrip-docs",
+      "url": "https://docs.myrealtrip.com/",
+      "status": 200,
+      "mime": "text/html; charset=utf-8",
+      "responseBytes": 1445,
+      "sha256": "98855cdf855a6ff25ed0998946505c713ed1165cbd1192a9fe8200d01faf3115",
+      "finalUrl": "https://docs.myrealtrip.com/"
+    },
+    {
+      "name": "myrealtrip-bundle",
+      "url": "https://docs.myrealtrip.com/assets/index-kQYN436v.js",
+      "status": 200,
+      "mime": "application/javascript; charset=utf-8",
+      "responseBytes": 588720,
+      "sha256": "e3419316dbeefcea348956dd7eef9048a8d6391ae2954130a4160bafa73e9bdd",
+      "finalUrl": "https://docs.myrealtrip.com/assets/index-kQYN436v.js"
+    }
+  ],
+  "officialMyrealtripContract": {
+    "sourceProvenance": "first_party_bundle_contract",
+    "sourceURL": "https://docs.myrealtrip.com/assets/index-kQYN436v.js",
+    "sourceSha256": "e3419316dbeefcea348956dd7eef9048a8d6391ae2954130a4160bafa73e9bdd",
+    "health": {
+      "method": "GET",
+      "path": "/health",
+      "requiresAuth": false
+    },
+    "createLink": {
+      "method": "POST",
+      "path": "/v1/mylink",
+      "requestField": "targetUrl",
+      "maxLength": 2000,
+      "responseFields": [
+        "mylink",
+        "mylinkId"
+      ],
+      "documentedSampleApplicationStatus": 200
+    },
+    "scope": "Document contract, not a new authenticated call from this playbook checkout"
+  },
+  "liveChecks": {
+    "existingMyrealtripShortLink": {
+      "receipt": "verification/myrealtrip-link-readback-2026-10-11.json",
+      "verified": true,
+      "httpStatus": 301,
+      "anonymous": true,
+      "requestCount": 1,
+      "writeAttempts": 0,
+      "followedRedirect": false
+    }
+  },
+  "limits": [
+    "No new login or link issuance",
+    "No fresh native CLI/MCP project access claim from this checkout",
+    "No official v1 client added to package",
+    "No current commission/conversion claim",
+    "No SNS owner, account analytics or posting replay",
+    "Local tests and official document reads do not prove every service capability complete"
+  ],
+  "implementation": {
+    "service-packs/affiliate/apps/affiliate-api-hub/adapters/myrealtrip-marketing.mjs": "54bd32eda7f930f57f70fa9c58a434c454c5a7823ef4abdbd2b89fe2872d2bfb",
+    "lib/web-auth/toss/client.mjs": "ce1b5838c57f02fcb6b351ec76feb6c7b4b85bbd26e3986b8d65418cbfd45df5",
+    "tests/myrealtrip-link-verification.test.mjs": "e27cd61ffdc2dbcd88ed205196966d616f9e4306e8e0e50b287af8912c1aaae7",
+    "tests/toss-client-import.test.mjs": "faf1bb47dcec325e687629ef77f1c9661d96d6c083287ab3b09b73b0215544b6",
+    ".github/workflows/offline-checks.yml": "05a0d8f31abb69d74737d8d247f0727b4f336d7b389322358fcd4c0cfad94dc3"
+  },
+  "cloudCI": {
+    "workflow": ".github/workflows/offline-checks.yml",
+    "status": "pending_main_push",
+    "resultVerified": false,
+    "scope": "Ubuntu Node 24 offline install/doctor/root tests and MyRealTrip pack tests"
+  }
+}

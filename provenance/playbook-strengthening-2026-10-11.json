@@ -1,0 +1,70 @@
+{
+  "schema": "web-api-playbook-strengthening-provenance-v1",
+  "checkedAt": "2026-10-11T19:47:18.985934Z",
+  "baseRepository": "https://github.com/Lee-SiHyeon/web-api-playbook",
+  "baseCommit": "48921f3cd74f8db9288d3f32d5e6ca284920508a",
+  "credentialValuesIncluded": false,
+  "rawCallbacksIncluded": false,
+  "rawAccountExportsIncluded": false,
+  "sources": [
+    {
+      "repository": "https://github.com/Lee-SiHyeon/lifehackailab-web",
+      "commit": "e5377546028a56c30eca292f86eb0b6b86aec27c",
+      "paths": [
+        "docs/git-deployment.md",
+        "docs/operations-runbook.md",
+        "docs/myrealtrip-links-and-images.md",
+        "src/lib/collectors/myrealtrip-link-verification.mjs"
+      ],
+      "sourceSha256": {
+        "docs/git-deployment.md": "f1fe5db4d669df8cbb0c367f1ef7a7529bf3b1492a6f51760500246afa8bd8d6",
+        "docs/operations-runbook.md": "626776f7ee14159e4509914cf17b4a64cbad780db587c09909a73f937510446f",
+        "docs/myrealtrip-links-and-images.md": "968302cdc8d51f91b6529e8397351913f8f2b6746c7a4c0ac3772759e772dafb",
+        "src/lib/collectors/myrealtrip-link-verification.mjs": "511b66c11c1363e2f3b971cb6cb8dcc7bcf2a9830cb1e3a8b3e4dc374bb1724a"
+      },
+      "use": "Rewritten service-specific lessons and independently adapted redirect guards; no account helper, raw DB rows or credential files copied",
+      "sourceStatus": "working_tree_with_committed_baseline",
+      "matchesCommittedBaseline": {
+        "docs/git-deployment.md": true,
+        "docs/operations-runbook.md": false,
+        "docs/myrealtrip-links-and-images.md": false,
+        "src/lib/collectors/myrealtrip-link-verification.mjs": true
+      }
+    },
+    {
+      "repository": "https://github.com/Lee-SiHyeon/affiliate-content-operations",
+      "commit": "bfe50bf07ddf371241651b9c36968145d0b487df",
+      "path": "apps/affiliate-api-hub/adapters/myrealtrip-partner-api.mjs",
+      "sourceSha256": "d242e749f603a701b315086b19270e33cee5889ad45af18f5363099abe2a1661",
+      "use": "Official API origin, response shape and source-document pointer only; API client not imported"
+    }
+  ],
+  "modifications": [
+    {
+      "path": "service-packs/affiliate/apps/affiliate-api-hub/adapters/myrealtrip-marketing.mjs",
+      "baseSha256": "4b083a71523987e52afc175d7a2498c8faaa39d2bbc57304a09225c022ea30dc",
+      "currentSha256": "54bd32eda7f930f57f70fa9c58a434c454c5a7823ef4abdbd2b89fe2872d2bfb",
+      "change": "Reject unknown destination query additions, unexpected or duplicate t_scope/utm_source; preserve original repeated options and exact attribution; existing web API request scope unchanged"
+    },
+    {
+      "path": "lib/web-auth/toss/client.mjs",
+      "baseSha256": "ef7c4092aa1d6875c81250ae1af4de8bbab762afeda79bc4c167b30b50d1bc39",
+      "currentSha256": "ce1b5838c57f02fcb6b351ec76feb6c7b4b85bbd26e3986b8d65418cbfd45df5",
+      "change": "Create existing ProtectedStore lazily on storage operations so portable contracts and injected tests can import; no provider fallback or credential migration"
+    }
+  ],
+  "newReferences": [
+    "references/native-cloud-operations.md",
+    "references/myrealtrip-link-reconciliation.md",
+    "references/official-source-capabilities.md"
+  ],
+  "originalSnapshotManifestsPreserved": true,
+  "packagingBoundary": "Native Vercel/Supabase and official MyRealTrip v1 clients are not added to this package; historical sourceSha256 remains original-snapshot identity",
+  "newOfflineWorkflow": {
+    "path": ".github/workflows/offline-checks.yml",
+    "actionsCheckoutCommit": "d23441a48e516b6c34aea4fa41551a30e30af803",
+    "actionsSetupNodeCommit": "249970729cb0ef3589644e2896645e5dc5ba9c38",
+    "source": "Current official actions v6 tags read using GitHub API",
+    "liveCloudRun": "pending_main_push"
+  }
+}

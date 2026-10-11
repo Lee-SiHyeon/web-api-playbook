@@ -1,0 +1,133 @@
+{
+  "schema": "web-api-myrealtrip-official-search-provenance-v1",
+  "recordedAt": "2026-10-11T20:01:17.365288Z",
+  "officialSource": {
+    "url": "https://docs.myrealtrip.com/",
+    "observedAssetUrl": "https://docs.myrealtrip.com/assets/index-kQYN436v.js",
+    "assetSha256": "e3419316dbeefcea348956dd7eef9048a8d6391ae2954130a4160bafa73e9bdd",
+    "provenance": "first_party_bundle_contract"
+  },
+  "contract": {
+    "method": "POST",
+    "origin": "https://partner-ext-api.myrealtrip.com",
+    "path": "/v1/products/tna/search",
+    "operationSemantics": "read_only_catalog_search",
+    "authentication": "owner_official_Bearer_API_key_distinct_from_web_partner_session",
+    "requestJsonFieldNames": [
+      "keyword",
+      "category",
+      "minPrice",
+      "maxPrice",
+      "sort",
+      "page",
+      "size"
+    ],
+    "requiredRequestFieldNames": [
+      "keyword"
+    ],
+    "sortValues": [
+      "price_asc",
+      "price_desc",
+      "review_score_desc",
+      "selling_count_desc"
+    ],
+    "pageMinimum": 1,
+    "sizeMinimum": 1,
+    "sizeMaximum": 100,
+    "documentedRequestsPerMinute": 200,
+    "responseLocation": "data",
+    "responseFieldNames": [
+      "items",
+      "items[].gid",
+      "items[].itemName",
+      "items[].description",
+      "items[].salePrice",
+      "items[].priceDisplay",
+      "items[].category",
+      "items[].reviewScore",
+      "items[].reviewCount",
+      "items[].imageUrl",
+      "items[].productUrl",
+      "items[].deepLink",
+      "items[].tags",
+      "totalCount",
+      "page",
+      "perPage",
+      "hasNextPage"
+    ],
+    "requiredItemFields": [
+      "gid",
+      "itemName",
+      "salePrice",
+      "productUrl"
+    ],
+    "priceSemantics": "KRW_displayed_starting_price",
+    "pagination": "data.page, data.perPage, data.totalCount, data.hasNextPage",
+    "applicationSuccess": "HTTP 200 + result.status 200 + result.code success"
+  },
+  "authorizedReplay": {
+    "checkedAt": "2026-10-11T19:52:50.189Z",
+    "operation": "read_only_tna_search",
+    "method": "POST",
+    "origin": "https://partner-ext-api.myrealtrip.com",
+    "path": "/v1/products/tna/search",
+    "input": {
+      "keyword": "제주",
+      "sort": "selling_count_desc",
+      "page": 1,
+      "size": 2
+    },
+    "httpStatus": 200,
+    "applicationStatus": 200,
+    "applicationCodeSuccess": true,
+    "mime": "application/json",
+    "bytes": 1063,
+    "milliseconds": 1165,
+    "credentialsUsed": true,
+    "credentialValuesRecorded": false,
+    "cookiesSent": false,
+    "redirectFollowed": false,
+    "envelopeFieldNames": [
+      "data",
+      "meta",
+      "result"
+    ],
+    "dataFieldNames": [
+      "items",
+      "totalCount",
+      "page",
+      "perPage",
+      "hasNextPage"
+    ],
+    "itemCount": 2,
+    "validatedPublicProducts": 2,
+    "validationIssues": {},
+    "pagination": {
+      "page": 1,
+      "perPage": 2,
+      "totalCount": 700,
+      "hasNextPage": true
+    },
+    "valid": true
+  },
+  "runtimeGuards": {
+    "redirect": "manual",
+    "cookiesSent": false,
+    "timeoutMilliseconds": 8000,
+    "streamingBodyLimitBytes": 1048576,
+    "limitsAreClientSettings": true,
+    "conservativeClientSpacingMilliseconds": 1100,
+    "spacingIsDocumentedServerMandate": false
+  },
+  "executionScope": {
+    "authenticatedBusinessReads": 1,
+    "externalMutations": 0,
+    "liveDatabaseWrites": 0,
+    "cronInvocations": 0,
+    "rawProductsCopied": false,
+    "credentialValuesCopied": false,
+    "newAffiliateLinksCopied": false,
+    "webDeploymentVerifiedAtRecipeTime": false
+  },
+  "existingImplementationProofsModified": false
+}
