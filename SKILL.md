@@ -51,6 +51,11 @@ metric period, partial coverage and provider errors. Keep five readiness states,
 browser XHR capture, dated replay hashes and deployment proof separate. Do not
 promote undocumented feeds or anonymous cookies to incompatible live validators.
 
+For source-native Studio inspiration and popular-content discovery, read the
+[dated target contracts](references/creator-studio-inspiration-2026-10-11.md).
+Official news/profile feeds are separate scopes; preserve target-specific period,
+content language, sort, unknown country, source AI and current provider boundaries.
+
 For MyRealTrip link creation, use
 [link reconciliation](references/myrealtrip-link-reconciliation.md) and the existing
 owner-bound flow. Web partner sessions and official API keys/response fields differ;

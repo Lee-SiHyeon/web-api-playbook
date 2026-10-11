@@ -1,0 +1,582 @@
+{
+  "schema": "creator-studio-inspiration-discovery-v1",
+  "checkedAt": "2026-10-11T22:08:33.158Z",
+  "purpose": "Source-native inspiration/trend data; do not substitute official news or selected-profile updates",
+  "executionScope": "Docs-only registration of observed metadata; no new source requests, authentication, code collector or DB write by this change",
+  "fiveStateScope": "Target-specific; documentary/UI/input capture is not business capture. Threads live_replay refers to independent HTTP JSON observation, not new collector revision or cloud execution.",
+  "sources": [
+    {
+      "id": "x_creator_studio_inspiration",
+      "documentedOrObservedSurface": "User screenshot: Creator Studio > Inspiration",
+      "selectionEvidence": "user_ui_screenshot",
+      "periodOptions": [
+        "24h",
+        "7d",
+        "30d"
+      ],
+      "contentLanguageOptionsObserved": [
+        "EN"
+      ],
+      "sortOptionsObserved": [
+        "likes",
+        "comments",
+        "quotes"
+      ],
+      "additionalSortOption": "cropped_unknown",
+      "countryFilter": "not_observed",
+      "businessOperation": null,
+      "targetApiCaptured": false,
+      "targetRows": 0,
+      "fiveStates": {
+        "captured": false,
+        "client_exists": false,
+        "credential_propagated": "not_verified",
+        "remnant_free": null,
+        "live_replay": false
+      },
+      "currentInputShell": "x-web/entry-client-logged-out-alrqVPTE.js",
+      "currentEntrySha256": "fb928ce08c5cb383e8ee898965c79290394248b8859f69ee8c2fe9f45934b801",
+      "definitionsLiteralImports": 458,
+      "followupLiteralModuleReads": 3,
+      "followupTargetWiringFound": false,
+      "stopBoundary": "Anonymous known home route HTTP307 to onboarding; no redirect follow or guessed private operation",
+      "note": "Old manifest404 and old __INITIAL_STATE__/responsive-web main parser are separate historical contract drift, not proof that X has no API."
+    },
+    {
+      "id": "youtube_studio_trends",
+      "surface": [
+        "Analytics",
+        "Trends"
+      ],
+      "evidenceKind": "official_document",
+      "audienceBasis": "channel_audience_and_saved_searches",
+      "documentedPeriod": "28_days_for_relevant_audience_cards",
+      "cards": [
+        "top_searches",
+        "breakout_videos",
+        "recent_videos",
+        "shorts_content_gaps",
+        "audience_interest",
+        "watched_on_youtube",
+        "searched_on_youtube"
+      ],
+      "countryOrLanguageAvailability": "conditional_not_owner_verified",
+      "businessOperation": null,
+      "targetRows": 0,
+      "fiveStates": {
+        "captured": false,
+        "client_exists": false,
+        "credential_propagated": "not_verified",
+        "remnant_free": null,
+        "live_replay": false
+      },
+      "relatedFeatures": {
+        "inspiration": "Personalized AI ideas; desktop English; gradually deprecated since August2026",
+        "askStudio": "Channel-specific desktop assistant; most creators globally conditional; artist/MadeForKids/under18 excluded"
+      },
+      "notNational24h7d30dFeed": true
+    },
+    {
+      "id": "instagram_studio_inspiration",
+      "surface": [
+        "Trending Audio",
+        "Reels trending templates"
+      ],
+      "evidenceKind": "official_document",
+      "documentedAudioPreviewLimit": 50,
+      "period": null,
+      "country": null,
+      "sort": null,
+      "businessOperation": null,
+      "targetRows": 0,
+      "fiveStates": {
+        "captured": false,
+        "client_exists": false,
+        "credential_propagated": "not_verified",
+        "remnant_free": null,
+        "live_replay": false
+      },
+      "existingClientScope": [
+        "authenticated_profile",
+        "authenticated_posts"
+      ],
+      "professionalEntitlementVerified": false,
+      "note": "The12 official-profile photo/caption rows are a separate frozen WIP and not popular-content data."
+    },
+    {
+      "id": "facebook_professional_inspiration",
+      "surface": [
+        "Professional Dashboard",
+        "Inspiration Hub"
+      ],
+      "documentedContent": [
+        "popular_reels",
+        "hashtags",
+        "topics",
+        "music"
+      ],
+      "evidenceKind": "official_document",
+      "originalAnnouncementYear": 2023,
+      "businessOperation": null,
+      "targetRows": 0,
+      "fiveStates": {
+        "captured": false,
+        "client_exists": false,
+        "credential_propagated": "not_verified",
+        "remnant_free": null,
+        "live_replay": false
+      },
+      "creatorAssistant2026": {
+        "personalized": true,
+        "initialDocumentedMarkets": [
+          "US",
+          "CA",
+          "IN"
+        ],
+        "currentOwnerFeatureAvailable": false,
+        "replacementForInspirationHubVerified": false,
+        "nationalRankingEquivalent": false
+      },
+      "nativeProvider": "not_found_in_reviewed_Meta_service_matrix",
+      "note": "Educational /professional-dashboard and generic website /api/graphql are not captured native target routes."
+    },
+    {
+      "id": "threads_search_trending_topics",
+      "surface": "search_tab",
+      "market": "UNKNOWN",
+      "country": null,
+      "aggregationWindow": null,
+      "periodSortInputs": null,
+      "explicitRank": null,
+      "sourcePublishedAt": null,
+      "metrics": [],
+      "summaryOrigin": "source_ai",
+      "coverage": "anonymous_preview",
+      "targetRows": 5,
+      "fiveStates": {
+        "captured": true,
+        "client_exists": true,
+        "credential_propagated": "owner_not_required_fresh_anonymous_inputs_verified",
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "businessContract": {
+        "method": "POST",
+        "origin": "https://www.threads.com",
+        "path": "/api/graphql/",
+        "operation": "BarcelonaSearchTrendingTopicsSectionQuery",
+        "variables": {
+          "first": 5,
+          "serp_prefetch": true,
+          "surface_type": "search_tab",
+          "__relay_internal__pv__BarcelonaDiscussionSummariesrelayprovider": true
+        },
+        "responseRoot": "data.trends.edges[].node",
+        "selectedResponseFields": [
+          "trend_llm_keyword",
+          "title_text_fragments",
+          "summary_text_fragments",
+          "search_url",
+          "trend_type"
+        ],
+        "docIdProvenance": {
+          "source": "Current /search Relay preloader queryName/queryID binding",
+          "numericValuePersisted": false,
+          "runtimeRule": "Discover fresh queryID,variables,LSD,SiteData,RelayAPIConfigDefaults and anonymous CSRF every run; do not hardcode this capture"
+        },
+        "bootstrapBusinessContentConsumed": false,
+        "applicationErrorsRejected": true
+      },
+      "externalWebClient": {
+        "repository": "Lee-SiHyeon/lifehackailab-web",
+        "path": "src/lib/hub/ontology/creator-threads-trending.ts",
+        "sha256": "6e85f4f5d1f20c136ccc4ab0c2d822332e34a7511d10d32a17eaa5808d0673aa",
+        "implementationObservedAt": "2026-10-11T22:05:56.587Z",
+        "nativePlaybookClientExists": false,
+        "capturedPayloadOfflineAcceptance": {
+          "checkedAt": "2026-10-11T22:02:24.590Z",
+          "networkRequests": 0,
+          "bodySha256": "6012dcb04172163a3c32693966bbc396bf33ba967adb1817102d917fa68d8dec",
+          "validHubItems": 5,
+          "validCreatorProjections": 5
+        },
+        "currentCollectorRevisionLiveReplay": true,
+        "nativeCronVerified": false,
+        "databasePersistenceVerified": false,
+        "reviewedWebRevision": "f20e7c84eab0aa6f9903ed66395946ee35f165e7",
+        "standaloneHttpAcceptance": {
+          "kind": "explicit_authorized_current_collector_acceptance",
+          "automaticScheduler": false,
+          "collectorSha256": "6e85f4f5d1f20c136ccc4ab0c2d822332e34a7511d10d32a17eaa5808d0673aa",
+          "startedAt": "2026-10-11T22:08:32.423Z",
+          "completedAt": "2026-10-11T22:08:33.158Z",
+          "requests": [
+            {
+              "method": "GET",
+              "path": "/search",
+              "status": 200,
+              "mime": "text/html"
+            },
+            {
+              "method": "POST",
+              "path": "/api/graphql/",
+              "status": 200,
+              "mime": "text/javascript"
+            }
+          ],
+          "fetched": 5,
+          "accepted": 5,
+          "validProjection": true,
+          "error": null,
+          "blocked": false,
+          "bodySha256": [
+            "78024827e62a198a9281ab5bc31924d2ab718ba1980e8ff1753fed620d83c807"
+          ],
+          "browserCalls": 0,
+          "ownerCredentialReads": 0,
+          "databaseWrites": 0
+        }
+      },
+      "underlyingPosts": {
+        "observedAt": "2026-10-11T21:58:13.318Z",
+        "httpStatus": 200,
+        "applicationResult": "APPLICATION_ERROR",
+        "collectedPosts": 0,
+        "stopResult": "STOPPED_NO_FALLBACK"
+      },
+      "note": "No country/period/metric-sort request fields. Sequence position is not rank. AI summary is provider-authored, not independently verified article/post reporting."
+    },
+    {
+      "id": "tiktok_creative_center_video_preview",
+      "surface": "Creative Center video preview",
+      "evidenceKind": "previous_independent_business_json",
+      "observedMarkets": [
+        "JP",
+        "US"
+      ],
+      "targetRows": 8,
+      "rowsPerMarket": 4,
+      "requestedPeriodDays": 7,
+      "verifiedAggregationWindow": null,
+      "explicitRank": null,
+      "coverage": "anonymous_preview",
+      "sourceIncludesAdvertising": true,
+      "fiveStates": {
+        "captured": true,
+        "client_exists": true,
+        "credential_propagated": "not_required",
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "scope": "Existing first-page video preview only; not all-platform popular posts/hashtags or verified current seven-day creation window",
+      "evidenceReference": "provenance/creator-public-data-2026-10-11.json"
+    },
+    {
+      "id": "naver_creator_advisor_trends",
+      "surface": "Creator Advisor aggregate trend tabs",
+      "evidenceKind": "existing_first_party_client_and_historical_contract",
+      "businessContract": {
+        "method": "GET",
+        "origin": "https://creator-advisor.naver.com",
+        "paths": [
+          "/api/v6/trend/category",
+          "/api/v6/trend/demo",
+          "/api/v6/trend/trend-contents",
+          "/api/v6/trend/search-inflow-trend"
+        ],
+        "queryFieldNames": [
+          "service",
+          "contentType",
+          "interval",
+          "date",
+          "categories",
+          "age",
+          "gender",
+          "metric",
+          "hasRankChange",
+          "limit",
+          "keyword",
+          "startDate",
+          "endDate"
+        ],
+        "periodSelection": "day/week/month; returned date must be validated",
+        "authorization": "Owner-bound NAVER session and response-derived HMAC; exact origin only"
+      },
+      "privateChannelAnalyticsExcluded": true,
+      "targetRows": 0,
+      "fiveStates": {
+        "captured": false,
+        "client_exists": false,
+        "credential_propagated": "not_verified",
+        "remnant_free": null,
+        "live_replay": false
+      },
+      "providerBoundary": "Existing native NAVER credential is Brandconnect-only; CreatorAdvisor allowed origin and authenticated replay not established",
+      "datalabBoundary": "Separate developer keyword-group relative-interest API needs ClientId/Secret; public shopping JSON bootstrap lacks BUC. Neither supplies verified CreatorAdvisor data."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "youtube-trends-guide",
+      "sourceUrl": "https://support.google.com/youtube/answer/11962757?hl=en",
+      "observedAt": "2026-10-11T19:33:19.000Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "responseBytes": null,
+      "bodySha256": "f5500e34b8482a1a0ccba979fcd7cdc96624fe932506f1f447439f17be4f905a",
+      "evidenceKind": "official_document"
+    },
+    {
+      "id": "youtube-inspiration-guide",
+      "sourceUrl": "https://support.google.com/youtube/answer/15575509?hl=en",
+      "observedAt": "2026-10-11T19:33:24.000Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "responseBytes": null,
+      "bodySha256": "3179841eb3f73f8f5e9dcec88d8364b8da317a81fe3c1605f443de3378a5d405",
+      "evidenceKind": "official_document"
+    },
+    {
+      "id": "youtube-ask-guide",
+      "sourceUrl": "https://support.google.com/youtube/answer/16291691?hl=en",
+      "observedAt": "2026-10-11T19:36:26.000Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "responseBytes": null,
+      "bodySha256": "a909445dd0507ee05016af3f8c65596a6ac61f612f5d666196a7a85437bb1805",
+      "evidenceKind": "official_document"
+    },
+    {
+      "id": "instagram-get-inspired",
+      "sourceUrl": "https://creators.instagram.com/get-inspired",
+      "observedAt": "2026-10-11T21:46:46.656Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=\"utf-8\"",
+      "responseBytes": 228391,
+      "bodySha256": "8c4250a6c67e2cd68f81d6431fcd1fe1ce45590fe00dd831defeb40ee7ffd7ed",
+      "evidenceKind": "official_document"
+    },
+    {
+      "id": "instagram-reels",
+      "sourceUrl": "https://creators.instagram.com/reels",
+      "observedAt": "2026-10-11T21:46:45.942Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=\"utf-8\"",
+      "responseBytes": 265165,
+      "bodySha256": "fcaddbeb660dab884b635843ae9481dc35d3a40558783d15593d27d0125092ec",
+      "evidenceKind": "official_document"
+    },
+    {
+      "id": "facebook-document-1",
+      "sourceUrl": "https://about.fb.com/news/2023/06/helping-creators-get-discovered-and-earn-money-on-facebook/amp/",
+      "observedAt": "2026-10-11T21:55:21.477Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "responseBytes": 100822,
+      "bodySha256": "d2d46bf66307e38f6d2a69aa26e98bce0e08484ec91b53873346c1ec9d6d33ec",
+      "evidenceKind": "official_document"
+    },
+    {
+      "id": "facebook-document-2",
+      "sourceUrl": "https://about.fb.com/news/2026/06/creator-assistant-more-languages-for-ai-translations-on-facebook/",
+      "observedAt": "2026-10-11T21:55:21.478Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "responseBytes": 556551,
+      "bodySha256": "ba9fa2ff216ed734f33a802e2c5083845a2d7dd5660f62242ea31a04c1bdc792",
+      "evidenceKind": "official_document"
+    },
+    {
+      "id": "facebook-document-3",
+      "sourceUrl": "https://creators.facebook.com/blog/meet-creator-assistant",
+      "observedAt": "2026-10-11T21:56:15.617Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=\"utf-8\"",
+      "responseBytes": 1429795,
+      "bodySha256": "c44645f82002931d8f84bc2d4ff84cd0f1587b0e02db5e4c494c70e469d1261b",
+      "evidenceKind": "official_document",
+      "observedQueryFieldNames": [
+        "locale",
+        "draft"
+      ],
+      "queryValuesOmitted": true,
+      "urlMeaning": "Observed document path; literal public anchor query values omitted, not a canonical no-query replay claim"
+    },
+    {
+      "id": "x-current-canonical",
+      "sourceUrl": "https://x.com/",
+      "observedAt": "2026-10-11T21:46:35.328Z",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "responseBytes": 41847,
+      "bodySha256": "f7edf3eb1f4c6f92fd0536e77ceea6591ea376172772f8bdd5239ef8ae89c74c",
+      "evidenceKind": "first_party_request_input"
+    },
+    {
+      "id": "x-current-entry",
+      "sourceUrl": "https://abs.twimg.com/x-web/x-web/entry-client-logged-out-alrqVPTE.js",
+      "observedAt": "2026-10-11T21:47:12.314Z",
+      "httpStatus": 200,
+      "contentType": "application/javascript",
+      "responseBytes": 33741,
+      "bodySha256": "fb928ce08c5cb383e8ee898965c79290394248b8859f69ee8c2fe9f45934b801",
+      "evidenceKind": "first_party_request_input"
+    },
+    {
+      "id": "x-anonymous-known-home",
+      "sourceUrl": "https://x.com/home",
+      "observedAt": "2026-10-11T21:48:49.388Z",
+      "httpStatus": 307,
+      "contentType": null,
+      "responseBytes": 0,
+      "bodySha256": null,
+      "evidenceKind": "access_boundary",
+      "redirectPath": "/i/jf/onboarding/web",
+      "redirectFollowed": false
+    },
+    {
+      "id": "threads-topics-bootstrap",
+      "sourceUrl": "https://www.threads.com/search",
+      "observedAt": "2026-10-11T21:54:30.422Z",
+      "httpStatus": 200,
+      "contentType": "text/html",
+      "responseBytes": 381810,
+      "bodySha256": "fa73fbb18f1155b363c0f713df424891d802396605025e9b247cb8cb2ab7468f",
+      "evidenceKind": "first_party_request_input"
+    },
+    {
+      "id": "threads-topics-business",
+      "sourceUrl": "https://www.threads.com/api/graphql/",
+      "observedAt": "2026-10-11T21:54:30.422Z",
+      "httpStatus": 200,
+      "contentType": "text/javascript",
+      "responseBytes": 7138,
+      "bodySha256": "6012dcb04172163a3c32693966bbc396bf33ba967adb1817102d917fa68d8dec",
+      "evidenceKind": "business_json"
+    },
+    {
+      "id": "threads-topic-posts-error",
+      "sourceUrl": "https://www.threads.com/api/graphql/",
+      "observedAt": "2026-10-11T21:58:13.318Z",
+      "httpStatus": 200,
+      "contentType": "text/javascript",
+      "responseBytes": 1428,
+      "bodySha256": "e5b3050e7b7be95bd04182ec535cd059779d5e6fe7820c405dcbaf4a70dad6d5",
+      "evidenceKind": "application_error",
+      "applicationResult": "APPLICATION_ERROR",
+      "stopResult": "STOPPED_NO_FALLBACK"
+    }
+  ],
+  "providerReadiness": {
+    "observedAt": "2026-10-11T21:54:48.000Z",
+    "metadataOnly": true,
+    "credentialValuesRead": 0,
+    "ownerBindingChecked": false,
+    "naverBrandconnect": {
+      "credentialPresent": true,
+      "recordedStatus": "ready",
+      "allowedOrigin": "https://gw-brandconnect.naver.com",
+      "lastHealthAt": "2026-10-11T21:01:57.290Z",
+      "currentAuthenticatedTrafficVerified": false
+    },
+    "naverCreatorAdvisor": {
+      "originPermittedByReviewedNativeVault": false,
+      "runtimeReadinessVerified": false
+    },
+    "snsProviders": {
+      "rowsInReviewedServiceVault": 0,
+      "runtimeReadinessVerified": false,
+      "scope": "This service vault only; not absence from every native provider"
+    },
+    "reviewedLegacyStore": {
+      "provider": "Windows_DPAPI_CurrentUser",
+      "currentRuntime": "linux",
+      "storeUnavailableInThisRuntime": true,
+      "expiryOrCredentialsInvalidClaim": false
+    },
+    "nativeGoogleAuth": {
+      "observedDateUtc": "2026-10-11",
+      "identifierSubmissions": 1,
+      "rejection": "This browser or app may not be secure",
+      "finalPath": "/v3/signin/rejected",
+      "passwordSubmissions": 0,
+      "twoFactorReached": false,
+      "authenticatedOwnerVerified": false,
+      "attemptStopped": true
+    },
+    "nativeXAuth": {
+      "publicHttpLoginStatus": 200,
+      "browserLoginStatus": 403,
+      "authenticatedOwnerVerified": false,
+      "meaning": "Public HTTP200 is not authentication; browser403 is a separate transport observation"
+    }
+  },
+  "evidenceReports": [
+    {
+      "artifactName": "report.json",
+      "sha256": "3290e1e35324be92d9d59d20430536f9b5983e7db650b1c48e8c6f96e153b200",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "official-document-receipt.json",
+      "sha256": "9f3293b123633b15de03a5dc5ed89d0c2f1d3c0d4b726d5df3cecdd2dbb084af",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "report.json",
+      "sha256": "5a8232aa46d086a2271610ea5eb39e1fadd8f83caa1c172e5889c583d1e1f6af",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "lifehack-x-inspiration-discovery-report.json",
+      "sha256": "53bf1022a170d6e35d9e3754b369cbd8bd289a25e547fcf22c58ac81da24648b",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "lifehack-x-inspiration-target-module-followup.json",
+      "sha256": "bb8a24bee047f7f57ea3273b3a672275a848497943d46245cf094151b8e8c0a1",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "threads-trending-topics-json-receipt.json",
+      "sha256": "9ce1c175e6af5d1a356bcd94a07f98ad5299af903017cfee618fdec5d5a9d3a6",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "threads-first-topic-posts-receipt.json",
+      "sha256": "77574acf0c975865ec4515588ed5475d831a9e009147aaccc284326e32919982",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "threads-trending-topics-offline-acceptance.json",
+      "sha256": "c6658c0024b18770da781686dc2ad0d28c20a831072ac5f93b92fb89f5002f1b",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "studio-session-readiness-proof.json",
+      "sha256": "59b980069c4f53a496c14ea394b3d4591501fd99bfd46bb138a27c3320166835",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    },
+    {
+      "artifactName": "native-google-auth-20261011.json",
+      "sha256": "41589defed07f3c83960a95b3a3689b94f771191c3ee7f0fd803b14b0175bf89",
+      "role": "Dated metadata reference; original local path and private identifiers omitted"
+    }
+  ],
+  "excludedSubstitutes": [
+    "official_tool_links",
+    "official_news_publications",
+    "selected_official_profile_posts",
+    "owner_private_channel_analytics",
+    "unverified_national_rankings"
+  ],
+  "sanitization": {
+    "rawBodiesPersisted": false,
+    "tokensOrCookiesPersisted": false,
+    "privateEmailsOrOwnerIdsPersisted": false,
+    "localPathsPersisted": false,
+    "opaqueDocIdsPersisted": false,
+    "signedMediaUrlsPersisted": false
+  },
+  "deployment": "No deployment or DB persistence proved by this dated discovery record; later exact-revision execution needs its own receipt"
+}
