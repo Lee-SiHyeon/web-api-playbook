@@ -140,7 +140,10 @@ a partial collection or resumed tail is not complete review coverage.
 
 For Adpick ShoppingMate affiliate links, read
 [the dated API contract and data-rights boundary](references/adpick-affiliate-api-2026-10-11.md).
-The Biz API is documented but no authenticated client or key provider is implemented.
+Use `scripts/adpick-read.mjs` for the credential-injected `malls`, `search` and `best` GET
+reader; [its checklist](checklists/services/adpick.json) remains pending live account/key proof.
+The key provider is caller-owned memory/stdin, not browser scraping or a shipped credential.
+No login, key management, link issuer or conversion reader is implemented.
 Keep the older anonymous mall-list reader separate. Preserve exact original product/option
 URLs, use provider-returned stored commission links, and keep path-based API keys private.
 Do not copy product/image datasets without independently established reuse scope, expose

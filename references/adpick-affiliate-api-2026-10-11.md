@@ -1,6 +1,7 @@
 # Adpick ShoppingMate API — reviewed 2026-10-11
 
-This is a documented affiliate-shopping contract, not a live authenticated client.
+This is a documented affiliate-shopping contract with a credential-injected HTTP read client;
+no live authenticated Biz API response has been obtained.
 Source: [official API guide](https://biz.adpick.co.kr/?ac=api&sub=guide), including its hidden API/FAQ tabs.
 See [the dated provenance](../provenance/adpick-affiliate-api-2026-10-11.json).
 
@@ -58,7 +59,59 @@ quantity, sales, commission and normal/cancel/pending/confirmed aggregates. Reco
 These are owner/account purchase data, not public traffic, market demand or creator trend metrics.
 Do not commit orders, transaction identifiers or raw account exports; public pages must not read them.
 
-## Bounded implementation plan — not implemented
+## Runnable HTTP reads — pending live credentials
+
+[`lib/commerce/adpick-shoppingmate.mjs`](../lib/commerce/adpick-shoppingmate.mjs) exports
+`createAdpickReadClient({apiKeyProvider})`, with `readMalls({rewardmalls,order,pData})`,
+`searchProducts({q,limit,pData})` and `bestProducts({area,limit,pData})`. The caller injects a
+service-bound key through an in-memory function. Nothing reads browser cookies, account pages,
+API-key files or other services' credentials. These reads do not call `link` again, follow a
+commission link or write hub/product data. The returned data remains ephemeral caller memory.
+
+Run `node scripts/adpick-read.mjs status` without credentials or network. The executable commands
+are `malls --credential-stdin`, `search --credential-stdin --q <query> [--limit 1..20]`, and
+`best --credential-stdin --area today|commission|pick|popular [--limit 1..10]`. Feed exactly one
+API key, optionally ending in a newline, from an existing private credential provider into stdin;
+do not put a real key in shell history, an argument, a repository file or a command example.
+No such provider/key is available in the current session. Optional `--p-data` accepts a pseudonymous
+ASCII identifier of at most 50 characters; malls also accepts `--rewardmalls true|false` and
+`--order new|popular|commission`. The stricter identifier rule is a client privacy policy,
+not Adpick's full documented string grammar.
+
+The CLI emits counts, redacted receipt paths and scope warnings by default. `--include-data`
+returns the bounded data to stdout when the caller needs the raw response fields; it grants no
+product/image storage, reuse or publication rights. It writes no file or dataset. Empty example
+commission links stay empty. It never assigns product/option/seller IDs from title or a link,
+marks links as destination/payee verified, or declares an authenticated owner from a successful
+shopping read. Search formatted-price strings and best numeric KRW/commission values stay separate.
+
+The transport is exact-origin HTTPS GET with redirects refused and no cookies/bearer header.
+One deadline (default 15 seconds, maximum 30) covers credential acquisition, headers and complete
+body. The stream limit defaults to 1 MiB (maximum 2 MiB); early redirects, MIME failures and oversized
+bodies are cancelled. There are no retries. Per-key process-local endpoint budgets are 60/10/10
+for malls/search/best, and the unresolved aggregate FAQ limit is conservatively enforced as 10
+total requests per rolling minute. This is not cross-process/distributed rate limiting; deploy
+one serialized caller or add a separate durable shared budget before recurring multi-worker use.
+Requests, failed attempts and local quota exhaustion cannot expose the key-bearing URL, provider
+exception, error text or unknown response fields. Reflected keys and key-bearing Biz API links are
+rejected. Response hashes contain no raw field values; error receipts never contain query values.
+
+Client policy bounds include ASCII path-safe keys up to 256 characters, queries up to 200 characters,
+500 mall rows, bounded known fields and HTTPS credential-free returned URL fields. These are local
+transport/schema guards, not assertions about undocumented account limits. The guide documents a
+JSON envelope but no Biz MIME header: the reader accepts bounded UTF-8 JSON under JSON/+json,
+text/plain, text/html or missing MIME. A 200 login page still fails JSON/envelope validation; HTML 403
+stays unknown unless it contains the documented JSON error fields. Unsupported binary MIME is
+rejected before reading. These are synthetic parser tests, not an observed Biz header claim. The guide's best
+example says count 5 while showing one abbreviated list item; the runtime requires count to match
+the actual returned list and requested bound, so that abbreviated example intentionally fails.
+The real authenticated schema, available merchants and quota remain unverified.
+
+Verify locally with `node --test tests/adpick-shoppingmate.test.mjs` and
+`node scripts/checklist.mjs --service=adpick --run-tests`. Strict capability audit is expected to
+remain pending for live auth/read, rights and issuance/reporting; synthetic tests are not replay proof.
+
+## Link and reporting integration plan — not implemented
 
 1. Verify the intended native owner and actual API entitlement. The documented
    [API KEY page](https://biz.adpick.co.kr/?ac=api&sub=key) is an authenticated management surface;
@@ -106,11 +159,24 @@ The existing native pack contains only
 Its anonymous `www.adpick.co.kr/apis/shopping.php?md=mall_list...` replay observed 43 merchants
 on 2026-09-20 UTC (2026-09-21 KST). That historical frontend JSON contract is separate from this
 credentialed Biz API and does not prove current access, participation, link issuance or payment.
-It has no protected key provider, conversion reader or current Biz API client.
+It has no protected key provider or conversion reader. The new standalone read client does not
+change that historical public reader's scope or establish a logged-in account.
 
-Before implementation, register an Adpick capability checklist for owner/key access, read/link
-scope, exact identity, safe public readback, rights/eligibility, rate limits and private reporting.
-For the Biz API now: documented contract present; browser XHR captured=false; client_exists=false;
-credential_propagated=not_verified; remnant_free=null; live_replay=false. A docs capture and an
-old mall-list client cannot make those states green. This documentation review made no authenticated business call, key-management or issuance
-action. No Adpick credentialed client is shipped by this reference.
+A separate current root-run replay of that anonymous frontend reader succeeded once at
+2026-10-11T23:36:03.144Z: HTTP 200, 44 unique merchants, 217,051 response bytes, body SHA-256
+`8a45eb5a6c243be722bcbeb1834fd232b4516e39b3ab1a84c4b78bbc2b58863a`.
+Its response was valid JSON with a `list` field despite `text/html; charset=UTF-8` MIME.
+The sanitized receipt SHA-256 is `d9fe0fa5dee0b1aa39db929b4333b2701f5a919608c87815afbf6896bf25b82b`;
+its bounded receipt is recorded in the dated provenance. No raw product/merchant dataset or
+machine hostname is included here. This proves only the current anonymous merchant-list scope;
+it supplies no Biz API key, intended owner, merchant approval, issued link, conversion or
+product/image reuse right. Biz read-client live replay remains false. No further live call was made.
+
+The [Adpick capability checklist](../checklists/services/adpick.json) tracks owner/key access,
+each read, exact-identity link/public readback, rights/eligibility and private reporting separately.
+For the three Biz reads now: documented contract present; browser XHR captured=false;
+client_exists=true; credential_propagated=not_verified; remnant_free=true for the named read-client
+code only; live_replay=false. Login acquisition and deployed operation remain unverified. Synthetic
+contract/security tests supply no account, current merchant or independent HTTP business proof.
+No actual API key, authenticated business call, key-management action, link issuance or conversion
+read was performed while implementing this client.

@@ -60,14 +60,16 @@
     "documentedContract": true,
     "captured": false,
     "capturedMeaning": "No business API browser XHR or live authenticated request captured",
-    "client_exists": false,
+    "client_exists": true,
     "credential_propagated": "not_verified",
-    "remnant_free": null,
+    "remnant_free": true,
     "live_replay": false,
     "businessRequestCount": 0,
     "trackingLinkIssuanceCount": 0,
     "accountWriteCount": 0,
-    "deployedIntegration": false
+    "deployedIntegration": false,
+    "clientScope": "documented GET malls/search/best only",
+    "remnantFreeScope": "implemented read client and CLI; login acquisition not included"
   },
   "nativeGoogleAttempt": {
     "reportedBy": "deployment_access",
@@ -185,7 +187,8 @@
         "commission_per"
       ],
       "couponOrRewardEligibilitySeparate": true,
-      "schemaLiveVerified": false
+      "schemaLiveVerified": false,
+      "clientImplemented": true
     },
     {
       "function": "search",
@@ -219,7 +222,8 @@
       "originalProductUrlDocumented": false,
       "exactOptionOrSellerIdentityDocumented": false,
       "linkAgainRequired": false,
-      "schemaLiveVerified": false
+      "schemaLiveVerified": false,
+      "clientImplemented": true
     },
     {
       "function": "best",
@@ -271,7 +275,8 @@
       "originalProductUrlDocumented": false,
       "exactOptionOrSellerIdentityDocumented": false,
       "linkAgainRequired": false,
-      "schemaLiveVerified": false
+      "schemaLiveVerified": false,
+      "clientImplemented": true
     },
     {
       "function": "conversion",
@@ -419,8 +424,10 @@
     "historicalRows": 43,
     "historicalResponseSha256": "48e7639f27c8c3c8ff9ceb68ebf0e5ec8f2b7b5ede95a7c863a31d52e62144b9",
     "historicalReceiptSha256": "8e31d401078ca4e232d112ee4c33b2398bd4f90118231d90b8c9beadcc811e18",
-    "currentReplayPerformed": false,
-    "authenticatedIssuanceVerified": false
+    "currentReplayPerformed": true,
+    "authenticatedIssuanceVerified": false,
+    "currentReplayScope": "anonymous_frontend_merchant_list_only",
+    "currentReplayObservedAt": "2026-10-11T23:36:03.144Z"
   },
   "proposedFirstIntegration": {
     "scope": "linkonly_enrichment_for_existing_independently_authorized_exact_targets",
@@ -442,6 +449,119 @@
     "Independent product/image reuse rights",
     "Exact destination and owner binding of returned links",
     "Stable whitelisted egress for private conversion reporting",
-    "Documented link lifetime and quota contradictions"
-  ]
+    "Documented link lifetime and quota contradictions",
+    "Actual best response count/list consistency; guide example count5 shows one abbreviated item"
+  ],
+  "readClientImplementation": {
+    "module": "lib/commerce/adpick-shoppingmate.mjs",
+    "factory": "createAdpickReadClient",
+    "cli": "scripts/adpick-read.mjs",
+    "tests": "tests/adpick-shoppingmate.test.mjs",
+    "checklist": "checklists/services/adpick.json",
+    "operations": [
+      "malls",
+      "search",
+      "best"
+    ],
+    "credentialInput": "caller_owned_memory_provider_or_cli_stdin",
+    "credentialsShipped": false,
+    "executionMode": "pure_http",
+    "browserUsedByReadClient": false,
+    "redirects": "refused",
+    "retries": 0,
+    "deadlineDefaultMs": 15000,
+    "bodyDefaultMaxBytes": 1048576,
+    "endpointPerKeyPerMinute": {
+      "malls": 60,
+      "search": 10,
+      "best": 10
+    },
+    "conservativeAggregatePerKeyPerMinute": 10,
+    "budgetScope": "shared_per_key_in_one_process_not_distributed",
+    "responseDataPersistence": "none",
+    "cliDataOutputDefault": "omitted_metadata_only",
+    "schemaProof": "synthetic_documentation_contract_only",
+    "actualApiRequestCount": 0,
+    "linkOrConversionImplemented": false,
+    "sha256": {
+      "lib/commerce/adpick-shoppingmate.mjs": "0e256257b9a6d9e386febf00aeb1698ef6a9a7526e89ad3d071d7cf650c863e8",
+      "scripts/adpick-read.mjs": "5b25095683a05a028fd2d7a012bc9df8dd6bbca1e714f144f8e4f6537c9c3cd1",
+      "tests/adpick-shoppingmate.test.mjs": "f6ac4193cddf00348448c36e7d48124a99b99cbaa815110dd9ee5e755bf76a72",
+      "checklists/services/adpick.json": "5983eea456c001181d370658e60809ed6bf9f3bb1678d6735ae79f9fb3db122c"
+    },
+    "syntheticTestsPassed": 14,
+    "syntheticTestsAreLiveProof": false,
+    "mimePolicy": "Bounded UTF-8 JSON envelope under JSON/+json/text/plain/text/html/missing MIME; no observed Biz MIME claim"
+  },
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "candidateMeaning": "First-party documented API request shapes; no business XHR capture or authenticated replay",
+  "contracts": [
+    {
+      "method": "GET",
+      "origin": "https://biz.adpick.co.kr",
+      "path": "/api/{redacted}/malls",
+      "contractProvenance": {
+        "kind": "first_party_documented_api",
+        "sourceUrl": "https://biz.adpick.co.kr/?ac=api&sub=guide"
+      },
+      "businessRequestCaptured": false,
+      "liveReplay": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://biz.adpick.co.kr",
+      "path": "/api/{redacted}/search",
+      "contractProvenance": {
+        "kind": "first_party_documented_api",
+        "sourceUrl": "https://biz.adpick.co.kr/?ac=api&sub=guide"
+      },
+      "businessRequestCaptured": false,
+      "liveReplay": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://biz.adpick.co.kr",
+      "path": "/api/{redacted}/best",
+      "contractProvenance": {
+        "kind": "first_party_documented_api",
+        "sourceUrl": "https://biz.adpick.co.kr/?ac=api&sub=guide"
+      },
+      "businessRequestCaptured": false,
+      "liveReplay": false
+    }
+  ],
+  "currentAnonymousMallReplay": {
+    "reportedBy": "root",
+    "proofSchema": "adpick-public-mall-replay-proof-v1",
+    "checkedAt": "2026-10-11T23:36:03.144Z",
+    "execution": {
+      "mode": "pure_http",
+      "browserUsed": false,
+      "credentialsUsed": false
+    },
+    "receipt": {
+      "method": "GET",
+      "url": "https://www.adpick.co.kr/apis/shopping.php?md=mall_list&order=starttime&search_value=",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=UTF-8",
+      "responseBytes": 217051,
+      "responseSha256": "8a45eb5a6c243be722bcbeb1834fd232b4516e39b3ab1a84c4b78bbc2b58863a",
+      "responseKeys": [
+        "list"
+      ],
+      "count": 44
+    },
+    "merchantCount": 44,
+    "proofSha256": "d9fe0fa5dee0b1aa39db929b4333b2701f5a919608c87815afbf6896bf25b82b",
+    "proofArtifactName": "adpick-public-malls-replay-proof-20261011.json",
+    "rawDatasetIncludedInRepository": false,
+    "machineHostnameIncluded": false,
+    "scope": "anonymous_first_party_frontend_merchant_list_only",
+    "credentialedBizApiVerified": false,
+    "authenticatedOwnerVerified": false,
+    "linkGenerationCount": 0,
+    "accountWriteCount": 0,
+    "doesNotPromoteBizReadClientLiveReplay": true
+  }
 }

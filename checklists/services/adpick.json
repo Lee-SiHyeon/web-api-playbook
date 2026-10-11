@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "service": "adpick",
+  "description": "Documented ShoppingMate Biz API read-only client; no login, key management, link issuance or conversion implementation. Synthetic tests do not establish live authentication. Dashboard profile/content CRUD and general CPA/CPI/CPC campaign operations are outside this documented shopping API scope.",
+  "capabilities": [
+    {
+      "id": "auth.owner_key",
+      "title": "Verify intended owner, API approval and protected key propagation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Google rejected the working browser; no owner/API approval or key obtained. No login/key-management client is implemented."
+    },
+    {
+      "id": "malls.read",
+      "title": "Read documented merchant summaries and returned commission links",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/adpick-shoppingmate.mjs",
+            "exports": [
+              "createAdpickReadClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/adpick-read.mjs",
+            "tokens": [
+              "malls"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/adpick-shoppingmate.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "provenance/adpick-affiliate-api-2026-10-11.json"
+          ]
+        }
+      ],
+      "blocker": "Client and synthetic tests exist; actual authorized key, account eligibility and independent business replay are unverified."
+    },
+    {
+      "id": "products.search",
+      "title": "Read bounded product search with original formatted reference prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/adpick-shoppingmate.mjs",
+            "exports": [
+              "createAdpickReadClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/adpick-read.mjs",
+            "tokens": [
+              "search"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/adpick-shoppingmate.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "provenance/adpick-affiliate-api-2026-10-11.json"
+          ]
+        }
+      ],
+      "blocker": "No live key replay. No documented exact product/option/seller identity; no rights or verified-offer claim."
+    },
+    {
+      "id": "products.best",
+      "title": "Read a random bounded area sample with numeric reference prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/adpick-shoppingmate.mjs",
+            "exports": [
+              "createAdpickReadClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/adpick-read.mjs",
+            "tokens": [
+              "best"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/adpick-shoppingmate.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "provenance/adpick-affiliate-api-2026-10-11.json"
+          ]
+        }
+      ],
+      "blocker": "No live key replay; not a rank or exhaustive catalogue. Actual count/list contract must be checked against the abbreviated guide example."
+    },
+    {
+      "id": "affiliate.exact_link_readback",
+      "title": "Journal an exact authorized source target and verify a provider-issued link without duplicate issuance",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Link/directlink operations are intentionally not implemented in this read-only client. Owner, destination and eligibility proof remain absent."
+    },
+    {
+      "id": "data.rights_eligibility",
+      "title": "Establish merchant-specific product/image reuse and commission eligibility",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Adpick documentation grants no product/image storage or reuse rights; independent merchant scope is unverified."
+    },
+    {
+      "id": "reporting.conversion",
+      "title": "Read private conversion reports under intended owner and whitelisted egress",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No conversion client, account key or confirmed IP whitelist. Vercel dynamic egress is not eligibility proof; no billing/network change authorized."
+    }
+  ]
+}
