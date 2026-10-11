@@ -138,6 +138,15 @@ unexposed operation. Acquire public frontend keys through current HTTP bootstrap
 and keep their values only in memory. Preserve safe bounded continuations;
 a partial collection or resumed tail is not complete review coverage.
 
+For Adpick ShoppingMate affiliate links, read
+[the dated API contract and data-rights boundary](references/adpick-affiliate-api-2026-10-11.md).
+The Biz API is documented but no authenticated client or key provider is implemented.
+Keep the older anonymous mall-list reader separate. Preserve exact original product/option
+URLs, use provider-returned stored commission links, and keep path-based API keys private.
+Do not copy product/image datasets without independently established reuse scope, expose
+key-bearing direct links, relabel reference prices as verified offers, or publish private
+conversion records. Google owner/API approval and IP-whitelisted reporting remain unverified.
+
 For domestic Olive Young sales rankings, use `commerce oliveyoung-public ranking`
 and [the ranking contract](references/commerce-oliveyoung-korea-ranking.md).
 Preserve the site's displayed rank and category; do not assign ranks from array

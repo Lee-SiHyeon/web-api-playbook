@@ -1,0 +1,447 @@
+{
+  "schemaVersion": 1,
+  "service": "adpick_shoppingmate",
+  "reviewedAt": "2026-10-11T23:05:45.000Z",
+  "reference": "references/adpick-affiliate-api-2026-10-11.md",
+  "sources": [
+    {
+      "id": "official_api_guide",
+      "url": "https://biz.adpick.co.kr/?ac=api&sub=guide",
+      "authority": "first_party_documentation",
+      "observedOn": "2026-10-11",
+      "accessMethod": "anonymous_native_browser_dom_text",
+      "httpStatus": 200,
+      "browserUsed": true,
+      "authenticated": false,
+      "sourceBusinessRequestCaptured": false,
+      "artifactName": "adpick-biz-api-guide-public-full-20261011.txt",
+      "domTextChars": 70406,
+      "domTextBytes": 82437,
+      "domTextSha256": "fa3bc9924c963bc3dfd01ecfb03a789816cbc8025d00feb3c39e644a18c49221",
+      "artifactModifiedAt": "2026-10-11T23:01:08.464057Z",
+      "exactNetworkObservedAt": null,
+      "rawArtifactIncludedInRepository": false
+    },
+    {
+      "id": "native_guide_http_probe",
+      "url": "https://biz.adpick.co.kr/?ac=api&sub=guide",
+      "method": "GET",
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "credentialsUsed": false,
+      "httpStatus": 403,
+      "errorType": "HTTPError",
+      "responseHash": null,
+      "cause": "unknown",
+      "notApiQuotaProof": true
+    },
+    {
+      "id": "documented_key_management",
+      "url": "https://biz.adpick.co.kr/?ac=api&sub=key",
+      "accessMethod": "not_opened_by_documentation_reviewer",
+      "accountAccessVerified": false
+    }
+  ],
+  "credentialContract": {
+    "baseUrlTemplate": "https://biz.adpick.co.kr/api/{apikey}/{function}",
+    "method": "GET",
+    "keyLocation": "url_path",
+    "authorizationHeaderRequired": false,
+    "serverOnly": true,
+    "publicHrefMayContainApiKey": false,
+    "keyAccessed": false,
+    "keyCreated": false,
+    "ownerVerified": false,
+    "apiApprovalVerified": false,
+    "normalizedReceiptPath": "/api/{redacted}/{function}",
+    "apiKeyValuesIncluded": false
+  },
+  "readiness": {
+    "documentedContract": true,
+    "captured": false,
+    "capturedMeaning": "No business API browser XHR or live authenticated request captured",
+    "client_exists": false,
+    "credential_propagated": "not_verified",
+    "remnant_free": null,
+    "live_replay": false,
+    "businessRequestCount": 0,
+    "trackingLinkIssuanceCount": 0,
+    "accountWriteCount": 0,
+    "deployedIntegration": false
+  },
+  "nativeGoogleAttempt": {
+    "reportedBy": "deployment_access",
+    "knownIdentitySubmittedOnce": true,
+    "googleRejectedWorkingBrowser": true,
+    "passwordEntered": false,
+    "mfaEntered": false,
+    "authenticatedOwnerVerified": false,
+    "accountIdentifierRecorded": false,
+    "stopped": true
+  },
+  "rights": {
+    "purpose": "affiliate_marketing_reference_data_and_commission_links",
+    "priceBasis": "reference_only",
+    "currentPriceGuaranteed": false,
+    "stock": false,
+    "options": false,
+    "shipping": false,
+    "salesStatus": false,
+    "productDataStorageRightsGrantedByAdpick": false,
+    "productImageStorageRightsGrantedByAdpick": false,
+    "productDataProcessingOrReuseGrantedByAdpick": false,
+    "rightsHolder": "merchant_or_seller",
+    "independentAuthorizedReuseScopeVerified": false,
+    "bulkProvision": "requires_separate_agreement",
+    "generalCpaCpiCpcCampaignCatalogDocumented": false
+  },
+  "operations": [
+    {
+      "function": "link",
+      "classification": "issuance",
+      "required": [
+        "url"
+      ],
+      "optional": [
+        "linkonly",
+        "p_data"
+      ],
+      "defaults": {
+        "linkonly": true
+      },
+      "limits": {
+        "perMinuteLinkOnly": 60,
+        "perMinuteWithProductData": 10,
+        "pDataMaxChars": 50
+      },
+      "dataFields": [
+        "status",
+        "commissionlink"
+      ],
+      "fullDataFields": [
+        "cp_name",
+        "cp_code",
+        "cp_icon",
+        "commission_per",
+        "product_name",
+        "product_price",
+        "product_price_org",
+        "product_img"
+      ],
+      "schemaLiveVerified": false
+    },
+    {
+      "function": "directlink",
+      "classification": "issuance_and_redirect",
+      "required": [
+        "url"
+      ],
+      "optional": [
+        "p_data",
+        "forceredirect"
+      ],
+      "defaults": {
+        "forceredirect": false
+      },
+      "limits": {
+        "perMinuteDocumented": null,
+        "pDataMaxChars": 50,
+        "documentedNoLimit": true
+      },
+      "responseKind": "302_redirect_or_error_html",
+      "publicKeyBearingHrefProposed": false,
+      "schemaLiveVerified": false
+    },
+    {
+      "function": "malls",
+      "classification": "documented_catalog_read_with_commission_links",
+      "required": [],
+      "optional": [
+        "rewardmalls",
+        "order",
+        "p_data"
+      ],
+      "defaults": {
+        "rewardmalls": false,
+        "order": "new"
+      },
+      "enum": {
+        "order": [
+          "new",
+          "popular",
+          "commission"
+        ]
+      },
+      "limits": {
+        "perMinute": 60,
+        "pDataMaxChars": 50
+      },
+      "dataFields": [
+        "cp_code",
+        "name",
+        "icon",
+        "title",
+        "commissionlink",
+        "commission_per"
+      ],
+      "couponOrRewardEligibilitySeparate": true,
+      "schemaLiveVerified": false
+    },
+    {
+      "function": "search",
+      "classification": "documented_product_search_with_commission_links",
+      "required": [
+        "q"
+      ],
+      "optional": [
+        "limit",
+        "p_data"
+      ],
+      "defaults": {
+        "limit": 10
+      },
+      "limits": {
+        "perMinute": 10,
+        "limitMin": 1,
+        "limitMax": 20,
+        "pDataMaxChars": 50
+      },
+      "dataFields": [
+        "title",
+        "price",
+        "photo",
+        "cp_code",
+        "cp_name",
+        "cp_icon",
+        "commissionlink"
+      ],
+      "priceType": "formatted_string",
+      "originalProductUrlDocumented": false,
+      "exactOptionOrSellerIdentityDocumented": false,
+      "linkAgainRequired": false,
+      "schemaLiveVerified": false
+    },
+    {
+      "function": "best",
+      "classification": "documented_random_product_sample_with_commission_links",
+      "required": [
+        "area"
+      ],
+      "optional": [
+        "limit",
+        "p_data"
+      ],
+      "defaults": {
+        "limit": 5
+      },
+      "enum": {
+        "area": [
+          "today",
+          "commission",
+          "pick",
+          "popular"
+        ]
+      },
+      "limits": {
+        "perMinute": 10,
+        "limitMin": 1,
+        "limitMax": 10,
+        "pDataMaxChars": 50
+      },
+      "dataFields": [
+        "area",
+        "area_name",
+        "count",
+        "list"
+      ],
+      "itemFields": [
+        "title",
+        "price",
+        "photo",
+        "cp_code",
+        "cp_name",
+        "cp_icon",
+        "commission_per",
+        "commissionlink"
+      ],
+      "priceType": "number_krw",
+      "commissionType": "number_percent",
+      "completeCatalog": false,
+      "explicitRankDocumented": false,
+      "originalProductUrlDocumented": false,
+      "exactOptionOrSellerIdentityDocumented": false,
+      "linkAgainRequired": false,
+      "schemaLiveVerified": false
+    },
+    {
+      "function": "conversion",
+      "classification": "private_owner_conversion_reporting",
+      "required": [],
+      "optional": [
+        "sdate",
+        "edate",
+        "cdate",
+        "order",
+        "page",
+        "limit",
+        "p_data",
+        "o_cd",
+        "status",
+        "link_id",
+        "cp_code"
+      ],
+      "defaults": {
+        "order": "api",
+        "page": 1,
+        "limit": 50,
+        "date": "today"
+      },
+      "enum": {
+        "order": [
+          "api",
+          "reg",
+          "confirm"
+        ],
+        "requestStatus": [
+          "정상",
+          "확정",
+          "취소"
+        ],
+        "returnedStatus": [
+          "정상",
+          "확인중",
+          "확정",
+          "취소"
+        ]
+      },
+      "limits": {
+        "perMinute": 60,
+        "limitMax": 200,
+        "maxRangeDays": 365,
+        "maxRangeLeapYearDays": 366
+      },
+      "cdateOverridesRange": true,
+      "timezone": "not_documented",
+      "ipWhitelistRequired": true,
+      "pagingFields": [
+        "total_count",
+        "total_pages",
+        "page",
+        "limit",
+        "order",
+        "list_count"
+      ],
+      "summaryFields": [
+        "total_qty",
+        "total_sales",
+        "total_commission",
+        "normal_sales",
+        "normal_commission",
+        "cancel_sales",
+        "cancel_commission",
+        "pending_commission",
+        "confirmed_commission"
+      ],
+      "itemFields": [
+        "idx",
+        "cp_code",
+        "o_cd",
+        "trlog_id",
+        "p_cd",
+        "regdate",
+        "confirm_date",
+        "p_nm",
+        "qty",
+        "sales",
+        "commission",
+        "commission_rate",
+        "status",
+        "trans_comment",
+        "p_data",
+        "link_id",
+        "api_date"
+      ],
+      "publicHubEligible": false,
+      "privateReportingImplemented": false,
+      "whitelistedEgressVerified": false,
+      "schemaLiveVerified": false
+    }
+  ],
+  "errors": {
+    "fields": [
+      "status",
+      "code",
+      "error"
+    ],
+    "documentedHttpStatus": {
+      "400": "invalid_input_or_unsupported_merchant",
+      "401": "invalid_key",
+      "403": "api_quota",
+      "404": "unknown_function",
+      "501": "server_error"
+    },
+    "nativeGenericHtml403CauseVerified": false
+  },
+  "conflicts": [
+    {
+      "id": "key_count",
+      "documentedValues": [
+        10,
+        5
+      ],
+      "resolution": "actual_account_limit_unverified"
+    },
+    {
+      "id": "link_lifetime",
+      "statements": [
+        "Inactive links may be removed after 180 days except revenue-producing links",
+        "FAQ says links do not expire"
+      ],
+      "resolution": "no_perpetual_availability_or_invented_ttl_claim"
+    },
+    {
+      "id": "quota_description",
+      "statements": [
+        "Endpoint-specific limits differ",
+        "Generic error table says 60/min",
+        "FAQ mentions aggregate 10/min"
+      ],
+      "resolution": "conservative_per_endpoint_key_budget_then_actual_response"
+    }
+  ],
+  "existingImplementation": {
+    "path": "service-packs/affiliate/apps/affiliate-api-hub/tools/research/adpick-affiliate-catalog.mjs",
+    "sha256": "1735fbc6d281a3caa29d25f10796ff50a9d8bc28c541e68480d9e9964e30a5d7",
+    "scope": "anonymous_legacy_www_mall_list_only",
+    "implementsCurrentBizApi": false,
+    "historicalReceipt": "service-packs/affiliate/apps/affiliate-api-hub/references/adpick-public-malls-replay-2026-09-21.json",
+    "historicalObservedAt": "2026-09-20T18:23:28.892Z",
+    "historicalRows": 43,
+    "historicalResponseSha256": "48e7639f27c8c3c8ff9ceb68ebf0e5ec8f2b7b5ede95a7c863a31d52e62144b9",
+    "historicalReceiptSha256": "8e31d401078ca4e232d112ee4c33b2398bd4f90118231d90b8c9beadcc811e18",
+    "currentReplayPerformed": false,
+    "authenticatedIssuanceVerified": false
+  },
+  "proposedFirstIntegration": {
+    "scope": "linkonly_enrichment_for_existing_independently_authorized_exact_targets",
+    "implemented": false,
+    "publicRequestsTriggerIssuance": false,
+    "preserveCanonicalProductOptionSellerUrl": true,
+    "keyPathRedacted": true,
+    "pData": "opaque_content_or_campaign_id_without_email_customer_or_order_data",
+    "forceredirect": false,
+    "existingApprovedProviderLinksOverwritten": false,
+    "newProductImageDatasetStored": false,
+    "newStaticEgressBillingAuthorized": false
+  },
+  "unknowns": [
+    "Actual native owner access and account/API approval",
+    "Actual API key management entitlement and limit",
+    "Merchant/product/channel-specific commission eligibility and terms",
+    "Actual authenticated response schema and quota scope",
+    "Independent product/image reuse rights",
+    "Exact destination and owner binding of returned links",
+    "Stable whitelisted egress for private conversion reporting",
+    "Documented link lifetime and quota contradictions"
+  ]
+}
