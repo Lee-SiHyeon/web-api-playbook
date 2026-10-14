@@ -38,3 +38,16 @@ Plain `curl`, Chrome UA, **one GET at a time**, ≥5 s apart, stop on bot-check/
 - No inline `skuPrice` / `formattedPrice` / price JSON; client loaders (`pdp-pc`, `cosmos`, `LWSC-G`) imply MTop/XHR for price
 - Conclusion unchanged: **title/SEO shell reachable keyless with proper browser-like Accept headers; price still not available without authenticated/official API (or browser challenge path we do not automate)**
 
+## Browser netcap follow-up (2026-10-15 ~00:14 KST)
+
+Source: `/workspace/captures/2026-10-14T15-14-10-750Z` (real Chrome session on `ko.aliexpress.com` PDP + search). Contracts: `verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json` (14 first-party; full HAR had 477 inventory rows, mostly CDN/tracker).
+
+| Call | Status | Bytes | Notes |
+|---|---|---|---|
+| `GET acs.aliexpress.com/h5/mtop.aliexpress.pdp.pc.query/1.0/` | 200 | ~195 KB | **Succeeded** in browser (signed `appKey`+`sign`+`t`+`data`). Earlier 2026-10-05 anonymous Playwright saw `/_____tmd_____/punish` for the same API. |
+| `GET .../mtop.aliexpress.review.pc.list/1.0/` | 200 | ~15 KB | Reviews list; same signed MTop shape. |
+| `GET ko.aliexpress.com/aeglodetailweb/api/seo/seodata` | 200 | ~7 KB | Matches existing keyless `productSeo` contract. |
+| `GET pdp.aliexpress-media.com/product/{id}/pc/v2/ko_KR/desc.htm` | 200 | ~32 KB | Description HTML; query has `productId`, `sellerId`, `token`, `v`. |
+| recommend / cart.count / cookie.render / poplayer | 200 | small | Session/UI; not catalog price. |
+
+Conclusion update: **PDP business payload is reachable as `headless_assisted_http` / browser-session MTop** (signed query), not as anonymous keyless pure HTTP. Keyless path remains sitemap IDs + `getProductSeo` only. Next step when wanted: replay `pdp.pc.query` with captured sign fields from a sanctioned session store (no CAPTCHA solve), or use Portals official API for price.
