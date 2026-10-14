@@ -16,7 +16,8 @@ export const MANIFEST = 'PLAYBOOK_VENDOR.json';
 export const DEFAULT_KEEP = Object.freeze(['package.json', 'package-lock.json', 'README.md', '.gitignore', '.gitattributes']);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-export const sha256 = file => createHash('sha256').update(readFileSync(file)).digest('hex');
+// Line endings are normalized so a CRLF checkout (e.g. *.ps1 under .gitattributes) is not drift.
+export const sha256 = file => createHash('sha256').update(readFileSync(file).toString('latin1').replace(/\r\n/g, '\n'), 'latin1').digest('hex');
 
 export function parseArgs(argv) {
   const out = { keep: [], check: false, subdir: '' };
