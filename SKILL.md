@@ -97,6 +97,21 @@ pagination and the record-write candidate remain explicit gaps. See
 [`references/gabia-login-dns.md`](references/gabia-login-dns.md) and
 [`checklists/services/gabia.json`](checklists/services/gabia.json).
 
+For overseas marketplace crawling policy, read
+[official API first](references/overseas-official-api-first.md),
+[anti-bot boundaries](references/anti-bot-boundaries.md),
+[geo/locale/currency](references/geo-locale-currency.md),
+[region egress](references/region-egress-proxy.md),
+[rate-limit backoff](references/rate-limit-backoff.md),
+[pagination patterns](references/pagination-patterns.md),
+[sanctioned session refresh](references/session-refresh-sanctioned.md), and
+[legal/ToS notes](references/legal-tos-overseas.md).
+Detect challenges and stop; never solve CAPTCHAs, fake fingerprints, buy challenge
+cookies, reverse mtop/anti-content signatures, or use residential proxies to evade
+blocks. Prefer Creators API / AliExpress Affiliate / network feeds; keep Temu, SHEIN,
+iHerb and AliExpress Portals link-generate gaps in their checklists until live receipts exist.
+Reuse `lib/commerce/backoff.mjs` for classification and bounded read retries.
+
 For anonymous foreign storefront reads, reuse
 [the public retail clients and exact limits](references/retail-public-apis.md).
 No login is needed for their supported operations. Keep SEO metadata,

@@ -21,6 +21,14 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 | [아고다 공개 요금·행사](references/agoda-http.md) | 알려진 16개 숙소의 날짜별 KRW 요금과 행사 카드 direct HTTP, 독립 계약·부분 제공 범위 표시 |
 | [쇼핑·여행커넥트](references/naver-connect.md) | 네이버 브랜드커넥트 상품 검색·상세·수수료·링크 발급 및 관리, DPAPI 세션 재사용 |
 | [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
+| [해외 공식 API 우선](references/overseas-official-api-first.md) | Amazon Creators·AliExpress Affiliate·Awin/Impact 우선, PA-API5 금지, Temu/SHEIN/iHerb 경로 |
+| [봇 차단 경계](references/anti-bot-boundaries.md) | 챌린지 감지 후 중단, 우회·CAPTCHA 풀이·서명 역공학 금지 (`lib/commerce/backoff.mjs`) |
+| [지역·로케일·통화](references/geo-locale-currency.md) | marketplace·ship-to·locale·currency 관측 축 |
+| [이그레스·프록시 정책](references/region-egress-proxy.md) | 주거용 프록시 우회 금지 |
+| [요청 간격·백오프](references/rate-limit-backoff.md) | Retry-After, jitter, 일일 한도 |
+| [페이지네이션 패턴](references/pagination-patterns.md) | page/cursor/GraphQL/mtop, 종료 조건 |
+| [세션 갱신(허용 경로)](references/session-refresh-sanctioned.md) | OAuth·앱 서명만, 챌린지 쿠키 구매 금지 |
+| [해외 약관·고지](references/legal-tos-overseas.md) | Associates·AliExpress·Temu·SHEIN·iHerb·통관 메모 |
 | [해외 제휴·드랍쉬핑 상품 수집](references/commerce-collection.md) | 공식 제휴/공급사 API, Printful 공개 가격 피드, Allbirds·ColourPop, JSON·CSV 수집과 가격 변화 비교 |
 | [제휴 프로그램별 연결](references/affiliate-program-adapters.md) | Olive Young·Shopee·Sephora·Ulta·Rakuten, 브랜드 카탈로그 확인과 제휴 링크·수수료의 검증 범위 |
 | [상품 상세·리뷰 조회](references/catalog-read-apis.md) | 상세 설명·이미지·옵션, 리뷰 본문·사진·페이지 조회와 제휴 링크를 제외한 기능 감사 |
