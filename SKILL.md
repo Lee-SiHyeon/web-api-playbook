@@ -22,7 +22,7 @@ Source candidates and no-op calls do not count as live save evidence; report
 historical proof and current implementation-hash freshness separately.
 
 1. Read the project contract, runner and latest relevant receipt. Identify the actual host, account scope, requested operations, and allowed side effects. Prefer a working service pack or project adapter over rediscovery.
-2. Read [login phases and recovery](references/browserless-login-flow.md) and [credential propagation](references/runtime-credential-propagation.md) before opening a browser or requesting another login.
+2. For a service that needs login, pin down the login flow first with [login-flow-first](references/login-flow-first.md). Read [login phases and recovery](references/browserless-login-flow.md) and [credential propagation](references/runtime-credential-propagation.md) before opening a browser or requesting another login.
 3. Distinguish provider readiness from authentication. Use the same protected owner read through the same runner that will perform the business operation. Repair the first failed boundary: provider → consumer → transport → authentication → entitlement → schema.
 4. Preserve the user's earlier authorization. Do not require renewed approval merely because a generic example contains an execution flag. Still obey actual tool/service requirements. For uncertain writes, use the same journal and independent readback before any new attempt.
 

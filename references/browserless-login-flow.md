@@ -27,6 +27,9 @@ install a service merely because the user says "browserless".
 
 ## Establish login before feature discovery
 
+For a new service, first fill the capture sheet, hand-off points, re-login
+policy and attempt pacing in [login-flow-first.md](login-flow-first.md).
+
 1. **Restore context and host.** Read the existing operation contracts, runner,
    login helper, and recent receipts. Label local Windows, company PC, remote
    worker, and hosted browser separately. An earlier result is scoped to its
