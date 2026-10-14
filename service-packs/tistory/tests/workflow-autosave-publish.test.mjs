@@ -51,3 +51,9 @@ test('publish requires the consumer marker policy and journals before the single
   await assert.rejects(publishReviewed(root, input, { request, inspectPublication }), /do not resend POST/);
   assert.equal(posts, 1, 'indeterminate create is never retried');
 });
+
+test('workflow origin stays equal to the scoped transport origin', async () => {
+  const { BLOG_ORIGIN: workflowOrigin } = await import('../lib/workflows/origin.mjs');
+  const { BLOG_ORIGIN } = await import('../lib/transport.mjs');
+  assert.equal(workflowOrigin, BLOG_ORIGIN);
+});

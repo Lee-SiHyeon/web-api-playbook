@@ -4,7 +4,7 @@
 import {createHash,randomUUID} from 'node:crypto';
 import {mkdir,open,readFile,rename,unlink} from 'node:fs/promises';
 import {join} from 'node:path';
-import {BLOG_ORIGIN} from '../transport.mjs';
+import {BLOG_ORIGIN} from './origin.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 // Raw records stay in memory for exact revision reconciliation.
 export async function readOwnerComments(cookie,{fetchImpl=fetch,maxPages=50}={}){

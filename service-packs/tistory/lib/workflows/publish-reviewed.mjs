@@ -4,7 +4,7 @@ import {createHash,randomUUID} from 'node:crypto';
 import {mkdir,open,readFile,rename,unlink} from 'node:fs/promises';
 import {join} from 'node:path';
 import {parsePublicationContext} from './publication-context.mjs';
-import {BLOG_ORIGIN as origin} from '../transport.mjs';
+import {BLOG_ORIGIN as origin} from './origin.mjs';
 const hash=x=>createHash('sha256').update(x).digest('hex');
 async function save(file,data){const tmp=file+'.'+randomUUID()+'.tmp';const h=await open(tmp,'wx');try{await h.writeFile(JSON.stringify(data,null,2));await h.sync();}finally{await h.close();}await rename(tmp,file);}
 async function optional(file){try{return JSON.parse(await readFile(file,'utf8'));}catch(e){if(e.code==='ENOENT')return null;throw e;}}

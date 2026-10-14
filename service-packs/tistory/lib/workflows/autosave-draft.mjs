@@ -2,7 +2,7 @@
 // Journal-first writes, no automatic retry of a business write, explicit ledger status states.
 // Update an explicitly observed existing autosave only; never create or publish a post.
 import {createHash} from 'node:crypto';
-import {BLOG_ORIGIN} from '../transport.mjs';
+import {BLOG_ORIGIN} from './origin.mjs';
 const digest=x=>createHash('sha256').update(x).digest('hex');
 export async function updateExistingAutosave(input,{request:requestImpl}={}){
  if(!Number.isInteger(input.draftSequence)||input.draftSequence<=0||typeof input.title!=='string'||typeof input.content!=='string'||!input.title.trim()||!input.content.trim())throw Error('Observed draft sequence, title and content required');
