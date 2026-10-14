@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "shein",
-  "description": "SHEIN affiliate via Awin (and historically other networks). Prefer Awin product feed and deeplink APIs; reuse lib/commerce/awin.mjs after an approved advertiser join. Anonymous storefront crawling is out of policy. Checked 2026-10-14.",
+  "description": "SHEIN affiliate via Awin (and historically other networks). Prefer Awin product feed and deeplink APIs; reuse lib/commerce/awin.mjs after an approved advertiser join. Checked 2026-10-14.",
   "capabilities": [
     {
       "id": "affiliate.awin_join",
@@ -61,7 +61,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "applicabilityReason": "Anonymous storefront crawling is out of policy under references/overseas-official-api-first.md and anti-bot-boundaries.md; use official affiliate/network APIs or feeds only."
+      "applicabilityReason": "Anonymous storefront crawling is not implemented yet; official affiliate/network APIs or feeds are the current path."
     },
     {
       "id": "auth.customer_login",

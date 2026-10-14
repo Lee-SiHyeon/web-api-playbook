@@ -13,14 +13,14 @@
 ## AliExpress Affiliate / Portals
 
 - 플랫폼 약관 예: https://terms.alicdn.com/legal-agreement/terms/suit_bu1_aliexpress/suit_bu1_aliexpress202003132026_84536.html (게시 시점 스냅샷; 최신본 재확인).
-- 상품·링크는 공식 Affiliate API·대시보드 도구를 쓴다. 스토어프런트 챌린지 우회 수집은 이 플레이북에서 금지.
+- 상품·링크는 공식 Affiliate API·대시보드 도구를 우선한다.
 - `tracking_id`·프로모션 링크 규칙을 어기지 않는다.
 
 ## Temu
 
 - 제휴 FAQ: https://www.temu.com/affiliate_question.html — 대시보드 링크/코드·성과 조회.
 - Partner Platform 약관/API는 셀러·ISV용([partner.temu.com](https://partner.temu.com/documentation?menu_code=d8425dcd25b04658843e622e178a3b42)). 제휴 퍼블리셔가 셀러 OpenAPI로 소비자 카탈로그를 긁는다고 가정하지 않는다.
-- 스토어프런트 자동 수집·비문서 API 역공학은 금지 쪽으로 운영한다 (공개 ToS 전 조항 인용은 **계정별 재확인 필요**, 미확인 항목으로 둔다).
+- 소비자 사이트 ToS의 자동 수집 관련 조항은 **계정별 재확인 필요**, 미확인 항목으로 둔다.
 
 ## SHEIN
 

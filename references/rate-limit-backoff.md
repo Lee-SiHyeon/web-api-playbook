@@ -4,7 +4,7 @@
 
 ## 규칙
 
-1. **챌린지·401·403·418·451은 재시도하지 않는다.** `classifyResponse`가 `stop`이면 즉시 종료 ([anti-bot-boundaries.md](anti-bot-boundaries.md)).
+1. **챌린지·401·403·418·451은 재시도하지 않는다.** `classifyResponse`가 `stop`이면 즉시 종료 (감지 신호: [anti-bot-boundaries.md](anti-bot-boundaries.md)).
 2. **429 / 502 / 503 / 504만** `maxAttempts`(기본 3)까지 재시도한다. 응답 헤더·본문에 챌린지 마커가 있으면 상태와 관계없이 중단한다.
 3. **Retry-After**가 있으면 초/HTTP-date를 파싱해 대기 하한으로 쓰고, 그래도 `maxMs`(기본 120s)를 넘기지 않는다. `Headers` 객체와 `Retry-After` 대소문자는 `normalizeHeaders`가 처리한다.
 4. 대기는 **full-jitter** 지수 백오프: `random() * min(maxMs, baseMs * 2^attempt)`.
