@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><title>서울주택도시개발공사 &gt; 공고 및 공지 &gt; 주택임대</title></head>
+<body>
+  <form id="mainform" name="mainform" method="post" action="./list.do">
+    <input type="hidden" name="page" value="1">
+    <input type="hidden" name="seq" value="">
+    <input type="hidden" name="itm_seq_1" value="0">
+    <input type="hidden" name="multi_itm_seq" value="2">
+    <input type="hidden" name="multi_itm_seqsStr" value="">
+    <input type="hidden" name="isRecrnoti" value="">
+    <select name="notType1"><option value="2" selected>주택임대</option></select>
+    <select name="splyTy"><option value="">전체</option></select>
+    <input type="radio" name="annType1" value="0">
+    <input type="radio" name="recrnotiState" value="0">
+    <input type="text" name="srchFr" value="">
+    <input type="text" name="srchTo" value="">
+    <input type="text" name="recSrchFr" value="">
+    <input type="text" name="recSrchTo" value="">
+    <select name="srchTp"><option value="0" selected>제목</option></select>
+    <input type="text" name="srchWord" value="">
+  </form>
+  <script>
+    function getDetailView(seq) {
+      var f = document.mainform;
+      f.seq.value = seq;
+      f.action = "view.do";
+      f.submit();
+    }
+    function getPaging(pageNo) {
+      if (pageNo) { document.mainform.page.value = pageNo; }
+      document.mainform.submit();
+    }
+  </script>
+  <table>
+    <thead><tr><th>번호</th><th>제목</th><th>담당부서</th><th>등록일</th><th>조회수</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1724 NEW</td>
+        <td><a href="#" onclick="javascript:getDetailView('311549');return false;">NEW 성북구 도전숙(수요자맞춤) 잔여세대 입주자 모집 공고</a></td>
+        <td>매입주택공급부</td><td>2026-10-14</td><td>1,146</td>
+      </tr>
+      <tr>
+        <td>1723 NEW</td>
+        <td><a href="#" onclick="javascript:getDetailView('311479');return false;">NEW 2026년 화곡동 청년 협동조합주택(그랑) 잔여세대 입주자 모집공고 당첨자 발표</a></td>
+        <td>맞춤주택공급부</td><td>2026-10-14</td><td>580</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="#none" onclick="getPaging(173,null);return false;">마지막페이지</a>
+</body>
+</html>
