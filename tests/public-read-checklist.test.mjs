@@ -106,3 +106,27 @@ test('a required currency lookup is independently checked rather than trusting t
   await f.save({ ...f.receipt, currencyRequest: { ...currencyRequest, httpStatus: 403 } });
   assert.equal(await f.audit(), 'evidence_invalid');
 });
+
+test('paired Document HTTP capture and an independent HTML read pass without being labeled XHR', async t => {
+  const f = await fixture(t);
+  f.entry.mime = 'text/html';
+  const provenance = { kind: 'browser_http_observed', resourceType: 'Document',
+    sourceURL: 'https://mall.test/api/product', sourceSha256: sha('sanitized browser HTTP observation'),
+    requestResponsePaired: true, truncated: false, capturedAt: '2026-10-05T00:00:00Z' };
+  const receipt = { ...f.receipt, request: { ...f.receipt.request, mime: 'text/html' }, contractProvenance: provenance };
+  await f.save(receipt);
+  assert.equal(await f.audit(), 'recorded_live');
+  for (const changes of [{ requestResponsePaired: false }, { truncated: true }, { sourceSha256: null },
+    { resourceType: 'DOM' }, { capturedAt: null }, { sourceURL: 'https://mall.test/other' }]) {
+    await f.save({ ...receipt, contractProvenance: { ...provenance, ...changes } });
+    assert.equal(await f.audit(), 'evidence_invalid', JSON.stringify(changes));
+  }
+});
+
+test('paired Fetch HTTP observations retain their actual resource type', async t => {
+  const f = await fixture(t);
+  await f.save({ ...f.receipt, contractProvenance: { kind: 'browser_http_observed', resourceType: 'Fetch',
+    sourceURL: 'https://mall.test/api/product', sourceSha256: sha('sanitized Fetch observation'),
+    requestResponsePaired: true, truncated: false, capturedAt: '2026-10-05T00:00:00Z' } });
+  assert.equal(await f.audit(), 'recorded_live');
+});

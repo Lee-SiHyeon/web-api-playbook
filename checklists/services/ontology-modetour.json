@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "service": "ontology-modetour",
+  "description": "Observed public overseas landing-page Document and recommendation data. The required scope is its initial feed, not the full travel site or a booking workflow.",
+  "capabilities": [
+    {
+      "id": "catalog.document_recommendations",
+      "title": "Read the captured HTML Document, parse its ten initial recommendation rows and compare displayed titles and amounts",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "service-packs/ontology/src/travel-price/modetour-document.mjs", "exports": ["collectModetourDocument", "parseModetourDocument", "compareModetourDocumentToBrowser"] }],
+        "cli": [{ "path": "service-packs/ontology/scripts/modetour-document.mjs", "tokens": ["browser-evidence", "out"] }],
+        "tests": ["service-packs/ontology/src/travel-price/modetour-document.test.mjs"]
+      },
+      "evidence": [{
+        "kind": "http-public-read-v1", "origin": "https://www.modetour.com", "path": "/package/overseas",
+        "method": "GET", "mime": "text/html", "readOnly": true,
+        "files": ["service-packs/ontology/verification/modetour-document-http-2026-10-15.json"],
+        "hashPaths": ["service-packs/ontology/src/travel-price/modetour-document.mjs", "service-packs/ontology/scripts/modetour-document.mjs"]
+      }],
+      "sourceEvidence": []
+    },
+    {
+      "id": "catalog.other_sections_and_inventory",
+      "title": "Other landing sections, category navigation, pagination, options and date-specific inventory",
+      "priority": "conditional", "applicability": "applicable", "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
+      "blocker": "The Document reader currently projects the initial recommendation feed only. Other HTTP observations are retained as contracts, not completed clients."
+    },
+    {
+      "id": "auth_and_booking_writes",
+      "title": "Account login and booking/payment mutations",
+      "priority": "conditional", "applicability": "not_applicable", "requirement": "live",
+      "applicabilityReason": "This operation reads a public anonymous recommendation feed; it neither needs owner authentication nor requests a booking.",
+      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": []
+    }
+  ]
+}

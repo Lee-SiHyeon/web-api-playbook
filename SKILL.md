@@ -9,6 +9,15 @@ Carry an observed workflow from discovery to an independently executable HTTP cl
 
 ## Start from the existing evidence
 
+The workflow name does not restrict capture to XMLHttpRequest. Observe the full
+HTTP exchange, including Document navigation, Fetch, XHR, redirects and the
+resources that carry the requested data. Record each resource type accurately.
+When a click sends no new request, trace the initial Document or earlier response;
+parse embedded JSON or HTML through an independent HTTP client when it contains
+the needed data. Do not stop at a responsive tab or report absence of XHR as
+absence of a usable HTTP contract. With bounded CDP buffers, drain events during
+navigation and check truncation before claiming complete request/response pairs.
+
 The default scope for a new service includes a capability checklist, not only login.
 Read `checklists/template.json`, register the applicable functions in
 `checklists/services/<service>.json`, and run `npm run checklist` before delivery.

@@ -20,6 +20,24 @@ The `examples/sanitized.har.json` file uses `example.invalid` and synthetic reda
 
 ## HAR to contract inventory
 
+Include Document, Fetch, XHR and other relevant HTTP resource types in the source
+capture; do not export only the browser's XHR filter. An initial HTML response can
+carry the usable catalog in embedded JSON even when a later UI click makes no
+request. Capture before navigation, drain bounded CDP buffers while it runs, and
+pair requests and responses before reducing them to this inventory. Missing or
+truncated events remain gaps; DOM text alone does not reconstruct a lost response.
+
+The [Modetour Document reader](../service-packs/ontology/README.md) provides a live
+example: the observed HTML GET contains ten recommendations in `__NEXT_DATA__`,
+independently parsed without running JavaScript or loading a browser session.
+
+The capability checklist accepts `browser_http_observed` provenance with the
+actual `resourceType`, paired request/response, non-truncated capture, observation
+time, sanitized evidence hash and exact source route. This includes Document and
+Fetch without mislabeling them as XHR. The independent replay still has to pass
+the configured status, MIME, response/schema checks and current-code hash check;
+a bare `ssr_document` label or DOM-only observation is insufficient.
+
 Read a local HAR and print the sanitized inventory:
 
 ```powershell

@@ -19,6 +19,7 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 | [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice·[Inpock](references/inpock-login.md) 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
 | [Gabia 도메인·DNS](references/gabia-login-dns.md) | 정상 Google UI 로그인 뒤 메모리 내 세션 handoff, owner-bound pure HTTP 도메인·DNS 조회, 공개 recursive DNS와 로컬 레코드 계획 |
 | [아고다 공개 요금·행사](references/agoda-http.md) | 알려진 16개 숙소의 날짜별 KRW 요금과 행사 카드 direct HTTP, 독립 계약·부분 제공 범위 표시 |
+| [온톨로지 공개 원천](service-packs/ontology/README.md) | 정책·SH·NOL·모두투어의 독립 HTTP reader, Document·Fetch·XHR 관측과 모두투어 최초 HTML 추천 10개 대조 |
 | [쇼핑·여행커넥트](references/naver-connect.md) | 네이버 브랜드커넥트 상품 검색·상세·수수료·링크 발급 및 관리, DPAPI 세션 재사용 |
 | [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
 | [해외 공식 API 우선](references/overseas-official-api-first.md) | Amazon Creators·AliExpress Affiliate·Awin/Impact 우선, PA-API5 금지, Temu/SHEIN/iHerb 경로 |
