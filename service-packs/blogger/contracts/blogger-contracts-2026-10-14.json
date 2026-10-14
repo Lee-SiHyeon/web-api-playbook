@@ -1,0 +1,241 @@
+{
+  "schema": "blogger-contract-snapshot-v1",
+  "observedAt": "2026-10-14",
+  "source": "netcap CDP capture of www.blogger.com dashboard (read-only), session-cookie; values stripped",
+  "observed": [
+    {
+      "id": "3564dec9ed9e4f0628b1eebc",
+      "method": "POST",
+      "origin": "https://www.blogger.com",
+      "path": "/_/BloggerUi/browserinfo",
+      "queryFields": [
+        "_reqid",
+        "bl",
+        "f.sid",
+        "hl",
+        "rt",
+        "soc-app",
+        "soc-device",
+        "soc-platform"
+      ],
+      "bodyFields": [
+        "at",
+        "f.req"
+      ],
+      "encoding": "application/x-www-form-urlencoded",
+      "operationFields": [],
+      "mutationCandidate": true,
+      "semanticOperation": "telemetry (not used)",
+      "observations": [
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:11:54.121Z",
+          "requestMime": "application/x-www-form-urlencoded",
+          "requestBytes": 167,
+          "status": 200,
+          "responseMime": "application/json",
+          "responseBytes": 91,
+          "responseSha256": "68475cd1b9dcb78f133dc6788a73bc782bdf051e45b106fbbf7f07cc6f1b8a62",
+          "responseBodyAvailable": true,
+          "responseSchema": {
+            "state": "invalid_json"
+          },
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        },
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:12:10.236Z",
+          "requestMime": "application/x-www-form-urlencoded",
+          "requestBytes": 167,
+          "status": 200,
+          "responseMime": "application/json",
+          "responseBytes": 92,
+          "responseSha256": "61124aefda58142f29d0f1725259eb62ac700eecf62e7d4055bc4d84fd488202",
+          "responseBodyAvailable": true,
+          "responseSchema": {
+            "state": "invalid_json"
+          },
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        },
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:12:21.621Z",
+          "requestMime": "application/x-www-form-urlencoded",
+          "requestBytes": 167,
+          "status": 0,
+          "responseMime": null,
+          "responseBytes": 0,
+          "responseSha256": null,
+          "responseBodyAvailable": false,
+          "responseSchema": null,
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        }
+      ]
+    },
+    {
+      "id": "9edc82096d0e94fada922822",
+      "method": "POST",
+      "origin": "https://www.blogger.com",
+      "path": "/_/BloggerUi/data/batchexecute",
+      "queryFields": [
+        "_reqid",
+        "bl",
+        "f.sid",
+        "hl",
+        "rpcids",
+        "rt",
+        "soc-app",
+        "soc-device",
+        "soc-platform",
+        "source-path"
+      ],
+      "bodyFields": [
+        "at",
+        "f.req"
+      ],
+      "encoding": "application/x-www-form-urlencoded",
+      "operationFields": [],
+      "mutationCandidate": true,
+      "semanticOperation": "read:rpc FYl0fd (dashboard notices; not used by client)",
+      "observations": [
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:11:51.170Z",
+          "requestMime": "application/x-www-form-urlencoded",
+          "requestBytes": 154,
+          "status": 200,
+          "responseMime": "application/json",
+          "responseBytes": 778,
+          "responseSha256": "02397d4033585d32b90d5c88092c75aaac0f21dd8b05e7681af1bdf3dc73271e",
+          "responseBodyAvailable": true,
+          "responseSchema": {
+            "state": "invalid_json"
+          },
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        },
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:12:07.258Z",
+          "requestMime": "application/x-www-form-urlencoded",
+          "requestBytes": 123,
+          "status": 200,
+          "responseMime": "application/json",
+          "responseBytes": 757,
+          "responseSha256": "889b914d241d71a6eedcaf228e3ff2f2e441631ae449a0731f6e8ddee7e22856",
+          "responseBodyAvailable": true,
+          "responseSchema": {
+            "state": "invalid_json"
+          },
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        },
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:12:07.260Z",
+          "requestMime": "application/x-www-form-urlencoded",
+          "requestBytes": 123,
+          "status": 200,
+          "responseMime": "application/json",
+          "responseBytes": 758,
+          "responseSha256": "fc171cb24e4b8f22ec0f49656dcb4dab81c5db32f0abb9cee6e77e177fe975df",
+          "responseBodyAvailable": true,
+          "responseSchema": {
+            "state": "invalid_json"
+          },
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        },
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:12:07.261Z",
+          "requestMime": "application/x-www-form-urlencoded",
+          "requestBytes": 123,
+          "status": 200,
+          "responseMime": "application/json",
+          "responseBytes": 758,
+          "responseSha256": "abb3cc4a7ce47d003e3ecfe5022c9cacf6d7e4a77c57eba63b7dcab29d76830d",
+          "responseBodyAvailable": true,
+          "responseSchema": {
+            "state": "invalid_json"
+          },
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        }
+      ]
+    },
+    {
+      "id": "ec4aa17e27af76b4aae6239f",
+      "method": "GET",
+      "origin": "https://www.blogger.com",
+      "path": "/blog/:id/:id",
+      "queryFields": [],
+      "bodyFields": [],
+      "encoding": null,
+      "operationFields": [],
+      "mutationCandidate": false,
+      "semanticOperation": "read:posts dashboard HTML; AF_initDataCallback ds:0 current blog, ds:1 blog list, ds:2 posts page [blogId, posts[], .., pageToken@5, total@7]",
+      "observations": [
+        {
+          "source": "HAR",
+          "observedAt": "2026-10-14T06:11:50.031Z",
+          "requestMime": null,
+          "requestBytes": null,
+          "status": 200,
+          "responseMime": "text/html",
+          "responseBytes": 687237,
+          "responseSha256": "e04ecb73baf4d555881f8faab62c3e55ad1a9d19260541780c640fb62da4a2f7",
+          "responseBodyAvailable": true,
+          "responseSchema": null,
+          "operationFields": [],
+          "selectorValuesRecorded": false
+        }
+      ]
+    }
+  ],
+  "replayedReadOnly": [
+    {
+      "method": "GET",
+      "origin": "https://www.blogger.com",
+      "path": "/blog/posts/:blogId",
+      "auth": "session cookies (scoped to www.blogger.com)",
+      "result": "200 text/html with ds:0/ds:1/ds:2",
+      "mode": "pure_http"
+    },
+    {
+      "method": "GET",
+      "origin": "https://<blog>.blogspot.com",
+      "path": "/feeds/posts/default[/:postId]",
+      "query": [
+        "alt",
+        "max-results",
+        "start-index"
+      ],
+      "auth": "none",
+      "result": "200 JSON; published posts only",
+      "mode": "pure_http"
+    }
+  ],
+  "notObserved": {
+    "webWrites": "draft save/publish/update rpcids NOT captured (would require a real write). Web-session writes intentionally unimplemented.",
+    "stats": "/blog/stats/:blogId only issued FYl0fd; stats data source not identified; client reports per-post views/comments from posts dashboard",
+    "pagination": "ds:2 pageToken empty for 11 posts; >1 page unobserved"
+  },
+  "officialApi": {
+    "base": "https://www.googleapis.com/blogger/v3",
+    "scope": "https://www.googleapis.com/auth/blogger",
+    "endpoints": [
+      "GET /users/self/blogs",
+      "GET /blogs/:blogId/posts",
+      "GET /blogs/:blogId/posts/:postId",
+      "GET /blogs/:blogId/pageviews",
+      "POST /blogs/:blogId/posts?isDraft=true",
+      "POST /blogs/:blogId/posts/:postId/publish",
+      "PATCH /blogs/:blogId/posts/:postId"
+    ],
+    "status": "documented by Google; not live-verified (no OAuth client/token on box)"
+  }
+}
