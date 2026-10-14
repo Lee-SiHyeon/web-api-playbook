@@ -11,6 +11,7 @@
 | [threads](threads/README.md) | 저장소 루트 의존성 사용 | 공개 HTML parser, 익명 HTTP bootstrap + GraphQL profile/view | 익명 CSRF가 로그인 계정 인증은 아님. doc ID와 schema는 재관측 필요 |
 | [gabia](gabia/README.md) | 저장소 루트 Node 24 의존성, `npm run gabia` / `npm run gabia:read` | 로컬 DNS 계획, 공개 recursive DNS·HTTPS 검사, Google UI 로그인 뒤 memory-stdin owner/domain/DNS HTTP reads | Gabia first-party UI에서 관측한 API routes이며 published API 보장이 없음. 로그인은 browser_automation, reads는 pure HTTP. 이메일 대조·만료 복구 미검증, DNS writes 미구현 |
 | [ontology](ontology/README.md) | pack에서 `npm ci --ignore-scripts`, `npm run notices`, `npm run travel` | SH·정책브리핑·국토부 파서, NOL 키워드 숙소 검색, 모두투어 추천·상세; 기존 네이버 해외호텔·Agoda HTTP reader | 국토부 자동 호출 제외; source-observed/Document 계약과 실제 브라우저 XHR 캡처 구분; 제한된 페이지·상품·가격 의미 보존 |
+| [blogger](blogger/README.md) | 저장소 루트 Node 24, `node service-packs/blogger/scripts/cli.mjs` | 세션쿠키 web read(블로그·글·조회수), 공개 feed read, 공식 API v3 OAuth read/write(journal) | 웹 쓰기 rpcid 미관측·미구현. OAuth 경로 라이브 미검증 |
 
 ## 고정 버전
 
