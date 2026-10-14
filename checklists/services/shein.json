@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "service": "shein",
+  "description": "SHEIN affiliate via Awin (and historically other networks). Prefer Awin product feed and deeplink APIs; reuse lib/commerce/awin.mjs after an approved advertiser join. Anonymous storefront crawling is out of policy. Checked 2026-10-14.",
+  "capabilities": [
+    {
+      "id": "affiliate.awin_join",
+      "title": "Approved join to SHEIN programme on Awin for the target country",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Requires publisher approval on the country programme (US advertiser id 15920: https://ui.awin.com/merchant-profile/15920 ; UK 15919). Commission/cookie values change; do not hard-code."
+    },
+    {
+      "id": "catalog.awin_product_feed",
+      "title": "Read SHEIN product feed rows with currency through Awin",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Await approved Awin relationship and feed access. Implementation candidate: lib/commerce/awin.mjs. Do not scrape us.shein.com."
+    },
+    {
+      "id": "affiliate.deeplink",
+      "title": "Generate tracking deeplinks for SHEIN product URLs via Awin",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Same approval dependency as feed. Never click tracking links to verify."
+    },
+    {
+      "id": "catalog.storefront_anonymous",
+      "title": "Anonymous SHEIN storefront XHR catalog",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Anonymous storefront crawling is out of policy under references/overseas-official-api-first.md and anti-bot-boundaries.md; use official affiliate/network APIs or feeds only."
+    },
+    {
+      "id": "auth.customer_login",
+      "title": "Customer account login",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Affiliate feed scope only."
+    },
+    {
+      "id": "checkout.write",
+      "title": "Cart or checkout writes",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Read-only affiliate scope."
+    }
+  ]
+}

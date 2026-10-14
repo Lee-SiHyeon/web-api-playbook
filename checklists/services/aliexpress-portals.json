@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "service": "aliexpress-portals",
+  "description": "AliExpress Affiliate link generation (Portals) via official method aliexpress.affiliate.link.generate on the signed TOP/IOP gateway. Product search/detail already live in aliexpress-partner; this checklist tracks promotion link issuance only. Checked 2026-10-14.",
+  "capabilities": [
+    {
+      "id": "affiliate.link_generate",
+      "title": "Convert product or store URLs into promotion links with tracking_id",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Official method documented (promotion_link_type, source_values, tracking_id) at https://developer.alibaba.com/docs/doc.htm?articleId=45804&docType=2&treeId=674 — adapter wiring and live receipt not yet in this repo. Reuse signing from lib/commerce/aliexpress-affiliate.mjs; do not invent a second signer.",
+      "note": "Endpoint commonly POST https://api-sg.aliexpress.com/sync with method=aliexpress.affiliate.link.generate."
+    },
+    {
+      "id": "affiliate.link_types",
+      "title": "Support promotion_link_type 0/1/2 (normal, search, hot) as documented",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Needs live verification per app permission set after link_generate works."
+    },
+    {
+      "id": "affiliate.tracking_id_bind",
+      "title": "Bind links to the publisher tracking_id from the same app",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "tracking_id must come from the Portals account; do not hard-code foreign IDs."
+    },
+    {
+      "id": "storefront.mtop_sign",
+      "title": "Reverse storefront mtop sign for link APIs",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Forbidden under anti-bot-boundaries.md; official sync API only."
+    },
+    {
+      "id": "checkout.write",
+      "title": "Buyer checkout writes",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Affiliate link issuance only."
+    }
+  ]
+}

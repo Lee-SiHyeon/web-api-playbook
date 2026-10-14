@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "service": "temu",
+  "description": "Temu affiliate and catalog scope for overseas collection. Official publisher product API is unverified as of 2026-10-14; Partner Platform OpenAPI is seller/ISV scoped. Prefer affiliate dashboard links; anonymous storefront crawling is out of policy. See references/overseas-official-api-first.md and checklists note in legal-tos-overseas.md.",
+  "capabilities": [
+    {
+      "id": "affiliate.dashboard_links",
+      "title": "Issue or read affiliate referral/product links from the Temu affiliate dashboard tools",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No HTTP contract observed for dashboard link issuance. Manual/dashboard-only until a first-party API receipt exists. FAQ: https://www.temu.com/affiliate_question.html"
+    },
+    {
+      "id": "catalog.official_product_search",
+      "title": "Search affiliate-eligible products with price and currency via an official publisher API",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No verified Temu affiliate product search API for publishers. partner.temu.com OpenAPI targets sellers/ERP (openapi-b-*.temu.com), not confirmed for affiliate catalog reads."
+    },
+    {
+      "id": "catalog.storefront_anonymous",
+      "title": "Anonymous storefront product JSON over Node HTTP",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Anonymous storefront crawling is out of policy under references/overseas-official-api-first.md and anti-bot-boundaries.md; use official affiliate/network APIs or feeds only."
+    },
+    {
+      "id": "pricing.ship_to_currency",
+      "title": "Record ship-to country and response currency on each offer",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Depends on an official catalog channel; axes defined in references/geo-locale-currency.md."
+    },
+    {
+      "id": "auth.customer_login",
+      "title": "Customer account login",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Affiliate collection does not use end-customer login."
+    },
+    {
+      "id": "checkout.write",
+      "title": "Cart or checkout writes",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Read-only affiliate scope."
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "service": "iherb",
+  "description": "iHerb affiliate via Awin, CJ, Impact, or Partnerize (https://www.iherb.com/info/affiliates). Prefer network product feeds and APIs already patterned by lib/commerce/impact.mjs and awin.mjs. Storefront scraping is out of policy. Checked 2026-10-14.",
+  "capabilities": [
+    {
+      "id": "affiliate.network_join",
+      "title": "Approved publisher join on one of Awin/CJ/Impact/Partnerize for iHerb",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No account approval or MID/campaign id recorded in this repo yet."
+    },
+    {
+      "id": "catalog.network_product_feed",
+      "title": "Read iHerb product feed with currency and deep links from the chosen network",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Await network credentials and campaign/feed ids. Do not guess Impact catalogId or Awin MID."
+    },
+    {
+      "id": "affiliate.deeplink",
+      "title": "Create tracking links for iHerb product URLs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Depends on network join. Preserve network-returned URLs; do not append Rewards codes contrary to programme FAQ."
+    },
+    {
+      "id": "catalog.storefront_anonymous",
+      "title": "Anonymous iHerb storefront product API",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Anonymous storefront crawling is out of policy under references/overseas-official-api-first.md and anti-bot-boundaries.md; use official affiliate/network APIs or feeds only."
+    },
+    {
+      "id": "claims.health",
+      "title": "Publish medical or efficacy claims from labels",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Existing content policy forbids medical/efficacy claims; affiliate copy stays factual."
+    },
+    {
+      "id": "checkout.write",
+      "title": "Cart or checkout writes",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Read-only affiliate scope."
+    }
+  ]
+}
