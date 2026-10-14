@@ -1,8 +1,11 @@
-import { readCredential, writeCredential } from './secure-credential-store.mjs';
+import { credentialExists, readCredential, writeCredential } from './secure-credential-store.mjs';
 
 export const NAVER_SESSION_ORIGINS = Object.freeze([
   'https://admin.blog.naver.com', 'https://blog.naver.com', 'https://blog.stat.naver.com',
+  // Creator Advisor rotates NID_SES on /api/v6/accounts/channels (2026-10-03); accept and persist that rotation.
+  'https://creator-advisor.naver.com',
 ]);
+export const NAVER_SESSION_CREDENTIAL = 'naver-blog-session';
 const requiredNaverCookies = ['NID_AUT', 'NID_SES'];
 const naverDomain = /^(?:\.)?(?:[a-z0-9-]+\.)*naver\.com$/i;
 const cookieName = /^[!#$%&'*+\-.^_|~0-9A-Za-z]+$/;
@@ -70,10 +73,7 @@ export function naverCookieHeaderFor(cookies, rawUrl, now = Date.now()) {
   return header;
 }
 
-export function mergeNaverSetCookies(cookies, response, rawUrl, now = Date.now()) {
-  let url;
-  try { url = new URL(rawUrl); } catch { throw new Error('NAVER_SESSION_SCOPE'); }
-  if (!NAVER_SESSION_ORIGINS.includes(url.origin) || url.username || url.password) throw new Error('NAVER_SESSION_SCOPE');
+function mergeSetCookiesAtUrl(cookies, response, url, now) {
   let updated = normalizeNaverCookies(cookies, now, { requireAuthentication: false });
   let changed = false;
   for (const header of (response.headers.getSetCookie?.() || []).slice(0, 100)) {
@@ -117,6 +117,24 @@ export function mergeNaverSetCookies(cookies, response, rawUrl, now = Date.now()
   return { cookies: normalizeNaverCookies(updated, now, { requireAuthentication: false }), changed };
 }
 
+function approvedUrl(rawUrl, origins) {
+  let url;
+  try { url = new URL(rawUrl); } catch { throw new Error('NAVER_SESSION_SCOPE'); }
+  if (!origins.includes(url.origin) || url.username || url.password) throw new Error('NAVER_SESSION_SCOPE');
+  return url;
+}
+
+export function mergeNaverSetCookies(cookies, response, rawUrl, now = Date.now()) {
+  return mergeSetCookiesAtUrl(cookies, response, approvedUrl(rawUrl, NAVER_SESSION_ORIGINS), now);
+}
+
+// Login responses use nid.naver.com, while normal session requests remain scoped
+// to NAVER_SESSION_ORIGINS. Keep this exact-origin path separate so accepting a
+// login cookie rotation never widens the HTTP session's request destinations.
+export function mergeNaverLoginSetCookies(cookies, response, rawUrl, now = Date.now()) {
+  return mergeSetCookiesAtUrl(cookies, response, approvedUrl(rawUrl, ['https://nid.naver.com']), now);
+}
+
 export function normalizeNaverUserAgent(userAgent) {
   if (userAgent == null) return null;
   if (typeof userAgent !== 'string' || !userAgent.trim() || userAgent.length > 512
@@ -126,7 +144,7 @@ export function normalizeNaverUserAgent(userAgent) {
 
 export async function storeNaverCookies(cookies, { allowIncomplete = false, userAgent } = {}) {
   const normalized = normalizeNaverCookies(cookies, Date.now(), { requireAuthentication: !allowIncomplete });
-  return writeCredential('naver-blog-session', JSON.stringify({ version: 1, cookies: normalized,
+  return writeCredential(NAVER_SESSION_CREDENTIAL, JSON.stringify({ version: 1, cookies: normalized,
     userAgent: normalizeNaverUserAgent(userAgent) }));
 }
 
@@ -134,16 +152,83 @@ export async function loadNaverCookies({ env = process.env, now = Date.now(), re
   const runtime = env.NAVER_COOKIE || '';
   if (runtime) {
     const cookies = parseNaverCookieHeader(runtime);
-    await storeNaverCookies(cookies);
-    return { cookies, provider: 'runtime_environment', persisted: true };
+    return { cookies, provider: 'runtime_environment', persisted: false };
   }
-  const saved = await readCredential('naver-blog-session');
+  const saved = await readCredential(NAVER_SESSION_CREDENTIAL);
   if (!saved) return { cookies: [], provider: null, persisted: false };
   let bundle;
   try { bundle = JSON.parse(saved); } catch { throw new Error('NAVER_SESSION_INVALID'); }
   if (bundle?.version !== 1) throw new Error('NAVER_SESSION_INVALID');
   return { cookies: normalizeNaverCookies(bundle.cookies, now, { requireAuthentication }), userAgent: normalizeNaverUserAgent(bundle.userAgent),
     provider: 'windows_dpapi_current_user', persisted: true };
+}
+
+// Return only safe storage metadata. The credential string and cookie values stay
+// in memory and are never included in this object.
+export async function inspectNaverSessionStore({ now = Date.now() } = {}) {
+  const provider = 'windows_dpapi_current_user';
+  let stored;
+  try { stored = credentialExists(NAVER_SESSION_CREDENTIAL); }
+  catch (error) {
+    return { provider: null, stored: null, usable: false, authCookieState: 'unknown',
+      cookieCount: null, liveCookieCount: null, expiredCookieCount: null, userAgentPresent: false,
+      code: safeStoreCode(error) };
+  }
+  if (!stored) return { provider: null, stored: false, usable: false, authCookieState: 'missing',
+    cookieCount: 0, liveCookieCount: 0, expiredCookieCount: 0, userAgentPresent: false,
+    code: 'NAVER_AUTH_COOKIES_MISSING' };
+
+  let saved;
+  try { saved = await readCredential(NAVER_SESSION_CREDENTIAL); }
+  catch (error) {
+    return { provider, stored: true, usable: false, authCookieState: 'unknown',
+      cookieCount: null, liveCookieCount: null, expiredCookieCount: null, userAgentPresent: false,
+      code: safeStoreCode(error) };
+  }
+  if (!saved) return { provider, stored: true, usable: false, authCookieState: 'invalid',
+    cookieCount: 0, liveCookieCount: 0, expiredCookieCount: 0, userAgentPresent: false,
+    code: 'NAVER_SESSION_INVALID' };
+
+  let bundle;
+  try { bundle = JSON.parse(saved); }
+  catch { return { provider, stored: true, usable: false, authCookieState: 'invalid',
+    cookieCount: null, liveCookieCount: null, expiredCookieCount: null, userAgentPresent: false,
+    code: 'NAVER_SESSION_INVALID' }; }
+  if (bundle?.version !== 1 || !Array.isArray(bundle.cookies) || bundle.cookies.length > 1024) {
+    return { provider, stored: true, usable: false, authCookieState: 'invalid',
+      cookieCount: Array.isArray(bundle?.cookies) ? bundle.cookies.length : null,
+      liveCookieCount: null, expiredCookieCount: null, userAgentPresent: false,
+      code: 'NAVER_SESSION_INVALID' };
+  }
+
+  const rawCookies = bundle.cookies;
+  const rawAuth = new Map(requiredNaverCookies.map(name => [name, rawCookies.filter(cookie =>
+    cookie?.name === name && typeof cookie.value === 'string' && cookie.value.length > 0)]));
+  const nowSeconds = now / 1000;
+  const expiredAuth = requiredNaverCookies.some(name => rawAuth.get(name).some(cookie =>
+    typeof cookie.expires === 'number' && Number.isFinite(cookie.expires) && cookie.expires !== -1
+      && cookie.expires <= nowSeconds));
+  let cookies;
+  try { cookies = normalizeNaverCookies(rawCookies, now, { requireAuthentication: false }); }
+  catch { return { provider, stored: true, usable: false, authCookieState: 'invalid',
+    cookieCount: rawCookies.length, liveCookieCount: null, expiredCookieCount: null,
+    userAgentPresent: false, code: 'NAVER_SESSION_INVALID' }; }
+  const authCookiesPresent = requiredNaverCookies.every(name => cookies.some(cookie => cookie.name === name && cookie.value));
+  const authCookieState = authCookiesPresent ? 'present'
+    : requiredNaverCookies.some(name => rawAuth.get(name).length === 0) ? 'missing'
+      : expiredAuth ? 'expired' : 'invalid';
+  const expiredCookieCount = rawCookies.filter(cookie => cookie && typeof cookie.expires === 'number'
+    && Number.isFinite(cookie.expires) && cookie.expires !== -1 && cookie.expires <= nowSeconds).length;
+  return { provider, stored: true, usable: authCookiesPresent, authCookiesPresent, authCookieState,
+    cookieCount: rawCookies.length, liveCookieCount: cookies.length, expiredCookieCount,
+    userAgentPresent: typeof bundle.userAgent === 'string' && bundle.userAgent.length > 0,
+    code: authCookiesPresent ? null : authCookieState === 'expired' ? 'NAVER_AUTH_COOKIES_EXPIRED'
+      : authCookieState === 'missing' ? 'NAVER_AUTH_COOKIES_MISSING' : 'NAVER_SESSION_INVALID' };
+}
+
+function safeStoreCode(error) {
+  const value = error?.code || error?.message || '';
+  return /^[A-Z_]+$/.test(value) ? value : 'CREDENTIAL_STORE_UNREADABLE';
 }
 
 // The independent publisher passes cookies only through process memory. After
@@ -179,7 +264,7 @@ export async function persistNaverObservedResponse(response, rawUrl) {
   const saved = await loadNaverCookies({ env: {}, requireAuthentication: false });
   const update = mergeNaverSetCookies(saved.cookies, response, rawUrl);
   if (!update.changed) return { stored: false, changed: false };
-  await storeNaverCookies(update.cookies, { allowIncomplete: true, userAgent: saved.userAgent });
+  await storeNaverCookies(update.cookies, { userAgent: saved.userAgent });
   return { stored: true, changed: true };
 }
 
@@ -254,4 +339,9 @@ export async function loadThreadsSession(handle, code = null, { now = Date.now()
   try { session = JSON.parse(saved); } catch { throw new Error('THREADS_SESSION_INVALID'); }
   if (!validThreadsBundle(session, handle, code, now)) return null;
   return { ...session, reusedSession: true };
+}
+
+export async function invalidateThreadsSession() {
+  // Replace the protected bundle so a rejected or deleted CSRF token cannot be reused.
+  return writeCredential('threads-anonymous-session', JSON.stringify({ version: 0 }));
 }

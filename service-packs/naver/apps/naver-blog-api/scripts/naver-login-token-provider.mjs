@@ -5,19 +5,35 @@ import { JSDOM, ResourceLoader, VirtualConsole } from 'jsdom';
 // No browser engine, account password, saved cookies, fingerprint patches, or writes.
 export const NAVER_NODE_USER_AGENT = `Node.js/${process.versions.node} jsdom/26.1.0 NaverLoginHttpClient/1.0`;
 
+export function normalizeNaverLoginSdk(sdk) {
+  if (!sdk || typeof sdk !== 'object' || Array.isArray(sdk)) throw new Error('LOGIN_TOKEN_SDK_SCOPE');
+  const loaderUrl = new URL(sdk.loaderUrl);
+  if (loaderUrl.origin !== 'https://ncpt.naver.com' || loaderUrl.pathname !== '/static/ncaptcha-api.js'
+    || loaderUrl.username || loaderUrl.password
+    || (sdk.siteKey !== undefined && (typeof sdk.siteKey !== 'string'
+      || sdk.siteKey.length < 1 || sdk.siteKey.length > 512 || /[\r\n\0]/.test(sdk.siteKey)))) {
+    throw new Error('LOGIN_TOKEN_SDK_SCOPE');
+  }
+  const keyboardIds = sdk.keyboardIds || ['captcha', 'chptcha'];
+  if (!Array.isArray(keyboardIds) || keyboardIds.length > 4
+    || new Set(keyboardIds).size !== keyboardIds.length
+    || keyboardIds.some(id => !['id', 'pw', 'captcha', 'chptcha'].includes(id))) {
+    throw new Error('LOGIN_TOKEN_SDK_SCOPE');
+  }
+  return { loaderUrl: loaderUrl.href, keyboardIds: [...keyboardIds],
+    ...(sdk.siteKey !== undefined ? { siteKey: sdk.siteKey } : {}) };
+}
+
+export function createNaverKoopOptions(inputIds, sdk) {
+  return { keyboard: inputIds.map(id => ({ id })),
+    ...(sdk?.siteKey !== undefined ? { siteKey: sdk.siteKey } : {}) };
+}
+
 export async function issueNaverLoginToken({ pageUrl = 'https://nid.naver.com/nidlogin.login?mode=form', sdk } = {}) {
 const sourceUrl = new URL(pageUrl);
 if (sourceUrl.origin !== 'https://nid.naver.com' || sourceUrl.pathname !== '/nidlogin.login'
   || sourceUrl.username || sourceUrl.password) throw new Error('LOGIN_TOKEN_PAGE_SCOPE');
-if (sdk) {
-  const loaderUrl = new URL(sdk.loaderUrl);
-  if (loaderUrl.origin !== 'https://ncpt.naver.com' || loaderUrl.pathname !== '/static/ncaptcha-api.js'
-    || loaderUrl.username || loaderUrl.password || typeof sdk.siteKey !== 'string'
-    || sdk.siteKey.length < 1 || sdk.siteKey.length > 512 || /[\r\n\0]/.test(sdk.siteKey)) throw new Error('LOGIN_TOKEN_SDK_SCOPE');
-  if (sdk.keyboardIds && (!Array.isArray(sdk.keyboardIds) || sdk.keyboardIds.length > 4
-    || new Set(sdk.keyboardIds).size !== sdk.keyboardIds.length
-    || sdk.keyboardIds.some(id => !['id', 'pw', 'captcha', 'chptcha'].includes(id)))) throw new Error('LOGIN_TOKEN_SDK_SCOPE');
-}
+const normalizedSdk = sdk ? normalizeNaverLoginSdk(sdk) : null;
 const userAgent = NAVER_NODE_USER_AGENT;
 let token = null;
 const receipt = {
@@ -82,10 +98,10 @@ class Loader extends ResourceLoader {
 let dom;
 async function main() {
   let scriptTag;
-  if (sdk) {
+  if (normalizedSdk) {
     const source = new JSDOM('');
     const script = source.window.document.createElement('script');
-    const configuredLoader = new URL(sdk.loaderUrl);
+    const configuredLoader = new URL(normalizedSdk.loaderUrl);
     if (!configuredLoader.searchParams.has('ncaptcha-onload')) configuredLoader.searchParams.set('ncaptcha-onload', 'initNcaptcha');
     script.src = configuredLoader.href;
     scriptTag = script.outerHTML;
@@ -107,7 +123,7 @@ async function main() {
   const readyPromise = new Promise(resolve => { ready = resolve; });
   const virtualConsole = new VirtualConsole();
   virtualConsole.on('jsdomError', diagnostic);
-  const inputIds = sdk ? (sdk.keyboardIds || ['captcha', 'chptcha']) : ['id', 'pw'];
+  const inputIds = normalizedSdk ? normalizedSdk.keyboardIds : ['id', 'pw'];
   dom = new JSDOM(`<!doctype html><html><head></head><body>${inputIds.map(id => `<input id="${id}">`).join('')}${scriptTag}</body></html>`, {
     url: pageUrl, runScripts: 'dangerously', resources: new Loader(), virtualConsole,
     beforeParse(window) {
@@ -121,7 +137,7 @@ async function main() {
       window.initNcaptcha = () => {
         try {
           if (receipt.sdkReady) return;
-          window.wtmncapt = new window.homz.Koop({ keyboard: inputIds.map(id => ({ id })), ...(sdk ? { siteKey: sdk.siteKey } : {}) });
+          window.wtmncapt = new window.homz.Koop(createNaverKoopOptions(inputIds, normalizedSdk));
           receipt.sdkReady = true;
           ready(true);
         } catch (error) { diagnostic(error); ready(false); }

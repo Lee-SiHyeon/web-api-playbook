@@ -15,3 +15,13 @@
 코드는 `scripts/`, `workflows/`, `tools/discovery/`로 나뉩니다. 인증값과 실행 산출물은 Git에 포함하지 않습니다. 관측된 요청 계약은 `references/`에 있습니다.
 
 이전 README의 로그인 미구현·공개 신규 발행 차단 설명과 테스트 횟수는 각 실행 당시 기록입니다. [정리 전 원본은 Git 이력](https://github.com/Lee-SiHyeon/naver-blog-api-only/blob/1455287ae5d988cd0af2e2f751e9bea16b63c599/apps/naver-blog-api/README.md)에 남아 있습니다.
+
+## Consolidation (2026-10-14)
+
+This pack is the single source of truth for Naver Blog HTTP code. Consumers vendor it with
+`node scripts/vendor-pack.mjs --pack naver [--subdir apps/naver-blog-api] --dest <consumer>`.
+Ported from affiliate-content-operations/apps/naver-blog-api (2026-10-05): session lock and reuse,
+handoff options/persistence, relogin cooldown, HTTP session rotation persistence, login HTTP handoff
+utilities, the reworked session client/vault/health/login CLI, DataLab trend web + Exploding Topics
+trend-radar sources, and the stat client guard that refuses to persist a rotation which deletes
+NID_AUT/NID_SES (`tests/client-auth-rotation.test.mjs`).

@@ -4,6 +4,7 @@ import { ScopedHttpSession, BLOG_ORIGIN } from '../lib/transport.mjs';
 import { saveState, loadState } from '../lib/state.mjs';
 import { verifySession } from '../lib/auth.mjs';
 import { withSessionLock } from '../lib/lock.mjs';
+import { validateLoginIdentity, saveLoginIdentity } from '../lib/login-identity.mjs';
 
 // One-use local form carries only RSA-OAEP/AES-GCM ciphertext. Private key and
 // decrypted cookies stay in this process, then Windows DPAPI CurrentUser.
@@ -47,25 +48,37 @@ const server = http.createServer(async (request, response) => {
     || !/^application\/x-www-form-urlencoded(?:;|$)/i.test(request.headers['content-type'] || '')) { response.writeHead(404).end(); return; }
   used = true;
   let result;
+  let loginIdentity;
+  let bundle;
   try {
     let body = '';
     for await (const part of request) { body += part.toString('utf8'); if (Buffer.byteLength(body) > 262144) throw new Error(); }
     const form = new URLSearchParams(body);
     if ([...form.keys()].length !== 1 || !form.has('envelope')) throw new Error();
-    const bundle = decrypt(JSON.parse(form.get('envelope')));
+    bundle = decrypt(JSON.parse(form.get('envelope')));
     if (bundle?.version !== 1 || bundle.blogOrigin !== BLOG_ORIGIN || !Number.isFinite(bundle.capturedAt)
       || bundle.capturedAt < startedAt - 10000 || bundle.capturedAt > Date.now() + 10000) throw new Error();
+    if (bundle.loginIdentity != null) loginIdentity = validateLoginIdentity(bundle.loginIdentity);
     const session = ScopedHttpSession.fromBrowserCookies(bundle.cookies, { userAgent: bundle.userAgent, now: Date.now });
     const verified = await withSessionLock(async () => {
       const existing = loadState();
       const checked = await verifySession(session, existing?.identity);
+      if (loginIdentity) saveLoginIdentity(loginIdentity, checked.identity);
       saveState({ version: 1, blogOrigin: BLOG_ORIGIN, session: session.toJSON(), identity: checked.identity,
         verifiedAt: checked.verifiedAt, login: { ...existing?.login, reauthRequired: false } });
       return checked;
     });
     result = { stored: true, provider: 'windows_dpapi_current_user', ...verified.receipt,
       cookieCount: session.cookieMetadata().count, plaintextPersisted: false, credentialValuesReturned: false };
+    if (loginIdentity) result.loginIdentityStored = true;
   } catch (error) { result = { stored: false, code: codeOf(error) }; process.exitCode = 2; }
+  finally {
+    if (loginIdentity) { loginIdentity.username = ''; loginIdentity.password = ''; }
+    if (bundle?.loginIdentity && typeof bundle.loginIdentity === 'object') {
+      bundle.loginIdentity.username = ''; bundle.loginIdentity.password = '';
+    }
+    if (bundle && typeof bundle === 'object') bundle.cookies = [];
+  }
   console.log(JSON.stringify(result));
   response.writeHead(result.stored ? 200 : 422, { 'content-type': 'application/json' });
   response.end(JSON.stringify(result));

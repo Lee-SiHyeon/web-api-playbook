@@ -4,6 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { collectShoppingTrends, SHOPPING_CATEGORIES } from './sources/naver-shopping-insight.mjs';
 import { collectAutocomplete } from './sources/naver-autocomplete.mjs';
 import { fetchGoogleTrending } from './sources/google-trends-rss.mjs';
+import { fetchExplodingTopics } from './sources/exploding-topics.mjs';
 import { naverSearchTrendCredentialState } from './sources/naver-search-trend.mjs';
 import { buildContentIdeas, buildLongTailOpportunities, scoreShoppingTrends } from './scoring.mjs';
 
@@ -19,6 +20,7 @@ function parseArgs(args) {
     top: 50,
     autocompleteSeeds: 30,
     google: true,
+    exploding: true,
   };
   for (const arg of args) {
     if (arg === '--help' || arg === '-h') options.help = true;
@@ -28,6 +30,7 @@ function parseArgs(args) {
     else if (arg.startsWith('--top=')) options.top = Number(arg.slice(6));
     else if (arg.startsWith('--autocomplete-seeds=')) options.autocompleteSeeds = Number(arg.slice(21));
     else if (arg === '--no-google') options.google = false;
+    else if (arg === '--no-exploding') options.exploding = false;
     else throw new Error(`Unknown argument: ${arg}`);
   }
   if (!options.timeUnits.every(unit => ['date', 'week', 'month'].includes(unit))) throw new Error('Invalid --units');
@@ -47,7 +50,7 @@ function usage() {
     '  npm run research:trends -- --seed=보조배터리,신혼여행',
     '  node research/trend-radar/run.mjs --categories=50000003,50000008 --units=date,week',
     '',
-    'Sources: Naver Shopping Insight XHR replay, Naver autocomplete JSONP, Google Trends RSS.',
+    'Sources: Naver Shopping Insight XHR replay, Naver autocomplete JSONP, Google Trends RSS, Exploding Topics public list.',
     'Normal execution imports no browser automation.',
   ].join('\n');
 }
@@ -56,7 +59,25 @@ function sourceState({ captured, clientExists, remnantFree, credentialPropagated
   return { captured, clientExists, remnantFree, credentialPropagated, liveReplay, ...(reason ? { reason } : {}) };
 }
 
+function sourceStatus(state, { successful, requested, candidates } = {}) {
+  if (!state) return '상태 미기록';
+  if (state.liveReplay === true) {
+    const partial = Number.isFinite(successful) && Number.isFinite(requested) && successful < requested;
+    const coverage = Number.isFinite(successful) && Number.isFinite(requested) ? ` ${successful}/${requested}` : '';
+    const count = Number.isFinite(candidates) ? ` · 후보 ${candidates}건` : '';
+    return `${partial ? '부분 API-only 실검증' : 'API-only 실검증'}${coverage}${count}`;
+  }
+  if (state.reason === 'not_run_to_preserve_quota') return '이번 실행 미실행(쿼터 보호)';
+  return state.reason ? `미검증: ${state.reason}` : '이번 실행 미실행';
+}
+
 function markdown(record) {
+  const shoppingState = record.sourceStates?.naverShoppingInsight;
+  const autocompleteState = record.sourceStates?.naverAutocomplete;
+  const googleState = record.sourceStates?.googleTrendingRss;
+  const searchTrendState = record.sourceStates?.naverOfficialSearchTrend;
+  const explodingState = record.sourceStates?.explodingTopics;
+  const global = record.globalEarlySignals || [];
   const lines = [
     '# API-only 트렌드 레이더',
     '',
@@ -65,17 +86,19 @@ function markdown(record) {
     `- 네이버 쇼핑 계약: ${record.coverage.shoppingContractsSucceeded}/${record.coverage.shoppingContractsRequested}`,
     `- 자동완성 seed: ${record.coverage.autocompleteSeedsSucceeded}/${record.coverage.autocompleteSeedsRequested}`,
     `- Google 급상승: ${record.googleTrending.length}개`,
+    `- 해외 초기 신호(Exploding Topics): ${global.length}개`,
     '',
     '## 소스 역할',
     '',
-    '| 소스 | 무엇을 알려주나 | 현재 상태 |',
+    '| 소스 | 무엇을 알려주나 | 이번 실행 상태 |',
     '|---|---|---|',
-    '| Naver Shopping Insight | 쇼핑 카테고리별 인기 검색어와 일·주·월 지속성 | API-only 실검증 |',
-    '| Naver autocomplete | 사람들이 붙여 검색하는 롱테일·문제·구매 의도 | API-only 실검증 |',
-    '| Google Trends RSS | 지금 갑자기 치솟는 뉴스·대중 관심사 | API-only 실검증 |',
-    '| Naver Search Trend 공식 API | 후보 키워드의 상대 검색 추이·인구통계 비교 | 키 미설정으로 대기 |',
-    '| Naver Blog search | 상위 콘텐츠 구조와 경쟁 강도 | 기존 레퍼런스 분석기로 처리 |',
-    '| Coupang Partners | 실제 판매 상품·가격·제휴 링크 | 기존 상품 비교기로 처리 |',
+    `| Naver Shopping Insight | 쇼핑 카테고리별 인기 검색어와 일·주·월 지속성 | ${sourceStatus(shoppingState, { successful: record.coverage.shoppingContractsSucceeded, requested: record.coverage.shoppingContractsRequested })} |`,
+    `| Naver autocomplete | 사람들이 붙여 검색하는 롱테일·문제·구매 의도 | ${sourceStatus(autocompleteState, { successful: record.coverage.autocompleteSeedsSucceeded, requested: record.coverage.autocompleteSeedsRequested })} |`,
+    `| Google Trends RSS | 지금 갑자기 치솟는 뉴스·대중 관심사 | ${sourceStatus(googleState, { candidates: record.googleTrending.length })} |`,
+    `| Exploding Topics | 해외(주로 미국)에서 막 뜨는 주제·제품, 국내 유입 전 신호 | ${sourceStatus(explodingState, { candidates: global.length })} |`,
+    `| Naver Search Trend 공식 API | 후보 키워드의 상대 검색 추이·인구통계 비교 | ${sourceStatus(searchTrendState)} |`,
+    '| Naver Blog search | 상위 콘텐츠 구조와 경쟁 강도 | 이번 실행 범위 밖 |',
+    '| Coupang Partners | 실제 판매 상품·가격·제휴 링크 | 이번 실행 범위 밖 |',
     '',
     '## 쇼핑 트렌드 상위',
     '',
@@ -110,6 +133,12 @@ function markdown(record) {
       `${index + 1}. **${item.keyword}** — ${item.approxTrafficLabel || 'traffic 미표시'}`
     )),
     '',
+    '## 해외 초기 신호 (Exploding Topics)',
+    '',
+    '| 주제 | 검색량 | 증가 |',
+    '|---|---:|---:|',
+    ...global.slice(0, 25).map(item => `| [${item.keyword}](${item.url}) | ${item.volumeLabel ?? '-'} | ${item.growthLabel ?? '-'} |`),
+    '',
     '## 콘텐츠 후보',
     '',
     ...record.contentIdeas.slice(0, 40).map((item, index) => (
@@ -121,6 +150,7 @@ function markdown(record) {
     '- 쇼핑인사이트 순위는 카테고리 내 상대 인기이며 절대 검색량이 아니다.',
     '- 자동완성은 연관 검색 의도 신호이지 검색량 순위가 아니다.',
     '- Google 급상승은 뉴스성 이슈가 많아 상품 제휴 적합성을 별도로 판단한다.',
+    '- Exploding Topics는 해외(주로 미국 구글) 2년 검색 추이다. 국내 수요는 네이버 검색으로 따로 확인한다.',
     '- 실제 글감 선정 전에 네이버 블로그 상위글과 커뮤니티 반복 질문을 추가 분석한다.',
     '',
   ];
@@ -162,6 +192,11 @@ export async function run(args = process.argv.slice(2)) {
     try { google = await fetchGoogleTrending({ geo: 'KR' }); }
     catch (error) { google = { trends: [], receipt: null, error: error?.code || error?.name || 'ERROR' }; }
   }
+  let exploding = { topics: [], receipt: null, error: null };
+  if (options.exploding) {
+    try { exploding = await fetchExplodingTopics(); }
+    catch (error) { exploding = { topics: [], receipt: null, error: error?.code || error?.name || 'ERROR' }; }
+  }
   const credentialState = naverSearchTrendCredentialState();
   const checkedAt = new Date();
   const contentIdeas = buildContentIdeas(shoppingTrends, longTailOpportunities, google.trends);
@@ -194,11 +229,19 @@ export async function run(args = process.argv.slice(2)) {
       naverAutocomplete: sourceState({
         captured: true, clientExists: true, remnantFree: true,
         credentialPropagated: 'not_applicable_public', liveReplay: autocomplete.successfulSeeds > 0,
+        reason: autocomplete.successfulSeeds === autocomplete.requestedSeeds
+          ? null
+          : `partial_coverage_${autocomplete.successfulSeeds}_of_${autocomplete.requestedSeeds}`,
       }),
       googleTrendingRss: sourceState({
         captured: true, clientExists: true, remnantFree: true,
         credentialPropagated: 'not_applicable_public', liveReplay: Boolean(google.receipt),
         reason: google.error,
+      }),
+      explodingTopics: sourceState({
+        captured: true, clientExists: true, remnantFree: true,
+        credentialPropagated: 'not_applicable_public', liveReplay: Boolean(exploding.receipt),
+        reason: exploding.error,
       }),
       naverOfficialSearchTrend: sourceState({
         captured: true, clientExists: true, remnantFree: true,
@@ -212,16 +255,19 @@ export async function run(args = process.argv.slice(2)) {
       shopping: shopping.results.map(item => item.receipt),
       autocomplete: autocomplete.results.map(item => item.receipt),
       google: google.receipt,
+      explodingTopics: exploding.receipt,
     },
     failures: {
       shopping: shopping.failures,
       autocomplete: autocomplete.failures,
       google: google.error,
+      explodingTopics: exploding.error,
     },
     shoppingTrends: shoppingTrends.slice(0, options.top),
     seedExpansions,
     longTailOpportunities: longTailOpportunities.slice(0, options.top * 2),
     googleTrending: google.trends,
+    globalEarlySignals: exploding.topics,
     contentIdeas: contentIdeas.slice(0, options.top * 2),
     credentialsPersisted: false,
     browserUsedForNormalExecution: false,
@@ -246,6 +292,7 @@ export async function run(args = process.argv.slice(2)) {
     shoppingTrendCount: record.shoppingTrends.length,
     longTailCount: record.longTailOpportunities.length,
     googleTrendCount: record.googleTrending.length,
+    globalEarlySignalCount: record.globalEarlySignals.length,
     browserUsedForNormalExecution: false,
   }));
   return record;

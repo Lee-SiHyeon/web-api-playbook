@@ -107,3 +107,19 @@ test('normal trend radar implementation contains no browser automation imports',
   }
   assert.equal(SHOPPING_CATEGORIES.length, 12);
 });
+
+test('Exploding Topics tiles become keyword, volume and growth; Pro tiles are skipped', async () => {
+  const { parseExplodingTopics, parseVolume } = await import('../research/trend-radar/sources/exploding-topics.mjs');
+  const tile = (slug, kw, vol, growth, desc) => `<div class="tileStyle cardHover"><a class="tileLink" href="/topic/${slug}"><div class="tileKeyword">${kw}</div>`
+    + `<div class="scoreTag scoreTag--volume"><div class="scoreTagTop">${vol}</div><div class="scoreTagBottom">Volume</div></div>`
+    + `<div class="scoreTag last"><div class="scoreTagTop growth scoreTagGradient">${growth}</div></div><div class="tileDescription">${desc}</div></a></div>`;
+  const html = tile('pdrn-serum-nLoLq6tz', 'Pdrn  serum', '110K', '+6000%', 'Skincare with PDRN.')
+    + '<div class="tileStyle cardHover"><a class="tileLink" href="/pricing"><div>Pro</div></a></div>'
+    + tile('glp1', 'GLP1', '1.5M', '+900%', 'Weight-loss drugs &amp; peptides.') + tile('mitti-labs', 'Mitti labs', '0-100', '+99X+', '');
+  const rows = parseExplodingTopics(html);
+  assert.deepEqual(rows.map(r => [r.keyword, r.volume, r.growthPct]), [['Pdrn serum', 110000, 6000], ['GLP1', 1500000, 900], ['Mitti labs', null, null]]);
+  assert.equal(rows[0].url, 'https://explodingtopics.com/topic/pdrn-serum-nLoLq6tz');
+  assert.equal(rows[1].description, 'Weight-loss drugs & peptides.');
+  assert.equal(parseVolume('1.83M'), 1830000);
+  assert.throws(() => parseExplodingTopics('<html>Sign in</html>'), /no topic tiles/);
+});

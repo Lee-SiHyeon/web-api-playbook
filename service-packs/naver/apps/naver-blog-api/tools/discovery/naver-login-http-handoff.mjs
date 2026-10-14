@@ -1,7 +1,8 @@
 import { createDecipheriv, createPublicKey, generateKeyPairSync, privateDecrypt, constants } from 'node:crypto';
 import http from 'node:http';
 import { createInterface } from 'node:readline';
-import { normalizeNaverCookies, storeNaverCookies } from '../../scripts/session-vault.mjs';
+import { normalizeNaverCookies } from '../../scripts/session-vault.mjs';
+import { hasFreshAuthenticationCookies, mergeLoginResponseCookies } from './naver-login-http-handoff-utils.mjs';
 
 // One-use browser-prepared form handoff. The browser prepares its normal ncaptcha
 // and encrypted credential fields; this process alone submits the observed POST.
@@ -80,33 +81,6 @@ function validateBundle(bundle) {
   return { cookies, params };
 }
 
-function applySetCookies(oldCookies, response) {
-  let cookies = [...oldCookies];
-  const changedNames = [];
-  for (const line of (response.headers.getSetCookie?.() || []).slice(0, 40)) {
-    if (line.length > 8192 || /[\r\n]/.test(line)) continue;
-    const [pair, ...attrs] = line.split(';');
-    const equal = pair.indexOf('=');
-    if (equal < 1) continue;
-    const item = { name: pair.slice(0, equal).trim(), value: pair.slice(equal + 1).trim(),
-      domain: 'nid.naver.com', path: '/', secure: false, expires: -1, httpOnly: false };
-    for (const raw of attrs) {
-      const [key, ...rest] = raw.trim().split('=');
-      const value = rest.join('=').trim();
-      if (/^domain$/i.test(key)) item.domain = '.' + value.replace(/^\./, '').toLowerCase();
-      if (/^path$/i.test(key) && value.startsWith('/')) item.path = value;
-      if (/^secure$/i.test(key)) item.secure = true;
-      if (/^httponly$/i.test(key)) item.httpOnly = true;
-      if (/^max-age$/i.test(key) && /^\d+$/.test(value)) item.expires = Date.now() / 1000 + Number(value);
-    }
-    if (!/^(?:\.)?(?:[a-z0-9-]+\.)*naver\.com$/i.test(item.domain)) continue;
-    if (['NID_AUT', 'NID_SES'].includes(item.name) && item.value) changedNames.push(item.name);
-    cookies = cookies.filter(old => !(old.name === item.name && old.domain === item.domain && old.path === item.path));
-    cookies.push(item);
-  }
-  return { cookies: normalizeNaverCookies(cookies, Date.now(), { requireAuthentication: false }), changedNames };
-}
-
 async function boundedBody(response) {
   if (!response.body) return '';
   const chunks = [];
@@ -121,8 +95,6 @@ async function boundedBody(response) {
 
 async function submit(bundle) {
   const { cookies } = validateBundle(bundle);
-  const baseline = new Map(cookies.filter(cookie => ['NID_AUT', 'NID_SES'].includes(cookie.name))
-    .map(cookie => [cookie.name, cookie.value]));
   const response = await fetch(loginUrl, { method: 'POST', redirect: 'manual', signal: AbortSignal.timeout(20000),
     headers: { accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
       'content-type': 'application/x-www-form-urlencoded', origin, referer: bundle.sourcePage,
@@ -131,29 +103,36 @@ async function submit(bundle) {
       'upgrade-insecure-requests': '1', cookie: scopedCookieHeader(cookies, loginUrl) },
     body: bundle.form });
   const html = await boundedBody(response);
-  const update = applySetCookies(cookies, response);
-  const fresh = ['NID_AUT', 'NID_SES'].every(name => update.cookies.some(cookie => cookie.name === name
-    && cookie.value && cookie.value !== baseline.get(name)));
-  const inputNames = [...html.matchAll(/<input\b[^>]*\bname\s*=\s*["']([^"']{1,64})["']/gi)]
-    .map(match => match[1]).filter(name => /^[A-Za-z0-9_-]+$/.test(name)).slice(0, 40);
-  const imageChallenge = /<img\b[^>]*(?:captcha|자동입력|캡차)|<[^>]+(?:id|class)\s*=\s*["'][^"']*(?:captcha|captcha_image)[^"']*["'][^>]*>/i.test(html);
-  const loginForm = /<form\b[^>]*(?:frmNIDLogin|nidlogin\.login)/i.test(html);
-  const finalizeReference = /signin\/v3\/finalize/i.test(html);
+  const update = mergeLoginResponseCookies(cookies, response);
+  const fresh = hasFreshAuthenticationCookies(cookies, update.cookies, actor);
+  const { summarizeNaverLoginResponse, classifyUnauthenticatedLoginResponse } = await import('../../scripts/naver-login-http.mjs');
+  const responseShape = summarizeNaverLoginResponse(html, response);
   const receipt = { actor, mode: 'browser_prepared_http_submit', browserSubmittedLogin: false,
-    httpPostStatus: response.status, freshAuthCookies: fresh, imageChallengeDetected: !fresh && imageChallenge,
-    responseShape: { loginForm, finalizeReference, inputNames },
+    httpPostStatus: response.status, freshAuthCookies: fresh,
+    imageChallengeDetected: !fresh && responseShape.imageChallengeDetected, responseShape,
     protectedOwnerRead: false, stored: false };
-  if (!fresh) return { ...receipt, code: imageChallenge ? 'IMAGE_CHALLENGE_REQUIRED' : 'LOGIN_NOT_VERIFIED' };
+  if (!fresh) return { ...receipt, code: classifyUnauthenticatedLoginResponse(responseShape, response.status) };
   process.env.NAVER_BLOG_ID = actor;
   const { SessionClient } = await import('../../scripts/session-client.mjs');
-  const client = new SessionClient({ cookies: update.cookies });
+  const client = new SessionClient({ cookies: update.cookies, ownerBlogId: actor,
+    defaultHeaders: { 'user-agent': bundle.userAgent }, persistRotation: false });
   try {
-    const result = await client.verifyRoot();
-    receipt.protectedOwnerRead = result.verified === true && result.actorMatched === true && result.adminShell === true;
+    let persistence;
+    try { persistence = await client.persistVerifiedSession(); }
+    catch (error) {
+      if (error?.code === 'AUTH_UNVERIFIED' || error?.code === 'AUTH_MISSING') {
+        return { ...receipt, code: 'LOGIN_PROTECTED_READ_FAILED' };
+      }
+      throw error;
+    }
+    const verification = persistence?.verification;
+    receipt.protectedOwnerRead = verification?.verified === true
+      && verification.actorMatched === true && verification.adminShell === true;
+    receipt.userAgentApplied = verification?.userAgentApplied === true;
+    receipt.stored = persistence?.stored === true;
   } finally { client.clear(); }
   if (!receipt.protectedOwnerRead) return { ...receipt, code: 'LOGIN_PROTECTED_READ_FAILED' };
-  await storeNaverCookies(update.cookies);
-  receipt.stored = true;
+  if (!receipt.stored) return { ...receipt, code: 'CREDENTIAL_STORE_UNVERIFIED' };
   return receipt;
 }
 
