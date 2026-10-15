@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:35:49.953Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000000548687/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 27466,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 1,
+      "countPerPage": 5,
+      "totalCount": 10,
+      "totalPages": 2,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "855525682",
+        "productId": "10000000548687",
+        "rating": 5,
+        "itemName": "[제주] 중문 액트몬(아이존팝/레이저미션/포즐파크/종합이용권)",
+        "reviewedAt": 1772713477000
+      },
+      {
+        "reviewId": "847658889",
+        "productId": "10000000548687",
+        "rating": 5,
+        "itemName": "[제주] 중문 액트몬(아이존팝/레이저미션/포즐파크/종합이용권)",
+        "reviewedAt": 1771041744000
+      },
+      {
+        "reviewId": "838136883",
+        "productId": "10000000548687",
+        "rating": 5,
+        "itemName": "[제주] 중문 액트몬(아이존팝/레이저미션/포즐파크/종합이용권)",
+        "reviewedAt": 1769354435000
+      },
+      {
+        "reviewId": "773506297",
+        "productId": "10000000548687",
+        "rating": 5,
+        "itemName": "[제주] 중문 액트몬(아이존팝/레이저미션/포즐파크/종합이용권)",
+        "reviewedAt": 1759540080000
+      },
+      {
+        "reviewId": "161496549",
+        "productId": "10000000548687",
+        "rating": 5,
+        "itemName": "[제주] 중문 액트몬(아이존팝/레이저미션/포즐파크/종합이용권)",
+        "reviewedAt": 1619424745000
+      }
+    ]
+  },
+  "projectionSha256": "c5a4880eeb0597c6548eb9fcd3d5f61e55706f0ce02ff3514cdd01fc7d880e6c",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

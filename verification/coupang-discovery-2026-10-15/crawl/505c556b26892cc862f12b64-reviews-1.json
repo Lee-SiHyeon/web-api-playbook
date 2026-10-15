@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:33:10.451Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000000665006/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 21603,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 0,
+      "countPerPage": 5,
+      "totalCount": 176,
+      "totalPages": 36,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "1027282816",
+        "productId": "10000000665006",
+        "rating": 5,
+        "itemName": "[전북투어패스] 전북투어패스 통합이용권",
+        "reviewedAt": 1791277925000
+      },
+      {
+        "reviewId": "1027145737",
+        "productId": "10000000665006",
+        "rating": 5,
+        "itemName": "[전북투어패스] 전북투어패스 통합이용권",
+        "reviewedAt": 1791273420000
+      },
+      {
+        "reviewId": "1027145695",
+        "productId": "10000000665006",
+        "rating": 5,
+        "itemName": "[전북투어패스] 전북투어패스 통합이용권",
+        "reviewedAt": 1791273419000
+      },
+      {
+        "reviewId": "1026715705",
+        "productId": "10000000665006",
+        "rating": 5,
+        "itemName": "[전북투어패스] 전북투어패스 통합이용권",
+        "reviewedAt": 1791258142000
+      },
+      {
+        "reviewId": "1018546371",
+        "productId": "10000000665006",
+        "rating": 5,
+        "itemName": "[전북투어패스] 전북투어패스 통합이용권",
+        "reviewedAt": 1790499813000
+      }
+    ]
+  },
+  "projectionSha256": "bcd137de0cdd7f332ce617bcd240373c5a969d41916151fdb819c22bd5f09758",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

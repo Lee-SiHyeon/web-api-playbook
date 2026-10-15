@@ -1,0 +1,90 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:33:30.777Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/products/10000002595816/vendor-items",
+    "queryFields": [],
+    "method": "POST",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 3669,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_ticket_options",
+    "productId": "10000002595816",
+    "options": [
+      {
+        "travelItemId": "675550519372034049",
+        "name": "경북투어패스 서부권 48시간권",
+        "validFrom": "2026-07-03 12:52:00",
+        "validTo": "2027-03-31 23:59:59",
+        "vendorItems": [
+          {
+            "vendorItemId": "70000068305279",
+            "name": "경북투어패스 서부권 48시간권 대인",
+            "price": {
+              "salePrice": 12900,
+              "priceAvailable": true,
+              "originalPrice": null,
+              "discountPrice": null,
+              "discountedSalePrice": 12900,
+              "totalSalesPrice": null,
+              "totalDiscountedPrice": null,
+              "unitPeriod": null,
+              "description": "",
+              "priceTag": "",
+              "membershipCondition": "not_verified",
+              "currency": "KRW",
+              "currencyBasis": "observed_Korean_storefront_won_label",
+              "accountApplied": false
+            },
+            "stockCount": 9989,
+            "saleStatus": ""
+          },
+          {
+            "vendorItemId": "70000068305280",
+            "name": "경북투어패스 서부권 48시간권 소인",
+            "price": {
+              "salePrice": 12900,
+              "priceAvailable": true,
+              "originalPrice": null,
+              "discountPrice": null,
+              "discountedSalePrice": 12900,
+              "totalSalesPrice": null,
+              "totalDiscountedPrice": null,
+              "unitPeriod": null,
+              "description": "",
+              "priceTag": "",
+              "membershipCondition": "not_verified",
+              "currency": "KRW",
+              "currencyBasis": "observed_Korean_storefront_won_label",
+              "accountApplied": false
+            },
+            "stockCount": 9994,
+            "saleStatus": ""
+          }
+        ]
+      }
+    ],
+    "purchaseSubmitted": false
+  },
+  "projectionSha256": "a553624103f7342442a47231e547b9316ac336136b7ab6bdfca7e2091037f20f",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

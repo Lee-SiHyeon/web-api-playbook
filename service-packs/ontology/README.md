@@ -48,3 +48,5 @@ npm run modetour:document -- --browser-evidence=verification/modetour-browser-ht
 Document 파서·명령·테스트·축약 공개 fixture는 이 pack에서 추가한 구현이다. 기존 `provenance.json`의 41개 donor 파일 해시와 구분한다. 원시 HTML에는 다른 상태가 섞일 수 있으므로 본문은 메모리에서만 처리하고 허용한 상품 필드만 출력한다. 루트에서 `node scripts/checklist.mjs --service=ontology-modetour --run-tests --strict`로 해당 범위의 구현과 날짜가 명시된 근거를 확인할 수 있다.
 
 루트의 [원격 감사](../../references/ontology-xhr-extension-audit-2026-10-14.md)는 536행 정적 인벤토리와 이번에 작업한 원천을 구분한다. 제한된 표본·가격 의미의 결측을 보존하며 지급 총액·전체 재고·최저가를 주장하지 않는다.
+
+쿠팡 트래블 확장은 루트의 [쿠팡 HTTP reader 및 탐색 기록](../../references/coupang-public-discovery-2026-10-15.md)에 있다. `lib/retail/coupang-ontology.mjs`는 검증된 HTTP receipt를 `travel-price`용 상품·가격·옵션·후기 메타데이터로 변환한다. 숙박/대여 날짜, 회원 조건, internal product ID와 package ID를 분리하며 DB 쓰기는 수행하지 않는다. 이 pack의 고정 donor 사본과 루트에서 추가한 클라이언트는 별도 구현이다.

@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:32:50.011Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000000567773/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 24649,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 0,
+      "countPerPage": 5,
+      "totalCount": 6,
+      "totalPages": 2,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "960054689",
+        "productId": "10000000567773",
+        "rating": 5,
+        "itemName": "[제주] 제주 OK승마장",
+        "reviewedAt": 1785221829000
+      },
+      {
+        "reviewId": "927741398",
+        "productId": "10000000567773",
+        "rating": 5,
+        "itemName": "[제주] 제주 OK승마장",
+        "reviewedAt": 1782021077000
+      },
+      {
+        "reviewId": "847747981",
+        "productId": "10000000567773",
+        "rating": 3,
+        "itemName": "[제주] 제주 OK승마장",
+        "reviewedAt": 1771252372000
+      },
+      {
+        "reviewId": "708117051",
+        "productId": "10000000567773",
+        "rating": 5,
+        "itemName": "[제주] 제주 OK승마장",
+        "reviewedAt": 1744598527000
+      },
+      {
+        "reviewId": "683594071",
+        "productId": "10000000567773",
+        "rating": 5,
+        "itemName": "[제주] 제주 OK승마장",
+        "reviewedAt": 1738741228000
+      }
+    ]
+  },
+  "projectionSha256": "ef6d00b3244769d66e794c8c46836e9dba52ac1967d54c1e3fc27d37cab3f0c5",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

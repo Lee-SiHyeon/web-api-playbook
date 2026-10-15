@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:35:56.948Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000011240833/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 17621,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 1,
+      "countPerPage": 5,
+      "totalCount": 1588,
+      "totalPages": 318,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "1031116996",
+        "productId": "10000011240833",
+        "rating": 5,
+        "itemName": "[서울/삼성] 씨라이프코엑스아쿠아리움_성인권/어린이권/커플권",
+        "reviewedAt": 1791628784000
+      },
+      {
+        "reviewId": "1031003192",
+        "productId": "10000011240833",
+        "rating": 5,
+        "itemName": "[서울/삼성] 씨라이프코엑스아쿠아리움_성인권/어린이권/커플권",
+        "reviewedAt": 1791620471000
+      },
+      {
+        "reviewId": "1030617816",
+        "productId": "10000011240833",
+        "rating": 5,
+        "itemName": "[서울/삼성] 씨라이프코엑스아쿠아리움_성인권/어린이권/커플권",
+        "reviewedAt": 1791606303000
+      },
+      {
+        "reviewId": "1030617782",
+        "productId": "10000011240833",
+        "rating": 5,
+        "itemName": "[서울/삼성] 씨라이프코엑스아쿠아리움_성인권/어린이권/커플권",
+        "reviewedAt": 1791606301000
+      },
+      {
+        "reviewId": "1028976267",
+        "productId": "10000011240833",
+        "rating": 5,
+        "itemName": "[서울/삼성] 씨라이프코엑스아쿠아리움_성인권/어린이권/커플권",
+        "reviewedAt": 1791442583000
+      }
+    ]
+  },
+  "projectionSha256": "0e128989e57adbeb38ab17ac920930781357534371573b539bf9bcaf14acb891",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

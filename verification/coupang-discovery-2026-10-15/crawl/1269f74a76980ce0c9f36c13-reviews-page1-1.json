@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:35:58.042Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/178101317/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 23034,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 1,
+      "countPerPage": 5,
+      "totalCount": 116,
+      "totalPages": 24,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "136661683",
+        "productId": "178101317",
+        "rating": 3,
+        "itemName": "[거제도] 해금강테마박물관 입장권",
+        "reviewedAt": 1606887007000
+      },
+      {
+        "reviewId": "123593632",
+        "productId": "178101317",
+        "rating": 4,
+        "itemName": "[거제도] 해금강테마박물관 입장권",
+        "reviewedAt": 1597673516000
+      },
+      {
+        "reviewId": "123593626",
+        "productId": "178101317",
+        "rating": 5,
+        "itemName": "[거제도] 해금강테마박물관 입장권",
+        "reviewedAt": 1597673511000
+      },
+      {
+        "reviewId": "122346832",
+        "productId": "178101317",
+        "rating": 5,
+        "itemName": "[거제도] 해금강테마박물관 입장권",
+        "reviewedAt": 1596675722000
+      },
+      {
+        "reviewId": "116952880",
+        "productId": "178101317",
+        "rating": 5,
+        "itemName": "[거제도] 해금강테마박물관 입장권",
+        "reviewedAt": 1592367490000
+      }
+    ]
+  },
+  "projectionSha256": "b0a636b3907f981d4e2eef0599384cdd4dd3f0f861dba1529996a8ea12e6b323",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

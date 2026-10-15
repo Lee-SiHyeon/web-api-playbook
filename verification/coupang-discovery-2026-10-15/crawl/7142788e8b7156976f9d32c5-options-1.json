@@ -1,0 +1,68 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:31:50.097Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/products/205140070/vendor-items",
+    "queryFields": [],
+    "method": "POST",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 2839,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_ticket_options",
+    "productId": "205140070",
+    "options": [
+      {
+        "travelItemId": "901041866496036864",
+        "name": "조안베어뮤지엄 입장권 <199073>",
+        "validFrom": "2026-09-22 16:42:00",
+        "validTo": "2026-10-31 23:59:59",
+        "vendorItems": [
+          {
+            "vendorItemId": "70000184540563",
+            "name": "조안베어뮤지엄 입장권 <199073>",
+            "price": {
+              "salePrice": 3000,
+              "priceAvailable": true,
+              "originalPrice": 12000,
+              "discountPrice": null,
+              "discountedSalePrice": 3000,
+              "totalSalesPrice": null,
+              "totalDiscountedPrice": null,
+              "unitPeriod": null,
+              "description": "",
+              "priceTag": "",
+              "membershipCondition": "not_verified",
+              "currency": "KRW",
+              "currencyBasis": "observed_Korean_storefront_won_label",
+              "accountApplied": false
+            },
+            "stockCount": 429,
+            "saleStatus": ""
+          }
+        ]
+      }
+    ],
+    "purchaseSubmitted": false
+  },
+  "projectionSha256": "a311727cd1465244c4af5c6a7440e46f9948e0da33fca0c06a50ff68d89882d4",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

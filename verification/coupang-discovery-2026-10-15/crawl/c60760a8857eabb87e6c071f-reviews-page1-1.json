@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:36:05.214Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/332221178/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 19674,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 1,
+      "countPerPage": 5,
+      "totalCount": 55,
+      "totalPages": 11,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "937676670",
+        "productId": "332221178",
+        "rating": 5,
+        "itemName": "[제주] 에코랜드+카멜리아힐",
+        "reviewedAt": 1783065106000
+      },
+      {
+        "reviewId": "931472478",
+        "productId": "332221178",
+        "rating": 5,
+        "itemName": "[제주] 에코랜드+카멜리아힐",
+        "reviewedAt": 1782385365000
+      },
+      {
+        "reviewId": "928330446",
+        "productId": "332221178",
+        "rating": 5,
+        "itemName": "[제주] 에코랜드+카멜리아힐",
+        "reviewedAt": 1782067870000
+      },
+      {
+        "reviewId": "925340063",
+        "productId": "332221178",
+        "rating": 5,
+        "itemName": "[제주] 에코랜드+카멜리아힐",
+        "reviewedAt": 1781766561000
+      },
+      {
+        "reviewId": "924786991",
+        "productId": "332221178",
+        "rating": 5,
+        "itemName": "[제주] 에코랜드+카멜리아힐",
+        "reviewedAt": 1781707090000
+      }
+    ]
+  },
+  "projectionSha256": "4163bf52380272a7451ae72e5c78bf1f834c160db4a0d74bb715c25888d18a07",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

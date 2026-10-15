@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:32:43.842Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000000554169/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 21833,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 0,
+      "countPerPage": 5,
+      "totalCount": 15,
+      "totalPages": 3,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "921217900",
+        "productId": "10000000554169",
+        "rating": 5,
+        "itemName": "[제주] 삼다수목장 (기본코스 / 더블코스 / 목장코스 / 산책코스)",
+        "reviewedAt": 1781419303000
+      },
+      {
+        "reviewId": "896774330",
+        "productId": "10000000554169",
+        "rating": 5,
+        "itemName": "[제주] 삼다수목장 (기본코스 / 더블코스 / 목장코스 / 산책코스)",
+        "reviewedAt": 1778998316000
+      },
+      {
+        "reviewId": "858584290",
+        "productId": "10000000554169",
+        "rating": 5,
+        "itemName": "[제주] 삼다수목장 (기본코스 / 더블코스 / 목장코스 / 산책코스)",
+        "reviewedAt": 1773298929000
+      },
+      {
+        "reviewId": "853282416",
+        "productId": "10000000554169",
+        "rating": 5,
+        "itemName": "[제주] 삼다수목장 (기본코스 / 더블코스 / 목장코스 / 산책코스)",
+        "reviewedAt": 1772258615000
+      },
+      {
+        "reviewId": "838281888",
+        "productId": "10000000554169",
+        "rating": 5,
+        "itemName": "[제주] 삼다수목장 (기본코스 / 더블코스 / 목장코스 / 산책코스)",
+        "reviewedAt": 1769394827000
+      }
+    ]
+  },
+  "projectionSha256": "4df68bbb4420fd972db77846f777e460fa6eaed5590f75bf8bf6189188a181c8",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

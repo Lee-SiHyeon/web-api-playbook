@@ -1,0 +1,224 @@
+{
+  "schema": "coupang-public-verification-v1",
+  "verifiedAt": "2026-10-15T01:56:11.719Z",
+  "networkUsed": false,
+  "verifier": "scripts/verify-coupang-public.mjs",
+  "records": [
+    {
+      "file": "verification/coupang-discovery-2026-10-15/categories-live.json",
+      "kind": "category_tree",
+      "count": 3228,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:12.823Z",
+      "sha256": "6e0ba11460c4472078d8604bb4f1e8b9d858115e1c17ce10e3029fd997e38f80"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-autocomplete-live.json",
+      "kind": "travel_autocomplete",
+      "count": null,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:31.107Z",
+      "sha256": "92fc6235e96a64f126c3978faae4b948d7cc97fd18ed5c4ccbb2b2db384a8394"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-page2-live.json",
+      "kind": "travel_listing",
+      "count": 24,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:12.903Z",
+      "sha256": "03a23772b4b4722838e26e7936eed83dcb5db3eb364916dcf6debbb3ce3872bf"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-rental-live.json",
+      "kind": "travel_listing",
+      "count": 25,
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:29:13.046Z",
+      "sha256": "90c61053fc5130360bd04c08890816a095e9d13105b96eddb8cbf6eaf8eba517"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-rooms-live.json",
+      "kind": "travel_rooms",
+      "count": 5,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:12.661Z",
+      "sha256": "638c4916db311a2fbbcde9be589e0bc05d67c6684a4d926bb67eb9be216e9131"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-ticket-options-live.json",
+      "kind": "travel_ticket_options",
+      "count": 3,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:24:23.273Z",
+      "sha256": "3bd4ef837dd2da531a7a9cc3934315a30e275c0a85eea404080d36ed57922791"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-ticket-reviews-live.json",
+      "kind": "travel_reviews",
+      "count": 5,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:31.177Z",
+      "sha256": "7427161585640f77487a6b21cecbdfb22a922f9a837a66f880d19a35dfc5f797"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-ticket-detail-live.json",
+      "kind": "travel_detail",
+      "count": null,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:31.685Z",
+      "sha256": "9f2e8ac0103944aa8fa3dff21b11567a9911a8521143d344ddd5cd742300a786"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-rental-detail-context-live.json",
+      "kind": "travel_detail",
+      "count": null,
+      "states": {
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true,
+        "captureScope": "browser_document_request_not_paired"
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:47:26.806Z",
+      "sha256": "0645a343e559d23c23a572809aedd4be607bbb352048b0b2f9fc5d263d655f8a"
+    }
+  ],
+  "blocked": [
+    {
+      "file": "verification/coupang-discovery-2026-10-15/retail-search-live.json",
+      "checkedAt": "2026-10-15T01:46:50.496Z",
+      "httpStatus": 403,
+      "mode": "anonymous",
+      "cause": "unknown",
+      "protectedSessionReplay": "unverified"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/retail-category-live.json",
+      "checkedAt": "2026-10-15T01:24:23.359Z",
+      "httpStatus": 403,
+      "mode": "anonymous",
+      "cause": "unknown",
+      "protectedSessionReplay": "unverified"
+    }
+  ],
+  "crawl": {
+    "receipts": 230,
+    "ok": 218,
+    "failed": 12,
+    "listingPages": 114,
+    "detailDocuments": 24,
+    "optionReads": 24,
+    "reviewReads": 46
+  },
+  "coverage": {
+    "complete": false,
+    "totalDenominator": "unknown",
+    "resourceNodes": 6700,
+    "edges": 9448,
+    "activeResourceNodes": 6650,
+    "supersededResources": 50,
+    "browserInspected": 35,
+    "directHttpVerified": 138,
+    "listingVerified": 103,
+    "optionsVerified": 24,
+    "reviewsVerified": 25,
+    "pending": 6511,
+    "blocked": 1,
+    "sharedBoundaryDeferred": 3221,
+    "pendingReadRoutes": 100,
+    "pendingNestedOperations": 1,
+    "blockedNestedOperations": 0,
+    "pendingReviewPages": 12,
+    "stages": {
+      "navigation": {
+        "discovered": 3504,
+        "verified": 46,
+        "pending": 3457,
+        "blocked": 1
+      },
+      "listing": {
+        "discovered": 161,
+        "verified": 67,
+        "pending": 94,
+        "blocked": 0
+      },
+      "product_detail": {
+        "discovered": 3035,
+        "verified": 25,
+        "pending": 2960,
+        "blocked": 0
+      }
+    }
+  },
+  "implementationAtVerification": {
+    "lib/retail/coupang-public.mjs": "1aa821144a32b83ad2484d4fbdee82bae5af194bdd36c2891c1dc806158db1e0",
+    "lib/retail/coupang-frontier.mjs": "fb3b970b90bd1a5e100a0e5708fb0b79dca8fafdc318ef62eb7b73170a6a1c3e",
+    "lib/retail/coupang-ontology.mjs": "b6dbc0a826b89b6184a9058122dee04dcbb2cf260cf95e0d3f3fca0501fc3f4f",
+    "scripts/coupang-public.mjs": "160b2c6f6d5c8d2bef3f10b79067a5a5d5e790a6de18d73833c34f1aee39db4a",
+    "scripts/coupang-crawl.mjs": "6ee7fe1fd544b0a2ce728f1801781e6b12bda91e6378cf783440e4c9d26b1870",
+    "scripts/verify-coupang-public.mjs": "97573a850d504582c760284c937ffe9f16360163883412c3f467e8cfac5e618d",
+    "tests/coupang-public.test.mjs": "ec8fb3f11230db4c7a04e6bd6b00cd2ed7966d84b6b072a2bdd6816a316caee9",
+    "tests/coupang-frontier.test.mjs": "463f33827c800fa6a438caea3bb22828c62ce7278b63bfd3930a0d3ffd89e832"
+  },
+  "evidenceAudit": {
+    "jsonFiles": 249,
+    "runtimeIdentifierFindings": 0
+  },
+  "limitations": [
+    "Entire catalog is not complete. Pending resource and nested-operation frontiers are preserved.",
+    "General retail browser navigation succeeds; anonymous search/category Document reads return 403. Protected session replay is not verified.",
+    "Flight iframe search is not verified. Membership prices are advertised values, not verified account checkout totals.",
+    "Early live receipts predate later metadata/parser repairs; implementation digests describe code at verification time."
+  ]
+}
