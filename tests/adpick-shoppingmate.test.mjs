@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { createAdpickReadClient, AdpickReadError, safeAdpickError } from '../lib/commerce/adpick-shoppingmate.mjs';
 
 // All keys/responses here are synthetic; no provider request or account material is used.
@@ -241,7 +242,7 @@ test('deadline includes provider and response body; late credentials do not caus
 });
 
 test('CLI status/invalid inputs require no network, and synthetic stdin key is absent from default and data output', () => {
-  const script = new URL('../scripts/adpick-read.mjs', import.meta.url).pathname;
+  const script = fileURLToPath(new URL('../scripts/adpick-read.mjs', import.meta.url));
   const run = (args, input = '') => spawnSync(process.execPath, [script, ...args], { encoding: 'utf8', input });
   const status = run(['status']);
   assert.equal(status.status, 0);

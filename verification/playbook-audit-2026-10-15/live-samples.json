@@ -1,0 +1,424 @@
+{
+  "schema": "web-api-playbook-live-samples-v1",
+  "scope": "eleven_bounded_anonymous_read_operations_not_whole_site_coverage",
+  "writeOperationsScheduled": 0,
+  "freshBrowserCaptures": 0,
+  "sourceStatesMeaning": "reported_by_existing_client; captured may describe prior contract capture, not this run",
+  "summary": {
+    "operations": 11,
+    "passed": 10,
+    "blocked": 1
+  },
+  "samples": [
+    {
+      "id": "amazon-navigation",
+      "checkedAt": "2026-10-15T09:30:01.977Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 2,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "origin": "https://www.amazon.com",
+          "pathname": "/nav/ajax/hMenuDesktopFirstLayer",
+          "cookieSent": false,
+          "credentialsUsed": false
+        },
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "origin": "https://www.amazon.com",
+          "pathname": "/nav/ajax/hamburgerMainContent",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "destinations": 343,
+        "menus": 37,
+        "edges": 418
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "sourceSummarySha256": "c0463a28ee0f1bb8a17d1bfcc4d49e2e90e9f7238bf656e6f953ceec817bafe9",
+      "sourceSummaryFilename": "amazon-navigation.json"
+    },
+    {
+      "id": "amazon-search-wireless-mouse",
+      "checkedAt": "2026-10-15T09:30:06.478Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "POST",
+          "httpStatus": 200,
+          "mime": "application/json-amazonui-streaming",
+          "origin": "https://www.amazon.com",
+          "pathname": "/s/query",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "items": 16
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "sourceSummarySha256": "bf15d8090e3348fdaeb6c4853c396d694b413fefd1dbcf7a44dd95553a65582e",
+      "sourceSummaryFilename": "amazon-search.json"
+    },
+    {
+      "id": "rakuten-home",
+      "checkedAt": "2026-10-15T09:30:21.54Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "text/html",
+          "origin": "https://www.rakuten.co.jp",
+          "pathname": "/",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "menus": 10,
+        "edges": 50,
+        "links": 40
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "credential_propagated": false,
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "sourceSummarySha256": "82a07521747f783e62f3b562c7594a8f9cc62197f98b80609a8b1637dfed5fec",
+      "sourceSummaryFilename": "rakuten-home.json"
+    },
+    {
+      "id": "rakuten-search-mouse-category-100026",
+      "checkedAt": "2026-10-15T09:30:23.439Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "text/html",
+          "origin": "https://search.rakuten.co.jp",
+          "pathname": "/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "links": 131,
+        "products": 49,
+        "categoryNodes": 18
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "credential_propagated": false,
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "sourceSummarySha256": "c28c19e98d7e4b2b8a7cd887c01419b7a710b2090e2f1ec1e9ab1e6556fe50de",
+      "sourceSummaryFilename": "rakuten-search.json"
+    },
+    {
+      "id": "yahoo-shopping-jp-home",
+      "checkedAt": "2026-10-15T09:30:25.55Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "text/html",
+          "origin": "https://shopping.yahoo.co.jp",
+          "pathname": "/",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "edges": 449,
+        "links": 801,
+        "categoryNodes": 448,
+        "identityCandidates": 331
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "credential_propagated": false,
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "sourceSummarySha256": "f9911565305eb9ec2ecc46917dac0011d74a96db5f8552befbf161d9e25d3a3a",
+      "sourceSummaryFilename": "yahoo-home.json"
+    },
+    {
+      "id": "yahoo-shopping-jp-product",
+      "checkedAt": "2026-10-15T09:30:28.918Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "text/html",
+          "origin": "https://store.shopping.yahoo.co.jp",
+          "pathname": "/ya-man/r2305a.html",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "links": 6,
+        "productCount": 1,
+        "productVariants": 6
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "credential_propagated": false,
+        "remnant_free": true,
+        "live_replay": true
+      },
+      "sourceSummarySha256": "32f0dd144ac1b1b0b995b07d3d82b75a9321b3d9b750ba1dfd8939f35480679e",
+      "sourceSummaryFilename": "yahoo-product.json"
+    },
+    {
+      "id": "coupang-categories",
+      "checkedAt": "2026-10-15T09:31:01.7696343Z",
+      "checkedAtBasis": "summary_capture_timestamp; the CLI omits the reader checkedAt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "mimeBasis": "reader enforces JSON MIME before parsing; the CLI omits receipt MIME",
+      "counts": {
+        "categoryNodes": 3228
+      },
+      "reportedStates": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "sourceSummarySha256": "8f621963deb5178bd90420597128f3edb52439d5a5204fff7671cff06a8a65e1",
+      "sourceSummaryFilename": "coupang-categories-audit-summary.json"
+    },
+    {
+      "id": "coupang-travel-autocomplete-jeju",
+      "checkedAt": "2026-10-15T09:31:58.973Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "POST",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "origin": "https://trip.coupang.com",
+          "pathname": "/api/search/auto-complete",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "groups": 2,
+        "suggestions": 7
+      },
+      "reportedStates": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "sourceSummarySha256": "e709e993c3e4115c98f8ed5508892e6b32fe6904404de79a8921f43737585f6f",
+      "sourceSummaryFilename": "coupang-autocomplete-live.json"
+    },
+    {
+      "id": "retail-search",
+      "checkedAt": "2026-10-15T09:31:03.537Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": false,
+      "errorCode": "COUPANG_HTTP_403",
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 403,
+          "mime": "text/html",
+          "origin": "https://www.coupang.com",
+          "path": "/np/search",
+          "cookieSent": false,
+          "credentialsUsed": false,
+          "browserUsed": false,
+          "authenticationMode": "anonymous",
+          "transport": "native_fetch"
+        }
+      ],
+      "counts": {},
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": false
+      },
+      "sourceSummarySha256": "4fb712743f02c0b555a4acfd9ece22b4813bc12607bd48547d905d469db7f937",
+      "sourceSummaryFilename": "coupang-retail-search.json"
+    },
+    {
+      "id": "shopify-allbirds-predictive-search-runner-limit-3",
+      "checkedAt": "2026-10-15T09:32:32.283Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 2,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "origin": "https://www.allbirds.com",
+          "pathname": "/search/suggest.json",
+          "cookieSent": false,
+          "credentialsUsed": false
+        },
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "text/javascript",
+          "origin": "https://www.allbirds.com",
+          "pathname": "/cart.js",
+          "cookieSent": false,
+          "credentialsUsed": false
+        }
+      ],
+      "counts": {
+        "products": 3
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "sourceSummarySha256": "6cdea662dba0bb39817fbc5306db7654ea04968bb4b1202d624cc7a6064977b9",
+      "sourceSummaryFilename": "shopify-predictive-search.json"
+    },
+    {
+      "id": "ebay-suggest-usb",
+      "checkedAt": "2026-10-15T09:32:34.263Z",
+      "checkedAtBasis": "client_receipt",
+      "ok": true,
+      "errorCode": null,
+      "executionMode": "pure_http",
+      "browserUsed": false,
+      "accountCredentialsUsed": false,
+      "freshBrowserCapture": false,
+      "requestCount": 1,
+      "requests": [
+        {
+          "method": "GET",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "origin": "https://autosug.ebay.com",
+          "pathname": "/autosug",
+          "cookieSent": null,
+          "credentialsUsed": null
+        }
+      ],
+      "counts": {
+        "suggestions": 10,
+        "categoryHints": 2
+      },
+      "reportedStates": {
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "sourceSummarySha256": "0bb0a85db88e96502f7c9a0bc0738157a53d01ff3069fa10e628b107760ed599",
+      "sourceSummaryFilename": "ebay-suggest.json"
+    }
+  ]
+}

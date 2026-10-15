@@ -1,6 +1,6 @@
 # REA·AI 브라우저 조사와 Rust 분석 계층
 
-조사일: **2026-10-15**. 이 문서는 공식 저장소의 문서와 일부 구현을 검토한 설계 결정이다. 도구 설치, 대상 사이트 실행, Rust 컴파일, 성능 측정은 수행하지 않았다. 기존 서비스의 `captured`, `client_exists`, `remnant_free`, `credential_propagated`, `live_replay` 상태를 이 조사로 올리지 않는다.
+조사일: **2026-10-15**. 이 문서는 공식 저장소의 문서와 일부 구현을 검토한 설계 결정이다. 아래의 “미수행·예정”은 최초 조사 시점 기준이다. 후속 [적용 내역](playbook-audit.md)에서 전수조사 CLI, HAR/REA 정제, Rust agent-browser의 격리 fixture runner를 추가했다. 바이너리는 설치했으나 Canary·Stable 데몬 연결이 실패해 브라우저 실증은 미통과다. Rust 컴파일·성능 측정은 수행하지 않았다. [전수조사 결과](../verification/playbook-audit-2026-10-15/README.md)의 새 HTTP 표본과 기존 영수증을 구분한다.
 
 ## 결정
 

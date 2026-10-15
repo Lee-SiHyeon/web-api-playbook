@@ -16,6 +16,7 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 |---|---|
 | [SKILL.md](SKILL.md) | 에이전트가 따르는 전환 절차와 증거 기준 |
 | [공통 도구](references/runtime-modules.md) | origin별 HTTP 세션, 쿠키 회전, DPAPI, 잠금, 쓰기 저널 |
+| [전수조사·REA 증거 연결](references/playbook-audit.md) | 모든 등록 기능·실행기 후보·테스트·저장 증거 조사, HAR/REA 정제와 격리 브라우저 fixture ([2026-10-15 결과](verification/playbook-audit-2026-10-15/README.md)) |
 | [웹 로그인 실행기](references/web-login-usage.md) | MyRealTrip·LinkPrice·[Inpock](references/inpock-login.md) 비밀번호 로그인, Coupang 웹 세션, X 요청별 transaction ID와 조회 CLI |
 | [Gabia 도메인·DNS](references/gabia-login-dns.md) | 정상 Google UI 로그인 뒤 메모리 내 세션 handoff, owner-bound pure HTTP 도메인·DNS 조회, 공개 recursive DNS와 로컬 레코드 계획 |
 | [아고다 공개 요금·행사](references/agoda-http.md) | 알려진 16개 숙소의 날짜별 KRW 요금과 행사 카드 direct HTTP, 독립 계약·부분 제공 범위 표시 |
