@@ -38,3 +38,23 @@ Plain `curl`, Chrome UA, **one GET at a time**, ≥5 s apart, stop on bot-check/
 - No inline `skuPrice` / `formattedPrice` / price JSON; client loaders (`pdp-pc`, `cosmos`, `LWSC-G`) imply MTop/XHR for price
 - Conclusion unchanged: **title/SEO shell reachable keyless with proper browser-like Accept headers; price still not available without authenticated/official API (or browser challenge path we do not automate)**
 
+## Browser netcap follow-up (2026-10-15 ~00:14 KST)
+
+Source: `/workspace/captures/2026-10-14T15-14-10-750Z` (real Chrome session on `ko.aliexpress.com` PDP + search). Contracts: `verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json` (14 first-party; full HAR had 477 inventory rows, mostly CDN/tracker).
+
+| Call | Status | Bytes | Notes |
+|---|---|---|---|
+| `GET acs.aliexpress.com/h5/mtop.aliexpress.pdp.pc.query/1.0/` | 200 | ~195 KB | **Succeeded** in browser (signed `appKey`+`sign`+`t`+`data`). Earlier 2026-10-05 anonymous Playwright saw `/_____tmd_____/punish` for the same API. |
+| `GET .../mtop.aliexpress.review.pc.list/1.0/` | 200 | ~15 KB | Reviews list; same signed MTop shape. |
+| `GET ko.aliexpress.com/aeglodetailweb/api/seo/seodata` | 200 | ~7 KB | Matches existing keyless `productSeo` contract. |
+| `GET pdp.aliexpress-media.com/product/{id}/pc/v2/ko_KR/desc.htm` | 200 | ~32 KB | Description HTML; query has `productId`, `sellerId`, `token`, `v`. |
+| recommend / cart.count / cookie.render / poplayer | 200 | small | Session/UI; not catalog price. |
+
+Conclusion update: **PDP business payload is reachable as `headless_assisted_http` / browser-session MTop** (signed query), not as anonymous keyless pure HTTP. Keyless path remains sitemap IDs + `getProductSeo` only. Next step when wanted: replay `pdp.pc.query` with captured sign fields from a sanctioned session store (no CAPTCHA solve), or use Portals official API for price.
+
+## Browser-free MTop replay test (2026-10-15 ~10:50 KST)
+
+- Offline check on the 00:14 KST HAR: `sign == md5(_m_h5_tk token & t & appKey & data)` for every `pdp.pc.query` / `review.pc.list` call that carried `_m_h5_tk` (appKey `12574478`, jsv 2.5.1). Signing itself is reproducible; the successful browser session also carried `x5sec` + `cna`.
+- PDP payload in the browser capture has KRW price fields (`formatedAmount`, `salePriceString`), so this is the price source.
+- Pure HTTP (`requests`, Chrome UA, home hop for cookies, then one signed MTop GET 6 s later): home **200 ok**, MTop **200 but `FAIL_SYS_USER_VALIDATE` / `RGV587_ERROR::SM`** (anti-bot challenge), no `_m_h5_tk` issued. Stopped after 1 MTop call (no retry, no challenge solve).
+- Conclusion: AliExpress price is **not** reachable keyless browser-free from this egress. Options: (a) browser-session assisted (real browser obtains `_m_h5_tk`/`x5sec`/`cna`, store in DB, HTTP client replays until expiry), or (b) official AliExpress Portals/Affiliate API (needs app key).
