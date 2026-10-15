@@ -1,16 +1,17 @@
 # 쿠팡 일반 상품과 트래블 HTTP 탐색
 
-2026-10-15 Canary의 실제 메뉴·상품 클릭으로 일반 검색, 정렬/필터, 홈 탭과 트래블을 관측하고 독립 Node HTTP reader를 추가했다. 브라우저는 계약 발견과 화면 대조에만 사용한다. 반복 수집 경로는 `fetch`와 HTML/JSON 파서이며 브라우저·쿠키·인증 공급자를 사용하지 않는다.
+2026-10-15 Canary의 실제 메뉴·상품 클릭으로 일반 검색, 정렬/필터, 홈 탭과 트래블을 관측하고 독립 Node HTTP reader를 추가했다. 트래블은 쿠키 없이 읽는다. 일반 검색 Document는 기존 `coupang-visitor-context`의 HTTP 발급 방문자 쿠키를 기본으로 사용한다. RSC reader는 관측한 입력을 메모리로 받아 별도 Node HTTP 프로세스에서 실행하며, 반복 입력의 브라우저 의존성 제거는 아직 완료하지 않았다.
 
-**전체 탐색은 부분 완료다.** 일반 검색의 익명 Document GET은 403이고, 브라우저에서 관측한 RSC 응답의 전체 본문·입력 계약도 확보하지 못했다. 트래블의 사용 가능한 계약은 실제 하위 카테고리, 다음 페이지, 상세·옵션·후기에 적용했다. 미처리 목록은 저장돼 있으며 백그라운드 작업이 실행 중인 것은 아니다.
+**전체 탐색은 부분 완료다.** 일반 검색 RSC의 실제 입력과 전체 본문을 확보했고 주 목록 60개의 ID·이름을 DOM과 대조했다. 그러나 쿠키 없는 요청과 HTTP 발급 방문자 쿠키를 보낸 독립 RSC 재현은 모두 403이다. 트래블의 사용 가능한 계약은 실제 하위 카테고리, 다음 페이지, 상세·옵션·후기에 적용했다. 미처리 목록은 저장돼 있으며 백그라운드 작업이 실행 중인 것은 아니다.
 
 ## 현재 확인 범위
 
 | 범위 | 실제 확인 | 남은 경계 |
 |---|---|---|
 | 홈 카테고리 | 공개 `category-list` JSON 200, 메뉴 노드 3,228개 | 메뉴 수는 상품 목록 수가 아니다 |
-| 일반 상품 검색 | `무선 마우스` 결과, 낮은가격순, 무료배송을 UI로 확인; Fetch 200 `text/x-component` 관측 | RSC 본문·완전한 입력값 미확보. 별도 Document 클라이언트의 실제 익명 요청은 403 |
-| 일반 카테고리 | 가전디지털 목록과 다음 링크로 2페이지 UI 확인 | 익명 Document GET 403. 저장된 `coupang-search`/`coupang-consumer` 공급자 없음; 인증 세션을 사용한 재현은 미검증 |
+| 일반 상품 검색 | 기본·가격순·무료배송 UI 확인. 새 검색 탭의 RSC 200 본문에서 주 목록 60개를 추출, 60/60 ID·이름 일치 | Document와 RSC의 직접 재현은 쿠키 없음/방문자 쿠키 모두 403. 브라우저 쿠키를 복사한 재현은 수행하지 않음 |
+| 일반 카테고리 | 가전디지털 목록 60개와 다음 링크로 2페이지 UI 확인 | 방문자 쿠키를 보낸 1·2페이지 Document GET도 403 |
+| 일반 상품 공개 가격 | 기존 방문자 부트스트랩 200, 정확한 SKU의 offer-list 200. Document 거부 전후 동일 방문자로 일반가 13,200원 확인 | 회원 적용가는 미검증. 공개 후기 JSON은 별도 envoy 403 |
 | 다른 홈 탭 | 로켓배송, 로켓프레시, 로켓직구, 판매자특가, 와우회원할인, 반품마켓, 착한상점, 이달의신상, 기획전, 골드박스 UI 관측 | 탭 방문은 모든 하위 기능의 HTTP 성공이 아니다. 다시 구매는 클릭 후 브라우저 도구 오류, 쿠팡비즈 계정 흐름은 미검증 |
 | 트래블 대분류 | 국내 티켓·호텔·펜션·패키지·렌터카, 해외 패키지·항공+호텔·티켓·숙소·실시간항공권 10개 UI 관측 | 실시간항공권 iframe 탐색은 도구 오류로 미검증 |
 | 트래블 카테고리/페이지 | 하위 navigation 54회 첫 탐색, 이후 수정·페이지 진행. 최종 고유 HTTP 자원 138개, 목록 자원 103개 | 목록 자원에는 목록을 담은 category navigation도 포함. 전체 재고 분모는 미상 |
@@ -38,6 +39,21 @@ npm run coupang:public -- reviews --product-id=10000011240833 --page=1 --sort=OR
 
 `retail-search`는 일반 상품 Document reader이며 현재 라이브 성공을 보장하지 않는다. `search`는 트래블 JSON reader다. Document는 `document --url=<관측한 공개 주소>`로 읽는다. 허용한 읽기 경로만 전송하며 로그인 HTML·SPA 빈 껍데기·다른 상품 ID·잘못된 페이지를 성공으로 처리하지 않는다. 옵션의 19자리 ID는 응답의 정확한 문자열을 사용한다.
 
+### 방문자 쿠키와 403 진단
+
+앞선 `retail-search-live.json`은 쿠키 없는 진단이었다. 기존 익명 상품 로직은 `GET /n-api/web-adapter/proxy`로 발급된 `PCID`, 언어·시장 쿠키만 메모리에서 재사용한다. 계정 쿠키와 bot-management 쿠키는 포함하지 않는다. 이 로직을 일반 검색·카테고리와 별도 관측된 RSC 범위에 연결했다. `retail-search --anonymous`는 명시적 쿠키 없는 진단이며, `document --visitor`는 허용된 일반 검색·카테고리에만 적용된다.
+
+```powershell
+npm run coupang:visitor:check -- --out=work/visitor-check.json
+npm run coupang:retail:diagnose -- --compare-403 --out=work/retail-diagnostic.json
+```
+
+비교 진단은 사용자 요청에 따른 명시적 실행이다. 한 방문자와 실제 네이티브 fetch 헤더를 유지하며 가격순, 무료배송, 홈 Referer, Node HTTP/2, 카테고리 1·2페이지를 비교한다. 모든 Document 변형은 `AkamaiGHost` 403이었다. 동일 방문자의 offer-list는 비교 전후 `envoy` 200이었다. 후기 JSON의 `envoy` 403은 다른 응답 계열로 보존한다. 일반 수집기는 거부 후 중단하며, 진단도 재발급·방문자 교체·자동 재시도 없이 진행하고 401/418/429 또는 상호작용형 challenge에서 중단한다.
+
+새 탭에서 CDP Network 연결을 복구하고 실제 가격순 클릭의 Fetch 요청·응답을 연결했다. 브라우저 RSC는 `h2`, `envoy`, 200 `text/x-component`였다. 쿠키 이름 관측에는 PCID와 bot-management 상태가 포함됐지만, 특정 쿠키나 TLS 특성이 성공에 필수라고 입증한 것은 아니다. 사용자 계정 로그인이 필요하다는 결론도 아니다. 기존 탭의 React #418과 paused Document 오류는 별도로 기록했다. React #418은 HTTP 상태가 아니라 서버 HTML과 클라이언트 초기 화면의 불일치를 뜻한다. [React 공식 설명](https://react.dev/errors/418).
+
+`scripts/coupang-rsc-probe.mjs`는 `_rsc`와 라우터 헤더를 포함한 관측 입력을 **stdin 메모리**로만 받는다. `--visitor` 유무 두 실행 모두 현재 403이다. `_rsc` 생성·갱신을 구현했다고 주장하지 않는다. `lib/retail/coupang-rsc.mjs`는 RSC 모델의 주요 `products` 배열만 읽고 추천 19개와 광고 추적 정보는 제외한다. 캡처 본문의 한글 디코딩 보정은 DOM 60/60 대조로 검증했으며, 직접 HTTP 파서는 받은 바이트를 UTF-8로 해석한다.
+
 ## 재귀 탐색과 재개
 
 `verification/coupang-discovery-2026-10-15/resource-frontier.json`에 홈페이지 두 곳, 관측 부모 관계, 각 URL의 HTTP 결과·시도 횟수, 날짜/옵션 구분, 다음 페이지와 미처리 옵션을 저장한다. 카테고리 기본 필터의 중복만 합치며 대여/숙박 날짜와 상품 옵션은 별도 자원으로 유지한다. 같은 frontier를 동시에 두 프로세스에서 실행하지 않는다.
@@ -59,8 +75,9 @@ npm run coupang:crawl -- --phase=travel-reviews --max=24
 | 계약 | captured | client_exists | remnant_free | credential_propagated | live_replay |
 |---|---|---|---|---|---|
 | 일반 카테고리 메뉴 JSON | true | true | true | 익명, 해당 없음 | true |
-| 일반 검색 RSC Fetch | 메타데이터만; 필수 입력·본문 미완료 | false | 해당 없음 | 미검증 | false |
-| 일반 검색/카테고리 Document | 현재 요청/응답 쌍 미확보 | true | true | 익명, 해당 없음 | false, 403 |
+| 일반 검색 RSC Fetch | true, 가격순 클릭의 입력·본문 | true | HTTP 전송만; 반복 입력 공급 미완료 | 계정 인증 해당 없음; 방문자 전송 확인 | false, 독립 재현 403 |
+| 일반 검색/카테고리 Document | 현재 요청/응답 쌍 미확보 | true | true | 계정 인증 해당 없음; 방문자 전송 확인 | false, 403 |
+| 일반 상품 offer-list | 기존 관측 계약 | true | true | 계정 인증 해당 없음; 방문자 전송 확인 | true, 정확한 SKU·비교 전후 |
 | 트래블 category Document 계열 | true | true | true | 익명, 해당 없음 | true, 처리한 자원만 |
 | 트래블 home/detail Document | 현재 요청/응답 쌍 미확보 | true | true | 익명, 해당 없음 | true, 처리한 자원만 |
 | 트래블 autocomplete/search/rooms/ticket-options/reviews JSON | true | true | true | 익명, 해당 없음 | true, 기록된 입력만 |
@@ -72,6 +89,7 @@ npm run coupang:crawl -- --phase=travel-reviews --max=24
 
 ```powershell
 node --test tests/coupang-public.test.mjs tests/coupang-frontier.test.mjs
+node --import ./scripts/coupang-offline-guard.mjs --test tests/coupang-retail-visitor.test.mjs tests/coupang-retail-diagnostic.test.mjs tests/coupang-rsc.test.mjs service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-visitor-context.test.mjs
 npm run coupang:verify
 ```
 
@@ -82,5 +100,7 @@ npm run coupang:verify
 - [재개할 탐색 목록](../verification/coupang-discovery-2026-10-15/resource-frontier.json)
 - [대표 온톨로지 투영](../verification/coupang-discovery-2026-10-15/ontology-projections.json), [수집 receipt별 JSONL](../verification/coupang-discovery-2026-10-15/ontology-crawl-projections.jsonl)
 - [렌터카 옵션 화면](../verification/coupang-discovery-2026-10-15/travel-rental-options.jpg)
+- [방문자 비교 진단](../verification/coupang-discovery-2026-10-15/retail-403-variants-live.json), [RSC 캡처와 DOM 대조](../verification/coupang-discovery-2026-10-15/retail-rsc-capture.json)
+- [RSC 쿠키 없는 직접 재현](../verification/coupang-discovery-2026-10-15/retail-rsc-anonymous-replay.json), [방문자 직접 재현](../verification/coupang-discovery-2026-10-15/retail-rsc-visitor-replay.json), [검색 화면](../verification/coupang-discovery-2026-10-15/retail-rsc-browser.jpg)
 
 `projectCoupangTravel`은 `productId`, package ID, vendor item ID를 구분하고 가격마다 날짜·인원·회원 조건·증거 해시를 붙인다. public 가격이 없는 경우 0원으로 채우지 않는다. 데이터베이스 반영은 수행하지 않았으며 `databaseWrites=0`이다. 원시 응답의 session/search tracking, access pass, booking block, 사용자 신원은 출력에서 제외한다.

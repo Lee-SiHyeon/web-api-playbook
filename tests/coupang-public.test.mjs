@@ -82,12 +82,12 @@ test('room response must match the requested hotel identity',async()=>{
 });
 
 test('retail search uses observed public fields and never promotes a navigation shell into search success',async()=>{
-  await assert.rejects(readCoupangRetailSearch('무선 마우스',{sorter:'salePriceAsc',freeDelivery:true,fetchImpl:async(url,init)=>{
+  await assert.rejects(readCoupangRetailSearch('무선 마우스',{authentication:'anonymous',sorter:'salePriceAsc',freeDelivery:true,fetchImpl:async(url,init)=>{
     const u=new URL(url);assert.equal(u.pathname,'/np/search');assert.equal(u.searchParams.get('q'),'무선 마우스');
     assert.equal(u.searchParams.get('filterType'),'free');assert.equal(init.headers.cookie,undefined);
     return new Response('<title>Access Denied</title>',{status:403});
   }}),{code:'COUPANG_HTTP_403'});
-  await assert.rejects(readCoupangRetailSearch('mouse',{fetchImpl:async()=>new Response('<a href="/np/categories/1">category</a>',{headers:{'content-type':'text/html'}})}),{code:'COUPANG_RETAIL_LISTING_MISSING'});
+  await assert.rejects(readCoupangRetailSearch('mouse',{authentication:'anonymous',fetchImpl:async()=>new Response('<a href="/np/categories/1">category</a>',{headers:{'content-type':'text/html'}})}),{code:'COUPANG_RETAIL_LISTING_MISSING'});
   const html=await fixture('retail-search-dom.html');
   const listing=parseCoupangDocument(html+'<a href="/np/categories/178255?page=2">다음</a>','https://www.coupang.com/np/categories/178255');
   assert.equal(listing.pagination.hasNext,true);assert.equal(listing.pagination.nextUrl,'https://www.coupang.com/np/categories/178255?page=2');

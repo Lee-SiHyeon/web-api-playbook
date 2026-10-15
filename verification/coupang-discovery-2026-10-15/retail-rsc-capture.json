@@ -1,0 +1,87 @@
+{
+  "schema": "coupang-rsc-capture-v1",
+  "capturedAt": "2026-10-15T02:29:51.345Z",
+  "action": "clicked observed related-search link then lowest-price label",
+  "request": {
+    "origin": "https://www.coupang.com",
+    "path": "/np/search",
+    "method": "GET",
+    "resourceType": "Fetch",
+    "query": {
+      "q": "무선마우스",
+      "channel": "relate",
+      "sorter": "salePriceAsc"
+    },
+    "runtimeQueryFields": [
+      "_rsc"
+    ],
+    "headerNames": [
+      ":authority",
+      ":method",
+      ":path",
+      ":scheme",
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "cookie",
+      "next-router-state-tree",
+      "next-url",
+      "priority",
+      "referer",
+      "rsc",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-agent"
+    ],
+    "cookieNames": [
+      "x-coupang-target-market",
+      "x-coupang-accept-language",
+      "PCID",
+      "bm_so",
+      "bm_sz",
+      "bm_s",
+      "_abck"
+    ],
+    "inputValuesPersisted": false
+  },
+  "response": {
+    "status": 200,
+    "mime": "text/x-component",
+    "protocol": "h2",
+    "server": "envoy",
+    "capturedTextLength": 1609156,
+    "rawBodyStored": false
+  },
+  "projection": {
+    "mainListProducts": 60,
+    "recommendationProductsExcluded": 19,
+    "domProductRows": 62,
+    "exactIdentityAndTitleMatches": 60,
+    "fixture": "tests/fixtures/coupang/retail-rsc-list.json",
+    "captureTextDecoding": "Windows-1252 to UTF-8 repair for CDP text only, verified against DOM",
+    "maintainedParserReadFullCapturedBody": true,
+    "maintainedParserCount": 60,
+    "maintainedParserExactDomMatches": 60
+  },
+  "directReplay": {
+    "anonymous": {
+      "status": 403,
+      "server": "AkamaiGHost"
+    },
+    "httpIssuedVisitor": {
+      "status": 403,
+      "server": "AkamaiGHost"
+    }
+  },
+  "browserRecovery": {
+    "freshTabNetworkEnabled": true,
+    "rscBodyCaptured": true,
+    "priorTabPausedDocument": true,
+    "react418Observed": true
+  },
+  "writesSubmitted": 0
+}

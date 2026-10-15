@@ -47,11 +47,41 @@ for(const file of crawlFiles){const run=await read(dir+'crawl/'+file);if(!run.ok
 const blocked=[];
 for(const file of ['retail-search-live.json','retail-category-live.json']){
  const run=await read(dir+file);assert.equal(run.ok,false);assert.equal(run.request.httpStatus,403);assert.equal(run.states.live_replay,false);
- blocked.push({file:dir+file,checkedAt:run.checkedAt,httpStatus:403,mode:'anonymous',cause:'unknown',protectedSessionReplay:'unverified'});
+ blocked.push({file:dir+file,checkedAt:run.checkedAt,httpStatus:403,mode:'cookie_free',cause:'unknown',protectedSessionReplay:'unverified'});
 }
+const visitor=await read(dir+'retail-visitor-live.json');
+assert.equal(visitor.visitorContextCount,1);assert.equal(visitor.rebootstrapAllowed,false);
+assert.equal(visitor.runs[0].receipt.visitorBootstrap.status,200);assert.equal(visitor.runs[0].receipt.status,200);
+assert.equal(visitor.runs[0].selectedOffer.price.amount,13200);assert.equal(visitor.runs[1].receipt.httpStatus,403);
+assert.equal(visitor.runs[1].receipt.cookieSent,true);assert.equal(visitor.runs[1].receipt.visitorBootstrap,null);
+const diagnostic=await read(dir+'retail-403-variants-live.json');
+assert.equal(diagnostic.nativeNetwork,true);assert.equal(diagnostic.bootstrapRequests,1);assert.equal(diagnostic.identityPreserved,true);
+assert.equal(diagnostic.runs.length,9);assert.equal(diagnostic.stopped,null);
+for(const name of ['offer_control_before','offer_control_after']) {
+ const row=diagnostic.runs.find(x=>x.name===name);assert.equal(row.ok,true);assert.equal(row.receipt.status,200);assert.equal(row.price.amount,13200);
+}
+for(const row of diagnostic.runs.filter(x=>!x.ok)){assert.equal(row.receipt.httpStatus??row.receipt.status,403);}
+const rscCapture=await read(dir+'retail-rsc-capture.json');
+assert.equal(rscCapture.response.status,200);assert.equal(rscCapture.response.mime,'text/x-component');
+assert.equal(rscCapture.projection.mainListProducts,60);assert.equal(rscCapture.projection.exactIdentityAndTitleMatches,60);
+assert.equal(rscCapture.projection.maintainedParserReadFullCapturedBody,true);
+assert.equal(rscCapture.projection.maintainedParserCount,60);assert.equal(rscCapture.projection.maintainedParserExactDomMatches,60);
+const rscReplays=[];
+for(const file of ['retail-rsc-anonymous-replay.json','retail-rsc-visitor-replay.json']){
+ const run=await read(dir+file);assert.equal(run.ok,false);assert.equal(run.receipt.status,403);assert.equal(run.receipt.server,'AkamaiGHost');
+ assert.equal(run.states.live_replay,false);rscReplays.push({file:dir+file,mode:run.receipt.authenticationMode,status:403,cookieSent:run.receipt.cookieSent});
+}
+const retailDiagnostics={visitorReceipt:dir+'retail-visitor-live.json',comparisonReceipt:dir+'retail-403-variants-live.json',
+ visitorBootstrapStatus:200,publicOfferStatusBeforeAndAfter:[200,200],publicOfferGeneralPriceKrw:13200,
+ documentVariants:diagnostic.runs.filter(x=>!x.name.startsWith('offer_')&&x.name!=='review_json').map(x=>({name:x.name,status:x.receipt.httpStatus,server:x.receipt.server})),
+ reviewStatus:diagnostic.runs.find(x=>x.name==='review_json').receipt.status,
+ rscCapture:{file:dir+'retail-rsc-capture.json',status:200,products:60,exactDomMatches:60},rscReplays,
+ conclusions:['PCID bootstrap and public offer JSON work in the same identity before and after Document denials.',
+ 'RSC capture and parser are complete for the observed sorted-search response; independent cookie-free and visitor replays still return 403.',
+ 'AkamaiGHost denial is observed; the exact rule and browser-state requirement are not established.']};
 // Fail without printing any value if future evidence accidentally contains runtime identifiers.
 let evidenceFiles=0;
-const sensitive=/^(?:coupangApp|pcid|uuid|memberSrl|feedId|nextPageKey|continuationToken|accessPasses?|blockId|searchId|searchGroupId|q2cId|token|session|cookie|authorization)$/i;
+const sensitive=/^(?:coupangApp|pcid|uuid|memberSrl|feedId|nextPageKey|continuationToken|accessPasses?|blockId|searchId|searchGroupId|q2cId|token|session|cookie|authorization|_rsc|next-router-state-tree)$/i;
 function inspect(value,shape=false){
  if(typeof value==='string'){
    if(shape)assert.ok(['string','number','boolean','null','undefined','array','object'].includes(value),'EVIDENCE_BODY_SHAPE_VALUE');
@@ -69,13 +99,16 @@ for(const file of await readdir(new URL(dir,root),{recursive:true}))if(file.ends
  inspect(await read(dir+file));evidenceFiles++;
 }
 const implementationAtVerification={};for(const file of ['lib/retail/coupang-public.mjs','lib/retail/coupang-frontier.mjs','lib/retail/coupang-ontology.mjs',
- 'scripts/coupang-public.mjs','scripts/coupang-crawl.mjs','scripts/verify-coupang-public.mjs','tests/coupang-public.test.mjs','tests/coupang-frontier.test.mjs'])
+ 'scripts/coupang-public.mjs','scripts/coupang-crawl.mjs','scripts/verify-coupang-public.mjs','tests/coupang-public.test.mjs','tests/coupang-frontier.test.mjs',
+ 'lib/retail/coupang-rsc.mjs','scripts/coupang-retail-diagnostic.mjs','scripts/coupang-retail-visitor-check.mjs','scripts/coupang-rsc-probe.mjs',
+ 'tests/coupang-retail-diagnostic.test.mjs','tests/coupang-retail-visitor.test.mjs','tests/coupang-rsc.test.mjs',
+ 'service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-visitor-context.mjs'])
  implementationAtVerification[file]=hash(await readFile(new URL(file,root)));
 const report={schema:'coupang-public-verification-v1',verifiedAt:new Date().toISOString(),networkUsed:false,
- verifier:'scripts/verify-coupang-public.mjs',records,blocked,crawl,coverage:coupangCoverage(frontier),implementationAtVerification,
+ verifier:'scripts/verify-coupang-public.mjs',records,blocked,crawl,retailDiagnostics,coverage:coupangCoverage(frontier),implementationAtVerification,
  evidenceAudit:{jsonFiles:evidenceFiles,runtimeIdentifierFindings:0},
  limitations:['Entire catalog is not complete. Pending resource and nested-operation frontiers are preserved.',
- 'General retail browser navigation succeeds; anonymous search/category Document reads return 403. Protected session replay is not verified.',
+ 'General retail browser RSC returns 60 matching products; cookie-free and HTTP-issued visitor RSC replays and Document variants return 403. Public offer JSON remains usable.',
  'Flight iframe search is not verified. Membership prices are advertised values, not verified account checkout totals.',
  'Early live receipts predate later metadata/parser repairs; implementation digests describe code at verification time.']};
 await writeFile(new URL(dir+'verification.json',root),JSON.stringify(report,null,2)+'\n');

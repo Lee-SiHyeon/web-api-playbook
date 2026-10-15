@@ -1,6 +1,6 @@
 {
   "schema": "coupang-public-verification-v1",
-  "verifiedAt": "2026-10-15T01:56:11.719Z",
+  "verifiedAt": "2026-10-15T02:37:22.085Z",
   "networkUsed": false,
   "verifier": "scripts/verify-coupang-public.mjs",
   "records": [
@@ -139,7 +139,7 @@
       "file": "verification/coupang-discovery-2026-10-15/retail-search-live.json",
       "checkedAt": "2026-10-15T01:46:50.496Z",
       "httpStatus": 403,
-      "mode": "anonymous",
+      "mode": "cookie_free",
       "cause": "unknown",
       "protectedSessionReplay": "unverified"
     },
@@ -147,7 +147,7 @@
       "file": "verification/coupang-discovery-2026-10-15/retail-category-live.json",
       "checkedAt": "2026-10-15T01:24:23.359Z",
       "httpStatus": 403,
-      "mode": "anonymous",
+      "mode": "cookie_free",
       "cause": "unknown",
       "protectedSessionReplay": "unverified"
     }
@@ -160,6 +160,74 @@
     "detailDocuments": 24,
     "optionReads": 24,
     "reviewReads": 46
+  },
+  "retailDiagnostics": {
+    "visitorReceipt": "verification/coupang-discovery-2026-10-15/retail-visitor-live.json",
+    "comparisonReceipt": "verification/coupang-discovery-2026-10-15/retail-403-variants-live.json",
+    "visitorBootstrapStatus": 200,
+    "publicOfferStatusBeforeAndAfter": [
+      200,
+      200
+    ],
+    "publicOfferGeneralPriceKrw": 13200,
+    "documentVariants": [
+      {
+        "name": "search_sorted",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "search_free_delivery",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "search_home_referer",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "search_native_http2",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "category_default",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "category_page2",
+        "status": 403,
+        "server": "AkamaiGHost"
+      }
+    ],
+    "reviewStatus": 403,
+    "rscCapture": {
+      "file": "verification/coupang-discovery-2026-10-15/retail-rsc-capture.json",
+      "status": 200,
+      "products": 60,
+      "exactDomMatches": 60
+    },
+    "rscReplays": [
+      {
+        "file": "verification/coupang-discovery-2026-10-15/retail-rsc-anonymous-replay.json",
+        "mode": "anonymous",
+        "status": 403,
+        "cookieSent": false
+      },
+      {
+        "file": "verification/coupang-discovery-2026-10-15/retail-rsc-visitor-replay.json",
+        "mode": "visitor",
+        "status": 403,
+        "cookieSent": true
+      }
+    ],
+    "conclusions": [
+      "PCID bootstrap and public offer JSON work in the same identity before and after Document denials.",
+      "RSC capture and parser are complete for the observed sorted-search response; independent cookie-free and visitor replays still return 403.",
+      "AkamaiGHost denial is observed; the exact rule and browser-state requirement are not established."
+    ]
   },
   "coverage": {
     "complete": false,
@@ -202,22 +270,30 @@
     }
   },
   "implementationAtVerification": {
-    "lib/retail/coupang-public.mjs": "1aa821144a32b83ad2484d4fbdee82bae5af194bdd36c2891c1dc806158db1e0",
+    "lib/retail/coupang-public.mjs": "5b015c93f896f6d3614a9bba07d1ef0a80614bfa6e4c9ae7e3265a33a42503f1",
     "lib/retail/coupang-frontier.mjs": "fb3b970b90bd1a5e100a0e5708fb0b79dca8fafdc318ef62eb7b73170a6a1c3e",
     "lib/retail/coupang-ontology.mjs": "b6dbc0a826b89b6184a9058122dee04dcbb2cf260cf95e0d3f3fca0501fc3f4f",
-    "scripts/coupang-public.mjs": "160b2c6f6d5c8d2bef3f10b79067a5a5d5e790a6de18d73833c34f1aee39db4a",
+    "scripts/coupang-public.mjs": "00b186e5f92a48eb9934ed9ac8ca92d7a0c24eb1eabb09198bcd34b681bd3bba",
     "scripts/coupang-crawl.mjs": "6ee7fe1fd544b0a2ce728f1801781e6b12bda91e6378cf783440e4c9d26b1870",
-    "scripts/verify-coupang-public.mjs": "97573a850d504582c760284c937ffe9f16360163883412c3f467e8cfac5e618d",
-    "tests/coupang-public.test.mjs": "ec8fb3f11230db4c7a04e6bd6b00cd2ed7966d84b6b072a2bdd6816a316caee9",
-    "tests/coupang-frontier.test.mjs": "463f33827c800fa6a438caea3bb22828c62ce7278b63bfd3930a0d3ffd89e832"
+    "scripts/verify-coupang-public.mjs": "f95a52c9b0dec30f6836af3c477c3ea7a185ea494cd5eedfdd2fdf76758b6c61",
+    "tests/coupang-public.test.mjs": "123c955309c41214958f19fe2b6c6f1fc40a905c882cf87717e6cd7c5e028754",
+    "tests/coupang-frontier.test.mjs": "463f33827c800fa6a438caea3bb22828c62ce7278b63bfd3930a0d3ffd89e832",
+    "lib/retail/coupang-rsc.mjs": "f81d210d26fbf9fb00de774502cae06ccfb0a8113fce7abd8608732e4cce5404",
+    "scripts/coupang-retail-diagnostic.mjs": "1d000b96d4d487632b3eb82adfcebc1a003dd4488d41fa551440c71b76c44a03",
+    "scripts/coupang-retail-visitor-check.mjs": "0ec2015b859e60602375935d159415db88c3ca961c03f701dc3391ced663ae6e",
+    "scripts/coupang-rsc-probe.mjs": "63f432f3d4d02f9a4f028732a84a52ac5c177f3204c911a8ea61559d221c7429",
+    "tests/coupang-retail-diagnostic.test.mjs": "34f634db57c168daf24a518c24ca5062cb6957d18e58652193c6559ebc7077b8",
+    "tests/coupang-retail-visitor.test.mjs": "0845bb3777326081ba3bd600f27764084a5c684bf240aef8373c30acb407e144",
+    "tests/coupang-rsc.test.mjs": "5d8d093ae71147e19804681eda225909e0dab4ed928b1a0532e1fd98e9127216",
+    "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-visitor-context.mjs": "30cc1c74382118fcf7f5a7c6a7d1815e16fd6584e3fa9c7174c5e6562f8aaf2f"
   },
   "evidenceAudit": {
-    "jsonFiles": 249,
+    "jsonFiles": 257,
     "runtimeIdentifierFindings": 0
   },
   "limitations": [
     "Entire catalog is not complete. Pending resource and nested-operation frontiers are preserved.",
-    "General retail browser navigation succeeds; anonymous search/category Document reads return 403. Protected session replay is not verified.",
+    "General retail browser RSC returns 60 matching products; cookie-free and HTTP-issued visitor RSC replays and Document variants return 403. Public offer JSON remains usable.",
     "Flight iframe search is not verified. Membership prices are advertised values, not verified account checkout totals.",
     "Early live receipts predate later metadata/parser repairs; implementation digests describe code at verification time."
   ]

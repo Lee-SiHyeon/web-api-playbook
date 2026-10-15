@@ -187185,7 +187185,9 @@
       "operation": "Network.getResponseBody",
       "state": "blocked_runtime",
       "evidence": "Raw CDP unavailable while paused document response is resolving; readEvents remains available",
-      "observedAt": "2026-10-15T01:00:49.516Z"
+      "observedAt": "2026-10-15T01:00:49.516Z",
+      "recoveryObservedAt": "2026-10-15T02:29:51.345Z",
+      "recoveryScope": "Fresh related-search tab RSC request and response body; historical paused Document still recorded"
     },
     {
       "operation": "flight-iframe",
@@ -187239,7 +187241,7 @@
       }
     }
   },
-  "updatedAt": "2026-10-15T01:54:19.819Z",
+  "updatedAt": "2026-10-15T02:33:19.346Z",
   "unresolvedRoutes": [
     {
       "url": "https://www.coupang.com/np/fbi",
@@ -188638,7 +188640,7 @@
       "operation": "retail-search-document",
       "receipt": "retail-search-live.json",
       "status": 403,
-      "mode": "anonymous",
+      "mode": "cookie_free",
       "cause": "unknown",
       "protectedSessionReplay": "unverified"
     },
@@ -188646,16 +188648,44 @@
       "operation": "retail-category-document",
       "receipt": "retail-category-live.json",
       "status": 403,
-      "mode": "anonymous",
+      "mode": "cookie_free",
       "cause": "unknown",
       "protectedSessionReplay": "unverified"
+    },
+    {
+      "operation": "retail-search-category-document-variants",
+      "receipt": "retail-403-variants-live.json",
+      "status": 403,
+      "mode": "http_issued_visitor",
+      "cause": "exact_rule_unknown",
+      "responseServer": "AkamaiGHost",
+      "sameVisitorOfferControlStatuses": [
+        200,
+        200
+      ]
+    },
+    {
+      "operation": "retail-search-rsc",
+      "receipt": "retail-rsc-capture.json",
+      "browserStatus": 200,
+      "directReplayModes": {
+        "cookie_free": 403,
+        "http_issued_visitor": 403
+      },
+      "directResponseServer": "AkamaiGHost",
+      "cause": "exact_rule_unknown"
     }
   ],
   "unresolvedOperations": [
     {
       "operation": "retail_search_rsc",
-      "state": "captured_metadata_only",
-      "reason": "Request/response pair observed; response body and complete input values unavailable through paused Document CDP boundary"
+      "state": "captured_client_blocked_http",
+      "reason": "Fresh tab capture recovered: full RSC body and request inputs observed; 60 exact SKU/title DOM matches. Native HTTP replay with no cookies or HTTP-issued visitor cookies returns 403.",
+      "captureRef": "retail-rsc-capture.json",
+      "replayRefs": [
+        "retail-rsc-anonymous-replay.json",
+        "retail-rsc-visitor-replay.json"
+      ]
     },
     {
       "operation": "rental_all_insurance_options",
@@ -188689,5 +188719,13 @@
       "evidence": "travel-rental-detail DOM URL mapping and search request rentalCar context",
       "newNetworkRequests": 0
     }
-  ]
+  ],
+  "retailDiagnostics": {
+    "visitorProvider": "existing_http_issued_memory_context",
+    "visitorCheckRef": "retail-visitor-live.json",
+    "comparisonRef": "retail-403-variants-live.json",
+    "rscCaptureRef": "retail-rsc-capture.json",
+    "publicOfferReadVerified": true,
+    "listingDirectReplayVerified": false
+  }
 }

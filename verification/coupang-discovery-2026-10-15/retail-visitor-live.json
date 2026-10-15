@@ -1,0 +1,380 @@
+{
+  "schema": "coupang-retail-visitor-check-v1",
+  "checkedAt": "2026-10-15T02:06:26.252Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "ownerCredentialUsed": false,
+  "visitorValuesPersisted": false,
+  "visitorContextCount": 1,
+  "rebootstrapAllowed": false,
+  "writesSubmitted": 0,
+  "productUrl": "https://www.coupang.com/vp/products/6247736560?itemId=12646874013&vendorItemId=79914317500",
+  "runs": [
+    {
+      "operation": "offer_list",
+      "ok": true,
+      "source": "coupang",
+      "sourceScope": "consumer_public_offer_list",
+      "productId": "6247736560",
+      "itemId": "12646874013",
+      "selectedVendorItemId": "79914317500",
+      "offers": [
+        {
+          "type": "RetailOffer",
+          "id": "coupang:6247736560:12646874013:79914317500:offer-list",
+          "sourceId": "coupang",
+          "sourceScope": "consumer_public_offer_list",
+          "identityEvidence": "request_scope",
+          "productId": "6247736560",
+          "itemId": "12646874013",
+          "vendorItemId": "79914317500",
+          "selected": true,
+          "price": {
+            "amount": 13200,
+            "currency": "KRW",
+            "priceKind": "offer_list_general_sale_price",
+            "basis": "public_offer_list"
+          },
+          "priceComponents": {
+            "generalSalePrice": {
+              "amount": 13200,
+              "currency": "KRW",
+              "priceKind": "offer_list_general_sale_price",
+              "basis": "public_offer_list"
+            },
+            "displayedOriginalPrice": {
+              "amount": 19900,
+              "currency": "KRW",
+              "priceKind": "public_displayed_original_price",
+              "basis": "public_offer_list"
+            },
+            "advertisedCouponPrice": null
+          },
+          "originalPriceReadStatus": "valid",
+          "couponPriceReadStatus": "absent",
+          "advertisedWowPrice": null,
+          "wowPriceReadStatus": "not_exposed_by_public_offer_list",
+          "memberPriceVerified": false,
+          "shipping": {
+            "fee": {
+              "amount": 2500,
+              "currency": "KRW",
+              "priceKind": "public_offer_list_shipping_fee",
+              "basis": "public_offer_list"
+            },
+            "sourcePaths": [
+              "vendorItemSaleInfo.deliveryFee.shippingFee",
+              "vendorItemSaleInfo.vendorItemDelivery.shippingFee",
+              "sellerSaleDeliveryInfo.shippingFee"
+            ],
+            "conditions": {
+              "hasSkuBundleConditionalFreeShippingPrice": true,
+              "skuBundleConditionalFreeShippingPrice": 19800,
+              "vendorItemDelivery": {
+                "rocketWowBadge": false,
+                "freeShipOverAmount": 19800,
+                "deliveryChargeType": "CONDITIONAL_FREE"
+              },
+              "sellerSaleDeliveryInfo": {
+                "deliveryChargePolicy": "무료배송 (로켓배송 상품 19,800원 이상 구매 시)"
+              }
+            },
+            "sourceScope": "consumer_public_offer_list",
+            "memberEligibilityVerified": false
+          },
+          "advertisedShipping": null,
+          "shippingFeeEvidence": {
+            "sourceScope": "consumer_public_offer_list",
+            "memberEligibilityVerified": false,
+            "feeCandidates": [
+              {
+                "sourcePath": "vendorItemSaleInfo.deliveryFee.shippingFee",
+                "amount": 2500,
+                "currency": "KRW",
+                "readStatus": "valid"
+              },
+              {
+                "sourcePath": "vendorItemSaleInfo.vendorItemDelivery.shippingFee",
+                "amount": 2500,
+                "currency": "KRW",
+                "readStatus": "valid"
+              },
+              {
+                "sourcePath": "sellerSaleDeliveryInfo.shippingFee",
+                "amount": 2500,
+                "currency": "KRW",
+                "readStatus": "valid"
+              }
+            ],
+            "conditions": {
+              "hasSkuBundleConditionalFreeShippingPrice": true,
+              "skuBundleConditionalFreeShippingPrice": 19800,
+              "vendorItemDelivery": {
+                "rocketWowBadge": false,
+                "freeShipOverAmount": 19800,
+                "deliveryChargeType": "CONDITIONAL_FREE"
+              },
+              "sellerSaleDeliveryInfo": {
+                "deliveryChargePolicy": "무료배송 (로켓배송 상품 19,800원 이상 구매 시)"
+              }
+            },
+            "conditionsReadStatus": "valid"
+          },
+          "shippingReadStatus": "verified",
+          "shippingConditionsReadStatus": "valid",
+          "couponFlags": {
+            "hasCouponDownload": false,
+            "hasAppreciationCoupon": false,
+            "hasNoneAppreciationCoupon": true
+          }
+        }
+      ],
+      "count": 1,
+      "selectedOffer": {
+        "type": "RetailOffer",
+        "id": "coupang:6247736560:12646874013:79914317500:offer-list",
+        "sourceId": "coupang",
+        "sourceScope": "consumer_public_offer_list",
+        "identityEvidence": "request_scope",
+        "productId": "6247736560",
+        "itemId": "12646874013",
+        "vendorItemId": "79914317500",
+        "selected": true,
+        "price": {
+          "amount": 13200,
+          "currency": "KRW",
+          "priceKind": "offer_list_general_sale_price",
+          "basis": "public_offer_list"
+        },
+        "priceComponents": {
+          "generalSalePrice": {
+            "amount": 13200,
+            "currency": "KRW",
+            "priceKind": "offer_list_general_sale_price",
+            "basis": "public_offer_list"
+          },
+          "displayedOriginalPrice": {
+            "amount": 19900,
+            "currency": "KRW",
+            "priceKind": "public_displayed_original_price",
+            "basis": "public_offer_list"
+          },
+          "advertisedCouponPrice": null
+        },
+        "originalPriceReadStatus": "valid",
+        "couponPriceReadStatus": "absent",
+        "advertisedWowPrice": null,
+        "wowPriceReadStatus": "not_exposed_by_public_offer_list",
+        "memberPriceVerified": false,
+        "shipping": {
+          "fee": {
+            "amount": 2500,
+            "currency": "KRW",
+            "priceKind": "public_offer_list_shipping_fee",
+            "basis": "public_offer_list"
+          },
+          "sourcePaths": [
+            "vendorItemSaleInfo.deliveryFee.shippingFee",
+            "vendorItemSaleInfo.vendorItemDelivery.shippingFee",
+            "sellerSaleDeliveryInfo.shippingFee"
+          ],
+          "conditions": {
+            "hasSkuBundleConditionalFreeShippingPrice": true,
+            "skuBundleConditionalFreeShippingPrice": 19800,
+            "vendorItemDelivery": {
+              "rocketWowBadge": false,
+              "freeShipOverAmount": 19800,
+              "deliveryChargeType": "CONDITIONAL_FREE"
+            },
+            "sellerSaleDeliveryInfo": {
+              "deliveryChargePolicy": "무료배송 (로켓배송 상품 19,800원 이상 구매 시)"
+            }
+          },
+          "sourceScope": "consumer_public_offer_list",
+          "memberEligibilityVerified": false
+        },
+        "advertisedShipping": null,
+        "shippingFeeEvidence": {
+          "sourceScope": "consumer_public_offer_list",
+          "memberEligibilityVerified": false,
+          "feeCandidates": [
+            {
+              "sourcePath": "vendorItemSaleInfo.deliveryFee.shippingFee",
+              "amount": 2500,
+              "currency": "KRW",
+              "readStatus": "valid"
+            },
+            {
+              "sourcePath": "vendorItemSaleInfo.vendorItemDelivery.shippingFee",
+              "amount": 2500,
+              "currency": "KRW",
+              "readStatus": "valid"
+            },
+            {
+              "sourcePath": "sellerSaleDeliveryInfo.shippingFee",
+              "amount": 2500,
+              "currency": "KRW",
+              "readStatus": "valid"
+            }
+          ],
+          "conditions": {
+            "hasSkuBundleConditionalFreeShippingPrice": true,
+            "skuBundleConditionalFreeShippingPrice": 19800,
+            "vendorItemDelivery": {
+              "rocketWowBadge": false,
+              "freeShipOverAmount": 19800,
+              "deliveryChargeType": "CONDITIONAL_FREE"
+            },
+            "sellerSaleDeliveryInfo": {
+              "deliveryChargePolicy": "무료배송 (로켓배송 상품 19,800원 이상 구매 시)"
+            }
+          },
+          "conditionsReadStatus": "valid"
+        },
+        "shippingReadStatus": "verified",
+        "shippingConditionsReadStatus": "valid",
+        "couponFlags": {
+          "hasCouponDownload": false,
+          "hasAppreciationCoupon": false,
+          "hasNoneAppreciationCoupon": true
+        }
+      },
+      "coverage": "one_observed_offer_list_response",
+      "privacy": {
+        "vendorNamesStored": false,
+        "vendorContactsStored": false,
+        "rawResponseStored": false
+      },
+      "receipt": {
+        "checkedAt": "2026-10-15T02:06:26.256Z",
+        "operation": "offer_list",
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/next-api/offer-list",
+        "query": {
+          "productId": "6247736560",
+          "itemId": "12646874013",
+          "selectedVendorItemId": "79914317500"
+        },
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 4407,
+        "bodyComplete": true,
+        "responseCookieHeadersAvailable": true,
+        "responseCookieCount": 7,
+        "retryAfterSeconds": null,
+        "durationMs": 447,
+        "execution": "pure_http",
+        "browserUsed": false,
+        "authenticationMode": "visitor",
+        "sessionProvider": "http_issued_memory_visitor",
+        "credentialSent": false,
+        "credentialPropagated": false,
+        "authenticatedOwnerVerified": false,
+        "applicationAuthenticated": null,
+        "cookieRotationApplied": false,
+        "cookieRotationPersisted": false,
+        "transport": "native_fetch",
+        "retry": false,
+        "redirectsFollowed": false,
+        "ownerCredentialUsed": false,
+        "visitorCookiesSent": true,
+        "visitorCookieNames": [
+          "PCID",
+          "x-coupang-accept-language",
+          "x-coupang-target-market"
+        ],
+        "visitorBootstrap": {
+          "operation": "public_visitor_bootstrap",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/n-api/web-adapter/proxy",
+          "status": 200,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "transport": "native_fetch",
+          "ownerCredentialUsed": false,
+          "valuesPersisted": false,
+          "redirectsFollowed": false,
+          "retries": 0,
+          "challengeConfirmed": false,
+          "contentType": "text/html",
+          "bytes": 1735,
+          "responseSha256": "3eb0847506e760a9a04ebafeb5b016b612640c0e6fc29bd1c030ed9eaeaaf1b2",
+          "cookieNames": [
+            "PCID",
+            "x-coupang-accept-language",
+            "x-coupang-target-market"
+          ],
+          "botCookiesAccepted": false,
+          "accountCookiesAccepted": false
+        },
+        "visitorValuesPersisted": false,
+        "server": "envoy",
+        "dpopChallengePresent": false,
+        "responseSha256": "674150004af4be4253276d49e7640525635dfa885b9f994c300de638b6f40b92",
+        "bodyError": null,
+        "challengeConfirmed": false,
+        "accessDeniedTitle": false,
+        "denialSignals": {
+          "requestBlocked": false,
+          "automatedAccess": false,
+          "permissionDenied": false,
+          "loginPage": false
+        },
+        "visitorCookieRotationApplied": false,
+        "applicationStatus": 200
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": false,
+        "live_replay": true
+      }
+    },
+    {
+      "operation": "retail_search_document",
+      "ok": false,
+      "code": "COUPANG_HTTP_403",
+      "receipt": {
+        "origin": "https://www.coupang.com",
+        "path": "/np/search",
+        "queryFields": [
+          "q",
+          "channel",
+          "sorter",
+          "listSize",
+          "filterType",
+          "rating",
+          "filter"
+        ],
+        "method": "GET",
+        "authenticationMode": "visitor",
+        "transport": "native_fetch",
+        "cookieSent": true,
+        "credentialsUsed": false,
+        "browserUsed": false,
+        "httpStatus": 403,
+        "mime": "text/html",
+        "visitorCookieNames": [
+          "PCID",
+          "x-coupang-accept-language",
+          "x-coupang-target-market"
+        ],
+        "visitorBootstrap": null,
+        "visitorValuesPersisted": false,
+        "ownerCredentialUsed": false,
+        "responseBytes": 534,
+        "challengeSignal": true
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "operation": "retail_category_document",
+      "reason": "prior_probe_failed_no_retry_or_identity_rotation"
+    }
+  ],
+  "complete": false
+}
