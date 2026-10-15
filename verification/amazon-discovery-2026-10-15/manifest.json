@@ -10,7 +10,7 @@
     "lib/retail/amazon-retail-session.mjs": "0b93c0d705a50f8337c22951707496c70a6d39b561d325d8001675547a62519b",
     "lib/scoped-session.mjs": "75ccca7b5e6cedb7a088ee0caeb72c1aee23ec68f87c1b715d17c8851b0339f2",
     "lib/retail/amazon-ontology.mjs": "76a645e0a9ccefb1c1524f9345acd3d2e1e2e3a00f9e98e208085b674684548b",
-    "lib/capability-checklist.mjs": "c9d47854535ce174baf42f7268749fc47cd4ebe54655fdee949df941047df633",
+    "lib/capability-checklist.mjs": "879751d2cb02111606125901c358e98aadebab421776a5d2a788db2649df9576",
     "scripts/retail.mjs": "b6c9b0c3ab739a403f0d569c6353ebcb90522b90752a0c00af71d0641c6dc70d",
     "scripts/amazon-retail-session.mjs": "a41626a0e251696fe806b1eadf43d29dc274acb1045a6a329f76fc434e29eb2d",
     "scripts/amazon-ontology.mjs": "a936e4ba59ef3d827b27e0750928e2f1a77e4b7ca65cb64d1f099451eebf874e",
@@ -45,5 +45,12 @@
   },
   "completeCatalog": false,
   "sessionRenewalVerified": false,
-  "accountWrites": 0
+  "accountWrites": 0,
+  "validatorRevalidation": {
+    "checkedAt": "2026-10-15T08:12:00.716Z",
+    "networkUsed": false,
+    "reason": "Shared validator gained Japanese direct-HTTP Document support; existing Amazon public/session evidence semantics are unchanged.",
+    "tests": "tests/public-read-checklist.test.mjs; tests/amazon-session-checklist.test.mjs",
+    "originalNetworkCaptureTimesPreserved": true
+  }
 }

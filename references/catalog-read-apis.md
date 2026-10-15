@@ -22,7 +22,8 @@ npm run commerce -- oliveyoung-global category --category-id=1000000008 --page-s
 |---|---|---|
 | Sephora US | 공개 검색·페이지, SKU 가격/세일·이미지·옵션, 리뷰 본문/사진·SKU 필터 | 장문 상품 설명 API에서 본문을 받지 못함 |
 | Ulta US | 공개 검색·가격·상세 설명/성분·이미지·옵션·전체 리뷰/사진·페이지 | 현재 US 읽기 범위의 필수 게이트 통과; 전체 카탈로그 전수 수집은 아님 |
-| Rakuten Japan | 공개 리뷰 본문·사진 썸네일·페이지, 공식 상품/설명/이미지/평점 클라이언트 | 상품 API 실호출은 applicationId/accessKey 필요 |
+| [Rakuten Japan](japan-retail-http.md) | 공개 Document 메뉴·검색·상세·SKU 가격/재고, 리뷰 본문·사진 썸네일·페이지 | 공식 API 실호출은 applicationId/accessKey 필요; 전체 탐색 미완료 |
+| [Yahoo Shopping Japan](japan-retail-http.md) | 공개 Document 홈/카테고리·상세·옵션별 가격/재고·리뷰 미리보기 | 일반 검색 HTTP 500; 공식 검색 app ID·제휴 연결·전체 리뷰 미검증 |
 | Olive Young Global | 상세·설명·옵션·가격·베스트셀러·리뷰 요약/본문/사진·페이지 | 키워드 검색 403; 한국 Curator와 별도 |
 | Olive Young Korea | Curator 가격 검색 코드 | 세션 부재, 공개 상세/리뷰는 Cloudflare 차단 |
 | Amazon US | 공개 검색 XHR·표시 가격·썸네일·페이지; 공식 상품/이미지/옵션 클라이언트 | 공개 상세/전체 리뷰·완전한 검색 종료 미검증, 공식 조회는 승인된 API 자격 필요 |

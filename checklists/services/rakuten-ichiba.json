@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "rakuten-ichiba",
-  "description": "Rakuten Ichiba / Rakuten Affiliate Japan. Official catalog/detail Search and Genre calls use documented v2026-07-01 APIs and require a caller registered applicationId plus accessKey; affiliateId is caller supplied. The separate public Reviews page API returns individual review bodies, dates, ratings, pagination and review-photo thumbnails without a user account, using a short-lived in-memory key bootstrapped from current first-party page JS. Distinct from Rakuten Advertising global publisher APIs.",
+  "description": "Rakuten Ichiba / Rakuten Affiliate Japan. Official catalog/detail Search and Genre calls use documented v2026-07-01 APIs and require a caller registered applicationId plus accessKey; affiliateId is caller supplied. The separate public Reviews page API returns individual review bodies, dates, ratings, pagination and review-photo thumbnails without a user account, using a short-lived in-memory key bootstrapped from current first-party page JS. Distinct from Rakuten Advertising global publisher APIs. Public consumer Document readers added on 2026-10-15 support home genres, category/search pages, product detail and SKU observations without app credentials; these are separate from the official credentialed API.",
   "capabilities": [
     {
       "id": "auth.application_credentials",
@@ -409,6 +409,375 @@
       },
       "evidence": [],
       "sourceEvidence": []
+    },
+    {
+      "id": "catalog.public_navigation",
+      "title": "Read Ichiba home product-genre menus and keep every observed sibling",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/rakuten-public-catalog.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "rakuten"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.rakuten.co.jp",
+          "path": "/",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/rakuten-catalog-public_navigation-proof.json",
+            "verification/japan-retail-2026-10-15/rakuten-home.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "10 menu groups; product genres only. Other home services and widgets are explicitly excluded."
+    },
+    {
+      "id": "catalog.public_category",
+      "title": "Read genre landing products, observed child links and next-page targets",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/rakuten-public-catalog.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "rakuten"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.rakuten.co.jp",
+          "path": "/category/100371/",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/rakuten-catalog-public_category-proof.json",
+            "verification/japan-retail-2026-10-15/rakuten-category.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Uses the category HTML Document INITIAL_STATE. Full recursive catalog traversal remains incomplete."
+    },
+    {
+      "id": "catalog.public_search",
+      "title": "Search the consumer mall without account cookies or app credentials",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/rakuten-public-catalog.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "rakuten"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://search.rakuten.co.jp",
+          "path": "/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/rakuten-catalog-public_search-proof.json",
+            "verification/japan-retail-2026-10-15/rakuten-search-01.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Binds query/category/page; listing price is not a selected SKU price. Includes sponsored rows."
+    },
+    {
+      "id": "catalog.public_pagination",
+      "title": "Follow observed search next links with the same query/category",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/rakuten-public-catalog.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "rakuten"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://search.rakuten.co.jp",
+          "path": "/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/rakuten-catalog-public_pagination-proof.json",
+            "verification/japan-retail-2026-10-15/rakuten-search-02.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "nextPageRead",
+              "origin": "https://search.rakuten.co.jp",
+              "path": "/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/",
+              "method": "GET",
+              "mime": "text/html"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Pages 1-3 returned 50 rows each; page 4 remains pending. Advertised page size can differ due to sponsored rows."
+    },
+    {
+      "id": "catalog.public_detail",
+      "title": "Read identity-bound item Document, description, images and review target",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/rakuten-public-catalog.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "rakuten"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://item.rakuten.co.jp",
+          "path": "/logicool/m220gr/",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/rakuten-catalog-public_detail-proof.json",
+            "verification/japan-retail-2026-10-15/rakuten-product-01.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "EUC-JP decoding; itemInfoSku shop/item IDs must match hidden fields and URL shop/manage number."
+    },
+    {
+      "id": "catalog.public_options",
+      "title": "Read each observed SKU price, option values and purchase stock",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/rakuten-public-catalog.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "rakuten"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://item.rakuten.co.jp",
+          "path": "/logicool/m220gr/",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/rakuten-catalog-public_options-proof.json",
+            "verification/japan-retail-2026-10-15/rakuten-product-01.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "M220 has 3 SKU rows. purchaseInfo SKU stock takes precedence over conflicting display-axis flags. A second product has no SKU rows; no options are invented."
     }
   ]
 }

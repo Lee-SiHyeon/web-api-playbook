@@ -25,6 +25,7 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 | [해외 쇼핑몰 공개 조회](references/retail-public-apis.md) | 비로그인 AliExpress 상품 SEO, eBay 검색 제안, Shopify 기반 Allbirds 상품·예측 검색과 해외몰 기능 체크리스트 |
 | [해외 쇼핑 온톨로지 확장](references/overseas-retail-expansion-2026-10-15.md) | 알리·테무·SHEIN·아이허브 범위, SHEIN Document 가격·아이허브 XML 상품 ID, 온톨로지 투영과 미완료 탐색 목록 |
 | [아마존 HTTP 확장](references/amazon-public-discovery-2026-10-15.md) | 메뉴 XHR, 검색 재개, DPAPI 세션 기반 상품 Document·옵션, 온톨로지 투영과 미완료 탐색 목록 |
+| [일본 쇼핑 HTTP API](references/japan-retail-http.md) | 라쿠텐 메뉴·검색·상세·SKU·리뷰, 야후쇼핑 메뉴·상세·옵션, 요청 계약·CLI·검증 기록과 남은 검색/제휴 기능 |
 | [해외 공식 API 우선](references/overseas-official-api-first.md) | Amazon Creators·AliExpress Affiliate·Awin/Impact 우선, PA-API5 금지, Temu/SHEIN/iHerb 경로 |
 | [봇 차단 감지](references/anti-bot-boundaries.md) | 벤더별 차단 페이지 신호·상태 코드 분류 (`lib/commerce/backoff.mjs`) |
 | [지역·로케일·통화](references/geo-locale-currency.md) | marketplace·ship-to·locale·currency 관측 축 |
@@ -136,6 +137,9 @@ npm run retail -- amazon product --asin=B08KT2Z93D
 npm run retail -- shopify predictive-search --query=runner --limit=5
 npm run retail -- status
 npm run retail:overseas -- status
+npm run retail:japan -- rakuten search --query=マウス --category-id=100026
+npm run retail:japan -- yahoo product --url=https://store.shopping.yahoo.co.jp/ya-man/r2305a.html
+npm run retail:japan:verify
 ```
 
 지원 명령은 브라우저 없이 HTTP로 실행한다. 검색 제안, SEO 정보, 가격·재고, 상품 목록을 별도 기능으로 구분하며 [현재 지원 범위와 차단 지점](references/retail-public-apis.md)을 확인한다. 새 서비스의 기능은 자동 [체크리스트](checklists/README.md)에 포함한다.

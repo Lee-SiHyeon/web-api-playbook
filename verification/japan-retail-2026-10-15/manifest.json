@@ -1,0 +1,119 @@
+{
+  "schema": "web-api-japan-playbook-verification-v1",
+  "recordedAt": "2026-10-15T08:03:40.504Z",
+  "implementation": {
+    "lib/retail/japan-http.mjs": "18596e32c17827aac271d5b691f62eba45a6347e28e87f06b4b4cd7fddb6fc47",
+    "lib/retail/japan-public.mjs": "e35adf61a785af12342b28fab9767f4c739699cdc6fbba179f74df5b3ce80ce2",
+    "lib/retail/rakuten-public-catalog.mjs": "dd0a9e599856db06a334da1a629daf00f363ba97c2fa6d5010460fff5104b497",
+    "lib/retail/yahoo-jp-public.mjs": "0d4325e7995c83d7383afe3dc8689cc122291dfb4103548e9ff40e5bfec4135e",
+    "lib/commerce/yahoo-shopping-jp.mjs": "566c8562875e7678f2f695dd1049b30c977d2eac68fb2a29b0ed666f716d5e75",
+    "scripts/japan-retail.mjs": "429ab5566f62755b225f272c68c3749ad48d172c3df425c4ddcd326844e0acf0",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "lib/commerce/credential-output.mjs": "89b5f640422cf9dbf5a3d2679099842264ae6d30b6a924ad9308af6432e485db",
+    "lib/commerce/rakuten-ichiba-public.mjs": "707e2bb864e59889a715669b026cee406e9163ed060c881bfdecc8ea91f1a11f",
+    "lib/capability-checklist.mjs": "879751d2cb02111606125901c358e98aadebab421776a5d2a788db2649df9576",
+    "scripts/verify-japan-retail.mjs": "59155a9972d14565281ad14071f5c8bd4ec91d2f1726e73663944a1999ed25d8"
+  },
+  "artifacts": {
+    "rakuten-frontier-start.json": "54714bf71fcf4bf139ced7b0c175c98ae9354fac57feacc4c4f97e820c3c0b29",
+    "rakuten-frontier-resumed.json": "1a64b251e248fe2bed27fe48d2fd0a3321a8e656ba0c83d0f3744f7eb9860616",
+    "yahoo-frontier-start.json": "b232bca686a189962890489fa4f2b7d283052c7c4ea6e766eb12999c0bf0b520",
+    "yahoo-frontier-resumed.json": "16bcf29f5a3341f4473e3e84b712a3bfd3e56d004cfd5a64770ccf1c1bb6a1c7",
+    "rakuten-home.json": "da06b9c43e74b334c0aae3fc44d45b79bd1ae80c580beb2e532f561408c36f1a",
+    "rakuten-category.json": "932c84d314ed935ec2e1d106d4f7a8f0cc60e55068dba053dddb79cd626d0485",
+    "yahoo-home.json": "420c5e78e176632845528ea4231fa8762daca2ef07f9e92ac2876b9da3728eda",
+    "yahoo-category.json": "af65e839a4ccdca66653c943ced3f78741638aa8da0c3f8552a909c92823d6d3",
+    "rakuten-search-01.json": "7892e32594a5053a8d17dd1f7d27a88985af6de1d9035c1575da272a11ca6aa7",
+    "rakuten-search-02.json": "3fe0a4aaa47620949cd720cff6bfdf6cba2865684819c306b6bc143ae4faccdb",
+    "rakuten-search-03.json": "56a665ad1781b2e8c8253023757f938c62d163f35fd301e28026ac91ecb8483c",
+    "rakuten-product-01.json": "ae2c84635236719f290dc49589e013f9cfadc33ab589f50a827d352c74c55b96",
+    "rakuten-product-02.json": "155782d12bccdf7654ae63b326a78a34df3e523c34d6b18f97b858dad5c45435",
+    "rakuten-product-readback.json": "bcb4f3b043dde2d6097cabc25ec0fa7fbc7176a5a654808aeb31c8dedba4d8ec",
+    "yahoo-product-01.json": "31bb2b5d7a2c6aaed22839b2eaebd89a296528beffd88e50147a8f2378f4a778",
+    "yahoo-product-02.json": "56b4063d37a75367fe84026b87be6e43067e550d8d215622d621ef1ddf1b2ad6",
+    "yahoo-product-03.json": "80b3675d4ad26ce40d0f3372868581e378c9cda6ebe415c9c7244fd6fc018490",
+    "yahoo-product-readback.json": "27d59a74258a57ae5351f9de9a15dd686e3ff169804607d925d2f23f5b581c8b",
+    "yahoo-category-redirect.json": "2221b844c3669ec0d9c361a4f11cf180bfe015f3dac8ef4e16842832cc6176e5",
+    "rakuten-review-summary.json": "fe4f6a3da96a5dd11ca2e9c3baba6bdb85caf2001076baae8279b7c38cdfc103",
+    "yahoo-search-diagnostic.json": "dae80c49a8e2da9feabc24083d85ef50ccbc148027eb1d59f9fb9639e5ef6187",
+    "credential-readiness.json": "2c7b591f3fa748882500b73cad2c8e213b637317e08c59e4de241629d2bb626d",
+    "rakuten-catalog-public_navigation-proof.json": "b4b1f83ad8bbd88f74105047df7aeeb7c8a3fc6fd56d4e8f8eabb7fc6a6edbee",
+    "rakuten-catalog-public_category-proof.json": "21381fd4bd88b8df7b814a84d7c3f0cd58b55d0e614e2bc3757cdb1385f5a5c6",
+    "rakuten-catalog-public_search-proof.json": "9619349b76dfcf6f8c1110061f1b6d689e9c3eaa207c227002b0e1a16878f238",
+    "rakuten-catalog-public_pagination-proof.json": "f9868f7dac4fbfaf07e52fd1d319048f6b3fb49f0399b5cc2df3ad732cc88b28",
+    "rakuten-catalog-public_detail-proof.json": "cda2fb605ce7b59dbaf2f02833da1ec84f29fa47f688758cc62f667e6af5b9be",
+    "rakuten-catalog-public_options-proof.json": "00986f579f3e19b2556dffedb6e64e57985fb47f77907753fab781b431a8589c",
+    "yahoo-catalog-public_navigation-proof.json": "8ab3651983c47571f635a96134e3616e21f37d392f6c13f6f7bb7f5d0c1e6038",
+    "yahoo-catalog-public_category-proof.json": "278e234ac45c88ec5f7aa31fbf622d9e6fb0d9a5b37400f24b822b4c3aa9f69a",
+    "yahoo-catalog-public_detail-proof.json": "15ff18cfb8ef15daa882d7cd0a6aed86616296d0c048cdb3bcf63fed794f64fa",
+    "yahoo-catalog-public_options-proof.json": "2b2d74b54ca4991267311453227493a4c89d4a6ccda0aee605813c80e575bff5",
+    "yahoo-catalog-public_review_preview-proof.json": "0438d821a7a662f51b8b27cb77375e9d3daf4ea4f6852834f164364b79f77990"
+  },
+  "executions": [
+    "rakuten-home.json",
+    "rakuten-category.json",
+    "yahoo-home.json",
+    "yahoo-category.json",
+    "rakuten-search-01.json",
+    "rakuten-search-02.json",
+    "rakuten-search-03.json",
+    "rakuten-product-01.json",
+    "rakuten-product-02.json",
+    "rakuten-product-readback.json",
+    "yahoo-product-01.json",
+    "yahoo-product-02.json",
+    "yahoo-product-03.json",
+    "yahoo-product-readback.json",
+    "yahoo-category-redirect.json"
+  ],
+  "recordedCapabilities": {
+    "rakuten-ichiba": [
+      "catalog.public_navigation",
+      "catalog.public_category",
+      "catalog.public_search",
+      "catalog.public_pagination",
+      "catalog.public_detail",
+      "catalog.public_options"
+    ],
+    "yahoo-shopping-jp": [
+      "catalog.public_navigation",
+      "catalog.public_category",
+      "catalog.public_detail",
+      "catalog.public_options",
+      "catalog.public_review_preview"
+    ]
+  },
+  "readbacks": [
+    [
+      "rakuten-product-01.json",
+      "rakuten-product-readback.json"
+    ],
+    [
+      "yahoo-product-01.json",
+      "yahoo-product-readback.json"
+    ]
+  ],
+  "searchPages": [
+    "rakuten-search-01.json",
+    "rakuten-search-02.json",
+    "rakuten-search-03.json"
+  ],
+  "resumePairs": [
+    [
+      "rakuten-frontier-start.json",
+      "rakuten-frontier-resumed.json"
+    ],
+    [
+      "yahoo-frontier-start.json",
+      "yahoo-frontier-resumed.json"
+    ]
+  ],
+  "boundaries": {
+    "browserCapture": false,
+    "publicDirectHttpReplay": true,
+    "officialCredentialedReplay": false,
+    "affiliateLinkVerified": false,
+    "completeCatalog": false
+  }
+}

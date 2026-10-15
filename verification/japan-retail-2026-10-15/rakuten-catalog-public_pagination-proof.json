@@ -1,0 +1,80 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "rakuten-ichiba",
+  "capabilityId": "catalog.public_pagination",
+  "checkedAt": "2026-10-15T07:54:55.415Z",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 50,
+  "request": {
+    "checkedAt": "2026-10-15T07:54:55.415Z",
+    "url": "https://search.rakuten.co.jp/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/?p=2",
+    "method": "GET",
+    "origin": "https://search.rakuten.co.jp",
+    "path": "/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/",
+    "queryFields": [
+      "p"
+    ],
+    "httpStatus": 200,
+    "mime": "text/html",
+    "browserUsed": false,
+    "anonymous": true,
+    "readOnly": true,
+    "cookieSent": false,
+    "cookiesSent": false,
+    "authorizationSent": false,
+    "credentialsUsed": false,
+    "responseBytes": 887640,
+    "responseSha256": "c99ca38f678c92f24dc2764bac5957a2b6d2c83fbe48a909ab7cfb2f68ee972f",
+    "charset": "utf-8",
+    "documentBodyPersisted": false
+  },
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "responseFormat": "html_document",
+    "sourceURL": "https://search.rakuten.co.jp/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/",
+    "sourceSha256": "c99ca38f678c92f24dc2764bac5957a2b6d2c83fbe48a909ab7cfb2f68ee972f",
+    "projectionSha256": "ef1f130eea7528319eca0922e8b1a69456c7906725320eb932bc2415e643ec3a"
+  },
+  "implementation": {
+    "lib/retail/japan-http.mjs": "18596e32c17827aac271d5b691f62eba45a6347e28e87f06b4b4cd7fddb6fc47",
+    "lib/retail/japan-public.mjs": "e35adf61a785af12342b28fab9767f4c739699cdc6fbba179f74df5b3ce80ce2",
+    "lib/retail/rakuten-public-catalog.mjs": "dd0a9e599856db06a334da1a629daf00f363ba97c2fa6d5010460fff5104b497",
+    "lib/retail/yahoo-jp-public.mjs": "0d4325e7995c83d7383afe3dc8689cc122291dfb4103548e9ff40e5bfec4135e",
+    "lib/commerce/yahoo-shopping-jp.mjs": "566c8562875e7678f2f695dd1049b30c977d2eac68fb2a29b0ed666f716d5e75",
+    "scripts/japan-retail.mjs": "429ab5566f62755b225f272c68c3749ad48d172c3df425c4ddcd326844e0acf0",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "lib/commerce/credential-output.mjs": "89b5f640422cf9dbf5a3d2679099842264ae6d30b6a924ad9308af6432e485db",
+    "lib/commerce/rakuten-ichiba-public.mjs": "707e2bb864e59889a715669b026cee406e9163ed060c881bfdecc8ea91f1a11f",
+    "lib/capability-checklist.mjs": "879751d2cb02111606125901c358e98aadebab421776a5d2a788db2649df9576",
+    "scripts/verify-japan-retail.mjs": "59155a9972d14565281ad14071f5c8bd4ec91d2f1726e73663944a1999ed25d8"
+  },
+  "nextPageRead": {
+    "checkedAt": "2026-10-15T07:55:27.983Z",
+    "url": "https://search.rakuten.co.jp/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/?p=3",
+    "method": "GET",
+    "origin": "https://search.rakuten.co.jp",
+    "path": "/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/",
+    "queryFields": [
+      "p"
+    ],
+    "httpStatus": 200,
+    "mime": "text/html",
+    "browserUsed": false,
+    "anonymous": true,
+    "readOnly": true,
+    "cookieSent": false,
+    "cookiesSent": false,
+    "authorizationSent": false,
+    "credentialsUsed": false,
+    "responseBytes": 888428,
+    "responseSha256": "d4e85f6c28839daae7464d82d83528f2b04fb4aead169384bc780095f1edf0f5",
+    "charset": "utf-8",
+    "documentBodyPersisted": false
+  }
+}

@@ -7,7 +7,7 @@ import path from 'node:path';
 import { auditCapabilityChecklist } from '../lib/capability-checklist.mjs';
 
 const sha = value => createHash('sha256').update(value).digest('hex');
-async function fixture(t) {
+async function fixture(t, { service = 'mall' } = {}) {
   const scratch = process.env.TMPDIR || path.join(os.homedir(), '.nad-scratch/tmp');
   await mkdir(scratch, { recursive: true });
   const root = await mkdtemp(path.join(scratch, 'public-read-checklist-'));
@@ -17,12 +17,12 @@ async function fixture(t) {
   await writeFile(path.join(root, 'lib/product.mjs'), code);
   const entry = { kind: 'http-public-read-v1', origin: 'https://mall.test', path: '/api/product',
     files: ['verification/live.json'], hashPaths: ['lib/product.mjs'] };
-  const manifest = { schemaVersion: 1, service: 'mall', capabilities: [{
+  const manifest = { schemaVersion: 1, service, capabilities: [{
     id: 'product.read', title: 'Anonymous product read', priority: 'required', applicability: 'applicable', requirement: 'live',
     implementation: { files: [{ path: 'lib/product.mjs', exports: ['readProduct'] }], tests: [] },
     evidence: [entry], sourceEvidence: [],
   }] };
-  const receipt = { schema: 'web-api-public-read-receipt-v1', service: 'mall', capabilityId: 'product.read',
+  const receipt = { schema: 'web-api-public-read-receipt-v1', service, capabilityId: 'product.read',
     checkedAt: '2026-10-05T00:00:00Z', anonymous: true, credentialsUsed: false,
     secretsPersistedInEvidence: false, schemaVerified: true, expectedResultVerified: true,
     request: { method: 'GET', origin: entry.origin, path: entry.path, httpStatus: 200,
@@ -33,9 +33,9 @@ async function fixture(t) {
   };
   const save = async value => {
     await writeFile(path.join(root, 'verification/live.json'), JSON.stringify(value));
-    await writeFile(path.join(root, 'checklists/services/mall.json'), JSON.stringify(manifest));
+    await writeFile(path.join(root, 'checklists/services', service + '.json'), JSON.stringify(manifest));
   };
-  const audit = async () => (await auditCapabilityChecklist({ root, service: 'mall' })).capabilities[0].status;
+  const audit = async () => (await auditCapabilityChecklist({ root, service })).capabilities[0].status;
   await save(receipt);
   return { root, receipt, manifest, entry, save, audit };
 }
@@ -45,6 +45,40 @@ test('anonymous read requires a real response and current implementation hash', 
   assert.equal(await f.audit(), 'recorded_live');
   await writeFile(path.join(f.root, 'lib/product.mjs'), 'export function readProduct() { return null; }\n');
   assert.equal(await f.audit(), 'needs_reverification');
+});
+
+test('Japanese document evidence binds CLI data, response bytes and SKU coverage without inventing an XHR capture', async t => {
+  const f = await fixture(t, { service: 'yahoo-shopping-jp' });
+  f.entry.mime = 'text/html';
+  f.entry.files.push('verification/cli.json');
+  f.manifest.capabilities[0].id = 'catalog.public_options';
+  const url = f.entry.origin + f.entry.path;
+  const data = { product: { identityVerified: true, url, variants: [{ id: 'synthetic-sku' }] } };
+  const request = { ...f.receipt.request, mime: 'text/html', responseSha256: sha('synthetic document') };
+  const receipt = { ...f.receipt, capabilityId: 'catalog.public_options', request, resultCount: 1,
+    contractProvenance: { kind: 'direct_http_observed', responseFormat: 'html_document', sourceURL: url,
+      sourceSha256: request.responseSha256, projectionSha256: sha(JSON.stringify(data)) } };
+  const execution = { schema: 'web-api-japan-retail-result-v1', service: 'yahoo-shopping-jp', operation: 'product',
+    ok: true, url, data, dataSha256: receipt.contractProvenance.projectionSha256, requests: [request],
+    executionMode: 'pure_http', browserUsed: false, credentialsUsed: false, anonymous: true, writesSubmitted: 0,
+    completeCatalog: false, affiliateLinkVerified: false, fiveStates: { captured: false, live_replay: true } };
+  const save = async (proof = receipt, run = execution) => {
+    await f.save(proof); await writeFile(path.join(f.root, 'verification/cli.json'), JSON.stringify(run));
+  };
+  await save(); assert.equal(await f.audit(), 'recorded_live');
+  for (const changed of [
+    { dataSha256: sha('wrong') }, { data: { product: { ...data.product, identityVerified: false } } },
+    { completeCatalog: true }, { affiliateLinkVerified: true }, { fiveStates: { captured: true, live_replay: true } },
+    { requests: [{ ...request, responseSha256: sha('different document') }] },
+  ]) {
+    await save(receipt, { ...execution, ...changed }); assert.equal(await f.audit(), 'evidence_invalid');
+  }
+  const noOptions = { product: { ...data.product, variants: [] } }, noOptionsHash = sha(JSON.stringify(noOptions));
+  await save({ ...receipt, contractProvenance: { ...receipt.contractProvenance, projectionSha256: noOptionsHash } },
+    { ...execution, data: noOptions, dataSha256: noOptionsHash });
+  assert.equal(await f.audit(), 'evidence_invalid');
+  await save({ ...receipt, contractProvenance: { ...receipt.contractProvenance, sourceSha256: sha('wrong bytes') } });
+  assert.equal(await f.audit(), 'evidence_invalid');
 });
 
 test('auth, browser, wrong route, HTML gate and schema failure cannot pass as anonymous JSON', async t => {

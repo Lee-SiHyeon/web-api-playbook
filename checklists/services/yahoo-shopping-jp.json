@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "service": "yahoo-shopping-jp",
+  "description": "Yahoo Shopping Japan: public Document navigation and identity-bound product/options reads; separate documented V3 app-ID search adapter. Public search HTTP 500 and affiliate ownership remain unresolved.",
+  "capabilities": [
+    {
+      "id": "catalog.public_navigation",
+      "title": "Read home category hierarchy and retain candidate product links",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/yahoo-jp-public.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "yahoo"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://shopping.yahoo.co.jp",
+          "path": "/",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/yahoo-catalog-public_navigation-proof.json",
+            "verification/japan-retail-2026-10-15/yahoo-home.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "448 category nodes in the observed root state. Brand-card labels are not used as product titles."
+    },
+    {
+      "id": "catalog.public_category",
+      "title": "Read category recommendation pages and observed same-origin redirects",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/yahoo-jp-public.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "yahoo"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://shopping.yahoo.co.jp",
+          "path": "/category/13457/2494/recommend",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/yahoo-catalog-public_category-proof.json",
+            "verification/japan-retail-2026-10-15/yahoo-category-redirect.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "/category/2494/recommend redirects to /category/13457/2494/recommend. Generic search/ranking response contracts are separate and unverified."
+    },
+    {
+      "id": "catalog.public_detail",
+      "title": "Read product identity, display price, images and description",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/yahoo-jp-public.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "yahoo"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://store.shopping.yahoo.co.jp",
+          "path": "/ya-man/r2305a.html",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/yahoo-catalog-public_detail-proof.json",
+            "verification/japan-retail-2026-10-15/yahoo-product-01.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Binds URL seller/item, canonical URL, pageProps item and JSON-LD offer currency/price. No account/session fields are retained."
+    },
+    {
+      "id": "catalog.public_options",
+      "title": "Read SKU options, individual prices and stock without replacing missing SKU prices",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/yahoo-jp-public.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "yahoo"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://store.shopping.yahoo.co.jp",
+          "path": "/ya-man/r2305a.html",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/yahoo-catalog-public_options-proof.json",
+            "verification/japan-retail-2026-10-15/yahoo-product-01.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "YA-MAN: 6 priced variants; Yogibo: 27 variants with stock but no per-SKU price. Null stays null. Acknowledgement controls are separate customization options."
+    },
+    {
+      "id": "catalog.public_review_preview",
+      "title": "Read public review excerpts embedded in a product Document",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/yahoo-jp-public.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "yahoo"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://store.shopping.yahoo.co.jp",
+          "path": "/ya-man/r2305a.html",
+          "method": "GET",
+          "readOnly": true,
+          "mime": "text/html",
+          "files": [
+            "verification/japan-retail-2026-10-15/yahoo-catalog-public_review_preview-proof.json",
+            "verification/japan-retail-2026-10-15/yahoo-product-01.json"
+          ],
+          "hashPaths": [
+            "lib/retail/japan-http.mjs",
+            "lib/retail/japan-public.mjs",
+            "lib/retail/rakuten-public-catalog.mjs",
+            "lib/retail/yahoo-jp-public.mjs",
+            "lib/commerce/yahoo-shopping-jp.mjs",
+            "scripts/japan-retail.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/capability-checklist.mjs",
+            "scripts/verify-japan-retail.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Product-page preview only; names/profiles omitted. Review pagination and full review retrieval are not verified."
+    },
+    {
+      "id": "catalog.public_search",
+      "title": "Public consumer search and ranking response parsing",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/japan-public.mjs",
+            "exports": [
+              "createJapanPublicClient"
+            ]
+          },
+          {
+            "path": "lib/retail/yahoo-jp-public.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "yahoo"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed GET /search returned HTTP 500 on this host. Cause is unknown. No public listing parser is verified; named public search fails before claiming results."
+    },
+    {
+      "id": "catalog.official_search",
+      "title": "Documented Yahoo Shopping V3 itemSearch with caller registered app ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/yahoo-shopping-jp.mjs",
+            "exports": [
+              "createYahooShoppingJpClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/japan-retail.mjs",
+            "tokens": [
+              "official-search"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/japan-retail.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Fixture tested against the current first-party API contract; caller app ID is required in memory. No credentialed live replay or account ownership claim. See references/japan-retail-contracts.json."
+    },
+    {
+      "id": "affiliate.link_generation",
+      "title": "Issue and verify caller-owned ValueCommerce affiliate links",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Caller affiliate enrollment/ID is unverified. No affiliate link was generated or synthesized."
+    }
+  ]
+}

@@ -1,0 +1,652 @@
+{
+  "schema": "web-api-japan-retail-result-v1",
+  "ok": true,
+  "service": "rakuten-ichiba",
+  "operation": "home",
+  "url": "https://www.rakuten.co.jp/",
+  "checkedAt": "2026-10-15T07:54:55.398Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "affiliateLinkVerified": false,
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "responseFormat": "html_document",
+    "sourceURL": "https://www.rakuten.co.jp/"
+  },
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "credential_propagated": false,
+    "remnant_free": true,
+    "live_replay": true
+  },
+  "credentialStatus": "not_required_for_public_document",
+  "requests": [
+    {
+      "checkedAt": "2026-10-15T07:54:55.398Z",
+      "url": "https://www.rakuten.co.jp/",
+      "method": "GET",
+      "origin": "https://www.rakuten.co.jp",
+      "path": "/",
+      "queryFields": [],
+      "httpStatus": 200,
+      "mime": "text/html",
+      "browserUsed": false,
+      "anonymous": true,
+      "readOnly": true,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "authorizationSent": false,
+      "credentialsUsed": false,
+      "responseBytes": 184365,
+      "responseSha256": "7e0d1901fce24c04bcd326a6e60b97c1d2b1b055192f7aede4c6e75de348b7c9",
+      "charset": "utf-8",
+      "documentBodyPersisted": false
+    }
+  ],
+  "data": {
+    "root": "https://www.rakuten.co.jp/",
+    "navigationScope": "ichiba_product_genres",
+    "rootDiscoveryComplete": true,
+    "menus": [
+      {
+        "id": "genre-group:fashion",
+        "label": "fashion",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:food",
+        "label": "food",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:daily",
+        "label": "daily",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:cosme",
+        "label": "cosme",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:baby",
+        "label": "baby",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:appliance",
+        "label": "appliance",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:sports",
+        "label": "sports",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:auto",
+        "label": "auto",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:interior",
+        "label": "interior",
+        "labelBasis": "first_party_menu_key"
+      },
+      {
+        "id": "genre-group:hobby",
+        "label": "hobby",
+        "labelBasis": "first_party_menu_key"
+      }
+    ],
+    "edges": [
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:fashion",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/100371/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/551177/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/111078/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/111102/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/100433/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/216131/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/558885/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/558929/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:fashion",
+        "to": "https://www.rakuten.co.jp/category/216129/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:food",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:food",
+        "to": "https://www.rakuten.co.jp/category/100227/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:food",
+        "to": "https://www.rakuten.co.jp/category/551167/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:food",
+        "to": "https://www.rakuten.co.jp/category/100316/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:food",
+        "to": "https://www.rakuten.co.jp/category/510915/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:food",
+        "to": "https://www.rakuten.co.jp/category/100317/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:food",
+        "to": "https://www.rakuten.co.jp/category/510901/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:daily",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:daily",
+        "to": "https://www.rakuten.co.jp/category/215783/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:daily",
+        "to": "https://www.rakuten.co.jp/category/100938/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:daily",
+        "to": "https://www.rakuten.co.jp/category/551169/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:cosme",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:cosme",
+        "to": "https://www.rakuten.co.jp/category/100939/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:baby",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:baby",
+        "to": "https://www.rakuten.co.jp/category/100533/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:baby",
+        "to": "https://www.rakuten.co.jp/category/566382/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:appliance",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:appliance",
+        "to": "https://www.rakuten.co.jp/category/562637/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:appliance",
+        "to": "https://www.rakuten.co.jp/category/211742/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:appliance",
+        "to": "https://www.rakuten.co.jp/category/564500/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:appliance",
+        "to": "https://www.rakuten.co.jp/category/100026/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:sports",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:sports",
+        "to": "https://www.rakuten.co.jp/category/101070/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:sports",
+        "to": "https://www.rakuten.co.jp/category/101077/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:auto",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:auto",
+        "to": "https://www.rakuten.co.jp/category/503190/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:auto",
+        "to": "https://www.rakuten.co.jp/category/101114/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:interior",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:interior",
+        "to": "https://www.rakuten.co.jp/category/100804/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:interior",
+        "to": "https://www.rakuten.co.jp/category/558944/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:interior",
+        "to": "https://www.rakuten.co.jp/category/101213/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:interior",
+        "to": "https://www.rakuten.co.jp/category/100005/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:interior",
+        "to": "https://www.rakuten.co.jp/category/101438/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "https://www.rakuten.co.jp/",
+        "to": "genre-group:hobby",
+        "relation": "home_to_menu"
+      },
+      {
+        "from": "genre-group:hobby",
+        "to": "https://www.rakuten.co.jp/category/101205/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:hobby",
+        "to": "https://www.rakuten.co.jp/category/101240/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:hobby",
+        "to": "https://www.rakuten.co.jp/category/101164/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:hobby",
+        "to": "https://www.rakuten.co.jp/category/112493/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:hobby",
+        "to": "https://www.rakuten.co.jp/category/200162/",
+        "relation": "menu_to_category"
+      },
+      {
+        "from": "genre-group:hobby",
+        "to": "https://www.rakuten.co.jp/category/101381/",
+        "relation": "menu_to_category"
+      }
+    ],
+    "links": [
+      {
+        "url": "https://www.rakuten.co.jp/category/100371/",
+        "kind": "category",
+        "label": "ladiesfashion",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/551177/",
+        "kind": "category",
+        "label": "mensfashion",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/111078/",
+        "kind": "category",
+        "label": "kidsfashion",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/111102/",
+        "kind": "category",
+        "label": "babyfashion",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100433/",
+        "kind": "category",
+        "label": "inner",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/216131/",
+        "kind": "category",
+        "label": "fashiongoods",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/558885/",
+        "kind": "category",
+        "label": "shoes",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/558929/",
+        "kind": "category",
+        "label": "watch",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/216129/",
+        "kind": "category",
+        "label": "accessories",
+        "relation": "menu_to_category",
+        "parent": "genre-group:fashion"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100227/",
+        "kind": "category",
+        "label": "food",
+        "relation": "menu_to_category",
+        "parent": "genre-group:food"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/551167/",
+        "kind": "category",
+        "label": "sweets",
+        "relation": "menu_to_category",
+        "parent": "genre-group:food"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100316/",
+        "kind": "category",
+        "label": "drink",
+        "relation": "menu_to_category",
+        "parent": "genre-group:food"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/510915/",
+        "kind": "category",
+        "label": "liquor",
+        "relation": "menu_to_category",
+        "parent": "genre-group:food"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100317/",
+        "kind": "category",
+        "label": "wine",
+        "relation": "menu_to_category",
+        "parent": "genre-group:food"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/510901/",
+        "kind": "category",
+        "label": "sake",
+        "relation": "menu_to_category",
+        "parent": "genre-group:food"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/215783/",
+        "kind": "category",
+        "label": "daily",
+        "relation": "menu_to_category",
+        "parent": "genre-group:daily"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100938/",
+        "kind": "category",
+        "label": "health",
+        "relation": "menu_to_category",
+        "parent": "genre-group:daily"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/551169/",
+        "kind": "category",
+        "label": "medicine",
+        "relation": "menu_to_category",
+        "parent": "genre-group:daily"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100939/",
+        "kind": "category",
+        "label": "beauty",
+        "relation": "menu_to_category",
+        "parent": "genre-group:cosme"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100533/",
+        "kind": "category",
+        "label": "baby",
+        "relation": "menu_to_category",
+        "parent": "genre-group:baby"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/566382/",
+        "kind": "category",
+        "label": "toy",
+        "relation": "menu_to_category",
+        "parent": "genre-group:baby"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/562637/",
+        "kind": "category",
+        "label": "appliance",
+        "relation": "menu_to_category",
+        "parent": "genre-group:appliance"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/211742/",
+        "kind": "category",
+        "label": "electronics",
+        "relation": "menu_to_category",
+        "parent": "genre-group:appliance"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/564500/",
+        "kind": "category",
+        "label": "smartdevice",
+        "relation": "menu_to_category",
+        "parent": "genre-group:appliance"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100026/",
+        "kind": "category",
+        "label": "computer",
+        "relation": "menu_to_category",
+        "parent": "genre-group:appliance"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101070/",
+        "kind": "category",
+        "label": "sports",
+        "relation": "menu_to_category",
+        "parent": "genre-group:sports"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101077/",
+        "kind": "category",
+        "label": "golf",
+        "relation": "menu_to_category",
+        "parent": "genre-group:sports"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/503190/",
+        "kind": "category",
+        "label": "autogoods",
+        "relation": "menu_to_category",
+        "parent": "genre-group:auto"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101114/",
+        "kind": "category",
+        "label": "auto",
+        "relation": "menu_to_category",
+        "parent": "genre-group:auto"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100804/",
+        "kind": "category",
+        "label": "interior",
+        "relation": "menu_to_category",
+        "parent": "genre-group:interior"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/558944/",
+        "kind": "category",
+        "label": "kitchen",
+        "relation": "menu_to_category",
+        "parent": "genre-group:interior"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101213/",
+        "kind": "category",
+        "label": "pet",
+        "relation": "menu_to_category",
+        "parent": "genre-group:interior"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/100005/",
+        "kind": "category",
+        "label": "flower",
+        "relation": "menu_to_category",
+        "parent": "genre-group:interior"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101438/",
+        "kind": "category",
+        "label": "service",
+        "relation": "menu_to_category",
+        "parent": "genre-group:interior"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101205/",
+        "kind": "category",
+        "label": "game",
+        "relation": "menu_to_category",
+        "parent": "genre-group:hobby"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101240/",
+        "kind": "category",
+        "label": "media",
+        "relation": "menu_to_category",
+        "parent": "genre-group:hobby"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101164/",
+        "kind": "category",
+        "label": "hobby",
+        "relation": "menu_to_category",
+        "parent": "genre-group:hobby"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/112493/",
+        "kind": "category",
+        "label": "instrument",
+        "relation": "menu_to_category",
+        "parent": "genre-group:hobby"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/200162/",
+        "kind": "category",
+        "label": "book",
+        "relation": "menu_to_category",
+        "parent": "genre-group:hobby"
+      },
+      {
+        "url": "https://www.rakuten.co.jp/category/101381/",
+        "kind": "category",
+        "label": "カタログギフト・チケット",
+        "relation": "menu_to_category",
+        "parent": "genre-group:hobby"
+      }
+    ],
+    "products": [],
+    "pagination": null,
+    "otherWidgetsExcluded": [
+      "SearchWidget",
+      "ServiceWidget",
+      "CurationContent",
+      "HelpWidget"
+    ],
+    "completeCatalog": false
+  },
+  "dataSha256": "6c2891227f3e60bfd759848dfeb021b79b1054cb608dcbe826affe56e8ada8b4"
+}
