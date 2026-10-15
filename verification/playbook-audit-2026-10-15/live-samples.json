@@ -338,7 +338,10 @@
         "live_replay": false
       },
       "sourceSummarySha256": "4fb712743f02c0b555a4acfd9ece22b4813bc12607bd48547d905d469db7f937",
-      "sourceSummaryFilename": "coupang-retail-search.json"
+      "sourceSummaryFilename": "coupang-retail-search.json",
+      "operation": "retail_search_document_anonymous",
+      "diagnosticOnly": true,
+      "representsProtectedRscClient": false
     },
     {
       "id": "shopify-allbirds-predictive-search-runner-limit-3",
@@ -420,5 +423,20 @@
       "sourceSummarySha256": "0bb0a85db88e96502f7c9a0bc0738157a53d01ff3069fa10e628b107760ed599",
       "sourceSummaryFilename": "ebay-suggest.json"
     }
-  ]
+  ],
+  "followup": {
+    "checkedAt": "2026-10-15T11:46:10.718Z",
+    "evidence": "../coupang-recheck-2026-10-15/summary.json",
+    "maintainedSearchRunner": "scripts/coupang-retail-session.mjs",
+    "httpReads": 3,
+    "passed": 3,
+    "productCounts": [
+      60,
+      54,
+      60
+    ],
+    "initialBrowserBootstrap": true,
+    "note": "Original 11-sample counts remain unchanged. The anonymous Document 403 does not describe the maintained RSC search client.",
+    "naturalExpiryAutoRenewal": true
+  }
 }

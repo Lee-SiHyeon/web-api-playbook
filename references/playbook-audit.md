@@ -26,6 +26,8 @@ npm run audit:playbook -- --output-dir=work/audit-strict --run-tests --strict
 
 `recorded_live`는 기존 영수증을 현재 소스와 대조한 기록이다. 현재 원격 결과, 세션·owner 상태, 모든 페이지·옵션의 범위까지 검증한 것이 아니다. 이번 직접 HTTP 표본은 별도 파일에 시각·상태·MIME·내용 검증·인증 방식과 다섯 상태를 기록한다. 전체 사이트의 새 라이브 검증으로 승격하지 않는다.
 
+쿠팡 일반 검색은 `coupang-retail/catalog.search`가 `scripts/coupang-retail-session.mjs search`를 가리킨다. `coupang-public.mjs retail-search --anonymous`는 별도의 cookie-free Document 진단이다. 같은 `/np/search`라도 RSC 헤더·응답 MIME·세션 적용이 다르므로 진단의 403을 검색 기능 전체의 결과로 합치지 않는다. 로컬 세션 preflight 거부는 HTTP 요청 0건이며 서버 응답과 구분한다. [2026-10-15 정정과 실제 HTTP 결과](../verification/coupang-recheck-2026-10-15/README.md).
+
 ## REA와 agent-browser 적용
 
 ```powershell
@@ -52,7 +54,7 @@ runner는 바이너리 버전을 확인하고 명시한 브라우저를 새 임�
 
 동작 전에 HAR 수집을 켜고 행동 전후 request 수를 남긴다. 이 창은 initiator 인과관계 증명이 아니다. pinned HAR exporter의 initiator/redirect ancestry 부재와 본문 누락은 별도 gap이다. 302 hop 보존 여부도 core 행동 성공과 분리한다. timeout은 `blocked_runtime`으로 취급하고 같은 서비스 세션 만료로 판단하지 않는다. close가 확인되지 않으면 임시 파일 삭제 성공으로 표시하지 않는다.
 
-2026-10-15 로컬에서는 바이너리의 버전·도움말은 실행됐지만 Canary와 Stable 양쪽의 첫 `open about:blank`가 데몬의 `outcome_unknown` 응답으로 실패했다. 운영 사이트 브라우저 캡처는 0건이다. 현재 적용 범위는 조사 CLI, 정제 adapter, 로컬 fixture runner와 회귀이며 브라우저 실증 통과는 아니다. 상세 결과는 [2026-10-15 전수조사](../verification/playbook-audit-2026-10-15/README.md)에 기록한다.
+2026-10-15 로컬에서는 바이너리의 버전·도움말은 실행됐지만 Canary와 Stable 양쪽의 첫 `open about:blank`가 데몬의 `outcome_unknown` 응답으로 실패했다. 이 Rust runner의 운영 사이트 캡처는 0건이다. 조사 CLI, 정제 adapter, 로컬 fixture runner와 회귀는 적용됐지만 Rust 브라우저 실증은 통과하지 않았다. 후속 쿠팡 재검증에서는 기존 Chrome 확장/CDP 연결로 정상 RSC 200을 관측했으며 이는 별도 경로다. 상세 결과는 [2026-10-15 전수조사](../verification/playbook-audit-2026-10-15/README.md)에 기록한다.
 
 ## 출처와 라이선스
 

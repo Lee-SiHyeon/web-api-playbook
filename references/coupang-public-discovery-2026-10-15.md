@@ -68,7 +68,7 @@ npm run coupang:retail:diagnose -- --compare-403 --out=work/retail-diagnostic.js
 
 기존 방문자 provider의 허용 범위를 넓히거나 수집기의 기본 쿠키 정책을 변경하지 않았다. 이 비교 runner는 입력 획득에 브라우저가 필요한 명시적 진단 경로다. 재사용 가능한 보호 저장소·쿠키 갱신·프로세스 재시작 후 복구는 이 실행에서 검증하지 않았다.
 
-후속 요청에서 공개 스크립트의 `x-cp-s` 60초 갱신·5분 만료 로직을 확인하고 독립 Node 계산으로 옮겼다. `scripts/coupang-retail-session.mjs`는 DPAPI에서 검증된 12개 쿠키 조합을 불러와 서명을 자동 갱신하고 검색 60개를 읽는다. 반복 RSC 입력도 로컬에서 생성한다. 상세한 라이브 증거와 장기 세션 갱신의 미검증 범위는 [HTTP 갱신 기록](coupang-retail-renewal-2026-10-15.md)에 있다.
+후속 요청에서 공개 스크립트의 `x-cp-s` 60초 갱신·5분 만료 로직을 확인하고 독립 Node 계산으로 옮겼다. `scripts/coupang-retail-session.mjs`는 DPAPI의 쿠팡 전용 쿠키를 불러와 서명을 자동 갱신하고 검색을 읽는다. 초기 검증은 12개 조합이었으며, 11:37 UTC 정상 재부트스트랩에서는 사라진 `bm_mi`를 선택 항목으로 수정한 11개 조합으로 200·60개, 별도 프로세스 서명 갱신 후 200·54개를 확인했다. 반복 RSC 입력도 로컬에서 생성한다. 상세한 라이브 증거와 장기 세션 갱신의 미검증 범위는 [HTTP 갱신 기록](coupang-retail-renewal-2026-10-15.md)에 있다.
 
 ## 재귀 탐색과 재개
 
@@ -91,7 +91,7 @@ npm run coupang:crawl -- --phase=travel-reviews --max=24
 | 계약 | captured | client_exists | remnant_free | credential_propagated | live_replay |
 |---|---|---|---|---|---|
 | 일반 카테고리 메뉴 JSON | true | true | true | 익명, 해당 없음 | true |
-| 일반 검색 RSC Fetch | true, 가격순 클릭의 입력·본문 | true | 최초 인계 후 반복 입력·서명 갱신·전송 전부 HTTP/Node | DPAPI 12개 쿠키 조합의 실제 전송 일치 확인; 소유자 인증 미검증 | true, 200·60개; 장기 세션 재발급 별도 |
+| 일반 검색 RSC Fetch | true, 가격순 클릭의 입력·본문 | true | 최초 인계 후 반복 입력·서명 갱신·전송 전부 HTTP/Node | DPAPI 11개 쿠키 조합의 실제 전송 일치 재확인; 소유자 인증 미검증 | true, 200·60개 및 별도 서명 갱신 후 54개; 장기 세션 재발급 별도 |
 | 일반 검색/카테고리 Document | 현재 요청/응답 쌍 미확보 | true | true | 계정 인증 해당 없음; 방문자 전송 확인 | false, 403 |
 | 일반 상품 offer-list | 기존 관측 계약 | true | true | 계정 인증 해당 없음; 방문자 전송 확인 | true, 정확한 SKU·비교 전후 |
 | 트래블 category Document 계열 | true | true | true | 익명, 해당 없음 | true, 처리한 자원만 |

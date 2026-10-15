@@ -40,6 +40,19 @@ async function setup(t){
   store.write(COUPANG_RETAIL_STORE,JSON.stringify(state));return {store,state};
 }
 
+test('fresh bootstrap accepts observed bm_mi absence but still rejects missing required or duplicate cookies',()=>{
+  const now=Date.now(),signature=renewCoupangSignature(vectors[0].encoded,{now,nonce:'c'.repeat(32)});
+  const cookies=RETAIL_COOKIE_NAMES.filter(name=>name!=='bm_mi').map(name=>({name,
+    value:name==='x-cp-s'?signature.value:'SYNTHETIC_'+name,domain:'.coupang.com',path:'/',secure:true,
+    httpOnly:false,expires:(now+600000)/1000}));
+  const state=createCoupangRetailState(cookies);
+  assert.equal(state.session.cookieJar.cookies.length,11);
+  assert.equal(state.session.cookieJar.cookies.some(c=>c.key==='bm_mi'),false);
+  for(const name of RETAIL_COOKIE_NAMES.filter(name=>name!=='bm_mi'))
+    assert.throws(()=>createCoupangRetailState(cookies.filter(c=>c.name!==name)),{code:'COUPANG_RETAIL_IMPORT_INCOMPLETE'});
+  assert.throws(()=>createCoupangRetailState([...cookies,cookies[0]]),{code:'COUPANG_RETAIL_IMPORT_INCOMPLETE'});
+});
+
 test('expired signature refresh reaches HTTP, stores observed rotation and deletion, and never logs secrets',async t=>{
   const {store}=await setup(t);let calls=0;
   const result=await searchCoupangRetail('무선마우스',{store,fetchImpl:async(url,init)=>{

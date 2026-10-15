@@ -1,10 +1,12 @@
 # 2026-10-15 플레이북 전수조사
 
+**쿠팡 검색 판정 정정 (11:37 UTC 이후):** 아래 최초 표본은 쿠키 없는 Document 진단을 선택해, 이미 유지되던 DPAPI RSC 검색 실행기를 빠뜨렸다. 정상 세션에서 사라진 `bm_mi`를 필수로 요구하던 가져오기 조건을 수정한 뒤, 독립 Node HTTP 검색 **200·60개**, 별도 프로세스 서명 갱신 후 검색 **200·54개**, 자연 만료 후 일반 검색의 자동 갱신 **200·60개**를 확인했다. [재검증과 수정 내역](../coupang-recheck-2026-10-15/README.md), [기계 판독 증거](../coupang-recheck-2026-10-15/summary.json). 최초 40개/378개 집계는 당시 snapshot이며, 이후 `coupang-retail/catalog.search`를 등록했다.
+
 **40개 등록 서비스·378개 기능·7개 서비스 팩의 조사를 완료했다.** 모든 기능이 현재 동작한다는 뜻은 아니다. 필수 미충족 항목은 **190개**이고, 과거 HTTP 실증 기록 61개와 이번 새 HTTP 표본을 구분했다.
 
 - [전체 기능 표](audit.md): 378개 기능, 서비스별 집계, 미등록 실행기 후보, 누락 참조.
 - [기계 판독 결과](audit.json): 기존 capability 검사기 결과와 테스트·재고 상세.
-- [새 HTTP 표본](live-samples.json): 읽기 11건 중 **10건 성공·1건 403**. 모든 서비스의 라이브 검증을 대표하지 않는다.
+- [최초 HTTP 표본](live-samples.json): 읽기 11건 중 **10건 성공·쿠키 없는 Document 진단 1건 403**. 쿠팡의 유지되는 RSC 검색 경로를 대표하지 않는다. 후속 RSC 읽기 3건은 모두 200이다.
 - [공개 원천 추가 검사](ontology-live-summary.json): 정책·SH·모두투어의 제한된 읽기 성공, NOL/야놀자 schema 실패와 국토부 건너뜀.
 - [브라우저 시도](browser-fixture.json): Rust 바이너리 설치·버전 확인 완료, 합성 캡처는 `blocked_runtime`.
 - [검증 기록](validation.json), [HTTP 실행 소스 해시](live-code-hashes.json).
@@ -56,7 +58,7 @@
 | Yahoo Shopping 상품 | 200 HTML, 상품 1개·옵션 6개 |
 | Coupang 카테고리 | 200, JSON 계약 검증, 카테고리 노드 3,228개 |
 | Coupang Travel 자동완성 | 읽기 POST 200 JSON, 제안 7개 |
-| Coupang 일반 상품 검색 | **403 HTML**, `COUPANG_HTTP_403`, 실제 상품 결과 없음 |
+| Coupang 쿠키 없는 검색 Document 진단 | **403 HTML**, `COUPANG_HTTP_403`, 상품 결과 없음. 유지되는 RSC 검색 클라이언트와 다른 경로 |
 | Allbirds/Shopify 예측 검색 | 200 JSON과 통화 조회 200 JavaScript MIME, 상품 3개 |
 | eBay 자동완성 | 200 JSON, 제안 10개·카테고리 힌트 2개 |
 
@@ -72,7 +74,7 @@ agent-browser 0.39.1의 Rust Windows 바이너리를 `work/`에 설치하고 버
 
 1. **Rust 브라우저 IPC/CDP 실행 복구:** 로컬 fixture의 클릭·본문·정제·HTTP 값 비교부터 통과시킨다. initiator와 redirect ancestry는 별도 수집 확장 대상이다.
 2. **기능 매니페스트 연결:** 미등록 실행기를 검토해 Naver·Tistory·affiliate·social 등의 서비스/기능 및 인증·readback 조건을 연결한다. 후보를 자동으로 기능 성공으로 등록하지 않는다.
-3. **실제 실패 회귀:** NOL/야놀자의 현재 HTML/schema 차이와 쿠팡 일반 검색 403을 별도 관측한다. 이번 결과를 차단 해결로 표시하지 않는다.
+3. **실제 실패 회귀:** NOL/야놀자의 현재 HTML/schema 차이를 관측한다. 쿠팡은 후속 RSC 검색 200을 별도로 기록했으며, 남은 범위는 전체 세션의 장기 자동 갱신이다. 쿠키 없는 Document 진단 403은 해당 경로의 결과로 보존한다.
 4. **기록 갱신과 미구현 분리:** 재검증 21개·pending live 16개를 서비스별 현재 읽기로 검증한다. 계정·쓰기·생성 기능은 해당 기능의 준비와 readback 조건을 갖춘 별도 실행이 필요하다.
 
 실행 당시 기준 source revision은 `2af4d895bbdc4dd0894d85f520a94ddf332938c5`이며 새 조사 도구와 Windows 테스트 수정은 이 결과와 함께 반영한다. 보고서에 없는 외부 사이트나 계정 기능의 현재 상태는 확인하지 않았다.
