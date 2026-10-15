@@ -2,6 +2,8 @@
 
 2026-10-14에 GitHub의 default branch와 로컬 구현을 대조했다. 기존 작업 폴더의 미커밋 변경은 그대로 두고 아래 기준에서 별도 worktree를 만들었다.
 
+2026-10-15 범위 보완: 아래 여행·공고 8개 원천은 전체 요청 범위가 아니다. 사용자가 명시한 알리를 포함해 온톨로지의 해외 쇼핑 원천 `aliexpress`, `temu`, `shein`, `iherb`를 [별도 확장 기록](overseas-retail-expansion-2026-10-15.md)과 [미완료 탐색 목록](overseas-retail-frontier.json)에 추가했다. HTML Document와 XML도 관측·구현 대상으로 포함한다.
+
 | 저장소 | 원격 main 기준 |
 |---|---|
 | Lee-SiHyeon/web-api-playbook | `696b588100df6cf026b57cd71e85ad5360bd7e24` |

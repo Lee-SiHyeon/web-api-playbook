@@ -1,0 +1,408 @@
+{
+  "schema": "web-api-overseas-retail-frontier-v1",
+  "checkedAt": "2026-10-15T00:21:04.630Z",
+  "scope": [
+    "aliexpress",
+    "temu",
+    "shein",
+    "iherb"
+  ],
+  "complete": false,
+  "networkCaptureVerified": false,
+  "accountWrites": 0,
+  "services": [
+    {
+      "service": "aliexpress",
+      "priority": 1,
+      "status": "blocked_tool_policy",
+      "currentRun": {
+        "directHttpCalls": 0,
+        "browserOpen": "site_safety_policy_denied",
+        "autoReviewAttempted": false,
+        "workaroundAttempted": false
+      },
+      "implemented": [
+        "product-seo (historical)",
+        "sitemap-index",
+        "sitemap-products"
+      ],
+      "liveVerifiedThisRun": [],
+      "historicalEvidence": [
+        "verification/retail-aliexpress-product-seo-cli-live-2026-10-05.json"
+      ],
+      "pending": [
+        "Current sitemap replay",
+        "Search Document product-link parser and live verification",
+        "Product detail, images and options",
+        "Prices, currency and availability",
+        "Category traversal and pagination",
+        "Reviews and review pagination"
+      ],
+      "note": "The browser tool denied site access. No alternate HTTP or browser route was attempted in this run. Sitemap changes use existing observed contracts and offline fixtures only."
+    },
+    {
+      "service": "temu",
+      "priority": 2,
+      "status": "partial_observation_no_catalog_client",
+      "currentRun": {
+        "browserHomeObserved": true,
+        "browserNetworkCaptured": false,
+        "documentReplay": {
+          "origin": "https://www.temu.com",
+          "path": "/kr/channel/best-sellers.html",
+          "httpStatus": 200,
+          "responseBytes": 2922,
+          "productLinks": 0
+        }
+      },
+      "implemented": [],
+      "liveVerifiedThisRun": [],
+      "evidence": [
+        "verification/retail-overseas-followup-probes-2026-10-15.json"
+      ],
+      "pending": [
+        "Capture the storefront product request and response",
+        "Catalog identity, titles and displayed prices",
+        "Categories and pagination",
+        "Details, options and reviews"
+      ],
+      "note": "HTTP 200 alone did not return a verified catalog. CDP Network.enable was blocked by the browser runtime; no anti-bot bypass was attempted."
+    },
+    {
+      "service": "shein",
+      "priority": 3,
+      "status": "home_verified_category_blocked",
+      "currentRun": {
+        "productCount": 10,
+        "navigationCount": 15,
+        "browserComparison": {
+          "matched": 8,
+          "total": 10,
+          "commonTitles": 8,
+          "completeMatch": false
+        },
+        "categoryProbe": {
+          "path": "/Women-T-Shirts-c-1738.html",
+          "httpStatus": 302,
+          "redirectPath": "/risk/challenge",
+          "followed": false
+        }
+      },
+      "implemented": [
+        "home Document cards and menu"
+      ],
+      "liveVerifiedThisRun": [
+        "catalog.home_document"
+      ],
+      "evidence": [
+        "verification/retail-shein-home-cli-2026-10-15-v2.json",
+        "verification/retail-shein-direct-http-proof-2026-10-15.json",
+        "verification/retail-shein-browser-dom-2026-10-15.json",
+        "verification/retail-overseas-followup-probes-2026-10-15.json"
+      ],
+      "navigation": [
+        {
+          "label": "바로 당신을 위해",
+          "url": "https://kr.shein.com/Women-T-Shirts-c-1738.html",
+          "externalCategoryId": "1738",
+          "edgeType": "home_to_category",
+          "idNamespace": "category",
+          "state": "blocked_challenge",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "신상품",
+          "url": "https://kr.shein.com/recommend/Women-New-in-sc-10050026724.html",
+          "externalCategoryId": "10050026724",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "세일",
+          "url": "https://kr.shein.com/sale/All-Sale-sc-0051884505.html",
+          "externalCategoryId": "0051884505",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "여성의류",
+          "url": "https://kr.shein.com/RecommendSelection/Women-Clothing-sc-017172961.html",
+          "externalCategoryId": "017172961",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "여성 플러스 의류",
+          "url": "https://kr.shein.com/RecommendSelection/Curve-sc-017172964.html",
+          "externalCategoryId": "017172964",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "속옷 & 잠옷",
+          "url": "https://kr.shein.com/RecommendSelection/Underwear-Sleepwear-sc-017172965.html",
+          "externalCategoryId": "017172965",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "남성복",
+          "url": "https://kr.shein.com/RecommendSelection/Men-Clothing-sc-017172963.html",
+          "externalCategoryId": "017172963",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "주얼리 & 액세서리",
+          "url": "https://kr.shein.com/RecommendSelection/Jewelry-Accessories-sc-017291431.html",
+          "externalCategoryId": "017291431",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "신발",
+          "url": "https://kr.shein.com/RecommendSelection/Shoes-sc-017172966.html",
+          "externalCategoryId": "017172966",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "뷰티 & 헬스",
+          "url": "https://kr.shein.com/RecommendSelection/Beauty-Health-sc-017172970.html",
+          "externalCategoryId": "017172970",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "홈 앤 리빙",
+          "url": "https://kr.shein.com/RecommendSelection/Home-Kitchen-sc-017185546.html",
+          "externalCategoryId": "017185546",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "가방 & 러기지",
+          "url": "https://kr.shein.com/RecommendSelection/Bags-Luggage-sc-017174546.html",
+          "externalCategoryId": "017174546",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "스포츠 & 아웃도어",
+          "url": "https://kr.shein.com/RecommendSelection/Sports-Outdoors-sc-017185553.html",
+          "externalCategoryId": "017185553",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "휴대폰 & 액세서리",
+          "url": "https://kr.shein.com/RecommendSelection/Cell-Phones-Accessories-sc-017706910.html",
+          "externalCategoryId": "017706910",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        },
+        {
+          "label": "전자기기",
+          "url": "https://kr.shein.com/RecommendSelection/Electronics-sc-017706908.html",
+          "externalCategoryId": "017706908",
+          "edgeType": "home_to_collection",
+          "idNamespace": "collection",
+          "state": "pending",
+          "fetchAllowedInCurrentRun": false
+        }
+      ],
+      "productIds": [
+        "471133769",
+        "320679328",
+        "284047598",
+        "565817878",
+        "310823671",
+        "545905685",
+        "560220761",
+        "547784512",
+        "545086881",
+        "162798248"
+      ],
+      "pending": [
+        "Category traversal after permitted access is available",
+        "Product URL and detail binding",
+        "Options, stock and reviews",
+        "Pagination and shipping/tax context"
+      ],
+      "note": "Home success predates the later category challenge. Further SHEIN requests stopped. Only home-card prices are verified; recommendations varied between separate browser and HTTP reads."
+    },
+    {
+      "service": "iherb",
+      "priority": 4,
+      "status": "partial_identity_catalog",
+      "currentRun": {
+        "productIdsRead": 100,
+        "shardsDiscovered": 3,
+        "selectedShardIndex": 0,
+        "selectedShardPath": "/sitemaps/products-0-www-0.xml",
+        "uniqueProductsInSelectedShard": 20500,
+        "priceVerified": false,
+        "stockVerified": false
+      },
+      "implemented": [
+        "sitemap-index",
+        "sitemap-products"
+      ],
+      "liveVerifiedThisRun": [
+        "catalog.sitemap_products"
+      ],
+      "evidence": [
+        "verification/retail-iherb-sitemap-cli-2026-10-15-v2.json",
+        "verification/retail-iherb-direct-http-proof-2026-10-15.json"
+      ],
+      "next": {
+        "shardIndex": 0,
+        "offset": 100,
+        "snapshotSha256": "d300f5e38c8fdde12bf42fc819afa0d2bbbc806d68ae7f50819aa9996b8fcc13"
+      },
+      "productIds": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "12",
+        "13",
+        "15",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "33",
+        "36",
+        "42",
+        "64",
+        "67",
+        "79",
+        "106",
+        "110",
+        "111",
+        "112",
+        "116",
+        "117",
+        "120",
+        "123",
+        "124",
+        "125",
+        "127",
+        "129",
+        "131",
+        "133",
+        "134",
+        "136",
+        "137",
+        "139",
+        "142",
+        "143",
+        "145",
+        "171",
+        "176",
+        "177",
+        "185",
+        "187",
+        "192",
+        "199",
+        "224",
+        "231",
+        "244",
+        "250",
+        "256",
+        "260",
+        "268",
+        "273",
+        "276",
+        "278",
+        "280",
+        "282",
+        "288",
+        "298",
+        "299",
+        "300",
+        "301",
+        "302",
+        "303",
+        "304",
+        "306",
+        "307",
+        "308",
+        "309",
+        "310",
+        "311",
+        "312",
+        "313",
+        "315",
+        "316",
+        "317",
+        "318",
+        "319",
+        "321",
+        "322",
+        "323",
+        "325",
+        "326",
+        "328",
+        "329",
+        "330",
+        "331",
+        "332",
+        "333"
+      ],
+      "pending": [
+        "Remaining identities in selected shard",
+        "Remaining 2 sitemap shards",
+        "Protected or permitted storefront contract for titles, prices and options",
+        "Reviews and review pagination"
+      ],
+      "note": "The www.iherb.com XML contract provides identities only. The separate kr.iherb.com storefront returned a 403 challenge; no price/stock claim is made."
+    }
+  ],
+  "adjacentObservations": [
+    {
+      "service": "ebay",
+      "status": "browser_visible_http_403",
+      "path": "/b/Electronics/bn_7000259124",
+      "pending": "Observed Document is eligible for HTTP parsing once an allowed successful replay exists."
+    }
+  ]
+}

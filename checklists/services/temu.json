@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "temu",
-  "description": "Temu affiliate and catalog scope for overseas collection. Official publisher product API is unverified as of 2026-10-14; Partner Platform OpenAPI is seller/ISV scoped. Prefer affiliate dashboard links. See references/overseas-official-api-first.md and checklists note in legal-tos-overseas.md.",
+  "description": "Temu affiliate and catalog scope for overseas collection. Official publisher product API is unverified as of 2026-10-14; Partner Platform OpenAPI is seller/ISV scoped. Prefer affiliate dashboard links. See references/overseas-official-api-first.md and checklists note in legal-tos-overseas.md. 2026-10-15: storefront HTTP expansion is applicable; see references/overseas-retail-frontier.json. Affiliate approval remains independent.",
   "capabilities": [
     {
       "id": "affiliate.dashboard_links",
@@ -35,10 +35,10 @@
     },
     {
       "id": "catalog.storefront_anonymous",
-      "title": "Anonymous storefront product JSON over Node HTTP",
-      "priority": "optional",
-      "applicability": "not_applicable",
-      "requirement": "inventory",
+      "title": "Anonymous temu storefront catalog through observed HTTP Documents, Fetch or XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
       "implementation": {
         "files": [],
         "cli": [],
@@ -46,7 +46,8 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "applicabilityReason": "Anonymous storefront crawling is not implemented yet; official affiliate/network APIs or feeds are the current path."
+      "blocker": "Browser home displayed products, but the observed best-sellers Document replay returned HTTP 200 with no verified product catalog. CDP network capture is blocked_runtime; HTTP 200 is not catalog success.",
+      "discoveryFrontier": "references/overseas-retail-frontier.json"
     },
     {
       "id": "pricing.ship_to_currency",

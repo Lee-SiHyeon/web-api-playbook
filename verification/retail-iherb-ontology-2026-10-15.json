@@ -1,0 +1,858 @@
+{
+  "schema": "web-api-cps-commerce-projection-v1",
+  "ontologyId": "acada:cps-commerce",
+  "networkUsed": false,
+  "databaseWrites": 0,
+  "sourceId": "iherb",
+  "observedAt": "2026-10-15T00:19:39.176Z",
+  "completeCatalog": false,
+  "consumerSources": [
+    {
+      "sourceId": "iherb",
+      "origin": "https://www.iherb.com",
+      "contractState": "verified_public_http",
+      "scope": "sitemap_identities_only",
+      "contractEvidence": [
+        {
+          "id": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7",
+          "sourceId": "iherb",
+          "requestMethod": "GET",
+          "requestUrl": "https://www.iherb.com/sitemaps/products-0-www-0.xml",
+          "responseStatus": 200,
+          "contentType": "text/xml",
+          "responseSha256": null,
+          "observedAt": "2026-10-15T00:19:39.176Z",
+          "browserUsed": false,
+          "cookiesSent": false,
+          "authorizationSent": false,
+          "projectionSha256": "fdcef58d8abe989eb2b8800b6887daf07d1cec03a6db6aa72b33684f91eb1362",
+          "pagination": {
+            "pagesRead": 1,
+            "nextPageCandidate": {
+              "shardIndex": 0,
+              "offset": 100,
+              "snapshotSha256": "d300f5e38c8fdde12bf42fc819afa0d2bbbc806d68ae7f50819aa9996b8fcc13"
+            },
+            "complete": false,
+            "stopReason": "bounded_identity_sample"
+          }
+        }
+      ]
+    }
+  ],
+  "offerings": [],
+  "offers": [],
+  "identityCandidates": [
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "1",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-5-htp-100-mg-60-veggie-caps/1",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "2",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-alpha-lipoic-acid-150-150-mg-120-veggie-caps/2",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "3",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-msm-with-optimsm-1-500-mg-120-tablets/3",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "4",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-stabilized-r-lipoic-acid-100-mg-60-veggie-caps/4",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "5",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-msm-powder-with-optimsm-8-8-oz-250-g/5",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "6",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-ultra-cordyceps-750-mg-60-veggie-caps/6",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "7",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-quercetin-bromelain-180-veggie-capsules/7",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "8",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-5-htp-enhanced-with-vitamins-b6-and-c-120-veggie-caps/8",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "9",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-glucosamine-180-capsules-750-mg-per-capsule/9",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "12",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-digestive-enzymes-90-veggie-caps/12",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "13",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-high-absorption-curcumin-120-veggie-caps/13",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "15",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-high-absorption-magnesium-lysinate-glycinate-chelated-albion-traacs-120-tablets-100-mg-per-tablet/15",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "19",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-msm-180-capsules-1-000-mg-per-capsule/19",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "20",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-high-absorption-coq10-100-mg-60-veggie-caps/20",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "21",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-synergistic-glucosamine-msm-formula-with-optimsm-180-capsules/21",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "22",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-glucosamine-chondroitin-msm-120-veggie-capsules/22",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "23",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-glucosamine-chondroitin-msm-with-optimsm-240-veggie-capsules/23",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "24",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-saw-palmetto-standardized-extract-320-mg-60-softgels/24",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "25",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-comprehensive-prostate-formula-120-veggie-caps/25",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "26",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-ginkgo-120-mg-120-veggie-caps/26",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "27",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-noni-fruit-powder-120-veggie-caps-650-mg-per-capsule/27",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "28",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-acetyl-l-carnitine-60-veggie-caps-500-mg-per-capsule/28",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "33",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-nattokinase-2-000-fus-90-veggie-caps/33",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "36",
+      "canonicalUrl": "https://www.iherb.com/pr/nutrikel-natural-curves-60-tablets/36",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "42",
+      "canonicalUrl": "https://www.iherb.com/pr/doctor-s-best-benfotiamine-150-150-mg-120-veggie-caps/42",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "64",
+      "canonicalUrl": "https://www.iherb.com/pr/new-chapter-fermented-iron-complex-60-vegetarian-tablets/64",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "67",
+      "canonicalUrl": "https://www.iherb.com/pr/new-chapter-fermented-zinc-complex-60-vegetarian-tablets/67",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "79",
+      "canonicalUrl": "https://www.iherb.com/pr/new-chapter-zyflamend-180-mini-softgels/79",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "106",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-curcumin-95-turmeric-extract-500-mg-60-veggie-capsules/106",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "110",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-b-right-100-veggie-capsules/110",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "111",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-co-q10-100-mg-60-veggie-capsules/111",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "112",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-citicoline-cdp-choline-250-mg-60-capsules/112",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "116",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-acetyl-l-carnitine-500-mg-60-veggie-capsules/116",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "117",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-methyl-b-12-5-000-mcg-60-chewable-tablets/117",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "120",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-quercetin-500-mg-200-veggie-capsules/120",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "123",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-same-200-200-mg-60-tablets/123",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "124",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-jarro-dophilus-eps-60-veggie-caps-5-billion-cfu-per-capsule/124",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "125",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-same-400-400-mg-30-tablets/125",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "127",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-milk-thistle-150-mg-200-veggie-capsules/127",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "129",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-methyl-b-12-lemon-1-000-mcg-100-chewable-tablets/129",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "131",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-n-a-g-700-mg-120-veggie-capsules/131",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "133",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-taurine-1-000-mg-100-capsules/133",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "134",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-lactoferrin-freeze-dried-250-mg-60-capsules/134",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "136",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-l-carnitine-500-mg-100-veggie-capsules/136",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "137",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-toco-sorb-60-softgels/137",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "139",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-lutein-60-softgels/139",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "142",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-q-absorb-100-mg-60-softgels/142",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "143",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-alpha-lipoic-sustain-with-biotin-60-tablets/143",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "145",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-5-htp-100-mg-60-veggie-capsules/145",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "171",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-biotin-100-veggie-capsules/171",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "176",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-alpha-gpc-300-mg-60-veggie-capsules/176",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "177",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-artichoke-500-mg-180-veggie-capsules/177",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "185",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-l-glutamine-1-000-mg-100-tablets/185",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "187",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-l-glutamine-750-mg-120-veggie-capsules/187",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "192",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-inositol-750-mg-100-veggie-capsules/192",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "199",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-glucosamine-chondroitin-msm-240-capsules/199",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "224",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-co-q10-200-mg-60-veggie-capsules/224",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "231",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-5-htp-50-mg-90-veggie-capsules/231",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "244",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-msm-1-000-mg-200-veggie-capsules/244",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "250",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-krill-oil-60-softgels/250",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "256",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-mk-7-90-mcg-60-softgels/256",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "260",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-mastic-gum-60-veggie-capsules-500-mg-per-capsule/260",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "268",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-same-200-200-mg-20-tablets/268",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "273",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-ps100-100-mg-60-softgels/273",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "276",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-pantothenic-acid-b5-100-veggie-caps/276",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "278",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-zinc-balance-100-veggie-capsules/278",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "280",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-ps100-phosphatidylserine-100-mg-120-capsules/280",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "282",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-vegan-theanine-100-100-mg-60-veggie-caps/282",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "288",
+      "canonicalUrl": "https://www.iherb.com/pr/jarrow-formulas-l-tyrosine-500-mg-100-capsules/288",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "298",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-grape-seed-200-veg-capsules/298",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "299",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-gamma-e-complex-advanced-120-softgels/299",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "300",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-l-carnitine-500-mg-180-veg-capsules/300",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "301",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-sports-l-glutamine-1-000-mg-120-veg-capsules/301",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "302",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-coral-calcium-plus-100-veg-capsules/302",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "303",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-lecithin-granules-1-lb-454-g/303",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "304",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-e-400-with-mixed-tocopherols-268-mg-400-iu-250-softgels/304",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "306",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-5-htp-100-mg-120-veg-capsules/306",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "307",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-turmeric-curcumin-60-veg-capsules-665-mg-per-capsule/307",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "308",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-l-carnosine-500-mg-50-veg-capsules/308",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "309",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-bromelain-500-mg-60-veg-capsules/309",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "310",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-ashwagandha-standardized-extract-450-mg-90-veg-capsules/310",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "311",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-alpha-lipoic-acid-100-mg-120-veg-capsules/311",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "312",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-coq10-with-hawthorn-berry-180-veg-capsules/312",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "313",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-alpha-lipoic-acid-60-veg-capsules/313",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "315",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-alpha-lipoic-acid-250-mg-120-veg-capsules/315",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "316",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-acetyl-l-carnitine-500-mg-100-veg-capsules/316",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "317",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-5-htp-50-mg-90-veg-capsules/317",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "318",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-cla-800-mg-180-softgels/318",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "319",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-coq10-100-mg-150-softgels/319",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "321",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-real-food-xylitol-1-lb-454-g/321",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "322",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-better-stevia-zero-calorie-sweetener-original-100-packets-3-5-oz-100-g/322",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "323",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-omega-3-fish-oil-1-000-mg-200-softgels/323",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "325",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-super-omega-3-6-9-fish-oil-180-softgels/325",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "326",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-pantothenic-acid-250-veg-capsules/326",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "328",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-melatonin-3-mg-180-veg-capsules/328",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "329",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-better-stevia-organic-extract-powder-1-oz-28-g/329",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "330",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-quercetin-with-bromelain-120-veg-capsules/330",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "331",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-lutein-10-mg-120-softgels/331",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "332",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-lycopene-20-mg-50-softgels/332",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    },
+    {
+      "consumerSourceId": "iherb",
+      "sourceLocalId": "333",
+      "canonicalUrl": "https://www.iherb.com/pr/now-foods-pantethine-300-mg-60-softgels/333",
+      "title": null,
+      "state": "needs_product_detail",
+      "evidenceRef": "http:32049de16461daee342e9093e7b5f6d391285932367ba6a85491c31ebf7264b7"
+    }
+  ],
+  "variants": [],
+  "reviews": [],
+  "input": {
+    "file": "verification/retail-iherb-sitemap-cli-2026-10-15-v2.json",
+    "sha256": "bc213d6dcfb75fe616d1b00f5af9387794ff056094b0a668605120c1c780a8ea",
+    "proof": "verification/retail-iherb-direct-http-proof-2026-10-15.json"
+  },
+  "implementation": {
+    "lib/retail/ontology.mjs": "43ae73d3d2b9d65adeab3491a43d40eaf28456769f492a86dee7cb5033905b02",
+    "scripts/overseas-retail-ontology.mjs": "6712bebb33eca107a9c217612ac4a4fe8fce89e12fbd28ec64bf58792bd8f115"
+  }
+}

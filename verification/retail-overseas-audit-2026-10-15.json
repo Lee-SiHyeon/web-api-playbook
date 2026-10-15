@@ -1,0 +1,223 @@
+{
+  "schema": "web-api-overseas-retail-audit-v1",
+  "checkedAt": "2026-10-15T00:31:54.632Z",
+  "networkUsed": false,
+  "audits": [
+    {
+      "service": "aliexpress",
+      "exitStatus": 2,
+      "summary": {
+        "total": 12,
+        "recordedLive": 1,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "catalog.product_detail",
+          "catalog.search",
+          "catalog.offer_price",
+          "catalog.categories",
+          "catalog.pagination",
+          "catalog.reviews",
+          "catalog.sitemap_products"
+        ],
+        "strictPassed": false
+      },
+      "capabilities": [
+        {
+          "id": "catalog.product_seo",
+          "status": "recorded_live"
+        },
+        {
+          "id": "catalog.product_detail",
+          "status": "source_candidate"
+        },
+        {
+          "id": "catalog.search",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.offer_price",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.categories",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.pagination",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.reviews",
+          "status": "unimplemented"
+        },
+        {
+          "id": "auth.login",
+          "status": "not_applicable"
+        },
+        {
+          "id": "profile.write",
+          "status": "not_applicable"
+        },
+        {
+          "id": "cart.checkout",
+          "status": "not_applicable"
+        },
+        {
+          "id": "affiliate.workflow",
+          "status": "not_applicable"
+        },
+        {
+          "id": "catalog.sitemap_products",
+          "status": "blocked"
+        }
+      ]
+    },
+    {
+      "service": "temu",
+      "exitStatus": 2,
+      "summary": {
+        "total": 6,
+        "recordedLive": 0,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "affiliate.dashboard_links",
+          "catalog.official_product_search",
+          "catalog.storefront_anonymous",
+          "pricing.ship_to_currency"
+        ],
+        "strictPassed": false
+      },
+      "capabilities": [
+        {
+          "id": "affiliate.dashboard_links",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.official_product_search",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.storefront_anonymous",
+          "status": "unimplemented"
+        },
+        {
+          "id": "pricing.ship_to_currency",
+          "status": "unimplemented"
+        },
+        {
+          "id": "auth.customer_login",
+          "status": "not_applicable"
+        },
+        {
+          "id": "checkout.write",
+          "status": "not_applicable"
+        }
+      ]
+    },
+    {
+      "service": "shein",
+      "exitStatus": 2,
+      "summary": {
+        "total": 7,
+        "recordedLive": 1,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "affiliate.awin_join",
+          "catalog.awin_product_feed",
+          "affiliate.deeplink",
+          "catalog.storefront_anonymous"
+        ],
+        "strictPassed": false
+      },
+      "capabilities": [
+        {
+          "id": "affiliate.awin_join",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.awin_product_feed",
+          "status": "unimplemented"
+        },
+        {
+          "id": "affiliate.deeplink",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.storefront_anonymous",
+          "status": "unimplemented"
+        },
+        {
+          "id": "auth.customer_login",
+          "status": "not_applicable"
+        },
+        {
+          "id": "checkout.write",
+          "status": "not_applicable"
+        },
+        {
+          "id": "catalog.home_document",
+          "status": "recorded_live"
+        }
+      ]
+    },
+    {
+      "service": "iherb",
+      "exitStatus": 2,
+      "summary": {
+        "total": 7,
+        "recordedLive": 1,
+        "needsReverification": 0,
+        "requiredGaps": [
+          "affiliate.network_join",
+          "catalog.network_product_feed",
+          "affiliate.deeplink",
+          "catalog.storefront_anonymous"
+        ],
+        "strictPassed": false
+      },
+      "capabilities": [
+        {
+          "id": "affiliate.network_join",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.network_product_feed",
+          "status": "unimplemented"
+        },
+        {
+          "id": "affiliate.deeplink",
+          "status": "unimplemented"
+        },
+        {
+          "id": "catalog.storefront_anonymous",
+          "status": "unimplemented"
+        },
+        {
+          "id": "claims.health",
+          "status": "not_applicable"
+        },
+        {
+          "id": "checkout.write",
+          "status": "not_applicable"
+        },
+        {
+          "id": "catalog.sitemap_products",
+          "status": "recorded_live"
+        }
+      ]
+    }
+  ],
+  "tests": {
+    "focused": {
+      "passed": 29,
+      "failed": 0
+    },
+    "regression": {
+      "passed": 24,
+      "failed": 0
+    },
+    "uniqueTests": 50,
+    "note": "The 3 ontology tests were included in both commands."
+  },
+  "scopeComplete": false
+}

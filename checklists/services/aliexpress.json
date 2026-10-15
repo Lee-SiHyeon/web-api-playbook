@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "aliexpress",
-  "description": "익명 공개 상품 카탈로그의 직접 HTTP 조회. SEO 제목·설명만 독립 재생 완료. 상품 검색은 현재 HTML 문서만 확인됐고, 상세 MTop 요청은 reCAPTCHA에 막혀 있으며 리뷰 API 계약은 관찰되지 않아 필수 미완료로 둔다.",
+  "description": "익명 공개 상품의 직접 HTTP 확장. SEO는 과거 검증, sitemap CLI는 기존 관측 계약 기반 구현 및 오프라인 검증. 2026-10-15 도구 사이트 안전 정책 차단으로 알리 직접 HTTP 호출은 0회다. Document·XML도 수집 대상이며 목록·가격·상세·옵션·리뷰는 현재 라이브 미완료다.",
   "capabilities": [
     {
       "id": "catalog.product_seo",
@@ -90,7 +90,7 @@
     },
     {
       "id": "catalog.search",
-      "title": "키워드 검색 상품 목록 XHR 조회",
+      "title": "키워드 검색 상품 목록 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -101,11 +101,11 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "현재 검색 URL의 익명 HTTP 응답은 상품 링크 60개가 든 `text/html` 문서다. 이를 검색 API로 표시하지 않는다. 상품 목록 JSON XHR 및 순위·필터 계약은 미확인이다."
+      "blocker": "2026-10-05 검색 Document에 상품 링크 60개가 관측됐다. HTML은 유효한 HTTP 수집 대상이지만 현재 원문 fixture, 목록 파서와 독립 결과 검증은 없다. 2026-10-15 사이트 도구 정책 차단으로 재접근하지 않았다."
     },
     {
       "id": "catalog.offer_price",
-      "title": "상품 가격·통화·재고 XHR 조회",
+      "title": "상품 가격·통화·재고 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -120,7 +120,7 @@
     },
     {
       "id": "catalog.categories",
-      "title": "카테고리 목록·상품 분류 XHR 조회",
+      "title": "카테고리 목록·상품 분류 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -131,11 +131,11 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "관찰한 익명 화면에서 분류 데이터 XHR 계약을 확인하지 못했다."
+      "blocker": "카테고리 Document/Fetch/XHR의 구조와 독립 HTTP 재현이 아직 검증되지 않았다."
     },
     {
       "id": "catalog.pagination",
-      "title": "검색·분류 결과 페이지네이션 XHR 조회",
+      "title": "검색·분류 결과 페이지네이션 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -146,7 +146,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "검색 결과 문서에는 상품 링크 60개가 있었지만 페이지 이동 API, 다음 페이지 입력, 종료 조건은 확인하지 못했다."
+      "blocker": "과거 검색 Document의 링크 60개는 부분 관측이다. 다음 페이지 입력, 중복 제거 및 종료 조건은 아직 검증되지 않았다."
     },
     {
       "id": "catalog.reviews",
@@ -222,6 +222,40 @@
       },
       "evidence": [],
       "sourceEvidence": []
+    },
+    {
+      "id": "catalog.sitemap_products",
+      "title": "기존 관측 XML sitemap 상품 ID 수집과 해시 기반 재개",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/overseas-sitemaps.mjs",
+            "exports": [
+              "createOverseasSitemapClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/overseas-retail.mjs",
+            "tokens": [
+              "aliexpress",
+              "sitemap-products"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-overseas-sitemaps.test.mjs",
+          "tests/overseas-retail-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "오프라인 검증만 완료. 이번 실행은 사이트 도구 정책 차단으로 알리 HTTP 요청 0회이며 현재 라이브 재현을 주장하지 않는다.",
+      "discoveryFrontier": "references/overseas-retail-frontier.json"
     }
   ]
 }

@@ -7,6 +7,9 @@
 | AliExpress | 상품 ID로 SEO 제목·설명·정규 URL 조회 | 상품 목록 검색, 현재 가격·통화·재고, 분류, 페이지 이동 |
 | eBay | 검색어 제안과 제안별 카테고리 힌트 | 상품 목록·상세, 전체 분류, 페이지 이동 |
 | Shopify 기반 Allbirds | 공개 상품·옵션·가격·통화·판매 가능 여부, 최대 10개 예측 상품 검색 | 전체 상품 검색·분류·페이지 이동, 다른 스토어 계약 |
+| SHEIN | KR 홈 Document 상품 10개와 KRW 표시가, 메뉴 목적지 15개 (2026-10-15) | 분류 Document는 challenge로 이동; 상세·옵션·리뷰·페이지 이동 |
+| iHerb | XML sitemap 3개 중 첫 파일에서 상품 ID·URL 100개 (2026-10-15) | 나머지 ID·파일, 상품명·가격·옵션·리뷰; KR storefront는 HTTP 403 |
+| Temu | 화면과 Document 응답을 확인했으나 상품 HTTP 클라이언트는 미검증 | 목록·가격·상세·옵션·리뷰·페이지 이동 |
 | Amazon | 공개 카탈로그 API 실증 없음 | 상품 JSON의 정확한 Accept 헤더 미확보, 독립 재생 415; 추천 입력 준비 미전환 |
 | Walmart | 공개 카탈로그 API 실증 없음 | 익명 검색이 사람 확인 화면으로 이동 |
 
@@ -26,7 +29,9 @@ Shopify는 여러 스토어가 쓰는 플랫폼이다. 현재 어댑터는 `http
 
 검색은 공식 `unavailable_products=hide` 옵션을 전송했지만 실측 결과에 `available:false` 상품도 포함됐다. 응답의 판매 가능 여부를 그대로 제공하며 해당 필터가 작동했다고 보증하지 않는다. 재고 수량이나 예약 가능 수량은 검증하지 않았다.
 
-계약과 검증은 [AliExpress 계약](retail-aliexpress-contracts.json), [eBay 계약](retail-ebay-contracts.json), [Amazon 조사 기록](retail-amazon-contracts.json), [Walmart 차단 기록](retail-walmart-contracts.json)에 남긴다. eBay의 자사 JS는 실제 `XMLHttpRequest` URL 생성기를 포함하지만 현재 페이지에서 그 요청이 발생한 것은 관찰하지 못했다. 따라서 `first_party_bundle_contract`와 실제 익명 HTTP 재생을 각각 기록한다. SSR 상품 문서나 텔레메트리 응답은 상품 API 성공으로 처리하지 않는다.
+계약과 검증은 [AliExpress 계약](retail-aliexpress-contracts.json), [eBay 계약](retail-ebay-contracts.json), [Amazon 조사 기록](retail-amazon-contracts.json), [Walmart 차단 기록](retail-walmart-contracts.json)에 남긴다. eBay의 자사 JS는 실제 `XMLHttpRequest` URL 생성기를 포함하지만 당시 페이지에서 그 요청이 발생한 것은 관찰하지 못했다. 따라서 `first_party_bundle_contract`와 실제 익명 HTTP 재생을 각각 기록한다. Document·SSR·XML도 직접 HTTP 수집 대상이다. 원문 방문이나 상태 코드만으로 성공을 인정하지 않고, 독립 실행 결과와 상품 필드·해시를 검증한다. 텔레메트리는 상품 데이터로 세지 않는다.
+
+2026-10-15 확장은 [4개 쇼핑몰 실행 범위](overseas-retail-expansion-2026-10-15.md)와 [재개 목록](overseas-retail-frontier.json)을 따른다. 알리 sitemap CLI는 기존 계약으로 구현·오프라인 검증했지만 이번 실행은 도구 사이트 안전 정책에 막혀 알리 HTTP 요청 0회다. 과거 SEO 영수증을 현재 알리 재검증으로 표시하지 않는다.
 
 Amazon의 추천 스트림은 캡처한 암호화 입력으로 재생됐지만, 새 입력을 HTTP만으로 얻는 단계는 미전환이고 샘플 HTML 카드에서 상품 링크·가격 노드를 검증하지 못했다. 응답 길이는 같았으나 해시는 달랐다. 상품 JSON의 415 원인도 정확한 요청 Accept를 확보하지 못해 미확인이다. 이들을 작동하는 상품 클라이언트로 등록하지 않는다.
 

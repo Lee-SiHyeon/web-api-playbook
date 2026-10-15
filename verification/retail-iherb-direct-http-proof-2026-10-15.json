@@ -1,0 +1,58 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "iherb",
+  "capabilityId": "catalog.sitemap_products",
+  "checkedAt": "2026-10-15T00:19:39.176Z",
+  "verifiedAt": "2026-10-15T00:20:19.153Z",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 100,
+  "request": {
+    "method": "GET",
+    "origin": "https://www.iherb.com",
+    "path": "/sitemaps/products-0-www-0.xml",
+    "checkedAt": "2026-10-15T00:19:37.974Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/xml",
+    "responseBytes": 3236056,
+    "decodedBytes": 3236056
+  },
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "sourceURL": "https://www.iherb.com/sitemaps/products-0-www-0.xml",
+    "responseFormat": "xml_sitemap",
+    "projectionSha256": "fdcef58d8abe989eb2b8800b6887daf07d1cec03a6db6aa72b33684f91eb1362",
+    "browserNetworkCaptured": false
+  },
+  "implementation": {
+    "lib/retail/overseas-sitemaps.mjs": "6252768904dad0485b6bbedfba7df35cc48a987a08a79803777ff66d81f31942",
+    "scripts/overseas-retail.mjs": "bc1435c2dc82fe354b13224905c67a7a017550bb5e993f72c1e62d501d5c1068",
+    "scripts/verify-overseas-retail.mjs": "3541373ff1e45a45eebcc50fdabcb3c44875c0eadb4271eb5442403f0759497e",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "package-lock.json": "5ce5b94ddbeca47d288e2f90dc51874e6f644e5c0d2a9870db76c515fb4bf092",
+    "verification/retail-iherb-sitemap-cli-2026-10-15-v2.json": "bc213d6dcfb75fe616d1b00f5af9387794ff056094b0a668605120c1c780a8ea"
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/overseas-retail.mjs",
+    "operation": "sitemap-products",
+    "exitStatus": 0
+  },
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  },
+  "browserComparison": null,
+  "fullCatalogVerified": false
+}

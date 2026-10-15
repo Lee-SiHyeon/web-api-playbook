@@ -130,3 +130,30 @@ test('paired Fetch HTTP observations retain their actual resource type', async t
     requestResponsePaired: true, truncated: false, capturedAt: '2026-10-05T00:00:00Z' } });
   assert.equal(await f.audit(), 'recorded_live');
 });
+
+test('direct HTTP Document evidence binds the separate actual runner output without claiming browser capture', async t => {
+  const f = await fixture(t);
+  f.entry.mime = 'text/html';
+  f.entry.files.push('verification/execution.json');
+  const request = { ...f.receipt.request, mime: 'text/html', cookieSent: false };
+  const execution = { schema: 'web-api-overseas-retail-result-v1', service: 'mall', ok: true,
+    executionMode: 'pure_http', browserUsed: false, credentialsUsed: false, anonymous: true, writesSubmitted: 0,
+    requests: [request], data: { products: [{ externalProductId: '123', title: 'Observed card' }] },
+    fiveStates: { captured: false, live_replay: true } };
+  const receipt = { ...f.receipt, request, resultCount: 1, contractProvenance: { kind: 'direct_http_observed',
+    sourceURL: 'https://mall.test/api/product', responseFormat: 'html_document',
+    projectionSha256: sha(JSON.stringify(execution.data)) } };
+  await writeFile(path.join(f.root, 'verification/execution.json'), JSON.stringify(execution));
+  await f.save(receipt);
+  assert.equal(await f.audit(), 'recorded_live');
+  for (const changed of [
+    { ...execution, data: { products: [] } },
+    { ...execution, browserUsed: true },
+    { ...execution, requests: [{ ...request, httpStatus: 403 }] },
+    { ...execution, fiveStates: { captured: true, live_replay: true } },
+    { ...execution, service: 'other' },
+  ]) {
+    await writeFile(path.join(f.root, 'verification/execution.json'), JSON.stringify(changed));
+    assert.equal(await f.audit(), 'evidence_invalid');
+  }
+});
