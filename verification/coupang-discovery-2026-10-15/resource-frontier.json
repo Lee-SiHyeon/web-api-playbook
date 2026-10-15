@@ -188670,21 +188670,28 @@
       "browserStatus": 200,
       "directReplayModes": {
         "cookie_free": 403,
-        "http_issued_visitor": 403
+        "http_issued_visitor": 403,
+        "browser_visitor_only": 403,
+        "browser_visitor_plus_akamai": 403,
+        "browser_full_cookie_header": 200
       },
       "directResponseServer": "AkamaiGHost",
-      "cause": "exact_rule_unknown"
+      "cause": "full_browser_cookie_header_succeeds_minimum_cookie_subset_unknown",
+      "successfulReplayRef": "retail-browser-cookie-comparison-live.json",
+      "successfulResponseServer": "envoy",
+      "wholeOperationBrowserIndependent": false
     }
   ],
   "unresolvedOperations": [
     {
       "operation": "retail_search_rsc",
-      "state": "captured_client_blocked_http",
-      "reason": "Fresh tab capture recovered: full RSC body and request inputs observed; 60 exact SKU/title DOM matches. Native HTTP replay with no cookies or HTTP-issued visitor cookies returns 403.",
+      "state": "live_replay_verified_inputs_browser_dependent",
+      "reason": "Fresh full browser Cookie header succeeds in independent Node HTTP: 200, 60 products, 60 exact DOM identity/title/price matches. Browser visitor-only and visitor-plus-Akamai subsets return 403. Reusable input/session renewal and the minimum cookie subset remain unverified.",
       "captureRef": "retail-rsc-capture.json",
       "replayRefs": [
         "retail-rsc-anonymous-replay.json",
-        "retail-rsc-visitor-replay.json"
+        "retail-rsc-visitor-replay.json",
+        "retail-browser-cookie-comparison-live.json"
       ]
     },
     {
@@ -188726,6 +188733,10 @@
     "comparisonRef": "retail-403-variants-live.json",
     "rscCaptureRef": "retail-rsc-capture.json",
     "publicOfferReadVerified": true,
-    "listingDirectReplayVerified": false
+    "listingDirectReplayVerified": true,
+    "listingVerificationScope": "One observed lowest-price search RSC with full browser cookies; 60 exact DOM identity/title/price matches",
+    "browserCookieComparisonRef": "retail-browser-cookie-comparison-live.json",
+    "wholeOperationBrowserIndependent": false,
+    "sessionRenewalVerified": false
   }
 }

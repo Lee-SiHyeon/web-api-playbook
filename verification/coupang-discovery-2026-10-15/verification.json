@@ -1,6 +1,6 @@
 {
   "schema": "coupang-public-verification-v1",
-  "verifiedAt": "2026-10-15T02:37:22.085Z",
+  "verifiedAt": "2026-10-15T03:03:18.742Z",
   "networkUsed": false,
   "verifier": "scripts/verify-coupang-public.mjs",
   "records": [
@@ -223,10 +223,27 @@
         "cookieSent": true
       }
     ],
+    "browserCookieComparison": {
+      "file": "verification/coupang-discovery-2026-10-15/retail-browser-cookie-comparison-live.json",
+      "statuses": [
+        403,
+        403,
+        200
+      ],
+      "cookieCounts": [
+        3,
+        11,
+        33
+      ],
+      "exactCookieHeadersSent": true,
+      "products": 60,
+      "exactDomIdentityTitleAndPriceMatches": 60,
+      "wholeOperationBrowserIndependent": false
+    },
     "conclusions": [
       "PCID bootstrap and public offer JSON work in the same identity before and after Document denials.",
-      "RSC capture and parser are complete for the observed sorted-search response; independent cookie-free and visitor replays still return 403.",
-      "AkamaiGHost denial is observed; the exact rule and browser-state requirement are not established."
+      "Cookie-free, HTTP-issued visitor and browser visitor-plus-Akamai RSC replays return 403; the exact full browser cookie header succeeds with 60 products.",
+      "All 60 direct HTTP products match current DOM identities, titles and displayed prices. The necessary additional cookie subset and renewal remain unknown."
     ]
   },
   "coverage": {
@@ -275,7 +292,7 @@
     "lib/retail/coupang-ontology.mjs": "b6dbc0a826b89b6184a9058122dee04dcbb2cf260cf95e0d3f3fca0501fc3f4f",
     "scripts/coupang-public.mjs": "00b186e5f92a48eb9934ed9ac8ca92d7a0c24eb1eabb09198bcd34b681bd3bba",
     "scripts/coupang-crawl.mjs": "6ee7fe1fd544b0a2ce728f1801781e6b12bda91e6378cf783440e4c9d26b1870",
-    "scripts/verify-coupang-public.mjs": "f95a52c9b0dec30f6836af3c477c3ea7a185ea494cd5eedfdd2fdf76758b6c61",
+    "scripts/verify-coupang-public.mjs": "c1b9e73a71bc3959f13f505789a49e7213e6e1f0be5277317bba899e8c43d2d9",
     "tests/coupang-public.test.mjs": "123c955309c41214958f19fe2b6c6f1fc40a905c882cf87717e6cd7c5e028754",
     "tests/coupang-frontier.test.mjs": "463f33827c800fa6a438caea3bb22828c62ce7278b63bfd3930a0d3ffd89e832",
     "lib/retail/coupang-rsc.mjs": "f81d210d26fbf9fb00de774502cae06ccfb0a8113fce7abd8608732e4cce5404",
@@ -285,15 +302,17 @@
     "tests/coupang-retail-diagnostic.test.mjs": "34f634db57c168daf24a518c24ca5062cb6957d18e58652193c6559ebc7077b8",
     "tests/coupang-retail-visitor.test.mjs": "0845bb3777326081ba3bd600f27764084a5c684bf240aef8373c30acb407e144",
     "tests/coupang-rsc.test.mjs": "5d8d093ae71147e19804681eda225909e0dab4ed928b1a0532e1fd98e9127216",
+    "scripts/coupang-browser-cookie-probe.mjs": "12885aaf0a5e7d62879ba0648c1d613af537d95e649aa40574570b6676ee731b",
+    "tests/coupang-browser-cookie-probe.test.mjs": "8661c5b24fc674aa8ca59f99215555664ddadac1dd004d65238c72eb53530644",
     "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-visitor-context.mjs": "30cc1c74382118fcf7f5a7c6a7d1815e16fd6584e3fa9c7174c5e6562f8aaf2f"
   },
   "evidenceAudit": {
-    "jsonFiles": 257,
+    "jsonFiles": 260,
     "runtimeIdentifierFindings": 0
   },
   "limitations": [
     "Entire catalog is not complete. Pending resource and nested-operation frontiers are preserved.",
-    "General retail browser RSC returns 60 matching products; cookie-free and HTTP-issued visitor RSC replays and Document variants return 403. Public offer JSON remains usable.",
+    "General retail RSC direct replay succeeds with a fresh full browser cookie header: 60 DOM-matched products. Cookie-free, visitor-only and visitor-plus-Akamai variants fail. Recurring input/session renewal remains browser-dependent.",
     "Flight iframe search is not verified. Membership prices are advertised values, not verified account checkout totals.",
     "Early live receipts predate later metadata/parser repairs; implementation digests describe code at verification time."
   ]
