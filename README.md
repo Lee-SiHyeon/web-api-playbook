@@ -43,6 +43,7 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 | [MyRealTrip 링크 대사](references/myrealtrip-link-reconciliation.md) | 웹 파트너/공식 API 구분, 원 옵션·제휴 ID·허용 tracking만 검증, 발급 재시도 금지 |
 | [MyRealTrip 공식 투어·티켓 검색](references/myrealtrip-official-catalog-search.md) | 실제 인증 조회한 read-only POST, 1-based page·시작가 KRW·안전한 실행 한도 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
+| [REA·AI 브라우저와 Rust 설계](references/browser-analysis-rust.md) | agent-browser·BrowserOS neo 비교, 행동별 증거·직접 HTTP 재현, 도구 채택 방향과 검증 순서 |
 | [Google Flow HTTP 경계와 실측](references/google-flow-http.md) | 실제 UI 생성 처리 단계, 직접 HTTP 미디어 다운로드, 480p 변환 및 미검증 pure-HTTP 생성 경계 |
 | [네이버](service-packs/naver/README.md) | HTTP 로그인, 저장 세션, 블로그 API, 통계, 이미지·영상, 발행·수정 |
 | [티스토리](service-packs/tistory/README.md) | 저장된 카카오/티스토리 세션, 보호 조회, 발행·수정, 이미지·MP4 첨부 |
