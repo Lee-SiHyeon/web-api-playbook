@@ -2,20 +2,28 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createSephoraPublicClient } from '../lib/commerce/sephora.mjs';
 
-const product = ({ id, sku, name, price, onSaleData = 'NONE' }) => ({
+const product = ({ id, sku, name, price, onSaleData = 'NONE', salePrice, rating = '4.5' }) => ({
   productId: id,
   productName: name,
   displayName: name,
   brandName: 'Beauty Brand',
+  rating,
+  reviews: '1,234',
+  heroImage: `https://www.sephora.com/productimages/sku/${sku}-hero.jpg`,
+  image450: `https://www.sephora.com/productimages/sku/${sku}-450.jpg`,
+  image250: `https://www.sephora.com/productimages/sku/${sku}-250.jpg`,
+  image135: `https://www.sephora.com/productimages/sku/${sku}-135.jpg`,
+  altImage: `https://www.sephora.com/productimages/sku/${sku}-alternate.jpg`,
   targetUrl: `/product/fixture-${id}?skuId=${sku}&icid2=tracking-only`,
-  currentSku: { skuId: sku, listPrice: price, isNew: false },
+  currentSku: { skuId: sku, listPrice: price, isNew: false, imageAltText: 'Fixture product image',
+    ...(salePrice === undefined ? {} : { salePrice }) },
   onSaleData,
 });
 
 function payload(page = 1) {
   const products = page === 1
     ? [
-      product({ id: 'P12345', sku: '100001', name: 'Range Lipstick', price: '$16.00 - $25.00' }),
+      product({ id: 'P12345', sku: '100001', name: 'Range Lipstick', price: '$16.00 - $25.00', salePrice: '$12.00', rating: '4.54321' }),
       product({ id: 'P12346', sku: '100002', name: 'Single Lipstick', price: '$26.00' }),
     ]
     : [product({ id: 'P12347', sku: '100003', name: 'Last Lipstick', price: '$9.50' })];
@@ -62,6 +70,10 @@ test('Sephora anonymous search returns source-bound product IDs and normalized U
   });
   assert.equal(result.products[0].priceScope, 'product_range');
   assert.equal(result.products[0].listPriceText, '$16.00 - $25.00');
+  assert.equal(result.products[0].rating, 4.54321);
+  assert.equal(result.products[0].reviewCount, 1234);
+  assert.equal(result.products[0].images.length, 5);
+  assert.deepEqual(result.products[0].salePrice, { amount: '12.00', currency: 'USD', kind: 'sale' });
   assert.deepEqual(result.products[1].price, { amount: '26.00', currency: 'USD', kind: 'retail_list' });
   assert.equal(result.products[1].priceScope, 'current_sku');
   assert.equal(result.products[1].onSaleData, 'NONE');
@@ -75,6 +87,38 @@ test('Sephora anonymous search returns source-bound product IDs and normalized U
   assert.equal(result.receipt.request.cookieSent, false);
   assert.equal(result.receipt.request.browserUsed, false);
   assert.equal(JSON.stringify(result.receipt).includes('lipstick'), false);
+});
+
+test('Sephora search rejects missing rating, review count, and malformed explicit sale prices', async () => {
+  for (const mutate of [
+    item => { delete item.rating; },
+    item => { delete item.reviews; },
+    item => { item.currentSku.salePrice = 'not a price'; },
+  ]) {
+    const data = payload();
+    mutate(data.products[0]);
+    const client = createSephoraPublicClient({ fetchImpl: async () => jsonResponse(data) });
+    await assert.rejects(client.searchProducts({ query: 'lipstick' }), {
+      code: 'SEPHORA_SEARCH_SCHEMA_INVALID',
+    });
+  }
+});
+
+test('Sephora search preserves the product when its source supplies no same-origin image', async () => {
+  const data = payload();
+  Object.assign(data.products[0], {
+    heroImage: 'https://example.com/product.jpg',
+    image450: null,
+    image250: null,
+    image135: null,
+    altImage: null,
+  });
+  const client = createSephoraPublicClient({ fetchImpl: async () => jsonResponse(data) });
+
+  const result = await client.searchProducts({ query: 'lipstick' });
+
+  assert.equal(result.products.length, 2);
+  assert.deepEqual(result.products[0].images, []);
 });
 
 test('Sephora records the observed 60-result page when the smaller page-size hint is ignored', async () => {

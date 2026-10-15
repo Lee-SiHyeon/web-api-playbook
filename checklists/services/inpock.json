@@ -11,12 +11,62 @@
     {
       "id": "auth.owner", "title": "보호 계정 조회와 owner ID 고정", "priority": "required", "applicability": "applicable", "requirement": "live",
       "implementation": { "files": [{ "path": "lib/web-auth/inpock.mjs", "exports": ["createInpockAuth"] }], "cli": [{ "path": "scripts/inpock.mjs", "tokens": ["owner", "credentials-stdin"] }], "tests": ["tests/inpock-auth.test.mjs"] },
-      "evidence": [{ "kind": "inpock-auth-v1", "files": ["verification/inpock-login-2026-10-04.json", "verification/inpock-runner-2026-10-04.json"], "hashPaths": ["lib/web-auth/inpock.mjs", "scripts/inpock.mjs"] }], "sourceEvidence": []
+      "evidence": [
+        {
+          "kind": "inpock-auth-v1",
+          "files": [
+            "verification/inpock-login-2026-10-04.json",
+            "verification/inpock-runner-2026-10-04.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/inpock.mjs",
+            "scripts/inpock.mjs"
+          ]
+        },
+        {
+          "kind": "inpock-protected-read-v1",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/inpock-protected-reads.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/inpock.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "scripts/inpock.mjs"
+          ],
+          "note": "Current Windows DPAPI CurrentUser session passed the protected owner GET; no login was sent."
+        }
+      ], "sourceEvidence": []
     },
     {
       "id": "auth.reuse", "title": "같은 세션 재사용", "priority": "required", "applicability": "applicable", "requirement": "live",
       "implementation": { "files": [{ "path": "lib/web-auth/inpock.mjs", "exports": ["createInpockAuth"] }], "cli": [{ "path": "scripts/inpock.mjs", "tokens": ["ensure", "credentials-stdin"] }], "tests": ["tests/inpock-auth.test.mjs"] },
-      "evidence": [{ "kind": "inpock-auth-v1", "files": ["verification/inpock-login-2026-10-04.json", "verification/inpock-runner-2026-10-04.json"], "hashPaths": ["lib/web-auth/inpock.mjs", "scripts/inpock.mjs"] }], "sourceEvidence": []
+      "evidence": [
+        {
+          "kind": "inpock-auth-v1",
+          "files": [
+            "verification/inpock-login-2026-10-04.json",
+            "verification/inpock-runner-2026-10-04.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/inpock.mjs",
+            "scripts/inpock.mjs"
+          ]
+        },
+        {
+          "kind": "inpock-protected-read-v1",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/inpock-protected-reads.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/inpock.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "scripts/inpock.mjs"
+          ],
+          "note": "Three protected owner GET receipts passed through the stored session; no login was sent."
+        }
+      ], "sourceEvidence": []
     },
     {
       "id": "auth.recovery", "title": "401·쿠키 소멸 후 재인증", "priority": "conditional", "applicability": "applicable", "requirement": "local",
@@ -31,7 +81,32 @@
     {
       "id": "profile.read", "title": "인증된 프로필 디자인 조회", "priority": "required", "applicability": "applicable", "requirement": "live",
       "implementation": { "files": [{ "path": "lib/inpock-profile.mjs", "exports": ["createInpockProfileClient"] }], "cli": [{ "path": "scripts/inpock.mjs", "tokens": ["profile-get"] }], "tests": ["tests/inpock-profile.test.mjs"] },
-      "evidence": [{ "kind": "inpock-profile-read-v1", "files": ["verification/inpock-profile-2026-10-05.json"], "hashPaths": ["lib/inpock-profile.mjs", "scripts/inpock.mjs"] }],
+      "evidence": [
+        {
+          "kind": "inpock-profile-read-v1",
+          "files": [
+            "verification/inpock-profile-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/inpock-profile.mjs",
+            "scripts/inpock.mjs"
+          ]
+        },
+        {
+          "kind": "inpock-profile-read-v1",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/inpock-profile-read-live.json"
+          ],
+          "hashPaths": [
+            "lib/inpock-profile.mjs",
+            "lib/web-auth/inpock.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "scripts/inpock.mjs"
+          ],
+          "note": "Current Windows DPAPI CurrentUser profile design GET passed; profile save and edit were not attempted."
+        }
+      ],
       "sourceEvidence": [], "note": "profile-get의 현재 계정 GET 200만 실측됐다."
     },
     {
@@ -64,7 +139,33 @@
     {
       "id": "cards.read", "title": "관리 카드 목록과 공개 카드 조회", "priority": "required", "applicability": "applicable", "requirement": "live",
       "implementation": { "files": [{ "path": "lib/inpock-read.mjs", "exports": ["createInpockReadClient"] }], "cli": [{ "path": "scripts/inpock.mjs", "tokens": ["blocks", "public"] }], "tests": ["tests/inpock-read.test.mjs"] },
-      "evidence": [{ "kind": "inpock-inventory-v1", "files": ["verification/inpock-inventory-2026-10-04.json", "verification/inpock-publication-proof-2026-10-05.json"], "hashPaths": ["lib/inpock-read.mjs", "scripts/inpock.mjs"] }], "sourceEvidence": []
+      "evidence": [
+        {
+          "kind": "inpock-inventory-v1",
+          "files": [
+            "verification/inpock-inventory-2026-10-04.json",
+            "verification/inpock-publication-proof-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/inpock-read.mjs",
+            "scripts/inpock.mjs"
+          ]
+        },
+        {
+          "kind": "inpock-protected-read-v1",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/inpock-protected-reads.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/inpock.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/inpock-read.mjs",
+            "scripts/inpock.mjs"
+          ],
+          "note": "Read-only 4-page server-end pagination returned 70 cards; no write requests were sent."
+        }
+      ], "sourceEvidence": []
     },
     {
       "id": "cards.create", "title": "공개 simple 링크 카드 생성", "priority": "required", "applicability": "applicable", "requirement": "live",
@@ -141,7 +242,33 @@
     {
       "id": "stats.read", "title": "방문 통계 조회", "priority": "optional", "applicability": "applicable", "requirement": "live",
       "implementation": { "files": [{ "path": "lib/inpock-read.mjs", "exports": ["createInpockReadClient"] }], "cli": [{ "path": "scripts/inpock.mjs", "tokens": ["stats"] }], "tests": ["tests/inpock-read.test.mjs"] },
-      "evidence": [{ "kind": "inpock-inventory-v1", "files": ["verification/inpock-inventory-2026-10-04.json", "verification/inpock-publication-proof-2026-10-05.json"], "hashPaths": ["lib/inpock-read.mjs", "scripts/inpock.mjs"] }], "sourceEvidence": []
+      "evidence": [
+        {
+          "kind": "inpock-inventory-v1",
+          "files": [
+            "verification/inpock-inventory-2026-10-04.json",
+            "verification/inpock-publication-proof-2026-10-05.json"
+          ],
+          "hashPaths": [
+            "lib/inpock-read.mjs",
+            "scripts/inpock.mjs"
+          ]
+        },
+        {
+          "kind": "inpock-protected-read-v1",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/inpock-protected-reads.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/inpock.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/inpock-read.mjs",
+            "scripts/inpock.mjs"
+          ],
+          "note": "Read-only stats GET returned the observed today, accumulated, realtime, and subscribers fields."
+        }
+      ], "sourceEvidence": []
     }
   ]
 }

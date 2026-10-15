@@ -1,0 +1,107 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "sephora",
+  "capabilityId": "catalog.product_description",
+  "checkedAt": "2026-10-15T16:30:48.297Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": false,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://www.sephora.com/js/ufe/isomorphic/main.bundle.B22CoriginmasterD20260922192852.js",
+    "sourceSha256": "5c69df88c12e129005fb796a1067876bc3df65096aa0fdf6f457373513cf5763"
+  },
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "accountCredentialsUsed": false,
+  "cookieSent": false,
+  "externalWrites": 0,
+  "rawBodiesPersisted": false,
+  "implementation": {
+    "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.sephora.com",
+    "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P417985/lite",
+    "checkedAt": "2026-10-15T16:30:48.297Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "addCurrentSkuToProductChildSkus",
+      "includeRegionsMap",
+      "showContent",
+      "includeConfigurableSku",
+      "channel",
+      "loc",
+      "countryCode",
+      "preferredSku",
+      "removePersonalizedData",
+      "includeReviewFilters",
+      "includeReviewImages"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 17516,
+    "schemaVerified": true
+  },
+  "requestedProductId": "P417985",
+  "returnedProductId": "P417985",
+  "requestedSkuId": "2234219",
+  "returnedSkuId": "2234219",
+  "normalizedDescriptionStatus": "not_returned_by_observed_product_api",
+  "normalizedDescriptionLength": null,
+  "normalizedDescriptionNonBlank": false,
+  "matchedResult": {
+    "productId": "P417985",
+    "skuId": "2234219",
+    "shapeScan": {
+      "maximumDepth": 10,
+      "maximumArrayEntriesInspected": 20,
+      "matchingKeyPattern": "description|ingredient|productdetails|content"
+    },
+    "productDetailsFields": [
+      "brand",
+      "displayName",
+      "productId"
+    ],
+    "descriptionOrIngredientFields": [],
+    "descriptionReturned": false,
+    "descriptionStatus": "not_returned_by_observed_product_api"
+  },
+  "payloadShape": {
+    "httpStatus": 200,
+    "mime": "application/json",
+    "topLevelFields": [
+      "currentSku",
+      "fullSiteProductUrl",
+      "onSaleChildSkus",
+      "pickupMessage",
+      "productDetails",
+      "productId",
+      "regularChildSkus",
+      "skuSelectorType",
+      "swatchType",
+      "targetUrl",
+      "variationType",
+      "variationTypeDisplayName"
+    ],
+    "relevantFields": [
+      {
+        "path": "$.productDetails",
+        "type": "object",
+        "fields": [
+          "brand",
+          "displayName",
+          "productId"
+        ]
+      }
+    ]
+  }
+}

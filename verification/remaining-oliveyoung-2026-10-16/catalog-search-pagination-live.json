@@ -1,0 +1,94 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-public",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "executionMode": "pure_http",
+  "implementation": {
+    "lib/commerce/oliveyoung-korea-public.mjs": "569eb70d6c760a153f75c1baf4a696a41509c30116b047b92abfd3c6b4df3f1c",
+    "lib/commerce/oliveyoung-http-transport.mjs": "0371014feb8c17a491860654cbfe44749b9b8f93da9cf44ec1ad95d46ef9ffa9",
+    "scripts/oliveyoung-http-transport.py": "4a030089fa4061439a4d5462c5787a1f49190ae17fc060ada83240ba7eef2183"
+  },
+  "sourceMtimeNotAfterRead": true,
+  "requestCheckedAtBasis": "live_observation_time",
+  "capabilityId": "catalog.search_pagination",
+  "checkedAt": "2026-10-15T16:50:28.259Z",
+  "request": {
+    "method": "POST",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/search/NewMainSearchApi.do",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 13219,
+    "responseSha256": "c911c6642fda2873fb46edfcab0020806e1cd846daf5a284e56e47f73f43a317",
+    "checkedAt": "2026-10-15T16:50:28.259Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "secondPage": {
+    "method": "POST",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/search/NewMainSearchApi.do",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 13330,
+    "responseSha256": "b989ef32ef7ee9db7d50f516f79bdda2442a8dfeb296c155f17dcc7489e72264",
+    "checkedAt": "2026-10-15T16:50:33.214Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "lastPage": {
+    "method": "POST",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/search/NewMainSearchApi.do",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 7584,
+    "responseSha256": "c3d1bda3484b52a9b01c04c505ec2e9e622909f647625d8000cdef61bf174e0e",
+    "checkedAt": "2026-10-15T16:50:37.825Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.oliveyoung.co.kr/store/search/NewMainSearchApi.do"
+  },
+  "resultSummary": {
+    "query": "선크림",
+    "sampledPages": [
+      1,
+      2,
+      62
+    ],
+    "sampledOffsets": [
+      0,
+      10,
+      610
+    ],
+    "counts": [
+      10,
+      10,
+      5
+    ],
+    "totalProducts": 615,
+    "firstPageHasNext": true,
+    "secondPageHasNext": true,
+    "sampledLastPageHasNext": false,
+    "sampledLastPageSourceTerminal": true,
+    "contiguousTraversal": false,
+    "complete": false
+  }
+}

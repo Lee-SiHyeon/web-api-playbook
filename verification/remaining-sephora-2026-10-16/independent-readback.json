@@ -1,0 +1,105 @@
+{
+  "schema": "sephora-independent-live-readback-v1",
+  "checkedAt": "2026-10-15T16:18:09.213Z",
+  "executionMode": "pure_http",
+  "independentNodeProcess": true,
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "cookieSent": false,
+  "externalWrites": 0,
+  "rawBodiesPersisted": false,
+  "implementation": {
+    "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+    "lib/commerce/sephora-reviews.mjs": "031a64aa4e98fbfb1ec9c638df0ddf96474c0bf92cc45eb9edad411678d2dc2f",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "checks": {
+    "catalog.search": {
+      "outcome": "verified_live",
+      "query": "concealer",
+      "currentTotalProducts": 140,
+      "returnedProducts": 140,
+      "uniqueProductIds": 140,
+      "pageCount": 3,
+      "pageReturnedCounts": [
+        60,
+        60,
+        20
+      ],
+      "ratedProducts": 140,
+      "reviewCountProducts": 140,
+      "imagedProducts": 139,
+      "productsWithoutValidImages": 1,
+      "salePricedProducts": 6,
+      "firstRunTotalMatches": true
+    },
+    "catalog.pagination": {
+      "outcome": "verified_live",
+      "currentTotalProducts": 140,
+      "returnedProducts": 140,
+      "terminalPageVerified": true,
+      "firstRunPageCountsMatch": true
+    },
+    "catalog.product_detail": {
+      "outcome": "verified_live",
+      "requestedProductId": "P417985",
+      "returnedProductId": "P417985",
+      "requestedSkuId": "2234219",
+      "currentSkuId": "2234219",
+      "matched": true,
+      "variantCount": 6
+    },
+    "catalog.variants": {
+      "outcome": "verified_live",
+      "requestedProductId": "P417985",
+      "variantCount": 6,
+      "uniqueSkuIds": 6,
+      "variantsWithOptionLabels": 6,
+      "variantsWithImages": 6
+    },
+    "catalog.sale_price": {
+      "outcome": "verified_live",
+      "productId": "P417985",
+      "skuId": "2234219",
+      "listPrice": {
+        "amount": "15.00",
+        "currency": "USD",
+        "kind": "retail_list"
+      },
+      "salePrice": {
+        "amount": "7.50",
+        "currency": "USD",
+        "kind": "sale"
+      },
+      "discounted": true
+    },
+    "catalog.reviews.read": {
+      "outcome": "verified_live",
+      "productId": "P417985",
+      "page": 1,
+      "pageSize": 100,
+      "totalReviews": 1918,
+      "returned": 100,
+      "bodyCount": 100,
+      "allFamilyBound": true,
+      "firstRunTotalMatches": true
+    },
+    "catalog.reviews.pagination": {
+      "outcome": "verified_live",
+      "lastPage": 20,
+      "returned": 18,
+      "totalReviews": 1918,
+      "terminalPageVerified": true,
+      "firstRunLastPageMatches": true
+    },
+    "catalog.reviews.variant_filter": {
+      "outcome": "verified_live",
+      "productId": "P417985",
+      "skuId": "2234169",
+      "sourceFilter": "ProductId:2234169;ExcludeFamily:True",
+      "totalReviews": 149,
+      "returned": 20,
+      "allVariantIdsMatched": true
+    }
+  }
+}

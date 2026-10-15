@@ -180,7 +180,13 @@ test('attested memory state runs owner health and the original link adapter in o
       'the issued short URL is never opened');
     const cache = path.join(directory, 'link-state', 'links.json');
     const journal = path.join(directory, 'link-state', 'link-operations.json');
-    assert.equal(statSync(cache).mode & 0o077, 0);
-    assert.equal(statSync(journal).mode & 0o077, 0);
+    assert.equal(statSync(cache).isFile(), true);
+    assert.equal(statSync(journal).isFile(), true);
+    // Node's Windows stat mode does not describe the file's ACL. Keep the POSIX
+    // permission assertion on POSIX hosts; this fixture does not verify ACLs.
+    if (process.platform !== 'win32') {
+      assert.equal(statSync(cache).mode & 0o077, 0);
+      assert.equal(statSync(journal).mode & 0o077, 0);
+    }
   } finally { rmSync(directory, { recursive: true, force: true }); }
 });

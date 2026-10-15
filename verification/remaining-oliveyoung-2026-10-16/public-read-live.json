@@ -1,0 +1,225 @@
+{
+  "schema": "oliveyoung-remaining-public-read-v1",
+  "checkedAt": "2026-10-15T16:12:20.573Z",
+  "transport": {
+    "library": "curl_cffi",
+    "version": "0.16.3",
+    "profile": "chrome",
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false
+  },
+  "implementation": {
+    "lib/commerce/oliveyoung-korea-public.mjs": "4397ce4e35dca93218eebf007d5d219e1617dc3cec7437d65b406e20c391b894",
+    "lib/commerce/oliveyoung-http-transport.mjs": "0371014feb8c17a491860654cbfe44749b9b8f93da9cf44ec1ad95d46ef9ffa9",
+    "scripts/oliveyoung-http-transport.py": "4a030089fa4061439a4d5462c5787a1f49190ae17fc060ada83240ba7eef2183"
+  },
+  "search": {
+    "firstPage": {
+      "query": "선크림",
+      "page": 1,
+      "pageSize": 10,
+      "productCount": 10,
+      "totalProducts": 615,
+      "firstProductId": "A000000257097",
+      "hasNext": true,
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "catalog.search_prices",
+        "checkedAt": "2026-10-15T16:12:20.656Z",
+        "request": {
+          "method": "POST",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/search/NewMainSearchApi.do",
+          "queryFields": [],
+          "bodyFieldNames": [
+            "collection",
+            "displayMediaTypes",
+            "goods_sort",
+            "listnum",
+            "query",
+            "sort",
+            "startCount"
+          ],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 13219,
+          "responseSha256": "907d52f97dcf11c5c6d46a81a23c53d53b6f2ef0addff0136a1259a9aa2a549f",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    },
+    "secondPage": {
+      "productCount": 10,
+      "totalProducts": 615,
+      "offset": 10,
+      "hasNext": true,
+      "firstProductId": "A000000186166",
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "catalog.search_prices",
+        "checkedAt": "2026-10-15T16:12:26.340Z",
+        "request": {
+          "method": "POST",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/search/NewMainSearchApi.do",
+          "queryFields": [],
+          "bodyFieldNames": [
+            "collection",
+            "displayMediaTypes",
+            "goods_sort",
+            "listnum",
+            "query",
+            "sort",
+            "startCount"
+          ],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 13155,
+          "responseSha256": "94216c1aaf8d49c217859157bf961dede2958d4cc24a577eab287e841cce9186",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    },
+    "lastPage": {
+      "page": 62,
+      "productCount": 5,
+      "totalProducts": 615,
+      "offset": 610,
+      "hasNext": false,
+      "nextPage": null,
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "catalog.search_prices",
+        "checkedAt": "2026-10-15T16:12:31.497Z",
+        "request": {
+          "method": "POST",
+          "origin": "https://www.oliveyoung.co.kr",
+          "path": "/store/search/NewMainSearchApi.do",
+          "queryFields": [],
+          "bodyFieldNames": [
+            "collection",
+            "displayMediaTypes",
+            "goods_sort",
+            "listnum",
+            "query",
+            "sort",
+            "startCount"
+          ],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 7584,
+          "responseSha256": "db70c62f01c0672a0192b07965f9eef0896b723b95978ace1fcc6447c93b7caf",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    }
+  },
+  "reviews": {
+    "firstPage": {
+      "productId": "A000000257097",
+      "reviewCount": 10,
+      "totalReviews": null,
+      "hasNext": true,
+      "productRelationCounts": {
+        "requested": 10,
+        "related": 0
+      },
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "reviews.body",
+        "checkedAt": "2026-10-15T16:12:35.837Z",
+        "request": {
+          "method": "POST",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/cursor",
+          "queryFields": [],
+          "bodyFieldNames": [
+            "goodsNumber",
+            "page",
+            "reviewType",
+            "size",
+            "sortType"
+          ],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 21666,
+          "responseSha256": "6d99b5eeb5ec4ab0ed2e02bc72e81c6d90a92fcd2022b7989ec141d18e33e6fb",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    },
+    "secondPage": {
+      "reviewCount": 10,
+      "hasNext": true,
+      "continuationPresent": true,
+      "productRelationCounts": {
+        "requested": 10,
+        "related": 0
+      },
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "reviews.body",
+        "checkedAt": "2026-10-15T16:12:39.553Z",
+        "request": {
+          "method": "POST",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/cursor",
+          "queryFields": [],
+          "bodyFieldNames": [
+            "cursorCount",
+            "cursorId",
+            "cursorScore",
+            "goodsNumber",
+            "reviewType",
+            "size",
+            "sortType"
+          ],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 19303,
+          "responseSha256": "d53f7f1436f5b6be88d243abd3574d076a33fc67b2d73b148fa8827599e27d3a",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    }
+  },
+  "status": "partial_read_contracts_verified"
+}

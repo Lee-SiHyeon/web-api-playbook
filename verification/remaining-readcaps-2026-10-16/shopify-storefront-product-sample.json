@@ -1,0 +1,47 @@
+{
+  "schema": "web-api-product-price-snapshot-v1",
+  "executionMode": "pure_http",
+  "provider": "shopify-storefronts",
+  "context": {
+    "store": "colourpop",
+    "operation": "product"
+  },
+  "checkedAt": "2026-10-15T16:11:20.625Z",
+  "collection": {
+    "pagesRead": 1,
+    "rowsSeen": 1,
+    "offersStored": 1,
+    "maxPages": 1,
+    "maxOffers": 100,
+    "coverage": "product_detail",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": true
+  },
+  "offers": [
+    {
+      "schema": "web-api-product-offer-v1",
+      "provider": "shopify-storefronts",
+      "productId": "7593200615506",
+      "variantId": "42459323203666",
+      "title": "Eeveelution / Default Title",
+      "url": "https://colourpop.com/products/eeveelution-shadow-palette",
+      "price": {
+        "amount": "24.00",
+        "currency": "USD",
+        "kind": "retail_current"
+      },
+      "priceRange": null,
+      "availability": "available",
+      "context": {
+        "store": "colourpop",
+        "operation": "product"
+      },
+      "observedAt": "2026-10-15T16:11:20.623Z",
+      "source": "shopify-storefronts_documented_response"
+    }
+  ]
+}

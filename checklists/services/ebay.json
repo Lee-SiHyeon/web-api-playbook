@@ -45,6 +45,21 @@
             "lib/cli.mjs",
             "verification/retail-ebay-suggest-cli-result-2026-10-05.json"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://autosug.ebay.com",
+          "path": "/autosug",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/ebay-suggestions-live.json"
+          ],
+          "hashPaths": [
+            "lib/retail/ebay.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs"
+          ],
+          "note": "Current anonymous autosug read returned 10 suggestions and 2 category hints. Listing, detail, and pagination remain unverified."
         }
       ],
       "sourceEvidence": [],
@@ -72,7 +87,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Current anonymous search page returns item listings in HTML; no independently replayed XHR listing endpoint observed."
+      "blocker": "Historical browser HTML contained listings. The current direct GET /sch/i.html returned 403 text/html with an Error Page and no product cards; see verification/remaining-consumer-2026-10-16/diagnosis.json. Suggestions remain a separate working contract."
     },
     {
       "id": "item.detail",
@@ -96,7 +111,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Observed item 306337924086 opened a sold-out ePID hub; 13 XHR/fetch requests supplied no product-detail JSON, and no direct replayable detail route was established."
+      "blocker": "Historical browser item 306337924086 opened a sold-out ePID hub without product-detail JSON. The current direct GET for the same item returned 403 text/html; see verification/remaining-consumer-2026-10-16/diagnosis.json. No successful maintained detail reader is established."
     },
     {
       "id": "item.price",

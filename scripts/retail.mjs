@@ -9,9 +9,10 @@ import { createAmazonPublicClient } from '../lib/retail/amazon.mjs';
 import { createAmazonNavigationClient } from '../lib/retail/amazon-navigation.mjs';
 import { crawlAmazonSearch } from '../lib/retail/amazon-crawl.mjs';
 import { getAmazonProduct } from '../lib/retail/amazon-retail-session.mjs';
+import { createWalmartPublicClient } from '../lib/retail/walmart.mjs';
 
 const services = ['aliexpress', 'amazon', 'ebay', 'walmart', 'shopify'];
-const supported = { aliexpress: ['product-seo'], ebay: ['suggest'], shopify: ['product', 'predictive-search'], amazon: ['search', 'navigation', 'crawl', 'product'], walmart: [] };
+const supported = { aliexpress: ['product-seo'], ebay: ['suggest'], shopify: ['product', 'predictive-search'], amazon: ['search', 'navigation', 'crawl', 'product'], walmart: ['search'] };
 let output;
 try {
   const [service, operation, ...args] = process.argv.slice(2);
@@ -36,6 +37,7 @@ try {
         : service === 'amazon' ? operation === 'navigation' ? ['output'] : operation === 'product' ? ['asin','output'] : operation === 'crawl'
           ? ['query', 'max-pages', 'checkpoint', 'output'] : ['query', 'page', 'output']
         : service === 'ebay' ? ['query', 'output']
+          : service === 'walmart' ? ['query', 'output']
           : operation === 'product' ? ['handle', 'output'] : ['query', 'limit', 'output'];
       const opts = options(args, flags);
       if (opts.output !== undefined && typeof opts.output !== 'string') throw Object.assign(new Error(), { code: 'RETAIL_ARGUMENT_INVALID' });
@@ -43,6 +45,7 @@ try {
       let data;
       if (service === 'aliexpress') data = await createAliExpressPublicClient().getProductSeo({ productId: opts['product-id'], subject: opts.subject });
       else if (service === 'ebay') data = await createEbayPublicClient().suggestCatalogHints({ query: opts.query });
+      else if (service === 'walmart') data = await createWalmartPublicClient().searchProducts({ query: opts.query });
       else if (service === 'amazon') {
         if (operation === 'product') data = await getAmazonProduct({ asin: opts.asin });
         else if (operation === 'navigation') data = await createAmazonNavigationClient().getNavigation();

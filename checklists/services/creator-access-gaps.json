@@ -52,15 +52,32 @@
           "service-packs/naver/apps/naver-blog-api/tests/trend-radar.test.mjs"
         ]
       },
-      "evidence": [],
+      "evidence": [
+        {
+          "kind": "naver-shopping-insight-anonymous-read-v1",
+          "origin": "https://datalab.naver.com",
+          "path": "/shoppingInsight/getKeywordRank.naver",
+          "method": "POST",
+          "readOnly": true,
+          "mime": "application/json",
+          "acceptedStatuses": [200],
+          "files": [
+            "verification/remaining-naver-insight-2026-10-16/ranking-replay.json"
+          ],
+          "hashPaths": [
+            "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/naver-shopping-insight.mjs",
+            "service-packs/naver/apps/naver-blog-api/tests/trend-radar.test.mjs",
+            "references/creator-public-data-contracts.json"
+          ]
+        }
+      ],
       "sourceEvidence": [
         {
           "files": [
             "references/creator-public-data-contracts.json"
           ]
         }
-      ],
-      "blocker": "Current bootstrap emittedNNB but no requiredBUC, so SESSION_BOOTSTRAP stops. Current direct200HTML is not valid rankingJSON. This public client does not depend on DPAPI or account login."
+      ]
     },
     {
       "id": "naver.datalab",

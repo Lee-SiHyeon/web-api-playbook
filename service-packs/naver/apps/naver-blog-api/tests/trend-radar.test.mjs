@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
+  bootstrapAnonymousNaverSession,
+  collectShoppingTrends,
+  fetchShoppingRanks,
   parseShoppingRankResponse,
   SHOPPING_CATEGORIES,
 } from '../research/trend-radar/sources/naver-shopping-insight.mjs';
@@ -26,6 +29,183 @@ test('shopping insight parser validates application schema without retaining val
   assert.throws(() => parseShoppingRankResponse('<html>blocked</html>', {
     categoryId: '50000003', categoryName: '디지털/가전', timeUnit: 'date',
   }), { code: 'APPLICATION_HTML' });
+});
+
+test('Shopping Insight anonymous bootstrap requires and forwards only the observed NNB cookie', async () => {
+  let requestedUrl;
+  const session = await bootstrapAnonymousNaverSession({
+    fetchImpl: async url => {
+      requestedUrl = new URL(url);
+      return {
+        status: 200,
+        headers: {
+          getSetCookie: () => [
+            'NNB=fixture-nnb; Domain=.naver.com; Path=/; Secure',
+            'BUC=fixture-buc; Domain=.naver.com; Path=/; Secure',
+            'LCS=fixture-lcs; Domain=lcs.naver.com; Path=/; Secure',
+          ],
+          get: () => 'image/gif',
+        },
+        text: async () => '',
+      };
+    },
+  });
+  assert.equal(requestedUrl.origin, 'https://lcs.naver.com');
+  assert.equal(requestedUrl.pathname, '/m');
+  assert.equal(session.cookieHeader, 'NNB=fixture-nnb');
+  assert.deepEqual(session.evidence.cookieNamesPresent, ['BUC', 'LCS', 'NNB']);
+  assert.deepEqual(session.evidence.requiredCookieNames, ['NNB']);
+  assert.deepEqual(session.evidence.cookieNamesSent, ['NNB']);
+  assert.equal(session.evidence.bucObserved, true);
+  assert.equal(session.evidence.cookieValuesPersisted, false);
+
+  await assert.rejects(() => bootstrapAnonymousNaverSession({
+    fetchImpl: async () => ({
+      status: 200,
+      headers: { getSetCookie: () => ['BUC=fixture-buc; Path=/'], get: () => 'image/gif' },
+      text: async () => '',
+    }),
+  }), { code: 'SESSION_BOOTSTRAP' });
+});
+
+test('Shopping Insight rank requests require NNB, allow observed BUC for comparison, and reject extra cookie scope', async () => {
+  let request;
+  const result = await fetchShoppingRanks({
+    categoryId: '50000003',
+    categoryName: '디지털/가전',
+    timeUnit: 'date',
+    cookieHeader: 'NNB=fixture-nnb',
+    fetchImpl: async (url, options) => {
+      request = { url: new URL(url), options };
+      return new Response(JSON.stringify([
+        { statusCode: 200, returnCode: 0, date: '2026/10/16', datetime: 'day1', range: '',
+          ranks: [{ rank: 1, keyword: 'fixture rank' }] },
+      ]), { status: 200, headers: { 'content-type': 'application/json;charset=UTF-8' } });
+    },
+  });
+  assert.equal(request.url.origin, 'https://datalab.naver.com');
+  assert.equal(request.url.pathname, '/shoppingInsight/getKeywordRank.naver');
+  assert.equal(request.options.method, 'POST');
+  assert.equal(request.options.headers.cookie, 'NNB=fixture-nnb; _datalab_cid=50000003');
+  assert.equal(result.periodCount, 1);
+  assert.equal(result.periods[0].ranks[0].keyword, 'fixture rank');
+
+  let comparisonCookie;
+  await fetchShoppingRanks({
+    categoryId: '50000003', categoryName: '디지털/가전', timeUnit: 'date',
+    cookieHeader: 'NNB=fixture-nnb; BUC=fixture-buc',
+    fetchImpl: async (_url, options) => {
+      comparisonCookie = options.headers.cookie;
+      return new Response(JSON.stringify([
+        { statusCode: 200, returnCode: 0, date: '2026/10/16', datetime: 'day1', range: '',
+          ranks: [{ rank: 1, keyword: 'fixture rank' }] },
+      ]), { status: 200, headers: { 'content-type': 'application/json;charset=UTF-8' } });
+    },
+  });
+  assert.equal(comparisonCookie, 'NNB=fixture-nnb; BUC=fixture-buc; _datalab_cid=50000003');
+
+  let sent = false;
+  for (const cookieHeader of ['NNB=fixture-nnb; LCS=fixture-lcs', 'NNB=fixture-nnb; NNB=duplicate',
+    'NNB=fixture-nnb\r\nX-Test: bad', 'BUC=fixture-buc']) {
+    await assert.rejects(() => fetchShoppingRanks({
+      categoryId: '50000003', categoryName: '디지털/가전', timeUnit: 'date', cookieHeader,
+      fetchImpl: async () => { sent = true; throw new Error('must not send invalid cookie scope'); },
+    }), { code: 'SESSION_MISSING' });
+  }
+  assert.equal(sent, false);
+});
+
+test('a missing anonymous bootstrap cookie records source failures and lets other trend sources continue', async () => {
+  let requestCount = 0;
+  const result = await collectShoppingTrends({
+    categories: [
+      { id: '50000003', name: '디지털/가전' },
+      { id: '50000002', name: '화장품/미용' },
+    ],
+    timeUnits: ['date', 'week'],
+    delayMs: 0,
+    fetchImpl: async url => {
+      requestCount++;
+      assert.equal(new URL(url).origin, 'https://lcs.naver.com');
+      return {
+        status: 200,
+        headers: { getSetCookie: () => ['BUC=fixture-buc; Path=/'], get: () => 'image/gif' },
+        text: async () => '',
+      };
+    },
+  });
+  assert.equal(requestCount, 1);
+  assert.equal(result.requestedContracts, 4);
+  assert.equal(result.successfulContracts, 0);
+  assert.deepEqual(result.failures.map(item => item.code), Array(4).fill('SESSION_BOOTSTRAP'));
+  assert.deepEqual(result.failures.map(item => item.httpStatus), Array(4).fill(null));
+  assert.equal(result.sessionEvidence.bootstrapCount, 0);
+  assert.equal(result.sessionEvidence.bootstrapFailureCode, 'SESSION_BOOTSTRAP');
+  assert.deepEqual(result.sessionEvidence.cookieNamesPresent, ['BUC']);
+  assert.deepEqual(result.sessionEvidence.cookieNamesSent, []);
+});
+
+test('a failed refresh bootstrap preserves prior ranks and records the remaining contracts as source failures', async () => {
+  let bootstrapCalls = 0;
+  let rankCalls = 0;
+  const result = await collectShoppingTrends({
+    categories: [
+      { id: '50000003', name: '디지털/가전' },
+      { id: '50000002', name: '화장품/미용' },
+      { id: '50000004', name: '가구/인테리어' },
+    ],
+    timeUnits: ['date'],
+    delayMs: 0,
+    fetchImpl: async url => {
+      const parsed = new URL(url);
+      if (parsed.origin === 'https://lcs.naver.com') {
+        bootstrapCalls++;
+        if (bootstrapCalls > 1) return new Response('', { status: 503 });
+        return {
+          status: 200,
+          headers: {
+            getSetCookie: () => ['NNB=fixture-nnb; Path=/', 'BUC=fixture-buc; Path=/'],
+            get: () => 'image/gif',
+          },
+          text: async () => '',
+        };
+      }
+      rankCalls++;
+      if (rankCalls === 1) {
+        return new Response(JSON.stringify([
+          { statusCode: 200, returnCode: 0, date: '2026/10/16', datetime: 'day1', range: '',
+            ranks: [{ rank: 1, keyword: 'verified fixture rank' }] },
+        ]), { status: 200, headers: { 'content-type': 'application/json;charset=UTF-8' } });
+      }
+      return new Response('<!doctype html><title>temporary fallback</title>', {
+        status: 200, headers: { 'content-type': 'text/html' },
+      });
+    },
+  });
+
+  assert.equal(bootstrapCalls, 3); // initial bootstrap plus the bounded HTTP retry for refresh
+  assert.equal(rankCalls, 2); // the third contract is recorded as failed without a request
+  assert.equal(result.requestedContracts, 3);
+  assert.equal(result.successfulContracts, 1);
+  assert.equal(result.results[0].categoryId, '50000003');
+  assert.equal(result.results[0].periods[0].ranks[0].keyword, 'verified fixture rank');
+  assert.deepEqual(result.failures, [
+    {
+      categoryId: '50000002', categoryName: '화장품/미용', timeUnit: 'date',
+      code: 'SESSION_BOOTSTRAP', httpStatus: null, bootstrapHttpStatus: 503,
+      failureStage: 'session_refresh', bootstrapFailureCode: 'HTTP_STATUS', rankFailureCode: 'APPLICATION_HTML',
+    },
+    {
+      categoryId: '50000004', categoryName: '가구/인테리어', timeUnit: 'date',
+      code: 'SESSION_BOOTSTRAP', httpStatus: null, bootstrapHttpStatus: 503,
+      failureStage: 'session_unavailable_after_refresh_failure', bootstrapFailureCode: 'HTTP_STATUS',
+    },
+  ]);
+  assert.equal(result.sessionEvidence.bootstrapCount, 1);
+  assert.equal(result.sessionEvidence.bootstrapFailureCode, 'HTTP_STATUS');
+  assert.equal(result.sessionEvidence.bootstrapFailureHttpStatus, 503);
+  assert.deepEqual(result.sessionEvidence.cookieNamesPresent, ['BUC', 'NNB']);
+  assert.equal(result.sessionEvidence.cookieValuesPersisted, false);
 });
 
 test('autocomplete JSONP parser requires the exact callback', () => {

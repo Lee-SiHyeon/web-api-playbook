@@ -94,7 +94,34 @@ test('foreign state, expired bootstrap and positive login-cookie changes are rej
   const result=await searchCoupangRetail('mouse',{store,fetchImpl:async()=>new Response(frame,{headers:{'content-type':'text/x-component',
     'set-cookie':'ILOGIN=UNEXPECTED_AUTH_SECRET; Domain=.coupang.com; Path=/; Max-Age=3600'}})});
   assert.equal(result.code,'COUPANG_RETAIL_RESPONSE_COOKIE_SCOPE');assert.equal(JSON.stringify(result).includes('UNEXPECTED_AUTH_SECRET'),false);
+  assert.equal(result.receipt.status,200);assert.equal(result.receipt.contentType,'text/x-component');
+  assert.deepEqual(result.receipt.rejectedResponseCookies,[{name:'ILOGIN',domain:'coupang.com',path:'/',deleted:false,reason:'name_not_allowlisted'}]);
   assert.equal(store.read(COUPANG_RETAIL_STORE).includes('UNEXPECTED_AUTH_SECRET'),false);
+});
+
+test('HTML response classification takes precedence over an unapproved same-origin cookie and does not persist it',async t=>{
+  const {store}=await setup(t);
+  const result=await searchCoupangRetail('bluetooth speaker',{store,fetchImpl:async()=>new Response('<!doctype html><title>Challenge</title>',{status:200,headers:{
+    'content-type':'text/html','set-cookie':'bm_sc=UNTRUSTED_SENTINEL; Domain=.coupang.com; Path=/; Max-Age=3600'}})});
+  assert.equal(result.code,'COUPANG_RETAIL_CONTENT_TYPE');assert.equal(result.ok,false);assert.equal(result.receipt.status,200);
+  assert.equal(result.receipt.contentType,'text/html');assert.equal(result.receipt.accessDeniedTitle,false);
+  assert.deepEqual(result.receipt.rejectedResponseCookies,[{name:'bm_sc',domain:'coupang.com',path:'/',deleted:false,reason:'name_not_allowlisted'}]);
+  assert.equal(result.states.live_replay,false);assert.equal(result.states.credential_propagated,'injected_transport_test');
+  assert.equal(store.read(COUPANG_RETAIL_STORE).includes('UNTRUSTED_SENTINEL'),false);
+  assert.equal(JSON.stringify(result).includes('UNTRUSTED_SENTINEL'),false);
+});
+
+test('allowlisted response cookie at non-root path is rejected and removed before protected persistence',async t=>{
+  const {store}=await setup(t);
+  const result=await searchCoupangRetail('bluetooth speaker',{store,fetchImpl:async()=>new Response(frame,{status:200,headers:{
+    'content-type':'text/x-component','set-cookie':'bm_sv=PATH_SCOPE_SENTINEL; Domain=.coupang.com; Path=/np; Max-Age=3600'}})});
+  assert.equal(result.code,'COUPANG_RETAIL_RESPONSE_COOKIE_SCOPE');assert.equal(result.ok,false);
+  assert.deepEqual(result.receipt.rejectedResponseCookies,[{name:'bm_sv',domain:'coupang.com',path:'out_of_scope',deleted:false,reason:'cookie_scope'}]);
+  const state=JSON.parse(store.read(COUPANG_RETAIL_STORE));
+  assert.equal(state.session.cookieJar.cookies.some(c=>c.key==='bm_sv'&&c.path==='/np'),false);
+  assert.equal(state.session.cookieJar.cookies.some(c=>c.key==='bm_sv'&&c.path==='/'),true);
+  assert.equal(JSON.stringify(state).includes('PATH_SCOPE_SENTINEL'),false);
+  assert.equal(JSON.stringify(result).includes('PATH_SCOPE_SENTINEL'),false);
 });
 
 test('deleted required context and failed protected persistence cannot report successful renewal',async t=>{

@@ -1,0 +1,78 @@
+{
+  "schema": "web-api-commerce-collection-proof-v1",
+  "service": "ulta",
+  "capabilityId": "catalog.common_collector",
+  "checkedAt": "2026-10-15T16:11:33.313Z",
+  "secretsPersistedInEvidence": false,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "sourceRequest": {
+    "method": "GET",
+    "origin": "https://www.ulta.com",
+    "path": "/dxl/graphql",
+    "checkedAt": "2026-10-15T16:11:22.062Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 912391,
+    "responseSha256": "96ff6c438621fdb2e2c9c5968b2c8988d7a48ecabeffdf75bb695e83ee44d92a"
+  },
+  "sampleOfferCount": 20,
+  "fullOfferCount": 212,
+  "csvDataRows": 212,
+  "scalarPriceOfferCount": 199,
+  "priceRangeOfferCount": 13,
+  "jsonReadbackMatched": true,
+  "csvReadbackMatched": true,
+  "fullJsonSha256": "65b9facc7d11a1deea4cf353f81bdda144345b4e7d3bc08ab6169955ff14995e",
+  "fullCsvSha256": "b41afcd55c8eff19c9aca313c72f12e6fa653f9c9cee5ec38cd919b194047a62",
+  "fullOutputs": {
+    "json": "verification/remaining-readcaps-2026-10-16/ulta-common-collector.json",
+    "csv": "verification/remaining-readcaps-2026-10-16/ulta-common-collector.csv"
+  },
+  "collection": {
+    "pagesRead": 3,
+    "rowsSeen": 218,
+    "offersStored": 212,
+    "maxPages": 10,
+    "maxOffers": 50000,
+    "coverage": "provider_limited",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": false
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/commerce.mjs",
+    "arguments": [
+      "ulta",
+      "search",
+      "--query=lipstick",
+      "--limit=50000",
+      "--max-pages=10",
+      "--output=verification/remaining-readcaps-2026-10-16/ulta-common-collector.json",
+      "--csv=verification/remaining-readcaps-2026-10-16/ulta-common-collector.csv"
+    ],
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/commerce.mjs": "0e5dc18975f1b895ee29467c978b3e0cf83dce19af691f48899df1fef4c22f65",
+    "lib/commerce/providers.mjs": "f8bce501a1aebe63d069fc884be41942712e7a961504ff836646ec7ebdb152f7",
+    "lib/commerce/snapshots.mjs": "f59158c31e1490e2124de595d68f5e5cc87cd020f73184d5046258144b45d659",
+    "lib/commerce/credential-output.mjs": "89b5f640422cf9dbf5a3d2679099842264ae6d30b6a924ad9308af6432e485db",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622"
+  },
+  "independentReadback": {
+    "jsonOfferCount": 212,
+    "csvDataRows": 212,
+    "allRowsMatchedByOrderedFields": true,
+    "headerFieldCount": 24
+  }
+}

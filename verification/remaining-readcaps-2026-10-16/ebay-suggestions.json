@@ -1,0 +1,56 @@
+{
+  "schema": "web-api-retail-result-v1",
+  "ok": true,
+  "service": "ebay",
+  "operation": "suggest",
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "data": {
+    "query": "headphones",
+    "suggestions": [
+      "headphones bluetooth",
+      "headphones wired",
+      "headphones bluetooth wireless",
+      "headphones noise cancelling",
+      "headphones with mic",
+      "headphones wireless",
+      "headphones",
+      "headphone stand",
+      "headphones wired type c",
+      "headphones bluetooth wireless noise cancelling"
+    ],
+    "categoryHints": [
+      {
+        "keyword": "headphones bluetooth",
+        "id": "15052",
+        "name": "Portable Audio & Headphones"
+      },
+      {
+        "keyword": "headphones bluetooth",
+        "id": "9394",
+        "name": "Cell Phone Accessories"
+      }
+    ],
+    "receipt": {
+      "method": "GET",
+      "origin": "https://autosug.ebay.com",
+      "path": "/autosug",
+      "queryFields": [
+        "kwd",
+        "sId",
+        "_richres",
+        "callback"
+      ],
+      "browserUsed": false,
+      "anonymous": true,
+      "checkedAt": "2026-10-15T16:11:21.294Z",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 822,
+      "suggestionCount": 10,
+      "categoryHintCount": 2
+    }
+  }
+}

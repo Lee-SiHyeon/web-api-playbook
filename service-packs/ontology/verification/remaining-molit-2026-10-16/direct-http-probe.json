@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "task": "MOLIT current redirect diagnosis",
+  "reportWrittenAt": "2026-10-15T16:11:19.000Z",
+  "timezone": "Asia/Seoul",
+  "codeHead": "6063743c6b49d60c1f24857448b02e278a180766",
+  "execution": {
+    "mode": "pure_http",
+    "browserUsed": false,
+    "authentication": "anonymous",
+    "credentialsSent": false,
+    "rawBodyPersisted": false,
+    "cookieValuesLogged": false
+  },
+  "existingProofPreserved": "verification/molit-notices-live.json",
+  "attempts": [
+    {
+      "checkedAt": "2026-10-15T16:07:59.174Z",
+      "operation": "maintained collectMolitNotices on registered seed",
+      "request": {
+        "method": "GET",
+        "origin": "https://www.molit.go.kr",
+        "path": "/USR/NEWS/m_71/lst.jsp",
+        "queryKeys": []
+      },
+      "response": {
+        "status": 307,
+        "mime": null,
+        "bytes": 0,
+        "sha256": null
+      },
+      "location": {
+        "present": true,
+        "origin": "https://www.molit.go.kr",
+        "path": "/USR/NEWS/m_71/lst.jsp",
+        "queryKeys": [],
+        "sameOrigin": true,
+        "samePath": true,
+        "sameQueryKeys": true
+      },
+      "client": {
+        "status": "redirect_blocked",
+        "error": "HTTP_307_SELF_REDIRECT",
+        "listPagesRead": 0,
+        "itemCount": 0,
+        "captureCleanupVerified": true
+      },
+      "bodyValidation": {
+        "parsed": false,
+        "reason": "no response body"
+      }
+    },
+    {
+      "checkedAt": "2026-10-15T16:08:37.950Z",
+      "operation": "maintained collectMolitNotices using only the existing allowlisted host alias",
+      "request": {
+        "method": "GET",
+        "origin": "https://molit.go.kr",
+        "path": "/USR/NEWS/m_71/lst.jsp",
+        "queryKeys": []
+      },
+      "response": {
+        "status": 307,
+        "mime": null,
+        "bytes": 0,
+        "sha256": null
+      },
+      "location": {
+        "present": true,
+        "origin": "https://molit.go.kr",
+        "path": "/USR/NEWS/m_71/lst.jsp",
+        "queryKeys": [],
+        "sameOrigin": true,
+        "samePath": true,
+        "sameQueryKeys": true
+      },
+      "client": {
+        "status": "redirect_blocked",
+        "error": "HTTP_307_SELF_REDIRECT",
+        "listPagesRead": 0,
+        "itemCount": 0,
+        "captureCleanupVerified": true
+      },
+      "bodyValidation": {
+        "parsed": false,
+        "reason": "no response body"
+      }
+    },
+    {
+      "checkedAt": "2026-10-15T16:10:08.451Z",
+      "operation": "maintained collectMolitNotices with only its User-Agent header omitted",
+      "request": {
+        "method": "GET",
+        "origin": "https://www.molit.go.kr",
+        "path": "/USR/NEWS/m_71/lst.jsp",
+        "queryKeys": []
+      },
+      "response": {
+        "status": 307,
+        "mime": null,
+        "bytes": 0,
+        "sha256": null
+      },
+      "location": {
+        "present": true,
+        "origin": "https://www.molit.go.kr",
+        "path": "/USR/NEWS/m_71/lst.jsp",
+        "queryKeys": [],
+        "sameOrigin": true,
+        "samePath": true,
+        "sameQueryKeys": true
+      },
+      "client": {
+        "status": "redirect_blocked",
+        "error": "HTTP_307_SELF_REDIRECT",
+        "listPagesRead": 0,
+        "itemCount": 0,
+        "captureCleanupVerified": true
+      },
+      "bodyValidation": {
+        "parsed": false,
+        "reason": "no response body"
+      }
+    }
+  ],
+  "homepageProbe": {
+    "path": "/",
+    "status": 307,
+    "mime": null,
+    "bytes": 0,
+    "sha256": null,
+    "error": "HTTP_307_SELF_REDIRECT",
+    "bodyParsed": false,
+    "cleanupVerified": true
+  },
+  "assessment": {
+    "resolved": false,
+    "finding": "The observed Location is a same-origin, same-path, same-query self-loop rather than a normal first-party move. No actual application body is returned, so current HTTP evidence cannot support a usable read.",
+    "guardChanged": false,
+    "sourceUrlChanged": false,
+    "nextEvidenceNeeded": "A current official browser observation of the public notices navigation or another site-provided first-party URL; do not guess a replacement path.",
+    "successfulLiveReplay": false
+  }
+}

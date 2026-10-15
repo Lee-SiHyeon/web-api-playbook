@@ -33,7 +33,9 @@ async function fixture(t) {
 }
 
 test('whole inventory includes package commands, undeclared pack entrypoints and recorded catalogs', async t => {
-  const { root } = await fixture(t);
+  const { root, save } = await fixture(t);
+  await save('.venv-oliveyoung/Lib/site-packages/vendor/manifest.json', '{');
+  await save('.venv-oliveyoung/Lib/site-packages/vendor/browser.py', 'browser.launch()');
   const result = await inventoryPlaybook(root);
   assert.equal(result.inventory.manifestFiles, 1);
   assert.ok(result.inventory.entrypoints.some(item => item.path === 'service-packs/demo/scripts/unmapped.mjs' && !item.declaredInManifest));
@@ -43,6 +45,8 @@ test('whole inventory includes package commands, undeclared pack entrypoints and
   assert.ok(result.inventory.runtimeEntrypoints.some(item => item.path === 'service-packs/demo/extension/background.js' && item.kind === 'browser_extension_service_worker' && item.sourcePresent));
   assert.ok(result.inventory.runtimeEntrypoints.some(item => item.path === 'service-packs/demo/probe.js' && item.kind === 'powershell_relative_js_reference'));
   assert.ok(result.inventory.browserMentions.some(item => item.path === 'service-packs/demo/extension/background.js'));
+  assert.equal(result.inventory.sourceAssets.some(file => file.startsWith('.venv-oliveyoung/')), false);
+  assert.deepEqual(result.errors, []);
   await assert.rejects(() => readAuditFile(root, '../outside.json'), /AUDIT_PATH_INVALID/);
 });
 

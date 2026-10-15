@@ -1,17 +1,24 @@
 {
   "schemaVersion": 1,
   "service": "walmart",
-  "description": "Anonymous, read-only Walmart storefront catalog integration. Blocked operations remain required gaps until a supported contract and independent HTTP replay exist; official partner APIs require separate authorization and scope review.",
+  "description": "Anonymous, read-only Walmart storefront catalog integration. Search has a bounded parser/client for one observed public HTML Document, with current live replay reliability still partial; detail, category, pagination, and offer coverage remain gaps. Official partner APIs require separate authorization and scope review.",
   "capabilities": [
     {
-      "id": "catalog.search", "title": "상품 키워드 검색 JSON 조회", "priority": "required", "applicability": "applicable", "requirement": "live",
-      "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
-      "blocker": "Anonymous /search reached a Robot or human challenge. See references/retail-walmart-contracts.json and verification/retail-walmart-live-2026-10-05.json."
+      "id": "catalog.search", "title": "상품 키워드 검색 결과 조회", "priority": "required", "applicability": "applicable", "requirement": "live",
+      "implementation": {
+        "files": [{ "path": "lib/retail/walmart.mjs", "exports": ["createWalmartPublicClient", "parseWalmartSearchDocument"] }],
+        "cli": [{ "path": "scripts/retail.mjs", "tokens": ["walmart", "search"] }],
+        "tests": ["tests/retail-walmart.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The sanitized HTML fixture is tests/fixtures/walmart-search-observed.html. The failed maintained replay is verification/remaining-consumer-2026-10-16/walmart-search-cli-live.json; neither a fixture nor this failed receipt is positive live evidence.",
+      "blocker": "A prior anonymous explicit-header direct HTTP read returned a product-list HTML Document and the parser is fixture-verified. The fresh CLI replay returned 200 text/html but ended at /blocked; see verification/remaining-consumer-2026-10-16/diagnosis.json. Current live repeatability is partial, and no browser-confirmed replay is claimed."
     },
     {
       "id": "catalog.detail", "title": "상품 상세 JSON 조회와 canonical URL", "priority": "required", "applicability": "applicable", "requirement": "live",
       "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
-      "blocker": "No successful anonymous product-detail XHR contract observed; storefront automated retrieval is restricted by Walmart terms."
+      "blocker": "No successful anonymous product-detail contract observed. The bounded search HTML parser does not implement detail reads."
     },
     {
       "id": "catalog.category", "title": "카테고리 탐색과 상품 목록 연결", "priority": "required", "applicability": "applicable", "requirement": "live",
@@ -21,7 +28,7 @@
     {
       "id": "catalog.pagination", "title": "검색·카테고리 페이지네이션과 종료 조건", "priority": "required", "applicability": "applicable", "requirement": "live",
       "implementation": { "files": [], "cli": [], "tests": [] }, "evidence": [], "sourceEvidence": [],
-      "blocker": "No first-page business JSON response or next-page contract observed."
+      "blocker": "One product-list HTML Document was observed, but no next-page contract or terminal condition was verified."
     },
     {
       "id": "catalog.offer", "title": "가격·통화·가용성 필드를 구분해 검증", "priority": "required", "applicability": "applicable", "requirement": "live",

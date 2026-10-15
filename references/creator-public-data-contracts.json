@@ -297,15 +297,24 @@
       "sourceSelectors": {
         "u": "https://datalab.naver.com/"
       },
+      "httpStatus": 200,
+      "sourceFormat": "image/gif",
+      "checkedAt": "2026-10-15T16:37:43.804Z",
       "requiredAnonymousCookieNames": [
-        "NNB",
-        "BUC"
+        "NNB"
       ],
       "currentlyObservedCookieNames": [
+        "BUC",
         "NNB"
       ],
       "cookieValuesPersisted": false,
-      "liveReplaySuccessful": false
+      "optionalObservedCookieNames": [
+        "BUC"
+      ],
+      "liveReplaySuccessful": true,
+      "evidenceFile": "verification/remaining-naver-insight-2026-10-16/ranking-replay.json",
+      "bootstrapFailureHandling": "missing NNB or bootstrap transport/status failure is recorded as a per-contract Shopping Insight source failure; the collector returns control so other trend sources can continue",
+      "scope": "anonymous first-party measurement bootstrap; LCS may issue NNB and BUC; only NNB is required/sent as an LCS session cookie"
     },
     {
       "service": "creator-access-gaps",
@@ -329,8 +338,12 @@
         "ranks[].rank",
         "ranks[].keyword"
       ],
-      "liveReplaySuccessful": false,
-      "scope": "public shopping category rankings, not all-topic issues; current HTML response is not JSON"
+      "httpStatus": 200,
+      "sourceFormat": "json",
+      "liveReplaySuccessful": true,
+      "checkedAt": "2026-10-15T16:37:43.804Z",
+      "evidenceFile": "verification/remaining-naver-insight-2026-10-16/ranking-replay.json",
+      "scope": "public shopping category rankings; anonymous request with NNB as its only LCS session cookie plus _datalab_cid selector returned ranking JSON for category 50000003/timeUnit date (12 periods x 10 ranks); other category/timeUnit combinations require their own replay; not all-topic issues"
     },
     {
       "service": "creator-access-gaps",

@@ -1,0 +1,251 @@
+{
+  "schema": "inpock-protected-reads-v1",
+  "service": "inpock",
+  "capabilities": [
+    "auth.owner",
+    "auth.reuse",
+    "profile.read",
+    "cards.read",
+    "stats.read"
+  ],
+  "checkedAt": "2026-10-15T16:13:07.216Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "secretsPersistedInEvidence": false,
+  "noWriteRequestsSent": true,
+  "credentialProvider": "Windows DPAPI CurrentUser",
+  "persistent": true,
+  "providerReadiness": {
+    "status": "ready",
+    "loginAvailable": true,
+    "sessionAvailable": true
+  },
+  "runner": {
+    "entrypoint": "scripts/inpock.mjs",
+    "commands": [
+      "verify",
+      "profile-get",
+      "blocks",
+      "stats"
+    ],
+    "exitStatus": 0,
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "credentialProvider": "Windows DPAPI CurrentUser",
+    "persistent": true,
+    "writeRequestsSent": 0
+  },
+  "operations": {
+    "auth.owner": {
+      "ok": true,
+      "authenticated": true,
+      "ownerVerified": true,
+      "browserUsed": false,
+      "receipt": {
+        "method": "GET",
+        "origin": "https://link-rest.inpock.co.kr",
+        "path": "/v2/users",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 1533,
+        "checkedAt": "2026-10-15T16:12:12.248Z",
+        "browserUsed": false
+      }
+    },
+    "auth.reuse": {
+      "ok": true,
+      "authenticated": true,
+      "ownerVerified": true,
+      "browserUsed": false,
+      "renewal": "stored_session",
+      "receipts": [
+        {
+          "method": "GET",
+          "origin": "https://link-rest.inpock.co.kr",
+          "path": "/v2/users",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 1533,
+          "checkedAt": "2026-10-15T16:12:12.248Z",
+          "browserUsed": false
+        },
+        {
+          "method": "GET",
+          "origin": "https://link-rest.inpock.co.kr",
+          "path": "/v2/users",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 1533,
+          "checkedAt": "2026-10-15T16:12:18.051Z",
+          "browserUsed": false
+        },
+        {
+          "method": "GET",
+          "origin": "https://link-rest.inpock.co.kr",
+          "path": "/v2/users",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 1533,
+          "checkedAt": "2026-10-15T16:12:43.237Z",
+          "browserUsed": false
+        }
+      ]
+    },
+    "profile.read": {
+      "ok": true,
+      "authenticated": true,
+      "ownerVerified": true,
+      "browserUsed": false,
+      "isDraft": false,
+      "snapshotHash": "a2a89a634cb85900a04368e2d79dc93aacffa36348c88288c925a9a8d758a4d2",
+      "profileFieldNames": [
+        "profile_image",
+        "title",
+        "bio",
+        "sns",
+        "sns_position",
+        "layout_type",
+        "cover_image",
+        "profile_alignment",
+        "profile_size",
+        "theme",
+        "background_type",
+        "background_color",
+        "background_image",
+        "typography",
+        "block_shape",
+        "block_animation",
+        "block_shadow",
+        "block_alignment",
+        "notice",
+        "brand_image",
+        "brand_url",
+        "brand_image_policy",
+        "using_short_link",
+        "allow_offers",
+        "using_search",
+        "show_tiktok_browser_popup"
+      ],
+      "nullFieldNames": [
+        "cover_image",
+        "background_image",
+        "block_animation",
+        "block_shadow",
+        "brand_image",
+        "brand_url"
+      ],
+      "receipt": {
+        "method": "GET",
+        "origin": "https://link-rest.inpock.co.kr",
+        "path": "/v2/users/design",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 1192,
+        "checkedAt": "2026-10-15T16:17:56.87Z",
+        "browserUsed": false
+      }
+    },
+    "cards.read": {
+      "ok": true,
+      "authenticated": true,
+      "ownerVerified": true,
+      "browserUsed": false,
+      "recordCount": 70,
+      "complete": true,
+      "pages": 4,
+      "stopReason": "server_end",
+      "receipts": [
+        {
+          "method": "GET",
+          "origin": "https://link-rest.inpock.co.kr",
+          "path": "/v2/blocks",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 10630,
+          "checkedAt": "2026-10-15T16:12:59.431Z",
+          "browserUsed": false,
+          "recordCount": 20,
+          "hasNext": true
+        },
+        {
+          "method": "GET",
+          "origin": "https://link-rest.inpock.co.kr",
+          "path": "/v2/blocks",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 10127,
+          "checkedAt": "2026-10-15T16:12:59.653Z",
+          "browserUsed": false,
+          "recordCount": 20,
+          "hasNext": true
+        },
+        {
+          "method": "GET",
+          "origin": "https://link-rest.inpock.co.kr",
+          "path": "/v2/blocks",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 11351,
+          "checkedAt": "2026-10-15T16:12:59.732Z",
+          "browserUsed": false,
+          "recordCount": 20,
+          "hasNext": true
+        },
+        {
+          "method": "GET",
+          "origin": "https://link-rest.inpock.co.kr",
+          "path": "/v2/blocks",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 5557,
+          "checkedAt": "2026-10-15T16:12:59.844Z",
+          "browserUsed": false,
+          "recordCount": 10,
+          "hasNext": false
+        }
+      ]
+    },
+    "stats.read": {
+      "ok": true,
+      "authenticated": true,
+      "ownerVerified": true,
+      "browserUsed": false,
+      "fieldNames": [
+        "today",
+        "accumulated",
+        "realtime",
+        "subscribers"
+      ],
+      "receipt": {
+        "method": "GET",
+        "origin": "https://link-rest.inpock.co.kr",
+        "path": "/stats/mini",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 103,
+        "checkedAt": "2026-10-15T16:13:07.216Z",
+        "browserUsed": false,
+        "fieldsReturned": [
+          "today",
+          "accumulated",
+          "realtime",
+          "subscribers"
+        ]
+      }
+    }
+  },
+  "notReplayed": {
+    "auth.login": "No login POST was sent; the current stored session passed owner verification.",
+    "cards.create": "No target or write payload was requested; no create was sent.",
+    "publishing.idempotency": "No target or write payload was requested; no publication replay was sent.",
+    "publishing.public_rendering": "No new publication target was requested; no write-bound rendering replay was sent."
+  },
+  "implementation": {
+    "lib/web-auth/inpock.mjs": "64e197fac3ad1e526ce7361bffd103bee6c192ff950495b66822b609e900fcc5",
+    "lib/protected-store.mjs": "9198a545fe948882e0e3d7cf7186bd84a354ef0fa520a6fc008fdfa7166e99a2",
+    "lib/scoped-session.mjs": "75ccca7b5e6cedb7a088ee0caeb72c1aee23ec68f87c1b715d17c8851b0339f2",
+    "lib/inpock-read.mjs": "65e1d4ecb96fcb365ab36144f65361a69e4eb126159eeff51f398e6c04ac9900",
+    "lib/inpock-profile.mjs": "be7a867beb86b392d666464a7c54953261ffab90a3a25a0dae5ed52537af699e",
+    "scripts/inpock.mjs": "3e31f7e4863e84345769d205277ab77b701ff6e8bbe769c7751445a1fff97745"
+  }
+}
