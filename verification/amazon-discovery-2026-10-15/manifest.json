@@ -1,0 +1,49 @@
+{
+  "schema": "web-api-amazon-expansion-evidence-v1",
+  "checkedAt": "2026-10-15T06:16:52.005Z",
+  "scope": "bounded_amazon_public_shopping_http",
+  "implementation": {
+    "lib/retail/amazon.mjs": "10d2cae2fb68bf41969448018883d4c606db5d514f7f1e4a18f1bd65d508abca",
+    "lib/retail/amazon-crawl.mjs": "163a28bc10186825940b2ec62020d2bd51112d040beeed1f3ad37fbd409548e1",
+    "lib/retail/amazon-navigation.mjs": "584984d6c9d5d8658b6f1dbace09d8542f4cbc2c529a58c6178f4333ac950225",
+    "lib/retail/amazon-product.mjs": "b033602a59d5298d59d279425f8ef8187086a0019c01966a8071a96be781e703",
+    "lib/retail/amazon-retail-session.mjs": "0b93c0d705a50f8337c22951707496c70a6d39b561d325d8001675547a62519b",
+    "lib/scoped-session.mjs": "75ccca7b5e6cedb7a088ee0caeb72c1aee23ec68f87c1b715d17c8851b0339f2",
+    "lib/retail/amazon-ontology.mjs": "76a645e0a9ccefb1c1524f9345acd3d2e1e2e3a00f9e98e208085b674684548b",
+    "lib/capability-checklist.mjs": "c9d47854535ce174baf42f7268749fc47cd4ebe54655fdee949df941047df633",
+    "scripts/retail.mjs": "b6c9b0c3ab739a403f0d569c6353ebcb90522b90752a0c00af71d0641c6dc70d",
+    "scripts/amazon-retail-session.mjs": "a41626a0e251696fe806b1eadf43d29dc274acb1045a6a329f76fc434e29eb2d",
+    "scripts/amazon-ontology.mjs": "a936e4ba59ef3d827b27e0750928e2f1a77e4b7ca65cb64d1f099451eebf874e",
+    "scripts/verify-amazon-expansion.mjs": "dee39efd5f4fb009b200d7def32b938a5f3453def2db5a44d60c16a66ed9f31c"
+  },
+  "files": {
+    "verification/amazon-discovery-2026-10-15/navigation.json": "e2b12285388fd5feba4a8a78c913b25ba5b269f188bfcf9044751a2ac6da5b1e",
+    "verification/amazon-discovery-2026-10-15/browser-observation.json": "a1af5fbc604328ec598a4553a54c14599483ffa311d422d92d7048780fcb1ee0",
+    "verification/amazon-discovery-2026-10-15/search-crawl.json": "6e0b58dc08e4ed8357bd92a3b58580be928f6246c8ea67ddd48b9329259d77c6",
+    "verification/amazon-discovery-2026-10-15/search-resume.json": "2e8cadb943ef1d7b05096a40621fe6f62c2eb16a760e2f7c9a1890b5f463d039",
+    "verification/amazon-discovery-2026-10-15/product-lotion.json": "5c879091ff6f6bc93313ceda1dfd92a9c157a28227cf55c63ebe919e7123d4da",
+    "verification/amazon-discovery-2026-10-15/product-option.json": "268c4570bd85624dc6772e24d9c9cd113a5dab0c7016c2933625743f4f319216",
+    "verification/amazon-discovery-2026-10-15/product-mouse.json": "613d4834727a4d92960a40d3ac0b40469d873e5f13bfbc8678897e9e8c8ba7aa",
+    "verification/amazon-discovery-2026-10-15/product-repeat.json": "5423a287c21fab5552c1ba260430a05a25db62edb31f0739817f96811ab61d9b",
+    "verification/amazon-discovery-2026-10-15/followup-probes.json": "4f998e72d1117d468e1166654c4bc17dd8e78df1de5d1c72d05283035b44e6eb",
+    "verification/amazon-discovery-2026-10-15/category-probe.json": "06668dfc1af7932254543c2b15ae23e4b6e63888441c40947003500ab0eaccca",
+    "verification/amazon-discovery-2026-10-15/stateless-detail-probe.json": "c210008fefe9ff0724e2f96bd053fd3cb272108a8b1963727c27255776b83360",
+    "verification/amazon-discovery-2026-10-15/ontology.json": "b8f2cf1921ee55371831c26c123dc3b678b412767fc0e68deed01dfce80bff4a",
+    "verification/amazon-discovery-2026-10-15/frontier.json": "9e4d7104979fcf63818df68c3a31132214b5708531ddf14aa817e3cd00cc42ff"
+  },
+  "counts": {
+    "searchPages": 4,
+    "uniqueSearchProducts": 60,
+    "productDetails": 3,
+    "offerings": 62,
+    "offerObservations": 47,
+    "variantEdges": 47,
+    "menus": 37,
+    "destinations": 342,
+    "pendingListings": 206,
+    "pendingProducts": 114
+  },
+  "completeCatalog": false,
+  "sessionRenewalVerified": false,
+  "accountWrites": 0
+}

@@ -1,40 +1,209 @@
 {
   "schemaVersion": 1,
   "service": "amazon",
-  "description": "Anonymous public Amazon.com catalog XHR scope. Search/detail documents and observed UI XHRs do not satisfy the required API operations. See references/retail-amazon-contracts.json and verification/retail-amazon-live-2026-10-05.json.",
+  "description": "Amazon observed XHR and direct HTTP Document scope: public navigation/search, protected public-session product reads, saved traversal frontier and local ontology projection. Full catalog, review bodies and session expiry recovery remain incomplete.",
   "capabilities": [
+    {
+      "id": "catalog.navigation",
+      "title": "Read returned home navigation menus and public destination graph",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon-navigation.mjs",
+            "exports": [
+              "createAmazonNavigationClient",
+              "parseAmazonNavigation"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "navigation"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/amazon-expansion.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/nav/ajax/hMenuDesktopFirstLayer",
+          "mime": "application/json",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-navigation-proof.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon-navigation.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "secondLayerRequest",
+              "method": "GET",
+              "origin": "https://www.amazon.com",
+              "path": "/nav/ajax/hamburgerMainContent",
+              "mime": "application/json"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "37 menus, 342 destinations, 418 edges. All returned submenu references resolve; catalog/category traversal remains incomplete."
+    },
     {
       "id": "catalog.search",
       "title": "Search validated main product cards with displayed price and thumbnail through anonymous XHR",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [{"path": "lib/retail/amazon.mjs", "exports": ["createAmazonPublicClient", "parseAmazonSearchStream"]}], "cli": [], "tests": ["tests/retail-amazon.test.mjs"]},
-      "evidence": [{"kind": "http-public-read-v1", "method": "POST", "readOnly": true, "origin": "https://www.amazon.com", "path": "/s/query", "mime": "application/json-amazonui-streaming", "files": ["verification/retail-amazon-search-live-2026-10-05.json"], "hashPaths": ["lib/retail/amazon.mjs"]}],
-      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
-      "note": "Direct POST /s/query works for page 1 without cookies or qid/xpid. Result scope is validated main cards; some responses report additional ASINs and are marked partial."
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon.mjs",
+            "exports": [
+              "createAmazonPublicClient",
+              "parseAmazonSearchStream"
+            ]
+          },
+          {
+            "path": "lib/retail/amazon-crawl.mjs",
+            "exports": [
+              "crawlAmazonSearch"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "crawl",
+              "checkpoint"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-amazon.test.mjs",
+          "tests/amazon-expansion.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "method": "POST",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/s/query",
+          "mime": "application/json-amazonui-streaming",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-search-proof.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon.mjs",
+            "lib/retail/amazon-crawl.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "Four observed pages yield 60 unique validated main-card ASINs; pages 1 and 4 remain partial."
     },
     {
       "id": "catalog.product",
-      "title": "Read full product detail by ASIN from a validated anonymous XHR",
+      "title": "Read identity-bound product detail through a scoped public-session HTTP Document",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
-      "evidence": [],
-      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
-      "blocker": "A related-product vendor JSON GET was observed once, but its ASIN did not match the current detail page. Direct replay returned 415 without the browser's exact Accept; source-backed anonymous HTTP attempts returned 406, 503 or 404."
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon-product.mjs",
+            "exports": [
+              "parseAmazonProductDocument"
+            ]
+          },
+          {
+            "path": "lib/retail/amazon-retail-session.mjs",
+            "exports": [
+              "getAmazonProduct"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "getAmazonProduct",
+              "asin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/amazon-product-session.test.mjs",
+          "tests/amazon-session-checklist.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "amazon-product-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/-/ko/dp/B08KT2Z93D/",
+          "mime": "text/html",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-product-proof.json",
+            "verification/amazon-discovery-2026-10-15/product-repeat.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon-product.mjs",
+            "lib/retail/amazon-retail-session.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "Independent Node process, DPAPI session reload and exact on-wire Cookie match verified. Public-session read only; no owner, renewal, complete gallery, all option offers or checkout claim."
     },
     {
       "id": "catalog.categories",
-      "title": "List or filter product categories through anonymous XHR",
+      "title": "List or filter category products through observed HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "No category data XHR was observed in the bounded anonymous journey."
+      "blocker": "Menu discovery works; a Headphones landing Document returned 200 but no product cards in the tested layout. Category listing traversal is pending."
     },
     {
       "id": "catalog.pagination",
@@ -42,10 +211,61 @@
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [{"path": "lib/retail/amazon.mjs", "exports": ["createAmazonPublicClient"]}], "cli": [], "tests": ["tests/retail-amazon.test.mjs"]},
-      "evidence": [{"kind": "http-public-read-v1", "method": "POST", "readOnly": true, "origin": "https://www.amazon.com", "path": "/s/query", "mime": "application/json-amazonui-streaming", "files": ["verification/retail-amazon-pagination-live-2026-10-05.json"], "hashPaths": ["lib/retail/amazon.mjs"]}],
-      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
-      "note": "Pages 1, 2 and 3 yielded distinct verified main cards without cookies. Full catalog coverage and last-page termination remain separate gaps."
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon.mjs",
+            "exports": [
+              "createAmazonPublicClient",
+              "parseAmazonSearchStream"
+            ]
+          },
+          {
+            "path": "lib/retail/amazon-crawl.mjs",
+            "exports": [
+              "crawlAmazonSearch"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "crawl",
+              "checkpoint"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-amazon.test.mjs",
+          "tests/amazon-expansion.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "method": "POST",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/s/query",
+          "mime": "application/json-amazonui-streaming",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-pagination-proof.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon.mjs",
+            "lib/retail/amazon-crawl.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "Resume reads page 4 after a saved pages 1-3 checkpoint. Page 5 remains pending; complete query/catalog coverage is not asserted."
     },
     {
       "id": "catalog.pagination_termination",
@@ -53,10 +273,23 @@
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon-crawl.mjs",
+            "exports": [
+              "crawlAmazonSearch"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "tests/amazon-expansion.test.mjs"
+        ]
+      },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "The streaming metadata's total/ASIN counts do not prove all products or last-page access; termination has not been replayed."
+      "blocker": "Explicit next-disabled handling passes offline tests, but current live search stopped after page 4 with page 5 pending; last-page termination is unverified."
     },
     {
       "id": "catalog.price_availability",
@@ -64,54 +297,170 @@
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Search-card displayed current price and explicit KRW amount are verified. Full product offer/list price, coupon, checkout price and stock semantics are not replayed."
+      "blocker": "Displayed product prices and in-stock text are verified separately. Definitive list price, coupons, checkout price and stock quantity are still unverified."
     },
     {
       "id": "catalog.description",
-      "title": "Read product description, features and specifications through a validated anonymous XHR",
+      "title": "Read description, feature bullets and specifications present in a verified product Document",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
-      "evidence": [],
-      "sourceEvidence": [],
-      "blocker": "A public product document contained description markup, but no independently replayed XHR for full description or specifications was found."
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon-product.mjs",
+            "exports": [
+              "parseAmazonProductDocument"
+            ]
+          },
+          {
+            "path": "lib/retail/amazon-retail-session.mjs",
+            "exports": [
+              "getAmazonProduct"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "getAmazonProduct",
+              "asin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/amazon-product-session.test.mjs",
+          "tests/amazon-session-checklist.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "amazon-product-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/-/ko/dp/B08KT2Z93D/",
+          "mime": "text/html",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-description-proof.json",
+            "verification/amazon-discovery-2026-10-15/product-repeat.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon-product.mjs",
+            "lib/retail/amazon-retail-session.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "Independent Node process, DPAPI session reload and exact on-wire Cookie match verified. Public-session read only; no owner, renewal, complete gallery, all option offers or checkout claim."
     },
     {
       "id": "catalog.photos",
-      "title": "Read all product image URLs, sizes and variants through a validated anonymous XHR",
+      "title": "Read the complete product image gallery and all image variants",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Search-card thumbnail URLs are verified. Full gallery images, sizes and variants remain unverified because the anonymous product/v2 XHR did not return a product entity."
+      "blocker": "Observed Document image URLs, thumbnails and responsive sizes are verified separately; complete gallery and every image variant are not."
     },
     {
       "id": "catalog.options",
-      "title": "Read selectable variations and child ASIN mappings through anonymous XHR",
+      "title": "Read visible dimension labels and child-ASIN mappings from product Documents",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
-      "evidence": [],
-      "sourceEvidence": [{"files": ["references/retail-amazon-contracts.json"]}],
-      "blocker": "A twisterDimensionSlotsDefault XHR was observed once, but its exact query values and result schema were not captured or independently replayed."
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon-product.mjs",
+            "exports": [
+              "parseAmazonProductDocument"
+            ]
+          },
+          {
+            "path": "lib/retail/amazon-retail-session.mjs",
+            "exports": [
+              "getAmazonProduct"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "getAmazonProduct",
+              "asin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/amazon-product-session.test.mjs",
+          "tests/amazon-session-checklist.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "amazon-product-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/-/ko/dp/B08KT2Z93D/",
+          "mime": "text/html",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-options-proof.json",
+            "verification/amazon-discovery-2026-10-15/product-repeat.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon-product.mjs",
+            "lib/retail/amazon-retail-session.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "Independent Node process, DPAPI session reload and exact on-wire Cookie match verified. Public-session read only; no owner, renewal, complete gallery, all option offers or checkout claim."
     },
     {
       "id": "reviews.full_body",
-      "title": "Read individual full review bodies, rating and date through anonymous XHR",
+      "title": "Read individual full review bodies, ratings and dates through HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "An anonymous browser visit to a product-reviews page showed Sign in, with zero review-body nodes and no review-data XHR. Rating counts are not full review text."
+      "blocker": "Session-backed GET /product-reviews/B004YAVF8I/ returned 302 to /ap/signin. The redirect was not followed; bodies and pagination remain blocked_auth."
     },
     {
       "id": "reviews.pagination",
@@ -119,10 +468,14 @@
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "No anonymous review-body page or review pagination XHR was observed; the visited review page displayed Sign in."
+      "blocker": "Session-backed GET /product-reviews/B004YAVF8I/ returned 302 to /ap/signin. The redirect was not followed; bodies and pagination remain blocked_auth."
     },
     {
       "id": "home.dynamic_cards",
@@ -130,7 +483,11 @@
       "priority": "optional",
       "applicability": "applicable",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": [],
       "blocker": "The streaming XHR replayed but its 10 encrypted inputs came from the browser page; their engine-free acquisition is unverified, and sampled cards contained no product paths or price nodes."
@@ -140,9 +497,13 @@
       "title": "Acquire a personal Amazon login",
       "priority": "required",
       "applicability": "not_applicable",
-      "applicabilityReason": "The user requested anonymous public reads without login.",
+      "applicabilityReason": "This extension performs public shopping reads; personal account login and owner reads are outside its scope.",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": []
     },
@@ -153,7 +514,11 @@
       "applicability": "not_applicable",
       "applicabilityReason": "Personal account/profile operations are outside this anonymous public-read scope.",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": []
     },
@@ -164,7 +529,11 @@
       "applicability": "not_applicable",
       "applicabilityReason": "Cart and address writes are outside the requested read-only scope.",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": []
     },
@@ -175,7 +544,11 @@
       "applicability": "not_applicable",
       "applicabilityReason": "Ordering and messaging are outside the requested read-only scope.",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": []
     },
@@ -184,11 +557,162 @@
       "title": "Use the credentialed Associates Creators API",
       "priority": "optional",
       "applicability": "not_applicable",
-      "applicabilityReason": "Creators API requires Associates eligibility and API credentials; this request is limited to anonymous public XHR.",
+      "applicabilityReason": "No Associates API credential was supplied; current scope is observed public shopping HTTP reads.",
       "requirement": "live",
-      "implementation": {"files": [], "cli": [], "tests": []},
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
       "evidence": [],
       "sourceEvidence": []
+    },
+    {
+      "id": "catalog.observed_images",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "title": "Read image URLs and responsive dimensions present in the observed Document",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon-product.mjs",
+            "exports": [
+              "parseAmazonProductDocument"
+            ]
+          },
+          {
+            "path": "lib/retail/amazon-retail-session.mjs",
+            "exports": [
+              "getAmazonProduct"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "getAmazonProduct",
+              "asin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/amazon-product-session.test.mjs",
+          "tests/amazon-session-checklist.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "amazon-product-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/-/ko/dp/B08KT2Z93D/",
+          "mime": "text/html",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-observed_images-proof.json",
+            "verification/amazon-discovery-2026-10-15/product-repeat.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon-product.mjs",
+            "lib/retail/amazon-retail-session.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "Independent Node process, DPAPI session reload and exact on-wire Cookie match verified. Public-session read only; no owner, renewal, complete gallery, all option offers or checkout claim."
+    },
+    {
+      "id": "catalog.displayed_offer",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "title": "Read explicit displayed price and availability text from a product Document",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/amazon-product.mjs",
+            "exports": [
+              "parseAmazonProductDocument"
+            ]
+          },
+          {
+            "path": "lib/retail/amazon-retail-session.mjs",
+            "exports": [
+              "getAmazonProduct"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/retail.mjs",
+            "tokens": [
+              "getAmazonProduct",
+              "asin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/amazon-product-session.test.mjs",
+          "tests/amazon-session-checklist.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "amazon-product-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.amazon.com",
+          "path": "/-/ko/dp/B08KT2Z93D/",
+          "mime": "text/html",
+          "files": [
+            "verification/amazon-discovery-2026-10-15/catalog-displayed_offer-proof.json",
+            "verification/amazon-discovery-2026-10-15/product-repeat.json"
+          ],
+          "hashPaths": [
+            "lib/retail/amazon-product.mjs",
+            "lib/retail/amazon-retail-session.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "note": "Independent Node process, DPAPI session reload and exact on-wire Cookie match verified. Public-session read only; no owner, renewal, complete gallery, all option offers or checkout claim."
+    },
+    {
+      "id": "catalog.variant_offers",
+      "title": "Read every variant combination with its own price and stock",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/amazon-discovery-contracts-2026-10-15.json"
+          ]
+        }
+      ],
+      "blocker": "Child-ASIN maps and one different lotion scent detail are verified. Every combination and corresponding offer/stock is not."
     }
   ]
 }

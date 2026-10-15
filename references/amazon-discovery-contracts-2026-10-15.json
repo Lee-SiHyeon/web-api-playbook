@@ -1,0 +1,64 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "service": "amazon",
+  "observedAt": "2026-10-15T06:16:52.005Z",
+  "secretsPersisted": false,
+  "note": "Dated contract index. Per-operation actual execution and limits are recorded separately; source inventory alone is not live evidence.",
+  "contracts": [
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/nav/ajax/hMenuDesktopFirstLayer",
+      "browserObserved": true,
+      "independentReplay": true
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/nav/ajax/hamburgerMainContent",
+      "browserObserved": true,
+      "secondLayerInput": "derived from current first-layer JSON declaration",
+      "independentReplay": true
+    },
+    {
+      "method": "POST",
+      "origin": "https://www.amazon.com",
+      "path": "/s/query",
+      "minimalQueryFields": [
+        "k",
+        "page"
+      ],
+      "readOnly": true,
+      "independentReplay": true
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/-/ko/dp/{asin}/",
+      "browserNavigationObserved": true,
+      "browserDocumentNetworkCaptured": false,
+      "independentReplay": true,
+      "sessionProvider": "protected_store"
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/gp/product/ajax/twisterDimensionSlotsDefault",
+      "browserObserved": true,
+      "independentReplay": true,
+      "maintainedClient": false,
+      "recurringInputDerivationVerified": false
+    },
+    {
+      "method": "GET",
+      "origin": "https://www.amazon.com",
+      "path": "/product-reviews/B004YAVF8I/",
+      "independentReplay": false,
+      "httpStatus": 302,
+      "redirectPath": "/ap/signin"
+    }
+  ],
+  "evidenceDirectory": "verification/amazon-discovery-2026-10-15/",
+  "guide": "references/amazon-public-discovery-2026-10-15.md"
+}

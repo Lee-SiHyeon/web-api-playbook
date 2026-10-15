@@ -38,7 +38,8 @@
         "Category traversal and pagination",
         "Reviews and review pagination"
       ],
-      "note": "The browser tool denied site access. No alternate HTTP or browser route was attempted in this run. Sitemap changes use existing observed contracts and offline fixtures only."
+      "note": "The browser tool denied site access. No alternate HTTP or browser route was attempted in this run. Sitemap changes use existing observed contracts and offline fixtures only.",
+      "currentUserExcluded": true
     },
     {
       "service": "temu",
@@ -404,5 +405,21 @@
       "path": "/b/Electronics/bn_7000259124",
       "pending": "Observed Document is eligible for HTTP parsing once an allowed successful replay exists."
     }
-  ]
+  ],
+  "currentUserScope": {
+    "checkedAt": "2026-10-15T06:16:52.005Z",
+    "priority": [
+      "amazon"
+    ],
+    "excluded": [
+      "aliexpress"
+    ],
+    "retainedBacklog": [
+      "shein",
+      "iherb",
+      "temu"
+    ],
+    "amazonFrontier": "verification/amazon-discovery-2026-10-15/frontier.json",
+    "note": "Historical observations below are retained; exclusion prevents new AliExpress work."
+  }
 }
