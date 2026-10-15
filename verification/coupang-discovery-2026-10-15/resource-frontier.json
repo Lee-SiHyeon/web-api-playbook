@@ -187241,7 +187241,7 @@
       }
     }
   },
-  "updatedAt": "2026-10-15T02:33:19.346Z",
+  "updatedAt": "2026-10-15T04:15:20.493Z",
   "unresolvedRoutes": [
     {
       "url": "https://www.coupang.com/np/fbi",
@@ -188685,13 +188685,16 @@
   "unresolvedOperations": [
     {
       "operation": "retail_search_rsc",
-      "state": "live_replay_verified_inputs_browser_dependent",
-      "reason": "Fresh full browser Cookie header succeeds in independent Node HTTP: 200, 60 products, 60 exact DOM identity/title/price matches. Browser visitor-only and visitor-plus-Akamai subsets return 403. Reusable input/session renewal and the minimum cookie subset remain unverified.",
+      "state": "recurring_http_verified_long_lived_context_renewal_pending",
+      "reason": "Recurring Node HTTP regenerates RSC inputs and x-cp-s from the DPAPI context, including after natural 5-minute signature expiry and fresh-process restart. Opaque device-context reissuance and complete Akamai-session expiry recovery remain unverified.",
       "captureRef": "retail-rsc-capture.json",
       "replayRefs": [
         "retail-rsc-anonymous-replay.json",
         "retail-rsc-visitor-replay.json",
-        "retail-browser-cookie-comparison-live.json"
+        "retail-browser-cookie-comparison-live.json",
+        "retail-auto-renewal-expired-live.json",
+        "retail-auto-renewal-restart-live.json",
+        "retail-auto-renewal-second-query-live.json"
       ]
     },
     {
@@ -188734,9 +188737,19 @@
     "rscCaptureRef": "retail-rsc-capture.json",
     "publicOfferReadVerified": true,
     "listingDirectReplayVerified": true,
-    "listingVerificationScope": "One observed lowest-price search RSC with full browser cookies; 60 exact DOM identity/title/price matches",
+    "listingVerificationScope": "Lowest-price RSC: 12-cookie protected session, locally derived request inputs and signature renewal; 60 products after natural signature expiry and process restart",
     "browserCookieComparisonRef": "retail-browser-cookie-comparison-live.json",
     "wholeOperationBrowserIndependent": false,
-    "sessionRenewalVerified": false
+    "sessionRenewalVerified": false,
+    "recurringReadBrowserIndependent": true,
+    "signatureRenewalVerified": true,
+    "opaqueContextRenewalVerified": false,
+    "completeAkamaiSessionRenewalVerified": false,
+    "processRestartVerified": true,
+    "renewalRefs": [
+      "retail-auto-renewal-expired-live.json",
+      "retail-auto-renewal-restart-live.json",
+      "retail-auto-renewal-second-query-live.json"
+    ]
   }
 }

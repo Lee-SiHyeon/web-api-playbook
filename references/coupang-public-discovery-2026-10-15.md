@@ -52,7 +52,7 @@ npm run coupang:retail:diagnose -- --compare-403 --out=work/retail-diagnostic.js
 
 새 탭에서 CDP Network 연결을 복구하고 실제 가격순 클릭의 Fetch 요청·응답을 연결했다. 브라우저 RSC는 `h2`, `envoy`, 200 `text/x-component`였다. 쿠키 이름 관측에는 PCID와 bot-management 상태가 포함됐지만, 특정 쿠키나 TLS 특성이 성공에 필수라고 입증한 것은 아니다. 사용자 계정 로그인이 필요하다는 결론도 아니다. 기존 탭의 React #418과 paused Document 오류는 별도로 기록했다. React #418은 HTTP 상태가 아니라 서버 HTML과 클라이언트 초기 화면의 불일치를 뜻한다. [React 공식 설명](https://react.dev/errors/418).
 
-`scripts/coupang-rsc-probe.mjs`는 `_rsc`와 라우터 헤더를 포함한 관측 입력을 **stdin 메모리**로만 받는다. `--visitor` 유무 두 실행 모두 현재 403이다. `_rsc` 생성·갱신을 구현했다고 주장하지 않는다. `lib/retail/coupang-rsc.mjs`는 RSC 모델의 주요 `products` 배열만 읽고 추천 19개와 광고 추적 정보는 제외한다. 캡처 본문의 한글 디코딩 보정은 DOM 60/60 대조로 검증했으며, 직접 HTTP 파서는 받은 바이트를 UTF-8로 해석한다.
+초기 `scripts/coupang-rsc-probe.mjs`는 `_rsc`와 라우터 헤더를 포함한 관측 입력을 stdin으로 받았으며 `--visitor` 유무 두 실행은 403이었다. 후속 [HTTP 갱신 클라이언트](coupang-retail-renewal-2026-10-15.md)는 `_rsc`와 서명을 Node에서 생성한다. `lib/retail/coupang-rsc.mjs`는 RSC 모델의 주요 `products` 배열만 읽고 추천 19개와 광고 추적 정보는 제외한다. 캡처 본문의 한글 디코딩 보정은 DOM 60/60 대조로 검증했으며, 직접 HTTP 파서는 받은 바이트를 UTF-8로 해석한다.
 
 ### 브라우저 쿠키 비교 후속 검증
 
@@ -67,6 +67,8 @@ npm run coupang:retail:diagnose -- --compare-403 --out=work/retail-diagnostic.js
 `undici:request:create`에서 실제 전송된 쿠키 문자열이 입력과 같은지 메모리에서 비교했고 세 조건 모두 일치했다. 브라우저 User-Agent, TLS 지문, HTTP/2 옵션을 재현한 실험은 아니다. 쿠키와 요청 입력은 저장하지 않으며 5분의 로컬 입력 신선도 제한을 둔다. 이는 서버의 쿠키 만료 시간이라는 뜻이 아니다. 리디렉션·자동 재시도·방문자 재발급은 없다. 전체 쿠키 성공은 추가 쿠키 중 무엇이 필요한지 또는 소유자 인증이 성립했는지를 증명하지 않는다. 직접 HTTP 결과 60개는 현재 화면의 상품·item·vendor ID, 이름, 표시 가격과 모두 대조했다.
 
 기존 방문자 provider의 허용 범위를 넓히거나 수집기의 기본 쿠키 정책을 변경하지 않았다. 이 비교 runner는 입력 획득에 브라우저가 필요한 명시적 진단 경로다. 재사용 가능한 보호 저장소·쿠키 갱신·프로세스 재시작 후 복구는 이 실행에서 검증하지 않았다.
+
+후속 요청에서 공개 스크립트의 `x-cp-s` 60초 갱신·5분 만료 로직을 확인하고 독립 Node 계산으로 옮겼다. `scripts/coupang-retail-session.mjs`는 DPAPI에서 검증된 12개 쿠키 조합을 불러와 서명을 자동 갱신하고 검색 60개를 읽는다. 반복 RSC 입력도 로컬에서 생성한다. 상세한 라이브 증거와 장기 세션 갱신의 미검증 범위는 [HTTP 갱신 기록](coupang-retail-renewal-2026-10-15.md)에 있다.
 
 ## 재귀 탐색과 재개
 
@@ -89,7 +91,7 @@ npm run coupang:crawl -- --phase=travel-reviews --max=24
 | 계약 | captured | client_exists | remnant_free | credential_propagated | live_replay |
 |---|---|---|---|---|---|
 | 일반 카테고리 메뉴 JSON | true | true | true | 익명, 해당 없음 | true |
-| 일반 검색 RSC Fetch | true, 가격순 클릭의 입력·본문 | true | HTTP 전송만; 반복 입력 공급 미완료 | 전체 브라우저 쿠키의 실제 전송 일치 확인; 소유자 인증 미검증 | true, 전체 쿠키 조건에서 200·60개 |
+| 일반 검색 RSC Fetch | true, 가격순 클릭의 입력·본문 | true | 최초 인계 후 반복 입력·서명 갱신·전송 전부 HTTP/Node | DPAPI 12개 쿠키 조합의 실제 전송 일치 확인; 소유자 인증 미검증 | true, 200·60개; 장기 세션 재발급 별도 |
 | 일반 검색/카테고리 Document | 현재 요청/응답 쌍 미확보 | true | true | 계정 인증 해당 없음; 방문자 전송 확인 | false, 403 |
 | 일반 상품 offer-list | 기존 관측 계약 | true | true | 계정 인증 해당 없음; 방문자 전송 확인 | true, 정확한 SKU·비교 전후 |
 | 트래블 category Document 계열 | true | true | true | 익명, 해당 없음 | true, 처리한 자원만 |

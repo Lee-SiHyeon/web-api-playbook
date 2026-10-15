@@ -84,6 +84,38 @@ assert.equal(fullCookieRead.states.live_replay,true);assert.equal(fullCookieRead
 assert.equal(fullCookieRead.projectionSha256,hash(JSON.stringify(fullCookieRead.data)));
 assert.equal(cookieComparison.browserDomVerification.exactIdentityAndTitleMatches,60);
 assert.equal(cookieComparison.browserDomVerification.displayedPriceMatches,60);
+const renewalProofs=[];
+for(const file of ['retail-auto-renewal-expired-live.json','retail-auto-renewal-restart-live.json']) {
+ const row=await read(dir+file);
+ assert.equal(row.ok,true);assert.equal(row.executionMode,'pure_http');assert.equal(row.browserUsed,false);
+ assert.equal(row.browserUsedForInputs,false);assert.equal(row.browserUsedForRenewal,false);
+ assert.equal(row.receipt.status,200);assert.equal(row.receipt.contentType,'text/x-component');
+ assert.equal(row.receipt.requestCount,1);assert.equal(row.receipt.exactCookieHeaderSent,true);
+ assert.equal(row.states.live_replay,true);assert.equal(row.states.credential_propagated,true);
+ assert.equal(row.storage.provider,'Windows DPAPI CurrentUser');assert.equal(row.storage.stored,true);
+ assert.equal(row.data.products.length,60);assert.equal(row.projectionSha256,hash(JSON.stringify(row.data)));
+ assert.equal(row.renewal.opaqueContextRenewed,false);assert.equal(row.renewal.loginRenewed,false);
+ if(file.includes('expired')){assert.equal(row.renewal.oldExpiredAtStart,true);assert.equal(row.renewal.verifiedByRead,true);
+   assert.ok(Date.parse(row.checkedAt)>Date.parse(row.renewal.oldExpiresAt));}
+ renewalProofs.push({file:dir+file,checkedAt:row.checkedAt,status:200,products:60,signatureRenewed:row.renewal.verifiedByRead,
+   oldSignatureExpired:row.renewal.oldExpiredAtStart,cookieNames:row.receipt.outgoingCookieNames});
+}
+const lineage=await read(dir+'retail-signature-renewal-research-live.json');
+assert.equal(lineage.originalSignatureMatches,true);assert.equal(lineage.derivedRscMatches,true);
+assert.deepEqual(lineage.runs.map(r=>r.status),[200,200]);assert.equal(lineage.runs[1].cookieNames.length,12);
+const secondQuery=await read(dir+'retail-auto-renewal-second-query-live.json');
+assert.equal(secondQuery.ok,true);assert.equal(secondQuery.data.products.length,54);assert.equal(secondQuery.browserUsedForInputs,false);
+assert.equal(secondQuery.states.live_replay,true);assert.equal(secondQuery.receipt.exactCookieHeaderSent,true);
+assert.equal(secondQuery.projectionSha256,hash(JSON.stringify(secondQuery.data)));
+const finalRenewal=await read(dir+'retail-auto-renewal-final-live.json');
+assert.equal(finalRenewal.ok,true);assert.equal(finalRenewal.renewal.verifiedByRead,true);
+assert.equal(finalRenewal.states.live_replay,true);assert.equal(finalRenewal.sessionReadyAfterRead,true);
+assert.equal(finalRenewal.data.products.length,60);assert.equal(finalRenewal.projectionSha256,hash(JSON.stringify(finalRenewal.data)));
+const cookieLifetime=await read(dir+'retail-cookie-lifetime-dependency-live.json');
+assert.deepEqual(cookieLifetime.runs.map(r=>r.omitted),[null,'bm_mi','ak_bmsc','bm_sv','bm_sz','bm_so','bm_lso']);
+assert.ok(cookieLifetime.runs.every(r=>r.status===200&&r.count===60));
+assert.ok(cookieLifetime.runs.find(r=>r.omitted==='bm_sz').issued.some(c=>c.name==='bm_sz'&&c.maxAge>14000));
+assert.equal(cookieLifetime.actualCookieExpiryRecoveryVerified,false);
 const retailDiagnostics={visitorReceipt:dir+'retail-visitor-live.json',comparisonReceipt:dir+'retail-403-variants-live.json',
  visitorBootstrapStatus:200,publicOfferStatusBeforeAndAfter:[200,200],publicOfferGeneralPriceKrw:13200,
  documentVariants:diagnostic.runs.filter(x=>!x.name.startsWith('offer_')&&x.name!=='review_json').map(x=>({name:x.name,status:x.receipt.httpStatus,server:x.receipt.server})),
@@ -91,19 +123,25 @@ const retailDiagnostics={visitorReceipt:dir+'retail-visitor-live.json',compariso
  rscCapture:{file:dir+'retail-rsc-capture.json',status:200,products:60,exactDomMatches:60},rscReplays,
  browserCookieComparison:{file:dir+'retail-browser-cookie-comparison-live.json',statuses:[403,403,200],cookieCounts:[3,11,33],
    exactCookieHeadersSent:true,products:60,exactDomIdentityTitleAndPriceMatches:60,wholeOperationBrowserIndependent:false},
+ browserFreeRenewal:{proofs:renewalProofs,signatureRegenerationVerified:true,processRestartVerified:true,
+   additionalQuery:{file:dir+'retail-auto-renewal-second-query-live.json',products:54},
+   finalCodeLiveRead:{file:dir+'retail-auto-renewal-final-live.json',products:60},
+   missingCookieReissuance:{file:dir+'retail-cookie-lifetime-dependency-live.json',cookieName:'bm_sz',verified:true,wholeSessionExpiryVerified:false},
+   opaqueContextRenewalVerified:false,completeAkamaiSessionRenewalVerified:false,initialBootstrapRequiresBrowser:true},
  conclusions:['PCID bootstrap and public offer JSON work in the same identity before and after Document denials.',
  'Cookie-free, HTTP-issued visitor and browser visitor-plus-Akamai RSC replays return 403; the exact full browser cookie header succeeds with 60 products.',
- 'All 60 direct HTTP products match current DOM identities, titles and displayed prices. The necessary additional cookie subset and renewal remain unknown.']};
+ 'All 60 original full-cookie HTTP products matched DOM identities, titles and displayed prices.',
+ 'A verified 12-cookie subset plus locally regenerated x-cp-s and RSC inputs works after natural signature expiry and a fresh process. Long-lived opaque context and complete Akamai session reissuance remain unverified.']};
 // Fail without printing any value if future evidence accidentally contains runtime identifiers.
 let evidenceFiles=0;
-const sensitive=/^(?:coupangApp|pcid|uuid|memberSrl|feedId|nextPageKey|continuationToken|accessPasses?|blockId|searchId|searchGroupId|q2cId|token|session|cookie|cookieHeader|authorization|_rsc|next-router-state-tree|_abck|ak_bmsc|bm_[a-z]+|authCodeVerifier|authLoginChallenge|authLoginSessionId|CT_LSID|cf_clearance)$/i;
+const sensitive=/^(?:coupangApp|pcid|uuid|memberSrl|feedId|nextPageKey|continuationToken|accessPasses?|blockId|searchId|searchGroupId|q2cId|token|session|cookie|cookieHeader|authorization|_rsc|next-router-state-tree|x-cp-s|FP_DATA|c4|c6|_abck|ak_bmsc|bm_[a-z]+|authCodeVerifier|authLoginChallenge|authLoginSessionId|CT_LSID|cf_clearance)$/i;
 function inspect(value,shape=false){
  if(typeof value==='string'){
    if(shape)assert.ok(['string','number','boolean','null','undefined','array','object'].includes(value),'EVIDENCE_BODY_SHAPE_VALUE');
    assert.ok(!value.includes('COUPANG|PC|'),'EVIDENCE_RUNTIME_IDENTIFIER');
    assert.ok(!/eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\./.test(value),'EVIDENCE_TOKEN_PATTERN');
    assert.ok(!/[?&](?:searchId|searchGroupId|q2cId|pcid|access_token|onlinetourRT)=/i.test(value),'EVIDENCE_RUNTIME_URL');
-   assert.ok(!/(?:^|;\s*)(?:PCID|_abck|ak_bmsc|bm_[a-z]+|authCodeVerifier|authLoginChallenge|authLoginSessionId|CT_LSID|cf_clearance)=[^;\s]+/i.test(value),'EVIDENCE_COOKIE_VALUE');
+   assert.ok(!/(?:^|;\s*)(?:PCID|x-cp-s|_abck|ak_bmsc|bm_[a-z]+|authCodeVerifier|authLoginChallenge|authLoginSessionId|CT_LSID|cf_clearance)=[^;\s]+/i.test(value),'EVIDENCE_COOKIE_VALUE');
  }
  if(!value||typeof value!=='object')return;
  for(const[k,v]of Object.entries(value)){
@@ -119,13 +157,14 @@ const implementationAtVerification={};for(const file of ['lib/retail/coupang-pub
  'lib/retail/coupang-rsc.mjs','scripts/coupang-retail-diagnostic.mjs','scripts/coupang-retail-visitor-check.mjs','scripts/coupang-rsc-probe.mjs',
  'tests/coupang-retail-diagnostic.test.mjs','tests/coupang-retail-visitor.test.mjs','tests/coupang-rsc.test.mjs',
  'scripts/coupang-browser-cookie-probe.mjs','tests/coupang-browser-cookie-probe.test.mjs',
+ 'lib/retail/coupang-signature.mjs','lib/retail/coupang-retail-session.mjs','scripts/coupang-retail-session.mjs','tests/coupang-retail-session.test.mjs',
  'service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-visitor-context.mjs'])
  implementationAtVerification[file]=hash(await readFile(new URL(file,root)));
 const report={schema:'coupang-public-verification-v1',verifiedAt:new Date().toISOString(),networkUsed:false,
  verifier:'scripts/verify-coupang-public.mjs',records,blocked,crawl,retailDiagnostics,coverage:coupangCoverage(frontier),implementationAtVerification,
  evidenceAudit:{jsonFiles:evidenceFiles,runtimeIdentifierFindings:0},
  limitations:['Entire catalog is not complete. Pending resource and nested-operation frontiers are preserved.',
- 'General retail RSC direct replay succeeds with a fresh full browser cookie header: 60 DOM-matched products. Cookie-free, visitor-only and visitor-plus-Akamai variants fail. Recurring input/session renewal remains browser-dependent.',
+ 'General retail lowest-price RSC works with DPAPI cookies, locally generated inputs and signature renewal after expiry. Initial bootstrap, opaque device context reissuance and complete Akamai session expiry recovery remain separate and are not proven browser-free.',
  'Flight iframe search is not verified. Membership prices are advertised values, not verified account checkout totals.',
  'Early live receipts predate later metadata/parser repairs; implementation digests describe code at verification time.']};
 await writeFile(new URL(dir+'verification.json',root),JSON.stringify(report,null,2)+'\n');

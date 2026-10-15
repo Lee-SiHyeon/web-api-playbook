@@ -1,6 +1,6 @@
 {
   "schema": "coupang-public-verification-v1",
-  "verifiedAt": "2026-10-15T03:03:18.742Z",
+  "verifiedAt": "2026-10-15T04:18:57.624Z",
   "networkUsed": false,
   "verifier": "scripts/verify-coupang-public.mjs",
   "records": [
@@ -240,10 +240,78 @@
       "exactDomIdentityTitleAndPriceMatches": 60,
       "wholeOperationBrowserIndependent": false
     },
+    "browserFreeRenewal": {
+      "proofs": [
+        {
+          "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-expired-live.json",
+          "checkedAt": "2026-10-15T04:15:20.493Z",
+          "status": 200,
+          "products": 60,
+          "signatureRenewed": true,
+          "oldSignatureExpired": true,
+          "cookieNames": [
+            "x-coupang-target-market",
+            "x-coupang-accept-language",
+            "PCID",
+            "bm_mi",
+            "ak_bmsc",
+            "bm_sz",
+            "bm_so",
+            "bm_lso",
+            "_abck",
+            "bm_s",
+            "bm_sv",
+            "x-cp-s"
+          ]
+        },
+        {
+          "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-restart-live.json",
+          "checkedAt": "2026-10-15T04:15:27.153Z",
+          "status": 200,
+          "products": 60,
+          "signatureRenewed": false,
+          "oldSignatureExpired": false,
+          "cookieNames": [
+            "x-coupang-target-market",
+            "x-coupang-accept-language",
+            "PCID",
+            "bm_mi",
+            "ak_bmsc",
+            "bm_sz",
+            "bm_so",
+            "bm_lso",
+            "_abck",
+            "bm_s",
+            "bm_sv",
+            "x-cp-s"
+          ]
+        }
+      ],
+      "signatureRegenerationVerified": true,
+      "processRestartVerified": true,
+      "additionalQuery": {
+        "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-second-query-live.json",
+        "products": 54
+      },
+      "finalCodeLiveRead": {
+        "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-final-live.json",
+        "products": 60
+      },
+      "missingCookieReissuance": {
+        "file": "verification/coupang-discovery-2026-10-15/retail-cookie-lifetime-dependency-live.json",
+        "cookieName": "bm_sz",
+        "verified": true,
+        "wholeSessionExpiryVerified": false
+      },
+      "opaqueContextRenewalVerified": false,
+      "completeAkamaiSessionRenewalVerified": false,
+      "initialBootstrapRequiresBrowser": true
+    },
     "conclusions": [
       "PCID bootstrap and public offer JSON work in the same identity before and after Document denials.",
       "Cookie-free, HTTP-issued visitor and browser visitor-plus-Akamai RSC replays return 403; the exact full browser cookie header succeeds with 60 products.",
-      "All 60 direct HTTP products match current DOM identities, titles and displayed prices. The necessary additional cookie subset and renewal remain unknown."
+      "All 60 original full-cookie HTTP products matched DOM identities, titles and displayed prices.",
+      "A verified 12-cookie subset plus locally regenerated x-cp-s and RSC inputs works after natural signature expiry and a fresh process. Long-lived opaque context and complete Akamai session reissuance remain unverified."
     ]
   },
   "coverage": {
@@ -292,10 +360,10 @@
     "lib/retail/coupang-ontology.mjs": "b6dbc0a826b89b6184a9058122dee04dcbb2cf260cf95e0d3f3fca0501fc3f4f",
     "scripts/coupang-public.mjs": "00b186e5f92a48eb9934ed9ac8ca92d7a0c24eb1eabb09198bcd34b681bd3bba",
     "scripts/coupang-crawl.mjs": "6ee7fe1fd544b0a2ce728f1801781e6b12bda91e6378cf783440e4c9d26b1870",
-    "scripts/verify-coupang-public.mjs": "c1b9e73a71bc3959f13f505789a49e7213e6e1f0be5277317bba899e8c43d2d9",
+    "scripts/verify-coupang-public.mjs": "df8137fe03cff25af7e457f1fe5cf31cf615246977d274af7811db8e2833177f",
     "tests/coupang-public.test.mjs": "123c955309c41214958f19fe2b6c6f1fc40a905c882cf87717e6cd7c5e028754",
     "tests/coupang-frontier.test.mjs": "463f33827c800fa6a438caea3bb22828c62ce7278b63bfd3930a0d3ffd89e832",
-    "lib/retail/coupang-rsc.mjs": "f81d210d26fbf9fb00de774502cae06ccfb0a8113fce7abd8608732e4cce5404",
+    "lib/retail/coupang-rsc.mjs": "da5ce379a9092d50daabaaf63ac3f4a22d4950ac1a4b569c9acf435536a92835",
     "scripts/coupang-retail-diagnostic.mjs": "1d000b96d4d487632b3eb82adfcebc1a003dd4488d41fa551440c71b76c44a03",
     "scripts/coupang-retail-visitor-check.mjs": "0ec2015b859e60602375935d159415db88c3ca961c03f701dc3391ced663ae6e",
     "scripts/coupang-rsc-probe.mjs": "63f432f3d4d02f9a4f028732a84a52ac5c177f3204c911a8ea61559d221c7429",
@@ -304,15 +372,19 @@
     "tests/coupang-rsc.test.mjs": "5d8d093ae71147e19804681eda225909e0dab4ed928b1a0532e1fd98e9127216",
     "scripts/coupang-browser-cookie-probe.mjs": "12885aaf0a5e7d62879ba0648c1d613af537d95e649aa40574570b6676ee731b",
     "tests/coupang-browser-cookie-probe.test.mjs": "8661c5b24fc674aa8ca59f99215555664ddadac1dd004d65238c72eb53530644",
+    "lib/retail/coupang-signature.mjs": "1a660b36ed45a7857434e36a6705b4f3889f1802f650f4ae543472a5de2a94dd",
+    "lib/retail/coupang-retail-session.mjs": "0e95a5a945c79eacda5364a874ad33dc4be2d0ca439e3e0288843165c744a278",
+    "scripts/coupang-retail-session.mjs": "e92778adf648231ecef661856003c9230b9c386760f4a46ea7b81e39d390cf08",
+    "tests/coupang-retail-session.test.mjs": "07b6bbe58a705589798efef294ba33eebb2b75fccd842794937140e3be48e5a7",
     "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-visitor-context.mjs": "30cc1c74382118fcf7f5a7c6a7d1815e16fd6584e3fa9c7174c5e6562f8aaf2f"
   },
   "evidenceAudit": {
-    "jsonFiles": 260,
+    "jsonFiles": 268,
     "runtimeIdentifierFindings": 0
   },
   "limitations": [
     "Entire catalog is not complete. Pending resource and nested-operation frontiers are preserved.",
-    "General retail RSC direct replay succeeds with a fresh full browser cookie header: 60 DOM-matched products. Cookie-free, visitor-only and visitor-plus-Akamai variants fail. Recurring input/session renewal remains browser-dependent.",
+    "General retail lowest-price RSC works with DPAPI cookies, locally generated inputs and signature renewal after expiry. Initial bootstrap, opaque device context reissuance and complete Akamai session expiry recovery remain separate and are not proven browser-free.",
     "Flight iframe search is not verified. Membership prices are advertised values, not verified account checkout totals.",
     "Early live receipts predate later metadata/parser repairs; implementation digests describe code at verification time."
   ]
