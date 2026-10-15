@@ -1,0 +1,407 @@
+{
+  "schema": "other-path-audit-apps-v1",
+  "checkedAt": "2026-10-15",
+  "repositoryHead": "914e580cfe9edbea51ac320e8fce46d63759388c",
+  "method": "Read-only source, manifest, documentation, and sanitized-receipt review. No service CLI, browser, login, network request, process inspection, credential-store read, or Git mutation was performed.",
+  "registeredManifestScope": [
+    "adpick",
+    "gabia",
+    "inpock",
+    "toss-sharelink",
+    "creator-access-gaps",
+    "creator-google",
+    "creator-meta",
+    "creator-threads",
+    "creator-tiktok"
+  ],
+  "globalAuditContext": {
+    "report": "verification/playbook-audit-2026-10-15/audit.json",
+    "checkedAt": "2026-10-15T10:08:23.716Z",
+    "manifestCount": 40,
+    "capabilityCount": 378,
+    "allManifestAuditsCompleted": true,
+    "allRequiredGatesPassed": false,
+    "allReferencedFilesPresent": false,
+    "unmappedEntrypoints": 121,
+    "interpretation": "The audit evaluates registered capability manifests and separately inventories executable candidates. Unregistered means outside registered capability coverage, not necessarily unimplemented. The 121 candidate count is not a count of missing business features."
+  },
+  "findings": [
+    {
+      "service": "elevenlabs",
+      "registeredManifest": false,
+      "previousStatusIn2026Audit": "Not covered by the 40 service manifests.",
+      "maintainedExecutor": "No ElevenLabs client, CLI, or service manifest was found in this checkout. scripts/check-ai-providers.mjs is limited to Gemini and Grok.",
+      "confirmedErrors": [],
+      "unverified": [
+        "No current ElevenLabs session, options read, TTS request, audio result, or history readback is established by this repository."
+      ],
+      "classification": "Absence of an executor in this checkout; no HTTP failure or account-session failure was observed."
+    },
+    {
+      "service": "gemini-and-grok-provider-audit",
+      "registeredManifest": false,
+      "maintainedExecutor": "scripts/check-ai-providers.mjs invokes configured external provider checkouts in offline consistency mode; it rejects reports claiming current network verification.",
+      "previousEvidence": {
+        "report": "verification/ai-provider-stored-evidence-audit-2026-10-07.json",
+        "evidenceScope": "stored_receipt_consistency",
+        "currentNetworkVerified": false,
+        "strictPass": false,
+        "gemini": "0 of 15 accepted; login evidence missing and remaining features unresolved.",
+        "grok": "2 of 18 accepted; remaining evidence incomplete."
+      },
+      "confirmedErrors": [],
+      "unverified": [
+        "No live provider calls or current session status were checked in this audit.",
+        "The configured external checkout paths were not opened."
+      ],
+      "classification": "The strict failure is incomplete stored evidence from an offline audit, not a provider 403 or a live login failure."
+    },
+    {
+      "service": "linkprice",
+      "registeredManifest": false,
+      "maintainedExecutor": {
+        "cli": "scripts/web-login.mjs linkprice <operation>",
+        "client": "lib/web-auth/linkprice.mjs",
+        "capabilities": [
+          "Direct HTTP login, ensure/refresh, protected health and owner read, registered sites, merchants and subscriptions; guarded link/apply/site operations are documented."
+        ]
+      },
+      "previousEvidence": {
+        "receipt": "verification/linkprice-login-2026-09-24.json",
+        "checkedAt": "2026-09-25T01:08:08Z",
+        "outcomes": [
+          "Fresh HTTP password login succeeded.",
+          "Protected account_id owner read returned HTTP 200.",
+          "A separate process reused the stored session and verified the owner.",
+          "Registered-sites read returned one record."
+        ],
+        "unverifiedBranches": [
+          "Observed server expiry recovery",
+          "Forced revocation recovery",
+          "Additional challenge branch"
+        ]
+      },
+      "confirmedErrors": [],
+      "unverified": [
+        "No current session or credential readiness was checked on 2026-10-15."
+      ],
+      "classification": "This is a prepared direct-HTTP executor with dated successful evidence, omitted from registered manifest coverage. Documentation distinguishes expired-token JSON returned with HTTP 200 from AUTH_FORBIDDEN and AUTH_THROTTLED."
+    },
+    {
+      "service": "myrealtrip",
+      "registeredManifest": false,
+      "maintainedExecutor": {
+        "cli": "scripts/myrealtrip.mjs",
+        "client": "service-packs/affiliate/apps/affiliate-api-hub/adapters/myrealtrip-marketing.mjs",
+        "auth": "lib/web-auth/myrealtrip.mjs",
+        "workflow": "lib/myrealtrip-link-flow.mjs",
+        "route": "Observed web-partner HTTP route; root CLI does not automatically select the separately documented official Partner API route."
+      },
+      "previousEvidence": {
+        "receipt": "verification/myrealtrip-flow-2026-10-05.json",
+        "checkedAt": "2026-10-04T23:19:29.547Z",
+        "outcomes": [
+          "Password plus email OTP login, protected owner match, DPAPI CurrentUser provider, and fresh-process health were recorded.",
+          "A createLink POST and short-link destination/attribution verification were recorded as pure HTTP.",
+          "A separate reuse operation reported writeAttempted=false."
+        ],
+        "laterReceipt": "verification/myrealtrip-link-readback-2026-10-11.json",
+        "laterReceiptMeaning": "Anonymous GET of an existing short link; no credentials, no write, manual redirect stop at HTTP 301."
+      },
+      "confirmedErrors": [],
+      "unverified": [
+        "Current owner/session readiness and current commissions were not checked.",
+        "The 2026-10-11 anonymous readback does not establish a current login or new link issuance.",
+        "The documented official /v1/mylink endpoint is not the root CLI's implemented route."
+      ],
+      "classification": "A maintained executor and historical end-to-end proof exist; the newer 301 receipt is read-only and must not be presented as new authenticated success."
+    },
+    {
+      "service": "adpick",
+      "registeredManifest": true,
+      "auditStatus": {
+        "auth.owner_key": "unimplemented",
+        "malls.read": "blocked",
+        "products.search": "blocked",
+        "products.best": "blocked",
+        "affiliate.exact_link_readback": "unimplemented",
+        "data.rights_eligibility": "unimplemented",
+        "reporting.conversion": "unimplemented"
+      },
+      "maintainedExecutor": {
+        "readClient": "lib/commerce/adpick-shoppingmate.mjs",
+        "cli": "scripts/adpick-read.mjs"
+      },
+      "blocker": "No authorized API key/account approval or live business replay. The blocker concerns account/key preparation; the read client and synthetic tests exist.",
+      "confirmedErrors": [],
+      "unverified": [
+        "Live merchant eligibility, product read, affiliate link issuance, rights, and conversion reporting."
+      ],
+      "classification": "Do not treat the noted Google-browser rejection as an Adpick API 403; no Adpick API response was observed."
+    },
+    {
+      "service": "gabia",
+      "registeredManifest": true,
+      "auditStatus": {
+        "auth.owner": "recorded_live",
+        "domains.read": "recorded_live",
+        "dns.records.read": "recorded_live",
+        "auth.google_login": "unimplemented",
+        "auth.session_renewal": "unimplemented",
+        "domains.pagination": "unimplemented",
+        "dns.records.write": "source_candidate",
+        "dns.public_recursive_check": "code_inventory",
+        "dns.record_plan.prepare": "code_inventory",
+        "web.https_reachability": "code_inventory"
+      },
+      "maintainedExecutor": {
+        "authenticatedReader": "lib/gabia-read.mjs",
+        "cli": "scripts/gabia-read.mjs",
+        "publicChecks": "lib/gabia-dns.mjs"
+      },
+      "previousEvidence": "Sanitized owner, target-domain, and DNS reads dated 2026-10-08. The target domain was found on page 1; full account pagination was not verified.",
+      "confirmedErrors": [
+        "A supplemental public HTTPS check returned HTTP 429 with unknown cause; this is not a Gabia authentication result."
+      ],
+      "unverified": [
+        "No current Gabia session, UI login, automatic renewal, or full pagination was checked.",
+        "No durable pure-HTTP DNS writer exists; the observed native-UI write is not API-write completion."
+      ],
+      "classification": "Read execution is present and historically live; Google login/session acquisition and renewal are correctly separate missing capabilities."
+    },
+    {
+      "service": "inpock",
+      "registeredManifest": true,
+      "auditStatus": {
+        "auth.login": "needs_reverification",
+        "auth.owner": "needs_reverification",
+        "auth.reuse": "needs_reverification",
+        "profile.read": "needs_reverification",
+        "cards.read": "needs_reverification",
+        "cards.create": "needs_reverification",
+        "publishing.public_rendering": "needs_reverification",
+        "profile.edit": "pending_live",
+        "affiliate.workflow": "pending_live",
+        "categories.contract": "scope_unknown",
+        "cards.update": "source_candidate",
+        "media.upload": "source_candidate"
+      },
+      "maintainedExecutor": {
+        "authAndCli": "lib/web-auth/inpock.mjs and scripts/inpock.mjs",
+        "readers": "lib/inpock-read.mjs and lib/inpock-profile.mjs",
+        "writer": "lib/inpock-write.mjs"
+      },
+      "previousEvidence": [
+        "2026-10-04 login/runner receipts recorded password login, protected owner match, and separate-process session reuse.",
+        "2026-10-05 profile receipt covered GET/preview/unchanged request with zero write attempts.",
+        "2026-10-05 publication proof covered one simple public link card."
+      ],
+      "confirmedErrors": [],
+      "unverified": [
+        "The 2026-10-15 offline audit says needs_reverification; this is not a current server failure or proof of logout.",
+        "Current session state was not checked.",
+        "Broader collections/card-management/content/media executor references include missing files such as lib/inpock-card-management.mjs, lib/inpock-collections.mjs, lib/inpock-content.mjs, and lib/inpock-media.mjs; do not count those capabilities as prepared executors."
+      ],
+      "classification": "A narrow executor and historical live proofs exist. The wider source-candidate surface remains unimplemented or unverified; 403/429/server/network failures are documented as distinct from session renewal."
+    },
+    {
+      "service": "toss-sharelink",
+      "registeredManifest": true,
+      "auditStatus": {
+        "auth.owner_curation": "verified_local",
+        "auth.login_once": "verified_local"
+      },
+      "maintainedExecutor": {
+        "client": "lib/web-auth/toss/",
+        "operations": "Protected owner/health GETs and a scoped HTTP login flow; this pack does not issue Sharelink links."
+      },
+      "previousEvidence": {
+        "sourceCheckoutLogin": "verification/toss-web-login-live-2026-10-07.json recorded HTTP 200 and owner match after one login POST, but playbookImplementationLiveVerified=false for that source revision.",
+        "currentPlaybookEnsure": "verification/toss-web-login-cli-live-2026-10-07.json recorded a fresh playbook CLI ensure, protected owner match and HTTP 200; loginAttempted=false and loginPostCount=0."
+      },
+      "confirmedErrors": [],
+      "unverified": [
+        "No current 2026-10-15 session check was made.",
+        "A stored-session ensure is not evidence of a fresh password login."
+      ],
+      "classification": "The 10/15 verified_local status and 10/07 ensure are bounded evidence; neither should be restated as a current login POST or Sharelink issuance capability."
+    },
+    {
+      "service": "creator-access-gaps",
+      "registeredManifest": true,
+      "auditStatus": {
+        "youtube.chart": "source_candidate",
+        "naver.shopping": "blocked",
+        "naver.datalab": "source_candidate",
+        "naver.advisor": "source_candidate"
+      },
+      "maintainedExecutor": "The Naver Shopping Insight client is under service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/naver-shopping-insight.mjs.",
+      "confirmedErrors": [
+        "Current bootstrap emitted NNB but omitted required BUC; the direct endpoint responded HTTP 200 HTML, not ranking JSON."
+      ],
+      "unverified": [
+        "No account or DPAPI login is required for this public ranking path.",
+        "YouTube/DataLab/Advisor credentials, current providers, and live business replay remain unverified."
+      ],
+      "classification": "The Naver Shopping blocker is an anonymous bootstrap/response-contract problem, not an account login failure or server 403."
+    },
+    {
+      "service": "creator-google",
+      "registeredManifest": true,
+      "auditStatus": {
+        "rss.public": "pending_live",
+        "rss.cn": "blocked"
+      },
+      "maintainedExecutor": "fetchGoogleTrending in service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs.",
+      "previousEvidence": {
+        "receipt": "verification/creator-public-data-2026-10-11.json",
+        "nativeKR": "HTTP 200 RSS XML with 10 keyword items.",
+        "documentation": "The checklist explicitly says pending_live is a typed evidence-validator gap, not missing replay."
+      },
+      "confirmedErrors": [
+        "The CN feed returned HTTP 400 HTML; this does not establish zero trends or a login problem."
+      ],
+      "unverified": [
+        "Rank semantics, fixed aggregation period, and official documentation provenance."
+      ],
+      "classification": "Do not interpret pending_live as no successful KR replay; do not promote the receipt to a broader market or documented-contract claim."
+    },
+    {
+      "service": "creator-meta",
+      "registeredManifest": true,
+      "auditStatus": {
+        "publication.public": "source_candidate",
+        "categories.public": "source_candidate"
+      },
+      "previousEvidence": "The 2026-10-11 public-data web replay includes three Meta observations; it is not a persisted collector or account-authorized provider proof.",
+      "confirmedErrors": [],
+      "unverified": [
+        "A maintained live collector, durable contract, account token provider, and current replay."
+      ],
+      "classification": "Source-candidate status is not equivalent to a prepared Meta executor or to a live provider failure."
+    },
+    {
+      "service": "creator-threads",
+      "registeredManifest": true,
+      "auditStatus": {
+        "profile.public": "pending_live",
+        "keyword.public": "source_candidate"
+      },
+      "maintainedExecutor": "service-packs/threads/threads-xhr.mjs, threads-public.mjs, and session-vault.mjs implement the bounded public profile read.",
+      "previousEvidence": "The native pack documents HTTP 200 text/javascript JSON with five official public posts via an anonymous session cookie; this is not protected owner authentication. A separate 2026-10-11 web replay also included five candidates with credentialProvider=none and zero database writes.",
+      "confirmedErrors": [],
+      "unverified": [
+        "The automatic public-read validator currently excludes the anonymous session cookie, so profile.public remains pending_live despite the recorded replay.",
+        "The approved keyword-search token provider and keyword/national-search replay."
+      ],
+      "classification": "A maintained public profile executor and dated replay exist. Its anonymous session cookie is not owner authentication, and the typed evidence gate explains pending_live; this does not mean no HTTP response was obtained."
+    },
+    {
+      "service": "creator-tiktok",
+      "registeredManifest": true,
+      "auditStatus": {
+        "video.preview": "source_candidate",
+        "hashtag.preview": "source_candidate",
+        "filter.config": "source_candidate"
+      },
+      "previousEvidence": "The 2026-10-11 web replay includes eight TikTok candidate results, separate from the native manifest evidence.",
+      "confirmedErrors": [
+        "A captured TikTok response can be HTTP 200 while its application payload reports BaseResp.StatusCode 50000 or lacks the ranking index; it must not be treated as valid ranked results."
+      ],
+      "unverified": [
+        "A maintained, enabled collector and accepted application-level ranking response."
+      ],
+      "classification": "The manifest does not claim a working collector; outer HTTP success is not equivalent to valid provider data."
+    },
+    {
+      "service": "social-x",
+      "registeredManifest": false,
+      "maintainedExecutor": {
+        "client": "service-packs/social-x/src/client.mjs",
+        "sessionProvider": "service-packs/social-x/src/provider.mjs",
+        "handoffRunner": "service-packs/social-x/scripts/session-run.mjs",
+        "operations": [
+          "UserByScreenName",
+          "UserOriginalsTimeline",
+          "TweetDetail",
+          "CreateTweet"
+        ]
+      },
+      "previousEvidence": {
+        "receipt": "service-packs/social-x/docs/live-verification-20260922.md",
+        "outcomes": "Named X profile/timeline reads, a create, and exact TweetDetail readback succeeded over independent Node HTTP in that 2026-09-22 run.",
+        "boundary": "Session capture/browser bootstrap remains required; server-directed renewal, unattended restarts, and independent transaction-ID generation remain unverified."
+      },
+      "classificationRisk": "The original code mapped both HTTP 401 and 403 to AUTH_REJECTED; the bounded follow-up change now classifies 401 as AUTH_REJECTED and 403 as ACCESS_BLOCKED. No current failed response was observed in the cited successful run.",
+      "confirmedErrors": [],
+      "unverified": [
+        "No current X session was checked.",
+        "No current live replay was performed."
+      ],
+      "classification": "This is a prepared executor with dated narrow live success, not a current-session guarantee; preserve 403 separately from session bootstrap conclusions."
+    },
+    {
+      "service": "naver-blog",
+      "registeredManifest": false,
+      "maintainedExecutor": {
+        "reader": "service-packs/naver/scripts/cli.mjs and service-packs/naver/apps/naver-blog-api/scripts/read-discovery.mjs",
+        "publisher": "service-packs/naver/apps/naver-blog-api/scripts/publisher-direct.mjs",
+        "sessionTools": "service-packs/naver/apps/naver-blog-api/scripts/"
+      },
+      "previousEvidence": {
+        "readerInventory": "service-packs/naver/references/implemented-operations.json contains 55 dated read-operation records, including HTTP-live records from 2026-09-13.",
+        "importBoundary": "service-packs/naver/README.md says the repository import did not rerun live login or publishing tests."
+      },
+      "confirmedErrors": [],
+      "unverified": [
+        "No current Naver account/session state was checked.",
+        "The creator-access-gaps manifest covers public Shopping Insight, DataLab, Advisor, and YouTube source candidates; it is not the Naver Blog publisher checklist."
+      ],
+      "classification": "A maintained reader/publisher exists outside the registered capability manifests. Its older operation receipts are not current authentication or publication proof."
+    },
+    {
+      "service": "tistory",
+      "registeredManifest": false,
+      "maintainedExecutor": {
+        "cli": "service-packs/tistory/scripts/cli.mjs",
+        "httpClient": "service-packs/tistory/scripts/client.mjs and service-packs/tistory/lib/",
+        "auth": "Observed first-party HTTP session check and saved-Kakao-account renewal path."
+      },
+      "errorClassification": {
+        "TISTORY_REAUTH_REQUIRED": "Tistory session rejected or expired.",
+        "TISTORY_KAKAO_REAUTH_REQUIRED": "Saved Kakao login rejected or interactive reauthentication required.",
+        "TISTORY_ACCESS_DENIED": "403 access denied, distinct from session reauthentication.",
+        "TISTORY_PROVIDER_MISSING": "Session provider unavailable, not proof that stored credentials are invalid."
+      },
+      "confirmedErrors": [],
+      "unverified": [
+        "No current DPAPI/provider readiness or Tistory session was read.",
+        "Historical read/write receipts and XHR shape catalogs do not establish current authentication or write success."
+      ],
+      "classification": "Prepared API-only operations exist outside manifest coverage. The code and docs distinguish missing provider, session expiry, Kakao reauthentication, and HTTP 403."
+    }
+  ],
+  "crossCuttingFindings": [
+    "The 10/15 aggregate audit is a manifest and static-executor inventory, not a current service login sweep.",
+    "Prepared direct executors omitted from the nine-manifest set include LinkPrice, MyRealTrip, X, Naver Blog, and Tistory. Missing manifest membership should not be normalized to unimplemented.",
+    "Historical live receipts should be quoted with operation, timestamp, execution path, and their limited scope; they do not establish current sessions.",
+    "The X 401/403 classifier risk found in the original worktree was corrected locally: 401 maps to AUTH_REJECTED, 403 to ACCESS_BLOCKED. This is code-contract evidence only; no current remote authentication failure was observed."
+  ],
+  "boundedFollowupFix": {
+    "files": [
+      "service-packs/social-x/src/client.mjs",
+      "service-packs/social-x/test/client.test.mjs",
+      "service-packs/social-x/README.md"
+    ],
+    "statusAndMime": "HTTP response status and MIME are retained in direct error receipts and through the publish wrapper/journal.",
+    "sideEffects": "No credential deletion or renewal was introduced. Failed CreateTweet remains unknown_needs_review with no retry; the original ACCESS_BLOCKED response receipt is retained.",
+    "verification": "node --test test/client.test.mjs: 12 passed; node --check src/client.mjs passed. Mock responses only.",
+    "currentRemoteAuthFailureObserved": false
+  },
+  "rustBrowserFixture": {
+    "report": "verification/playbook-audit-2026-10-15/browser-fixture.json",
+    "documentation": "references/playbook-audit.md",
+    "currentFinding": "Canary and Stable first open about:blank failed with outcome_unknown; the Canary close diagnostic also records outcome_unknown, socketError 10060, exitCode 1. productionSitesTested is 0 and fixture steps are 0.",
+    "scope": "This is a failed isolated agent-browser Rust runner session. The docs separately record a successful existing Chrome extension/CDP Coupang RSC HTTP 200. It does not prove that all Chrome or CDP access is unavailable."
+  }
+}

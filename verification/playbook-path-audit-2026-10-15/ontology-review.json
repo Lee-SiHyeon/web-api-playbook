@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-15T13:07:10.745Z",
+  "runner": "current Windows Node 24 runner",
+  "mode": "pure_http_anonymous",
+  "scope": "One current bounded anonymous operation per service; default notice bounds 12 rows, 1 page, 1 detail; MOLIT explicitly selected; Yanolja one normal search plus one distinct-keyword low-level diagnostic; ModeTour 1 recommendation detail.",
+  "auditSnapshot": {
+    "checkedAt": "2026-10-15T09:33:24.562Z",
+    "verifier": "scripts/verify-live.mjs",
+    "overallOk": false
+  },
+  "services": {
+    "yanoljaSearch": {
+      "priorAudit": {
+        "status": null,
+        "error": "YANOLJA_SEARCH_SCHEMA_INVALID",
+        "httpStatus": null
+      },
+      "currentPrimary": {
+        "operation": "observed q-only HTML Document keyword search",
+        "queryKey": "q",
+        "keyword": "Gangneung (강릉)",
+        "outcome": "error",
+        "code": "YANOLJA_SEARCH_SCHEMA_INVALID",
+        "effectiveStatusEvidence": {
+          "status": 200,
+          "mime": "text/html",
+          "basis": "client code passed its status/MIME contract guard before `validateItems` threw; exception did not carry response metadata"
+        },
+        "endpoint": {
+          "origin": "https://nol.yanolja.com",
+          "path": "/discovery/list/search/PRODUCT_CATEGORY_KOREA_ACCOMMODATION"
+        },
+        "parserResult": "parsed cards existed; validation rejected the operation after response parsing",
+        "assessment": "real query-level client validation failure; does not establish site-wide outage or HTTP rejection",
+        "domSchemaInspection": {
+          "checkedAt": "2026-10-15T13:03:42.930Z",
+          "verdict": "parsed",
+          "status": 200,
+          "mime": "text/html",
+          "sourceCardCount": 8,
+          "oldTitleAriaLabelCardCount": 0,
+          "oldFallbackOneCardCount": 0,
+          "oldFallbackTwoCardCount": 0,
+          "observedTitleSelector": "span.line-clamp-2.typography-subtitle-16-bold",
+          "observedTitleSelectorCardCount": 8,
+          "rawBodyPersisted": false,
+          "titleTextLogged": false,
+          "cookiesLogged": false
+        }
+      },
+      "currentDiagnostic": {
+        "verdict": "parsed_html",
+        "status": 200,
+        "mime": "text/html",
+        "bytes": 396896,
+        "path": "/discovery/list/search/PRODUCT_CATEGORY_KOREA_ACCOMMODATION",
+        "responseKeywordMatchesRequest": true,
+        "returnedKeywordLength": 2,
+        "parsedTotalCount": 1465,
+        "cardCount": 8,
+        "pricedCardCount": 8
+      },
+      "judgment": "The pre-fix one-query failure was a real client schema error, not site unavailability. The earlier one-card hypothesis was not confirmed: all 8 current cards matched the observed product-name span while the old selectors matched none. After binding the parser to that observed title DOM, the same maintained 강릉 request returned 200 text/html with 8 valid titled cards and 0 exclusions; coverage remains page 1 only.",
+      "currentBeforeParserFix": {
+        "operation": "maintained collectLive(yanolja-search, [강릉])",
+        "checkedAt": "2026-10-15T13:02:28.386Z",
+        "verdict": "error",
+        "code": "YANOLJA_SEARCH_SCHEMA_INVALID",
+        "response": {
+          "status": 200,
+          "mime": "text/html"
+        },
+        "schemaValidation": {
+          "sourceItemCount": 8,
+          "validItemCount": 0,
+          "excludedInvalidItemCount": 8,
+          "invalidReasons": {
+            "title_missing": 8
+          }
+        },
+        "rawBodyPersisted": false,
+        "cookiesLogged": false
+      },
+      "currentAfterParserFix": {
+        "operation": "maintained collectLive(yanolja-search, [강릉])",
+        "checkedAt": "2026-10-15T13:07:10.745Z",
+        "verdict": "usable_html",
+        "response": {
+          "status": 200,
+          "mime": "text/html"
+        },
+        "request": {
+          "method": "GET",
+          "origin": "https://nol.yanolja.com",
+          "path": "/discovery/list/search/PRODUCT_CATEGORY_KOREA_ACCOMMODATION",
+          "queryNames": [
+            "q"
+          ]
+        },
+        "parserEvidence": {
+          "titleSelector": "span.line-clamp-2.typography-subtitle-16-bold",
+          "titleValidCount": 8,
+          "sourceCardCount": 8
+        },
+        "schemaValidation": {
+          "sourceItemCount": 8,
+          "validItemCount": 8,
+          "excludedInvalidItemCount": 0,
+          "invalidReasons": {},
+          "pricedItemCount": 8,
+          "discountedItemCount": 6
+        },
+        "coverage": {
+          "page": 1,
+          "totalPages": 45,
+          "fetchedPages": [
+            1
+          ],
+          "paginationReplayed": false,
+          "pageTwoStatus": "not requested; page request contract not captured",
+          "schemaPartial": false,
+          "schemaPartialReasons": [],
+          "completeCatalog": false
+        },
+        "liveReplay": true,
+        "rawBodyPersisted": false,
+        "cookiesLogged": false,
+        "coverageAnnotation": {
+          "updatedAt": "2026-10-15T13:11:32.000Z",
+          "mode": "offline annotation only",
+          "replayEvidenceCheckedAt": "2026-10-15T13:07:10.745Z",
+          "httpRequestMade": false
+        }
+      }
+    },
+    "modetourPackages": {
+      "priorAudit": {
+        "verdict": "usable_limited",
+        "recommendationCount": 10,
+        "productCount": 1,
+        "detailCount": 1,
+        "requestCount": 3,
+        "requests": [
+          {
+            "method": "GET",
+            "origin": "https://www.modetour.com",
+            "pathname": "/package/overseas",
+            "status": 200
+          },
+          {
+            "method": "GET",
+            "origin": "https://b2c-api.modetour.com",
+            "pathname": "/Package/GetRecommendedProduct",
+            "status": 200
+          },
+          {
+            "method": "GET",
+            "origin": "https://b2c-api.modetour.com",
+            "pathname": "/Package/GetProductMasterByIds",
+            "status": 200
+          }
+        ],
+        "contractSourceObserved": true,
+        "anonymousSdkContextPropagated": true,
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "remnant_free_scope": "recurring_http_without_browser_engine",
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "current": {
+        "verdict": "usable_limited",
+        "counts": {
+          "recommendations": 10,
+          "matchingProducts": 1,
+          "liveDetails": 1
+        },
+        "requestCount": 3,
+        "requests": [
+          {
+            "method": "GET",
+            "origin": "https://www.modetour.com",
+            "pathname": "/package/overseas",
+            "status": 200,
+            "contentType": "text/html"
+          },
+          {
+            "method": "GET",
+            "origin": "https://b2c-api.modetour.com",
+            "pathname": "/Package/GetRecommendedProduct",
+            "status": 200,
+            "contentType": "application/json"
+          },
+          {
+            "method": "GET",
+            "origin": "https://b2c-api.modetour.com",
+            "pathname": "/Package/GetProductMasterByIds",
+            "status": 200,
+            "contentType": "application/json"
+          }
+        ],
+        "scope": "Public recommendation feed, one destination match and one product-master detail",
+        "credential": "anonymous first-party context and SDK-derived header",
+        "liveReplay": true
+      },
+      "judgment": "Prior limited verdict remains supported by current direct HTTP replay."
+    },
+    "policyBriefing": {
+      "priorAudit": {
+        "status": "read",
+        "count": 12,
+        "error": null,
+        "registeredBlocked": false,
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "remnant_free_scope": "recurring_http_without_browser_engine",
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "current": {
+        "status": "read",
+        "ok": true,
+        "count": 12,
+        "requests": [
+          {
+            "method": "GET",
+            "url": null,
+            "finalUrl": null,
+            "status": 200,
+            "mime": "text/html",
+            "error": null
+          },
+          {
+            "method": "GET",
+            "url": null,
+            "finalUrl": null,
+            "status": 200,
+            "mime": "text/html",
+            "error": null
+          }
+        ],
+        "scope": "one list page and one detail",
+        "liveReplay": true
+      },
+      "judgment": "Prior read verdict remains supported by current HTML list/detail responses."
+    },
+    "shNotices": {
+      "priorAudit": {
+        "status": "partial",
+        "count": 10,
+        "error": null,
+        "registeredBlocked": false,
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "remnant_free_scope": "recurring_http_without_browser_engine",
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "current": {
+        "status": "partial",
+        "ok": true,
+        "count": 10,
+        "requests": [
+          {
+            "method": "GET",
+            "url": null,
+            "finalUrl": null,
+            "status": 200,
+            "mime": "text/html",
+            "error": null
+          },
+          {
+            "method": "GET",
+            "url": null,
+            "finalUrl": null,
+            "status": 302,
+            "mime": "text/html",
+            "error": null
+          },
+          {
+            "method": "GET",
+            "url": null,
+            "finalUrl": null,
+            "status": 200,
+            "mime": "text/html",
+            "error": null
+          },
+          {
+            "method": "GET",
+            "url": null,
+            "finalUrl": null,
+            "status": 200,
+            "mime": "text/html",
+            "error": null
+          },
+          {
+            "method": "POST",
+            "url": null,
+            "finalUrl": null,
+            "status": 200,
+            "mime": "text/html",
+            "error": null
+          }
+        ],
+        "scope": "one list page, one detail; result intentionally partial at default detail sample limit",
+        "liveReplay": true
+      },
+      "judgment": "Partial is accurate; it denotes bounded detail coverage, and usable list/detail reads are confirmed."
+    },
+    "molitNotices": {
+      "priorAudit": {
+        "status": "skipped",
+        "count": 0,
+        "error": "MOLIT_PUBLIC_REDIRECT_BLOCKED",
+        "registeredBlocked": true,
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "remnant_free_scope": "recurring_http_without_browser_engine",
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": false
+      },
+      "priorPackReceipt": {
+        "checkedAt": "2026-10-14T15:59:52.172Z",
+        "status": "skipped",
+        "httpStatus": null
+      },
+      "current": {
+        "status": "redirect_blocked",
+        "ok": false,
+        "count": 0,
+        "requests": [
+          {
+            "method": "GET",
+            "origin": null,
+            "pathname": null,
+            "status": 307,
+            "contentType": null
+          }
+        ],
+        "scope": "explicit one-page anonymous request to the registered Document seed",
+        "liveReplay": false
+      },
+      "judgment": "Expected default skip was correctly labeled registeredBlocked; explicit current read independently returns HTTP 307 with no usable body, so the blocked verdict is supported."
+    },
+    "publicNoticesAggregate": {
+      "priorAudit": {
+        "ok": true,
+        "snapshotComplete": false
+      },
+      "current": {
+        "status": "partial",
+        "snapshotComplete": false,
+        "requestedSources": [
+          "policy-briefing",
+          "sh-notices"
+        ],
+        "skipped": [
+          "molit-notices"
+        ],
+        "partialSources": [
+          "sh-notices"
+        ]
+      },
+      "judgment": "Aggregate ok with snapshotComplete=false is intentional bounded/partial completion, not a complete snapshot claim."
+    }
+  },
+  "overallAssessment": "The Yanolja schema-invalid verdict before the parser fix reflected title-selector drift across all 8 returned cards, not an HTTP rejection or a one-card anomaly. The same maintained query now replays as usable_html with 8 valid cards and page-one-only coverage. ModeTour, Policy Briefing, SH, and MOLIT judgments remain bounded to their current direct HTTP evidence; no broader coverage is claimed.",
+  "reportUpdatedAt": "2026-10-15T13:11:32.000Z",
+  "reportUpdate": {
+    "kind": "offline_coverage_label_annotation",
+    "httpRequestMade": false,
+    "replayEvidenceCheckedAt": "2026-10-15T13:07:10.745Z",
+    "note": "This historical replay predates the coverage label rename. The former partial flag described schema exclusions only; schemaPartial and completeCatalog were corrected offline, with no new HTTP observation."
+  }
+}

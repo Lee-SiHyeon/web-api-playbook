@@ -1,0 +1,793 @@
+{
+  "schema": "web-api-retail-path-audit-v1",
+  "auditedAt": "2026-10-15T13:17:43.573Z",
+  "repository": {
+    "head": "914e580cfe9edbea51ac320e8fce46d63759388c",
+    "trackedFilesChangedByThisAudit": [
+      "checklists/services/rakuten-ichiba.json",
+      "checklists/services/yahoo-shopping-jp.json",
+      "scripts/verify-japan-retail.mjs",
+      "scripts/verify-amazon-expansion.mjs",
+      "lib/recorded-evidence-provenance.mjs",
+      "tests/recorded-evidence-provenance.test.mjs"
+    ],
+    "historicalProofBytesOrRecordedAtChanged": false
+  },
+  "scope": {
+    "services": [
+      "amazon",
+      "amazon-partner",
+      "rakuten-ichiba",
+      "rakuten-advertising",
+      "yahoo-shopping-jp",
+      "ebay",
+      "ebay-partner",
+      "shopify",
+      "shopify-storefronts"
+    ],
+    "excluded": [
+      "aliexpress"
+    ],
+    "mode": "read-only; no login, browser bootstrap, cookie extraction, affiliate issuance, or write operations",
+    "secretHandling": "No credentials, raw headers, tokens, cookies, or full response bodies included.",
+    "protectedCredentialValuesRead": false,
+    "liveRequestsExecuted": 0,
+    "liveRequestsExecutedMeaning": "No new service requests were sent in the report-correction turn. The attached samples are prior same-day runs, not replays from this audit turn.",
+    "priorSampleSource": "verification/playbook-audit-2026-10-15/live-samples.json",
+    "samplesReplayedInThisAudit": false
+  },
+  "freshnessRevalidation": {
+    "japan": {
+      "status": "historical_recorded_evidence_revalidated",
+      "checkedAt": "2026-10-15T13:12:51.737Z",
+      "recordedAt": "2026-10-15T08:03:40.504Z",
+      "networkUsed": false,
+      "runtimeImplementationHashesMatched": true,
+      "evidenceHashesMatched": true,
+      "currentEvidenceValidation": true,
+      "verifiedExecutions": 15,
+      "searchPages": 3,
+      "searchRows": 150,
+      "uniqueSearchProducts": 148,
+      "historicalReviewCount": 60,
+      "historicalReviewPages": 2,
+      "requiredDirectCapabilities": {
+        "rakutenIchiba": 6,
+        "yahooShoppingJp": 5
+      },
+      "priorFreshnessDiagnosis": "11 proofs (Rakuten 6, Yahoo 5) were marked stale solely because lib/capability-checklist.mjs changed; no runtime HTTP client hash or artifact hash differed.",
+      "repair": "Removed only lib/capability-checklist.mjs and scripts/verify-japan-retail.mjs from the Japan public-read evidence hashPaths. The standalone verifier reports those exact files as historical verification-tool provenance and continues validating every historical artifact, recorded proof schema, identity, counts and scope.",
+      "verificationToolProvenance": [
+        {
+          "path": "lib/capability-checklist.mjs",
+          "kind": "evidence_validator",
+          "status": "historical_tool_changed"
+        },
+        {
+          "path": "scripts/verify-japan-retail.mjs",
+          "kind": "offline_verifier",
+          "status": "historical_tool_changed"
+        }
+      ],
+      "liveState": "not_checked",
+      "replayedInThisAudit": false,
+      "verificationMode": "offline recorded-evidence validation"
+    },
+    "amazon": {
+      "status": "historical_recorded_evidence_revalidated",
+      "checkedAt": "2026-10-15T13:12:44.893Z",
+      "recordedAt": "2026-10-15T06:16:52.005Z",
+      "networkUsed": false,
+      "runtimeImplementationHashesMatched": true,
+      "evidenceHashesMatched": true,
+      "currentEvidenceValidation": true,
+      "historicallyVerifiedCapabilities": [
+        "catalog.navigation",
+        "catalog.search",
+        "catalog.pagination",
+        "catalog.product",
+        "catalog.description",
+        "catalog.options",
+        "catalog.observed_images",
+        "catalog.displayed_offer"
+      ],
+      "requiredGaps": [
+        "catalog.categories",
+        "catalog.pagination_termination",
+        "catalog.price_availability",
+        "catalog.photos",
+        "reviews.full_body",
+        "reviews.pagination",
+        "catalog.variant_offers"
+      ],
+      "verificationToolProvenance": [
+        {
+          "path": "lib/capability-checklist.mjs",
+          "kind": "evidence_validator",
+          "status": "historical_tool_changed"
+        },
+        {
+          "path": "scripts/verify-amazon-expansion.mjs",
+          "kind": "offline_verifier",
+          "status": "historical_tool_changed"
+        }
+      ],
+      "liveState": "not_checked",
+      "replayedInThisAudit": false,
+      "verificationMode": "offline recorded-evidence validation"
+    },
+    "oldProofsMutated": false,
+    "otherStaleEvidence": [
+      {
+        "service": "ebay",
+        "capability": "suggestions.read",
+        "stalePaths": [
+          "scripts/retail.mjs",
+          "lib/cli.mjs"
+        ],
+        "cause": "runtime/CLI code changed; not validator-only drift",
+        "freshCurrentSample": "work/playbook-audit-20261015-live/ebay-suggest.json"
+      },
+      {
+        "service": "shopify",
+        "capabilities": [
+          "catalog.product_detail",
+          "catalog.predictive_search"
+        ],
+        "stalePaths": [
+          "lib/retail/shopify.mjs",
+          "scripts/retail.mjs",
+          "lib/cli.mjs"
+        ],
+        "cause": "runtime/client and CLI code changed; prior same-day predictive-search sample covers the suggest route only, not the old product-detail proof."
+      }
+    ],
+    "implementationFix": {
+      "helper": "lib/recorded-evidence-provenance.mjs",
+      "export": "verifyManifestImplementation({ implementation, readFile, sha256, verificationToolKinds })",
+      "hashSha256": "1b91407194a7d74c3797cd1a54a87decb901333b4aa9ee88c758dd761ed2e2d7",
+      "testFile": "tests/recorded-evidence-provenance.test.mjs",
+      "testFileSha256": "995ff03a60438a5c1ecbd0a36377c9bb9eb7461901496321c11b66c4e6a41312",
+      "tests": {
+        "passed": 4,
+        "failed": 0,
+        "checks": [
+          "allowlisted tool-only drift is reported as provenance",
+          "runtime mismatch fails",
+          "inherited constructor property cannot enter allowlist",
+          "invalid recorded hash and missing file fail"
+        ]
+      }
+    }
+  },
+  "services": [
+    {
+      "service": "amazon",
+      "routesReviewed": [
+        {
+          "mode": "anonymous consumer XHR",
+          "method": "GET",
+          "path": "/nav/ajax/hMenuDesktopFirstLayer"
+        },
+        {
+          "mode": "anonymous consumer XHR",
+          "method": "POST",
+          "path": "/s/query",
+          "mime": "application/json-amazonui-streaming"
+        },
+        {
+          "mode": "public-session Document",
+          "method": "GET",
+          "path": "/-/ko/dp/{asin}/",
+          "mime": "text/html"
+        }
+      ],
+      "historicalResult": {
+        "sample": "verification/amazon-discovery-2026-10-15/manifest.json",
+        "recordedAt": "2026-10-15T06:16:52.005Z",
+        "productDocuments": 3,
+        "completeCatalog": false,
+        "renewalVerified": false
+      },
+      "currentLimits": [
+        "Prior same-day navigation sample returns one more destination than the historical recorded sample (343 vs 342); this is observed content drift and the old evidence remains unchanged.",
+        "An earlier local session-status read showed AMAZON_RETAIL_REBOOTSTRAP_REQUIRED; no protected product request was replayed in this report-correction turn.",
+        "Categories, pagination termination, complete image gallery, option offers and review bodies remain gaps."
+      ],
+      "diagnosis": "Prior same-day navigation and search samples validate those public routes only; they do not establish a protected product-detail read. The session-backed reader is distinct from the official partner API.",
+      "evidence": [
+        "work/playbook-audit-20261015-live/amazon-navigation.json",
+        "work/playbook-audit-20261015-live/amazon-search.json",
+        "work/playbook-audit-20261015-live/amazon-recorded-verifier.json",
+        "checklists/services/amazon.json",
+        "lib/retail/amazon-retail-session.mjs"
+      ],
+      "sourceHashes": {
+        "checklists/services/amazon.json": "8ed9594a78d79df504aa86600f7017ebeaad337eb6b68ba8d59878a1636c14d7",
+        "lib/retail/amazon.mjs": "10d2cae2fb68bf41969448018883d4c606db5d514f7f1e4a18f1bd65d508abca",
+        "lib/retail/amazon-navigation.mjs": "584984d6c9d5d8658b6f1dbace09d8542f4cbc2c529a58c6178f4333ac950225",
+        "lib/retail/amazon-crawl.mjs": "163a28bc10186825940b2ec62020d2bd51112d040beeed1f3ad37fbd409548e1",
+        "lib/retail/amazon-product.mjs": "b033602a59d5298d59d279425f8ef8187086a0019c01966a8071a96be781e703",
+        "lib/retail/amazon-retail-session.mjs": "0b93c0d705a50f8337c22951707496c70a6d39b561d325d8001675547a62519b",
+        "scripts/retail.mjs": "b6c9b0c3ab739a403f0d569c6353ebcb90522b90752a0c00af71d0641c6dc70d",
+        "scripts/verify-amazon-expansion.mjs": "b285619b75d57a5370b5f10f851d3bbbb179787e1a052760f7b2127b44ad9f39"
+      },
+      "priorSameDaySample": {
+        "navigation": {
+          "checkedAt": "2026-10-15T09:30:01.977Z",
+          "status": 200,
+          "mime": "application/json",
+          "requestCount": 2,
+          "menus": 37,
+          "destinations": 343,
+          "edges": 418,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "amazon-navigation.json",
+          "sharedSampleId": "amazon-navigation"
+        },
+        "search": {
+          "checkedAt": "2026-10-15T09:30:06.478Z",
+          "status": 200,
+          "mime": "application/json-amazonui-streaming",
+          "method": "POST",
+          "requestCount": 1,
+          "returnedItems": 16,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "amazon-search.json",
+          "sharedSampleId": "amazon-search-wireless-mouse"
+        },
+        "protectedSession": {
+          "ready": false,
+          "code": "AMAZON_RETAIL_REBOOTSTRAP_REQUIRED",
+          "liveCheckPerformed": false,
+          "observation": "Earlier local protected-store metadata read; no account cookie value exposed.",
+          "replayedInThisAudit": false
+        },
+        "replayedInThisAudit": false,
+        "sampleEvidenceSource": "verification/playbook-audit-2026-10-15/live-samples.json"
+      },
+      "replayedInThisAudit": false
+    },
+    {
+      "service": "amazon-partner",
+      "routesReviewed": [
+        {
+          "mode": "official authenticated Creators API",
+          "methods": [
+            "POST"
+          ],
+          "operations": [
+            "SearchItems",
+            "GetItems",
+            "GetVariations"
+          ]
+        }
+      ],
+      "historicalResult": {
+        "checklist": "checklists/services/amazon-partner.json",
+        "liveEvidence": false
+      },
+      "currentLimits": [
+        "This provider is separate from anonymous Amazon consumer XHR and public-session HTML.",
+        "No credential values or PartnerTag were supplied; no token exchange or product call occurred."
+      ],
+      "diagnosis": "The maintained client exists, but this audit had no approved partner credential or PartnerTag; no live authenticated result is recorded.",
+      "evidence": [
+        "checklists/services/amazon-partner.json",
+        "lib/commerce/amazon-creators.mjs",
+        "lib/commerce/providers.mjs"
+      ],
+      "sourceHashes": {
+        "checklists/services/amazon-partner.json": "ac5575d274738d13df97ed5d2670af63722334672b0260747b959da486396357",
+        "lib/commerce/amazon-creators.mjs": "2f7b08447bd0a2a8c1edde72cac37db252580b419481451163cf9c4a2c283f6c",
+        "lib/commerce/providers.mjs": "a8d56497abfb21475efa017f887a797c8656f62149a8fbf323be45f11139ef42",
+        "scripts/commerce.mjs": "0e5dc18975f1b895ee29467c978b3e0cf83dce19af691f48899df1fef4c22f65"
+      },
+      "credentialPath": "Explicit credentials-stdin process-memory input only; no matching persistent protected provider/readiness was configured or read in this audit.",
+      "replayedInThisAudit": false,
+      "reviewedReadiness": {
+        "readiness": "credentialed_live_pending",
+        "authenticatedReplay": false,
+        "networkRead": false,
+        "requiredCallerCredentials": [
+          "Credential ID/Secret/version",
+          "marketplace PartnerTag"
+        ],
+        "replayedInThisAudit": false,
+        "reviewSource": "Earlier local provider/checklist metadata review; no sample in shared live-samples archive and no service request."
+      }
+    },
+    {
+      "service": "rakuten-ichiba",
+      "routesReviewed": [
+        {
+          "mode": "anonymous public Document",
+          "method": "GET",
+          "origin": "https://www.rakuten.co.jp",
+          "path": "/"
+        },
+        {
+          "mode": "anonymous public Document",
+          "method": "GET",
+          "origin": "https://search.rakuten.co.jp",
+          "path": "/search/mall/{query}/{category}/"
+        },
+        {
+          "mode": "official credentialed catalog API",
+          "methods": [
+            "GET"
+          ],
+          "paths": [
+            "/ichibams/api/IchibaItem/Search/20260701",
+            "/ichibagt/api/IchibaGenre/Search/20260701"
+          ]
+        },
+        {
+          "mode": "public reviews XHR",
+          "method": "POST",
+          "origin": "https://web-gateway.rakuten.co.jp",
+          "path": "/review/itemshopreviewlist/get/v1",
+          "successStatus": 207
+        }
+      ],
+      "historicalResult": {
+        "recordedAt": "2026-10-15T08:03:40.504Z",
+        "directExecutions": 15,
+        "searchPages": 3,
+        "searchRows": 150,
+        "uniqueSearchProducts": 148,
+        "publicReviewRows": 60,
+        "reviewPages": 2,
+        "completeCatalog": false
+      },
+      "readiness": {
+        "officialApi": "credentialed_live_pending",
+        "credentialsNeeded": [
+          "applicationId",
+          "accessKey"
+        ],
+        "callerAffiliateIdNeededOnlyForAffiliateFields": true,
+        "currentAuthenticatedReplay": false
+      },
+      "currentLimits": [
+        "The prior same-day live samples verify public Document HTML, not official app-credentialed Search/Genre calls.",
+        "The public review XHR history is separately recorded; its short-lived first-party page key is in-memory bootstrap, and no new review read was run in this audit.",
+        "Product details/options and search pagination rely on dated historical evidence; full catalog remains incomplete."
+      ],
+      "diagnosis": "The public consumer contract and official API contract are correctly separate; no auth failure was inferred from anonymous document reads.",
+      "evidence": [
+        "work/playbook-audit-20261015-live/rakuten-home.json",
+        "work/playbook-audit-20261015-live/rakuten-search.json",
+        "verification/japan-retail-2026-10-15/manifest.json",
+        "checklists/services/rakuten-ichiba.json",
+        "verification/commerce-rakuten-ichiba-review-page1-2026-10-05.json",
+        "verification/commerce-rakuten-ichiba-review-page2-2026-10-05.json"
+      ],
+      "sourceHashes": {
+        "checklists/services/rakuten-ichiba.json": "ac1b21b35838bf9609b91f99860e655f6bfcbbd9b1054abebcf43a59c375d46f",
+        "lib/retail/japan-http.mjs": "18596e32c17827aac271d5b691f62eba45a6347e28e87f06b4b4cd7fddb6fc47",
+        "lib/retail/japan-public.mjs": "e35adf61a785af12342b28fab9767f4c739699cdc6fbba179f74df5b3ce80ce2",
+        "lib/retail/rakuten-public-catalog.mjs": "dd0a9e599856db06a334da1a629daf00f363ba97c2fa6d5010460fff5104b497",
+        "lib/commerce/rakuten-ichiba.mjs": "9f04206db5ec8cb73a3c7bf4b3aef8d0324d1f4338eeb3827fb59ecfb11d30bb",
+        "lib/commerce/rakuten-ichiba-public.mjs": "707e2bb864e59889a715669b026cee406e9163ed060c881bfdecc8ea91f1a11f",
+        "scripts/japan-retail.mjs": "429ab5566f62755b225f272c68c3749ad48d172c3df425c4ddcd326844e0acf0",
+        "scripts/verify-japan-retail.mjs": "d16460baac8ab5432575f38e9f45c94831d7ac67e263a7e50c95201cc51db86a"
+      },
+      "credentialPath": "Explicit credentials-stdin process-memory input only; no matching persistent protected provider/readiness was configured or read in this audit.",
+      "priorSameDaySample": {
+        "home": {
+          "checkedAt": "2026-10-15T09:30:21.54Z",
+          "status": 200,
+          "mime": "text/html",
+          "menus": 10,
+          "links": 40,
+          "edges": 50,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "rakuten-home.json",
+          "sharedSampleId": "rakuten-home"
+        },
+        "search": {
+          "checkedAt": "2026-10-15T09:30:23.439Z",
+          "status": 200,
+          "mime": "text/html",
+          "products": 49,
+          "links": 131,
+          "categoryNodes": 18,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "rakuten-search.json",
+          "sharedSampleId": "rakuten-search-mouse-category-100026"
+        },
+        "replayedInThisAudit": false,
+        "sampleEvidenceSource": "verification/playbook-audit-2026-10-15/live-samples.json"
+      },
+      "replayedInThisAudit": false
+    },
+    {
+      "service": "rakuten-advertising",
+      "routesReviewed": [
+        {
+          "mode": "official authenticated global publisher API",
+          "methods": [
+            "GET"
+          ],
+          "credentials": [
+            "accessToken"
+          ]
+        }
+      ],
+      "historicalResult": {
+        "evidence": "verification/commerce-rakuten-advertising-2026-10-05.json",
+        "noTokenControlStatus": 401,
+        "noTokenControlMime": "application/json",
+        "localTestsPassed": 10
+      },
+      "currentLimits": [
+        "The 401 is an anonymous no-token control, not an authenticated API failure and not a successful catalog read.",
+        "Rakuten Advertising global publisher API is separate from Rakuten Ichiba Japan and its affiliateId flow."
+      ],
+      "diagnosis": "Historical unauthenticated control was correctly scoped as a control; there is no token to test the partner route.",
+      "evidence": [
+        "verification/commerce-rakuten-advertising-2026-10-05.json",
+        "checklists/services/rakuten-advertising.json",
+        "lib/commerce/rakuten-advertising.mjs",
+        "lib/commerce/providers.mjs"
+      ],
+      "sourceHashes": {
+        "checklists/services/rakuten-advertising.json": "aa37d15ef84363189d99543d2b74c86329d7dc171bd3ba012b2ae6e31cf3a9eb",
+        "lib/commerce/rakuten-advertising.mjs": "cff815590b94db2380a63dcf9f3a6e2d5c5101cd49aad730fb5d8b22fbe897a4",
+        "lib/commerce/providers.mjs": "a8d56497abfb21475efa017f887a797c8656f62149a8fbf323be45f11139ef42",
+        "scripts/commerce.mjs": "0e5dc18975f1b895ee29467c978b3e0cf83dce19af691f48899df1fef4c22f65"
+      },
+      "credentialPath": "Explicit credentials-stdin process-memory input only; no matching persistent protected provider/readiness was configured or read in this audit.",
+      "replayedInThisAudit": false,
+      "reviewedReadiness": {
+        "readiness": "credentialed_live_pending",
+        "currentAuthenticatedReplay": false,
+        "currentNetworkRead": false,
+        "replayedInThisAudit": false,
+        "reviewSource": "Earlier local provider/checklist metadata review; no sample in shared live-samples archive and no service request."
+      }
+    },
+    {
+      "service": "yahoo-shopping-jp",
+      "routesReviewed": [
+        {
+          "mode": "anonymous public Document",
+          "method": "GET",
+          "origin": "https://shopping.yahoo.co.jp",
+          "path": "/"
+        },
+        {
+          "mode": "anonymous public Document",
+          "method": "GET",
+          "origin": "https://store.shopping.yahoo.co.jp",
+          "path": "/{merchant}/{item}.html"
+        },
+        {
+          "mode": "official credentialed V3 search API",
+          "method": "GET",
+          "path": "/v3/itemSearch",
+          "credential": "caller appId via credentials-stdin"
+        }
+      ],
+      "historicalResult": {
+        "recordedAt": "2026-10-15T08:03:40.504Z",
+        "directCapabilitiesRevalidated": 5,
+        "oldPublicSearchDiagnostic": {
+          "status": 500,
+          "mime": "text/html",
+          "cause": "unknown",
+          "responseContractVerified": false
+        }
+      },
+      "currentLimits": [
+        "The prior same-day sample covers home navigation and one product detail/options; no current public search result is established.",
+        "Official V3 itemSearch has a client but no appId was made available for this audit; affiliate ValueCommerce link generation is unimplemented.",
+        "Public search HTTP 500 has unknown cause and is not a diagnosis of official API health."
+      ],
+      "diagnosis": "The prior baseline marked 5 public proofs stale only because the evidence validator hash changed. The offline verifier output from the earlier audit work rechecked historical schema/scope and reports validator/verifier provenance; it did not refresh the proof date or query the service.",
+      "evidence": [
+        "work/playbook-audit-20261015-live/yahoo-home.json",
+        "work/playbook-audit-20261015-live/yahoo-product.json",
+        "verification/japan-retail-2026-10-15/yahoo-search-diagnostic.json",
+        "verification/japan-retail-2026-10-15/manifest.json",
+        "checklists/services/yahoo-shopping-jp.json"
+      ],
+      "sourceHashes": {
+        "checklists/services/yahoo-shopping-jp.json": "a3ab70c5ab89f748f13f01e828a999caa40a0ef83312b8d20f77692a1f3cbe72",
+        "lib/retail/japan-http.mjs": "18596e32c17827aac271d5b691f62eba45a6347e28e87f06b4b4cd7fddb6fc47",
+        "lib/retail/japan-public.mjs": "e35adf61a785af12342b28fab9767f4c739699cdc6fbba179f74df5b3ce80ce2",
+        "lib/retail/yahoo-jp-public.mjs": "0d4325e7995c83d7383afe3dc8689cc122291dfb4103548e9ff40e5bfec4135e",
+        "lib/commerce/yahoo-shopping-jp.mjs": "566c8562875e7678f2f695dd1049b30c977d2eac68fb2a29b0ed666f716d5e75",
+        "scripts/japan-retail.mjs": "429ab5566f62755b225f272c68c3749ad48d172c3df425c4ddcd326844e0acf0",
+        "scripts/verify-japan-retail.mjs": "d16460baac8ab5432575f38e9f45c94831d7ac67e263a7e50c95201cc51db86a"
+      },
+      "credentialPath": "Explicit credentials-stdin process-memory input only; no matching persistent protected provider/readiness was configured or read in this audit.",
+      "priorSameDaySample": {
+        "home": {
+          "checkedAt": "2026-10-15T09:30:25.55Z",
+          "status": 200,
+          "mime": "text/html",
+          "categories": 448,
+          "links": 801,
+          "identityCandidates": 331,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "yahoo-home.json",
+          "sharedSampleId": "yahoo-shopping-jp-home"
+        },
+        "product": {
+          "checkedAt": "2026-10-15T09:30:28.918Z",
+          "status": 200,
+          "mime": "text/html",
+          "products": 1,
+          "variants": 6,
+          "links": 6,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "yahoo-product.json",
+          "sharedSampleId": "yahoo-shopping-jp-product"
+        },
+        "officialSearch": {
+          "readiness": "pending caller appId",
+          "currentReplay": false
+        },
+        "replayedInThisAudit": false,
+        "sampleEvidenceSource": "verification/playbook-audit-2026-10-15/live-samples.json"
+      },
+      "replayedInThisAudit": false
+    },
+    {
+      "service": "ebay",
+      "routesReviewed": [
+        {
+          "mode": "anonymous public suggestions",
+          "method": "GET",
+          "origin": "https://autosug.ebay.com",
+          "path": "/autosug"
+        },
+        {
+          "mode": "consumer listing/search Document",
+          "status": "maintained consumer CLI supports suggestions only; this audit did not replay listing/search"
+        }
+      ],
+      "historicalResult": {
+        "documentedConsumerProductRoute": "no verified reusable listing/detail XHR or direct parser",
+        "previousElectronicsDocumentStatus": 403
+      },
+      "currentLimits": [
+        "No bounded listing/search sample was run because the maintained consumer CLI supports only suggestion lookup.",
+        "checklists/services/ebay.json references lib/retail/ebay-catalog.mjs for listings/detail/category/pagination, but that file is absent in this checkout.",
+        "The recorded 403 alone does not establish whether the site blocks anonymous HTTP, the document route or this environment."
+      ],
+      "diagnosis": "The prior same-day sample validates autocomplete only. Listing/search remains an explicit unimplemented capability; the planned module path is an implementation gap, not a confirmed wrong-path defect.",
+      "evidence": [
+        "work/playbook-audit-20261015-live/ebay-suggest.json",
+        "checklists/services/ebay.json",
+        "scripts/retail.mjs",
+        "lib/retail/ebay.mjs"
+      ],
+      "sourceHashes": {
+        "checklists/services/ebay.json": "5478efd5aa0e9d182f454a17a828bf23663164d0dfcf1e3c26b6892b4715ba99",
+        "lib/retail/ebay.mjs": "b948e6fd9fafab85d02e53f098833a3542ba12ce151b21cb535156ed1805eb55",
+        "scripts/retail.mjs": "b6c9b0c3ab739a403f0d569c6353ebcb90522b90752a0c00af71d0641c6dc70d",
+        "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190"
+      },
+      "priorSameDaySample": {
+        "suggestions": {
+          "checkedAt": "2026-10-15T09:32:34.263Z",
+          "status": 200,
+          "mime": "application/json",
+          "suggestions": 10,
+          "categoryHints": 2,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "ebay-suggest.json",
+          "sharedSampleId": "ebay-suggest-usb"
+        },
+        "retailCliSupportsOnly": [
+          "suggest"
+        ],
+        "checklistStatus": "suggestions.read needs_reverification (scripts/retail.mjs and lib/cli.mjs hash drift)",
+        "replayedInThisAudit": false,
+        "sampleEvidenceSource": "verification/playbook-audit-2026-10-15/live-samples.json",
+        "implementationGapPaths": [
+          "lib/retail/ebay-catalog.mjs"
+        ],
+        "checklistStatusMeaning": "The capability audit already classifies listing/detail/category/pagination as unimplemented; this path is a planned implementation reference, not a failed or misrouted live request.",
+        "sampleSource": "verification/playbook-audit-2026-10-15/live-samples.json",
+        "sourceCheckedAt": "2026-10-15T09:32:34.263Z"
+      },
+      "replayedInThisAudit": false,
+      "findingType": "implementation_gap",
+      "confirmedWrongPathDefect": false,
+      "auditorNote": "The capability checklist already records listing/search as unimplemented; the planned source path is not counted as a failed live contract."
+    },
+    {
+      "service": "ebay-partner",
+      "routesReviewed": [
+        {
+          "mode": "official authenticated eBay Browse API",
+          "methods": [
+            "GET"
+          ],
+          "operations": [
+            "search",
+            "getItem",
+            "getItemsByItemGroup"
+          ],
+          "auth": "application OAuth token"
+        }
+      ],
+      "historicalResult": {
+        "checklist": "checklists/services/ebay-partner.json",
+        "authenticatedEvidence": false
+      },
+      "currentLimits": [
+        "No application credentials/token supplied; no Browse call was sent.",
+        "An anonymous 403 cannot distinguish missing auth from marketplace production-access approval.",
+        "Browse product review summary is aggregate only; it does not provide full review bodies/photos."
+      ],
+      "diagnosis": "Protected Browse client is a separate partner route from consumer eBay suggestions and HTML. No protected result can be inferred from the anonymous control.",
+      "evidence": [
+        "checklists/services/ebay-partner.json",
+        "lib/commerce/ebay-browse.mjs",
+        "lib/commerce/providers.mjs"
+      ],
+      "sourceHashes": {
+        "checklists/services/ebay-partner.json": "4368c7fc14624604f72f8a40346d1058319b171c485c6209845a3dbc6aa739b9",
+        "lib/commerce/ebay-browse.mjs": "22367e4df286b52217108ff7f3288db53597c91724f349bfed07b89ace120c06",
+        "lib/commerce/providers.mjs": "a8d56497abfb21475efa017f887a797c8656f62149a8fbf323be45f11139ef42",
+        "scripts/commerce.mjs": "0e5dc18975f1b895ee29467c978b3e0cf83dce19af691f48899df1fef4c22f65"
+      },
+      "credentialPath": "Explicit credentials-stdin process-memory input only; no matching persistent protected provider/readiness was configured or read in this audit.",
+      "replayedInThisAudit": false,
+      "reviewedReadiness": {
+        "readiness": "credentialed_live_pending",
+        "currentAuthenticatedReplay": false,
+        "currentNetworkRead": false,
+        "noTokenControl": {
+          "status": 403,
+          "mime": "text/html",
+          "interpretation": "authorization/production access cause unresolved"
+        },
+        "replayedInThisAudit": false,
+        "reviewSource": "Earlier local provider/checklist metadata review; no sample in shared live-samples archive and no service request."
+      }
+    },
+    {
+      "service": "shopify",
+      "routesReviewed": [
+        {
+          "mode": "anonymous Allbirds Shopify Ajax",
+          "method": "GET",
+          "path": "/search/suggest.json"
+        },
+        {
+          "mode": "anonymous cart context",
+          "method": "GET",
+          "path": "/cart.js"
+        },
+        {
+          "mode": "anonymous product JSON",
+          "method": "GET",
+          "path": "/products/{handle}.js"
+        }
+      ],
+      "historicalResult": {
+        "oldProductAndSuggestProofs": "stale due to lib/retail/shopify.mjs, scripts/retail.mjs and lib/cli.mjs changes"
+      },
+      "currentLimits": [
+        "The prior same-day sample covers bounded predictive suggestions only; it does not refresh product-detail historical evidence.",
+        "Predictive search is capped at suggestions and does not prove full search, collection pagination or locale support.",
+        "Checklist remains needs_reverification for both saved proofs until a complete matching product-detail read is recorded."
+      ],
+      "diagnosis": "The prior same-day direct sample confirms the predictive-suggestion route only. Prior product evidence is stale because runtime code changed, not because of the shared validator.",
+      "evidence": [
+        "work/playbook-audit-20261015-live/shopify-predictive-search.json",
+        "checklists/services/shopify.json",
+        "lib/retail/shopify.mjs",
+        "scripts/retail.mjs"
+      ],
+      "sourceHashes": {
+        "checklists/services/shopify.json": "6e6907aa23033f39acc20f1e613a42c72223b9a315cdeedae85720c5fa89c7f1",
+        "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb",
+        "scripts/retail.mjs": "b6c9b0c3ab739a403f0d569c6353ebcb90522b90752a0c00af71d0641c6dc70d",
+        "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190"
+      },
+      "priorSameDaySample": {
+        "predictiveSearch": {
+          "checkedAt": "2026-10-15T09:32:32.283Z",
+          "status": 200,
+          "mime": "application/json",
+          "products": 3,
+          "checkedAtBasis": "client_receipt",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "shopify-predictive-search.json",
+          "sharedSampleId": "shopify-allbirds-predictive-search-runner-limit-3"
+        },
+        "cartContext": {
+          "status": 200,
+          "mime": "text/javascript",
+          "checkedAt": "2026-10-15T09:32:32.283Z",
+          "replayedInThisAudit": false,
+          "sourceSummaryFilename": "shopify-predictive-search.json",
+          "sharedSampleId": "shopify-allbirds-predictive-search-runner-limit-3"
+        },
+        "credentialsUsed": false,
+        "replayedInThisAudit": false,
+        "sampleEvidenceSource": "verification/playbook-audit-2026-10-15/live-samples.json"
+      },
+      "replayedInThisAudit": false
+    },
+    {
+      "service": "shopify-storefronts",
+      "routesReviewed": [
+        {
+          "mode": "anonymous pinned Shopify storefront reader",
+          "method": "GET",
+          "path": "/search/suggest.json"
+        },
+        {
+          "mode": "anonymous currency context",
+          "method": "GET",
+          "path": "/cart.js"
+        },
+        {
+          "mode": "additional ColourPop product/review client",
+          "methods": [
+            "GET"
+          ]
+        }
+      ],
+      "historicalResult": {
+        "checklistCapabilitiesRecorded": [
+          "allbirds.catalog.product_detail",
+          "allbirds.catalog.predictive_search",
+          "colourpop.catalog.product_detail",
+          "colourpop.catalog.predictive_search",
+          "colourpop.catalog.reviews"
+        ],
+        "allbirdsReviews": "blocked; live source declares reviews disabled"
+      },
+      "currentLimits": [
+        "shopify-storefronts imports and reuses createAllbirdsPublicClient from lib/retail/shopify.mjs; Allbirds operations overlap and should not be counted twice as distinct clients.",
+        "The wrapper separately supports ColourPop and store-specific Okendo reviews; full search pagination, collections and locale variation remain unimplemented.",
+        "Public catalog access is not partner, affiliate, resale, or dropship authorization."
+      ],
+      "diagnosis": "No client duplication defect: this is a shared Allbirds transport/parser with commerce normalization plus extra store-specific capabilities. The wrapper sample summary was not saved as raw output; underlying bounded direct sample is retained above.",
+      "evidence": [
+        "work/playbook-audit-20261015-live/shopify-predictive-search.json",
+        "checklists/services/shopify-storefronts.json",
+        "lib/commerce/shopify-storefronts.mjs",
+        "lib/retail/shopify.mjs",
+        "lib/commerce/providers.mjs"
+      ],
+      "sourceHashes": {
+        "checklists/services/shopify-storefronts.json": "660e9facae40d08be1b87fe3d10177d273ba92a3caef01f317197e663c79d56f",
+        "lib/commerce/shopify-storefronts.mjs": "e50784065f0807c149e053f5bae32efbcd2ad3ee45d95f229318fcaf93b0ed2a",
+        "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb",
+        "lib/commerce/providers.mjs": "a8d56497abfb21475efa017f887a797c8656f62149a8fbf323be45f11139ef42",
+        "scripts/commerce.mjs": "0e5dc18975f1b895ee29467c978b3e0cf83dce19af691f48899df1fef4c22f65"
+      },
+      "priorSameDaySample": {
+        "checkedAt": "2026-10-15T03:58:54Z",
+        "checkedAtBasis": "prior command output timestamp, Asia/Seoul converted to UTC",
+        "replayedInThisAudit": false,
+        "sourceSummaryFilename": null,
+        "sourceNote": "Earlier bounded wrapper command output was summarized; no raw output file was saved. Underlying shared Allbirds sample is in live-samples.json."
+      },
+      "replayedInThisAudit": false
+    }
+  ],
+  "conclusion": "No service requests were sent in this report-correction turn. The linked 2026-10-15 live-samples record and per-command outputs are prior same-day bounded reads; the Japan/Amazon checks with later checkedAt values are offline revalidations of historical evidence, not new service reads. No confirmed wrong-path defect was established for eBay: autocomplete was sampled, while listing/search remains explicitly unimplemented and the module path is a planned implementation reference. Japan historical hashes, schemas, scopes and timestamps remain preserved; eBay and Shopify saved proofs are stale due to runtime/CLI code drift.",
+  "evidenceSources": {
+    "sharedPriorSameDayLiveSamples": "verification/playbook-audit-2026-10-15/live-samples.json",
+    "sourceSummaryFiles": "work/playbook-audit-20261015-live/*.json",
+    "freshnessVerifierRuns": "Offline recorded-evidence checks only; networkUsed:false."
+  }
+}

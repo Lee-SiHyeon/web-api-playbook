@@ -26,6 +26,10 @@ npm run audit:playbook -- --output-dir=work/audit-strict --run-tests --strict
 
 `recorded_live`는 기존 영수증을 현재 소스와 대조한 기록이다. 현재 원격 결과, 세션·owner 상태, 모든 페이지·옵션의 범위까지 검증한 것이 아니다. 이번 직접 HTTP 표본은 별도 파일에 시각·상태·MIME·내용 검증·인증 방식과 다섯 상태를 기록한다. 전체 사이트의 새 라이브 검증으로 승격하지 않는다.
 
+실행 클라이언트와 오프라인 검증 도구의 변경은 구분한다. 일본·아마존·해외 리테일 검증기는 과거 영수증의 실행 코드 및 응답 해시를 그대로 검사하며, 명시한 validator/verifier 파일의 해시 차이는 `verificationToolProvenance`에 남긴다. 현재 판정기로 증거의 계약도 다시 검사한다. 검증 도구만 바뀐 경우는 새 HTTP 실행도, 실행 클라이언트 변경도 아니다. 클라이언트·CLI·증거 본문 변경은 계속 검증 실패다. `verify-overseas-retail.mjs`도 읽기 전용이며 기존 proof의 해시·시각을 다시 쓰지 않는다.
+
+등록 목록 밖에도 유지 실행기가 있을 수 있다. LinkPrice와 MyRealTrip의 미등록은 미구현 판정이 아니며, Google Trends·Threads의 `pending_live`에는 저장 재생 증거를 판정하는 validator의 미지원 범위가 포함된다. 기능별 경로와 상태 해석, 현재 HTTP 표본 및 교정 내용은 [2026-10-15 경로 재감사](../verification/playbook-path-audit-2026-10-15/README.md)에 기록한다.
+
 쿠팡 일반 검색은 `coupang-retail/catalog.search`가 `scripts/coupang-retail-session.mjs search`를 가리킨다. `coupang-public.mjs retail-search --anonymous`는 별도의 cookie-free Document 진단이다. 같은 `/np/search`라도 RSC 헤더·응답 MIME·세션 적용이 다르므로 진단의 403을 검색 기능 전체의 결과로 합치지 않는다. 로컬 세션 preflight 거부는 HTTP 요청 0건이며 서버 응답과 구분한다. [2026-10-15 정정과 실제 HTTP 결과](../verification/coupang-recheck-2026-10-15/README.md).
 
 ## REA와 agent-browser 적용

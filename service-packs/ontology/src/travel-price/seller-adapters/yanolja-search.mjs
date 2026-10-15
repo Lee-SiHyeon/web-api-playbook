@@ -8,20 +8,41 @@ function fail(code, message, metadata) {
   return Object.assign(new Error(message), { code, ...(metadata ? { metadata } : {}) });
 }
 
-function validateItems(items) {
-  for (const item of items) {
-    let detail;
-    try {
-      detail = new URL(item.detailUrl);
-    } catch {
-      throw fail('YANOLJA_SEARCH_SCHEMA_INVALID', 'Yanolja search returned an invalid detail URL');
-    }
-    if (detail.origin !== OBSERVED_ORIGIN || !OBSERVED_DETAIL_PATH.test(detail.pathname)
-      || detail.pathname.split('/').filter(Boolean).at(-1) !== item.hotelId
-      || item.sellerId !== 'yanolja-hotel' || typeof item.title !== 'string' || !Array.isArray(item.prices)) {
-      throw fail('YANOLJA_SEARCH_SCHEMA_INVALID', 'Yanolja search item is outside the observed public accommodation schema');
-    }
+function itemSchemaFailure(item) {
+  let detail;
+  try {
+    detail = new URL(item.detailUrl);
+  } catch {
+    return 'detail_url_invalid';
   }
+  if (detail.origin !== OBSERVED_ORIGIN) return 'detail_url_origin_invalid';
+  if (!OBSERVED_DETAIL_PATH.test(detail.pathname)) return 'detail_url_path_invalid';
+  if (detail.pathname.split('/').filter(Boolean).at(-1) !== item.hotelId) return 'hotel_id_mismatch';
+  if (item.sellerId !== 'yanolja-hotel') return 'seller_id_invalid';
+  if (typeof item.title !== 'string' || !item.title.trim()) return 'title_missing';
+  if (!Array.isArray(item.prices)) return 'prices_invalid';
+  return null;
+}
+
+function validateItems(items) {
+  const validItems = [];
+  const invalidReasons = {};
+  for (const item of items) {
+    const reason = itemSchemaFailure(item);
+    if (!reason) {
+      validItems.push(item);
+      continue;
+    }
+    invalidReasons[reason] = (invalidReasons[reason] ?? 0) + 1;
+  }
+  return {
+    validItems,
+    inputScope: 'parsed_product_cards_after_url_filter',
+    sourceItemCount: items.length,
+    validItemCount: validItems.length,
+    excludedInvalidItemCount: items.length - validItems.length,
+    invalidReasons,
+  };
 }
 
 /**
@@ -55,10 +76,34 @@ export async function searchYanoljaAccommodation(options = {}) {
     throw fail('YANOLJA_SEARCH_CONTRACT_CHANGED', 'Yanolja search response does not match the observed public Document contract', metadata);
   }
   if (result.search.category !== 'PRODUCT_CATEGORY_KOREA_ACCOMMODATION'
-    || result.search.keyword !== query || !Array.isArray(result.cards) || result.cards.length === 0) {
-    throw fail('YANOLJA_SEARCH_SCHEMA_INVALID', 'Yanolja search Document did not match the observed keyword result schema', metadata);
+    || result.search.keyword !== query || !Array.isArray(result.cards)) {
+    throw fail('YANOLJA_SEARCH_SCHEMA_INVALID', 'Yanolja search Document did not match the observed keyword result schema', {
+      ...metadata,
+      schemaValidation: {
+        reason: result.search.category !== 'PRODUCT_CATEGORY_KOREA_ACCOMMODATION' ? 'category_mismatch'
+          : result.search.keyword !== query ? 'keyword_mismatch' : 'cards_missing',
+        sourceItemCount: Array.isArray(result.cards) ? result.cards.length : null,
+        validItemCount: 0,
+        excludedInvalidItemCount: Array.isArray(result.cards) ? result.cards.length : null,
+      },
+    });
   }
-  validateItems(result.cards);
+  if (result.cards.length === 0) {
+    throw fail('YANOLJA_SEARCH_EMPTY_RESULT', 'Yanolja search returned no product cards', {
+      ...metadata,
+      schemaValidation: { sourceItemCount: 0, validItemCount: 0, excludedInvalidItemCount: 0, invalidReasons: {} },
+    });
+  }
+  const { validItems, ...schemaValidation } = validateItems(result.cards);
+  if (schemaValidation.validItemCount === 0) {
+    throw fail('YANOLJA_SEARCH_SCHEMA_INVALID', 'Yanolja search returned no cards matching the observed public accommodation schema', {
+      ...metadata,
+      schemaValidation,
+    });
+  }
+  const hasExcludedItems = schemaValidation.excludedInvalidItemCount > 0;
+  const pricedItemCount = validItems.filter(item => item.prices.some(price => price.salePriceKrw != null)).length;
+  const discountedItemCount = validItems.filter(item => item.prices.some(price => price.discountRatePercent != null)).length;
 
   const page = result.page;
   const checkedAt = metadata.checkedAt;
@@ -74,7 +119,7 @@ export async function searchYanoljaAccommodation(options = {}) {
   };
   const receipt = {
     checkedAt,
-    status: 'usable_html',
+    status: hasExcludedItems ? 'partial' : 'usable_html',
     execution: { mode: 'pure_http', browserUsed: false, authentication: 'anonymous' },
     request: {
       method: 'GET',
@@ -94,9 +139,12 @@ export async function searchYanoljaAccommodation(options = {}) {
     },
     counts: {
       totalResultCount: result.totalResultCount,
-      returnedItemCount: result.returnedCardCount,
-      pricedItemCount: result.pricedCardCount,
-      discountedItemCount: result.discountedCardCount,
+      sourceItemCount: schemaValidation.sourceItemCount,
+      returnedItemCount: schemaValidation.validItemCount,
+      excludedInvalidItemCount: schemaValidation.excludedInvalidItemCount,
+      invalidItemReasons: schemaValidation.invalidReasons,
+      pricedItemCount,
+      discountedItemCount,
     },
     observedResultContext: {
       source: 'date and occupancy values parsed from returned product links; not caller-supplied request options',
@@ -112,6 +160,19 @@ export async function searchYanoljaAccommodation(options = {}) {
       fetchedPages: [1],
       paginationReplayed: false,
       pageTwoStatus: 'not requested; page request contract not captured',
+      sourceItemCount: schemaValidation.sourceItemCount,
+      returnedValidItemCount: schemaValidation.validItemCount,
+      excludedInvalidItemCount: schemaValidation.excludedInvalidItemCount,
+      schemaPartial: hasExcludedItems,
+      schemaPartialReasons: hasExcludedItems ? ['invalid_cards_excluded'] : [],
+      completeCatalog: false,
+    },
+    schemaValidation: {
+      inputScope: schemaValidation.inputScope,
+      sourceItemCount: schemaValidation.sourceItemCount,
+      validItemCount: schemaValidation.validItemCount,
+      excludedInvalidItemCount: schemaValidation.excludedInvalidItemCount,
+      invalidReasons: schemaValidation.invalidReasons,
     },
     priceSemantics: {
       basis: 'listing labels only',
@@ -134,5 +195,5 @@ export async function searchYanoljaAccommodation(options = {}) {
       : 'not scanned',
   };
 
-  return { source, items: result.cards, receipt };
+  return { source, items: validItems, receipt };
 }

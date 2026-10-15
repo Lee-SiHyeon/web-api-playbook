@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { sha, japanDestination } from '../lib/retail/japan-http.mjs';
 import { auditCapabilityChecklist, safeRelativePath } from '../lib/capability-checklist.mjs';
+import { verifyManifestImplementation } from '../lib/recorded-evidence-provenance.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const folder = 'verification/japan-retail-2026-10-15/';
@@ -55,7 +56,16 @@ const validateRun = run => {
 try {
   const manifest = await json(folder + 'manifest.json');
   assert.equal(manifest.schema, 'web-api-japan-playbook-verification-v1');
-  for (const [file, digest] of Object.entries(manifest.implementation)) assert.equal(sha(await read(file)), digest, 'Changed implementation: ' + file);
+  assert.ok(Number.isFinite(Date.parse(manifest.recordedAt)), 'Invalid historical recordedAt');
+  const implementationVerification = await verifyManifestImplementation({
+    implementation: manifest.implementation,
+    readFile: read,
+    sha256: sha,
+    verificationToolKinds: {
+      'lib/capability-checklist.mjs': 'evidence_validator',
+      'scripts/verify-japan-retail.mjs': 'offline_verifier',
+    },
+  });
   for (const [file, digest] of Object.entries(manifest.artifacts)) {
     assert.equal(sha(await read(folder + file)), digest, 'Changed evidence: ' + file);
     nonSecret(await json(folder + file));
@@ -104,10 +114,16 @@ try {
   assert.equal(reviews.collection.pagesRead, 2); assert.equal(reviews.collection.paginationVerified, true);
   assert.equal(reviews.collection.complete, false);
   assert.ok(reviews.receipts.some(r=>r.path === '/review/itemshopreviewlist/get/v1' && r.httpStatus === 207));
-  console.log(JSON.stringify({ ok: true, verifier: 'japan-retail-recorded-evidence', networkUsed: false,
+  console.log(JSON.stringify({ ok: true, status: 'historical_recorded_evidence_revalidated',
+    verifier: 'japan-retail-recorded-evidence', checkedAt: new Date().toISOString(),
+    recordedAt: manifest.recordedAt, networkUsed: false, liveState: 'not_checked',
+    runtimeImplementationHashesMatched: implementationVerification.runtimeImplementationHashesMatched,
+    evidenceHashesMatched: true, currentEvidenceValidation: true,
+    verificationToolProvenance: implementationVerification.verificationToolProvenance,
     executions: executions.size, searchPages: pages.length, searchRows: pages.reduce((n,r)=>n+r.data.products.length,0),
     uniqueSearchProducts: seen.size, reviewCount: reviews.collection.count, frontierSummaries,
-    publicReplay: true, browserCapture: false, affiliateLinksVerified: false,
+    recordedBoundaries: manifest.boundaries,
+    affiliateLinksVerified: false,
     officialCredentialedReplay: false, completeCatalog: false }, null, 2));
 } catch (error) {
   console.error(JSON.stringify({ ok: false, verifier: 'japan-retail-recorded-evidence',

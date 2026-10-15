@@ -56,9 +56,10 @@ export class XClient {
       response=await this.fetch(url,{method,headers,redirect:'error',signal:AbortSignal.timeout(20000),...(method==='POST'?{body:JSON.stringify({...payload,queryId:c.queryId})}:{})});
       let bytes=0;const chunks=[];for await(const chunk of response.body){bytes+=chunk.length;if(bytes>4_000_000)throw Error('size');chunks.push(chunk);}text=Buffer.concat(chunks).toString('utf8');
     }catch{throw new XError(method==='POST'?'WRITE_UNKNOWN':'TRANSPORT');}
-    const receipt={operation,method,path:url.pathname,status:response.status,bytes:Buffer.byteLength(text),sha256:hash(text),checkedAt:new Date().toISOString(),mode:'pure_http'};
-    if(!response.ok)throw new XError(response.status===429?'RATE_LIMITED':[401,403].includes(response.status)?'AUTH_REJECTED':'HTTP_ERROR',receipt);
-    if(!response.headers.get('content-type')?.includes('json'))throw new XError('NOT_JSON',receipt);
+    const mime=response.headers.get('content-type');
+    const receipt={operation,method,path:url.pathname,status:response.status,mime:mime??null,bytes:Buffer.byteLength(text),sha256:hash(text),checkedAt:new Date().toISOString(),mode:'pure_http'};
+    if(!response.ok)throw new XError(response.status===429?'RATE_LIMITED':response.status===401?'AUTH_REJECTED':response.status===403?'ACCESS_BLOCKED':'HTTP_ERROR',receipt);
+    if(!mime?.includes('json'))throw new XError('NOT_JSON',receipt);
     let result;try{result=JSON.parse(text);}catch{throw new XError('NOT_JSON',receipt);}
     if(result.errors?.length||!result.data)throw new XError('SERVICE_ERROR',receipt);
     return {data:result.data,receipt};
@@ -110,7 +111,13 @@ export class XClient {
       const readback=await this.detail(postId,expectedHandle);
       if(readback.item.text!==text)throw new XError('READBACK_MISMATCH');
       state.state='verified';state.readbackReceipt=readback.receipt;await writeFile(file,JSON.stringify(state,null,2));return {item:readback.item,receipt,readbackReceipt:readback.receipt,verified:true};
-    }catch(e){state.state=state.postId?'created_needs_review':'unknown_needs_review';state.error=e instanceof XError?e.code:'LOCAL_ERROR';await writeFile(file,JSON.stringify(state,null,2));throw new XError(state.state,{jobId,postId:state.postId});}
+    }catch(e){
+      state.state=state.postId?'created_needs_review':'unknown_needs_review';state.error=e instanceof XError?e.code:'LOCAL_ERROR';
+      const responseReceipt=e instanceof XError&&Number.isInteger(e.receipt?.status)?e.receipt:undefined;
+      if(responseReceipt)state.responseReceipt=responseReceipt;
+      await writeFile(file,JSON.stringify(state,null,2));
+      throw new XError(state.state,{jobId,postId:state.postId,...responseReceipt?{responseReceipt}: {}});
+    }
   }
 }
 export const loadContracts=async()=>JSON.parse(await readFile(new URL('../contracts/x.json',import.meta.url),'utf8'));

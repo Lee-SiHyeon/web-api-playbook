@@ -8,6 +8,7 @@ import { projectAmazonRetail } from '../lib/retail/amazon-ontology.mjs';
 import { parseAmazonNavigation } from '../lib/retail/amazon-navigation.mjs';
 import { parseAmazonProductDocument } from '../lib/retail/amazon-product.mjs';
 import { auditCapabilityChecklist, safeRelativePath } from '../lib/capability-checklist.mjs';
+import { verifyManifestImplementation } from '../lib/recorded-evidence-provenance.mjs';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dir = 'verification/amazon-discovery-2026-10-15/';
 const sha = value => createHash('sha256').update(value).digest('hex');
@@ -35,7 +36,17 @@ function noRuntimeValues(value, key = '') {
 
 try {
   const manifest = await json(dir+'manifest.json');
-  for (const [file, expected] of Object.entries({...manifest.implementation,...manifest.files})) assert.equal(sha(await bytes(file)), expected, file);
+  assert.ok(Number.isFinite(Date.parse(manifest.checkedAt)), 'Invalid historical checkedAt');
+  const implementationVerification = await verifyManifestImplementation({
+    implementation: manifest.implementation,
+    readFile: bytes,
+    sha256: sha,
+    verificationToolKinds: {
+      'lib/capability-checklist.mjs': 'evidence_validator',
+      'scripts/verify-amazon-expansion.mjs': 'offline_verifier',
+    },
+  });
+  for (const [file, expected] of Object.entries(manifest.files)) assert.equal(sha(await bytes(file)), expected, file);
   const nav = (await json(dir+'navigation.json')).data;
   const fixtureNav = parseAmazonNavigation((await bytes('tests/fixtures/amazon/menu-first.html')).toString(), (await bytes('tests/fixtures/amazon/menu-second.html')).toString());
   // Fixtures were captured in a separate read. One support link disappeared
@@ -104,9 +115,13 @@ try {
   assert.equal(audit.summary.strictPassed,false);
   const evidenceFiles = (await readdir(path.join(root,dir))).filter(f=>f.endsWith('.json'));
   for (const file of evidenceFiles) { try { noRuntimeValues(await json(dir+file)); } catch { throw new Error(`UNSAFE_EVIDENCE:${file}`); } }
-  console.log(JSON.stringify({ok:true,schema:'web-api-amazon-expansion-verifier-v1',checkedAt:new Date().toISOString(),
-    networkUsed:false,protectedStoreRead:false,implementationHashesMatched:true,evidenceHashesMatched:true,
-    counts:manifest.counts,verifiedCapabilities:verified,requiredGaps:audit.summary.requiredGaps,
+  console.log(JSON.stringify({ok:true,status:'historical_recorded_evidence_revalidated',
+    schema:'web-api-amazon-expansion-verifier-v1',checkedAt:new Date().toISOString(),recordedAt:manifest.checkedAt,
+    networkUsed:false,liveState:'not_checked',protectedStoreRead:false,
+    runtimeImplementationHashesMatched:implementationVerification.runtimeImplementationHashesMatched,
+    evidenceHashesMatched:true,currentEvidenceValidation:true,
+    verificationToolProvenance:implementationVerification.verificationToolProvenance,
+    counts:manifest.counts,historicallyVerifiedCapabilities:verified,requiredGaps:audit.summary.requiredGaps,
     evidenceJsonFilesChecked:evidenceFiles.length,runtimeValueFindings:0,completeCatalog:false,sessionRenewalVerified:false},null,2));
 } catch (error) {
   console.error(JSON.stringify({ok:false,code:'AMAZON_EVIDENCE_VERIFICATION_FAILED',detail:String(error.message).slice(0,500)}));

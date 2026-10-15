@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,readFile,rm} from 'node:fs/promises';
+import {mkdtemp,readFile,realpath,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {XClient,decode} from '../src/client.mjs';
@@ -17,6 +17,34 @@ test('profile uses observed same-origin route and exact identity',async()=>{
 });
 test('HTML login response is failure',async()=>{await assert.rejects(client(async()=>new Response('<html>login</html>')).profile('sama'),/NOT_JSON/);});
 test('429 has no implicit retry',async()=>{let n=0;await assert.rejects(client(async()=>{n++;return new Response('',{status:429});}).profile('sama'),/RATE_LIMITED/);assert.equal(n,1);});
+test('401 is auth rejection while 403 is access blocked; both preserve status and MIME',async()=>{
+  for(const [status,code,mime] of [[401,'AUTH_REJECTED','application/json; charset=utf-8'],[403,'ACCESS_BLOCKED','text/html; charset=utf-8']]){
+    let calls=0;const c=client(async()=>{calls++;return new Response('denied',{status,headers:{'content-type':mime}});});
+    await assert.rejects(c.profile('sama'),error=>error.code===code&&error.receipt.status===status&&error.receipt.mime===mime&&!('body' in error.receipt));
+    assert.equal(calls,1);c.close();
+  }
+});
+test('publish preserves a 403 response receipt without retrying or clearing the session',async()=>{
+  const journalDir=await mkdtemp(path.join(tmpdir(),'snsx-'));let writes=0;
+  const c=client(async(url,options)=>{
+    if(url.pathname.endsWith('UserByScreenName'))return json({user:{result:{__typename:'User',rest_id:'1605',core:{screen_name:'sama'}}}});
+    if(options.method==='POST'){writes++;return new Response('denied',{status:403,headers:{'content-type':'text/html; charset=utf-8'}});}
+    throw Error('unexpected request');
+  });
+  const job={text:'hello',expectedHandle:'sama',expectedUserId:'1605',jobId:'blocked',execute:true,journalDir};
+  try{
+    await assert.rejects(c.publish(job),error=>error.code==='unknown_needs_review'&&error.receipt.responseReceipt?.status===403&&error.receipt.responseReceipt?.mime==='text/html; charset=utf-8');
+    assert.equal(writes,1);
+    const receipt=JSON.parse(await readFile(path.join(journalDir,'blocked.json'),'utf8'));
+    assert.equal(receipt.state,'unknown_needs_review');assert.equal(receipt.error,'ACCESS_BLOCKED');
+    assert.equal(receipt.responseReceipt.status,403);assert.equal(receipt.responseReceipt.mime,'text/html; charset=utf-8');
+    assert.equal(c.headers.cookie,'auth_token=fixture-auth; ct0=fixture-csrf');
+  }finally{
+    c.close();const target=await realpath(journalDir),parent=await realpath(tmpdir());
+    assert.equal(path.dirname(target),parent);assert.ok(path.basename(target).startsWith('snsx-'));
+    await rm(target,{recursive:true});
+  }
+});
 test('author filtering and absent metrics remain distinct from zero',()=>{
   const p=decode(instructions,'sama');assert.equal(p.items[0].metrics.likes,0);assert.equal(p.items[0].metrics.views,null);assert.equal(decode(instructions,'other').items.length,0);
 });

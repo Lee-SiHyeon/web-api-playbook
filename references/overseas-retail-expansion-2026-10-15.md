@@ -50,3 +50,5 @@ node scripts/overseas-retail-ontology.mjs --input=verification/retail-iherb-site
 - [체크리스트 감사](../verification/retail-overseas-audit-2026-10-15.json): SHEIN 홈과 iHerb ID 조회는 현재 코드 해시의 `recorded_live`. 4개 사이트의 전체 strict 검사는 남은 필수 기능 때문에 예상대로 종료 코드 2다. 관련 테스트 50개가 통과했다(두 명령에서 공통 테스트 3개 중복 실행).
 
 `scripts/verify-overseas-retail.mjs`는 저장된 CLI 결과를 읽어 필드·고유 ID·요청 상태·구현 해시를 검증하며 네트워크를 사용하지 않는다. `direct_http_observed` 검증은 별도 실제 CLI 결과와 결합하며, `recorded_live`는 해당 날짜의 실행 증거다. 계정 자격 증명·제휴 승인·전체 카탈로그를 뜻하지 않는다. 원문 HTML과 인증값은 증거에 저장하지 않았다.
+
+2026-10-15 경로 재감사에서 이 명령을 읽기 전용으로 교정했다. 과거 proof 파일과 `checkedAt`를 보존하고 저장 당시의 실행 코드 해시를 대조한다. 실행 코드가 바뀌면 실패하며, 과거 응답을 현재 코드의 성공 증거로 다시 발급하지 않는다. verifier 자체 변경은 별도 이력으로 보고하고 현재 계약 검증은 계속 수행한다.

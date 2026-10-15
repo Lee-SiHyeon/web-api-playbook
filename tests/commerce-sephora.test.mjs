@@ -77,6 +77,121 @@ test('Sephora anonymous search returns source-bound product IDs and normalized U
   assert.equal(JSON.stringify(result.receipt).includes('lipstick'), false);
 });
 
+test('Sephora records the observed 60-result page when the smaller page-size hint is ignored', async () => {
+  let received;
+  const data = {
+    keyword: 'serum',
+    totalProducts: 745,
+    products: Array.from({ length: 60 }, (_, index) => product({
+      id: `P${30000 + index}`,
+      sku: String(200000 + index),
+      name: `Fixture Serum ${index}`,
+      price: '$1.00',
+    })),
+  };
+  const client = createSephoraPublicClient({ fetchImpl: async (url, init) => {
+    received = { url, init };
+    return jsonResponse(data);
+  } });
+
+  const result = await client.searchProducts({ query: 'serum', page: 1, pageSize: 10 });
+
+  assert.equal(received.url.searchParams.get('page'), '10');
+  assert.equal(received.init.credentials, 'omit');
+  assert.equal(result.requestedPageSize, 10);
+  assert.equal(result.pageSize, 60);
+  assert.equal(result.pageCount, 13);
+  assert.equal(result.products.length, 60);
+  assert.equal(result.receipt.queryMatched, true);
+  assert.equal(result.receipt.request.schemaVerified, true);
+  assert.equal(result.receipt.request.requestedPageSize, 10);
+  assert.equal(result.receipt.request.pageSize, 60);
+  assert.equal(result.receipt.request.productCount, 60);
+});
+
+test('Sephora pagination keeps the observed 60-result width on its final short page', async () => {
+  const requestedPages = [];
+  const requestedPageSizes = [];
+  const client = createSephoraPublicClient({ fetchImpl: async url => {
+    const page = Number(url.searchParams.get('currentPage'));
+    requestedPages.push(page);
+    requestedPageSizes.push(Number(url.searchParams.get('page')));
+    const products = page === 1
+      ? Array.from({ length: 60 }, (_, index) => product({
+        id: `P${40000 + index}`,
+        sku: String(300000 + index),
+        name: `Fixture Serum ${index}`,
+        price: '$1.00',
+      }))
+      : Array.from({ length: 25 }, (_, index) => product({
+        id: `P${40060 + index}`,
+        sku: String(300060 + index),
+        name: `Final Fixture Serum ${index}`,
+        price: '$1.00',
+      }));
+    return jsonResponse({ keyword: 'serum', totalProducts: 85, products });
+  } });
+
+  const all = await client.searchAllProducts({ query: 'serum', pageSize: 10, maxPages: 2 });
+
+  assert.deepEqual(requestedPages, [1, 2]);
+  assert.deepEqual(requestedPageSizes, [10, 60]);
+  assert.equal(all.requestedPageSize, 10);
+  assert.equal(all.pageSize, 60);
+  assert.equal(all.totalProducts, 85);
+  assert.equal(all.pageCount, 2);
+  assert.equal(all.complete, true);
+  assert.deepEqual(all.pages.map(page => page.pageSize), [60, 60]);
+  assert.deepEqual(all.pages.map(page => page.returnedProducts), [60, 25]);
+});
+
+test('Sephora rejects a 60-row response when totalProducts claims fewer results', async () => {
+  const data = {
+    keyword: 'serum',
+    totalProducts: 10,
+    products: Array.from({ length: 60 }, (_, index) => product({
+      id: `P${50000 + index}`,
+      sku: String(400000 + index),
+      name: `Fixture Serum ${index}`,
+      price: '$1.00',
+    })),
+  };
+  const client = createSephoraPublicClient({ fetchImpl: async () => jsonResponse(data) });
+
+  await assert.rejects(client.searchProducts({ query: 'serum', pageSize: 10 }), {
+    code: 'SEPHORA_SEARCH_SCHEMA_INVALID',
+  });
+});
+
+test('Sephora does not carry an observed page width into an independent query', async () => {
+  const client = createSephoraPublicClient({ fetchImpl: async url => {
+    const query = url.searchParams.get('q');
+    const products = query === 'serum'
+      ? Array.from({ length: 60 }, (_, index) => product({
+        id: `P${51000 + index}`,
+        sku: String(410000 + index),
+        name: `Fixture Serum ${index}`,
+        price: '$1.00',
+      }))
+      : Array.from({ length: 10 }, (_, index) => product({
+        id: `P${52000 + index}`,
+        sku: String(420000 + index),
+        name: `Fixture Blush ${index}`,
+        price: '$1.00',
+      }));
+    return jsonResponse({ keyword: query, totalProducts: query === 'serum' ? 120 : 15, products });
+  } });
+
+  const first = await client.searchProducts({ query: 'serum', pageSize: 10 });
+  const second = await client.searchProducts({ query: 'blush', pageSize: 10 });
+
+  assert.equal(first.pageSize, 60);
+  assert.equal(first.pageCount, 2);
+  assert.equal(second.pageSize, 10);
+  assert.equal(second.pageCount, 2);
+  assert.equal(second.products.length, 10);
+});
+
 test('Sephora pagination collects every verified page and refuses duplicates or count drift', async () => {
   const requestedPages = [];
   const client = createSephoraPublicClient({ fetchImpl: async url => {

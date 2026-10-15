@@ -236,8 +236,11 @@ function parseCard(anchor, { baseUrl, checkedAt, priceScope }) {
   const rawText = plainText(anchor) ?? '';
   const cardType = anchor.getAttribute('data-card-type') ?? null;
   const image = anchor.querySelector('img')?.getAttribute('src') ?? null;
-  const fallbackTitle = plainText(anchor.querySelector('div[class*="mb-4"][class*="line-clamp-1"]'))
-    ?? plainText(anchor.querySelector('div[class*="pc:px-4"] > div'));
+  // Current live result cards expose the product name in this observed text
+  // span; keep the older observed labels as fallbacks for earlier layouts.
+  const fallbackTitle = plainText(anchor.querySelector('span.line-clamp-2.typography-subtitle-16-bold'))
+    || plainText(anchor.querySelector('div[class*="mb-4"][class*="line-clamp-1"]'))
+    || plainText(anchor.querySelector('div[class*="pc:px-4"] > div'));
   return {
     sellerId: 'yanolja-hotel',
     hotelId,
