@@ -58,3 +58,24 @@ Conclusion update: **PDP business payload is reachable as `headless_assisted_htt
 - PDP payload in the browser capture has KRW price fields (`formatedAmount`, `salePriceString`), so this is the price source.
 - Pure HTTP (`requests`, Chrome UA, home hop for cookies, then one signed MTop GET 6 s later): home **200 ok**, MTop **200 but `FAIL_SYS_USER_VALIDATE` / `RGV587_ERROR::SM`** (anti-bot challenge), no `_m_h5_tk` issued. Stopped after 1 MTop call (no retry, no challenge solve).
 - Conclusion: AliExpress price is **not** reachable keyless browser-free from this egress. Options: (a) browser-session assisted (real browser obtains `_m_h5_tk`/`x5sec`/`cna`, store in DB, HTTP client replays until expiry), or (b) official AliExpress Portals/Affiliate API (needs app key).
+
+## Status vs. main readers (2026-10-16 ~09:20 KST recheck)
+
+The sitemap client above is now wrapped by `scripts/overseas-retail.mjs` (`npm run retail:overseas`): `aliexpress|iherb sitemap-index` and `sitemap-products --shard-index --offset --limit [--snapshot-sha]` (resumable, `completeCatalog:false`). `listProducts()` still exists and now delegates to `productsPage()`. See [overseas-retail-expansion-2026-10-15](overseas-retail-expansion-2026-10-15.md) for the full CLI and ontology flow.
+
+The table at the top was about sitemaps only. Later main commits changed two rows:
+
+- **SHEIN:** the sitemap is still blocked, but `shein home` parses `gbRawData` from the KR home Document over plain HTTP: 10 cards with KRW sale and retail display prices, plus 15 menu links. Category Documents redirect to `/risk/challenge`.
+- **Temu:** the observed `/kr/channel/best-sellers.html` GET returns 200 but has no verified product list. There is still no supported CLI operation for Temu.
+
+Light live recheck from this box (cookieless, one CLI at a time, ≥6 s apart, no retries):
+
+| Command | Result |
+|---|---|
+| `iherb sitemap-index` | 200, 3 product shards |
+| `aliexpress sitemap-index` | 200, 604 item shards |
+| `aliexpress sitemap-products --shard-index=0 --limit=20` | 200, 31,999 unique IDs in shard 0, IDs + lastmod only |
+| `retail.mjs aliexpress product-seo` | 200. The description is present, but `title` came back as the bare `" - AliExpress "` suffix and price stays null |
+| `shein home` | 200, 10 priced cards |
+
+AliExpress price is still unavailable without the official Portals API. See the browser-free MTop section above.

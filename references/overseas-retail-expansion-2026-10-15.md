@@ -4,7 +4,7 @@
 
 | 원천 | 이번 구현·검증 | 미완료 범위 |
 |---|---|---|
-| AliExpress | 기존 관측 sitemap 계약을 CLI에 연결. XML/gzip 크기 제한·중복 제거·재개 해시를 오프라인 검증 | 사이트 도구 안전 정책이 페이지 접근을 거부해 알리 직접 HTTP 호출 0회. 현재 sitemap·검색·상세·가격·옵션·리뷰 라이브 미검증 |
+| AliExpress | 기존 관측 sitemap 계약을 CLI에 연결. XML/gzip 크기 제한·중복 제거·재개 해시를 오프라인 검증 | 사이트 도구 안전 정책이 페이지 접근을 거부해 알리 직접 HTTP 호출 0회. 현재 sitemap·검색·상세·가격·옵션·리뷰 라이브 미검증 (2026-10-16 sitemap-index·sitemap-products 직접 HTTP 200 재확인: [keyless probe](overseas-keyless-probe-2026-10-14.md#status-vs-main-readers-2026-10-16-0920-kst-recheck). 검색·상세·가격·옵션·리뷰는 여전히 미검증) |
 | Temu | 화면 탐색과 관측된 `/kr/channel/best-sellers.html` GET 확인 | HTTP 200, 2,922바이트이지만 검증된 상품 목록 없음. 상품 요청 캡처·HTTP 클라이언트 미완료 |
 | SHEIN | KR 홈 Document의 `gbRawData`를 JS 실행 없이 파싱. 상품 10개·KRW 표시가·메뉴 목적지 15개 | 후속 분류 GET이 302 `/risk/challenge`로 이동하여 추가 요청 중단. 상세·SKU·재고·리뷰·전체 분류·페이지 이동 미검증 |
 | iHerb | www 사이트맵 3개 발견. 첫 XML의 고유 ID 20,500개 중 100개를 CLI로 출력 | 첫 파일 나머지와 2개 파일, 상품명·가격·재고·옵션·리뷰. 별도 KR storefront는 403 challenge |
