@@ -62,7 +62,9 @@ const status = store.status('example-session');
 
 `read(name)`, `write(name, value)`, `status(name)`은 동기 메서드입니다. `directory`는 선택 가능하며 `store.directory`에서 정규화된 절대 경로를 읽을 수 있습니다. 이름은 `^[a-z0-9][a-z0-9.-]{0,63}$`여야 합니다. 값은 UTF-8 문자열이며 최대 1 MiB입니다. Secret 값은 명령 인자나 환경변수로 넘기지 않고 PowerShell helper의 stdin으로만 전달합니다.
 
-Windows에서는 provider를 지정하지 않으면 Windows DPAPI CurrentUser를 사용합니다. 파일 내용은 DPAPI 암호문입니다. 새 저장 디렉터리는 현재 사용자 ACL로 만들고, 이미 존재하는 사용자 지정 디렉터리의 ACL은 변경하지 않으므로 전용 경로를 지정하세요. DPAPI는 같은 Windows 사용자 컨텍스트에서만 복호화됩니다. 다른 OS에서는 자동으로 디스크 암호화를 흉내 내지 않습니다. 명시적으로 `{ provider: 'memory' }`를 선택하면 현재 Node 프로세스 메모리에만 보관되며 재시작 후 사라집니다. AES 파일 암호화나 임의 key 파일은 구현하지 않습니다.
+Windows에서는 provider를 지정하지 않으면 Windows DPAPI CurrentUser를 사용합니다. 파일 내용은 DPAPI 암호문입니다. 새 저장 디렉터리는 현재 사용자 ACL로 만들고, 이미 존재하는 사용자 지정 디렉터리의 ACL은 변경하지 않으므로 전용 경로를 지정하세요. DPAPI는 같은 Windows 사용자 컨텍스트에서만 복호화됩니다. 다른 OS에서는 기본값이 없습니다(`PROTECTED_STORE_PROVIDER_REQUIRED`). 명시적으로 `{ provider: 'memory' }`를 선택하면 현재 Node 프로세스 메모리에만 보관되며 재시작 후 사라집니다.
+
+Linux/macOS 지속 저장은 opt-in `{ provider: 'file' }` 또는 환경변수 `PROTECTED_STORE_PROVIDER=file`입니다(인자 없이 `new ProtectedStore()`를 쓰는 기존 봇은 환경변수로 켭니다). 값마다 AES-256-GCM으로 봉인해 `<directory>/<name>.sealed`(0600, 디렉터리 0700)에 원자적으로 씁니다. 자격 증명 이름을 AAD로 묶어 다른 이름으로 파일을 바꿔치기하면 복호화가 실패합니다. 키는 `PROTECTED_STORE_KEY`(base64 32바이트, 서버리스·CI용) 또는 `PROTECTED_STORE_KEY_FILE`(기본 `~/.config/xhr-to-api-only/protected-store.key`, 첫 사용 시 0600으로 생성)입니다. 키 파일과 봉인 파일이 같은 사용자 계정에 있으므로 DPAPI CurrentUser와 같은 수준(같은 OS 사용자면 복호화 가능)이며, 키를 git·로그에 넣지 마세요. receipt provider는 `Linux AES-256-GCM file`입니다. 이 repo의 X 세션 클라이언트는 Node 24 이상이 필요합니다(`x-client-transaction-id`가 `ArrayBuffer.prototype.transfer` 사용).
 
 ## `withSessionLock`
 

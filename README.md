@@ -325,7 +325,7 @@ node scripts/request.mjs --profile=work/profile.json --operation=update-item --i
 | `MODULE_NOT_FOUND` | 실행 중인 사본의 루트에서 `npm ci --ignore-scripts` 실행 여부 |
 | `TARGET_ALREADY_EXISTS` | 스킬 설치 대상이 이미 있음. 새 경로/보관 후 설치 |
 | `PROVIDER_MISSING` | 저장 이름/폴더/Windows 사용자 및 실제 child runner 전달 |
-| `PROTECTED_STORE_PROVIDER_REQUIRED` | Windows 외 OS에서 DPAPI 지속 저장을 요구했는지. stdin/provider 경로 사용 |
+| `PROTECTED_STORE_PROVIDER_REQUIRED` | Windows 외 OS에서 provider 미지정. 지속 저장은 `PROTECTED_STORE_PROVIDER=file`(AES-256-GCM 봉인 파일), 일회성은 stdin/memory |
 | `OWNER_MISMATCH` | 준비한 identity와 서버의 실제 계정/블로그/조직이 같은지 |
 | `SESSION_SCOPE_MISMATCH` | 저장 시점 profile과 현재 origin/cookie 범위가 달라졌는지 |
 | `MIME_UNEXPECTED` | JSON 대신 로그인 HTML/SPA/오류 페이지를 받았는지 |
