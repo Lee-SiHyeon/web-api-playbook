@@ -1,0 +1,55 @@
+{
+  "schema": "aliexpress-offline-validation-v1",
+  "checkedAt": "2026-10-16T00:44:34.823Z",
+  "fullSuite": {
+    "command": "npm test",
+    "tests": 745,
+    "pass": 744,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 1,
+    "todo": 0,
+    "note": "Final working tree after the strict base64 guard and integration of upstream main de5533033911886c63f79a5213c56f0fef087c03."
+  },
+  "finalTargetedSuite": {
+    "command": "node --test tests/contracts-jsonp.test.mjs tests/browser-evidence.test.mjs tests/retail-aliexpress.test.mjs tests/retail-overseas-sitemaps.test.mjs tests/overseas-retail-cli.test.mjs",
+    "tests": 27,
+    "pass": 27,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "checklist": {
+    "command": "node scripts/checklist.mjs --service=aliexpress --json",
+    "summary": {
+      "total": 12,
+      "recordedLive": 0,
+      "needsReverification": 1,
+      "requiredGaps": [
+        "catalog.product_seo",
+        "catalog.product_detail",
+        "catalog.search",
+        "catalog.offer_price",
+        "catalog.categories",
+        "catalog.pagination",
+        "catalog.reviews",
+        "catalog.sitemap_products"
+      ],
+      "strictPassed": false
+    }
+  },
+  "independentReview": {
+    "performed": true,
+    "blockerCount": 0,
+    "followUpFixed": "Malformed HAR base64 is rejected before schema parsing."
+  },
+  "sourceHashes": {
+    "lib/contracts.mjs": "6d216c1b7f1ac673f5cd8a744c73cdfaf154ba992da2f6b45a7d3c7c4a56efa8",
+    "lib/browser-evidence.mjs": "dadce20f90fe3ea3c1fe17b24c9fade7f2d46b3086a914a2d930726767ee8d91",
+    "tests/contracts-jsonp.test.mjs": "077c7a5fd3f5ed37e7f5940beee609af0774ae1b577fd0695b344d8263f42f3c",
+    "checklists/services/aliexpress.json": "80be096a90b77cc323660a4ba31c328a7c5964ae68007b565cccabf0b5be2ea9"
+  },
+  "liveReplay": false,
+  "directAliHttpCalls": 0
+}

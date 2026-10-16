@@ -16,10 +16,15 @@
       "priority": 1,
       "status": "blocked_tool_policy",
       "currentRun": {
+        "checkedAt": "2026-10-16T00:39:15.671Z",
         "directHttpCalls": 0,
-        "browserOpen": "site_safety_policy_denied",
+        "browserNavigation": "Google organic link clicked; AliExpress URL/title in tab metadata",
+        "browserObservation": "site_safety_policy_denied",
+        "screenshotCaptured": false,
         "autoReviewAttempted": false,
-        "workaroundAttempted": false
+        "userPermissionPromptAttempted": false,
+        "workaroundAttempted": false,
+        "evidence": "verification/aliexpress-reassessment-2026-10-16/browser-attempt.json"
       },
       "implemented": [
         "product-seo (historical)",
@@ -38,8 +43,21 @@
         "Category traversal and pagination",
         "Reviews and review pagination"
       ],
-      "note": "The browser tool denied site access. No alternate HTTP or browser route was attempted in this run. Sitemap changes use existing observed contracts and offline fixtures only.",
-      "currentUserExcluded": true
+      "note": "User exclusion lifted. The current tool denial is page observation, not an observed HTTP 403 or a CAPTCHA. Local historical inventory review found 3 PDP and 6 review response observations, but business schemas and current direct replay remain unverified.",
+      "currentUserExcluded": false,
+      "previousRuns": [
+        {
+          "checkedAt": "2026-10-15T00:21:04.630Z",
+          "directHttpCalls": 0,
+          "browserOpen": "site_safety_policy_denied",
+          "autoReviewAttempted": false,
+          "workaroundAttempted": false
+        }
+      ],
+      "evidence": [
+        "verification/aliexpress-reassessment-2026-10-16/browser-attempt.json",
+        "verification/aliexpress-reassessment-2026-10-16/historical-contracts.json"
+      ]
     },
     {
       "service": "temu",
@@ -407,19 +425,35 @@
     }
   ],
   "currentUserScope": {
-    "checkedAt": "2026-10-15T06:16:52.005Z",
+    "checkedAt": "2026-10-16T00:39:15.671Z",
     "priority": [
-      "amazon"
-    ],
-    "excluded": [
       "aliexpress"
     ],
+    "excluded": [],
     "retainedBacklog": [
       "shein",
       "iherb",
       "temu"
     ],
-    "amazonFrontier": "verification/amazon-discovery-2026-10-15/frontier.json",
-    "note": "Historical observations below are retained; exclusion prevents new AliExpress work."
-  }
+    "previousAmazonFrontier": "verification/amazon-discovery-2026-10-15/frontier.json",
+    "note": "The user explicitly resumed AliExpress. Its previous exclusion is lifted; the new browser observation remains blocked by tool policy, not missing user authorization."
+  },
+  "userScopeHistory": [
+    {
+      "checkedAt": "2026-10-15T06:16:52.005Z",
+      "priority": [
+        "amazon"
+      ],
+      "excluded": [
+        "aliexpress"
+      ],
+      "retainedBacklog": [
+        "shein",
+        "iherb",
+        "temu"
+      ],
+      "amazonFrontier": "verification/amazon-discovery-2026-10-15/frontier.json",
+      "note": "Historical observations below are retained; exclusion prevents new AliExpress work."
+    }
+  ]
 }

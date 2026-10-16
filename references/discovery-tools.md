@@ -60,6 +60,17 @@ node scripts/har-to-contracts.mjs --input=.\examples\sanitized.har.json --output
 
 `mutationCandidate` is a review hint for write-like HTTP methods. It is not proof of a mutation, and a POST may be a read. Conversely, a GET can still mutate. Do not replay a candidate until its semantics, actor scope, parameters, response behavior, and required authentication are independently established.
 
+For JSON/JavaScript responses with an observed `callback` query parameter, the
+inventory also supports a single JSONP wrapper whose simple identifier exactly
+matches that request parameter. It parses only the JSON argument with
+`JSON.parse`; it never evaluates scripts. Duplicate/mismatched callbacks,
+expressions, additional arguments and executable suffixes are rejected. Output
+records `responseFormat: json` or `jsonp`, never the callback value. Structured
+bodies over 4 MiB retain the size-limit gap. A parseable error envelope is still
+only a schema observation, not usable business data or a direct replay. Existing
+inventories containing `invalid_json` cannot be recovered without the original
+authorized body; do not relabel them as successfully parsed JSONP.
+
 ## Discover candidates from saved HTML
 
 The HTML tool parses one saved local document. It extracts anchors/areas, frames, scripts with `src`, and links with `href`. It does not fetch those destinations or script imports, inspect inline script source, or claim XHR capture.

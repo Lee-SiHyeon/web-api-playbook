@@ -6,15 +6,33 @@
   "discovery": {
     "browser": "Playwright Chromium, anonymous fresh context, discovery only",
     "pages": [
-      { "kind": "home", "origin": "https://www.aliexpress.com", "status": 200, "redirectedOrigin": "https://ko.aliexpress.com" },
-      { "kind": "search", "origin": "https://www.aliexpress.com", "path": "/w/wholesale-usb-cable.html", "status": 200, "visibleResults": true },
-      { "kind": "item", "origin": "https://ko.aliexpress.com", "path": "/item/1005011947482958.html", "status": 200, "visibleTitle": true, "visiblePrice": true }
+      {
+        "kind": "home",
+        "origin": "https://www.aliexpress.com",
+        "status": 200,
+        "redirectedOrigin": "https://ko.aliexpress.com"
+      },
+      {
+        "kind": "search",
+        "origin": "https://www.aliexpress.com",
+        "path": "/w/wholesale-usb-cable.html",
+        "status": 200,
+        "visibleResults": true
+      },
+      {
+        "kind": "item",
+        "origin": "https://ko.aliexpress.com",
+        "path": "/item/1005011947482958.html",
+        "status": 200,
+        "visibleTitle": true,
+        "visiblePrice": true
+      }
     ],
     "searchResultXhrObserved": false,
     "priceXhrObserved": false,
     "categoryXhrObserved": false,
     "paginationXhrObserved": false,
-    "notes": "The visible search result and price do not establish an XHR contract. First-party recommendation MTOP POSTs were observed but require a signed request and were not independently replayed.",
+    "notes": "Search Documents are valid direct-HTTP build targets. Historical browser observations and source candidates do not establish a current usable client or live replay.",
     "followUpObservedAt": "2026-10-05T02:19:40Z",
     "currentSearchDocument": {
       "origin": "https://www.aliexpress.com",
@@ -24,7 +42,11 @@
       "mime": "text/html",
       "responseBytes": 848237,
       "uniqueProductLinks": 60,
-      "productIdsUsedForDetailProbe": ["1005011667478296", "1005006510589628", "1005009561948552"],
+      "productIdsUsedForDetailProbe": [
+        "1005011667478296",
+        "1005006510589628",
+        "1005009561948552"
+      ],
       "apiResult": false,
       "meaning": "Public HTML discovery only; not a search XHR replay"
     },
@@ -57,12 +79,20 @@
         "productId": "numeric public item ID",
         "subject": "public visible listing title in observed browser XHR; optional in verified independent HTTP replay"
       },
-      "requestHeaders": { "referer": "https://ko.aliexpress.com/item/{productId}.html" },
+      "requestHeaders": {
+        "referer": "https://ko.aliexpress.com/item/{productId}.html"
+      },
       "encoding": "URL query string",
       "response": {
         "status": 200,
         "mime": "application/json",
-        "applicationChecks": ["code=200", "success=true", "body.title nonempty", "body.description string", "body.canonical matches item ID"],
+        "applicationChecks": [
+          "code=200",
+          "success=true",
+          "body.title nonempty",
+          "body.description string",
+          "body.canonical matches item ID"
+        ],
         "sampleResponseBytes": 6338,
         "observedResponseSha256": "6d8e8813e7298c0bf42ca1bbd81803b318d64f817c8f851131eaa0ee85cba12f"
       },
@@ -82,7 +112,7 @@
     },
     {
       "operation": "productDetail",
-      "evidenceLevel": "first_party_js_contract_and_browser_request_observed_but_challenged_before_business_data",
+      "evidenceLevel": "historical_browser_request_and_transport_observed_business_schema_unverified",
       "method": "GET",
       "origin": "https://acs.aliexpress.com",
       "path": "/h5/mtop.aliexpress.pdp.pc.query/1.0/",
@@ -98,7 +128,20 @@
         "version": "1.0",
         "method": "GET",
         "type": "originaljsonp",
-        "dataKeys": ["productId", "_lang", "_currency", "country", "province", "city", "channel", "pdp_ext_f", "pdpNPI", "sourceType", "clientType", "ext"],
+        "dataKeys": [
+          "productId",
+          "_lang",
+          "_currency",
+          "country",
+          "province",
+          "city",
+          "channel",
+          "pdp_ext_f",
+          "pdpNPI",
+          "sourceType",
+          "clientType",
+          "ext"
+        ],
         "clientType": "pc"
       },
       "observedOutcome": {
@@ -110,10 +153,16 @@
           "userSessionUsed": false,
           "httpStatus": 200,
           "mime": "application/json",
-          "topLevelKeys": ["data", "dialogSize", "ret"],
+          "topLevelKeys": [
+            "data",
+            "dialogSize",
+            "ret"
+          ],
           "businessPayloadReceived": false,
           "challengeDetected": true,
-          "responseCookieNamesOnly": ["x5secdata"],
+          "responseCookieNamesOnly": [
+            "x5secdata"
+          ],
           "mtopTokenAvailableFromFreshHtmlBootstrap": false
         },
         "screenshot": "verification/retail-blockers/aliexpress-detail-2026-10-05.png",
@@ -122,16 +171,70 @@
         "userSessionUsed": false,
         "captchaBypassed": false
       },
-      "semantics": "First-party product-detail candidate only. No product title, variants, price, currency, stock, or detail fields were accepted from the challenged response. The emitted JSONP script request is not described as XHR."
+      "semantics": "First-party product-detail candidate only. No product title, variants, price, currency, stock, or detail fields were accepted from the challenged response. The emitted JSONP script request is not described as XHR.",
+      "subsequentBrowserObservation": {
+        "method": "GET",
+        "origin": "https://acs.aliexpress.com",
+        "path": "/h5/mtop.aliexpress.pdp.pc.query/1.0/",
+        "queryFieldNames": [
+          "api",
+          "appKey",
+          "callback",
+          "data",
+          "dataType",
+          "jsv",
+          "sign",
+          "t",
+          "timeout",
+          "type",
+          "v"
+        ],
+        "observations": [
+          {
+            "sourceEntry": 15,
+            "observedAt": "2026-10-14T15:14:14.773Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 194676,
+            "responseSha256": "43987f8ce71db2c16d46ba3133323ec61cc8cf41b1dcab08c3c39db56d9c2420",
+            "storedSchemaState": "invalid_json"
+          },
+          {
+            "sourceEntry": 662,
+            "observedAt": "2026-10-14T15:14:35.312Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 253022,
+            "responseSha256": "6ead1ef784e23cb7881684c3a5bf17b797bdbc5fb7a68c875c8bac7df3a6e909",
+            "storedSchemaState": "invalid_json"
+          },
+          {
+            "sourceEntry": 991,
+            "observedAt": "2026-10-14T15:14:42.653Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 102908,
+            "responseSha256": "9f8ef49a4314fc048b9ce17728e6d86f734f0cc7c20494a4d60d24a3d9e28f8b",
+            "storedSchemaState": "invalid_json"
+          }
+        ],
+        "requestObserved": true,
+        "responseSchemaAccepted": false,
+        "businessOutcome": "unclassified",
+        "clientImplemented": false,
+        "independentHttpReplayVerified": false,
+        "source": "verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json",
+        "reassessment": "verification/aliexpress-reassessment-2026-10-16/historical-contracts.json"
+      }
     },
     {
       "operation": "productReviews",
-      "evidenceLevel": "not_observed",
+      "evidenceLevel": "historical_browser_request_observed_response_schema_unverified",
       "firstPartyRendererInspection": {
         "htmlScriptAssets": [
-        "/g/ae-fe/global/0.0.3/index.js",
-        "/g/ae-fe/cosmos/0.0.451/pc/index.js",
-        "/g/lzd_sec/LWSC-G/index.js",
+          "/g/ae-fe/global/0.0.3/index.js",
+          "/g/ae-fe/cosmos/0.0.451/pc/index.js",
+          "/g/lzd_sec/LWSC-G/index.js",
           "/g/ae-fe/page-header-ui/0.0.94/js/index.js",
           "/g/code/npm/@alife/nano-cross-page-loader/0.0.51/_cross_page_loader_.js",
           "/g/ae-fe/pdp-pc/0.2.140/js/index.js"
@@ -150,8 +253,99 @@
         "reviewDateReceived": false,
         "reviewPaginationObserved": false
       },
-      "semantics": "No review endpoint, review record schema, photo schema, or pagination contract is inferred from the summary rating UI or global reviews landing-page footer."
+      "semantics": "The October 5 absence was superseded by six October 14 browser request/response observations. The inventory retains invalid_json; original bodies are not available here to verify JSONP syntax, review fields or paging. No review client or current direct replay is claimed. The global /reviews.html footer is not a product-review contract.",
+      "method": "GET",
+      "origin": "https://acs.aliexpress.com",
+      "path": "/h5/mtop.aliexpress.review.pc.list/1.0/",
+      "runtimeObservationAt": "2026-10-05T02:19:40Z",
+      "subsequentBrowserObservation": {
+        "method": "GET",
+        "origin": "https://acs.aliexpress.com",
+        "path": "/h5/mtop.aliexpress.review.pc.list/1.0/",
+        "queryFieldNames": [
+          "api",
+          "appKey",
+          "callback",
+          "data",
+          "dataType",
+          "jsv",
+          "sign",
+          "t",
+          "type",
+          "v"
+        ],
+        "observations": [
+          {
+            "sourceEntry": 206,
+            "observedAt": "2026-10-14T15:14:18.025Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 14700,
+            "responseSha256": "c9489cd233712ce037349f8f5ef380bc1ed5a398fb9c7d7e553df6cd0bfe251c",
+            "storedSchemaState": "invalid_json"
+          },
+          {
+            "sourceEntry": 207,
+            "observedAt": "2026-10-14T15:14:18.025Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 9534,
+            "responseSha256": "93ab48ae9c511ce46cc978c8d27aa831bcd1faaeef27fa3d915d97170c702bd6",
+            "storedSchemaState": "invalid_json"
+          },
+          {
+            "sourceEntry": 884,
+            "observedAt": "2026-10-14T15:14:37.411Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 12125,
+            "responseSha256": "7e037e3bac0596eb12a8a65f0df50690dbf2399968a55c6a80cf98ed13509407",
+            "storedSchemaState": "invalid_json"
+          },
+          {
+            "sourceEntry": 885,
+            "observedAt": "2026-10-14T15:14:37.411Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 8749,
+            "responseSha256": "9053a76eb1045c2df83fc55e4206b3fdd15f3acc3b969df9b647ab8508963111",
+            "storedSchemaState": "invalid_json"
+          },
+          {
+            "sourceEntry": 1091,
+            "observedAt": "2026-10-14T15:14:43.606Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 11735,
+            "responseSha256": "0fe66ad7b01491801bf383bfe31a5e3f7dd01f04ca153b6a02f9aea13867ce95",
+            "storedSchemaState": "invalid_json"
+          },
+          {
+            "sourceEntry": 1092,
+            "observedAt": "2026-10-14T15:14:43.606Z",
+            "httpStatus": 200,
+            "mime": "application/json",
+            "responseBytes": 8063,
+            "responseSha256": "f4a79dc841fc3993ca9f81f51e19c7a9db5c8faa684598c845c1a910ec2534e7",
+            "storedSchemaState": "invalid_json"
+          }
+        ],
+        "requestObserved": true,
+        "responseSchemaAccepted": false,
+        "businessOutcome": "unclassified",
+        "clientImplemented": false,
+        "independentHttpReplayVerified": false,
+        "source": "verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json",
+        "reassessment": "verification/aliexpress-reassessment-2026-10-16/historical-contracts.json"
+      }
     }
   ],
-  "secretsPersistedInEvidence": false
+  "secretsPersistedInEvidence": false,
+  "reassessedAt": "2026-10-16T00:39:15.671Z",
+  "currentAttempt": {
+    "status": "blocked_tool_policy",
+    "evidence": "verification/aliexpress-reassessment-2026-10-16/browser-attempt.json",
+    "siteHttpStatus": null,
+    "directHttpCalls": 0
+  }
 }
