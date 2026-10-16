@@ -75,7 +75,7 @@ Light live recheck from this box (cookieless, one CLI at a time, ≥6 s apart, n
 | `iherb sitemap-index` | 200, 3 product shards |
 | `aliexpress sitemap-index` | 200, 604 item shards |
 | `aliexpress sitemap-products --shard-index=0 --limit=20` | 200, 31,999 unique IDs in shard 0, IDs + lastmod only |
-| `retail.mjs aliexpress product-seo` | 200. The description is present, but `title` came back as the bare `" - AliExpress "` suffix and price stays null |
+| `retail.mjs aliexpress product-seo` | 200 with the description, but the site returned only the bare `" - AliExpress "` suffix as the title, with or without `subject`; the item Document `og:title` was the same. The reader now strips the suffix and returns `title:null` with `titleSource` and `seoTitleRaw`, instead of a fake title. Price stays null |
 | `shein home` | 200, 10 priced cards |
 
 AliExpress price is still unavailable without the official Portals API. See the browser-free MTop section above.

@@ -86,3 +86,5 @@ node scripts/checklist.mjs --service=yahoo-shopping-jp --run-tests
 현재 공개 HTTP 기능은 라쿠텐 6개, 야후 5개가 `recorded_live`다. Yahoo 공개 검색은 `blocked`, 공식 검색은 `pending_live`, 제휴 링크 발급은 `unimplemented`다. 이 미완료 항목 때문에 전체 서비스 `--strict` 통과를 주장하지 않는다.
 
 새 일본 사이트의 CDP capture는 `paused document response` 오류로 얻지 못했다. 따라서 이번 Document 계약은 `direct_http_observed`, `captured:false`, `live_replay:true`로 기록했다. 일반 UI 방문이나 HTTP 200만으로 XHR capture 성공을 표시하지 않는다. 기존 라쿠텐 리뷰 XHR 계약과 이번 Document 계약의 출처를 분리한다.
+
+> 2026-10-16: `parseRakutenListing` now accepts keyword-only searches. When `uiQuestion` has no `category`, the next link has no genre segment, and the parser used to compare it against `"undefined"` (`RAKUTEN_NEXT_PAGE_QUERY_MISMATCH`). `query.categoryId` is now `null` in that case. A live keyword-only search (`ヘッドホン`) returned 50 priced rows and the `?p=2` next link. Because `lib/retail/rakuten-public-catalog.mjs` changed, the 2026-10-15 receipts no longer match its hash: `retail:japan:verify` fails, and the audit shows the Rakuten public catalog capabilities as `needs_reverification` until the evidence set is recorded again.

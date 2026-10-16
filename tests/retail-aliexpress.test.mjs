@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createAliExpressPublicClient } from '../lib/retail/aliexpress.mjs';
+import { createAliExpressPublicClient, cleanAliExpressTitle } from '../lib/retail/aliexpress.mjs';
 
 const productId = '1005011947482958';
 const subject = 'Public USB cable listing';
@@ -34,6 +34,9 @@ test('replays the observed anonymous SEO XHR with exact query and scoped referer
   const result = await createAliExpressPublicClient({ fetchImpl, now: () => 1_000 }).getProductSeo({ productId, subject });
   assert.equal(calls, 1);
   assert.equal(result.productId, productId);
+  assert.equal(result.title, subject);
+  assert.equal(result.titleSource, 'seo_title_suffix_stripped');
+  assert.equal(result.seoTitleRaw, 'Public USB cable listing - AliExpress');
   assert.equal(result.canonicalUrl, `${origin}/item/${productId}.html`);
   assert.equal(result.price, null);
   assert.equal(result.currency, null);
@@ -88,4 +91,18 @@ test('requires a numeric product ID and validates any caller-supplied title befo
   ]) {
     await assert.rejects(client.getProductSeo(input), { code: 'ALIEXPRESS_INPUT_INVALID' });
   }
+});
+
+test('strips the site suffix and never reports the bare " - AliExpress " placeholder as a title', async () => {
+  assert.equal(cleanAliExpressTitle('30L Camping Bag - AliExpress '), '30L Camping Bag');
+  assert.equal(cleanAliExpressTitle('Cable | AliExpress.com'), 'Cable');
+  assert.equal(cleanAliExpressTitle('Cable - AliExpress 7'), 'Cable - AliExpress 7');
+  for (const raw of [' - AliExpress ', 'AliExpress', '  ', null]) assert.equal(cleanAliExpressTitle(raw), null);
+  const placeholder = structuredClone(body);
+  placeholder.body.title = ' - AliExpress ';
+  const result = await createAliExpressPublicClient({ fetchImpl: async () => Response.json(placeholder) }).getProductSeo({ productId });
+  assert.equal(result.title, null);
+  assert.equal(result.titleSource, 'unavailable_site_returned_suffix_only');
+  assert.equal(result.seoTitleRaw, ' - AliExpress ');
+  assert.equal(result.description, 'Public item description');
 });

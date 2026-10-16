@@ -111,6 +111,17 @@ test('home menu preserves siblings and title-only item; blank genre root is stru
   assert.equal(result.categoryNodes[0].structuralRoot, true);
 });
 
+test('keyword-only listing (uiQuestion without category) accepts the genre-less next link', () => {
+  const url = 'https://search.rakuten.co.jp/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/';
+  const doc = listing().replace(',"category":100026', '').replace('/100026/?p=2', '/?p=2');
+  const r = parseRakutenListing(doc, url);
+  assert.equal(r.pagination.nextUrl, url + '?p=2');
+  assert.equal(r.query.categoryId, null);
+  assert.equal(r.query.keyword, 'マウス');
+  assert.throws(() => parseRakutenListing(doc.replace('/?p=2', '/100027/?p=2'), url), { code: 'RAKUTEN_NEXT_PAGE_QUERY_MISMATCH' });
+  assert.throws(() => parseRakutenListing(doc.replace('%E3%83%9E%E3%82%A6%E3%82%B9/?p=2', '%E3%82%AD%E3%83%BC/?p=2'), url), { code: 'RAKUTEN_NEXT_PAGE_QUERY_MISMATCH' });
+});
+
 test('listing uses exact query/page/category; listing variant does not prove option price', () => {
   const url = 'https://search.rakuten.co.jp/search/mall/%E3%83%9E%E3%82%A6%E3%82%B9/100026/';
   const r = parseRakutenListing(listing(), url);
