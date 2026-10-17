@@ -31,6 +31,12 @@
             "exports": [
               "renewCoupangSignature"
             ]
+          },
+          {
+            "path": "lib/retail/coupang-response.mjs",
+            "exports": [
+              "inspectCoupangResponse"
+            ]
           }
         ],
         "cli": [
@@ -46,7 +52,8 @@
         "tests": [
           "tests/coupang-retail-session.test.mjs",
           "tests/coupang-rsc.test.mjs",
-          "tests/coupang-retail-checklist.test.mjs"
+          "tests/coupang-retail-checklist.test.mjs",
+          "tests/coupang-retail-response-analysis.test.mjs"
         ]
       },
       "evidence": [
@@ -128,7 +135,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "Use coupang-retail-session search, not coupang-public retail-search --anonymous, for this capability. Session preflight failures are not HTTP 403. Initial/rebootstrap uses the authorized browser; recurring reads and x-cp-s refresh use HTTP. The local six-hour bound remains; opaque context expiry recovery, full catalog pagination, account pricing and product detail are outside this proof."
+      "note": "Use coupang-retail-session search, not coupang-public retail-search --anonymous, for this capability. Session preflight failures are not HTTP 403. Initial/rebootstrap uses the authorized browser; recurring reads and x-cp-s refresh use HTTP. The local six-hour bound remains; opaque context expiry recovery, full catalog pagination, account pricing and product detail are outside this proof. 2026-10-17 revalidation: HTML/JSON/Flight inspection and URL-scoped full-cookie import are implemented with offline regressions. Prior live evidence remains historical after code changes; no new successful Vercel business read or durable full-context renewal is claimed. Observed DOM-card price extraction has offline fixture proof; current live HTML business success remains unverified."
     }
   ]
 }
