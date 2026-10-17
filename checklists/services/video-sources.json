@@ -493,6 +493,36 @@
       "evidence": [],
       "sourceEvidence": [],
       "blocker": "Observed 2026-10-17: uploadBase64WithRequest returns an imageId (JPEG required; WebP fails), but imageSimilarSearchV2 returns params invalid and the KR AliTrading UI sends no search without login. Not implemented."
+    },
+    {
+      "id": "walmart.product_videos",
+      "title": "Read seller product videos from Walmart PDPs",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17 via in-tab fetch (no block): search /search?q= returns usItemIds; 4/4 sampled PDPs had \"videos\":null and only videoInfographics (VIG_* assets on vds.prod.walmartimages.com) = Walmart auto-generated image slideshows, not seller footage. Not implemented: low value for shorts."
+    },
+    {
+      "id": "shopify.product_media_videos",
+      "title": "Read product media videos from Shopify brand storefronts (/products/{handle}.js)",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17: 5 brand stores x 12 products had no video media in product .js (videos live in page sections); 3 stores return 403 on /products.json. Per-brand storefronts are not a search source. Not implemented."
     }
   ]
 }

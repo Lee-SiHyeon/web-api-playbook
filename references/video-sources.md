@@ -91,3 +91,12 @@ npm run video:similar -- --title "IRIN PJ88C 접이식 디지털 피아노 88키
 4. `--videos N`: 위 순서대로 `different`를 건너뛰며 판매자 영상 조회.
 
 관측(2026-10-17): 판매자마다 사진이 달라 dHash 거리는 22~29에 몰려 약한 신호다. 모델 코드와 LLM 판정이 결정적이었다. 1688 이미지 검색은 업로드(imageId)까지만 되고 검색은 막혀 미구현.
+
+## 조사했지만 구현하지 않은 소스 (2026-10-17)
+
+| 소스 | 관측 | 판단 |
+|---|---|---|
+| Walmart | 탭 fetch로 검색·PDP 정상. 표본 4개 모두 `"videos":null`, `videoInfographics`(VIG_*)만 있음 = 월마트가 상품 이미지로 자동 생성한 슬라이드 | 판매자 실촬영이 아니라 쇼츠 소재 가치 낮음 |
+| Shopify 브랜드 스토어 | 5개 브랜드 × 12상품의 `/products/{handle}.js` 미디어에 영상 0개, 3곳은 `/products.json` 403 | 브랜드별 스토어라 검색 소스가 아님 |
+| 1688 이미지 검색 | 업로드(`uploadBase64WithRequest`, JPEG 필수) → imageId까지 성공, `imageSimilarSearchV2`는 params invalid | 로그인 또는 추가 파라미터 필요 |
+| 더우인 / 샤오홍슈 | 검색에 로그인 필요 | 작업용 계정이 생기면 추가 |
