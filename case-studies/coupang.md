@@ -46,3 +46,20 @@ Lifehack에는 reader를 별도 Vercel 수집기로 연결했다. 다음 URL의 
 Lifehack production `566b02bd102245d8a5b7511ce8851dd3294433c9`의 새 수집기를 Vercel에서 실행했다. source claim은 73ms에 완료됐지만 첫 공개 방문자 bootstrap이 HTTP 403을 반환했다. 결과는 `COUPANG_VISITOR_HTTP_REJECTED`, source 요청 1회, pageCount 0, fetched/upserted 0, `blocked`다. 목록 HTML/JSON을 받기 전의 접근 실패이므로 HTML 파싱 누락이나 첫 페이지의 20개 제한으로 설명하면 안 된다.
 
 실패 receipt는 DB에 저장됐지만 골드박스 상품은 저장되지 않았다. 이 경우 receipt의 `persisted=true`는 빈 관측과 실패 기록의 저장을 뜻하므로 `status/error/fetched/upserted`와 함께 해석한다. 24시간 해당 writer 보류를 기록했고 다른 쿠팡 Partners 목록과 카드사 수집은 유지했다. 로컬의 200개 관측을 Vercel 수집 실적으로 승격하지 않는다. 페이지 순회 구현·회귀검증·배포는 완료됐으나 **Vercel 공개 골드박스 전체 수집은 미완료**다.
+
+### 2026-10-17 21:34 KST — Vercel CDP WebSocket 연결과 상품 수집을 분리
+
+Vercel 서울 `icn1` Sandbox의 Chrome 151에 `browserWSEndpoint`로 직접 연결해 공개 골드박스 페이지를 두 번 관측했다. 브라우저와 WebSocket 클라이언트 모두 해당 Sandbox에서 실행했다. 로컬 PC는 실행 시작과 결과 읽기만 했으며 PC 브라우저 중계, 계정 쿠키 반입, 상품 DB 업로드는 하지 않았다. 두 Sandbox는 관측 후 종료했다.
+
+| 관측 | WebSocket | 골드박스 최상위 문서 | 후속 응답 | 상품 목록 검증 |
+| --- | --- | --- | --- | --- |
+| 21:30~21:31 KST | 연결 성공 | HTTP 200 | 관측 범위에서 거절 없음 | 알려진 위젯 응답 0회; 수집 건수 미확인 |
+| 21:33~21:34 KST | 연결 성공 | HTTP 200 | `/m/r` fetch HTTP 403 | 알려진 위젯 응답 0회; 수집 건수 미확인 |
+
+두 번째 진단은 첫 자사 document/XHR/fetch 거절 시 페이지를 닫는 보수적인 진단기로 실행했다. 따라서 예약했던 DOM·스크린샷·후속 페이지 확인 전에 종료됐다. **`/m/r`이 상품 API인지, 그 거절이 목록 부재의 원인인지는 확인하지 못했다.** 상품이 0개인 화면을 확인한 것도 아니다. 상품 수는 `null`로 남겼으며 이 진단에서는 catalog write를 실행하지 않았다.
+
+기존 Puppeteer의 `browserURL` 연결도 먼저 `/json/version`에서 WebSocket 주소를 얻어 CDP WebSocket에 접속한다. `browserWSEndpoint`는 이 주소를 직접 전달하는 경로이지 쿠팡의 HTTP API를 WebSocket API로 바꾸는 기능이 아니다. [Puppeteer 연결 옵션](https://pptr.dev/api/puppeteer.connectoptions), [브라우저 WebSocket endpoint](https://pptr.dev/api/puppeteer.browser.wsendpoint).
+
+앞선 운영 bootstrap 403과 이번 문서 200은 endpoint·실행 문맥·관측 시각이 다르므로 상태 차이를 WebSocket 전환의 효과로 단정하지 않는다. 연결 성공, 문서 응답, 실제 목록 렌더링, 후속 페이지 소진, 저장 완료를 각각 증명해야 한다. 운영 수집기·Cron·기존 source 보류는 변경하지 않았으며 **WebSocket 연결은 확인했지만 403 해결과 Vercel 상품 수집 완료는 확인하지 못했다.**
+
+실행 근거는 작업 audit의 `coupang-goldbox-ws-result.json`과 `coupang-goldbox-ws-inspection.json`이다. 이 문서는 그 관측 범위와 한계를 기록하며 새로운 운영 수집 성공 기록을 대체하지 않는다.
