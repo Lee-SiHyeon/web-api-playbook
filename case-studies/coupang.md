@@ -1,5 +1,23 @@
 # Coupang: 소스 후보를 계약으로 오인하지 않기
 
+## 최신 브라우저 관측: 2026-10-18 00:19~00:27 KST
+
+HTTP reader 비교 대신 **Vercel 실제 Chrome에서 페이지를 여는 단계부터** 기록하고 로컬 브라우저와 대조했다. [정제 영수증](../sanitizedverification/coupang-browser-parity-2026-10-18.json)에 문서/iframe/목록 요청, 쿠키 이름, DOM 수, 화면 파일 hash를 보존했다. 쿠키 값·계정 세션·원본 HTML은 포함하지 않는다.
+
+| 실제 브라우저 흐름 | 관측 |
+| --- | --- |
+| Vercel `icn1`, 골드박스 바로 진입 | 최상위 문서 403, 화면 `Access Denied`, 파서 미실행 |
+| 로컬, 같은 Chrome 151·화면·flow/parser | HTML 100행 → 실제 스크롤 → 사이트 XHR 100행 → EOF; 정확한 상품 URL 193개, 추적 대상 7개 제외 |
+| Vercel, 쿠팡 홈부터 진입 | 홈·bootstrap iframe 200 → 초기화 12초 → 보이는 골드박스 메뉴 실제 클릭 1회 → 골드박스 문서 403 |
+
+세 번째 흐름의 골드박스 요청에는 브라우저가 자연 발급받은 PCID 등 **14종 쿠키가 실제로 전송**됐으며 차단된 쿠키 목록은 비어 있었다. 전체 쿠키 누락, HTTP/HTTPS 혼동, 두 번째 페이지 파싱 오류를 이번 문서 거절의 원인으로 설명하지 않는다. 다만 계정 세션 효과나 네트워크/IP·OS·언어·시간대 중 어느 차이가 원천 판정을 바꿨는지는 확정하지 않았다. 직접 진입 두 실행은 Windows 최초 실행 화면 처리만 달랐고, 그 외 번들 바이트 일치를 확인했다.
+
+로컬 DOM의 정확한 상품 대상은 스크롤 전 94개에서 후 193개로 늘었다. 페이지 2 버튼이나 수동 fetch를 사용한 것이 아니다. 브라우저 스크린샷과 네트워크 HTTP 상태를 함께 확인했으며, 오류 화면 설명의 `http` 문자열과 달리 실제 요청은 HTTPS/h2였다. Vercel 홈 화면의 일부 한글 글꼴 미표시는 별도 UI 환경 차이이며 403의 원인으로 확정하지 않았다.
+
+00:26 KST 독립 DB 확인 결과 운영 데이터는 앞선 부분 수집의 94개였다(정확한 SKU/가격/이미지 각 94개, affiliate URL 보유 82개). 이 관측은 링크 82개를 새로 발급했다는 뜻이 아니다. 이번 probe는 상품 저장·Cron 수동 실행·기존 보류 해제를 하지 않았고, 사용한 브라우저·임시 프로필·Sandbox는 종료/정리했다. **Vercel 골드박스 전체 수집은 아직 해결되지 않았다.** 아래 10/17의 첫 HTML 100행 성공은 당시 별도 실행 결과로 보존하며 현재 문서 거절과 혼합하지 않는다.
+
+## 배경: 관측 API와 정적 후보 구분
+
 2026-09-19 기록은 실제 브라우저 관측 API 9개, 분석한 공개 JavaScript bundle 6개, 원시 문자열 후보 149개, 정규화 계약/후보 154개를 구분합니다. 154개가 전부 독립 HTTP로 검증된 operation이라는 의미는 아닙니다.
 
 근거: [당시 분석 문서](../service-packs/affiliate/apps/affiliate-api-hub/docs/coupang-partners-api-discovery-2026-09-19.md), [관측 API](../service-packs/affiliate/apps/affiliate-api-hub/references/coupang-partners-observed-api.json), [정제 catalog](../service-packs/affiliate/apps/affiliate-api-hub/references/coupang-partners-curated-api.json). 파일 원본 hash는 `provenance/additional-sources.json`에 있습니다.
