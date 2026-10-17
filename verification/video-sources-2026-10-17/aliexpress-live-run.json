@@ -1,0 +1,48 @@
+{
+  "schema": "video-sources-live-run-v1",
+  "checkedAt": "2026-10-17T10:53:45Z",
+  "service": "video-sources",
+  "source": "aliexpress",
+  "operation": "product-media + download",
+  "transport": "browser_tab_fetch (CDP Runtime.evaluate fetch in an existing ko.aliexpress.com tab, Chrome Canary 158 automation profile :9333)",
+  "request": {
+    "method": "GET",
+    "origin": "https://acs.aliexpress.com",
+    "path": "/h5/mtop.aliexpress.pdp.pc.query/1.0/",
+    "appKey": "12574478",
+    "jsv": "2.5.1",
+    "signRule": "md5(_m_h5_tk token & t & appKey & data)",
+    "httpStatus": 200,
+    "ret": "SUCCESS"
+  },
+  "httpTransportObservation": {
+    "date": "2026-10-17",
+    "result": "first plain-Node replay of the browser cookie bundle returned SUCCESS; the next two returned FAIL_SYS_USER_VALIDATE / RGV587_ERROR::SM; in-tab fetch kept returning SUCCESS (3/3) afterwards"
+  },
+  "results": [
+    {
+      "productId": "1005007677070035",
+      "videoId": "5000112640435",
+      "storeNum": "912120122",
+      "uploaderAccountId": "2211623887539",
+      "bytes": 11708715,
+      "sha256": "ad44e4b80d87c731bd96783bc2eab8e56fa55ab4840481f01e3affa0ecf8ee4d",
+      "mime": "video/mp4",
+      "downloadUrlHost": "gv-vod-cdn.aliexpress-media.com",
+      "rightsBasis": "seller_product_video_unverified"
+    },
+    {
+      "productId": "1005013075520990",
+      "videoId": "5000512850330",
+      "storeNum": "1102638446",
+      "uploaderAccountId": "2215427586775",
+      "bytes": 6283662,
+      "sha256": "abfd64c79496852d9c85612e66d30bc7df2c736c4bb10dcbe7448bb96d8da9d2",
+      "mime": "video/mp4",
+      "downloadUrlHost": "gv-vod-cdn.aliexpress-media.com",
+      "rightsBasis": "seller_product_video_unverified"
+    }
+  ],
+  "secretsPersistedInEvidence": false,
+  "mediaPersistedInRepository": false
+}
