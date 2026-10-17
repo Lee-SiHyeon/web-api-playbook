@@ -23,6 +23,7 @@ for (let i = 0; i < argv.length; i++) {
   opts[m[1]] = m[2] ?? (argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[++i] : true);
 }
 const ALLOWED = ['coupang-url', 'coupang-query', 'pick', 'out', 'per-source', 'max-videos', 'include-type', 'judge', 'cdp'];
+const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/158.0.0.0 Safari/537.36';
 const log = (...a) => console.error('[pipeline]', ...a);
 
 async function sellerVideo(c, clients) {
@@ -33,7 +34,7 @@ async function sellerVideo(c, clients) {
   }
   if (c.source === '1688') {
     const m = await clients[1688].offerMedia({ offerId: c.id });
-    return m.video ? { kind: 'mp4', url: m.video.playUrl, videoId: m.video.videoId, hosts: ['cloud.video.taobao.com', 'caiyuanbao.alicdn.com'],
+    return m.video ? { kind: 'mp4', url: m.video.playUrl, videoId: m.video.videoId, hosts: ['cloud.video.taobao.com', 'caiyuanbao.alicdn.com'], referer: 'https://detail.1688.com/',
       extra: { uploaderAccountId: m.video.uploaderUserId, supplier: m.supplier.companyName } } : null;
   }
   if (c.source === 'amazon') {
@@ -87,7 +88,7 @@ try {
         const stem = `${c.source}-${c.id}-${String(v.videoId).slice(0, 16)}`;
         const saved = existsSync(path.join(dir, `${stem}.mp4`)) ? { file: `${stem}.mp4`, reused: true }
           : v.kind === 'hls' ? await downloadHlsMedia({ masterUrl: v.url, outDir: dir, fileStem: stem, allowedHosts: v.hosts, provenance })
-          : await downloadMedia({ url: v.url, outDir: dir, fileStem: stem, allowedHosts: v.hosts, provenance });
+          : await downloadMedia({ url: v.url, outDir: dir, fileStem: stem, allowedHosts: v.hosts, provenance, referer: v.referer, userAgent: v.referer ? UA : undefined });
         c.videoStatus = 'downloaded';
         videos.push({ videoId: v.videoId, file: saved.file, bytes: saved.bytes ?? null, source: c.source, productId: c.id, verdict: c.verdict });
         log('video', c.source, c.id, saved.file);
