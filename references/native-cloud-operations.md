@@ -47,6 +47,31 @@ Supabase는 [공식 login 문서](https://supabase.com/docs/reference/cli/supaba
 프로젝트 service-role key, anon key, DB password는 서로 다른 자격이며 바꿔 쓰지 않는다.
 CLI 로그인만으로 임의 프로젝트 SQL 접근이 증명되는 것도 아니다.
 
+### 2026-10-17 native CLI 적용에서 확인한 추가 경계
+
+- Supabase CLI 2.120.0의 `db query`는 이 환경에서 native 로그인 자격으로
+  Management API SQL을 실행했다. 명시적인 project ref를 사용할 때도 `--linked`가
+  필요했다. `db query --linked --project-ref <verified-ref> --file <reviewed.sql>`의
+  실제 결과를 확인하며, 이를 위해 DB 비밀번호나 PAT를 임의 파일로 추출하지 않는다.
+  다른 버전은 해당 실행기의 `--help`를 먼저 확인한다.
+- 마이그레이션은 기존 원격 이력·사용할 RPC 계약과 대조한 새 파일만 적용한다.
+  관련 없는 과거 pending 파일을 일괄 push하지 않는다. 적용과 migration history를
+  같은 transaction에 기록하고, 별도 읽기로 파일 hash·RPC grant·익명 접근 거부를 검증한다.
+  적용된 SQL 파일은 수정하지 않고 후속 변경은 별도 migration으로 남긴다.
+- Vercel CLI 62.7.0의 `link --yes`는 기존 프로젝트 연결과 함께 `.env.local`에
+  OIDC 값을 내려받기도 했다. 연결만 했다고 credential 파일이 없다고 가정하지 않는다.
+  값은 출력하지 않고 `.env*`와 `.vercel/`의 Git·배포 제외 여부를 확인한다.
+  native 파일을 일반 evidence나 portable skill로 복사하지 않는다.
+- `vercel crons run`의 triggered ACK는 수집 완료가 아니다. 저장된 start row, DB lease,
+  완료 receipt와 실제 catalog를 별도로 읽는다. 불확실한 ACK를 이유로 같은 작업을
+  즉시 다시 보내지 않는다. PC 관측 시간과 cloud/DB 실행 시간은 서로 기록한다.
+- GitHub Actions의 결제/사용 한도 때문에 job steps가 시작되지 않은 경우는 코드 검사
+  실패와 구분한다. 로컬 검사·Vercel build가 성공해도 GitHub CI가 통과했다고 쓰지 않는다.
+
+실제 반례는 [Coupang 일반몰 Vercel 기록](coupang-retail-vercel-2026-10-17.md)에 둔다.
+운영 배포와 native Cron dispatch가 성공해도 source 403, 상품 0개, 세션 없음이면
+`deployed / collection blocked`이며 이관 성공이 아니다.
+
 ## 원격 환경의 일회용 OAuth callback
 
 브라우저가 사용자의 컴퓨터에서 `127.0.0.1` callback으로 이동하면 페이지가 안 열려도

@@ -1,0 +1,108 @@
+{
+  "schema": "lifehack-coupang-retail-vercel-verification-v1",
+  "scope": "External Lifehack consumer; general storefront search, not Partners authentication or link issuance",
+  "observedDate": "2026-10-17",
+  "playbookSourceSha": "4cc2263948f549931a9ad706fe8a3561e1a035dd",
+  "initialLifehackSha": "fd09677c8c5335dde9ec92d95ca1dd3198df08d7",
+  "hardenedRelease": {
+    "lifehackSha": "7cef72ea4b42a78b33147c79920fd229a8bd3058",
+    "deploymentId": "dpl_BfZGhcGBbpb253nuoLMkGSj2jTEB",
+    "ready": true,
+    "productionAliasVerified": true,
+    "cloudSchemaPreflight": "verified",
+    "localTests": { "passed": 1115, "failed": 0 },
+    "localTypecheck": "passed",
+    "localBuild": "passed",
+    "heldCronVerifiedAtCloud": "2026-10-17T05:19:01.186+00:00",
+    "heldCronError": "HTTP 503 COUPANG_RETAIL_BOOTSTRAP_HTTP_403",
+    "heldCronPersisted": false,
+    "stateRevisionUnchanged": true,
+    "sourceReceiptsUnchanged": true,
+    "additionalCatalogRows": 0
+  },
+  "initialDeployment": {
+    "id": "dpl_AXso7NQUm6Y4tSbm2odWYuuUyTbC",
+    "ready": true,
+    "productionAlias": "lifehackailab.com",
+    "remoteMainShaMatched": true,
+    "repositoryVisibility": "PRIVATE",
+    "cloudSchemaPreflight": "verified",
+    "nativeCronPath": "/api/cron/hub-coupang-retail",
+    "cronSchedule": "8,23,38,53 * * * *",
+    "manualTriggerAcknowledged": true,
+    "automaticSuccessfulCollectionVerified": false
+  },
+  "migration": {
+    "version": "202610170100",
+    "sha256": "6345dd9a3fd7291f671c5fa7074b4e411470aa71987d3b92907fc8c644fdcf8b",
+    "appliedAndIndependentlyReadBack": true,
+    "existingUpsertContractMatched": true,
+    "anonymousRpcExecute": false,
+    "authenticatedRpcExecute": false,
+    "serviceRoleRpcExecute": true,
+    "serviceRoleRawTableRead": false
+  },
+  "firstProductionAttempt": {
+    "startedAtCloud": "2026-10-17T04:59:49.373199+00:00",
+    "browserExecution": "vercel_sandbox",
+    "functionExecution": "vercel_function",
+    "initialDocumentStatus": 200,
+    "failedStage": "observed_price_sort",
+    "code": "COUPANG_RETAIL_BOOTSTRAP_FAILED",
+    "sourcePersisted": false,
+    "fetched": 0,
+    "accepted": 0,
+    "initialCronMisclassifiedCooldownAsSuccess": true
+  },
+  "separateReadOnlyDiagnostic": {
+    "localObservedAt": "2026-10-17T04:51:42.642Z",
+    "execution": "vercel_sandbox",
+    "documentResponseStatuses": [200, 403],
+    "priceSortSelectorCount": 0,
+    "requests": 6,
+    "policyBlockedHosts": [],
+    "sourceCookieValuesExported": false,
+    "dbWrites": 0,
+    "exactReasonForProviderDenial": "unverified"
+  },
+  "storedRuntime": {
+    "status": "blocked",
+    "revision": 3,
+    "hasSession": false,
+    "leaseBusy": false,
+    "lastHttpStatus": 403,
+    "lastError": "COUPANG_RETAIL_BOOTSTRAP_HTTP_403",
+    "operatorHoldAtCloud": "2026-10-17T05:08:38.164695+00:00",
+    "originalFailedReceiptPreserved": true,
+    "sourceRetryAfterObservedDenial": false,
+    "pcSourceCollectorAdded": false,
+    "pcSchedulerAdded": false
+  },
+  "unverifiedGates": [
+    "Vercel browser-to-function cookie handoff",
+    "independent HTTP RSC success with real wire Cookie header",
+    "actual retail catalog rows",
+    "subsequent invocation reuse and long-lived renewal",
+    "authenticated affiliate link issuance"
+  ],
+  "otherBoundaries": {
+    "nativeVercelAuthenticated": true,
+    "nativeSupabaseAuthenticated": true,
+    "publicLifehackHealthStatus": 429,
+    "publicLifehackHealthMitigation": "challenge",
+    "githubActionsJobStarted": false,
+    "githubActionsBlocker": "account_payments_or_spending_limit",
+    "initialLocalTests": { "passed": 1113, "failed": 0 },
+    "initialLocalTypecheck": "passed",
+    "initialLocalBuild": "passed",
+    "clockNote": "PC observed timestamps and cloud/DB timestamps were recorded separately; the PC clock differed by about 15 minutes."
+  },
+  "playbookChecks": {
+    "coupangScopedChecklistStrictPassed": true,
+    "scopeOfRecordedLiveEvidence": "historical Windows runner, not this Vercel integration",
+    "staticAuditErrors": 0,
+    "wholePlaybookRequiredGaps": 207,
+    "requiredGapsUnchangedFromBaseline": true
+  },
+  "completion": "deployed_but_collection_blocked"
+}

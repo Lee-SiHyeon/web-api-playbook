@@ -1,5 +1,9 @@
 # Coupang 공개 검색의 HTTP 갱신
 
+다른 runtime의 성공은 별도 검증한다. [2026-10-17 Vercel 이관 사례](coupang-retail-vercel-2026-10-17.md)는
+운영 배포·DB 적용과 달리 후속 검색 Document 403으로 수집이 보류된 결과이며,
+아래의 Windows HTTP 성공을 Vercel 세션 재사용 성공으로 확대하지 않는다.
+
 최초 승인된 Canary 세션을 한 번 인계한 뒤, 반복 검색은 `scripts/coupang-retail-session.mjs`로 실행한다. Node가 서명과 RSC 입력을 계산하며, 브라우저·CDP·headless·DOM 모사·프록시·TLS/UA 모사를 실행하지 않는다. 쿠키와 서명 내부의 기기 문맥은 Windows CurrentUser DPAPI의 `coupang-retail-public-v1`에만 저장한다.
 
 ```powershell
