@@ -40,3 +40,9 @@ Lifehack에는 reader를 별도 Vercel 수집기로 연결했다. 다음 URL의 
 기존 상품 ID와 신규 SKU ID를 단순 합산하면 중복도 생긴다. 상품 ID는 다른 판매 옵션으로 바뀔 수 있으므로 영구 alias로 묶지 않고, 읽기 전용 피드에서 정확한 세 ID 기준으로 최신 관측을 cursor/limit 전에 선택한다. 원본 기록과 기존 공유 URL은 유지한다. 누락이 품절의 증거가 아니므로 샘플을 완전한 snapshot으로 승격하지 않는다.
 
 배포 확인은 production SHA → Cron 등록 → 실제 Vercel 실행 → durable receipt → DB readback 순서다. trigger ACK나 로컬 200 응답만으로 클라우드 수집 성공을 보고하지 않는다. [카드사 목록의 유사 사례](card-mall-collection.md)도 같은 기준을 적용한다.
+
+### 2026-10-17 20:00 KST 운영 결과 — 순회 구현과 원천 접근 실패를 분리
+
+Lifehack production `566b02bd102245d8a5b7511ce8851dd3294433c9`의 새 수집기를 Vercel에서 실행했다. source claim은 73ms에 완료됐지만 첫 공개 방문자 bootstrap이 HTTP 403을 반환했다. 결과는 `COUPANG_VISITOR_HTTP_REJECTED`, source 요청 1회, pageCount 0, fetched/upserted 0, `blocked`다. 목록 HTML/JSON을 받기 전의 접근 실패이므로 HTML 파싱 누락이나 첫 페이지의 20개 제한으로 설명하면 안 된다.
+
+실패 receipt는 DB에 저장됐지만 골드박스 상품은 저장되지 않았다. 이 경우 receipt의 `persisted=true`는 빈 관측과 실패 기록의 저장을 뜻하므로 `status/error/fetched/upserted`와 함께 해석한다. 24시간 해당 writer 보류를 기록했고 다른 쿠팡 Partners 목록과 카드사 수집은 유지했다. 로컬의 200개 관측을 Vercel 수집 실적으로 승격하지 않는다. 페이지 순회 구현·회귀검증·배포는 완료됐으나 **Vercel 공개 골드박스 전체 수집은 미완료**다.
