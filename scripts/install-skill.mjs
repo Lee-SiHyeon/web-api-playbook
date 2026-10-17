@@ -6,8 +6,10 @@ import { fileURLToPath } from 'node:url';
 import { options, fail, safeError } from '../lib/cli.mjs';
 
 const source = path.resolve(fileURLToPath(new URL('../', import.meta.url)));
-const excluded = new Set(['.git', 'node_modules', '.runtime', 'runtime', 'work', 'runs', 'workflow-runs', '__pycache__', 'credentials', 'private', 'secrets', 'raw-captures']);
-const forbidden = file => /\.(?:dpapi|har|log|pem|key|pfx|p12|db|sqlite)$/i.test(file) || /^\.env(?:\.|$)/.test(file) && file !== '.env.example';
+const excluded = new Set(['.git', 'node_modules', '.venv', 'venv', '.auth', '.vercel', '.runtime', 'runtime', 'work', 'runs', 'workflow-runs', '__pycache__', 'credentials', 'private', 'secrets', 'raw-captures']);
+const forbidden = file => /\.(?:dpapi|sealed|har|log|pem|key|pfx|p12|db|sqlite)$/i.test(file)
+  || /^(?:\.?auth|\.?credentials|cookies|session|storage-?state|token|tokens)(?:[.-].*)?\.json$/i.test(file)
+  || /^\.env(?:\.|$)/i.test(file) && file.toLowerCase() !== '.env.example';
 try {
   const args = options(process.argv.slice(2), ['target']);
   if (args.target === true) fail('TARGET_INVALID');
@@ -23,7 +25,8 @@ try {
   let copied = 0;
   async function copy(dir, dest) {
     for (const entry of await readdir(dir, { withFileTypes: true })) {
-      if (excluded.has(entry.name) || forbidden(entry.name)) continue;
+      if (excluded.has(entry.name.toLowerCase()) || forbidden(entry.name)
+        || entry.isDirectory() && /^\.?venv(?:[._-].*)?$/i.test(entry.name)) continue;
       if (entry.isSymbolicLink()) fail('SYMLINK_NOT_DISTRIBUTABLE');
       const from = path.join(dir, entry.name), to = path.join(dest, entry.name);
       if (entry.isDirectory()) { await mkdir(to); await copy(from, to); }
@@ -33,6 +36,7 @@ try {
   await copy(source, target);
   const pkg = JSON.parse(await readFile(path.join(target, 'package.json'), 'utf8'));
   console.log(JSON.stringify({ installed: true, target, version: pkg.version, files: copied,
-    dependenciesInstalled: false, credentialsCopied: false,
+    dependenciesInstalled: false, credentialsCopied: null,
+    credentialExclusion: 'known_paths_only_not_content_verified',
     next: ['Change directory to target', 'npm ci --ignore-scripts', 'npm run doctor', 'Start a new agent session to discover the skill'] }, null, 2));
 } catch (error) { console.error(JSON.stringify({ ok: false, code: safeError(error) })); process.exitCode = 1; }

@@ -91,7 +91,7 @@ npm run install:skill
 node scripts/install-skill.mjs "--target=C:/agent-skills/xhr-to-api-only"
 ```
 
-**이미 존재하는 대상에는 덮어쓰지 않습니다.** 업데이트할 때 기존 폴더를 별도로 보관하고 새 대상에 설치하거나, 저장소를 Git으로 관리하며 변경을 합치세요. `node_modules`, 인증값, 작업 기록, `.git`은 설치 사본에 복사하지 않습니다. `agents/openai.yaml`은 Codex용 메타데이터이며 다른 에이전트는 `SKILL.md`부터 읽으면 됩니다.
+**이미 존재하는 대상에는 덮어쓰지 않습니다.** 업데이트할 때 기존 폴더를 별도로 보관하고 새 대상에 설치하거나, 저장소를 Git으로 관리하며 변경을 합치세요. `node_modules`, `.venv`, 알려진 인증 파일명/암호화 저장 파일, 작업 기록, `.git`은 제외합니다. 이 필터는 임의 파일 안의 인증값까지 검사하지 않습니다. 따라서 `credentialsCopied:null`과 `credentialExclusion:known_paths_only_not_content_verified`를 반환합니다. 인증 저장소가 섞이지 않은 배포용 checkout에서 설치하고 세션은 별도의 보호된 provider로 연결하세요. `agents/openai.yaml`은 Codex용 메타데이터이며 다른 에이전트는 `SKILL.md`부터 읽으면 됩니다.
 
 ## 2. 로그인 없이 도구부터 실행
 
