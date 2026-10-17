@@ -77,3 +77,17 @@ npm run video:sources -- amazon product-videos --asin B0DS23X39K --download .run
 - PDP Document의 `"videos":[...]`(이미지 블록 `IB_G1`). `aciContentId`가 `amzn1.ive.seller.video.*` / `amzn1.ive.vendor.video.*`이면 판매자·브랜드 영상으로 분류하고, 그 외(크리에이터·고객 영상)는 `--include-creator` 없이는 제외한다.
 - 직접 MP4는 480p(`default.jobtemplate.mp4.480.mp4`)뿐이다. HLS 마스터에서 짧은 변 기준 ≤1080 최고 화질을 골라 ffmpeg `-c copy`로 합친다(세로 1080x1920 유지).
 - 2026-10-17: 검색 52 ASIN, 표본 6개 중 4개에 판매자 영상, 3개 다운로드(19초).
+
+## 유사상품 탐색 (`npm run video:similar`)
+
+```powershell
+$env:FFMPEG_BIN = "C:\path\to\ffmpeg.exe"
+npm run video:similar -- --title "IRIN PJ88C 접이식 디지털 피아노 88키" --image https://ae-pic-a1.aliexpress-media.com/kf/<id>.jpg --per-source 30 --judge --videos 6 --output .runtime\similar.json
+```
+
+1. 키워드: `--ko/--zh/--en`이 없으면 로그인된 agy(Gemini)로 생성(알리 KR=ko, 1688=zh, 아마존=en).
+2. 소스별 검색(탭 전송) → 후보의 대표 이미지 dHash(ffmpeg 9x8) + 같은 언어 제목 trigram + **모델 코드 일치(PJ88C 등, 언어 무관) 가산** → 점수.
+3. `--judge`: 상위 25개를 LLM이 `same / type / different`로 판정, 순서 `same > type > 미판정 > different`.
+4. `--videos N`: 위 순서대로 `different`를 건너뛰며 판매자 영상 조회.
+
+관측(2026-10-17): 판매자마다 사진이 달라 dHash 거리는 22~29에 몰려 약한 신호다. 모델 코드와 LLM 판정이 결정적이었다. 1688 이미지 검색은 업로드(imageId)까지만 되고 검색은 막혀 미구현.

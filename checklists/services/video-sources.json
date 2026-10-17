@@ -388,6 +388,111 @@
         }
       ],
       "blocker": "Live run 2026-10-17: 4 of 6 sampled PDPs had seller videos; 3 videos remuxed (1080x1920, 1920x1080 x2). Creator/customer videos are excluded unless --include-creator. Needs ffmpeg."
+    },
+    {
+      "id": "aliexpress.search",
+      "title": "Search AliExpress KR by keyword (60 cards: Korean title, KRW price, sold, rating, image) from the server-rendered wholesale Document",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/aliexpress-search.mjs",
+            "exports": [
+              "createAliExpressSearchClient",
+              "parseAliExpressSearchItems"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-similar.mjs",
+            "tokens": [
+              "--sources"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-similar.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/similar-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live 2026-10-17 via browser_tab_fetch (60 items); no evidence kind for that transport yet."
+    },
+    {
+      "id": "similar.cross_source_discovery",
+      "title": "Find similar products for a seed (title+image) across AliExpress KR, 1688 and Amazon: per-language keywords, dHash + title + model-code scoring, LLM verdicts (same/type/different), seller-video lookup",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/similar.mjs",
+            "exports": [
+              "findSimilarProducts",
+              "scoreCandidate",
+              "modelCodes",
+              "applyVerdicts",
+              "imageDHash"
+            ]
+          },
+          {
+            "path": "lib/video-sources/llm.mjs",
+            "exports": [
+              "productKeywords",
+              "llmJudge",
+              "agyRunner"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-similar.mjs",
+            "tokens": [
+              "--title",
+              "--image",
+              "--judge",
+              "--videos"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-similar.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/similar-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live 2026-10-17: seed IRIN PJ88C -> both PJ88C listings (AliExpress, 1688 OEM) judged same and ranked first, with seller videos. LLM provider is the logged-in agy CLI; swap runPrompt for an AI Gateway/Jev client when a key exists."
+    },
+    {
+      "id": "alibaba1688.image_search",
+      "title": "1688 image search (upload -> imageId -> imageSimilarSearchV2)",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17: uploadBase64WithRequest returns an imageId (JPEG required; WebP fails), but imageSimilarSearchV2 returns params invalid and the KR AliTrading UI sends no search without login. Not implemented."
     }
   ]
 }
