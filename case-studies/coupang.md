@@ -114,3 +114,26 @@ Lifehack production `c6c9e48b8d9ed9b390a24d5cbd82cdb7a2b0eaac` / deployment `dpl
 정기 Cron은 매시 22분으로 등록돼 있다. 다만 새 원천 보류는 **2026-10-18 23:25:11 KST**까지이고, 그 뒤의 첫 정기 시도 슬롯은 **2026-10-19 00:22 KST**다. 등록된 시간표를 매시 실제 수집 성공으로 보고하지 않는다. 공개 첫 페이지 부분 회복은 입증됐지만 **두 번째 페이지 거절이 남아 있어 전체 골드박스 수집은 여전히 미완료**다.
 
 앱 `npm ci`, typecheck, build와 전체 테스트 **1,301/1,301**을 통과하고 로컬 데스크톱·모바일의 표시된 demo 흐름도 확인한 뒤 배포했다. 로컬 demo를 운영 증거로 사용하지 않았다. 최종 운영 근거는 `goldbox-browser-partial-production-proof.json` (`partialPipelineVerified=true`, `fullCollectionVerified=false`), `retail-db-management-goldbox-browser-proof.json`, `goldbox-ui-production.json`, `card-goldbox-release-status.json`이다. 전체 수집 성공을 요구하는 별도 proof 기준은 낮추지 않았다.
+
+### 2026-10-17 23:45 KST — 동일 HTTP reader를 로컬과 Vercel에서 대조
+
+앞의 로컬 HTTP 성공과 Vercel 브라우저 실패만으로는 요청 방식과 실행 환경이 동시에 달라 원인을 좁히기 어려웠다. 이번에는 Playbook의 HTTP reader와 익명 방문자 모듈을 **하나의 번들로 만들어 동일 바이트를 양쪽에서 각각 한 번 실행**했다. SHA-256은 `26bca646cce4c5198bdb1d7e106e88c2fe7ca75c887de037834dc51dbc95149e`다. owner credential·기존 계정 쿠키·local 상품 데이터는 VM에 공급하지 않았다.
+
+| 항목 | 로컬 Windows | Vercel Sandbox `icn1` |
+| --- | --- | --- |
+| 실행 시각 (KST) | 23:44:51 | 23:45:49 |
+| Node | 24.22.0 | 24.21.0 |
+| Undici / OpenSSL | 7.29.1 / 3.5.8 | 7.29.1 / 3.5.8 |
+| 첫 익명 bootstrap | GET, Cookie 없음, HTTP 200 | 같은 application-level 요청, HTTP 403 |
+| 상품 JSON | 99행 + 101행, 모두 HTTP 200 | 미시도 — bootstrap에서 중단 |
+| 전체 행 / 정확한 소비자 대상 | 200 / 193, 추적 전용 7개 제외 | 관측 0행, 실제 원천 목록 크기는 미확인 |
+| 페이지 소진 | 확인 | 확인 못 함 |
+| 재시도 / 상품 DB 쓰기 | 0 / 0 | 0 / 0 |
+
+로컬은 자연 발급한 `PCID`, `x-coupang-accept-language`, `x-coupang-target-market` 세 익명 쿠키만 상품 요청에 사용했다. 로그인이나 브라우저 전체 계정 쿠키가 로컬 성공의 필수 조건이었다는 근거는 없다. 클라우드 실패는 쿠키를 발급받는 첫 요청에서 발생했으므로 이를 상품 파싱 실패로 설명할 수도 없다. 실패한 bootstrap 뒤에 다른 endpoint를 추측 호출하거나 방문자·IP를 교체하지 않았다. VM은 종료했다.
+
+같은 코드와 같은 초기 요청 형태에서 **환경에 따른 실제 HTTP 응답 차이**가 확인됐다. 다만 네트워크/서버 판정, OS, Node patch, TLS/HTTP의 차이는 여전히 남으므로 출구 IP 하나를 확정 원인으로 보고하지 않는다. 현재 app pure-HTTP와 Playbook reader의 요청·순회·JSON 계약은 같고, 앱의 주요 추가 차이는 허용된 CDN 이미지의 HTTPS 정규화다. 이 변환은 bootstrap 전에 발생하는 403의 설명이 아니다.
+
+23:51 KST 운영 credential metadata에서는 Partners `web_session=ready`, `open_api=unconfigured/has_credential=false`였다. 두 인증을 같은 것으로 취급하지 않는다. 공식 API로 바꾸기만 하면 공개 전체 200행을 얻는다는 사실도 확인되지 않았다. 다음 검증의 전제는 원천 측에서 허용된 Vercel 접근 경로나 유효한 공식 API 인증과 목록 범위다. 고정 IP 구매·프록시·PC 중계를 해결로 간주하거나 구성하지 않았다.
+
+이번 비교로 실패하는 HTTP 경로를 운영에 배포하지 않았고, production은 앞 절의 **94개 부분 저장 + 다음 페이지 403** 상태를 유지했다. 보류 해제·추가 Cron 실행·계정 쿠키 이전·로컬 상품 업로드는 없었다. **전체 수집 미해결**이며, 측정 결과와 원인 한계를 [sanitized comparison receipt](../sanitizedverification/coupang-runtime-parity-2026-10-17.json)에 보존했다. 이 영수증의 정합성 검사는 hash 불일치·요청 차이·누락 상태·가짜 cloud 행·VM 미종료·로컬 업로드·가짜 운영 성공 등을 거부하는 오프라인 10개 사례를 통과했다. 이는 새 운영 구현의 테스트나 수집 성공 증거가 아니다.

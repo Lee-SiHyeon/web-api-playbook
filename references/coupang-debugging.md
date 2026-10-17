@@ -39,6 +39,16 @@ cd service-packs/affiliate
 
 수동 요청과 앱의 실제 pagination 계약이 다르면 공개 앱 코드와 native UI 동작부터 확인한다. 새 헤더·토큰을 추측해서 추가하지 않는다. 2026-10-17 Vercel 관측에서는 세 문맥 헤더 값이 일치했고 실제 UI의 다음 페이지도 403이었다. 이런 경우 앞선 정상 페이지의 정확한 상품만 부분 저장하되 `blocked/error`, 페이지 소진 실패와 다음 허용 시각을 보존한다. 부분 저장 성공을 전체 수집 성공으로 바꾸거나 실패 receipt의 `persisted=true`만으로 정상 판정하지 않는다.
 
+### 로컬 성공과 클라우드 실패의 비교 순서
+
+1. **같은 reader를 비교한다.** 로컬 `bootstrap → JSON → dataUrl`과 클라우드 `HTML Flight → native UI XHR`은 첫 요청부터 다르다. 단일 번들을 한 번 생성하고 SHA-256이 같은 바이트를 양쪽에서 실행해 코드 차이를 먼저 고정한다. 실행기 자체가 source URL·헤더·쿠키를 추가하거나 재시도하지 않도록 확인한다.
+2. **첫 분기점을 찾는다.** 같은 application-level 요청의 method/path/query key/header name/cookie name과 각 HTTP 상태를 기록한다. bootstrap 403이면 상품 JSON 파서는 실행되지 않았다. 이 상태의 0행은 원천 상품이 0개라는 뜻이 아니다. opaque URL 값·쿠키 값·원시 계정 응답은 비교 보고서에 넣지 않는다.
+3. **런타임 차이는 숨기지 않는다.** worker hash가 같아도 OS, Node patch, 네트워크, TLS/HTTP, 기본 헤더, 서버의 판정 상태까지 같다는 뜻은 아니다. Node·Undici·OpenSSL·platform·arch와 proxy 환경변수의 존재 여부만 남긴다. 환경에 따른 응답 차이만으로 IP 차단이나 빠진 쿠키 하나를 원인으로 확정하지 않는다.
+4. **관측과 운영을 분리한다.** 읽기 전용 cloud probe는 운영 Cron/DB 성공이 아니다. 실패한 HTTP reader를 배포하거나 기존 보류를 해제하지 않고, 현재 동작하는 부분 reader와 다른 수집기를 유지한다. 실제 변경 후 전체 순회·정확한 SKU·durable receipt·DB·UI를 별도로 입증한다.
+5. **다른 인증을 대용하지 않는다.** Partners web session의 `ready`와 공식 Open API credential의 configured 상태는 다르다. 공식 API도 현재 공개 골드박스 전체와 같은 범위를 제공한다고 가정하지 않는다. 권한과 목록 범위를 확인한 뒤 수집 경로로 채택한다.
+
+2026-10-17 23:44~23:45 KST 동일 HTTP 번들 비교는 로컬 `200 → 200 → 200`, Vercel 첫 bootstrap `403`이었다. 두 환경의 Undici/OpenSSL 버전은 같았지만 OS와 Node patch는 달랐다. [보존한 비교 영수증](../sanitizedverification/coupang-runtime-parity-2026-10-17.json)의 `evidenceComparisonVerified=true`는 **비교 자료의 정합성**이며 `fullCollectionResolved=false`를 대체하지 않는다. 브라우저 native Axios의 Accept는 기존 HTTP reader와 같았으므로, 더 오래된 수동 fetch의 Accept 차이를 현재 실패의 원인으로 재사용하지 않는다.
+
 - 상품 URL의 `productId`, `itemId`, `vendorItemId` 세 값을 고정한다. 첫 옵션이나 같은 상품의 다른 판매 옵션으로 바꾸지 않는다.
 - `offer-list` 공개 일반가, 골드박스·반짝세일의 표시 행사 가격, 공개 와우 표시가, 현재 계정에 적용된 회원 가격을 별도 값과 출처로 보존한다. 회원 자격을 검증하지 못한 표시가는 회원 적용가로 승격하지 않는다.
 - 배송비 누락·필드 충돌·조건부 무료배송은 `null` 또는 미확인 상태다. 명시적으로 검증된 0원만 무료배송으로 확정한다. 가격과 배송비의 SKU·일반가 견적이 다르면 비교에 합치지 않는다.
