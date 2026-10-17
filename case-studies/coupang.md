@@ -63,3 +63,18 @@ Vercel 서울 `icn1` Sandbox의 Chrome 151에 `browserWSEndpoint`로 직접 연�
 앞선 운영 bootstrap 403과 이번 문서 200은 endpoint·실행 문맥·관측 시각이 다르므로 상태 차이를 WebSocket 전환의 효과로 단정하지 않는다. 연결 성공, 문서 응답, 실제 목록 렌더링, 후속 페이지 소진, 저장 완료를 각각 증명해야 한다. 운영 수집기·Cron·기존 source 보류는 변경하지 않았으며 **WebSocket 연결은 확인했지만 403 해결과 Vercel 상품 수집 완료는 확인하지 못했다.**
 
 실행 근거는 작업 audit의 `coupang-goldbox-ws-result.json`과 `coupang-goldbox-ws-inspection.json`이다. 이 문서는 그 관측 범위와 한계를 기록하며 새로운 운영 수집 성공 기록을 대체하지 않는다.
+
+### 2026-10-17 21:55 KST — 상태 코드 오독과 실패 범위 오판을 구분
+
+직전 진단기의 `401/403/418/429/451 → page.close()`는 요청 역할을 구분하지 않았다. `/m/r` 거절을 보고 전체 진단을 종료한 것은 **실패 범위를 너무 넓게 잡은 판정 오류**다. HTTP 상태 코드는 개별 요청의 결과이며, 그 요청이 상품 목록 또는 필수 초기화에 어떻게 연결되는지 입증하지 않고 전체 수집 상태로 승격하면 안 된다. [HTTP 403 정의](https://www.rfc-editor.org/rfc/rfc9110.html#name-403-forbidden).
+
+이를 고친 별도 진단기로 Vercel `icn1` Chrome에 한 번만 탐색하고 정상 렌더링을 12초 관측했다. 미분류 부가 요청 오류는 기록하되 즉시 페이지를 닫지 않았고, 쿠키 반입·수동 API 재시도·운영 변경은 하지 않았다.
+
+- 최상위 문서는 Puppeteer와 CDP 응답/실제 헤더 상태 모두 **200**이었다. `text/html; charset=utf-8`, gzip 전송이며 디코딩된 HTML은 704,172 bytes다. 제목과 한글 DOM 텍스트를 읽었으므로 적어도 이 문서의 상태 코드나 gzip/UTF-8 해석이 403으로 잘못 바뀐 것은 아니다.
+- `/m/r`은 **POST, Fetch, 403, text/html**이었다. CDP initiator 스택에는 `assets.coupangcdn.com/customjs/sec-g/1.2.11/sec.min.js`와 fetch wrapper가 기록됐다. 알려진 골드박스 위젯과 다른 요청이다. 이 요청의 응답 본문은 확보되지 않았고 정확한 역할·목록 초기화와의 인과관계는 여전히 미확인이다.
+- DOM과 스크린샷에는 헤더·내비게이션·푸터만 보였다. 관측 시점의 `/vp/products/` 상품 링크는 0개, 알려진 위젯 응답은 0회였다. 이는 해당 렌더링의 관측값이지 전체 상품 수가 0이라는 뜻이 아니다. HTML의 모든 내장 JavaScript/RSC 데이터를 해석한 결과도 아니다.
+- 상품 화면의 `app/mlp/web/layout-*.js`를 포함한 스크립트 5개와 이미지 2개에서 `net::ERR_INSUFFICIENT_RESOURCES`가 관측됐다. HTTP 403과 별도의 브라우저 로딩 실패다. 구체적인 OS/브라우저 자원 원인과 빈 상품 영역의 인과관계는 확인하지 못했으므로 메모리 부족이나 쿠팡 차단 하나로 단정하지 않는다.
+
+따라서 현재 판정은 **문서 수신 성공 / 일부 리소스 로딩 실패 / 상품 목록 초기화·수집 미검증**이다. 이 정정은 앞선 운영 bootstrap endpoint의 실제 HTTP 403 기록을 없애지 않는다. 운영 코드는 대상 bootstrap의 `response.status`를 읽고 있었으며, 전체 브라우저 요청을 일괄 실패 처리한 진단기와 다른 경로다.
+
+요청 역할 분리와 200 오류 본문·미확인/빈 목록 구분에 대한 오프라인 테스트 8개를 통과했다. 실행 근거는 `coupang-http-semantics-result.json`, 화면은 `coupang-http-semantics-page.png`다. Sandbox는 종료했으며 상품 저장과 운영 Cron 변경은 없다.
