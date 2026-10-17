@@ -291,18 +291,42 @@
     },
     {
       "id": "product_match.coupang",
-      "title": "Map a source video's product to a Coupang listing (title/image match) before scripting",
+      "title": "Coupang product -> similar products abroad -> seller videos (manifest)",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
       "implementation": {
-        "files": [],
-        "cli": [],
-        "tests": []
+        "files": [
+          {
+            "path": "lib/video-sources/coupang-seed.mjs",
+            "exports": [
+              "createCoupangSeedClient",
+              "parseCoupangProductSeed"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-pipeline.mjs",
+            "tokens": [
+              "--coupang-url",
+              "--coupang-query"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-similar.test.mjs"
+        ]
       },
       "evidence": [],
-      "sourceEvidence": [],
-      "blocker": "Not implemented in this pack; Coupang search readers exist under lib/retail and lifehackailab-web. Matching rules (identity, option, seller) are pending."
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/video-sources.md"
+          ]
+        }
+      ],
+      "blocker": "Live 2026-10-17: Coupang product 8733070301 (plain Node GET of /np/search is 403; in-tab fetch 200) -> keywords via agy -> 3-source search -> Codex verdicts (0 same, 8 type: domestic brand) -> 4 Amazon seller videos downloaded with provenance in 63 s. No evidence kind for browser_tab_fetch yet."
     },
     {
       "id": "amazon.search",

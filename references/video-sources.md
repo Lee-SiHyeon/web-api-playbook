@@ -113,3 +113,14 @@ Decision 모델 계약(크레딧 충전 후 사용, 현재 403/429):
 - Vercel: `POST https://ai-gateway.vercel.sh/v1/decisions`, `model: "openai/gpt-6-luna-decisions"` 또는 `microsoft/microsoft-decision-1`.
 - OpenAI 직접: `POST https://api.openai.com/v1/decisions`, `model: "gpt-6-luna"`.
 - 본문: `{ model, input: [{ role: "user", content: [{type:"input_text",text}, {type:"input_image", image_url:"data:image/jpeg;base64,..."}] }], questions: [{type:"predicate", instructions}, {type:"choice", instructions, choices:[{value:"same"},{value:"type"},{value:"different"}]}] }` (Vercel은 choice에 `label` 허용, OpenAI는 `label` 거부. 이미지는 base64 data URL만, 외부 URL 불가). Codex CLI(ChatGPT 계정)에서는 decision 모델이 거부된다.
+
+## 쿠팡 → 해외 같은 상품 → 판매자 영상 (`npm run video:pipeline`)
+
+```powershell
+npm run video:pipeline -- --coupang-url https://www.coupang.com/vp/products/8733070301 --out .runtime\pipeline --include-type --max-videos 4
+npm run video:pipeline -- --coupang-query "접이식 피아노" --pick 3 --out .runtime\pipeline
+```
+
+- 쿠팡 검색·상품 Document는 Node 직접 GET이 403이라 탭 전송으로 읽는다. 상품 페이지의 `og:title`, `og:image`(640x640)가 기준.
+- 결과: `<out>/coupang-<productId>/manifest.json`(기준 상품, 키워드, same/type 매칭과 사유, 영상 상태) + 영상 파일과 `.provenance.json`(매칭된 쿠팡 상품 ID·판정 포함).
+- 2026-10-17: 토이게이트 88건반(국내 브랜드) → same 0, type 8, 아마존 판매자 영상 4개, 63초. 국내 브랜드 상품은 same이 없을 수 있어 `--include-type`으로 같은 종류 영상을 쓴다.

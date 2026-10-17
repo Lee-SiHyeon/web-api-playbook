@@ -70,3 +70,15 @@ test('model codes are language independent and drop spec tokens', () => {
   assert.deepEqual(s.modelMatch, ['PJ88C']);
   assert.equal(s.score, 0.4);
 });
+
+import { parseCoupangProductSeed } from '../lib/video-sources/coupang-seed.mjs';
+test('Coupang product seed: og:title without site suffix, protocol-relative og:image on the CDN', () => {
+  const html = `<html><head><meta property="og:title" content="토이게이트 88건반 플로리다 접이식 전자 피아노 - 디지털피아노 | 쿠팡">`
+    + `<meta property="og:image" content="//thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/retail/images/6771.jpg"></head>${'x'.repeat(2000)}</html>`;
+  const s = parseCoupangProductSeed(html, 'https://www.coupang.com/vp/products/8733070301');
+  assert.equal(s.title, '토이게이트 88건반 플로리다 접이식 전자 피아노');
+  assert.equal(s.image, 'https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/retail/images/6771.jpg');
+  assert.equal(s.productId, '8733070301');
+  const evil = parseCoupangProductSeed(html.replace('//thumbnail.coupangcdn.com', 'https://evil.example'), 'https://www.coupang.com/vp/products/1');
+  assert.equal(evil.image, null);
+});
