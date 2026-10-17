@@ -19,6 +19,7 @@
 | 1688 검색 | `mtop.relationrecommend.wirelessrecommend.recommend/2.0` (h5api.m.1688.com, appKey 12574478, appId 32517) → `data.data.OFFER.items` 60개 | **동작**(로그인 없음, 탭 전송): ID·제목·위안 가격·판매 건수·재구매율·이미지 |
 | 1688 상품 영상 | `detail.1688.com/offer/{id}.html` 서버 HTML의 `"video":{videoId, videoUrl, coverUrl, title}` | **동작**: Node 직접 GET은 punish 페이지, 탭 fetch는 200. 영상 2개 다운로드 (`cloud.video.taobao.com` → `caiyuanbao.alicdn.com`) |
 | 타오바오 상세 영상 | 같은 MTOP H5 서명 | 미관측 |
+| Amazon US 판매자 영상 | PDP `"videos"` + HLS 1080p | **동작**(로그인 없음, 탭 전송) |
 | 더우인 / 샤오홍슈 | 웹 서명(a_bogus / x-s) + 로그인 | **로그인 필요 확인**: 더우인은 검색 시 로그인 모달, 샤오홍슈는 `code -101 无登录信息` |
 | 쿠팡 상품 매칭 | 제목·이미지 기준 동일 상품 확인 | 미구현 |
 
@@ -64,3 +65,15 @@ npm run video:sources -- 1688 offer-media --offer-id 678197228838 --download .ru
 - 검색어는 중국어. `charset=utf8`로 보내서 GBK 변환이 필요 없다.
 - 같은 판매자의 여러 상품이 영상 하나를 공유한다(관측: 1047106487219와 848877992659가 같은 videoId). 영상 ID로 중복 제거한다.
 - 1688 영상은 1~2분, 가로·정사각이 많다. 쇼츠에는 3~5초 단위로 잘라 쓴다.
+
+## Amazon (US) 판매자 영상
+
+```powershell
+$env:FFMPEG_BIN = "C:\path\to\ffmpeg.exe"   # 또는 PATH
+npm run video:sources -- amazon search --keyword "folding piano keyboard"
+npm run video:sources -- amazon product-videos --asin B0DS23X39K --download .runtime\video-sources
+```
+
+- PDP Document의 `"videos":[...]`(이미지 블록 `IB_G1`). `aciContentId`가 `amzn1.ive.seller.video.*` / `amzn1.ive.vendor.video.*`이면 판매자·브랜드 영상으로 분류하고, 그 외(크리에이터·고객 영상)는 `--include-creator` 없이는 제외한다.
+- 직접 MP4는 480p(`default.jobtemplate.mp4.480.mp4`)뿐이다. HLS 마스터에서 짧은 변 기준 ≤1080 최고 화질을 골라 ffmpeg `-c copy`로 합친다(세로 1080x1920 유지).
+- 2026-10-17: 검색 52 ASIN, 표본 6개 중 4개에 판매자 영상, 3개 다운로드(19초).

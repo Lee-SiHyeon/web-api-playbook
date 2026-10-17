@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "video-sources",
-  "description": "Product video sources for shopping shorts: find a product seller/creator video, download it with a provenance sidecar (source, IDs, SHA-256, claimed rights basis), and map it back to a sellable product. AliExpress PDP media and 1688 search/offer media work through a browser-tab transport on the user automation profile (no login). Douyin and Xiaohongshu search require a logged-in account; Taobao is not yet observed.",
+  "description": "Product video sources for shopping shorts: find a product seller/creator video, download it with a provenance sidecar (source, IDs, SHA-256, claimed rights basis), and map it back to a sellable product. AliExpress PDP media and 1688 search/offer media and Amazon search/seller videos work through a browser-tab transport on the user automation profile (no login). Douyin and Xiaohongshu search require a logged-in account; Taobao is not yet observed.",
   "capabilities": [
     {
       "id": "aliexpress.product_media",
@@ -303,6 +303,91 @@
       "evidence": [],
       "sourceEvidence": [],
       "blocker": "Not implemented in this pack; Coupang search readers exist under lib/retail and lifehackailab-web. Matching rules (identity, option, seller) are pending."
+    },
+    {
+      "id": "amazon.search",
+      "title": "Search Amazon US by keyword and return result-card ASINs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/amazon-media.mjs",
+            "exports": [
+              "createAmazonMediaClient",
+              "parseAmazonSearchAsins"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "amazon",
+              "search"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/amazon-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live run 2026-10-17: 52 ASINs through browser_tab_fetch; no evidence kind for that transport yet."
+    },
+    {
+      "id": "amazon.product_videos",
+      "title": "Read seller/brand product videos from an Amazon PDP (classified by aciContentId namespace) and download the best HLS variant up to 1080p",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/amazon-media.mjs",
+            "exports": [
+              "createAmazonMediaClient",
+              "parseAmazonPdpVideos",
+              "classifyAmazonVideo"
+            ]
+          },
+          {
+            "path": "lib/video-sources/media-download.mjs",
+            "exports": [
+              "downloadHlsMedia"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "amazon",
+              "product-videos"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/amazon-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live run 2026-10-17: 4 of 6 sampled PDPs had seller videos; 3 videos remuxed (1080x1920, 1920x1080 x2). Creator/customer videos are excluded unless --include-creator. Needs ffmpeg."
     }
   ]
 }

@@ -5,12 +5,15 @@
 //   npm run video:sources -- aliexpress product-media --product-id <id> [--download <dir>] [--output <file>] [--transport browser|http] [--cdp <url>]
 //   npm run video:sources -- 1688 search --keyword <中文关键词> [--page N] [--output <file>] [--cdp <url>]
 //   npm run video:sources -- 1688 offer-media --offer-id <id> [--download <dir>] [--output <file>] [--cdp <url>]
+//   npm run video:sources -- amazon search --keyword <keyword>
+//   npm run video:sources -- amazon product-videos --asin <ASIN> [--download <dir>] [--max-height 1080] [--include-creator]   (needs ffmpeg: FFMPEG_BIN or PATH)
 import { writeFileSync, existsSync } from 'node:fs';
 import { readCdpCookies } from '../lib/video-sources/cdp-cookies.mjs';
 import { aliExpressBrowserTransport, aliExpressHttpTransport, aliExpressSessionStatus, createAliExpressMediaClient, createAliExpressSessionState, importAliExpressSession }
   from '../lib/video-sources/aliexpress-media.mjs';
-import { downloadMedia } from '../lib/video-sources/media-download.mjs';
+import { downloadHlsMedia, downloadMedia } from '../lib/video-sources/media-download.mjs';
 import { create1688Client } from '../lib/video-sources/alibaba-1688.mjs';
+import { createAmazonMediaClient } from '../lib/video-sources/amazon-media.mjs';
 
 const [service, command, ...rest] = process.argv.slice(2);
 const opts = {};
@@ -22,6 +25,7 @@ for (let i = 0; i < rest.length; i++) {
 const COMMANDS = {
   aliexpress: { 'session-import': ['cdp'], 'session-status': [], 'product-media': ['product-id', 'download', 'output', 'transport', 'cdp'] },
   1688: { search: ['keyword', 'page', 'output', 'cdp'], 'offer-media': ['offer-id', 'download', 'output', 'cdp'] },
+  amazon: { search: ['keyword', 'output', 'cdp'], 'product-videos': ['asin', 'download', 'max-height', 'include-creator', 'output', 'cdp'] },
 };
 const out = value => console.log(JSON.stringify(value, null, 2));
 const err = code => Object.assign(new Error(code), { code });
@@ -62,12 +66,28 @@ async function alibaba1688() {
   return { ...media, download };
 }
 
+async function amazon() {
+  const client = createAmazonMediaClient({ cdpEndpoint: cdp });
+  if (command === 'search') return client.search({ keyword: String(opts.keyword ?? '') });
+  const media = await client.productVideos({ asin: String(opts.asin ?? ''), includeCreator: opts['include-creator'] === true });
+  const downloads = [];
+  if (typeof opts.download === 'string') {
+    for (const v of media.videos.filter(x => x.kind === 'seller_product_video')) {
+      downloads.push(await downloadHlsMedia({ masterUrl: v.hlsUrl, outDir: opts.download, fileStem: `amazon-${media.asin}-${v.videoId.slice(0, 16)}`,
+        allowedHosts: ['m.media-amazon.com'], maxHeight: opts['max-height'] ? Number(opts['max-height']) : 1080,
+        provenance: { sourcePlatform: 'amazon', sourceUrl: media.productUrl, productId: media.asin, videoId: v.videoId,
+          contentNamespace: v.contentNamespace, videoTitle: v.title, productTitle: media.title, rightsBasis: 'seller_product_video_unverified' } }));
+    }
+  }
+  return { ...media, downloads };
+}
+
 try {
   const allowed = COMMANDS[service]?.[command];
   if (!allowed) throw err('COMMAND_REQUIRED');
   for (const key of Object.keys(opts)) if (!allowed.includes(key)) throw err('UNKNOWN_OPTION');
   if (typeof opts.output === 'string' && existsSync(opts.output)) throw err('OUTPUT_EXISTS');
-  const data = service === 'aliexpress' ? await aliexpress() : await alibaba1688();
+  const data = service === 'aliexpress' ? await aliexpress() : service === 'amazon' ? await amazon() : await alibaba1688();
   const result = { service, command, ...data };
   if (typeof opts.output === 'string') writeFileSync(opts.output, JSON.stringify(result, null, 2), { flag: 'wx' });
   out(result);

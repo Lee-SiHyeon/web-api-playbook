@@ -160,3 +160,32 @@ test('1688 offer detail: brace-matched video object, images and supplier from se
   assert.equal(extractJsonObjectAfter('{"a":1}', 'video'), null);
   assert.throws(() => parse1688OfferDetail(`<html>_____tmd_____ punish x5secdata${pad}</html>`, '1'), { code: 'ALIBABA1688_CHALLENGE_REQUIRED' });
 });
+
+// ---- Amazon ----
+import { classifyAmazonVideo, parseAmazonPdpVideos, parseAmazonSearchAsins } from '../lib/video-sources/amazon-media.mjs';
+
+test('Amazon PDP: keeps seller/vendor videos, drops creator videos, derives the 480p MP4', () => {
+  const hls = id => `https://m.media-amazon.com/images/S/vse-vms-transcoding-artifact-us-east-1-prod/${id}/default.jobtemplate.hls.m3u8`;
+  const videos = [
+    { isVideo: true, mediaObjectId: '07469fc7b2784a66aa', aciContentId: 'amzn1.ive.seller.video.07469fc7b2784a66aa', title: 'Rhymo Folding Piano', durationTimestamp: '01:07', videoWidth: '1080', videoHeight: '1920', url: hls('a'), groupType: 'IB_G1' },
+    { isVideo: true, mediaObjectId: '03c6a6da379743199a', aciContentId: 'amzn1.ive.vendor.video.03c6a6da379743199a', title: 'Brand', url: hls('b') },
+    { isVideo: true, mediaObjectId: 'ffffffffffffffffff', aciContentId: 'amzn1.ive.creator.video.x', title: 'Influencer', url: hls('c') },
+    { isVideo: true, mediaObjectId: '07469fc7b2784a66aa', aciContentId: 'amzn1.ive.seller.video.dup', url: hls('a') },
+    { isVideo: true, mediaObjectId: 'eeeeeeeeeeeeeeeeee', aciContentId: 'amzn1.ive.seller.video.e', url: 'https://evil.example/x.m3u8' },
+  ];
+  const html = `<html>${'x'.repeat(2000)}<span id="productTitle" class="a"> Rhymo  Folding Piano </span><script>var d={"videos":${JSON.stringify(videos)}};</script></html>`;
+  const r = parseAmazonPdpVideos(html, 'B0DS23X39K');
+  assert.equal(r.title, 'Rhymo Folding Piano');
+  assert.deepEqual(r.videos.map(v => v.videoId), ['07469fc7b2784a66aa', '03c6a6da379743199a']);
+  assert.equal(r.videos[0].mp4Url480, 'https://m.media-amazon.com/images/S/vse-vms-transcoding-artifact-us-east-1-prod/a/default.jobtemplate.mp4.480.mp4');
+  assert.equal(r.videos[0].width, 1080);
+  assert.equal(parseAmazonPdpVideos(html, 'B0DS23X39K', { includeCreator: true }).videos.length, 3);
+  assert.equal(classifyAmazonVideo('amzn1.ive.creator.video.x'), 'creator_or_customer_video');
+  assert.throws(() => parseAmazonPdpVideos(`<form action="/errors/validateCaptcha">${'x'.repeat(2000)}</form>`, 'B0DS23X39K'), { code: 'AMAZON_CHALLENGE_REQUIRED' });
+});
+
+test('Amazon search: result-card ASINs first, deduped', () => {
+  const html = '<div data-asin="B0DS23X39K" data-component-type="s-search-result"></div><div data-asin="B0DS23X39K" data-component-type="s-search-result"></div>'
+    + '<div data-asin="B0F8NCR929" data-index="2" data-component-type="s-search-result"></div><div data-asin="AD0000000X"></div>';
+  assert.deepEqual(parseAmazonSearchAsins(html), ['B0DS23X39K', 'B0F8NCR929']);
+});
