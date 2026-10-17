@@ -9,7 +9,7 @@ import { createAliExpressSearchClient } from '../lib/video-sources/aliexpress-se
 import { create1688Client } from '../lib/video-sources/alibaba-1688.mjs';
 import { createAmazonMediaClient } from '../lib/video-sources/amazon-media.mjs';
 import { createAliExpressMediaClient } from '../lib/video-sources/aliexpress-media.mjs';
-import { llmJudge, productKeywords } from '../lib/video-sources/llm.mjs';
+import { aiGatewayChat, codexJudge, llmJudge, productKeywords, visionJudge } from '../lib/video-sources/llm.mjs';
 
 const opts = {};
 const argv = process.argv.slice(2);
@@ -18,7 +18,7 @@ for (let i = 0; i < argv.length; i++) {
   if (!m) { console.error(JSON.stringify({ error: 'UNKNOWN_ARGUMENT' })); process.exit(2); }
   opts[m[1]] = m[2] ?? (argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[++i] : true);
 }
-const ALLOWED = ['title', 'image', 'ko', 'zh', 'en', 'sources', 'per-source', 'judge', 'videos', 'output', 'cdp'];
+const ALLOWED = ['title', 'image', 'ko', 'zh', 'en', 'sources', 'per-source', 'judge', 'judge-model', 'videos', 'output', 'cdp'];
 try {
   for (const k of Object.keys(opts)) if (!ALLOWED.includes(k)) throw Object.assign(new Error('UNKNOWN_OPTION'), { code: 'UNKNOWN_OPTION' });
   if (typeof opts.output === 'string' && existsSync(opts.output)) throw Object.assign(new Error('OUTPUT_EXISTS'), { code: 'OUTPUT_EXISTS' });
@@ -37,7 +37,13 @@ try {
   const clients = { ...(want.has('aliexpress') ? { aliexpress: createAliExpressSearchClient({ cdpEndpoint }) } : {}),
     ...(c1688 ? { 1688: c1688 } : {}), ...(amazon ? { amazon } : {}) };
   const result = await findSimilarProducts({ seed: { title, image: opts.image, lang: 'ko' }, keywords, clients,
-    perSource: opts['per-source'] ? Number(opts['per-source']) : 20, judge: opts.judge ? llmJudge() : undefined });
+    perSource: opts['per-source'] ? Number(opts['per-source']) : 20,
+    // --judge (= codex): Codex CLI on the ChatGPT subscription, images+titles, schema-forced verdicts.
+    // --judge gateway: AI Gateway vision model; --judge agy: text-only judge through the agy CLI.
+    judge: !opts.judge ? undefined : opts.judge === 'agy' ? llmJudge()
+      : opts.judge === 'gateway' ? visionJudge({ chat: aiGatewayChat({ model: typeof opts['judge-model'] === 'string' ? opts['judge-model'] : 'google/gemini-2.5-flash' }) })
+      : codexJudge({ model: typeof opts['judge-model'] === 'string' ? opts['judge-model'] : 'gpt-6-luna' }),
+    judgeTop: 10 });
   // Seller-video lookup for the top N (skipping judged "different").
   const nVideos = opts.videos ? Number(opts.videos) : 0;
   if (nVideos > 0) {

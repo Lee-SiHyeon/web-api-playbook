@@ -100,3 +100,16 @@ npm run video:similar -- --title "IRIN PJ88C 접이식 디지털 피아노 88키
 | Shopify 브랜드 스토어 | 5개 브랜드 × 12상품의 `/products/{handle}.js` 미디어에 영상 0개, 3곳은 `/products.json` 403 | 브랜드별 스토어라 검색 소스가 아님 |
 | 1688 이미지 검색 | 업로드(`uploadBase64WithRequest`, JPEG 필수) → imageId까지 성공, `imageSimilarSearchV2`는 params invalid | 로그인 또는 추가 파라미터 필요 |
 | 더우인 / 샤오홍슈 | 검색에 로그인 필요 | 작업용 계정이 생기면 추가 |
+
+## 판정기(judge) 선택 — 2026-10-17 실측
+
+| `--judge` | 경로 | 상태 |
+|---|---|---|
+| (기본) `codex` | 설치된 Codex 앱의 `codex.exe exec --model gpt-6-luna --output-schema` + 이미지·제목 | **동작.** ChatGPT 구독, API 크레딧 불필요, 10개 판정 약 5~10초. 제목을 빼면 다른 브랜드를 same으로 오판 |
+| `gateway` | Vercel AI Gateway 채팅(OIDC 또는 `AI_GATEWAY_API_KEY`) | 무료 $5 크레딧 팀은 `gemini-2.5-flash`만. Gemini 3.x·Jev·Claude는 403 |
+| `agy` | Antigravity CLI 텍스트 판정 | 동작, 이미지 없음 |
+
+Decision 모델 계약(크레딧 충전 후 사용, 현재 403/429):
+- Vercel: `POST https://ai-gateway.vercel.sh/v1/decisions`, `model: "openai/gpt-6-luna-decisions"` 또는 `microsoft/microsoft-decision-1`.
+- OpenAI 직접: `POST https://api.openai.com/v1/decisions`, `model: "gpt-6-luna"`.
+- 본문: `{ model, input: [{ role: "user", content: [{type:"input_text",text}, {type:"input_image", image_url:"data:image/jpeg;base64,..."}] }], questions: [{type:"predicate", instructions}, {type:"choice", instructions, choices:[{value:"same"},{value:"type"},{value:"different"}]}] }` (Vercel은 choice에 `label` 허용, OpenAI는 `label` 거부. 이미지는 base64 data URL만, 외부 URL 불가). Codex CLI(ChatGPT 계정)에서는 decision 모델이 거부된다.
