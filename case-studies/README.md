@@ -11,6 +11,8 @@
 | POST가 끊겨 중복 게시 우려 | [쓰기와 대사](../references/write-and-reconcile.md), [Tistory 사례](non-naver.md) | `lib/write-journal.mjs`, pack별 publishing journal |
 | 링크/iframe 수를 API 수로 혼동 | [재귀 탐색](../references/recursive-discovery.md) | `lib/contracts.mjs`, `lib/frontier.mjs` |
 | 소스에서 찾은 endpoint가 호출 실패 | [서비스 사례](non-naver.md), [Coupang](coupang.md) | affiliate 관측/후보 catalog, X contract discovery |
+| 골드박스 20개를 전체 목록으로 오인 | [골드박스 페이지 계약](coupang.md#2026-10-17-골드박스-20개를-전체-목록으로-오인한-사례) | 실제 dataUrl 순회, 고유 SKU·연결·가격·DB 저장 개수 분리 |
+| 카드사 행사와 상품 특가 혼동·순회 누락 | [카드사 수집 계약](card-mall-collection.md) | Lifehack의 7개 카드사 선택 표면 adapter; 전체 mall 수집과 구분 |
 | 이미지 403, 첨부만 있고 재생 안 됨 | [미디어](../references/media-and-publishing.md) | Tistory media library, Naver upload/reconcile |
 | 다른 PC에서 JSON 한글/DPAPI 실패 | [이식 안내](../references/portability.md) | `scripts/dpapi-store.ps1`, `scripts/doctor.mjs` |
 
