@@ -78,3 +78,39 @@ Vercel 서울 `icn1` Sandbox의 Chrome 151에 `browserWSEndpoint`로 직접 연�
 따라서 현재 판정은 **문서 수신 성공 / 일부 리소스 로딩 실패 / 상품 목록 초기화·수집 미검증**이다. 이 정정은 앞선 운영 bootstrap endpoint의 실제 HTTP 403 기록을 없애지 않는다. 운영 코드는 대상 bootstrap의 `response.status`를 읽고 있었으며, 전체 브라우저 요청을 일괄 실패 처리한 진단기와 다른 경로다.
 
 요청 역할 분리와 200 오류 본문·미확인/빈 목록 구분에 대한 오프라인 테스트 8개를 통과했다. 실행 근거는 `coupang-http-semantics-result.json`, 화면은 `coupang-http-semantics-page.png`다. Sandbox는 종료했으며 상품 저장과 운영 Cron 변경은 없다.
+
+### 2026-10-17 22:17 KST — 브라우저 렌더링과 HTML 내장 상품 데이터 확인
+
+Vercel `icn1`에서 2 vCPU/4 GB와 작은 `/dev/shm`을 대신하는 파일 기반 공유 메모리 설정으로 한 번 관측했다. Chrome의 보안 sandbox는 유지했고, 계정 쿠키를 가져오지 않은 새 공개 방문 문맥을 사용했다. 브라우저와 CDP 클라이언트는 같은 Vercel VM 안에서 실행됐다. 이 실행에서는 이전의 리소스 로딩 오류가 관측되지 않았고 실제 골드박스 상품 화면이 표시됐다. CPU/메모리 크기와 공유 메모리 설정을 함께 바꿨으므로 원인을 RAM 하나로 확정하지 않는다.
+
+문서는 HTTP 200, 디코딩된 HTML 710,396 bytes였다. DOM에는 상품 링크 282개와 서로 다른 정확한 SKU 링크 94개가 있었고, HTML Flight 안의 정확한 상품 위젯(`43145`, 페이지 `3712`)에는 **100행과 실제 다음 `dataUrl`**이 있었다. 별도의 알려진 위젯 XHR 응답이 없더라도 첫 페이지 상품은 HTML에 포함될 수 있다. `/m/r`의 403도 같은 실행에서 관측됐으므로 그 상태만으로 상품 조회 실패를 판정하는 것은 명백히 잘못이다.
+
+HTML은 보호 저장한 뒤 오프라인 분석했다. Flight `T<16진수 바이트 길이>,본문` 레코드 뒤에 개행 없이 다음 상품 모델이 붙는 경우가 있었다. 단순 줄 분리나 script 순서 뒤집기로 우연히 추출한 값을 정식 파서로 사용하지 않는다. 문서 순서를 보존하고 UTF-8 **바이트 길이**를 따라 텍스트 프레임을 건너뛴 뒤, JSON literal만 읽어 정확한 위젯을 선택한다. `eval`이나 임의 스크립트 실행은 필요 없다.
+
+오프라인 정규화 결과는 SKU 100개, 정확한 소비자 URL 94개, 추적 전용 URL 6개였다. 일반 가격은 100개, WOW 표시 가격은 87개(할인가 85개·가입 쿠폰가 2개)였다. 추적 링크를 임의 상품 URL로 만들어 저장하지 않고 조건부 가격을 일반 적용가로 바꾸지 않는다. 관측된 HTTP CDN 이미지는 허용된 두 쿠팡 이미지 호스트만 HTTPS로 정규화하되 실제 이미지 로드 성공과는 별도 증거로 취급한다.
+
+이 절의 실험은 **첫 페이지 렌더링·파싱 성공**이며 페이지 소진이나 운영 DB 저장의 증거는 아니다. 실행 후 VM을 종료했다. 근거는 `coupang-resource-html-result.json`, `coupang-resource-html-page.png`와 HTML SHA-256 `0046176b709f9bca23cae96e6af0f6d12ec305009471b87be508cdf5b692bd0e`다. 원시 HTML·방문자 값·opaque continuation은 Git에 보관하지 않는다.
+
+### 2026-10-17 22:56 KST — 실제 UI의 다음 페이지 요청도 별도로 검증
+
+운영 후보 reader를 같은 Vercel VM 환경에서 검증했다. 첫 수동 continuation 관측은 HTML 100행/정확한 상품 94개 다음의 요청이 HTTP 403이었다. 이를 누락 헤더나 토큰 문제라고 단정하지 않고 실제 문서가 참조한 공개 앱 번들을 분석했다. `window.__root_state__.headers`의 세 헤더 값은 기존 요청과 일치했다. 앱은 상품 리스트 뒤의 IntersectionObserver sentinel에서 받은 `dataUrl`을 Axios XHR로 호출했다. 수동 fetch와 실제 앱 호출의 차이는 확인했지만, 특정 헤더 하나를 거절 원인으로 입증한 것은 아니다.
+
+이어 수동 fetch·헤더 재구성 없이 실제 SKU에 연결된 리스트의 sentinel로 스크롤하고, 탐색 전부터 앱의 응답을 수동 개입 없이 관찰했다. Vercel `icn1` Chrome의 문서는 HTTP 200, HTML 상품은 99행, 정확한 소비자 URL과 일반 가격·이미지가 있는 것은 93개였다. 추적 전용 목적지 6개는 제외했다. 실제 앱의 **두 번째 상품 페이지 XHR도 HTTP 403**이었고 한 번 관측한 뒤 재시도하지 않았다. 이 403은 앞선 미분류 `/m/r` 오류와 달리 정확한 continuation 요청에 연결된 실패다.
+
+따라서 byte-framing 파싱 수정과 첫 페이지 회복은 검증됐으나, **네이티브 UI로 바꾸는 것만으로 전체 페이지 순회가 해결되지는 않았다.** HTML 200, WebSocket 연결 성공, 첫 페이지 상품 93개를 전체 수집 성공으로 합치지 않는다. 일반 페이지 수/요청 수와 브라우저 부가 요청 수를 따로 기록하며, 정확한 다음 URL만 매칭하고 페이지 5개·네이티브 스크롤 4회·총 브라우저 요청 1,000회로 제한한다.
+
+이 후보는 실패 전 검증된 행을 보존한다. 운영 적용 시에도 유효 행의 원자적 저장과 원천 차단 상태를 함께 남기고, 누락 상품을 품절로 처리하거나 실패 코드를 지워 정상 상태로 만들지 않는다. 실제 운영 저장·화면 확인은 별도의 증거가 필요하다. 근거는 `coupang-goldbox-browser-manual-fetch-result.json`, `coupang-goldbox-browser-native-ui-result.json`, `goldbox-browser-preflight-subset-proof.json`이다. 마지막 파일의 `partialReaderVerified=true`와 `fullCollectionVerified=false`는 서로 다른 판정이며 운영 성공 증거가 아니다. 계정 쿠키 반입·로컬 상품 업로드는 없고 생성한 VM을 종료했다.
+
+### 2026-10-17 23:30 KST — Vercel → DB → 운영 화면의 부분 회복 확인
+
+Lifehack production `c6c9e48b8d9ed9b390a24d5cbd82cdb7a2b0eaac` / deployment `dpl_5333yC8dBCMZP5GiBt7iRRfK6ucw`를 READY와 원격 main SHA로 확인했다. 기존 직접 bootstrap 실패의 특정 보류만 이력·결과 hash를 보존해 해제하고, 바뀐 reader를 운영 Cron에서 한 번 실행했다. 새 실패의 보류는 다시 해제하지 않았다.
+
+- 23:23:50~23:25:11 KST 실제 source run `43990a7e-491f-4ad7-a398-61a49d7faa11`: Vercel `icn1`, Chrome 151, CDP WebSocket 연결, 문서 HTTP 200, 브라우저 리소스 실패 0회, VM 종료 확인. PC는 배포·검증만 수행했고 상품을 업로드하지 않았다.
+- 첫 페이지 **100행 중 정확한 SKU 상품 94개를 저장**했다. 독립 DB readback은 해당 신규 writer 기준 0 → 94개, 가격 94개·이미지 URL 94개·정확한 상품/옵션/판매자상품 대상 94개였다. 추적 전용 목적지 6개는 제외했다. 일반가와 조건부 표시 가격을 분리했으며 새 제휴 링크 발급은 0개다.
+- 실제 앱의 다음 페이지는 다시 403이었다. source 상태 `blocked`, `COUPANG_GOLDBOX_WIDGET_HTTP_REJECTED`, `paginationExhausted=false`, `snapshotComplete=false`를 그대로 저장했다. source의 `persisted=true`는 이번에는 유효 상품 94개와 실패 receipt가 함께 저장됐다는 뜻이다. 바깥 Cron도 완료된 `HTTP 503 COUPANG_GOLDBOX_WIDGET_HTTP_REJECTED` 기록을 남겼으며 정상 성공으로 바꾸지 않았다.
+- 운영 UI는 데스크톱 1280px에서 저장된 피드 cursor 4페이지를 따라 **94개 전부**, 모바일 390px에서 2페이지의 60개를 대조했다. 양쪽 상품 상세는 200, 확인한 상세 이미지들은 HTTPS 로드 성공, 스크립트 오류·가로 overflow 0이었다. 브라우저에서 collector Cron을 호출한 횟수도 0이다. 수집과 공개 읽기 경로는 분리돼 있다.
+- UI 검증기의 첫 시도는 query-only `?before=...` 링크를 현재 `/shopping` 대신 사이트 루트에 결합해 홈으로 이동했다. 검사 도구의 URL 기준을 현재 페이지로 고치고 3개 오프라인 URL 사례와 전체 UI 흐름을 다시 확인했다. 이는 운영 사이트의 더 보기 링크나 원천 상품 페이지가 실패한 증거가 아니다.
+
+정기 Cron은 매시 22분으로 등록돼 있다. 다만 새 원천 보류는 **2026-10-18 23:25:11 KST**까지이고, 그 뒤의 첫 정기 시도 슬롯은 **2026-10-19 00:22 KST**다. 등록된 시간표를 매시 실제 수집 성공으로 보고하지 않는다. 공개 첫 페이지 부분 회복은 입증됐지만 **두 번째 페이지 거절이 남아 있어 전체 골드박스 수집은 여전히 미완료**다.
+
+앱 `npm ci`, typecheck, build와 전체 테스트 **1,301/1,301**을 통과하고 로컬 데스크톱·모바일의 표시된 demo 흐름도 확인한 뒤 배포했다. 로컬 demo를 운영 증거로 사용하지 않았다. 최종 운영 근거는 `goldbox-browser-partial-production-proof.json` (`partialPipelineVerified=true`, `fullCollectionVerified=false`), `retail-db-management-goldbox-browser-proof.json`, `goldbox-ui-production.json`, `card-goldbox-release-status.json`이다. 전체 수집 성공을 요구하는 별도 proof 기준은 낮추지 않았다.
