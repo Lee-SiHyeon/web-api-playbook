@@ -117,6 +117,15 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 
 ## 3. 기존 서비스를 사용할 때
 
+### YouTube Studio 롱폼 업로드·다국어
+
+```bash
+node scripts/youtube-studio.mjs upload   job.json --shots=out/shots
+node scripts/youtube-studio.mjs captions job.json --shots=out/shots
+```
+
+로그인된 자동화 Canary(CDP 9333)에서 Studio UI를 그대로 조작합니다(브라우저 보조, 토큰 미반출). 업로드·제목/설명·A/B 썸네일·공개 예약·원어 SRT·언어별 제목/설명/SRT까지 한 job으로 처리합니다. 함정과 검증 범위는 [YouTube Studio 업로드 플레이북](references/youtube-studio-longform-upload.md), 입력 예시는 `examples/youtube-studio-job.example.json`.
+
 ### Gabia 도메인과 DNS
 
 ```bash
