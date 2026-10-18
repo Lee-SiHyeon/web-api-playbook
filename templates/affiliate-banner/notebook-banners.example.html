@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<style>
+@font-face{font-family:BHS;src:url(../fonts/BlackHanSans-Regular.ttf)}
+:root{--ink:#1d1a16;--paper:#f6efdf;--mus:#ffc83d;--tom:#e5483c}
+*{box-sizing:border-box;margin:0}
+body{background:#888;font-family:"Pretendard","Malgun Gothic",sans-serif}
+.b{width:1200px;height:400px;position:relative;overflow:hidden;margin:0 0 20px;
+  background:url(../img/clean/board-bg.jpg) center/cover;}
+.b::after{content:"";position:absolute;inset:0;background:rgba(20,14,8,.35)}
+.photo{position:absolute;left:34px;top:30px;width:520px;height:340px;background:#fff;padding:12px 12px 12px;
+  transform:rotate(-2deg);box-shadow:0 14px 30px rgba(0,0,0,.45);z-index:2}
+.photo div{width:100%;height:100%;background-size:cover;background-position:center}
+.tape{position:absolute;width:150px;height:34px;background:rgba(255,226,140,.85);z-index:3;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.t1{left:200px;top:16px;transform:rotate(-6deg)}
+.card{position:absolute;right:34px;top:38px;width:586px;height:324px;background:var(--paper);z-index:2;
+  transform:rotate(1deg);box-shadow:0 14px 30px rgba(0,0,0,.45);padding:30px 36px 0;
+  background-image:repeating-linear-gradient(transparent 0 37px,rgba(29,26,22,.07) 37px 38px)}
+.kick{display:inline-block;background:var(--mus);color:var(--ink);font:700 19px/1 "Malgun Gothic";padding:8px 12px;transform:rotate(-1.5deg)}
+h1{font:400 50px/1.12 BHS;color:var(--ink);margin:16px 0 10px;letter-spacing:-.5px}
+h1 em{font-style:normal;color:var(--tom)}
+p{font:600 21px/1.45 "Malgun Gothic";color:#3d362d}
+.cta{position:absolute;left:36px;bottom:28px;background:var(--tom);color:#fff;font:400 26px/1 BHS;padding:16px 22px;border-radius:6px;
+  box-shadow:0 4px 0 #a92d24}
+.ad{position:absolute;right:30px;bottom:34px;font:600 14px/1.3 "Malgun Gothic";color:#6b6152;text-align:right}
+.stamp{position:absolute;right:28px;top:22px;width:92px;height:92px;border:4px solid var(--tom);border-radius:50%;color:var(--tom);
+  font:400 21px/1.05 BHS;display:flex;align-items:center;justify-content:center;text-align:center;transform:rotate(12deg);opacity:.85}
+.brand{position:absolute;left:44px;bottom:16px;z-index:4;background:rgba(29,26,22,.82);color:#fff;font:700 15px/1 "Malgun Gothic";padding:7px 10px;border-radius:4px}
+</style></head><body>
+
+<section class="b" id="flight">
+  <div class="photo"><div style="background-image:url(../img/arrive.jpg)"></div></div><span class="tape t1"></span>
+  <div class="card"><span class="kick">✈️ 곽범 방콕 코스 따라가기 ①</span>
+    <h1>인천 → 방콕<br><em>왕복 항공권</em> 비교</h1>
+    <p>전 항공사 한 번에 · 날짜는 결과 화면에서 변경</p>
+    <span class="cta">마이리얼트립에서 보기 →</span><span class="ad">제휴 링크<br>수수료 지급 가능</span>
+    <span class="stamp">출발<br>준비</span></div>
+  <span class="brand">생활이득AI연구소 · AI 이미지</span>
+</section>
+
+<section class="b" id="tour">
+  <div class="photo"><div style="background-image:url(../img/watpho-out.jpg)"></div></div><span class="tape t1"></span>
+  <div class="card"><span class="kick">🛕 곽범 방콕 코스 따라가기 ②</span>
+    <h1>왕궁 + 왓포<br><em>한국어 가이드</em> 투어</h1>
+    <p>입장료 왕궁 500 · 왓포 300바트 코스를 한 번에</p>
+    <span class="cta">마이리얼트립에서 보기 →</span><span class="ad">제휴 링크<br>수수료 지급 가능</span>
+    <span class="stamp">영상<br>속 코스</span></div>
+  <span class="brand">생활이득AI연구소 · AI 이미지</span>
+</section>
+
+<section class="b" id="market">
+  <div class="photo"><div style="background-image:url(../street/ai-jodd.jpg)"></div></div><span class="tape t1"></span>
+  <div class="card"><span class="kick">🌙 곽범 방콕 코스 따라가기 ③</span>
+    <h1>쩟페어 <em>랏차다</em><br>야시장 가는 투어</h1>
+    <p>아유타야 선셋 후 야시장 샌딩 · 옛 라마9점은 폐장</p>
+    <span class="cta">마이리얼트립에서 보기 →</span><span class="ad">제휴 링크<br>수수료 지급 가능</span>
+    <span class="stamp">이사<br>완료</span></div>
+  <span class="brand">생활이득AI연구소 · AI 이미지</span>
+</section>
+
+<section class="b" id="hotel">
+  <div class="photo"><div style="background-image:url(../street/ai-somerset.jpg)"></div></div><span class="tape t1"></span>
+  <div class="card"><span class="kick">🏨 곽범 방콕 코스 따라가기 ④</span>
+    <h1>야시장 도보 14분<br><em>서머셋 라마9</em></h1>
+    <p>영상 속 숙소로 추정 · MRT 블루라인 근처</p>
+    <span class="cta">마이리얼트립에서 보기 →</span><span class="ad">제휴 링크<br>수수료 지급 가능</span>
+    <span class="stamp">숙소<br>추정</span></div>
+  <span class="brand">생활이득AI연구소 · AI 이미지</span>
+</section>
+</body></html>

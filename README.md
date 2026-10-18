@@ -117,6 +117,17 @@ node scripts/frontier.mjs report --snapshot=work/frontier-001.json
 
 ## 3. 기존 서비스를 사용할 때
 
+### 블로그 멀티 채널 게시 (라이프핵 lab · 네이버 · 배너)
+
+```bash
+node scripts/blog-md.mjs lab-run post.md img/ run/ --youtube=<id>      # lifehackailab-web mirror-lab 입력
+node scripts/blog-md.mjs se-html post.md urlmap.json post.html --headings=quote --palette=notebook
+node scripts/naver-se-paste.mjs login | draft <blogId> post.title.txt post.html | publish <blogId> --category= --tags= [--confirm]
+node scripts/html-capture.mjs banners.html out/ flight,tour             # 제휴 배너 이미지
+```
+
+마크다운 하나로 라이프핵 lab(가져오기 API)과 네이버(스마트에디터 붙여넣기, 카나리 보조)를 만듭니다. 붙여넣기에서 살아남는 서식 표, 상위 여행 블로그 서식 통계, Vercel 보안 체크포인트(429)·Supabase 연결 고갈 재시작, 배너 템플릿은 [멀티 채널 게시 플레이북](references/blog-multichannel-publish-2026-10-19.md).
+
 ### YouTube Studio 롱폼 업로드·다국어
 
 ```bash
