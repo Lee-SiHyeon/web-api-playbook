@@ -33,20 +33,13 @@ ko-main.md ──► fact-check agent (facts.verified.json, script.md, links.jso
 - **`LAB_PUBLIC_READBACK_UNVERIFIED` while the import itself succeeded:**
   - **Cause:** the site has the Vercel Security Checkpoint on. Every non-browser client, curl with a browser UA included, gets **429** with `<title>Vercel Security Checkpoint`.
   - **Workaround:** verify in Canary instead: title, `[data-testid=lab-body]`, images loaded after scrolling (lazy), the YouTube nocookie iframe, `data-updated-at`.
-  - **Resolved 2026-10-19 08:07 KST:** the cause was the managed rule `bot_protection` with action `challenge`. It was set to `log` through `PATCH /v1/security/firewall/config?projectId=…&teamId=…` with body `{"action":"managedRules.update","id":"bot_protection","value":{"active":true,"action":"log"}}` (firewall version 12 → 13).
-    - Results: `/`, `/lab` and the post return 200 to curl and to a Googlebot UA.
-    - Still in force: the custom deny rule for data crawlers (Ahrefs, Semrush, GPTBot…) and the bearer bypass for cron/import routes.
-    - To restore the check, send the same call with `"action":"challenge"`. The Vercel token is the CLI one in `lifehack-cloud-opserceluth.json`; never print it.
-- **`LAB_IMPORT_HTTP_503 "Lab import could not be persisted"` (media uploads OK, final RPC failed):**
-  - **Cause:** this was a database outage, not an input problem.
-    - Public REST reads hung longer than 40 s.
-    - `supabase db query` hung at "Initialising login role".
-    - Vercel runtime logs showed every cron and `/deal/*` page timing out at 60–300 s.
-    - The project status still said `ACTIVE_HEALTHY`.
-  - **Fix:** restart through the Management API: `POST https://api.supabase.com/v1/projects/<ref>/restart`.
-    - The token is the Supabase CLI's own access token, read in-process from Windows Credential Manager target `Supabase CLI:supabase`. Never print it.
-    - Recovery took about 4 minutes (`RESTARTING` → `ACTIVE_HEALTHY`); a REST read then answered in 2 s, and the import passed.
-  - **Root cause:** still to fix separately. The likely suspect is long-running crons exhausting connections.
+  - **Resolved 2026-10-19 (final state, firewall version 15):**
+    - The cause was the managed rule `bot_protection` with action `challenge`.
+    - The challenge stays on for everyone. A custom rule **"Allow lifehack operator IP"** `bypass`es only `ip_address eq 220.86.121.120`, the automation PC's public IP. The script readback, curl and Canary from this PC all get 200.
+    - **If the ISP changes the IP:** check it with `curl https://api.ipify.org` and update that rule (`rules.update`, or delete and insert).
+    - **API:** `PATCH /v1/security/firewall/config?projectId=…&teamId=…` with `{"action":"rules.insert","value":{name,description,active,conditionGroup:[{conditions:[{type:"ip_address",op:"eq",value:"<ip>"}]}],action:{mitigate:{action:"bypass"}}}}`. The Vercel token is the CLI one in `lifehack-cloud-opserceluth.json`; never print it.
+    - **Cloud runners (GitHub Actions, Dots):** they have no fixed IP. Give them a header-secret bypass rule instead, with the secret kept in DPAPI or Actions secrets.
+    - (An interim fix, `bot_protection` set to `log`, was reverted in favour of the IP rule.)
 
 ## Naver SmartEditor ONE by paste
 
