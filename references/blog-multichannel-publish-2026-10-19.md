@@ -33,7 +33,10 @@ ko-main.md ──► fact-check agent (facts.verified.json, script.md, links.jso
 - **`LAB_PUBLIC_READBACK_UNVERIFIED` while the import itself succeeded:**
   - **Cause:** the site has the Vercel Security Checkpoint on. Every non-browser client, curl with a browser UA included, gets **429** with `<title>Vercel Security Checkpoint`.
   - **Workaround:** verify in Canary instead: title, `[data-testid=lab-body]`, images loaded after scrolling (lazy), the YouTube nocookie iframe, `data-updated-at`.
-  - **Note:** the same checkpoint also hits crawlers that don't run JS. Review the firewall rule.
+  - **Resolved 2026-10-19 08:07 KST:** the cause was the managed rule `bot_protection` with action `challenge`. It was set to `log` through `PATCH /v1/security/firewall/config?projectId=…&teamId=…` with body `{"action":"managedRules.update","id":"bot_protection","value":{"active":true,"action":"log"}}` (firewall version 12 → 13).
+    - Results: `/`, `/lab` and the post return 200 to curl and to a Googlebot UA.
+    - Still in force: the custom deny rule for data crawlers (Ahrefs, Semrush, GPTBot…) and the bearer bypass for cron/import routes.
+    - To restore the check, send the same call with `"action":"challenge"`. The Vercel token is the CLI one in `lifehack-cloud-opserceluth.json`; never print it.
 - **`LAB_IMPORT_HTTP_503 "Lab import could not be persisted"` (media uploads OK, final RPC failed):**
   - **Cause:** this was a database outage, not an input problem.
     - Public REST reads hung longer than 40 s.
