@@ -50,6 +50,9 @@ function targetUrl(value) {
   // 2026-09-26 for the "유튜버 따라가기" posts), so those product pages are link targets too.
   if (!(url.origin === 'https://www.myrealtrip.com' && /^\/offers\/\d+$/.test(url.pathname)) &&
       !(url.origin === 'https://experiences.myrealtrip.com' && /^\/products\/\d+$/.test(url.pathname) && !url.search) &&
+      // Accommodation product pages (owner 2026-10-18 "숙소 링크 로직 추가"): accommodation.myrealtrip.com/union/products/<id>,
+      // observed from the public search (서머셋 라마 9 방콕 = 1488714). Dates are dropped so the link never expires with a stay date.
+      !(url.origin === 'https://accommodation.myrealtrip.com' && /^\/union\/products\/\d+$/.test(url.pathname) && !url.search) &&
       !(url.origin === 'https://air-web.myrealtrip.com' && url.pathname === '/results')) fail('TARGET_SCOPE');
   return url.href;
 }

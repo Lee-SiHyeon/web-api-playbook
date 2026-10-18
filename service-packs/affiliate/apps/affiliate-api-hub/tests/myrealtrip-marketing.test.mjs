@@ -46,6 +46,9 @@ test('unobserved operations, destinations, fields, dates and handoff age fail be
   const cases = [
     [env('deleteLink', {}), 'SCOPE'],
     [env('createLink', { targetUrl: 'https://www.myrealtrip.com.attacker.example/offers/123' }), 'TARGET_SCOPE'],
+    [env('createLink', { targetUrl: 'https://accommodation.myrealtrip.com/union/products/1488714?checkIn=2026-11-01' }), 'TARGET_SCOPE'],
+    [env('createLink', { targetUrl: 'https://accommodation.myrealtrip.com/union/search?keyword=x' }), 'TARGET_SCOPE'],
+    [env('createLink', { targetUrl: 'https://accommodation.myrealtrip.com.evil.example/union/products/1' }), 'TARGET_SCOPE'],
     [env('createLink', { targetUrl: 'https://user:pass@www.myrealtrip.com/offers/123' }), 'URL'],
     [env('createLink', { targetUrl: 'https://experiences.myrealtrip.com/products/3419212?utm=x' }), 'TARGET_SCOPE'],
     [env('createLink', { targetUrl: 'https://experiences.myrealtrip.com/offers/3419212' }), 'TARGET_SCOPE'],
@@ -164,4 +167,10 @@ test('real stdin runner rejects stale input and a faulty runner cannot echo its 
     return child;
   };
   await assert.rejects(runMyrealtrip(env('createLink', { targetUrl }), { spawnImpl, environment: { SystemRoot: 'fixture-root', UNRELATED_SECRET: 'private' } }), fails('WRITE_OUTCOME_UNKNOWN', 'RUNNER_OUTPUT_REDACTED'));
+});
+
+test('accommodation product pages are allowed link targets (dates stripped by the caller)', async () => {
+  const { normalizeMyrealtripLinkTarget } = await import('../adapters/myrealtrip-marketing.mjs');
+  assert.equal(normalizeMyrealtripLinkTarget('https://accommodation.myrealtrip.com/union/products/1488714'), 'https://accommodation.myrealtrip.com/union/products/1488714');
+  assert.equal(normalizeMyrealtripLinkTarget('https://experiences.myrealtrip.com/products/3446433'), 'https://experiences.myrealtrip.com/products/3446433');
 });
