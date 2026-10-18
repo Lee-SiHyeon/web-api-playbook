@@ -3,7 +3,8 @@
 Source run: 곽범 Bangkok long-form post (`kwak-bangkok-day-course`).
 - **Markdown source:** `G:\내 드라이브\shorts-factory\kwak-bangkok\blog\ko-main.md` (Korean); `en-blogger.md` is the English version.
 - **Live:** https://lifehackailab.com/lab/kwak-bangkok-day-course
-- **Naver:** the draft is saved on `aicandoanything` but not yet published.
+- **Naver:** https://blog.naver.com/aicandoanything/224446172611
+- **Blogger:** https://everyintheworld.blogspot.com/2026/10/a-korean-comedians-one-day-bangkok.html (HTML view, CodeMirror `setValue`)
 
 ## Pipeline
 
@@ -80,6 +81,22 @@ Measured in `affiliate-content-operations/.../blog-performance/style-cards/style
 - Body font: mostly **나눔마루부리**, with sizes 19, 24 and 28
 
 `blog-md.mjs se-html --headings=quote --palette=notebook` produces the paste-compatible half of this: quotation headings, highlighted bold, cream callout boxes and mustard table headers. The quotation layout and the font have to be set in the editor after pasting.
+
+### After the paste: images, cover, banner links, AI label (each verified on the published post 224446172611)
+
+- **Remote images leave the post without a cover.** Pasted `<img src="https://…">` stays hot-linked: the post shows in the list with no thumbnail and no og:image (owner noticed on mobile).
+  - **Fix:** open `postwrite?logNo=<no>` and run `node scripts/naver-se-replace-images.mjs <tab> order.txt <imgDir>`.
+  - Per image it selects the component, clicks 교체 ("사진 교체"), intercepts the chooser and feeds the local file. Each image becomes `blogfiles.pstatic.net`.
+  - The first image becomes 대표 (`.se-set-rep-image-button.se-is-selected`), and `og:image` becomes the cover.
+  - Run it from Node: a bash loop mangled a Korean path, and the resulting "파일 전송 오류" popup silently blocked every later chooser.
+- **`<a href><img></a>` loses its link on paste.** Set it afterwards with `node scripts/naver-se-image-links.mjs <tab> 5=https://… 9=https://…`, using the image toolbar's link button and the `.se-custom-layer-link-input` field, then Enter.
+  - In the editor the link only shows as `.se-image-link-icon`; the URL appears in the published HTML.
+- **Each image has an "AI 활용 설정" toggle** (Naver asks AI-made content to be labelled).
+  - On = `.se-set-ai-mark-button-toggle` has `se-is-selected`. The same class on the wrapper means nothing.
+  - **교체 resets it**, so `naver-se-image-links.mjs` turns it back on for every image at the end.
+- **Quotation style:** select the quotation, then click `button[data-value=quotation_line]`. The values are default, line, bubble, underline, postit and corner.
+- **Font:** click a body paragraph and press Ctrl+A twice, open 서체 변경, then click `button[data-value=nanummaruburi]`. On this post that covered 17 of 26 text-bearing components.
+- **Republish:** `naver-se-paste.mjs publish <blogId> --confirm` on the edit tab. Category and tags persist.
 
 ### Pitfalls
 
