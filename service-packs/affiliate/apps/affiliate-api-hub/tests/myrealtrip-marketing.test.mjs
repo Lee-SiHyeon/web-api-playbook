@@ -55,7 +55,10 @@ test('unobserved operations, destinations, fields, dates and handoff age fail be
     [env('createLink', { targetUrl, headers: { cookie: 'private' } }), 'INPUT'],
     [env('sales', { fromDate: '2026-02-30', toDate: '2026-03-01' }), 'DATE'],
     [env('reservations', { startDate: '2026-09-20', endDate: '2026-09-01' }), 'DATE_RANGE'],
-    [env('createFlightLink', { ...flight, tripTypeCd: 'OW' }), 'UNOBSERVED_VARIANT'],
+    [env('createFlightLink', { ...flight, tripTypeCd: 'MT' }), 'UNOBSERVED_VARIANT'],
+    [env('createFlightLink', { ...flight, cabinClass: 'PRESTIGE' }), 'UNOBSERVED_VARIANT'],
+    [env('createFlightLink', { ...flight, airline: '' }), 'AIRLINE'],
+    [env('createFlightLink', { ...flight, tripTypeCd: 'OW' }), 'DATE_RANGE'],
     [env('createFlightLink', { ...flight, infant: 2 }), 'PASSENGERS'],
     [{ ...env('sales', {}), acquiredAt: '2000-01-01T00:00:00Z' }, 'HANDOFF_EXPIRED'],
   ];
@@ -98,6 +101,21 @@ test('flight orchestration validates landing fields and shortens exactly once', 
   } });
   const output = await client.createFlightLink(flight);
   assert.equal(calls.length, 3); assert.equal(output.receipts.length, 2); assert.equal(output.data.landingUrl, landingUrl);
+});
+
+test('one-way, all-airline and business-class flight landings are validated against the observed URL shape', async () => {
+  const { arrDate, airline, ...oneWay } = { ...flight, tripTypeCd: 'OW', cabinClass: 'BUSINESS' };
+  const owUrl = 'https://air-web.myrealtrip.com/results?trip=A.SEL.A.NRT.2026-10-15&adult=1&child=0&infant=0&cabins=BUSINESS&tripType=ONE_WAY';
+  const client = await createMyrealtripClient(session, { fetchImpl: async (url, options) => {
+    if (url.endsWith('/partners')) return account();
+    if (url.endsWith('/query-landing-url')) { assert.deepEqual(JSON.parse(options.body), oneWay); return Response.json(result({ url: owUrl, gid: 0 })); }
+    assert.deepEqual(JSON.parse(options.body), { targetUrl: owUrl }); return link();
+  } });
+  assert.equal((await client.createFlightLink(oneWay)).data.landingUrl, owUrl);
+  // An airline filter the caller did not ask for is a mismatch, not silently accepted.
+  const strict = await createMyrealtripClient(session, { fetchImpl: async url => url.endsWith('/partners') ? account()
+    : Response.json(result({ url: owUrl.replace('&tripType', '&airlines=KE&tripType'), gid: 0 })) });
+  await assert.rejects(strict.createFlightLink(oneWay), fails('WRITE_OUTCOME_UNKNOWN', 'FLIGHT_MISMATCH'));
 });
 
 test('wrong flight destination is uncertain and never forwarded to shortening', async () => {
