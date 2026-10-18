@@ -44,10 +44,17 @@ try {
   } else if (cmd === 'send') {
     const text = rest.join(' ');
     if (!a1 || !text) throw new Error('usage: send <roomId> <text>');
-    await T.send('Page.navigate', { url: 'https://chatgpt.com/dots/home' }); await new Promise((r) => setTimeout(r, 5000));
+    // open the dot's own page (tbo id that owns this room), wait for its composer
+    const L = await get(T, '/tbo?limit=25&include_room_preview=false'); const items = L.body?.items || L.body?.tbos || L.body?.data || L.body || [];
+    const dot = (Array.isArray(items) ? items : []).find((d) => (d.room_id || d.messaging_room_id || d.room?.id) === a1);
+    await T.send('Page.navigate', { url: 'https://chatgpt.com/dots/' + (dot ? dot.id : 'home') });
+    for (let k = 0; k < 30 && !(await T.ev("!!document.querySelector('[contenteditable=true]')")); k++) await new Promise((r) => setTimeout(r, 500));
     await T.ev(`(()=>{const e=document.querySelector('[contenteditable=true]'); if(!e) throw new Error('composer not found'); e.focus();})()`);
     await T.send('Input.insertText', { text });
-    for (const type of ['keyDown', 'keyUp']) await T.send('Input.dispatchKeyEvent', { type, key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, ...(type === 'keyDown' ? { text: '\r' } : {}) });
+    // the dot page submits with its send button (Enter alone did not submit there on 2026-10-18)
+    await new Promise((r) => setTimeout(r, 300));
+    const clicked = await T.ev(`(()=>{const b=[...document.querySelectorAll('button')].find(b=>/^(보내기|Send)$/i.test(b.getAttribute('aria-label')||''));if(b&&!b.disabled){b.click();return true}return false})()`);
+    if (!clicked) for (const type of ['keyDown', 'keyUp']) await T.send('Input.dispatchKeyEvent', { type, key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, ...(type === 'keyDown' ? { text: '\r' } : {}) });
     await new Promise((r) => setTimeout(r, 2500));
     const r = await get(T, `/messaging/rooms/${a1}/messages?limit=5`);
     const mine = (r.body?.items || r.body?.messages || []).find((m) => m.content?.text === text);
