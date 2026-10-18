@@ -1,5 +1,50 @@
 # Coupang: 소스 후보를 계약으로 오인하지 않기
 
+## 2026-10-18 11:32 KST: Vercel 운영 저장 95개 확인, 두 번째 페이지 403은 미해결
+
+수정 commit `3334e472e524a939280a6e5402db0acf6e4901b6`는 전체 회귀 1,324/1,324, 타입 검사, production build를 통과했고 private GitHub main readback과 Vercel production READY를 확인했다. 검증 도중 설정한 Goldbox 전용 임시 maintenance hold는 이전 실패 receipt hash를 바꾸지 않고 해제했다. 검증용 별도 Vercel VM은 종료했고 원천 Chrome VM은 보존했다.
+
+실제 Vercel Cron run `63216114-15e4-49d6-84e6-2a0b2eb483a3`은 Google 검색 → 공식 결과 → 쿠팡 홈 → 실제 골드박스 메뉴까지 진행했다. 첫 HTML **100행 중 정확한 상품 URL이 있는 95개를 실제 DB에 저장**했다. 해당 run의 시작~종료 시간에 기록된 상품을 별도로 조회해 95개의 정확한 SKU·가격·이미지와 collector log의 upserted 95를 대조했다. 추적 전용 5행은 제외했고, 제휴 링크 발급 0개를 발급 성공으로 표시하지 않는다. 기존 94개 또는 별도 probe의 205행을 이번 저장 수에 더하지 않는다.
+
+후속 native XHR은 여전히 **HTTP 403**이었다. 수동 HTTP 재현이 아니라 사이트 자신의 스크롤 observer가 보낸 요청이며, 수동 선택한 쿠키 목록을 주입하지 않았다. 별도 passive CDP 관측에서 widget `productOffset=100`, 쿠키 이름 16종, 브라우저 차단 쿠키 0개, HTTP/2, disk/service-worker cache 미사용, HTML 응답 403을 확인했다. Goldbox 문서 생성 후 약 12초에 요청됐으므로 초기화 대기를 추가했다는 이유만으로 해결됐다고 볼 수 없다. 브라우저의 cookie 전송 여부는 서버가 그 방문자를 허용한다는 증거도 아니다. [Akamai의 공식 설명](https://www.akamai.com/site/en/documents/white-paper/compliance-through-privacy-by-design-white-paper.pdf)은 네트워크·브라우저·행동 신호를 함께 사용한다고 설명하지만, 이번 요청의 구체적인 거부 정책은 확인되지 않았다.
+
+실제 사이트 검증은 **저장된 부분 관측의 표시 검증**으로 구분한다. PC 1,280px에서 4개 목록 페이지를 순회해 이번 저장 95개를 모두 확인했고, 모바일 390px에서 60개와 상세 화면을 확인했다. 가격·상세 이미지 로딩, 스크립트 오류 0, 가로 넘침 0, 공개 페이지에서 collector 호출 0을 검증했다. 이것을 원천 전체 수집 성공으로 승격하지 않는다. `persistenceVerified=true`, `completeCollectionVerified=false`, `paginationExhausted=false`를 별도로 기록한다.
+
+근거: [운영 Cron·독립 DB·PC/모바일·실제 쿠키 전송 요약](../sanitizedverification/coupang-production-browser-2026-10-18.json), [구글 검색부터 첫 페이지와 후속 403까지의 2분 19.6초 녹화](https://drive.google.com/file/d/10CaWUdYW_iW7ktR7INGP0eScyAAoVMOv/view?usp=drivesdk). 전체 EOF 녹화로 표시하지 않는다.
+
+### 11:47 KST 추가 대조: 홈 초기화 5분도 후속 403을 해결하지 못함
+
+앞서 두 번의 EOF 성공이 오래 열린 홈을 재사용했다는 차이를 검사했다. 운영 실패 뒤 15분 이상 간격을 두고, **동일 VM·Chrome 프로세스·프로필·탭**에서 Google 검색 → 홈을 열어 301,546ms 유지했다. 이 동안 쿠키 15개의 자연 갱신도 관측했다(값은 기록하지 않음). 그런 뒤 배포된 것과 같은 reader가 `reusedHome=true`, 메뉴 탐색 1회로 들어갔지만 여전히 첫 HTML 100행, 두 번째 native XHR 403이었다. 기다리는 시간만 늘리면 해결된다는 가설도 이 대조에서는 지지되지 않았다. IP, 쿠키값, UA, 브라우저 보안 설정을 교체하거나 숨기지 않았다.
+
+이 대조의 DB 쓰기는 0이며 운영 실패 hold를 해제하지 않았다. [별도 대조 receipt](../sanitizedverification/coupang-warmed-home-comparison-2026-10-18.json)에 실패와 브라우저 보존을 기록했다. 결론은 **전체 브라우저 실행·부분 상품 저장은 검증, 전체 페이지 수집 및 지속 성공은 미검증**이다. 쿠키 누락/HTML 파싱으로 현재의 실제 native 403을 설명하거나, 반대로 Vercel에서 브라우저 자체를 실행할 수 없다고 결론내리지 않는다. 현재 정기 Cron은 존재하지만 Goldbox 원천 수집은 denial backoff 상태다. 다음 허용된 예약 시도는 두 hold를 모두 지난 2026-10-19 12:22 KST이며, 그때의 성공은 아직 관측하지 않았다.
+
+## 2026-10-18 10:02~10:22 KST: 운영 재검증에서 탐색 오판과 실제 후속 403을 분리
+
+전체 브라우저 구현 `922391b286b3b4bb34fc5c38c8fca3b954a64f66`를 private main과 Vercel production READY까지 확인했다. 기존 특정 Goldbox 보류만 이전 receipt hash를 보존해 해제했다. 하지만 Google부터 시작한 첫 운영 run `49fbf4ae-92fa-4a81-9a30-9ff6d0a4ae78`은 `COUPANG_GOLDBOX_HOME_SCOPE_CHANGED`, fetched/upserted 0으로 종료됐다. 이 실패 receipt의 `persisted=true`는 상품 저장 성공이 아니다. 독립 DB 조회의 해당 run-window 상품도 0개였다.
+
+원인은 실제 도착 전에 중간 navigation lifecycle을 소비하는 코드 결함이었다. Google의 중간 HTTP 200과 늦게 도착한 이전 홈의 lifecycle 이벤트는 새 페이지의 응답이 아니다. 제어 연결을 다시 열어 본 같은 Chrome/탭은 이미 정상 쿠팡 홈에 도착해 있었다. 수정 reader는 탐색 전에 설치한 observer에서 **도착 URL + main frame의 실제 응답**을 고르고, 같은 클릭의 최종 문서 준비를 기다린다. intermediate 200, 최종 403, 실제 response 없는 DOM, 늦은 이전 lifecycle을 각각 회귀검증한다.
+
+이 수정 뒤 Google → 홈 → 실제 골드박스 메뉴는 정상 진행됐지만 10:09 KST 별도 probe의 후속 상품 XHR은 **실제 HTTP 403**이었다. 첫 HTML 98행, 정확한 DOM 상품 93개, 두 번째 페이지 미수집이다. 이후 읽기 전용 검사에서도 해당 XHR의 `responseStatus=403`, 프로토콜 `h2`, DOM 93개였으며 자동 회복된 전체 목록은 없었다. 앞선 두 번의 205행 EOF 성공을 이 실행의 성공으로 재사용하지 않는다.
+
+새 문서에는 analytics의 무한 network-idle 대신 문서 age 12초까지 초기화 여유를 두되, 이미 오래 열린 문서에 같은 지연을 반복하지 않도록 보강했다. 초기화 대기가 403을 해결했다고 단정하지 않는다. 브라우저 프로세스·프로필·탭은 그대로 보존하고, 짧은 간격의 재시도·cookie reset·IP 교체는 하지 않는다. 화면의 한국어 tofu는 별도 글꼴 문제여서 전용 VM에 Noto CJK를 설치했다. `fc-match`는 설치를 확인했지만 실행 중인 Chrome의 별도 테스트 화면에는 tofu가 남았다. 설치 성공을 즉시 렌더링 성공이나 원천 접근 허용으로 보고하지 않는다.
+
+10:22:35 KST의 실제 정기 Cron은 기존 완료된 10시 슬롯을 재생해 같은 실패를 반환했고 소스를 중복 수집하지 않았다. 이는 정기 호출과 dedup 동작의 증거이며 **새 상품 수집 성공은 아니다.** 변경된 reader의 최종 운영·DB·화면 검증은 후속 receipt로 별도 확정해야 한다.
+
+## 2026-10-18 09:25~09:30 KST: Vercel 전체 브라우저를 유지해 끝 페이지까지 읽음
+
+이전의 일회용 VM/프로필 대신 named persistent Vercel Sandbox `icn1`에서 정식 Chrome 155.0.8059.84의 전체 프로필과 실행 중 프로세스·탭을 보존했다. 개별 작업은 CDP 제어 연결만 끊고 다음 작업이 같은 Chrome과 탭에 다시 연결했다. 로컬 쿠키/프로필 반입, PC 브라우저 중계, 공식 Open API는 사용하지 않았다.
+
+- 구글 검색 → 공식 쿠팡 결과 → 실제 골드박스 메뉴 클릭에서 홈과 골드박스 main document가 HTTP 200이었다. 부가 telemetry의 403과 목록 응답을 분리했다.
+- 첫 성공은 이미 열린 동일 골드박스 탭에서 실제 sentinel을 두 번 스크롤해 **98+100+7=205행, 3페이지, EOF**를 확인한 흐름이다. 첫 페이지 재개 입력은 live DOM이고 후속 두 페이지는 사이트가 실제 발생시킨 XHR 응답이었다. DOM hash를 새 HTTP response hash로 혼동하지 않는다.
+- 수정된 운영 entrypoint의 다음 독립 실행도 **99+99+7=205행, 모든 목록 페이지 HTTP 200, EOF**였다. 이 실행은 이미 열린 홈을 재사용했다(`reusedHome=true`, `sourceNavigations=1`). 따라서 새 Google 검색부터의 성공 증거로 확장하지 않는다. Goldbox main document는 이번 실행의 실제 HTTP response body와 frame/URL로 검증했다. 브라우저와 탭 identity는 작업 전후 같았다.
+- 정확한 상품 URL이 없는 추적 전용 9행은 상품 URL을 추측해 채우지 않는다. 총 목록행, 정확한 SKU 상품 196개, DB 저장행은 서로 다른 수다. 이 시점 probe의 DB 쓰기는 0회다.
+
+이번 구현 중 발견한 별도 결함도 기록한다. 홈의 analytics가 계속 움직여 `networkidle2`가 끝나지 않았고, 골드박스 상품 anchor는 `display: contents`라 자체 박스가 0×0이었다. 이는 실제 상품이 없다는 뜻이 아니다. DOM 준비/안정된 메뉴 locator와 **리스트 컨테이너** 가시성으로 수정했다. 이 버그가 과거의 실제 main-document 403 응답까지 설명하는 것은 아니다.
+
+브라우저를 매번 버리지 않는 구조에서 반복 성공은 확인했지만, Chrome 버전·방문 시간·프로필 지속성이 함께 바뀌었으므로 특정 한 변수를 유일한 원인으로 확정하지 않는다. 운영 배포/정기 실행/DB 저장은 별도 readback으로 검증한다. VM 종료 후 disk snapshot은 전체 프로필을 보존하지만 JS 메모리를 보존하지 않는다. live-process 재접속과 disk-profile 재개를 분리해야 한다.
+
+근거: [정제된 전체 순회·재접속 receipt](../sanitizedverification/coupang-persistent-browser-2026-10-18.json), [2~3페이지 실제 스크롤 녹화](https://drive.google.com/file/d/1DOm9-k5zv8BdHwg8cQLJzaXRayJVKN2b/view?usp=drivesdk). 이 짧은 녹화는 이어진 페이지 스크롤만 담으며 전체 Google 진입 과정을 촬영했다고 표시하지 않는다. [Puppeteer locator의 안정된 요소 대기](https://pptr.dev/guides/page-interactions)와 [Vercel disk snapshot 경계](https://vercel.com/docs/sandbox/concepts/snapshots)를 참고한다.
+
 ## 최신 브라우저 관측: 2026-10-18 00:19~00:27 KST
 
 HTTP reader 비교 대신 **Vercel 실제 Chrome에서 페이지를 여는 단계부터** 기록하고 로컬 브라우저와 대조했다. [정제 영수증](../sanitizedverification/coupang-browser-parity-2026-10-18.json)에 문서/iframe/목록 요청, 쿠키 이름, DOM 수, 화면 파일 hash를 보존했다. 쿠키 값·계정 세션·원본 HTML은 포함하지 않는다.
