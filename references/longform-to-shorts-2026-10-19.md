@@ -55,3 +55,16 @@ First use: the kwak-bangkok kit is on the longform-render v3 branch, commit 3882
   - 재생목록; visibility 전체 공개 / 예약 / 비공개 예약; country; comments.
   - 임시저장 / 등록.
   - Leaving the draft page raises a beforeunload confirm that blocks CDP evaluation until it is answered.
+
+## Publishing rules learned 2026-10-19 (owner)
+
+- **Lead with the source creator's name.** Put it in the hook band, the Shorts or clip title and the first line of the description: "곽범이 간 …", "곽범 방콕 하루 …". A generic hook ("이 야시장 이사했다") misses the search and click value of the creator's name; v1 was redone as v2 for this reason.
+- **Fonts:** Black Han Sans has no 「」 or ▶ glyphs, so keep those out of drawtext. Captions wrap to 3 lines and long sentences get cut off; split long sentences or shorten them.
+- **Naver Clip:** `scripts/naver-clip-upload.mjs <mp4> <desc.txt> --ai --blog=<title part> [--draft]`.
+  - The AI switch is `button[class*=Toggle_toggle]` inside the "AI 활용 설정" module item. When on, its class contains `toggleOn`. The hidden checkbox inputs belong to other controls; clicking them ticked "등록 예약".
+  - Delete a clip from the row's ⋮ menu → 삭제 → confirm.
+- **YouTube Shorts:** `youtube-studio.mjs upload` with `"visibility":"PUBLIC"`.
+  - The upload dialog links `youtube.com/shorts/<id>`, not youtu.be.
+  - The final dialog for a public video is "동영상 처리 중" (public once SD is ready).
+  - Link the long video afterwards in the edit page: 관련 동영상 → pick by title → 저장.
+- **Threads:** video posting is not supported by Grok Bot's web writer (upload only). Use images on Threads.

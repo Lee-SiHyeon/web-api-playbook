@@ -99,7 +99,7 @@ try {
     await send('Page.navigate', { url: `https://studio.youtube.com/channel/${job.channelId}/videos/upload?d=ud` });
     await waitFor(`!!document.querySelector('input[type=file]')`, 30000);
     await setFiles('input[type=file]', 0, job.video);
-    const videoId = await waitFor(`(() => { const a = [...document.querySelectorAll('a')].find(a => /youtu\\.be\\/[\\w-]{11}/.test(a.href)); return a ? a.href.match(/youtu\\.be\\/([\\w-]{11})/)[1] : null; })()`, 60000);
+    const videoId = await waitFor(`(() => { const a = [...document.querySelectorAll('a')].find(a => /(youtu\\.be|youtube\\.com\\/shorts)\\/[\\w-]{11}/.test(a.href)); return a ? a.href.match(/(?:youtu\\.be|shorts)\\/([\\w-]{11})/)[1] : null; })()`, 60000);
     log({ step: 'file', videoId }); await shot('file');
 
     await waitFor(`document.querySelectorAll('#textbox').length >= 2`);
@@ -155,10 +155,11 @@ try {
       log({ step: 'schedule', when }); await shot('schedule');
       if (!when.includes(job.schedule.date.replace(/\.$/, '')) || !when.includes(job.schedule.time)) fail('SCHEDULE_MISMATCH', { when });
     } else {
-      await ev(`(document.querySelector('tp-yt-paper-radio-button[name=PRIVATE]')?.click(), 1)`);
+      const vis = job.visibility || 'PRIVATE'; // PUBLIC | UNLISTED | PRIVATE
+      await ev(`(document.querySelector('tp-yt-paper-radio-button[name=${vis}]')?.click(), 1)`); await sleep(800);
     }
     await ev(`(document.querySelector('#done-button').click(), 1)`);
-    const confirm = await waitFor(`(() => { const m = document.body.innerText.match(/(\\d{4}년 \\d+월 \\d+일 [\\d:]+)에 동영상이 공개|동영상 저장됨|동영상 게시됨/); return m ? m[0] : null; })()`, 30000);
+    const confirm = await waitFor(`(() => { const m = document.body.innerText.match(/(\\d{4}년 \\d+월 \\d+일 [\\d:]+)에 동영상이 공개|동영상 저장됨|동영상 게시됨|동영상 처리 중/); return m ? m[0] : null; })()`, 30000);
     log({ step: 'done', videoId, confirm, url: `https://youtu.be/${videoId}` }); await shot('done');
   }
 
