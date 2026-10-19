@@ -119,7 +119,9 @@ Measured in `affiliate-content-operations/.../blog-performance/style-cards/style
 - **Publish layer:**
   - Upload the cover through "대표이미지 추가" (intercepted chooser). og:image then becomes the kakaocdn copy.
   - Choose 공개, set 홈주제 to 해외여행, then press 공개 발행.
-  - There is no travel blog category, so 생활정보 was used. The editor keeps at most 10 tags.
+  - **Category: 여행 > <country>** (owner 2026-10-19: "여행카테고리 만들고 국가로 나눠"). The tree is 여행 (topic 여행·맛집) > 태국. For a new country: open manage/category, press 추가 on the 여행 row, name the country, choose 여행·맛집, press 확인, then 변경사항 저장.
+  - To move a post without touching its HTML, use manage/posts: tick the post, open 변경 and pick the category there. Re-saving through the editor risks the body.
+  - The editor keeps at most 10 tags.
 - **Verify:** open the post in the browser, scroll it (images are lazy) and check `.contents_style` for text length, loaded images, `a[href*=myrealt]` and the iframe. Here that gave 4,053 chars, 15/15 images, 17 links, the YouTube embed and 9 heading bars.
 
 ## Blogger
