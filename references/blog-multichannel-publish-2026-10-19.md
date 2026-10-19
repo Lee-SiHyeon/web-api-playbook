@@ -4,6 +4,7 @@ Source run: 곽범 Bangkok long-form post (`kwak-bangkok-day-course`).
 - **Markdown source:** `G:\내 드라이브\shorts-factory\kwak-bangkok\blog\ko-main.md` (Korean); `en-blogger.md` is the English version.
 - **Live:** https://lifehackailab.com/lab/kwak-bangkok-day-course
 - **Naver:** https://blog.naver.com/aicandoanything/224446172611
+- **Tistory:** https://i-never-stop-study.tistory.com/263 (HTML mode, full notebook design)
 - **Blogger:** https://everyintheworld.blogspot.com/2026/10/a-korean-comedians-one-day-bangkok.html (HTML view, CodeMirror `setValue`)
 
 ## Pipeline
@@ -105,6 +106,27 @@ Measured in `affiliate-content-operations/.../blog-performance/style-cards/style
 - **Draft dialog:** "작성 중인 글이 있습니다" appears whenever an autosave exists. 취소 starts fresh; 확인 continues the draft.
 - **Category:** open the dropdown and click the item's `<label>`. Clicking the visible span looked selected but did not stick.
 - **Tags:** one `insertText` + Enter per tag, 30 at most.
+
+## Tistory (Kakao login, HTML mode)
+
+- **Login:** in Canary go to tistory.com/auth/login, choose "카카오계정으로 로그인", then run `node scripts/kakao-login-fill.mjs <tab>`.
+  - It reads the identity from the playbook ProtectedStore key `tistory-kakao-login`, saved 2026-10-19 for hyeon0528@nate.com.
+  - Kakao then asks for **2-step verification through KakaoTalk**, and the owner has to approve it on the phone. Tick "이 브라우저에서 2단계 인증 사용 안 함" first so this browser is not asked again.
+  - After approval comes a consent page; press 계속하기.
+- **Design:** `node scripts/blog-tistory-html.mjs post.md urlmap.json out.html --youtube=<id>` renders the full notebook design in inline CSS: dark heading bars with a mustard border, highlighter bold, cream list cards, rounded tables, pill CTA buttons and a responsive YouTube iframe. All of it survived publishing.
+- **HTML mode:** "기본모드 → HTML" raises a **native `confirm()`** dialog that freezes CDP evaluation. Enable `Page` and answer `Page.javascriptDialogOpening` with `handleJavaScriptDialog({accept:true})`; `scripts/tistory-html-input.mjs` does this.
+- **Body input:** **`CodeMirror.setValue()` published an EMPTY body.** Type the HTML instead: focus, `execCommand('selectAll')`, then `Input.insertText(html)` (22 KB went in one call).
+- **Publish layer:**
+  - Upload the cover through "대표이미지 추가" (intercepted chooser). og:image then becomes the kakaocdn copy.
+  - Choose 공개, set 홈주제 to 해외여행, then press 공개 발행.
+  - There is no travel blog category, so 생활정보 was used. The editor keeps at most 10 tags.
+- **Verify:** open the post in the browser, scroll it (images are lazy) and check `.contents_style` for text length, loaded images, `a[href*=myrealt]` and the iframe. Here that gave 4,053 chars, 15/15 images, 17 links, the YouTube embed and 9 heading bars.
+
+## Blogger
+
+- In the new-post screen open the mode menu, choose "HTML 보기", and set the body with `document.querySelector('.CodeMirror').CodeMirror.setValue(html)`. Unlike Tistory this persisted.
+- Type the title into the 제목 input and the labels as a comma list, then press 게시 and confirm.
+- Read back from the feed: `/feeds/posts/default?alt=json`. It shows the post URL and that a thumbnail exists.
 
 ## Affiliate banners
 

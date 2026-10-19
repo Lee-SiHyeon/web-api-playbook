@@ -10,8 +10,10 @@
 // > notice, ---, **bold**, bare https links, [이미지: img/x.jpg — caption], [배너: img/x.jpg | https://link | alt].
 import fs from 'node:fs';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-const [cmd, ...rest] = process.argv.slice(2);
+const MAIN = !!process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+const [cmd, ...rest] = MAIN ? process.argv.slice(2) : [];
 const opt = Object.fromEntries(rest.filter((a) => a.startsWith('--')).map((a) => { const i = a.indexOf('='); return i < 0 ? [a.slice(2), true] : [a.slice(2, i), a.slice(i + 1)]; }));
 const args = rest.filter((a) => !a.startsWith('--'));
 
@@ -86,7 +88,7 @@ if (cmd === 'lab-run') {
   fs.writeFileSync(out, seHtml(doc, JSON.parse(fs.readFileSync(mapFile, 'utf8')), { headings: opt.headings, palette: opt.palette }));
   fs.writeFileSync(out.replace(/\.html$/, '') + '.title.txt', doc.meta.title || '');
   console.log(JSON.stringify({ out, title: doc.meta.title, blocks: doc.blocks.length }));
-} else if (cmd) {
+} else if (MAIN) {
   console.error('usage: blog-md.mjs lab-run <md> <imgDir> <runDir> [--youtube=id] | se-html <md> <urlMap.json> <out.html> [--headings=quote] [--palette=notebook]');
   process.exitCode = 2;
 }
