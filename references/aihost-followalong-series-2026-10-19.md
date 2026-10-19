@@ -39,3 +39,7 @@ First episode: 곽범 「연차없이 어떡행2」 파리 EP.5–6. Project: `G
 `keyframes.mjs` runs spec,facts,quotes,host first and refuses to generate on errors.
 
 First run on Paris found two real issues: a paraphrased quote (s09) and a 2-character quote the trigram check could not score (fixed: short quotes use substring match).
+
+## Compute placement (owner 2026-10-19)
+Whisper/alignment, ASR and rendering run in the cloud (GitHub release kit + Dots / Grok bot), never on the 16 GB PC.
+TTS with timestamps (ElevenLabs with-timestamps) avoids alignment entirely. Subagent execution: `worker` (haiku).
