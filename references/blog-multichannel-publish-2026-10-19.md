@@ -98,6 +98,10 @@ Measured in `affiliate-content-operations/.../blog-performance/style-cards/style
 - **Quotation style:** select the quotation, then click `button[data-value=quotation_line]`. The values are default, line, bubble, underline, postit and corner.
 - **Font:** click a body paragraph and press Ctrl+A twice, open 서체 변경, then click `button[data-value=nanummaruburi]`. On this post that covered 17 of 26 text-bearing components.
 - **Republish:** `naver-se-paste.mjs publish <blogId> --confirm` on the edit tab. Category and tags persist.
+- **Categories:** Naver now has 여행·숙소 > 태국 (categoryNo 15), alongside Tistory's 여행 > 태국. The 여행·숙소 name stays because publication-channels routing uses it.
+  - **Adding a country:** open admin.blog.naver.com/<id>/config/blog. Select 여행·숙소 *first*, then click 카테고리 추가; the new item is created as its child. Type the name into the frame input (`#papermain` contentDocument, value "게시판"), press Enter, then 확인.
+  - **Trap:** opening `AdminCategoryView.naver` standalone (outside the admin frame) shows the same form, but 확인 does not persist.
+  - **Moving a post:** publish panel, then `--category=태국`. The option renders as "ㄴ 태국"; the script normalises that.
 
 ### Pitfalls
 
