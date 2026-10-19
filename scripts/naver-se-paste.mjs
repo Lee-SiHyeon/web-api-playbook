@@ -95,8 +95,7 @@ try {
     if (opt.category) {
       const dd = await T.ev(centerOf(`[...document.querySelectorAll('button')].find(b => b.offsetParent && b.closest('[class*=publish]') && /카테고리|category/i.test(b.getAttribute('aria-label') || b.className))`));
       if (dd) { await T.click(...dd); await sleep(1000); }
-      const ok = await T.ev(`(() => { const want = ${JSON.stringify(opt.category)}; const norm = (t) => t.split('
-').pop().replace('ㄴ', '').trim(); const c = [...document.querySelectorAll('label, span, li, button')].filter(e => e.offsetParent && norm(e.innerText.trim()) === want);
+      const ok = await T.ev(`(() => { const want = ${JSON.stringify(opt.category)}; const norm = (t) => t.split(String.fromCharCode(10)).pop().replace('ㄴ', '').trim(); const c = [...document.querySelectorAll('label, span, li, button')].filter(e => e.offsetParent && norm(e.innerText.trim()) === want);
         c.sort((a, b) => a.querySelectorAll('*').length - b.querySelectorAll('*').length); const t = c[0]; if (!t) return false; (t.closest('label') || t).click(); return true; })()`);
       if (!ok) throw new Error('CATEGORY_NOT_FOUND');
     }
