@@ -50,3 +50,16 @@ headless google-chrome + npm hyperframes, 8 CPU / 15 GB RAM (≈4 GB free) / 107
 background jobs unlimited. It can run Grok Imagine image→video itself and return the mp4.
 Use: `grokbot.mjs send <id> "<task>"` then `wait`. Split work: Dots = long-form render, Grok Bot = shorts / Imagine fallback for
 Flow-filtered clips (the grok.com chat route returns slideshows or refusals — do not use it).
+
+## Stage gates (added 2026-10-20 after the owner's review: "게이트 좀 잘 구성해라 — 계속 누락 생기잖아")
+Root cause of the omissions: owner decisions lived in chat and each subagent got a partial brief. Fix: every episode has
+`longform/requirements.json` (R01…, plan limits, clipAnchors) and `aihost-lint.mjs` now has three stage gates that read it
+(`tools/aihost-gates-stage.mjs`):
+- `plan`   — before render: no overlay/quote/map over an AI clip, word-synced evidence cues kept (never dropped, on static cuts, not under maps),
+  clip starts on its anchor sentence, host never speaks on camera (prompt check) and the intro lines are speech bubbles with the action on the word,
+  recap present (length, ≥15 cards, cost card), one card per zone, base-layer coverage, clip block = clip length.
+- `output` — on the mp4: 1080p, duration = plan, -14 LUFS, true peak ≤ -1 dBTP, BGM-only tail not louder than programme, no black/frozen frames.
+- `release`— before upload: title, descriptions, SRTs (ko + 8), chapters, tags, pinned comment, thumbnails A/B, AI + affiliate disclosure, source link, publish.json aiDisclosure.
+Audit of paris-v1 (first render): 49 plan errors (9 quote bubbles and 5 evidence cards over clips, 13 cues dropped under maps, 12 clips off their
+sentence, intro stretch 4 s before "끄응", 3 prompts with on-camera speech, no recap), true peak -0.3 dBTP, BGM-only tail 3.5 LU louder than programme.
+Run order: pre-gen gates → plan (0 errors) → render → output → release.
