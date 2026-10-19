@@ -1,5 +1,5 @@
 // Naver Clip (clipcreators.naver.com) upload through the logged-in automation Canary (CDP 9333). 2026-10-19.
-//   node scripts/naver-clip-upload.mjs <video.mp4> <desc.txt> [--cat1=여행] [--cat2=해외여행] [--blog=<post title substring>] [--ai] [--draft]
+//   node scripts/naver-clip-upload.mjs <video.mp4|-> <desc.txt> [--draftId=<id> fills an existing draft instead of uploading] [--cat1=여행] [--cat2=해외여행] [--blog=<post title substring>] [--ai] [--draft]
 // Flow: 업로드 → 파일 선택 (native chooser, intercepted) → resumable upload → draft page → 설명 (≤300) → 1차/2차 카테고리 →
 // AI 활용 toggle → 콘텐츠 링크 블로그 (picker lists the owner's own posts; pick by title) → 등록 (or 임시저장 with --draft).
 // Gotchas seen: clicking on hidden checkbox inputs hit the wrong control ("등록 예약" got ticked); use the visible
@@ -11,7 +11,8 @@ const [video, descFile, ...flags] = process.argv.slice(2);
 const opt = Object.fromEntries(flags.map((f) => { const i = f.indexOf('='); return i < 0 ? [f.slice(2), true] : [f.slice(2, i), f.slice(i + 1)]; }));
 const desc = fs.readFileSync(descFile, 'utf8').trim();
 if ([...desc].length > 300) { console.log(JSON.stringify({ ok: false, code: 'DESC_OVER_300' })); process.exit(2); }
-const t = await (await fetch(`${CDP}/json/new?https://clipcreators.naver.com/web/upload`, { method: 'PUT' })).json();
+const startUrl = opt.draftId ? `https://clipcreators.naver.com/web/draft/${opt.draftId}` : 'https://clipcreators.naver.com/web/upload';
+const t = await (await fetch(`${CDP}/json/new?${startUrl}`, { method: 'PUT' })).json();
 const ws = new WebSocket(t.webSocketDebuggerUrl); await new Promise((r) => (ws.onopen = r));
 let n = 0; const p = new Map(); let chooser = null;
 const send = (method, params = {}) => new Promise((r) => { const i = ++n; p.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
@@ -24,6 +25,7 @@ const byText = (text, sel = 'button,li,[role=option],div,span,a') => `[...docume
 const out = { video: path.basename(video) };
 try {
   await send('Page.enable'); await sleep(7000);
+  if (!opt.draftId) {
   await send('Page.setInterceptFileChooserDialog', { enabled: true });
   await click(await pointOf(byText('파일 선택')));
   for (let k = 0; k < 50 && !chooser; k++) await sleep(100);
@@ -31,6 +33,7 @@ try {
   await send('DOM.setFileInputFiles', { backendNodeId: chooser.backendNodeId, files: [path.resolve(video)] });
   await send('Page.setInterceptFileChooserDialog', { enabled: false });
   for (let k = 0; k < 150; k++) { await sleep(2000); const s = await ev(`({ url: location.href, prog: (document.body.innerText.match(/진행 중 \\d+%/) || [''])[0] })`); if (/\/draft\/\d+/.test(s.url) && !s.prog) break; }
+  }
   out.draft = (await ev('location.href')).match(/draft\/(\d+)/)?.[1];
   await ev(`(() => { const t = document.querySelector('textarea'); t.focus(); t.select(); return 1; })()`);
   await send('Input.insertText', { text: desc }); await sleep(500);

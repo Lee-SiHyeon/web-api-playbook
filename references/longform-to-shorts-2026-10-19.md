@@ -68,3 +68,18 @@ First use: the kwak-bangkok kit is on the longform-render v3 branch, commit 3882
   - The final dialog for a public video is "동영상 처리 중" (public once SD is ready).
   - Link the long video afterwards in the edit page: 관련 동영상 → pick by title → 저장.
 - **Threads:** video posting is not supported by Grok Bot's web writer (upload only). Use images on Threads.
+
+## Instagram (new account @lifehack_ailab, 2026-10-19)
+
+- **Old account:** @lifehack__ailab on Instagram is deactivated. The new account is @lifehack_ailab, linked in the same Meta Accounts Center as the owner's personal account.
+- **Login:** log in as the personal account first. Then 전환 → lifehack_ailab, enter the password (DPAPI `instagram-login`), then the email code from Gmail ("Verify your profile"; use the newest code), then 정보 저장.
+  - A brand-new account first shows a consent sheet with 4 [필수] toggles; switch them on and press 동의함.
+- **Session:** `node scripts/meta-session-from-canary.mjs` stores it in DPAPI `instagram-auth-session`, verified with the owner read `/api/v1/accounts/edit/web_form_data/`.
+  - In ACO `meta-auth-session.mjs`, the Instagram `expectedOwner` is now `META_INSTAGRAM_OWNER || 'lifehack_ailab'`. Threads stays `lifehack__ailab`.
+- **Posting:** `node scripts/instagram-web-post.mjs caption.txt <files…> [--ratio=4:5] [--ai]`.
+  - Several images make a carousel; a single MP4 makes a Reel (9:16 crop).
+  - The first Reel shows a "이제 동영상 게시물이 릴스로 공유됩니다" sheet; press 확인.
+  - Success text: "게시물이 공유되었습니다" or "릴스가 공유되었습니다".
+  - Closing the dialog before sharing triggers "게시물을 삭제하시겠어요?".
+- **Carousel cards:** 1080×1350 on a dark background, with a title strip (Black Han Sans; no ①–⑥ or ·) and an "n/10" page marker.
+- **Bio:** accounts/edit, `textarea#pepBio`, then 제출. Web links in the bio are plain text, not clickable.
