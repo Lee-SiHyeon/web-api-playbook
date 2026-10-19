@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "service": "ably",
+  "description": "Ably (에이블리) fashion marketplace anonymous public reads via api.a-bly.com with a server-issued anonymous token: ranking by category, keyword search, product detail, category tree, share link forms, community outfits, style contents and influencer (셀럽) shop ranking. Affiliate/creator enrollment and reward link creation need login and are recorded as blocked.",
+  "capabilities": [
+    {
+      "id": "categories.contract",
+      "title": "Read the ranking category tree (vertical -> category -> sub-category snos, periods, age filters) from /api/v2/goods/ranking-filters/",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "createAblyClient",
+              "parseRankingFilters",
+              "rankingQueryFor"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/ably.mjs",
+            "tokens": [
+              "categories"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.a-bly.com",
+          "path": "/api/v2/goods/ranking-filters/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/ably-2026-10-19/categories.contract.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ably.mjs",
+            "scripts/ably.mjs",
+            "tests/ably.test.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ranking.category_best",
+      "title": "Read the per-category best ranking (displayed rank, goods sno, name, market, KRW price, reviews) with last_ranking/last_sno paging",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "createAblyClient",
+              "parseRankingPage"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/ably.mjs",
+            "tokens": [
+              "ranking",
+              "--category",
+              "--limit"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.a-bly.com",
+          "path": "/api/v2/goods/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/ably-2026-10-19/ranking.category_best.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ably.mjs",
+            "scripts/ably.mjs",
+            "tests/ably.test.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "page2",
+              "origin": "https://api.a-bly.com",
+              "path": "/api/v2/goods/",
+              "method": "GET",
+              "mime": "application/json"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "search.keyword",
+      "title": "Keyword search -> goods cards (ads flagged) from the SEARCH_RESULT screen with next_token paging",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "createAblyClient",
+              "parseSearchScreen"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/ably.mjs",
+            "tokens": [
+              "search",
+              "--q"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.a-bly.com",
+          "path": "/api/v2/screens/SEARCH_RESULT/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/ably-2026-10-19/search.keyword.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ably.mjs",
+            "scripts/ably.mjs",
+            "tests/ably.test.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "product.detail",
+      "title": "Product detail: name, market/brand, list/sale/coupon price, cover + description images, review count and positive %, options, share-reward estimate",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "createAblyClient",
+              "parseGoodsBasic",
+              "parseGoodsDetailImages",
+              "parseReviewSummary",
+              "parseOptionsBrief",
+              "parseOptionLevel",
+              "parseAffiliateGoods"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/ably.mjs",
+            "tokens": [
+              "product",
+              "--id"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.a-bly.com",
+          "path": "/api/v3/goods/66796623/basic/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/ably-2026-10-19/product.detail.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ably.mjs",
+            "scripts/ably.mjs",
+            "tests/ably.test.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "reviewSummary",
+              "origin": "https://api.a-bly.com",
+              "path": "/api/v2/goods/66796623/review_summary/",
+              "method": "GET",
+              "mime": "application/json"
+            },
+            {
+              "key": "detail",
+              "origin": "https://api.a-bly.com",
+              "path": "/api/v3/goods/66796623/detail/",
+              "method": "GET",
+              "mime": "application/json"
+            },
+            {
+              "key": "optionsBrief",
+              "origin": "https://api.a-bly.com",
+              "path": "/api/v2/goods/66796623/options/brief/",
+              "method": "GET",
+              "mime": "application/json"
+            },
+            {
+              "key": "affiliate",
+              "origin": "https://api.a-bly.com",
+              "path": "/api/v2/affiliate/goods/66796623/",
+              "method": "GET",
+              "mime": "application/json"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "links.share_format",
+      "title": "Public goods link forms (m.a-bly.com web, mobile.a-bly.com app-web, ably:// deeplink) without tracking parameters",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "ablyGoodsLinks"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Forms taken from goods basic webview_url, the SPA moveToGoods code and ably:// deeplinks seen in responses. A reward/affiliate link is a different, login-only artifact (see affiliate.link_create)."
+    },
+    {
+      "id": "influencer.outfits",
+      "title": "Read community outfit posts (요즘코디: images, tags, like/bookmark counts, tagged goods) and outfits that tag a given goods",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "createAblyClient",
+              "parseOutfits",
+              "parseRelatedOutfits"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/ably.mjs",
+            "tokens": [
+              "outfits",
+              "--goods"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.a-bly.com",
+          "path": "/community/webview/outfits/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/ably-2026-10-19/influencer.outfits.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ably.mjs",
+            "scripts/ably.mjs",
+            "tests/ably.test.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "relatedOutfits",
+              "origin": "https://api.a-bly.com",
+              "path": "/api/v2/goods/66796623/related-outfits/",
+              "method": "GET",
+              "mime": "application/json"
+            }
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Member identity and body fields (writer, height, weight) are dropped by the parser."
+    },
+    {
+      "id": "influencer.style_contents",
+      "title": "Read editorial style/lookbook contents (tags such as 인플 PICK, influencer collaborations)",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "createAblyClient",
+              "parseStyleContents"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/ably.mjs",
+            "tokens": [
+              "style-contents"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.a-bly.com",
+          "path": "/api/v2/style_contents/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/ably-2026-10-19/influencer.style_contents.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ably.mjs",
+            "scripts/ably.mjs",
+            "tests/ably.test.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "influencer.celeb_markets",
+      "title": "Read the 셀럽 (influencer-run shop) market ranking: rank, market sno, Instagram URL, favorites count, style tags",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/ably.mjs",
+            "exports": [
+              "createAblyClient",
+              "parseMarketRanking"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/ably.mjs",
+            "tokens": [
+              "markets",
+              "--type"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/ably.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.a-bly.com",
+          "path": "/api/v2/markets/rankings/7/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/ably-2026-10-19/influencer.celeb_markets.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/ably.mjs",
+            "scripts/ably.mjs",
+            "tests/ably.test.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "influencer.member_profile",
+      "title": "Read a community member profile (follower/following counts)",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed GET /community/webview/communities/profiles/{memberSno}/ returns 200 anonymously but includes private-person fields (birth_date, height, weight, skin type). Not implemented on purpose; implement only a follower-count projection if the user explicitly needs it."
+    },
+    {
+      "id": "affiliate.program_enrollment",
+      "title": "Join the Ably creator [공유 리워드] programme (affiliate)",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Needs a logged-in Ably member account. Onboarding page m.a-bly.com/affiliate/events/3a3c7d4a (campaign-register-button, campaign_type 1); policy m.a-bly.com/affiliate/agreement/campaign-policy: real-name application with an own SNS channel, payout account via 마이페이지 > 크리에이터 되고 수익 얻기 > 계좌등록, 3.3% withholding for individuals, base reward 2%. Enrollment is a user decision; not automated."
+    },
+    {
+      "id": "affiliate.link_create",
+      "title": "Create a reward (affiliate) link for a goods sno",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Bundle contract only (never sent): POST /api/v2/affiliate/links {goods_sno} returns app_link/link when members/me affiliate_information.is_link_campaign_affiliator is true; the landing URL carries uid and the page posts /api/v2/affiliate/links/access-logs. It is a write that needs an enrolled, logged-in creator account. Needs: Ably login (Kakao/Naver/email), completed enrollment, then an authorised session handoff."
+    },
+    {
+      "id": "auth.login_flow_captured",
+      "title": "Capture the login flow",
+      "priority": "conditional",
+      "applicability": "not_applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Implemented scope is anonymous public reads only; login is needed only for the affiliate items, which are recorded as blocked."
+    }
+  ]
+}

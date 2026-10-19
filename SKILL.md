@@ -186,6 +186,12 @@ rebootstrap or retry a rate-limited job. Use the explicit Python HTTP transport
 dependency, with no browser fallback, and
 keep search/detail/review readiness separate from a successful ranking request.
 
+For Ably (에이블리) fashion rankings, search, product detail, outfits and influencer
+(셀럽) shops, use `scripts/ably.mjs` and [the Ably contract](references/commerce-ably.md).
+It bootstraps a server-issued anonymous token in memory, sends no cookies or login and
+keeps a 3 s request interval. Creator reward enrollment and reward-link creation need a
+logged-in account and stay blocked in [its checklist](checklists/services/ably.json).
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.

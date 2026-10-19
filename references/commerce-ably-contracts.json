@@ -1,0 +1,123 @@
+{
+  "schema": "commerce-ably-contracts-v1",
+  "checkedAt": "2026-10-19",
+  "service": "ably",
+  "scope": "Anonymous public reads of the Ably (에이블리) fashion marketplace. No account login, no cookies, no writes.",
+  "observation": {
+    "method": "Automation Chrome tab via CDP: Document/XHR/Fetch with response bodies; SPA bundle grep for routes not reached by UI clicks",
+    "pages": [
+      "https://m.a-bly.com/ -> 302 to https://mobile.a-bly.com/ (Vite SPA shell, no embedded JSON)",
+      "https://mobile.a-bly.com/ranking",
+      "https://mobile.a-bly.com/market_ranking",
+      "https://mobile.a-bly.com/search/search-result?query=...",
+      "https://mobile.a-bly.com/goods/{sno}",
+      "https://mobile.a-bly.com/overview",
+      "https://mobile.a-bly.com/style -> iframe https://m.a-bly.com/style (Next.js)",
+      "https://m.a-bly.com/content/style/home (Next.js, client fetch)",
+      "https://m.a-bly.com/affiliate/events/3a3c7d4a",
+      "https://m.a-bly.com/affiliate/agreement/campaign-policy"
+    ],
+    "embeddedJson": "mobile.a-bly.com documents are an empty SPA shell. m.a-bly.com Next.js pages carry __NEXT_DATA__ with only session context (isLogin) or RSC text; all catalog data comes from api.a-bly.com JSON.",
+    "replay": "Node 24 fetch, fresh process, 3 s minimum interval; all listed GET routes returned 200 application/json on 2026-10-19"
+  },
+  "session": {
+    "bootstrap": { "method": "GET", "origin": "https://api.a-bly.com", "path": "/api/v2/anonymous/token/", "response": { "token": "JWT (payload: anonymous_id, iat)" } },
+    "requestHeaders": {
+      "X-Anonymous-Token": "token from bootstrap (memory only)",
+      "X-Device-Id": "client-generated UUID v4",
+      "X-Web-Type": "Web",
+      "X-Device-Type": "PCWeb",
+      "X-App-Version": "0.1.0"
+    },
+    "withoutToken": "401 application/json {detail: authentication credentials were not provided}",
+    "cookies": "Not required. The token response sets a Cloudflare cookie that the client ignores.",
+    "antiBot": "mobile.a-bly.com static assets answer a Cloudflare managed challenge to non-browser clients; api.a-bly.com JSON did not challenge Node during this check."
+  },
+  "endpoints": [
+    {
+      "id": "ranking-filters", "method": "GET", "path": "/api/v2/goods/ranking-filters/", "resourceType": "XHR",
+      "response": {
+        "market_vertical_types[]": "{sno, name, query_value:{market_type_sno}|{category_sno}, categories[]:{sno, name, depth, query_value:{category_sno}, categories[]:{sno,name,depth}}}",
+        "periods[]": "{value: daily|weekly|monthly, name, description}",
+        "ages[]": "{value: 0..5, query_value:{age_tags[]}}"
+      }
+    },
+    {
+      "id": "ranking", "method": "GET", "path": "/api/v2/goods/", "resourceType": "XHR",
+      "query": {
+        "filter": "best (required)",
+        "market_type_sno": "vertical sno (1 fashion, 2 life, 3 beauty, 4 digital, 27 place); sent together with category_sno by the UI",
+        "category_sno": "category or sub-category sno from ranking-filters",
+        "period": "daily|weekly|monthly (omitted = default list)",
+        "age_tags[]": "1..5",
+        "last_ranking": "rank of the last item of the previous page",
+        "last_sno": "goods sno of the last item of the previous page"
+      },
+      "pageSize": 10,
+      "response": {
+        "list_id": "e.g. best_list_popular_weekly",
+        "last_updated_before_message": "e.g. 15시간 전",
+        "goods[]": "{ranking, sno, name, price, discount_rate, linked_option:{price, original_price, option_names}, sell_count, total_review_count, positive_review_rate, is_soldout, image, first_page_rendering:{cover_image, original_price, price}, market:{sno,name,market_type:{sno,name},style_tags,age_tags}, category:{sno,name}, brand_sno, ad}"
+      },
+      "rankRule": "Displayed rank is goods[].ranking; array position is never used. Duplicate rank fails."
+    },
+    {
+      "id": "search", "method": "GET", "path": "/api/v2/screens/SEARCH_RESULT/", "resourceType": "XHR",
+      "query": { "query": "keyword", "next_token": "opaque base64 token from the previous page" },
+      "response": {
+        "components[]": "{type:{item_list}, entity:{item_list[]:{item}}}; goods are in components whose item_list type ends with GOODS_LIST (THREE_COL_GOODS_LIST)",
+        "item": "{sno, name, image, market_sno, market_name, market_type, category_name, price, discount_rate, sell_count, first_page_rendering:{original_price, cover_image}, ad (non-null = sponsored)}",
+        "next_token": "string"
+      },
+      "pageSize": "about 36 goods",
+      "companions": ["/api/v2/screens/SEARCH_RESULT/meta/", "/api/v2/search/check_spell/?query=", "/api/v2/search/query_recommend/?query=&search_type=DIRECT"]
+    },
+    {
+      "id": "goods-basic", "method": "GET", "path": "/api/v3/goods/{sno}/basic/", "resourceType": "XHR",
+      "response": { "goods": "{sno, name, sku_code, sale_type, cover_images[], price_info:{consumer, base_thumbnail_price, thumbnail_price, discount_rate}, price_description:{text}, market:{sno,name,market_vertical_type}, brand:{sno,name}, display_categories[]:{sno,name,parent_category}, standard_category, positive_review_rate, webview_url}" },
+      "priceKinds": { "consumer": "retail_list", "base_thumbnail_price": "retail_current", "thumbnail_price": "coupon_applied_display (depends on viewer coupons; not a guaranteed price)" }
+    },
+    { "id": "goods-detail", "method": "GET", "path": "/api/v3/goods/{sno}/detail/", "query": { "channel": "0" }, "resourceType": "XHR",
+      "response": { "goods.detail_html_parts[]": "{html_part_type: GOODS_TOP_NOTICE|CERTIFICATION_NOTICE|GOODS_NOTICE|DESCRIPTION|..., contents[]: html}" },
+      "parse": "Image src values inside DESCRIPTION parts only" },
+    { "id": "review-summary", "method": "GET", "path": "/api/v2/goods/{sno}/review_summary/", "resourceType": "XHR",
+      "response": { "review": "{count, positive_percent}" }, "note": "No star average is exposed; positive_percent is the rating signal." },
+    { "id": "options-brief", "method": "GET", "path": "/api/v2/goods/{sno}/options/brief/", "resourceType": "XHR (after 구매하기)",
+      "response": { "option_names[]": "e.g. 색상, 사이즈", "option_groups[]": "{depth, name, component_count, first_goods_option_sno}" } },
+    { "id": "options", "method": "GET", "path": "/api/v2/goods/{sno}/options/", "query": { "depth": "1|2", "selected_option_sno": "goods_option_sno of the chosen depth-1 value (depth 2 only)" }, "resourceType": "XHR",
+      "response": { "name": "group name", "option_components[]": "{name, depth, goods_option_sno, is_final_depth, option_minimum_additional_price, goods_option:{option_names, price, original_price, is_soldout} (final depth)}" } },
+    { "id": "affiliate-goods", "method": "GET", "path": "/api/v2/affiliate/goods/{sno}/", "resourceType": "XHR",
+      "response": "{is_affiliate_member, is_campaign_member, expected_reward, logging:{SETTLEMENT_RATE}}",
+      "note": "Anonymous viewer sees the share-reward estimate (최대 N원 받기) and settlement rate 2; it is a display estimate, not a commission record." },
+    { "id": "related-outfits", "method": "GET", "path": "/api/v2/goods/{sno}/related-outfits/", "resourceType": "XHR",
+      "response": { "item_list[].item": "{sno, thumbnail, contents, like:{count}, bookmark:{count}, tagged_goods_count, deeplink}" } },
+    { "id": "outfits", "method": "GET", "path": "/community/webview/outfits/", "resourceType": "Fetch (m.a-bly.com/content/style/home)",
+      "query": { "per_page": "30", "order_by": "recommend", "next_token": "previous next_cursor", "cursor": "previous next_cursor" },
+      "response": { "outfits[].item": "{sno, contents, images[], thumbnail, tags[], season_tags[], like, bookmark, comment_count, member:{...private fields...}, goods_list[].item:{sno,name,linked_option:{price,original_price},market,category,is_soldout,image}}", "next_cursor": "number" },
+      "privacy": "member.writer/height/weight are not emitted by the client" },
+    { "id": "style-contents", "method": "GET", "path": "/api/v2/style_contents/", "resourceType": "XHR (m.a-bly.com/style)",
+      "response": { "contents[].item": "{sno, title, sub_title, list_thumbnail, opened_at, tags[]:{sno,name}, filter:{sno,name}, deeplink}" , "per_page": 10 } },
+    { "id": "market-ranking-types", "method": "GET", "path": "/api/v2/markets/rankings/available_types/", "resourceType": "XHR",
+      "response": { "market_types[]": "{sno, name}: 8 쇼핑몰, 7 셀럽, 6 브랜드, 2 라이프, 3 뷰티, 4 디지털" } },
+    { "id": "market-ranking", "method": "GET", "path": "/api/v2/markets/rankings/{type}/", "query": { "next_token": "empty on first page in the UI; numeric string afterwards" }, "resourceType": "XHR",
+      "response": { "markets[]": "{rank, last_rank, sno, name, instagram, style_tags, age_tags, favorites_count, market_type:{sno,name}, highlight}", "next_token": "string" } },
+    { "id": "overview-categories", "method": "GET", "path": "/api/v2/overview/category-index-list/", "resourceType": "XHR",
+      "note": "Category tab index with deeplinks; not used by the client (ranking-filters gives the snos the ranking API accepts)." }
+  ],
+  "linkForms": {
+    "web": "https://m.a-bly.com/goods/{sno}",
+    "appWeb": "https://mobile.a-bly.com/goods/{sno}",
+    "appDeeplink": "ably://goods/{sno}",
+    "outfit": "https://m.a-bly.com/content/style/{outfitSno}/goods",
+    "styleContent": "https://m.a-bly.com/events/{sno}",
+    "market": "https://mobile.a-bly.com/markets/{marketSno}"
+  },
+  "notImplemented": [
+    { "id": "affiliate-link-create", "method": "POST", "path": "/api/v2/affiliate/links", "source": "first-party bundle (index-BaoKz7ip.js), not sent",
+      "body": "{goods_sno}", "response": "{app_link | link}", "precondition": "GET /api/v2/members/me/ affiliate_information.is_link_campaign_affiliator === true (logged-in enrolled creator)" },
+    { "id": "tracking-link-create", "method": "POST", "path": "/api/v2/tracking-links/", "source": "bundle, not sent", "body": "{tracking_source, campaign_type:'goods', is_affiliate:false, landing:{type:'goods', sno}}" },
+    { "id": "referral-code", "method": "POST", "path": "/webview/referral/{domain}/codes", "source": "bundle, not sent", "body": "{sno}" },
+    { "id": "affiliate-access-log", "method": "POST", "path": "/api/v2/affiliate/links/access-logs", "source": "bundle, not sent", "body": "{uid, goods_sno} (sent when a landing URL has ?uid=)" },
+    { "id": "member-profile", "method": "GET", "path": "/community/webview/communities/profiles/{memberSno}/", "source": "observed", "reason": "returns private-person fields (birth_date, height, weight)" }
+  ]
+}

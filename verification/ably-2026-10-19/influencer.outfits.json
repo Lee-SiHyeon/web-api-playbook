@@ -1,0 +1,67 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "ably",
+  "capabilityId": "influencer.outfits",
+  "checkedAt": "2026-10-19T09:25:27.098Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 3,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "anonymousSession": {
+    "bootstrapPath": "/api/v2/anonymous/token/",
+    "tokenHeader": "X-Anonymous-Token",
+    "tokenSource": "server-issued anonymous JWT (no account)",
+    "tokenPersisted": false,
+    "cookiesSent": false
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://api.a-bly.com",
+    "path": "/community/webview/outfits/",
+    "queryFields": [
+      "per_page",
+      "order_by"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 173293,
+    "checkedAt": "2026-10-19T09:25:23.972Z",
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "anonymousTokenSent": true,
+    "browserUsed": false
+  },
+  "relatedOutfits": {
+    "method": "GET",
+    "origin": "https://api.a-bly.com",
+    "path": "/api/v2/goods/66796623/related-outfits/",
+    "queryFields": [],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 6983,
+    "checkedAt": "2026-10-19T09:25:26.985Z",
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "anonymousTokenSent": true,
+    "browserUsed": false
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://api.a-bly.com/community/webview/outfits/",
+    "resourceType": "XHR",
+    "capturedAt": "2026-10-19T09:00:00.000Z",
+    "note": "Observed in an automation Chrome tab (mobile.a-bly.com -> api.a-bly.com) on 2026-10-19, then replayed by this Node process."
+  },
+  "implementation": {
+    "lib/commerce/ably.mjs": "d586221bcae17297ccc5a22d0b81e173bfde18e1fb8b661d548e6402789eac26",
+    "scripts/ably.mjs": "2afe9f40e32af33b96b623af84cfa0fe4f2b860c138c55aadd8dbcdc2f0f0613",
+    "tests/ably.test.mjs": "f3e294da5f09120469f95dd5fef7c742dbe5fd928ff45ca6d106a6a13bc982e9"
+  }
+}

@@ -45,6 +45,7 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 | [MyRealTrip 링크 대사](references/myrealtrip-link-reconciliation.md) | 웹 파트너/공식 API 구분, 원 옵션·제휴 ID·허용 tracking만 검증, 발급 재시도 금지 |
 | [MyRealTrip 공식 투어·티켓 검색](references/myrealtrip-official-catalog-search.md) | 실제 인증 조회한 read-only POST, 1-based page·시작가 KRW·안전한 실행 한도 |
 | [쇼핑 쇼츠 영상 소스](references/video-sources.md) | 알리 판매자 상품 영상·이미지·스토어 신호 조회(브라우저 탭 전송 MTOP), 출처·권리 근거 기록 다운로드, 더우인·샤오홍슈·1688 미구현 목록 |
+| [에이블리 공개 조회](references/commerce-ably.md) | 카테고리 랭킹·검색·상품 상세(가격·이미지·옵션·리뷰)·코디·셀럽 쇼핑몰, 익명 토큰 HTTP, 크리에이터 리워드 가입·링크 생성은 로그인 필요로 미구현 |
 | [발견 도구](references/discovery-tools.md) | HAR → 계약 목록, 저장 HTML → 후보, 재개 가능한 탐색 상태 |
 | [REA·AI 브라우저와 Rust 설계](references/browser-analysis-rust.md) | agent-browser·BrowserOS neo 비교, 행동별 증거·직접 HTTP 재현, 도구 채택 방향과 검증 순서 |
 | [Google Flow HTTP 경계와 실측](references/google-flow-http.md) | 실제 UI 생성 처리 단계, 직접 HTTP 미디어 다운로드, 480p 변환 및 미검증 pure-HTTP 생성 경계 |
@@ -164,6 +165,7 @@ npm run retail:overseas -- status
 npm run retail:japan -- rakuten search --query=マウス --category-id=100026
 npm run retail:japan -- yahoo product --url=https://store.shopping.yahoo.co.jp/ya-man/r2305a.html
 npm run retail:japan:verify
+npm run ably -- ranking --category=467 --period=weekly --limit=20
 ```
 
 지원 명령은 브라우저 없이 HTTP로 실행한다. 검색 제안, SEO 정보, 가격·재고, 상품 목록을 별도 기능으로 구분하며 [현재 지원 범위와 차단 지점](references/retail-public-apis.md)을 확인한다. 새 서비스의 기능은 자동 [체크리스트](checklists/README.md)에 포함한다.
