@@ -43,3 +43,10 @@ First run on Paris found two real issues: a paraphrased quote (s09) and a 2-char
 ## Compute placement (owner 2026-10-19)
 Whisper/alignment, ASR and rendering run in the cloud (GitHub release kit + Dots / Grok bot), never on the 16 GB PC.
 TTS with timestamps (ElevenLabs with-timestamps) avoids alignment entirely. Subagent execution: `worker` (haiku).
+
+## Grok Bot as a second cloud worker (checked 2026-10-20 via scripts/grokbot.mjs)
+Agent "Grok Bot" (4e7942a3-…): GitHub clone/release download+upload (`gh` logged in as Lee-SiHyeon), Node 20.19, ffmpeg 7.1.5,
+headless google-chrome + npm hyperframes, 8 CPU / 15 GB RAM (≈4 GB free) / 107 GB disk, no GPU; foreground commands ≤13 min,
+background jobs unlimited. It can run Grok Imagine image→video itself and return the mp4.
+Use: `grokbot.mjs send <id> "<task>"` then `wait`. Split work: Dots = long-form render, Grok Bot = shorts / Imagine fallback for
+Flow-filtered clips (the grok.com chat route returns slideshows or refusals — do not use it).
