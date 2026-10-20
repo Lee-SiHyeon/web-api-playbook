@@ -31,12 +31,12 @@ node scripts/ably.mjs markets --type=7 --limit=20               # 셀럽(인플�
 - 세션: 첫 요청에서 `GET /api/v2/anonymous/token/`이 발급한 익명 JWT를 `X-Anonymous-Token`
   헤더로 보낸다(`X-Device-Id`는 프로세스마다 새 UUID). 토큰은 메모리에만 두고 출력·영수증에 쓰지 않는다.
   토큰 없이 부르면 401이다. 쿠키는 쓰지 않는다(토큰 응답의 Cloudflare 쿠키는 무시).
-  계정 로그인은 없다. 영수증의 `credentialsUsed:false`는 사용자 자격증명이 없다는 뜻이며,
+  공개 조회 명령에는 계정 로그인이 없다(제휴 발급 `affiliate-link`만 로그인된 Canary 세션을 쓴다). 영수증의 `credentialsUsed:false`는 사용자 자격증명이 없다는 뜻이며,
   익명 토큰 전송 여부는 `anonymousTokenSent`로 따로 기록한다.
 - 간격: 요청 사이 최소 3초(`--interval-ms`로 늘릴 수만 있음). 401/403/챌린지 HTML은 즉시 중단,
   429/5xx도 재시도하지 않고 `ABLY_RATE_LIMITED`/`ABLY_HTTP_ERROR`로 끝낸다
   ([anti-bot-boundaries](anti-bot-boundaries.md)).
-- 쓰기 없음: 찜, 장바구니, 공유/리워드 링크 생성(POST)은 구현하지 않았다.
+- 쓰기 없음(공개 조회 명령): 찜, 장바구니는 구현하지 않았다. 공유/리워드 링크 발급(POST)은 `affiliate-link` 명령에만 있다(아래 제휴 절).
 - `mobile.a-bly.com` 정적 자산은 비브라우저 클라이언트에 Cloudflare managed challenge를 돌려준다.
   `api.a-bly.com` JSON은 이번 확인에서 Node에 챌린지를 걸지 않았다. 이는 2026-10-19 관측이며
   지속 보장은 아니다.
@@ -83,7 +83,36 @@ node scripts/ably.mjs markets --type=7 --limit=20               # 셀럽(인플�
 - 회원 프로필 `GET /community/webview/communities/profiles/{memberSno}/`은 익명으로 200이지만
   생년월일·키·몸무게가 포함되어 구현하지 않았다.
 
-## 제휴(크리에이터 [공유 리워드]) 프로그램 — 로그인 필요, 미구현
+## 제휴(크리에이터 [공유 리워드]) 프로그램 — 로그인 세션 필요, 발급 구현
+
+`node scripts/ably.mjs affiliate-link --sno=<goods sno> [--check-only] [--reissue-reason=<text>]`.
+Canary(CDP 9333)에 이미 로그인된 에이블리 세션을 쓴다. 명령이 임시 탭(`https://m.a-bly.com/my`)을 열고
+탭 안에서 fetch하며, 끝나면 그 탭만 닫는다. 토큰·자격은 출력·저장하지 않는다. 구현 파일:
+`lib/commerce/ably-affiliate.mjs`. 발급 기록은 write journal(service `ably`, operation
+`affiliate.link_create`)에 reserve→finish로 남고, 이미 `issued`인 sno는 `--reissue-reason` 없이는 거부된다.
+`--check-only`는 쓰기 없이 가입·캠페인 플래그만 읽는다.
+
+### 확인된 계약 (2026-10-20, 번들 + 실제 호출)
+
+- 가입 여부: `GET /api/v2/affiliate/goods/{sno}/` → `is_affiliate_member`, `is_campaign_member`, `expected_reward`.
+  `members/me`의 `affiliate_information.is_link_campaign_affiliator`가 true일 때만 사이트가 발급 경로를 쓴다.
+  (가입 직후에도 캠페인 참여 전에는 false였고, 그때 발급된 응답에는 `uid`가 없어 귀속되지 않았다.)
+- 발급: `POST https://api.a-bly.com/api/v2/affiliate/links/` (끝 슬래시 필수; 없으면 405로 리다이렉트됨),
+  body `{"goods_sno": <sno>}` → `201 {"link": "/goods/<sno>?uid=<uid>", "app_link": "https://applink.a-bly.com/<code>"}`.
+- 헤더: `Authorization: JWT <ably-jwt-token 쿠키 값>`, `X-Device-Id`(localStorage `device-id`),
+  `X-Web-Type: Web`, `X-Device-Type: PCWeb`, `X-App-Version: 0.1.0`.
+- 링크 검증: `app_link`는 airbridge 단축 링크로 302 → `https://m.a-bly.com/goods/<sno>?uid=<같은 uid>&tracking_content=...&airbridge_referrer=...`.
+  웹 `link`의 uid와 동일하다. 명령은 발급 직후 Location의 goods 경로와 uid 일치를 검사해 저널에 남긴다.
+- 발급 로그 집계: 랜딩의 `uid`로 `POST /api/v2/affiliate/links/access-logs`(사이트 JS가 호출).
+- 발급 전 확인: `POST /api/v2/tracking-links/`는 비가입자용 추적 경로이며 이 명령은 쓰지 않는다.
+
+### 시작 전 조건 (사용자 측)
+
+- 에이블리 웹/앱 계정 로그인, 앱에서 크리에이터 가입(실명·SNS 채널), 그리고 '공유 리워드'(링크 캠페인) 참여.
+  참여 여부는 `--check-only`의 `member.isLinkCampaignAffiliator`로 확인한다.
+- 가입은 사용자 결정이며 자동화하지 않는다.
+
+### 정책 요지 (운영정책 이미지)
 
 존재 확인. 익명 `members/me` 응답에 `affiliate_information.link_campaign_onboarding_deeplink`가
 있고 상품 상세에 "최대 N원 받기 / 공유하기"가 보인다.
@@ -98,13 +127,7 @@ node scripts/ably.mjs markets --type=7 --limit=20               # 셀럽(인플�
   ("기재된 제휴 링크를 통해 상품을 구매하실 경우, 상품 구매로 발생한 수익의 일부가 작성자에게 분배됩니다."),
   만 14세 이상 미성년자는 법정대리인 동의, 문의는 카카오톡 채널 '에이블리 크리에이터'.
   리워드 대상 카테고리: 브랜드 패션, 소호 패션, 뷰티, 라이프.
-- 링크 생성 계약(번들에서 확인, 요청은 보내지 않음): 가입한 크리에이터는
-  `POST /api/v2/affiliate/links {goods_sno}` → `app_link`/`link`. 비가입자는
-  `POST /api/v2/tracking-links/`(일반 공유 추적). 랜딩 URL의 `uid`로
-  `POST /api/v2/affiliate/links/access-logs`가 집계된다.
-- 사용자에게 필요한 것: 에이블리 계정 로그인(카카오/네이버/이메일), 위 페이지에서 크리에이터 가입
-  (실명·SNS 채널), 정산 계좌·세무 정보 등록. 그다음 인증 세션을 넘겨받는 별도 작업으로
-  `affiliate.link_create`를 구현·검증할 수 있다. 가입은 사용자 결정이며 자동화하지 않는다.
+- 정산 계좌·세무 정보 등록은 사용자 몫이며 자동화하지 않는다(위 '시작 전 조건'과 계약은 위 절 참조).
 - AI 인플루언서 계정으로 신청 가능한지는 정책에 명시가 없다("본인이 적법하게 소유한 SNS 채널",
   "본인 실명"). 운영 측 확인이 필요하다.
 
