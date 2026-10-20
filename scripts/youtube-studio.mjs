@@ -46,6 +46,7 @@ const send = (method, params = {}) => new Promise((r) => { const i = ++seq; pend
 const ev = async (expression) => { const m = await send('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true, userGesture: true }); if (m.result?.exceptionDetails) throw new Error(m.result.exceptionDetails.exception?.description || m.result.exceptionDetails.text); return m.result?.result?.value; };
 await send('Page.enable'); await send('DOM.enable');
 let shotN = 0;
+let uploadPending = false; // true from file selection until Studio reports the upload finished; the tab must stay open until then
 const shot = async (label) => { if (!opt.shots) return; fs.mkdirSync(opt.shots, { recursive: true }); const r = await send('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(opt.shots, `${String(++shotN).padStart(2, '0')}-${label}.png`), Buffer.from(r.result.data, 'base64')); };
 const log = (o) => console.log(JSON.stringify(o));
 const fail = (code, extra = {}) => { throw Object.assign(new Error(code), { code, ...extra }); };
@@ -91,6 +92,20 @@ const fillEditable = async (n, text) => {
   await typeText(text);
 };
 const pickMenuItem = async (text) => { const ok = await waitFor(`(() => { const it = [...document.querySelectorAll('tp-yt-paper-item')].filter(e => e.offsetParent && e.innerText.trim() === ${JSON.stringify(text)}); if (!it[0]) return false; it[0].click(); return true; })()`, 6000); return ok; };
+// wait until Studio's upload dialog shows no remaining "N% 업로드 중" (upload reached 100%), then the tab may be closed.
+// Closing the tab mid-upload interrupts it ("업로드가 중단되었습니다"), which is why this is awaited before cleanup.
+const uploadDone = async () => {
+  await sleep(30000);
+  let quiet = 0;
+  for (let k = 0; k < 480; k++) {
+    const s = await ev(`(() => { const b = document.body.innerText; return { pct: (b.match(/(\\d+)% 업로드 중/) || [])[1] || null, interrupted: /업로드가 중단/.test(b) }; })()`);
+    log({ step: 'upload-progress', ...s });
+    if (s.interrupted) fail('UPLOAD_INTERRUPTED');
+    if (!s.pct) { if (++quiet >= 2) return; } else quiet = 0;
+    await sleep(15000);
+  }
+  fail('UPLOAD_TIMEOUT');
+};
 
 try {
   if (cmd === 'upload') {
@@ -98,7 +113,7 @@ try {
     if ([job.title, ...(job.abTest || []).map((v) => v.title)].some((s) => s && [...s].length > 100)) fail('TITLE_OVER_100');
     await send('Page.navigate', { url: `https://studio.youtube.com/channel/${job.channelId}/videos/upload?d=ud` });
     await waitFor(`!!document.querySelector('input[type=file]')`, 30000);
-    await setFiles('input[type=file]', 0, job.video);
+    await setFiles('input[type=file]', 0, job.video); uploadPending = true;
     const videoId = await waitFor(`(() => { const a = [...document.querySelectorAll('a')].find(a => /(youtu\\.be|youtube\\.com\\/shorts)\\/[\\w-]{11}/.test(a.href)); return a ? a.href.match(/(?:youtu\\.be|shorts)\\/([\\w-]{11})/)[1] : null; })()`, 60000);
     log({ step: 'file', videoId }); await shot('file');
 
@@ -134,7 +149,8 @@ try {
     }
     if (job.language) { await ev(`(() => { const s = document.querySelector('#language-input'); (s.querySelector('ytcp-dropdown-trigger') || s).click(); return 1; })()`); await pickMenuItem(job.language); }
     if (job.category) { await sleep(500); await ev(`(() => { const s = document.querySelector('ytcp-form-select#category'); (s.querySelector('ytcp-dropdown-trigger') || s).click(); return 1; })()`); await pickMenuItem(job.category); }
-    const details = await ev(`({ title: document.querySelectorAll('#textbox')[0].innerText, descLen: document.querySelectorAll('#textbox')[1].innerText.length,
+    // title/description are read from Studio's named containers; the bare #textbox index order changes after the A/B dialog (was swapped in the log)
+    const details = await ev(`({ title: (document.querySelector('#title-textarea #textbox') || document.querySelectorAll('#textbox')[1]).innerText, descLen: (document.querySelector('#description-textarea #textbox') || document.querySelectorAll('#textbox')[0]).innerText.length,
       tags: document.querySelector('#tags-container').innerText.split('\\n').length, lang: document.querySelector('#language-input').innerText.replace(/\\n/g, ' '),
       category: document.querySelector('ytcp-form-select#category').innerText.replace(/\\n/g, ' ') })`);
     log({ step: 'details', ...details }); await shot('details');
@@ -159,8 +175,9 @@ try {
       await ev(`(document.querySelector('tp-yt-paper-radio-button[name=${vis}]')?.click(), 1)`); await sleep(800);
     }
     await ev(`(document.querySelector('#done-button').click(), 1)`);
-    const confirm = await waitFor(`(() => { const m = document.body.innerText.match(/(\\d{4}년 \\d+월 \\d+일 [\\d:]+)에 동영상이 공개|동영상 저장됨|동영상 게시됨|동영상 처리 중/); return m ? m[0] : null; })()`, 30000);
+    const confirm = await waitFor(`(() => { const m = document.body.innerText.match(/(\\d{4}년 \\d+월 \\d+일 [\\d:]+)에 동영상이 공개|동영상 저장됨|동영상 게시됨|동영상 처리 중/); return m ? m[0] : null; })()`, 30000).catch(() => null); // confirm text is not reliable; the upload itself is verified below
     log({ step: 'done', videoId, confirm, url: `https://youtu.be/${videoId}` }); await shot('done');
+    await uploadDone(); uploadPending = false; log({ step: 'upload-complete', videoId });
   }
 
   if (cmd === 'captions') {
@@ -179,7 +196,7 @@ try {
       fail('CAPTION_UPLOAD', { srt });
     };
     await go();
-    if (job.captions?.original) {
+    if (job.captions?.original && !('skip-original' in opt)) { // --skip-original: only the localized tracks
       await clickText('자막 수정'); await sleep(3000);
       // ⋮ menu sits right of "텍스트로 편집"
       let p = null; for (let k = 0; k < 60 && !p; k++) { p = await pointOfText('텍스트로 편집'); if (!p) await sleep(500); } if (!p) fail('NO_EDITOR');
@@ -218,5 +235,8 @@ try {
   log({ ok: false, code: e.code || 'ERROR', message: e.message, ...(e.text ? { text: e.text } : {}) });
   process.exitCode = 2;
 } finally {
-  ws.close(); await fetch(`${CDP}/json/close/${t.id}`).catch(() => {});
+  ws.close();
+  // the tab is only closed once the upload is confirmed complete; otherwise it stays open so the upload is not interrupted
+  if (uploadPending) log({ step: 'tab-kept-open', reason: 'upload not confirmed complete; close this tab manually after Studio shows it finished' });
+  else await fetch(`${CDP}/json/close/${t.id}`).catch(() => {});
 }
