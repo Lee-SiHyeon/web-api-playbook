@@ -29,8 +29,12 @@ ko-main.md ──► fact-check agent (facts.verified.json, script.md, links.jso
 ## lifehackailab.com lab import
 
 - **Command:** `HUB_IMPORT_TOKEN=… node scripts/mirror-lab.mjs --run=<dir> --published-at=<ISO> --updated-at=<ISO> --site-first --slug=<slug>`
-  - Pull the token with `vercel env pull` (global-config `…\lifehack-cloud-ops\vercel`).
-  - Keep the token in process memory and delete the env file right after.
+  - **Token:** DPAPI `lab-hub-import-token` (JSON `{token}`). Read it with ProtectedStore and pass it only through the child process env.
+  - **Refresh the token** (only when the import says it is invalid). Run from the linked project `C:\Users\sihyeon\dev\lifehackailab-web`:
+    `npx vercel env pull <scratch>\lab.env --environment=production --yes --global-config C:\Users\sihyeon\AppData\Local\lifehack-cloud-ops\vercel`.
+    Then write `HUB_IMPORT_TOKEN` to DPAPI and delete the env file.
+  - Without `--global-config` the CLI is not logged in and waits for a login that never comes. On 2026-10-21 the blog agent stalled there twice.
+    Check the login with `npx vercel whoami --global-config …`.
 - **Re-import:** use the same `published-at` and a newer `updated-at`. The script picks `updated` from job.publishedAt, which must not be earlier than published, otherwise `LAB_REVISION_TIMESTAMP_INVALID`.
 - **`LAB_PUBLIC_READBACK_UNVERIFIED` while the import itself succeeded:**
   - **Cause:** the site has the Vercel Security Checkpoint on. Every non-browser client, curl with a browser UA included, gets **429** with `<title>Vercel Security Checkpoint`.
