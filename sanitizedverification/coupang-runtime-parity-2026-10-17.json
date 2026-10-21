@@ -1,0 +1,99 @@
+{
+  "schema": "goldbox_runtime_comparison_v1",
+  "evidenceComparisonVerified": true,
+  "fullCollectionResolved": false,
+  "sameWorkerSha256": "26bca646cce4c5198bdb1d7e106e88c2fe7ca75c887de037834dc51dbc95149e",
+  "applicationBootstrapShapeEqual": true,
+  "identicalWireOrInfrastructureProven": false,
+  "local": {
+    "observedAt": "2026-10-17T14:44:51.948Z",
+    "runtime": {
+      "node": "v24.22.0",
+      "undici": "7.29.1",
+      "openssl": "3.5.8",
+      "platform": "win32",
+      "arch": "x64",
+      "proxyVariablesPresent": []
+    },
+    "bootstrapStatus": 200,
+    "pages": [
+      {
+        "status": 200,
+        "rows": 99
+      },
+      {
+        "status": 200,
+        "rows": 101
+      }
+    ],
+    "rows": 200,
+    "exactConsumerTargets": 193,
+    "trackingTargets": 7,
+    "paginationExhausted": true,
+    "catalogWrites": 0
+  },
+  "cloud": {
+    "observedAt": "2026-10-17T14:45:49.295Z",
+    "runtime": {
+      "node": "v24.21.0",
+      "undici": "7.29.1",
+      "openssl": "3.5.8",
+      "platform": "linux",
+      "arch": "x64",
+      "proxyVariablesPresent": []
+    },
+    "region": "icn1",
+    "bootstrapStatus": 403,
+    "requests": 1,
+    "catalogRequestsAttempted": 0,
+    "catalogRowsObserved": 0,
+    "sourceCatalogSize": null,
+    "error": "COUPANG_VISITOR_HTTP_REJECTED",
+    "catalogParsingAttempted": false,
+    "sandboxStopped": true
+  },
+  "existingProduction": {
+    "observedAt": "2026-10-17T14:25:11.143484+00:00",
+    "productionSha": "c6c9e48b8d9ed9b390a24d5cbd82cdb7a2b0eaac",
+    "transport": "vercel_sandbox_native_ui_scroll",
+    "fetched": 100,
+    "stored": 94,
+    "secondPageStatus": 403,
+    "partialPipelineVerified": true,
+    "fullCollectionVerified": false,
+    "nextAttemptAt": "2026-10-18T14:25:11.143484+00:00"
+  },
+  "credentialMetadata": {
+    "observedAt": "2026-10-17T14:51:01.851612+00:00",
+    "officialApiConfigured": false,
+    "partnersWebSessionReady": true,
+    "webSessionIsOfficialApiKey": false
+  },
+  "conclusion": "The identical HTTP reader reaches the catalog locally but is rejected at anonymous bootstrap in Vercel. The current Vercel browser separately reaches the first HTML page but its native continuation is rejected.",
+  "notEstablished": [
+    "egress_ip_is_the_cause",
+    "missing_cookie_is_the_cause",
+    "missing_header_is_the_cause",
+    "node_patch_version_is_the_cause",
+    "official_api_has_complete_public_goldbox_coverage"
+  ],
+  "decisions": {
+    "deployFailingHttpReader": false,
+    "clearProductionHold": false,
+    "uploadLocalCatalog": false,
+    "reuseAccountCookies": false,
+    "claimFixed": false
+  },
+  "nextAcceptanceCriteria": [
+    "Source-authorized Vercel access or a configured official API with verified list coverage",
+    "Vercel-only traversal follows observed continuations to EOF without a rejected catalog request",
+    "Exact product/option/vendor-item mapping and exclusions remain explicit",
+    "Production Cron receipt, independent database readback and public UI agree"
+  ],
+  "inputSha256": {
+    "goldbox-http-parity-local.json": "e4fdd95a112793b6a9f219d081347f4b38789f8ce5f014ccbec54274d23fc0c2",
+    "goldbox-http-parity-cloud.json": "eb26a6bdc3861cb39925bfe7c341b61a9a0a4dc3e746dd511436120000b3b4dc",
+    "goldbox-browser-partial-production-proof.json": "a4770e70401d0bb6c01db7a9648378d1a43deb1310d289c532182b650b18a2c6",
+    "retail-db-management-partner-status.json": "f9db7047de5e178d67cc272bd9e6b8d375315620939a3d39dc69fd43d8191272"
+  }
+}

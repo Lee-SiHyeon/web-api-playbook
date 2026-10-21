@@ -1,0 +1,781 @@
+{
+  "schema": "goldbox_browser_path_comparison_v1",
+  "evidenceComparisonVerified": true,
+  "fullCollectionResolved": false,
+  "browserFlowAndParserIdentical": true,
+  "sameFullWorkerBytes": false,
+  "allowedLauncherDifference": "Windows-only --no-first-run, verified as the only byte delta; no source request in startup preflight",
+  "comparedControls": [
+    "Chrome/151.0.7922.34",
+    "1280x900 viewport, deviceScaleFactor 1",
+    "fresh temporary profile",
+    "no imported account cookies",
+    "native browser document navigation",
+    "same source-generated continuation parser and actual UI scroll"
+  ],
+  "remainingDifferences": [
+    "Windows vs Linux",
+    "ko-KR vs en-US browser locale",
+    "Asia/Seoul vs UTC timezone",
+    "network egress and source-side session decisions",
+    "Node patch version",
+    "observation time"
+  ],
+  "cloudDirect": {
+    "startedAt": "2026-10-17T15:19:39.136Z",
+    "completedAt": "2026-10-17T15:19:41.692Z",
+    "region": "icn1",
+    "workerSha256": "df72c8f3a803347b4bfa08d45051b72aa6fd2c0b5677f16e2eae3257ad129c1c",
+    "platform": "linux",
+    "node": "v24.21.0",
+    "browserVersion": "Chrome/151.0.7922.34",
+    "headless": false,
+    "sourceNavigations": 1,
+    "entryMode": "direct",
+    "homeStatus": null,
+    "menuClicks": 0,
+    "documentStatus": 403,
+    "pages": [
+      {
+        "page": 1,
+        "status": 403,
+        "rows": null,
+        "nextPagePresent": null,
+        "error": null,
+        "responseSha256": null
+      }
+    ],
+    "catalogParsing": false,
+    "catalogSize": null,
+    "rows": 0,
+    "exactConsumerTargets": 0,
+    "excludedTrackingTargets": null,
+    "paginationExhausted": false,
+    "error": "COUPANG_GOLDBOX_DOCUMENT_HTTP_REJECTED",
+    "uiScrollActions": 0,
+    "observedRequestCount": 2,
+    "sourceRequests": [
+      {
+        "role": "document",
+        "resourceType": "Document",
+        "origin": "https://www.coupang.com",
+        "path": "/mlp/web/mlp-landing-page",
+        "method": "GET",
+        "status": 403,
+        "networkStatus": 403,
+        "protocol": "h2",
+        "sentCookieNames": [],
+        "setCookieNames": [
+          "_abck",
+          "bm_s",
+          "bm_so",
+          "bm_sz"
+        ],
+        "blockedCookieCount": 0,
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      }
+    ],
+    "snapshots": [
+      {
+        "stage": "finish",
+        "atMs": 289,
+        "scopeValid": true,
+        "dom": {
+          "readyState": "complete",
+          "visibility": "visible",
+          "hasFocus": true,
+          "language": "en-US",
+          "languages": [
+            "en-US"
+          ],
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+          "webdriver": false,
+          "timeZone": "UTC",
+          "viewport": {
+            "width": 1280,
+            "height": 900,
+            "devicePixelRatio": 1
+          },
+          "productAnchors": 0,
+          "uniqueExactProductTargets": 0,
+          "scriptElements": 1
+        },
+        "rootCookieNames": [
+          "_abck",
+          "bm_lso",
+          "bm_s",
+          "bm_so",
+          "bm_sz"
+        ],
+        "failedScripts": []
+      }
+    ],
+    "screenshots": [
+      {
+        "stage": "finish",
+        "name": "goldbox-1-finish.jpg",
+        "atMs": 332,
+        "sha256": "c03b7ecaec37901b732b9943ad7236201e251c840879f60e645c8590e17b721d",
+        "bytes": 20572,
+        "visuallyInspected": true
+      }
+    ],
+    "accountCookiesImported": false,
+    "manualSourceRequests": 0,
+    "retries": 0,
+    "profileRemoved": true,
+    "ownedBrowserClosed": true,
+    "sandboxStopped": true,
+    "productionWrites": 0
+  },
+  "localDirect": {
+    "startedAt": "2026-10-17T15:22:51.728Z",
+    "completedAt": "2026-10-17T15:23:23.031Z",
+    "region": null,
+    "workerSha256": "c0f031c96f84567211a9eea8e811b7bd83c131810c8b8a34187d1050a520c9f0",
+    "platform": "win32",
+    "node": "v24.22.0",
+    "browserVersion": "Chrome/151.0.7922.34",
+    "headless": false,
+    "sourceNavigations": 1,
+    "entryMode": "direct",
+    "homeStatus": null,
+    "menuClicks": 0,
+    "documentStatus": 200,
+    "pages": [
+      {
+        "page": 1,
+        "status": 200,
+        "rows": 100,
+        "nextPagePresent": true,
+        "error": null,
+        "responseSha256": "45d8edfdcf782fd117e60e6bdab2877ccef2456828bd0f192901ac688e02bec8"
+      },
+      {
+        "page": 2,
+        "status": 200,
+        "rows": 100,
+        "nextPagePresent": false,
+        "error": null,
+        "responseSha256": "927392e830ff478d93c5c683b6a41c5174281a7f80e3bb4e3466c6471624a84c"
+      }
+    ],
+    "catalogParsing": true,
+    "catalogSize": 200,
+    "rows": 200,
+    "exactConsumerTargets": 193,
+    "excludedTrackingTargets": 7,
+    "paginationExhausted": true,
+    "error": null,
+    "uiScrollActions": 1,
+    "observedRequestCount": 194,
+    "sourceRequests": [
+      {
+        "role": "document",
+        "resourceType": "Document",
+        "origin": "https://www.coupang.com",
+        "path": "/mlp/web/mlp-landing-page",
+        "method": "GET",
+        "status": 200,
+        "networkStatus": 200,
+        "protocol": "h2",
+        "sentCookieNames": [],
+        "setCookieNames": [
+          "ILOGIN",
+          "SAID",
+          "_abck",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sz",
+          "member_srl"
+        ],
+        "blockedCookieCount": 0,
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "role": "bootstrap",
+        "resourceType": "Document",
+        "origin": "https://www.coupang.com",
+        "path": "/n-api/web-adapter/proxy",
+        "method": "GET",
+        "status": 200,
+        "networkStatus": 200,
+        "protocol": "h2",
+        "sentCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "web-session-id"
+        ],
+        "setCookieNames": [
+          "ILOGIN",
+          "SAID",
+          "bm_s",
+          "bm_sv",
+          "member_srl",
+          "x-coupang-accept-language",
+          "x-coupang-target-market"
+        ],
+        "blockedCookieCount": 0,
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "role": "widget",
+        "resourceType": "XHR",
+        "origin": "https://www.coupang.com",
+        "path": "/vm/mlp/v1/newweb/mlp-widget-landing",
+        "method": "GET",
+        "status": 200,
+        "networkStatus": 200,
+        "protocol": "h2",
+        "sentCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "web-session-id",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "setCookieNames": [
+          "ILOGIN",
+          "SAID",
+          "bm_sv",
+          "member_srl"
+        ],
+        "blockedCookieCount": 0,
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      }
+    ],
+    "snapshots": [
+      {
+        "stage": "document_ready",
+        "atMs": 4363,
+        "scopeValid": true,
+        "dom": {
+          "readyState": "complete",
+          "visibility": "visible",
+          "hasFocus": false,
+          "language": "ko-KR",
+          "languages": [
+            "ko-KR"
+          ],
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+          "webdriver": false,
+          "timeZone": "Asia/Seoul",
+          "viewport": {
+            "width": 1280,
+            "height": 900,
+            "devicePixelRatio": 1
+          },
+          "productAnchors": 0,
+          "uniqueExactProductTargets": 0,
+          "scriptElements": 39
+        },
+        "rootCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "web-session-id",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "failedScripts": []
+      },
+      {
+        "stage": "before_native_scroll",
+        "atMs": 17898,
+        "scopeValid": true,
+        "dom": {
+          "readyState": "complete",
+          "visibility": "visible",
+          "hasFocus": false,
+          "language": "ko-KR",
+          "languages": [
+            "ko-KR"
+          ],
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+          "webdriver": false,
+          "timeZone": "Asia/Seoul",
+          "viewport": {
+            "width": 1280,
+            "height": 900,
+            "devicePixelRatio": 1
+          },
+          "productAnchors": 282,
+          "uniqueExactProductTargets": 94,
+          "scriptElements": 40
+        },
+        "rootCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "web-session-id",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "failedScripts": []
+      },
+      {
+        "stage": "after_native_response",
+        "atMs": 19688,
+        "scopeValid": true,
+        "dom": {
+          "readyState": "complete",
+          "visibility": "visible",
+          "hasFocus": false,
+          "language": "ko-KR",
+          "languages": [
+            "ko-KR"
+          ],
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+          "webdriver": false,
+          "timeZone": "Asia/Seoul",
+          "viewport": {
+            "width": 1280,
+            "height": 900,
+            "devicePixelRatio": 1
+          },
+          "productAnchors": 579,
+          "uniqueExactProductTargets": 193,
+          "scriptElements": 40
+        },
+        "rootCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "web-session-id",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "failedScripts": []
+      },
+      {
+        "stage": "finish",
+        "atMs": 19973,
+        "scopeValid": true,
+        "dom": {
+          "readyState": "complete",
+          "visibility": "visible",
+          "hasFocus": false,
+          "language": "ko-KR",
+          "languages": [
+            "ko-KR"
+          ],
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+          "webdriver": false,
+          "timeZone": "Asia/Seoul",
+          "viewport": {
+            "width": 1280,
+            "height": 900,
+            "devicePixelRatio": 1
+          },
+          "productAnchors": 579,
+          "uniqueExactProductTargets": 193,
+          "scriptElements": 40
+        },
+        "rootCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "web-session-id",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "failedScripts": []
+      }
+    ],
+    "screenshots": [
+      {
+        "stage": "before_native_scroll",
+        "name": "goldbox-1-before_native_scroll.jpg",
+        "atMs": 18322,
+        "sha256": "d8a92d19515666883e312601b08fb5dd1667eb37779e56e2e00a223cd8c8fc99",
+        "bytes": 106374,
+        "visuallyInspected": true
+      },
+      {
+        "stage": "after_native_response",
+        "name": "goldbox-2-after_native_response.jpg",
+        "atMs": 19957,
+        "sha256": "447aa9ebdb6cf10da764de31e2dee5d3760c84ed29802fc3778d477152be42a6",
+        "bytes": 115754,
+        "visuallyInspected": true
+      },
+      {
+        "stage": "finish",
+        "name": "goldbox-3-finish.jpg",
+        "atMs": 20393,
+        "sha256": "db09f25967708e6a91a81cd6c629ee4c81da3e94edd6c35c4de8c15ca55ecb07",
+        "bytes": 115750,
+        "visuallyInspected": false
+      }
+    ],
+    "accountCookiesImported": false,
+    "manualSourceRequests": 0,
+    "retries": 0,
+    "profileRemoved": true,
+    "ownedBrowserClosed": true,
+    "sandboxStopped": null,
+    "productionWrites": 0
+  },
+  "cloudHomeMenu": {
+    "startedAt": "2026-10-17T15:27:21.662Z",
+    "completedAt": "2026-10-17T15:27:37.340Z",
+    "region": "icn1",
+    "workerSha256": "ea15772308fa9b3efec6364632bb3b6bc5efba74ab80705c0d1175da3c0a3282",
+    "platform": "linux",
+    "node": "v24.21.0",
+    "browserVersion": "Chrome/151.0.7922.34",
+    "headless": false,
+    "sourceNavigations": 2,
+    "entryMode": "home_menu",
+    "homeStatus": 200,
+    "menuClicks": 1,
+    "documentStatus": 403,
+    "pages": [
+      {
+        "page": 1,
+        "status": 403,
+        "rows": null,
+        "nextPagePresent": null,
+        "error": null,
+        "responseSha256": null
+      }
+    ],
+    "catalogParsing": false,
+    "catalogSize": null,
+    "rows": 0,
+    "exactConsumerTargets": 0,
+    "excludedTrackingTargets": null,
+    "paginationExhausted": false,
+    "error": "COUPANG_GOLDBOX_DOCUMENT_HTTP_REJECTED",
+    "uiScrollActions": 0,
+    "observedRequestCount": 179,
+    "sourceRequests": [
+      {
+        "role": "home",
+        "resourceType": "Document",
+        "origin": "https://www.coupang.com",
+        "path": "/",
+        "method": "GET",
+        "status": 200,
+        "networkStatus": 200,
+        "protocol": "h2",
+        "sentCookieNames": [],
+        "setCookieNames": [
+          "ILOGIN",
+          "PCID",
+          "SAID",
+          "_abck",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sz",
+          "member_srl",
+          "x-coupang-accept-language",
+          "x-coupang-target-market"
+        ],
+        "blockedCookieCount": 0,
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "role": "bootstrap",
+        "resourceType": "Document",
+        "origin": "https://www.coupang.com",
+        "path": "/n-api/web-adapter/proxy",
+        "method": "GET",
+        "status": 200,
+        "networkStatus": 200,
+        "protocol": "h2",
+        "sentCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "setCookieNames": [
+          "ILOGIN",
+          "SAID",
+          "ak_bmsc",
+          "bm_s",
+          "bm_sv",
+          "member_srl"
+        ],
+        "blockedCookieCount": 0,
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      },
+      {
+        "role": "document",
+        "resourceType": "Document",
+        "origin": "https://www.coupang.com",
+        "path": "/mlp/web/mlp-landing-page",
+        "method": "GET",
+        "status": 403,
+        "networkStatus": 403,
+        "protocol": "h2",
+        "sentCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "sid",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "setCookieNames": [
+          "bm_s",
+          "bm_sz"
+        ],
+        "blockedCookieCount": 0,
+        "fromDiskCache": false,
+        "fromServiceWorker": false
+      }
+    ],
+    "snapshots": [
+      {
+        "stage": "home_ready",
+        "atMs": 12960,
+        "scopeValid": true,
+        "dom": {
+          "readyState": "complete",
+          "visibility": "visible",
+          "hasFocus": true,
+          "language": "en-US",
+          "languages": [
+            "en-US"
+          ],
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+          "webdriver": false,
+          "timeZone": "UTC",
+          "viewport": {
+            "width": 1280,
+            "height": 900,
+            "devicePixelRatio": 1
+          },
+          "productAnchors": 0,
+          "uniqueExactProductTargets": 0,
+          "scriptElements": 60
+        },
+        "rootCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "sid",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "failedScripts": []
+      },
+      {
+        "stage": "finish",
+        "atMs": 13390,
+        "scopeValid": true,
+        "dom": {
+          "readyState": "complete",
+          "visibility": "visible",
+          "hasFocus": true,
+          "language": "en-US",
+          "languages": [
+            "en-US"
+          ],
+          "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+          "webdriver": false,
+          "timeZone": "UTC",
+          "viewport": {
+            "width": 1280,
+            "height": 900,
+            "devicePixelRatio": 1
+          },
+          "productAnchors": 0,
+          "uniqueExactProductTargets": 0,
+          "scriptElements": 1
+        },
+        "rootCookieNames": [
+          "PCID",
+          "_abck",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_mi",
+          "bm_s",
+          "bm_so",
+          "bm_sv",
+          "bm_sz",
+          "sg_local_id",
+          "sid",
+          "x-coupang-accept-language",
+          "x-coupang-target-market",
+          "x-cp-s"
+        ],
+        "failedScripts": []
+      }
+    ],
+    "screenshots": [
+      {
+        "stage": "home_ready",
+        "name": "goldbox-1-home_ready.jpg",
+        "atMs": 13012,
+        "sha256": "cb0658a5c92d3979de4ed6b63a2654074828e6766d0e32bb4a73451eb8179697",
+        "bytes": 126112,
+        "visuallyInspected": true
+      },
+      {
+        "stage": "finish",
+        "name": "goldbox-2-finish.jpg",
+        "atMs": 13438,
+        "sha256": "374720175517934cf1bd22c764cd01e10af872500da18f29c8ae54d01631dea3",
+        "bytes": 20774,
+        "visuallyInspected": true
+      }
+    ],
+    "accountCookiesImported": false,
+    "manualSourceRequests": 0,
+    "retries": 0,
+    "profileRemoved": true,
+    "ownedBrowserClosed": true,
+    "sandboxStopped": true,
+    "productionWrites": 0
+  },
+  "productionReadback": {
+    "observedAt": "2026-10-17T15:26:46.996230+00:00",
+    "databaseTime": "2026-10-17T15:26:48.069674+00:00",
+    "catalog": {
+      "rows": 94,
+      "notEnded": 94,
+      "withImage": 94,
+      "withPrice": 94,
+      "affiliateLinks": 82,
+      "lastObservedAt": "2026-10-17T14:25:10.188+00:00",
+      "exactSkuTargets": 94
+    },
+    "sourceJob": {
+      "state": "blocked",
+      "nextAttemptAt": "2026-10-18T14:25:11.143484+00:00",
+      "runId": "43990a7e-491f-4ad7-a398-61a49d7faa11",
+      "status": "blocked",
+      "error": "COUPANG_GOLDBOX_WIDGET_HTTP_REJECTED",
+      "fetched": 100,
+      "upserted": 94,
+      "persisted": true
+    },
+    "latestCronReceipt": {
+      "run_id": "f3700a4e-3166-4308-98f5-cf87bb1245f3",
+      "ran_at": "2026-10-17T15:22:35.277+00:00",
+      "completed_at": "2026-10-17T15:22:35.735+00:00",
+      "source": "cron:hub-coupang-goldbox",
+      "error": "HTTP 503 COUPANG_GOLDBOX_WIDGET_HTTP_REJECTED",
+      "fetched": 0,
+      "upserted": 0,
+      "persisted": false
+    },
+    "probesWroteCatalog": false
+  },
+  "observations": [
+    "Cloud direct navigation returns HTTP 403 before the catalog parser; screenshot shows Access Denied.",
+    "Both direct runs start with no Cookie header. Local HTML and native scroll continuation both return 200.",
+    "Local browser naturally creates PCID and web-session-id and sends them with native widget XHR; no cookie import was needed.",
+    "Cloud direct response also issues cookies and they are sent on a subsequent browser script request; complete cookie omission is not observed.",
+    "Cloud homepage and native bootstrap iframe return 200. Clicking the visible Goldbox menu sends 14 naturally issued cookie names including PCID, but the Goldbox document returns 403.",
+    "The homepage run also observes unrelated /m/r and other auxiliary 403s; those are not classified as Goldbox catalog responses.",
+    "Local page uses scrolling, not a page-2 button or a reconstructed fetch; exact product DOM targets grow from 94 to 193.",
+    "The Access Denied page prints http in its message, but the actual traced navigation is https over h2; no scheme downgrade is observed."
+  ],
+  "notEstablished": [
+    "egress_ip_is_the_sole_cause",
+    "missing_account_cookies_are_the_cause",
+    "locale_or_timezone_causes_the_rejection",
+    "source_catalog_is_empty",
+    "vercel_full_collection_is_fixed"
+  ],
+  "decisions": {
+    "deployUnprovenChanges": false,
+    "clearProductionHold": false,
+    "uploadLocalCatalog": false,
+    "importLocalAccountCookies": false,
+    "productionCronInvocations": 0,
+    "claimFixed": false
+  },
+  "inputSha256": {
+    "goldbox-browser-path-cloud.json": "8e3df0f929511602abcd146a7b17145df65980e58694a3de9efb51dd33de3819",
+    "goldbox-browser-path-local.json": "f9ec80e4c8fda4466bb4e9840565073dc0c9be39dd7bd9b9b7539d2d74a0c06b",
+    "goldbox-browser-path-cloudhome.json": "e12d5d5a96dba08f9c7fc834c99db0ba2a63b151778ac28607bbf0378f4c42ca",
+    "retail-db-management-goldbox-browser-proof.json": "1aaafdf1756375988084f3ed143e7253a131411539d8fe4789c3db7c22504a10"
+  }
+}

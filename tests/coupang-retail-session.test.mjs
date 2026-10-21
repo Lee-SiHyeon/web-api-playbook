@@ -48,7 +48,7 @@ test('fresh bootstrap accepts observed bm_mi absence but still rejects missing r
   const state=createCoupangRetailState(cookies);
   assert.equal(state.session.cookieJar.cookies.length,11);
   assert.equal(state.session.cookieJar.cookies.some(c=>c.key==='bm_mi'),false);
-  for(const name of RETAIL_COOKIE_NAMES.filter(name=>name!=='bm_mi'))
+  for(const name of ['PCID','x-cp-s'])
     assert.throws(()=>createCoupangRetailState(cookies.filter(c=>c.name!==name)),{code:'COUPANG_RETAIL_IMPORT_INCOMPLETE'});
   assert.throws(()=>createCoupangRetailState([...cookies,cookies[0]]),{code:'COUPANG_RETAIL_IMPORT_INCOMPLETE'});
 });
@@ -95,32 +95,33 @@ test('foreign state, expired bootstrap and positive login-cookie changes are rej
     'set-cookie':'ILOGIN=UNEXPECTED_AUTH_SECRET; Domain=.coupang.com; Path=/; Max-Age=3600'}})});
   assert.equal(result.code,'COUPANG_RETAIL_RESPONSE_COOKIE_SCOPE');assert.equal(JSON.stringify(result).includes('UNEXPECTED_AUTH_SECRET'),false);
   assert.equal(result.receipt.status,200);assert.equal(result.receipt.contentType,'text/x-component');
-  assert.deepEqual(result.receipt.rejectedResponseCookies,[{name:'ILOGIN',domain:'coupang.com',path:'/',deleted:false,reason:'name_not_allowlisted'}]);
+  assert.deepEqual(result.receipt.rejectedResponseCookies,[{name:'ILOGIN',domain:'coupang.com',path:'/',deleted:false,reason:'account_cookie_unsupported'}]);
   assert.equal(store.read(COUPANG_RETAIL_STORE).includes('UNEXPECTED_AUTH_SECRET'),false);
 });
 
-test('HTML response classification takes precedence over an unapproved same-origin cookie and does not persist it',async t=>{
+test('HTML is inspected and all anonymous same-origin cookies survive without a live-success claim',async t=>{
   const {store}=await setup(t);
   const result=await searchCoupangRetail('bluetooth speaker',{store,fetchImpl:async()=>new Response('<!doctype html><title>Challenge</title>',{status:200,headers:{
     'content-type':'text/html','set-cookie':'bm_sc=UNTRUSTED_SENTINEL; Domain=.coupang.com; Path=/; Max-Age=3600'}})});
-  assert.equal(result.code,'COUPANG_RETAIL_CONTENT_TYPE');assert.equal(result.ok,false);assert.equal(result.receipt.status,200);
+  assert.equal(result.code,'COUPANG_RETAIL_CHALLENGE');assert.equal(result.ok,false);assert.equal(result.receipt.status,200);
   assert.equal(result.receipt.contentType,'text/html');assert.equal(result.receipt.accessDeniedTitle,false);
-  assert.deepEqual(result.receipt.rejectedResponseCookies,[{name:'bm_sc',domain:'coupang.com',path:'/',deleted:false,reason:'name_not_allowlisted'}]);
+  assert.equal(result.receipt.rejectedResponseCookies,undefined);
+  assert.equal(result.receipt.responseAnalysis.htmlInspected,true);
+  assert.equal(result.receipt.responseAnalysis.productCount,null);
   assert.equal(result.states.live_replay,false);assert.equal(result.states.credential_propagated,'injected_transport_test');
-  assert.equal(store.read(COUPANG_RETAIL_STORE).includes('UNTRUSTED_SENTINEL'),false);
+  assert.equal(store.read(COUPANG_RETAIL_STORE).includes('UNTRUSTED_SENTINEL'),true);
   assert.equal(JSON.stringify(result).includes('UNTRUSTED_SENTINEL'),false);
 });
 
-test('allowlisted response cookie at non-root path is rejected and removed before protected persistence',async t=>{
+test('URL-applicable non-root cookie paths are preserved as distinct cookie identities',async t=>{
   const {store}=await setup(t);
   const result=await searchCoupangRetail('bluetooth speaker',{store,fetchImpl:async()=>new Response(frame,{status:200,headers:{
     'content-type':'text/x-component','set-cookie':'bm_sv=PATH_SCOPE_SENTINEL; Domain=.coupang.com; Path=/np; Max-Age=3600'}})});
-  assert.equal(result.code,'COUPANG_RETAIL_RESPONSE_COOKIE_SCOPE');assert.equal(result.ok,false);
-  assert.deepEqual(result.receipt.rejectedResponseCookies,[{name:'bm_sv',domain:'coupang.com',path:'out_of_scope',deleted:false,reason:'cookie_scope'}]);
+  assert.equal(result.ok,true);assert.equal(result.receipt.rejectedResponseCookies,undefined);
   const state=JSON.parse(store.read(COUPANG_RETAIL_STORE));
-  assert.equal(state.session.cookieJar.cookies.some(c=>c.key==='bm_sv'&&c.path==='/np'),false);
+  assert.equal(state.session.cookieJar.cookies.some(c=>c.key==='bm_sv'&&c.path==='/np'),true);
   assert.equal(state.session.cookieJar.cookies.some(c=>c.key==='bm_sv'&&c.path==='/'),true);
-  assert.equal(JSON.stringify(state).includes('PATH_SCOPE_SENTINEL'),false);
+  assert.equal(JSON.stringify(state).includes('PATH_SCOPE_SENTINEL'),true);
   assert.equal(JSON.stringify(result).includes('PATH_SCOPE_SENTINEL'),false);
 });
 

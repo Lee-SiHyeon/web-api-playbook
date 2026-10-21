@@ -1,5 +1,8 @@
 # 쿠팡 HTTP 수집·파트너스 반복 진단
 
+최신 전체 브라우저 진단은 [2026-10-18 native 세션·초기화 재검증](coupang-native-session-2026-10-18.md)을 함께 읽는다.
+프로필 유지/탭 복원/현재 토큰 등록/검색 Document/정렬 RSC/다음 페이지를 구분하며, 현재 403은 미해결이다.
+
 최근 디버깅에서 사용한 상품·오퍼 파서, 와우 가격 검증기, 배송비 검증, 골드박스·반짝세일 수집, 파트너스 링크 발급을 [affiliate 서비스팩](../service-packs/affiliate/README.md)에 포함했다. 개인 프로젝트 경로나 별도 checkout 없이 저장소 루트의 보호 인증 런타임과 함께 실행한다. 로그인 정보는 배포하지 않는다.
 
 ## 설치와 오프라인 회귀검증
@@ -34,6 +37,24 @@ cd service-packs/affiliate
 각 CLI의 옵션과 입력은 구현 파일의 parser를 따른다. 소비자·와우 세션과 파트너스 세션은 다른 서비스 범위다. 파트너스 인증 성공을 소비자 와우 자격의 증거로 사용하지 않는다.
 
 ## 가격·배송비·행사 판정
+
+공개 골드박스의 브라우저/HTML 진단에서는 [2026-10-17 관측 사례](../case-studies/coupang.md)를 함께 읽는다. 문서·목록·보조 요청의 HTTP 상태를 분리하고, 위젯 XHR이 없다는 이유로 HTML Flight 안의 첫 페이지를 누락하지 않는다. Flight는 UTF-8 바이트 길이 프레임을 포함할 수 있으므로 줄 단위 JSON 추출만으로 충분하지 않다. 실제 다음 `dataUrl`만 제한적으로 순회하며, 렌더링·파싱·순회·DB 저장·운영 화면을 각각 검증한다.
+
+수동 요청과 앱의 실제 pagination 계약이 다르면 공개 앱 코드와 native UI 동작부터 확인한다. 새 헤더·토큰을 추측해서 추가하지 않는다. 2026-10-17 Vercel 관측에서는 세 문맥 헤더 값이 일치했고 실제 UI의 다음 페이지도 403이었다. 이런 경우 앞선 정상 페이지의 정확한 상품만 부분 저장하되 `blocked/error`, 페이지 소진 실패와 다음 허용 시각을 보존한다. 부분 저장 성공을 전체 수집 성공으로 바꾸거나 실패 receipt의 `persisted=true`만으로 정상 판정하지 않는다.
+
+### 로컬 성공과 클라우드 실패의 비교 순서
+
+1. **운영 경로가 브라우저라면 Vercel 브라우저부터 비교한다.** 실제 문서 진입 → 자연 쿠키 발급 → 스크립트/DOM 초기화 → 실제 메뉴 클릭/스크롤 → 사이트가 보낸 XHR을 기록한 다음 로컬의 같은 브라우저 흐름과 대조한다. 브라우저 문제를 먼저 HTTP reader로 바꿔 시험하지 않는다. 로컬 `bootstrap → JSON → dataUrl`과 클라우드 `HTML Flight → native UI XHR`은 첫 요청부터 다르다. 같은 브라우저 버전·화면 크기·새 프로필·동일 flow/parser를 고정하고 번들 SHA를 남긴다. OS별 실행기 차이가 필요하면 정확한 차이만 별도로 검증·공개한다. HTTP 번들 비교는 그 뒤의 별도 증거다.
+2. **첫 분기점을 찾는다.** 같은 application-level 요청의 method/path/query key/header name/cookie name과 각 HTTP 상태를 기록한다. bootstrap 403이면 상품 JSON 파서는 실행되지 않았다. 이 상태의 0행은 원천 상품이 0개라는 뜻이 아니다. opaque URL 값·쿠키 값·원시 계정 응답은 비교 보고서에 넣지 않는다.
+3. **런타임 차이는 숨기지 않는다.** worker hash가 같아도 OS, Node patch, 네트워크, TLS/HTTP, 기본 헤더, 서버의 판정 상태까지 같다는 뜻은 아니다. Node·Undici·OpenSSL·platform·arch와 proxy 환경변수의 존재 여부만 남긴다. 환경에 따른 응답 차이만으로 IP 차단이나 빠진 쿠키 하나를 원인으로 확정하지 않는다.
+4. **관측과 운영을 분리한다.** 읽기 전용 cloud probe는 운영 Cron/DB 성공이 아니다. 실패한 HTTP reader를 배포하거나 기존 보류를 해제하지 않고, 현재 동작하는 부분 reader와 다른 수집기를 유지한다. 실제 변경 후 전체 순회·정확한 SKU·durable receipt·DB·UI를 별도로 입증한다.
+5. **다른 인증을 대용하지 않는다.** Partners web session의 `ready`와 공식 Open API credential의 configured 상태는 다르다. 공식 API도 현재 공개 골드박스 전체와 같은 범위를 제공한다고 가정하지 않는다. 권한과 목록 범위를 확인한 뒤 수집 경로로 채택한다.
+
+2026-10-17 23:44~23:45 KST 동일 HTTP 번들 비교는 로컬 `200 → 200 → 200`, Vercel 첫 bootstrap `403`이었다. 두 환경의 Undici/OpenSSL 버전은 같았지만 OS와 Node patch는 달랐다. [보존한 비교 영수증](../sanitizedverification/coupang-runtime-parity-2026-10-17.json)의 `evidenceComparisonVerified=true`는 **비교 자료의 정합성**이며 `fullCollectionResolved=false`를 대체하지 않는다. 브라우저 native Axios의 Accept는 기존 HTTP reader와 같았으므로, 더 오래된 수동 fetch의 Accept 차이를 현재 실패의 원인으로 재사용하지 않는다.
+
+2026-10-18 00:19~00:27 KST에는 [실제 브라우저 비교 영수증](../sanitizedverification/coupang-browser-parity-2026-10-18.json)을 추가했다. Vercel 직접 진입은 첫 문서 403, 로컬은 HTML 100행 → native scroll XHR 100행 → EOF였다. 별도 Vercel **홈 200 → 자연 쿠키 발급/초기화 → 골드박스 메뉴 실제 클릭**도 실행했다. 이때 골드박스 문서 요청에는 PCID를 포함한 14종 쿠키가 실제 전송됐지만 403이었다. 따라서 이 실행은 쿠키를 전혀 발급·전송하지 않은 문제가 아니고, 두 번째 페이지 파싱 전에 거절된 것이다. 홈의 `/m/r`·미분류 보조 요청 거절과 골드박스 문서 거절은 별도로 기록한다.
+
+Chrome 151과 1280×900 화면, flow/parser는 같았지만 OS·언어·시간대·네트워크·실행 시각은 달랐다. Windows 실행기는 소스 요청 이전에 Chrome 최초 실행 화면을 생략하는 `--no-first-run`만 달랐고, 그 한 변경을 제외한 번들 바이트 일치를 검증했다. 이를 완전히 같은 실행 환경이나 IP 원인 확정으로 과장하지 않는다. `Access Denied` 화면의 설명문에 `http`가 있어도 실제 CDP 요청은 HTTPS/h2였다. 초기 탭·CDP 시작 실패는 원천 403과 별도로 보존하고, 실제 source 요청 증거가 없는 진단을 수집 실패로 세지 않는다.
 
 - 상품 URL의 `productId`, `itemId`, `vendorItemId` 세 값을 고정한다. 첫 옵션이나 같은 상품의 다른 판매 옵션으로 바꾸지 않는다.
 - `offer-list` 공개 일반가, 골드박스·반짝세일의 표시 행사 가격, 공개 와우 표시가, 현재 계정에 적용된 회원 가격을 별도 값과 출처로 보존한다. 회원 자격을 검증하지 못한 표시가는 회원 적용가로 승격하지 않는다.

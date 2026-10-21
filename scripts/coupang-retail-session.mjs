@@ -11,7 +11,10 @@ try {
     if(!query||args.length!==(out?2:1)||args.some(a=>!a.startsWith('--query=')&&!a.startsWith('--out=')))fail();
     result=await searchCoupangRetail(query,{forceRenew:command==='renew'});
     if(out)await writeFile(out,JSON.stringify(result,null,2)+'\n',{flag:'wx'});
-    console.log(JSON.stringify({ok:result.ok,code:result.code,status:result.receipt.status,products:result.data?.products.length??0,
+    const analysis=result.receipt.responseAnalysis;
+    console.log(JSON.stringify({ok:result.ok,code:result.code,status:result.receipt.status??null,
+      products:analysis?.dataValidated===true?analysis.productCount:null,
+      parseStatus:analysis?.parseStatus??'not_attempted',htmlInspected:analysis?.htmlInspected??false,
       signatureRenewed:result.renewal.verifiedByRead,oldSignatureExpired:result.renewal.oldExpiredAtStart,
       cookieRotation:result.renewal.cookieRotationObserved,browserUsed:result.browserUsed,states:result.states,output:out}));
     if(!result.ok)process.exitCode=2;

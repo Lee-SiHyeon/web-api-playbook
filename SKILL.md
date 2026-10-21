@@ -51,6 +51,12 @@ pending OAuth callback after exact endpoint/state validation; never archive code
 or replace native credentials with repository files. This package does not ship
 cloud login/deployment adapters.
 
+When deployment or collectors time out, compare per-service database health with
+project status before changing credentials or parsers. Do not skip schema gates,
+call a deployment ACK collection success, or count a different successful source
+as proof for the failed operation. Preserve invocation, persistence and catalog
+readback as separate evidence.
+
 For official creator tools and guides, use
 [source capabilities](references/official-source-capabilities.md). Keep public
 documents, protected workspaces, documented APIs, legacy replacements and real
@@ -227,6 +233,8 @@ Tool interfaces: [discovery tools](references/discovery-tools.md). Connection fa
 - Use [runtime modules](references/runtime-modules.md) for protected storage, transport, session locks and journals. Authorized persistence is supported: Windows DPAPI CurrentUser locally; explicit memory/stdin integration elsewhere. Copying this repository does not copy a login.
 - Treat server cookie rotation, action-token reissuance, expired-session renewal, password login and process restart as separate capabilities. Never downgrade an existing protected credential provider to plaintext for convenience.
 - Use bounded size/time limits and distinct authentication, permission, throttling, transport and schema errors. A 200 login page is a failure. A 403 with unknown cause stays unknown.
+- A MIME mismatch is not an empty result. Inspect bounded HTML for DOM candidates, embedded JSON/Flight and explicit login/denial evidence without executing scripts. Record `parseAttempted`, `parseStatus`, and nullable `productCount`; only validated data can supply a measured count. Never initialize an unmeasured count to zero. Preserve a bounded failed response in authorized encrypted storage when needed for offline diagnosis; keep raw bodies out of Git, stdout and ordinary evidence. See [the Coupang counterexample](references/coupang-retail-vercel-2026-10-17.md).
+- Distinguish all URL-applicable cookies from a historical cookie-name subset, pre-request wire cookies from the post-response jar, and exact cookie propagation from successful business data. Preserve observed request inputs separately from locally derived inputs. A new response or an aged session cannot retroactively classify a discarded earlier body.
 - Read [client reliability](references/client-reliability.md) and [write reconciliation](references/write-and-reconcile.md) before mutations. Reserve output and record intent before sending. A timeout leaves the outcome unknown; no automatic retry of writes.
 
 ## Check and report the actual boundary

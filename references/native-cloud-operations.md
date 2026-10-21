@@ -29,6 +29,24 @@ CLI 종료코드만 검사하지 않는다. 2026-10-17 Windows의 Vercel CLI 62.
 
 ## 공식 setup과 기존 설정 보존
 
+### 배포와 DB 장애를 수집 실패에서 분리
+
+- 프로젝트 목록의 `ACTIVE_HEALTHY`와 DB/REST/Auth/Storage의 실제 service health는
+  별도다. 2026-10-17에는 전자는 정상인데 네 서비스가 모두 unhealthy였고, 배포의
+  schema preflight와 여러 collector가 동시에 timeout/503/504로 실패했다.
+- 같은 실행기의 구조화된 오류 stdout와 stderr를 모두 분류한다. `Initialising login role...`
+  한 줄만 보이면 자격 부재로 단정하지 않는다. 실제 오류는 `DbConfigLoginRoleStatusError`
+  / HTTP 544 / DB 연결 timeout일 수 있다. 출력 전 토큰·원문 query·개인 데이터를 제거한다.
+- DB 계약 검사를 끄거나 `DATA_MODE=demo`로 바꿔 배포 성공을 만들지 않는다. 읽기 전용
+  service health/SQL/metrics를 대조하고, 확인된 대상의 제한적인 운영 복구 후 다시 검사한다.
+  restart ACK는 복구가 아니다. 상태와 실제 SQL/REST가 돌아왔는지 별도로 읽는다.
+- `vercel env run`도 production의 Secret 값을 내보내지 못할 수 있다. 임의 `.env` 작성이나
+  legacy key 재활성화로 해결하지 않는다. 이미 승인된 서비스의 native credential provider와
+  공식 API를 사용하는 경우에도 정확한 프로젝트·operation을 고정하고 자격은 process memory에만
+  두며 파일/로그/커맨드라인으로 내보내지 않는다. 다른 계정·credential target은 탐색하지 않는다.
+- 첫 실패 deployment, 복구 작업, 재배포, production SHA, Cron invocation, DB receipt 및
+  catalog readback을 각각 남긴다. 성공한 Partners/feed 수집을 실패한 일반몰 검색과 합치지 않는다.
+
 Vercel 작업은 현재 [get-started.md](https://vercel.com/get-started.md)를 먼저 읽는다.
 기존 CLI·전역 guidance·MCP entry를 조사하고, 필요한 항목만 추가한다. 최초 전역 setup만으로
 새 프로젝트를 만들지 않는다. 이미 연결된 팀·프로젝트·Git branch를 우선 읽는다.
