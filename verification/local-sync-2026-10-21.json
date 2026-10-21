@@ -1,0 +1,139 @@
+{
+  "schema": "web-api-local-sync-verification-v1",
+  "checkedAt": "2026-10-21T04:56:08.0945047Z",
+  "sourceCommit": "2d6d0eeccee2bf0aeb36f809e0de10c30faf5273",
+  "verificationMode": "offline_clean_checkout",
+  "environment": {
+    "os": "Windows",
+    "architecture": "x64",
+    "node": "24.22.0",
+    "npm": "11.19.1",
+    "python": "3.13.15",
+    "pythonSelection": "Explicit WEB_API_OLIVEYOUNG_PYTHON and PYTHON paths to an installed interpreter",
+    "naverBrowserFixture": "Playwright Chromium in an isolated headless test context"
+  },
+  "installation": {
+    "source": "Fresh local Git clone of committed files, without ignored runtime files or node_modules",
+    "command": "npm ci --ignore-scripts --no-audit --no-fund",
+    "roots": [
+      ".",
+      "service-packs/affiliate",
+      "service-packs/naver",
+      "service-packs/ontology",
+      "service-packs/social-x",
+      "service-packs/tistory"
+    ],
+    "allExitCodes": 0
+  },
+  "checks": {
+    "doctor": true,
+    "syntheticHar": true,
+    "savedHtmlDiscovery": true,
+    "operationDescribe": true,
+    "operationTools": true,
+    "serviceListAll": true,
+    "readmeRelativeLinksAndAnchors": true,
+    "gitDiffCheck": true
+  },
+  "suites": [
+    {
+      "suite": "root",
+      "testedCommit": "2d6d0eeccee2bf0aeb36f809e0de10c30faf5273",
+      "relevantPackUnchangedAtSummaryCommit": true,
+      "command": "node --test --test-concurrency=4 \"tests/*.test.mjs\"",
+      "tests": 1266,
+      "passed": 1263,
+      "failed": 0,
+      "skipped": 3,
+      "exitCode": 0,
+      "localLogSha256": "ba8b16ed3dfb479177298cab879785fac416e7e674dd94c5d632f60ac169d4fc"
+    },
+    {
+      "suite": "naver",
+      "testedCommit": "2d6d0eeccee2bf0aeb36f809e0de10c30faf5273",
+      "relevantPackUnchangedAtSummaryCommit": true,
+      "command": "npm test -- --test-concurrency=4",
+      "tests": 721,
+      "passed": 721,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "localLogSha256": "9a1cb1c90b92a288104204f1ea279c1f4b718493615beea85046180d0232c003"
+    },
+    {
+      "suite": "affiliate",
+      "testedCommit": "ffeeef1a205084a555e805e39da5bc1f5c0f492a",
+      "relevantPackUnchangedAtSummaryCommit": true,
+      "command": "npm test --workspaces",
+      "tests": 323,
+      "passed": 323,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "localLogSha256": "dd6258b7eee60e2db057bde9fc7e883b4b492a85fab87c2485a08f176edcfba7"
+    },
+    {
+      "suite": "ontology",
+      "testedCommit": "ffeeef1a205084a555e805e39da5bc1f5c0f492a",
+      "relevantPackUnchangedAtSummaryCommit": true,
+      "command": "npm test",
+      "tests": 51,
+      "passed": 51,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "localLogSha256": "2ae269cdc800b67f9d35a12e3d4bbf01b137e86fb11ebf0a0e0435315cc783a6"
+    },
+    {
+      "suite": "social-x",
+      "testedCommit": "ffeeef1a205084a555e805e39da5bc1f5c0f492a",
+      "relevantPackUnchangedAtSummaryCommit": true,
+      "command": "npm test",
+      "tests": 21,
+      "passed": 21,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "localLogSha256": "2e878b0ba0f894f7a0c45a46390911ed6628293af1ed35620bc18199f5485703"
+    },
+    {
+      "suite": "tistory",
+      "testedCommit": "a1c9cd7d961f012d7613748c9501b1d4c8dd7885",
+      "relevantPackUnchangedAtSummaryCommit": true,
+      "command": "npm test",
+      "tests": 41,
+      "passed": 41,
+      "failed": 0,
+      "skipped": 0,
+      "exitCode": 0,
+      "localLogSha256": "85211962adf4a1a41c2986dda84e74948b7b07cd831fbea51e5c4bc6ed761080"
+    }
+  ],
+  "totals": {
+    "tests": 2423,
+    "passed": 2420,
+    "failed": 0,
+    "skipped": 3
+  },
+  "resolvedFindings": [
+    "Document Python prerequisites for the full regression suite while keeping offline quickstart Node-only",
+    "Remove personal absolute Kakao import; retain explicit optional Meta integration and portable sibling discovery",
+    "Check every declared runtime dependency in doctor",
+    "Exclude known raw captures and root scratch files from Git and skill installation",
+    "Resolve packaged travel-adapter registry without changing original layout precedence",
+    "Use production acquisition budget for successful lock tests; retain contention deadlines and stale-age safeguards",
+    "Await async environment-session contract in tests and verify scope failures do not mutate state",
+    "Bind synthetic Jev fixture to its final revision and retain post-review mutation rejection",
+    "Precheck existing publisher receipt before credential access while preserving atomic wx reservation"
+  ],
+  "boundaries": {
+    "authenticatedServiceActionsPerformed": false,
+    "externalPublishingPerformed": false,
+    "liveServiceAvailabilityVerified": false,
+    "repositoryVisibilityChanged": false,
+    "licenseChanged": false,
+    "githubActionsResult": "Local tests only; latest remote pre-sync workflow could not start due account billing/spending-limit annotation",
+    "rawCaptures": "Remain local and ignored; excluded from commits and installation",
+    "historicalSecretAuditPerformed": false
+  }
+}
