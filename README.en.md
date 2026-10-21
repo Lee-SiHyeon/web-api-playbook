@@ -6,6 +6,9 @@
 [![Offline Node checks](https://github.com/Lee-SiHyeon/web-api-playbook/actions/workflows/offline-checks.yml/badge.svg?branch=main)](https://github.com/Lee-SiHyeon/web-api-playbook/actions/workflows/offline-checks.yml)
 [![Node.js >=24](https://img.shields.io/badge/node-%3E%3D24-339933?logo=node.js&logoColor=white)](#requirements)
 
+[PRs](https://github.com/Lee-SiHyeon/web-api-playbook/pulls) for new features and improvements, and [Discussions](https://github.com/Lee-SiHyeon/web-api-playbook/discussions), are always welcome.
+Including the expected behavior and reproduction steps or examples helps us review your contribution.
+
 **Turn observed browser requests into repeatable, independently verified HTTP operations.**
 
 Web API Playbook combines request-discovery tools, scoped sessions, service adapters, and evidence-driven workflows. Observe a request, record its contract, reproduce it outside the browser, and verify what actually happened—not just whether the server returned HTTP 200.

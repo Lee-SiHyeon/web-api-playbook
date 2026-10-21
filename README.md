@@ -6,6 +6,9 @@
 [![Offline Node checks](https://github.com/Lee-SiHyeon/web-api-playbook/actions/workflows/offline-checks.yml/badge.svg?branch=main)](https://github.com/Lee-SiHyeon/web-api-playbook/actions/workflows/offline-checks.yml)
 [![Node.js >=24](https://img.shields.io/badge/node-%3E%3D24-339933?logo=node.js&logoColor=white)](#1-설치)
 
+기능 추가·개선 [PR](https://github.com/Lee-SiHyeon/web-api-playbook/pulls)과 [Discussions](https://github.com/Lee-SiHyeon/web-api-playbook/discussions)는 언제든 환영합니다.
+기대하는 동작과 재현 절차·예시를 함께 남겨 주시면 검토에 도움이 됩니다.
+
 브라우저에서 관측한 요청을 **로그인·세션 재사용이 가능한 독립 HTTP 작업**으로 바꾸는 개인 작업 도구와 노하우 모음입니다. 기존 스킬, 세션 분석, 실패 원인, 인증 저장·갱신, 재귀 탐색, 발행·업로드 구현을 한 저장소에 담았습니다.
 
 **바로 시작:** [설치](#1-설치) → [로그인 없이 도구 실행](#2-로그인-없이-도구부터-실행) → [서비스 선택](#3-기존-서비스를-사용할-때) → [새 서비스 전환](#4-새-서비스를-http로-전환할-때).
