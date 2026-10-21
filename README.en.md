@@ -106,11 +106,23 @@ The file backend accepts `PROTECTED_STORE_KEY` (a base64-encoded 32-byte key) or
 
 ## Tests and evidence
 
+The offline Quick Start above only needs Node.js. The **full root regression suite (`npm test`) also requires a Python 3 interpreter** for the Olive Young worker tests. Those offline tests use the Python standard library and mock sessions; the live HTTP dependency `curl_cffi` is not required for these tests.
+
 ```sh
 npm run test:operations
 npm run test:services
 npm test
 ```
+
+The tests select Python from `WEB_API_OLIVEYOUNG_PYTHON`, then the checkout's `.venv-oliveyoung`, then `python3` on PATH. A fresh Windows checkout does not include that virtual environment, and a Microsoft Store execution alias is not a working interpreter. In PowerShell, point to an installed Python executable:
+
+```powershell
+$env:WEB_API_OLIVEYOUNG_PYTHON = 'C:/path/to/python.exe'
+& $env:WEB_API_OLIVEYOUNG_PYTHON --version
+npm test
+```
+
+Replace the placeholder path with your installed interpreter. On macOS/Linux, a working `python3` on PATH needs no override. Service-pack tests and browser runtimes have their own prerequisites; follow each pack's guide separately.
 
 The [offline CI workflow](.github/workflows/offline-checks.yml) runs installation, `doctor`, root regression tests, and the MyRealTrip pack compatibility test on Ubuntu with Node.js 24. Its badge reports the workflow's actual status; it is not a live-service health indicator. Windows-native storage and account-authenticated operations require separate verification.
 

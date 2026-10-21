@@ -24,6 +24,7 @@
 - Naver/Tistory pack README: 통합 저장소의 폴더 기준으로 설치 명령을 변경. 원래 hub README는 historical banner를 추가.
 - Naver `research/trend-radar/build-vertical-brief.mjs`와 `tests/travel-vertical-profile.test.mjs` (2026-10-21): 여행 adapter registry의 원래 인접 app 경로를 우선 유지하고, 파일이 없을 때 패키징된 `service-packs/affiliate/apps/affiliate-api-hub/references/travel-adapters.json`으로 fallback. 두 배치와 잘못된 JSON의 오류 보존을 합성 fixture로 검사하며 원본 source hash는 변경하지 않음.
 - Tistory `recipes/build-post-with-media.mjs`: 실제 이식 작업의 순수 변환 함수를 추가하고 절대 import를 pack 상대 경로로 변경. 네트워크 발행이나 작업 manifest는 포함하지 않음.
+- Tistory `tests/lock.test.mjs` (2026-10-21): 부하가 있는 Windows에서 200 ms acquisition 예산이 정상 stale recovery 도중 만료되는 현상을 확인. 성공 경로 테스트만 기존 production 기본값인 30초로 조정하고, 짧은 busy timeout·2분 malformed lock 보존 조건은 유지. 만료된 recovery가 callback을 실행하지 않는 회귀 테스트를 추가했으며 production lock 알고리즘은 변경하지 않음.
 - OliveYoung: 원본의 미커밋 adapter/script/docs/contract/helper 및 기존 test 코드 보존; 전체 저장소에 커밋됐었다고 표시하지 않음.
 - Threads: XHR 모듈의 vault import를 독립 helper로 교체, cached receipt 라벨을 provider 중립으로 변경. 새 helper는 root의 protected store를 쓰며 Windows는 DPAPI, 다른 OS는 명시적 process memory. 서버 로그인 자동화로 확장하지 않음.
 - 원본의 `node_modules`, raw capture, runtime 결과, 브라우저 프로필, credential 파일은 복사하지 않음. 기존 service pack test 소스는 보존했으며 이 패키징에서 실행하지 않음.

@@ -390,6 +390,20 @@ node scripts/playbook.mjs mcp --profile=work/profile-v2.json
 
 패키징 과정의 확인 내역은 [verification](verification/README.md)에 기록합니다. 과거 서비스 라이브 결과와 이 저장소의 로컬 설치 확인은 구분합니다. 다른 OS에서 실행했다는 근거가 없으면 지원 설계만으로 실행 검증 완료라고 부르지 않습니다.
 
+### 전체 회귀 검사 준비
+
+위의 로그인 없는 합성 예제는 Node.js만으로 실행합니다. 반면 루트의 **`npm test` 전체 회귀에는 Python 3 인터프리터도 필요**합니다. Olive Young worker 테스트는 Python 표준 라이브러리와 모의 세션을 사용하므로, 이 오프라인 검사에 라이브 HTTP용 `curl_cffi` 설치는 필요하지 않습니다.
+
+테스트는 `WEB_API_OLIVEYOUNG_PYTHON` → 저장소의 `.venv-oliveyoung` → PATH의 `python3` 순으로 인터프리터를 선택합니다. 새 Windows checkout에는 로컬 venv가 없으며 Microsoft Store 실행 별칭만으로는 충분하지 않습니다. 실제 설치된 Python 경로를 지정하세요:
+
+```powershell
+$env:WEB_API_OLIVEYOUNG_PYTHON = 'C:/path/to/python.exe'
+& $env:WEB_API_OLIVEYOUNG_PYTHON --version
+npm test
+```
+
+`C:/path/to/python.exe`는 설치한 Python 실행 파일의 실제 경로로 바꿉니다. macOS/Linux에서 실제 `python3`가 PATH에 있으면 별도 지정 없이 `npm test`를 실행할 수 있습니다. 서비스 pack의 테스트·브라우저 런타임 요구사항은 각 pack 안내를 별도로 따릅니다.
+
 원본에 있던 회귀 검사 코드는 service pack 안에 보존했습니다. 설치 명령은 이를 실행하지 않습니다. 필요한 범위가 정해지면 각 pack의 기존 명령을 이용할 수 있습니다.
 
 현재 [NOTICE](NOTICE.md)는 개인 비공개 재사용을 전제로 하며, `package.json`은 `UNLICENSED`입니다. 공개 접근 가능 여부와 오픈소스 사용 허가는 별개입니다. 출처·재배포·재라이선스 경계는 NOTICE와 [provenance](provenance/README.md)를 확인하세요.

@@ -1,10 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, open, readFile, rm, stat, utimes, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, open, readFile, realpath, rm, stat, utimes, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { withSessionLock } from '../lib/lock.mjs';
+
+// Positive acquisitions exercise filesystem safety, not a sub-second I/O SLA.
+// Keep the production 30 s budget on loaded Windows CI; contention tests below retain short deadlines.
+const ACQUIRE_TIMEOUT_MS = 30_000;
 
 async function tempRoot() {
   return mkdtemp(path.join(os.tmpdir(), 'tistory-lock-'));
@@ -25,7 +29,7 @@ test('concurrent callbacks serialize through an exclusive protected lock file', 
     maximum = Math.max(maximum, active);
     await new Promise(resolve => setTimeout(resolve, 20));
     active--;
-  }, { lockPath, timeoutMs: 1000, pollMs: 2 });
+  }, { lockPath, timeoutMs: ACQUIRE_TIMEOUT_MS, pollMs: 2 });
 
   await Promise.all([run(), run(), run()]);
   assert.equal(maximum, 1);
@@ -42,7 +46,7 @@ test('a valid lock owned by a confirmed-dead process is recovered', async t => {
 
   await withSessionLock(async () => { entered = true; }, {
     lockPath,
-    timeoutMs: 200,
+    timeoutMs: ACQUIRE_TIMEOUT_MS,
     pollMs: 2,
     processAlive: pid => { aliveChecks++; assert.equal(pid, 999_999_991); return false; },
   });
@@ -84,7 +88,25 @@ test('old malformed or empty lock files recover only after two minutes', async t
 
   const old = new Date(Date.now() - 121_000);
   await utimes(lockPath, old, old);
-  await withSessionLock(async () => {}, { lockPath, timeoutMs: 200, pollMs: 2 });
+  await withSessionLock(async () => {}, { lockPath, timeoutMs: ACQUIRE_TIMEOUT_MS, pollMs: 2 });
+  await assert.rejects(stat(lockPath), { code: 'ENOENT' });
+});
+
+test('stale recovery honors an expired acquisition deadline without entering the callback', async t => {
+  const parent = await realpath(os.tmpdir());
+  const root = await realpath(await mkdtemp(path.join(parent, 'tistory-lock-')));
+  t.after(async () => {
+    if (path.dirname(root) !== parent || !path.basename(root).startsWith('tistory-lock-')) throw Error('TEST_CLEANUP_SCOPE');
+    await rm(root, { recursive: true, force: true });
+  });
+  const lockPath = path.join(root, 'tistory.lock');
+  await writeFile(lockPath, '');
+  const old = new Date(Date.now() - 121_000);
+  await utimes(lockPath, old, old);
+  await assert.rejects(withSessionLock(async () => assert.fail('expired acquisition must not run callback'), {
+    lockPath, timeoutMs: 0, pollMs: 2,
+  }), { code: 'TISTORY_SESSION_BUSY' });
+  // Recovery can finish after the deadline; BUSY does not imply the stale file was left behind.
   await assert.rejects(stat(lockPath), { code: 'ENOENT' });
 });
 
