@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
 import { VIDEO_MAX_BYTES } from "./video-upload.mjs";
-import { readFile, open, stat } from "node:fs/promises";
+import { readFile, open, stat, lstat } from "node:fs/promises";
 import path from "node:path";
 import { NaverEditorClient } from "./editor-client.mjs";
 import { environmentSession, loadProtectedSessionPersistence } from "./environment-session.mjs";
@@ -38,6 +38,14 @@ try {
   if (!commands.includes(options.command)) throw new Error("COMMAND_REQUIRED");
   if (Object.keys(options).some(k => !["command", "blog-id", "log-no", "output", "journal", "job", "document", "file", "metadata"].includes(k)))
     throw new Error("UNKNOWN_OPTION");
+  // Reject existing receipts before opening credential providers. Do not create
+  // a receipt yet: missing authentication must still leave no output artifact.
+  if (options.output) {
+    try {
+      await lstat(path.resolve(options.output));
+      throw Object.assign(new Error('EEXIST'), { code: 'EEXIST' });
+    } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
   const requiresJob = ["preview-update", "lint-model", "prepare-update", "update", "reconcile", "save-draft", "verify-private-update", "reconcile-draft", "prepare-create", "prepare-create-http", "create", "reconcile-create", "prepare-tags", "update-tags", "reconcile-tags"].includes(
     options.command,
   );
@@ -73,7 +81,8 @@ try {
     ),
   });
   // Reserve receipt destination before any network mutation, after credential
-  // validation. An existing output can never cause a write followed by EEXIST.
+  // validation. Keep wx even after the precheck to reject a concurrent creator.
+  // An existing output can never cause a network write followed by EEXIST.
   if (options.output) outputHandle = await open(path.resolve(options.output), "wx", 0o600);
   let result;
   if (['prepare-create', 'create'].includes(options.command)) {

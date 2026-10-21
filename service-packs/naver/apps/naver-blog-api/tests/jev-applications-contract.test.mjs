@@ -21,6 +21,20 @@ test('applications article supports distinct primary cases with source hashes, a
   const gate=await evaluatePublisherJobGate(job,{baseDir:directory,now:NOW});
   assert.deepEqual(gate.failedChecks,[],JSON.stringify(gate.details));
   assert.equal(gate.details.researchGate.checks.applicationsFinancialLimits,true);
+  assert.equal(gate.details.jevQuality.passed,true);
+});
+for(const [name,mutate,expected] of [
+  ['document',b=>b.document.blocks.push({type:'paragraph',claimClass:'guidance',text:'최종 검토 이후에 추가한 안내 문장입니다.'}),'documentRevisionMatches'],
+  ['claim ledger',b=>b.claimLedger.claims[0].text+=' 최종 검토 이후 수정됨.','claimLedgerRevisionMatches'],
+]) test(`applications gate rejects a ${name} revision made after its synthetic quality review`,async t=>{
+  const {directory,job}=await fixture(t);
+  mutate(job.publicationBundle);
+  // Rebind ordinary fixture artifacts without issuing a new Jev review.
+  bind(job);
+  const gate=await evaluatePublisherJobGate(job,{baseDir:directory,now:NOW});
+  assert.equal(gate.passed,false);
+  assert.equal(gate.checks.jevQualityPassed,false);
+  assert.ok(gate.details.jevQuality.failedChecks.includes(expected),gate.details.jevQuality.failedChecks.join(','));
 });
 for(const [name,mutate,expected] of [
   ['only one application',b=>b.research.applications.pop(),'applicationsPresent'],

@@ -2,7 +2,9 @@ import {writeFile} from 'node:fs/promises';
 import path from 'node:path';
 import {aiResearchFixture} from './ai-research-fixture.mjs';
 import {NOW,bind} from './publication-fixture.mjs';
-import {sha256} from '../../scripts/gates/publication-document.mjs';
+import {documentFingerprint,sha256} from '../../scripts/gates/publication-document.mjs';
+import {fingerprint} from '../../../../packages/contracts/src/index.mjs';
+import {buildJevQualityState} from '../../workflows/republish/jev-quality.mjs';
 import {JEV_APPLICATIONS_SCOPE,JEV_APPLICATION_SOURCES} from '../../scripts/gates/jev-applications-contract.mjs';
 
 export async function jevApplicationsFixture(directory,now=NOW) {
@@ -38,5 +40,10 @@ export async function jevApplicationsFixture(directory,now=NOW) {
   bundle.document.blocks.push(...claims.map(c=>({type:'paragraph',claimClass:'factual',claimIds:[c.claimId],text:c.text})),
     ...research.sources.filter(s=>['T_REPO','B_REPO'].includes(s.id)).map(s=>({type:'link',display:'label',label:`프로젝트 ${s.projectId} 원문`,url:s.publicUrl})));
   job.researchSnapshot=structuredClone(research);
+  // Synthetic test-only review covers the final applications fixture, not the
+  // introduction revision inherited before adding project sources and claims.
+  bundle.jevQuality.documentFingerprint=documentFingerprint(bundle.document);
+  bundle.jevQuality.claimLedgerFingerprint=fingerprint(ledger);
+  bundle.jevQuality.requestFingerprint=fingerprint(buildJevQualityState(bundle.document,ledger,research.claimBindings,research.sources));
   return bind(job);
 }
