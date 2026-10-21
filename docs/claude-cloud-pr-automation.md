@@ -12,7 +12,10 @@
 - **Task-level event allowlist:** the saved task works only on `opened`, `synchronize`, `reopened`, or `ready_for_review`. Other matching actions may start a session that immediately exits; they are not filtered out at the trigger level.
 - **Other triggers:** no schedule or API triggers configured.
 - **Built-in auto-fix/follow-up monitor:** off. The saved task separately permits the bounded draft-fix PR workflow below; there is no automatic merge.
-- **End-to-end event verification: PENDING.** Activation and configuration were verified, but a GitHub event starting and completing the intended review has not yet been verified.
+- **Native webhook delivery verified:** opening [PR #5](https://github.com/Lee-SiHyeon/web-api-playbook/pull/5) started run `session_0165e2E6gynz4QrjM3UN5prj` at `05:29:36Z`, identifying PR #5 and exact head `a4274e8ebc953f046b88f6f3df7a5077f2a93c23`. Repository cloning succeeded.
+- **First-run bootstrap failure:** the optional environment setup script exited with status 1 before the agent started (zero turns). Tests and the PR result comment did not run. This proves event delivery, not completed review or test success.
+- **Bootstrap adjustment:** the optional environment setup script was removed through the UI. The saved task still requires Node 24+ and Python 3; runtime provisioning/validation now happens in the task rather than a fail-before-agent setup script.
+- **Retry and complete-review verification: PENDING.** The next push to the open PR's branch will exercise `synchronize`; successful agent startup, tests, and result-comment delivery remain unverified.
 
 The exact saved-task policy is in the sibling [claude-pr-assistant-prompt.txt](claude-pr-assistant-prompt.txt). Routine, environment, repository connection, and trigger settings live remotely: cloning this repository does **not** install or enable them. This native Claude Cloud routine is independent of GitHub Actions; it does not require an Actions workflow or runner.
 
