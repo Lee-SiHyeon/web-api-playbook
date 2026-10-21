@@ -1,5 +1,5 @@
 // node kakao-fill.mjs <targetId> : types the DPAPI Tistory/Kakao identity into the open accounts.kakao.com login form (never printed)
-import { ProtectedStore } from 'file:///C:/Users/sihyeon/dev/web-api-playbook/lib/protected-store.mjs';
+import { ProtectedStore } from '../lib/protected-store.mjs';
 const [id] = process.argv.slice(2);
 const raw = new ProtectedStore().read(process.env.KAKAO_STORE_KEY || 'tistory-kakao-login');
 if (!raw) { console.log(JSON.stringify({ ok: false, code: 'IDENTITY_MISSING' })); process.exit(2); }

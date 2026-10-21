@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "serviceId": "example",
+  "allowedOrigins": ["https://example.invalid"],
+  "operations": {
+    "search": {
+      "origin": "https://example.invalid",
+      "method": "GET",
+      "path": "/api/items",
+      "semantics": "read",
+      "description": "Search items using an observed page input",
+      "evidence": "SYNTHETIC EXAMPLE: replace with an observed request and response contract",
+      "inputs": {
+        "query": {
+          "q": { "type": "string", "required": true, "minLength": 1 },
+          "page": { "type": "integer", "default": 1, "minimum": 1 }
+        }
+      },
+      "expected": { "status": 200, "mime": "application/json" },
+      "response": { "format": "json", "requiredPointers": ["/items", "/nextPage"] },
+      "outputSchema": {
+        "type": "object",
+        "required": ["items"],
+        "properties": { "items": { "type": "array", "items": { "type": "object", "required": ["id"] } } }
+      }
+    },
+    "detail": {
+      "origin": "https://example.invalid",
+      "method": "GET",
+      "path": "/api/items/{id}",
+      "semantics": "read",
+      "evidence": "SYNTHETIC EXAMPLE: replace with an observed detail contract",
+      "inputs": { "path": { "id": { "type": "string", "required": true } } },
+      "expected": { "status": 200, "mime": "application/json" },
+      "response": { "format": "json", "requiredPointers": ["/id"] }
+    },
+    "html-list": {
+      "origin": "https://example.invalid",
+      "method": "GET",
+      "path": "/catalog",
+      "semantics": "read",
+      "evidence": "SYNTHETIC EXAMPLE: replace selectors with fields from an observed page",
+      "expected": { "status": 200, "mime": "text/html" },
+      "response": {
+        "format": "html",
+        "html": {
+          "items": "article.item",
+          "fields": {
+            "title": { "selector": "h2", "required": true },
+            "url": { "selector": "a", "attribute": "href", "absoluteUrl": true }
+          },
+          "page": { "next_url": { "selector": "a.next", "attribute": "href", "absoluteUrl": true } },
+          "limit": 100
+        }
+      }
+    }
+  },
+  "health": {
+    "checks": [
+      { "operation": "search", "input": { "query": { "q": "example" } } },
+      { "operation": "detail", "input": { "path": { "id": { "$result": { "operation": "search", "pointer": "/items/0/id" } } } } }
+    ]
+  }
+}

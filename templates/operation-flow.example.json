@@ -1,0 +1,6 @@
+{
+  "steps": [
+    { "id": "search", "operation": "search", "input": { "query": { "q": "example" } } },
+    { "id": "detail", "operation": "detail", "input": { "path": { "id": { "$result": { "step": "search", "pointer": "/items/0/id" } } } } }
+  ]
+}

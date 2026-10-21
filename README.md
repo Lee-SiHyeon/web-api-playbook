@@ -1,5 +1,11 @@
 # XHR → API-only
 
+**한국어** | [English](README.en.md)
+
+[![GitHub stars](https://img.shields.io/github/stars/Lee-SiHyeon/web-api-playbook?style=social)](https://github.com/Lee-SiHyeon/web-api-playbook/stargazers)
+[![Offline Node checks](https://github.com/Lee-SiHyeon/web-api-playbook/actions/workflows/offline-checks.yml/badge.svg?branch=main)](https://github.com/Lee-SiHyeon/web-api-playbook/actions/workflows/offline-checks.yml)
+[![Node.js >=24](https://img.shields.io/badge/node-%3E%3D24-339933?logo=node.js&logoColor=white)](#1-설치)
+
 브라우저에서 관측한 요청을 **로그인·세션 재사용이 가능한 독립 HTTP 작업**으로 바꾸는 개인 작업 도구와 노하우 모음입니다. 기존 스킬, 세션 분석, 실패 원인, 인증 저장·갱신, 재귀 탐색, 발행·업로드 구현을 한 저장소에 담았습니다.
 
 **바로 시작:** [설치](#1-설치) → [로그인 없이 도구 실행](#2-로그인-없이-도구부터-실행) → [서비스 선택](#3-기존-서비스를-사용할-때) → [새 서비스 전환](#4-새-서비스를-http로-전환할-때).
@@ -56,7 +62,7 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 | [사례](case-studies/README.md) | 무엇이 됐고 어디서 실패했는지, 다른 서비스에 적용할 교훈 |
 | [출처](provenance/README.md) | 원본 저장소 commit, 미커밋 스냅샷, 파일 SHA-256, 이식 변경 |
 
-서비스 구현은 저장소 안에 포함된 **고정 버전 사본**입니다. 예전 작업 폴더나 다른 개인 레포를 다시 받아야 코드를 읽을 수 있는 구조가 아닙니다. 각 서비스의 설치 의존성과 실행 경계는 해당 README를 따릅니다.
+서비스 pack은 저장소 안에 포함된 **고정 버전 사본**입니다. 예전 작업 폴더나 다른 개인 레포를 다시 받아야 pack 코드를 읽을 수 있는 구조가 아닙니다. 각 서비스의 설치 의존성과 실행 경계는 해당 README를 따릅니다. 일부 별도 실행기에는 명시적인 선택형 외부 연동이 있으며, Meta 세션 helper의 `ACO_ROOT` 조건은 [이식 안내](references/portability.md#선택형-외부-연동)를 참고하세요.
 
 크리에이터의 실제 공개 데이터는 [HTTP 데이터 계약과 검증 범위](references/creator-public-data.md)를 참고하세요. 기존 Google RSS·Threads native client와 별도 웹 프로젝트의 TikTok·Meta client, 부분 수집·공급자 오류·미연결 권한을 구분합니다. [creator 체크리스트](checklists/README.md)는 실제 재생 기록과 automatic gate의 남은 부분도 별도로 표시합니다.
 
@@ -65,7 +71,7 @@ root 회귀와 MyRealTrip pack 호환성 검사를 실행합니다. 서비스 �
 ### 공통 요구사항
 
 - Node.js **24 이상**, npm, Git. 브라우저는 공통 도구 실행에 필요하지 않습니다.
-- 이 비공개 저장소를 읽을 수 있는 GitHub 계정.
+- 저장소가 비공개인 동안에는 읽기 권한이 있는 GitHub 계정.
 - Windows 보호 저장에는 Windows PowerShell 5.1 이상의 `powershell.exe`와 현재 Windows 사용자 프로필이 필요합니다.
 
 ```powershell
@@ -75,7 +81,7 @@ npm ci --ignore-scripts
 npm run doctor
 ```
 
-macOS/Linux도 공통 Node 도구 설치 명령은 같습니다. `doctor`의 `dpapiAvailable:false`는 그 OS에서 예상되는 결과입니다. 지속 저장은 별도 OS 보관함 공급자를 연결해야 하며, 공통 요청기는 `--session-stdin`으로 메모리 세션을 받을 수 있습니다. Windows DPAPI 파일을 다른 OS나 사용자에게 복사해 재사용하지 않습니다.
+macOS/Linux도 공통 Node 도구 설치 명령은 같습니다. `doctor`의 `dpapiAvailable:false`는 그 OS에서 예상되는 결과입니다. 공통 보호 저장소는 `PROTECTED_STORE_PROVIDER=file`로 AES-256-GCM 파일 backend를 명시적으로 선택할 수 있으며, 일회성 요청은 `--session-stdin`으로 메모리 세션을 받을 수 있습니다. 파일 backend는 OS Keychain/Secret Service가 아니며, 암호화 키와 저장 디렉터리를 별도로 보호해야 합니다. Windows DPAPI 파일을 다른 OS나 사용자에게 복사해 재사용하지 않습니다. 서비스 pack별 provider 지원은 별도입니다.
 
 `doctor`는 런타임·파일·의존성을 확인합니다. 사이트에 로그인하거나 실제 서비스 세션을 검증하지 않습니다. 환경별 경계는 [이식 안내](references/portability.md)를 보세요.
 
@@ -290,7 +296,7 @@ node scripts/har-to-contracts.mjs "--input=C:/private-runtime/capture.har" --out
 - `operations`: method/path, `semantics:read|write`, 인증 필요 여부, 입력 필드 이름, 관측 근거.
 - `expected`: HTTP 상태, JSON MIME, 결과·스키마·소유자 확인.
 
-공통 CLI는 **JSON 요청/응답**을 대상으로 합니다. HTML 로그인, multipart 업로드, GraphQL 동적 입력, 서명 발급, 바이너리 다운로드는 관측한 서비스 adapter를 작성하거나 기존 pack을 사용합니다. 일반 profile은 쿠키·비밀번호·토큰을 query/body 입력 필드로 받지 않습니다.
+기존 `scripts/request.mjs`의 v1 공통 CLI는 **JSON 요청/응답**을 대상으로 합니다. 새 v2 실행기는 typed 입력, JSON/form 요청, HTML·SSR 추출을 지원합니다([공통 기능 실행기](references/operation-runtime.md)). HTML 로그인, multipart 업로드, 서명 발급, 바이너리 다운로드는 기존 서비스 adapter/pack의 범위입니다. 일반 v1 profile은 쿠키·비밀번호·토큰을 query/body 입력 필드로 받지 않습니다.
 
 ### 4-3. 쿠키·토큰 보호 저장 및 재사용
 
@@ -315,7 +321,7 @@ node scripts/request.mjs --profile=work/profile.json --operation=items --input=t
 
 기본 저장 위치는 사용자 홈의 `.config/xhr-to-api-only/credentials`입니다. 별도 위치는 `--store-dir=...`로 지정하며, 같은 이름을 공유하는 실행기는 같은 경로를 써야 잠금이 동작합니다. core와 서비스 pack의 저장 형식은 자동 호환으로 간주하지 않습니다.
 
-macOS/Linux 또는 일회성 runner에서는 승인된 provider의 JSON을 pipe로 받아 `--session-stdin`을 사용합니다. 형식은 위 session-input과 같으며 `schemaVersion:1`이 필요합니다. 이 모드의 쿠키 회전은 해당 프로세스 메모리에만 유지됩니다. 재시작 후 갱신값 재사용은 adapter가 OS 보관함에 저장하도록 구현해야 합니다.
+macOS/Linux 또는 일회성 runner에서는 승인된 provider의 JSON을 pipe로 받아 `--session-stdin`을 사용합니다. 형식은 위 session-input과 같으며 `schemaVersion:1`이 필요합니다. 이 모드의 쿠키 회전은 해당 프로세스 메모리에만 유지됩니다. 공통 보호 저장소에서 재시작 후 재사용할 때는 `PROTECTED_STORE_PROVIDER=file`을 명시하거나 별도 보관함 adapter를 연결합니다. 파일 backend의 키는 `PROTECTED_STORE_KEY`(32바이트 base64) 또는 `PROTECTED_STORE_KEY_FILE`로 지정할 수 있습니다. 미지정 시 사용자 홈의 `.config/xhr-to-api-only/protected-store.key`에 키 파일을 생성하며, OS 보관함에 결합된 암호화는 아닙니다. 키·봉인 파일은 소스 저장소 밖에 보관합니다.
 
 ### 4-4. 쓰기와 대사
 
@@ -326,6 +332,29 @@ node scripts/request.mjs --profile=work/profile.json --operation=update-item --i
 ```
 
 쓰기 ACK만으로 완료 처리하지 않습니다. 정상 ACK는 `acknowledged_requires_readback`, 결과를 받지 못했으면 `WRITE_RECONCILIATION_REQUIRED`입니다. **같은 키를 재전송하거나 저널을 지워 재시도하지 마세요.** 대상 조회/관리 목록 등 독립 readback을 수행하고 [저널 절차](references/write-and-reconcile.md)로 결과를 대조합니다.
+
+### 4-5. 공통 기능 명세·CLI·MCP·재개
+
+기존 v1 profile과 서비스 adapter를 보존하면서 v2 기능 명세에서 typed CLI/MCP 입력을 함께 만듭니다.
+HAR·HTML·번들 분석은 오프라인 `prepare`로 묶고, 실제 읽기 검증은 `check`로 분리합니다.
+
+```powershell
+npm run playbook -- describe --profile=templates/profile-v2.example.json
+npm run playbook -- tools --profile=templates/profile-v2.example.json
+npm run test:operations
+node scripts/playbook.mjs list --all
+node scripts/playbook.mjs run --service=ably --operation=categories
+# MCP 클라이언트의 command/args에는 npm 대신 node와 이 경로를 직접 지정합니다.
+node scripts/playbook.mjs mcp --profile=work/profile-v2.json
+```
+
+템플릿은 합성 예시이며 라이브 서비스가 아닙니다. 실제 계약으로 교체한 뒤 `run`, `check`,
+`flow`, `collect`를 사용하세요. `collect --checkpoint=...`는 실행 입력·커서·결과를 저장해
+실제 재개하며, 기존 `frontier`의 관측 기록과는 별개입니다. 준비 후보는 실행 검증으로 승격하지 않습니다.
+상세 명세, adapter 연결과 범위는 [공통 기능 실행기](references/operation-runtime.md)에 있습니다.
+기존 서비스를 profile 작성 없이 바로 호출하는 방법과 현재 named read 점검은
+[서비스 공통 CLI](references/service-cli.md)를 따릅니다. `npm run services`로 연결/미연결 범위를,
+`npm run services:verify -- --progress --output=work/services-current.json`으로 실제 읽기 결과를 확인합니다.
 
 ## 5. 오래 쓰기 위한 기준
 
@@ -363,4 +392,4 @@ node scripts/request.mjs --profile=work/profile.json --operation=update-item --i
 
 원본에 있던 회귀 검사 코드는 service pack 안에 보존했습니다. 설치 명령은 이를 실행하지 않습니다. 필요한 범위가 정해지면 각 pack의 기존 명령을 이용할 수 있습니다.
 
-개인 비공개 사용을 전제로 하며 [NOTICE](NOTICE.md)의 출처와 라이선스 경계를 확인하세요.
+현재 [NOTICE](NOTICE.md)는 개인 비공개 재사용을 전제로 하며, `package.json`은 `UNLICENSED`입니다. 공개 접근 가능 여부와 오픈소스 사용 허가는 별개입니다. 출처·재배포·재라이선스 경계는 NOTICE와 [provenance](provenance/README.md)를 확인하세요.

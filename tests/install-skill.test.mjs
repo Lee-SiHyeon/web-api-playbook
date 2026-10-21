@@ -16,13 +16,19 @@ test('installer excludes known session/provider artifacts case-insensitively wit
     }
     await writeFile(path.join(source,'package.json'),JSON.stringify({type:'module',version:'fixture'}));
     const forbidden=['auth.json','nested/Auth.JSON','cookies.json','session.backup.json','token.json',
-      'nested/test.sealed','.venv/marker.txt','.venv-oliveyoung/marker.txt','.AUTH/marker.txt','.env.production'];
-    for (const file of forbidden) await writeFile(path.join(source,file),'SYNTHETIC_ONLY');
-    await writeFile(path.join(source,'.env.example'),'EXAMPLE=');
+      'nested/test.sealed','.venv/marker.txt','.venv-oliveyoung/marker.txt','.AUTH/marker.txt','.env.production',
+      'research/DoTs/capture.json','research/GROKBOT/request.json','.tmp-verify-mrt.mjs','.TMP-output/marker.json'];
+    const allowed=['.env.example','research/README.md','research/other/notes.md',
+      'service-packs/demo/research/dots/notes.md','service-packs/demo/research/grokbot/notes.md',
+      'nested/.tmp-allowed.mjs'];
+    for (const file of [...forbidden,...allowed]) {
+      await mkdir(path.dirname(path.join(source,file)),{recursive:true});
+      await writeFile(path.join(source,file),'SYNTHETIC_ONLY');
+    }
     const receipt=JSON.parse(execFileSync(process.execPath,[path.join(source,'scripts/install-skill.mjs'),'--target='+target],
       {encoding:'utf8',windowsHide:true}));
     for (const file of forbidden) await assert.rejects(access(path.join(target,file)),{code:'ENOENT'},file);
-    await access(path.join(target,'.env.example'));
+    for (const file of allowed) assert.equal(await readFile(path.join(target,file),'utf8'),'SYNTHETIC_ONLY',file);
     assert.equal(receipt.installed,true);
     assert.equal(receipt.credentialsCopied,null);
     assert.equal(receipt.credentialExclusion,'known_paths_only_not_content_verified');

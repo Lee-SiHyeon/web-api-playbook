@@ -37,6 +37,12 @@ historical proof and current implementation-hash freshness separately.
 
 For commands and installation, start with [README](README.md). For service-specific code and limits, open [service-packs](service-packs/README.md). Historical success is scoped to its date, account, operation and revision; it is not a current session check.
 
+For a shared typed CLI/MCP interface, use [the operation runtime](references/operation-runtime.md).
+Extend a v2 profile or bind an existing adapter rather than replacing working packs.
+Offline `prepare` produces candidates, `check` replays declared reads, and `flow`/`collect`
+resume executable checkpoints; the discovery frontier is not an executable checkpoint.
+Use `npm run test:operations` for the common runtime's synthetic regression tests.
+
 For existing Vercel/Supabase native CLI credentials, follow
 [native cloud operations](references/native-cloud-operations.md). Preserve provider
 storage and unrelated user-wide settings. CLI identity, MCP OAuth, team/project

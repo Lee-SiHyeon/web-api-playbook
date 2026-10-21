@@ -7,6 +7,8 @@ import { options, fail, safeError } from '../lib/cli.mjs';
 
 const source = path.resolve(fileURLToPath(new URL('../', import.meta.url)));
 const excluded = new Set(['.git', 'node_modules', '.venv', 'venv', '.auth', '.vercel', '.runtime', 'runtime', 'work', 'runs', 'workflow-runs', '__pycache__', 'credentials', 'private', 'secrets', 'raw-captures']);
+// These working-checkout captures are not distribution assets. Other research docs remain distributable.
+const excludedRootPaths = new Set(['research/dots', 'research/grokbot']);
 const forbidden = file => /\.(?:dpapi|sealed|har|log|pem|key|pfx|p12|db|sqlite)$/i.test(file)
   || /^(?:\.?auth|\.?credentials|cookies|session|storage-?state|token|tokens)(?:[.-].*)?\.json$/i.test(file)
   || /^\.env(?:\.|$)/i.test(file) && file.toLowerCase() !== '.env.example';
@@ -25,10 +27,12 @@ try {
   let copied = 0;
   async function copy(dir, dest) {
     for (const entry of await readdir(dir, { withFileTypes: true })) {
+      const from = path.join(dir, entry.name), to = path.join(dest, entry.name);
+      const relativePath = path.relative(source, from).split(path.sep).join('/').toLowerCase();
       if (excluded.has(entry.name.toLowerCase()) || forbidden(entry.name)
+        || excludedRootPaths.has(relativePath) || dir === source && /^\.tmp-/i.test(entry.name)
         || entry.isDirectory() && /^\.?venv(?:[._-].*)?$/i.test(entry.name)) continue;
       if (entry.isSymbolicLink()) fail('SYMLINK_NOT_DISTRIBUTABLE');
-      const from = path.join(dir, entry.name), to = path.join(dest, entry.name);
       if (entry.isDirectory()) { await mkdir(to); await copy(from, to); }
       else if (entry.isFile()) { await copyFile(from, to, constants.COPYFILE_EXCL); copied++; }
     }

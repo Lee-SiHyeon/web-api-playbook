@@ -2,7 +2,7 @@
 
 ## 이식 단위
 
-공통 도구는 Node 24 ESM과 잠긴 npm 의존성(`parse5`, `tough-cookie`)을 사용합니다. 실행 경로는 `import.meta.url` 또는 명시적으로 받은 입력 경로를 기준으로 해석합니다. 원래 사용자의 `Documents` 폴더나 monorepo 설치에 의존하지 않습니다.
+공통 도구는 Node 24 ESM과 `package-lock.json`에 고정된 npm 의존성을 사용합니다. 실행 경로는 `import.meta.url` 또는 명시적으로 받은 입력 경로를 기준으로 해석합니다. 공통 도구는 원래 사용자의 `Documents` 폴더나 monorepo 설치에 의존하지 않습니다. `doctor`는 `package.json`의 전체 runtime 의존성을 확인하지만 모든 선택형 서비스 연동의 설치나 현재 로그인까지 검증하지는 않습니다.
 
 서비스 pack은 고정 시점의 별도 제품 코드입니다. 루트 의존성을 설치했다고 모든 pack 의존성이 설치되는 것은 아닙니다. 각 pack 루트의 `npm ci --ignore-scripts`를 따르세요. 네이버의 headless SDK가 필요한 작업은 해당 README에 따라 별도 브라우저 런타임도 준비해야 합니다.
 
@@ -11,6 +11,7 @@
 | HAR/HTML 정규화, frontier | Node 24 | Node 24 설계; 이 패키징에서 실행 여부는 verification 확인 |
 | origin 제한 HTTP, JSON profile | Node 24 | Node 24 설계 |
 | DPAPI 지속 저장 | 현재 Windows 사용자 | 사용할 수 없음 |
+| opt-in AES-256-GCM 파일 저장 | 명시적 `provider:'file'` | `PROTECTED_STORE_PROVIDER=file`; 실제 OS별 검증 범위는 별도 확인 |
 | stdin 메모리 세션 | 지원 | 지원 설계 |
 | journal/lock | 로컬 파일시스템 | 로컬 파일시스템 설계 |
 | Windows PowerShell 기반 pack 런처 | pack별 조건 | 대체 provider/런처 필요 |
@@ -21,7 +22,11 @@ DPAPI CurrentUser 저장은 실행한 Windows 사용자 컨텍스트에 묶입�
 
 저장 위치를 변경할 때는 소비자와 공급자가 같은 `--store-dir`를 사용해야 합니다. 사용자 홈 기반 경로이므로 사용자 이름이 달라도 자동으로 계산됩니다. 보호 저장소와 그 잠금 폴더는 소스 저장소 밖에 두세요. 같은 PC의 작업 프로세스끼리만 lock을 공유하며 네트워크 분산 잠금을 제공하지 않습니다.
 
-macOS/Linux의 core request는 provider가 stdin으로 JSON을 전달할 수 있습니다. 반복 실행 및 회전된 값의 재사용에는 OS Keychain/Secret Service 등 기존 보관함 adapter가 필요합니다. 이 저장소에는 해당 OS의 지속 저장 구현을 추가했다고 주장하지 않습니다. `ProtectedStore({provider:'memory'})`는 같은 프로세스 동안만 유지됩니다.
+macOS/Linux의 core request는 provider가 stdin으로 JSON을 전달할 수 있습니다. 반복 실행 및 회전된 값의 재사용에는 `PROTECTED_STORE_PROVIDER=file` 또는 `ProtectedStore({provider:'file'})`로 AES-256-GCM 파일 저장을 명시적으로 선택할 수 있습니다. 키는 `PROTECTED_STORE_KEY` 또는 `PROTECTED_STORE_KEY_FILE`로 공급하며, 기본 키 파일은 `~/.config/xhr-to-api-only/protected-store.key`입니다. 이는 OS Keychain/Secret Service 연동이 아니며 키와 암호화 파일은 모두 Git 밖에서 보호해야 합니다. `ProtectedStore({provider:'memory'})`는 같은 프로세스 동안만 유지됩니다. 구현 존재와 특정 OS에서의 실제 검증은 구분합니다.
+
+### 선택형 외부 연동
+
+`scripts/meta-session-from-canary.mjs`는 포함된 공통 도구와 달리 별도 `affiliate-content-operations` checkout의 `apps/naver-blog-api/scripts/meta-auth-session.mjs`를 사용하는 선택형 연동입니다. `ACO_ROOT`에 해당 checkout을 지정하거나 두 저장소를 같은 부모 폴더에 배치합니다. helper가 없거나 필요한 export가 없으면 브라우저·인증 작업 전에 `META_SESSION_HELPER_UNAVAILABLE` 또는 `META_SESSION_HELPER_INVALID`로 종료합니다. 이 연동을 사용할 수 없는 환경에서도 공통 도구와 오프라인 예제는 독립적으로 사용할 수 있습니다.
 
 ## 인코딩과 프로세스
 

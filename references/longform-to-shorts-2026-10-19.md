@@ -75,6 +75,7 @@ First use: the kwak-bangkok kit is on the longform-render v3 branch, commit 3882
 - **Login:** log in as the personal account first. Then 전환 → lifehack_ailab, enter the password (DPAPI `instagram-login`), then the email code from Gmail ("Verify your profile"; use the newest code), then 정보 저장.
   - A brand-new account first shows a consent sheet with 4 [필수] toggles; switch them on and press 동의함.
 - **Session:** `node scripts/meta-session-from-canary.mjs` stores it in DPAPI `instagram-auth-session`, verified with the owner read `/api/v1/accounts/edit/web_form_data/`.
+  - This is an optional external integration, not a bundled session adapter. Set `ACO_ROOT` to an `affiliate-content-operations` checkout, or keep that checkout beside this repository. Missing helper dependencies are reported before browser or credential operations; see [portability](portability.md#선택형-외부-연동).
   - In ACO `meta-auth-session.mjs`, the Instagram `expectedOwner` is now `META_INSTAGRAM_OWNER || 'lifehack_ailab'`. Threads stays `lifehack__ailab`.
 - **Posting:** `node scripts/instagram-web-post.mjs caption.txt <files…> [--ratio=4:5] [--ai]`.
   - Several images make a carousel; a single MP4 makes a Reel (9:16 crop).

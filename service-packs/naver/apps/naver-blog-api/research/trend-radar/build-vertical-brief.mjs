@@ -4,7 +4,15 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const naverRoot = path.resolve(currentDir, '..', '..');
-const affiliateRoot = path.resolve(naverRoot, '..', 'affiliate-api-hub');
+
+export async function loadTravelAdapterRegistry(naverDirectory = naverRoot) {
+  const upstream = path.resolve(naverDirectory, '..', 'affiliate-api-hub', 'references', 'travel-adapters.json');
+  try { return JSON.parse(await readFile(upstream, 'utf8')); }
+  catch (error) { if (error.code !== 'ENOENT') throw error; }
+  // Packaged snapshots separate the original sibling apps into service-packs/naver and service-packs/affiliate.
+  const packaged = path.resolve(naverDirectory, '../../..', 'affiliate', 'apps', 'affiliate-api-hub', 'references', 'travel-adapters.json');
+  return JSON.parse(await readFile(packaged, 'utf8'));
+}
 
 function normalize(value) {
   return String(value || '').toLowerCase().replace(/\s+/g, '');
@@ -163,9 +171,7 @@ export async function buildFromFiles(verticalId = 'travel') {
     await readFile(path.join(currentDir, 'verticals', `${verticalId}.json`), 'utf8'),
   );
   const trend = JSON.parse(await readFile(path.join(currentDir, 'latest.json'), 'utf8'));
-  const adapters = JSON.parse(
-    await readFile(path.join(affiliateRoot, 'references', 'travel-adapters.json'), 'utf8'),
-  );
+  const adapters = await loadTravelAdapterRegistry();
   const brief = buildVerticalBrief(profile, trend, adapters);
   const outputDir = path.join(currentDir, 'vertical-latest');
   await mkdir(outputDir, { recursive: true });

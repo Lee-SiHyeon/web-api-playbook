@@ -1,13 +1,24 @@
 // Capture the logged-in Instagram web session from the automation Canary (CDP 9333) into DPAPI via
-// affiliate-content-operations meta-auth-session storeMetaSession('instagram', …). Nothing secret is printed.
+// OPTIONAL external affiliate-content-operations integration: meta-auth-session storeMetaSession('instagram', …).
+// Set ACO_ROOT to that checkout, or place it beside this repository. Nothing secret is printed.
 //   node scripts/meta-session-from-canary.mjs [<instagramTabId>]
 // The owner check uses the observed owner read GET /api/v1/accounts/edit/web_form_data/ (headers captured from the page's
 // own request). 2026-10-19: @lifehack_ailab (new account; old lifehack__ailab IG deactivated).
 // Login path that worked: instagram.com as the personal Meta account → 전환 → lifehack_ailab → password →
 // email code (Gmail, "Verify your profile") → 정보 저장.
-import { pathToFileURL } from 'node:url';
-const ACO = process.env.ACO_ROOT || 'C:/Users/sihyeon/dev/affiliate-content-operations';
-const { storeMetaSession, loadMetaSession } = await import(pathToFileURL(`${ACO}/apps/naver-blog-api/scripts/meta-auth-session.mjs`).href);
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+const ACO = process.env.ACO_ROOT || fileURLToPath(new URL('../../affiliate-content-operations/', import.meta.url));
+const failSetup = (code) => {
+  console.error(JSON.stringify({ ok: false, code, integration: 'affiliate-content-operations',
+    hint: 'Set ACO_ROOT to a checkout containing apps/naver-blog-api/scripts/meta-auth-session.mjs with storeMetaSession and loadMetaSession exports; this optional integration is not included in web-api-playbook.' }));
+  process.exit(2);
+};
+let sessionHelper;
+try { sessionHelper = await import(pathToFileURL(path.resolve(ACO, 'apps/naver-blog-api/scripts/meta-auth-session.mjs')).href); }
+catch { failSetup('META_SESSION_HELPER_UNAVAILABLE'); }
+const { storeMetaSession, loadMetaSession } = sessionHelper;
+if (typeof storeMetaSession !== 'function' || typeof loadMetaSession !== 'function') failSetup('META_SESSION_HELPER_INVALID');
 const CDP = process.env.META_CDP || 'http://127.0.0.1:9333';
 const list = await (await fetch(`${CDP}/json/list`)).json();
 const t = list.find((v) => v.id === process.argv[2]) || list.find((v) => v.type === 'page' && /^https:\/\/www\.instagram\.com\//.test(v.url));

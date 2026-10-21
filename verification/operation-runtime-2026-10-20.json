@@ -1,0 +1,106 @@
+{
+  "schema": "operation-runtime-verification-v1",
+  "verifiedAt": "2026-10-19T15:22:22.949Z",
+  "platform": "win32",
+  "node": "v24.22.0",
+  "scope": "Common additive operation runtime; not migration or current live verification of every existing service adapter",
+  "implementation": [
+    "v1/v2 typed registry and adapter injection",
+    "shared CLI/MCP interface",
+    "offline HAR/HTML/bundle prepare",
+    "JSON/HTML/SSR extraction",
+    "deterministic read health",
+    "workflow bindings and bounded resumable pagination"
+  ],
+  "rootTests": {
+    "command": "npm test",
+    "total": 1042,
+    "passed": 1039,
+    "failed": 0,
+    "skipped": 3,
+    "exitCode": 0
+  },
+  "capabilityChecklist": {
+    "command": "node scripts/checklist.mjs --service=operation-runtime --run-tests --strict --json",
+    "summary": {
+      "total": 6,
+      "recordedLive": 0,
+      "needsReverification": 0,
+      "requiredGaps": [],
+      "strictPassed": true
+    },
+    "capabilities": [
+      {
+        "id": "operations.typed_registry",
+        "status": "verified_local"
+      },
+      {
+        "id": "operations.mcp_stdio",
+        "status": "verified_local"
+      },
+      {
+        "id": "operations.offline_prepare",
+        "status": "verified_local"
+      },
+      {
+        "id": "operations.response_extraction",
+        "status": "verified_local"
+      },
+      {
+        "id": "operations.deterministic_health",
+        "status": "verified_local"
+      },
+      {
+        "id": "operations.resumable_execution",
+        "status": "verified_local"
+      }
+    ],
+    "exitCode": 0
+  },
+  "allRegisteredChecklists": {
+    "command": "npm run checklist",
+    "exitCode": 0,
+    "strict": false,
+    "globalReadiness": "Existing required gaps and historical/live freshness limits remain; command success is not whole-site completion"
+  },
+  "python": {
+    "distribution": "Python.Python.3.13",
+    "version": "3.13.15",
+    "pip": "26.2.1",
+    "scope": "current Windows user",
+    "projectVenv": ".venv-oliveyoung",
+    "projectDependency": "curl_cffi==0.16.3",
+    "regressionTests": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0
+    }
+  },
+  "limits": {
+    "deployed": false,
+    "committed": false,
+    "newRuntimeLiveServiceVerified": false,
+    "dashboardOrBrowserAutomationImplemented": false,
+    "prepareIsOfflineCandidateInventory": true
+  },
+  "sourceSha256": {
+    "lib/operation-registry.mjs": "e63a3c61a97a934774f1d682a05229195200956ead92d995bf603e6f0fb1891e",
+    "lib/operation-extract.mjs": "ec68458d7b825b4435893fb54aea29373e6e27c0944b4f8b8e492332ac5080de",
+    "lib/operation-health.mjs": "ee8c80688e048144ef590d230208f7ee4f9acf53e775832564ba5179907c5cea",
+    "lib/operation-flow.mjs": "56f2e7aab12e44e035674a4465aca2291ad332d3af1a28d5041b717b9587e26f",
+    "lib/operation-mcp.mjs": "26ff02f2b0e15e1cc1ccff0e81279058d7b22525d2e5d8424c5dcb46e7070ffc",
+    "lib/prepare-operations.mjs": "448f736b5a589eba8961c098e6a5cacb71efd12aaa16e196003b00d23bea8acf",
+    "lib/scoped-session.mjs": "d4cc590ef7989f9b872db79155d18b2175a13f51712729506a1bead1b5930df3",
+    "scripts/playbook.mjs": "e50746116c1296abb484ade698270aa67e0f34d2b5228fa9133ca0da92e91e95",
+    "scripts/prepare-operations.mjs": "969a2bfbe9e03c7b6f5e0941af2e77a3316f47572c1715a24608960a5f0c0375",
+    "checklists/services/operation-runtime.json": "1c194df22a682e8f6847d6585f4510e91b496660963a49c5afa931c52f7657ad",
+    "templates/profile-v2.example.json": "d5ac2090598a13216195727e08be959e574b25ad3ea22b52594f0bd03aeb2f51",
+    "templates/operation-flow.example.json": "5dc38e61705e20fd5a44fb1cd07e02b31e4a5347586e319a6c4e7cfaefedada3",
+    "templates/operation-collection.example.json": "c9400c4f6a69c9c93f923c5948225d7615db70f1961e2236f5929d0f55c2772e",
+    "package.json": "ba430ef1b8d8506e409dc1977ab3e4f9b1f08e8805f9fc2cbf8a8c2787082ca5",
+    "README.md": "5bf27f5f6ae436a492daa7aa7b13f72e740dbae0ca79a4b1fa3654b2a54345a0",
+    "SKILL.md": "ce556fa558708ac0b74d30cb0a79a623f40a0091de1f28a23faed6114ad018b4",
+    "references/operation-runtime.md": "23bba873f236cb4884e824e1f14dc0bc785d6597013dfaaa56f01dfdefe3b9ef",
+    "references/commerce-oliveyoung-korea-ranking.md": "ff615f1892caaf603b37395d63272dac35305f7a89492c8b01c65cac7a90c761"
+  }
+}
