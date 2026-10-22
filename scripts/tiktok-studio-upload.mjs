@@ -36,7 +36,8 @@ try {
   const q = await send('DOM.querySelectorAll', { nodeId: doc.result.root.nodeId, selector: 'input[type=file]' });
   if (!q.result.nodeIds.length) { await shot('0-noinput'); throw new Error('NO_FILE_INPUT'); }
   await send('DOM.setFileInputFiles', { nodeId: q.result.nodeIds[0], files: [path.resolve(video)] });
-  for (let i = 0; i < 60; i++) { await sleep(3000); if (await ev(`!!document.querySelector('[contenteditable=true]') && /업로드됨|Uploaded/.test(document.body.innerText)`)) break; }
+  const waitN = Math.max(60, Math.ceil(fs.statSync(video).size / 1.5e6)); // ~3 s per 4.5 MB; a 492 MB long video needs minutes
+  for (let i = 0; i < waitN; i++) { await sleep(3000); if (await ev(`!!document.querySelector('[contenteditable=true]') && /업로드됨|Uploaded/.test(document.body.innerText)`)) break; }
   await sleep(2000); await shot('1-uploaded');
   const capRaw = fs.readFileSync(captionFile, 'utf8').trim();
   const tags = (capRaw.match(/#[^\s#]+/g) || []).map((x) => x.slice(1));
@@ -60,10 +61,12 @@ try {
     const b = await buttonAt('^(게시|Post)$'); if (!b) throw new Error('NO_POST_BUTTON');
     await click(b); await sleep(4000);
     const now = await buttonAt('^지금 게시$'); if (now) { await click(now); out.confirmed = true; }
-    await sleep(12000); await shot('3-posted');
-    out.after = await ev('location.href');
-    if (!/tiktokstudio\/content/.test(out.after)) throw new Error('POST_NOT_CONFIRMED');
-    await sleep(5000);
+    // short videos redirect to the content list; a long one stays on the form while checks run but shows "동영상이 게시되었습니다"
+    for (let i = 0; i < 20 && !out.posted; i++) { await sleep(3000); out.posted = await ev(`/tiktokstudio\\/content/.test(location.href) || /동영상이 게시되었습니다/.test(document.body.innerText)`); }
+    await shot('3-posted'); out.after = await ev('location.href');
+    if (!out.posted) throw new Error('POST_NOT_CONFIRMED');
+    if (!/tiktokstudio\/content/.test(out.after)) await send('Page.navigate', { url: 'https://www.tiktok.com/tiktokstudio/content' });
+    await sleep(10000);
     out.url = await ev(`[...document.querySelectorAll('a')].map(a=>a.href).find(h=>/\\/video\\/\\d+/.test(h))`); // newest first
   }
   out.ok = true;
