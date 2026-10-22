@@ -19,7 +19,37 @@ Commercial tools for comparison:
 
 **Naver Clip "클립 AI 하이라이트"** (clipcreators.naver.com/web/ai-clip) does this for free inside Naver. The page says: "3분이 넘는 가로형 영상을 업로드하면 여러 개의 세로형 동영상으로 나눌 수 있어요". It has not been tried end to end yet: a plain upload created an ordinary clip draft (draft/1221503), and no project-start control has been found yet.
 
-## Our pipeline (`scripts/longform-to-shorts.mjs`)
+## Runbook (v2, Tokyo 2026-10-22) — use this, not a one-off builder
+
+The owner asked for it to be a playbook ("플레이북으로 안해놨나 매번 이래야해 ?"). Per episode you write two JSON files and run:
+
+1. **Spec** `data/<ep>-shorts/shorts.spec.json`: `plan` (aihost plan.json), local `video`, `fontFile`, `label`, `pictureCrop`,
+   render repo/releases, and `shorts[]` = `{ id, scenes[], out?, title:[line1 with creator name, line2], patches?, blur? }`.
+   Pick whole plan scenes (a scene = Ria's dialogue shot + its narration), 30–55 s each.
+2. `node scripts/longform-to-shorts.mjs plan <spec>` → `build <spec>` (fails on any glyph missing from the font) →
+   `still <spec> <id> 0.6,<mid>` and look at the frames (title band, captions inside the safe zone, cards not cut).
+3. `node scripts/longform-to-shorts.mjs kit <spec> <branch>` pushes the kit and prints the job text →
+   `node scripts/dots.mjs send <dots.roomId> "<job>"` (Dots ran the ffmpeg-only job in ~6 min; Grok Bot as fallback).
+4. Download the release, check every file: ffprobe (1080x1920, 30 fps, dur ±0.1 s, 48 kHz 2 ch), the **last 12 frames**
+   (title present, no next-scene caption), and every map pill / card in the cuts (Tokyo shipped `undefined 11분` on a kart leg).
+5. **Manifest** `data/<ep>-shorts/distribute.json` (titles, desc, question, hashtags, links per short; longform URL + related
+   title; Naver blog title; schedule) → `node scripts/shorts-distribute.mjs <manifest>`:
+   YouTube upload (s1 public, rest one per day 오후 6:00) + thumbnail + related long video, Naver Clip ×all, TikTok ×all,
+   Instagram 1/day. State goes to `distribute.state.json`; **the daily follow-up is the same command** (pins each Short once it
+   is public, posts the next Reel).
+
+Helper scripts it calls: `youtube-studio.mjs upload`, `youtube-studio-edit.mjs` (thumb/desc/related, readback),
+`youtube-pin-comment.mjs`, `naver-clip-upload.mjs`, `tiktok-studio-upload.mjs`, `instagram-web-post.mjs`; `cdp-steps.mjs` for
+one-off manual steps in a tab.
+
+Tokyo pitfalls (all handled by the scripts now): Black Han Sans lacks 「」·… (system Noto Sans shadowed Noto Sans KR on the
+cloud box); the longform crossfade shows the next scene in the last 0.3 s (hold the last frame); the file is one frame longer
+than the cut (persistent ASS lines run past the end); a next-scene caption overlapping < 0.3 s flashed; Studio's schedule check
+read only innerText (time is an input value) and left two videos as drafts; Shorts thumbnails are set on the edit page after
+upload; the 관련 동영상 picker sometimes renders late (retry); TikTok Shift+Enter submits a comment, its web comment menu has no
+pin, and 게시 asks "계속 게시할까요?" while checks run.
+
+## Our pipeline v1 (`scripts/longform-to-shorts.mjs`, Bangkok 2026-10-19; superseded by the runbook above)
 
 We already have a sentence-timed transcript (`timed.ko.json`), so highlight detection is unnecessary.
 - **Spans:** pick self-contained sentence spans of 25–55 s, cut on sentence boundaries, and avoid spans that start with "앞서/아까" style back-references.
