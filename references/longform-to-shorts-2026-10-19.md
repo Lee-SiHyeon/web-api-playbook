@@ -44,6 +44,11 @@ The owner asked for it to be a playbook ("플레이북으로 안해놨나 매번
 **Instagram takes the long video as a Reel too** (2026-10-22): `instagram-web-post.mjs caption.txt final.mp4 --ratio=원본 --ai`
 (10:01, 492 MB, "공유 중" for ~4 min, then "릴스가 공유되었습니다"; the script now waits by file size).
 
+**Pinned comments on scheduled Shorts, ahead of time** (owner: "고정댓글 미리해둘수없음 ?"): scheduled = private = no comments, so
+`youtube-prepin.mjs <id> <comment.txt> "2026. 10. 24." "오후 6:00" --shorts` switches to 일부 공개 (~1 min, link-only), posts + pins, then
+restores the schedule (the date is a dropdown whose calendar popup holds the input) and reads back "예약됨" + date + time.
+`shorts-distribute.mjs --channels=youtube-pin` uses it for every scheduled short, so no daily follow-up is needed.
+
 Helper scripts it calls: `youtube-studio.mjs upload`, `youtube-studio-edit.mjs` (thumb/desc/related, readback),
 `youtube-pin-comment.mjs`, `naver-clip-upload.mjs`, `tiktok-studio-upload.mjs`, `instagram-web-post.mjs`; `cdp-steps.mjs` for
 one-off manual steps in a tab.

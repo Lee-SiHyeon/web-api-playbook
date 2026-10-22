@@ -2,7 +2,8 @@
 //   node scripts/shorts-distribute.mjs <distribute.json> [--channels=youtube,youtube-pin,naver-clip,tiktok,instagram] [--only=s1,s2] [--dry]
 // Default channels: all. Re-running skips what the state file already records, so the daily follow-up is the same command:
 //   - youtube      upload (s1 public now, the rest scheduled one per day), then thumbnail + related long video (youtube-studio-edit)
-//   - youtube-pin  post + pin the comment on every uploaded short whose publish time has passed (scheduled videos take no comments)
+//   - youtube-pin  post + pin the comment on every uploaded short; scheduled ones go through youtube-prepin.mjs (they take no
+//                  comments while private: unlisted for ~1 min, pin, back to the same schedule), so nothing is left for later
 //   - naver-clip   clip with description (<= 300 chars), linked Naver blog post, AI toggle
 //   - tiktok       post with caption + AI label (links are not clickable there, so none are put in)
 //   - instagram    Reel with AI label; at most `instagramPerDay` per 20 h (a new account gets rate-limited on bursts)
@@ -78,8 +79,13 @@ for (const { s, i } of list) {
     const r = run('youtube-studio-edit.mjs', [x.youtube.videoId, `--thumb=${thumbOf(s)}`, `--related=${M.longform.relatedTitle}`]);
     x.youtube.edited = !!r.last?.ok || !!r.dry; save(); log({ id: s.id, ch: 'youtube-edit', ...(r.last || {}) });
   }
-  if (channels.includes('youtube-pin') && x.youtube?.videoId && !x.youtube.pinned && new Date(x.youtube.publishAt) <= new Date()) {
-    const r = run('youtube-pin-comment.mjs', [x.youtube.videoId, write(`${s.id}.pin.txt`, pinText(s)), path.join(work, 'pin-' + s.id), '--shorts']);
+  if (channels.includes('youtube-pin') && x.youtube?.videoId && !x.youtube.pinned) {
+    // public -> pin directly; scheduled -> youtube-prepin (unlisted for ~1 min, pin, back to the same schedule)
+    const at = new Date(x.youtube.publishAt), pinFile = write(`${s.id}.pin.txt`, pinText(s));
+    const studioDate = `${at.getFullYear()}. ${at.getMonth() + 1}. ${at.getDate()}.`, h = at.getHours(), studioTime = `${h < 12 ? '오전' : '오후'} ${((h + 11) % 12) + 1}:${String(at.getMinutes()).padStart(2, '0')}`;
+    const r = at <= new Date() ? run('youtube-pin-comment.mjs', [x.youtube.videoId, pinFile, path.join(work, 'pin-' + s.id), '--shorts'])
+      : run('youtube-prepin.mjs', [x.youtube.videoId, pinFile, studioDate, studioTime, '--shorts']);
+    if (r.last && r.last.pin) r.last.badge = r.last.pin.badge;
     x.youtube.pinned = /고정함/.test(r.last?.badge || '') || !!r.dry; save(); log({ id: s.id, ch: 'youtube-pin', ...(r.last || {}) });
   }
   if (channels.includes('naver-clip') && !x.naverClip?.ok) {
