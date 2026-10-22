@@ -79,10 +79,10 @@ The `example.invalid` profile demonstrates structure only. Replace it with an ob
 | Use an existing service | `node scripts/playbook.mjs list --all`, then the [service CLI guide](references/service-cli.md). Listing does not log in or send network requests. |
 | Add a new HTTP workflow | [Discovery tools](references/discovery-tools.md), [operation runtime](references/operation-runtime.md), and [profile template](templates/profile-v2.example.json). |
 | Connect an MCP client | Use `node` with absolute paths to `scripts/playbook.mjs`, `mcp`, and `--profile=...`; see the [MCP section](references/operation-runtime.md#mcp). The server implements a documented stdio subset, not automatic client registration. |
-| Use the playbook with an agent | Read [SKILL.md](SKILL.md). `npm run install:skill` installs a local copy; see the [Korean installation guide](README.md#codex-스킬로-설치) for destinations and update behavior. |
+| Use the playbook with an agent | Read [SKILL.md](SKILL.md). `npm run install:skill` installs a local copy; see the [Korean installation guide](docs/guide.md#codex-스킬로-설치) for destinations and update behavior. |
 | Understand a failure or verify a write | [Write and reconciliation](references/write-and-reconcile.md), [case studies](case-studies/README.md), and [verification records](verification/README.md). |
 
-The detailed guides are currently primarily in Korean. The [Korean README](README.md) is the full navigation index.
+The detailed guides are currently primarily in Korean. The [Korean detailed guide](docs/guide.md) is the full navigation index.
 
 ## Service scope and experimental boundaries
 
@@ -105,7 +105,7 @@ Authentication is separate from source installation. Keep credentials, captured 
 | **Opt-in encrypted files** | On macOS/Linux, select `PROTECTED_STORE_PROVIDER=file` for the core AES-256-GCM backend. This is file encryption, **not** integration with Keychain or Secret Service. |
 | **stdin / process memory** | `--session-stdin` accepts a session for that process. Rotated values do not persist automatically across restarts. |
 
-The file backend accepts `PROTECTED_STORE_KEY` (a base64-encoded 32-byte key) or `PROTECTED_STORE_KEY_FILE`. Otherwise, it creates `~/.config/xhr-to-api-only/protected-store.key`. Protect both the key and the sealed files; a locally stored key is not equivalent to OS-bound storage. Service packs retain their own provider formats and are not automatically interchangeable. See the [Korean session guide](README.md#4-3-쿠키토큰-보호-저장-및-재사용) and [storage implementation](lib/protected-store.mjs).
+The file backend accepts `PROTECTED_STORE_KEY` (a base64-encoded 32-byte key) or `PROTECTED_STORE_KEY_FILE`. Otherwise, it creates `~/.config/xhr-to-api-only/protected-store.key`. Protect both the key and the sealed files; a locally stored key is not equivalent to OS-bound storage. Service packs retain their own provider formats and are not automatically interchangeable. See the [Korean session guide](docs/guide.md#4-3-쿠키토큰-보호-저장-및-재사용) and [storage implementation](lib/protected-store.mjs).
 
 ## Tests and evidence
 
