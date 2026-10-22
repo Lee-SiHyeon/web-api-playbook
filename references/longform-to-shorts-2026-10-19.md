@@ -41,6 +41,9 @@ The owner asked for it to be a playbook ("플레이북으로 안해놨나 매번
 **The long video goes to Naver Clip too** (2026-10-22): a 10:01 horizontal 16:9 MP4 of 492 MB was accepted as an ordinary clip
 (no length/ratio warning; covers are offered as vertical crops). Same command: `naver-clip-upload.mjs final.mp4 desc.txt --blog=… --ai`.
 
+**Instagram takes the long video as a Reel too** (2026-10-22): `instagram-web-post.mjs caption.txt final.mp4 --ratio=원본 --ai`
+(10:01, 492 MB, "공유 중" for ~4 min, then "릴스가 공유되었습니다"; the script now waits by file size).
+
 Helper scripts it calls: `youtube-studio.mjs upload`, `youtube-studio-edit.mjs` (thumb/desc/related, readback),
 `youtube-pin-comment.mjs`, `naver-clip-upload.mjs`, `tiktok-studio-upload.mjs`, `instagram-web-post.mjs`; `cdp-steps.mjs` for
 one-off manual steps in a tab.
