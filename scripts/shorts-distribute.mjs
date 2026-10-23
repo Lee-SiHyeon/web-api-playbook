@@ -12,7 +12,7 @@
 //
 // distribute.json:
 // { "channelId": "UC…", "videoDir": "C:/…/upload", "thumbDir": "C:/…/thumbs", "videoName": "tokyo-short-{id}.mp4",
-//   "longform": { "url": "https://youtu.be/…", "relatedTitle": "<title prefix in the Studio picker>" },
+//   "longform": { "url": "https://youtu.be/…", "relatedTitle": "<title prefix in the Studio picker>" },   // optional: standalone Shorts
 //   "naverBlogTitle": "<title part of the Naver post to link from the clip>",
 //   "schedule": { "from": "2026-10-23", "time": "오후 6:00" },            // s[0] public now, s[i] = from + (i-1) days
 //   "instagramPerDay": 1,
@@ -28,7 +28,7 @@ const opt = Object.fromEntries(flags.map((f) => { const i = f.indexOf('='); retu
 const M = JSON.parse(fs.readFileSync(manFile, 'utf8'));
 const stateFile = manFile.replace(/\.json$/, '') + '.state.json';
 const S = fs.existsSync(stateFile) ? JSON.parse(fs.readFileSync(stateFile, 'utf8')) : { shorts: {} };
-const save = () => fs.writeFileSync(stateFile, JSON.stringify(S, null, 2) + '\n');
+const save = () => { if (!opt.dry) fs.writeFileSync(stateFile, JSON.stringify(S, null, 2) + '\n'); }; // a dry run records nothing
 const channels = (opt.channels || 'youtube,youtube-pin,naver-clip,tiktok,instagram').split(',');
 const only = opt.only ? opt.only.split(',') : null;
 const work = path.join(os.tmpdir(), 'shorts-distribute', path.basename(manFile, '.json')); fs.mkdirSync(work, { recursive: true });
@@ -46,8 +46,9 @@ function run(script, args, timeoutMs = 600000) {
 
 // ---------- texts ----------
 const linkBlock = (s) => (s.links?.length ? ['', M.common.affiliateDisclosure, ...s.links.map((l) => `- ${l.label}\n  ${l.url}`)] : []);
-const ytDesc = (s) => [s.desc, ...linkBlock(s), '', `🎬 풀영상: ${M.longform.url}`, '', M.common.footer].join('\n');
-const pinText = (s) => [s.question, '', `🎬 풀영상: ${M.longform.url}`, ...linkBlock(s)].join('\n');
+const fullLine = () => (M.longform?.url ? ['', `🎬 풀영상: ${M.longform.url}`] : []); // standalone Shorts have no long video
+const ytDesc = (s) => [s.desc, ...linkBlock(s), ...fullLine(), '', M.common.footer].join('\n');
+const pinText = (s) => s.pin || [s.question, ...fullLine(), ...linkBlock(s)].join('\n'); // s.pin: a custom pinned comment
 const socialText = (s) => [s.title, '', s.desc, '', s.question, '', M.common.socialNote, '', s.hashtags].join('\n');
 const clipText = (s) => { let t = `${s.desc} ${s.question} ${M.common.clipNote || ''} ${s.hashtags}`.replace(/\s+/g, ' ').trim(); while ([...t].length > 300) t = t.replace(/ \S+$/, ''); return t; };
 const write = (name, text) => { const f = path.join(work, name); fs.writeFileSync(f, text + '\n'); return f; };
@@ -66,7 +67,7 @@ for (const { s, i } of list) {
   if (channels.includes('youtube') && !x.youtube?.videoId) {
     const [when, dateStr] = publishAt(i);
     const job = { channelId: M.channelId, video: videoOf(s), title: s.title, description: ytDesc(s), tags: M.common.tags, category: M.common.category || '여행/이벤트',
-      language: '한국어', madeForKids: false, paidPromotion: !!s.links?.length, alteredContent: true, visibility: 'PUBLIC',
+      language: '한국어', madeForKids: false, paidPromotion: !!s.links?.length, alteredContent: M.common.alteredContent ?? true, visibility: 'PUBLIC',
       ...(dateStr ? { schedule: { date: dateStr, time: M.schedule.time } } : {}) };
     const jf = write(`${s.id}.yt-job.json`, JSON.stringify(job, null, 1));
     const r = run('youtube-studio.mjs', ['upload', jf, `--shots=${path.join(work, 'yt-' + s.id)}`], 900000);
@@ -76,7 +77,8 @@ for (const { s, i } of list) {
     if (!done && !r.dry) continue;
   }
   if (channels.includes('youtube') && x.youtube?.videoId && !x.youtube.edited) {
-    const r = run('youtube-studio-edit.mjs', [x.youtube.videoId, `--thumb=${thumbOf(s)}`, `--related=${M.longform.relatedTitle}`]);
+    const editArgs = [...(M.thumbDir && fs.existsSync(thumbOf(s)) ? [`--thumb=${thumbOf(s)}`] : []), ...(M.longform?.relatedTitle ? [`--related=${M.longform.relatedTitle}`] : [])];
+    const r = editArgs.length ? run('youtube-studio-edit.mjs', [x.youtube.videoId, ...editArgs]) : { last: { ok: true, skipped: 'no thumbnail or related video' } };
     x.youtube.edited = !!r.last?.ok || !!r.dry; save(); log({ id: s.id, ch: 'youtube-edit', ...(r.last || {}) });
   }
   if (channels.includes('youtube-pin') && x.youtube?.videoId && !x.youtube.pinned) {
