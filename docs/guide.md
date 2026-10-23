@@ -392,4 +392,4 @@ npm test
 
 원본에 있던 회귀 검사 코드는 service pack 안에 보존했습니다. 설치 명령은 이를 실행하지 않습니다. 필요한 범위가 정해지면 각 pack의 기존 명령을 이용할 수 있습니다.
 
-현재 [NOTICE](../NOTICE.md)는 개인 비공개 재사용을 전제로 하며, `package.json`은 `UNLICENSED`입니다. 공개 접근 가능 여부와 오픈소스 사용 허가는 별개입니다. 출처·재배포·재라이선스 경계는 NOTICE와 [provenance](../provenance/README.md)를 확인하세요.
+이 저장소는 [MIT 라이선스](../LICENSE)입니다. 저작권 표시를 남기면 누구나 자유롭게 사용·수정·재배포할 수 있습니다. 타사 라이브러리와 외부 원본의 범위는 [NOTICE](../NOTICE.md)와 [provenance](../provenance/README.md)를 확인하세요.

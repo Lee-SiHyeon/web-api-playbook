@@ -118,4 +118,6 @@ npm test   # full regression; also needs Python 3
 
 ## License
 
-`package.json` declares `UNLICENSED`, and [NOTICE](NOTICE.md) describes private reuse; it does not grant an open-source license. Repository visibility and license permission are separate. Sources are recorded in [provenance](provenance/README.md).
+[MIT](LICENSE): use, modify and redistribute it freely, for personal or commercial work. Keep the copyright notice. You use it at your own risk.
+
+Third-party libraries installed through npm, and outside material whose source is recorded in [provenance](provenance/README.md), stay under their own licenses. Check the terms of service of each site you automate. See [NOTICE](NOTICE.md).
