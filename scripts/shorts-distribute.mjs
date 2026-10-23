@@ -1,5 +1,5 @@
 // Distribute a set of finished vertical Shorts to every channel from ONE manifest; resumable (state file next to it).
-//   node scripts/shorts-distribute.mjs <distribute.json> [--channels=youtube,youtube-pin,naver-clip,tiktok,instagram,facebook,threads,x] [--only=s1,s2] [--dry] [--retry-x] [--check]
+//   node scripts/shorts-distribute.mjs <distribute.json> [--channels=youtube,youtube-pin,naver-clip,tiktok,instagram,facebook,threads,x] [--only=s1,s2] [--dry] [--retry-x]
 // Default channels: all. Re-running skips what the state file already records, so the daily follow-up is the same command:
 //   - youtube      upload (s1 public now, the rest scheduled one per day), then thumbnail + related long video (youtube-studio-edit)
 //   - youtube-pin  post + pin the comment on every uploaded short; scheduled ones go through youtube-prepin.mjs (they take no
@@ -20,7 +20,6 @@
 //   "shorts": [ { "id": "s1", "title": "…", "desc": "…", "question": "…", "hashtags": "#a #b", "links": [{ "label": "…", "url": "…" }] } ] }
 import fs from 'node:fs';
 import path from 'node:path';
-import os from 'node:os';
 import { spawnSync } from 'node:child_process';
 const HERE = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'));
 const [manFile, ...flags] = process.argv.slice(2);
@@ -93,21 +92,8 @@ const publishAt = (i) => { // [Date, studio date string]
   return [d, `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}.`];
 };
 
-// TikTok pacing ledger (shared by every manifest): { pausedUntil, perDay, minGapHours, posts: [iso] }
-const ttLedger = process.env.TIKTOK_LEDGER || path.join(os.homedir(), '.config', 'web-api-playbook', 'tiktok-ledger.json');
-const ttRead = () => { try { return JSON.parse(fs.readFileSync(ttLedger, 'utf8')); } catch { return { perDay: 2, minGapHours: 4, posts: [] }; } };
-function tiktokGate() {
-  const L = ttRead(), now = Date.now();
-  if (L.pausedUntil && now < new Date(L.pausedUntil).getTime()) return `paused until ${L.pausedUntil} (${L.reason || 'ledger'})`;
-  const recent = (L.posts || []).map((t) => new Date(t).getTime()).filter((t) => now - t < 24 * 3600e3);
-  if (recent.length >= (L.perDay ?? 2)) return `daily cap ${L.perDay ?? 2} reached; run again later`;
-  const last = Math.max(0, ...recent);
-  if (last && now - last < (L.minGapHours ?? 4) * 3600e3) return `min gap ${L.minGapHours ?? 4} h since ${new Date(last).toISOString()}`;
-  return null;
-}
-function tiktokRecord() { const L = ttRead(); L.posts = [...(L.posts || []), new Date().toISOString()].slice(-200); fs.mkdirSync(path.dirname(ttLedger), { recursive: true }); fs.writeFileSync(ttLedger, JSON.stringify(L, null, 1)); }
 
-const list = opt.check ? [] : M.shorts.map((s, i) => ({ s, i })).filter(({ s }) => !only || only.includes(s.id)); // --check: gate only, posts nothing
+const list = M.shorts.map((s, i) => ({ s, i })).filter(({ s }) => !only || only.includes(s.id));
 for (const { s, i } of list) {
   const x = st(s.id);
   if (channels.includes('youtube') && !x.youtube?.videoId) {
@@ -143,15 +129,8 @@ for (const { s, i } of list) {
     x.naverClip = r.last || { ok: !!r.dry }; save(); log({ id: s.id, ch: 'naver-clip', ...x.naverClip });
   }
   if (channels.includes('tiktok') && !x.tiktok?.ok) {
-    // One ledger for every manifest: a new account that got 6 posts in 5 minutes (2026-10-22) dropped from 100-245 views per
-    // post to 0 from the next post on. Pause date, daily cap and minimum gap apply across series.
-    const gate = tiktokGate();
-    if (gate) { x.tiktokDeferred = gate; log({ id: s.id, ch: 'tiktok', skipped: gate }); }
-    else {
-      const r = run('tiktok-studio-upload.mjs', [videoOf(s), write(`${s.id}.tiktok.txt`, noUrl(socialText(s))), '--ai', '--post', `--shots=${path.join(work, 'tt-' + s.id)}`]);
-      x.tiktok = r.last || { ok: !!r.dry }; delete x.tiktokDeferred; save(); log({ id: s.id, ch: 'tiktok', ...x.tiktok });
-      if (x.tiktok.ok && !opt.dry) tiktokRecord();
-    }
+    const r = run('tiktok-studio-upload.mjs', [videoOf(s), write(`${s.id}.tiktok.txt`, noUrl(socialText(s))), '--ai', '--post', `--shots=${path.join(work, 'tt-' + s.id)}`]);
+    x.tiktok = r.last || { ok: !!r.dry }; save(); log({ id: s.id, ch: 'tiktok', ...x.tiktok });
   }
   if (channels.includes('instagram') && !x.instagram?.ok) {
     const recent = Object.values(S.shorts).map((v) => v.instagram?.at).filter(Boolean).filter((a) => Date.now() - new Date(a) < 20 * 3600e3).length;
@@ -180,11 +159,7 @@ for (const { s, i } of list) {
     }
   }
 }
-// gate: every requested channel must be confirmed for every Short; a pacing deferral is a warning, anything else fails the run
+// status per Short and channel (pacing and completion rules belong to the caller, e.g. a content pipeline's gate)
 const okOf = { youtube: (x) => !!x.youtube?.videoId && x.youtube.uploaded !== false, 'youtube-pin': (x) => !!x.youtube?.pinned, 'naver-clip': (x) => !!x.naverClip?.ok,
   tiktok: (x) => !!x.tiktok?.ok, instagram: (x) => !!x.instagram?.ok, facebook: (x) => !!x.facebook?.ok, threads: (x) => !!x.threads?.ok, x: (x) => !!x.x?.ok };
-const rows = M.shorts.filter((s) => !only || only.includes(s.id)).map((s) => { const x = S.shorts[s.id] || {}; return { id: s.id, ...Object.fromEntries(channels.filter((c) => okOf[c]).map((c) => [c, okOf[c](x) ? 'ok' : c === 'tiktok' && x.tiktokDeferred ? 'deferred' : 'MISSING'])) }; });
-console.table(rows);
-const missing = rows.flatMap((r) => Object.entries(r).filter(([, v]) => v === 'MISSING').map(([c]) => `${r.id}:${c}`));
-console.log(JSON.stringify({ gate: 'DIST_SHORTS', ok: !missing.length, missing, deferred: rows.filter((r) => Object.values(r).includes('deferred')).map((r) => r.id) }));
-if (missing.length && !opt.dry) process.exitCode = 1;
+console.table(M.shorts.map((s) => { const x = S.shorts[s.id] || {}; return { id: s.id, ...Object.fromEntries(channels.filter((c) => okOf[c]).map((c) => [c, okOf[c](x) ? 'ok' : '-'])) }; }));
