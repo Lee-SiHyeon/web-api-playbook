@@ -4,7 +4,7 @@
 // Login: email + password (DPAPI `tiktok-login`) + 2FA code from Gmail; see references/blog-multichannel-publish-2026-10-19.md.
 // Pitfalls encoded here (2026-10-22, 7 uploads):
 //  - Caption: typing a whole text with hashtags lets the hashtag autocomplete swallow the sentence. Type the sentence first,
-//    then each "#tag" followed by a space, all inside the caption box (Ctrl+A/Backspace there only; a document-wide
+//    then each "#tag" + Enter on the suggestion (that makes it a real hashtag), all inside the caption box (Ctrl+A/Backspace there only; a document-wide
 //    selectAll crashed the page).
 //  - "AI 생성 콘텐츠" is an <input type=checkbox> in the settings block (after 펼치기); a JS click switches it on.
 //  - 게시 opens "계속 게시할까요? (검사가 아직 진행 중)" -> 지금 게시.
@@ -46,9 +46,14 @@ try {
   await click(edPt); await sleep(500);
   await key('a', 'KeyA', 65, 2); await key('Backspace', 'Backspace', 8); await sleep(600);
   await send('Input.insertText', { text: sentence }); await sleep(800);
-  for (const tg of tags) { await send('Input.insertText', { text: '#' + tg }); await sleep(1000); await send('Input.insertText', { text: ' ' }); await sleep(600); }
+  // A typed "#tag" followed by a space stays plain text (2026-10-23: 26 posts, 0 recognised hashtags). Enter on the open
+  // hashtag suggestion turns it into a tag (<span class="mention" data-testid="mentionText">) and adds the space itself.
+  const enter = async () => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, ...(type === 'keyDown' ? { text: '\r' } : {}) }); };
+  for (const tg of tags) { await send('Input.insertText', { text: '#' + tg }); await sleep(1800); await enter(); await sleep(900); }
   await sleep(800);
   out.caption = await ev(`document.querySelector('[contenteditable=true]').innerText.length`);
+  out.hashtags = await ev(`[...document.querySelectorAll('[contenteditable=true] [data-testid=mentionText]')].map((e) => e.innerText.trim())`);
+  if (tags.length && out.hashtags.length < tags.length) { await shot('1b-hashtags'); throw new Error(`HASHTAGS_NOT_RECOGNISED ${out.hashtags.length}/${tags.length}`); }
   const more = await buttonAt('^(펼치기|Show more)$'); if (more) { await click(more); await sleep(1500); }
   const popup = await buttonAt('^켜기$'); if (popup) { await click(popup); await sleep(1000); }
   if (opt.ai) {
