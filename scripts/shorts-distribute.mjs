@@ -50,7 +50,27 @@ const fullLine = () => (M.longform?.url ? ['', `🎬 풀영상: ${M.longform.url
 const ytDesc = (s) => [s.desc, ...linkBlock(s), ...fullLine(), '', M.common.footer].join('\n');
 const pinText = (s) => s.pin || [s.question, ...fullLine(), ...linkBlock(s)].join('\n'); // s.pin: a custom pinned comment
 const socialText = (s) => [s.title, '', s.desc, '', s.question, '', M.common.socialNote, '', s.hashtags].join('\n');
-const clipText = (s) => { let t = `${s.desc} ${s.question} ${M.common.clipNote || ''} ${s.hashtags}`.replace(/\s+/g, ' ').trim(); while ([...t].length > 300) t = t.replace(/ \S+$/, ''); return t; };
+// Naver Clip shows the description as plain text: links are not clickable and long URLs wrap mid-word. Keep paragraphs
+// (blank lines), drop lines that carry an http(s) link (put a bare domain once in common.clipNote instead), max 300 chars.
+const noUrl = (t) => String(t || '').split('\n').filter((l) => !/https?:\/\//.test(l)).join('\n').trim();
+const clipText = (s) => {
+  const sentences = noUrl(s.desc).split(/(?<=[.!?。])\s+/);
+  const build = (n) => [s.title, sentences.slice(0, n).join(' '), s.question, noUrl(M.common.clipNote), s.hashtags].filter(Boolean)
+    .map((p) => p.replace(/[ \t]+/g, ' ').trim()).join('\n\n');
+  let n = sentences.length, t = build(n);
+  while ([...t].length > 300 && n > 1) t = build(--n);
+  while ([...t].length > 300) t = t.replace(/\s*\S+$/, '');
+  return t;
+};
+export function clipLint(t) { // errors that make a clip description look broken on the clip page
+  const errs = [];
+  if ([...t].length > 300) errs.push('CLIP_OVER_300');
+  if (/https?:\/\//.test(t)) errs.push('CLIP_HTTP_LINK');
+  const doms = t.match(/\b[a-z0-9-]+(\.[a-z0-9-]+)+\.[a-z]{2,}\b/gi) || [];
+  if (doms.length !== new Set(doms.map((d) => d.toLowerCase())).size) errs.push('CLIP_DUPLICATE_LINK');
+  if (!/\n/.test(t)) errs.push('CLIP_NO_LINE_BREAKS');
+  return errs;
+}
 const write = (name, text) => { const f = path.join(work, name); fs.writeFileSync(f, text + '\n'); return f; };
 const videoOf = (s) => path.join(M.videoDir, (M.videoName || '{id}.mp4').replace('{id}', s.id));
 const thumbOf = (s) => path.join(M.thumbDir, `${s.id}.jpg`);
@@ -91,7 +111,9 @@ for (const { s, i } of list) {
     x.youtube.pinned = /고정함/.test(r.last?.badge || '') || !!r.dry; save(); log({ id: s.id, ch: 'youtube-pin', ...(r.last || {}) });
   }
   if (channels.includes('naver-clip') && !x.naverClip?.ok) {
-    const r = run('naver-clip-upload.mjs', [videoOf(s), write(`${s.id}.clip.txt`, clipText(s)), ...(M.naverBlogTitle ? [`--blog=${M.naverBlogTitle}`] : []), '--ai']);
+    const ct = clipText(s), lint = clipLint(ct);
+    if (lint.length) { log({ id: s.id, ch: 'naver-clip', error: 'CLIP_LINT', lint, text: ct }); continue; }
+    const r = run('naver-clip-upload.mjs', [videoOf(s), write(`${s.id}.clip.txt`, ct), ...(M.naverBlogTitle ? [`--blog=${M.naverBlogTitle}`] : []), '--ai']);
     x.naverClip = r.last || { ok: !!r.dry }; save(); log({ id: s.id, ch: 'naver-clip', ...x.naverClip });
   }
   if (channels.includes('tiktok') && !x.tiktok?.ok) {
