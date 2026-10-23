@@ -50,7 +50,9 @@ try {
     out.ai = await ev(`[...document.querySelectorAll('[role=dialog] input[type=checkbox]')].map(c => c.checked)[0]`);
   }
   await click(await at(text('공유하기', "document.querySelector('[role=dialog]')")));
-  for (let k = 0; k < 60; k++) { await sleep(3000); const s = await ev(`(document.querySelector('[role=dialog]')?.innerText.match(/(게시물이|릴스가) 공유되었습니다/) || [])[0] || null`); if (s) { out.shared = s; break; } }
+  // wait scales with the upload size: a 492 MB 10-min long video stayed at "공유 중" for ~4 min (2026-10-22)
+  const waitN = Math.max(60, Math.ceil(files.reduce((t, f) => t + fs.statSync(f).size, 0) / 1.5e6));
+  for (let k = 0; k < waitN; k++) { await sleep(3000); const s = await ev(`(document.querySelector('[role=dialog]')?.innerText.match(/(게시물이|릴스가) 공유되었습니다/) || [])[0] || null`); if (s) { out.shared = s; break; } }
   out.ok = !!out.shared;
 } catch (e) { out.ok = false; out.error = e.message; }
 console.log(JSON.stringify(out));

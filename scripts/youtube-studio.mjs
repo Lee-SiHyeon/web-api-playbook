@@ -167,7 +167,8 @@ try {
       const tp = await ev(`(() => { const {vis} = ${H}; const e = [...document.querySelectorAll('input')].find(e => e.offsetParent && /^오[전후] \\d/.test(e.value)); return e ? vis(e) : null; })()`);
       if (!tp) fail('NO_TIME_INPUT'); await click(tp); await sleep(800); await pickMenuItem(job.schedule.time);
       await sleep(600);
-      const when = await ev(`[...document.querySelectorAll('ytcp-datetime-picker')].map(e => e.innerText.replace(/\\s+/g, ' ')).join(' | ')`);
+      // the date shows as text but the time sits in an <input> value (2026-10-22: innerText alone lacked "오후 6:00" -> false SCHEDULE_MISMATCH, video left as draft)
+      const when = await ev(`[...document.querySelectorAll('ytcp-datetime-picker')].map(e => e.innerText.replace(/\\s+/g, ' ') + ' ' + [...e.querySelectorAll('input')].map(i => i.value).join(' ')).join(' | ')`);
       log({ step: 'schedule', when }); await shot('schedule');
       if (!when.includes(job.schedule.date.replace(/\.$/, '')) || !when.includes(job.schedule.time)) fail('SCHEDULE_MISMATCH', { when });
     } else {
