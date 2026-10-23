@@ -9,7 +9,7 @@ import path from 'node:path';
 const CDP = process.env.CLIP_CDP || 'http://127.0.0.1:9333';
 const [video, descFile, ...flags] = process.argv.slice(2);
 const opt = Object.fromEntries(flags.map((f) => { const i = f.indexOf('='); return i < 0 ? [f.slice(2), true] : [f.slice(2, i), f.slice(i + 1)]; }));
-const desc = fs.readFileSync(descFile, 'utf8').trim();
+const desc = fs.readFileSync(descFile, 'utf8').replace(/\r/g, '').trim();
 if ([...desc].length > 300) { console.log(JSON.stringify({ ok: false, code: 'DESC_OVER_300' })); process.exit(2); }
 const startUrl = opt.draftId ? `https://clipcreators.naver.com/web/draft/${opt.draftId}` : 'https://clipcreators.naver.com/web/upload';
 const t = await (await fetch(`${CDP}/json/new?${startUrl}`, { method: 'PUT' })).json();
@@ -36,7 +36,12 @@ try {
   }
   out.draft = (await ev('location.href')).match(/draft\/(\d+)/)?.[1];
   await ev(`(() => { const t = document.querySelector('textarea'); t.focus(); t.select(); return 1; })()`);
-  await send('Input.insertText', { text: desc }); await sleep(500);
+  // Line breaks: insertText of a multi-line string lands as one line, and Shift+Enter does nothing in this textarea;
+  // a plain Enter key event that carries text "\r" makes the break (2026-10-23).
+  const enter = async () => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, ...(type === 'keyDown' ? { text: '\r' } : {}) }); };
+  for (const [i, line] of desc.split('\n').entries()) { if (i) await enter(); if (line) await send('Input.insertText', { text: line }); await sleep(60); }
+  await sleep(500);
+  out.descMatches = (await ev(`document.querySelector('textarea').value`)) === desc;
   for (const [label, value] of [['1차 카테고리', opt.cat1 || '여행'], ['2차 카테고리', opt.cat2 || '해외여행']]) {
     await click(await pointOf(byText(label, 'button,div'))); await sleep(800);
     await click(await pointOf(byText(value, 'li,[role=option],button'))); await sleep(800);
