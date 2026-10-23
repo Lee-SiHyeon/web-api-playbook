@@ -110,6 +110,6 @@ The setup here wraps the same `serve` command in a small launcher (`launch.py`, 
 ## Scripts that follow this pattern
 
 `youtube-studio.mjs` (upload, A/B, captions with resume), `youtube-pin-comment.mjs`, `youtube-reply-comment.mjs`,
-`shorts-distribute.mjs`, `facebook-web.mjs` (login with checkpoint, page post/reel with AI label), `facebook-captions.mjs` (SRT tracks per language on a published Reel; the panel opens from the CC icon's tooltip), `sns-web-post.mjs`
+`shorts-distribute.mjs`, `facebook-web.mjs` (login with checkpoint, page post/reel with AI label), `facebook-captions.mjs` (SRT tracks per language on a published Reel; the panel opens from the CC icon's tooltip), `google-photos-web.mjs` (list/search/info/download originals, read-only), `sns-web-post.mjs`
 (Threads / X), `blogger-post.mjs`, `naver-se-paste.mjs`, `naver-clip-upload.mjs`, `instagram-web-post.mjs`,
 `tiktok-studio-upload.mjs`, `blog-md.mjs` (`tables` renders tables as images for mobile blogs).
