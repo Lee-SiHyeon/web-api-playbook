@@ -2,8 +2,8 @@
 // 2026-10-23 (kwak Macau): the HTTP clients (sns-threads, sns-X) have no verified media publish, so promo posts with media go
 // through the web UI here. Media goes straight into the composer's <input type=file> (DOM.setFileInputFiles), no chooser.
 //   node scripts/sns-web-post.mjs threads|x <text.txt> [media1,media2] [--dry] [--shots=<dir>]
-// --dry stops before the post button; --keep leaves the tab open (e.g. --dry --keep, then press Post with a real OS click through
-// a Windows desktop MCP when the site ignores synthetic input, as X did on 2026-10-23). Prints {posted, url?, tab?}.
+// --dry stops before the post button; --keep leaves the tab open. X: if the composer is still open 90 s after the CDP click, Post is pressed once with a real OS click through
+// a Windows desktop MCP (lib/desktop-click.mjs). Threads: the tab stays open until "게시 중" ends. Prints {posted, account, url, osClick?}.
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -68,18 +68,27 @@ try {
   else {
     const pb = await center(SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`);
     if (!pb) throw new Error('NO_POST_BUTTON');
-    await clickAt(pb); await sleep(5000);
-    // X sometimes ignores a synthetic click on Post: fall back to Ctrl+Enter in the editor
-    if (await ev(`!!document.querySelector(${JSON.stringify(SITE.editor)})`)) {
-      const ed2 = await center(`document.querySelector(${JSON.stringify(SITE.editor)})`); if (ed2) await clickAt(ed2);
-      for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'Enter', code: 'Enter', windowsVirtualKeyCode: 13, modifiers: 2 });
-      out.ctrlEnter = true;
+    const postExpr = SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`;
+    const composerOpen = () => ev(`!!document.querySelector(${JSON.stringify(SITE.editor)})`);
+    await clickAt(pb);
+    // A CDP click on X's Post works, but with a video the composer can take 20-60 s to close; earlier runs read that as "click
+    // ignored" and the retry made a duplicate. Wait up to 90 s; only if the composer is still open and the Post button is still
+    // there, press it once with a real OS click through the desktop MCP. No Ctrl+Enter retry.
+    let closed = false; for (let i = 0; i < 45 && !closed; i++) { await sleep(2000); closed = !(await composerOpen()); }
+    if (!closed && site === 'x' && !opt['no-os-click'] && await ev(`!!(${postExpr})`)) {
+      const { osClickElement } = await import('../lib/desktop-click.mjs');
+      out.osClick = await osClickElement(send, ev, postExpr).catch((e) => e.message);
     }
     // success = the composer closed (a toast alone is not proof; the first X run reported posted while the video was still uploading)
-    let closed = false; for (let i = 0; i < 60 && !closed; i++) { await sleep(3000); closed = !(await ev(`!!document.querySelector(${JSON.stringify(SITE.editor)})`)); }
+    for (let i = 0; i < 60 && !closed; i++) { await sleep(3000); closed = !(await composerOpen()); }
+    // Threads keeps uploading the video after the composer closes ("게시 중..."); closing the tab then cancels the post
+    for (let i = 0; i < 80 && site === 'threads'; i++) { if (!/게시 중|Posting/.test(await ev('document.body.innerText'))) break; await sleep(3000); }
     await sleep(4000); await shot(`${site}-2-posted`);
     out.posted = closed; if (!closed) throw new Error('COMPOSER_STILL_OPEN');
-    out.url = await ev(`(() => { const a = [...document.querySelectorAll('a[href*="/post/"], a[href*="/status/"]')].map((x) => x.href).find((h) => /\\/(post|status)\\//.test(h)); return a || null; })()`);
+    // the post link: only one of the logged-in account's own posts (feeds show other people's posts first)
+    const me = await ev(`(() => { const a = [...document.querySelectorAll('a[href^="/@"], a[data-testid="AppTabBar_Profile_Link"]')].find((x) => /프로필|Profile/.test(x.getAttribute('aria-label') || x.innerText || '') || x.dataset.testid === 'AppTabBar_Profile_Link'); return a ? a.getAttribute('href').replace(/^\\//, '') : null; })()`);
+    out.account = me;
+    out.url = me ? await ev(`(() => { const a = [...document.querySelectorAll('a[href*="/post/"], a[href*="/status/"]')].map((x) => x.href).find((h) => h.includes('/${me}/') && /\\/(post|status)\\/[\\w-]+$/.test(h)); return a || null; })()`) : null;
   }
 } catch (e) { out.error = e.message; await shot(`${site}-error`).catch(() => {}); process.exitCode = 1; }
 finally { if (opt.keep) out.tab = t.id; console.log(JSON.stringify(out)); ws.close(); if (!opt.keep) await fetch(`${CDP}/json/close/${t.id}`).catch(() => {}); }

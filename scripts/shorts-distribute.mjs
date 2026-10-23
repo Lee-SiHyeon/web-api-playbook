@@ -81,6 +81,20 @@ const publishAt = (i) => { // [Date, studio date string]
   return [d, `${d.getFullYear()}. ${d.getMonth() + 1}. ${d.getDate()}.`];
 };
 
+// TikTok pacing ledger (shared by every manifest): { pausedUntil, perDay, minGapHours, posts: [iso] }
+const ttLedger = process.env.TIKTOK_LEDGER || path.join(os.homedir(), '.config', 'web-api-playbook', 'tiktok-ledger.json');
+const ttRead = () => { try { return JSON.parse(fs.readFileSync(ttLedger, 'utf8')); } catch { return { perDay: 2, minGapHours: 4, posts: [] }; } };
+function tiktokGate() {
+  const L = ttRead(), now = Date.now();
+  if (L.pausedUntil && now < new Date(L.pausedUntil).getTime()) return `paused until ${L.pausedUntil} (${L.reason || 'ledger'})`;
+  const recent = (L.posts || []).map((t) => new Date(t).getTime()).filter((t) => now - t < 24 * 3600e3);
+  if (recent.length >= (L.perDay ?? 2)) return `daily cap ${L.perDay ?? 2} reached; run again later`;
+  const last = Math.max(0, ...recent);
+  if (last && now - last < (L.minGapHours ?? 4) * 3600e3) return `min gap ${L.minGapHours ?? 4} h since ${new Date(last).toISOString()}`;
+  return null;
+}
+function tiktokRecord() { const L = ttRead(); L.posts = [...(L.posts || []), new Date().toISOString()].slice(-200); fs.mkdirSync(path.dirname(ttLedger), { recursive: true }); fs.writeFileSync(ttLedger, JSON.stringify(L, null, 1)); }
+
 const list = M.shorts.map((s, i) => ({ s, i })).filter(({ s }) => !only || only.includes(s.id));
 for (const { s, i } of list) {
   const x = st(s.id);
@@ -117,8 +131,13 @@ for (const { s, i } of list) {
     x.naverClip = r.last || { ok: !!r.dry }; save(); log({ id: s.id, ch: 'naver-clip', ...x.naverClip });
   }
   if (channels.includes('tiktok') && !x.tiktok?.ok) {
-    const r = run('tiktok-studio-upload.mjs', [videoOf(s), write(`${s.id}.social.txt`, socialText(s)), '--ai', '--post', `--shots=${path.join(work, 'tt-' + s.id)}`]);
+    // One ledger for every manifest: a new account that got 6 posts in 5 minutes (2026-10-22) dropped from 100-245 views per
+    // post to 0 from the next post on. Pause date, daily cap and minimum gap apply across series.
+    const gate = tiktokGate();
+    if (gate) { log({ id: s.id, ch: 'tiktok', skipped: gate }); continue; }
+    const r = run('tiktok-studio-upload.mjs', [videoOf(s), write(`${s.id}.tiktok.txt`, noUrl(socialText(s))), '--ai', '--post', `--shots=${path.join(work, 'tt-' + s.id)}`]);
     x.tiktok = r.last || { ok: !!r.dry }; save(); log({ id: s.id, ch: 'tiktok', ...x.tiktok });
+    if (x.tiktok.ok && !opt.dry) tiktokRecord();
   }
   if (channels.includes('instagram') && !x.instagram?.ok) {
     const recent = Object.values(S.shorts).map((v) => v.instagram?.at).filter(Boolean).filter((a) => Date.now() - new Date(a) < 20 * 3600e3).length;
