@@ -10,7 +10,48 @@ of the browser: the scripts drive the sites' own web UI in a browser that is alr
 |---|---|---|
 | **Chrome Canary, non-default profile** | Canary started with its own `--user-data-dir` (not the everyday Chrome, not Canary's default profile) and `--remote-debugging-port=9333` | One long-lived profile that holds every channel login. Sites see an ordinary, warm desktop browser with history, so logins survive and checks stay mild (Facebook's reCAPTCHA checkbox passed with one click). Your own Chrome stays untouched. |
 | **CDP (Chrome DevTools Protocol)** | Scripts call `http://127.0.0.1:9333/json/new?<url>`, attach a WebSocket, and drive that tab with `Runtime.evaluate`, `Input.*`, `DOM.*`, `Page.*` | Plain Node, no Playwright/Puppeteer install. Each script opens **its own tab and closes only that tab**. |
-| **Windows MCP** (a desktop-control MCP server, here `windows-http`: Screenshot, Click, Type, Shortcut, App) | Real OS mouse/keyboard, full-desktop screenshots, native dialogs, other apps | For what CDP cannot reach. X ignored every synthetic Post click (CDP mouse events, `element.click()`, Ctrl+Enter); one real OS click through the MCP posted. It also clears OS pop-ups that steal focus from the browser (a firewall prompt, a Drive welcome window). |
+| **Windows MCP** ([Windows-MCP](https://github.com/CursorTouch/Windows-MCP), shared over HTTP and registered as `windows-http`; see below) | Real OS mouse/keyboard, full-desktop screenshots, native dialogs, other apps | For what CDP cannot reach. X ignored every synthetic Post click (CDP mouse events, `element.click()`, Ctrl+Enter); one real OS click through the MCP posted. It also clears OS pop-ups that steal focus from the browser (a firewall prompt, a Drive welcome window). |
+
+## The desktop MCP: Windows-MCP over HTTP
+
+The server is [Windows-MCP](https://github.com/CursorTouch/Windows-MCP) (CursorTouch, MIT, Python, version 0.8.8 here).
+Its tools include Screenshot, Snapshot, Click, Type, Scroll, Move, Shortcut, Wait, App, Clipboard, PowerShell, Process,
+FileSystem, Registry and Notification. Here it runs as **one HTTP server** that every agent shares (Claude Code, Codex and so on),
+not as a stdio server that each client starts.
+
+| Choice | Why |
+|---|---|
+| `streamable-http` on `127.0.0.1:8765` | Several agents use one desktop, so one server owns the mouse and keyboard. With a stdio server per client, two servers fight over the same cursor. |
+| Started by a **logon scheduled task** in the signed-in session (`pythonw`, interactive token, no time limit, restart on failure 3x every 1 min, runs on battery) | Desktop control needs the interactive session. A Windows service runs in session 0 and cannot see the desktop. `pythonw` keeps a console window from popping up. |
+| Pinned version in its own venv (`uv`) | An upstream update can rename tools. Upgrade on purpose, then run the check below. |
+| Bound to localhost only | Anyone who reaches the port controls the PC. For remote use, add `windows-mcp auth` (key and TLS) first. |
+
+### Setup
+
+```powershell
+# 1) Install the pinned version in its own environment
+uv tool install windows-mcp==0.8.8
+
+# 2) Register a logon task that runs the HTTP server in your session
+windows-mcp install --transport streamable-http --host 127.0.0.1 --port 8765
+#    (stop and remove: windows-mcp uninstall)
+
+# 3) Point each agent at it
+claude mcp add --transport http --scope user windows-http http://127.0.0.1:8765/mcp
+#    Codex and other clients: add the same URL as a streamable-HTTP MCP server
+```
+
+The setup here wraps the same `serve` command in a small launcher (`launch.py`, a `server.toml` with
+`transport = "streamable-http"`, `host`, `port`) so it can rotate its log and set
+`ANONYMIZED_TELEMETRY=false`. The scheduled task then adds the restart-on-failure settings.
+
+### Health check
+
+- A connected transport does not prove that desktop control works. Call the `ControlStatus` tool and look at the result.
+- Then take one Screenshot. Run the check from **two clients at once** to confirm that the server is shared rather than started
+  twice.
+- If it stops answering, restart the scheduled task (end the old listener on 8765 first) and read the server log.
+- `ControlStatus` reports `USER_CONTROL` when it sees outside input. Rule 11 below covers what that means on an unattended PC.
 
 ## Launching the automation Canary
 
