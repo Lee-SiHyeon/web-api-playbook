@@ -89,11 +89,10 @@ The setup here wraps the same `serve` command in a small launcher (`launch.py`, 
    the channel's account). Read the active account name from the composer and stop if it is not the channel.
 8. **Feeds virtualise.** To count posts, scroll and accumulate what you saw at each step. Counting `innerText` once at the end
    misses the posts that were scrolled away.
-9. **Rate limits are behavioural.** Instagram publishes no daily cap, but a new account got throttled when posts came in a
-   burst. Pace uploads, and make the per-day cap a setting rather than a constant.
-
+9. **Rate limits are behavioural, and a burst can cost a new account its reach.** Instagram publishes no daily cap, but a new account got throttled when posts came in a burst. On TikTok a new account posted 6 Shorts in 5 minutes (2026-10-22): those got 100-245 views each, and every later post got 0. shorts-distribute keeps one TikTok ledger for all series (`~/.config/web-api-playbook/tiktok-ledger.json`: `pausedUntil`, `perDay` 2, `minGapHours` 4) and skips TikTok when it says so. Make caps settings, not constants.
 10. **Check the profile, then the post URL, before you retry.** X's own profile timeline lagged by minutes. A "failed" first run
-    had in fact posted, so the retry made a duplicate (which was then deleted). Before re-posting, look the item up by URL or oEmbed
+    had in fact posted, so the retry made a duplicate (which was then deleted). With a video, X's composer can take 20-60 s to close
+    after Post; that looked like an ignored click. sns-web-post waits 90 s and only then presses Post once with a real OS click. Before re-posting, look the item up by URL or oEmbed
     (`publish.twitter.com/oembed?url=…` → 200/404), or poll the list for a while.
 11. **`USER_CONTROL` on an unattended PC can be a false alarm.** Windows-MCP 0.8.8 reports it for real physical input (hooked
     mouse/keyboard events without the injected flag, raw input from a real device). It also reports it after **recovering from
