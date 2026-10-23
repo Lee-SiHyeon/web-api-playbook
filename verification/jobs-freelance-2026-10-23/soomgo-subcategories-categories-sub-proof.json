@@ -1,0 +1,46 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "soomgo",
+  "capabilityId": "categories.sub",
+  "checkedAt": "2026-10-23T10:58:00.299Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 6,
+  "request": {
+    "method": "GET",
+    "origin": "https://api.soomgo.com",
+    "path": "/api2/categories/%EC%9D%B4%EC%82%AC-%EC%B2%AD%EC%86%8CA",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 22901,
+    "responseSha256": "a0b043fb3dc93c4beda45a92c7fa6004d9fff1cedc8e4d54356baf48c98b720b",
+    "checkedAt": "2026-10-23T10:58:00.299Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": []
+  },
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "sourceURL": "https://api.soomgo.com/api2/categories/%EC%9D%B4%EC%82%AC-%EC%B2%AD%EC%86%8CA",
+    "responseFormat": "json_response",
+    "sourceSha256": "a0b043fb3dc93c4beda45a92c7fa6004d9fff1cedc8e4d54356baf48c98b720b",
+    "projectionSha256": "ac6294093cd74ef822848d7ad3bd461e554dd3a341ed968b2adba6a16443e7f5"
+  },
+  "implementation": {
+    "lib/freelance/soomgo.mjs": "6ca3189197c7fc837bc0b9b62e65501fbf926e95a726aec4c683087015cb447a",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "scripts/freelance.mjs": "d1999ad3209e075a52363851c01a87eaab69af05db26d27e5f0084381f5c328e"
+  },
+  "scope": {
+    "operation": "subcategories",
+    "gigId": null
+  },
+  "sourceResultSha256": "279cbd9e68179d8db5b5766e1931bd5706b2143de9db37471c3ae5ef720e27c3",
+  "implementationStableDuringRun": true
+}

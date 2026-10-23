@@ -29,6 +29,7 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run doctor
       - run: npm test
+      - run: npm run verify:jobs-freelance
       - run: npm run test:client-packs
       - run: npm run audit:consolidation
       - name: MyRealTrip pack compatibility

@@ -1,0 +1,54 @@
+{
+  "aggregates": {"bizUserCount": 1, "aggregateJobSectors": []},
+  "reviewPage": {
+    "currentPage": 1,
+    "lastPage": 3,
+    "perPage": 5,
+    "totalItemCount": 11,
+    "items": [
+      {
+        "buyerReview": {
+          "reviewId": 90001,
+          "userId": 812345,
+          "nickname": "익명 별칭",
+          "thumbnail": "https://cdn.example.invalid/private-thumb.jpg",
+          "comment": "완성도가 좋고 빠르게 진행됐습니다.",
+          "score": 5,
+          "createdDateTime": "2026-10-22 16:00:05"
+        },
+        "sellerReview": {
+          "reviewId": 80001,
+          "userId": 900123,
+          "nickname": "판매자 연락처 노출 금지",
+          "comment": "감사합니다. 다음에도 잘 부탁드립니다.",
+          "createdDateTime": "2026-10-22 16:02:29"
+        },
+        "orderDetail": {
+          "orderId": 1234567,
+          "gigId": 70001,
+          "productTitle": "로고 디자인 의뢰",
+          "totalPrice": 50000
+        },
+        "isReorder": false
+      },
+      {
+        "buyerReview": {
+          "reviewId": 90002,
+          "userId": 712345,
+          "nickname": "다른 별칭",
+          "comment": "요청한 부분을 꼼꼼하게 반영했습니다.",
+          "score": 4.5,
+          "createdDateTime": "2026-10-21 10:30:00"
+        },
+        "sellerReview": null,
+        "orderDetail": {
+          "orderId": 1234568,
+          "gigId": 70001,
+          "productTitle": "로고 디자인 의뢰",
+          "totalPrice": 90000
+        },
+        "isReorder": true
+      }
+    ]
+  }
+}

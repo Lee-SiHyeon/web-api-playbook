@@ -1,0 +1,214 @@
+{
+  "schema": "web-api-jobs-freelance-verification-v1",
+  "recordedAt": "2026-10-23T11:02:55.118207+00:00",
+  "baseCommit": "e2f755d5cac50a406b92c61bc389c78c4cf8c11a",
+  "implementation": {
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "lib/jobs/providers.mjs": "937559d228854181e48dbb0512c22abeaaec3917cd3dc54542adea9ad0c0feed",
+    "lib/jobs/model.mjs": "fa60e7477f92a121b81b44d904db5dedb39a45560903c39fe13f339f0909e15a",
+    "lib/jobs/boards.mjs": "af27dc37f558c75aee067417f7a9ab41b3ea082b290b339039c64d4943ffa6a9",
+    "lib/jobs/snapshots.mjs": "463891d804ef6265bbf6fd022c692d57b6500839c2405df8ee08656b2698658a",
+    "lib/freelance/kmong.mjs": "27f9440f714a595464ee88ce40cea567ee747bd294346f27dc24233eb2edb47a",
+    "lib/freelance/soomgo.mjs": "6ca3189197c7fc837bc0b9b62e65501fbf926e95a726aec4c683087015cb447a",
+    "lib/freelance/upwork.mjs": "66314e8d73f0c0c645b30e60880cc44bd6a22b611134392f71b1fedd366faea7",
+    "lib/service-operations/jobs.mjs": "e42aa2856c9745d4f7bb498acf7ebdbb3b1e8621a59ee19aaa3b0aa736222398",
+    "lib/service-operations/freelance.mjs": "9ecc695236ea49532eeec82b590ae79c9698493b5578652ceeaca3f757ae391f",
+    "lib/service-operations/index.mjs": "46389e65cab7ed6e7ba31585ee4029fe55aa782bf0062b7424ed2b6a9651336c",
+    "lib/operation-registry.mjs": "e63a3c61a97a934774f1d682a05229195200956ead92d995bf603e6f0fb1891e",
+    "scripts/jobs.mjs": "138c8ea8a006a57a415b1f38c9e232070b62bddb4ec511278d1108f446cc4290",
+    "scripts/freelance.mjs": "d1999ad3209e075a52363851c01a87eaab69af05db26d27e5f0084381f5c328e",
+    "scripts/playbook.mjs": "07559e34ce2a93bbef3e8a373137e70eee1c515ab5366b4147b6537afda0e5bd",
+    "scripts/verify-jobs-freelance.mjs": "e1011957d19e528f28b6ec085798758592eecafed9d60821bc9aa40ff4fdb5db",
+    "lib/capability-checklist.mjs": "f5df8116662abfaab68d511d5837ec47f14f41d4b8e8cb61ed30938683489bf7",
+    "package.json": "113d54f2d1a215ffc4d73d2a86efbc9ab3d787e71dccb503d47cf94238c31627",
+    "package-lock.json": "1473991dd35b4b20cc0e7b25abcceebb79b3f6945dff329b244a3276cc70c6ce"
+  },
+  "artifacts": {
+    "kmong-search-catalog-keyword_search-proof.json": "cd4c1d6046ab66ae260b260bf6f40b9b493381d5f34a5552004140f694f4376f",
+    "kmong-categories-result.json": "37aef3682b64110bd1fe221f1d2e64b54c92bddb88dcf51a2d26b143b65742a7",
+    "remotive-list-result.json": "7be7f7b2cbafd2c8b404ce6ae9219b8ccdf98626218ff87ae6d006c7fe6890a7",
+    "kmong-reviews-result.json": "9fcde8ae53435cb1ba81f4c76c8291414dd525a3757910a5fe8e3ae53fd13589",
+    "greenhouse-detail-ats-greenhouse-detail-proof.json": "0c40e96a75ae3cae714e8f32938f0601f9140fbca3e6a2de22328be1ff36b5ea",
+    "kmong-home-catalog-home-proof.json": "6dc91eb96252bd0895e88ac560991c84e37cda32c00c2c0346f1ee3d847d9f1f",
+    "soomgo-categories-result.json": "53984c72767c54e64a671a7acfdf7d7c4fd7e67808dc65fedee3154d4a1a69b5",
+    "lever-list-result.json": "b46ec745a83e41f33da141ca0e4a97c97ad3d2ea0471a17b892a881e6ed53cb5",
+    "kmong-categories-catalog-categories-proof.json": "44b4437fc7175d1b422810aed9f95a1137bb2f50af1a18a758f2f59c82f14df5",
+    "greenhouse-detail-result.json": "a0999e620679e113250d8dd0fa3d35af6704781a11b96923ccd36a881d415a31",
+    "soomgo-subcategories-categories-sub-proof.json": "58b88a1fe4468d38efaccb6c737bfea8f1c3872664c3bc4376fc77cd1ffe7c40",
+    "kmong-detail-service-detail-proof.json": "f3dfa7a5bb8ca143c31c680950d06b2a6d4d9b6a36e3af766ace0517596c9445",
+    "greenhouse-list-result.json": "f2ad98acbe48b6278be14cef2333518eb67759aa7db95c2b0d13e240d5bc966c",
+    "lever-list-ats-lever-list-proof.json": "e526c70bb69f3a1b55da7916500dccf11ee451fa1dcd74f7847e640fd6e51826",
+    "soomgo-collect-providers-search-proof.json": "9b5732543c1d236abab3cde45e5b2da151a7d1c86f77db1976affa2a013e9f7a",
+    "kmong-search-result.json": "4d2d05b360a33cb0640d3142a4fdac572c97381ae4e8015ec5ea25303c9780f9",
+    "remotive-list-jobs-remotive-list-proof.json": "ddeb04fc414f29657b5c4a73bcc7662e8791dc62ba692fd2a25f19fd696a1cc1",
+    "ashby-list-ats-ashby-list-proof.json": "b11f1bbf5107f59a8d99711e093341ac2c38f4921e8235892ea944e05554c534",
+    "greenhouse-readback-ats-greenhouse-collect-proof.json": "ca5ba442845089d460a97833d14b19a8b26a6d300b1fb252230d0f06358ebe8c",
+    "kmong-detail-result.json": "b0df2f08c73c6e28b5d35e4a0e237b8576268ece3f875f8ff6537194402a7feb",
+    "greenhouse-list-ats-greenhouse-list-proof.json": "61cb62d2e764ed7db20472e1ba904ae8096ec16a7ac2b6b53a24b451202408f6",
+    "soomgo-categories-categories-top-proof.json": "57315de131518ae97a0fc3d61d60a4bd6f5487f245123a06baf4f44b1e364f9b",
+    "soomgo-collect-result.json": "01fcd1219028a2012568990761483d537d0361c57ff0634cbea78f2669aed291",
+    "soomgo-collect-providers-collect-proof.json": "fd29d7f0664469ab5084522aba6796522dbefe2b1b34a6d962493e3189160f0c",
+    "greenhouse-readback-result.json": "e95668022995fc5a0238a127e8f2d39da6d8a314e1bdbae7f02779ad8df067b5",
+    "lever-detail-result.json": "d7238d224d0d944e5ef7b65fbc7a8b788c0c85c648c8740b3d0160a2413c4b4d",
+    "ashby-list-result.json": "55765ce6c84201a21bb851a741798ee17ef11a33dd3de97a1a47d92ad2de12b7",
+    "ashby-detail-ats-ashby-detail-proof.json": "29d4a3947c6719471dd2f3ccaa00a39da42863160895c38035abf7e51243f848",
+    "kmong-home-result.json": "37805d9c074d5e1ec9dff2d2220af195dcf1d2f2eb581affd37a494fc8e28825",
+    "kmong-reviews-reviews-page-proof.json": "3658371f85324e80191e27311e9861591f100ecb69982f1fd13b9850aa239bef",
+    "ashby-detail-result.json": "ac56e8575afec8c07b0ac8544464eb757912bbe5bd5c2cb6e0015caaa7c337ac",
+    "soomgo-subcategories-result.json": "8d9d3cc84e1e5dd31df9cd57e262fb5be9a66afb352f0c7d34c947626b6932bc",
+    "lever-list-ats-lever-collect-proof.json": "e98f462d3ca8de66c14de4858eaf383785f6e5633edf376911d546e1fe3acaba",
+    "lever-detail-ats-lever-detail-proof.json": "7f38d36987c5ab1306300eb4841feb6c221451a7bed6be1916f581e3648b9d72",
+    "local-validation.json": "e69788925c614e2fce0a5b36bbd75d587b1e5376ec942d18678ffb65d5961d5f"
+  },
+  "executions": [
+    {
+      "name": "greenhouse-list",
+      "file": "greenhouse-list-result.json",
+      "service": "jobs-public",
+      "resultCount": 19
+    },
+    {
+      "name": "greenhouse-detail",
+      "file": "greenhouse-detail-result.json",
+      "service": "jobs-public",
+      "resultCount": 1
+    },
+    {
+      "name": "greenhouse-readback",
+      "file": "greenhouse-readback-result.json",
+      "service": "jobs-public",
+      "resultCount": 19
+    },
+    {
+      "name": "lever-list",
+      "file": "lever-list-result.json",
+      "service": "jobs-public",
+      "resultCount": 79
+    },
+    {
+      "name": "lever-detail",
+      "file": "lever-detail-result.json",
+      "service": "jobs-public",
+      "resultCount": 1
+    },
+    {
+      "name": "ashby-list",
+      "file": "ashby-list-result.json",
+      "service": "jobs-public",
+      "resultCount": 69
+    },
+    {
+      "name": "ashby-detail",
+      "file": "ashby-detail-result.json",
+      "service": "jobs-public",
+      "resultCount": 1
+    },
+    {
+      "name": "remotive-list",
+      "file": "remotive-list-result.json",
+      "service": "jobs-public",
+      "resultCount": 9
+    },
+    {
+      "name": "kmong-home",
+      "file": "kmong-home-result.json",
+      "service": "kmong",
+      "resultCount": 11
+    },
+    {
+      "name": "kmong-categories",
+      "file": "kmong-categories-result.json",
+      "service": "kmong",
+      "resultCount": 35
+    },
+    {
+      "name": "kmong-search",
+      "file": "kmong-search-result.json",
+      "service": "kmong",
+      "resultCount": 40
+    },
+    {
+      "name": "kmong-detail",
+      "file": "kmong-detail-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "kmong-reviews",
+      "file": "kmong-reviews-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "soomgo-categories",
+      "file": "soomgo-categories-result.json",
+      "service": "soomgo",
+      "resultCount": 11
+    },
+    {
+      "name": "soomgo-subcategories",
+      "file": "soomgo-subcategories-result.json",
+      "service": "soomgo",
+      "resultCount": 6
+    },
+    {
+      "name": "soomgo-collect",
+      "file": "soomgo-collect-result.json",
+      "service": "soomgo",
+      "resultCount": 10
+    }
+  ],
+  "identityReadbacks": [
+    {
+      "list": "greenhouse-list",
+      "detail": "greenhouse-detail"
+    },
+    {
+      "list": "lever-list",
+      "detail": "lever-detail"
+    },
+    {
+      "list": "ashby-list",
+      "detail": "ashby-detail"
+    }
+  ],
+  "recordedCapabilities": {
+    "jobs-public": [
+      "ats.greenhouse.list",
+      "ats.greenhouse.detail",
+      "ats.greenhouse.collect",
+      "ats.lever.list",
+      "ats.lever.collect",
+      "ats.lever.detail",
+      "ats.ashby.list",
+      "ats.ashby.detail",
+      "jobs.remotive.list"
+    ],
+    "kmong": [
+      "catalog.home",
+      "catalog.categories",
+      "catalog.keyword_search",
+      "service.detail",
+      "reviews.page"
+    ],
+    "soomgo": [
+      "categories.top",
+      "categories.sub",
+      "providers.search",
+      "providers.collect"
+    ]
+  },
+  "boundaries": {
+    "privateCandidateStatus": false,
+    "reed": "implemented; approved API key/live replay unavailable",
+    "upwork": "implemented; approved OAuth token/live replay unavailable",
+    "tokyodev": "142 source-saved job cards parsed offline; current Node and fresh browser requests receive Cloudflare 403; normal authenticated session reuse not verified",
+    "collectionSemantics": "Complete is scoped to the observed source. Missing from a later list is not proof of closure.",
+    "reviewBodiesPersisted": false,
+    "businessWritesSubmitted": 0
+  },
+  "offlineImplementation": {
+    "lib/jobs/japan.mjs": "ea9e0e211e10668de4bb1cdbe5989c4a5eb991283fbf65aa078c05a0204de9bd"
+  }
+}

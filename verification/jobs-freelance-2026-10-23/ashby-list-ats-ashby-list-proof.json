@@ -1,0 +1,52 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "jobs-public",
+  "capabilityId": "ats.ashby.list",
+  "checkedAt": "2026-10-23T10:58:00.423Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 69,
+  "request": {
+    "method": "GET",
+    "origin": "https://api.ashbyhq.com",
+    "path": "/posting-api/job-board/Ashby",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 2247269,
+    "responseSha256": "f73cba6ebe027447f46795eb33996a33f5837737aca03ae7033f535d80578306",
+    "checkedAt": "2026-10-23T10:57:59.621Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "includeCompensation"
+    ]
+  },
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://developers.ashbyhq.com/docs/public-job-posting-api"
+  },
+  "implementation": {
+    "lib/jobs/model.mjs": "fa60e7477f92a121b81b44d904db5dedb39a45560903c39fe13f339f0909e15a",
+    "lib/jobs/providers.mjs": "937559d228854181e48dbb0512c22abeaaec3917cd3dc54542adea9ad0c0feed",
+    "lib/jobs/boards.mjs": "af27dc37f558c75aee067417f7a9ab41b3ea082b290b339039c64d4943ffa6a9",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "scripts/jobs.mjs": "138c8ea8a006a57a415b1f38c9e232070b62bddb4ec511278d1108f446cc4290"
+  },
+  "scope": {
+    "provider": "ashby",
+    "board": "Ashby",
+    "region": "global",
+    "filters": {
+      "includeCompensation": true,
+      "listedOnly": true
+    }
+  },
+  "sourceResultSha256": "a00067a2eb650ca35a898c40d465f1cb9ea45ccd65322ebcdc41b734ee1b1cbb",
+  "implementationStableDuringRun": true
+}

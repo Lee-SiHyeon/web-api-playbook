@@ -1,0 +1,49 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "kmong",
+  "capabilityId": "reviews.page",
+  "checkedAt": "2026-10-23T10:58:06.934Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 1,
+  "request": {
+    "method": "GET",
+    "origin": "https://api.kmong.com",
+    "path": "/order-app/order/v1/reviews/gigs/705123",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 6309,
+    "responseSha256": "33e7d6fe134ffff96bdb30ad61806319bdfaa972466d3534fafa24df11f67de9",
+    "checkedAt": "2026-10-23T10:58:06.934Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "page",
+      "perPage",
+      "sortType"
+    ]
+  },
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "sourceURL": "https://api.kmong.com/order-app/order/v1/reviews/gigs/705123",
+    "responseFormat": "json_response",
+    "sourceSha256": "33e7d6fe134ffff96bdb30ad61806319bdfaa972466d3534fafa24df11f67de9",
+    "projectionSha256": "1a8673faf7cebdf602f584ed4b28c6e4856f4823e9a10cefc30f82f5330c5b10"
+  },
+  "implementation": {
+    "lib/freelance/kmong.mjs": "27f9440f714a595464ee88ce40cea567ee747bd294346f27dc24233eb2edb47a",
+    "scripts/freelance.mjs": "d1999ad3209e075a52363851c01a87eaab69af05db26d27e5f0084381f5c328e"
+  },
+  "scope": {
+    "operation": "reviews",
+    "gigId": "705123"
+  },
+  "sourceResultSha256": "8c7f8381ed45fc541f62ac5951e69cb3d2871fe201465f8c4cd1d59fbd1483a4",
+  "implementationStableDuringRun": true
+}

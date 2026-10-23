@@ -1,0 +1,70 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "jobs-public",
+  "provider": "greenhouse",
+  "operation": "detail",
+  "checkedAt": "2026-10-23T10:58:00.861Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "8126988",
+        "key": "greenhouse:global:greenhouse:8126988",
+        "title": "Commercial Counsel",
+        "company": "Greenhouse",
+        "url": "https://job-boards.greenhouse.io/greenhouse/jobs/8126988?gh_jid=8126988",
+        "location": "Eastern Timezone",
+        "workplaceType": null,
+        "employmentType": null,
+        "compensation": null,
+        "sourceFacts": null,
+        "descriptionSha256": "3fbaf9db6a20b305cb6fb2d8068c4c5755e483dc6b8d230dd6bf42b177e1e379"
+      }
+    ]
+  },
+  "dataSha256": "a5f445aa08d822ebfbf4cb7b00932e6f68ca7141bf66fc2f5d96c291cbd5d58e",
+  "coverage": {
+    "complete": true,
+    "reason": "provider_detail_read",
+    "returned": 1,
+    "sourceTotal": 1,
+    "providerTotal": null,
+    "filteredOut": 0,
+    "next": null,
+    "pages": 1
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://boards-api.greenhouse.io",
+      "path": "/v1/boards/greenhouse/jobs/8126988",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 13625,
+      "responseSha256": "7134ecd7cbee0a9e94abd4821a6903c77617688bb6308dc8faced23f45083191",
+      "checkedAt": "2026-10-23T10:58:00.558Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "queryFields": [
+        "content"
+      ]
+    }
+  ],
+  "runner": "scripts/playbook.mjs",
+  "sourceResultSha256": "aa21e320ace0524999278764ae5fa882d29c3353b8d3ff03d21448a0b21b1071"
+}
