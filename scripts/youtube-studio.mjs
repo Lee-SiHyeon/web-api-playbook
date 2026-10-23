@@ -213,8 +213,32 @@ try {
       await shot('original'); await clickText('게시'); await sleep(4000);
       log({ step: 'original', ok: !!rows });
     }
+    // Resume (2026-10-23): a run that stopped mid-track leaves the language row with title/description 게시됨 but no captions.
+    // An existing row is not added again: captions 게시됨 -> skip; captions "–" -> hover the row's captions cell, its 추가 opens the
+    // same caption flow. (Adding the language again is impossible: the 언어 추가 menu no longer lists it.)
+    const rowState = (label) => ev(`(() => { const tr = [...document.querySelectorAll('ytgn-video-translation-row tr, tr')].find(r => (r.querySelector('.tablecell-language')?.innerText || '').trim() === ${JSON.stringify(label)});
+      if (!tr) return null; const c = tr.querySelector('.tablecell-captions'); const b = c.getBoundingClientRect(); c.scrollIntoView({ block: 'center' });
+      const b2 = c.getBoundingClientRect(); return { captions: c.innerText.trim(), meta: (tr.querySelector('.tablecell-metadata')?.innerText || '').trim(), x: b2.left + b2.width / 2, y: b2.top + b2.height / 2 }; })()`);
     for (const tr of job.captions?.tracks || []) {
       await go();
+      const existing = await rowState(tr.label);
+      if (existing && /게시됨/.test(existing.captions)) { log({ step: 'track', label: tr.label, skipped: 'already published', row: `${existing.captions} ${existing.meta}` }); continue; }
+      if (existing) {
+        // the language name opens the same editor the 언어 추가 path lands in (title/description + "수동 자막 · 추가")
+        const name = await ev(`(() => { const tr = [...document.querySelectorAll('ytgn-video-translation-row tr, tr')].find(r => (r.querySelector('.tablecell-language')?.innerText || '').trim() === ${JSON.stringify(tr.label)});
+          const b = tr.querySelector('.tablecell-language button') || tr.querySelector('.tablecell-language'); const r = b.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; })()`);
+        await click(name); await sleep(2500);
+        const lbl = await pointOfText('수동 자막'); if (!lbl) fail('NO_CAPTION_ROW', { label: tr.label, resumed: true });
+        const add = await ev(`(() => { const {vis, all} = ${H}; const c = all().filter(e => (e.innerText || '').trim() === '추가').map(e => [e, vis(e)]).filter(x => x[1] && Math.abs(x[1][1] - ${lbl[1]}) < 20); c.sort((a, b) => a[0].querySelectorAll('*').length - b[0].querySelectorAll('*').length); return c[0] ? c[0][1] : null; })()`);
+        if (!add) fail('NO_ROW_CAPTION_ADD', { label: tr.label });
+        await click(add); await sleep(1500);
+        if (await pointOfText('변경사항 저장')) { await clickText('변경사항 저장'); await sleep(3000); }
+        const rows = await uploadInEditor(tr.srt);
+        await shot(tr.label); await clickText('게시'); await sleep(4000);
+        const row = await ev(`[...document.querySelectorAll('tr, .row')].map(e => e.innerText.replace(/\\s+/g, ' ').trim()).find(t => t.startsWith(${JSON.stringify(tr.label)})) || ''`);
+        log({ step: 'track', label: tr.label, rows, row, resumed: true });
+        continue;
+      }
       await clickText('언어 추가'); await sleep(1200);
       if (!(await pickMenuItem(tr.label))) fail('NO_LANG', { label: tr.label });
       await sleep(2500);

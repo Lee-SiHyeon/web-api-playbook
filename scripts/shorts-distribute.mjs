@@ -37,7 +37,7 @@ const log = (o) => console.log(JSON.stringify(o));
 
 // run one helper script; its LAST JSON line is the result
 function run(script, args, timeoutMs = 600000) {
-  if (opt.dry) { log({ dry: script, args }); return { ok: true, dry: true }; }
+  if (opt.dry) { log({ dry: script, args }); return { ok: true, dry: true, lines: [] }; }
   const r = spawnSync(process.execPath, [path.join(HERE, script), ...args], { encoding: 'utf8', timeout: timeoutMs, maxBuffer: 32 << 20 });
   const lines = String(r.stdout || '').trim().split(/\r?\n/).filter((l) => l.startsWith('{'));
   const parsed = lines.map((l) => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
@@ -89,7 +89,7 @@ for (const { s, i } of list) {
     x.youtube.pinned = /고정함/.test(r.last?.badge || '') || !!r.dry; save(); log({ id: s.id, ch: 'youtube-pin', ...(r.last || {}) });
   }
   if (channels.includes('naver-clip') && !x.naverClip?.ok) {
-    const r = run('naver-clip-upload.mjs', [videoOf(s), write(`${s.id}.clip.txt`, clipText(s)), `--blog=${M.naverBlogTitle}`, '--ai']);
+    const r = run('naver-clip-upload.mjs', [videoOf(s), write(`${s.id}.clip.txt`, clipText(s)), ...(M.naverBlogTitle ? [`--blog=${M.naverBlogTitle}`] : []), '--ai']);
     x.naverClip = r.last || { ok: !!r.dry }; save(); log({ id: s.id, ch: 'naver-clip', ...x.naverClip });
   }
   if (channels.includes('tiktok') && !x.tiktok?.ok) {

@@ -1,7 +1,7 @@
 # Google Flow Music (Lyria 3.5) 사용법·요금·약관 관측 — 2026-10-20
 
 대상: https://www.flowmusic.app/ (Google Flow Music, Lyria 3.5 음악 모델, Veo 뮤직비디오)
-계정: shyeon0528@gmail.com (Google 로그인 완료, 요금제는 FREE 유지)
+계정: 운영자 Google 계정 (로그인 완료, 요금제는 FREE 유지)
 
 ## 1. 로그인·동의 흐름
 
