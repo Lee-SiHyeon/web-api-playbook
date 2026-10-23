@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "operationId": "settings.update",
+  "observedAt": "2026-10-06T02:05:29.068915+00:00",
+  "ownerVerified": true,
+  "source": {
+    "url": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+    "sha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+    "functionName": "settingsSetUserSettingsRaw",
+    "method": "POST",
+    "path": "/rest/user-settings",
+    "declaredHeaders": [
+      "Content-Type"
+    ],
+    "mutationSource": "first-party settings preference setter preserves the current preference map and changes the selected preference"
+  },
+  "target": {
+    "preferenceName": "autoWrapLongLinesCode",
+    "initialValue": false,
+    "temporaryValue": true,
+    "restoredValue": false
+  },
+  "directChange": {
+    "state": "completed",
+    "verified": true,
+    "httpStatus": 200,
+    "readbackStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 837,
+    "responseTopLevelFieldNames": [
+      "agentCustomizations",
+      "allowAutoShare",
+      "allowCompanionNotifications",
+      "allowGrokFinishedNotification",
+      "allowShareIndexing",
+      "allowXPersonalization",
+      "audioRefConsent",
+      "enableMemory",
+      "excludeFromTraining",
+      "mutedBotPushAgentIds",
+      "preferences"
+    ],
+    "requestHeaderNames": [
+      "content-type",
+      "cookie"
+    ],
+    "cookieNames": [
+      "sso"
+    ],
+    "transportHttpVersion": "h2",
+    "tlsVerified": true,
+    "trustEnv": false,
+    "redirectsFollowed": false,
+    "explicitRetries": 0,
+    "attemptCount": 1,
+    "requestDigest": "2dfc34b1bcd343ff60248fb5773428ffc83331e5f8c9d4b9dd17ea92bb938bf7",
+    "intentDigest": "ebc74819aecae68a4942902761a32f959a4f05884b1cd9ae902310ef7db5e005",
+    "parsedResponseDigest": "239ff85ff9c9287c3fd0bb87f18c224705a839cef14e906546ce2bb10425a831",
+    "responseDigestPersisted": false,
+    "readback": {
+      "preferenceMatched": true,
+      "otherPreferencesUnchanged": true,
+      "otherSettingsUnchanged": true
+    }
+  },
+  "restore": {
+    "state": "completed",
+    "verified": true,
+    "httpStatus": 200,
+    "readbackStatus": 200,
+    "requestDigest": "a49f739ca6d6378d71c874e6f23c47b10b84f93a472774ecfb44d004bcc494b4",
+    "intentDigest": "7d00b4aafa24b4d12e5ea4b8c5a724e54b6b0306c6eb1f4de759beddd0384e33",
+    "readback": {
+      "preferenceMatched": true,
+      "otherPreferencesUnchanged": true,
+      "otherSettingsUnchanged": true
+    }
+  },
+  "finalValueVerifiedFalse": true,
+  "rawIdentityPersisted": false,
+  "rawCookiePersisted": false,
+  "rawSettingsPersisted": false
+}

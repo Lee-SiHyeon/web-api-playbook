@@ -1,0 +1,1321 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "pageRoleMatched": true,
+  "readOnlyCandidateReads": [
+    {
+      "goalTimeCorrelatedCandidate": true,
+      "candidateRowIndex": 1,
+      "candidateRowIdFieldIndex": 0,
+      "candidateRowIdLength": 18,
+      "candidateRouteIdLength": 16,
+      "candidateRowIdPreservedVerbatim": true,
+      "candidatePrefixRelationVerified": true,
+      "rowCorrelationFieldPath": [
+        0
+      ],
+      "candidateLinkBinding": "literal_c_prefix_bijection",
+      "candidateLinkVisible": true,
+      "candidateRouteReadOpened": true,
+      "timeWindowHints": [
+        "video"
+      ],
+      "timeDeltaFromWindowMidpointSeconds": 0.911,
+      "candidateDetailRequestCount": 1,
+      "detailRequests": [
+        {
+          "timeWindowHints": [
+            "video"
+          ],
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "method": "POST",
+          "origin": "https://gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeys": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFields": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 200,
+          "contentType": "application/x-www-form-urlencoded",
+          "requestOuterFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      "string",
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestInnerFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      {
+                        "type": "array",
+                        "length": 8,
+                        "items": [
+                          "string",
+                          "number",
+                          "null",
+                          "number"
+                        ]
+                      },
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestArgsTemplate": {
+            "length": 8,
+            "arguments": [
+              "{{apiConversationId}}",
+              10,
+              null,
+              1,
+              [
+                1
+              ],
+              [
+                4
+              ],
+              null,
+              1
+            ],
+            "identifierPath": [
+              0
+            ]
+          },
+          "candidateRowIdLength": 18,
+          "candidateRouteIdLength": 16,
+          "candidateRowIdMatchedInMemory": true,
+          "triggeredBySelectedGoalTimeHistoryLink": true
+        }
+      ],
+      "detailResponses": [
+        {
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 106458,
+          "responseSha256": "d75a72994f7045bdcb7857125fcbe08ed86d408351dc961b59c5d1c65089b3f8",
+          "framing": "utf16_length_frames",
+          "responseShape": [
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 7,
+                  "items": [
+                    "string",
+                    "string",
+                    {
+                      "type": "array",
+                      "length": 4,
+                      "items": [
+                        {
+                          "type": "array",
+                          "length": 1,
+                          "items": [
+                            {
+                              "type": "array",
+                              "length": 5,
+                              "items": [
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit"
+                              ]
+                            }
+                          ]
+                        },
+                        "null",
+                        "null",
+                        {
+                          "type": "array",
+                          "length": 3,
+                          "items": [
+                            "null",
+                            "null",
+                            {
+                              "type": "array",
+                              "length": 1,
+                              "items": [
+                                "depth_limit"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "null"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 2,
+                  "items": [
+                    "string",
+                    "number"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "length": 4,
+                  "items": [
+                    "string",
+                    "number",
+                    "string",
+                    "number"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 5,
+                  "items": [
+                    "string",
+                    "number",
+                    "null",
+                    "null"
+                  ]
+                }
+              ]
+            }
+          ],
+          "responseFrameCount": 3,
+          "responseRpcIds": [
+            "hNvQHb"
+          ],
+          "statusErrorEnums": [],
+          "taskMessageExactHashMatches": [
+            "video"
+          ],
+          "candidateConversationIdPresentInResponse": true
+        }
+      ],
+      "matchedTaskCapabilities": [
+        "video"
+      ],
+      "taskReadbacks": [
+        {
+          "capability": "video",
+          "domTaskMessageExactMatch": true,
+          "responseTaskMessageExactHashMatch": true,
+          "taskMessageVerified": true,
+          "taskMediaUrlCandidateCount": 5,
+          "taskMediaReferences": [
+            {
+              "origin": "https://contribution.usercontent.google.com",
+              "pathFamily": "/download",
+              "queryKeyNames": [
+                "c",
+                "filename",
+                "opi"
+              ]
+            },
+            {
+              "origin": "https://contribution.usercontent.google.com",
+              "pathFamily": "/download",
+              "queryKeyNames": [
+                "c",
+                "filename",
+                "opi"
+              ]
+            },
+            {
+              "origin": "https://lh3.googleusercontent.com",
+              "pathFamily": "/gg/{id}",
+              "queryKeyNames": []
+            },
+            {
+              "origin": "https://lh3.googleusercontent.com",
+              "pathFamily": "/gg/{id}",
+              "queryKeyNames": []
+            },
+            {
+              "origin": "https://www.gstatic.com",
+              "pathFamily": "/images/branding/productlogos/gemini_2025_blue/v1/192px.svg",
+              "queryKeyNames": []
+            }
+          ],
+          "selectedAssetReference": {
+            "origin": "https://contribution.usercontent.google.com",
+            "pathFamily": "/download",
+            "queryKeyNames": [
+              "c",
+              "filename",
+              "opi"
+            ]
+          },
+          "blockedOriginCandidateCount": 0,
+          "artifactFetchAttempted": true,
+          "artifactReadback": {
+            "source": "browser_network",
+            "httpStatus": 200,
+            "mime": "video/mp4",
+            "bytes": 1357034,
+            "redirects": [],
+            "redirectCount": 0,
+            "artifact": {
+              "saved": true,
+              "filename": "gemini-video-neutral-geometry-20261006.mp4",
+              "mime": "video/mp4",
+              "bytes": 1357034,
+              "magicVerified": true,
+              "independentFileReadback": true
+            }
+          }
+        }
+      ],
+      "detailResponseIdBound": true
+    },
+    {
+      "goalTimeCorrelatedCandidate": true,
+      "candidateRowIndex": 2,
+      "candidateRowIdFieldIndex": 0,
+      "candidateRowIdLength": 18,
+      "candidateRouteIdLength": 16,
+      "candidateRowIdPreservedVerbatim": true,
+      "candidatePrefixRelationVerified": true,
+      "rowCorrelationFieldPath": [
+        0
+      ],
+      "candidateLinkBinding": "literal_c_prefix_bijection",
+      "candidateLinkVisible": true,
+      "candidateRouteReadOpened": true,
+      "timeWindowHints": [
+        "image"
+      ],
+      "timeDeltaFromWindowMidpointSeconds": 2.319,
+      "candidateDetailRequestCount": 1,
+      "detailRequests": [
+        {
+          "timeWindowHints": [
+            "image"
+          ],
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "method": "POST",
+          "origin": "https://gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeys": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFields": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 200,
+          "contentType": "application/x-www-form-urlencoded",
+          "requestOuterFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      "string",
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestInnerFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      {
+                        "type": "array",
+                        "length": 8,
+                        "items": [
+                          "string",
+                          "number",
+                          "null",
+                          "number"
+                        ]
+                      },
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestArgsTemplate": {
+            "length": 8,
+            "arguments": [
+              "{{apiConversationId}}",
+              10,
+              null,
+              1,
+              [
+                1
+              ],
+              [
+                4
+              ],
+              null,
+              1
+            ],
+            "identifierPath": [
+              0
+            ]
+          },
+          "candidateRowIdLength": 18,
+          "candidateRouteIdLength": 16,
+          "candidateRowIdMatchedInMemory": true,
+          "triggeredBySelectedGoalTimeHistoryLink": true
+        }
+      ],
+      "detailResponses": [
+        {
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 1033,
+          "responseSha256": "286a9a56ee1c77e3282578947ea191a768cb4eeabdbdd3975ce299df97baf656",
+          "framing": "utf16_length_frames",
+          "responseShape": [
+            {
+              "type": "array",
+              "length": 3,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 7,
+                  "items": [
+                    "string",
+                    "string",
+                    {
+                      "type": "array",
+                      "length": 4,
+                      "items": [
+                        {
+                          "type": "array",
+                          "length": 1,
+                          "items": [
+                            {
+                              "type": "array",
+                              "length": 5,
+                              "items": [
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit"
+                              ]
+                            }
+                          ]
+                        },
+                        "null",
+                        "null",
+                        {
+                          "type": "array",
+                          "length": 0,
+                          "items": []
+                        }
+                      ]
+                    },
+                    "null"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "length": 2,
+                  "items": [
+                    "string",
+                    "number"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "length": 4,
+                  "items": [
+                    "string",
+                    "number",
+                    "string",
+                    "number"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 5,
+                  "items": [
+                    "string",
+                    "number",
+                    "null",
+                    "null"
+                  ]
+                }
+              ]
+            }
+          ],
+          "responseFrameCount": 2,
+          "responseRpcIds": [
+            "hNvQHb"
+          ],
+          "statusErrorEnums": [],
+          "taskMessageExactHashMatches": [
+            "image"
+          ],
+          "candidateConversationIdPresentInResponse": true
+        }
+      ],
+      "matchedTaskCapabilities": [
+        "image"
+      ],
+      "taskReadbacks": [
+        {
+          "capability": "image",
+          "domTaskMessageExactMatch": true,
+          "responseTaskMessageExactHashMatch": true,
+          "taskMessageVerified": true,
+          "taskMediaUrlCandidateCount": 0,
+          "taskMediaReferences": [],
+          "selectedAssetReference": null,
+          "blockedOriginCandidateCount": 0,
+          "artifactFetchAttempted": false,
+          "artifactReadback": null
+        }
+      ],
+      "detailResponseIdBound": true
+    }
+  ],
+  "verifiedArtifacts": [
+    {
+      "capability": "video",
+      "filename": "gemini-video-neutral-geometry-20261006.mp4",
+      "mime": "video/mp4",
+      "bytes": 1357034,
+      "magicVerified": true,
+      "independentFileReadback": true
+    }
+  ],
+  "rawIdsPersisted": false,
+  "rawResponseBodiesPersisted": false,
+  "signedUrlValuesPersisted": false,
+  "listResponse": {
+    "rpcId": "MaZiqc",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 6228,
+    "framing": "utf16_length_frames",
+    "summaryCount": 28,
+    "timestampFieldPath": [
+      5,
+      0
+    ],
+    "candidateIdFieldIndex": 0
+  },
+  "candidateSelection": {
+    "windowRule": "dispatch_start_minus_10s_through_response_plus_60s",
+    "candidateRowsInWindows": 2,
+    "validCandidateRows": 2,
+    "detailReadLimit": 2,
+    "detailReadCount": 2,
+    "priorDetailReadCount": 3,
+    "totalDetailReadCountWithinAuthorization": 5,
+    "candidateRowsMissingRawId": 0
+  },
+  "historyReadContract": {
+    "rpcId": "hNvQHb",
+    "responseSelector": "wrb.fr[0]=='wrb.fr' && wrb.fr[1]=='hNvQHb'",
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "pathFamily": "/_/BardChatUi/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "formFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "contentType": "application/x-www-form-urlencoded",
+    "rpcArgsTemplate": {
+      "length": 8,
+      "arguments": [
+        "{{apiConversationId}}",
+        10,
+        null,
+        1,
+        [
+          1
+        ],
+        [
+          4
+        ],
+        null,
+        1
+      ],
+      "identifierPath": [
+        0
+      ]
+    }
+  },
+  "candidateReads": [
+    {
+      "goalTimeCorrelatedCandidate": true,
+      "candidateRowIndex": 1,
+      "candidateRowIdFieldIndex": 0,
+      "candidateRowIdLength": 18,
+      "candidateRouteIdLength": 16,
+      "candidateRowIdPreservedVerbatim": true,
+      "candidatePrefixRelationVerified": true,
+      "rowCorrelationFieldPath": [
+        0
+      ],
+      "candidateLinkBinding": "literal_c_prefix_bijection",
+      "candidateLinkVisible": true,
+      "candidateRouteReadOpened": true,
+      "timeWindowHints": [
+        "video"
+      ],
+      "timeDeltaFromWindowMidpointSeconds": 0.911,
+      "candidateDetailRequestCount": 1,
+      "detailRequests": [
+        {
+          "timeWindowHints": [
+            "video"
+          ],
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "method": "POST",
+          "origin": "https://gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeys": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFields": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 200,
+          "contentType": "application/x-www-form-urlencoded",
+          "requestOuterFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      "string",
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestInnerFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      {
+                        "type": "array",
+                        "length": 8,
+                        "items": [
+                          "string",
+                          "number",
+                          "null",
+                          "number"
+                        ]
+                      },
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestArgsTemplate": {
+            "length": 8,
+            "arguments": [
+              "{{apiConversationId}}",
+              10,
+              null,
+              1,
+              [
+                1
+              ],
+              [
+                4
+              ],
+              null,
+              1
+            ],
+            "identifierPath": [
+              0
+            ]
+          },
+          "candidateRowIdLength": 18,
+          "candidateRouteIdLength": 16,
+          "candidateRowIdMatchedInMemory": true,
+          "triggeredBySelectedGoalTimeHistoryLink": true
+        }
+      ],
+      "detailResponses": [
+        {
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 106458,
+          "responseSha256": "d75a72994f7045bdcb7857125fcbe08ed86d408351dc961b59c5d1c65089b3f8",
+          "framing": "utf16_length_frames",
+          "responseShape": [
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 7,
+                  "items": [
+                    "string",
+                    "string",
+                    {
+                      "type": "array",
+                      "length": 4,
+                      "items": [
+                        {
+                          "type": "array",
+                          "length": 1,
+                          "items": [
+                            {
+                              "type": "array",
+                              "length": 5,
+                              "items": [
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit"
+                              ]
+                            }
+                          ]
+                        },
+                        "null",
+                        "null",
+                        {
+                          "type": "array",
+                          "length": 3,
+                          "items": [
+                            "null",
+                            "null",
+                            {
+                              "type": "array",
+                              "length": 1,
+                              "items": [
+                                "depth_limit"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "null"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 2,
+                  "items": [
+                    "string",
+                    "number"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "length": 4,
+                  "items": [
+                    "string",
+                    "number",
+                    "string",
+                    "number"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 5,
+                  "items": [
+                    "string",
+                    "number",
+                    "null",
+                    "null"
+                  ]
+                }
+              ]
+            }
+          ],
+          "responseFrameCount": 3,
+          "responseRpcIds": [
+            "hNvQHb"
+          ],
+          "statusErrorEnums": [],
+          "taskMessageExactHashMatches": [
+            "video"
+          ],
+          "candidateConversationIdPresentInResponse": true
+        }
+      ],
+      "matchedTaskCapabilities": [
+        "video"
+      ],
+      "taskReadbacks": [
+        {
+          "capability": "video",
+          "domTaskMessageExactMatch": true,
+          "responseTaskMessageExactHashMatch": true,
+          "taskMessageVerified": true,
+          "taskMediaUrlCandidateCount": 5,
+          "taskMediaReferences": [
+            {
+              "origin": "https://contribution.usercontent.google.com",
+              "pathFamily": "/download",
+              "queryKeyNames": [
+                "c",
+                "filename",
+                "opi"
+              ]
+            },
+            {
+              "origin": "https://contribution.usercontent.google.com",
+              "pathFamily": "/download",
+              "queryKeyNames": [
+                "c",
+                "filename",
+                "opi"
+              ]
+            },
+            {
+              "origin": "https://lh3.googleusercontent.com",
+              "pathFamily": "/gg/{id}",
+              "queryKeyNames": []
+            },
+            {
+              "origin": "https://lh3.googleusercontent.com",
+              "pathFamily": "/gg/{id}",
+              "queryKeyNames": []
+            },
+            {
+              "origin": "https://www.gstatic.com",
+              "pathFamily": "/images/branding/productlogos/gemini_2025_blue/v1/192px.svg",
+              "queryKeyNames": []
+            }
+          ],
+          "selectedAssetReference": {
+            "origin": "https://contribution.usercontent.google.com",
+            "pathFamily": "/download",
+            "queryKeyNames": [
+              "c",
+              "filename",
+              "opi"
+            ]
+          },
+          "blockedOriginCandidateCount": 0,
+          "artifactFetchAttempted": true,
+          "artifactReadback": {
+            "source": "browser_network",
+            "httpStatus": 200,
+            "mime": "video/mp4",
+            "bytes": 1357034,
+            "redirects": [],
+            "redirectCount": 0,
+            "artifact": {
+              "saved": true,
+              "filename": "gemini-video-neutral-geometry-20261006.mp4",
+              "mime": "video/mp4",
+              "bytes": 1357034,
+              "magicVerified": true,
+              "independentFileReadback": true
+            }
+          }
+        }
+      ],
+      "detailResponseIdBound": true
+    },
+    {
+      "goalTimeCorrelatedCandidate": true,
+      "candidateRowIndex": 2,
+      "candidateRowIdFieldIndex": 0,
+      "candidateRowIdLength": 18,
+      "candidateRouteIdLength": 16,
+      "candidateRowIdPreservedVerbatim": true,
+      "candidatePrefixRelationVerified": true,
+      "rowCorrelationFieldPath": [
+        0
+      ],
+      "candidateLinkBinding": "literal_c_prefix_bijection",
+      "candidateLinkVisible": true,
+      "candidateRouteReadOpened": true,
+      "timeWindowHints": [
+        "image"
+      ],
+      "timeDeltaFromWindowMidpointSeconds": 2.319,
+      "candidateDetailRequestCount": 1,
+      "detailRequests": [
+        {
+          "timeWindowHints": [
+            "image"
+          ],
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "method": "POST",
+          "origin": "https://gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeys": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFields": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 200,
+          "contentType": "application/x-www-form-urlencoded",
+          "requestOuterFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      "string",
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestInnerFReqShape": {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 4,
+                    "items": [
+                      "string",
+                      {
+                        "type": "array",
+                        "length": 8,
+                        "items": [
+                          "string",
+                          "number",
+                          "null",
+                          "number"
+                        ]
+                      },
+                      "null",
+                      "string"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "requestArgsTemplate": {
+            "length": 8,
+            "arguments": [
+              "{{apiConversationId}}",
+              10,
+              null,
+              1,
+              [
+                1
+              ],
+              [
+                4
+              ],
+              null,
+              1
+            ],
+            "identifierPath": [
+              0
+            ]
+          },
+          "candidateRowIdLength": 18,
+          "candidateRouteIdLength": 16,
+          "candidateRowIdMatchedInMemory": true,
+          "triggeredBySelectedGoalTimeHistoryLink": true
+        }
+      ],
+      "detailResponses": [
+        {
+          "rpcIds": [
+            "hNvQHb"
+          ],
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 1033,
+          "responseSha256": "286a9a56ee1c77e3282578947ea191a768cb4eeabdbdd3975ce299df97baf656",
+          "framing": "utf16_length_frames",
+          "responseShape": [
+            {
+              "type": "array",
+              "length": 3,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 7,
+                  "items": [
+                    "string",
+                    "string",
+                    {
+                      "type": "array",
+                      "length": 4,
+                      "items": [
+                        {
+                          "type": "array",
+                          "length": 1,
+                          "items": [
+                            {
+                              "type": "array",
+                              "length": 5,
+                              "items": [
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit",
+                                "depth_limit"
+                              ]
+                            }
+                          ]
+                        },
+                        "null",
+                        "null",
+                        {
+                          "type": "array",
+                          "length": 0,
+                          "items": []
+                        }
+                      ]
+                    },
+                    "null"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "length": 2,
+                  "items": [
+                    "string",
+                    "number"
+                  ]
+                },
+                {
+                  "type": "array",
+                  "length": 4,
+                  "items": [
+                    "string",
+                    "number",
+                    "string",
+                    "number"
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 5,
+                  "items": [
+                    "string",
+                    "number",
+                    "null",
+                    "null"
+                  ]
+                }
+              ]
+            }
+          ],
+          "responseFrameCount": 2,
+          "responseRpcIds": [
+            "hNvQHb"
+          ],
+          "statusErrorEnums": [],
+          "taskMessageExactHashMatches": [
+            "image"
+          ],
+          "candidateConversationIdPresentInResponse": true
+        }
+      ],
+      "matchedTaskCapabilities": [
+        "image"
+      ],
+      "taskReadbacks": [
+        {
+          "capability": "image",
+          "domTaskMessageExactMatch": true,
+          "responseTaskMessageExactHashMatch": true,
+          "taskMessageVerified": true,
+          "taskMediaUrlCandidateCount": 0,
+          "taskMediaReferences": [],
+          "selectedAssetReference": null,
+          "blockedOriginCandidateCount": 0,
+          "artifactFetchAttempted": false,
+          "artifactReadback": null
+        }
+      ],
+      "detailResponseIdBound": true
+    }
+  ],
+  "blockedPostFamilies": [],
+  "recordedAt": "2026-10-05T19:39:17.012337+00:00",
+  "scriptSha256": "632fa125593f56e91a69efbf0b73ecb197759628a2901ae8b8c9da6e93337d25"
+}

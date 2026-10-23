@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "properties": {
+    "comments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "accountId": { "type": "string", "pattern": "^[0-9]{1,25}$" },
+          "comment": { "type": "string", "minLength": 1, "maxLength": 80 }
+        },
+        "required": ["accountId", "comment"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["comments"],
+  "additionalProperties": false
+}

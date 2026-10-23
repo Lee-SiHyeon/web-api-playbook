@@ -1,0 +1,96 @@
+{
+  "schema": "gemini-settings-update-live-verification-v1",
+  "service": "gemini-web",
+  "operation": "settings_update",
+  "recordedAt": "2026-10-06T10:34:19Z",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-settings-update-20261006",
+  "contractFragment": "discovery/gemini-settings-update-contract-fragment-2026-10-06.json",
+  "ownerProbe": {
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "expectedOwnerPersisted": false
+  },
+  "baselineRead": {
+    "operation": "settings_read",
+    "rpcId": "ESY5D",
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 157,
+    "responseSha256": "312ef04040a9329a0dddac5dc30b904bf9b332ce86d9fad3a60b2090b4a4f27b",
+    "selectorIds": [41],
+    "fieldId": 41,
+    "valueType": "boolean",
+    "value": true
+  },
+  "sourceEncoding": {
+    "sourceBundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+    "rpcId": "L5adhe",
+    "valueFieldId": 41,
+    "denseArrayIndex": 40,
+    "denseVectorLength": 41,
+    "field3Selector": [41],
+    "valueEncoding": "numeric_boolean_0_or_1"
+  },
+  "controlledTest": {
+    "callerIntentBase": "gemini-side-nav-settings-corrected-20261006-v2",
+    "preferenceKey": "side_nav_open_by_default",
+    "baselineValue": true,
+    "testValue": false,
+    "autoRetry": false,
+    "apply": {
+      "requestDispatchCount": 1,
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseBytes": 144,
+      "responseSha256": "58e767ee9bd55fcb8ca050635f2a4490419714bc6e3a992bdd906badd6b83df9",
+      "responseRpcMatched": true,
+      "providerErrorFieldOne": null,
+      "readback": {
+        "operation": "settings_read",
+        "fieldId": 41,
+        "found": true,
+        "valueType": "boolean",
+        "value": false,
+        "matchesTestValue": true
+      },
+      "journalState": "reconciled"
+    },
+    "restore": {
+      "requestDispatchCount": 1,
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseBytes": 145,
+      "responseSha256": "a022eb28427fb357a32efc9970cf8e65ce64c2306e6605d90aa8c5d884dc0a36",
+      "responseRpcMatched": true,
+      "providerErrorFieldOne": null,
+      "readback": {
+        "operation": "settings_read",
+        "fieldId": 41,
+        "found": true,
+        "valueType": "boolean",
+        "value": true,
+        "matchesOriginalBaseline": true
+      },
+      "journalState": "reconciled"
+    },
+    "finalStateRestored": true
+  },
+  "browserCapture": {
+    "settingsReadRewrittenToSelectorIds": [41],
+    "startupUpdatePostsBlocked": 8,
+    "startupUpdateAbortAcknowledged": 8,
+    "sidebarOpenCloseL5adheRequestsObserved": 0,
+    "browserBusinessWrites": 0,
+    "uiRestoredToOriginalSidebarState": true
+  },
+  "scope": {
+    "preferenceKeysUpdated": ["side_nav_open_by_default"],
+    "privacyActivityMemoryPersonalContextOrSecurityPreferencesTouched": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "otherPreferenceValuesPersisted": false
+  }
+}

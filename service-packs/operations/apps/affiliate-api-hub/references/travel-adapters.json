@@ -1,0 +1,629 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T01:05:00Z",
+  "purpose": "Travel-content and affiliate adapter discovery registry. Presence here does not mean credentials, commercial approval, or live replay exist.",
+  "canonicalCapabilities": [
+    "programs.list",
+    "links.create",
+    "transactions.list",
+    "reports.summary",
+    "payouts.list",
+    "flights.search.live",
+    "flights.search.indicative",
+    "flights.price_trends",
+    "flights.autosuggest",
+    "lodging.search",
+    "lodging.content",
+    "lodging.reviews",
+    "cars.search",
+    "activities.search",
+    "activities.content",
+    "transfers.search",
+    "rail.feed",
+    "esim.catalog",
+    "insurance.search",
+    "destination.content",
+    "weather.forecast",
+    "currency.rates",
+    "official_reservation.watch",
+    "availability.get",
+    "orders.report"
+  ],
+  "adapters": [
+    {
+      "id": "travelpayouts",
+      "name": "Travelpayouts",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "flights",
+        "lodging",
+        "activities",
+        "transfers",
+        "rail",
+        "esim"
+      ],
+      "priority": "P0",
+      "accessState": "api_key",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "very_high",
+      "capabilities": [
+        "programs.list",
+        "links.create",
+        "transactions.list",
+        "reports.summary",
+        "payouts.list",
+        "flights.price_trends",
+        "flights.search.live",
+        "flights.autosuggest",
+        "rail.feed",
+        "transfers.search",
+        "esim.catalog",
+        "activities.content"
+      ],
+      "contentUseCases": [
+        "항공권 가격 추이 글",
+        "도시·공항 자동완성",
+        "여행 브랜드 링크 변환",
+        "eSIM 국가별 비교",
+        "투어·교통 상품 큐레이션",
+        "제휴 수익 리포트"
+      ],
+      "monetizationModel": "brand_defined_affiliate_commission",
+      "officialSources": [
+        "https://support.travelpayouts.com/hc/en-us/categories/200358578-API-and-data",
+        "https://support.travelpayouts.com/hc/en-us/articles/25289759198226-API-for-Travelpayouts-partner-links",
+        "https://support.travelpayouts.com/hc/en-us/articles/360019864079-API-of-affiliate-programs-booking-statistics"
+      ],
+      "nextAction": "가입 후 token을 로컬 자격증명에 저장하고 partner-links와 statistics를 첫 API-only 어댑터로 구현한다.",
+      "riskFlags": [
+        "program_specific_access",
+        "cached_prices_may_not_be_live",
+        "brand_terms_vary"
+      ]
+    },
+    {
+      "id": "coupang-travel-gear",
+      "name": "Coupang Partners Travel Gear Binding",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel_gear",
+        "luggage",
+        "power",
+        "adapter",
+        "packing",
+        "security_accessories"
+      ],
+      "priority": "P0",
+      "accessState": "account_portal",
+      "verification": "live_read_verified",
+      "apiOnlyPotential": "high_portal_contracts_observed",
+      "capabilities": [
+        "links.create",
+        "transactions.list",
+        "reports.summary",
+        "payouts.list"
+      ],
+      "contentUseCases": [
+        "캐리어",
+        "압축파우치",
+        "멀티어댑터",
+        "보조배터리",
+        "목베개",
+        "소매치기 방지 가방"
+      ],
+      "monetizationModel": "category_dependent_affiliate_commission",
+      "officialSources": [
+        "https://partners.coupang.com/"
+      ],
+      "nextAction": "기존 쿠팡 상품 어댑터를 travel_gear 비교축에 바인딩하고 상품·글·CTA별 Sub ID를 추가한다.",
+      "riskFlags": [
+        "portal_internal_contracts",
+        "price_variant_freshness",
+        "account_session_dependency"
+      ]
+    },
+    {
+      "id": "official-attraction-reservation-watch",
+      "name": "Official Attraction Reservation Watch",
+      "roles": [
+        "evidence",
+        "reservation_watch"
+      ],
+      "verticals": [
+        "travel",
+        "attractions",
+        "museums",
+        "official_tickets"
+      ],
+      "priority": "P0",
+      "accessState": "public",
+      "verification": "design_only",
+      "apiOnlyPotential": "per_venue_contract_discovery",
+      "capabilities": [
+        "official_reservation.watch",
+        "availability.get"
+      ],
+      "contentUseCases": [
+        "바티칸",
+        "콜로세움",
+        "우피치",
+        "최후의 만찬 공식 예약 오픈·가격·취소 규정 추적"
+      ],
+      "monetizationModel": "none_content_authority_and_conversion_support",
+      "officialSources": [],
+      "nextAction": "장소별 공식 페이지와 XHR을 관측해 예약 오픈·가격·정책 watch adapter를 만든다.",
+      "riskFlags": [
+        "site_specific_contracts",
+        "anti_bot",
+        "terms_and_rate_limits"
+      ]
+    },
+    {
+      "id": "booking-demand-api",
+      "name": "Booking.com Demand API",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "lodging",
+        "cars",
+        "activities",
+        "transfers"
+      ],
+      "priority": "P1",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "high_after_approval",
+      "capabilities": [
+        "lodging.search",
+        "lodging.content",
+        "cars.search",
+        "activities.search",
+        "activities.content",
+        "transfers.search",
+        "links.create",
+        "availability.get",
+        "orders.report"
+      ],
+      "contentUseCases": [
+        "도시별 숙소 비교",
+        "무료취소·가격·위치 비교",
+        "관광지·렌터카·공항 이동 큐레이션",
+        "예약 전환 및 리포트"
+      ],
+      "monetizationModel": "commercial_contract_defined",
+      "officialSources": [
+        "https://developers.booking.com/demand/docs/getting-started/overview"
+      ],
+      "nextAction": "파트너 자격을 확인하고 content-only 또는 search-look-redirect 흐름부터 신청한다.",
+      "riskFlags": [
+        "partner_onboarding",
+        "availability_varies_by_access",
+        "booking_compliance"
+      ]
+    },
+    {
+      "id": "expedia-group",
+      "name": "Expedia Group Rapid / Travel Redirect API",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "lodging",
+        "flights",
+        "cars",
+        "activities"
+      ],
+      "priority": "P1",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "high_after_approval",
+      "capabilities": [
+        "lodging.search",
+        "lodging.content",
+        "flights.search.live",
+        "cars.search",
+        "activities.search",
+        "links.create",
+        "transactions.list",
+        "reports.summary"
+      ],
+      "contentUseCases": [
+        "숙소·항공·렌터카·액티비티 비교",
+        "Expedia 리디렉션형 예약",
+        "예약 성과 분석"
+      ],
+      "monetizationModel": "commercial_contract_defined",
+      "officialSources": [
+        "https://developers.expediagroup.com/"
+      ],
+      "nextAction": "Travel Redirect 자격과 Rapid 승인 요건을 비교해 리디렉션형부터 검토한다.",
+      "riskFlags": [
+        "partner_onboarding",
+        "commercial_contract",
+        "implementation_complexity"
+      ]
+    },
+    {
+      "id": "skyscanner-partner-api",
+      "name": "Skyscanner Partner APIs",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "flights",
+        "lodging",
+        "cars"
+      ],
+      "priority": "P1",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "high_after_approval",
+      "capabilities": [
+        "flights.search.live",
+        "flights.search.indicative",
+        "flights.autosuggest",
+        "lodging.search",
+        "lodging.content",
+        "lodging.reviews",
+        "cars.search",
+        "links.create"
+      ],
+      "contentUseCases": [
+        "항공권 실시간·대략 가격 비교",
+        "호텔·렌터카 비교",
+        "공항·도시 자동완성",
+        "제휴 링크"
+      ],
+      "monetizationModel": "partner_contract_defined",
+      "officialSources": [
+        "https://developers.skyscanner.net/docs/getting-started/authentication"
+      ],
+      "nextAction": "Partnerships 팀에 API key를 신청하고 indicative-price부터 파일럿한다.",
+      "riskFlags": [
+        "application_review",
+        "api_key_secret",
+        "usage_guidelines"
+      ]
+    },
+    {
+      "id": "viator-partner-api",
+      "name": "Viator Partner API",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "activities",
+        "attractions",
+        "tours"
+      ],
+      "priority": "P1",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "high_after_approval",
+      "capabilities": [
+        "activities.search",
+        "activities.content",
+        "availability.get",
+        "links.create",
+        "orders.report"
+      ],
+      "contentUseCases": [
+        "도시별 투어 비교",
+        "관광지 티켓 대안",
+        "일일투어·오디오투어·가이드 상품 비교",
+        "예약 후 상태"
+      ],
+      "monetizationModel": "partner_contract_defined",
+      "officialSources": [
+        "https://docs.viator.com/partner-api/technical/"
+      ],
+      "nextAction": "파트너 유형별 검색·제휴 링크·예약 범위를 확인한다.",
+      "riskFlags": [
+        "partner_tier_scope",
+        "booking_and_refund_policy"
+      ]
+    },
+    {
+      "id": "klook-affiliate",
+      "name": "Klook Affiliate",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "activities",
+        "attractions",
+        "transfers",
+        "rail",
+        "esim",
+        "cars"
+      ],
+      "priority": "P1",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "high_after_approval",
+      "capabilities": [
+        "activities.search",
+        "activities.content",
+        "transfers.search",
+        "rail.feed",
+        "esim.catalog",
+        "cars.search",
+        "links.create",
+        "reports.summary"
+      ],
+      "contentUseCases": [
+        "관광지 입장권",
+        "현지투어",
+        "공항 이동",
+        "철도·교통패스",
+        "eSIM",
+        "렌터카"
+      ],
+      "monetizationModel": "affiliate_commission",
+      "officialSources": [
+        "https://affiliate.klook.com/"
+      ],
+      "nextAction": "affiliate 계정을 만들고 data feed, API, white-label 중 제공 범위를 확인한다.",
+      "riskFlags": [
+        "account_scope_unknown",
+        "regional_inventory",
+        "price_and_currency_variation"
+      ]
+    },
+    {
+      "id": "getyourguide-affiliate",
+      "name": "GetYourGuide Affiliate Program",
+      "roles": [
+        "monetization",
+        "inventory"
+      ],
+      "verticals": [
+        "travel",
+        "activities",
+        "attractions",
+        "tours"
+      ],
+      "priority": "P2",
+      "accessState": "partner_approval",
+      "verification": "partner_scope_to_verify",
+      "apiOnlyPotential": "unknown_until_portal_verified",
+      "capabilities": [
+        "links.create",
+        "activities.search",
+        "activities.content"
+      ],
+      "contentUseCases": [
+        "도시별 액티비티·티켓·투어 링크",
+        "상품 큐레이션"
+      ],
+      "monetizationModel": "affiliate_commission",
+      "officialSources": [
+        "https://partner.getyourguide.com/"
+      ],
+      "nextAction": "가입 후 portal에서 API, feed, deep-link, reporting 제공 여부를 검증한다.",
+      "riskFlags": [
+        "public_api_not_confirmed",
+        "portal_verification_required"
+      ]
+    },
+    {
+      "id": "amadeus-travel-apis",
+      "name": "Amadeus for Developers",
+      "roles": [
+        "inventory",
+        "enrichment",
+        "evidence"
+      ],
+      "verticals": [
+        "travel",
+        "flights",
+        "lodging",
+        "destinations",
+        "insurance"
+      ],
+      "priority": "ENRICHMENT",
+      "accessState": "api_key",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "high",
+      "capabilities": [
+        "flights.search.live",
+        "lodging.search",
+        "lodging.content",
+        "destination.content",
+        "insurance.search"
+      ],
+      "contentUseCases": [
+        "항공·숙소 비교의 보조 데이터",
+        "공항·목적지 정보",
+        "여행보험 상품 데이터 검증"
+      ],
+      "monetizationModel": "none_by_default_separate_commercial_path_required",
+      "officialSources": [
+        "https://developers.amadeus.com/"
+      ],
+      "nextAction": "Self-Service에서 목적지·항공·숙소 enrichment 범위를 우선 검증한다.",
+      "riskFlags": [
+        "not_affiliate_by_default",
+        "quota_and_pricing",
+        "enterprise_features_differ"
+      ]
+    },
+    {
+      "id": "italy-rail-and-transfer-watch",
+      "name": "Italy Rail and Transfer Watch",
+      "roles": [
+        "evidence",
+        "reservation_watch",
+        "enrichment"
+      ],
+      "verticals": [
+        "travel",
+        "rail",
+        "transfers",
+        "italy"
+      ],
+      "priority": "WATCH",
+      "accessState": "manual_review",
+      "verification": "design_only",
+      "apiOnlyPotential": "mixed",
+      "capabilities": [
+        "rail.feed",
+        "official_reservation.watch",
+        "transfers.search"
+      ],
+      "contentUseCases": [
+        "Trenitalia·Italo 예약 시기",
+        "구간별 소요시간",
+        "수하물·변경·취소 규정",
+        "공항 이동"
+      ],
+      "monetizationModel": "affiliate_possible_through_networks",
+      "officialSources": [],
+      "nextAction": "공식 사이트 약관을 먼저 확인하고 Travelpayouts나 Omio feed와 공식 정보 watch를 분리한다.",
+      "riskFlags": [
+        "official_api_not_confirmed",
+        "schedule_changes",
+        "terms_review_required"
+      ]
+    },
+    {
+      "id": "kma-short-term-forecast",
+      "name": "KMA Short-term Forecast API",
+      "roles": [
+        "enrichment",
+        "evidence"
+      ],
+      "verticals": [
+        "travel",
+        "weather",
+        "domestic_travel"
+      ],
+      "priority": "ENRICHMENT",
+      "accessState": "api_key",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "high",
+      "capabilities": [
+        "weather.forecast"
+      ],
+      "contentUseCases": [
+        "국내 여행 날짜별 날씨·강수·체감 준비물",
+        "행사·여행 일정 갱신"
+      ],
+      "monetizationModel": "none",
+      "officialSources": [
+        "https://www.data.go.kr/data/15084084/openapi.do"
+      ],
+      "nextAction": "공공데이터포털 service key를 별도 credential로 등록하고 국내 여행 프로필에 연결한다.",
+      "riskFlags": [
+        "forecast_uncertainty",
+        "grid_conversion"
+      ]
+    },
+    {
+      "id": "ecb-exchange-rates",
+      "name": "ECB Exchange Rates",
+      "roles": [
+        "enrichment",
+        "evidence"
+      ],
+      "verticals": [
+        "travel",
+        "currency",
+        "europe"
+      ],
+      "priority": "ENRICHMENT",
+      "accessState": "public",
+      "verification": "live_read_verified",
+      "apiOnlyPotential": "high",
+      "capabilities": [
+        "currency.rates"
+      ],
+      "contentUseCases": [
+        "유로 예산표",
+        "환율 확인일 표시",
+        "숙소·티켓 원화 환산"
+      ],
+      "monetizationModel": "none",
+      "officialSources": [
+        "https://data.ecb.europa.eu/data/datasets/EXR"
+      ],
+      "nextAction": "EUR 기준 공식 reference-rate snapshot adapter를 만들고 카드사 적용 환율과 구분한다.",
+      "riskFlags": [
+        "reference_rate_not_card_settlement_rate",
+        "weekend_staleness"
+      ],
+      "liveReadVerification": {
+        "checkedAt": "2026-09-20T01:12:44.105Z",
+        "referenceDate": "2026-09-18",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "responseSchema": "ECB EXR CSV"
+      }
+    },
+    {
+      "id": "travel-insurance-affiliate",
+      "name": "Travel Insurance Affiliate / Comparison Adapter",
+      "roles": [
+        "monetization",
+        "inventory",
+        "evidence"
+      ],
+      "verticals": [
+        "travel",
+        "insurance"
+      ],
+      "priority": "P2",
+      "accessState": "manual_review",
+      "verification": "partner_scope_to_verify",
+      "apiOnlyPotential": "unknown",
+      "capabilities": [
+        "insurance.search",
+        "links.create",
+        "transactions.list"
+      ],
+      "contentUseCases": [
+        "보장 항목 비교",
+        "여행 기간·목적별 체크리스트",
+        "가입 링크"
+      ],
+      "monetizationModel": "lead_or_sale_commission",
+      "officialSources": [
+        "https://developers.amadeus.com/enterprise/category/insurance/api/search-and-shopping"
+      ],
+      "nextAction": "국내 제휴망과 규제·광고 심사 요건을 확인하기 전에는 자동 추천·순위화를 금지한다.",
+      "riskFlags": [
+        "high_stakes_financial_content",
+        "regulatory_review",
+        "coverage_terms_complex"
+      ]
+    }
+  ],
+  "relatedRegistries": [
+    "domestic-travel-adapters.json"
+  ]
+}

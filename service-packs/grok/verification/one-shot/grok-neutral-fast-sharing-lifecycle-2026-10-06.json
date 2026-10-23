@@ -1,0 +1,118 @@
+{
+  "schema": "grok-sharing-direct-lifecycle-v1",
+  "startedAt": "2026-10-06T11:37:54.267Z",
+  "sourceBeforeImports": {
+    "src/client.mjs": "fbc42db06aada43768e7b20f10e5279a62414be0b57be90682164f2a1c51534c",
+    "src/grok-conversations.mjs": "24e4fa92abbdb4e97824b0a319ac6ac3f916072b43fff5a8aa8d0e7555f85ac9",
+    "src/runtime.mjs": "9a98d7e64f3b5cf7128dc421420c31d3cff9f0e6a5507a84742a65182284e34e",
+    "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+    "src/journal.mjs": "eb5ae0dd987ca2b9551a0fe007ab853e0c671b4d6173907bd9e15a2a2f8ccef7",
+    "src/authenticated-chrome-fetch.mjs": "b4db2f6cb2d601f40526bd0690d63b165b1ad3f8c26f32c2e5c386717213bf34",
+    "scripts/authenticated-chrome-transport.py": "fd538ac05d96585630bee2ff3e243ddbed2f4b1f0dc0f0868e658a252e9a8a58",
+    "contracts/grok-web.v1.json": "e5e123d62e8525f8705ee4a8b41f952c63a518498df6ec4627bdf5cf0071c5db"
+  },
+  "ownerVerified": true,
+  "allowIndexing": false,
+  "writeAttempts": {
+    "create": 1,
+    "revoke": 0
+  },
+  "rawIdsBodiesCredentialsPersisted": false,
+  "targetRead": {
+    "status": 200,
+    "mime": "application/json",
+    "bytes": 425,
+    "rawSha256": "eb339dd6f029cddb8f0e6afa31cacaf9ab19a1c0d4a1b3e67b8370fafefbf898",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "1bfa300e0f573127ca2c29485b58c05b09af9b27979edda51db85319bbc182a1"
+  },
+  "targetNodes": {
+    "status": 200,
+    "mime": "application/json",
+    "bytes": 310,
+    "rawSha256": "02ba953047059a2ee901757e3be96ebb3191b960d1019d0e449c6c70a9fcab67",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "9d50188b6df23fa29fbd29db95ab0f5d10e35963ed0a6843ed8a514d45dfa6ba"
+  },
+  "targetResponses": {
+    "status": 200,
+    "mime": "application/json",
+    "bytes": 3096,
+    "rawSha256": "78e224432fbe29d374bac325712883a4da8646786dd2c10829818763db3982df",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "f9431d13db783c426a543c118fd026cda1d42f2208d7e46f2486d152dae0eb98"
+  },
+  "target": {
+    "conversationSha256": "0cadb1e23ddbe14255578ea88b6fb40dcb4d2538c422aa152656f395afeba016",
+    "responseSha256": "70a87c26204ec55856384f78d6204f2bb2599ff5634f3317172214f44f8b217e",
+    "promptSha256": "87022acfad1ae0916ed351a0b720967217ebdb9b6c25194f5a32ca4777ab0ede",
+    "exactOwnerPromptAndAnswer": true,
+    "ownedNeutralTest": true,
+    "responseCount": 2
+  },
+  "create": {
+    "state": "needs_review",
+    "verified": false,
+    "httpStatus": 200,
+    "readbackStatus": 200,
+    "sameConversationId": true,
+    "sameResponseId": true,
+    "issuedLinkMatchedScopedState": false,
+    "responseReceipt": {
+      "operationId": "conversation.share.set",
+      "observedAt": "2026-10-06T11:37:59.165Z",
+      "method": "POST",
+      "requestDigest": "b449840f5c57d0af82a43c9713325c85f1fcaf38b72cbb93e0da116c96bf7679",
+      "intentDigest": "6230b4b680afb5f31c8f395dea33be3fa1ecaf3aa5b3879f3f692266ebc748de",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 239,
+      "responseDigest": "33276efbe0776812cca5f7961afafe8a0e3571ecb060e78600205a3dc68fcd1f",
+      "responseDigestKind": "raw_http_body",
+      "responseTopLevelFieldNames": [
+        "shareLinkId",
+        "workspaceSeedIneligibleReason",
+        "workspaceSeedNoSession",
+        "workspaceSeedPending",
+        "workspaceSeedRegistered"
+      ],
+      "requestHeaderNames": [
+        "content-type",
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "transportHttpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "businessResponsePersisted": false
+    }
+  },
+  "linkRead": {
+    "status": 200,
+    "mime": "application/json",
+    "bytes": 3594,
+    "rawSha256": "c05f58a3b8eededc08166621ef838b3bebbb066a46e159e3b21f31e1627c9ae8",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "af6292d6ecdfcd231df956090aaa36bc12a2133f553c1b6cda75b62206ed050e"
+  },
+  "linkFacts": {
+    "sameConversation": true,
+    "responseMember": true,
+    "isPublic": true,
+    "allowIndexing": false,
+    "canonicalIdPresent": false
+  },
+  "outcome": "needs_review",
+  "failureCode": "SHARE_CREATE_UNVERIFIED",
+  "finishedAt": "2026-10-06T11:38:00.601Z",
+  "sourceStable": true,
+  "cleanupRequired": true
+}

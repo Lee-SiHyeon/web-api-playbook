@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "proposedAt": "2026-10-06",
+  "taskTarget": {
+    "scope": "the single root-created PROTOCOL42 task conversation",
+    "selectionProof": "exact input-prompt SHA-256 and assistant response-pattern match, plus fresh conversation detail viewerIsOwner=true",
+    "conversationIdPersisted": false,
+    "arbitraryExistingConversationWrites": false
+  },
+  "rename": {
+    "status": "root-authorized; pending native write-abort capture",
+    "method": "PUT",
+    "pathTemplate": "/rest/app-chat/conversations/{returnedTaskConversationId}",
+    "sdkMethod": "chatUpdateConversationRaw",
+    "requestBody": {"title": "Codex API verified text 20261006"},
+    "effects": ["changes only the title of the exact task conversation"],
+    "readback": [
+      "new title matches exactly",
+      "same conversation ID still resolves",
+      "viewerIsOwner remains true",
+      "exact test prompt hash and assistant response pattern remain in response history"
+    ],
+    "attemptPolicy": "one stable intent, one dispatch, no retry after an unknown outcome"
+  },
+  "delete": {
+    "status": "root-authorized; defer until canonical core source receipts are copied",
+    "method": "DELETE",
+    "candidatePaths": [
+      "/rest/app-chat/conversations/{returnedTaskConversationId}",
+      "/rest/app-chat/conversations/soft/{returnedTaskConversationId}"
+    ],
+    "sdkMethods": ["chatDeleteConversationRaw", "chatSoftDeleteConversationRaw"],
+    "precondition": "native UI capture must identify which delete path the conversation menu uses",
+    "readback": ["complete paginated conversation list no longer includes the task ID", "conversation detail is absent"],
+    "attemptPolicy": "one stable intent, one dispatch, no retry after an unknown outcome"
+  },
+  "sharing": {
+    "status": "proposal only; no write until root approves the exact native request and visibility",
+    "target": "the same root-created neutral PROTOCOL42 task conversation and its assistant response",
+    "method": "POST",
+    "pathTemplate": "/rest/app-chat/conversations/{returnedTaskConversationId}/share",
+    "sdkMethod": "chatShareConversationRaw",
+    "sdkBodyFieldNames": ["responseId", "teamMembersToShare", "shareWithTeamMembers", "sharePublicly", "allowIndexing", "targetTeamIds", "shareWithOrg", "shareWorkspace"],
+    "requestedVisibility": "an unlisted link only if the native UI exposes that scope; allowIndexing must be false and no public-feed listing is allowed",
+    "revoke": {
+      "method": "DELETE",
+      "pathTemplate": "/rest/app-chat/share_links/{returnedShareLinkId}",
+      "sdkMethod": "chatDeleteShareLinkRaw",
+      "readback": "sharing state has no active share link and the link resource is absent"
+    },
+    "currentLimitation": "conversation.share.read returned only workspace seed eligibility fields for the sampled private chat; the exact task-share state contract is unverified"
+  },
+  "regeneration": {
+    "status": "proposal only; exact native UI request capture required",
+    "target": "only the assistant response in the same root-created PROTOCOL42 task conversation",
+    "method": "POST",
+    "pathTemplate": "/rest/app-chat/conversations/{returnedTaskConversationId}/responses",
+    "sdkMethod": "chatAddResponseRaw",
+    "sdkBodySerializer": "ChatAddResponseBodyToJSON; source body fields are not defined in the captured SDK chunk",
+    "requiredReadback": ["new response appears in the same conversation", "pre-existing task prompt remains unchanged", "new response is the target of the one approved regenerate action"],
+    "attemptPolicy": "one stable intent, one dispatch, no retry after an unknown outcome"
+  },
+  "upload": {
+    "status": "proposal only; no upload session has been created",
+    "target": "the same root-created neutral test conversation",
+    "localTestFile": {
+      "relativeScratchPath": "$TMPDIR/grok-api-test/protocol42.txt",
+      "bytes": 14,
+      "mimeType": "text/plain",
+      "content": "PROTOCOL42:42\\n",
+      "personalData": false
+    },
+    "sdkFlow": [
+      {
+        "method": "POST",
+        "pathTemplate": "/rest/app-chat/upload-file-v2/init",
+        "sdkMethod": "chatUploadFileInitRaw",
+        "requestFieldNames": ["fileName", "fileMimeType", "fileSource", "thirdPartyFileId", "sizeBytes", "resumableSupported", "multipartSupported"]
+      },
+      {
+        "method": "PATCH",
+        "pathTemplate": "/rest/app-chat/upload-file-v2/patch",
+        "sdkMethod": "chatUploadFilePatchRaw",
+        "requestFieldNames": ["uploadId", "completedParts"]
+      },
+      {
+        "method": "POST",
+        "pathTemplate": "/rest/app-chat/upload-file-v2/complete",
+        "sdkMethod": "chatUploadFileCompleteRaw",
+        "requestFieldNames": ["presigned", "directUpload"]
+      },
+      {
+        "method": "GET",
+        "pathTemplate": "/rest/app-chat/upload-file-v2/status",
+        "sdkMethod": "chatUploadFileStatusRaw",
+        "queryFieldNames": ["uploadId"]
+      },
+      {
+        "method": "POST",
+        "pathTemplate": "/rest/app-chat/upload-file-v2/abort",
+        "sdkMethod": "chatUploadFileAbortRaw",
+        "requestFieldNames": ["uploadId"]
+      }
+    ],
+    "independentReadback": "download the newly uploaded file through its conversation attachment API in memory, compare 14-byte length and SHA-256, then remove the attachment or delete the authorized task conversation after root confirms cleanup",
+    "currentLimitation": "native upload method, fileSource enum, presigned-host binding, and conversation attachment download readback still require capture"
+  },
+  "settings": {
+    "status": "proposal only; safe restore body not captured",
+    "method": "POST",
+    "pathTemplate": "/rest/user-settings",
+    "sdkMethod": "settingsSetUserSettingsRaw",
+    "candidatePreference": "preferences.enableStarBackground",
+    "effects": "changes a reversible visual preference only",
+    "sequence": ["read and hold the original value in memory", "capture the exact UI request with writes aborted", "change one preference", "read back", "restore the original value", "read back again"],
+    "sdkBodyFieldNames": ["excludeFromTraining", "preferences", "allowXPersonalization", "enableMemory", "allowShareIndexing", "allowCompanionNotifications", "allowAutoShare", "agentCustomizationsDeprecated", "agentCustomizations", "agentLibrary", "allowGrokFinishedNotification", "imagineEnabledConnectors", "audioRefConsent"],
+    "excludedSettings": ["security", "authentication", "billing", "privacy", "sharing"],
+    "currentLimitation": "GET response and setter serializer use different agent-customization shapes; no update helper is exposed until an exact restorable mapping is captured"
+  }
+}

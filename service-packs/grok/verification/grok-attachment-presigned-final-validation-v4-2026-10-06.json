@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T09:10:33.318075Z",
+  "operation": "attachment.upload.presigned",
+  "state": "needs_review",
+  "ownerVerified": true,
+  "intentId": "grok-large-presigned-final-validation-20261006-v4",
+  "sourcePolicy": {
+    "v2Enabled": true,
+    "direct": 16,
+    "directToHttp": true,
+    "maxFile": 150,
+    "maxVideo": 150,
+    "multipart": true,
+    "concurrency": 4,
+    "configUpdatedAt": 1791276881333
+  },
+  "taskFile": {
+    "bytes": 16777217,
+    "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+    "fileNameMatched": true
+  },
+  "nativeCapture": {
+    "role": "codex-grok-uploads-20261006",
+    "registeredTargetMatched": true,
+    "method": "POST",
+    "path": "/rest/app-chat/upload-file-v2/init",
+    "requestFieldNames": [
+      "fileMimeType",
+      "fileName",
+      "multipartSupported",
+      "sizeBytes"
+    ],
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "rawHeaderValuesPersisted": false
+  },
+  "directApi": {
+    "reasonCode": "INDEPENDENT_READBACK_UNVERIFIED",
+    "initHttpStatus": 200,
+    "signedPutRequestCount": 1,
+    "completeHttpStatus": 200,
+    "initPolicyDiagnostics": {
+      "normalizedMethod": "single_put",
+      "methodSource": "explicit_single_put",
+      "endpointCount": 1,
+      "signedStorageOrigins": [
+        "https://storage.googleapis.com"
+      ],
+      "requiredHeadersState": "present_valid",
+      "requiredHeaderNames": [
+        "Content-Length",
+        "Content-Type",
+        "x-amz-meta-upload-id"
+      ],
+      "contentLengthMatchesBody": true,
+      "transportManagedHeaderNames": [
+        "content-length"
+      ],
+      "validationCode": null,
+      "nativeInitResponseDelivered": true
+    },
+    "stageDiagnostics": [
+      {
+        "stage": "init",
+        "ordinal": 0,
+        "state": "completed",
+        "requestDigest": "5cce5e5da2491bab77c4679448363ad28028daa2c579ff8ead33b9fffe96de70",
+        "requestBytes": 0,
+        "attemptCount": 1,
+        "stageKey": "eb142094dc20bfb28d18f7af8a316ff134c4e3957a5bac4d9303db9ee5919a2e",
+        "httpStatus": 200,
+        "responseBytes": 1332,
+        "transportRequestDigest": "f97bcc030041488bbdba20557d9740c0c2fd0aebc1cd60c4cfc8c29ac8611a95",
+        "transportIntentDigest": "cb2642d9889e91daad039559adf3084349f613864afa9cb611bf4a689d398d6c",
+        "responseStatus": 200,
+        "responseDigest": "036c45af5575785f6de34458033c43274e6c3cfc7092e187421b96bdc9e2d69d",
+        "responseDigestKind": "raw_http_body",
+        "responseContentType": "application/json",
+        "businessRetryAllowed": false,
+        "auditPersistence": {
+          "state": "stored"
+        },
+        "journalState": "completed",
+        "sourceOperationId": "attachment.upload.init",
+        "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+        "callerIntentSha256": "8973360592c8a3161dfc42d8901e1deda0f8e16ce8632b841703197a7f216299",
+        "issuedUploadIdSha256": "398defbfadc7679367097070a37908c846ee52d73c16d6dadae7bc21a44eed31",
+        "issuedAssetIdSha256": "117a6d050d5c549c9f1c092eb5c2ea30b8c1a36a037ea33ec658d70859db4ee1",
+        "responseBodyTruncated": false,
+        "journalStateWriteFailed": false
+      },
+      {
+        "stage": "singlePut",
+        "ordinal": 0,
+        "state": "completed",
+        "requestDigest": "ca5e28be11b74d4dd89e119272214dff2cb0d55eb687bf09ee205d6652c9a5ad",
+        "requestBytes": 16777217,
+        "attemptCount": 1,
+        "stageKey": "351ade896bf9c8f4916441a4d56c1d831b5e9daf4c825d5a62df319f7b22b80f",
+        "httpStatus": 200,
+        "responseBytes": 0,
+        "transportMethod": "PUT",
+        "responseStatus": 200,
+        "responseDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "responseDigestKind": "raw_http_body",
+        "responseBodyTruncated": false,
+        "requestHeaderNames": [
+          "content-length",
+          "content-type",
+          "x-amz-meta-upload-id"
+        ],
+        "businessRetryAllowed": false,
+        "auditPersistence": {
+          "state": "stored"
+        },
+        "journalState": "completed"
+      },
+      {
+        "stage": "complete",
+        "ordinal": 0,
+        "state": "completed",
+        "requestDigest": "6e5e91c8a47053739ea80c0794160c65aa6adf437255953bcbb70b1a4c1d4b15",
+        "requestBytes": 0,
+        "attemptCount": 1,
+        "stageKey": "42d4588ffedf32438596b8b7b9d533acc9e4489201e09756d8118d63c37a053e",
+        "httpStatus": 200,
+        "responseBytes": 438,
+        "transportMethod": "POST",
+        "transportRequestDigest": "d851f0bc8be648c107a91c8db97a8a040e106882e6002686ff4dc48642b1df39",
+        "transportIntentDigest": "581fdcc977751e79bf4248295fd59d657f414eedb5e07f2494c96e93b81dfb3b",
+        "responseStatus": 200,
+        "responseDigest": "82c8f63d85b2cef220532523368e00e3020db1f235acd9e01d5d3d5afeb79a18",
+        "responseDigestKind": "raw_http_body",
+        "responseContentType": "application/json",
+        "requestHeaderNames": [
+          "content-type",
+          "cookie",
+          "origin",
+          "referer",
+          "x-statsig-id",
+          "x-xai-request-id"
+        ],
+        "cookieNames": [
+          "sso"
+        ],
+        "businessRetryAllowed": false,
+        "auditPersistence": {
+          "state": "stored"
+        },
+        "journalState": "completed"
+      }
+    ],
+    "independentReadback": {
+      "status": 200,
+      "responseBytes": 364,
+      "fileNameMatched": true,
+      "mimeTypeMatched": true,
+      "sizeMatched": false,
+      "idMatched": true
+    },
+    "cleanupOutcome": null,
+    "uploadReference": null,
+    "uploadState": "completed"
+  },
+  "browserGuard": {
+    "nativeBusinessWriteAttempts": 7,
+    "nativeBusinessWriteFulfillments": 3,
+    "nativeBusinessWritesForwarded": 0,
+    "nativePutAttemptCount": 1,
+    "directPutCountAcknowledgedToNativeSdk": 1,
+    "blockedUnexpectedMutationKinds": [
+      "other_write_blocked",
+      "other_write_blocked",
+      "other_write_blocked",
+      "other_write_blocked"
+    ],
+    "duplicateNativeAttemptsBlocked": 0,
+    "pendingNativeWriteRoutes": 0,
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "completeHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "initBodyMatched": true,
+    "initPolicyDiagnostic": {
+      "normalizedMethod": "single_put",
+      "methodSource": "explicit_single_put",
+      "endpointCount": 1,
+      "signedStorageOrigins": [
+        "https://storage.googleapis.com"
+      ],
+      "requiredHeadersState": "present_valid",
+      "requiredHeaderNames": [
+        "Content-Length",
+        "Content-Type",
+        "x-amz-meta-upload-id"
+      ],
+      "contentLengthMatchesBody": true,
+      "transportManagedHeaderNames": [
+        "content-length"
+      ],
+      "validationCode": null,
+      "serverReplyWasParsed": true
+    }
+  },
+  "safety": {
+    "businessBrowserRequestsForwarded": 0,
+    "cookiesPersisted": false,
+    "dynamicHeaderValuesPersisted": false,
+    "signedUrlsPersisted": false,
+    "uploadIdsPersisted": false,
+    "rawBodiesPersisted": false
+  },
+  "incompleteReasonCode": "INDEPENDENT_READBACK_UNVERIFIED"
+}

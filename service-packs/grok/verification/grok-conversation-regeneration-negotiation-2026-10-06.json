@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "operationId": "chat.regenerate.wss",
+  "observedAt": "2026-10-06T00:12:40.570672Z",
+  "sourcePageRole": "codex-grok-lifecycle-20261006",
+  "intentDigest": "0fd1ddc0d832830953b9618720f7980c08508ea408b2ae3d934dd8be1437d72d",
+  "requestDigest": "243387192ba7cbe135f745577046571997afca1748b160d19f6a3120192148ab",
+  "journal": {
+    "state": "rejected",
+    "httpStatus": 101,
+    "reasonCode": "CONVERSATION_WSS_FRAME_NOT_SENT",
+    "attemptCount": 1
+  },
+  "browserGuards": {
+    "ownerVerified": true,
+    "sameConversationTarget": true,
+    "sameParentTarget": true,
+    "existingTaskAttachGatePassed": true,
+    "nativeRegenerateClickCount": 1,
+    "browserControlFramesForwarded": 1,
+    "browserBusinessFramesCaptured": 1,
+    "browserBusinessFramesDelivered": 0
+  },
+  "nativeEvent": {
+    "type": "response.create",
+    "castleRequestTokenIsString": true,
+    "castleRequestTokenNonempty": true,
+    "castleRequestTokenLength": 5965,
+    "castleRequestTokenHasControlChars": false,
+    "nativePreparerValidationPassed": true,
+    "rawEventPersisted": false
+  },
+  "directNegotiation": {
+    "handshakeStatus": 101,
+    "controlFrameSent": true,
+    "serverSessionAcknowledgementObserved": true,
+    "businessFrameBoundToServerSession": false,
+    "directBusinessFrameSent": false,
+    "terminalEventObserved": false,
+    "eventTypes": ["conversation.live.snapshot", "session.created"]
+  },
+  "taskReadback": {
+    "status": 200,
+    "ownerVerified": true,
+    "sameConversationTarget": true,
+    "exactParentPromptHashMatched": true,
+    "targetAssistantPatternMatched": true,
+    "responseCountBefore": 4,
+    "responseCountAfter": 4,
+    "userResponseCountBefore": 1,
+    "userResponseCountAfter": 1,
+    "targetAssistantUnchanged": true,
+    "historyUnchanged": true
+  },
+  "recoveryEvidence": {
+    "operationId": "chat.regenerate.wss",
+    "state": "rejected",
+    "httpStatus": 101,
+    "reasonCode": "CONVERSATION_WSS_FRAME_NOT_SENT",
+    "requestDigest": "243387192ba7cbe135f745577046571997afca1748b160d19f6a3120192148ab",
+    "intentDigest": "0fd1ddc0d832830953b9618720f7980c08508ea408b2ae3d934dd8be1437d72d",
+    "controlFrameSent": true,
+    "serverSessionAcknowledgementObserved": true,
+    "businessFrameBoundToServerSession": false,
+    "directBusinessFrameSent": false,
+    "browserBusinessFramesDelivered": 0,
+    "historyUnchanged": true,
+    "ownerVerified": true,
+    "sameConversationTarget": true,
+    "sameParentTarget": true,
+    "targetAssistantUnchanged": true,
+    "userResponseCountUnchanged": true
+  },
+  "rawIdentifiersPersisted": false,
+  "rawFramesPersisted": false,
+  "rawCastleTokenPersisted": false,
+  "messageContentPersisted": false
+}

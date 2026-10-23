@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "conversation.history",
+  "requirementId": "history.response-nodes",
+  "operationId": "history.response-nodes",
+  "observedAt": "2026-10-06T06:27:59.645Z",
+  "recordedAt": "2026-10-06T06:27:59.645Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "31e5e14e317b63d71b049ad5646062c863caa2a8a092a8985ac5d6421175043b",
+  "ownerProofPath": "verification/owner-proofs/31e5e14e317b63d71b049ad5646062c863caa2a8a092a8985ac5d6421175043b.json",
+  "ownerProofSha256": "31e5e14e317b63d71b049ad5646062c863caa2a8a092a8985ac5d6421175043b",
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 1918,
+  "requestDigest": "d1ac1ae679f5bb4ddfbf1f4f299f4c0d0534fa958993bd2e7d5def1d569c687a",
+  "responseDigest": "7c168c0358bce4ae68b2b9c968d428332f771e2ddc03cd340ba4b020090e32c2",
+  "capturedOperationSha256": "a9d1308914146350f173edc659a4f4b2810f1a22d14531e2acd5023ac8b46e37",
+  "handlerId": "client.read",
+  "dispatchBinding": {
+    "handlerId": "client.read",
+    "operationId": "history.response-nodes",
+    "operationKind": "read",
+    "mode": "validated_registry_generic"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "codeSha256": {
+    "src/client.mjs": "f9229c5fb79a88e015dfcdbdc8e56559784c1b9f641533436971c83226ebbce2",
+    "src/transport.mjs": "f4b0c6c5bb4e38cc1490d83f6a6d2e7e61ddbc87adb9f5f0cf2c28a6160df6b1",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/runtime.mjs": "749d88b4e6909dcab1fa7824eb0d30d6e92c4a6d24bffd751ef5a49ba5724d6d",
+    "src/grok-conversations.mjs": "a47761cc119dafc539e74d57e75c1cfb70998ce1360b48468784f4567a592f38"
+  },
+  "semanticReadback": {
+    "responseNodeCount": 14,
+    "inflightResponseCount": 0
+  }
+}

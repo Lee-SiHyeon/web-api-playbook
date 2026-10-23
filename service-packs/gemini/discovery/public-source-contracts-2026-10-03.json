@@ -1,0 +1,122 @@
+{
+  "service": "gemini",
+  "observedDate": "2026-10-03",
+  "requestTimestampUtc": null,
+  "evidenceKind": "public_document_and_published_static_source",
+  "document": {
+    "origin": "https://gemini.google.com",
+    "path": "/",
+    "method": "GET",
+    "cookiesSent": false,
+    "parserSetting": { "maxHeaderSize": 262144 },
+    "response": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "rawHeaderBytesObserved": [25973, 25965],
+      "bodyBytesObserved": [849583, 849536],
+      "bodySha256Observed": [
+        "6d2c0052018bf751d42c316ee9ea37f8d5f4afcfbdf8632f6e5620f66ed2ab2b",
+        "3aea2094d57469da1a14ead95369f5d2eda26ef6168685b1ed8acb4ebd411469"
+      ],
+      "redirect": false,
+      "parser": "parse5 7.3.0",
+      "contentVariesAcrossPublicRequests": true
+    },
+    "applicationClassification": {
+      "title": "Google Gemini (leading bidi mark omitted)",
+      "htmlLang": "en-US",
+      "tagCounts": {
+        "html": 1,
+        "head": 1,
+        "base": 1,
+        "link": 17,
+        "meta": 22,
+        "script": 15,
+        "style": 5,
+        "title": 1,
+        "body": 1,
+        "div": 11,
+        "chat-app-orchestrator": 1
+      },
+      "externalScripts": [
+        { "origin": "https://www.googletagmanager.com", "path": "/gtm.js", "googleFirstParty": false },
+        { "origin": "https://gemini.gstatic.com", "pathPrefix": "/_/mss/boq-gemini-web-uiserver/_/js/", "googleFirstParty": true, "moduleIdsObserved": ["_b", "LQaXg", "xqG9Nd"] }
+      ],
+      "scriptIds": ["bard-initial-data", "base-js"],
+      "bootstrapMarkerNamesPresent": ["AF_initDataCallback", "WIZ_global_data", "FdrFJe", "cfb2h"],
+      "bootstrapMarkerValuesStored": false,
+      "forms": 0,
+      "inputControls": 0,
+      "textareaControls": 0,
+      "buttonControls": 0,
+      "signInTextSignal": true,
+      "genericChallengeTextSignal": true,
+      "captchaTextSignal": false,
+      "recaptchaMarkerPresent": false,
+      "cloudflareCfRayMarkerPresent": false,
+      "cloudflareChallengeMarkerPresent": false,
+      "classification": "public Gemini app shell with sign-in CTA; generic challenge text is present but no observed CAPTCHA/Cloudflare challenge signature",
+      "authenticated": false
+    }
+  },
+  "transportFinding": {
+    "earlierNodeFetchError": "UND_ERR_HEADERS_OVERFLOW",
+    "httpsRequestMaxHeaderSize": 262144,
+    "httpsRequestStatus": 200,
+    "observedRawHeaderBlockBytes": 25973,
+    "redirectStatus": false,
+    "requestCookiesSent": false,
+    "responseHeaderValuesRecorded": false,
+    "interpretation": "The received public response header block exceeded the usual 16 KiB Node limit; increasing only maxHeaderSize to 256 KiB allowed document parsing."
+  },
+  "staticSourceContracts": {
+    "assetOrigin": "https://gemini.gstatic.com",
+    "assetPathPrefix": "/_/mss/boq-gemini-web-uiserver/_/js/",
+    "moduleId": "LQaXg",
+    "status": 200,
+    "bodyBytes": 3023297,
+    "sha256": "114be5ada829cf983d3538b019043bc0648691fa47fcd040da7f4ff58befbf19",
+    "rpcRoutes": [
+      { "path": "/assistant.lamda.BardFrontendService/StreamGenerate", "rpcId": "RxAFq" },
+      { "path": "/assistant.lamda.BardFrontendService/StreamGenerateArtifact", "rpcId": "ZiDWTc" },
+      { "path": "/assistant.lamda.BardFrontendService/StreamGenerateCurationDocument", "rpcId": "XOgkKc" },
+      { "path": "/assistant.lamda.BardFrontendService/StreamGenerateProjectDetail", "rpcId": "G4wK8e" },
+      { "path": "/assistant.lamda.BardFrontendService/StreamGenerateYourDay", "rpcId": "Skfdkd" }
+    ],
+    "transportSource": {
+      "pathAssembly": "dynamic base field eptZe + data/batchexecute",
+      "queryNames": ["rpcids", "source-path"],
+      "optionalQueryName": "fcd.retries",
+      "bodyFormat": "typed proto message object; complete field serialization not derived here",
+      "streamFramingAndResponseParser": "not established from this bounded pass",
+      "dynamicBaseValueStored": false
+    },
+    "generationModelLiterals": [
+      "gemini-3.1-flash-image",
+      "imagen-4.0-generate-001",
+      "gemini-3-pro-image",
+      "veo-2.0-generate-001"
+    ],
+    "otherOperationNamesObserved": [
+      "BardFrontendService.SearchConversations",
+      "BardFrontendService.GenerateDailyBrief",
+      "CreateConversation",
+      "ListConversations",
+      "GenerateAnswer"
+    ],
+    "sourceContractObserved": true,
+    "browserRequestCaptured": false,
+    "directReadVerified": false,
+    "credentialPropagated": false,
+    "textImageVideoOperationSent": false
+  },
+  "safetyAndCoverage": {
+    "rawHtmlPersisted": false,
+    "cookieValuesRecorded": false,
+    "setCookieValuesRecorded": false,
+    "SNlM0eFdrFJecfb2hNonceOrCsrfValuesRecorded": false,
+    "challengeBypassAttempted": false,
+    "authenticated": false,
+    "liveReplay": false
+  }
+}

@@ -1,0 +1,577 @@
+{
+  "assetDelivery": {
+    "assetServerOrigin": "https://assets.grok.com",
+    "directMagicVerified": false,
+    "directNewAssetDownloadVerified": false,
+    "observedBehavior": "returns data/blob/http keys unchanged; otherwise assigns the key to ASSET_SERVER_URL URL.pathname",
+    "producerFunction": "getAssetUrl",
+    "producerSource": "cdn.grok.com/_next/static/chunks/16osubjnt5lgq.js",
+    "signedUrlValuesPersisted": false
+  },
+  "credentialBinding": {
+    "authMode": "session",
+    "capturedCookieNames": [
+      "sso"
+    ],
+    "cookieValuesPersisted": false,
+    "note": "Core reports its current protected reads replay with only the sso cookie binding."
+  },
+  "directReadReplay": {
+    "adapterBoundary": {
+      "authenticatedChromeFetchIntegrationVerified": false,
+      "oneOffIndependentHttpReplay": true
+    },
+    "automaticRetries": 0,
+    "browserProfile": "chrome150",
+    "credentialBinding": [
+      "sso"
+    ],
+    "curlCffiVersion": "0.16.3",
+    "httpVersion": "h2",
+    "observedAt": "2026-10-06",
+    "operations": [
+      {
+        "bodyBytes": 286,
+        "jsonParsed": true,
+        "mime": "application/json",
+        "operationId": "media.imagine.quota",
+        "requestAttempts": 1,
+        "safeValues": {
+          "allModesAvailable": true,
+          "windowSizeSeconds": 64800
+        },
+        "status": 200
+      },
+      {
+        "bodyBytes": 4771,
+        "jsonParsed": true,
+        "mime": "application/json",
+        "operationId": "media.references.list",
+        "referenceCount": 4,
+        "requestAttempts": 1,
+        "status": 200
+      },
+      {
+        "bodyBytes": 61,
+        "itemCount": 113,
+        "jsonParsed": true,
+        "mime": "application/json",
+        "operationId": "media.search.status",
+        "requestAttempts": 1,
+        "status": "MEDIA_SEARCH_INDEX_STATUS_READY"
+      },
+      {
+        "bodyBytes": 730,
+        "jsonParsed": true,
+        "mime": "application/json",
+        "operationId": "media.skills.list",
+        "requestAttempts": 1,
+        "skillCount": 5,
+        "status": 200
+      },
+      {
+        "bodyBytes": 30079,
+        "directReadReplayVerified": true,
+        "jsonParsed": true,
+        "mime": "application/json",
+        "mimeTypeCounts": {
+          "image/jpeg": 24
+        },
+        "nextPageTokenPresent": true,
+        "observedAssetKeyFieldPresent": true,
+        "operationId": "media.assets.list",
+        "pageSize": 24,
+        "requestAttempts": 1,
+        "status": 200
+      }
+    ],
+    "ownerRead": {
+      "identityValuePersisted": false,
+      "matchedExpectedOwner": true,
+      "status": 200
+    },
+    "proxyEnvironmentUsed": false,
+    "secretValuesPersisted": false,
+    "tlsVerified": true,
+    "transport": "curl_cffi.requests.Session"
+  },
+  "dynamicRequestMetadata": {
+    "directWriteProducerReady": false,
+    "observedHeaderNames": [
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "valuesPersisted": false
+  },
+  "observedAt": "2026-10-06",
+  "readOperations": [
+    {
+      "authMode": "session",
+      "evidence": {
+        "capturedAt": "2026-10-06",
+        "httpStatus": 200,
+        "observedValues": {
+          "allModesAvailable": true,
+          "remainingCountExposed": false,
+          "windowSizeSeconds": 64800
+        },
+        "requestFieldNames": [],
+        "requestMethod": "POST",
+        "requestPath": "/rest/media/imagine/quota_info",
+        "responseContentType": "application/json",
+        "responseShape": {
+          "image": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "imageEdit": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "imagePro": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "video": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "video720p": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          }
+        },
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "source": "browser_network_capture"
+      },
+      "id": "media.imagine.quota",
+      "kind": "read",
+      "method": "POST",
+      "request": {
+        "bodyEncoding": "json",
+        "bodyTemplate": {},
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536,
+        "mode": "json",
+        "statuses": [
+          200
+        ]
+      },
+      "urlTemplate": "https://grok.com/rest/media/imagine/quota_info"
+    },
+    {
+      "authMode": "session",
+      "evidence": {
+        "capturedAt": "2026-10-06",
+        "httpStatus": 200,
+        "observedReferenceCount": 4,
+        "privateValuesPersisted": false,
+        "requestFieldNames": [
+          "limit"
+        ],
+        "requestMethod": "POST",
+        "requestPath": "/rest/media/reference/list",
+        "responseContentType": "application/json",
+        "responseShape": {
+          "references": {
+            "assetFieldNames": [
+              "assetId",
+              "mimeType",
+              "url"
+            ],
+            "itemFieldNames": [
+              "assets",
+              "createTime",
+              "description",
+              "id",
+              "isOwner",
+              "kind",
+              "name",
+              "sampleKey",
+              "updateTime",
+              "userId"
+            ],
+            "type": "array"
+          }
+        },
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "source": "browser_network_capture"
+      },
+      "id": "media.references.list",
+      "kind": "read",
+      "method": "POST",
+      "request": {
+        "bodyEncoding": "json",
+        "bodyTemplate": {
+          "limit": 50
+        },
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144,
+        "mode": "json",
+        "statuses": [
+          200
+        ]
+      },
+      "urlTemplate": "https://grok.com/rest/media/reference/list"
+    },
+    {
+      "authMode": "session",
+      "evidence": {
+        "capturedAt": "2026-10-06",
+        "httpStatus": 200,
+        "observedValues": {
+          "itemCount": 113,
+          "status": "MEDIA_SEARCH_INDEX_STATUS_READY"
+        },
+        "requestFieldNames": [],
+        "requestMethod": "POST",
+        "requestPath": "/rest/media/search/status",
+        "responseContentType": "application/json",
+        "responseShape": {
+          "itemCount": "number",
+          "status": "string"
+        },
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "source": "browser_network_capture"
+      },
+      "id": "media.search.status",
+      "kind": "read",
+      "method": "POST",
+      "request": {
+        "bodyEncoding": "json",
+        "bodyTemplate": {},
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536,
+        "mode": "json",
+        "statuses": [
+          200
+        ]
+      },
+      "urlTemplate": "https://grok.com/rest/media/search/status"
+    },
+    {
+      "authMode": "session",
+      "evidence": {
+        "capturedAt": "2026-10-06",
+        "httpStatus": 200,
+        "observedSkillCount": 5,
+        "requestFieldNames": [
+          "locale"
+        ],
+        "requestMethod": "POST",
+        "requestPath": "/rest/skills",
+        "responseContentType": "application/json",
+        "responseShape": {
+          "skills": {
+            "itemFieldNames": [
+              "description",
+              "displayName",
+              "icon",
+              "index",
+              "name"
+            ],
+            "type": "array"
+          }
+        },
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "source": "browser_network_capture"
+      },
+      "id": "media.skills.list",
+      "kind": "read",
+      "method": "POST",
+      "request": {
+        "bodyEncoding": "json",
+        "bodyTemplate": {
+          "locale": "en"
+        },
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 131072,
+        "mode": "json",
+        "statuses": [
+          200
+        ]
+      },
+      "urlTemplate": "https://grok.com/rest/skills"
+    },
+    {
+      "authMode": "session",
+      "evidence": {
+        "capturedAt": "2026-10-06",
+        "httpStatus": 200,
+        "observedInitialQuery": {
+          "includeImagineFiles": "true",
+          "isLatest": "true",
+          "orderBy": "ORDER_BY_CREATE_TIME",
+          "pageSize": "24",
+          "source": "SOURCE_ANY"
+        },
+        "pageTokenValuePersisted": false,
+        "privateValuesPersisted": false,
+        "queryFieldNames": [
+          "includeImagineFiles",
+          "isLatest",
+          "orderBy",
+          "pageSize",
+          "pageToken",
+          "source"
+        ],
+        "requestMethod": "GET",
+        "requestPath": "/rest/assets",
+        "responseContentType": "application/json",
+        "responseShape": {
+          "assets": {
+            "itemFieldNames": [
+              "assetId",
+              "auxKeys",
+              "createTime",
+              "fileSource",
+              "height",
+              "inlineStatus",
+              "isDeleted",
+              "isLatest",
+              "isModelGenerated",
+              "isPublic",
+              "isRootAssetCreatedByModel",
+              "key",
+              "lastUseTime",
+              "mimeType",
+              "name",
+              "ownerUserId",
+              "previewImageKey",
+              "rRated",
+              "responseId",
+              "rootAssetSourceConversationId",
+              "sharedWithTeam",
+              "sharedWithUserIds",
+              "sizeBytes",
+              "sourceConversationId",
+              "summary",
+              "thumbhash",
+              "updateTime",
+              "width"
+            ],
+            "observedPageSize": 24,
+            "type": "array"
+          },
+          "nextPageToken": "string"
+        },
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "source": "browser_network_capture"
+      },
+      "id": "media.assets.list",
+      "kind": "read",
+      "method": "GET",
+      "request": {
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        },
+        "inputSchema": {
+          "properties": {
+            "pageToken": {
+              "maxLength": 8192,
+              "type": "string"
+            }
+          },
+          "required": []
+        },
+        "queryTemplate": {
+          "includeImagineFiles": "true",
+          "isLatest": "true",
+          "orderBy": "ORDER_BY_CREATE_TIME",
+          "pageSize": "24",
+          "pageToken": "{{input.pageToken}}",
+          "source": "SOURCE_ANY"
+        }
+      },
+      "response": {
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304,
+        "mode": "json",
+        "statuses": [
+          200
+        ]
+      },
+      "urlTemplate": "https://grok.com/rest/assets"
+    }
+  ],
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "serviceOrigin": "https://grok.com",
+  "validationBoundary": {
+    "actualFileMagicVerified": false,
+    "authenticatedChromeFetchIntegrationVerified": false,
+    "directWriteReplayVerified": false,
+    "mediaDownloadContractCapturedFromCurrentSdk": true,
+    "newGeneratedAssetReadbackVerified": false,
+    "note": "Media reads have one off curl-cffi Chrome150 replay each. Video and image writes remain provisional until their direct response and correlated media readback are verified.",
+    "oneOffDirectMediaReadReplaysVerified": true
+  },
+  "writeCandidates": [
+    {
+      "bodyShape": {
+        "enableImageStreaming": "boolean",
+        "enableSideBySide": "boolean",
+        "kind": "string",
+        "mediaGenInput": {
+          "textToVideo": {
+            "aspectRatio": "string",
+            "duration": "number",
+            "prompt": "string",
+            "resolutionName": "string",
+            "skipAudio": "boolean"
+          }
+        },
+        "message": "string",
+        "modelName": "string",
+        "responseMetadata": {
+          "experiments": "array",
+          "modelConfigOverride": {
+            "modelMap": "object"
+          }
+        },
+        "sendFinalMetadata": "boolean"
+      },
+      "browserAbortAttempts": 13,
+      "browserResponses": 0,
+      "contentType": "application/json",
+      "directSubmitVerified": false,
+      "directWriteAttempts": 1,
+      "directWriteRetries": 0,
+      "transportStageEvidenceAvailable": false,
+      "transportStageEvidenceGap": "the attempt used a helper version that collapsed request and response-stream exceptions",
+      "id": "media.video.create",
+      "kind": "submit",
+      "method": "POST",
+      "observedSafeProfile": {
+        "aspectRatio": "2:3",
+        "duration": 6,
+        "kind": "CONVERSATION_KIND_IMAGINE",
+        "modelName": "imagine-video-gen",
+        "resolutionName": "480p",
+        "skipAudio": true,
+        "messageSuffix": " --mode=custom"
+      },
+      "path": "/rest/app-chat/conversations/new",
+      "requestFieldNames": [
+        "enableImageStreaming",
+        "enableSideBySide",
+        "kind",
+        "mediaGenInput",
+        "message",
+        "modelName",
+        "responseMetadata",
+        "sendFinalMetadata"
+      ],
+      "sdkCallsite": {
+        "function": "fetchApi",
+        "script": "cdn.grok.com/_next/static/chunks/27akar72ihacg.js"
+      },
+      "state": "direct_http_transport_unknown_no_correlated_asset",
+      "directHttpTransportOutcome": "HTTP_TRANSPORT_FAILED",
+      "readbackAfterAttempt": {
+        "observedAt": "2026-10-06T01:03:28.991484+00:00",
+        "assetListingComplete": true,
+        "assetCount": 338,
+        "timeCandidateCount": 0,
+        "exactPromptHistoryCandidateCount": 0,
+        "writerResponseIdComparatorAvailable": false,
+        "readbackVerified": false
+      }
+    },
+    {
+      "contentSchema": {
+        "properties": [
+          "section_count",
+          "is_kids_mode",
+          "enable_nsfw",
+          "skip_upsampler",
+          "enable_side_by_side",
+          "is_initial",
+          "aspect_ratio",
+          "enable_pro",
+          "num_generations",
+          "enable_watermark"
+        ],
+        "requestId": "uuid-string",
+        "text": "string",
+        "type": "input_text"
+      },
+      "countMenuOptions": [
+        "Auto"
+      ],
+      "defaultSpeedProfile": {
+        "enable_pro": false,
+        "num_generations": 8
+      },
+      "directSubmitVerified": false,
+      "directWriteRetries": 0,
+      "frameType": "conversation.item.create",
+      "id": "media.image.create",
+      "itemType": "message",
+      "quality2NativeProfile": {
+        "aspect_ratio": "2:3",
+        "enable_pro": true,
+        "enable_side_by_side": true,
+        "num_generations": 4
+      },
+      "serverResponses": 0,
+      "state": "browser_frame_captured_without_server_forwarding",
+      "transport": "direct_ws",
+      "url": "wss://grok.com/ws/imagine/listen"
+    }
+  ]
+}

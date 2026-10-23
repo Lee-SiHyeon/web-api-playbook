@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "capability": "original_image_download",
+  "sourceEvidence": {
+    "sourceClass": "Gemini first-party web SDK",
+    "sourceCallsites": {
+      "rpcServiceMethod": "/BardFrontendService.DownloadGeneratedImage",
+      "rpcId": "c8o8Fe",
+      "sdkMethod": "ImageGenerationApi.xxd",
+      "normalUiHandler": "kO.CDa",
+      "sizeTransform": "vPd(downloadUrl, true) calls setSize(0) before download",
+      "assetFetch": "dO adds alr=yes, includes credentials, follows text/plain bodies as URLs with a ten-hop bound"
+    },
+    "taskBinding": "hNvQHb prompt + API conversation ID + visible route ID",
+    "request": {
+      "method": "POST",
+      "origin": "https://gemini.google.com",
+      "path": "/_/BardChatUi/data/batchexecute",
+      "rpcId": "c8o8Fe",
+      "queryKeys": [
+        "_reqid",
+        "bl",
+        "f.sid",
+        "hl",
+        "rpcids",
+        "rt",
+        "source-path"
+      ],
+      "bodyFieldNames": [
+        "f.req",
+        "at"
+      ],
+      "callTupleLength": 4,
+      "requestType": "generic",
+      "selector": null,
+      "argsTopLevelCount": 5,
+      "argumentValueSource": "normal_sdk_prepared_request"
+    },
+    "response": {
+      "contentType": "application/json",
+      "framing": "batchexecute",
+      "frameLengthUnit": "utf16_code_units",
+      "frameLengthOverheadUnits": 2,
+      "rpcId": "c8o8Fe",
+      "decodedResult": "one HTTPS download URL; image bytes arrive through subsequent asset GETs"
+    },
+    "assetOrigins": [
+      "https://lh3.googleusercontent.com",
+      "https://lh3.google.com"
+    ],
+    "assetPathFamilies": [
+      {
+        "origin": "https://lh3.googleusercontent.com",
+        "pathFamily": "/gg/{id}",
+        "queryKeyNames": [
+          "alr"
+        ]
+      },
+      {
+        "origin": "https://lh3.google.com",
+        "pathFamily": "/rd-gg/{id}",
+        "queryKeyNames": [
+          "alr"
+        ]
+      },
+      {
+        "origin": "https://lh3.googleusercontent.com",
+        "pathFamily": "/rd-gg/{id}",
+        "queryKeyNames": [
+          "alr"
+        ]
+      }
+    ],
+    "normalUiCapture": {
+      "originalSizeControlObserved": true,
+      "c8o8FeObserved": true,
+      "browserDownloadScheme": "blob"
+    },
+    "directReplay": {
+      "httpStatus": 200,
+      "imageMime": "image/png",
+      "bytes": 7585633,
+      "dimensions": {
+        "width": 2816,
+        "height": 1536
+      },
+      "sha256": "577b4a42dabfc0d854450052062e8c687288b9751b60c4beb1da0617f5a3be62",
+      "mimeMagicMatched": true,
+      "independentFileReadback": true,
+      "matchedUiArtifact": true
+    },
+    "cookieHandling": "use validated Gemini session for c8o8Fe; use only ExtraInfo-observed media cookie names with existing scoped media cookie contract",
+    "rawValuesPersisted": false
+  },
+  "limitations": {
+    "sourcePreparedC8RequestRequired": true,
+    "opaqueProtobufArgumentsSynthesized": false,
+    "newGenerationPerformed": false
+  }
+}

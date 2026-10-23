@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "feature": "auth-session-refresh-discovery",
+  "recordedAt": "2026-10-05T22:26:38.381986+00:00",
+  "firstPartySource": {
+    "origin": "https://cdn.grok.com",
+    "path": "/_next/static/chunks/23px7v8a_s2zw.js",
+    "bytes": 35652,
+    "sha256": "b3d5533da494e110776e9191dadf874fa57710b1994cc38f0a26fa313cade5a2",
+    "fetchSessionFunctionOffset": 9270,
+    "fetchSessionFunctionSha256": "3e6b55d2c6fd34ec96d81f48937825cc0b09ef486b52f97ce5615a67ee74affd",
+    "method": "GET",
+    "pathTemplate": "/api/auth/session",
+    "credentialsMode": "same-origin",
+    "effect": "refetch authenticated session state; auth-cookie rotation not established"
+  },
+  "directRead": {
+    "transport": "curl-cffi-chrome150",
+    "executionHost": "Linux",
+    "status": 200,
+    "bytes": 648,
+    "expectedOwnerMatchedInMemory": true,
+    "setCookieNames": [
+      "x-userid",
+      "grok_device_id",
+      "__cf_bm"
+    ],
+    "ssoRotationObserved": false,
+    "challengeCookieReused": false
+  },
+  "localCookieRegression": {
+    "testFile": "test/session-rotation.test.mjs",
+    "passed": 5,
+    "authCookieRotationLiveVerified": false
+  },
+  "scope": {
+    "dedicatedRenewalRouteVerified": false,
+    "expiryRecoveryLiveVerified": false,
+    "credentialValuesPersisted": false,
+    "ownerIdentityPersisted": false,
+    "responseBodyPersisted": false
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "id": "domestic-food-ontology",
+  "updatedAt": "2026-09-28",
+  "purpose": "국산 식품 추천글 (owner 2026-09-28: \"식품이랑 엮어서 국내산 제품 추천글 뭐 이런걸로 가야해 다른 sns들도 찾아봐\"; started as a 대륙남TV-style 중국산 idea). 중국산 식품 이슈는 도입(왜 지금)으로만 쓰고, 본론은 ① 라벨에서 국산을 확인하는 법 ② 국산과 수입의 가격 차이 ③ 원산지가 국산으로 표시된 추천 제품 3~5개(제휴 링크). 독자가 얻는 것: 무엇을 보고 고르면 되는지, 얼마 더 내는지, 어디서 사면 되는지.",
+  "policy": {
+    "issueClaims": "중국산 이슈(도입부)는 공식 기록(식약처·농관원·서울시·국표원) 또는 방송사 보도를 출처와 날짜를 밝혀 한 문장으로 인용한다. SNS 영상·게시물의 '소름' 주장은 주장으로도 쓰지 않는다.",
+    "fairness": "Write about foods, labels and prices, never about Chinese people. No 혐중 wording, no '중국산 = 유해' generalization: 수입 식품도 통관 검사를 거친다는 점을 한 줄로 두고, 국산을 고르는 이유는 신선도·원산지 확인·선호로 설명한다.",
+    "recommendation": "A product is recommended only when its seller page shows 원산지 국산/국내산 for the main ingredient (김치: 배추와 고춧가루 각각) — ad copy alone is not enough. Record the page URL, 원산지 text, 원재료 표시, price, 용량 and 100g당 가격 at checkedAt. Certifications (GAP, 지리적표시, 친환경, HACCP) only when shown on the page or in the official registry.",
+    "affiliate": "Registered networks only (shopping-sources.v1.json, publication-registry): 링크프라이스(롯데ON 등), 네이버 쇼핑커넥트, 토스 쉐어링크; 쿠팡파트너스 links on Naver with the disclosure sticker (disclosure-sticker memory). Disclosure first; no 내돈내산/직접 먹어보니 claims (gate noUnsupportedExperience).",
+    "reuse": "Other creators' posts/videos: public metadata only (title, views, date, URL) as format references. No footage, images, captions or claims copied.",
+    "access": "Anonymous public HTTP; stop at login/CAPTCHA/challenge. Instagram/TikTok/Threads references come from search-engine results (their pages need a login); YouTube and Naver search pages are read anonymously with delays."
+  },
+  "classes": [
+    { "id": "FoodItem", "label": "식품 품목", "description": "참기름, 들기름, 고춧가루, 김치, 배추, 깐마늘, 대파, 당근, 무, 들깨가루, 간장, 고추장 등 원산지를 따지는 품목." },
+    { "id": "OriginRule", "label": "원산지 표시 규칙", "description": "How origin is labeled for the item (e.g. 김치는 배추·고춧가루 원산지를 각각 표시; 농산물 국산=국내산; 수입 후 국내 재배·사육 기간 규정). Source: 농관원 원산지 표시 안내." },
+    { "id": "IdentificationTip", "label": "구별·확인 방법", "description": "Label/where-to-look tips from official material (농관원 구별법 자료, 식약처 안내). Sensory tips (색·입자·향) only when an official source gives them." },
+    { "id": "ImportIssue", "label": "수입 식품 이슈", "description": "The 'why now' lead: 원산지 둔갑 적발, 해외직구 위해식품, 수입 부적합, 방송 보도 — each with agency/outlet and date." },
+    { "id": "PriceGap", "label": "국산·수입 가격 차이", "description": "Same item and grade, 국산 vs 수입(중국산) price per 100g/kg from KAMIS retail/wholesale on a stated date." },
+    { "id": "Certification", "label": "인증", "description": "GAP 농산물우수관리, 지리적표시, 친환경(유기·무농약), HACCP, 농산물이력추적." },
+    { "id": "DomesticProduct", "label": "국산 표시 제품", "description": "A buyable listing whose page states 국산/국내산 for the main ingredient; shop, price, 용량, 100g당 가격, affiliate network." },
+    { "id": "Shop", "label": "판매처", "description": "네이버쇼핑/스마트스토어, 롯데ON, 쿠팡, 토스쇼핑, 산지 직판 등 (shopping-sources.v1.json)." },
+    { "id": "Season", "label": "시즌", "description": "김장철(11월: 배추·고춧가루·젓갈), 명절 선물(참기름·들기름), 햇고추(8~9월), 봄 나물." },
+    { "id": "ContentAngle", "label": "글 각도", "description": "One reader question per post (contentFormulas)." },
+    { "id": "ReferencePost", "label": "참고 SNS 게시물", "description": "Public metadata of a post/video used as a format reference (snsReferences)." }
+  ],
+  "relations": [
+    { "id": "labeledBy", "domain": "FoodItem", "range": "OriginRule" },
+    { "id": "checkedWith", "domain": "FoodItem", "range": "IdentificationTip" },
+    { "id": "raisedBy", "domain": "FoodItem", "range": "ImportIssue" },
+    { "id": "pricedAs", "domain": "FoodItem", "range": "PriceGap" },
+    { "id": "instanceOf", "domain": "DomesticProduct", "range": "FoodItem" },
+    { "id": "soldAt", "domain": "DomesticProduct", "range": "Shop", "properties": ["price", "volume", "unitPricePer100g", "originText", "affiliateNetwork", "checkedAt"] },
+    { "id": "certifiedBy", "domain": "DomesticProduct", "range": "Certification" },
+    { "id": "peaksIn", "domain": "FoodItem", "range": "Season" },
+    { "id": "answers", "domain": "ContentAngle", "range": "FoodItem" },
+    { "id": "inspiredBy", "domain": "ContentAngle", "range": "ReferencePost" }
+  ],
+  "sources": [
+    { "id": "kamis_retail", "label": "KAMIS 소매가격(품목별)", "url": "https://www.kamis.or.kr/customer/price/retail/item.do", "agency": "aT 한국농수산식품유통공사", "kind": "official_price", "covers": ["고춧가루", "깐마늘(국산)", "배추", "당근", "무", "대파 등 품목별 소매가", "1개월전·1년전·평년"], "access": "anonymous_html_200 (2026-09-28); item/kind codes per 품목", "robots": "Disallow only /customer/common/search.do", "collector": "planned; KAMIS Open API needs an owner-issued key (optional)" },
+    { "id": "kamis_wholesale", "label": "KAMIS 도매·중도매 가격", "url": "https://www.kamis.or.kr/customer/price/wholesale/item.do", "agency": "aT", "kind": "official_price", "access": "anonymous_html_200 (2026-09-28)", "collector": "planned" },
+    { "id": "naqs", "label": "국립농산물품질관리원 (원산지 표시·구별법·위반 공표)", "url": "https://www.naqs.go.kr/", "agency": "농관원", "kind": "official_rule_and_enforcement", "covers": ["원산지 표시 방법", "국산·수입 농산물 구별법", "원산지 표시 위반 업체 공표"], "access": "anonymous_html_200 (2026-09-28); exact menu URLs to map", "collector": "planned" },
+    { "id": "foodsafetykorea", "label": "식품안전나라 (수입식품 부적합·제품 정보)", "url": "https://www.foodsafetykorea.go.kr/", "agency": "식약처", "kind": "official_record", "access": "anonymous_html_200 (2026-09-28); OpenAPI needs a key", "collector": "planned" },
+    { "id": "mfds_direct_purchase_food", "label": "식약처 해외직구 위해식품 목록", "url": "https://impfood.mfds.go.kr/CFCBB02F01", "agency": "식약처", "kind": "official_record", "access": "anonymous_html_200 (2026-09-28)", "use": "ImportIssue lead only" },
+    { "id": "safetykorea_recall", "label": "제품안전정보센터 리콜·해외직구 검사", "url": "https://www.safetykorea.kr/recall/recallBoard", "agency": "국표원", "kind": "official_record", "access": "anonymous_html_200 (2026-09-28)", "use": "식품 용기·주방용품 이슈 lead only" },
+    { "id": "shop_listings", "label": "판매처 상품 페이지 원산지·원재료 표시", "ref": "shopping-sources.v1.json", "kind": "seller_listing", "use": "DomesticProduct originText, price, volume" }
+  ],
+  "snsReferences": {
+    "checkedAt": "2026-09-28",
+    "method": "YouTube public search (8 queries, scratchpad yt-domestic-refs.json), Naver blog search (5 queries, naver-domestic-refs.json), Instagram/TikTok/Threads via search-engine results",
+    "formats": [
+      { "id": "shock_origin", "label": "중국산 ○○에서 나온 …, 소름", "examples": [
+        { "platform": "youtube_shorts", "title": "(200만뷰🎉)중국산 대파에서 나온 물의 정체가 소름 돋아요", "views": "260만" },
+        { "platform": "youtube_shorts", "title": "중국산 당근을 보고 정말 충격을 받았습니다!", "views": "238만" },
+        { "platform": "youtube_shorts", "title": "중국산 고춧가루에 이런 게 섞여 있다니 소름 돋습니다.", "views": "333만" }],
+        "ourUse": "Hook energy only. We never state an unverified 'what came out'; our opener names a real, dated issue and turns to what to check." },
+      { "id": "insider_never_eat", "label": "○○ 사장도 안 먹는 ○○ N가지", "examples": [
+        { "platform": "youtube_shorts", "title": "빵집 사장도 안 먹는 빵?! 절대 사면 안 되는 최악의 빵 4가지!", "views": "624만" },
+        { "platform": "youtube_shorts", "title": "떡집 사장도 안 먹는 떡?! 절대 사면 안 되는 최악의 떡 4가지!", "views": "156만" }],
+        "ourUse": "List structure (N가지) with label-based reasons; no insider persona we cannot back." },
+      { "id": "identify_label", "label": "국산 vs 중국산 구별법 / 라벨 딱 두 곳", "examples": [
+        { "platform": "tiktok", "title": "충격적인 중국산 김치 구별법! 식당에서 꼭 확인하고 드세요.", "url": "https://www.tiktok.com/@kbs_official/video/7620407568237694215" },
+        { "platform": "youtube_shorts", "title": "\"이렇게 구분하세요\"…한국산·중국산 김치 차이점은 / KBS", "views": "42만" },
+        { "platform": "naver_blog", "title": "배추는 국산, 고춧가루는 중국산…이 김치는 국산일까요? 헷갈리는 김치 원산지 표시, 딱 두 곳만 보면 됩니다" },
+        { "platform": "instagram", "title": "국산 vs 중국산 참기름 구별법 #살림꿀팁", "url": "https://www.instagram.com/p/DXlaMbwCbJr/" },
+        { "platform": "threads", "title": "쓰친들 혹시 “국산 vs 국내산” 뭐가 다른지 알고 있어?", "url": "https://www.threads.com/@farmdeli_official/post/DW3kRwFEStP" }],
+        "ourUse": "Core section of every post, from 농관원 rules." },
+      { "id": "price_gap", "label": "국산 vs 중국산 가격 차이 / 재료원가", "examples": [
+        { "platform": "youtube_shorts", "title": "참기름의 재료원가는 얼마일까?", "views": "3435만" },
+        { "platform": "instagram", "title": "국산 vs 중국산 고춧가루, 가격 차이 이 정도였어? 🌶️💸", "url": "https://www.instagram.com/p/DUfSy2EkWPd/" },
+        { "platform": "naver_blog", "title": "중국산 대신 국산을 선택하면 우리 밥상 가격은 얼마나 달라질까?" }],
+        "ourUse": "KAMIS 국산/수입 per 100g on a stated date; our strongest data advantage." },
+      { "id": "tier_recommend", "label": "전문가 티어리스트 / 추천템 N가지 + 고정댓글 링크", "examples": [
+        { "platform": "youtube_shorts", "title": "🥛 24년차 약사가 분류한 '두유' 티어리스트", "views": "82만" },
+        { "platform": "youtube_shorts", "title": "첨가물 No ❌ 성분좋고 깔끔한 조미료 추천템 5가지", "views": "101만" },
+        { "platform": "youtube_shorts", "title": "참기름 vs 들기름 (고정댓글👇추천제품)", "views": "53만" }],
+        "ourUse": "Recommendation table (원산지·용량·100g당 가격·인증) + affiliate links; on SNS the link goes in the pinned comment / affiliate reply (registered networks only)." },
+      { "id": "issue_to_product", "label": "○○ 논란에 걱정된다면 → 국산 ○○", "examples": [
+        { "platform": "naver_blog", "title": "중국산 배추 논란에 김치가 걱정된다면 운림가 국산 포기김치, 원재료부터 살펴봤어요" },
+        { "platform": "naver_blog", "title": "매일 먹는 김치라서 더 꼼꼼하게, 국산 재료로 만든 국내산 김치 추천 기준" },
+        { "platform": "youtube", "title": "[자막뉴스] 믿고 샀는데 이런 배신감이…'국산 김치' 샀다 뒤집어진 이유 / JTBC News", "views": "407만" }],
+        "ourUse": "Our post skeleton: issue lead → 라벨 → 가격차 → 추천." }
+    ]
+  },
+  "contentFormulas": [
+    { "id": "domestic_pick", "label": "국산 ○○ 고르는 법 + 추천 N개", "sections": ["왜 지금 (ImportIssue 1문장, 출처·날짜)", "라벨에서 볼 곳 (OriginRule/IdentificationTip)", "국산 vs 수입 가격 차이 (PriceGap, KAMIS 날짜)", "추천 3~5개 표: 제품·판매처·원산지 표시·용량·100g당 가격·인증", "보관·사용 팁 1개"], "evidence": ["naqs", "kamis_retail", "shop_listings"], "hook": "loss", "titleExample": "국산 고춧가루 고르는 법｜라벨 두 곳 확인, 100g당 가격 차이와 추천 N개" },
+    { "id": "gift_domestic", "label": "명절 선물 국산 ○○", "season": "명절", "evidence": ["shop_listings", "naqs"], "hook": "segment", "titleExample": "추석 선물 국산 참기름·들기름｜원산지 국산 표시 제품만 N개 비교" },
+    { "id": "kimjang_check", "label": "김장 재료 국산 체크리스트", "season": "김장철", "evidence": ["kamis_retail", "naqs", "shop_listings"], "hook": "loss", "titleExample": "김장 전 체크｜배추·고춧가루·젓갈 국산 확인법과 올해 가격" },
+    { "id": "price_gap_board", "label": "국산 vs 수입 가격 차이 한눈에", "evidence": ["kamis_retail"], "hook": "segment", "titleExample": "국산 vs 수입 N개 품목 가격 차이｜100g당 얼마 더 낼까" }
+  ],
+  "seedItems": [
+    { "item": "고춧가루", "season": "햇고추 8~9월, 김장 11월", "why": "SNS 조회 최다(333만·52만), 가격차 큼" },
+    { "item": "참기름·들기름", "season": "명절 선물(지금)", "why": "원가 쇼츠 3435만, 블로그 추천글 다수" },
+    { "item": "김치", "season": "상시, 김장", "why": "원산지 표시 혼동(배추·고춧가루 따로), 방송 보도 407만" },
+    { "item": "깐마늘", "season": "상시", "why": "KAMIS가 깐마늘(국산) 가격을 따로 공개" },
+    { "item": "배추·대파·당근·무", "season": "김장", "why": "쇼츠 이슈 다수; KAMIS 가격" }
+  ],
+  "genreMapping": { "naverCategory": "생활정보 (14) or 쇼핑 가이드 (11) when the recommendation table leads", "publisherGenre": "explainer / deal_roundup", "daangnBoard": "💡 생활 정보", "sns": "shorts: identify_label or price_gap; X/Threads: price_gap hook + affiliateReply (registered networks)" },
+  "detectors": [
+    { "id": "domestic_food_issue", "plannedIn": "research/content-store/event-detectors.mjs", "trigger": "new 농관원 원산지 위반 공표 or 식약처 수입/직구 부적합 naming a seedItem, or a KAMIS 국산/수입 gap change ≥20% in 1 month", "brief": "domestic_pick for that item" },
+    { "id": "domestic_food_season", "trigger": "calendar: 명절 D-21, 김장 11월 1일, 햇고추 8월 20일", "brief": "gift_domestic / kimjang_check" }
+  ],
+  "nextSteps": [
+    "map KAMIS item/kind codes for 고춧가루(국산·수입), 참깨, 들깨, 깐마늘(국산·수입), 배추, 대파 and write a collector (kamis-prices.mjs)",
+    "map 농관원 menu URLs: 원산지 표시 방법, 구별법 자료, 위반 공표 목록",
+    "shop listing checker: seller page → originText/원재료/용량/가격 (anonymous; shopping-sources decisions apply)",
+    "first brief: gift_domestic 참기름·들기름 (추석 직후 선물 수요는 지났으므로 domestic_pick 고춧가루가 더 시의적절 — 햇고추 시즌)"
+  ]
+}

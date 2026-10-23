@@ -1,0 +1,5221 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-19T06:49:39.679Z",
+  "provider": "coupang_partners",
+  "mode": "portal_contract_candidate_catalog",
+  "sessionReuse": {
+    "browser": "Google Chrome Stable",
+    "profile": "Default",
+    "strategy": "in_place_existing_session",
+    "cookieValuesCopied": false,
+    "sessionTokenValuesCopied": false,
+    "credentialsPersisted": false
+  },
+  "sourceEvidence": [
+    "coupang-netlog-sanitized.json",
+    "coupang-public-script-analysis.json",
+    "coupang-request-shape-hints.json"
+  ],
+  "contractCount": 146,
+  "liveObservedCount": 26,
+  "response200VerifiedCount": 26,
+  "executableCount": 0,
+  "bodySchemasObserved": 0,
+  "valuesPersisted": false,
+  "contracts": [
+    {
+      "id": "7bbf8a0cc0226541be14",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/fashion",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "15a0917acd1b161e7097",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/goldbox",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "2405e837bab339bd36af",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/rocket-fresh",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "0b306579e731acbadb78",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/performance/product",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session"
+      ],
+      "confidence": [
+        "live_authenticated_netlog"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "c9aae4329a9d87a86a17",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/search",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "categoryId",
+        "deliveryTypes",
+        "filter",
+        "page.pageNumber",
+        "page.size"
+      ],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "4a9051685d374db37e5e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/search-bar/widget-instance-id",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "b97e65c058f5015129a9",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/instances/search",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": true,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "98c339836005b7c4e373",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/url/instant/all",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "links.create_or_list",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "535e34a4fb40f25ccc88",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/payouts",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "payouts.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": true,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "2a40499ff6c701734a40",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/settlements",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "payouts.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": true,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "14353745dbd5f79e17bf",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/dashboard",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "d32f3f2581340c5b6711",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/earning/notification",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "3ff494e8da216c398965",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/earning/summary/v2",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "b398223ea72de42144c2",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/performance/summary",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "pathParameters": [],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "26ffcddd81cefb6a3475",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/daily",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P0",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "pathParameters": [],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "d8f86b30d3ea3a1a0e5b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/high-commission",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "715d683717df278da967",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/most-conversion",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "014fdd6ac20be3c021ab",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/most-discounted",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "7ccb319547155ecba974",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/most-sold",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "970931b66fd3beefa817",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/retail-clearance",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "3e6f2467d22f3e3ed3c9",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/discovery/top-commission",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [
+        "limit"
+      ],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "40d14e4d025a2d4e22cd",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/search/best",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "category",
+        "categoryId",
+        "page.pageNumber",
+        "page.size"
+      ],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8cd578095c6f3734dc7f",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/url/instant/{categoryId}",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "catalog.search_or_get",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [
+        "categoryId"
+      ],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "0f119fa99bf8774b668a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/banner/gen",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "links.create_or_list",
+      "operationNature": "link_generation_or_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "group",
+        "options",
+        "product"
+      ],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "0dd110286a70a216eed7",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/banner/iframe/url",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "links.create_or_list",
+      "operationNature": "link_generation_or_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "group",
+        "product"
+      ],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "5b54e2830b5413cdc886",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/performance/copyUrl",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [
+        "subId",
+        "traceId"
+      ],
+      "statusesObserved": [],
+      "capability": "links.create_or_list",
+      "operationNature": "link_generation_or_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "b571b7698abd1c389ecd",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/url/any",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [
+        "coupangUrl"
+      ],
+      "statusesObserved": [],
+      "capability": "links.create_or_list",
+      "operationNature": "link_generation_or_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a9983305f345890adfb1",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/url/instant/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "links.create_or_list",
+      "operationNature": "link_generation_or_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "fddce3a9f3ab1fdf9dd7",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/payout/details/download",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [
+        "month"
+      ],
+      "statusesObserved": [],
+      "capability": "payouts.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a5750cd6baff3dbf1556",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/payouts/details",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "payouts.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": true,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "41bbba71c5aebf76d1f7",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/settlement",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "payouts.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "pageNumber",
+        "size"
+      ],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "fa15cfcb90e9151d1550",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/settlements/details",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "payouts.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": true,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "c51297fae10a1b9badd2",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/settlements/details/download",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [
+        "month",
+        "trackingCode"
+      ],
+      "statusesObserved": [],
+      "capability": "payouts.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "6428200e1264d6b7edbe",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/events",
+      "methodsObserved": [
+        "POST"
+      ],
+      "preflightObserved": true,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "promotions.read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "page.pageNumber",
+        "page.size"
+      ],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "e9e812c28393903166ee",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/events/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "promotions.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "b932e417e4af1533dd42",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/downloads/async/reports/$%7Be%7D/create",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "61a275f65e585a08726a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/downloads/async/reports/$%7Be%7D/delete",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a1ba34147f69df57d0af",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/downloads/async/reports/$%7Be%7D/download",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "35b3c92bb66d37ad0d4a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/downloads/async/reports/$%7Be%7D/regen",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "c249132caf97e48e3327",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/downloads/async/reports/list",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "c082add66514cb11e5fc",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/earning/summary",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a8470b1952ea19533e3b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/referralkol/dashboard$%7Bt%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "eb889381518fd9abbd6e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/dynamic-banner",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "pathParameters": [],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "f9ab4a2c16625fce91c4",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/invoice/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "ab4ffeb726e46b03770d",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/monthly",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "filters[].column",
+        "filters[].operator",
+        "filters[].value"
+      ],
+      "pathParameters": [],
+      "filterColumns": [
+        "childTrackingCodes",
+        "endDate",
+        "startDate",
+        "subIds"
+      ],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "ae00b60a0f6f0152d7a6",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/report/tax",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "reports.read",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "20b5f5dcedfde7115e22",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/children/trackingCodes",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "tracking_ids.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "d0648b089b468812b247",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/subId",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "tracking_ids.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "e8e343c721ff22bf1ef5",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/subId/all",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "tracking_ids.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a53f6a89ce3d3aa16ed5",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/subId/delete/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "tracking_ids.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "b4918d00825a86892324",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/subId/internal",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "tracking_ids.manage_or_read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "c654f8394efac88489f7",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session"
+      ],
+      "confidence": [
+        "live_authenticated_netlog"
+      ],
+      "priority": "P1",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a6921fcf1b681523eba6",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/banners",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle",
+        "coupang-request-shape-hints.json:public_bundle_direct_call"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_direct_call",
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": true,
+      "bodyFieldHints": [
+        "datasetId",
+        "height",
+        "width"
+      ],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "16e17f43776c90311a72",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/datasets",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [
+        "dataType"
+      ],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "36acaa9b8e4aaac8611c",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/datasets/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "899fd9847c207f688e94",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/datasets/$%7Be%7D/delete",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "3be2b4aa708532c22697",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/datasets/types",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8c214ebdd039fb2dc59a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/instances",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "968bb86a1944b5791c03",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/instances/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "ec1fb068946e5ea5906e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/instances/$%7Be%7D/delete",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "6e27f11e2edf401b4559",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/instances/$%7Be%7D/passback",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "ba3ebe496fa4ed55eacd",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/videoBanners",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "62dce1e8cd7925eeeee5",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets/videoBanners/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "f766d49834bade5c6e5c",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/widgets$%7Bt%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "widgets.manage_or_read",
+      "operationNature": "mixed_read_write",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P1",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "6b93443828b93d59137e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8d93e52932257943867b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/closeDeactivatedAccount",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "9dbe18f3b9ddeb78ae1c",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/edit",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "0e63750c71aa4cfb1c7f",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/registration",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "bf9874205324fc149b70",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/registration/affiliateType/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "9b3c362378a650a1fed9",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/registration/payment/business",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "defbf95604a5c47938aa",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/registration/payment/individual",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "46ac47e7258926fdbd49",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/registration/payment/otherIndustries",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "c0800db4ccf371157801",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/registration/profile",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "04984c611652eec6ea5b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/registration/referrer/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "dcee1eb6ab92b7042255",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliate/unsubscribe",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "62689e2da9d15961dee3",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliateTypeChange/toIndividual",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "6f2abad5c9645354109a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/affiliateTypeChange/toOtherIndustries",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "ec5c3297efb0fc682b77",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/kmc/affiliate-rnv-status",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_read",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "74421063941474b978af",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/kmc/rnv",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [
+        "source"
+      ],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "10e5e978dfdafc3b337d",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/kmc/status",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_read",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "80ffd57c440dcefa3988",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "cdafdab16fe988bbd91b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/bank-branch/$%7Be%7D/branches",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "10b048f892d7890075d7",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/company",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "4ce003db2426ba3a8b25",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/deactivated/individual",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "4de75c62ee96eca55582",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/deactivated/otherIndustries",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "78f5730df86c1b7e8ea7",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/docstatus",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "c9dc15d529baadaad2f4",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/image/bank",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_read",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "49677f0197f9fb0807d4",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/image/brn",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_read",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "e6e9a1430cfd3a984419",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/image/id/back",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_read",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "676dd69f67b64f4dd97d",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/image/id/front",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_read",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "2a5cc4ba601ed963296c",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/individual",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "63c68965abc03e9f8bec",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/name-sync",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST",
+        "PUT"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "805a64b21949f21271ae",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/otherIndustries",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "cabd05fb4c3f113ff6da",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/pii/unmask",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8721fa1ba99afed5f246",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/payment/upload",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "account.manage_or_read",
+      "operationNature": "account_mutation",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "e9d780eade33d83ea5d7",
+      "origin": "https://partners.coupang.com",
+      "path": "/_sec/cpr/params",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session"
+      ],
+      "confidence": [
+        "live_authenticated_netlog"
+      ],
+      "priority": "P2",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "13952b591846343a6467",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/config",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "2c6fe62126d8dc781a38",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/configuration/content/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "2fa6d5286ad7da958a2c",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/configuration/content/$%7Bp%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a7fc116accffd3ecb151",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/configuration/content/LANDING_BANNER",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "42d4a1629b8b1312c08f",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/configuration/content/MARKETING_EMAIL",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "ccc26659d8e338241a8e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/configuration/content/MARKETING_PI_COLLECTION",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "d208278466b75af74e4a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/configuration/content/popup_notification",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "dbb1259271fefa511013",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/notification-bar",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "578f85098e9fe143cf53",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/notification/all",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "83f6f395f74cb8f073b5",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/notification/kakao/$%7Bt%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "54bd344a009c383c778a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/notification/markAllAsRead",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8a71c18d60b5ec10976c",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/notification/markAsRead/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "portal.support",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "f39035f46881fb5c5860",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/notification/top",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "106e57d59e29df04738d",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/region",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "3e348e212c7d70b60e47",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/wdpop/config",
+      "methodsObserved": [
+        "GET"
+      ],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [
+        200
+      ],
+      "capability": "portal.support",
+      "operationNature": "read_query",
+      "liveObserved": true,
+      "responseObserved": true,
+      "response200Verified": true,
+      "sources": [
+        "coupang-netlog-sanitized.json:authenticated_browser_session",
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "live_authenticated_netlog",
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "existing_chrome_default_profile_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "35c27102840a405e5d3b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/$%7Be%7D/$%7Bt%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "3a3f327acba8efc90f6a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/action",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "fb668966e7c19d2a7204",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/binding/$%7Be%7D/confirm",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "d86a8f1463d7fdb761ff",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/binding/$%7Be%7D/reject",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "52bb62440a8f9dc0f492",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/binding/status",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "0e81a6f7b9e13bd09796",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/children",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "1d5e1fed5c265e04cfba",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/children/$%7Be%7D/unbind",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "4132c80bec81322bb477",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/children/bind",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8c106ebe2ffad1bedd0b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/unbinding/$%7Be%7D/confirm",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "444a94411fce18281b0b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/agency/unbinding/$%7Be%7D/reject",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8409e49d057cc738228a",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/auth",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "8dc35bdb1d92b8369fe5",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/company-invoice/download",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "badc7ed7a6a45920ca40",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/company-invoice/status",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "cd99868f5bf81a4d184e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/company-invoice/upload",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "f4e37b78d010c0f5ab67",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/home-banners",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a3948dae6579e42cfec2",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/labor-report/confirm",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "440d5953b1c63c30ce1e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/labor-report/preview",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "18f7901fdf7415b3bbc0",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/labor-report/verify-identity",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "18683c31ba2c345c8afe",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/logout",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a8195e0728e93975f306",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/open-api",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "438d87ce925a54b04ac5",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/open-api/apply",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "a5e76a03afe552d9a07e",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/opt-in-out-settings",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "409baf2fe9fba3fddea5",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/penalty/appeal",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "7b7e6a9ff5b2b423b938",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/penalty/list",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "2e2b65b3cd6fc08b3eff",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/referral/summary",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "d07341a505d17e371192",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/referralkol/landing",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "read_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "41f5f04d7fc0ddc3b2da",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/referralkol/referees",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "GET",
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "ff660aeb95df47e4d101",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/upload/image",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "9e731cf20b343f09d991",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/verification/bankaccount",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "4b3498d36eba6c08edca",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/verification/brn/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "18f9ac7918063f66cf24",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/verification/deactivated/bankaccount",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "9f0d31be24fc1ada8965",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/verification/deactivated/brn/$%7Be%7D",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "46cb2d8d0d89e792d7c9",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/verification/deactivated/rrn",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "1edcee9545efa1be34cb",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/verification/rrn",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    },
+    {
+      "id": "6da79da8cbc30c7cdc8b",
+      "origin": "https://partners.coupang.com",
+      "path": "/api/v1/verification/site",
+      "methodsObserved": [],
+      "preflightObserved": false,
+      "methodsHinted": [
+        "POST"
+      ],
+      "queryFields": [],
+      "statusesObserved": [],
+      "capability": "unclassified",
+      "operationNature": "unknown_write_or_query",
+      "liveObserved": false,
+      "responseObserved": false,
+      "response200Verified": false,
+      "sources": [
+        "coupang-public-script-analysis.json:public_bundle"
+      ],
+      "confidence": [
+        "public_bundle_literal"
+      ],
+      "priority": "P2",
+      "authContext": "unknown_or_portal_session",
+      "bodySchemaObserved": false,
+      "bodySchemaHinted": false,
+      "bodyFieldHints": [],
+      "pathParameters": [],
+      "filterColumns": [],
+      "opaqueBodyObject": false,
+      "valuesPersisted": false,
+      "executable": false
+    }
+  ]
+}

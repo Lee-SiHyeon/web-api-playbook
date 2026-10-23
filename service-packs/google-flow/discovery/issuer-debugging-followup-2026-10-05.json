@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "status": "partial_unresolved",
+  "scope": "Normal issuance lineage and session handoff investigation; not a completed pure HTTP issuer",
+  "sessionRecovery": {
+    "failure": "HTTP document omitted SNlM0e; validity undetermined and RPC not sent",
+    "recovery": "Current observed Flow-scoped cookies rehydrated into Windows DPAPI CurrentUser",
+    "cookieCount": 21,
+    "reloginPerformed": false,
+    "protectedHttpReadVerifiedAt": "2026-10-05T14:22:19.480Z",
+    "authenticated": true,
+    "latestProtectedHttpReadVerifiedAt": "2026-10-05T14:55:17.501Z",
+    "latestProtectedMediaCount": 38
+  },
+  "issuerTransportDiagnostics": {
+    "normalHttpAnchorGetVerified": true,
+    "successfulNodeReloadVerificationCount": 0,
+    "firstHandoffRejectedBeforePost": "Expired optional cookies rejected the whole diagnostic bundle",
+    "diagnosticExpiryHandlingAdjusted": true,
+    "productionIssuerImplemented": false,
+    "laterHandoffProblems": ["receiver timeout", "fresh request capture incomplete"],
+    "noCompletedIssuerReplayClaim": true,
+    "sdkOnlyIsolation": {
+      "consumerGenerationFunctionInvoked": false,
+      "normalSdkAction": "VIDEO_GENERATION",
+      "normalReloadRequestObserved": true,
+      "crossOriginPauseObserved": true,
+      "cancelCommandResult": "Invalid InterceptionId",
+      "activeChildSessionAvailable": false,
+      "targetInventoryCommandSupported": false,
+      "unusedBodyGuaranteed": false,
+      "bodyNotHandedToNode": true,
+      "countAsServerHttpRejection": false,
+      "ownedDiagnosticTabsClosed": true
+    }
+  },
+  "protectedOwnerReadback": {
+    "verifiedAt": "2026-10-05T14:27:07.706Z",
+    "priorMediaCount": 37,
+    "currentMediaCount": 38,
+    "newMediaMatchesDiagnosticPrompt": true,
+    "mediaId": "05cb6e52-703a-46ce-825d-4642d12e338a",
+    "requestId": "7862712A-AF59-42D6-A9A3-EE895575C4D9",
+    "stateCode": 3,
+    "videoBytes": 4175898,
+    "creationTransportCaptured": false,
+    "countAsPureHttpGenerationSuccess": false,
+    "claimOverallGenerationCountZero": false
+  },
+  "discoveryGuard": {
+    "originalLineageCaptureConsumerCanceledVerified": true,
+    "guardCoverageAcrossLaterReloadsVerified": false,
+    "additionalUiGenerationStopped": true,
+    "ownedActiveTabClosed": true,
+    "rule": "A configured guard is not evidence of a canceled request; each action requires request correlation plus protected owner readback."
+  },
+  "unresolved": [
+    "SDK protobuf fields 5,6,16,20,21,22,25,28,29 do not have verified standalone producers.",
+    "Normal SDK binary body construction remains dependent on browser SDK execution.",
+    "Fresh action input issuance, renewal, process restart and consumer acceptance have not passed as one pure HTTP operation."
+  ],
+  "secrets": {
+    "cookieValuesRecorded": false,
+    "tokenValuesRecorded": false,
+    "rawSdkBinaryFieldsRecorded": false,
+    "browserIdentityHeadersFabricated": false
+  }
+}

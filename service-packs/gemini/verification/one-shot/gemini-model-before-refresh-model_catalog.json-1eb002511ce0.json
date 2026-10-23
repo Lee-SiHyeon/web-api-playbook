@@ -1,0 +1,450 @@
+{
+  "schema": "gemini-feature-live-receipt-v1",
+  "service": "gemini-web",
+  "featureId": "model_catalog",
+  "outcome": "verified",
+  "checkedAt": "2026-10-06T13:22:33.076629+00:00",
+  "evidenceClass": "direct_http_live",
+  "transport": "direct_http",
+  "executionHost": "linux_worker",
+  "mocked": false,
+  "publicOnly": false,
+  "authenticatedOwnerVerified": true,
+  "secretsPersisted": false,
+  "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+  "implementationFiles": [
+    {
+      "path": "scripts/gemini-model-catalog-http-once.mjs#performModelRead",
+      "sha256": "022feae610562583a7c938c0bd0532691bd376731356a7c0d67a2167d371c0bf"
+    },
+    {
+      "path": "scripts/gemini-model-catalog-http-once.mjs#readInput",
+      "sha256": "e8e5b9811fd12d9c32e30420d3dc9aca50014534fe1a5aad69cb2e34757e61e8"
+    },
+    {
+      "path": "scripts/gemini-model-catalog-http-once.mjs#sourceSnapshot",
+      "sha256": "3687c8a82fa29bf5d47eb5219665c95fbacb8afaaf9ac4eae7cd60931bb2d5fe"
+    },
+    {
+      "path": "scripts/gemini-model-catalog-read-once.py#run_model_read",
+      "sha256": "7cc176b49b2d4a4af43314aad8ecf3b7d16b1733fefcf67c6ea8e282a3206a96"
+    },
+    {
+      "path": "scripts/gemini-model-catalog-read-once.py#safe_model_result",
+      "sha256": "d7413515e1817d9f7b08d65187cc3639b7bde72b02f246915690064cbc055afa"
+    },
+    {
+      "path": "src/batch-response.mjs#parseBatchResponse",
+      "sha256": "d5bc4d2fae4b2eae28aa9b716c69a1a35dbbfc92bfc128caa604a9d4a83e3b07"
+    },
+    {
+      "path": "src/batch-response.mjs#requireRpcResponse",
+      "sha256": "2c727dcd328525eec299a1da4c9b68998034928b9d7df92eaddb9bb2e8f803b5"
+    },
+    {
+      "path": "src/cli.mjs#lifecycleReadMetadata",
+      "sha256": "725e91db00a0219359583dd5c5418fb3ba5eb6860a6773421d6f20d68c3d8fc6"
+    },
+    {
+      "path": "src/cli.mjs#runLifecycleReadOnce",
+      "sha256": "1a016f4ddf3003daa502537f76d8e3652436578ffd5faf4e6e15243a5adf4d04"
+    },
+    {
+      "path": "src/client.mjs#listModels",
+      "sha256": "14f369377f1bd960408ef0da6997fd7119d4a7734cda1beed543b79250dcc947"
+    },
+    {
+      "path": "src/client.mjs#read",
+      "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+    },
+    {
+      "path": "src/client.mjs#refreshSession",
+      "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+    },
+    {
+      "path": "src/client.mjs#verifyOwner",
+      "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+    },
+    {
+      "path": "src/constants.mjs#CREDENTIAL_NAME",
+      "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+    },
+    {
+      "path": "src/constants.mjs#SERVICE_ID",
+      "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+    },
+    {
+      "path": "src/constants.mjs#SERVICE_ORIGIN",
+      "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+    },
+    {
+      "path": "src/contract.mjs#requireCapturedOperation",
+      "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#computeModelCapacity",
+      "sha256": "588077e9a82f1e6cc9c2d4c4932911a8ce939fdbb92abdfb1575065359cf10c4"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#executeReadRpc",
+      "sha256": "c4c45ffb78c91666a60571c43d82456a3061b3ae340f28f0c3b02919693b3ab4"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#numberList",
+      "sha256": "698d1422130d92f459fb71d9899f1d6aa82153376235a1d60d24781e8903a3d6"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#parseModel",
+      "sha256": "69b17442714fefcffecc2a2938357af1e032b2ad1a47dbe0ed5a918cf2e9a92f"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#parseModelStatus",
+      "sha256": "c33db6a5a473d1ac94296793c535ebd37b1cc4876abcee5df4c01a666624ed41"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#readModels",
+      "sha256": "d7e469c74d66a88aa4deaa662c192c494ca7d1e083ba482f68a20be3f69e8d8b"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#requireClient",
+      "sha256": "99aec53f9d8fbe8cadfb67268cb2c8ba69521e71b8b418c65953a5a7a8a6e236"
+    },
+    {
+      "path": "src/conversation-lifecycle.mjs#verifyOwner",
+      "sha256": "25fe1a770997cb61293c992d29bcb8bee9d52477a0cc8485136487add4cdefe1"
+    },
+    {
+      "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+      "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+    },
+    {
+      "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+      "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+    },
+    {
+      "path": "src/http-transport.mjs#request",
+      "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+    },
+    {
+      "path": "src/https-transport.mjs#countHeaderBytes",
+      "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+    },
+    {
+      "path": "src/https-transport.mjs#createHttpsFetch",
+      "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+    },
+    {
+      "path": "src/https-transport.mjs#incomingHeaders",
+      "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+    },
+    {
+      "path": "src/session.mjs#makeCookieHeader",
+      "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+    },
+    {
+      "path": "src/session.mjs#readLifecycleReadEnvelopeFromStdin",
+      "sha256": "1d494ac39937b3b05098436062e49b775f8db08207e96b755b27f5b28820dedb"
+    },
+    {
+      "path": "src/session.mjs#validateSessionBundle",
+      "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+    }
+  ],
+  "implementationSetSha256": "5584cc22d25a8d7a989a99283e7dd5e388afc77174920b55fc460619b9c45deb",
+  "sourceScope": {
+    "schema": "gemini-feature-source-scope-v1",
+    "featureId": "model_catalog",
+    "operationNames": [
+      "model_list"
+    ],
+    "authOperation": "identity",
+    "contractScopeSha256": "557df8d2467491cc6fe7109e521937bd0c9307df0a50dbeea7cd269f5c6fe569",
+    "implementationUnits": [
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#performModelRead",
+        "sha256": "022feae610562583a7c938c0bd0532691bd376731356a7c0d67a2167d371c0bf"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#readInput",
+        "sha256": "e8e5b9811fd12d9c32e30420d3dc9aca50014534fe1a5aad69cb2e34757e61e8"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#sourceSnapshot",
+        "sha256": "3687c8a82fa29bf5d47eb5219665c95fbacb8afaaf9ac4eae7cd60931bb2d5fe"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-read-once.py#run_model_read",
+        "sha256": "7cc176b49b2d4a4af43314aad8ecf3b7d16b1733fefcf67c6ea8e282a3206a96"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-read-once.py#safe_model_result",
+        "sha256": "d7413515e1817d9f7b08d65187cc3639b7bde72b02f246915690064cbc055afa"
+      },
+      {
+        "path": "src/batch-response.mjs#parseBatchResponse",
+        "sha256": "d5bc4d2fae4b2eae28aa9b716c69a1a35dbbfc92bfc128caa604a9d4a83e3b07"
+      },
+      {
+        "path": "src/batch-response.mjs#requireRpcResponse",
+        "sha256": "2c727dcd328525eec299a1da4c9b68998034928b9d7df92eaddb9bb2e8f803b5"
+      },
+      {
+        "path": "src/cli.mjs#lifecycleReadMetadata",
+        "sha256": "725e91db00a0219359583dd5c5418fb3ba5eb6860a6773421d6f20d68c3d8fc6"
+      },
+      {
+        "path": "src/cli.mjs#runLifecycleReadOnce",
+        "sha256": "1a016f4ddf3003daa502537f76d8e3652436578ffd5faf4e6e15243a5adf4d04"
+      },
+      {
+        "path": "src/client.mjs#listModels",
+        "sha256": "14f369377f1bd960408ef0da6997fd7119d4a7734cda1beed543b79250dcc947"
+      },
+      {
+        "path": "src/client.mjs#read",
+        "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+      },
+      {
+        "path": "src/client.mjs#refreshSession",
+        "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+      },
+      {
+        "path": "src/client.mjs#verifyOwner",
+        "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+      },
+      {
+        "path": "src/constants.mjs#CREDENTIAL_NAME",
+        "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ID",
+        "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ORIGIN",
+        "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+      },
+      {
+        "path": "src/contract.mjs#requireCapturedOperation",
+        "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#computeModelCapacity",
+        "sha256": "588077e9a82f1e6cc9c2d4c4932911a8ce939fdbb92abdfb1575065359cf10c4"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#executeReadRpc",
+        "sha256": "c4c45ffb78c91666a60571c43d82456a3061b3ae340f28f0c3b02919693b3ab4"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#numberList",
+        "sha256": "698d1422130d92f459fb71d9899f1d6aa82153376235a1d60d24781e8903a3d6"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#parseModel",
+        "sha256": "69b17442714fefcffecc2a2938357af1e032b2ad1a47dbe0ed5a918cf2e9a92f"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#parseModelStatus",
+        "sha256": "c33db6a5a473d1ac94296793c535ebd37b1cc4876abcee5df4c01a666624ed41"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#readModels",
+        "sha256": "d7e469c74d66a88aa4deaa662c192c494ca7d1e083ba482f68a20be3f69e8d8b"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#requireClient",
+        "sha256": "99aec53f9d8fbe8cadfb67268cb2c8ba69521e71b8b418c65953a5a7a8a6e236"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#verifyOwner",
+        "sha256": "25fe1a770997cb61293c992d29bcb8bee9d52477a0cc8485136487add4cdefe1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+        "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+        "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+      },
+      {
+        "path": "src/http-transport.mjs#request",
+        "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+      },
+      {
+        "path": "src/https-transport.mjs#countHeaderBytes",
+        "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+      },
+      {
+        "path": "src/https-transport.mjs#createHttpsFetch",
+        "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+      },
+      {
+        "path": "src/https-transport.mjs#incomingHeaders",
+        "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+      },
+      {
+        "path": "src/session.mjs#makeCookieHeader",
+        "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+      },
+      {
+        "path": "src/session.mjs#readLifecycleReadEnvelopeFromStdin",
+        "sha256": "1d494ac39937b3b05098436062e49b775f8db08207e96b755b27f5b28820dedb"
+      },
+      {
+        "path": "src/session.mjs#validateSessionBundle",
+        "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+      }
+    ],
+    "implementationScopeSha256": "5584cc22d25a8d7a989a99283e7dd5e388afc77174920b55fc460619b9c45deb"
+  },
+  "ownerIdentityEvidence": {
+    "path": "verification/feature-evidence/identity--identity--model_catalog_owner.json",
+    "sha256": "1a647e7cdfdaa0fefc432a45086aa5034f0d531ea9a416d32b086a6300398ef6",
+    "implementationFiles": [
+      {
+        "path": "src/client.mjs#read",
+        "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+      },
+      {
+        "path": "src/client.mjs#refreshSession",
+        "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+      },
+      {
+        "path": "src/client.mjs#verifyOwner",
+        "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+      },
+      {
+        "path": "src/constants.mjs#CREDENTIAL_NAME",
+        "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ID",
+        "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ORIGIN",
+        "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+      },
+      {
+        "path": "src/contract.mjs#requireCapturedOperation",
+        "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+        "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+        "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+      },
+      {
+        "path": "src/http-transport.mjs#request",
+        "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+      },
+      {
+        "path": "src/https-transport.mjs#countHeaderBytes",
+        "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+      },
+      {
+        "path": "src/https-transport.mjs#createHttpsFetch",
+        "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+      },
+      {
+        "path": "src/https-transport.mjs#incomingHeaders",
+        "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+      },
+      {
+        "path": "src/session.mjs#makeCookieHeader",
+        "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+      },
+      {
+        "path": "src/session.mjs#validateSessionBundle",
+        "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+      }
+    ],
+    "implementationSetSha256": "60f5335612f637281377953b38ce512b88d05dc6be7b868d83ac8eae16936c90",
+    "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+    "sourceScope": {
+      "schema": "gemini-feature-source-scope-v1",
+      "featureId": "identity",
+      "operationNames": [
+        "identity"
+      ],
+      "authOperation": "identity",
+      "contractScopeSha256": "09a588ee41a57496011ef64b9fccfa328c14147a8bfc86e0ab8d5a48507f7ed2",
+      "implementationUnits": [
+        {
+          "path": "src/client.mjs#read",
+          "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+        },
+        {
+          "path": "src/client.mjs#refreshSession",
+          "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+        },
+        {
+          "path": "src/client.mjs#verifyOwner",
+          "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+        },
+        {
+          "path": "src/constants.mjs#CREDENTIAL_NAME",
+          "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ID",
+          "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ORIGIN",
+          "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+        },
+        {
+          "path": "src/contract.mjs#requireCapturedOperation",
+          "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+          "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+          "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+        },
+        {
+          "path": "src/http-transport.mjs#request",
+          "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+        },
+        {
+          "path": "src/https-transport.mjs#countHeaderBytes",
+          "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+        },
+        {
+          "path": "src/https-transport.mjs#createHttpsFetch",
+          "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+        },
+        {
+          "path": "src/https-transport.mjs#incomingHeaders",
+          "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+        },
+        {
+          "path": "src/session.mjs#makeCookieHeader",
+          "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+        },
+        {
+          "path": "src/session.mjs#validateSessionBundle",
+          "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+        }
+      ],
+      "implementationScopeSha256": "60f5335612f637281377953b38ce512b88d05dc6be7b868d83ac8eae16936c90"
+    }
+  },
+  "operationEvidence": [
+    {
+      "operationId": "model_list",
+      "caseId": "available",
+      "path": "verification/feature-evidence/model_catalog--model_list--available.json",
+      "sha256": "ef06aad0ae078110718fb54fdcfbb294941a7a8283354676059e653ce580cb78"
+    }
+  ]
+}

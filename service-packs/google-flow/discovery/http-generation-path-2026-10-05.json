@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-05T06:04:40Z",
+  "operation": "flow_text_video_8s_http_path",
+  "requested": {
+    "durationSeconds": 8,
+    "outputResolution": "480p",
+    "nativeObservedResolution": "720p",
+    "aspect": "16:9",
+    "count": 1
+  },
+  "authentication": {
+    "provider": "Windows DPAPI CurrentUser",
+    "initialDocumentFailure": "SNlM0e_missing",
+    "narrowCookieBootstrap": {
+      "cookieCount": 16,
+      "httpStatus": 302,
+      "redirectClass": "accounts_login"
+    },
+    "recoveredBootstrap": {
+      "cookieCount": 21,
+      "flowHostCookiesPresent": [
+        "OSID",
+        "__Secure-OSID"
+      ],
+      "documentStatus": 200,
+      "protectedRead": {
+        "rpcId": "Zzl0ze",
+        "projectMediaCount": 35,
+        "checkedAt": "2026-10-05T05:56:25.485Z"
+      },
+      "mode": "pure_http",
+      "cookieValuesRecorded": false
+    }
+  },
+  "currentCapture": {
+    "rpcId": "YhhmEf",
+    "method": "POST",
+    "origin": "https://flow.google.com",
+    "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "formKeys": [
+      "f.req",
+      "at"
+    ],
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+    "modelKey": "abra_t2v_8s",
+    "payloadSchema": [
+      [
+        [
+          [
+            null,
+            null,
+            [
+              [
+                [
+                  "<prompt>"
+                ]
+              ]
+            ]
+          ],
+          "abra_t2v_8s",
+          2,
+          null,
+          [
+            null,
+            null,
+            null,
+            null,
+            "<client-uuid-1>",
+            "<client-uuid-2>"
+          ]
+        ]
+      ],
+      [
+        null,
+        22,
+        null,
+        null,
+        null,
+        "<project-id>",
+        null,
+        null,
+        null,
+        null,
+        [
+          "<fresh-first-party-token>",
+          1
+        ]
+      ],
+      [
+        "<request-uuid>",
+        2
+      ]
+    ],
+    "browserRequestBlocked": true,
+    "blockedReason": "inspector",
+    "browserCreateResponseReceived": false,
+    "serviceCreateCount": 0,
+    "firstPartySdkInputObserved": true,
+    "recaptchaReloadStatus": 200,
+    "browserlessIssuerVerified": false
+  },
+  "protectedGenerationState": {
+    "rpcId": "jwpduf",
+    "mode": "pure_http",
+    "observedStateCode": 3,
+    "existingVideoBytes": 553769,
+    "creditBalance": 1050,
+    "existingMediaReusedAsRequestedOutput": false
+  },
+  "redaction": {
+    "authValuesPersisted": false,
+    "freshTokenPersisted": false,
+    "freshTokenReused": false,
+    "transientCaptchaBinaryValueInDiagnosticOutput": true,
+    "mitigation": "Binary request excluded from form-field decoding; capture values cleared and not replayed."
+  },
+  "outcome": {
+    "newVideoCreated": false,
+    "requestedArtifact": null,
+    "createHttpRequests": 0,
+    "remainingBoundary": "Fresh first-party generation input has no verified pure-HTTP issuer."
+  },
+  "references": {
+    "recaptcha": "https://docs.cloud.google.com/recaptcha/docs/create-assessment-website",
+    "flowModels": "https://support.google.com/flow/answer/16352836?hl=en"
+  },
+  "finalizedAt": "2026-10-05T06:48:09.956Z",
+  "httpClient": {
+    "implemented": true,
+    "generationRpc": "YhhmEf",
+    "inputProviderMode": "pure_http",
+    "verifiedIssuerConfigured": false,
+    "guardCode": "FLOW_HTTP_CAPTCHA_ISSUER_UNAVAILABLE",
+    "productionCliProbe": {
+      "duration": 8,
+      "resolution": "720p",
+      "aspect": "16:9",
+      "exitCode": 1,
+      "createHttpRequests": 0
+    },
+    "offlineVerification": {
+      "tests": 52,
+      "passed": 52,
+      "failed": 0,
+      "allSourceSyntaxPassed": true
+    },
+    "sourceTraceReceipt": "http-issuer-source-trace-2026-10-05.json",
+    "finalProtectedStatusCheck": {
+      "checkedAt": "2026-10-05T06:48:21.925Z",
+      "mode": "pure_http",
+      "session": "authenticated",
+      "projectMediaCount": 35
+    }
+  }
+}

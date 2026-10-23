@@ -1,0 +1,400 @@
+{
+  "schemaVersion": 1,
+  "provider": "naver-travel",
+  "observedOn": "2026-09-30",
+  "discoveryMethod": "document_and_client_js_analysis",
+  "browserCaptureObserved": false,
+  "overallState": "production_observed_replay_verified",
+  "runtimeRoute": "independent_http_only",
+  "normalExecutionBrowserRequired": false,
+  "defaultAuthentication": "anonymous",
+  "authenticatedReplayVerified": false,
+  "supportScope": "limited_production_observed_read_only",
+  "operations": [
+    {
+      "name": "flight-search-international",
+      "kind": "read",
+      "transport": "sse_stream",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://flight-api.naver.com",
+        "path": "/flight/international/searchFlights",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "observed_international_flight_search",
+      "bodyFields": [
+        "tripType",
+        "device",
+        "seatClass",
+        "adultCount",
+        "childCount",
+        "infantCount",
+        "isNonstop",
+        "openReturnDays",
+        "itineraries",
+        "initialRequest"
+      ],
+      "observedReplay": {
+        "httpStatus": 201,
+        "contentType": "text/event-stream",
+        "sampleRoute": "ICN-NRT",
+        "sampleDates": "20261015-20261020",
+        "inventoryDynamic": true
+      },
+      "priceSemantics": {
+        "priceScope": "per_adult",
+        "sourcePriceField": "adult.totalFare",
+        "occupancyPricingVerified": false
+      },
+      "limitations": [
+        "Production-observed SSE streaming contract; booking checkout requires airline/OTA redirect.",
+        "Prices are adult single fares observed in current partner feeds; conditional payment discounts require verification.",
+        "Multi-leg roundtrips resolve outbound and inbound legs via itineraryIds splitting; missing leg definitions are reported explicitly."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "flight-search-domestic",
+      "kind": "read",
+      "transport": "sse_stream",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://flight-api.naver.com",
+        "path": "/flight/domestic/searchFlights",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "observed_domestic_flight_schedule_and_fares",
+      "bodyFields": [
+        "type",
+        "device",
+        "fareType",
+        "person",
+        "tripType",
+        "itineraries"
+      ],
+      "observedReplay": {
+        "httpStatus": 201,
+        "contentType": "text/event-stream",
+        "sampleRoute": "GMP-CJU",
+        "sampleDates": "20261015-20261020",
+        "inventoryDynamic": true
+      },
+      "priceSemantics": {
+        "priceScope": "per_leg",
+        "sourcePriceField": "s.minFare",
+        "occupancyPricingVerified": false
+      },
+      "limitations": [
+        "Domestic flights require Korean domestic IATA airport codes.",
+        "Returned minFare is live carrier listing price per leg; not a confirmed round-trip bundle price.",
+        "Final checkout may vary by baggage or seat selection."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "flight-cards",
+      "kind": "read",
+      "transport": "graphql",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://flight-api.naver.com",
+        "path": "/graphql",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "flight_promotion_cards",
+      "query": "query flightsCards { flightsCards { code name category naverPaySaving } }",
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8"
+      },
+      "limitations": [
+        "Represents promotional categories and cards, not complete flight schedules or pricing."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "flight-price-graph",
+      "kind": "read",
+      "transport": "graphql",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://flight-api.naver.com",
+        "path": "/graphql",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "flight_itinerary_price_history",
+      "query": "query GET_PRICE_GRAPH($searchKey: String!, $includeEventFare: Boolean!, $nonstop: Boolean!, $period: Int!, $departureLocationType: LocationType, $arrivalLocationType: LocationType) { priceGraph(...) { averageLowestFare fares { lowestFare searchDate } } }",
+      "variables": {
+        "searchKey": "fareType + per leg yyyymmdd+origin+destination, e.g. Y20261026ICNSPN20261030SPNICN",
+        "includeEventFare": "true = 카드요금 toggle on (site default)",
+        "nonstop": "boolean",
+        "period": "60 on the results page",
+        "departureLocationType": "airport|city (lowercase enum; uppercase is BAD_USER_INPUT)",
+        "arrivalLocationType": "airport|city"
+      },
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8",
+        "verifiedAt": "2026-10-16T17:45:00+09:00",
+        "sample": "ICN-SPN 10/26~10/30 Y adult1: 60 daily points (one null), min 211800 max 320200, averageLowestFare 272778.57; with current 230420 -> page average 258987, 16% below 2-week average (matches flight.naver.com)"
+      },
+      "limitations": [
+        "Series is the lowest fare Naver saw per search day for this itinerary; the page summary also folds in the current search min fare.",
+        "Adult fare per person; not a payable price.",
+        "Page compares current min fare with averageLowestFare: |diff|<=2% is shown as similar."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "hotel-price-trend",
+      "kind": "read",
+      "transport": "graphql",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://hermes-hotel-svc-api.naver.com",
+        "path": "/graphql",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "hotel_checkin_nightly_min_price_history",
+      "query": "query HotelDailyMinPrices($hotelId: String!, $checkIn: String!) { hotelDailyMinPrices(hotelId: $hotelId, checkIn: $checkIn) { checkIn price roomName logDate } }",
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "verifiedAt": "2026-10-16T17:55:00+09:00",
+        "sample": "hotel 11583218 check-in 2026-10-26: 30 daily points 2026-09-16..2026-10-15, min 209000 max 302380 avg 259955 (1-night)"
+      },
+      "limitations": [
+        "Powers the hotels.naver.com detail page 1박 최저가 추이 block; ~30 logDates.",
+        "The page ratio compares current total/nights with the plain average of the series."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "hotel-search",
+      "kind": "read",
+      "transport": "graphql",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://hermes-hotel-svc-api.naver.com",
+        "path": "/graphql",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "domestic_hotel_list_in_korea",
+      "query": "query domesticHotelList($from: Int!, $query: String!, $size: Int!, $sort: DomesticHotelSortOrder!, $centerCoordinate: Coordinate, $deviceType: DeviceType!, $searchRadius: Int)",
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8",
+        "query": "서울"
+      },
+      "priceSemantics": {
+        "priceScope": "indicative_hotel_min_rate_without_dates",
+        "sourcePriceField": "hotelPriceMinRate",
+        "occupancyPricingVerified": false
+      },
+      "limitations": [
+        "Scope is restricted to domestic accommodations in South Korea; does not support overseas hotel search.",
+        "hotelPriceMinRate is an indicative entry minimum rate without stay dates; actual room rates require hotel-rates query.",
+        "centerCoordinate requires lat/lon format within valid geographical bounds."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "hotel-rates",
+      "kind": "read",
+      "transport": "graphql",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://hermes-hotel-svc-api.naver.com",
+        "path": "/graphql",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "domestic_hotel_quoted_room_rates",
+      "query": "query domesticHotelRates($adultCnt: Int!, $checkIn: String!, $checkOut: String!, $id: String!, $includeTax: Boolean!, $query: String!, $impArea: SingleImpArea!, $childrenAges: [Int])",
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8",
+        "hotelId": "11583218"
+      },
+      "priceSemantics": {
+        "priceScope": "quoted_listing_rate",
+        "sourcePriceField": "rate.userRate",
+        "occupancyPricingVerified": false
+      },
+      "limitations": [
+        "userRate reflects OTA listing price with tax included for the requested date and occupancy parameters.",
+        "Does not guarantee final checkout payable price; cancel deadlines and breakfast inclusions are listing claims that require OTA re-verification."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "travel-products",
+      "kind": "read",
+      "transport": "document_ssr_hydration",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://travel.naver.com",
+        "path": "/domestic",
+        "requestHeaderFields": [
+          "Accept",
+          "User-Agent"
+        ]
+      },
+      "scope": "curated_domestic_feed_cards_snapshot",
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "text/html; charset=utf-8"
+      },
+      "priceSemantics": {
+        "priceScope": "indicative_starting_price",
+        "sourcePriceField": "productPrice_or_lowestRate",
+        "occupancyPricingVerified": false
+      },
+      "limitations": [
+        "Curated domestic feed snapshot extracted via SSR document hydration (__NEXT_DATA__), not full search catalog.",
+        "Scope is limited to domestic regional tours and featured hotels in South Korea.",
+        "Prices are entry-level promotional rates for tour packages and regional hotels."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    },
+    {
+      "name": "travel-autocomplete",
+      "kind": "read",
+      "transport": "graphql",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://travelsearch-api.naver.com",
+        "path": "/graphql",
+        "requestHeaderFields": [
+          "Accept",
+          "Content-Type",
+          "Origin",
+          "Referer",
+          "User-Agent"
+        ]
+      },
+      "scope": "domestic_administrative_region_autocomplete",
+      "query": "query SEARCH_DOMESTIC($keyword: String!) { domesticAutocompleteSearch(keyword: $keyword) { rcode nameKo exposeTitle } }",
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json; charset=utf-8",
+        "keyword": "제주"
+      },
+      "limitations": [
+        "Provides domestic administrative region codes (rcode) and titles in South Korea."
+      ],
+      "state": {
+        "browser_xhr_captured": false,
+        "client_js_extracted": true,
+        "client_implementation_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay_verified": true
+      }
+    }
+  ],
+  "provenance": "Curated field names, routes, and verification outcomes observed on production Naver Travel, Flight, and Hotel endpoints via document and client JS analysis followed by independent HTTP replay. No cookies, authentication tokens, or user identities stored.",
+  "supportedDomains": [
+    "flight-api.naver.com",
+    "hermes-hotel-svc-api.naver.com",
+    "travelsearch-api.naver.com",
+    "travel.naver.com"
+  ]
+}

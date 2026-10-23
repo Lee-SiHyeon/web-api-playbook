@@ -32,3 +32,9 @@
 5. 쓰기에는 pack 고유 저널·readback 절차를 사용합니다. core의 `request.mjs`를 기존 품질/인증 절차를 건너뛰는 지름길로 사용하지 않습니다.
 
 `npm ci --ignore-scripts`는 브라우저 바이너리 설치 등 dependency postinstall을 생략합니다. 필요한 기능에 한해 pack의 명시적인 setup 명령을 따르세요. 기존 test 파일은 원본 구현과 함께 보존한 것이며 설치 중 실행하지 않습니다.
+
+## 통합된 추가 클라이언트
+
+GitHub 소유 저장소 44개의 확인 결과, 이식한 native CLI·SDK·HTTP client와 고정 commit은 [통합 현황](../references/repository-consolidation.md)을 참고하세요. 루트의 npm run clients로 읽기 전용 목록을 볼 수 있습니다.
+
+Gemini·Grok·ChatGPT·Flow/Flow bridge·Whisk·Adpick·Threads action·카페·쇼핑/여행·소셜·측정·creator helper·공개 앱 reader가 포함됩니다. 설치는 루트 npm ci --ignore-scripts로 필요한 workspace 의존성을 함께 준비합니다.

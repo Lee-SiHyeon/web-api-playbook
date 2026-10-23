@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T08:45:00.943092Z",
+  "operation": "attachment.upload.presigned",
+  "state": "needs_review",
+  "ownerVerified": true,
+  "intentId": "grok-large-presigned-final-validation-20261006-v2",
+  "sourcePolicy": {
+    "v2Enabled": true,
+    "direct": 16,
+    "directToHttp": true,
+    "maxFile": 150,
+    "maxVideo": 150,
+    "multipart": true,
+    "concurrency": 4,
+    "configUpdatedAt": 1791275769536
+  },
+  "taskFile": {
+    "bytes": 16777217,
+    "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+    "fileNameMatched": true
+  },
+  "nativeCapture": {
+    "role": "codex-grok-uploads-20261006",
+    "registeredTargetMatched": true,
+    "method": "POST",
+    "path": "/rest/app-chat/upload-file-v2/init",
+    "requestFieldNames": [
+      "fileMimeType",
+      "fileName",
+      "multipartSupported",
+      "sizeBytes"
+    ],
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "rawHeaderValuesPersisted": false
+  },
+  "directApi": {
+    "initHttpStatus": 200,
+    "signedPutRequestCount": 0,
+    "completeHttpStatus": null,
+    "initPolicyDiagnostics": {
+      "normalizedMethod": "single_put",
+      "methodSource": "explicit_single_put",
+      "endpointCount": 1,
+      "signedStorageOrigins": [
+        "https://storage.googleapis.com"
+      ],
+      "validationCode": null,
+      "nativeInitResponseDelivered": true
+    },
+    "stageDiagnostics": [
+      {
+        "stage": "init",
+        "ordinal": 0,
+        "state": "completed",
+        "requestDigest": "857049775473c2c39ec9c950c45b1bb6edf7423b8c8767c98f844a262ad389a4",
+        "requestBytes": 0,
+        "attemptCount": 1,
+        "stageKey": "381b2d364bdd9593a447b411d5eb4240521540f2073a004e69cce9a12075c47e",
+        "httpStatus": 200,
+        "responseBytes": 1332,
+        "transportRequestDigest": "dcee01bb98fff4aed20b290756f1761af33412e4dce3b96ec0deb875a3c63607",
+        "transportIntentDigest": "b813dd6fa933f3e6f1b2e43c289a4153aeb95434e614a1676450a6a030c34a8d",
+        "responseStatus": 200,
+        "responseDigest": "33b3dd11fa4cc910e0e12ad6c9f12892537446b37cc7007120e5883df0f35921",
+        "responseDigestKind": "raw_http_body",
+        "responseContentType": "application/json",
+        "businessRetryAllowed": false,
+        "auditPersistence": {
+          "state": "stored"
+        },
+        "journalState": "completed",
+        "sourceOperationId": "attachment.upload.init",
+        "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+        "callerIntentSha256": "13cca83b60729d92871c7ffb227191c54cf401869b52affbb3f86b3ae78df2f3",
+        "issuedUploadIdSha256": "a46c76248c030ec2fd5a714ed9da750e3088efdf72c88c3ccc767dff838d52fc",
+        "issuedAssetIdSha256": "1a2a469c879c64b479e7876f1df46b172dc0031c84951f4be1b9007ccb8baaea",
+        "responseBodyTruncated": false,
+        "journalStateWriteFailed": false
+      }
+    ],
+    "independentReadback": null,
+    "cleanupOutcome": {
+      "status": "unknown",
+      "abortState": "aborted",
+      "reasonCode": null,
+      "abortVerified": true
+    },
+    "uploadReference": {
+      "referenceKey": "f79b6203-0fb6-4639-9d60-6febe553988f",
+      "state": "needs_review",
+      "abortAttemptState": "aborted"
+    }
+  },
+  "browserGuard": {
+    "nativeBusinessWriteAttempts": 5,
+    "nativeBusinessWriteFulfillments": 1,
+    "nativeBusinessWritesForwarded": 0,
+    "nativePutAttemptCount": 0,
+    "directPutCountAcknowledgedToNativeSdk": 0,
+    "blockedUnexpectedMutationKinds": [
+      "other_write_blocked",
+      "other_write_blocked",
+      "other_write_blocked"
+    ],
+    "duplicateNativeAttemptsBlocked": 0,
+    "pendingNativeWriteRoutes": 0,
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "completeHeaderNames": [],
+    "initBodyMatched": true,
+    "initPolicyDiagnostic": {
+      "normalizedMethod": "single_put",
+      "methodSource": "explicit_single_put",
+      "endpointCount": 1,
+      "signedStorageOrigins": [
+        "https://storage.googleapis.com"
+      ],
+      "validationCode": null,
+      "serverReplyWasParsed": true
+    }
+  },
+  "safety": {
+    "businessBrowserRequestsForwarded": 0,
+    "cookiesPersisted": false,
+    "dynamicHeaderValuesPersisted": false,
+    "signedUrlsPersisted": false,
+    "uploadIdsPersisted": false,
+    "rawBodiesPersisted": false
+  },
+  "incompleteReasonCode": "DIRECT_UPLOAD_INCOMPLETE"
+}

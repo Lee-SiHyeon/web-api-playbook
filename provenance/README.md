@@ -11,6 +11,11 @@
 | [myrealtrip-official-search-2026-10-11.json](myrealtrip-official-search-2026-10-11.json) | 현재 공식 TNA 검색 계약·실제 인증 조회·시작가 KRW와 읽기/발급 경계 |
 | [creator-public-data-2026-10-11.json](creator-public-data-2026-10-11.json) | 공개 RSS/JSON/GraphQL의 실제 출처·native/web client 경계·다섯 상태·dated replay와 최신 guard hash 구분 |
 | [verification](../verification/README.md) | 새 패키지의 설치·정적 확인 범위 |
+| [repository-inventory-2026-10-23.json](repository-inventory-2026-10-23.json) | GitHub 저장소 44개 확인 수준·포함/제외 판정·기존 통합 PR refs |
+| [repository-consolidation-2026-10-23.json](repository-consolidation-2026-10-23.json) | AI/Adpick/Threads/쇼핑·카페 client의 고정 commit·원본/이식 hash |
+| [operations-consolidation-2026-10-23.json](operations-consolidation-2026-10-23.json) | 추가 HTTP client·필요한 공통 모듈·회귀 fixture·적용 변경 |
+| [additional-client-consolidation-2026-10-23.json](additional-client-consolidation-2026-10-23.json) | Whisk·creator helper·Lifehack reader 출처 |
+| [automation-consolidation-2026-10-23.json](automation-consolidation-2026-10-23.json) | 자동화 저장소의 API 표면·원본/이식 hash·원래 앱에 남긴 실행기 범위 |
 
 `sourceSha256`는 **원본에서 읽은 바이트**의 hash입니다. 해당 파일이 이식 과정에서 수정됐다면 패키지 현재 hash와 다를 수 있으며 아래 변경 목록을 함께 봅니다. Git의 package commit 자체가 배포된 내용을 고정합니다.
 

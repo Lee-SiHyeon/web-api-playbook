@@ -1,0 +1,366 @@
+{
+  "schemaVersion": 1,
+  "host": "home Windows DESKTOP-TO2H6OD",
+  "checkedAt": "2026-09-20T17:05:57.825Z",
+  "successfulCommands": 10,
+  "verifiedOperations": [
+    "createLink",
+    "searchAirports",
+    "searchAirlines",
+    "reservations",
+    "flightReservations",
+    "sales",
+    "salesSummary",
+    "flightSales",
+    "flightSalesSummary",
+    "createFlightLanding"
+  ],
+  "attempts": [
+    {
+      "ok": false,
+      "code": "REAUTH_REQUIRED",
+      "operation": "createLink",
+      "recovery": "Official browser refresh then a new verified handoff before business POST"
+    },
+    {
+      "ok": true,
+      "operation": "createLink",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "createLink",
+          "method": "POST",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/partner/v2/mylink",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 159,
+          "checkedAt": "2026-09-20T17:04:09.132Z",
+          "browserUsed": false
+        }
+      ],
+      "verification": {
+        "verified": true,
+        "destinationMatches": true,
+        "attributionMatches": true,
+        "credentialSent": false,
+        "followedRedirect": false,
+        "httpStatus": 301,
+        "checkedAt": "2026-09-20T17:07:49.762Z"
+      },
+      "summary": {
+        "linkReturned": true,
+        "expirationMinutes": 604800
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": false,
+      "code": "WRITE_OUTCOME_UNKNOWN",
+      "outcome": "unknown",
+      "causeCode": "SCHEMA",
+      "operation": "createFlightLink",
+      "recovery": "No retry of uncertain input; numeric schema corrected and a separate itinerary was verified"
+    },
+    {
+      "ok": true,
+      "operation": "searchAirports",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "searchAirports",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/search/flight/v1/ac",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 734,
+          "checkedAt": "2026-09-20T17:04:53.331Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "resultCount": 3
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "searchAirlines",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "searchAirlines",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/flight/api/partner/shopping/airline",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 253,
+          "checkedAt": "2026-09-20T17:04:53.596Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "resultCount": 1
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "reservations",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "reservations",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/order-admin/partner/partnership-marketing/reservations",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 134,
+          "checkedAt": "2026-09-20T17:04:53.851Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "recordCount": 0,
+        "rowsReturned": false,
+        "rowSchemaVerified": false,
+        "pagination": {
+          "page": 1,
+          "pageSize": 15,
+          "totalCount": 0
+        }
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "flightReservations",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "flightReservations",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/order-admin/partner/partnership-marketing/flight-reservations",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 82,
+          "checkedAt": "2026-09-20T17:04:54.153Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "recordCount": 0,
+        "rowsReturned": false,
+        "rowSchemaVerified": false
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "sales",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "sales",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/payments",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 82,
+          "checkedAt": "2026-09-20T17:04:54.405Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "recordCount": 0,
+        "rowsReturned": false,
+        "rowSchemaVerified": false
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "salesSummary",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "salesSummary",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/payments/aggregation",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 189,
+          "checkedAt": "2026-09-20T17:04:54.680Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "quantity": 0,
+        "commissionBase": 0,
+        "salePrice": 0,
+        "partnershipCommission": 0,
+        "settlementAmount": 0,
+        "taxCharges": 0
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "flightSales",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "flightSales",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/flight/payments",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 82,
+          "checkedAt": "2026-09-20T17:04:54.912Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "recordCount": 0,
+        "rowsReturned": false,
+        "rowSchemaVerified": false
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "flightSalesSummary",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "flightSalesSummary",
+          "method": "GET",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/flight/payments/aggregation",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 189,
+          "checkedAt": "2026-09-20T17:04:55.151Z",
+          "browserUsed": false
+        }
+      ],
+      "summary": {
+        "quantity": 0,
+        "commissionBase": 0,
+        "salePrice": 0,
+        "partnershipCommission": 0,
+        "settlementAmount": 0,
+        "taxCharges": 0
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    },
+    {
+      "ok": true,
+      "operation": "createFlightLink",
+      "identityVerified": true,
+      "receipts": [
+        {
+          "operation": "createFlightLanding",
+          "method": "POST",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/flight/api/partner/shopping/fare/query-landing-url",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 261,
+          "checkedAt": "2026-09-20T17:05:21.938Z",
+          "browserUsed": false
+        },
+        {
+          "operation": "createLink",
+          "method": "POST",
+          "origin": "https://api3-backoffice.myrealtrip.com",
+          "path": "/partner/v2/mylink",
+          "httpStatus": 200,
+          "applicationStatus": 200,
+          "responseBytes": 159,
+          "checkedAt": "2026-09-20T17:05:22.010Z",
+          "browserUsed": false
+        }
+      ],
+      "verification": {
+        "verified": true,
+        "destinationMatches": true,
+        "attributionMatches": true,
+        "credentialSent": false,
+        "followedRedirect": false,
+        "httpStatus": 301,
+        "checkedAt": "2026-09-20T17:07:49.799Z"
+      },
+      "summary": {
+        "linkReturned": true,
+        "expirationMinutes": 604800
+      },
+      "execution": {
+        "mode": "pure_http",
+        "browserUsed": false,
+        "credentialProvider": "memory_stdin",
+        "renewal": "unverified"
+      }
+    }
+  ],
+  "scope": {
+    "bootstrapBrowserRequired": true,
+    "normalOperationBrowserRequired": false,
+    "automaticHttpRenewalVerified": false,
+    "nonemptyReportRowsVerified": false,
+    "settlementHistory": "blocked_by_required_identity_and_bank_information",
+    "flightVariant": "round_trip_economy"
+  }
+}

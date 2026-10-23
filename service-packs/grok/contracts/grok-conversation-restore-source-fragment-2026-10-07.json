@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T15:30:37.394831+00:00",
+  "serviceId": "grok-web",
+  "classification": "first_party_source_contract",
+  "operationId": "conversation.restore",
+  "api": {
+    "sourceAsset": "27akar72ihacg.js",
+    "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+    "sourceFunctionName": "chatRestoreSoftDeletedConversationRaw",
+    "method": "POST",
+    "path": "/rest/app-chat/conversations/restore",
+    "requestBodyFieldNames": [
+      "conversationId"
+    ],
+    "declaredHeaders": [
+      "Content-Type"
+    ],
+    "responseNormalizer": "none; generated SDK wraps raw JSON response",
+    "functionBodySha256": "54842d7831899ec7023e6b357ff4d5178cd09f6539d8a4c1f658c47e4c79bf82"
+  },
+  "softDeletedList": {
+    "sourceFunctionName": "chatListSoftDeletedConversationsRaw",
+    "method": "GET",
+    "path": "/rest/app-chat/conversations/deleted",
+    "queryFieldNames": [
+      "pageSize",
+      "pageToken",
+      "workspaceId"
+    ],
+    "responseTopLevelFieldNames": [
+      "conversations",
+      "nextPageToken"
+    ],
+    "conversationRowDecoder": "GrokApiConversationFromJSON",
+    "functionBodySha256": "de2fcf741cfa4618a44926eeb1e4fcd81137475fb3509aeffabea527cfd8987c"
+  },
+  "ui": {
+    "sourceAsset": "0skqp8k76tn6n.js",
+    "sourceSha256": "75825269a3d1759576d6c45cddca05ed2b86b19e836108804830e128f4a60ca7",
+    "sourceFunctionName": "fetchRestoreSoftDeletedConversation",
+    "callsRestoreWithOnlyConversationId": true,
+    "afterRestoreActions": [
+      "remove_from_local_soft_deleted_state",
+      "broadcast_restore_tab_sync",
+      "invalidate_soft_deleted_list",
+      "refetch_all_workspace_conversations",
+      "fetch_conversation_detail"
+    ],
+    "storeCallsiteSha256": "81ebc8f354a75dc4fbb9c0dda6724aab04c4c618a5108adefce09679a69dd2f6"
+  },
+  "deletedConversationsPage": {
+    "sourceAsset": "2703fxzxz8av0.js",
+    "sourceSha256": "5debc2eb69c73aece81c4561e783cefe2c1d40093aa8dbf31f37e6485e5e998b",
+    "pageTitle": "Deleted Conversations",
+    "restoreActionLabel": "Restore",
+    "retentionDescription": "Conversations marked for deletion will be permanently deleted after 30 days."
+  },
+  "tabSync": {
+    "sourceAsset": "04_h3j2b0jac8.js",
+    "sourceSha256": "00fdb8e0a2adbbbcc96e2f6381b3f5351502958767f87babf7a65bf96c0a2658",
+    "restoreEventObserved": true,
+    "localAction": "rememberConversation"
+  },
+  "sourceVerification": {
+    "generatedChatApi": {
+      "asset": "27akar72ihacg.js",
+      "sha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+      "expectedSha256Matches": true
+    },
+    "conversationStore": {
+      "asset": "0skqp8k76tn6n.js",
+      "sha256": "75825269a3d1759576d6c45cddca05ed2b86b19e836108804830e128f4a60ca7",
+      "expectedSha256Matches": true
+    },
+    "deletedConversationUiText": {
+      "asset": "2703fxzxz8av0.js",
+      "sha256": "5debc2eb69c73aece81c4561e783cefe2c1d40093aa8dbf31f37e6485e5e998b",
+      "expectedSha256Matches": true
+    },
+    "conversationTabSync": {
+      "asset": "04_h3j2b0jac8.js",
+      "sha256": "00fdb8e0a2adbbbcc96e2f6381b3f5351502958767f87babf7a65bf96c0a2658",
+      "expectedSha256Matches": true
+    }
+  },
+  "directHttpReplayPerformed": false,
+  "rawUserIdsPersisted": false,
+  "rawConversationIdsPersisted": false,
+  "rawRequestBodiesPersisted": false
+}

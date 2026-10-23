@@ -26,7 +26,7 @@ macOS/Linux의 core request는 provider가 stdin으로 JSON을 전달할 수 있
 
 ### 선택형 외부 연동
 
-`scripts/meta-session-from-canary.mjs`는 포함된 공통 도구와 달리 별도 `affiliate-content-operations` checkout의 `apps/naver-blog-api/scripts/meta-auth-session.mjs`를 사용하는 선택형 연동입니다. `ACO_ROOT`에 해당 checkout을 지정하거나 두 저장소를 같은 부모 폴더에 배치합니다. helper가 없거나 필요한 export가 없으면 브라우저·인증 작업 전에 `META_SESSION_HELPER_UNAVAILABLE` 또는 `META_SESSION_HELPER_INVALID`로 종료합니다. 이 연동을 사용할 수 없는 환경에서도 공통 도구와 오프라인 예제는 독립적으로 사용할 수 있습니다.
+`scripts/meta-session-from-canary.mjs`는 기본적으로 포함된 `service-packs/operations/apps/naver-blog-api/scripts/meta-auth-session.mjs`를 사용합니다. `ACO_ROOT`를 지정하면 해당 checkout을 우선하며, 묶인 helper가 없는 이전 설치본에서는 인접 `affiliate-content-operations`를 호환 경로로 확인합니다. helper가 없거나 export가 잘못되면 브라우저·인증 작업 전에 `META_SESSION_HELPER_UNAVAILABLE` 또는 `META_SESSION_HELPER_INVALID`로 종료합니다. 이는 정상 로그인된 사용자의 브라우저 세션을 인계하는 선택형 단계이며, 현재 세션이나 인증 갱신 성공을 증명하지 않습니다.
 
 ## 인코딩과 프로세스
 

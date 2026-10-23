@@ -1,0 +1,115 @@
+{
+  "schema": "grok-direct-upload-native-policy-live-v1",
+  "observedAt": "2026-10-06T11:28:17.101229Z",
+  "operation": "attachment.upload.direct",
+  "state": "completed",
+  "ownerVerified": true,
+  "intentId": "grok-direct-policy-1mibplus1-validation-20261006-v1",
+  "sourceSnapshotPath": "/home/worker/.nad-scratch/tmp/grok-attachment-direct-source-prewire-v4-20261006.json",
+  "sourceSnapshotSha256": "f3fd254db40921dcb21a9e68be226a79e2471e8331831235f98f49363831ddda",
+  "sourceHashesStableBeforeDispatch": true,
+  "sourceHashesStableAfterDispatch": true,
+  "sourcePolicy": {
+    "directUploadMaxSizeBytes": 16777216,
+    "maxUploadFileSizeBytes": 157286400,
+    "sourceStorageKey": "web_file_upload"
+  },
+  "taskFile": {
+    "fileName": "grok-direct-upload-1048577-20261006.bin",
+    "mimeType": "application/octet-stream",
+    "bytes": 1048577,
+    "sha256": "c71a41441753bbae65ada353661e41b6c0bbc9fe21c8aafedc1405954593c951"
+  },
+  "nativeCapture": {
+    "registeredRole": "codex-grok-uploads-20261006",
+    "registeredTargetMatched": true,
+    "requestMethod": "POST",
+    "requestPath": "/http/upload-file-v2/direct",
+    "fieldNames": [
+      "file"
+    ],
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent"
+    ],
+    "cookieNames": [
+      "OptanonAlertBoxClosed",
+      "OptanonConsent",
+      "__cf_bm",
+      "__cuid",
+      "__cuid",
+      "__stripe_mid",
+      "grok_device_id",
+      "i18nextLng",
+      "mp_ea93da913ddb66b6372b89d97b1029ac_mixpanel",
+      "sso",
+      "sso-rw",
+      "x-userid"
+    ],
+    "requestBytes": 1048804,
+    "fileNameMatched": true,
+    "mimeTypeMatched": true,
+    "fileBytes": 1048577,
+    "fileSha256": "c71a41441753bbae65ada353661e41b6c0bbc9fe21c8aafedc1405954593c951",
+    "browserBusinessRequestForwarded": false,
+    "nativeDirectAttempts": 1,
+    "otherWritesBlocked": 6
+  },
+  "directApi": {
+    "httpStatus": 200,
+    "requestDigest": "012357c0633231197d64f91496bf3cada27d54ae89edaf0c8e93937b043560eb",
+    "responseBytes": 423,
+    "multipartBodyIntegrity": {
+      "expectedBytes": 1048794,
+      "expectedSha256": "18a506f2ebafa447b0d48b4fd1cf844aa45785182b9a683f2dcc91132939ba23",
+      "transportObservedBytes": 1048794,
+      "transportObservedSha256": "18a506f2ebafa447b0d48b4fd1cf844aa45785182b9a683f2dcc91132939ba23",
+      "transportMode": "private_file_stream",
+      "tempFileCleanup": "removed",
+      "digestMatched": true
+    },
+    "metadataReadbackVerified": true,
+    "assetReadbackVerified": true,
+    "downloadVerified": true,
+    "download": {
+      "status": 200,
+      "mimeType": "application/octet-stream",
+      "bodyBytes": 1048577,
+      "sha256": "c71a41441753bbae65ada353661e41b6c0bbc9fe21c8aafedc1405954593c951",
+      "bytesMatch": true,
+      "artifactPath": "/home/worker/artifacts/grok-attachments-20261006/7e90ce8ec951cc4f-grok-direct-upload-1048577-20261006.bin",
+      "headersSubmittedNames": [
+        "accept",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "cookieNamesUsed": [
+        "sso"
+      ]
+    },
+    "cleanupHttpStatus": 200,
+    "cleanupVerified": true,
+    "auditPath": "/home/worker/work/provider-login-20261004/grok-web-xhr-client/verification/grok-attachment-upload-api-live-2026-10-06-7e90ce8ec951cc4f.json"
+  },
+  "safety": {
+    "businessBrowserRequestsForwarded": 0,
+    "cookiesPersisted": false,
+    "rawBodiesPersisted": false,
+    "rawDynamicHeadersPersisted": false,
+    "resourceIdentifiersPersisted": false,
+    "signedUrlsPersisted": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "gemini-feature-pair-evidence-v1",
+  "service": "gemini-web",
+  "featureId": "identity",
+  "operationId": "identity",
+  "caseId": "owner",
+  "contractSha256": "e16b57edf9cf6e11586f699c46ef718bc5a28ecb599734f8ff4c0def21ae916e",
+  "clientCodeSha256": "fc1c4747523b303b933bfb35aef3805d52cead98e03637f805d94a64b8c350a8",
+  "observedAt": "2026-10-06T02:00:57.627Z",
+  "executionHost": "linux_worker",
+  "transport": "direct_http",
+  "evidenceClass": "direct_http_live",
+  "mocked": false,
+  "publicOnly": false,
+  "requestResponsePaired": true,
+  "authenticatedOwnerVerified": true,
+  "expectedOutcomeVerified": true,
+  "identityMatchVerified": true,
+  "credentialPropagated": true,
+  "request": {
+    "method": "GET",
+    "origin": "https://gemini.google.com",
+    "path": "/app",
+    "queryKeys": [],
+    "headerNames": [],
+    "bodyFieldNames": [],
+    "valuesPersisted": false
+  },
+  "response": {
+    "status": 200,
+    "contentType": "text/html",
+    "bytes": 781457,
+    "bodySha256": "31a84c6f903376f0d1da77d4ea6751009a382e4b3c4af3d935f007981e9f56a2",
+    "framing": "text"
+  },
+  "secretsPersisted": false
+}

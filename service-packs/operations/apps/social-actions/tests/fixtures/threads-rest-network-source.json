@@ -1,0 +1,6 @@
+{
+  "capturedAt": "2026-10-01T08:32:13.117Z",
+  "sourceKind": "current_first_party_public_static_module",
+  "sha256": "1077a715e409587c1ce6a6ec9c4a90c062ff6488a78647da62468d7d2d035310",
+  "source": "__d(\"BarcelonaNetworkUtils\",[\"BDHeaderConfig\",\"BarcelonaConfigConstants\",\"Cookie\",\"InstagramAPIFetch\",\"InstagramSecurityConfig\",\"WebBloksVersioningID\",\"WebSession\"],(function(t,n,r,o,a,i,l){\"use strict\";var e=\"csrftoken\",s={getAjaxHeader:function(){return\"0\"},getAppID:function(){return o(\"BarcelonaConfigConstants\").BARCELONA_WEB_APP_ID},getASBID:function(){return o(\"BDHeaderConfig\").ASBD_ID},getCSRFToken:function(){var t,n;return(t=(n=r(\"Cookie\").get(e))!=null?n:r(\"InstagramSecurityConfig\").csrf_token)!=null?t:\"\"},getURL:function(t){return t},setAdditionalHeaders:function(t){t.set(\"X-BLOKS-VERSION-ID\",o(\"WebBloksVersioningID\").versioningID),t.set(\"X-Web-Session-ID\",o(\"WebSession\").getId())}},u=o(\"InstagramAPIFetch\").buildInstagramAPIFetch(\"POST\",s),c=o(\"InstagramAPIFetch\").buildInstagramAPIFetch(\"GET\",s);l.post=u,l.get=c}),98);\n"
+}

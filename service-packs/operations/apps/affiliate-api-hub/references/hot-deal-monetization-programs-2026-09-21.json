@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-21T03:23:28+09:00",
+  "host": "home Windows DESKTOP-TO2H6OD",
+  "purpose": "핫딜 글의 제휴 수익화 경로 조사; 가입·발행·구매 실행 없음",
+  "evidenceFiles": [
+    "references/adpick-public-malls-replay-2026-09-21.json",
+    "references/myrealtrip-marketing-replay-2026-09-21.json",
+    "references/naver-shopping-today-deals-replay-2026-09-21.json"
+  ],
+  "sources": {
+    "naverEligibility": "https://help.naver.com/service/30027/contents/24101?lang=ko&osType=COMMONOS",
+    "naverAttribution": "https://help.naver.com/service/30027/contents/24106?osType=COMMONOS",
+    "naverLinks": "https://help.naver.com/service/30027/contents/24104?osType=COMMONOS",
+    "linkprice": "https://www.linkprice.com/affiliate/2022_index.html",
+    "linkpriceAPI": "https://www.linkprice.com/affiliate/views/affiliate_marketing/plus_service_api.html",
+    "linkpriceApproval": "https://www.linkprice.com/affiliate/views/affiliate_marketing/affiliate_procedure.html",
+    "adpick": "https://www.adpick.co.kr/?ac=offer&tac=mall",
+    "adpickAPI": "https://www.adpick.co.kr/apis/shopping.php?md=mall_list&order=starttime&search_value=",
+    "myrealtrip": "https://partner.myrealtrip.com/welcome/marketing_partner",
+    "tripcom": "https://www.trip.com/partners/index",
+    "tripcomRegional": "https://jp.trip.com/partners/index?curr=JPY&locale=ja-JP",
+    "viator": "https://partnerresources.viator.com/",
+    "viatorAPI": "https://partnerresources.viator.com/travel-commerce/affiliate/",
+    "travelpayoutsAPI": "https://support.travelpayouts.com/hc/en-us/articles/25289759198226-API-for-Travelpayouts-partner-links",
+    "klook": "https://affiliate.klook.com/",
+    "kkday": "https://kkpartners.kkday.com/affiliate/",
+    "yeogi": "https://affiliate.yeogi.com/"
+  },
+  "programs": [
+    {
+      "id": "naver-shopping-connect",
+      "name": "네이버 쇼핑 커넥트",
+      "priority": 1,
+      "revenueModel": "CPS",
+      "fit": [
+        "네이버 오늘끝딜",
+        "스마트스토어 제휴 상품"
+      ],
+      "commission": {
+        "direct": "상품별 수수료",
+        "indirectDefaultPct": 1.8,
+        "indirectExceptions": true,
+        "rateTimestamp": "주문 발생 시점"
+      },
+      "attribution": {
+        "inflowHours": 24,
+        "collectedActionDays": 7,
+        "collectionCondition": "스토어 이탈 전 구매하기·장바구니·선물하기",
+        "note": "모든 클릭이 7일 인정되는 것은 아님"
+      },
+      "eligibility": "크리에이터 스페이스 개설 및 어필리에이트 통합 약관 동의; 베타 종료 2025-07-23",
+      "exclusions": [
+        "비제휴 상품",
+        "스마트스토어 외 주문",
+        "렌탈·정기구독",
+        "자기 링크로 자기 구매"
+      ],
+      "linkGeneration": "상품찾기에서 대상 상품의 링크 발급",
+      "api": {
+        "state": "not_captured",
+        "client_exists": false,
+        "live_replay": false
+      },
+      "accountStatus": "이번 조사에서 활성화·정산정보 미확인",
+      "sourceIds": [
+        "naverEligibility",
+        "naverAttribution",
+        "naverLinks"
+      ]
+    },
+    {
+      "id": "linkprice-influencer",
+      "name": "링크프라이스",
+      "priority": 1,
+      "revenueModel": "CPS_and_campaign_CPA",
+      "fit": [
+        "G마켓",
+        "옥션",
+        "11번가",
+        "여행·종합몰"
+      ],
+      "commission": {
+        "ratePct": null,
+        "note": "머천트·캠페인별 조건; 공개 대표 광고주 로고는 현재 계정의 승인 근거가 아님"
+      },
+      "eligibility": "운영 매체 등록 후 머천트별 자동 또는 수동 승인",
+      "linkGeneration": "상품·이벤트 URL 딥링크",
+      "api": {
+        "state": "official_api_documented_not_replayed",
+        "capabilities": [
+          "hot_deals",
+          "deep_links",
+          "rewards",
+          "mobile_CPA_CPI_CPE"
+        ],
+        "client_exists": false,
+        "credential_propagated": false,
+        "live_replay": false
+      },
+      "accountStatus": "기존 로컬 기록 2026-09-20: not_joined; 이번 조사에서 가입하지 않음",
+      "sourceIds": [
+        "linkprice",
+        "linkpriceAPI",
+        "linkpriceApproval"
+      ]
+    },
+    {
+      "id": "adpick-shopping-mate",
+      "name": "애드픽 쇼핑메이트",
+      "priority": 1,
+      "revenueModel": "CPS",
+      "fit": [
+        "11번가",
+        "SSG",
+        "이마트몰",
+        "알리익스프레스",
+        "오늘의집",
+        "LG전자",
+        "여행몰"
+      ],
+      "commission": {
+        "ratePct": null,
+        "note": "43개 공개 제휴몰 목록을 직접 HTTP로 확인; 카테고리·기기별 수수료와 제외 조건 적용"
+      },
+      "eligibility": "회원·홍보 채널 및 개별 제휴몰 조건 확인 필요",
+      "linkGeneration": "제휴몰 또는 상품 원본 URL로 홍보링크 생성; 이번 조사에서는 발급하지 않음",
+      "api": {
+        "state": "public_catalog_pure_http_verified",
+        "receipt": "references/adpick-public-malls-replay-2026-09-21.json",
+        "client": "tools/research/adpick-affiliate-catalog.mjs",
+        "client_exists": true,
+        "clientScope": "공개 제휴몰 목록만",
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_public_read",
+        "live_replay": true,
+        "authenticatedLinkGeneration": "not_verified"
+      },
+      "accountStatus": "미확인",
+      "sourceIds": [
+        "adpick",
+        "adpickAPI"
+      ]
+    },
+    {
+      "id": "myrealtrip-marketing-partner",
+      "name": "마이리얼트립 마케팅 파트너 직접 제휴",
+      "priority": 1,
+      "revenueModel": "CPS",
+      "fit": [
+        "투어",
+        "티켓",
+        "숙소",
+        "항공권",
+        "패키지"
+      ],
+      "commission": {
+        "headlineMaximumPct": 7,
+        "actualProductRate": "상품·카테고리별 재확인; 항공권 7%라는 뜻이 아님"
+      },
+      "attribution": {
+        "days": 7
+      },
+      "settlement": "여행 완료 건; 월 수익 10만원 초과 및 정산 확인 시 지급, 미달·미확인은 이월; 공식 안내의 최대 이월 6개월 후 일괄 지급",
+      "eligibility": "공식 안내: 대한민국 국적, SNS 채널, 본인 명의 국내 계좌 등",
+      "api": {
+        "state": "prior_live_replay_verified",
+        "receipt": "references/myrealtrip-marketing-replay-2026-09-21.json",
+        "verifiedAt": "2026-09-20T17:05:57.825Z",
+        "client_exists": true,
+        "client": "adapters/myrealtrip-marketing.mjs",
+        "live_replay": true,
+        "scope": "offer links, round-trip economy flight links, lookups and reports",
+        "renewal": "unverified"
+      },
+      "accountStatus": "기존 계정·링크 생성 확인; 2026-09-21 직전 기록에서 정산 필수정보 미완료; 이번 조사에서 인증 재실행하지 않음",
+      "sourceIds": [
+        "myrealtrip"
+      ]
+    },
+    {
+      "id": "viator-affiliate",
+      "name": "Viator Affiliate",
+      "priority": 2,
+      "revenueModel": "CPS",
+      "fit": [
+        "해외 투어",
+        "체험",
+        "입장권"
+      ],
+      "commission": {
+        "completedBookingPct": 8
+      },
+      "attribution": {
+        "days": 30
+      },
+      "eligibility": "공식 안내상 가입비·최소 방문자·팔로워 수 없음; 지급정보 등록 필요",
+      "settlement": "체험 완료 후; 은행 송금 월별 최소 USD 50, PayPal 주별 최소액 없음",
+      "api": {
+        "state": "official_api_documented_not_replayed",
+        "client_exists": false,
+        "live_replay": false
+      },
+      "accountStatus": "가입·승인·지급 미확인",
+      "sourceIds": [
+        "viator",
+        "viatorAPI"
+      ]
+    },
+    {
+      "id": "travelpayouts",
+      "name": "Travelpayouts",
+      "priority": 2,
+      "revenueModel": "CPS_by_brand",
+      "fit": [
+        "여행 브랜드",
+        "eSIM",
+        "호텔",
+        "항공·교통"
+      ],
+      "commission": {
+        "ratePct": null,
+        "note": "연결한 브랜드별 요율·귀속·제외 조건 확인"
+      },
+      "eligibility": "Travelpayouts 계정, 해당 브랜드 프로그램 연결, API 토큰",
+      "api": {
+        "state": "official_api_documented_not_replayed",
+        "method": "POST",
+        "endpoint": "https://api.travelpayouts.com/links/v1/create",
+        "maxLinksPerRequest": 10,
+        "maxRequestsPerMinutePerMarker": 100,
+        "capabilities": [
+          "link_generation",
+          "sub_id"
+        ],
+        "unsupportedLinkBrandsAtCheck": [
+          "Kiwi.com",
+          "Expedia UK",
+          "HolidayTaxis",
+          "Ticketmaster",
+          "Priority Pass",
+          "Indrive"
+        ],
+        "client_exists": false,
+        "live_replay": false
+      },
+      "accountStatus": "기존 기록 deferred; 이번 조사에서 가입하지 않음",
+      "sourceIds": [
+        "travelpayoutsAPI"
+      ]
+    },
+    {
+      "id": "tripcom-direct-affiliate",
+      "name": "Trip.com 직접 제휴",
+      "priority": 2,
+      "revenueModel": "CPS",
+      "fit": [
+        "호텔",
+        "항공권",
+        "철도",
+        "투어"
+      ],
+      "commission": {
+        "publicRegionalHeadlineMaximumPct": 7,
+        "koreanAccountActualRate": null,
+        "note": "일본 등 공식 지역 소개 페이지의 최대치; 한국 계정·항공권 요율 확정값으로 사용하지 않음"
+      },
+      "attribution": {
+        "websiteDays": 30,
+        "appDays": 7
+      },
+      "api": {
+        "state": "not_verified",
+        "client_exists": false,
+        "live_replay": false
+      },
+      "accountStatus": "미확인; 애드픽 경유 프로그램과 별도 계약",
+      "sourceIds": [
+        "tripcom",
+        "tripcomRegional"
+      ]
+    },
+    {
+      "id": "klook-direct-affiliate",
+      "name": "Klook Affiliate 직접 제휴",
+      "priority": 2,
+      "revenueModel": "CPS",
+      "fit": [
+        "투어",
+        "패스",
+        "액티비티",
+        "교통"
+      ],
+      "commission": {
+        "ratePct": null,
+        "note": "한국 계정 조건 미확인; 다른 국가 Kreator 캠페인의 요율·팔로워 조건을 전용하지 않음"
+      },
+      "api": {
+        "state": "official_integration_options_documented_not_replayed",
+        "capabilities": [
+          "data_feed",
+          "API",
+          "widgets"
+        ],
+        "client_exists": false,
+        "live_replay": false
+      },
+      "accountStatus": "기존 기록 deferred; 직접 제휴와 애드픽 경유 요율은 별도",
+      "sourceIds": [
+        "klook"
+      ]
+    },
+    {
+      "id": "kkday-kkpartners",
+      "name": "KKday KKpartners 직접 제휴",
+      "priority": 2,
+      "revenueModel": "CPS",
+      "fit": [
+        "일본·동남아 티켓",
+        "교통패스",
+        "투어"
+      ],
+      "commission": {
+        "ratePct": null,
+        "note": "최신 한국 계정 요율·정산 조건 미확인; 과거 체험단 자격과 제휴 가입 자격을 혼동하지 않음"
+      },
+      "api": {
+        "state": "not_verified",
+        "client_exists": false,
+        "live_replay": false
+      },
+      "accountStatus": "현재 공식 가입 경로 확인; 가입하지 않음",
+      "sourceIds": [
+        "kkday"
+      ]
+    },
+    {
+      "id": "yeogi-marketing-partner",
+      "name": "여기어때 마케팅 파트너",
+      "priority": 2,
+      "revenueModel": "CPS",
+      "fit": [
+        "국내 숙소"
+      ],
+      "commission": {
+        "ratePct": null
+      },
+      "eligibility": "공개 프런트엔드에서 파트너 정보 등록 및 심사 완료 후 링크·정산 기능 제공 확인",
+      "api": {
+        "state": "frontend_source_only",
+        "client_exists": false,
+        "live_replay": false
+      },
+      "accountStatus": "기존 기록 not_joined; 요율·현재 승인 미확인",
+      "sourceIds": [
+        "yeogi"
+      ]
+    }
+  ],
+  "adpickMerchantRules": {
+    "checkedAt": "2026-09-21T03:22:00+09:00",
+    "sourceIds": [
+      "adpickAPI",
+      "adpick"
+    ],
+    "scope": "공개 제휴몰 목록 43건 중 글감 관련 14개 상세 조건 요약",
+    "rows": [
+      {
+        "offerId": "c16a2",
+        "name": "11번가",
+        "rates": [
+          {
+            "scope": "PC·모바일웹",
+            "pct": 2.1
+          },
+          {
+            "scope": "앱",
+            "pct": 1.8
+          }
+        ],
+        "attribution": "웹 마지막 클릭부터 6시간; 앱 해당 방문세션",
+        "exclusions": [
+          "일반 가전·컴퓨터·디지털",
+          "여행·숙박·항공",
+          "환금성 상품",
+          "공동구매",
+          "무통장입금"
+        ],
+        "exceptions": "아마존 탭 가전·디지털·컴퓨터는 인정",
+        "fit": "식품·생필품 핫딜 우선"
+      },
+      {
+        "offerId": "b735e",
+        "name": "SSG",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 1.6
+          }
+        ],
+        "attribution": "1일",
+        "exclusions": [
+          "여행·숙박·항공·렌탈",
+          "상품권 등 환금성 상품"
+        ],
+        "fit": "식품·생활용품"
+      },
+      {
+        "offerId": "1e1c8",
+        "name": "이마트몰",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 1.6
+          }
+        ],
+        "attribution": "1일",
+        "exclusions": [
+          "여행·숙박·항공·렌탈",
+          "상품권 등 환금성 상품"
+        ],
+        "fit": "식품·생활용품"
+      },
+      {
+        "offerId": "83eca",
+        "name": "알리익스프레스",
+        "rates": [
+          {
+            "scope": "휴대폰·PC 등 지정 전자기기 카테고리 평균",
+            "pct": 2.1
+          },
+          {
+            "scope": "지정 패션·휴대폰 액세서리 등 카테고리 평균",
+            "pct": 6.3
+          },
+          {
+            "scope": "그 외 제휴 카테고리 평균",
+            "pct": 4.9
+          }
+        ],
+        "attribution": "3일",
+        "exclusions": [
+          "여행",
+          "special 등 일부 상품"
+        ],
+        "fit": "해외직구; 특정 셀러·상품 수수료 예외 확인"
+      },
+      {
+        "offerId": "2cfd6",
+        "name": "오늘의집",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 2.8
+          }
+        ],
+        "attribution": "1일",
+        "exclusions": [
+          "0원 렌탈",
+          "추적 불가 해외배송"
+        ],
+        "fit": "인테리어·생활용품; 공유하기 단축주소 대신 원본 상품 URL"
+      },
+      {
+        "offerId": "985ce",
+        "name": "LG전자 LGE.COM",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 2.5
+          }
+        ],
+        "attribution": "30일",
+        "exclusions": [
+          "비회원 주문",
+          "사업자몰",
+          "홈스타일"
+        ],
+        "fit": "공식몰 가전 할인; 회원 할인가 기준"
+      },
+      {
+        "offerId": "71c71",
+        "name": "컬리",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 2.1
+          }
+        ],
+        "attribution": "1일",
+        "exclusions": [
+          "일부 가전",
+          "온라인교환권·여행 티켓",
+          "상품권 등"
+        ],
+        "fit": "식품; 상품 링크도 메인으로 이동하므로 전환 불편 고려"
+      },
+      {
+        "offerId": "6958f",
+        "name": "하이마트",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 1
+          },
+          {
+            "scope": "데스크탑·조립PC·PC부품, 2026-06-01부터",
+            "pct": 0.5
+          }
+        ],
+        "attribution": "방문세션",
+        "fit": "가전·전자제품; 앱 직방문 혜택과 제휴 경유 혜택 비교"
+      },
+      {
+        "offerId": "2f07c",
+        "name": "트립닷컴",
+        "rates": [
+          {
+            "scope": "호텔",
+            "pct": 4.2
+          },
+          {
+            "scope": "항공",
+            "pct": 0.7
+          },
+          {
+            "scope": "투어·액티비티",
+            "pct": 2.1
+          },
+          {
+            "scope": "기차",
+            "pct": 1.4
+          }
+        ],
+        "attribution": "세부 조건: 웹 마지막 클릭부터 30일, 앱 7일; 목록 요약은 7일",
+        "fit": "호텔 및 제휴 판매처에서도 동일 조건인 항공 특가"
+      },
+      {
+        "offerId": "b796d",
+        "name": "KKday",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 3.5
+          },
+          {
+            "scope": "일부 상품",
+            "pct": 1.4
+          },
+          {
+            "scope": "제외 상품",
+            "pct": 0
+          }
+        ],
+        "attribution": "30일",
+        "fit": "투어·티켓; 제외 상품 공지 매칭"
+      },
+      {
+        "offerId": "e76c6",
+        "name": "클룩",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 2.8
+          },
+          {
+            "scope": "투어·관람",
+            "pct": 4.2
+          },
+          {
+            "scope": "지정 유럽 한국어 투어",
+            "pct": 8.4
+          },
+          {
+            "scope": "일반 스페셜 액티비티",
+            "pct": 1.12
+          },
+          {
+            "scope": "지정 테마파크, 2026-05부터",
+            "pct": 0.56
+          }
+        ],
+        "attribution": "30일",
+        "fit": "티켓·투어; 상품별 미인정 목록 확인"
+      },
+      {
+        "offerId": "20c9a",
+        "name": "마이리얼트립 애드픽 경유",
+        "rates": [
+          {
+            "scope": "스냅촬영",
+            "pct": 4.9
+          },
+          {
+            "scope": "투어",
+            "pct": 4.2
+          },
+          {
+            "scope": "숙소·티켓",
+            "pct": 1.4
+          },
+          {
+            "scope": "국제선 왕복 항공권",
+            "pct": 0.7
+          }
+        ],
+        "attribution": "7일",
+        "exclusions": [
+          "국내선·편도·소아·유아 항공권",
+          "메타서치 경유 결제 항공권",
+          "해외 렌터카·보험 등"
+        ],
+        "fit": "기존 직접 제휴 계정의 정확한 상품 수수료와 비교; 자동 대체하지 않음"
+      },
+      {
+        "offerId": "89b70",
+        "name": "야놀자(원본 목록 명칭)",
+        "rates": [
+          {
+            "scope": "목록 표시",
+            "pct": 2.3
+          },
+          {
+            "scope": "티켓·레저",
+            "pct": 1.58
+          }
+        ],
+        "attribution": "최초 클릭부터 24시간; 앱 회원 구매만",
+        "exclusions": [
+          "PC·모바일웹 구매",
+          "비회원",
+          "항공·교통"
+        ],
+        "fit": "숙소; 웹 독자 전환에 앱 조건을 고려"
+      },
+      {
+        "offerId": "f1800",
+        "name": "트래블로카",
+        "rates": [
+          {
+            "scope": "지정 eSIM",
+            "pct": 12
+          },
+          {
+            "scope": "호텔",
+            "pct": 2.7
+          },
+          {
+            "scope": "국제선 항공",
+            "pct": 0.59
+          },
+          {
+            "scope": "국내선 항공",
+            "pct": 0.27
+          },
+          {
+            "scope": "공항 픽업·렌터카",
+            "pct": 4.2
+          }
+        ],
+        "attribution": "14일",
+        "fit": "eSIM·공항 이동",
+        "caveats": [
+          "제3자 여행 정보와 비교 표시 제한 명시",
+          "일부 테마파크 조건의 내부 충돌이 있어 해당 상품은 확인 전 보류"
+        ]
+      }
+    ]
+  },
+  "routing": [
+    {
+      "source": "네이버 오늘끝딜",
+      "candidatePrograms": [
+        "naver-shopping-connect"
+      ],
+      "observedProductCount": 85,
+      "productEligibility": "not_checked",
+      "verifiedEligibleProductCount": 0,
+      "note": "85개가 수집되었다는 사실과 제휴 가능 여부는 별개; 현재 구매 가능 여부도 발행 직전 재확인"
+    },
+    {
+      "source": "G마켓·옥션",
+      "candidatePrograms": [
+        "linkprice-influencer"
+      ],
+      "eligibility": "requires_merchant_approval",
+      "note": "링크프라이스 대표 광고주 소개 확인; 이번 애드픽 공개 목록 43건에는 없었음"
+    },
+    {
+      "source": "11번가·SSG·이마트·알리·오늘의집·LG",
+      "candidatePrograms": [
+        "adpick-shopping-mate",
+        "linkprice-influencer"
+      ],
+      "eligibility": "requires_product_category_and_channel_match"
+    },
+    {
+      "source": "마리트 판매 상품",
+      "candidatePrograms": [
+        "myrealtrip-marketing-partner",
+        "adpick-shopping-mate"
+      ],
+      "eligibility": "compare_exact_product_and_direct_account_rate"
+    },
+    {
+      "source": "항공사 공식 홈페이지 전용 특가",
+      "candidatePrograms": [],
+      "eligibility": "direct_airline_affiliate_not_verified",
+      "note": "원래 항공사 구매 링크 유지; OTA에 동일 운임·조건이 확인된 경우에만 제휴 대안 제시. 숙소·eSIM·교통은 별도 상품으로 연결"
+    },
+    {
+      "source": "해외 투어·체험",
+      "candidatePrograms": [
+        "myrealtrip-marketing-partner",
+        "viator-affiliate",
+        "klook-direct-affiliate",
+        "kkday-kkpartners",
+        "adpick-shopping-mate"
+      ],
+      "eligibility": "compare_same_product_options_and_net_commission"
+    }
+  ],
+  "decisionRules": [
+    "판매처·상품·옵션·쿠폰 조건을 먼저 매칭",
+    "같은 판매처의 네트워크 경로와 직접 제휴 조건을 구분",
+    "수수료 제외·앱 전용·귀속 기간 확인 후 발행 대상 선정",
+    "승인·링크 발급·실적 추적·정산 가능 여부를 별도로 기록",
+    "링크 발급과 구매 전환 검증을 혼동하지 않음"
+  ],
+  "cpaAlternative": {
+    "program": "linkprice-influencer",
+    "model": "signup_or_participation_CPA",
+    "status": "official_mobile_API_description_only",
+    "note": "핫딜 구매 수익은 CPS가 중심; 가입·신청 CPA는 광고주별 캠페인·승인·유효 실적 단가를 확인한 뒤 별도 글감으로 운영",
+    "sourceIds": [
+      "linkpriceAPI"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema": "grok-independent-local-artifact-byte-verification-v1",
+  "checkedAt": "2026-10-06T09:28:40.828853+00:00",
+  "operation": "attachment.presigned.local-byte-verification",
+  "sourceReceiptPath": "verification/grok-attachment-presigned-final-validation-v4-2026-10-06.json",
+  "sourceReceiptSha256": "c1ea90378ba87fdd51ac1c25a4d8a677d266530afc16203292a6e8e41f3a6a6f",
+  "expectedBytes": 16777217,
+  "expectedSha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+  "artifacts": [
+    {
+      "artifactPath": "/home/worker/artifacts/grok-attachments-20261006/grok-presigned-final-validation-v4.bin",
+      "bytes": 16777217,
+      "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+      "mode": "0o600",
+      "matchesSourceCheckpoint": true
+    },
+    {
+      "artifactPath": "/home/worker/artifacts/grok-attachments-20261006/grok-presigned-final-validation-v4-confirm.bin",
+      "bytes": 16777217,
+      "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+      "mode": "0o600",
+      "matchesSourceCheckpoint": true
+    }
+  ],
+  "allArtifactBytesVerified": true,
+  "networkRequestsPerformed": 0,
+  "providerRequestRepeated": false,
+  "httpReadbackClaimedByThisProof": false,
+  "credentialOrResourceIdentifierValuesPersisted": false
+}

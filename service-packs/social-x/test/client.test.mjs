@@ -11,8 +11,8 @@ const json=data=>new Response(JSON.stringify({data}),{headers:{'content-type':'a
 const client=fetchImpl=>new XClient({authToken:'fixture-auth',csrfToken:'fixture-csrf',bearerToken:'fixture-bearer',contracts,fetchImpl});
 test('missing session rejected',()=>assert.throws(()=>new XClient({contracts}),/SESSION_INVALID/));
 test('malformed session rejected',()=>assert.throws(()=>new XClient({authToken:'x\r\n',csrfToken:'y',bearerToken:'z',contracts}),/SESSION_INVALID/));
-test('profile uses observed same-origin route and exact identity',async()=>{
-  const c=client(async(url,options)=>{assert.equal(url.origin,'https://x.com');assert.equal(url.pathname,'/i/api/graphql/fixture/UserByScreenName');assert.equal(options.redirect,'error');return json({user:{result:{__typename:'User',rest_id:'1605',core:{screen_name:'sama'}}}});});
+test('profile uses observed API origin route and exact identity',async()=>{
+  const c=client(async(url,options)=>{assert.equal(url.origin,'https://api.x.com');assert.equal(url.pathname,'/graphql/fixture/UserByScreenName');assert.equal(options.redirect,'error');return json({user:{result:{__typename:'User',rest_id:'1605',core:{screen_name:'sama'}}}});});
   assert.equal((await c.profile('sama')).id,'1605');c.close();await assert.rejects(c.profile('sama'),/CLIENT_CLOSED/);
 });
 test('HTML login response is failure',async()=>{await assert.rejects(client(async()=>new Response('<html>login</html>')).profile('sama'),/NOT_JSON/);});

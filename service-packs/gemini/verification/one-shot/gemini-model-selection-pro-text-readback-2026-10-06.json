@@ -1,0 +1,57 @@
+{
+  "schema": "gemini-model-selection-pro-text-readback-v1",
+  "service": "gemini-web",
+  "taskIntent": "gemini-model-selection-pro-20261006-v1",
+  "recordedAt": "2026-10-06T03:46:00.342347+00:00",
+  "outcome": "needs_review",
+  "dispatch": {
+    "count": 1,
+    "retryCount": 0,
+    "httpStatus": 200,
+    "responseBytes": null,
+    "responseSha256": null,
+    "checkpointFieldsComplete": false,
+    "checkpointStateBeforeReadback": "response_received",
+    "journalDispatchCount": 1,
+    "createdAt": "2026-10-06T03:30:57.127Z",
+    "settledAt": "2026-10-06T03:31:06.269Z",
+    "dispatchSourceBinding": "not_inferred_from_current_source"
+  },
+  "readback": {
+    "historyListHttpStatus": 200,
+    "historyListResponseBytes": 6211,
+    "historyListResponseSha256": "2edbd3f1409a1bd8e7bd3d0994638bcc11455fdd6c7f0acd6aaceab386e46bfe",
+    "candidateCount": 1,
+    "candidateWindowSource": "journal_created_to_settled_outer_bound",
+    "detailOperation": "history_read",
+    "detailRpc": "hNvQHb",
+    "detailHttpStatus": 200,
+    "detailResponseBytes": 958,
+    "detailResponseSha256": "1219c71798a501fc923cf6e97e970528145b8dd93fffad59b88f41df83a965ae",
+    "apiRouteBindingVerified": true,
+    "apiIdEchoedInDetail": true,
+    "promptMatched": true,
+    "assistantMarkerMatched": false,
+    "responseIdMatchAvailable": false,
+    "journalReconciled": false,
+    "journalStateAfterReadback": "response_received",
+    "verified": false
+  },
+  "modelSelection": {
+    "proUiSelectedAndNativeMetadataCaptured": true,
+    "capturedProCategoryCode": true,
+    "capturedStandardThinkingCode": true,
+    "directDispatchMetadataBinding": "not_inferred_from_current_source"
+  },
+  "guards": {
+    "browserBusinessPostsForwarded": 0,
+    "webSocketBusinessFramesForwarded": 0,
+    "readOnlyRpcCaptureObserved": true
+  },
+  "persistence": {
+    "promptOrResponsePersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "rawBodiesPersisted": false,
+    "conversationIdentifiersPersisted": false
+  }
+}

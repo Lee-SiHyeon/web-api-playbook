@@ -1,0 +1,454 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "serviceOrigin": "https://grok.com",
+  "allowedOrigins": [
+    "https://grok.com"
+  ],
+  "identityOperationId": null,
+  "fragmentId": "grok-conversation-crud-task-only",
+  "observedAt": "2026-10-06T09:52:11.251Z",
+  "operations": [
+    {
+      "id": "conversation.create",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "systemPromptName": {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                "temporary": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "systemPromptName",
+                "temporary"
+              ]
+            }
+          },
+          "required": [
+            "body"
+          ]
+        },
+        "bodyTemplate": {
+          "systemPromptName": "",
+          "temporary": false
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "responseJobIdPointer": "/conversationId",
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T09:52:11.251Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatCreateConversationRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-crud-live-2026-10-06.json",
+        "firstLiveReplayPermit": true,
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T09:52:11.251Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 375,
+          "responseDigestPersisted": true,
+          "responseSha256": "dff611ed7f132da539a9728424eecca2080a99ad7f15198571e1a70119208acd",
+          "requestDigest": "1be19b45bdf469f53bd8569a969e4d9f1ddbbc76479e875bda23706853789a3f",
+          "intentDigest": "0c1247b36a5e4acd1563b54fd7e6bbf29e330846bb5bda7dfbb1e5dfcdadc978",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "responseJobIdObserved": true,
+          "responseTopLevelFieldNames": [
+            "conversationId",
+            "createTime",
+            "kind",
+            "latestAssetMetadata",
+            "mediaTypes",
+            "modifyTime",
+            "starred",
+            "systemPromptName",
+            "taskResult",
+            "temporary",
+            "title",
+            "viewerIsOwner",
+            "workspaces"
+          ]
+        }
+      },
+      "effect": "chat_write"
+    },
+    {
+      "id": "conversation.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations_v2/{{input.conversationId}}",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "includeTaskResult": true,
+          "includeWorkspaces": true
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/conversations_v2/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedQueryKeys": [
+          "includeTaskResult",
+          "includeWorkspaces"
+        ],
+        "observedQueryBooleans": {
+          "includeTaskResult": true,
+          "includeWorkspaces": true
+        },
+        "observedResponseShape": [
+          "conversation:object",
+          "conversation.conversationId:string",
+          "conversation.title:string"
+        ],
+        "capturedResponseBytes": 410,
+        "directReplayReceipt": "verification/grok-core-http-reads-2026-10-06.json"
+      }
+    },
+    {
+      "id": "conversation.update",
+      "kind": "submit",
+      "method": "PUT",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "title": "{{input.body.title}}",
+          "starred": "{{input.body.starred}}",
+          "botAgentId": "{{input.body.botAgentId}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "starred": {
+                  "type": "boolean"
+                },
+                "botAgentId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                }
+              },
+              "required": []
+            }
+          },
+          "required": [
+            "conversationId",
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T09:52:11.251Z",
+        "requestMethod": "PUT",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatUpdateConversationRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-crud-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T09:52:11.251Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 375,
+          "responseDigestPersisted": true,
+          "responseSha256": "35443648d12eabcdaa2fd9f97be39d048010ac9f29c3d27f9c446d8feed56bcb",
+          "requestDigest": "792ef1b55c64e9131c402fc6bc4ad99c948fa64c86990d8f3febfa9420127d77",
+          "intentDigest": "e8a0622c47e6bdd913801c56fe5b829ebe1225af682aae62f96558d62d53ad65",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "responseTopLevelFieldNames": [
+            "conversationId",
+            "createTime",
+            "kind",
+            "latestAssetMetadata",
+            "mediaTypes",
+            "modifyTime",
+            "starred",
+            "systemPromptName",
+            "taskResult",
+            "temporary",
+            "title",
+            "workspaces"
+          ]
+        },
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": true
+      },
+      "responseJobIdPointer": "/conversationId",
+      "effect": "chat_write"
+    },
+    {
+      "id": "conversation.soft-delete",
+      "kind": "submit",
+      "method": "DELETE",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/soft/{{input.conversationId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T09:52:11.251Z",
+        "requestMethod": "DELETE",
+        "requestPath": "/rest/app-chat/conversations/soft/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0uf56-pwxogcp.js",
+        "sourceSha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a",
+        "sourceFunctionName": "chatSoftDeleteConversationRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-crud-live-2026-10-06.json",
+        "firstLiveReplayPermit": true,
+        "responseBytes": 2,
+        "observedResponseShape": [
+          "empty-object:possible"
+        ],
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": false,
+        "observedAttemptCount": 1,
+        "responseMayBeEmptyObject": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T09:52:11.251Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 2,
+          "responseDigestPersisted": true,
+          "responseSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "requestDigest": "f5bf0372b4699b0180b934072470f1d6358e2840a60ceb6e2332bf63ec147bd0",
+          "intentDigest": "c2a7f9796f95c4820e1ee491d389f122fdefe9877d7e2aad1c2ba5e15e515638",
+          "requestHeaderNames": [
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "responseTopLevelFieldNames": [],
+          "semanticReadback": {
+            "conversationAbsent": true,
+            "otherConversationsUnchanged": true,
+            "completeListReadback": true
+          }
+        }
+      },
+      "effect": "chat_write"
+    }
+  ],
+  "sourceAssets": [
+    {
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+      "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+      "sourceFunctionNames": [
+        "chatCreateConversationRaw",
+        "chatUpdateConversationRaw"
+      ]
+    },
+    {
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0uf56-pwxogcp.js",
+      "sourceSha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a",
+      "sourceFunctionNames": [
+        "chatGetConversationV2Raw",
+        "chatSoftDeleteConversationRaw"
+      ]
+    },
+    {
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/205b03gn_m2ip.js",
+      "sourceSha256": "45e567d74dfd50b5a111359914000af956061ada3dc9e76531eec31c1c4dfeec",
+      "sourceFunctionNames": [
+        "createChatConversation"
+      ]
+    }
+  ],
+  "sourceOnlyCreateContractReceipt": "contracts/grok-conversation-create-source-fragment-2026-10-06.json",
+  "nativeUiAttemptReceipt": "verification/grok-conversation-create-native-ui-attempt-2026-10-06.json",
+  "normalUiCreateRequestObserved": false,
+  "liveWorkflowReceipt": "verification/grok-conversation-crud-live-2026-10-06.json",
+  "persistenceAssertions": {
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "cookieValuesPersisted": false
+  }
+}

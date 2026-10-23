@@ -1,0 +1,442 @@
+{
+  "schema": "gemini-public-shared-conversation-read-v1",
+  "service": "gemini-web",
+  "feature": "share",
+  "operation": "share_public_read",
+  "outcome": "verified",
+  "verifiedAt": "2026-10-06T01:59:25.868571+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "sourceMapping": {
+    "sourceClass": "anonymous_google_first_party_web_client",
+    "rpcId": "ujx1Bf",
+    "operationName": "GetSharedConversation"
+  },
+  "taskBinding": {
+    "titleRowCount": 2,
+    "historyTitleMatchedExactlyOnce": true,
+    "historyDetailConversationIdBound": true,
+    "taskApiRouteSuffixBound": true,
+    "historyResponseEchoesConversationId": true,
+    "historyPromptMarkerPresent": true,
+    "historyTaskContentDigest": "8b621dffbfb6943fcec089d6b994a85154db801a772eb9517e6b65edcd42c6f8",
+    "ownerListCount": 9,
+    "ownerRowsMatchedExactly": true,
+    "rawConversationIdPersisted": false
+  },
+  "ownerListUiPair": {
+    "rpcId": "OXxBcc",
+    "capturedInThisRun": false,
+    "httpStatus": null,
+    "contentType": null,
+    "responseBytes": null,
+    "responseSha256": null,
+    "request": null,
+    "currentUiTargetRowsVisible": 2
+  },
+  "directTaskDetailReadback": {
+    "rpcId": "hNvQHb",
+    "httpStatus": 200,
+    "responseBytes": 873,
+    "responseSha256": "b785bef27aac279bccec3d231cbb0cd33e7d9176370bdf5bfcc387a88c876c4f",
+    "rpcMatchCount": 1,
+    "conversationIdEchoMatched": true,
+    "contentMarkerMatched": true
+  },
+  "normalUiCaptures": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "rpcId": "ujx1Bf",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "formFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "bodyBytes": 164,
+        "argsShape": {
+          "type": "array",
+          "length": 3,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 12
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            }
+          ]
+        },
+        "shareIdOccurrenceCount": 1,
+        "rpcCallTailShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 7
+            }
+          ]
+        }
+      },
+      "response": {
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "responseBytes": 1276,
+        "responseSha256": "621567bd855d60d4659d53f64875a106057a1a8420a2f32db186b0232c75cb6a",
+        "rpcIdPresent": true,
+        "batchexecutePrefix": true
+      },
+      "taskTitleVisible": true,
+      "taskMarkerVisible": true,
+      "shareIdPersisted": false,
+      "shareUrlPersisted": false,
+      "rawRequestOrResponsePersisted": false
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "rpcId": "ujx1Bf",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "formFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "bodyBytes": 164,
+        "argsShape": {
+          "type": "array",
+          "length": 3,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 12
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            }
+          ]
+        },
+        "shareIdOccurrenceCount": 1,
+        "rpcCallTailShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 7
+            }
+          ]
+        }
+      },
+      "response": {
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "responseBytes": 1276,
+        "responseSha256": "7e2754590406b9aded542529879e5f9b78574ddd1f80646f53da57a0bd17377c",
+        "rpcIdPresent": true,
+        "batchexecutePrefix": true
+      },
+      "taskTitleVisible": true,
+      "taskMarkerVisible": true,
+      "shareIdPersisted": false,
+      "shareUrlPersisted": false,
+      "rawRequestOrResponsePersisted": false
+    }
+  ],
+  "directReadbacks": [
+    {
+      "ownerMatched": true,
+      "anonymousOwnerAbsent": true,
+      "credentialPropagated": true,
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseBytes": 1276,
+      "responseSha256": "e2b610860a28d739f72a819786b673be8f85fc1cb3028e8bccbfc74c0f838f10",
+      "rpcId": "ujx1Bf",
+      "shareIdLength": 12,
+      "responseDecoded": true,
+      "taskTitlePresent": true,
+      "taskMarkerPresent": true,
+      "exactMarkerValueCount": 0,
+      "taskContentMatchesConversationDetail": true,
+      "taskContentDigest": "8b621dffbfb6943fcec089d6b994a85154db801a772eb9517e6b65edcd42c6f8",
+      "historyTaskContentDigest": "8b621dffbfb6943fcec089d6b994a85154db801a772eb9517e6b65edcd42c6f8",
+      "shareResponseEchoesConversationId": true
+    },
+    {
+      "ownerMatched": true,
+      "anonymousOwnerAbsent": true,
+      "credentialPropagated": true,
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseBytes": 1276,
+      "responseSha256": "6c27557a0c19a13227347b60895d901f1f0eca133414bdae3ba9b19c9e9f41fb",
+      "rpcId": "ujx1Bf",
+      "shareIdLength": 12,
+      "responseDecoded": true,
+      "taskTitlePresent": true,
+      "taskMarkerPresent": true,
+      "exactMarkerValueCount": 0,
+      "taskContentMatchesConversationDetail": true,
+      "taskContentDigest": "8b621dffbfb6943fcec089d6b994a85154db801a772eb9517e6b65edcd42c6f8",
+      "historyTaskContentDigest": "8b621dffbfb6943fcec089d6b994a85154db801a772eb9517e6b65edcd42c6f8",
+      "shareResponseEchoesConversationId": true
+    }
+  ],
+  "revokeCapture": {
+    "rpcId": "SgORbf",
+    "dispatchCount": 0,
+    "browserMutationReachedServer": false,
+    "capturedForTwoVerifiedRows": true,
+    "requestCaptures": [
+      {
+        "rpcId": "SgORbf",
+        "method": "POST",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "formFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "bodyBytes": 154,
+        "argsShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 12
+            }
+          ]
+        },
+        "shareIdOccurrenceCount": 1,
+        "rpcCallTailShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 7
+            }
+          ]
+        }
+      },
+      {
+        "rpcId": "SgORbf",
+        "method": "POST",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "formFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "bodyBytes": 154,
+        "argsShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 12
+            }
+          ]
+        },
+        "shareIdOccurrenceCount": 1,
+        "rpcCallTailShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            {
+              "type": "string",
+              "length": 7
+            }
+          ]
+        }
+      }
+    ],
+    "confirmations": [
+      {
+        "deleteConfirmationControlVisible": true,
+        "browserMutationReachedServer": false,
+        "browserAbortAcknowledged": true,
+        "blockedNonReadRequestCount": 4,
+        "guardParseFailureCount": 0,
+        "nonTargetMutationCount": 0
+      },
+      {
+        "deleteConfirmationControlVisible": true,
+        "browserMutationReachedServer": false,
+        "browserAbortAcknowledged": true,
+        "blockedNonReadRequestCount": 5,
+        "guardParseFailureCount": 0,
+        "nonTargetMutationCount": 0
+      }
+    ],
+    "shareIdsPersisted": false,
+    "requestArgumentsPersisted": false,
+    "directDispatchPending": true
+  },
+  "browserPageRestored": true,
+  "readOnlyGuards": {
+    "listBlockedNonReadRequestCount": 0,
+    "listGuardParseFailureCount": 0,
+    "copyBlockedNonReadRequestCount": 6,
+    "copyGuardParseFailureCount": 0,
+    "revokeListBlockedNonReadRequestCount": 4,
+    "revokeListGuardParseFailureCount": 0,
+    "revokeCopyBlockedNonReadRequestCount": 4,
+    "revokeCopyGuardParseFailureCount": 0,
+    "revokeRequestCaptureBlockedPostCount": 9,
+    "revokeRequestCaptureGuardParseFailureCount": 0,
+    "pageRestorationBlockedNonReadRequestCount": 31,
+    "pageRestorationGuardParseFailureCount": 0,
+    "unrelatedShareRowsModified": false
+  },
+  "persistence": {
+    "expectedOwnerPersisted": false,
+    "sessionValuesPersisted": false,
+    "shareIdsPersisted": false,
+    "shareUrlsPersisted": false,
+    "conversationIdsPersisted": false,
+    "promptOrAssistantTextPersisted": false,
+    "rawRequestOrResponseBodyPersisted": false
+  }
+}

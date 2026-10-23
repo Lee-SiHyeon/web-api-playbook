@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "evidenceClass": "first_party_bundle_direct_replay",
+  "featureId": "workspaces",
+  "requirementId": "workspace.shared-list",
+  "operationId": "workspaces.shared.list",
+  "observedAt": "2026-10-05T19:32:27.640Z",
+  "recordedAt": "2026-10-05T21:34:37.353Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "d1bf4b7ed695833b55c6e93678b145c2b79cdaac92bbbc180dfdb8ad082a8ee9",
+  "sourceProofPath": "verification/grok-workspaces-live-2026-10-06.json",
+  "sourceProofSha256": "2f09d620c4316e19754145377659cc830f199ec40116be10697c3e610e12b9ab",
+  "sourceContractSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+  "capturedOperationSha256": "3e8d22f1b677069044cad26c2dd17a608cf34bb6424befb7b9b771cf860f9401",
+  "method": "GET",
+  "pathTemplate": "/rest/workspaces/shared",
+  "requestFieldNames": [],
+  "responseFieldNames": [
+    "workspaces",
+    "nextPageToken"
+  ],
+  "httpStatus": 200,
+  "responseBytes": 17,
+  "responseMime": "application/json",
+  "handlerId": "workspaces.shared-list",
+  "dispatchBinding": {
+    "handlerId": "workspaces.shared-list",
+    "operationId": "workspaces.shared.list",
+    "operationKind": "read",
+    "mode": "owner_bound_workspace_client"
+  },
+  "transport": {
+    "tlsVerified": true,
+    "trustEnv": false,
+    "redirectsFollowed": false,
+    "explicitRetries": 0,
+    "cookieNames": [
+      "sso"
+    ],
+    "cookieValuesPersisted": false,
+    "browserWriteCapture": false
+  },
+  "semanticReadback": {
+    "complete": true,
+    "workspaceCount": 0
+  },
+  "codeSha256": {
+    "src/grok-workspaces.mjs": "6873ffef5247f9989b866fe4f49694e87b0cb900beb6a423bd290d3a17208632",
+    "src/client.mjs": "16a6f720e89dd9715e090c6b0d7d7840dc18966b665a5689e83726519b0b2d19",
+    "src/runtime.mjs": "98694c0e061bcee9d94cc34c8676100625786b1d8964ac5103a41eda135b04bd",
+    "src/cli.mjs": "1be5300c4c217a5cb5c4e75a9828a4de3a4726abc2eb78f2330e442594e03053"
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "workspaceIdsPersisted": false,
+    "identityValuePersisted": false
+  }
+}

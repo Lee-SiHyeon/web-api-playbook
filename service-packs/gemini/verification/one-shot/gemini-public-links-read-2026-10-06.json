@@ -1,0 +1,72 @@
+{
+  "schema": "gemini-owner-public-links-read-v1",
+  "service": "gemini-web",
+  "feature": "share",
+  "operation": "share_read",
+  "outcome": "verified",
+  "verifiedAt": "2026-10-06T00:12:07.783735+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "browserPageRestored": true,
+  "normalUiPair": {
+    "rpcId": "OXxBcc",
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 1579,
+    "responseSha256": "da669a7e76f72cabaa900422deadfc4640f75a1fa2aa310a004265ae724c9026",
+    "request": {
+      "method": "POST",
+      "path": "/_/BardChatUi/data/batchexecute",
+      "queryKeys": [
+        "rpcids",
+        "source-path",
+        "bl",
+        "f.sid",
+        "hl",
+        "_reqid",
+        "rt"
+      ],
+      "formFieldNames": [
+        "f.req",
+        "at"
+      ],
+      "valuesPersisted": false
+    },
+    "ownerPublicLinksSurfaceVisible": true
+  },
+  "directReplay": {
+    "clientEntryPoint": "GeminiWebClient.readPublicShareLinks",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "credentialPropagated": true,
+    "identityHttpStatus": null,
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 1578,
+    "responseSha256": "96d517047915b870d8572cafbc088a5dacb6d1af48dfc4e86b062028722d7704",
+    "rpcId": "OXxBcc",
+    "shareCount": 7,
+    "targetConversationLinkPresent": false
+  },
+  "ownerDeleteControl": {
+    "officialSurface": "Settings & help > Your public links > Delete public link",
+    "rowDeleteControlPresent": true,
+    "existingTaskLinkCount": 0,
+    "unrelatedLinksModified": false
+  },
+  "persistence": {
+    "expectedOwnerPersisted": false,
+    "cookiesPersisted": false,
+    "sessionValuesPersisted": false,
+    "publicLinkValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "rawRequestOrResponseBodyPersisted": false
+  },
+  "pageRestorationEvidence": {
+    "method": "visible history row opened under read-only page guard",
+    "taskTitleVisible": true,
+    "taskPromptMarkerVisible": true,
+    "conversationRouteVerified": true,
+    "nonReadRequestsAborted": true
+  }
+}

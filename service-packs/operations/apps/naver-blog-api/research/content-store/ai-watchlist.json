@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "tracks": [
+    {
+      "id": "musk",
+      "label": "일론 머스크 · Grok",
+      "sourceIds": [
+        "watch-ai-musk",
+        
+        "creator-ai-x-elonmusk"
+      ],
+      "primarySources": [
+        "https://x.ai/news"
+      ],
+      "angle": "새 기능이 실제 작업에 주는 변화와 회사 성능 주장의 검증",
+      "checks": [
+        "머스크 개인 발언과 회사 발표 구분",
+        "AI와 무관한 정치·주가·사생활 제외",
+        "벤치마크 조건과 실제 체험 구분"
+      ]
+    },
+    {
+      "id": "altman",
+      "label": "샘 알트먼 · OpenAI",
+      "sourceIds": [
+        "watch-ai-altman",
+        "watch-ai-altman-blog-rss",
+        "official-ai-openai-rss",
+        "creator-ai-x-sama"
+      ],
+      "primarySources": [
+        "https://blog.samaltman.com/",
+        "https://openai.com/news/"
+      ],
+      "angle": "AI 전망·인프라 투자와 실제 제품 변화의 연결",
+      "checks": [
+        "전망과 확정 출시 구분",
+        "원문 발언 시점 확인",
+        "한국 사용자 제공 조건 확인"
+      ]
+    },
+    {
+      "id": "amodei",
+      "label": "다리오 아모데이 · Anthropic",
+      "sourceIds": [
+        "watch-ai-amodei",
+        
+        "creator-ai-x-darioamodei"
+      ],
+      "primarySources": [
+        "https://www.anthropic.com/news",
+        "https://www.darioamodei.com/"
+      ],
+      "angle": "Claude 활용 변화와 AI 안전·일자리 논쟁의 맥락",
+      "checks": [
+        "인터뷰 전체 맥락 확인",
+        "예측을 확정 사실로 쓰지 않기",
+        "회사 정책과 개인 의견 구분"
+      ]
+    },
+    {
+      "id": "gemini",
+      "label": "Google Gemini · DeepMind",
+      "sourceIds": [
+        "watch-ai-gemini",
+        "official-ai-deepmind-rss",
+        "official-ai-google-rss"
+      ],
+      "primarySources": [
+        "https://gemini.google/release-notes/",
+        "https://deepmind.google/blog/"
+      ],
+      "angle": "업데이트 전후 변화와 한국어·요금제·지역별 사용 조건",
+      "checks": [
+        "앱과 API 모델 구분",
+        "순차 배포 및 국가·언어·요금제 확인",
+        "암호화폐 Gemini 뉴스 제외"
+      ]
+    }
+  ],
+  "policy": {
+    "headlineIsNotVerifiedClaim": true,
+    "noForcedAffiliate": true,
+    "publishAutomatically": false,
+    "xTimelineApiVerified": false
+  }
+}

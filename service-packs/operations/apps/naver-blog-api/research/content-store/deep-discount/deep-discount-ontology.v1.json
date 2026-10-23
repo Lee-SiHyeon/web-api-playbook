@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "id": "acada:deep-discount-ontology",
+  "label": "리퍼·반품·임박 떨이 / 중고 시세 온톨로지",
+  "createdAt": "2026-10-05",
+  "approval": "owner 2026-10-05: \"너 하고싶은거 다해라 병렬로 할거 알아서 하고\" — 새 온톨로지 방향 승인. 규칙은 공식·널리 쓰이는 출처만, 출처 URL 필수, 추측 금지.",
+  "sourceTrust": {
+    "note": "fetchVerified=true는 이 세션(2026-10-05, 비한국 egress)에서 원문을 직접 읽었다는 뜻. false는 법령·고시 명칭과 조문 위치만 근거로 두었고 원문 대조는 호출자 몫이다. 조문 번호는 적지 않고 고시 이름만 적는다(추측 방지).",
+    "legalCaveat": "법률 자문이 아니다. 게시 전 문구는 호출자가 확인한다."
+  },
+  "conditionGrades": [
+    { "id": "new", "ko": "새상품", "labelRequired": false, "comparableWith": ["new", "new_sealed"], "note": "비교 기준." },
+    { "id": "open_box", "ko": "단순개봉", "labelRequired": true, "signals": ["단순개봉", "개봉상품", "개봉 후 미사용", "open box"] },
+    { "id": "display", "ko": "전시상품", "labelRequired": true, "signals": ["전시상품", "전시품", "전시 상품", "디스플레이 상품"] },
+    { "id": "returned", "ko": "반품상품", "labelRequired": true, "signals": ["반품상품", "반품 상품", "반품마켓", "반품", "고객변심 반품"] },
+    { "id": "refurbished", "ko": "리퍼(재생)상품", "labelRequired": true, "signals": ["리퍼비시", "리퍼브", "리퍼", "재생품", "재생 상품", "refurbished", "re-newed", "renewed"] },
+    { "id": "b_grade", "ko": "B급·흠집(못난이)", "labelRequired": true, "signals": ["B급", "흠집", "스크래치", "못난이", "파지", "흠과", "비상품", "아웃박스 손상", "박스 손상", "포장 불량"] },
+    { "id": "near_expiry", "ko": "유통·소비기한 임박", "labelRequired": true, "expiryRequired": true, "signals": ["임박", "소비기한 임박", "유통기한 임박", "기한임박", "떨이"] },
+    { "id": "clearance_closing", "ko": "마감할인", "labelRequired": true, "signals": ["마감할인", "라스트오더", "폐점 할인", "당일 마감"] },
+    { "id": "used", "ko": "중고", "labelRequired": true, "signals": ["중고", "사용감", "s급", "a급", "미개봉 중고"] }
+  ],
+  "convenienceStorePromos": {
+    "note": "1+1·2+1은 새상품 행사다. 상태 등급이 아니라 행사 유형이며 '떨이'로 쓰지 않는다. 행사 종료일·매장별 재고는 목록에 없으면 쓰지 않는다.",
+    "types": ["1+1", "2+1", "3+1", "덤증정", "할인"]
+  },
+  "fields": {
+    "common": ["sourceId", "title", "price", "listPrice", "conditionGrade", "vendorGradeRaw", "warrantyText", "warrantyMonths", "expiryDate", "expiryKind", "url", "capturedAt"],
+    "note": "vendorGradeRaw는 판매처 표기를 그대로 보관한다. 판매처마다 A·B·S급 기준이 달라 서로 환산하지 않는다(규칙 R5).",
+    "expiryKind": ["소비기한", "유통기한", "품질유지기한"],
+    "warrantyOrigin": ["seller", "manufacturer", "none", "unknown"]
+  },
+  "rules": [
+    {
+      "id": "R1_label_condition",
+      "severity": "error",
+      "ko": "리퍼·전시·반품·B급·중고 상품은 글 본문에 그 상태를 그대로 밝힌다(예: '리퍼 상품', '전시상품'). 제목·가격 문장 근처에 둔다.",
+      "basis": "상품의 상태·품질을 숨기거나 새상품으로 오인하게 하면 기만적 표시·광고다. 전자상거래 정보제공 고시는 판매 상품의 거래조건·품질보증 정보를 소비자에게 제공하도록 한다.",
+      "sources": [
+        { "title": "표시·광고의 공정화에 관한 법률 (부당한 표시·광고의 금지)", "url": "https://www.law.go.kr/법령/표시ㆍ광고의공정화에관한법률", "kind": "statute", "fetchVerified": false },
+        { "title": "전자상거래 등에서의 상품 등의 정보제공에 관한 고시 (공정거래위원회)", "url": "https://www.law.go.kr/행정규칙/전자상거래등에서의상품등의정보제공에관한고시", "kind": "regulation", "fetchVerified": false }
+      ]
+    },
+    {
+      "id": "R2_show_expiry_for_near_expiry_food",
+      "severity": "error",
+      "ko": "임박 식품은 소비기한(또는 유통기한·품질유지기한) 날짜를 글에 적는다. 날짜가 목록에 없으면 임박 식품으로 소개하지 않는다. 2023-01-01부터 표시 용어는 '소비기한'이므로 판매처가 '유통기한'이라 적었으면 그대로 옮기되 임의 환산은 하지 않는다. 우유류는 소비기한 적용 유예(2031년)가 있어 '유통기한' 표기가 남는다.",
+      "basis": "식품 표시기준과 정보제공 고시는 식품에 소비기한(또는 유통기한·품질유지기한) 표시를 요구한다. 임박 상품은 기한이 가격의 핵심 조건이다.",
+      "sources": [
+        { "title": "식품 등의 표시기준 (식품의약품안전처)", "url": "https://www.law.go.kr/행정규칙/식품등의표시기준", "kind": "regulation", "fetchVerified": false },
+        { "title": "식품의약품안전처 소비기한 표시제", "url": "https://www.mfds.go.kr/", "kind": "agency_home", "fetchVerified": false, "note": "홈페이지만 확인(302). 세부 페이지 URL은 호출자가 확정." },
+        { "title": "전자상거래 등에서의 상품 등의 정보제공에 관한 고시 (공정거래위원회)", "url": "https://www.law.go.kr/행정규칙/전자상거래등에서의상품등의정보제공에관한고시", "kind": "regulation", "fetchVerified": false }
+      ]
+    },
+    {
+      "id": "R3_no_refurb_vs_new_as_same_product",
+      "severity": "error",
+      "ko": "리퍼·전시·반품·B급·중고 가격을 새상품 가격과 '같은 상품의 최저가'로 비교하지 않는다. 비교가 필요하면 '상태가 다른 상품'이라 밝히고 새상품 가격은 참고로만 둔다. 같은 상태끼리만 최저가를 말한다.",
+      "basis": "비교 표시·광고는 비교 대상이 같은 종류·같은 조건이어야 하고 객관적 근거가 있어야 한다.",
+      "sources": [
+        { "title": "비교표시·광고에 관한 심사지침 (공정거래위원회)", "url": "https://www.law.go.kr/행정규칙/비교표시ㆍ광고에관한심사지침", "kind": "guideline", "fetchVerified": false },
+        { "title": "표시·광고의 공정화에 관한 법률", "url": "https://www.law.go.kr/법령/표시ㆍ광고의공정화에관한법률", "kind": "statute", "fetchVerified": false }
+      ],
+      "repoPrecedent": "apps/naver-blog-api/research/content-store/coupang-flash-check.mjs sameItemOffers()가 이미 /못난이|파지|흠과|B급/ 일치 여부로 같은 상품을 판정한다. INTEGRATION.md에서 이 정규식을 conditionMatches()로 교체하는 방법을 적는다."
+    },
+    {
+      "id": "R4_warranty_disclosed_or_unknown",
+      "severity": "warn",
+      "ko": "보증기간을 알면 기관(판매처/제조사)과 개월 수를 적고, 모르면 '보증 조건은 판매 페이지에서 확인'이라고 적는다. 새상품과 같은 보증이라고 쓰지 않는다.",
+      "basis": "정보제공 고시는 품질보증기준·A/S 책임자를 제공 항목으로 둔다.",
+      "sources": [
+        { "title": "전자상거래 등에서의 상품 등의 정보제공에 관한 고시 (공정거래위원회)", "url": "https://www.law.go.kr/행정규칙/전자상거래등에서의상품등의정보제공에관한고시", "kind": "regulation", "fetchVerified": false }
+      ]
+    },
+    {
+      "id": "R5_vendor_grade_verbatim",
+      "severity": "error",
+      "ko": "판매처가 붙인 등급(S/A/B, 최상/상/중 등)은 그대로 옮기고 다른 판매처 등급과 같은 등급인 것처럼 비교하지 않는다.",
+      "basis": "등급 정의는 판매처 자체 기준이다. 공통 공식 등급 체계를 찾지 못했다(2026-10-05). 없는 기준을 만들지 않는다.",
+      "sources": [
+        { "title": "표시·광고의 공정화에 관한 법률", "url": "https://www.law.go.kr/법령/표시ㆍ광고의공정화에관한법률", "kind": "statute", "fetchVerified": false }
+      ]
+    },
+    {
+      "id": "R6_ho_ga_not_sold_price",
+      "severity": "error",
+      "ko": "중고 판매 중 목록의 가격은 '호가(판매자 희망가)'이고 거래 성사가가 아니다. 거래완료 표본을 얻지 못했다면 '시세'가 아니라 '호가 중앙값'이라 쓴다.",
+      "basis": "2026-10-05 비로그인 공개 조회로는 번개장터·중고나라·헬로마켓 모두 판매완료 목록을 얻지 못했다(captures 증거). 호가를 거래가로 쓰면 오인 표시다.",
+      "sources": [
+        { "title": "표시·광고의 공정화에 관한 법률", "url": "https://www.law.go.kr/법령/표시ㆍ광고의공정화에관한법률", "kind": "statute", "fetchVerified": false }
+      ]
+    },
+    {
+      "id": "R7_used_price_minimum_sample",
+      "severity": "error",
+      "ko": "표본이 부족하면 시세 숫자를 만들지 않는다. 이상치 제거 후 표본 6개 미만이면 값 없음, 6~19개면 중앙값만(분위수는 '참고'), 20개 이상이면 중앙값·p25·p75를 모두 낸다.",
+      "basis": "분포무관 중앙값 신뢰구간은 순서통계량 [x(1), x(n)]이 모집단 중앙값을 덮을 확률이 1−2·0.5^n이다. n=6이면 96.9%, n=5이면 93.8%로 95%에 못 미쳐 6개가 최소다. 사분위수는 표본이 작으면 정의에 따라 값이 크게 달라진다(Hyndman & Fan 1996). 20개는 분위수 방법 간 차이를 줄이기 위한 관행 기준이며 단순 규칙이다.",
+      "threshold": { "min": 6, "quartiles": 20 },
+      "sources": [
+        { "title": "Conover, Practical Nonparametric Statistics — distribution-free confidence interval for the median (order statistics, binomial)", "url": "https://www.wiley.com/en-us/Practical+Nonparametric+Statistics%2C+3rd+Edition-p-9780471160687", "kind": "textbook", "fetchVerified": false },
+        { "title": "Hyndman & Fan (1996) Sample quantiles in statistical packages, The American Statistician 50(4)", "url": "https://doi.org/10.1080/00031305.1996.10473566", "kind": "paper", "fetchVerified": false }
+      ]
+    },
+    {
+      "id": "R8_outlier_fences",
+      "severity": "error",
+      "ko": "시세 계산 전 Tukey 울타리(Q1−1.5·IQR ~ Q3+1.5·IQR) 밖 가격을 뺀다. 실제로 번개장터 '아이폰15' 검색 첫 페이지에 90,000원짜리 다모델 미끼 매물이 섞여 있었다.",
+      "basis": "상자그림 이상치 기준은 EDA의 표준 관행이다.",
+      "sources": [
+        { "title": "NIST/SEMATECH e-Handbook of Statistical Methods — Box plot", "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/boxplot.htm", "kind": "handbook", "fetchVerified": false }
+      ]
+    },
+    {
+      "id": "R9_real_cost_assumptions_stated",
+      "severity": "error",
+      "ko": "'새로 사서 ○개월 쓰고 팔면 실제 비용' 줄에는 가정을 함께 적는다: 되파는 값은 호가 p25(보수), 거래 시 흥정 차감, 판매 수수료, 상태 등급. 이 숫자는 예측이 아니라 시장 호가에서 뺀 시나리오다.",
+      "basis": "가정 수치(흥정 8%, 수수료 3.5%)는 출처 없는 보수적 기본값이며 호출자가 덮어쓴다. 출처가 있는 값이 아니다.",
+      "sources": []
+    },
+    {
+      "id": "R10_partner_link_gate",
+      "severity": "error",
+      "ko": "제휴 링크는 승인된 네트워크로만 만든다: 쿠팡 파트너스, 링크프라이스 APR 승인 판매처(lotteon, gmarket, auction), 네이버 쇼핑 커넥트. 그 밖의 판매처는 일반 URL이거나 링크 없음이다. 쿠팡 반품마켓은 파트너스 검색으로 확인되지 않으므로 반품마켓 상품이라고 링크를 만들지 않는다.",
+      "basis": "저장소의 apps/affiliate-api-hub/scripts/linkprice-links.mjs MERCHANTS(APR 2026-09-27)와 apps/naver-blog-api/research/content-store/shopping-sources.v1.json affiliateNetworks.",
+      "sources": [
+        { "title": "repo: linkprice-links.mjs MERCHANTS", "url": "apps/affiliate-api-hub/scripts/linkprice-links.mjs", "kind": "repo", "fetchVerified": true },
+        { "title": "repo: shopping-sources.v1.json affiliateNetworks", "url": "apps/naver-blog-api/research/content-store/shopping-sources.v1.json", "kind": "repo", "fetchVerified": true }
+      ]
+    }
+  ],
+  "usedPrice": {
+    "minSample": 6,
+    "quartileSample": 20,
+    "outlierFence": 1.5,
+    "excludeTitleSignals": ["매입", "삽니다", "구매합니다", "구해요", "구합니다", "교환", "부품용", "고장", "수리용", "액정파손", "케이스만", "박스만", "공기계 아님", "대여", "렌탈"],
+    "multiModelRule": "제목에 세 개 이상의 세대 숫자가 / , + 로 나열되면(예: '프로/맥스/13/14/15/16') 다모델 미끼로 보고 제외한다. 2026-10-05 번개장터 캡처의 관측 패턴.",
+    "realCostDefaults": { "resaleBasis": "p25", "negotiationHaircut": 0.08, "sellerFeeRate": 0.035, "provenance": "assumption_uncited" }
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "recordType": "grok-media-source-bound-run",
+  "requirementId": "video.text-to-video",
+  "observedAt": "2026-10-06T10:34:12.746368+00:00",
+  "sourceExecution": {
+    "capturedAt": "2026-10-06T10:32:37.860235+00:00",
+    "capturedBeforeDispatch": true,
+    "stableThroughReadback": true,
+    "codeSha256": {
+      "src/grok-media-operations.mjs": "c582bb0c4e1140063e492d61fbf2bc5f2491b1d2d7f0da26f6d723c960ff2786",
+      "src/grok-media-api.mjs": "c10d4bfa0a2f0e9592066941003a6325dafb81f7b7c42e88e6024eebca6f87ce",
+      "src/grok-media-asset-reader.mjs": "a18f59304772f1601f170755b46c7e27c597a79b1f44cc0bcd56f734e264e276",
+      "src/grok-media-video-transport.mjs": "a9d3e2a1db070a65ddff9805b156e928368f5796c5ff66e4da3908b5c88d2b2a",
+      "src/runtime.mjs": "9a98d7e64f3b5cf7128dc421420c31d3cff9f0e6a5507a84742a65182284e34e",
+      "src/cli.mjs": "08f51673f039802e1ddb7482b48646cadfc38e96233e0de7df9f6d3b7fceebc7",
+      "scripts/grok_media_video_submit.py": "cb2d765e5138b2220d894cbd7f1fabb54f87b17970bdceb0858ec09a1641d918",
+      "src/client.mjs": "cb62a2424ef2db9446b26107083f20136ad9913f731b16d1e3c6901f103d8d7a",
+      "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+      "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+      "src/grok-media-intent.mjs": "fe16a02b00673c66d84a817c5dda73728d00032fe326eafedbd1935146841ece",
+      "src/journal.mjs": "eb5ae0dd987ca2b9551a0fe007ab853e0c671b4d6173907bd9e15a2a2f8ccef7",
+      "scripts/verify-conversations.mjs": "762fd31f7674babcdcb0596dbe86632c1ddc85f1a447b293b3b52303ae6d48d3",
+      "src/feature-checklist.mjs": "ffab0851f56539c86a3924a4e3fe021fa8968d5788edc770c01b345bd052bae8",
+      "src/grok-media-proof-receipts.mjs": "11eb83389d2ab5bd4b1cea6d6eee10a4fc14ae7f9ce43d9334d98c74ffe4d8ab",
+      "scripts/emit-grok-media-proof.mjs": "8c24605a5efccf3d8daf50c3d5f50c0d13a9097c1d696076d04f303c1d0cd2a6",
+      "scripts/grok_media_capture_guard.py": "0a20afc8a97a082baa23a46af9f081355b11861d441ed14483deaf2011c2a016",
+      "src/mp4-duration.mjs": "922075f6a5c7230cf7c2a5b17c8c539dc5d056f9257e7b0def311fa8e81a5398",
+      "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b",
+      "contracts/grok-web.v1.json": "14b88ec69aac369fabab6a80762fc0da6b573d2ce55920c5335b951a284ae348",
+      "contracts/grok-feature-checklist.v1.json": "2b4f0932ebcafa7239963dcbb3de7b644b2472849ba181fbc41ea876df41ed15",
+      "src/authenticated-chrome-fetch.mjs": "b4db2f6cb2d601f40526bd0690d63b165b1ad3f8c26f32c2e5c386717213bf34",
+      "scripts/authenticated-chrome-transport.py": "fd538ac05d96585630bee2ff3e243ddbed2f4b1f0dc0f0868e658a252e9a8a58",
+      "src/grok-attachment-constants.mjs": "b9f1afe54c4003c681dade9d3739eaaddef832f056128c09a92f69c6bb9236ff"
+    }
+  },
+  "owner": {
+    "verified": true,
+    "sameAuthenticatedOwner": true,
+    "proofPath": "verification/owner-proofs/12484298a06b93d42ab35610b5bd0ef5b777c60cc07a45129a66b3268d1cbddd.json",
+    "canonicalSha256": "12484298a06b93d42ab35610b5bd0ef5b777c60cc07a45129a66b3268d1cbddd",
+    "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "identityReceiptSha256": "12484298a06b93d42ab35610b5bd0ef5b777c60cc07a45129a66b3268d1cbddd"
+  },
+  "requestDigest": "c1f3a573bc888401b14c9ce04967d447c0bea0df5c260db054c899b86d6fa99a",
+  "intentDigest": "7cf78b2908bfba05a5f73df04537d38224788bc21349f2c043c9cbbf6de22ff3",
+  "promptSha256": "c205175653e0320b18999f17ded3acc50b8d7c99c150e5ad3f1e6c9c75d81cf1",
+  "generationMode": "text",
+  "browserCapture": {
+    "captureMode": "http_request_aborted",
+    "pageRoleMatched": true,
+    "intentMatched": true,
+    "requestCaptured": true,
+    "businessActionBlocked": true,
+    "networkFailureCorrelated": true,
+    "browserBusinessWritesDelivered": 0,
+    "browserResponseCount": 0,
+    "rawRequestPersisted": false,
+    "rawResponsePersisted": false,
+    "requestBodyDigest": "fd8068cac90dfe647b9004ea941ddf991f51bbab0f29074b8c81d8afdd24d992"
+  },
+  "directTransport": {
+    "transport": "http",
+    "origin": "https://grok.com",
+    "path": "/rest/app-chat/conversations/new",
+    "method": "POST",
+    "requestStarted": true,
+    "responseReceived": true,
+    "httpStatus": null,
+    "responseMime": "application/json",
+    "responseBytes": 10368,
+    "responseDigest": "8b9ee191ece0826fde06476f030056ff6cc3d180bee3d0ddf3e8946f3aaac073",
+    "responseDigestKind": "raw_http_body",
+    "requestBodyDigest": "fd8068cac90dfe647b9004ea941ddf991f51bbab0f29074b8c81d8afdd24d992",
+    "directDispatchCount": 1,
+    "automaticRetries": 0,
+    "tlsVerified": true,
+    "redirectsFollowed": false,
+    "trustEnv": false,
+    "attemptCount": 1
+  },
+  "operationReadbacks": [
+    {
+      "operationId": "media.assets.list",
+      "httpStatus": 200,
+      "responseBytes": 11737,
+      "responseDigest": "a10a083db2dda45c8619d67a18de541df9285773b85266e2ab5149ce39667f6b",
+      "responseDigestKind": "raw_http_body"
+    },
+    {
+      "operationId": "conversation.read",
+      "httpStatus": 200,
+      "responseBytes": 431,
+      "responseDigest": "4a5e5620255c82e5a97b6c75c2bf75d0ae0cb6c8221aaee74a14f658d3653ccb",
+      "responseDigestKind": "raw_http_body"
+    },
+    {
+      "operationId": "history.response-nodes",
+      "httpStatus": 200,
+      "responseBytes": 251,
+      "responseDigest": "ef40f0fa85af645102cd9426b33106b3507d50c81a9f82c41cf73b0cb950f5de",
+      "responseDigestKind": "raw_http_body"
+    },
+    {
+      "operationId": "history.load-responses",
+      "httpStatus": 200,
+      "responseBytes": 5226,
+      "responseDigest": "ead5d49a2ff5233b4e7884146d98a1694c4da4d6652e9504779048dc0b768027",
+      "responseDigestKind": "raw_http_body"
+    }
+  ],
+  "semanticReadback": {
+    "taskBoundToIntent": true,
+    "exactPromptMatched": true,
+    "uniqueTaskCount": 1,
+    "assetCount": 1,
+    "privateGeneratedAssetCount": 1,
+    "expectedAssetCount": 1,
+    "sameConversationResponseSet": true,
+    "allAssetDownloadsVerified": false,
+    "allAssetMagicVerified": false,
+    "allFileReadbacksVerified": false
+  },
+  "artifacts": [
+    {
+      "httpStatus": null,
+      "mimeType": "video/mp4",
+      "bytes": 390210,
+      "sha256": "f2833aa64a0016f513cc2dc3981d907ceafd546e0c782a426e8252039fd443e8",
+      "magicVerified": true,
+      "independentFileReadback": true,
+      "taskAssetMatched": true
+    }
+  ],
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false,
+    "rawFramesPersisted": false,
+    "assetBytesPersisted": false,
+    "assetIdsPersisted": false,
+    "promptPersisted": false,
+    "rawIdsOrKeysOrUrlsPersisted": false,
+    "cookiesOrTokensPersisted": false
+  }
+}

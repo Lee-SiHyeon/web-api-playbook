@@ -1,0 +1,220 @@
+{
+  "schema": "gemini-original-image-download-direct-v1",
+  "service": "gemini-web",
+  "feature": "original_image_download",
+  "operation": "c8o8Fe",
+  "outcome": "verified",
+  "verifiedAt": "2026-10-06T08:09:59.469892+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-image-fullsize-20261006",
+  "taskBinding": {
+    "searchCandidateCount": 1,
+    "exactTaskMatchCount": 1,
+    "ownerSearchGatePassed": true,
+    "hNvRpcId": "hNvQHb",
+    "taskPromptMatched": true,
+    "apiConversationIdEchoed": true,
+    "apiConversationIdMatchedInC8Arguments": true,
+    "visibleRouteIdBound": true,
+    "rawPromptPersisted": false,
+    "rawConversationIdPersisted": false
+  },
+  "normalUiSourceCapture": {
+    "originalSizeControlObserved": true,
+    "originalSizeControlClicked": true,
+    "c8o8FeObserved": true,
+    "browserDownloadEventSeen": true,
+    "downloadScheme": "blob",
+    "uiArtifact": {
+      "fileName": "gemini-image-teal-sphere-white-cube-20261006.full-size.ui-native-verified.png",
+      "bytes": 7585633,
+      "mime": "image/png",
+      "dimensions": {
+        "width": 2816,
+        "height": 1536
+      },
+      "sha256": "577b4a42dabfc0d854450052062e8c687288b9751b60c4beb1da0617f5a3be62",
+      "independentFileReadback": true
+    }
+  },
+  "sourceRequest": {
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "pathFamily": "/_/BardChatUi/data/batchexecute",
+    "rpcId": "c8o8Fe",
+    "queryKeys": [
+      "_reqid",
+      "bl",
+      "f.sid",
+      "hl",
+      "rpcids",
+      "rt",
+      "source-path"
+    ],
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "fReqCharacters": 2719,
+    "atCharacters": 42,
+    "argsTopLevelCount": 5,
+    "callTupleLength": 4,
+    "headerNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "normalSdkPreparedArgumentsRequired": true
+  },
+  "sourceResponse": {
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 532,
+    "xssiPrefix": true,
+    "frameLengthDeclared": [
+      497,
+      25
+    ],
+    "normalUiResultType": "HTTPS download URL",
+    "resultFieldCount": 1
+  },
+  "sizeTransform": {
+    "sourceFunction": "vPd",
+    "setSize": 0,
+    "observedNativeSuffixApplied": true,
+    "suffixLength": 4
+  },
+  "directC8Replay": {
+    "dispatchCount": 1,
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 533,
+    "xssiPrefix": true,
+    "frameLengthUnit": "utf16_code_units",
+    "frameLengthOverheadUnits": 2,
+    "frameCount": 2,
+    "rpcId": "c8o8Fe",
+    "returnedUrlReference": {
+      "origin": "https://lh3.googleusercontent.com",
+      "pathFamily": "/gg/{id}",
+      "queryKeyNames": []
+    }
+  },
+  "directAssetChain": {
+    "sourceBehavior": "vPd size-zero URL then dO adds alr=yes and follows text/plain HTTPS URL bodies",
+    "hops": [
+      {
+        "reference": {
+          "origin": "https://lh3.googleusercontent.com",
+          "pathFamily": "/gg/{id}",
+          "queryKeyNames": [
+            "alr"
+          ]
+        },
+        "httpStatus": 200,
+        "contentType": "text/plain",
+        "responseBytes": 590,
+        "cookieNames": [],
+        "requestExtraInfoObserved": true
+      },
+      {
+        "reference": {
+          "origin": "https://lh3.google.com",
+          "pathFamily": "/rd-gg/{id}",
+          "queryKeyNames": [
+            "alr"
+          ]
+        },
+        "httpStatus": 200,
+        "contentType": "text/plain",
+        "responseBytes": 1503,
+        "cookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "requestExtraInfoObserved": true
+      },
+      {
+        "reference": {
+          "origin": "https://lh3.googleusercontent.com",
+          "pathFamily": "/rd-gg/{id}",
+          "queryKeyNames": [
+            "alr"
+          ]
+        },
+        "httpStatus": 200,
+        "contentType": "image/png",
+        "responseBytes": 7585633,
+        "cookieNames": [],
+        "requestExtraInfoObserved": true
+      }
+    ],
+    "finalHttpStatus": 200,
+    "mime": "image/png",
+    "bytes": 7585633,
+    "dimensions": {
+      "width": 2816,
+      "height": 1536
+    },
+    "sha256": "577b4a42dabfc0d854450052062e8c687288b9751b60c4beb1da0617f5a3be62",
+    "mimeMagicMatched": true,
+    "bytesMatchedExpected": true
+  },
+  "independentArtifactComparison": {
+    "expectedBytes": 7585633,
+    "expectedSha256": "577b4a42dabfc0d854450052062e8c687288b9751b60c4beb1da0617f5a3be62",
+    "actualBytes": 7585633,
+    "actualSha256": "577b4a42dabfc0d854450052062e8c687288b9751b60c4beb1da0617f5a3be62",
+    "bytesMatchedExpected": true,
+    "independentFileReadback": true,
+    "artifactPath": "/home/worker/artifacts/gemini-media-20261006/gemini-image-teal-sphere-white-cube-20261006.full-size.c8o8fe-direct-http.png"
+  },
+  "credentialBinding": {
+    "sessionCookieNameSetMatched": true,
+    "nativeObservedAuthCookieNameCount": 18,
+    "sessionCookieNameCount": 18
+  },
+  "guard": {
+    "blockedBusinessPosts": 64,
+    "webSocketBusinessFramesForwarded": 0
+  },
+  "persistence": {
+    "rawPromptPersisted": false,
+    "rawConversationIdPersisted": false,
+    "rawSignedUrlPersisted": false,
+    "rawCookieValuesPersisted": false,
+    "rawRequestBodyPersisted": false,
+    "rawResponseBodyPersisted": false
+  }
+}

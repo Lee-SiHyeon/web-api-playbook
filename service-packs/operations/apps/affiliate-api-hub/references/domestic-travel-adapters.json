@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T02:05:00Z",
+  "purpose": "???? ??? ?? ?? ??? ?? ?? ?? ?????? ???? ??. ?? ???? ??, API/XHR ???, ??? ???? ???? ????. ??? ?? ???API ?????? ??? ???? ???.",
+  "market": "KR",
+  "selectionPolicy": {
+    "directPublisherProgramPreferred": true,
+    "supplierPortalIsNotPublisherAffiliate": true,
+    "privatePartnershipRequiresManualVerification": true,
+    "publicBundleRoutesAreMetadataOnly": true,
+    "credentialsAndTokensMayNotBePersisted": true
+  },
+  "canonicalCapabilities": [
+    "programs.list",
+    "links.create",
+    "reservations.list",
+    "transactions.list",
+    "reports.summary",
+    "payouts.list",
+    "lodging.links",
+    "activities.links",
+    "packages.links",
+    "flights.links",
+    "content.submit",
+    "content.list",
+    "campaigns.list",
+    "performance.list",
+    "settlements.list",
+    "taxes.list"
+  ],
+  "adapters": [
+    {
+      "id": "myrealtrip-marketing-partner",
+      "name": "?????? ??? ???",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "flights",
+        "lodging",
+        "activities",
+        "packages",
+        "outbound_travel",
+        "domestic_travel"
+      ],
+      "priority": "P0",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "very_high_after_approval",
+      "programType": "direct_publisher_affiliate",
+      "publisherFit": "very_high",
+      "domesticMarketFit": "very_high",
+      "capabilities": [
+        "links.create",
+        "reservations.list",
+        "reports.summary",
+        "payouts.list",
+        "flights.links",
+        "lodging.links",
+        "activities.links",
+        "packages.links",
+        "settlements.list",
+        "taxes.list"
+      ],
+      "contentUseCases": [
+        "??? ??? ??",
+        "?? ????????",
+        "???? ???? ?? ???",
+        "?? ???????",
+        "???????? ???"
+      ],
+      "monetizationModel": "??? ??? ???; ?? ???? ?? 7% ??? ???? ?? ??? ??? ?? ???? ???",
+      "officialSources": [
+        "https://partner.myrealtrip.com/"
+      ],
+      "observedPublicBundle": {
+        "capturedAt": "2026-09-20T02:05:00Z",
+        "sourceType": "public_static_javascript_metadata",
+        "bundleOrigin": "https://dffoxz5he03rp.cloudfront.net/partner-build/production/",
+        "routes": [
+          "/partnership-marketing/link-generator",
+          "/partnership-marketing/reservations",
+          "/partnership-marketing/flight-reservations",
+          "/partnership-marketing/sales",
+          "/partnership-marketing/flightSales",
+          "/partnership-marketing/settles",
+          "/partnership-marketing/settles/:id",
+          "/partnership-marketing/taxes"
+        ],
+        "apiTermsObserved": true,
+        "apiKeyContractObserved": true,
+        "executable": false,
+        "credentialValuesCaptured": false
+      },
+      "nextAction": "??? ??? ????? ? ?? ?? ??? API ? ?? ??? ????, ??????????? ??? XHR?API-only ????.",
+      "riskFlags": [
+        "approval_required",
+        "product_specific_commission",
+        "partner_terms_change",
+        "self_or_family_purchase_prohibited",
+        "unpublished_promotion_prohibited"
+      ]
+    },
+    {
+      "id": "yeogi-marketing-partner",
+      "name": "???? ??? ???",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "domestic_travel",
+        "lodging",
+        "activities",
+        "packages"
+      ],
+      "priority": "P0",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "very_high_after_approval",
+      "programType": "direct_publisher_affiliate",
+      "publisherFit": "very_high",
+      "domesticMarketFit": "very_high",
+      "capabilities": [
+        "lodging.links",
+        "activities.links",
+        "packages.links",
+        "performance.list",
+        "settlements.list",
+        "content.submit",
+        "content.list"
+      ],
+      "contentUseCases": [
+        "????? ?? ??",
+        "????? ??",
+        "??? ????",
+        "??? ?? ????",
+        "????????? ??"
+      ],
+      "monetizationModel": "??? ??? ???; ?? ???? ?? ???????? ????? ???? ?? ???? ?? ???? ??",
+      "officialSources": [
+        "https://affiliate.yeogi.com/"
+      ],
+      "observedPublicBundle": {
+        "capturedAt": "2026-09-20T02:05:00Z",
+        "sourceType": "public_static_javascript_metadata",
+        "apiOrigin": "https://bff-hostcenter-pas.withinapi.com",
+        "frontendApiPrefix": "/pas-v100",
+        "routes": [
+          "/dashboard/generate-link/accommodation",
+          "/dashboard/generate-link/leisure-ticket",
+          "/dashboard/performance/list",
+          "/dashboard/settlement/list",
+          "/dashboard/settlement/detail",
+          "/dashboard/content/list",
+          "/dashboard/partner/enroll"
+        ],
+        "authRequired": true,
+        "executable": false,
+        "credentialValuesCaptured": false
+      },
+      "nextAction": "????? ? ????? ?? ??? ????? ??? ?? ????, ?? ?? ??? ?? ?? XHR? ??? ? API-only client? ???.",
+      "riskFlags": [
+        "approval_required",
+        "bearer_auth_boundary",
+        "private_portal_contracts",
+        "promotion_terms_change",
+        "content_review_possible"
+      ]
+    },
+    {
+      "id": "creatrip-affiliate",
+      "name": "Creatrip Affiliate",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "korea_inbound",
+        "activities",
+        "clinics",
+        "beauty",
+        "transport"
+      ],
+      "priority": "P1",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "medium_after_approval",
+      "programType": "direct_publisher_affiliate",
+      "publisherFit": "high_for_korea_inbound",
+      "domesticMarketFit": "medium",
+      "capabilities": [
+        "links.create",
+        "transactions.list",
+        "reports.summary",
+        "payouts.list",
+        "activities.links"
+      ],
+      "contentUseCases": [
+        "?? ????? ???",
+        "??????????",
+        "?????????????",
+        "??? ?? ?? ?? ?"
+      ],
+      "monetizationModel": "?? ???? ???? 8%, ??? ??? 40%, ?? ?? ?? ???? ??",
+      "officialSources": [
+        "https://affiliate.creatrip.com/"
+      ],
+      "observedPublicBundle": {
+        "capturedAt": "2026-09-20T02:05:00Z",
+        "sourceType": "public_static_javascript_metadata",
+        "attributionWindowDays": 30,
+        "sameDeviceBrowserConditionObserved": true,
+        "minimumCashPayoutKrw": 50000,
+        "koreanResidentWithholdingPercent": 3.3,
+        "executable": false,
+        "credentialValuesCaptured": false
+      },
+      "nextAction": "?? ???? ???? ??? ? ????, ????? ??????????? ??? ????. ??? ??? ???? ??? ????? ???.",
+      "riskFlags": [
+        "inbound_focus",
+        "same_device_browser_attribution",
+        "eligible_product_exclusions",
+        "commission_confirmed_after_use"
+      ]
+    },
+    {
+      "id": "trazy-affiliate",
+      "name": "Trazy Affiliate",
+      "roles": [
+        "monetization",
+        "inventory",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "korea_inbound",
+        "activities",
+        "attractions",
+        "tours",
+        "esim"
+      ],
+      "priority": "P1",
+      "accessState": "partner_approval",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "unknown_until_portal_verified",
+      "programType": "direct_publisher_affiliate",
+      "publisherFit": "medium_for_english_inbound",
+      "domesticMarketFit": "medium",
+      "capabilities": [
+        "links.create",
+        "activities.links",
+        "transactions.list",
+        "payouts.list"
+      ],
+      "contentUseCases": [
+        "?? ????????",
+        "K-pop???",
+        "???????",
+        "??? ?? ?? ???"
+      ],
+      "monetizationModel": "?? ?? ???? ?? 4%? ?? ??, 100?? ?? ??? ??",
+      "officialSources": [
+        "https://www.trazy.com/affiliate"
+      ],
+      "nextAction": "?? ? ?? ????????? ?? ?? ??? ????. ??? ??????? ??? ???? ?? ????.",
+      "riskFlags": [
+        "english_first",
+        "inbound_focus",
+        "usd_payout_threshold",
+        "portal_scope_unknown"
+      ]
+    },
+    {
+      "id": "linkprice-travel-network",
+      "name": "?????? ?? ???",
+      "roles": [
+        "discovery",
+        "monetization",
+        "attribution"
+      ],
+      "verticals": [
+        "travel",
+        "affiliate_network",
+        "lodging",
+        "activities",
+        "commerce"
+      ],
+      "priority": "P1",
+      "accessState": "account_portal",
+      "verification": "partner_scope_to_verify",
+      "apiOnlyPotential": "unknown_until_campaign_portal_verified",
+      "programType": "affiliate_network",
+      "publisherFit": "high_if_travel_campaign_available",
+      "domesticMarketFit": "high",
+      "capabilities": [
+        "programs.list",
+        "links.create",
+        "transactions.list",
+        "reports.summary",
+        "payouts.list"
+      ],
+      "contentUseCases": [
+        "?? ??? ?? ??? ??",
+        "?? ????? ?? ??? ??",
+        "????? ?? ???"
+      ],
+      "monetizationModel": "??? ???? ??? ???",
+      "officialSources": [
+        "https://www.linkprice.com/"
+      ],
+      "nextAction": "???? ???? ?? ?? ???? ????????API ?? ??? ????. ?? ?? ??? ??? ?? ????? ????.",
+      "riskFlags": [
+        "campaign_availability_changes",
+        "brand_terms_vary",
+        "portal_login_required"
+      ]
+    },
+    {
+      "id": "waug-private-partnership",
+      "name": "WAUG ????? ??",
+      "roles": [
+        "discovery",
+        "monetization"
+      ],
+      "verticals": [
+        "travel",
+        "activities",
+        "attractions",
+        "tours",
+        "cars"
+      ],
+      "priority": "P2",
+      "accessState": "manual_review",
+      "verification": "partner_scope_to_verify",
+      "apiOnlyPotential": "unknown",
+      "programType": "private_partnership",
+      "publisherFit": "unknown",
+      "domesticMarketFit": "high",
+      "capabilities": [],
+      "contentUseCases": [
+        "??? ??????????? ???? ?? ?? ??"
+      ],
+      "monetizationModel": "?? ????? ???? ??? ???? ???? ?? ?? ??",
+      "officialSources": [
+        "https://www.waug.com/ko"
+      ],
+      "nextAction": "?? ??? ?? ??? ???? ?????????? ?? ??? ?? ???? ??? adapter? ???? ???.",
+      "riskFlags": [
+        "no_public_self_service_affiliate_found",
+        "commercial_negotiation_required",
+        "api_not_confirmed"
+      ]
+    },
+    {
+      "id": "tourvis-private-partnership",
+      "name": "???? ?? ??",
+      "roles": [
+        "discovery",
+        "monetization"
+      ],
+      "verticals": [
+        "travel",
+        "flights",
+        "lodging",
+        "activities"
+      ],
+      "priority": "P2",
+      "accessState": "manual_review",
+      "verification": "partner_scope_to_verify",
+      "apiOnlyPotential": "unknown",
+      "programType": "private_or_network_campaign",
+      "publisherFit": "unknown",
+      "domesticMarketFit": "high",
+      "capabilities": [],
+      "contentUseCases": [
+        "???????? ?? ?? ?? ??? ??"
+      ],
+      "monetizationModel": "?? ????? ???? ????? ???? ??",
+      "officialSources": [
+        "https://tourvis.com/"
+      ],
+      "nextAction": "?? ?? ?? ?? ?????? ? ?? ????? ?? ???? ????.",
+      "riskFlags": [
+        "no_public_program_confirmed",
+        "private_contract_possible",
+        "campaign_portal_verification_required"
+      ]
+    },
+    {
+      "id": "hanatour-marketing-partnership",
+      "name": "???? ??? ?? ??",
+      "roles": [
+        "discovery",
+        "monetization"
+      ],
+      "verticals": [
+        "travel",
+        "packages",
+        "flights",
+        "lodging"
+      ],
+      "priority": "P2",
+      "accessState": "manual_review",
+      "verification": "partner_scope_to_verify",
+      "apiOnlyPotential": "unknown",
+      "programType": "b2b_or_private_partnership",
+      "publisherFit": "low_until_verified",
+      "domesticMarketFit": "high",
+      "capabilities": [],
+      "contentUseCases": [
+        "??????? ???? ?? ?? ?? ?? ???? ??"
+      ],
+      "monetizationModel": "?? ????? ??? ????? ?? ????? ???? ??? ????? ??? ???? ??",
+      "officialSources": [
+        "https://www.hanatour.com/"
+      ],
+      "nextAction": "????? ?? ?? ??????, ???????? B2B ?????? ?? ????.",
+      "riskFlags": [
+        "b2b_portal_not_publisher_affiliate",
+        "contract_required",
+        "public_creator_program_not_confirmed"
+      ]
+    },
+    {
+      "id": "nol-supplier-partner",
+      "name": "NOL ?????",
+      "roles": [
+        "inventory"
+      ],
+      "verticals": [
+        "travel",
+        "lodging",
+        "supplier_operations"
+      ],
+      "priority": "EXCLUDE",
+      "accessState": "excluded",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "not_applicable_for_publisher",
+      "programType": "supplier_portal",
+      "publisherFit": "not_applicable",
+      "domesticMarketFit": "high_but_wrong_program_type",
+      "capabilities": [],
+      "contentUseCases": [
+        "???? ???? ????? ??; ??? ???? ?? ??? ??"
+      ],
+      "monetizationModel": "??? ?? ??",
+      "officialSources": [
+        "https://partner.yanolja.com/"
+      ],
+      "nextAction": "??? ?? ?????? ???? ???. ??? ?? ???? ???? ?? ??? ???? ??? ? ? adapter? ????.",
+      "riskFlags": [
+        "supplier_not_publisher",
+        "wrong_account_type",
+        "do_not_automate_for_affiliate_content"
+      ]
+    },
+    {
+      "id": "modetour-b2b",
+      "name": "???? ???B2B ??",
+      "roles": [
+        "discovery"
+      ],
+      "verticals": [
+        "travel",
+        "packages",
+        "b2b"
+      ],
+      "priority": "EXCLUDE",
+      "accessState": "excluded",
+      "verification": "official_docs_confirmed",
+      "apiOnlyPotential": "not_applicable_until_publisher_program_found",
+      "programType": "corporate_or_b2b_partnership",
+      "publisherFit": "not_confirmed",
+      "domesticMarketFit": "high_but_wrong_program_type",
+      "capabilities": [],
+      "contentUseCases": [
+        "????? ?? ??; ?? ??? ??????? ???? ??"
+      ],
+      "monetizationModel": "???B2B ??",
+      "officialSources": [
+        "https://www.modetour.com/"
+      ],
+      "nextAction": "?? ???? ?????? ??? ???? ??? ??? ??? ????.",
+      "riskFlags": [
+        "b2b_not_publisher",
+        "public_creator_program_not_confirmed"
+      ]
+    }
+  ]
+}

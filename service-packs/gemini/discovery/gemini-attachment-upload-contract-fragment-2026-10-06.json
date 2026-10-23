@@ -1,0 +1,421 @@
+{
+  "version": 1,
+  "capability": "attachment_upload",
+  "sourceEvidence": {
+    "captureType": "guarded_native_request_aborted_before_network_dispatch",
+    "method": "POST",
+    "origin": "https://push.clients6.google.com",
+    "pathFamily": "/upload/",
+    "queryKeyNames": [],
+    "bodyContentType": "application/x-www-form-urlencoded",
+    "bodyFormat": "UTF-8 metadata text",
+    "metadataBodyPrefix": "File name: ",
+    "startProtocol": "resumable",
+    "startCommand": "start",
+    "fileLengthHeader": "x-goog-upload-header-content-length",
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "push-id",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-client-pctx",
+      "x-goog-upload-command",
+      "x-goog-upload-header-content-length",
+      "x-goog-upload-protocol",
+      "x-tenant-id"
+    ],
+    "cookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "apiTestFileRequest": {
+      "name": "api-protocol42.txt",
+      "fileBytes": 14,
+      "initBodyBytes": 29,
+      "initBodySha256": "70f6378286a61335334b3b06a81bc5498b52d17eabed4beac686e7511ab1057b",
+      "initRequestCount": 5,
+      "businessDispatchCount": 0,
+      "deliveryClaim": false
+    },
+    "appBundleInspection": {
+      "loadedGeminiFirstPartyScriptBundleCount": 80,
+      "xGoogUploadHeaderImplementationBundleCount": 1,
+      "uploadSessionCancelImplementationFound": true,
+      "unrelatedUploadPathFamily": "/upload/drive/v3/files",
+      "browserPageRole": "codex-gemini-uploads-offset-proof-20261006-v2",
+      "ownerDigestMatchedApproved": true,
+      "browserAssetServerRequestsOccurred": false,
+      "resetQuietVerified": true,
+      "sourceProbeTargetIdMatched": true,
+      "sourceProbeResetQuietVerified": true,
+      "sourceProbeBlockedNonReadRequestCount": 28
+    },
+    "nativeContinuationCapture": {
+      "captureType": "guarded native continuation after the real direct-start response was forwarded",
+      "receipt": "gemini-attachment-upload-offset-proof-2026-10-06.json",
+      "method": "POST",
+      "origin": "https://push.clients6.google.com",
+      "pathFamily": "/upload/",
+      "queryKeyNames": [
+        "upload_id",
+        "upload_protocol"
+      ],
+      "headerNames": [
+        "accept",
+        "content-type",
+        "cookie",
+        "origin",
+        "push-id",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-client-pctx",
+        "x-goog-upload-command",
+        "x-goog-upload-offset",
+        "x-tenant-id"
+      ],
+      "cookieNames": [
+        "AEC",
+        "APISID",
+        "HSID",
+        "NID",
+        "SAPISID",
+        "SEARCH_SAMESITE",
+        "SID",
+        "SIDCC",
+        "SSID",
+        "__Secure-1PAPISID",
+        "__Secure-1PSID",
+        "__Secure-1PSIDCC",
+        "__Secure-1PSIDTS",
+        "__Secure-3PAPISID",
+        "__Secure-3PSID",
+        "__Secure-3PSIDCC",
+        "__Secure-3PSIDTS"
+      ],
+      "command": "upload, finalize",
+      "offset": 0,
+      "bodyBytes": 12,
+      "bodySha256": "faf4a0c081387b0e6b185e0b63d934bd32af4d90debbec53b19c7a8346694bf1",
+      "browserDispatchCount": 0,
+      "directStartHttpStatus": 200,
+      "directUploadHttpStatus": 200,
+      "directUploadStatus": "final",
+      "directQueryHttpStatus": 200,
+      "directQueryStatus": "final",
+      "directQuerySizeReceived": 12,
+      "clientReadbackVerified": true,
+      "bothPhaseJournalsReconciled": true,
+      "resetQuietVerified": true,
+      "rawHeaderValuesPersisted": false,
+      "rawSessionUrlPersisted": false,
+      "rawBodyPersisted": false,
+      "headerValueSource": "start_request_custom_header_map"
+    },
+    "sdkUploadStateMachine": {
+      "bundlePathFamily": "/_/mss/boq-gemini-web-uiserver/_/js/k=boq-gemini-web-uiserver.BardChatUi.ko.WHAMix7zrSg.2018.O/ck=boq-gemini-web-uiserver.BardChatUi.SEkY20mt7ek.L.B1.O/am={build}/d=1/exm=_b/excm=_b/ed=1/br=1/wt=2/ujg=1/rs={build}/ee={registry}/dti=1/m=LQaXg",
+      "bundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+      "sourceBackedBehavior": [
+        "Finalize request clones the same custom header map used by start, then overrides command and adds the current offset.",
+        "Query reads server-reported upload size and resumes from that offset; chunks use server granularity.",
+        "Cancel sends POST command cancel only in Upload or Query states.",
+        "Completion retains the response text in memory for the higher-level file consumer."
+      ],
+      "rawBundlePersisted": false,
+      "higherLevelResourceDecoderFullyMapped": false
+    }
+  },
+  "resumable": {
+    "startSuccessStatus": 200,
+    "uploadUrlHeader": "x-goog-upload-url",
+    "uploadUrlOrigins": [
+      "https://push.clients6.google.com"
+    ],
+    "uploadUrlPathPrefixes": [
+      "/upload/"
+    ],
+    "uploadMethod": "POST",
+    "commandHeader": "x-goog-upload-command",
+    "finalizeCommand": "upload, finalize",
+    "querySupported": true,
+    "queryMethod": "POST",
+    "queryCommand": "query",
+    "uploadStatusHeader": "x-goog-upload-status",
+    "sizeReceivedHeader": "x-goog-upload-size-received",
+    "chunkGranularityHeader": "x-goog-upload-chunk-granularity",
+    "resumeSupported": true,
+    "offsetHeader": "x-goog-upload-offset",
+    "cancelSupported": true,
+    "protocolSource": "https://ai.google.dev/api/files",
+    "relatedFirstPartyDocumentation": {
+      "url": "https://ai.google.dev/api/files",
+      "product": "Gemini Files API",
+      "documentsOffsetHeader": "x-goog-upload-offset",
+      "documentsInitialOffset": 0,
+      "documentsFinalizeCommand": "upload, finalize",
+      "scopeBoundary": "Public Gemini Files API examples are related protocol documentation, while internal Gemini web behavior is evidenced by the first-party web bundle and native capture."
+    },
+    "serviceSpecificContinuationObserved": true,
+    "cancelReason": "First-party web uploader source sends the cancel command only while the local SDK state is Upload or Query.",
+    "serviceSpecificResumeObserved": true,
+    "resumeReason": "First-party web uploader source uses the server-reported size to resume each chunk at its current offset.",
+    "relatedGooglePhotosProtocolSource": "https://developers.google.com/photos/library/guides/resumable-uploads",
+    "nativeContinuation": {
+      "method": "POST",
+      "headerNames": [
+        "accept",
+        "content-type",
+        "cookie",
+        "origin",
+        "push-id",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-client-pctx",
+        "x-goog-upload-command",
+        "x-goog-upload-offset",
+        "x-tenant-id"
+      ],
+      "cookieNames": [
+        "AEC",
+        "APISID",
+        "HSID",
+        "NID",
+        "SAPISID",
+        "SEARCH_SAMESITE",
+        "SID",
+        "SIDCC",
+        "SSID",
+        "__Secure-1PAPISID",
+        "__Secure-1PSID",
+        "__Secure-1PSIDCC",
+        "__Secure-1PSIDTS",
+        "__Secure-3PAPISID",
+        "__Secure-3PSID",
+        "__Secure-3PSIDCC",
+        "__Secure-3PSIDTS"
+      ],
+      "commandHeader": "x-goog-upload-command",
+      "commandValue": "upload, finalize",
+      "offsetHeader": "x-goog-upload-offset",
+      "initialOffset": 0,
+      "bodySemantics": "selected_file_bytes",
+      "headerValuesCompleteForDefaultCli": true,
+      "headerValueSource": "start_request_custom_header_map"
+    },
+    "cancelMethod": "POST",
+    "cancelCommand": "cancel",
+    "cancelEligibleStates": [
+      "Upload",
+      "Query"
+    ]
+  },
+  "source": {
+    "origin": "https://push.clients6.google.com",
+    "method": "POST",
+    "pathFamily": "/upload/",
+    "queryKeyNames": [],
+    "contentType": "application/x-www-form-urlencoded",
+    "metadataBodyPrefix": "File name: ",
+    "startProtocol": "resumable",
+    "startCommand": "start",
+    "fileLengthHeader": "x-goog-upload-header-content-length",
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "push-id",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-client-pctx",
+      "x-goog-upload-command",
+      "x-goog-upload-header-content-length",
+      "x-goog-upload-protocol",
+      "x-tenant-id"
+    ],
+    "cookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "cookieScopes": [
+      {
+        "name": "AEC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "APISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "HSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "NID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SEARCH_SAMESITE",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "id": "acada:recall-sources",
+  "label": "회수·리콜 수집원 레지스트리",
+  "createdAt": "2026-10-05",
+  "purpose": "recallCheck/recallAlertCandidates가 쓸 공식 회수·리콜 공표를 어느 기관의 어느 엔드포인트에서 익명으로 읽을 수 있는지 정한다. shopping-sources.v1.json과 같은 모양(sites[].capabilities[])이다. 확인일은 모두 2026-10-05, 실행 환경은 비한국 egress.",
+  "policy": [
+    "익명 읽기만 한다. 로그인·CAPTCHA·WAF 우회 없음. 키가 필요한 공식 API는 클라이언트와 키 이름(DPAPI 레코드명)만 정하고 가입하지 않는다.",
+    "HTML뿐인 곳은 Document GET 파서와 fixture로 처리한다. fixture는 이 실행에서 받은 실제 응답을 줄인 것이다(fixtures/).",
+    "한국 사이트가 비한국 egress를 막으면 verdict를 geo_blocked_non_kr로 적고 증거를 남긴다. 우회하지 않는다.",
+    "수집 실패·색인 공백은 '회수 없음'이 아니다. 게이트는 review로 처리한다(ontology M6)."
+  ],
+  "controlledValues": {
+    "capability": ["recall_list", "recall_detail", "recall_search", "certification_revoked"],
+    "access": ["public_http", "public_http_sample_key", "key_required", "html_only", "blocked"],
+    "decision": ["use", "use_sample_only", "use_when_keyed", "manual_url_only", "exclude", "not_verified"],
+    "verdict": ["ok_anonymous", "ok_sample_key", "key_required_not_called", "stale_dataset", "geo_blocked_non_kr", "not_verified"]
+  },
+  "keyRecords": {
+    "FOODSAFETYKOREA_API_KEY": "식품안전나라 OpenAPI 인증키 (keyId). 없으면 'sample' 키로 최신 5건까지만 읽는다.",
+    "DATA_GO_KR_SERVICE_KEY": "data.go.kr 일반 인증키(Decoding). 식약처 의약품·의료기기·화장품 회수 API와 국가기술표준원 리콜 API가 같이 쓴다.",
+    "CONSUMER24_API_KEY": "소비자24 Open API 인증키(회원가입 필요). 가입하지 않았다."
+  },
+  "sites": [
+    {
+      "id": "foodsafetykorea",
+      "label": "식품안전나라 (식약처) 회수·판매중지",
+      "category": ["food", "health_functional_food"],
+      "capabilities": [
+        {
+          "capability": "recall_list",
+          "access": "public_http_sample_key",
+          "endpoint": "https://openapi.foodsafetykorea.go.kr/api/{keyId}/I0490/json/{start}/{end}[/CRET_DTM=YYYYMMDD]",
+          "serviceId": "I0490",
+          "serviceIdNote": "I0490이 현행 회수·판매중지 서비스로 응답함(2026-10-05, total_count 379). 서비스 목록 확인용 대조는 하지 못함.",
+          "key": "FOODSAFETYKOREA_API_KEY (sample 키는 익명, 최신 5건까지)",
+          "fields": {
+            "제품명": "PRDTNM",
+            "제조사/수입사": "BSSHNM",
+            "바코드": "BRCDNO (비어 있는 경우가 많음)",
+            "모델명": "없음",
+            "로트/유통기한": "DISTBTMLMT(소비기한), MNFDT(제조일자)",
+            "사유": "RTRVLPRVNS",
+            "등록일": "CRET_DTM",
+            "조치": "RTRVLPLANDOC_RTRVLMTHD (회수방법, 비어 있는 공표 있음)",
+            "기타": "RTRVL_GRDCD_NM(회수등급), PRDLST_TYPE, FRMLCUNIT(포장단위), IMG_FILE_PATH, RTRVLDSUSE_SEQ(고유번호), LCNS_NO, ADDR, TELNO"
+          },
+          "cadence": "수시(공표 즉시 등록). CRET_DTM 기준 최근 공표는 2026-10-02 17:52로 수집 3일 전까지 보임",
+          "decision": "use_sample_only",
+          "verdict": "ok_sample_key",
+          "reason": "public_http_sample_key",
+          "evidence": "captures/fs_I0490.body HTTP 200 application/json, 5 rows; CRET_DTM 필터 CRET_DTM=20261002 → total_count 2 (captures/fs_I0490_date.json)",
+          "limits": "sample 키 5건 상한. 전체 수집은 FOODSAFETYKOREA_API_KEY 필요(가입하지 않음)",
+          "noticeUrl": "https://www.foodsafetykorea.go.kr/ (품목 개별 URL은 확인 못 함: 추정 경로 3개가 404)",
+          "noticeUrlVerified": false
+        }
+      ]
+    },
+    {
+      "id": "nedrug",
+      "label": "의약품안전나라 (식약처) 의약품 회수·판매중지",
+      "category": ["drug", "quasi_drug"],
+      "capabilities": [
+        {
+          "capability": "recall_list",
+          "access": "public_http",
+          "endpoint": "https://nedrug.mfds.go.kr/cmn/xls/downc/OpenData_PotOpenRecallSaleStop",
+          "format": "CSV(UTF-8 BOM) 전체 목록 1회 다운로드. 2026-10-05 958행, 약 224KB",
+          "key": "없음(공공데이터 공개 페이지 https://nedrug.mfds.go.kr/pbp/CCBGA01 의 CSV 버튼이 부르는 경로)",
+          "fields": {
+            "제품명": "품목명",
+            "제조사/수입사": "업체명",
+            "바코드": "표준코드 ('|'로 이은 GTIN 목록)",
+            "모델명": "없음(품목기준코드)",
+            "로트/유통기한": "없음",
+            "사유": "회수사유내용",
+            "등록일": "회수명령일자(YYYYMMDD), 승인일자는 영업자 회수 보고 시각",
+            "조치": "없음",
+            "기타": "강제여부구분(Y=명령, N=자진), 사업자번호, 품목기준코드"
+          },
+          "cadence": "실시간(data.go.kr 15059114 표기). 최신 행 회수명령일자 20261002",
+          "decision": "use",
+          "verdict": "ok_anonymous",
+          "reason": "observed_public_http",
+          "evidence": "captures/nd_recall.csv HTTP 200, 헤더 '품목기준코드,품목명,업체명,회수사유내용,강제여부구분,승인일자,회수명령일자,사업자번호,표준코드'",
+          "noticeUrl": "https://nedrug.mfds.go.kr/pbp/CCBGA01",
+          "noticeUrlVerified": true,
+          "noticeUrlNote": "공공데이터 공개 페이지이며 회수 개별 공지 URL이 아니다. 개별 공지 URL은 확인하지 못했다."
+        },
+        {
+          "capability": "recall_list",
+          "access": "key_required",
+          "endpoint": "https://apis.data.go.kr/1471000/MdcinRtrvlSleStpgeInfoService05",
+          "operation": "미확인(활용신청 후 명세에서 확인해야 한다)",
+          "dataGoKrId": "15059114",
+          "format": "JSON+XML",
+          "key": "DATA_GO_KR_SERVICE_KEY",
+          "fields": "품목명, 업체명, 회수사유내용, 강제여부구분, 승인일자, 회수명령일자 (데이터 설명문 기준)",
+          "cadence": "실시간, 이용허락범위 제한 없음, 수정일 2026-08-20",
+          "decision": "use_when_keyed",
+          "verdict": "key_required_not_called",
+          "reason": "needs_api_key",
+          "note": "익명 CSV가 같은 데이터를 주므로 이 API는 CSV가 막힐 때의 예비다."
+        }
+      ]
+    },
+    {
+      "id": "nedrug_cosmetic_device",
+      "label": "식약처 화장품·의료기기 회수·판매중지 (data.go.kr)",
+      "category": ["cosmetic", "device"],
+      "capabilities": [
+        {
+          "capability": "recall_list",
+          "access": "key_required",
+          "endpoint": "화장품: data.go.kr 15106958 (엔드포인트 미확인) / 의료기기: https://apis.data.go.kr/1471000/MdlpRtrvlSleStpgeInfoService04 (15056785)",
+          "format": "JSON+XML",
+          "key": "DATA_GO_KR_SERVICE_KEY",
+          "fields": "페이지에서 항목명을 확인하지 못함(활용신청 후 명세 필요)",
+          "cadence": "실시간 표기, 의료기기 수정일 2026-09-16",
+          "decision": "use_when_keyed",
+          "verdict": "key_required_not_called",
+          "reason": "needs_api_key"
+        }
+      ]
+    },
+    {
+      "id": "safetykorea",
+      "label": "제품안전정보센터 (국가기술표준원) 국내리콜",
+      "category": ["consumer_product", "children_product", "vehicle"],
+      "capabilities": [
+        {
+          "capability": "recall_list",
+          "access": "html_only",
+          "endpoint": "GET https://www.safetykorea.kr/recall/recallBoard (최신 목록 1쪽); POST same URL body selectedOption=0&textWord=&pageNo=<0-based> (페이지 이동, 페이지 JS goPage와 같은 요청)",
+          "key": "없음",
+          "fields": {
+            "제품명": "제품명 열(품목, 예: '기타완구(완구)')",
+            "제조사/수입사": "사업자명 열",
+            "바코드": "바코드번호 열('-'이면 없음)",
+            "모델명": "모델명 열(제품명 문구가 들어간 경우도 있음)",
+            "로트/유통기한": "목록에 없음(상세 공표문)",
+            "사유": "목록에 없음(상세 공표문 '위해정도·제품결함·위해정보')",
+            "등록일": "공표일 열",
+            "조치": "리콜종류 열(명령에따른리콜/자발적리콜), 상세에 소비자 행동요령"
+          },
+          "cadence": "수시 공표. 목록 최신 번호 4249 공표일 2026-09-16",
+          "decision": "use",
+          "verdict": "ok_anonymous",
+          "reason": "html_only",
+          "evidence": "captures/sk_board.body HTTP 200 text/html, goDetail 행 10개; fixtures/safetykorea-recallBoard.sample.html",
+          "noticeUrl": "https://www.safetykorea.kr/recall/recallBoard",
+          "noticeUrlVerified": true,
+          "noticeUrlNote": "상세(POST /recall/ajax/recallBoard recallUid=<id>)는 직접 URL이 없어 목록 URL을 링크한다. 상세 페이지는 이 실행에서 같은 POST로 받았을 때 값이 비어 있어 파서를 만들지 않았다."
+        },
+        {
+          "capability": "recall_list",
+          "access": "key_required",
+          "endpoint": "data.go.kr 15116894 '산업통상부 국가기술표준원_제품 안전인증 및 리콜 정보' (엔드포인트 경로 미확인)",
+          "format": "JSON+XML",
+          "key": "DATA_GO_KR_SERVICE_KEY",
+          "fields": "제품명, 모델명, 인증번호, 인증기관, 제조수입사, 리콜 사유, 조치 내용, 공표일 (데이터 설명문 기준)",
+          "cadence": "실시간 표기, 수정일 2025-09-09",
+          "decision": "use_when_keyed",
+          "verdict": "key_required_not_called",
+          "reason": "needs_api_key"
+        },
+        {
+          "capability": "certification_revoked",
+          "access": "key_required",
+          "endpoint": "위 15116894 데이터에 '인증' 정보 포함(설명문 기준)",
+          "decision": "not_verified",
+          "verdict": "not_verified",
+          "reason": "not_verified",
+          "note": "인증취소 항목을 확인하지 못했다. 인증취소는 리콜 공표가 아니므로 게이트 입력에서 빼고 open question으로 둔다."
+        }
+      ]
+    },
+    {
+      "id": "consumer24",
+      "label": "소비자24 (공정거래위원회) 리콜정보",
+      "category": ["consumer_product", "food", "drug", "cosmetic", "device", "vehicle"],
+      "capabilities": [
+        {
+          "capability": "recall_list",
+          "access": "key_required",
+          "endpoint": "https://www.consumer.go.kr/user/ftc/consumer/openApiSvcUser/120/selectOpenApiSvcList.do (Open API 목록 페이지, 익명 200)",
+          "format": "Open API 목록: 국내리콜 분류에 리콜-공산품·자동차·축산물·의약품·의약외품·의료기기·위생용품·화장품·생활방사선제품",
+          "key": "CONSUMER24_API_KEY (회원가입 필요, 가입하지 않음)",
+          "fields": "명세 미확인",
+          "cadence": "미확인",
+          "decision": "not_verified",
+          "verdict": "key_required_not_called",
+          "reason": "needs_api_key",
+          "note": "소비자24 사이트 자체는 회수·리콜 정보를 타 기관(식약처·국표원·국토부)에서 모아 보여주는 중개처다. 원천 기관 수집원이 있으므로 이 수집원은 보조로 둔다."
+        },
+        {
+          "capability": "recall_list",
+          "access": "key_required",
+          "endpoint": "data.go.kr 공정거래위원회_{식품 15056914|화장품 15058422|의약품 15058714|공산품 15059073|의료기기 15058938|해외 15059289} 리콜정보",
+          "format": "XML",
+          "key": "DATA_GO_KR_SERVICE_KEY",
+          "cadence": "'실시간' 표기이나 수정일이 2019-03-05로 6년 이상 갱신되지 않음",
+          "decision": "exclude",
+          "verdict": "stale_dataset",
+          "reason": "stale_dataset"
+        }
+      ]
+    },
+    {
+      "id": "kca",
+      "label": "한국소비자원 위해정보·리콜",
+      "category": ["consumer_product"],
+      "capabilities": [
+        {
+          "capability": "recall_list",
+          "access": "blocked",
+          "endpoint": "https://www.kca.go.kr/",
+          "decision": "manual_url_only",
+          "verdict": "geo_blocked_non_kr",
+          "reason": "http_rejected",
+          "evidence": "2026-10-05 비한국 egress에서 www.kca.go.kr:443 CONNECT 터널은 성립하나 TLS 단계에서 응답 없이 끊김(curl code 000, 5회 이상 반복). 같은 실행에서 safetykorea·nedrug·consumer.go.kr은 HTTP 200. 에이전트 프록시 불안정 가능성이 있어 확정이 아니라 '비한국 egress 차단 추정'.",
+          "note": "한국소비자원은 위해정보를 소비자24와 safetykorea 리콜로도 내므로 수집원에서 빠져도 커버리지 손실은 위해정보(리콜 전 단계)에 한정된다."
+        },
+        {
+          "capability": "recall_list",
+          "access": "blocked",
+          "endpoint": "https://www.ciss.go.kr/ (소비자위해감시시스템)",
+          "decision": "manual_url_only",
+          "verdict": "geo_blocked_non_kr",
+          "reason": "http_rejected",
+          "evidence": "TLS 단계에서 SSL_ERROR_SYSCALL (curl code 000) 반복. kca.go.kr와 같은 증상."
+        }
+      ]
+    }
+  ]
+}

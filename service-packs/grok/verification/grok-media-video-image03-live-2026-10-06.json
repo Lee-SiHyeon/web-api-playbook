@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "operation": "media.video.create.image_reference.direct_live",
+  "observedAt": "2026-10-06T06:09:17.317748Z",
+  "ownerVerified": true,
+  "sourceImageTaskVerified": true,
+  "assetServerConfig": {
+    "present": true,
+    "origin": "https://assets.grok.com",
+    "source": "current_page_first_party_inline_bootstrap"
+  },
+  "assetNativeRead": {
+    "status": 200,
+    "mimeType": "image/jpeg",
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "protocol": "h2",
+    "ssoCookieObserved": true,
+    "ordinaryHeaderNames": [
+      "accept",
+      "accept-language",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-agent"
+    ]
+  },
+  "intentIdSha256": "e5f4ed8a9fa1595a027c379005a3f63d83e6ae39214d1057c02bc53e32c2804d",
+  "promptSha256": "c4b6ffe7e2293fe20a315c78171dec5e3c9e3a834a9ce47dc2ad8928c490abe8",
+  "promptLength": 130,
+  "generationMode": "image_reference",
+  "profileName": "video-image-reference-6s-480p-no-audio",
+  "nativeCapture": {
+    "captured": true,
+    "intentMatch": true,
+    "method": "POST",
+    "pathClass": "create-conversation",
+    "bodyLength": 700,
+    "bodySha256": "cfaeb8d542b2f33367ef950225d208afa5e184d2ea13d42abdf8dac0c2d03c99",
+    "topLevelFieldNames": [
+      "enableImageStreaming",
+      "enableSideBySide",
+      "kind",
+      "mediaGenInput",
+      "message",
+      "modelName",
+      "responseMetadata",
+      "sendFinalMetadata"
+    ],
+    "mediaGenInputModes": [
+      "imageToVideo"
+    ],
+    "inputFieldNames": [
+      "aspectRatio",
+      "duration",
+      "inputAssets",
+      "mode",
+      "prompt",
+      "resolutionName",
+      "skipAudio"
+    ],
+    "inputAssetCount": 1,
+    "inputAssetMatched": true,
+    "promptMatched": true,
+    "profile": {
+      "aspectRatio": "2:3",
+      "duration": 6,
+      "resolutionName": "480p",
+      "mode": "custom",
+      "skipAudio": true
+    },
+    "ordinaryHeaderNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "user-agent"
+    ],
+    "dynamicHeaderNames": [
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "ssoCookieObserved": true,
+    "abortProof": {
+      "verified": true,
+      "failRequestAck": true,
+      "networkIdPresent": true,
+      "loadingFailedCount": 1,
+      "responseCount": 0,
+      "intentMatch": true,
+      "loadingFailedMissing": false
+    }
+  },
+  "sourceImage": {
+    "taskHistoryVerified": true,
+    "ownerVerified": true,
+    "mimeType": "image/jpeg",
+    "createTime": "2026-10-05T22:11:24.488Z",
+    "assetIdSha256": "bbb877225f98711d9ac157a492f15955e54594efbac3d17da522a10816bff830",
+    "conversationIdSha256": "cf525680c9587422e0d5c9ba1648ed7cbf2339180155e3fa1ae22bff436d81a6",
+    "assetServerOrigin": "https://assets.grok.com",
+    "localArtifactMappingVerified": true,
+    "localArtifactSha256": "1bfe89b659df5e36b2e5c46fcd4a98ac92dec96a3b64b53848be4e89e4c7cea9",
+    "localArtifactBytes": 216268
+  },
+  "browserGuard": {
+    "pagewideVerified": true,
+    "browserMutationAttemptsBlocked": 37,
+    "lateBrowserRetriesBlocked": 10,
+    "failRequestAckCount": 60,
+    "networkIdMissingCount": 0,
+    "blockedBusinessWriteCount": 37,
+    "matchingNativeVideoIntentAttempts": 3,
+    "blockedSdkRetryAttempts": 2,
+    "browserServerWritesDelivered": 0,
+    "blockedWriteResponses": 0,
+    "asset": {
+      "requestCount": 2,
+      "requestHeaderNames": [
+        "accept",
+        "accept-language",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sec-fetch-dest",
+        "sec-fetch-mode",
+        "sec-fetch-site",
+        "user-agent"
+      ],
+      "ssoObserved": true,
+      "response": {
+        "status": 200,
+        "mimeType": "image/jpeg"
+      },
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "protocol": "h2"
+    }
+  },
+  "browserWriteRequestsSent": 0,
+  "promptOrPrivateIdsPersisted": false,
+  "cookiesOrTokensPersisted": false,
+  "rawBodiesOrFramesPersisted": false,
+  "publicSharingChanged": false,
+  "purchaseOrSubscriptionChanged": false,
+  "directSubmission": {
+    "stage": "media_api_preflight_and_submit",
+    "responseContentType": null,
+    "securitySignal": null,
+    "errorClass": null,
+    "persistenceErrorCode": null,
+    "processExitCode": 1,
+    "errorCode": "MEDIA_INTENT_TRANSITION_INVALID"
+  },
+  "finalState": null,
+  "directVideoCreateRequestsSent": null,
+  "automaticRetries": 0,
+  "promptPersisted": false,
+  "rawIdsKeysUrlsPersisted": false,
+  "rawFramesPersisted": false
+}

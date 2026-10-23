@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "host": "DESKTOP-TO2H6OD",
+  "checkedAt": "2026-09-20T16:55:14.982Z",
+  "scope": "Shopping Connect preparation, not commercial activation",
+  "httpAccountProbe": {
+    "httpStatus": 200,
+    "identityVerified": true,
+    "authenticated": true,
+    "credentialPropagated": true,
+    "responseBytes": 214,
+    "entitlement": {"creator":true,"partner":false,"accountAssigned":true},
+    "spaceStatus": {"observed":true,"activeSpaceCount":0,"spaceCount":0,"selectedSpaceAssigned":false,"waitingSpace":null},
+    "runner": "apps/affiliate-api-hub/scripts/partner-session-probe.mjs",
+    "browserUsedForHttpRequest": false,
+    "rawAccountReturned": false
+  },
+  "browserObservation": {
+    "entryAction": "Existing creator start button",
+    "resultUrl": "https://brandconnect.naver.com/space/create/creator",
+    "heading": "스페이스 개설하기 1/2",
+    "requiredInputs": ["at_least_one_channel","profile_image","space_name","main_topic","group_buying_experience_answers"],
+    "nextButtonEnabled": false,
+    "setupSubmitted": false
+  },
+  "readiness": {
+    "status": "blocked_space_setup",
+    "accountRead": "verified",
+    "creator": "verified",
+    "space": "missing",
+    "affiliateTerms": "unverified",
+    "productSearch": "unverified",
+    "linkIssue": "unverified",
+    "readyForScopedDiscovery": false,
+    "commercialOperationsEnabled": false,
+    "publishingEnabled": false
+  },
+  "execution": {
+    "sessionBootstrap": "existing_Canary_current_origin",
+    "handoff": "memory_to_independent_Node_stdin_child",
+    "accountRead": "pure_http",
+    "credentialsPersisted": false,
+    "automaticLoginRenewal": "unverified"
+  }
+}

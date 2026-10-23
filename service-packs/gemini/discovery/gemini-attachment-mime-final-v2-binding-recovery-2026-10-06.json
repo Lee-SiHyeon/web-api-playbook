@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_message_binding_diagnostic_recovery",
+  "recordedAt": "2026-10-06T07:30:45Z",
+  "sourceReceipt": "gemini-attachment-mime-final-v2-chain-2026-10-06.json",
+  "sourceCallerIntent": "gemini-attachment-mime-final-v2-20261006-v1",
+  "sourceMessageCallerIntent": "gemini-attachment-mime-final-v2-message-20261006-v1",
+  "observedFailureCode": "TEXT_ATTACHMENT_CAPTURE_MISMATCH",
+  "priorAttemptFacts": {
+    "directUploadVerified": true,
+    "nativeAttachmentMessageObserved": true,
+    "directTextDispatchCount": 0,
+    "selectedFileMimeType": "text/plain",
+    "rawAttachmentReferencePersisted": false,
+    "rawAttachmentMessageBodyPersisted": false,
+    "perFieldOccurrenceCountsPersisted": false,
+    "perFieldCandidateShapesPersisted": false,
+    "perFieldCandidateHashesPersisted": false,
+    "attachmentMessageBodyBytesPersisted": false,
+    "attachmentMessageBodySha256Persisted": false,
+    "browserPageResetAfterRunnerExit": true,
+    "sameUploadReferenceRecoverableAfterRunnerExit": false,
+    "fileBytesMayBeResent": false
+  },
+  "bindingDiagnostics": {
+    "responsePayloadOccurrenceCount": null,
+    "filenameOccurrenceCount": null,
+    "mimeTypeOccurrenceCount": null,
+    "sourceTupleMatchCount": null,
+    "candidateShapes": null,
+    "candidateHashes": null,
+    "unavailableReason": "The v2 child emitted only the generic error code before this diagnostic schema was installed; its raw request body and opaque upload response were intentionally not persisted and cannot be reconstructed after process exit."
+  },
+  "firstPartyDecoderEvidence": {
+    "sdkUploadDecoder": "Aqc",
+    "serializedFileMessage": "VE",
+    "nestedFileMetadata": "dqc",
+    "veFilenameField": 2,
+    "dqcUploadResponseField": 1,
+    "dqcFileSizeField": 3,
+    "dqcMimeTypeField": 4,
+    "serializationForm": "protobuf tuple arrays with null/default fields subject to JSON tuple trimming",
+    "evidenceBundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa"
+  },
+  "implementedDiagnosticPath": {
+    "module": "src/text-adapter.mjs",
+    "safeFields": [
+      "responsePayloadMatchCount",
+      "filenameMatchCount",
+      "mimeTypeMatchCount",
+      "sourceProtoTupleMatchCount",
+      "candidate byte lengths",
+      "candidate protobuf array positions and lengths",
+      "candidate SHA-256 digests",
+      "normalized standard MIME"
+    ],
+    "rawReferenceOrRequestPersisted": false,
+    "partialApiKeepsReferenceAndCaptureNonEnumerably": true,
+    "focusedTestsPassed": 24
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-06T01:41:31.150Z",
+  "implementation": "maintained src/cli.mjs default Node issuer",
+  "wholeOperationPureHttp": true,
+  "productionCliLiveVerified": true,
+  "initialAuthenticatedSession": "Scoped official login/bootstrap in Windows DPAPI; prerequisite outside generation",
+  "browserEngineUsedForIssuanceOrGeneration": false,
+  "browserIdentityFabricated": false,
+  "sdkSourceModified": false,
+  "secretsPersisted": false,
+  "issuer": {
+    "mode": "node_jsdom_unmodified_sdk",
+    "nodeVersion": "v24.10.0",
+    "jsdomVersion": "26.1.0",
+    "siteKeyFromCurrentFlowDocument": true,
+    "cookieValuesRecorded": false,
+    "tokenValuesRecorded": false,
+    "browserEngineUsed": false,
+    "browserSignalsOverridden": false,
+    "sdkSourceModified": false,
+    "stage": "reload_verified",
+    "workerStage": "reload_verified",
+    "failureCode": null,
+    "elapsedMs": 24493,
+    "workerOnline": true,
+    "loader": {
+      "host": "www.google.com",
+      "path": "/recaptcha/enterprise.js",
+      "method": "GET",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 1309,
+      "sha256": "ac45863cd2098c66751a91aee2c1a79c18dfdf659e84cf3d1a8d6a669250acfd"
+    },
+    "runtime": {
+      "host": "www.gstatic.com",
+      "path": "/recaptcha/releases/guXhH0v-XMxlzmbTwqkaT4i5/recaptcha__en.js",
+      "method": "GET",
+      "locale": "en",
+      "sdkVersion": "guXhH0v-XMxlzmbTwqkaT4i5",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 850516,
+      "sha256": "c179033168f7b2b948eb1eb42b149e93ce638499680f360413102471e38c765e"
+    },
+    "anchor": {
+      "host": "www.google.com",
+      "path": "/recaptcha/enterprise/anchor",
+      "method": "GET",
+      "status": 200,
+      "mime": "text/html",
+      "bytes": 39946,
+      "queryKeyCount": 9,
+      "configuredKeyMatches": true,
+      "hiddenTokenPresent": true
+    },
+    "worker": {
+      "constructed": true,
+      "host": "www.google.com",
+      "path": "/recaptcha/enterprise/webworker.js",
+      "sourceModified": false,
+      "scriptStatus": 200,
+      "scriptBytes": 102,
+      "scriptSha256": "d99b8a22e67ebfdd3518cf95e07cc705ced9ac5339aa442f7e91e9c7b5673787",
+      "runtimeStatus": 200,
+      "runtimeBytes": 850516,
+      "runtimeSha256": "c179033168f7b2b948eb1eb42b149e93ce638499680f360413102471e38c765e",
+      "initialized": true
+    },
+    "execute": {
+      "callCount": 1,
+      "returnedNonemptyToken": true,
+      "returnedTokenLength": 2382,
+      "matchesReloadReply": true
+    },
+    "reload": {
+      "postCount": 1,
+      "requestBytes": 9389,
+      "responseBytes": 2308,
+      "decodedResponseBytes": 2995,
+      "responseSchemaValid": true,
+      "sdkVersionMatchesAnchor": true,
+      "anchorTokenMatchesRequest": true,
+      "actionMatches": true,
+      "siteKeyMatches": true,
+      "outcomeUncertain": false,
+      "sendFinishedAt": "2026-10-06T01:26:27.966Z",
+      "status": 200,
+      "mime": "application/json",
+      "responseEndedAt": "2026-10-06T01:26:28.199Z"
+    },
+    "clear": {
+      "postCount": 0,
+      "responseBytes": 0
+    },
+    "networkBlockedCount": 0,
+    "completedAt": "2026-10-06T01:26:28.231Z"
+  },
+  "create": {
+    "at": "2026-10-06T01:26:28.363Z",
+    "method": "POST",
+    "host": "flow.google.com",
+    "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+    "rpcId": "YhhmEf",
+    "httpStatus": 200,
+    "mime": "application/json; charset=utf-8",
+    "attemptCount": 1,
+    "requestId": "9912FF25-F9DB-4250-A922-2D8DA71B44C0",
+    "mediaId": "d0b3cdf5-a075-4317-97bf-ac28fed46fba"
+  },
+  "projectReadback": {
+    "protected": true,
+    "rpcId": "Zzl0ze",
+    "baselineMediaCount": 39,
+    "afterCreateReads": 1
+  },
+  "serverCompletion": {
+    "pollRpcId": "jwpduf",
+    "pollReadCount": 5,
+    "phase": "download_ready",
+    "mediaId": "d0b3cdf5-a075-4317-97bf-ac28fed46fba",
+    "observedStateCode": 3,
+    "videoBytes": 3083154,
+    "at": "2026-10-06T01:27:15.622Z"
+  },
+  "download": {
+    "at": "2026-10-06T01:27:15.657Z",
+    "method": "GET",
+    "host": "flow-content.google",
+    "path": "/video/d0b3cdf5-a075-4317-97bf-ac28fed46fba",
+    "httpStatus": 200,
+    "mime": "video/mp4",
+    "state": "downloaded",
+    "journalId": "9f65d593-6616-44e5-99c1-d1f32bb53644",
+    "bytes": 3083154,
+    "createRetries": 0
+  },
+  "artifacts": [
+    {
+      "name": "flow-maintained-cli-blue-bird-8s-native720.mp4",
+      "bytes": 3083154,
+      "sha256": "e901450ea307bdcfa8506bf4470695d642a07eef0bd76f208b43960031b4f1bf",
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "seconds": 8,
+      "fps": 24,
+      "frames": 192
+    },
+    {
+      "name": "flow-maintained-cli-blue-bird-8s-480p.mp4",
+      "bytes": 1373017,
+      "sha256": "5e08191659c4475421f2f75ae21a2a73a8944223dfcad0b92689f589c90d91d6",
+      "codec": "h264",
+      "width": 854,
+      "height": 480,
+      "seconds": 8,
+      "fps": 24,
+      "frames": 192
+    }
+  ],
+  "requested480pIsLocalConversionOfNative720p": true,
+  "verification": {
+    "mp4SignaturesValidatedByClient": true,
+    "full480pDecodePassed": true,
+    "visualFrameInspection": "passed",
+    "visualFrameInspected": true,
+    "visualFrameMatchesPrompt": true
+  },
+  "rootCausesFixed": [
+    "ResourceLoader native response metadata compatibility",
+    "Shared frame message source/origin bookkeeping",
+    "Observed default Node HTTPS agent accepted while custom/proxy/TLS-weak agents remain blocked"
+  ],
+  "timeouts": {
+    "issuerOverallMs": 90000,
+    "sdkExecuteMs": 45000,
+    "dpapiHelperMs": 120000
+  },
+  "historicalAttemptsBeforeSuccess": {
+    "flowCreateAttempts": 0,
+    "scope": "Earlier maintained CLI startup/worker failures; isolated earlier yellow-boat generation remains separately documented"
+  }
+}

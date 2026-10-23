@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "observedAt": "2026-09-27T08:42:57.847Z",
+  "scope": {
+    "service": "LinkPrice Affiliate Center",
+    "operation": "active CPS merchant catalog",
+    "origin": "https://api.linkprice.com",
+    "browserUsed": false
+  },
+  "contract": {
+    "method": "PUT",
+    "path": "/svc/query",
+    "ormKey": "dc_lpop/tmerchant/v1/GetMerchants",
+    "filterFields": [
+      "hidden_flag",
+      "max_pgm_std_end_date",
+      "is_cps",
+      "orderby"
+    ],
+    "responseMime": "text/html",
+    "bodyFormat": "NDJSON"
+  },
+  "result": {
+    "httpStatus": 200,
+    "kind": "cps",
+    "recordCount": 112,
+    "distinctMerchantIds": 112,
+    "siteUrlCount": 112,
+    "distinctSiteUrlHosts": 111,
+    "duplicateHostGroups": 1
+  },
+  "repeatReplay": {
+    "checkedAt": "2026-09-27T08:44:59.773Z",
+    "httpStatus": 200,
+    "recordCount": 112,
+    "distinctMerchantIds": 112,
+    "browserUsed": false
+  },
+  "capabilityReceipt": {
+    "captured": true,
+    "clientExists": true,
+    "credentialPropagated": true,
+    "browserRemnantsInRecurringRead": false,
+    "liveReplay": true,
+    "allMerchantSubscriptionStatusesQueried": false,
+    "merchantApplicationsSent": false
+  },
+  "notes": [
+    "The list response contains all 112 active CPS rows at this observation time; counts may change.",
+    "Per-site subscription status is a separate GetSubscript operation. The cps CLI can retrieve the full catalog and batch statuses for an explicitly selected affiliateId.",
+    "Tracking URLs are locally constructed only after the selected affiliate site is confirmed as owner and the merchant status is APR.",
+    "The same site_url host appears for two merchant IDs; dynamic product-host matching fails closed for that ambiguous domain unless an explicit override exists."
+  ]
+}

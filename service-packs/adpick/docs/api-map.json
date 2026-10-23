@@ -1,0 +1,301 @@
+{
+  "root": "https://www.adpick.co.kr/?ac=dashboard",
+  "observed": "2026-10-12",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "runtime env ADPICK_COOKIE or login response cookieHeader; not a broker",
+    "live_replay": "partial"
+  },
+  "session": {
+    "login": "POST /?ac=proc&tac=login fields nurl, memid, mempwd, captcha_str, loginChk=on",
+    "successBody": "script location.replace /?ac=main",
+    "captcha": "GET /apis/captcha.php image/jpeg cookie ADPICK_CAPTCHA",
+    "persistence": "loginChk=on set a host cookie whose Expires was 365 days ahead. PODGATE_D1 and PODGATE_S were 3 days. ADPICK_LOGIN_EVENT was a session cookie. No refresh URL was present in the shopping, search, link, or report scripts.",
+    "probe": "GET /?ac=dashboard contains 로그아웃 and not the login form",
+    "renewal": "probe then, only when the login form returns, a new captcha plus the same login POST. An expired session was not separately forced, so recovery after expiry is unverified."
+  },
+  "operations": [
+    {
+      "name": "session",
+      "method": "GET",
+      "path": "/?ac=dashboard",
+      "mode": "pure_http",
+      "state": "replay_verified"
+    },
+    {
+      "name": "emailLogin",
+      "method": "POST",
+      "path": "/?ac=proc&tac=login",
+      "mode": "pure_http",
+      "state": "replay_verified",
+      "note": "captcha digits are a user input"
+    },
+    {
+      "name": "googleAuthorize",
+      "method": "GET",
+      "path": "accounts.google.com/o/oauth2/auth",
+      "mode": "browser_automation",
+      "state": "request_observed"
+    },
+    {
+      "name": "googleCallback",
+      "method": "GET",
+      "path": "/apis/sns-callback.php",
+      "mode": "pure_http",
+      "state": "failure_replay_verified"
+    },
+    {
+      "name": "malls",
+      "method": "GET",
+      "path": "/apis/shopping.php",
+      "query": [
+        "md=mall_list"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "categories",
+      "method": "GET",
+      "path": "/apis/shopping.php",
+      "query": [
+        "md=get_categorys"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "keywords",
+      "method": "GET",
+      "path": "/apis/shopping.php",
+      "query": [
+        "md=search_keyword_list"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "recommend",
+      "method": "GET",
+      "path": "/apis/shopping.php",
+      "query": [
+        "md=recommend_item"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "searchProducts",
+      "method": "POST",
+      "path": "/apis/shopping_search.php",
+      "fields": [
+        "md=search",
+        "md=get_search_result_list",
+        "search_word",
+        "sort",
+        "page",
+        "offers"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "coupangSearch",
+      "method": "GET",
+      "path": "/apis/shopping_coupang.php",
+      "query": [
+        "md=list",
+        "keyword",
+        "page"
+      ],
+      "state": "replay_verified",
+      "note": "keyword 텀블러 returned total_cnt 0"
+    },
+    {
+      "name": "campaigns",
+      "method": "GET",
+      "path": "/?ac=offer&tac=campaign",
+      "query": [
+        "fword",
+        "admenu"
+      ],
+      "state": "replay_verified",
+      "note": "HTML cards, not JSON. Default page parsed 12 cards. fword 쇼핑 parsed 1 card."
+    },
+    {
+      "name": "checkProductUrl",
+      "method": "GET",
+      "path": "/apis/shopping.php",
+      "query": [
+        "md=domain_check_mall",
+        "product_url"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "createProductLinks",
+      "method": "POST",
+      "path": "/apis/shopping.php",
+      "fields": [
+        "md=makeMultiProducturl",
+        "urls"
+      ],
+      "poll": "md=makeMultiProducturlList&time",
+      "state": "replay_verified"
+    },
+    {
+      "name": "createMallLink",
+      "method": "GET",
+      "path": "/apis/shopping.php",
+      "query": [
+        "md=getSlink",
+        "offer"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "links",
+      "method": "GET",
+      "path": "/apis/shopping.php",
+      "query": [
+        "md=link_list"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "reportSummary",
+      "method": "GET",
+      "path": "/apis/shopping_report.php",
+      "query": [
+        "md=get_summary_data"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "sdkOffers",
+      "method": "GET",
+      "path": "https://adpick.co.kr/apis/offers.php",
+      "query": [
+        "affid",
+        "os",
+        "adtype",
+        "category",
+        "order"
+      ],
+      "state": "replay_verified",
+      "note": "order=randone returned one campaign"
+    },
+    {
+      "name": "sdkShopping",
+      "method": "GET",
+      "path": "https://adpick.co.kr/apis/sdk_shopping.php",
+      "query": [
+        "affid"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "sdkHotdeal",
+      "method": "GET",
+      "path": "https://adpick.co.kr/apis/sdk_shopping_hotdeal.php",
+      "query": [
+        "affid"
+      ],
+      "state": "replay_verified"
+    },
+    {
+      "name": "sdkProfitLink",
+      "method": "GET",
+      "path": "https://deg.kr/cps/click.php",
+      "query": [
+        "apikey",
+        "url",
+        "print",
+        "forceredirect"
+      ],
+      "state": "replay_verified",
+      "note": "print=1 returned a link field for a product URL from the shopping SDK. Page offer is not sent. redirect=1 follows only bitl.bz or deg.kr and refuses a location that still contains apikey.",
+      "vercelMethod": "POST",
+      "vercelPath": "/api/sdk-link",
+      "vercelQueryKeysAllowed": false
+    },
+    {
+      "name": "banners",
+      "method": "GET",
+      "path": "/?ac=tools&tac=banner",
+      "state": "replay_verified",
+      "note": "readback after one create showed one row"
+    },
+    {
+      "name": "createBanner",
+      "method": "POST",
+      "path": "/?ac=tools&tac=banner&md=save",
+      "fields": [
+        "url",
+        "offer"
+      ],
+      "state": "replay_verified",
+      "note": "one save with offer=rand returned a list row whose link host was deg.kr"
+    },
+    {
+      "name": "saveShopbox",
+      "method": "POST",
+      "path": "/apis/shopbox.php",
+      "fields": [
+        "md=save",
+        "title",
+        "description",
+        "category",
+        "listnum",
+        "style"
+      ],
+      "state": "replay_verified",
+      "note": "ret success. Page URL host deg.kr path /shopbox/{affid}"
+    },
+    {
+      "name": "saveAppbox",
+      "method": "POST",
+      "path": "/apis/appbox.php",
+      "fields": [
+        "md=save",
+        "category",
+        "listnum",
+        "listorder"
+      ],
+      "state": "replay_verified",
+      "note": "ret success. Page URL host deg.kr path /appbox/{affid}"
+    },
+    {
+      "name": "nativeSource",
+      "method": "GET",
+      "path": "/nativeAD/ad.php",
+      "query": [
+        "affid",
+        "bannerType",
+        "limit"
+      ],
+      "state": "request_observed",
+      "note": "snippet is assembled locally from ADPICK_AFFID. No save request exists."
+    },
+    {
+      "name": "media",
+      "method": "GET",
+      "path": "/?ac=tools&tac=media",
+      "query": [
+        "mtype"
+      ],
+      "state": "replay_verified",
+      "note": "listed 5 media. Delete and bookmark were not called. Facebook connect opens myranky."
+    }
+  ],
+  "notInvoked": [
+    "withdraw",
+    "product delete or hide",
+    "chat join, leave, reject",
+    "offerwall webhook",
+    "group create"
+  ],
+  "vercel": {
+    "serviceTokenRequired": true,
+    "capabilitiesRoute": "GET /api/capabilities",
+    "protectedCloudReplay": "pending deployment",
+    "credentialValuesStored": false
+  }
+}

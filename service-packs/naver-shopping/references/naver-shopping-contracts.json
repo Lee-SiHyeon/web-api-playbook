@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "provider": "naver-shopping",
+  "observedOn": "2026-09-30",
+  "overallState": "partial",
+  "runtimeRoute": "independent_http_only",
+  "normalExecutionBrowserRequired": false,
+  "defaultAuthentication": "anonymous",
+  "authenticatedReplayVerified": false,
+  "completionGatePassed": false,
+  "operations": [
+    {
+      "name": "feed",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://shopsquare.naver.com",
+        "path": "/{section}",
+        "requestHeaderFields": [
+          "Accept",
+          "RSC",
+          "Next-Url"
+        ]
+      },
+      "scope": "current_public_promotion_feed",
+      "sections": [
+        "newshopping",
+        "newmens",
+        "newbrandshop",
+        "promotion"
+      ],
+      "observedReplay": {
+        "section": "promotion",
+        "httpStatus": 200,
+        "contentType": "text/x-component",
+        "recordCount": 16,
+        "pricedRecordCount": 6
+      },
+      "limitations": [
+        "Local keyword filtering is not global product search.",
+        "Review counts are not review bodies.",
+        "Promotions are not a complete catalog."
+      ],
+      "captureSource": "document_route_and_embedded_flight",
+      "rscVariant": {
+        "browserXhrObserved": false,
+        "sourceInferred": true,
+        "independentHttpReplayVerified": true
+      },
+      "sectionReplays": [
+        {
+          "section": "promotion",
+          "httpStatus": 200,
+          "recordCount": 16,
+          "responseSha256": "bf81af01c2af1247f541699f5362b4b00d541c335d5b706f340c9d450ac6f003",
+          "status": "succeeded"
+        },
+        {
+          "section": "newmens",
+          "httpStatus": 200,
+          "recordCount": 50,
+          "responseSha256": "55d4e9c2df82624aa89220a79b1aac51714428a32d7e33a09da54073fde27605",
+          "status": "succeeded"
+        },
+        {
+          "section": "newshopping",
+          "httpStatus": 200,
+          "recordCount": 80,
+          "responseSha256": "7f47cd36a045499187e110b8e8ab37ef7c4bcf853c0c27e4759c93cc69dc263a",
+          "status": "succeeded"
+        },
+        {
+          "section": "newbrandshop",
+          "httpStatus": 200,
+          "recordCount": 10,
+          "responseSha256": "a9d2c9c31ca6b1041a9293a9115578fbf0bed1c8de63c437b2ea3cb784cb7c45",
+          "status": "succeeded"
+        }
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      }
+    },
+    {
+      "name": "integrated-search",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://search.naver.com",
+        "path": "/search.naver",
+        "queryFields": [
+          "where",
+          "query"
+        ],
+        "fixedWhere": "nexearch"
+      },
+      "scope": "first_document_integrated_search_shopping_cards",
+      "sourceContribution": "references/naver-shopping-agy-contributions.json",
+      "maximumInspectedCards": 40,
+      "sourceSchema": {
+        "productId": "shopping bridge nv_mid",
+        "title": "data-nlog-area ending outtit or itemtit",
+        "listingPriceRow": "lS3yrqWd",
+        "priceAmount": "lfETsaia",
+        "listPriceRow": "YsimyBy5",
+        "conditionalCouponRow": "hx15sCPH",
+        "rating": "mlLzqQ3t",
+        "reviewCountDisplay": "zZrIETI9"
+      },
+      "localFilters": [
+        "includeRegex",
+        "excludeRegex",
+        "minPriceKrw",
+        "maxPriceKrw"
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      },
+      "independentReplays": [
+        {
+          "query": "노트북",
+          "httpStatus": 200,
+          "inspectedCount": 3,
+          "matchedCount": 2,
+          "responseSha256": "f2d626e67a017fe0565f34792b7ab9d99b111a8ae8931584a95c9f099d2151e8",
+          "code": null
+        },
+        {
+          "query": "맥북프로",
+          "httpStatus": 200,
+          "inspectedCount": 5,
+          "matchedCount": 5,
+          "responseSha256": "8dded5851ba8cced0ac9e37947a86e72e4e2f689512d54532ef6a1c9ae6d471a",
+          "code": null
+        }
+      ],
+      "limitations": [
+        "HTTP HTML contract; not native shopping JSON search.",
+        "Source order is not search/popularity rank.",
+        "Only observed cards are inspected and filtered; not a complete catalog.",
+        "Listed price, list price and conditional coupon price stay separate.",
+        "Abbreviated review counts stay approximate; review bodies are not included.",
+        "Compared options, coupon eligibility, shipping and final checkout price are not verified.",
+        "HTTP failure or unknown card structure is an error, not empty zero-price output."
+      ]
+    },
+    {
+      "name": "search",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "{store_origin}",
+        "path": "/{store}/search",
+        "queryFields": [
+          "q"
+        ]
+      },
+      "scope": "single_naver_store",
+      "browserObserved": {
+        "httpStatus": 200,
+        "statePath": "keywordSearch.simpleProducts",
+        "query": "쿠션",
+        "recordCount": 27
+      },
+      "independentReplay": {
+        "httpStatus": 429,
+        "errorCode": "RATE_LIMITED"
+      },
+      "limitations": [
+        "First document page only; paging and sorting are not claimed."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "anonymous_only; authorized_session_propagation_not_implemented",
+        "live_replay": false
+      }
+    },
+    {
+      "name": "product",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "{store_origin}",
+        "path": "/n/v2/channels/{channelUid}/products/{channelProductId}",
+        "queryFields": [
+          "withWindow"
+        ]
+      },
+      "browserObserved": {
+        "httpStatus": 200,
+        "responseFields": [
+          "id",
+          "productNo",
+          "name",
+          "channel",
+          "salePrice",
+          "benefitsView",
+          "reviewAmount",
+          "productDeliveryInfo"
+        ]
+      },
+      "independentReplay": {
+        "httpStatus": 429,
+        "errorCode": "RATE_LIMITED",
+        "auditReference": "references/naver-store-429-audit-20260930.json",
+        "verifiedFailureStage": "direct_product_json_request_and_canonical_document"
+      },
+      "contextResolution": {
+        "channelUid": "document.__PRELOADED_STATE__.channel.channelUid",
+        "originProductNo": "response.productNo",
+        "checkoutMerchantNo": "response.channel.naverPaySellerNo"
+      },
+      "limitations": [
+        "Listed prices are not final payable prices.",
+        "Option, membership, coupon and shipping eligibility require separate verification.",
+        "Earlier browser success without dynamic headers was context-specific. Latest HERA7195971829 UI-header removal: lct absent204, restored200; lct alone among the three dynamic fields200. Actual current SDK context replay in native Node fetch/http2 remains429; no API-only success."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "anonymous_only; authorized_session_propagation_not_implemented",
+        "live_replay": false
+      },
+      "latestHeaderControlReference": "references/naver-store-new-hypotheses-20260930.json"
+    },
+    {
+      "name": "reviews",
+      "kind": "read",
+      "endpoint": {
+        "method": "POST",
+        "origin": "{store_origin}",
+        "path": "/n/v1/contents/reviews/query-pages",
+        "bodyFields": [
+          "checkoutMerchantNo",
+          "originProductNo",
+          "page",
+          "pageSize",
+          "reviewSearchSortType"
+        ]
+      },
+      "browserObserved": {
+        "httpStatus": 200,
+        "page": 1,
+        "pageSize": 20,
+        "recordCount": 20,
+        "sort": "REVIEW_RANKING",
+        "responseFields": [
+          "contents",
+          "page",
+          "size",
+          "totalElements",
+          "totalPages",
+          "sort",
+          "first",
+          "last"
+        ]
+      },
+      "independentReplay": {
+        "httpStatus": 429,
+        "errorCode": "RATE_LIMITED",
+        "auditReference": "references/naver-store-429-audit-20260930.json",
+        "verifiedFailureStage": "direct_observed_review_post"
+      },
+      "selection": "all_reviews",
+      "writerAndOrderFieldsReturned": false,
+      "limitations": [
+        "Browser capture success does not establish authenticated independent replay.",
+        "STORE_PICK is a different, seller-selected endpoint and is not used as all reviews.",
+        "Earlier review browser200 without cookies/dynamic headers is a historical observation. Latest product lct result is not generalized to reviews; current review SDK requirements were not rechecked."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "anonymous_only; authorized_session_propagation_not_implemented",
+        "live_replay": false
+      }
+    },
+    {
+      "name": "product-page",
+      "kind": "read",
+      "scope": "single_brand_product_document_snapshot",
+      "nature": "SSR_DOCUMENT",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://brand.naver.com",
+        "path": "/{store}/products/{productId}"
+      },
+      "browserXhrObserved": false,
+      "independentReplayVerified": true,
+      "sourceStatePath": "__PRELOADED_STATE__.simpleProductForDetailPage",
+      "transport": {
+        "library": "curl_cffi",
+        "version": "0.16.3",
+        "profile": "chrome150",
+        "tlsHttp2ProfileEmulation": true,
+        "browserRequired": false,
+        "browserStateRequired": false
+      },
+      "observedReplay": {
+        "brands": [
+          "hera",
+          "dyson",
+          "nongshim",
+          "innisfree"
+        ],
+        "products": 9,
+        "httpStatus": 200,
+        "priceCount": 9,
+        "record": "references/naver-product-page-live-20260930.json"
+      },
+      "limitations": [
+        "HTML document state, not product JSON XHR.",
+        "Review count/rating aggregates only; no review bodies.",
+        "Displayed price only, not final checkout, option/coupon eligibility, or historical/global lowest price.",
+        "Current tested sample and transport profile; future availability is not guaranteed."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_document_read",
+        "live_replay": true
+      }
+    }
+  ],
+  "provenance": "Only curated field names, route templates and verification outcomes are stored. No raw browser bodies, cookies, security-header values, reviewer identities or order identifiers.",
+  "supportedStoreOrigins": [
+    "https://brand.naver.com"
+  ],
+  "latestStoreAccessAudit": "references/naver-store-429-audit-20260930.json",
+  "latestStoreHypothesisVerification": "references/naver-store-new-hypotheses-20260930.json",
+  "earlierStoreHypothesisVerification": "references/naver-store-hypotheses-20260930.json",
+  "latestBrandDocumentVerification": "references/naver-product-page-live-20260930.json",
+  "latestTransportFollowup": "references/naver-brand-transport-followup-20260930.json"
+}

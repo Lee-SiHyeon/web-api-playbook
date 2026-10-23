@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_upload_mime_diagnostic",
+  "recordedAt": "2026-10-06T06:19:55.868533+00:00",
+  "firstPartySource": {
+    "bundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+    "bundleBytes": 3057476,
+    "observedLive": true,
+    "sourceSymbols": [
+      "Vtc",
+      "Utc",
+      "Xtc",
+      "_.VXb",
+      "_.Ay"
+    ],
+    "selectedFileMetadataMimeRule": "file.type || _.Ay(file.name)",
+    "extensionMimeRule": "_.Ay maps .txt to text/plain in the observed extension table",
+    "uploadTransportBody": "the File object is passed to the uploader transport",
+    "transferHeaderRule": "oF.Lsc reuses its a.Ja transport-header map for the resumable upload state machine; the live Hsc.send wire capture establishes application/x-www-form-urlencoded as the effective continuation Content-Type. File.type remains the separate attachment metadata MIME.",
+    "fileRewrapRule": "the uploader wraps the selected blob as new File([blob], name, {type: blob.type}) before Vtc passes the File to kyb",
+    "uploaderMetadataMimeRule": "Utc records the selected File.type; Xtc uses File.type or the observed filename extension fallback for the returned MIME metadata",
+    "sourceTrace": {
+      "uploaderStateMachine": "oF.Lsc",
+      "transportHeaderMap": "a.Ja",
+      "requestTransport": "Hsc.send",
+      "contentTypeEffectiveValue": "application/x-www-form-urlencoded",
+      "fileMetadataMimeRule": "File.type || _.Ay(file.name)",
+      "txtFallbackMime": "text/plain"
+    }
+  },
+  "selectedFileTypeEvidence": {
+    "receipt": "gemini-attachment-selected-file-mime-2026-10-06.json",
+    "fileBytes": 12,
+    "fileMimeType": "text/plain",
+    "sdkFileTypeReadCount": 11,
+    "allSdkFileTypeReadsMatchedSelectedFile": true,
+    "uploadStartAttemptsIntercepted": 3,
+    "browserUploadDispatchCount": 0
+  },
+  "failedFinalAttempt": {
+    "receipt": "gemini-attachment-mime-final-chain-2026-10-06.json",
+    "callerIntent": "gemini-attachment-mime-final-20261006-v1",
+    "startHttpStatus": 200,
+    "transferDispatchCount": 0,
+    "queryHttpStatus": 200,
+    "queryUploadStatus": "active",
+    "querySizeReceived": 0,
+    "errorCode": "ATTACHMENT_UPLOAD_CONTINUATION_MIME_MISMATCH",
+    "nativeTransferMimeTypePersisted": false,
+    "sameIntentRetryPermitted": false
+  },
+  "diagnosticConclusion": "The wire Content-Type is transport metadata and is independent of the selected file metadata MIME. The source-backed continuation header is application/x-www-form-urlencoded; the selected text file and SDK attachment metadata MIME remain text/plain. The diagnostic transfer was not dispatched; the query confirmed an active zero-byte session. The session URL was kept in memory through query, then scrubbed when the one-shot runner exited.",
+  "rawBodiesOrCredentialsPersisted": false,
+  "rawSelectedFileContentsPersisted": false,
+  "browserOrContextClosed": false,
+  "freshDiagnosticAttempt": {
+    "receipt": "gemini-attachment-mime-diagnostic-chain-2026-10-06.json",
+    "callerIntent": "gemini-attachment-mime-diagnostic-20261006-v1",
+    "selectedFileType": "text/plain",
+    "nativeTransferMimeType": "application/x-www-form-urlencoded",
+    "nativeContentTypeHeaderPresent": true,
+    "command": "upload, finalize",
+    "offset": "0",
+    "fileBodyBytes": 12,
+    "fileBodySha256": "972837565fad630b020a704e2f50da0f1e0de219ffeff704ec8d332c94d966d2",
+    "fileBodyMatchedSelectedFile": true,
+    "nativeHeadersIndependentOfStartHeaders": true,
+    "startHttpStatus": 200,
+    "transferDispatchCount": 0,
+    "queryHttpStatus": 200,
+    "queryUploadStatus": "active",
+    "querySizeReceived": 0,
+    "rawSessionUrlPersisted": false,
+    "sameSessionUrlRetainedAfterRunnerExit": false
+  },
+  "firstPartyAttachmentReferenceEncoder": {
+    "bundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+    "observedLiveReadOnly": true,
+    "uploadConsumerCallsite": "_.Aqc(Object.assign({}, fileReference, {Gl: contextArgument}))",
+    "sourceMapping": {
+      "VEField1": "nested dqc attachment reference",
+      "VEField2": "filename",
+      "dqcField1": "opaque upload response dh",
+      "dqcField3": "Gl context argument, not file size",
+      "dqcField4": "attachment MIME",
+      "XtcFileSize": "File.size is stored in a separate orc upload metadata object"
+    },
+    "setterTrace": {
+      "VEFileName": "_.$pc(new _.VE, filename)",
+      "dqcDh": "_.Di(new _.dqc, 1, dh)",
+      "dqcMime": "_.Di(dqc, 4, mimeType)",
+      "dqcContext": "_.Fi(dqc, 3, Gl)",
+      "uploadFileSize": "dtc(new _.orc, file.size)"
+    },
+    "v5NativeCapture": {
+      "receipt": "gemini-attachment-mime-final-v5-chain-2026-10-06.json",
+      "vePath": [
+        0,
+        3,
+        0
+      ],
+      "dqcPath": [
+        0,
+        3,
+        0,
+        0
+      ],
+      "veFilenameArrayIndex": 1,
+      "dqcArrayElementTypes": [
+        "string",
+        "number",
+        "null",
+        "string"
+      ],
+      "dqcDhArrayIndex": 0,
+      "dqcContextArrayIndex": 1,
+      "dqcMimeArrayIndex": 3,
+      "responsePayloadMatched": true,
+      "filenameMatched": true,
+      "mimeMatched": true,
+      "fileSizeOccurrenceCountInTextRequest": 0,
+      "dqcContextEquals12ByteFileSize": false,
+      "numericContextValuePersisted": false,
+      "nativeTextDispatchCount": 0,
+      "uploadQueryHttpStatus": 200,
+      "uploadQueryStatus": "final",
+      "uploadQuerySizeReceived": 12
+    },
+    "matchingPolicy": {
+      "attachmentMessageBinding": "exact unique dh, filename, and MIME within one VE filename parent",
+      "sizeEvidence": "same-session upload query must be HTTP 200/final with exact selected file size before any text dispatch",
+      "contextField": "dqc field3 Gl is normalized numeric SDK context, never compared to file byte count",
+      "rawSourceBundleOrReferencePersisted": false
+    }
+  },
+  "v3BindingObservation": {
+    "receipt": "gemini-attachment-mime-final-v3-chain-2026-10-06.json",
+    "globalExactResponsePayloadCount": 1,
+    "globalExactFilenameCount": 1,
+    "globalExactMimeCount": 1,
+    "namedUploadedFilesArrayCount": 0,
+    "sourceVeDqcCandidateCount": 0,
+    "genericCandidateCount": 2,
+    "genericCandidateShapesPersisted": false,
+    "uniqueSizeFieldCountPersisted": false,
+    "exactWireTextDispatchCount": 0,
+    "rawReferenceAndRequestWereNotPersisted": true
+  },
+  "sourceValueCorrelationMatcher": {
+    "enabledInClient": true,
+    "requiresExactResponseFilenameMimeEachOnce": true,
+    "requiresFileSizeValueWhenSourceSizeKnown": true,
+    "rejectsReferenceValuesInsideCapturedPrompt": true,
+    "doesNotRequireInventedTuplePath": true,
+    "focusedRegressionTestsAdded": true
+  },
+  "lastReadOnlySourceProbeAt": "2026-10-06T07:49:34.201257+00:00",
+  "lastSourceMappingUpdateAt": "2026-10-06T09:28:35.621137+00:00"
+}

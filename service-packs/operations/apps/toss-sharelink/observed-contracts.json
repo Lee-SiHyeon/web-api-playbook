@@ -1,0 +1,889 @@
+{
+  "version": 1,
+  "service": "toss-sharelink",
+  "observedAt": "2026-09-27T15:40:55.887Z",
+  "contracts": [
+    {
+      "operation": "subscribed",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/subscribed",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "status": "string",
+          "subscribed": "boolean"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:43.280Z"
+    },
+    {
+      "operation": "member",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/member",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "publisherId": "number",
+          "userNo": "number",
+          "bizUserNo": "number",
+          "gaNo": "number",
+          "partnerType": "string",
+          "partnerCreatedAt": "string",
+          "publisherUuid": "string"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:44.184Z"
+    },
+    {
+      "operation": "registered",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/registered",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "registered": "boolean",
+          "verificationStatus": "null",
+          "hasTemporaryEmail": "boolean",
+          "gaNo": "number"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:44.890Z"
+    },
+    {
+      "operation": "me-settlement",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/me/settlement",
+      "queryKeys": [
+        "settlementMonth",
+        "scope"
+      ],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "settlementMonth": "string",
+          "scheduledPayoutDate": "string",
+          "lastUpdatedAt": "string",
+          "settlementAmount": "number",
+          "monthlyCommission": "number",
+          "previousCarryover": "number",
+          "orderProductCount": "number",
+          "preTaxAmount": "number",
+          "incomeTax": "null",
+          "localIncomeTax": "null",
+          "vatAmount": "null",
+          "supplyAmount": "number",
+          "postTaxAmount": "number",
+          "items": [],
+          "nextCursor": "null",
+          "size": "number",
+          "totalCount": "number",
+          "hasNext": "boolean",
+          "settlementPeriod": {
+            "startDate": "string",
+            "endDate": "string"
+          },
+          "payoutStatus": "null",
+          "payoutAccount": {
+            "bankName": "string",
+            "accountNumber": "string"
+          },
+          "displayStatus": "string",
+          "holdReason": "null",
+          "consecutiveUnpaidCount": "number",
+          "expectedPayoutAmount": "number",
+          "actualPaidAmount": "null",
+          "displayAmount": "number",
+          "paidAt": "null",
+          "hasSettlementHistory": "boolean"
+        }
+      },
+      "captured": true,
+      "liveReplay": false
+    },
+    {
+      "operation": "member-detail",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/member/detail",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "publisherId": "number",
+          "userNo": "number",
+          "bizUserNo": "number",
+          "gaNo": "number",
+          "email": "string",
+          "name": "string",
+          "phoneNumber": "string",
+          "birthday": "string",
+          "gender": "string",
+          "isSubscribed": "boolean",
+          "partnerType": "string",
+          "partnerName": "string",
+          "businessRegistrationNumber": "null",
+          "settlementAccount": {
+            "bankCode": "string",
+            "bankName": "string",
+            "accountNumber": "string",
+            "accountHolderName": "string"
+          },
+          "creatorName": "null",
+          "channels": []
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:46.046Z"
+    },
+    {
+      "operation": "shopping-curation-sections",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping/sharelink/curation-sections",
+      "queryKeys": [
+        "surface",
+        "size"
+      ],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "sections": [
+            {
+              "sectionCode": "string",
+              "displayName": "string",
+              "displayDescription": "null",
+              "titleSegments": [
+                {
+                  "text": "string",
+                  "highlighted": "boolean"
+                }
+              ],
+              "tooltipMessage": "string",
+              "viewType": "string",
+              "selectedTabCode": "null",
+              "tabs": [],
+              "items": [
+                {
+                  "rank": "number",
+                  "productId": "number",
+                  "taca": {
+                    "productView": {
+                      "tacaId": "number",
+                      "tacaItemId": "number",
+                      "productId": "number",
+                      "stockId": "number",
+                      "thumbnailUrl": "string",
+                      "adImageUrl": "string",
+                      "headlineText": "null",
+                      "displayName": "string",
+                      "isSoldOut": "boolean",
+                      "status": "string",
+                      "merchantId": "number",
+                      "originalPrice": "number",
+                      "displayPrice": "number",
+                      "priceCompositionType": "string",
+                      "discountRate": "number",
+                      "couponDiscountAmount": "number",
+                      "unitPriceView": "object",
+                      "reviewScore": "number",
+                      "reviewCount": "number",
+                      "isTargetToLowestPriceCompensation": "boolean",
+                      "deliveryStartType": "string",
+                      "deliveryArrivalType": "string",
+                      "deliveryType": "string",
+                      "aiImage": "boolean",
+                      "isAdultProduct": "boolean",
+                      "isCultureDeduction": "boolean",
+                      "isSpecialProduct": "boolean",
+                      "rewardAmount": "number",
+                      "partnerMallType": "string",
+                      "partnerThumbBadgeUrl": "null",
+                      "partnerAttributes": "object"
+                    },
+                    "extraAttributes": {
+                      "categories": "array"
+                    },
+                    "tagMeta": {
+                      "flags": "array",
+                      "campaignEndAt": "string"
+                    },
+                    "heart": "null",
+                    "retargetingDetail": "null",
+                    "adsParams": "null",
+                    "params": {},
+                    "displayContext": {
+                      "pageViewCount": "number",
+                      "isLowestPriceIn30Days": "boolean"
+                    },
+                    "magazineCardTheme": "null",
+                    "activeGift": "null",
+                    "benefitTypes": [],
+                    "categoryRanking": "null",
+                    "traceKeys": {
+                      "utk": "string",
+                      "feedId": "null"
+                    }
+                  },
+                  "hasMinPrice30dBadge": "boolean",
+                  "categoryId": "null",
+                  "categoryName": "null",
+                  "linkIssueAvailability": {
+                    "available": "boolean",
+                    "reason": "null"
+                  },
+                  "accessToken": "string",
+                  "todayDeal": {
+                    "startAt": "string",
+                    "endAt": "string"
+                  }
+                }
+              ],
+              "paging": {
+                "prevCursor": "null",
+                "nextCursor": "string",
+                "totalCount": "number"
+              }
+            }
+          ],
+          "paging": {
+            "nextCursor": "null"
+          },
+          "limited": "boolean",
+          "limitStatus": "string"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:46.963Z"
+    },
+    {
+      "operation": "shopping-today-deal-items",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping/sharelink/curation-sections/{sectionCode}/items",
+      "pathParams": [
+        "sectionCode"
+      ],
+      "queryKeys": [
+        "size"
+      ],
+      "sourceQueryKeys": [
+        "tabCode",
+        "nextCursor",
+        "size"
+      ],
+      "requestHeaderNames": [
+        "Accept",
+        "Cookie"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "sectionCode": "string",
+          "displayName": "string",
+          "titleSegments": [
+            {
+              "text": "string",
+              "highlighted": "boolean"
+            }
+          ],
+          "items": [
+            {
+              "rank": "number",
+              "productId": "number",
+              "taca": {
+                "productView": {
+                  "tacaId": "number",
+                  "tacaItemId": "number",
+                  "productId": "number",
+                  "displayName": "string",
+                  "isSoldOut": "boolean",
+                  "status": "string",
+                  "originalPrice": "number",
+                  "displayPrice": "number",
+                  "priceCompositionType": "string"
+                },
+                "displayContext": "object"
+              },
+              "accessToken": "string",
+              "todayDeal": {
+                "startAt": "string",
+                "endAt": "string"
+              }
+            }
+          ],
+          "paging": {
+            "prevCursor": "null",
+            "nextCursor": "string|null",
+            "totalCount": "number"
+          },
+          "limited": "boolean",
+          "limitStatus": "string"
+        }
+      },
+      "sourceObserved": true,
+      "sourcePage": "/links/best-ranking/daily-deals?sectionCode=TODAY_DEAL",
+      "sourceModule": "daily-deals-page.tsx / curationSectionItems hook",
+      "sourcePageSize": 20,
+      "sourceCursorRule": "First pageParam is null; later pageParam comes only from the items response paging.nextCursor",
+      "captured": false,
+      "liveReplay": true,
+      "livePageProjection": {
+        "sectionCode": "TODAY_DEAL",
+        "queryKeys": [
+          "size"
+        ],
+        "itemCount": 18,
+        "hasNext": true,
+        "reportedTotalCount": 0,
+        "limited": false
+      },
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-10-06T22:31:42.897Z"
+    },
+    {
+      "operation": "first-purchase-coupon-event",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/first-purchase-coupon/event",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "isEventEnded": "boolean",
+          "eventEndAt": "null"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:47.474Z"
+    },
+    {
+      "operation": "terms-agreed-terms-ids-bulk",
+      "method": "POST",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/terms/agreed-terms-ids/bulk",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "content-type",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "userNo": "number",
+          "agreedTermsIds": [
+            "number"
+          ]
+        }
+      },
+      "captured": true,
+      "liveReplay": false
+    },
+    {
+      "operation": "me-performance",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/me/performance",
+      "queryKeys": [
+        "fromDate",
+        "toDate",
+        "size"
+      ],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "fromDate": "string",
+          "toDate": "string",
+          "summary": {
+            "clickCount": "number",
+            "soldQuantity": "number",
+            "refundedQuantity": "number",
+            "netProductAmount": "number",
+            "netPromotionCost": "number",
+            "netPaymentAmount": "number",
+            "expectedCommissionAmount": "number",
+            "confirmedCommissionAmount": "number",
+            "lastUpdatedAt": "null"
+          },
+          "items": [],
+          "totalCount": "number",
+          "size": "number",
+          "hasNext": "boolean",
+          "hasPrev": "boolean",
+          "nextCursor": "null",
+          "prevCursor": "null"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:48.276Z"
+    },
+    {
+      "operation": "me-settlement",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/me/settlement",
+      "queryKeys": [
+        "settlementMonth",
+        "size",
+        "scope"
+      ],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "settlementMonth": "string",
+          "scheduledPayoutDate": "string",
+          "lastUpdatedAt": "string",
+          "settlementAmount": "number",
+          "monthlyCommission": "number",
+          "previousCarryover": "number",
+          "orderProductCount": "number",
+          "preTaxAmount": "number",
+          "incomeTax": "null",
+          "localIncomeTax": "null",
+          "vatAmount": "null",
+          "supplyAmount": "number",
+          "postTaxAmount": "number",
+          "items": [],
+          "nextCursor": "null",
+          "size": "number",
+          "totalCount": "number",
+          "hasNext": "boolean",
+          "settlementPeriod": {
+            "startDate": "string",
+            "endDate": "string"
+          },
+          "payoutStatus": "null",
+          "payoutAccount": {
+            "bankName": "string",
+            "accountNumber": "string"
+          },
+          "displayStatus": "string",
+          "holdReason": "null",
+          "consecutiveUnpaidCount": "number",
+          "expectedPayoutAmount": "number",
+          "actualPaidAmount": "null",
+          "displayAmount": "number",
+          "paidAt": "null",
+          "hasSettlementHistory": "boolean"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:45.452Z"
+    },
+    {
+      "operation": "shopping-products-groups",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping/sharelink/products/groups",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "groups": [
+            {
+              "label": "string",
+              "paramKey": "string",
+              "items": [
+                {
+                  "id": "string",
+                  "displayName": "string"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:48.815Z"
+    },
+    {
+      "operation": "shopping-products",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping/sharelink/products",
+      "queryKeys": [
+        "size"
+      ],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "items": [
+            {
+              "taca": {
+                "productView": {
+                  "tacaId": "number",
+                  "tacaItemId": "number",
+                  "productId": "number",
+                  "stockId": "number",
+                  "thumbnailUrl": "string",
+                  "adImageUrl": "string",
+                  "headlineText": "null",
+                  "displayName": "string",
+                  "isSoldOut": "boolean",
+                  "status": "string",
+                  "merchantId": "number",
+                  "originalPrice": "number",
+                  "displayPrice": "number",
+                  "priceCompositionType": "string",
+                  "discountRate": "number",
+                  "couponDiscountAmount": "number",
+                  "unitPriceView": "null",
+                  "reviewScore": "number",
+                  "reviewCount": "number",
+                  "isTargetToLowestPriceCompensation": "boolean",
+                  "deliveryStartType": "string",
+                  "deliveryArrivalType": "string",
+                  "deliveryType": "string",
+                  "aiImage": "boolean",
+                  "isAdultProduct": "boolean",
+                  "isCultureDeduction": "boolean",
+                  "isSpecialProduct": "boolean",
+                  "rewardAmount": "number",
+                  "partnerMallType": "string",
+                  "partnerThumbBadgeUrl": "null",
+                  "partnerAttributes": {}
+                },
+                "extraAttributes": {
+                  "categories": [
+                    {
+                      "level": "number",
+                      "id": "number"
+                    }
+                  ]
+                },
+                "tagMeta": {
+                  "flags": [],
+                  "campaignEndAt": "string"
+                },
+                "heart": "null",
+                "retargetingDetail": "null",
+                "adsParams": "null",
+                "params": {},
+                "displayContext": {
+                  "pageViewCount": "number",
+                  "isLowestPriceIn30Days": "boolean"
+                },
+                "magazineCardTheme": "null",
+                "activeGift": "null",
+                "benefitTypes": [],
+                "categoryRanking": "null",
+                "traceKeys": {
+                  "utk": "string",
+                  "feedId": "null"
+                }
+              },
+              "hasMinPrice30dBadge": "boolean",
+              "categoryId": "number",
+              "categoryName": "string",
+              "linkIssueAvailability": {
+                "available": "boolean",
+                "reason": "null"
+              },
+              "accessToken": "string"
+            }
+          ],
+          "paging": {
+            "prevCursor": "null",
+            "nextCursor": "string",
+            "totalCount": "number"
+          },
+          "limited": "boolean",
+          "limitStatus": "string"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:49.432Z"
+    },
+    {
+      "operation": "shopping-issued-links",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping/sharelink/issued-links",
+      "queryKeys": [
+        "size"
+      ],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "data": [
+            {
+              "tacaItemId": "number",
+              "tacaName": "string",
+              "thumbnailUrl": "string",
+              "displayPrice": "number",
+              "commissionRate": "number",
+              "status": "string",
+              "issuedAt": "string",
+              "shortUrl": "string"
+            }
+          ],
+          "nextCursor": "null",
+          "hasNext": "boolean"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:49.873Z"
+    },
+    {
+      "operation": "me-api-credential",
+      "method": "GET",
+      "origin": "https://sharelink.toss.im",
+      "path": "/api-public/v3/shopping-growth/sharelink/me/api-credential",
+      "queryKeys": [],
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "baggage",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sentry-trace"
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "resultType": "SUCCESS",
+      "responseSchema": {
+        "resultType": "string",
+        "success": {
+          "is_issued": "boolean",
+          "client_id": "null",
+          "client_secret": "null",
+          "allowed_ips": [],
+          "publisher_uuid": "string",
+          "application_status": "string",
+          "reject_reason": "null"
+        }
+      },
+      "captured": true,
+      "liveReplay": true,
+      "replayHeaders": [
+        "Accept",
+        "Cookie"
+      ],
+      "replayedAt": "2026-09-27T15:41:50.453Z"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "recordType": "media-business-handler-source-projection",
+  "requirementId": "artifact.video.download",
+  "originalSourceRunPath": "verification/one-shot/grok-media-video-asset-readback-20261006T113108887Z-7cf78b2908bfba05.json",
+  "originalSourceRunSha256": "de4b1179a4e006ce91d76ec8c81565ca92118f9b64e3452b5ec2e4d54a2ca1c8",
+  "normalizedSourceRunPath": "verification/one-shot/grok-media-video-asset-readback-business-handler-20261006T113108887Z-7cf78b2908bfba05.json",
+  "normalizedSourceRunSha256": "75be9119e4a0165b623a3441f58ca0259985bbf101f1ffce97cc2b24a05372b8",
+  "sourceCodeSnapshotAt": "2026-10-06T11:30:57.808Z",
+  "businessHandlerCodeFiles": [
+    "src/grok-media-api.mjs",
+    "src/grok-media-asset-reader.mjs",
+    "scripts/grok_media_asset_download.py",
+    "src/runtime.mjs",
+    "src/client.mjs",
+    "src/contracts.mjs",
+    "contracts/grok-web.v1.json",
+    "src/transport.mjs",
+    "src/session.mjs",
+    "src/journal.mjs",
+    "src/nonsecret-json-store.mjs",
+    "src/protected-json-store.mjs",
+    "src/authenticated-chrome-fetch.mjs",
+    "scripts/authenticated-chrome-transport.py"
+  ],
+  "businessHandlerSnapshotSha256": "d87d0c75b258061dd1a374250cb1e18ad9490b23b3c8ee97255fe250e47a3926",
+  "toolProvenanceCodeSha256": {
+    "scripts/grok_media_video_asset_readback.mjs": "3c70fc239ee18d481fa4aec501d18bc81c537e84c2555fc84a557240eb429d43",
+    "scripts/grok_media_video_asset_readback_once.py": "9adf258dbf2febd3a71f701351de4dc1ab31f59601a14971f8f423cf5fb3c5c7",
+    "scripts/grok_media_capture_guard.py": "91088b38517e928059b3554c4291969c6caf7bbda8d81c5a8a16b0e5ed9c0104",
+    "scripts/emit-grok-media-proof.mjs": "8c24605a5efccf3d8daf50c3d5f50c0d13a9097c1d696076d04f303c1d0cd2a6",
+    "src/grok-media-proof-receipts.mjs": "11eb83389d2ab5bd4b1cea6d6eee10a4fc14ae7f9ce43d9334d98c74ffe4d8ab",
+    "src/grok-media-intent.mjs": "fe16a02b00673c66d84a817c5dda73728d00032fe326eafedbd1935146841ece",
+    "src/feature-checklist.mjs": "05992cfc94606a14bff2e4fb3bda79363b5e9f6ebf7dbf93cc8311aac71fb63a",
+    "src/cli.mjs": "6883aaa16bf5293f0e2d31eae2201eea5b46295b98fbf2cec0fe48ed20b9dec2",
+    "contracts/grok-feature-checklist.v1.json": "8b032cb46b9d4fb0f9dab39ea133aa9485fc7545b1dca1d1c2da91836e064e9b",
+    "verification/grok-media-contract-capture-2026-10-06.json": "6743034146200246f7eac64a8666f6c2726788d3e46e249d93c80fe33ba360c7"
+  },
+  "businessHandlerHashesRestamped": false,
+  "excludedToolFileCount": 10,
+  "previousCanonicalReceiptArchivePath": "verification/one-shot/media-artifact.video.download-pre-business-source-map-c928ee6bb445.json",
+  "previousCanonicalReceiptArchiveSha256": "c928ee6bb445d065572f948b3082df6953aa6338f7803e84a1342314794022c1",
+  "normalizedReceiptRetainedAt": "verification/grok-feature-live-receipts/media-artifact.video.download.json",
+  "canonicalReceiptCurrent": false,
+  "sourceDriftPaths": [
+    "contracts/grok-web.v1.json"
+  ],
+  "canonicalPreflightStatus": "incomplete",
+  "canonicalPreflightBlockers": [
+    "sourceExecution.codeSha256.contracts/grok-web.v1.json:CURRENT_SOURCE_DRIFT"
+  ],
+  "artifactBytes": 390210,
+  "artifactSha256": "f2833aa64a0016f513cc2dc3981d907ceafd546e0c782a426e8252039fd443e8",
+  "directVideoCreateJournalLinked": true
+}

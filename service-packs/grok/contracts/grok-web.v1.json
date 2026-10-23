@@ -1,0 +1,3904 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "serviceOrigin": "https://grok.com",
+  "allowedOrigins": [
+    "https://grok.com"
+  ],
+  "identityOperationId": "auth.owner.read",
+  "operations": [
+    {
+      "id": "attachment.asset.delete",
+      "kind": "submit",
+      "method": "DELETE",
+      "urlTemplate": "https://grok.com/rest/assets/{{input.assetId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "assetId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            }
+          },
+          "required": [
+            "assetId"
+          ]
+        },
+        "headers": {
+          "origin": "https://grok.com",
+          "referer": "https://grok.com/"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200,
+          204
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4096
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T02:12:58Z",
+        "requestMethod": "DELETE",
+        "requestPath": "/rest/assets/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/3hel26q5vkbwb.js",
+        "sourceSha256": "cbd84c6ccfa030f8e6d962e6d20a39242b1d3e3d54d70259f81a68aef0f12ec3",
+        "sourceFunctionName": "assetRepositoryDeleteAssetRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-attachment-upload-live-2026-10-06.json",
+        "semanticReadbackVerified": true,
+        "responseSizeRecorded": false,
+        "observedResponseSubstantive": false,
+        "responseMayBeEmptyObject": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T02:51:35.314Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": false,
+          "responseBytes": null,
+          "requestDigest": "1fb9ebe4a338394ac5dbb780b74df712bf8e3f0860f1bd6d1dc44e14dcf66a25",
+          "intentDigest": "2b9748ebf29733a987a7b997d37cc678617445e307a45f9a8778d8cd14502d25",
+          "requestHeaderNames": [
+            "cookie",
+            "origin",
+            "referer"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestHeaderNamesCaptured": false,
+          "responseFieldNamesObserved": [],
+          "responseFieldNamesComplete": false
+        }
+      },
+      "effect": "file_upload"
+    },
+    {
+      "id": "attachment.asset.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/assets/{{input.assetId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "assetId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            }
+          },
+          "required": [
+            "assetId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T02:12:58Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/assets/__grok_input_segment__",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/3hel26q5vkbwb.js",
+        "sourceSha256": "cbd84c6ccfa030f8e6d962e6d20a39242b1d3e3d54d70259f81a68aef0f12ec3",
+        "sourceFunctionName": "assetRepositoryGetAssetMetadataRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-attachment-upload-live-2026-10-06.json",
+        "firstLiveReadPermit": true
+      }
+    },
+    {
+      "id": "attachment.assets.search",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/assets",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "pageSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50
+            },
+            "pageToken": {
+              "type": "string",
+              "maxLength": 8192
+            }
+          },
+          "required": [
+            "query"
+          ]
+        },
+        "queryTemplate": {
+          "query": "{{input.query}}",
+          "pageSize": "{{input.pageSize}}",
+          "pageToken": "{{input.pageToken}}"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 1048576
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T02:12:58Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/assets",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/3hel26q5vkbwb.js",
+        "sourceSha256": "cbd84c6ccfa030f8e6d962e6d20a39242b1d3e3d54d70259f81a68aef0f12ec3",
+        "sourceFunctionName": "assetRepositoryListAssetMetadataRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-attachment-upload-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T03:00:41.229Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": false,
+          "responseBytes": 13,
+          "requestHeaderNames": [
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestDigest": "00bfcaf99b175811c0aab9180f297bb06a7c59577bb0c2733b952114127c01a4"
+        }
+      }
+    },
+    {
+      "id": "attachment.file-metadata.read",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/file-metadata/{{input.fileMetadataId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "fileMetadataId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            }
+          },
+          "required": [
+            "fileMetadataId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        },
+        "headers": {
+          "origin": "https://grok.com",
+          "referer": "https://grok.com/"
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T02:12:58Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/file-metadata/__grok_input_segment__",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatGetFileMetadataRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-attachment-upload-live-2026-10-06.json",
+        "firstLiveReadPermit": true
+      }
+    },
+    {
+      "id": "attachment.upload.abort",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/upload-file-v2/abort",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "uploadId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            }
+          },
+          "required": [
+            "uploadId"
+          ]
+        },
+        "bodyTemplate": {
+          "uploadId": "{{input.uploadId}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "headers": {
+          "origin": "https://grok.com",
+          "referer": "https://grok.com/"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        },
+        "optionalPerActionMetadataHeaders": [
+          "x-statsig-id",
+          "x-xai-request-id"
+        ]
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T02:12:58Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/upload-file-v2/abort",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatUploadFileAbortRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-attachment-presigned-final-validation-v2-2026-10-06.json",
+        "firstLiveReplayPermit": true,
+        "nativeMiddlewareHeaderNames": [
+          "x-statsig-id",
+          "x-xai-request-id"
+        ],
+        "nativeMiddlewareValuesPersisted": false,
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": true,
+        "responseSizeRecorded": true,
+        "independentReadbackReceipt": "verification/grok-upload-abort-v2-status-readback-2026-10-06.json",
+        "responseEvidencePath": "verification/one-shot/grok-upload-abort-response-2026-10-06.json",
+        "responseEvidenceSha256": "72337ed4319bfd4f0f032c2711df68627859dfa86c2f44cacf818332b7912312",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": true,
+          "responseSha256": "a397703a09daf9054032994be41ca13831bdf50dd872c42d9457aaeb4f9f79ba",
+          "responseBytes": 44,
+          "requestDigest": "6b66eeadc5ee05104ffb09480034bf2b4120e956c6189269523d59df9630092f",
+          "intentDigest": "e16e98da39e4422382ec170186097822a897415c5f399cfe061ba05b00fea93b",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie",
+            "origin",
+            "referer"
+          ],
+          "cookieNames": [
+            "sso"
+          ]
+        }
+      },
+      "effect": "file_upload"
+    },
+    {
+      "id": "attachment.upload.direct",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/http/upload-file-v2/direct",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "multipartBodyBase64": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 22370212
+            }
+          },
+          "required": [
+            "multipartBodyBase64"
+          ]
+        },
+        "bodyTemplate": "{{input.multipartBodyBase64}}",
+        "bodyEncoding": "base64",
+        "maxBodyBytes": 16777659,
+        "streamBodyFile": true,
+        "contentType": "multipart/form-data; boundary=GrokWebAttachmentUploadV2Boundary",
+        "headers": {
+          "origin": "https://grok.com",
+          "referer": "https://grok.com/"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T02:12:58Z",
+        "requestMethod": "POST",
+        "requestPath": "/http/upload-file-v2/direct",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1e3r6boa1v4lr.js",
+        "sourceSha256": "0d8f5bd1ba17b16404c055b9fbcf854cf492e06784aaa9660753e2d9d1f2cc13",
+        "sourceFunctionName": "uploadFileV2",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-attachment-upload-live-2026-10-06.json",
+        "semanticReadbackVerified": true,
+        "responseSizeRecorded": false,
+        "observedResponseSubstantive": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T02:51:32.728Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": false,
+          "responseBytes": null,
+          "requestDigest": "bcf809fae7f3872e1e8a0e3387bc1e97c53f7a6a6720feb93a4c91a5a1a3324b",
+          "intentDigest": "90bb840f1fb0832c5495f47f8e5d870417300230571fbadee0707e76a49e9bc9",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie",
+            "origin",
+            "referer"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestHeaderNamesCaptured": false,
+          "responseJobIdObserved": true,
+          "responseFieldNamesObserved": [
+            "uploadId"
+          ],
+          "responseFieldNamesComplete": false
+        }
+      },
+      "effect": "file_upload",
+      "responseJobIdPointer": "/uploadId"
+    },
+    {
+      "id": "attachment.upload.status",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/upload-file-v2/status",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "uploadId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            }
+          },
+          "required": [
+            "uploadId"
+          ]
+        },
+        "queryTemplate": {
+          "uploadId": "{{input.uploadId}}"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T02:12:58Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/upload-file-v2/status",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatUploadFileStatusRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-upload-abort-v2-status-readback-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": false,
+          "parsedResponseDigest": "908c1ef8ab0175548608082c4fa65ca962f7806c0226d42dfc0f339bc114c191",
+          "responseBytes": 121,
+          "requestDigest": "25f5ba0da77a3dbb6afca5c598ac5ac876588d3b23d1647bda948f7de9274135",
+          "requestHeaderNames": [
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ]
+        }
+      }
+    },
+    {
+      "id": "auth.owner.read",
+      "kind": "read",
+      "role": "identity",
+      "identityJsonPointer": "/session/email",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/api/auth/session",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {},
+          "required": []
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4096
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/api/auth/session",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedRequestFieldNames": [],
+        "observedCookieNames": [
+          "sso"
+        ],
+        "observedResponseShape": [
+          "status:string",
+          "session:object",
+          "session.email:string"
+        ],
+        "capturedResponseBytes": 648,
+        "identityMatchedInMemory": true,
+        "directReplayReceipt": "verification/grok-core-http-reads-2026-10-06.json"
+      }
+    },
+    {
+      "id": "conversation.list.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "pageSize": "{{input.pageSize}}",
+          "pageToken": "{{input.pageToken}}",
+          "searchQuery": "{{input.searchQuery}}",
+          "forceElastic": "{{input.forceElastic}}",
+          "kind": "{{input.kind}}",
+          "isKidsMode": "{{input.isKidsMode}}",
+          "enableNsfw": "{{input.enableNsfw}}",
+          "includeComputer": "{{input.includeComputer}}",
+          "excludeProjects": "{{input.excludeProjects}}",
+          "filterIsStarred": "{{input.filterIsStarred}}",
+          "workspaceId": "{{input.workspaceId}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "pageSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "pageToken": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8192
+            },
+            "searchQuery": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512
+            },
+            "forceElastic": {
+              "type": "boolean"
+            },
+            "kind": {
+              "type": "string",
+              "maxLength": 128
+            },
+            "isKidsMode": {
+              "type": "boolean"
+            },
+            "enableNsfw": {
+              "type": "boolean"
+            },
+            "includeComputer": {
+              "type": "boolean"
+            },
+            "excludeProjects": {
+              "type": "boolean"
+            },
+            "filterIsStarred": {
+              "type": "boolean"
+            },
+            "workspaceId": {
+              "type": "string",
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "pageSize"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/conversations",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedRequestFieldNames": [],
+        "observedQueryKeys": [
+          "pageSize",
+          "excludeProjects",
+          "filterIsStarred",
+          "workspaceId"
+        ],
+        "observedResponseShape": [
+          "conversations:array",
+          "nextPageToken:string",
+          "textSearchMatches:array"
+        ],
+        "capturedResponseBytes": 23648,
+        "directReplayReceipt": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json",
+        "normalCliReplay": {
+          "source": "normal_cli_direct_http",
+          "observedAt": "2026-10-06T14:37:14.629Z",
+          "status": 200,
+          "ownerVerified": true,
+          "responseMime": "application/json",
+          "responseBytes": 7969,
+          "requestDigest": "81e7a2a35a3ba93803c97bdc50ab450a592005aefde4bafccd041a3cb62db87a",
+          "rawResponseDigest": "d4a0261a37cec569788817f9eed24f5d000039f8817f3dc1ecb4a9ecd5424506",
+          "responseDigestKind": "raw_http_body",
+          "sourceSnapshotBeforeSha256": "54fd4b38badfd53a355754ddad8888ba970367cee457983d943dbe97be916618",
+          "priorOperationProjectionSha256": "49a54c6ecd86b3e1d0f74ecd577a57f59f735d6c91822a2db604231e87a3a5ee",
+          "sourceProofPath": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json"
+        }
+      }
+    },
+    {
+      "id": "conversation.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations_v2/{{input.conversationId}}",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "includeTaskResult": true,
+          "includeWorkspaces": true
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/conversations_v2/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedQueryKeys": [
+          "includeTaskResult",
+          "includeWorkspaces"
+        ],
+        "observedQueryBooleans": {
+          "includeTaskResult": true,
+          "includeWorkspaces": true
+        },
+        "observedResponseShape": [
+          "conversation:object",
+          "conversation.conversationId:string",
+          "conversation.title:string"
+        ],
+        "capturedResponseBytes": 410,
+        "directReplayReceipt": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json",
+        "normalCliReplay": {
+          "source": "normal_cli_direct_http",
+          "observedAt": "2026-10-06T14:37:14.629Z",
+          "status": 200,
+          "ownerVerified": true,
+          "responseMime": "application/json",
+          "responseBytes": 425,
+          "requestDigest": "1bfa300e0f573127ca2c29485b58c05b09af9b27979edda51db85319bbc182a1",
+          "rawResponseDigest": "eb339dd6f029cddb8f0e6afa31cacaf9ab19a1c0d4a1b3e67b8370fafefbf898",
+          "responseDigestKind": "raw_http_body",
+          "sourceSnapshotBeforeSha256": "54fd4b38badfd53a355754ddad8888ba970367cee457983d943dbe97be916618",
+          "priorOperationProjectionSha256": "5bfdd3ecc49d7ea7b133b44eb592a454804447f8edbfda7b9d576cf469fbe507",
+          "sourceProofPath": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json"
+        }
+      }
+    },
+    {
+      "id": "conversation.create",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "systemPromptName": {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                "temporary": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "systemPromptName",
+                "temporary"
+              ]
+            }
+          },
+          "required": [
+            "body"
+          ]
+        },
+        "bodyTemplate": {
+          "systemPromptName": "",
+          "temporary": false
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "responseJobIdPointer": "/conversationId",
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T09:52:11.251Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatCreateConversationRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-crud-live-2026-10-06.json",
+        "firstLiveReplayPermit": true,
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T09:52:11.251Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 375,
+          "responseDigestPersisted": true,
+          "responseSha256": "dff611ed7f132da539a9728424eecca2080a99ad7f15198571e1a70119208acd",
+          "requestDigest": "1be19b45bdf469f53bd8569a969e4d9f1ddbbc76479e875bda23706853789a3f",
+          "intentDigest": "0c1247b36a5e4acd1563b54fd7e6bbf29e330846bb5bda7dfbb1e5dfcdadc978",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "responseJobIdObserved": true,
+          "responseTopLevelFieldNames": [
+            "conversationId",
+            "createTime",
+            "kind",
+            "latestAssetMetadata",
+            "mediaTypes",
+            "modifyTime",
+            "starred",
+            "systemPromptName",
+            "taskResult",
+            "temporary",
+            "title",
+            "viewerIsOwner",
+            "workspaces"
+          ]
+        }
+      },
+      "effect": "chat_write"
+    },
+    {
+      "id": "conversation.regenerate",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}/responses",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "message": "{{input.body.message}}",
+          "modelName": "{{input.body.modelName}}",
+          "parentResponseId": "{{input.body.parentResponseId}}",
+          "isRegenRequest": "{{input.body.isRegenRequest}}",
+          "skipCancelCurrentInflightRequests": "{{input.body.skipCancelCurrentInflightRequests}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "maxLength": 4000
+                },
+                "modelName": {
+                  "type": "string",
+                  "maxLength": 256
+                },
+                "parentResponseId": {
+                  "type": "string",
+                  "minLength": 16,
+                  "maxLength": 128
+                },
+                "isRegenRequest": {
+                  "type": "boolean"
+                },
+                "skipCancelCurrentInflightRequests": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "message",
+                "parentResponseId",
+                "isRegenRequest"
+              ]
+            }
+          },
+          "required": [
+            "conversationId",
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T07:44:10+09:00",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__/responses",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatAddResponseRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-regeneration-live-2026-10-06.json",
+        "firstLiveReplayPermit": true
+      },
+      "responseJobIdPointer": "/result/modelResponse/responseId",
+      "effect": "chat_write"
+    },
+    {
+      "id": "conversation.share.link.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/share_links_data/{{input.shareLinkId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "shareLinkId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            }
+          },
+          "required": [
+            "shareLinkId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 1048576
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T01:21:17Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/share_links_data/__grok_input_segment__",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatGetShareLinkRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-public-link-read-live-2026-10-06.json",
+        "firstLiveReadPermit": true
+      }
+    },
+    {
+      "id": "conversation.share.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}/sharing",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "responseId": "{{input.responseId}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "responseId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "conversationId",
+            "responseId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4096
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__/sharing",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedQueryKeys": [
+          "responseId"
+        ],
+        "observedResponseShape": [
+          "workspaceSeedEligible:boolean",
+          "workspaceSeedIneligibleReason:string"
+        ],
+        "capturedResponseBytes": 111,
+        "directReplayReceipt": "verification/grok-core-http-reads-2026-10-06.json"
+      }
+    },
+    {
+      "id": "conversation.share.revoke",
+      "kind": "submit",
+      "method": "DELETE",
+      "urlTemplate": "https://grok.com/rest/app-chat/share_links/{{input.shareLinkId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "shareLinkId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 512
+            }
+          },
+          "required": [
+            "shareLinkId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200,
+          204
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4096
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T01:21:17Z",
+        "requestMethod": "DELETE",
+        "requestPath": "/rest/app-chat/share_links/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatDeleteShareLinkRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/one-shot/grok-neutral-fast-sharing-reconcile-revoke-2026-10-06.json",
+        "firstLiveReplayPermit": true,
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": false,
+        "responseMayBeEmptyObject": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T11:53:45.888Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": true,
+          "responseBytes": 2,
+          "responseSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "requestDigest": "9529806063329ca7715dc633eef5d546bf458d35b656bc78bf58729f4f4ec48b",
+          "intentDigest": "e970204a97ec053e37d922565eb906a0fdede4fab7e7a72799e3d33d81d8835f",
+          "requestHeaderNames": [
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ]
+        },
+        "identifierContractReference": "contracts/grok-sharing-identifiers-fragment-2026-10-06.json"
+      },
+      "effect": "chat_write"
+    },
+    {
+      "id": "conversation.share.set",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}/share",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "responseId": "{{input.body.responseId}}",
+          "allowIndexing": "{{input.body.allowIndexing}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "responseId": {
+                  "type": "string",
+                  "minLength": 16,
+                  "maxLength": 128
+                },
+                "allowIndexing": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "responseId",
+                "allowIndexing"
+              ]
+            }
+          },
+          "required": [
+            "conversationId",
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 16384
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T01:21:17Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__/share",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatShareConversationRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/one-shot/grok-neutral-fast-sharing-reconcile-revoke-2026-10-06.json",
+        "firstLiveReplayPermit": true,
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T11:37:59.165Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": true,
+          "responseBytes": 239,
+          "responseSha256": "33276efbe0776812cca5f7961afafe8a0e3571ecb060e78600205a3dc68fcd1f",
+          "requestDigest": "b449840f5c57d0af82a43c9713325c85f1fcaf38b72cbb93e0da116c96bf7679",
+          "intentDigest": "6230b4b680afb5f31c8f395dea33be3fa1ecaf3aa5b3879f3f692266ebc748de",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ]
+        },
+        "identifierContractReference": "contracts/grok-sharing-identifiers-fragment-2026-10-06.json"
+      },
+      "effect": "chat_write"
+    },
+    {
+      "id": "conversation.soft-delete",
+      "kind": "submit",
+      "method": "DELETE",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/soft/{{input.conversationId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T09:52:11.251Z",
+        "requestMethod": "DELETE",
+        "requestPath": "/rest/app-chat/conversations/soft/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0uf56-pwxogcp.js",
+        "sourceSha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a",
+        "sourceFunctionName": "chatSoftDeleteConversationRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-crud-live-2026-10-06.json",
+        "firstLiveReplayPermit": true,
+        "responseBytes": 2,
+        "observedResponseShape": [
+          "empty-object:possible"
+        ],
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": false,
+        "observedAttemptCount": 1,
+        "responseMayBeEmptyObject": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T09:52:11.251Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 2,
+          "responseDigestPersisted": true,
+          "responseSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "requestDigest": "f5bf0372b4699b0180b934072470f1d6358e2840a60ceb6e2332bf63ec147bd0",
+          "intentDigest": "c2a7f9796f95c4820e1ee491d389f122fdefe9877d7e2aad1c2ba5e15e515638",
+          "requestHeaderNames": [
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "responseTopLevelFieldNames": [],
+          "semanticReadback": {
+            "conversationAbsent": true,
+            "otherConversationsUnchanged": true,
+            "completeListReadback": true
+          }
+        }
+      },
+      "effect": "chat_write"
+    },
+    {
+      "id": "conversation.deleted.list",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/deleted",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "pageSize": "{{input.pageSize}}",
+          "pageToken": "{{input.pageToken}}",
+          "workspaceId": "{{input.workspaceId}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "pageSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "pageToken": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8192
+            },
+            "workspaceId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": []
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T15:37:10.904817Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/conversations/deleted",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatListSoftDeletedConversationsRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-restore-live-2026-10-07.json",
+        "firstLiveReadPermit": true
+      }
+    },
+    {
+      "id": "conversation.restore",
+      "kind": "submit",
+      "effect": "chat_write",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/restore",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "conversationId": "{{input.body.conversationId}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "conversationId": {
+                  "type": "string",
+                  "minLength": 16,
+                  "maxLength": 128
+                }
+              },
+              "required": [
+                "conversationId"
+              ]
+            }
+          },
+          "required": [
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200,
+          204
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T15:37:10.904817Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations/restore",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatRestoreSoftDeletedConversationRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-restore-live-2026-10-07.json",
+        "firstLiveReplayPermit": true
+      }
+    },
+    {
+      "id": "conversation.update",
+      "kind": "submit",
+      "method": "PUT",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "title": "{{input.body.title}}",
+          "starred": "{{input.body.starred}}",
+          "botAgentId": "{{input.body.botAgentId}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "starred": {
+                  "type": "boolean"
+                },
+                "botAgentId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                }
+              },
+              "required": []
+            }
+          },
+          "required": [
+            "conversationId",
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T09:52:11.251Z",
+        "requestMethod": "PUT",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatUpdateConversationRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-crud-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T09:52:11.251Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 375,
+          "responseDigestPersisted": true,
+          "responseSha256": "35443648d12eabcdaa2fd9f97be39d048010ac9f29c3d27f9c446d8feed56bcb",
+          "requestDigest": "792ef1b55c64e9131c402fc6bc4ad99c948fa64c86990d8f3febfa9420127d77",
+          "intentDigest": "e8a0622c47e6bdd913801c56fe5b829ebe1225af682aae62f96558d62d53ad65",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "responseTopLevelFieldNames": [
+            "conversationId",
+            "createTime",
+            "kind",
+            "latestAssetMetadata",
+            "mediaTypes",
+            "modifyTime",
+            "starred",
+            "systemPromptName",
+            "taskResult",
+            "temporary",
+            "title",
+            "workspaces"
+          ]
+        },
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": true
+      },
+      "responseJobIdPointer": "/conversationId",
+      "effect": "chat_write"
+    },
+    {
+      "id": "history.load-responses",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}/load-responses",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "responseIds": "{{input.responseIds}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "responseIds": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 500,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              }
+            }
+          },
+          "required": [
+            "conversationId",
+            "responseIds"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 16777216
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__/load-responses",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedRequestFieldNames": [
+          "responseIds"
+        ],
+        "observedResponseShape": [
+          "responses:array",
+          "responses[].responseId:string",
+          "responses[].message:string",
+          "responses[].sender:string"
+        ],
+        "capturedResponseBytes": 1761466,
+        "directReplayReceipt": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json",
+        "normalCliReplay": {
+          "source": "normal_cli_direct_http",
+          "observedAt": "2026-10-06T14:37:14.629Z",
+          "status": 200,
+          "ownerVerified": true,
+          "responseMime": "application/json",
+          "responseBytes": 3096,
+          "requestDigest": "f9431d13db783c426a543c118fd026cda1d42f2208d7e46f2486d152dae0eb98",
+          "rawResponseDigest": "78e224432fbe29d374bac325712883a4da8646786dd2c10829818763db3982df",
+          "responseDigestKind": "raw_http_body",
+          "sourceSnapshotBeforeSha256": "54fd4b38badfd53a355754ddad8888ba970367cee457983d943dbe97be916618",
+          "priorOperationProjectionSha256": "136f5575bef071496798eb08802bc4bd22526abde984119d4a6b26fc5db21e21",
+          "sourceProofPath": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json"
+        }
+      }
+    },
+    {
+      "id": "history.response-nodes",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}/response-node",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "includeThreads": "{{input.includeThreads}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "includeThreads": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__/response-node",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedResponseShape": [
+          "responseNodes:array",
+          "inflightResponses:array",
+          "responseNodes[].responseId:string",
+          "responseNodes[].sender:string"
+        ],
+        "capturedResponseBytes": 2127,
+        "directReplayReceipt": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json",
+        "normalCliReplay": {
+          "source": "normal_cli_direct_http",
+          "observedAt": "2026-10-06T14:37:14.629Z",
+          "status": 200,
+          "ownerVerified": true,
+          "responseMime": "application/json",
+          "responseBytes": 310,
+          "requestDigest": "9d50188b6df23fa29fbd29db95ab0f5d10e35963ed0a6843ed8a514d45dfa6ba",
+          "rawResponseDigest": "02ba953047059a2ee901757e3be96ebb3191b960d1019d0e449c6c70a9fcab67",
+          "responseDigestKind": "raw_http_body",
+          "sourceSnapshotBeforeSha256": "54fd4b38badfd53a355754ddad8888ba970367cee457983d943dbe97be916618",
+          "priorOperationProjectionSha256": "a9d1308914146350f173edc659a4f4b2810f1a22d14531e2acd5023ac8b46e37",
+          "sourceProofPath": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r6.json"
+        }
+      }
+    },
+    {
+      "id": "history.task-responses",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/tasks/responses/{{input.conversationId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/tasks/responses/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedResponseShape": [
+          "taskIdWithResponseIds:array"
+        ],
+        "capturedResponseBytes": 28,
+        "directReplayReceipt": "verification/grok-conversations-live-reads-2026-10-06.json"
+      }
+    },
+    {
+      "id": "media.assets.list",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/assets",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "pageToken": {
+              "type": "string",
+              "maxLength": 8192
+            }
+          },
+          "required": []
+        },
+        "queryTemplate": {
+          "includeImagineFiles": "true",
+          "isLatest": "true",
+          "orderBy": "ORDER_BY_CREATE_TIME",
+          "pageSize": "24",
+          "source": "SOURCE_ANY",
+          "pageToken": "{{input.pageToken}}"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06",
+        "requestMethod": "GET",
+        "requestPath": "/rest/assets",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "queryFieldNames": [
+          "includeImagineFiles",
+          "isLatest",
+          "orderBy",
+          "pageSize",
+          "pageToken",
+          "source"
+        ],
+        "observedInitialQuery": {
+          "includeImagineFiles": "true",
+          "isLatest": "true",
+          "orderBy": "ORDER_BY_CREATE_TIME",
+          "pageSize": "24",
+          "source": "SOURCE_ANY"
+        },
+        "pageTokenValuePersisted": false,
+        "responseShape": {
+          "assets": {
+            "type": "array",
+            "observedPageSize": 24,
+            "itemFieldNames": [
+              "assetId",
+              "auxKeys",
+              "createTime",
+              "fileSource",
+              "height",
+              "inlineStatus",
+              "isDeleted",
+              "isLatest",
+              "isModelGenerated",
+              "isPublic",
+              "isRootAssetCreatedByModel",
+              "mimeType",
+              "name",
+              "ownerUserId",
+              "previewImageKey",
+              "rRated",
+              "rootAssetSourceConversationId",
+              "sharedWithTeam",
+              "sharedWithUserIds",
+              "sizeBytes",
+              "sourceConversationId",
+              "summary",
+              "thumbhash",
+              "updateTime",
+              "width"
+            ]
+          },
+          "nextPageToken": "string"
+        },
+        "privateValuesPersisted": false,
+        "directReplayVerified": false
+      }
+    },
+    {
+      "id": "media.imagine.quota",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/media/imagine/quota_info",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {},
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06",
+        "requestMethod": "POST",
+        "requestPath": "/rest/media/imagine/quota_info",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "requestFieldNames": [],
+        "responseShape": {
+          "image": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "imagePro": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "imageEdit": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "video": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          },
+          "video720p": {
+            "available": "boolean",
+            "windowSizeSeconds": "number"
+          }
+        },
+        "observedValues": {
+          "allModesAvailable": true,
+          "windowSizeSeconds": 64800,
+          "remainingCountExposed": false
+        },
+        "directReplayVerified": false
+      }
+    },
+    {
+      "id": "media.references.list",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/media/reference/list",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "limit": 50
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06",
+        "requestMethod": "POST",
+        "requestPath": "/rest/media/reference/list",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "requestFieldNames": [
+          "limit"
+        ],
+        "responseShape": {
+          "references": {
+            "type": "array",
+            "itemFieldNames": [
+              "assets",
+              "createTime",
+              "description",
+              "id",
+              "isOwner",
+              "kind",
+              "name",
+              "sampleKey",
+              "updateTime",
+              "userId"
+            ],
+            "assetFieldNames": [
+              "assetId",
+              "mimeType",
+              "url"
+            ]
+          }
+        },
+        "observedReferenceCount": 4,
+        "privateValuesPersisted": false,
+        "directReplayVerified": false
+      }
+    },
+    {
+      "id": "media.search.status",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/media/search/status",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {},
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06",
+        "requestMethod": "POST",
+        "requestPath": "/rest/media/search/status",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "requestFieldNames": [],
+        "responseShape": {
+          "status": "string",
+          "itemCount": "number"
+        },
+        "observedValues": {
+          "status": "MEDIA_SEARCH_INDEX_STATUS_READY",
+          "itemCount": 113
+        },
+        "directReplayVerified": false
+      }
+    },
+    {
+      "id": "media.skills.list",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/skills",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "locale": "en"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 131072
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06",
+        "requestMethod": "POST",
+        "requestPath": "/rest/skills",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "requestFieldNames": [
+          "locale"
+        ],
+        "responseShape": {
+          "skills": {
+            "type": "array",
+            "itemFieldNames": [
+              "description",
+              "displayName",
+              "icon",
+              "index",
+              "name"
+            ]
+          }
+        },
+        "observedSkillCount": 5,
+        "directReplayVerified": false
+      }
+    },
+    {
+      "id": "models.modes",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/modes",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "locale": "{{input.locale}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "locale": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 32
+            }
+          },
+          "required": [
+            "locale"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "POST",
+        "requestPath": "/rest/modes",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedRequestFieldNames": [
+          "locale"
+        ],
+        "observedResponseShape": [
+          "modes:array",
+          "defaultModeId:string"
+        ],
+        "capturedResponseBytes": 1066,
+        "directReplayReceipt": "verification/grok-conversations-live-reads-2026-10-06.json"
+      }
+    },
+    {
+      "id": "public.models",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/models",
+      "authMode": "none",
+      "request": {
+        "bodyTemplate": {
+          "locale": "en"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "credentialBindings": {
+          "cookies": [],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "public_bundle_callsite",
+        "capturedAt": "2026-10-03",
+        "requestMethod": "POST",
+        "requestPath": "/rest/models",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceFile": "https://cdn.grok.com/_next/static/chunks/35ntlely29ab3.js",
+        "sourceSha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316",
+        "functionName": "modelsGetModelsRaw",
+        "directReplay": {
+          "source": "direct_http",
+          "observedAt": "2026-10-03",
+          "status": 200,
+          "parsedData": true,
+          "responseBytes": 898,
+          "responseSha256": "7b751e71ddb6a5e035763763736374683fae683abe45d519fda6d6ec69ad37ce",
+          "credentialFree": true
+        }
+      }
+    },
+    {
+      "id": "settings.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/user-settings",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {},
+          "required": []
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "browser_network_capture",
+        "capturedAt": "2026-10-06T00:31:16+09:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/user-settings",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "normal_observed_xhr",
+        "securitySignals": [],
+        "observedResponseShape": [
+          "excludeFromTraining:boolean",
+          "preferences:object",
+          "allowXPersonalization:boolean",
+          "enableMemory:boolean"
+        ],
+        "capturedResponseBytes": 838,
+        "directReplayReceipt": "verification/grok-core-http-reads-2026-10-06.json"
+      }
+    },
+    {
+      "id": "settings.update",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/user-settings",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "preferences": "{{input.body.preferences}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "preferences": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "required": []
+                }
+              },
+              "required": [
+                "preferences"
+              ]
+            }
+          },
+          "required": [
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T01:21:17Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/user-settings",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+        "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+        "sourceFunctionName": "settingsSetUserSettingsRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/one-shot/grok-settings-current-source-canonical-v3-2026-10-06.json",
+        "firstLiveReplayPermit": false,
+        "responseBytes": 837,
+        "observedResponseShape": [
+          "agentCustomizations",
+          "allowAutoShare",
+          "allowCompanionNotifications",
+          "allowGrokFinishedNotification",
+          "allowShareIndexing",
+          "allowXPersonalization",
+          "audioRefConsent",
+          "enableMemory",
+          "excludeFromTraining",
+          "mutedBotPushAgentIds",
+          "preferences"
+        ],
+        "semanticReadbackVerified": true,
+        "observedResponseSubstantive": true,
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T14:05:09.403Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 837,
+          "responseDigestPersisted": true,
+          "responseSha256": "1294febf9190233277ffd0cbbe64f5ae24a04e800295399ff911825d147602f0",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestDigest": "2dfc34b1bcd343ff60248fb5773428ffc83331e5f8c9d4b9dd17ea92bb938bf7",
+          "intentDigest": "d628a319afedacd0704d60accfa3ce9cd0034e391e898bd3a653e73ba574af3b"
+        }
+      },
+      "effect": "user_settings"
+    },
+    {
+      "id": "workspaces.create",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/workspaces",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "name": "{{input.body.name}}",
+          "kind": "{{input.body.kind}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "body": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 120
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "WORKSPACE_KIND_IMAGINE",
+                    "WORKSPACE_KIND_ALL",
+                    "WORKSPACE_KIND_IMAGINE_ALL",
+                    "WORKSPACE_KIND_UNIFIED"
+                  ]
+                }
+              },
+              "required": [
+                "name",
+                "kind"
+              ]
+            }
+          },
+          "required": [
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_bundle_contract",
+        "capturedAt": "2026-10-05T19:32:27.640091+00:00",
+        "requestMethod": "POST",
+        "requestPath": "/rest/workspaces",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "observedRequestFieldNames": [
+          "name",
+          "kind"
+        ],
+        "observedResponseShape": [
+          "workspaceId:string",
+          "name:string",
+          "kind:string",
+          "isPublic:boolean",
+          "accessLevel:string",
+          "isReadonly:boolean"
+        ],
+        "responseBytes": 382,
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+        "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+        "sourceFunctionName": "workspaceRepositoryCreateWorkspaceRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-workspaces-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "responseBytes": 382,
+          "responseSha256": "4d56055df0c2a40c43973cb3283ad2437c84f373f5258b43ebedb49bef88f86d",
+          "requestDigest": "c03bcb23ef4dd6f8cf6b13f0665bb1bf0f0c3ac46ecde74706015d46bc3c1e01",
+          "intentDigest": "44b9bd1b25c77df337733a5a2cb489232cce5c98b203079511f2017c860e7626",
+          "observedAt": "2026-10-05T19:32:27.640091+00:00",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "requestHeaderNames": [
+            "accept",
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestBodiesPersisted": false,
+          "responseBodiesPersisted": false,
+          "workspaceIdsPersisted": false
+        },
+        "observedResponseSubstantive": true,
+        "semanticReadbackVerified": true,
+        "observedAttemptCount": 1
+      },
+      "responseJobIdPointer": "/workspaceId",
+      "effect": "workspace_management"
+    },
+    {
+      "id": "workspaces.delete",
+      "kind": "submit",
+      "method": "DELETE",
+      "urlTemplate": "https://grok.com/rest/workspaces/{{input.workspaceId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "workspaceId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "workspaceId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_bundle_contract",
+        "capturedAt": "2026-10-05T19:32:27.640091+00:00",
+        "requestMethod": "DELETE",
+        "requestPath": "/rest/workspaces/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "observedRequestFieldNames": [],
+        "observedResponseShape": [
+          "empty-object:possible"
+        ],
+        "responseBytes": 2,
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+        "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+        "sourceFunctionName": "workspaceRepositoryDeleteWorkspaceRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-workspaces-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "responseBytes": 2,
+          "responseSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+          "requestDigest": "e32ce91753eea4114614e25d5d1681df1e8dae3421509754be0ff2bb349445f3",
+          "intentDigest": "1fea8017491f79e054defe578c905bf38406ea968028bdc3a99100e99fde32a7",
+          "observedAt": "2026-10-05T19:32:27.640091+00:00",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "requestHeaderNames": [
+            "accept",
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestBodiesPersisted": false,
+          "responseBodiesPersisted": false,
+          "workspaceIdsPersisted": false
+        },
+        "observedResponseSubstantive": false,
+        "semanticReadbackVerified": true,
+        "observedAttemptCount": 1,
+        "responseMayBeEmptyObject": true
+      },
+      "effect": "workspace_management"
+    },
+    {
+      "id": "workspaces.list",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/workspaces",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "query": "{{input.query}}",
+          "pageSize": "{{input.pageSize}}",
+          "pageToken": "{{input.pageToken}}",
+          "orderBy": "{{input.orderBy}}",
+          "kind": "{{input.kind}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "query": {
+              "type": "string",
+              "maxLength": 256
+            },
+            "pageSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "pageToken": {
+              "type": "string",
+              "maxLength": 8192
+            },
+            "orderBy": {
+              "type": "string",
+              "enum": [
+                "ORDER_BY_INVALID",
+                "ORDER_BY_RELEVANCY",
+                "ORDER_BY_CREATE_TIME",
+                "ORDER_BY_LAST_USE_TIME",
+                "ORDER_BY_NAME"
+              ]
+            },
+            "kind": {
+              "type": "string",
+              "enum": [
+                "WORKSPACE_KIND_IMAGINE",
+                "WORKSPACE_KIND_ALL",
+                "WORKSPACE_KIND_IMAGINE_ALL",
+                "WORKSPACE_KIND_UNIFIED"
+              ]
+            }
+          },
+          "required": []
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "first_party_bundle_contract",
+        "capturedAt": "2026-10-05T19:32:27.640091+00:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/workspaces",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "observedRequestFieldNames": [],
+        "observedResponseShape": [
+          "workspaces:array",
+          "nextPageToken:string"
+        ],
+        "capturedResponseBytes": 4650,
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+        "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+        "sourceFunctionName": "workspaceRepositoryListWorkspacesRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-workspaces-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-05T19:32:27.640091+00:00",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "requestHeaderNames": [
+            "accept",
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestBodiesPersisted": false,
+          "responseBodiesPersisted": false,
+          "workspaceIdsPersisted": false
+        },
+        "observedQueryKeys": [
+          "query",
+          "pageSize",
+          "pageToken",
+          "orderBy",
+          "kind"
+        ]
+      }
+    },
+    {
+      "id": "workspaces.read",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/workspaces/{{input.workspaceId}}",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "workspaceId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "workspaceId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_bundle_contract",
+        "capturedAt": "2026-10-05T19:32:27.640091+00:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/workspaces/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "observedRequestFieldNames": [],
+        "observedResponseShape": [
+          "workspace:object",
+          "workspace.workspaceId:string",
+          "workspace.name:string",
+          "workspace.isPublic:boolean",
+          "workspace.kind:string",
+          "workspace.accessLevel:string",
+          "workspace.isReadonly:boolean"
+        ],
+        "capturedResponseBytes": 401,
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+        "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+        "sourceFunctionName": "workspaceRepositoryGetWorkspaceRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-workspaces-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-05T19:32:27.640091+00:00",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "requestHeaderNames": [
+            "accept",
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestBodiesPersisted": false,
+          "responseBodiesPersisted": false,
+          "workspaceIdsPersisted": false
+        }
+      }
+    },
+    {
+      "id": "workspaces.shared.list",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/workspaces/shared",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "pageSize": "{{input.pageSize}}",
+          "pageToken": "{{input.pageToken}}",
+          "orderBy": "{{input.orderBy}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "pageSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "pageToken": {
+              "type": "string",
+              "maxLength": 8192
+            },
+            "orderBy": {
+              "type": "string",
+              "enum": [
+                "ORDER_BY_INVALID",
+                "ORDER_BY_RELEVANCY",
+                "ORDER_BY_CREATE_TIME",
+                "ORDER_BY_LAST_USE_TIME",
+                "ORDER_BY_NAME"
+              ]
+            }
+          },
+          "required": []
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "first_party_bundle_contract",
+        "capturedAt": "2026-10-05T19:32:27.640091+00:00",
+        "requestMethod": "GET",
+        "requestPath": "/rest/workspaces/shared",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "observedRequestFieldNames": [],
+        "observedResponseShape": [
+          "workspaces:array",
+          "nextPageToken:string"
+        ],
+        "capturedResponseBytes": 17,
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+        "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+        "sourceFunctionName": "workspaceRepositoryListSharedWorkspacesRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-workspaces-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-05T19:32:27.640091+00:00",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "requestHeaderNames": [
+            "accept",
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestBodiesPersisted": false,
+          "responseBodiesPersisted": false,
+          "workspaceIdsPersisted": false
+        },
+        "observedQueryKeys": [
+          "pageSize",
+          "pageToken",
+          "orderBy"
+        ]
+      }
+    },
+    {
+      "id": "workspaces.update",
+      "kind": "submit",
+      "method": "PUT",
+      "urlTemplate": "https://grok.com/rest/workspaces/{{input.workspaceId}}",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "name": "{{input.body.name}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "workspaceId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 120
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          },
+          "required": [
+            "workspaceId",
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_bundle_contract",
+        "capturedAt": "2026-10-05T19:32:27.640091+00:00",
+        "requestMethod": "PUT",
+        "requestPath": "/rest/workspaces/__grok_input_segment__",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "observedRequestFieldNames": [
+          "name"
+        ],
+        "observedResponseShape": [
+          "workspaceId:string",
+          "name:string",
+          "kind:string",
+          "isPublic:boolean",
+          "accessLevel:string",
+          "isReadonly:boolean"
+        ],
+        "responseBytes": 402,
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+        "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+        "sourceFunctionName": "workspaceRepositoryUpdateWorkspaceRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-workspaces-live-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "responseBytes": 402,
+          "responseSha256": "56e3efee4d48e7efceeba360c362c0e502b34afc3a76cd38f20f2775a0258fd2",
+          "requestDigest": "f8f754f3d21e946cb9ebe61e89f3807378aaf203a86d3db087b55ef3a36c2cb2",
+          "intentDigest": "2433608c23ef688ed63b32f1623c2cd9cd2927908ae5c52f301d1732b8c31942",
+          "observedAt": "2026-10-05T19:32:27.640091+00:00",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "requestHeaderNames": [
+            "accept",
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestBodiesPersisted": false,
+          "responseBodiesPersisted": false,
+          "workspaceIdsPersisted": false
+        },
+        "observedResponseSubstantive": true,
+        "semanticReadbackVerified": true,
+        "observedAttemptCount": 1
+      },
+      "responseJobIdPointer": "/workspaceId",
+      "effect": "workspace_management"
+    },
+    {
+      "id": "attachment.upload.init",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/upload-file-v2/init",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "fileName": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "fileMimeType": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 161
+            },
+            "sizeBytes": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20
+            },
+            "multipartSupported": {
+              "type": "boolean"
+            },
+            "fileSource": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            }
+          },
+          "required": [
+            "fileName",
+            "fileMimeType",
+            "sizeBytes",
+            "multipartSupported"
+          ]
+        },
+        "bodyTemplate": {
+          "fileName": "{{input.fileName}}",
+          "fileMimeType": "{{input.fileMimeType}}",
+          "sizeBytes": "{{input.sizeBytes}}",
+          "multipartSupported": "{{input.multipartSupported}}",
+          "fileSource": "{{input.fileSource}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "headers": {
+          "origin": "https://grok.com",
+          "referer": "https://grok.com/"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        },
+        "optionalPerActionMetadataHeaders": [
+          "x-statsig-id",
+          "x-xai-request-id"
+        ]
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 1048576
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/upload-file-v2/init",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatUploadFileInitRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "firstLiveReplayPermit": true,
+        "captureTimePrecision": "day",
+        "captureKind": "first_party_source_review",
+        "directReplayReceipt": "verification/grok-attachment-presigned-upload-live-2026-10-06.json",
+        "nativeMiddlewareHeaderNames": [
+          "x-statsig-id",
+          "x-xai-request-id"
+        ],
+        "nativeMiddlewareValuesPersisted": false,
+        "semanticReadbackVerified": false,
+        "observedResponseSubstantive": true,
+        "responseSizeRecorded": true,
+        "resourceIssuedResponseVerified": true,
+        "resourceIssuance": {
+          "verificationKind": "validated_init_resource_response",
+          "proofPath": "verification/one-shot/grok-upload-init-resource-issued-2026-10-06.json",
+          "proofSha256": "40da57b3abef6b106116f9cf5f31d6d5e795edcdca72a819d07129c3ceaf3940",
+          "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+          "issuedUploadIdSha256": "d1a40738dbd07d6d9e3ee94d73403dba54bfe2f70939f178a8116903afd01654",
+          "issuedAssetIdSha256": "ffafdaf9ee5de6cfdc78e278a0ace8a668710693403c717857933895db877778",
+          "fullUploadReadbackVerified": false
+        },
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseDigestPersisted": true,
+          "responseSha256": "c0b1a8c260838803d6ba71d9722f0bc7debab4fc6c7b1bdb9bd3442f72f9a6d1",
+          "responseBytes": 1332,
+          "requestDigest": "db6181d3b224a21fa777009fb315357932d2f6676dd912b442e631111be05bc3",
+          "intentDigest": "733e1f553a2ce6400bcf06b3c7f95d82f5eee66f62f928802e46f7d8af7cf0c3",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "x-statsig-id",
+            "x-xai-request-id"
+          ],
+          "cookieNames": [
+            "sso"
+          ]
+        }
+      },
+      "effect": "file_upload",
+      "responseJobIdPointer": "/uploadId"
+    },
+    {
+      "id": "attachment.upload.complete",
+      "kind": "submit",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/upload-file-v2/complete",
+      "authMode": "session",
+      "request": {
+        "inputSchema": {
+          "properties": {
+            "presigned": {
+              "type": "object",
+              "properties": {
+                "uploadId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 512
+                },
+                "completedParts": {
+                  "type": "array",
+                  "maxItems": 256,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "partNumber": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 256
+                      },
+                      "etag": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024
+                      }
+                    },
+                    "required": [
+                      "partNumber",
+                      "etag"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "uploadId",
+                "completedParts"
+              ]
+            }
+          },
+          "required": [
+            "presigned"
+          ]
+        },
+        "bodyTemplate": {
+          "presigned": {
+            "uploadId": "{{input.presigned.uploadId}}",
+            "completedParts": "{{input.presigned.completedParts}}"
+          }
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "headers": {
+          "origin": "https://grok.com",
+          "referer": "https://grok.com/"
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        },
+        "optionalPerActionMetadataHeaders": [
+          "x-source-conversation-id",
+          "x-statsig-id",
+          "x-xai-request-id"
+        ]
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 1048576
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/upload-file-v2/complete",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatUploadFileCompleteRaw",
+        "sourceDeclaredHeaders": [
+          "x-source-conversation-id"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "firstLiveReplayPermit": true,
+        "captureTimePrecision": "day",
+        "captureKind": "first_party_source_review",
+        "directReplayReceipt": "verification/grok-attachment-presigned-upload-live-2026-10-06.json",
+        "nativeMiddlewareHeaderNames": [
+          "x-statsig-id",
+          "x-xai-request-id"
+        ],
+        "nativeMiddlewareValuesPersisted": false
+      },
+      "effect": "file_upload",
+      "responseJobIdPointer": "/uploadId"
+    },
+    {
+      "id": "conversation.files.list",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/conversations/files/list",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "conversationId": "{{input.conversationId}}",
+          "path": "{{input.path}}",
+          "pageToken": "{{input.pageToken}}",
+          "pageSize": "{{input.pageSize}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "pageToken": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8192
+            },
+            "pageSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/conversations/files/list",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0-4zkotdeiwyn.js",
+        "sourceSha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+        "sourceFunctionName": "filesServiceListFilesV2Raw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "files:array",
+          "files[].name:string",
+          "files[].path:string",
+          "files[].isDirectory:boolean",
+          "files[].size:number",
+          "files[].mimeType:string",
+          "files[].modifiedAt:string",
+          "path:string",
+          "nextPageToken:string"
+        ]
+      }
+    },
+    {
+      "id": "conversation.file.content.resolve",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/conversations/files/content",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "conversationId": "{{input.conversationId}}",
+          "path": "{{input.path}}",
+          "isDownload": true
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            }
+          },
+          "required": [
+            "conversationId",
+            "path"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/conversations/files/content",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0-4zkotdeiwyn.js",
+        "sourceSha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+        "sourceFunctionName": "filesServiceGetFileContentV2Raw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "dataUrl:string",
+          "mimeType:string",
+          "size:number",
+          "isTruncated:boolean",
+          "signedUrl:string",
+          "downloadSignedUrl:string"
+        ]
+      }
+    },
+    {
+      "id": "conversation.files.zip.resolve",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/conversations/files/download-zip",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "conversationId": "{{input.conversationId}}",
+          "path": "{{input.path}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "path": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/conversations/files/download-zip",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0-4zkotdeiwyn.js",
+        "sourceSha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+        "sourceFunctionName": "filesServiceDownloadFilesAsZipRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "downloadUrl:string",
+          "fileCount:number",
+          "totalSize:number"
+        ]
+      }
+    },
+    {
+      "id": "conversation.workspace.zip.resolve",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}/download-workspace",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "path": "{{input.body.path}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "maxLength": 4096
+                }
+              },
+              "required": []
+            }
+          },
+          "required": [
+            "conversationId",
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__/download-workspace",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatDownloadAppWorkspaceRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "downloadUrl:string",
+          "sizeBytes:number",
+          "expiresAt:string"
+        ]
+      }
+    },
+    {
+      "id": "models.imagine-overrides",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/models/imagine/overrides",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": "{{input.body}}",
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "body": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          },
+          "required": [
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 65536
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T15:00:12.613Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/models/imagine/overrides",
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/35ntlely29ab3.js",
+        "sourceSha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316",
+        "sourceFunctionName": "modelsGetModelsImagineOverridesRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/one-shot/grok-imagine-overrides-source-read-v3-2026-10-06.json",
+        "directReplay": {
+          "source": "direct_http",
+          "status": 200,
+          "parsedData": true,
+          "observedAt": "2026-10-06T15:00:13.527Z",
+          "ownerVerified": true,
+          "tlsVerified": true,
+          "trustEnv": false,
+          "redirectsFollowed": false,
+          "explicitRetries": 0,
+          "attemptCountPerMutation": 1,
+          "responseBytes": 24,
+          "responseDigestPersisted": true,
+          "responseSha256": "153fd2501012aada3d2b437a0071d7296c6c165acfd5cc5b8d2fa88f000fa523",
+          "requestHeaderNames": [
+            "content-type",
+            "cookie"
+          ],
+          "cookieNames": [
+            "sso"
+          ],
+          "requestDigest": "5a2696b0fc02e1dff4b1f50fa4320a599c3e02045e7422e4e8432906f0b81184"
+        },
+        "requestBodyVariant": "empty_object_only_live_verified",
+        "observedResponseShape": [
+          "modelMapOverrides:array"
+        ],
+        "responseBytes": 24
+      }
+    }
+  ],
+  "historicalEvidence": {
+    "source": "docs/grok-image-video-api-only-status-2026-09-29.md",
+    "observedAt": "2026-09-29",
+    "scope": "signed-in Imagine UI exposed image and video modes; the video request was intercepted before delivery",
+    "liveReplay": false,
+    "operationContracts": []
+  }
+}

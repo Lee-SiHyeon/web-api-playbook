@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T08:34:24.952567Z",
+  "operation": "attachment.upload.presigned",
+  "state": "needs_review",
+  "ownerVerified": true,
+  "intentId": "grok-large-presigned-final-validation-20261006-v1",
+  "sourcePolicy": {
+    "v2Enabled": true,
+    "direct": 16,
+    "directToHttp": true,
+    "maxFile": 150,
+    "maxVideo": 150,
+    "multipart": true,
+    "concurrency": 4,
+    "configUpdatedAt": 1791271870221
+  },
+  "taskFile": {
+    "bytes": 16777217,
+    "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+    "fileNameMatched": true
+  },
+  "nativeCapture": {
+    "role": "codex-grok-uploads-20261006",
+    "registeredTargetMatched": true,
+    "method": "POST",
+    "path": "/rest/app-chat/upload-file-v2/init",
+    "requestFieldNames": [
+      "fileMimeType",
+      "fileName",
+      "multipartSupported",
+      "sizeBytes"
+    ],
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "rawHeaderValuesPersisted": false
+  },
+  "directApi": {
+    "initHttpStatus": null,
+    "signedPutRequestCount": 0,
+    "completeHttpStatus": null,
+    "initPolicyDiagnostics": null,
+    "stageDiagnostics": [
+      {
+        "stage": "init",
+        "ordinal": 0,
+        "state": "rejected",
+        "requestDigest": "a5b62149551af8d2a5bfc49ce7e588b180e8c7d042757c644a15036a374261a2",
+        "requestBytes": 0,
+        "attemptCount": 1,
+        "stageKey": "8a4cc9e67e5ba8d877de531cec504a78548e0128162f00c24cdec515f765b793",
+        "reasonCode": "SOURCE_DISCOVERY_PERMIT_ALREADY_USED",
+        "businessRetryAllowed": false,
+        "auditPersistence": {
+          "state": "stored"
+        },
+        "journalState": "rejected"
+      }
+    ],
+    "independentReadback": null,
+    "cleanupOutcome": null,
+    "uploadReference": null,
+    "reasonCode": "SOURCE_DISCOVERY_PERMIT_ALREADY_USED"
+  },
+  "browserGuard": {
+    "nativeBusinessWriteAttempts": 4,
+    "nativeBusinessWriteFulfillments": 0,
+    "nativeBusinessWritesForwarded": 0,
+    "nativePutAttemptCount": 0,
+    "directPutCountAcknowledgedToNativeSdk": 0,
+    "blockedUnexpectedMutationKinds": [
+      "other_write_blocked",
+      "other_write_blocked",
+      "other_write_blocked"
+    ],
+    "duplicateNativeAttemptsBlocked": 0,
+    "pendingNativeWriteRoutes": 1,
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "completeHeaderNames": [],
+    "initBodyMatched": true,
+    "initPolicyDiagnostic": null
+  },
+  "safety": {
+    "businessBrowserRequestsForwarded": 0,
+    "cookiesPersisted": false,
+    "dynamicHeaderValuesPersisted": false,
+    "signedUrlsPersisted": false,
+    "uploadIdsPersisted": false,
+    "rawBodiesPersisted": false
+  },
+  "incompleteReasonCode": "SOURCE_DISCOVERY_PERMIT_ALREADY_USED",
+  "runnerGuardErrorCode": "NATIVE_WRITE_ROUTE_PENDING"
+}

@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "auth.owner-identity",
+  "requirementId": "auth.owner.read",
+  "operationId": "auth.owner.read",
+  "observedAt": "2026-10-06T14:58:58.027Z",
+  "recordedAt": "2026-10-06T14:58:58.027Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 648,
+  "capturedOperationSha256": "2258d14b5e9b227c0267557fd66e70a2fb0cb8f13e3da9a68245fd45cbc2c24c",
+  "requestDigest": "2edd8c980550840946ef3dd41ca5bd4d1f75bbaf0211ce26d26deb566c519f54",
+  "responseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+  "responseDigestKind": "raw_http_body",
+  "handlerId": "client.verify-owner",
+  "dispatchBinding": {
+    "handlerId": "client.verify-owner",
+    "operationId": "auth.owner.read",
+    "operationKind": "read",
+    "mode": "validated_registry_generic"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "codeSha256": {
+    "src/client.mjs": "eb386cf62e7d168a147b59ee9132b40875f952907987883faf6eaecce86dfc64",
+    "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7"
+  },
+  "codeHashCapturedAtExecution": true,
+  "sourceProofPath": "verification/grok-fast-task-readonly-cli-live-2026-10-06-r7.json",
+  "sourceProofSha256": "907ed9b3a55298464cd1af85ac64c31a96db42828a5c7111dbf0ed6ad1ae7225"
+}

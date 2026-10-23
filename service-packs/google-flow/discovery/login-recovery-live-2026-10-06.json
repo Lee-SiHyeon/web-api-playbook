@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-06",
+  "status": "maintained_http_flow_session_recovery_and_generation_verified",
+  "scope": "Flow login and session recovery from a valid protected Google first-party account session",
+  "browserRecovery": {
+    "authorizedCanaryRestart": true,
+    "existingProfileReused": true,
+    "browserUiResponded": true,
+    "ownerAndProUiConfirmed": true,
+    "taskCaptureTabsClosed": 2
+  },
+  "diagnosis": {
+    "previousFlowBundleMissingRequestToken": true,
+    "browserCurrentScopedBundleProtectedReadPassed": true,
+    "sidAndPsidValuesDifferedInMemory": true,
+    "individualCookieCausalityNotIsolated": true,
+    "rotateCookiesPageIsNotSetOsidLogin": true
+  },
+  "authentication": {
+    "provider": "Windows DPAPI CurrentUser",
+    "googleBrokerCredential": "google-flow-google-auth-v1",
+    "flowCredential": "google-flow-session-v1",
+    "firstPartyGoogleBootstrapRequired": true,
+    "freshGooglePasswordOrMfaLoginVerified": false,
+    "expiredGooglePrimaryAuthenticationRecoveryVerified": false,
+    "flowHostCookiesOmittedAtRecoveryStart": true,
+    "capturedRedirectUrlOrTicketReused": false,
+    "observedSequence": [
+      "flow.google.com /project/{id} 302",
+      "accounts.google.com /ServiceLogin 302",
+      "flow.google.com /accounts/SetOSID 302",
+      "flow.google.com /project/{sameid}?pli=1 200",
+      "Zzl0ze protected project RPC 200"
+    ],
+    "newFlowHostCookieNames": [
+      "OSID",
+      "__Secure-OSID"
+    ],
+    "activeOwnerField": "oPEP7c",
+    "exactOwnerReadbackVerified": true,
+    "productionCliRecoverSessionLiveVerified": true,
+    "productionCliRecoveredMediaCount": 41,
+    "flowCookieCount": 19,
+    "googleAuthCookieCount": 25,
+    "startupAutomaticRecoveryLiveVerified": true,
+    "startupTestInitialCookieOmissionWasMemoryOnly": true,
+    "startupRecoveryCount": 1,
+    "postGenerationRecoveredMediaCount": 42,
+    "autoRecoveryOnlyBeforeCreate": true,
+    "googlePrimaryAuthenticationOmissionTest": "refused without protected RPC or store writes; normal identifier page required"
+  },
+  "generation": {
+    "productionCli": "src/cli.mjs generate",
+    "mode": "pure_http",
+    "inputMode": "verified_pure_http",
+    "browserEngineUsed": false,
+    "unmodifiedFirstPartySdkInNode": true,
+    "reloadPostCount": 1,
+    "reloadHttpStatus": 200,
+    "sdkResultMatchesReloadResponse": true,
+    "createCount": 1,
+    "createRetryCount": 0,
+    "jobId": "ac48516e-ea4f-44bc-8130-777ec26cb08e",
+    "mediaId": "d30b0746-269a-44e7-84a2-1a08c3b53af1",
+    "requestId": "7AE9B071-54E6-4647-84B4-C1EB13FC918D",
+    "createdAt": "2026-10-06T09:52:05.729Z",
+    "downloadedAt": "2026-10-06T09:52:53.517Z",
+    "journalState": "downloaded",
+    "serverObservedCompletionCode": 3,
+    "serverCompletedBytes": 1514421,
+    "nativeBytes": 1514421,
+    "nativeResolutionRequested": "720p",
+    "nativeSha256": "0f891efcd5ba64617345e3adbddd888a27275f1000b71fa39f013b41b9f05d30",
+    "deliveredFile": "recovered-cat-8s-480p.mp4",
+    "deliveredBytes": 436496,
+    "deliveredSha256": "4cf3dd82403166aebe2f5cec8b871ed2b5552c9dae4925cec57120f01108977b",
+    "width": 854,
+    "height": 480,
+    "durationSeconds": 8,
+    "fps": 24,
+    "frames": 192,
+    "fullDecodePassed": true,
+    "visualReview": "8 sampled frames show the orange tabby moving its paws and side-stepping; full motion/audio not independently reviewed"
+  },
+  "validation": {
+    "appTestsPassed": 153,
+    "appTestsFailed": 0,
+    "syntaxFilesChecked": 21,
+    "independentSourceReviewCompleted": true,
+    "brokerChangeAndWriteFailureTestsAdded": true
+  },
+  "storeCommitLimits": {
+    "optimisticRawStateConflictCheck": true,
+    "crossProcessCasOrTransaction": false,
+    "sequentialTwoRecordCommit": true,
+    "partialCommitError": "FLOW_SSO_RECOVERY_PARTIAL_COMMIT",
+    "partialCommitRetainsVerifiedNewFlowSession": true
+  },
+  "secretHandling": {
+    "cookieValuesRecorded": false,
+    "tokenValuesRecorded": false,
+    "rawBodiesRecorded": false,
+    "accountIdentifiersRecorded": false,
+    "redirectQueryValuesRecorded": false,
+    "plaintextReusableCredentialsPersisted": false,
+    "temporaryEncryptedHandoffFilesRemoved": true
+  }
+}

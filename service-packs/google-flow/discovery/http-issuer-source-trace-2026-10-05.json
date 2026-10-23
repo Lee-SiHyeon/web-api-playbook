@@ -1,0 +1,163 @@
+{
+  "version": 2,
+  "checkedAt": "2026-10-05T06:42:41Z",
+  "scope": {
+    "operation": "read-only Flow project document and observed public script preloads",
+    "mode": "pure_http",
+    "document": {
+      "method": "GET",
+      "status": 200,
+      "scriptTagCount": 11,
+      "externalScriptTagCount": 2,
+      "inlineScriptTagCount": 9,
+      "preloadScriptCount": 3,
+      "moduleSelectors": [
+        "_b",
+        "wO1vlb",
+        "XRV0Af"
+      ]
+    },
+    "htmlPersisted": false,
+    "documentHashRecorded": false,
+    "credentialOrTokenValuesRecorded": false
+  },
+  "publicAssets": [
+    {
+      "moduleSelector": "_b",
+      "url": "https://www.gstatic.com/_/mss/boq-labs-ai-sandbox/_/js/k=boq-labs-ai-sandbox.AiSandboxAngularFrontend.ko.S1LSdVS0TiY.2018.O/d=1/excm=_b/ed=1/dg=0/br=1/wt=2/ujg=1/rs=APwUF7yZVesTmWcBJxd1oD80YiNZXGSckw/ee=Pjplud:PoEs9b;QGR0gd:Mlhmy;ScI3Yc:e7Hzgb;YIZmRd:A1yn5d;cEt90b:ws9Tlc;dowIGb:ebZ3mb/dti=1/m=_b",
+      "status": 200,
+      "mime": "text/javascript; charset=UTF-8",
+      "bytes": 1007477,
+      "sha256": "009da5d7c4f9898c6d93c4a30dc047d1fcbe6e0bd30b0b1f918a2cad2120afb6"
+    },
+    {
+      "moduleSelector": "wO1vlb",
+      "url": "https://www.gstatic.com/_/mss/boq-labs-ai-sandbox/_/js/k=boq-labs-ai-sandbox.AiSandboxAngularFrontend.ko.S1LSdVS0TiY.2018.O/ck=boq-labs-ai-sandbox.AiSandboxAngularFrontend.sUgRVg0AeCU.L.X.O/d=1/exm=_b/excm=_b/ed=1/br=1/wt=2/ujg=1/rs=APwUF7zsuozfyne6wXvCn0zHnWdJCctcug/ee=Pjplud:PoEs9b;QGR0gd:Mlhmy;ScI3Yc:e7Hzgb;YIZmRd:A1yn5d;cEt90b:ws9Tlc;dowIGb:ebZ3mb/dti=1/m=wO1vlb",
+      "status": 200,
+      "mime": "text/javascript; charset=UTF-8",
+      "bytes": 3445599,
+      "sha256": "5a47170f8c9b3dededf5cb8de0c7ae961755c136eb378d2c131c9cd58f516877"
+    },
+    {
+      "moduleSelector": "XRV0Af",
+      "url": "https://www.gstatic.com/_/mss/boq-labs-ai-sandbox/_/js/k=boq-labs-ai-sandbox.AiSandboxAngularFrontend.ko.S1LSdVS0TiY.2018.O/ck=boq-labs-ai-sandbox.AiSandboxAngularFrontend.sUgRVg0AeCU.L.X.O/d=1/exm=_b,wO1vlb/excm=_b/ed=1/br=1/wt=2/ujg=1/rs=APwUF7zsuozfyne6wXvCn0zHnWdJCctcug/ee=Pjplud:PoEs9b;QGR0gd:Mlhmy;ScI3Yc:e7Hzgb;YIZmRd:A1yn5d;cEt90b:ws9Tlc;dowIGb:ebZ3mb/dti=1/m=XRV0Af",
+      "status": 200,
+      "mime": "text/javascript; charset=UTF-8",
+      "bytes": 1665302,
+      "sha256": "8976d37050eba1afd33d7eb7ffb334540af8fd4c15877e47354e82c702f0ac81"
+    }
+  ],
+  "generationCallsite": {
+    "moduleSelector": "wO1vlb",
+    "sequence": [
+      "_.JS.initialize loads the first-party reCAPTCHA Enterprise web SDK",
+      "_.JS.An(action) waits for enterprise readiness and calls enterprise.execute(configuredKey, {action})",
+      "q7a requests An(\"VIDEO_GENERATION\")",
+      "q7a serializes through k5a, registered as RPC YhhmEf"
+    ],
+    "normalHttpTokenIssuerFound": false,
+    "assessment": "The observed producer is the web SDK execute call; documented REST assessment consumes an already-issued client token. No separate ordinary HTTP issuer was found in the three observed preloads or reviewed official references.",
+    "scopeLimit": "Bounded source and documentation trace; not proof that no private internal server implementation exists."
+  },
+  "actions": {
+    "browserExecution": false,
+    "sdkExecution": false,
+    "challengeReloadReplay": false,
+    "generationRequestCount": 0,
+    "applicationFilesEdited": false
+  },
+  "officialReferences": {
+    "recaptchaWebsiteAssessment": "https://docs.cloud.google.com/recaptcha/docs/create-assessment-website",
+    "recaptchaWebIntegration": "https://docs.cloud.google.com/recaptcha/docs/instrument-web-pages",
+    "assessmentCreateRest": "https://docs.cloud.google.com/recaptcha/docs/reference/rest/v1/projects.assessments/create",
+    "assessmentEventSchema": "https://docs.cloud.google.com/recaptcha/docs/reference/rest/v1/projects.assessments",
+    "flowVideoHelp": "https://support.google.com/flow/answer/16353334?co=GENIE.Platform%3DDesktop&hl=en"
+  },
+  "correctedAt": "2026-10-05T07:10:08.137Z",
+  "correction": {
+    "reason": "Two lazy public asset URLs contained a manually transcribed extra character; exact href extraction from the protected document corrected them.",
+    "incorrectUrlsHttpStatus": 404,
+    "buildDriftObserved": false,
+    "verifiedPreloadSource": "protected Flow document parsed with parse5",
+    "directReplayAfterCorrection": {
+      "allThreeStatus": 200,
+      "allThreeMime": "text/javascript; charset=UTF-8",
+      "hashesComputed": true
+    },
+    "rawCredentialsRecorded": false
+  },
+  "followupBranches": {
+    "observedDocument": {
+      "checkedAt": "2026-10-05T07:06:27.417Z",
+      "status": 200,
+      "recaptchaConfigured": true,
+      "rawKeyRecorded": false
+    },
+    "sdkBranches": [
+      "flagged wrapper around grecaptcha.enterprise.execute",
+      "direct grecaptcha.enterprise.execute"
+    ],
+    "wrapperFlag": "enable_recaptcha_execute_closure_wrap",
+    "wrapperFlagIsHttpIssuer": false,
+    "noKeyBranchActiveForOwner": false,
+    "videoModesSharingProducer": [
+      "TEXT",
+      "REFERENCES",
+      "START_FRAME",
+      "START_END_FRAMES",
+      "EDIT_VIDEO",
+      "EXTEND_VIDEO",
+      "UPSAMPLE_VIDEO"
+    ],
+    "sourceCharacterOffsets": {
+      "providerWrapperRegion": 2664533,
+      "providerClass": 2664781,
+      "textVideoCaller": 2673254,
+      "imageUploadCaller": 2666362
+    },
+    "textRpc": {
+      "descriptor": "k5a",
+      "rpcId": "YhhmEf",
+      "serviceMethod": "/VideoFxService.BatchAsyncGenerateVideoText"
+    },
+    "missingInput": {
+      "clientCanSerializeAbsent": true,
+      "serverAcceptance": "unknown_not_tested",
+      "unsupportedWriteSent": false
+    },
+    "ordinaryHttpIssuerFound": false,
+    "officialExpressKeyAlternative": {
+      "documented": true,
+      "flowKeySubstitutionSupported": false,
+      "used": false,
+      "reference": "https://docs.cloud.google.com/recaptcha/docs/keys"
+    },
+    "sdkScriptOnErrorHandlerObserved": false,
+    "sdkLoadFailureLiveObserved": false,
+    "generationHttpRequests": 0,
+    "newVideoCreated": false,
+    "experimentalVideoDescriptor": {
+      "rpcId": "IJhj9c",
+      "serviceMethod": "/VideoFxService.BatchAsyncGenerateVideoExperimental",
+      "publicSourceOccurrences": 1,
+      "registryOnlyInObservedModules": true,
+      "callerCaptured": false,
+      "directRequestSent": false
+    },
+    "streamDescriptor": {
+      "rpcId": "L2jnw",
+      "serviceMethod": "/FlowService.StreamGenerateContent",
+      "registryOnlyInObservedModules": true,
+      "callerCaptured": false,
+      "ownerAccessibleAlternativeEstablished": false,
+      "outputMediaKinds": "unknown",
+      "observedSourceModules": [
+        "_b",
+        "wO1vlb",
+        "XRV0Af"
+      ],
+      "otherUnobservedModulesNotRuledOut": true,
+      "requestsSent": 0
+    }
+  }
+}

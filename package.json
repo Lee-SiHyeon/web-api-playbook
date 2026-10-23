@@ -54,12 +54,51 @@
     "agoda": "node scripts/agoda.mjs",
     "video:sources": "node scripts/video-sources.mjs",
     "video:similar": "node scripts/video-similar.mjs",
-    "video:pipeline": "node scripts/video-pipeline.mjs"
+    "video:pipeline": "node scripts/video-pipeline.mjs",
+    "clients": "node scripts/client-packs.mjs list",
+    "client": "node scripts/client-packs.mjs run",
+    "gemini": "node scripts/client-packs.mjs run --service=gemini --",
+    "grok": "node scripts/client-packs.mjs run --service=grok --",
+    "chatgpt": "node scripts/client-packs.mjs run --service=chatgpt --",
+    "flow": "node scripts/client-packs.mjs run --service=google-flow --",
+    "flow:bridge": "node scripts/client-packs.mjs run --service=google-flow-bridge --",
+    "naver:shopping": "node scripts/client-packs.mjs run --service=naver-shopping --",
+    "naver:travel": "node scripts/client-packs.mjs run --service=naver-travel --",
+    "coupang:shopping": "node scripts/client-packs.mjs run --service=coupang-shopping --",
+    "threads:actions": "node scripts/client-packs.mjs run --service=threads-actions --",
+    "naver:cafe": "node scripts/client-packs.mjs run --service=naver-cafe --",
+    "test:client-packs": "node scripts/test-client-packs.mjs",
+    "social:actions": "node scripts/client-packs.mjs run --service=social-actions --",
+    "readers": "node scripts/client-packs.mjs run --service=lifehack-readers --",
+    "audit:consolidation": "node scripts/audit-consolidation.mjs"
   },
   "dependencies": {
     "linkedom": "0.18.13",
     "parse5": "8.0.1",
     "tough-cookie": "5.1.2",
     "x-client-transaction-id": "0.3.1"
-  }
+  },
+  "workspaces": [
+    "service-packs/gemini",
+    "service-packs/grok",
+    "service-packs/chatgpt",
+    "service-packs/google-flow",
+    "service-packs/google-flow-bridge",
+    "service-packs/gemini-bridge",
+    "service-packs/grok-public-modes",
+    "service-packs/adpick",
+    "service-packs/threads-actions",
+    "service-packs/naver-shopping",
+    "service-packs/coupang-shopping",
+    "service-packs/naver-cafe",
+    "service-packs/tistory",
+    "service-packs/social-x",
+    "service-packs/blogger",
+    "service-packs/ontology",
+    "service-packs/operations",
+    "service-packs/automation",
+    "service-packs/whisk",
+    "service-packs/creator-tools",
+    "service-packs/lifehack-readers"
+  ]
 }

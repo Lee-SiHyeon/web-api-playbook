@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "conversation.crud",
+  "requirementId": "conversation.read",
+  "operationId": "conversation.read",
+  "observedAt": "2026-10-06T11:42:40.307Z",
+  "recordedAt": "2026-10-06T11:42:40.307Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "529c36ddd8d88cc6308aa5470ef31d913ec4389d84d072b94445ced09e4e2365",
+  "ownerProofPath": "verification/owner-proofs/529c36ddd8d88cc6308aa5470ef31d913ec4389d84d072b94445ced09e4e2365.json",
+  "ownerProofSha256": "529c36ddd8d88cc6308aa5470ef31d913ec4389d84d072b94445ced09e4e2365",
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 425,
+  "requestDigest": "1bfa300e0f573127ca2c29485b58c05b09af9b27979edda51db85319bbc182a1",
+  "responseDigest": "9f2090dec75fbd7c9197cdd4d201138c22c00fad82b1b0457f5b9e80d70057c8",
+  "capturedOperationSha256": "5bfdd3ecc49d7ea7b133b44eb592a454804447f8edbfda7b9d576cf469fbe507",
+  "handlerId": "client.read",
+  "dispatchBinding": {
+    "handlerId": "client.read",
+    "operationId": "conversation.read",
+    "operationKind": "read",
+    "mode": "validated_registry_generic"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "codeSha256": {
+    "src/client.mjs": "fbc42db06aada43768e7b20f10e5279a62414be0b57be90682164f2a1c51534c",
+    "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/runtime.mjs": "9a98d7e64f3b5cf7128dc421420c31d3cff9f0e6a5507a84742a65182284e34e",
+    "src/grok-conversations.mjs": "24e4fa92abbdb4e97824b0a319ac6ac3f916072b43fff5a8aa8d0e7555f85ac9"
+  },
+  "semanticReadback": {
+    "readbackVerified": true,
+    "detailMatchesSearch": true,
+    "viewerIsOwner": true,
+    "mutableOwnerAccessVerified": true
+  }
+}

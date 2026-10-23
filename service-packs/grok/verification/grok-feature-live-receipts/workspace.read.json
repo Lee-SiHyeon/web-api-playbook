@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "evidenceClass": "first_party_bundle_direct_replay",
+  "featureId": "workspaces",
+  "requirementId": "workspace.read",
+  "operationId": "workspaces.read",
+  "observedAt": "2026-10-05T19:32:27.640Z",
+  "recordedAt": "2026-10-05T21:34:37.353Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "d1bf4b7ed695833b55c6e93678b145c2b79cdaac92bbbc180dfdb8ad082a8ee9",
+  "sourceProofPath": "verification/grok-workspaces-live-2026-10-06.json",
+  "sourceProofSha256": "2f09d620c4316e19754145377659cc830f199ec40116be10697c3e610e12b9ab",
+  "sourceContractSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+  "capturedOperationSha256": "792786ff5783e29f8f96fcf77168a5242316be6415384cd8bd8026a22d1edc02",
+  "method": "GET",
+  "pathTemplate": "/rest/workspaces/%7B%7Binput.workspaceId%7D%7D",
+  "requestFieldNames": [],
+  "responseFieldNames": [
+    "workspace",
+    "workspace.workspaceId",
+    "workspace.name",
+    "workspace.isPublic",
+    "workspace.kind",
+    "workspace.accessLevel",
+    "workspace.isReadonly"
+  ],
+  "httpStatus": 200,
+  "responseBytes": 401,
+  "responseDigest": "40fe86a79895800aff212e63a9e88700ac553d029d5b279dc9e298997ec3981c",
+  "responseMime": "application/json",
+  "handlerId": "workspaces.read",
+  "dispatchBinding": {
+    "handlerId": "workspaces.read",
+    "operationId": "workspaces.read",
+    "operationKind": "read",
+    "mode": "owner_bound_workspace_client"
+  },
+  "transport": {
+    "tlsVerified": true,
+    "trustEnv": false,
+    "redirectsFollowed": false,
+    "explicitRetries": 0,
+    "cookieNames": [
+      "sso"
+    ],
+    "cookieValuesPersisted": false,
+    "browserWriteCapture": false
+  },
+  "semanticReadback": {
+    "readbackVerified": true,
+    "privateVerified": true,
+    "kindMatched": true,
+    "nameMatched": true
+  },
+  "codeSha256": {
+    "src/grok-workspaces.mjs": "6873ffef5247f9989b866fe4f49694e87b0cb900beb6a423bd290d3a17208632",
+    "src/client.mjs": "16a6f720e89dd9715e090c6b0d7d7840dc18966b665a5689e83726519b0b2d19",
+    "src/runtime.mjs": "98694c0e061bcee9d94cc34c8676100625786b1d8964ac5103a41eda135b04bd",
+    "src/cli.mjs": "1be5300c4c217a5cb5c4e75a9828a4de3a4726abc2eb78f2330e442594e03053"
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "workspaceIdsPersisted": false,
+    "identityValuePersisted": false
+  }
+}

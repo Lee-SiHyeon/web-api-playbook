@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "operation": "grok.media.readback.header-matched-status",
+  "observedAt": "2026-10-05T23:16:59.330913+00:00",
+  "ownerVerified": true,
+  "assetServerOrigin": "https://assets.grok.com",
+  "assetUrlMapping": "getAssetUrl then getCachedAssetUrl adds cache=1 for same origin",
+  "sameExactAssetUrlUsed": true,
+  "browserRequestCacheMode": "Network.setCacheDisabled + first-party Image GET",
+  "nativeBrowserResponse": {
+    "status": 200,
+    "mimeType": "image/jpeg",
+    "protocol": "h2",
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "fromPrefetchCache": false,
+    "responseHeaderNames": [
+      "accept-ranges",
+      "access-control-allow-credentials",
+      "alt-svc",
+      "cache-control",
+      "cf-cache-status",
+      "cf-ray",
+      "content-length",
+      "content-security-policy",
+      "content-type",
+      "date",
+      "etag",
+      "server",
+      "speculation-rules",
+      "strict-transport-security",
+      "vary",
+      "x-content-type-options",
+      "x-trace-id"
+    ],
+    "bodyBytesDeclared": 223974,
+    "cfCacheStatus": "DYNAMIC",
+    "encodedDataLength": 224327,
+    "responseExtraInfoStatus": 200
+  },
+  "nativeBrowserImageEvent": "load",
+  "nativeRequestHeaderNames": [
+    ":authority",
+    ":method",
+    ":path",
+    ":scheme",
+    "accept",
+    "accept-encoding",
+    "accept-language",
+    "cache-control",
+    "cookie",
+    "pragma",
+    "priority",
+    "referer",
+    "sec-ch-ua",
+    "sec-ch-ua-mobile",
+    "sec-ch-ua-platform",
+    "sec-fetch-dest",
+    "sec-fetch-mode",
+    "sec-fetch-site",
+    "user-agent"
+  ],
+  "cookieHeaderPresent": true,
+  "observedSsoCookieBinding": [
+    {
+      "name": "sso",
+      "domain": ".grok.com",
+      "path": "/",
+      "secure": true,
+      "httpOnly": true
+    }
+  ],
+  "cookieNamesOrValuesPersisted": false,
+  "refererShape": {
+    "origin": "https://grok.com",
+    "path": "/"
+  },
+  "originPresent": false,
+  "chromeUserAgentMajor": 154,
+  "secChUaPlatform": "Linux",
+  "cffiOrdinaryHeaderNamesAvailableFromNativeRequest": [
+    "accept",
+    "accept-language",
+    "referer",
+    "sec-ch-ua",
+    "sec-ch-ua-mobile",
+    "sec-ch-ua-platform",
+    "sec-fetch-dest",
+    "sec-fetch-mode",
+    "sec-fetch-site",
+    "user-agent"
+  ],
+  "cffiHeaderMatchedReplayAttempted": true,
+  "cffiHeaderMatchedReplayBlockedByCookieBoundary": false,
+  "cffiCookiesUsed": true,
+  "egress": {
+    "chromeExplicitProxyConfigured": false,
+    "chromeProxyEnvironmentConfigured": false,
+    "workerProxyEnvironmentConfigured": false,
+    "cffiTrustEnv": false,
+    "chromeVersionMajor": 154,
+    "cffiImpersonation": "chrome150"
+  },
+  "image": {
+    "generationAttributionVerified": true,
+    "byteDownloadVerified": true,
+    "writeRequestsSent": 1,
+    "automaticRetries": 0,
+    "intentAttempts": 1,
+    "operationAttempts": 1,
+    "promptSha256": "fa21011b6f00c49841b25a44f8c83edcc04489b9fe630e9ce071afb5f2a811eb",
+    "candidateCount": 4,
+    "assetIdSha256": [
+      "804200bc5b822792fe69e26728fe660b0eafeb64b1f3791ad5e8ad8836f951a7",
+      "ba6e5f36f5540035769fd761d62629f09b13cd6dc1aa5c668630238078c4e661",
+      "bbb877225f98711d9ac157a492f15955e54594efbac3d17da522a10816bff830",
+      "d508f521d3c211ff4648e0f241d231424ca45c0e207251cbd2820ef7078618b8"
+    ],
+    "conversationIdSha256": [
+      "cf525680c9587422e0d5c9ba1648ed7cbf2339180155e3fa1ae22bff436d81a6"
+    ],
+    "responseIdSha256": [
+      "a7cb1f28a30e44f8e6137d37d143a129eee18294a80e8c839cef0e01215e6f73"
+    ],
+    "allFourResponseIdsInHistory": true,
+    "allFourSourceConversationsMatched": true,
+    "exactUniquePromptMatched": true,
+    "browserZeroWriteVerified": true,
+    "writerResponseIdComparatorAvailable": false,
+    "writerResponseIdComparatorReason": "prior raw websocket server frames were discarded; no safe response-id echo is retained",
+    "cffiDownloads": [
+      {
+        "assetIdSha256": "804200bc5b822792fe69e26728fe660b0eafeb64b1f3791ad5e8ad8836f951a7",
+        "assetHttpStatus": 200,
+        "bodyBytes": 223974,
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "sha256": "ec1023862d0b56d8e177303efec550a39b6402e4bc095129d5031d23e7b83129",
+        "source": "curl_cffi-0.16.3-chrome150",
+        "cookiesUsed": true,
+        "cookieNamesUsed": [
+          "sso"
+        ],
+        "headersSubmittedNames": [
+          "accept",
+          "accept-language",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "user-agent"
+        ],
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-01.jpg"
+      },
+      {
+        "assetIdSha256": "ba6e5f36f5540035769fd761d62629f09b13cd6dc1aa5c668630238078c4e661",
+        "assetHttpStatus": 200,
+        "bodyBytes": 184352,
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "sha256": "7f4405dc7fd1fbcb08ba4b0ace69a89ef3fdbd007be8086a3abc71c1ac4b4d56",
+        "source": "curl_cffi-0.16.3-chrome150",
+        "cookiesUsed": true,
+        "cookieNamesUsed": [
+          "sso"
+        ],
+        "headersSubmittedNames": [
+          "accept",
+          "accept-language",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "user-agent"
+        ],
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-02.jpg"
+      },
+      {
+        "assetIdSha256": "bbb877225f98711d9ac157a492f15955e54594efbac3d17da522a10816bff830",
+        "assetHttpStatus": 200,
+        "bodyBytes": 216268,
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "sha256": "1bfe89b659df5e36b2e5c46fcd4a98ac92dec96a3b64b53848be4e89e4c7cea9",
+        "source": "curl_cffi-0.16.3-chrome150",
+        "cookiesUsed": true,
+        "cookieNamesUsed": [
+          "sso"
+        ],
+        "headersSubmittedNames": [
+          "accept",
+          "accept-language",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "user-agent"
+        ],
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-03.jpg"
+      },
+      {
+        "assetIdSha256": "d508f521d3c211ff4648e0f241d231424ca45c0e207251cbd2820ef7078618b8",
+        "assetHttpStatus": 200,
+        "bodyBytes": 224165,
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "sha256": "a4186310f4b6c5380c7f100ddef0ba5425c04f4534e5ace34e9b54cc6989eefe",
+        "source": "curl_cffi-0.16.3-chrome150",
+        "cookiesUsed": true,
+        "cookieNamesUsed": [
+          "sso"
+        ],
+        "headersSubmittedNames": [
+          "accept",
+          "accept-language",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "user-agent"
+        ],
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-04.jpg"
+      }
+    ],
+    "artifacts": [
+      {
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-01.jpg",
+        "bodyBytes": 223974,
+        "sha256": "ec1023862d0b56d8e177303efec550a39b6402e4bc095129d5031d23e7b83129",
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "cffiSha256MatchesDisk": true,
+        "cffiBytesMatchDisk": true
+      },
+      {
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-02.jpg",
+        "bodyBytes": 184352,
+        "sha256": "7f4405dc7fd1fbcb08ba4b0ace69a89ef3fdbd007be8086a3abc71c1ac4b4d56",
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "cffiSha256MatchesDisk": true,
+        "cffiBytesMatchDisk": true
+      },
+      {
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-03.jpg",
+        "bodyBytes": 216268,
+        "sha256": "1bfe89b659df5e36b2e5c46fcd4a98ac92dec96a3b64b53848be4e89e4c7cea9",
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "cffiSha256MatchesDisk": true,
+        "cffiBytesMatchDisk": true
+      },
+      {
+        "artifactPath": "/home/worker/artifacts/grok-media-20261006/image-04.jpg",
+        "bodyBytes": 224165,
+        "sha256": "a4186310f4b6c5380c7f100ddef0ba5425c04f4534e5ace34e9b54cc6989eefe",
+        "magicVerified": true,
+        "mimeType": "image/jpeg",
+        "cffiSha256MatchesDisk": true,
+        "cffiBytesMatchDisk": true
+      }
+    ],
+    "promptPersisted": false,
+    "rawIdsOrKeysOrUrlsPersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "rawAssetBytesPersisted": false
+  },
+  "oldVideo": {
+    "candidateCount": 1,
+    "historyPromptHashMatchedPriorReceipt": true,
+    "sourceConversationMatchedDetail": true,
+    "assetResponseIdInHistory": true,
+    "directVideoCreateRequestsSent": 0,
+    "byteDownloadVerified": true,
+    "cffiHeaderMatchedReplayAttempted": true,
+    "cffiHeaderMatchedReplayBlockedByCookieBoundary": false,
+    "cffiDownload": {
+      "assetIdSha256": "3efa4aed8bf250a6d4920640c3583bd0603a4ce5b05b05ec07f325dcc32c7f34",
+      "assetHttpStatus": 200,
+      "bodyBytes": 410514,
+      "magicVerified": true,
+      "mimeType": "video/mp4",
+      "sha256": "604afb803f707f76eb0e55da3790be5507310ec03b6595c12018212f92417f67",
+      "source": "curl_cffi-0.16.3-chrome150",
+      "cookiesUsed": true,
+      "cookieNamesUsed": [
+        "sso"
+      ],
+      "headersSubmittedNames": [
+        "accept",
+        "accept-language",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sec-fetch-dest",
+        "sec-fetch-mode",
+        "sec-fetch-site",
+        "user-agent"
+      ],
+      "artifactPath": "/home/worker/artifacts/grok-media-20261006/video-01.mp4"
+    },
+    "artifact": {
+      "artifactPath": "/home/worker/artifacts/grok-media-20261006/video-01.mp4",
+      "bodyBytes": 410514,
+      "sha256": "604afb803f707f76eb0e55da3790be5507310ec03b6595c12018212f92417f67",
+      "magicVerified": true,
+      "mimeType": "video/mp4",
+      "cffiSha256MatchesDisk": true,
+      "cffiBytesMatchDisk": true
+    },
+    "assetIdSha256": [
+      "3efa4aed8bf250a6d4920640c3583bd0603a4ce5b05b05ec07f325dcc32c7f34"
+    ],
+    "conversationIdSha256": [
+      "389586a829110795ab3a869325c9b76f5c3f885fb1cd003c6d06b3a533304825"
+    ],
+    "responseIdSha256": [
+      "217113663bf185681f9f9710c8d618bf04281128e24546a6e5c92c3e7b978e1e"
+    ],
+    "rawIdsOrKeysOrUrlsPersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "rawAssetBytesPersisted": false
+  },
+  "rawFramesOrCredentialsPersisted": false,
+  "publicSharingChanged": false,
+  "purchaseOrSubscriptionChanged": false,
+  "screenshot": "verification/grok-media-readback-status-2026-10-06.png",
+  "productionReader": {
+    "productionReaderVerified": true,
+    "nativeBrowserImageEvent": "load",
+    "nativeCookieHeaderPresent": true,
+    "observedSsoCookieBinding": {
+      "name": "sso",
+      "domain": ".grok.com",
+      "path": "/",
+      "secure": true,
+      "httpOnly": true
+    },
+    "cookieNamesOrValuesPersisted": false,
+    "cookieNamesUsedByCffi": [
+      "sso"
+    ],
+    "cffiHeadersSubmittedNames": [
+      "accept",
+      "accept-language",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-agent"
+    ],
+    "assetHttpStatus": 200,
+    "mimeType": "image/jpeg",
+    "bodyBytes": 223974,
+    "magicVerified": true,
+    "sha256": "ec1023862d0b56d8e177303efec550a39b6402e4bc095129d5031d23e7b83129",
+    "matchesSavedArtifact": true,
+    "rawAssetUrlOrIdentifiersPersisted": false,
+    "assetBytesPersistedBySmoke": false
+  }
+}

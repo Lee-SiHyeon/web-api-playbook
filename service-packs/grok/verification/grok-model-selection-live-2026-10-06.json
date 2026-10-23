@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "models.private-selection",
+  "requirementId": "models.selection-in-chat",
+  "observedAt": "2026-10-05T22:34:35.619199+00:00",
+  "execution": "normal_linux_chrome_cdp_page",
+  "pageRole": "codex-grok-models-20261006",
+  "authenticatedSessionObserved": true,
+  "ownerIdentityMatchedToVerifiedBrowserOwner": true,
+  "pageRoleVerified": true,
+  "selectorMenuOpened": true,
+  "selector": {
+    "containerCount": 1,
+    "triggerCount": 1,
+    "triggerLabel": "Auto",
+    "menuCount": 1,
+    "items": [
+      {
+        "label": "Auto",
+        "selected": true,
+        "disabled": false
+      },
+      {
+        "label": "Fast",
+        "selected": false,
+        "disabled": false
+      },
+      {
+        "label": "Expert",
+        "selected": false,
+        "disabled": false
+      },
+      {
+        "label": "Build",
+        "selected": false,
+        "disabled": false
+      },
+      {
+        "label": "Heavy",
+        "selected": false,
+        "disabled": false
+      }
+    ]
+  },
+  "catalogRead": {
+    "operationId": "models.modes",
+    "method": "POST",
+    "path": "/rest/modes",
+    "requestFieldNames": [
+      "locale"
+    ],
+    "requestObserved": true,
+    "httpStatus": 200,
+    "responseContentType": "application/json",
+    "responseBytes": 1110,
+    "defaultModeId": "auto",
+    "choices": [
+      {
+        "id": "auto",
+        "title": "Auto",
+        "available": null,
+        "description": "Chooses Fast or Expert",
+        "iconHint": "rocket"
+      },
+      {
+        "id": "fast",
+        "title": "Fast",
+        "available": null,
+        "description": "Quick responses · Grok 4.7",
+        "iconHint": "lightning"
+      },
+      {
+        "id": "expert",
+        "title": "Expert",
+        "available": null,
+        "description": "Thinks hard · Grok 4.7",
+        "iconHint": "lightbulb"
+      },
+      {
+        "id": "heavy",
+        "title": "Heavy",
+        "available": null,
+        "description": "Team of Experts · Grok 4.7",
+        "iconHint": "connected_apps",
+        "minimumSubscriptionTier": "TIER_SUPERGROK_HEAVY"
+      },
+      {
+        "id": "build",
+        "title": "Build",
+        "available": null,
+        "description": "Build apps and sites · Grok 4.7",
+        "badgeText": "Beta",
+        "iconHint": "hammer"
+      }
+    ]
+  },
+  "selectionControl": {
+    "sourceState": "useModesStore.selectedModeId",
+    "sourceSetter": "useModesStore.setSelectedModeId",
+    "setterSourceTag": "user",
+    "setterEffect": "local_sdk_state_and_local_storage",
+    "selectedModeLabel": "Auto",
+    "selectedModeControlReadFrom": "visible_mode_menuitemradio",
+    "selectionOptionClicked": true,
+    "standaloneServerMutationObserved": false,
+    "selectedModeId": "auto",
+    "fastModeId": "fast",
+    "fastModeSelectedAndRestored": true,
+    "localStorageModeWritesObserved": true,
+    "localStorageKey": "modes-selected-id",
+    "finalLocalStorageModeIds": [
+      "auto"
+    ],
+    "finalStoredModeIdVerified": "auto",
+    "selectionEffect": "local_sdk_state_and_local_storage",
+    "menuAndStorageRestoredToAuto": true,
+    "storageKey": "modes-selected-id",
+    "serverPreferenceWriteAttempted": false
+  },
+  "guard": {
+    "installedBeforeNavigation": true,
+    "pageWideHttpWriteGuard": true,
+    "browserWriteRequestsBlocked": 20,
+    "blockedWritePathClasses": {
+      "other": 11,
+      "other-rest-api": 9
+    },
+    "nonModelApiReadsBlocked": {
+      "unscoped_fetch": 4,
+      "other-rest-api": 10,
+      "conversation-api": 5,
+      "asset-api": 1
+    },
+    "modelCatalogReadAllowedByExactFirstPartyShape": true,
+    "websocketRouteInstalledBeforeNavigation": true,
+    "websocketConnections": 0,
+    "pageFramesDropped": 0,
+    "serverFramesForwarded": 0,
+    "businessFramesDelivered": 0,
+    "localProbePageWideHttpWriteGuard": true,
+    "localProbeBlockedBusinessWriteCount": 1,
+    "localProbeWebSocketPageFramesDropped": 0,
+    "localProbeBlockedWriteAttempts": [
+      {
+        "method": "POST",
+        "pathTemplate": "/_data/v1/a/t/",
+        "requestFieldNames": [
+          "data"
+        ],
+        "classification": "outside_rest_api_body_not_inspected"
+      }
+    ],
+    "localProbeBlockedPreferenceAccountWriteCount": 0,
+    "localProbeBusinessWritesForwarded": false
+  },
+  "safety": {
+    "conversationCreated": false,
+    "chatResponseRequested": false,
+    "imageOrVideoGenerationRequested": false,
+    "modelOptionSelected": true,
+    "rawRequestOrResponseBodiesPersisted": false,
+    "credentialsOrCookiesPersisted": false,
+    "accountOrConversationIdentifiersPersisted": false,
+    "signedUrlsPersisted": false,
+    "fastModeSelectionWasRestoredToAuto": true,
+    "chatOrMediaInputForwarded": false,
+    "fastModeTrialRestoredToAuto": true,
+    "preferenceAccountWriteForwarded": false,
+    "chatOrMediaBusinessInputForwarded": false,
+    "browserWriteRequestsForwarded": 0
+  },
+  "localSelectionProbe": {
+    "observedAt": "2026-10-05T22:40:16.055830+00:00",
+    "role": "codex-grok-models-20261006",
+    "baseline": {
+      "label": "Auto",
+      "id": "auto",
+      "selectedItemCount": 1,
+      "disabled": false
+    },
+    "afterFastSelection": {
+      "label": "Fast",
+      "id": "fast",
+      "selectedItemCount": 1,
+      "disabled": false
+    },
+    "afterAutoRestore": {
+      "label": "Auto",
+      "id": "auto",
+      "selectedItemCount": 1,
+      "disabled": false
+    },
+    "fastSelectedVerified": true,
+    "autoRestoredVerified": true,
+    "selectionSetterSource": "useModesStore.getState().setSelectedModeId(modeId, {source:\"user\"})",
+    "sdkSelectedModeField": "selectedModeId",
+    "localStorageModeWrites": [
+      {
+        "operation": "setItem",
+        "key": "modes-selected-id",
+        "valueMatchesMode": false,
+        "modeValue": null
+      },
+      {
+        "operation": "removeItem",
+        "key": "modes-synthetic-id"
+      },
+      {
+        "operation": "setItem",
+        "key": "modes-selected-id",
+        "valueMatchesMode": false,
+        "modeValue": null
+      },
+      {
+        "operation": "removeItem",
+        "key": "modes-synthetic-id"
+      }
+    ],
+    "blockedOtherApiReads": [],
+    "websocket": {
+      "connections": 0,
+      "pageFramesDropped": 0,
+      "serverFramesForwarded": 0,
+      "businessFramesDelivered": 0
+    },
+    "chatOrMediaInputForwarded": false,
+    "chatOrMediaWriteDispatched": false,
+    "finalLocalStorageRead": {
+      "storageKeyPresent": true,
+      "storageValueMatchesKnownMode": false,
+      "storageValueIsJson": true,
+      "nestedKnownModeIds": [
+        "auto"
+      ],
+      "selectedMenuLabels": [
+        "Auto"
+      ],
+      "rawValuePersisted": false,
+      "observedAt": "2026-10-05T22:41:55.282473+00:00"
+    },
+    "blockedHttpWriteAttempts": [
+      {
+        "method": "POST",
+        "pathTemplate": "/_data/v1/a/t/",
+        "requestFieldNames": [
+          "data"
+        ],
+        "classification": "outside_rest_api_body_not_inspected"
+      }
+    ],
+    "blockedPreferenceAccountWriteAttempts": [],
+    "sessionControl": {
+      "selectedModeField": "selectedModeId",
+      "wssSessionCreateObserved": false,
+      "reason": "The selector probe did not submit a chat or create a gateway session.",
+      "businessInputForwarded": false
+    }
+  }
+}

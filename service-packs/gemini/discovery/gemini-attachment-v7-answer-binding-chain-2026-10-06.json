@@ -1,0 +1,353 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_chain",
+  "sourceSnapshotBeforeChain": {
+    "files": [
+      {
+        "path": "discovery/observed-contract.json",
+        "bytes": 39299,
+        "sha256": "cbd3ca0bdbfaeb0ae12bbb59ab7ecac2e4c3979edbe01f59ed1fd0bbec001f72"
+      },
+      {
+        "path": "scripts/gemini-attachment-chain-controlled-once.py",
+        "bytes": 92036,
+        "sha256": "a42c9da6ce48351e5fa8ae0f4b4366cc288bb176ff939ef6d878b90fd17e44e8"
+      },
+      {
+        "path": "src/attachment-chain.mjs",
+        "bytes": 52831,
+        "sha256": "74ab6fb096c595c35cd0f31a39d25fe877ba407fbacdc1bf8c37ff7aed54e561"
+      },
+      {
+        "path": "src/attachment-upload.mjs",
+        "bytes": 73285,
+        "sha256": "1af2ee26759fbff9d28868117f9e2cd8ba3cddb7456db0946d09a3c262a774af"
+      },
+      {
+        "path": "src/batch-response.mjs",
+        "bytes": 13763,
+        "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+      },
+      {
+        "path": "src/bootstrap-receive.mjs",
+        "bytes": 4471,
+        "sha256": "bbbd40b2c5ac74fa994d8e14c76a59d1b354210ae03097990b62f74e54542536"
+      },
+      {
+        "path": "src/chrome-public-document-transport.mjs",
+        "bytes": 5264,
+        "sha256": "fa4a464e47aee7c61794046ca83380924378df5fa98d4e018b04038d50826c2f"
+      },
+      {
+        "path": "src/cli.mjs",
+        "bytes": 101565,
+        "sha256": "130dd608be8944a7029d1a38db6ec7a73eea5cd57fef1e3cd6905a64ab76cb8c"
+      },
+      {
+        "path": "src/client.mjs",
+        "bytes": 37442,
+        "sha256": "9da7b4fd73a8e0f2af717d3356fd4a0110a43f23b0d82c68637300a974301d71"
+      },
+      {
+        "path": "src/constants.mjs",
+        "bytes": 632,
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "bytes": 33313,
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs",
+        "bytes": 33635,
+        "sha256": "5bfe0f5c23d9b1639f8db0242487682182aab16c316071ff362950ab1bce2b60"
+      },
+      {
+        "path": "src/errors.mjs",
+        "bytes": 332,
+        "sha256": "8337ec3eda6bd34b1d5303af5793986e1ed3730c3a138caa3f0ab9fa4dfd4075"
+      },
+      {
+        "path": "src/evidence.mjs",
+        "bytes": 1067,
+        "sha256": "73ded090b948798eb6b3fc86f99272efcaa5e69b16eb6d376e381b99d9c6d8c3"
+      },
+      {
+        "path": "src/feature-checklist.mjs",
+        "bytes": 89714,
+        "sha256": "395ae5048bb3e14abf9f57a3cd98fc6fdc1bf747be0b538e15e4922522cbdcef"
+      },
+      {
+        "path": "src/history-detail.mjs",
+        "bytes": 13856,
+        "sha256": "2605b37c565ab57fdd49a4c96e42191c1d35bc8a36a96882b667aa743aeb9374"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "bytes": 10277,
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "bytes": 12425,
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "bytes": 2959,
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/journal.mjs",
+        "bytes": 12548,
+        "sha256": "0d9e2ba7cf4c66c3bf3a6298c25b4c37e2f687825682419ae5d04ff92f893754"
+      },
+      {
+        "path": "src/lifecycle-mutation.mjs",
+        "bytes": 27008,
+        "sha256": "c8ade48d0e0c7eba2f5d1f89d829ec889d64a1b7321ebd027702e98aeb265b79"
+      },
+      {
+        "path": "src/media-capture.mjs",
+        "bytes": 7336,
+        "sha256": "44cfd457a1ea6fb2744da671c3be31887d5510ab869abf4d432111a6f7a55d80"
+      },
+      {
+        "path": "src/media-direct-once.mjs",
+        "bytes": 6881,
+        "sha256": "81a15f509517520db9932c05763619128e4706dba74f8b97c9192940cbd9931f"
+      },
+      {
+        "path": "src/media-download.mjs",
+        "bytes": 31131,
+        "sha256": "616e0cb33b433d335726f6d33c7149bf7002e7837f017d308e9d0d0b151d10fa"
+      },
+      {
+        "path": "src/media-response.mjs",
+        "bytes": 16108,
+        "sha256": "5c29417091ed491986c256d0f4a5f2398823f3727f0bba80cf8e719eed90c08b"
+      },
+      {
+        "path": "src/media.mjs",
+        "bytes": 5635,
+        "sha256": "31003f9ba7e60102db2bbd803fe66d302cea7cb376323ba9d0a1b9101e8f51be"
+      },
+      {
+        "path": "src/model-selection.mjs",
+        "bytes": 20330,
+        "sha256": "97ccfdb580b8b44bf29bd581090521ab995098da67a7d17b09241b4487631b00"
+      },
+      {
+        "path": "src/mutation.mjs",
+        "bytes": 1917,
+        "sha256": "5bda23914e7f4d658932a4ff0cda907821b400f1cefcd9e96942a620606b0394"
+      },
+      {
+        "path": "src/original-image-download.mjs",
+        "bytes": 29408,
+        "sha256": "ef9f38adea89f3c98049ad08f5b2e708810c3f3a47864321836b67fd49d2e6c6"
+      },
+      {
+        "path": "src/public-document.mjs",
+        "bytes": 6120,
+        "sha256": "9b81f4957c4dc6596aafcd85262ee333b40980be0267a5e9f3df36deff66631c"
+      },
+      {
+        "path": "src/rpc-adapters.mjs",
+        "bytes": 1738,
+        "sha256": "ff4618cef8ffa148fa6177094c8bf73b7457909870f18b1a68976c4985998400"
+      },
+      {
+        "path": "src/secure-credential-store.mjs",
+        "bytes": 6192,
+        "sha256": "5e296377c88c7a2920abfce12f103d63438e82742166f4cd3a60bf86094a6c25"
+      },
+      {
+        "path": "src/session-renewal.mjs",
+        "bytes": 4065,
+        "sha256": "c899fad625b68e8b3471732c9e39b7c9fd16da904318d74463956c46f89bd56e"
+      },
+      {
+        "path": "src/session.mjs",
+        "bytes": 37736,
+        "sha256": "b0607f4cda0582706f488611c868f2afa11c00942fa9cf4b324d4b57689db5db"
+      },
+      {
+        "path": "src/settings-update.mjs",
+        "bytes": 22683,
+        "sha256": "c4104f97d9c5ef953beb385975bda3470c3fd08d3858198578cf1ed0bb770cd5"
+      },
+      {
+        "path": "src/text-adapter.mjs",
+        "bytes": 28033,
+        "sha256": "359fdbe3c0d918881c4ea267a80d71644e047f68870dc816361a730f20745527"
+      },
+      {
+        "path": "src/text-lifecycle.mjs",
+        "bytes": 23861,
+        "sha256": "a58201a9688a140fb1398523a688727c4b60000f9129a1c4807165e152ab522e"
+      },
+      {
+        "path": "src/text-readback.mjs",
+        "bytes": 2735,
+        "sha256": "d3af2bed11b6f48ad029da89706aa870b4b742e682352af07a08ed2ba46de8e9"
+      },
+      {
+        "path": "src/text-response.mjs",
+        "bytes": 5010,
+        "sha256": "a5a5e993518ed83c4e30753311b2e2957233639d25c79f9b2fe35d0c4e0074de"
+      }
+    ],
+    "aggregateSha256": "f0013b923694360ab8444140da5bdcebf71f3d820cd8fcc61f4714ab2cfd7246"
+  },
+  "sourceSnapshotStableThroughReceipt": true,
+  "callerIntent": "gemini-attachment-v7-answer-binding-20261006-v1",
+  "messageCallerIntent": "gemini-attachment-v7-answer-binding-message-20261006-v1",
+  "recordedAt": "2026-10-06T10:29:59.493487+00:00",
+  "outputStatus": "incomplete",
+  "failureCode": "ATTACHMENT_CHAIN_NATIVE_UPLOAD_CAPTURE_INCOMPLETE",
+  "ownerDigestMatchedApproved": true,
+  "file": {
+    "name": "gemini-attachment-v7-answer-binding-20261006.txt",
+    "mimeType": "text/plain",
+    "bytes": 12,
+    "sha256": "2619b20221528e4233ff3e5967baa9a009d1ade313e5d97f3bb53ed1830ca50e"
+  },
+  "directDispatchCount": 1,
+  "mutationJournal": {
+    "attachment_upload": {
+      "state": "response_received",
+      "dispatchCount": 1,
+      "httpStatus": 200
+    }
+  },
+  "childError": null,
+  "directUploadSafeSummary": null,
+  "attachmentMessage": null,
+  "attachmentBindingDiagnostics": null,
+  "bindingDiagnosticAttempts": [],
+  "nativeAttachmentMessageCaptureAttempts": [],
+  "attachmentReferenceRecovery": null,
+  "selectedFileType": "text/plain",
+  "nativeContinuation": null,
+  "nativeStartObserved": true,
+  "nativeContinuationObserved": false,
+  "continuationCookieSnapshot": null,
+  "nativeAttachmentMessageObserved": false,
+  "normalHistoryTemplate": {
+    "captured": true,
+    "rpcId": "MaZiqc",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "observedHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "directReadHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "cursorAdjustedToCapturedFirstPageTemplate": false,
+    "canonicalFirstPageTemplateSource": "scripts/run-linux-text-smoke.py:FIRST_PAGE_HISTORY_ARGS",
+    "atPresentInMemory": true,
+    "rawQueryAndTokenValuesPersisted": false
+  },
+  "historyArgsMismatch": null,
+  "directStart": {
+    "httpStatus": 200,
+    "responseHeaderNames": [
+      "access-control-allow-credentials",
+      "access-control-allow-origin",
+      "access-control-expose-headers",
+      "content-type",
+      "x-goog-upload-chunk-granularity",
+      "x-goog-upload-control-url",
+      "x-goog-upload-status",
+      "x-goog-upload-url",
+      "x-guploader-uploadid"
+    ],
+    "contentType": "text/plain",
+    "responseBytes": 0,
+    "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sessionUrlRef": {
+      "origin": "https://push.clients6.google.com",
+      "pathFamily": "/upload/",
+      "queryKeyNames": [
+        "upload_id",
+        "upload_protocol"
+      ]
+    }
+  },
+  "directTransferResponse": null,
+  "guardLifecycle": {
+    "registeredTargetIdMatched": true,
+    "resetQuietVerifiedThroughDisconnect": false,
+    "lateBlockedRequestCount": 0,
+    "browserClosed": false,
+    "contextClosed": false
+  },
+  "rawBodiesOrCredentialValuesPersisted": false,
+  "rawOwnerEmailPersisted": false,
+  "rawUploadSessionUrlPersisted": false,
+  "rawAttachmentReferencePersisted": false,
+  "rawPromptOrFileContentsPersisted": false,
+  "attemptCount": 1,
+  "attempts": [
+    {
+      "recordedAt": "2026-10-06T10:29:59.493487+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_NATIVE_UPLOAD_CAPTURE_INCOMPLETE",
+      "directDispatchCount": 1,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": false,
+      "nativeAttachmentMessageObserved": false,
+      "historyArgsMismatch": null,
+      "childError": null,
+      "directUploadSafeSummary": null,
+      "attachmentBindingDiagnostics": null,
+      "bindingDiagnosticAttempts": [],
+      "nativeAttachmentMessageCaptureAttempts": [],
+      "sourceBindingResolutionPlan": null,
+      "attachmentReferenceRecovery": null,
+      "nativeContinuation": null,
+      "continuationCookieSnapshot": null,
+      "mutationJournal": {
+        "attachment_upload": {
+          "state": "response_received",
+          "dispatchCount": 1,
+          "httpStatus": 200
+        }
+      },
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    }
+  ]
+}

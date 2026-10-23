@@ -1,0 +1,19 @@
+{
+  "name": "coupang-shopping-crawler",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "description": "Observed direct HTTP Coupang public product feeds and category metadata",
+  "scripts": {
+    "coupang:feed": "node scripts/coupang-shopping.mjs feed",
+    "coupang:deals": "node scripts/coupang-shopping.mjs deals",
+    "coupang:sections": "node scripts/coupang-shopping.mjs sections",
+    "coupang:find": "node scripts/coupang-shopping.mjs find",
+    "coupang:categories": "node scripts/coupang-shopping.mjs categories",
+    "coupang:banner": "node scripts/coupang-shopping.mjs line-banner",
+    "coupang:catalog": "node scripts/coupang-shopping.mjs catalog"
+  }
+}

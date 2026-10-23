@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "service": "threads",
+  "owner": "lifehack__ailab",
+  "ownerId": "17824859444",
+  "observedAt": "2026-10-01T03:40:54Z",
+  "provenance": "Authenticated first-party Insights UI. Network request/response paired by requestId; credentials omitted.",
+  "operations": {
+    "summary": {"name": "BarcelonaInsightsV2SummaryCardQuery", "docId": "37630757686538087", "path": "/api/graphql", "requestId": "22752.396", "responseRoot": "xigTextAppViewer.text_app_account_insights"},
+    "audience": {"name": "BarcelonaInsightsV2AudienceCardQuery", "docId": "27976457238715713", "path": "/api/graphql", "requestId": "22752.397", "responseRoot": "xigTextAppViewer.text_app_account_insights"},
+    "links": {"name": "BarcelonaInsightsV2LinkClicksCardQuery", "docId": "28405021995802785", "path": "/graphql/query", "requestId": "22752.398", "responseRoot": "xdtTextAppViewer.contentInsights.links.edges"},
+    "posts": {"name": "BarcelonaInsightsLeftPanelPostsListQuery", "docId": "28867854396132950", "path": "/graphql/query", "requestId": "22752.399", "responseRoot": "viewer.content_insights.posts"},
+    "post": {"name": "BarcelonaPostInsightsV2PanelQuery", "docId": "28265018346533781", "path": "/api/graphql", "requestId": "22752.431", "responseRoot": "media.text_post_app_info.post_insights"},
+    "postRates": {"name": "BarcelonaPostInsightsV2WhatImpactsViewsSectionQuery", "docId": "28271018542557081", "path": "/graphql/query", "requestId": "22752.432", "responseRoot": "media.text_post_app_info.post_insights"},
+    "aiSummary": {"name": "BarcelonaInsightsV2AiSummaryCardQuery", "docId": "27989457067358998", "path": "/api/graphql", "requestId": "22752.395", "responseRoot": "xth_insights_ai_summary"}
+  },
+  "variableTypes": {
+    "startDate": "string YYYY-MM-DD", "endDate": "string YYYY-MM-DD",
+    "timeZoneID": "ASIA_SEOUL for summary, audience and post",
+    "timeZoneName": "Asia/Seoul for links and posts", "timeZone": "Asia/Seoul for aiSummary",
+    "first": "integer 10; posts only", "orderedBy": "DATE; posts only", "postType": "TOP_LEVEL; posts only",
+    "mediaID": "decimal media PK string from the verified owner post list; post only",
+    "postID": "same decimal media PK string; post and postRates"
+  },
+  "providerVariables": {
+    "posts": {"__relay_internal__pv__BarcelonaHasInsightsV2M2relayprovider": false, "__relay_internal__pv__BarcelonaIsInternalUserrelayprovider": false, "__relay_internal__pv__BarcelonaOptionalCookiesEnabledrelayprovider": true},
+    "post": {"__relay_internal__pv__BarcelonaCanSeeSponsoredContentrelayprovider": false, "__relay_internal__pv__BarcelonaIsLoggedInrelayprovider": true, "__relay_internal__pv__BarcelonaMessagesHasLiveChatMessagingrelayprovider": false, "__relay_internal__pv__BarcelonaHasEventBadgerelayprovider": false, "__relay_internal__pv__BarcelonaHasWebFaviconsrelayprovider": false, "__relay_internal__pv__BarcelonaIsCrawlerrelayprovider": false, "__relay_internal__pv__BarcelonaHasCommunityTopContributorsrelayprovider": false}
+  },
+  "nullability": {"accountInsightsData": "null for a known UNAVAILABLE status; usable data may also accompany insufficient-follower status", "aiSummary": "null observed", "postImpressions": "null observed and retained", "demographics": "null observed and retained", "postRatesIdentity": "composite media-PK_owner-ID; no separate response pk or username field required"},
+  "requestFields": ["av", "__user", "__a", "__req", "__hs", "dpr", "__ccg", "__rev", "__s", "__hsi", "__dyn", "__csr", "__hsdp", "__hblp", "__sjsp", "__comet_req", "fb_dtsg", "jazoest", "lsd", "__spin_r", "__spin_b", "__spin_t", "__crn", "fb_api_caller_class", "fb_api_req_friendly_name", "server_timestamps", "variables", "doc_id"],
+  "initiator": {"type": "script", "wrapper": "r.send", "scriptHost": "static.cdninstagram.com", "line": 1581},
+  "response": {"httpStatus": 200, "types": ["text/javascript", "application/json"], "prefix": "for (;;); optional"},
+  "limits": {"postsFirst": 10, "postsPaginationCaptured": false, "dateRangeObservedDays": 90, "timezone": "Asia/Seoul", "timeZoneID": "ASIA_SEOUL"},
+  "credentials": {"provider": "Windows DPAPI CurrentUser", "freshBootstrap": "authenticated profile HTML", "valuesRecorded": false}
+}

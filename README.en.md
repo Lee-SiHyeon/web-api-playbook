@@ -34,6 +34,10 @@ Real implementations built this way. Scope and limits differ per service and are
 
 See the full list in the [detailed guide](docs/guide.md#무엇이-들어-있나) (Korean) or run `npm run services`.
 
+## Consolidated clients
+
+Gemini, Grok, ChatGPT, both Flow implementations, Whisk, Adpick, Threads actions and additional shopping/travel/social clients are now bundled. See the [repository consolidation map](references/repository-consolidation.md) for pinned commits and execution boundaries. Run npm run clients for the metadata-only catalog and npm run test:client-packs for their original offline regression tests. This migration performs no account login, generation or publishing.
+
 ## Quick start
 
 Requires Node.js 24+, npm and Git. The examples below only read synthetic files in the repository: no browser, network or login.

@@ -1,0 +1,48 @@
+{
+  "schema": "gemini-feature-pair-evidence-v1",
+  "service": "gemini-web",
+  "featureId": "history",
+  "operationId": "history_read",
+  "caseId": "conversation",
+  "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+  "clientCodeSha256": "4a56d29af37a93db9ee586769a1947cff6b83101ac02009413abb17f7dcaa233",
+  "observedAt": "2026-10-06T12:22:46.910Z",
+  "executionHost": "linux_worker",
+  "transport": "direct_http",
+  "evidenceClass": "direct_http_live",
+  "mocked": false,
+  "publicOnly": false,
+  "requestResponsePaired": true,
+  "authenticatedOwnerVerified": true,
+  "expectedOutcomeVerified": true,
+  "credentialPropagated": true,
+  "request": {
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "headerNames": [],
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "valuesPersisted": false,
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8"
+  },
+  "response": {
+    "status": 200,
+    "contentType": "application/json",
+    "bytes": 1873,
+    "bodySha256": "d3800e415d09d53a7d18965d26d2ae8d197838e2220469f048d3e352f88c3c49",
+    "framing": "batchexecute"
+  },
+  "secretsPersisted": false
+}

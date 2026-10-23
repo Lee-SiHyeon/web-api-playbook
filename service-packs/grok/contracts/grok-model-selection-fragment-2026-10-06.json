@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "fragmentId": "grok-model-selection",
+  "observedAt": "2026-10-06",
+  "sourceAssets": [
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/1xpv0qochhbm7.js",
+      "sha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+      "sourceFunctions": {
+        "models.modes": "modelsListModesRaw",
+        "models.modes.responseMapper": "Q(e): id, title, description, badgeText, availability, iconHint, tags",
+        "models.modes.request": "POST /rest/modes with {locale}"
+      }
+    },
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/0ifwvga6jhm06.js",
+      "sha256": "a356353a1563347d0e5e48184dab0df7ace904936f0e16118fdeaca9bbd132de",
+      "sourceFunctions": {
+        "chat.model-selector": "QueryBar ModeSelect callsite",
+        "chat.model-selection-control": "useModesStore.getState().setSelectedModeId"
+      }
+    }
+  ],
+  "catalogOperationRef": {
+    "operationId": "models.modes",
+    "fragment": "grok-conversations-fragment-2026-10-06.json",
+    "method": "POST",
+    "path": "/rest/modes",
+    "requestBodyFieldNames": [
+      "locale"
+    ],
+    "responseFieldNames": [
+      "modes",
+      "defaultModeId"
+    ],
+    "selectionMutationRoute": "none_observed"
+  },
+  "sourceNativeControl": {
+    "selectorContainer": "[data-query-bar-mode-select]",
+    "choiceRole": "menuitemradio",
+    "stateHook": "useModesStore",
+    "selectedField": "selectedModeId",
+    "setter": "setSelectedModeId(modeId, {source: user})",
+    "localStorageKeyObservedDuringSelection": "modes-selected-id",
+    "effect": "local_sdk_state_and_local_storage",
+    "standaloneModelPreferenceEndpointObserved": false,
+    "chatOrMediaGenerationRequiredToChangeSelection": false,
+    "sessionControl": {
+      "selectedModeField": "selectedModeId",
+      "wssSessionCreateObservedInSelectorProbe": false,
+      "reason": "The selector probe did not submit a chat or create a gateway session."
+    }
+  },
+  "liveCapture": {
+    "receipt": "verification/grok-model-selection-live-2026-10-06.json",
+    "authenticatedSessionObserved": true,
+    "ownerIdentityMatchedToVerifiedBrowserOwner": true,
+    "pageRole": "codex-grok-models-20261006",
+    "catalogHttpStatus": 200,
+    "catalogResponseContentType": "application/json",
+    "catalogModeCount": 5,
+    "defaultModeId": "auto",
+    "choices": [
+      {
+        "id": "auto",
+        "title": "Auto",
+        "description": "Chooses Fast or Expert",
+        "available": null
+      },
+      {
+        "id": "fast",
+        "title": "Fast",
+        "description": "Quick responses · Grok 4.7",
+        "available": null
+      },
+      {
+        "id": "expert",
+        "title": "Expert",
+        "description": "Thinks hard · Grok 4.7",
+        "available": null
+      },
+      {
+        "id": "heavy",
+        "title": "Heavy",
+        "description": "Team of Experts · Grok 4.7",
+        "available": null,
+        "minimumSubscriptionTier": "TIER_SUPERGROK_HEAVY"
+      },
+      {
+        "id": "build",
+        "title": "Build",
+        "description": "Build apps and sites · Grok 4.7",
+        "badgeText": "Beta",
+        "available": null
+      }
+    ],
+    "selectorMenuOrder": ["Auto", "Fast", "Expert", "Build", "Heavy"],
+    "selectionTrial": {
+      "baseline": "auto",
+      "selected": "fast",
+      "restored": "auto",
+      "finalUiAndStoredSelectionVerified": true,
+      "preferenceAccountWriteForwarded": false,
+      "preferenceAccountWriteAttempted": false,
+      "httpWriteBlocked": true,
+      "blockedWriteAttempt": {
+        "method": "POST",
+        "path": "/_data/v1/a/t/",
+        "requestFieldNames": ["data"],
+        "bodyInspectedOrPersisted": false,
+        "forwarded": false
+      },
+      "chatOrMediaBusinessInputForwarded": false
+    }
+  },
+  "implementation": {
+    "module": "src/grok-model-selection.mjs",
+    "modeReaderUsesExistingOperationId": true,
+    "selectionUsesFirstPartyStoreSetter": true,
+    "serverPreferenceMutationImplemented": false
+  }
+}

@@ -1,0 +1,181 @@
+{
+  "operation": "attachment.upload.direct",
+  "state": "completed",
+  "ownerVerified": true,
+  "browserBusinessWritesDelivered": 0,
+  "uniqueMarkerAbsentBeforeWrite": true,
+  "uploadRequestCount": 1,
+  "uploadHttpStatus": 200,
+  "uploadSourceReceipt": null,
+  "cleanupSourceReceipt": null,
+  "sourceReadReceipts": [
+    {
+      "operationId": "attachment.assets.search",
+      "observedAt": "2026-10-06T05:34:31.697Z",
+      "source": "direct_http",
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 13,
+      "parsedData": true,
+      "requestDigest": "f42a9baeee5053db47a9827b7118e8deceeeb3f85ab5d5b938f420b1a5a02a80",
+      "responseDigestPersisted": false,
+      "requestHeaderNames": [
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "httpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "assetResultCount": 0,
+      "exactNameMatchCount": 0,
+      "nextPagePresent": false
+    },
+    {
+      "operationId": "attachment.assets.search",
+      "observedAt": "2026-10-06T05:34:33.319Z",
+      "source": "direct_http",
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 823,
+      "parsedData": true,
+      "requestDigest": "f42a9baeee5053db47a9827b7118e8deceeeb3f85ab5d5b938f420b1a5a02a80",
+      "responseDigestPersisted": false,
+      "requestHeaderNames": [
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "httpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "assetResultCount": 1,
+      "exactNameMatchCount": 1,
+      "nextPagePresent": false
+    },
+    {
+      "operationId": "attachment.file-metadata.read",
+      "observedAt": "2026-10-06T05:34:32.862Z",
+      "source": "direct_http",
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 339,
+      "parsedData": true,
+      "requestDigest": "b9256dee93b5ac83a7d17569e1b929f2703cd2cb409a7c611269c260fbeb75bc",
+      "responseDigestPersisted": false,
+      "requestHeaderNames": [
+        "cookie",
+        "origin",
+        "referer"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "httpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "responseFieldNames": [
+        "createTime",
+        "fileMetadataId",
+        "fileMimeType",
+        "fileName",
+        "fileSource",
+        "fileUri",
+        "parsedFileUri"
+      ]
+    },
+    {
+      "operationId": "attachment.asset.read",
+      "observedAt": "2026-10-06T05:34:33.764Z",
+      "source": "direct_http",
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 810,
+      "parsedData": true,
+      "requestDigest": "cd9b3edd96eebb050cd0ff431cc7bc24145e399bbab1fc22dbb3b560d90d263d",
+      "responseDigestPersisted": false,
+      "requestHeaderNames": [
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "httpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "responseFieldNames": [
+        "assetId",
+        "auxKeys",
+        "createTime",
+        "fileSource",
+        "inlineStatus",
+        "isDeleted",
+        "isLatest",
+        "isModelGenerated",
+        "isPublic",
+        "isRootAssetCreatedByModel",
+        "key",
+        "lastUseTime",
+        "mimeType",
+        "name",
+        "ownerUserId",
+        "previewImageKey",
+        "rootAssetId",
+        "sharedWithTeam",
+        "sharedWithUserIds",
+        "sizeBytes",
+        "summary",
+        "updateTime"
+      ]
+    }
+  ],
+  "exactTaskAssetMatchesAfterWrite": 1,
+  "fileBytes": 20,
+  "fileSha256": "ea16634bdedacb0115b413cdb78cc31b7fcbd04bd15b80e0a49c9e52195bbf3f",
+  "metadataReadbackVerified": true,
+  "assetReadbackVerified": true,
+  "download": {
+    "status": 200,
+    "mimeType": "text/plain",
+    "bodyBytes": 20,
+    "sha256": "ea16634bdedacb0115b413cdb78cc31b7fcbd04bd15b80e0a49c9e52195bbf3f",
+    "bytesMatch": true,
+    "artifactPath": "/home/worker/artifacts/grok-attachments-20261006/a5ed2ef269cf4bda-codex-attachment-retain-20261007.txt",
+    "headersSubmittedNames": [
+      "accept",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "user-agent"
+    ],
+    "cookieNamesUsed": [
+      "sso"
+    ]
+  },
+  "downloadVerified": true,
+  "cleanupHttpStatus": null,
+  "cleanupVerified": false,
+  "cleanupRequested": false,
+  "retainedForReuse": true,
+  "browserRequestCount": 0
+}

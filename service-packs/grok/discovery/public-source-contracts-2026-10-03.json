@@ -1,0 +1,214 @@
+{
+  "service": "grok",
+  "observedDate": "2026-10-03",
+  "requestTimestampUtc": null,
+  "evidenceKind": "public_document_and_published_static_source",
+  "stage": "source_discovery_before_client_implementation",
+  "laterClientReplayReceipt": "client-public-models-replay-2026-10-03.json",
+  "document": {
+    "origin": "https://grok.com",
+    "path": "/",
+    "method": "GET",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bodyBytes": 794235,
+    "bodySha256": "76e0a57fd4d70c95ba79a2c6940d6252c8f612b16a97630abb00efa12b0acdec",
+    "parser": "parse5 7.3.0",
+    "scriptTagCount": 93,
+    "uniqueExternalApplicationScriptCount": 84,
+    "staticAssets": {
+      "origin": "https://cdn.grok.com",
+      "status200Count": 84,
+      "statusOtherOrErrorCount": 0,
+      "sameOriginAsDocument": false,
+      "sameSiteFirstPartyCdn": true
+    },
+    "cloudflareTextMarkerPresent": true,
+    "challengeConfirmed": false,
+    "authenticated": false
+  },
+  "sourceContracts": [
+    {
+      "operation": "modelsGetModelsRaw",
+      "sourceAsset": {
+        "origin": "https://cdn.grok.com",
+        "path": "/_next/static/chunks/35ntlely29ab3.js",
+        "status": 200,
+        "bodyBytes": 772687,
+        "sha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316"
+      },
+      "request": {
+        "origin": "https://grok.com",
+        "path": "/rest/models",
+        "method": "POST",
+        "contentType": "application/json",
+        "jsonFields": ["locale"],
+        "localeValueUsed": "en",
+        "localeEvidence": "public document html[lang]=en",
+        "cookiesSent": false
+      },
+      "sourceResponseMapping": [
+        "models",
+        "unavailableModels",
+        "defaultAnonModel",
+        "defaultFreeModel",
+        "defaultProModel",
+        "defaultHeavyModel",
+        "defaultAnonMode",
+        "defaultFreeMode",
+        "defaultProMode",
+        "defaultHeavyMode"
+      ],
+      "directReadVerified": true,
+      "directReadResponse": {
+        "status": 200,
+        "contentType": "application/json",
+        "bodyBytes": 898,
+        "sha256": "7b751e71ddb6a5e035763763736374683fae683abe45d519fda6d6ec69ad37ce",
+        "topLevelKeys": [
+          "defaultAnonMode",
+          "defaultAnonModel",
+          "defaultFreeMode",
+          "defaultFreeModel",
+          "defaultHeavyMode",
+          "defaultHeavyModel",
+          "defaultProMode",
+          "defaultProModel",
+          "models",
+          "unavailableModels"
+        ],
+        "modelCount": 3,
+        "unavailableModelCount": 0,
+        "selectedSafeModelFields": ["modelId", "name", "description"],
+        "modelIds": ["grok-3", "grok-420", "grok-4-1-thinking-1129"],
+        "defaultModels": {
+          "anon": "grok-3",
+          "free": "grok-3",
+          "pro": "grok-4",
+          "heavy": "grok-4"
+        },
+        "defaultModes": {
+          "anon": "MODEL_MODE_AUTO",
+          "free": "MODEL_MODE_AUTO",
+          "pro": "MODEL_MODE_AUTO",
+          "heavy": "MODEL_MODE_AUTO"
+        },
+        "responseHeadersRecorded": ["content-type"],
+        "responseHeaderValuesStored": false,
+        "requestTimestampUtc": null
+      },
+      "browserRequestCaptured": false,
+      "credentialPropagated": false,
+      "productionClientReplayVerified": false
+    },
+    {
+      "operation": "chatCreateConversationAndRespond",
+      "sourceAsset": {
+        "origin": "https://cdn.grok.com",
+        "path": "/_next/static/chunks/0uf56-pwxogcp.js",
+        "status": 200,
+        "bodyBytes": 220394,
+        "sha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a"
+      },
+      "request": {
+        "origin": "https://grok.com",
+        "path": "/rest/app-chat/conversations/new",
+        "method": "POST",
+        "jsonFieldsObserved": [
+          "systemPromptName",
+          "temporary",
+          "modelName",
+          "message",
+          "fileAttachments",
+          "imageAttachments",
+          "disableSearch",
+          "enableImageGeneration",
+          "returnImageBytes",
+          "returnRawGrokInXaiRequest",
+          "enableImageStreaming",
+          "imageGenerationCount",
+          "forceConcise",
+          "toolOverrides",
+          "enableSideBySide",
+          "sendFinalMetadata",
+          "customInstructions"
+        ]
+      },
+      "browserRequestCaptured": false,
+      "directReadVerified": false,
+      "writeOrGenerationExecuted": false
+    },
+    {
+      "operation": "chatAddResponse",
+      "sourceAsset": {
+        "origin": "https://cdn.grok.com",
+        "path": "/_next/static/chunks/0uf56-pwxogcp.js",
+        "sha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a"
+      },
+      "request": {
+        "pathTemplate": "/rest/app-chat/conversations/{conversationId}/responses",
+        "method": "POST",
+        "bodySchema": "generated ChatAddResponseBodyToJSON serializer; fields not captured in this source-only pass"
+      },
+      "browserRequestCaptured": false,
+      "writeExecuted": false
+    },
+    {
+      "operation": "chatLoadResponses",
+      "sourceAsset": {
+        "origin": "https://cdn.grok.com",
+        "path": "/_next/static/chunks/0uf56-pwxogcp.js",
+        "sha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a"
+      },
+      "request": {
+        "pathTemplate": "/rest/app-chat/conversations/{conversationId}/load-responses",
+        "method": "POST",
+        "jsonFields": ["responseIds"]
+      },
+      "browserRequestCaptured": false,
+      "writeExecuted": false
+    },
+    {
+      "operation": "grokTasksGetGrokCreatedTasksByConversationId",
+      "sourceAsset": {
+        "origin": "https://cdn.grok.com",
+        "path": "/_next/static/chunks/35ntlely29ab3.js",
+        "sha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316"
+      },
+      "request": {
+        "origin": "https://grok.com",
+        "pathTemplate": "/rest/tasks/responses/{conversationId}",
+        "method": "GET"
+      },
+      "sourceResponseMapping": ["taskIdWithResponseIds"],
+      "browserRequestCaptured": false,
+      "directReadVerified": false
+    },
+    {
+      "operation": "grokTasksGetTaskByConversationIdIfExists",
+      "sourceAsset": {
+        "origin": "https://cdn.grok.com",
+        "path": "/_next/static/chunks/35ntlely29ab3.js",
+        "sha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316"
+      },
+      "request": {
+        "origin": "https://grok.com",
+        "pathTemplate": "/rest/tasks/conversation/{conversationId}",
+        "method": "GET"
+      },
+      "sourceResponseMapping": ["task", "result"],
+      "browserRequestCaptured": false,
+      "directReadVerified": false
+    }
+  ],
+  "safetyAndCoverage": {
+    "chatImageVideoMutationSent": false,
+    "billingOrAccountEndpointRead": false,
+    "rawHtmlPersisted": false,
+    "cookieOrTokenValuesRecorded": false,
+    "browserCaptured": false,
+    "credentialPropagated": false,
+    "liveReplay": false,
+    "importantScope": "Source-level method contract plus one successful unauthenticated model-metadata read; no browser operation capture or production client replay."
+  }
+}

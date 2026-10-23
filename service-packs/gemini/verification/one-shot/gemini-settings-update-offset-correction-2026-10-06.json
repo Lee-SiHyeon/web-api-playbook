@@ -1,0 +1,56 @@
+{
+  "schema": "gemini-settings-update-offset-correction-v1",
+  "service": "gemini-web",
+  "operation": "settings_update",
+  "recordedAt": "2026-10-06T10:34:19Z",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-settings-update-20261006",
+  "callerIntent": "gemini-side-nav-settings-reversible-test-20261006.apply",
+  "ownerMatched": true,
+  "anonymousOwnerAbsent": true,
+  "request": {
+    "rpcId": "L5adhe",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "preferenceFieldId": 41,
+    "preferenceKey": "side_nav_open_by_default",
+    "valueType": "boolean",
+    "denseArrayIndexUsed": 41,
+    "denseVectorLength": 42,
+    "field3Values": [41],
+    "rawBodyPersisted": false
+  },
+  "directResponse": {
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 140,
+    "responseSha256": "8447a40bbcf5c5e0a815ed6ce38b65928451bc93f291d7db8da83fb849ebaf23",
+    "dispatchCount": 1,
+    "journalState": "reconciled",
+    "resultCategory": "preference_state_unchanged"
+  },
+  "readback": {
+    "operation": "settings_read",
+    "selectorIds": [41],
+    "fieldFound": true,
+    "valueType": "boolean",
+    "baselineValue": true,
+    "valueChanged": false
+  },
+  "handling": {
+    "sameIntentReused": false,
+    "retrySent": false,
+    "restoreNeeded": false,
+    "privacySelectorsSent": false,
+    "privacyOrMemorySettingsChanged": false
+  },
+  "sourceCorrection": {
+    "sourceBundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+    "fieldId": 41,
+    "zeroBasedDenseArrayIndex": 40,
+    "correctDenseVectorLength": 41,
+    "correctField3Values": [41],
+    "rawSourcePersisted": false
+  },
+  "rawRequestResponseBodiesPersisted": false,
+  "cookiesTokensOrSessionValuesPersisted": false
+}

@@ -1,0 +1,1485 @@
+{
+  "schemaVersion": 1,
+  "ontologyId": "acada:income-events",
+  "label": "앱테크·금융 이벤트·공모주·에어드랍 온톨로지",
+  "createdAt": "2026-10-02",
+  "purpose": "공식 원문에 근거한 앱테크·금융 이벤트·공모주 일정·에어드랍 정보를 구조화하고, 보상·자격·리퍼럴·공개 게시 허용·규제 판정을 분리해 검토 가능한 게시 초안을 만든다.",
+  "designPrinciples": [
+    "보상·일정·자격·한도는 원문 URL과 확인 시각을 함께 둔다. 확인되지 않은 값은 unknown으로 두고 추정이면 assumption을 명시한다.",
+    "투자 권유, 개별 매수·매도 조언, 확정 수익 표현을 만들지 않는다. 공모주 사실은 DART/KIND 제출·거래소 원문으로 교차 확인한다.",
+    "추천·제휴 보상이 있으면 메시지 첫 부분에 보상 성격과 작성자의 이해관계를 알린다.",
+    "금융상품 초대 게시 허용은 프로그램의 공식 허용 근거와 금소법 판정 근거가 모두 있어야 allowed로 둔다.",
+    "공개 페이지가 열린다는 이유만으로 수집 권한을 추정하지 않는다. robots.txt와 적용 가능한 이용약관/API 조건을 각각 확인하기 전 autoCollect는 false다.",
+    "수익 인증과 실제 지급 사실은 구분한다. 작성자·이용자의 수익 주장만으로 검증된 수익 사실을 만들지 않는다.",
+    "후킹 첫 줄은 원문에서 확인한 실제 숫자나 차이만 사용한다. 결론에는 독자가 취할 정보 확인 행동을 '그래서' 한 줄로 쓴다.",
+    "게시 초안은 검토를 위한 입력·미리보기다. 이 도구는 원격 서비스에 게시하거나 초대코드를 적용하지 않는다."
+  ],
+  "classes": [
+    {
+      "id": "Event",
+      "label": "이벤트",
+      "description": "기간·대상·행동·혜택을 가진 앱테크, 가입, 거래, 출석, 응모 또는 할인 기회."
+    },
+    {
+      "id": "Provider",
+      "label": "제공자",
+      "description": "이벤트·상품·서비스의 공식 운영자. 은행·카드·증권·페이·통신·가상자산거래소·리테일로 유형화한다."
+    },
+    {
+      "id": "RewardRule",
+      "label": "보상 규칙",
+      "description": "보상 형태·금액·지급일·조건·한도·중복 제한과 원문 근거."
+    },
+    {
+      "id": "Eligibility",
+      "label": "참여 자격",
+      "description": "신규/기존 고객, 연령, 지역, 계정, 거래·보유·구매 요건 및 제외 대상."
+    },
+    {
+      "id": "ReferralProgram",
+      "label": "초대·추천 프로그램",
+      "description": "초대자와 피초대자 보상, 공식 프로그램 URL, 공개 게시 허용 판정·근거·유효기간."
+    },
+    {
+      "id": "IPOSchedule",
+      "label": "공모주 일정",
+      "description": "청약·납입/환불·배정·상장 관련 날짜와 DART/KIND 근거를 구분해 기록한다."
+    },
+    {
+      "id": "Airdrop",
+      "label": "에어드랍",
+      "description": "공식 신고 거래소 또는 프로젝트 공지에 있는 참여 조건·기간·분배 근거."
+    },
+    {
+      "id": "ComplianceRule",
+      "label": "준법 규칙",
+      "description": "게시 소재별 판정 allow|conditional|hold|forbid 및 근거 URL·조건."
+    },
+    {
+      "id": "DisclosureTemplate",
+      "label": "이해관계 고지 문안",
+      "description": "광고·추천 보상의 종류와 조건을 첫 부분에 명시하는 템플릿."
+    },
+    {
+      "id": "BannedPhrase",
+      "label": "금지·검토 표현",
+      "description": "허위 보장·수익 유인·미신고 거래소 유도를 탐지하는 표현 규칙."
+    },
+    {
+      "id": "Source",
+      "label": "출처",
+      "description": "공식·집계·커뮤니티 출처의 신뢰 등급, robots.txt·약관 검토 결과, 수집 가능 상태."
+    },
+    {
+      "id": "Draft",
+      "label": "게시 초안",
+      "description": "출처·후킹 근거·고지·준법 판정을 붙인 검토용 텍스트."
+    }
+  ],
+  "controlledValues": {
+    "providerType": [
+      "bank",
+      "card",
+      "securities",
+      "pay",
+      "telecom",
+      "crypto_exchange",
+      "retail",
+      "other",
+      "unknown"
+    ],
+    "rewardForm": [
+      "cash",
+      "point",
+      "asset",
+      "discount",
+      "voucher",
+      "draw",
+      "in_kind",
+      "fee_waiver",
+      "unknown"
+    ],
+    "publicPostingAllowed": [
+      "allowed",
+      "forbidden",
+      "unknown"
+    ],
+    "complianceDecision": [
+      "allow",
+      "conditional",
+      "hold",
+      "forbid"
+    ],
+    "sourceTrust": [
+      "primary",
+      "aggregator",
+      "community"
+    ],
+    "sourceCheck": [
+      "verified",
+      "partial",
+      "unknown"
+    ],
+    "robotsVerdict": [
+      "allowed",
+      "restricted",
+      "unknown"
+    ],
+    "termsVerdict": [
+      "allowed",
+      "restricted",
+      "unknown"
+    ]
+  },
+  "relationships": [
+    {
+      "id": "providedBy",
+      "domain": "Event",
+      "range": "Provider"
+    },
+    {
+      "id": "hasRewardRule",
+      "domain": "Event",
+      "range": "RewardRule"
+    },
+    {
+      "id": "restrictedBy",
+      "domain": "Event",
+      "range": "Eligibility"
+    },
+    {
+      "id": "offersReferral",
+      "domain": "Event",
+      "range": "ReferralProgram"
+    },
+    {
+      "id": "hasIPOSchedule",
+      "domain": "Event",
+      "range": "IPOSchedule"
+    },
+    {
+      "id": "hasAirdrop",
+      "domain": "Event",
+      "range": "Airdrop"
+    },
+    {
+      "id": "governedBy",
+      "domain": "Event",
+      "range": "ComplianceRule"
+    },
+    {
+      "id": "supportedBy",
+      "domain": "Event",
+      "range": "Source"
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A-SAMPLE-CLASSIFICATION",
+      "status": "assumption",
+      "statement": "참고 채널 표본의 대표 주제 분류는 조사 보고서 작성자의 단일 카테고리 추정이며 모집단 통계가 아니다.",
+      "sourceUrl": "https://t.me/s/poon_zetech",
+      "scope": "market-report.md의 공개 게시물 표본"
+    },
+    {
+      "id": "A-POSTING-PERMISSION",
+      "status": "assumption",
+      "statement": "공개 페이지·친구 공유 버튼의 존재는 공개 채널 게시 허용으로 해석하지 않는다. 각 프로그램의 허용 근거가 확인되기 전 unknown이다.",
+      "sourceUrl": "https://www.ftc.go.kr/www/selectExmplView.do?dscsnExmplSn=886&key=330&pageIndex=1&pageUnit=10&searchCnd=all",
+      "scope": "모든 초대·추천 프로그램"
+    },
+    {
+      "id": "A-ROBOT-TERMS-REVIEW",
+      "status": "assumption",
+      "statement": "이번 점검에서 robots.txt 및 일부 약관 페이지를 직접 가져오지 못한 도메인은 정책을 추정하지 않고 unknown으로 둔다.",
+      "sourceUrl": "https://opendart.fss.or.kr/intro/terms.do",
+      "scope": "sourceRegistry의 robotsReview와 termsReview"
+    }
+  ],
+  "legalReferences": [
+    {
+      "id": "law-fin-consumer-22",
+      "label": "금융소비자보호법 제22조",
+      "url": "https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1031294935",
+      "trust": "primary"
+    },
+    {
+      "id": "decree-fin-consumer-17",
+      "label": "금융소비자보호법 시행령 제17조",
+      "url": "https://www.law.go.kr/lsLinkCommonInfo.do?lspttninfSeq=166853",
+      "trust": "primary"
+    },
+    {
+      "id": "law-fin-consumer-24",
+      "label": "금융소비자보호법 제24조",
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=277247",
+      "trust": "primary"
+    },
+    {
+      "id": "fsc-financial-ad-guide",
+      "label": "금융위원회 금융상품 광고 가이드라인",
+      "url": "https://www.fsc.go.kr/po010103/76045?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+      "trust": "primary"
+    },
+    {
+      "id": "law-capital-market-101",
+      "label": "자본시장법 제101조 및 개정 이력",
+      "url": "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1017472761",
+      "trust": "primary"
+    },
+    {
+      "id": "fsc-pseudo-advisory-2024",
+      "label": "금융위원회 2024 유사투자자문업 안내",
+      "url": "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+      "trust": "primary"
+    },
+    {
+      "id": "law-virtual-asset-10",
+      "label": "가상자산이용자보호법 제10조",
+      "url": "https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1024558645",
+      "trust": "primary"
+    },
+    {
+      "id": "law-special-fin-info-7",
+      "label": "특정 금융거래정보의 보고 및 이용 등에 관한 법률 제7조",
+      "url": "https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1013169527",
+      "trust": "primary"
+    },
+    {
+      "id": "fsc-unreported-business",
+      "label": "금융위원회 신고 사업자·국내 영업 설명",
+      "url": "https://www.fsc.go.kr/po010104/85774?curPage=7&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+      "trust": "primary"
+    },
+    {
+      "id": "fsc-unreported-high-return",
+      "label": "금융위원회 미신고 사업자·고수익 홍보 주의",
+      "url": "https://fsc.go.kr/no010101/87177",
+      "trust": "primary"
+    },
+    {
+      "id": "ftc-endorsement-guideline",
+      "label": "공정위 추천·보증 심사지침 (2024-12-01 시행)",
+      "url": "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484",
+      "trust": "primary"
+    },
+    {
+      "id": "ftc-endorsement-faq",
+      "label": "공정위 경제적 이해관계 표시 상담 사례",
+      "url": "https://www.ftc.go.kr/www/selectExmplView.do?dscsnExmplSn=886&key=330&pageIndex=1&pageUnit=10&searchCnd=all",
+      "trust": "primary"
+    },
+    {
+      "id": "telegram-channels-faq",
+      "label": "Telegram Channels FAQ",
+      "url": "https://www.telegram.org/faq_channels?setln=en",
+      "trust": "primary"
+    },
+    {
+      "id": "telegram-terms",
+      "label": "Telegram Terms of Service",
+      "url": "https://telegram.org/tos",
+      "trust": "primary"
+    },
+    {
+      "id": "opendart-terms",
+      "label": "OpenDART 이용약관",
+      "url": "https://opendart.fss.or.kr/intro/terms.do",
+      "trust": "primary"
+    },
+    {
+      "id": "opendart-ipo-guide",
+      "label": "OpenDART 공모 관련 API 안내",
+      "url": "https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS006&apiId=2020054",
+      "trust": "primary"
+    },
+    {
+      "id": "kind-ipo-list",
+      "label": "KRX KIND 공모기업현황",
+      "url": "https://kind.krx.co.kr/listinvstg/pubofrschdl.do?method=searchPubofrScholMain",
+      "trust": "primary"
+    },
+    {
+      "id": "kind-ipo-scale",
+      "label": "KRX KIND 공모 규모",
+      "url": "https://kind.krx.co.kr/listinvstg/pubofrscale.do?method=searchPubofrScaleMain",
+      "trust": "primary"
+    },
+    {
+      "id": "upbit-announcement-doc",
+      "label": "Upbit 공식 공지 WebSocket 문서",
+      "url": "https://docs.upbit.com/kr/reference/websocket-announcement",
+      "trust": "primary"
+    },
+    {
+      "id": "upbit-rate-limits",
+      "label": "Upbit API 요청 수 제한",
+      "url": "https://docs.upbit.com/kr/kr/reference/rate-limits",
+      "trust": "primary"
+    },
+    {
+      "id": "bithumb-referral-notice",
+      "label": "빗썸 초대 보상 공지 예시",
+      "url": "https://feed.bithumb.com/notice/1648694",
+      "trust": "primary"
+    },
+    {
+      "id": "coinone-referral-guide",
+      "label": "코인원 친구 초대 안내",
+      "url": "https://support.coinone.co.kr/support/solutions/articles/31000154563-%EC%B9%9C%EA%B5%AC-%EC%B4%88%EB%8C%80-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%95%88%EB%82%B4",
+      "trust": "primary"
+    },
+    {
+      "id": "naver-store-points",
+      "label": "네이버 포인트 적립 안내",
+      "url": "https://mkt.naver.com/naverdetails/point",
+      "trust": "primary"
+    },
+    {
+      "id": "market-sample",
+      "label": "함푼 부수입 정보 공유방 공개 표본",
+      "url": "https://t.me/s/poon_zetech",
+      "trust": "community"
+    }
+  ],
+  "complianceRules": [
+    {
+      "id": "NONFIN-APP-EVENT",
+      "label": "비금융 앱테크·혜택 사실 요약",
+      "decision": "conditional",
+      "conditions": [
+        "공식 원문으로 기간·대상·조건·보상을 대조",
+        "추천 보상이 있으면 첫 부분에 이해관계를 표시",
+        "약관이 확인되지 않으면 해당 추천 링크 게시 보류"
+      ],
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484",
+        "https://www.ftc.go.kr/www/selectExmplView.do?dscsnExmplSn=886&key=330&pageIndex=1&pageUnit=10&searchCnd=all"
+      ],
+      "assumption": false
+    },
+    {
+      "id": "FINANCIAL-INVITE",
+      "label": "금융상품 개인 초대코드·가입 유도",
+      "decision": "conditional",
+      "conditions": [
+        "공식 프로그램이 공개 채널 게시를 allowed로 허용하고 그 근거 URL이 있어야 함",
+        "금소법 제22조·시행령 제17조·제24조 판정 근거와 합법적인 광고 주체·승인 확인이 있어야 통과",
+        "하나라도 미확인이면 hold"
+      ],
+      "evidenceUrls": [
+        "https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1031294935",
+        "https://www.law.go.kr/lsLinkCommonInfo.do?lspttninfSeq=166853",
+        "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=277247",
+        "https://www.fsc.go.kr/po010103/76045?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText="
+      ],
+      "assumption": false
+    },
+    {
+      "id": "IPO-PUBLIC-FACT",
+      "label": "공모주 청약·환불·상장 일정의 무료 일방향 사실 전달",
+      "decision": "allow",
+      "conditions": [
+        "DART 또는 KIND 원문 URL과 확인 시각을 표시",
+        "정정 가능성을 알리고 원문을 다시 확인하도록 안내",
+        "매수 추천·확정 수익으로 확대하지 않음"
+      ],
+      "evidenceUrls": [
+        "https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS006&apiId=2020054",
+        "https://kind.krx.co.kr/listinvstg/pubofrprogcom.do?method=searchPubofrProgComMain",
+        "https://kind.krx.co.kr/listinvstg/pubofrscale.do?method=searchPubofrscaleMain",
+        "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1017472761",
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText="
+      ],
+      "assumption": false
+    },
+    {
+      "id": "INVESTMENT-RECOMMENDATION",
+      "label": "개별 주식 매수·매도 권유, 유료·양방향 리딩 또는 확정 수익",
+      "decision": "forbid",
+      "conditions": [
+        "이 작업의 게시 도구는 투자 권유·개별 조언·수익 보장을 작성하지 않음",
+        "등록·자격이 필요한 서비스 여부는 법령과 감독기관 원문으로 별도 판정"
+      ],
+      "evidenceUrls": [
+        "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1017472761",
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText="
+      ],
+      "assumption": false
+    },
+    {
+      "id": "CRYPTO-EVENT",
+      "label": "신고 거래소 초대·에어드랍·거래 이벤트",
+      "decision": "conditional",
+      "conditions": [
+        "국내 신고 사업자 상태와 공식 거래소 공지·행사 약관을 확인",
+        "보상·기간·조건·한도·이해관계를 표시",
+        "거래량 조작·허위 상장·수익 보장 표현을 쓰지 않음"
+      ],
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1024558645",
+        "https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1013169527",
+        "https://www.fsc.go.kr/po010104/85774?curPage=7&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+        "https://docs.upbit.com/kr/reference/websocket-announcement"
+      ],
+      "assumption": false
+    },
+    {
+      "id": "UNREPORTED-FOREIGN-EXCHANGE",
+      "label": "미신고 해외 거래소의 국내 이용자 모집·수익 보장",
+      "decision": "forbid",
+      "conditions": [
+        "국내 신고 여부가 unreported이면 링크·가입 유도를 금지",
+        "상태가 unknown이면 확인 전 hold"
+      ],
+      "evidenceUrls": [
+        "https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1013169527",
+        "https://www.fsc.go.kr/po010104/85774?curPage=7&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+        "https://fsc.go.kr/no010101/87177"
+      ],
+      "assumption": false
+    },
+    {
+      "id": "UNVERIFIED-INCOME-PROOF",
+      "label": "출처 없는 수익 인증·선택적 수익률·미래 수익 확약",
+      "decision": "forbid",
+      "conditions": [
+        "운영자·참여자의 수익 인증을 광고 사실로 만들지 않음",
+        "실제 지급 근거·기간·비용·손실 맥락을 확인할 수 없으면 게시 금지"
+      ],
+      "evidenceUrls": [
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484"
+      ],
+      "assumption": false
+    },
+    {
+      "id": "ECONOMIC-INTEREST-DISCLOSURE",
+      "label": "추천·제휴 보상 이해관계 표시",
+      "decision": "conditional",
+      "conditions": [
+        "제목 또는 첫 부분에 작성자가 받을 보상 종류·조건을 구체적으로 표시",
+        "짧은 단독 문구 '홍보성 글' 또는 메시지 끝 고지만으로 통과시키지 않음"
+      ],
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484",
+        "https://www.ftc.go.kr/www/selectExmplView.do?dscsnExmplSn=886&key=330&pageIndex=1&pageUnit=10&searchCnd=all"
+      ],
+      "assumption": false
+    },
+    {
+      "id": "PUBLIC-TELEGRAM-SHARE",
+      "label": "공개 채널 소개와 초대 링크 배포",
+      "decision": "conditional",
+      "conditions": [
+        "공개 채널의 자발적 링크 공유만 검토",
+        "낯선 사람에게 초대 메시지를 무단 전송하지 않음"
+      ],
+      "evidenceUrls": [
+        "https://www.telegram.org/faq_channels?setln=en",
+        "https://telegram.org/tos"
+      ],
+      "assumption": false
+    }
+  ],
+  "bannedPhrases": [
+    {
+      "id": "BAN-PRINCIPAL-GUARANTEE",
+      "pattern": "원금\\s*보장|원금\\s*손실\\s*없음|손실\\s*없음",
+      "severity": "forbid",
+      "ruleId": "INVESTMENT-RECOMMENDATION",
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484",
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText="
+      ]
+    },
+    {
+      "id": "BAN-GUARANTEED-RETURN",
+      "pattern": "무조건\\s*수익|확정\\s*수익|\\d+(?:\\.\\d+)?\\s*%\\s*확정|100\\s*%\\s*수익|따상\\s*보장",
+      "severity": "forbid",
+      "ruleId": "UNVERIFIED-INCOME-PROOF",
+      "evidenceUrls": [
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484"
+      ]
+    },
+    {
+      "id": "BAN-IPO-CERTAINTY",
+      "pattern": "상장\\s*(?:확정|임박)|상장\\s*후\\s*(?:수익|상승)\\s*확정",
+      "severity": "forbid",
+      "ruleId": "INVESTMENT-RECOMMENDATION",
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484",
+        "https://kind.krx.co.kr/listinvstg/pubofrprogcom.do?method=searchPubofrProgComMain"
+      ]
+    },
+    {
+      "id": "BAN-INCOME-PROOF",
+      "pattern": "수익\\s*(?:인증|인증샷|인증\\s*후기)|월\\s*\\d[\\d,]*\\s*만?원\\s*(?:벌었|수익)",
+      "severity": "forbid",
+      "ruleId": "UNVERIFIED-INCOME-PROOF",
+      "evidenceUrls": [
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484"
+      ]
+    },
+    {
+      "id": "BAN-IPO-RECOMMENDATION",
+      "pattern": "매수\\s*(?:추천|하세요)|매도\\s*(?:추천|하세요)|지금\\s*청약\\s*(?:하세요|받으세요)|청약\\s*강추|오늘\\s*상한가",
+      "severity": "forbid",
+      "ruleId": "INVESTMENT-RECOMMENDATION",
+      "evidenceUrls": [
+        "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1017472761",
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText="
+      ]
+    },
+    {
+      "id": "REVIEW-UNDISCLOSED-COMPENSATION",
+      "pattern": "내돈내산|솔직\\s*후기|정보\\s*공유|소정의\\s*수수료를\\s*받을\\s*수\\s*있",
+      "severity": "disclosure_review",
+      "ruleId": "ECONOMIC-INTEREST-DISCLOSURE",
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484",
+        "https://www.ftc.go.kr/www/selectExmplView.do?dscsnExmplSn=886&key=330&pageIndex=1&pageUnit=10&searchCnd=all"
+      ]
+    },
+    {
+      "id": "BAN-FOMO-BUY",
+      "pattern": "지금\\s*안\\s*사면\\s*늦|늦기\\s*전에\\s*(?:사|청약)",
+      "severity": "forbid",
+      "ruleId": "INVESTMENT-RECOMMENDATION",
+      "evidenceUrls": [
+        "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1017472761",
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText="
+      ]
+    },
+    {
+      "id": "BAN-INDIVIDUAL-TRADE-DIRECTION",
+      "pattern": "(?:매수|매도).{0,18}\\d[\\d,]*\\s*원|(?:오늘|내일|이번\\s*주).{0,15}(?:매수|매도|사세요|팔으세요)",
+      "severity": "forbid",
+      "ruleId": "INVESTMENT-RECOMMENDATION",
+      "evidenceUrls": [
+        "https://law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1017472761",
+        "https://fsc.go.kr/po010101/82887?curPage=52&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText="
+      ]
+    },
+    {
+      "id": "CONDITION-OMITTED-FREE",
+      "pattern": "계좌만\\s*개설하면\\s*(?:현금|포인트)\\s*확정|조건\\s*없이\\s*무료|공짜\\s*혜택|공짜|무료",
+      "severity": "disclosure_review",
+      "ruleId": "NONFIN-APP-EVENT",
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484"
+      ]
+    }
+  ],
+  "disclosureTemplates": [
+    {
+      "id": "DISCLOSURE-REFERRAL",
+      "label": "일반 초대·제휴",
+      "placement": "opening",
+      "template": "광고·추천인 보상: [정확한 조건]을 완료하면 작성자는 [보상 종류·금액]을 받습니다. 제공자: [회사]. [공식 약관 URL]",
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484"
+      ]
+    },
+    {
+      "id": "DISCLOSURE-FINANCIAL",
+      "label": "승인된 금융상품 광고 추가 고지",
+      "placement": "opening",
+      "template": "광고·추천 보상: [정확한 조건] 충족 시 작성자는 [보상]을 받습니다. 계약 전 상품설명서와 약관을 확인하세요. 투자 결과 원금 손실이 발생할 수 있으며 손실은 투자자에게 귀속됩니다. [공식 URL]",
+      "evidenceUrls": [
+        "https://www.law.go.kr/lsLinkCommonInfo.do?lsJoLnkSeq=1031294935",
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484"
+      ]
+    },
+    {
+      "id": "DISCLOSURE-CRYPTO",
+      "label": "가상자산 이벤트·초대",
+      "placement": "opening",
+      "template": "광고·추천 보상: [조건] 충족 시 작성자는 [보상]을 받습니다. 가상자산은 가격 변동으로 원금 전부 또는 일부를 잃을 수 있습니다. [공식 공지 URL]",
+      "evidenceUrls": [
+        "https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1024558645",
+        "https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000249484"
+      ]
+    }
+  ],
+  "sourceRegistry": [
+    {
+      "id": "kb-bank-events",
+      "label": "KB국민은행 이벤트 허브",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://omoney.kbstar.com/quics?QSL=F&page=C016559",
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://omoney.kbstar.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "omoney.kbstar.com/robots.txt 200: User-agent * Disallow: /",
+        "verdict": "restricted",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "applicable event-site scraping clause not located or read",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "KB국민은행 일반 이용약관을 이 이벤트 허브 수집 허가로 추정하지 않음.",
+      "collectionObservation": {
+        "endpoint": null,
+        "method": null,
+        "observedStatus": "not_requested",
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "robots_disallow_all"
+      },
+      "blockedReason": "robots_disallow_all"
+    },
+    {
+      "id": "hana-bank-events",
+      "label": "하나은행 이벤트 목록·상세",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://www.kebhana.com/cont/news/news01/news0101/1506094_118324.jsp",
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://www.kebhana.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "www.kebhana.com/robots.txt 200: Disallow /*.do$ and /*? (event pages are .do/query URLs); the listed .jsp news page is not matched",
+        "verdict": "restricted",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [
+          "https://image.kebhana.com/cont/download/documents/provide/0000000230130_20241129.pdf"
+        ],
+        "checkedAt": "2026-10-02",
+        "result": "official OpenAPI terms found but not applicable to the event HTML; event-site scraping clause not read",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "이벤트 조건은 행사별 상세 원문에서 재확인.",
+      "collectionObservation": {
+        "endpoint": null,
+        "method": null,
+        "observedStatus": 200,
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "robots_disallow_event_list_paths",
+        "observedResource": "public detail page only; event list .do/query paths were not requested"
+      },
+      "blockedReason": "robots_disallow_event_list_paths"
+    },
+    {
+      "id": "woori-bank-events",
+      "label": "우리은행 모바일 이벤트 허브",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://spot.wooribank.com/pot/Dream?withyou=EVEVT0001",
+      "collectorType": "woori_bank_xhr",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://spot.wooribank.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "spot.wooribank.com/robots.txt 404; event list page returned HTTP 200 without login",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [
+          "https://eum.wooribank.com/biz/util/terms"
+        ],
+        "checkedAt": "2026-10-02",
+        "result": "official OpenAPI platform terms found but not applicable to the mobile event hub; scraping clause not read",
+        "verdict": "unknown"
+      },
+      "autoCollect": true,
+      "minIntervalSeconds": 3,
+      "notes": "보고서상 공개 동적 페이지이나 상세 조건 대조가 필요.",
+      "collectionBasis": {
+        "kind": "owner_authorized_unknown_terms",
+        "decidedAt": "2026-10-02",
+        "instruction": "미명시면 xhr api only작업해서 커밋하라해",
+        "mode": "xhr_api_only"
+      },
+      "collectionEndpoint": {
+        "url": "https://spot.wooribank.com/pot/jcc?withyou=EVEVT0001&__ID=c001308",
+        "method": "POST",
+        "robotsPathAllowed": true
+      },
+      "collectionObservation": {
+        "endpoint": "https://spot.wooribank.com/pot/jcc?withyou=EVEVT0001&__ID=c001308",
+        "method": "POST",
+        "observedStatus": 200,
+        "rawRowsReturned": 2,
+        "normalizedRowsReturned": 2
+      }
+    },
+    {
+      "id": "kb-card-events",
+      "label": "KB국민카드 이벤트 상세",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://card.kbcard.com/BON/DVIEW/HBBMCXCRVNEC0001",
+      "collectorType": "kb_card_xhr",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://card.kbcard.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "card.kbcard.com/robots.txt 200: Allow /BON/ (event path), Disallow /MKB/ only for listed paths",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": "https://mapps.kbcard.com/SVC/DVIEW/HSHMCXCRSZZC0024",
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "official terms index identified; applicable crawler permission clause not read",
+        "verdict": "unknown"
+      },
+      "autoCollect": true,
+      "minIntervalSeconds": 3,
+      "notes": "이벤트 상세의 카드 자격·할인·기간을 확인.",
+      "collectionBasis": {
+        "kind": "owner_authorized_unknown_terms",
+        "decidedAt": "2026-10-02",
+        "instruction": "미명시면 xhr api only작업해서 커밋하라해",
+        "mode": "xhr_api_only"
+      },
+      "collectionEndpoint": {
+        "url": "https://card.kbcard.com/BON/DVIEW/HBBMCXCRVNEC0001?isAjax=Y&isNoFrame=Y",
+        "method": "POST",
+        "robotsPathAllowed": true
+      },
+      "collectionObservation": {
+        "endpoint": "https://card.kbcard.com/BON/DVIEW/HBBMCXCRVNEC0001?isAjax=Y&isNoFrame=Y",
+        "method": "POST",
+        "observedStatus": 200,
+        "rawRowsReturned": 12,
+        "normalizedRowsReturned": 12
+      }
+    },
+    {
+      "id": "shinhan-card-events",
+      "label": "신한카드 이벤트 상세",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://www.shinhancard.com/pconts/html/benefit/event/1239002_2239.html",
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://www.shinhancard.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "www.shinhancard.com/robots.txt 200: Allow /pconts/html/benefit/ and /evt/ event pages",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": "https://www.shinhancard.com/pconts/html/helpdesk/terms/terms52/1186808_1192.html",
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "온라인 회원 약관 제13조 제1항 제2호가 사전 승낙 없는 서비스 정보 복제·유통 및 상업 이용을 금지한다. 이벤트 페이지는 신한카드 온라인 서비스이며 약관 적용은 회원·비회원 이용자 모두로 정의되어 restricted 처리.",
+        "verdict": "restricted",
+        "quote": "회사의 서비스 정보를 이용하여 얻은 정보를 회사의 사전 승낙 없이 복제 또는 유통시키거나 상업적으로 이용하는 행위",
+        "quoteUrl": "https://www.shinhancard.com/pconts/html/helpdesk/terms/terms52/1186808_1192.html",
+        "scope": "제13조 회원의 의무; 신한카드 온라인 회원 약관"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "이벤트별 대상 카드·한도·결제 조건을 따로 확인."
+    },
+    {
+      "id": "woori-card-events",
+      "label": "우리카드 이벤트 허브",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://pc.wooricard.com/dcpc/yh1/bnf/bnf02/prgevnt/H1BNF202S00.do",
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://pc.wooricard.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "pc.wooricard.com/robots.txt 200: only Allow /ai-data/, no Disallow for *",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": "https://pc.wooricard.com/dcpc/yh3/mc/mmb/mmb01/H3MMB201S00.do",
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "웹회원 약관 제12조 제1항 제2호는 카드사 서비스 정보를 사전 승낙 없이 복제·유통하거나 상업적으로 이용하지 못하도록 하고, 제17조 제4항은 영리 목적 이용을 별도로 금지한다.",
+        "verdict": "restricted",
+        "quote": "카드사의 서비스 정보를 이용하여 얻은 정보를 카드사의 사전 승낙 없이 복제 또는 유통시키거나 상업적으로 이용하는 행위",
+        "quoteUrl": "https://pc.wooricard.com/dcpc/yh3/mc/mmb/mmb01/H3MMB201S00.do",
+        "scope": "제12조 이용자의 의무; 우리카드 웹회원 약관"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "공개 사이트 여부만으로 수집 권한을 추정하지 않음."
+    },
+    {
+      "id": "naver-pay-events",
+      "label": "네이버페이 이벤트 상세·모음",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://pay.naver.com/benefit/payment/list?firstCategory=ONLINE",
+      "additionalUrls": [
+        "https://campaign2.naver.com/npay/event/?from=pay_search",
+        "https://pay.naver.com/benefit/payment/detail/23990096546093"
+      ],
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://pay.naver.com/robots.txt",
+          "https://campaign2.naver.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "pay.naver.com/robots.txt 404; campaign2.naver.com/robots.txt 200 Allow /",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": "https://notice.naver.com/api/v1/file/download/32",
+        "relatedTermsUrls": [
+          "https://notice.naver.com/api/v1/file/download/36"
+        ],
+        "checkedAt": "2026-10-02",
+        "result": "official Naver Pay/Naver service terms identified; event-site collection permission not established",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "이벤트 모음 페이지는 보고서 확인 시 일시 오류가 있어 자동화 후보를 확정하지 않음.",
+      "collectionEndpoint": {
+        "url": "https://pay.naver.com/benefit/payment/accumulation-promotions?firstCategory=ONLINE",
+        "method": "GET",
+        "robotsPathAllowed": false
+      },
+      "collectionObservation": {
+        "endpoint": "https://pay.naver.com/benefit/payment/accumulation-promotions?firstCategory=ONLINE",
+        "method": "GET",
+        "observedStatus": 200,
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "xhr_api_base_unresolved_candidate_returned_html",
+        "responseContentType": "text/html;charset=utf-8"
+      },
+      "blockedReason": "xhr_api_base_unresolved_candidate_returned_html"
+    },
+    {
+      "id": "kiwoom-events",
+      "label": "키움증권 이벤트 허브",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://www.kiwoom.com/wm/evt/evtMainEC210032View",
+      "additionalUrls": [
+        "https://www.kiwoom.com/e/wm/event/evtUserEC260075View"
+      ],
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://www.kiwoom.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "www.kiwoom.com/robots.txt 200: Allow /",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "event-site collection terms not located or read",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "계좌 신규 이벤트와 추천인 프로그램을 구분.",
+      "collectionObservation": {
+        "endpoint": null,
+        "method": null,
+        "observedStatus": 200,
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "event_list_xhr_not_verified",
+        "observedResource": "public event page and scripts; no list endpoint identified"
+      },
+      "blockedReason": "event_list_xhr_not_verified"
+    },
+    {
+      "id": "kt-events",
+      "label": "KT 진행 이벤트 목록",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://event.kt.com/html/event/ongoing_event_list.html",
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://event.kt.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "event.kt.com/robots.txt 200: no rules for *",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "source-specific public terms URL and scraping clause not verified",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "로그인 요구 여부는 행사별로 확인.",
+      "collectionEndpoint": {
+        "url": "https://event.kt.com/kt/codes/v1.0/channels/01/cdgroups/evt_svc_ch_type",
+        "method": "GET",
+        "robotsPathAllowed": false
+      },
+      "collectionObservation": {
+        "endpoint": "https://event.kt.com/kt/codes/v1.0/channels/01/cdgroups/evt_svc_ch_type",
+        "method": "GET",
+        "observedStatus": "not_requested",
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "observed_script_endpoint_is_category_dictionary_not_event_list"
+      },
+      "blockedReason": "observed_script_endpoint_is_category_dictionary_not_event_list"
+    },
+    {
+      "id": "tworld-benefits",
+      "label": "T world 멤버십 혜택",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://sktmembership.tworld.co.kr/mps/pc-bff/benefitbrand/list-tab1.do?mediumCategoryId=110",
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://sktmembership.tworld.co.kr/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "sktmembership.tworld.co.kr/robots.txt 200: Allow /, Disallow only auth/sample/common/mypage BFF paths",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": "https://www.tworld.co.kr/poc/html/util/member_policy/UT2.1.2.1T.1T.html",
+        "relatedTermsUrls": [
+          "https://www.tworld.co.kr/poc/html/util/member_policy/UT2.1.2.3P.1T.html"
+        ],
+        "checkedAt": "2026-10-02",
+        "result": "official SKT membership/service terms pages identified; crawling permission for this subdomain not established",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "상시 혜택과 기간형 이벤트를 구분.",
+      "collectionEndpoint": {
+        "url": "https://sktmembership.tworld.co.kr/mps/pc-bff/benefitbrand/brandList.do?mediumCategoryId=110",
+        "method": "GET",
+        "robotsPathAllowed": true
+      },
+      "collectionObservation": {
+        "endpoint": "https://sktmembership.tworld.co.kr/mps/pc-bff/benefitbrand/brandList.do?mediumCategoryId=110",
+        "method": "GET",
+        "observedStatus": 200,
+        "rawRowsReturned": 20,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "no_verifiable_periods",
+        "periodlessBenefitItems": 14
+      },
+      "blockedReason": "no_verifiable_periods"
+    },
+    {
+      "id": "ktm-referral",
+      "label": "KT M 모바일 추천 페이지",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://widget.ktmmobile.com/event/frndRecommend.do",
+      "collectorType": "public_html",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://widget.ktmmobile.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "widget.ktmmobile.com/robots.txt 200: Allow /",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": "https://www.ktmmobile.com/policy/ktPolicyView.do?stpltSeq=411",
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "게시물 약관 제15조 제1항은 사전 승낙 없는 서비스 정보 복제·유통·상업 이용 내용을 삭제 대상으로 둔다. 추천 페이지는 widget.ktmmobile.com 하위 도메인이며 같은 KT M모바일 서비스 약관의 적용으로 보아 restricted 처리.",
+        "verdict": "restricted",
+        "quote": "회원은 서비스에 게시된 자료 또는 서비스를 이용하여 얻은 정보를 회사의 사전승낙 없이 복제, 송신, 출판, 배포, 방송 및 기타 방법에 의해 영리목적으로 이용하거나 제3자에게 이용하게 할 수 없으며",
+        "quoteUrl": "https://www.ktmmobile.com/policy/ktPolicyView.do?stpltSeq=411",
+        "scope": "제16조 제6항 게시물의 저작권; 제17조 서비스의 재판매 금지; widget.ktmmobile.com 추천 페이지와 약관의 서비스 주체가 동일"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "공유 기능 존재만으로 공개 채널 게시 허용을 추론하지 않음."
+    },
+    {
+      "id": "opendart-ipo",
+      "label": "DART/OpenDART 공모 공시 API",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://opendart.fss.or.kr/guide/detail.do?apiGrpCd=DS006&apiId=2020054",
+      "additionalUrls": [
+        "https://opendart.fss.or.kr/intro/main.do"
+      ],
+      "collectorType": "opendart_setup_only",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://opendart.fss.or.kr/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "opendart.fss.or.kr/robots.txt redirects to error.html; OpenDART is a keyed official API (owner key setup)",
+        "verdict": "unknown",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": "https://opendart.fss.or.kr/intro/terms.do",
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "official API terms identified; API membership/key and usage conditions apply; no crawler permission inferred",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "setupOnly": true,
+      "requiredSetup": "api_key_required; the documented API requires crtfc_key. No key was requested or read, and no API request was made.",
+      "notes": "IPO fields are mapped only where present in official disclosures; payment date is not silently re-labelled as refund or listing date.",
+      "collectionEndpoint": {
+        "url": "https://opendart.fss.or.kr/api/estkRs.json",
+        "method": "GET",
+        "robotsPathAllowed": false
+      },
+      "collectionObservation": {
+        "endpoint": "https://opendart.fss.or.kr/api/estkRs.json",
+        "method": "GET",
+        "observedStatus": "not_requested",
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "api_key_required"
+      },
+      "blockedReason": "api_key_required"
+    },
+    {
+      "id": "kind-ipo",
+      "label": "KRX KIND 공모기업현황",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://kind.krx.co.kr/listinvstg/pubofrschdl.do?method=searchPubofrScholMain",
+      "additionalUrls": [
+        "https://kind.krx.co.kr/listinvstg/pubofrscale.do?method=searchPubofrScaleMain"
+      ],
+      "collectorType": "kind_calendar",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://kind.krx.co.kr/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "kind.krx.co.kr/robots.txt 200 but HTML body, no robots rules",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "site terms and redistribution/collection clause not located or read",
+        "verdict": "unknown"
+      },
+      "autoCollect": true,
+      "minIntervalSeconds": 3,
+      "notes": "공개 표의 지연·정정 가능성을 남기고 공시 원문과 수동 교차 확인.",
+      "collectionBasis": {
+        "kind": "owner_authorized_unknown_terms",
+        "decidedAt": "2026-10-02",
+        "instruction": "미명시면 xhr api only작업해서 커밋하라해",
+        "mode": "xhr_api_only"
+      },
+      "collectionEndpoint": {
+        "url": "https://kind.krx.co.kr/listinvstg/pubofrschdl.do?method=searchPubofrScholCalnd",
+        "method": "POST",
+        "robotsPathAllowed": true
+      },
+      "collectionObservation": {
+        "endpoint": "https://kind.krx.co.kr/listinvstg/pubofrschdl.do?method=searchPubofrScholCalnd",
+        "method": "POST",
+        "observedStatus": 200,
+        "rawRowsReturned": 5,
+        "normalizedRowsReturned": 5
+      }
+    },
+    {
+      "id": "38ipo-aggregator",
+      "label": "38커뮤니케이션 IPO 목록",
+      "trust": "aggregator",
+      "sourceCheck": "partial",
+      "url": "https://www.38.co.kr/html/fund/ipo.htm?o=nw&page=9",
+      "additionalUrls": [
+        "https://public.38.co.kr/html/fund/?no=2278&o=v"
+      ],
+      "collectorType": "disabled",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://www.38.co.kr/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "www.38.co.kr TLS ERR_SSL_DH_KEY_TOO_SMALL",
+        "verdict": "unknown",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [],
+        "checkedAt": "2026-10-02",
+        "result": "robots, terms and data-collection license not located or read",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "보조 탐색용 집계 출처. 자동 수집·최종 사실 근거로 사용하지 않음.",
+      "collectionEndpoint": {
+        "url": "https://www.38.co.kr/html/fund/ipo.htm?o=nw&page=9",
+        "method": "GET",
+        "robotsPathAllowed": false
+      },
+      "collectionObservation": {
+        "endpoint": "https://www.38.co.kr/html/fund/ipo.htm?o=nw&page=9",
+        "method": "GET",
+        "observedStatus": "TLS_ERR_SSL_DH_KEY_TOO_SMALL",
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "tls_negotiation_failed_no_downgrade_attempt"
+      },
+      "blockedReason": "tls_negotiation_failed_no_downgrade_attempt"
+    },
+    {
+      "id": "upbit-notices",
+      "label": "Upbit 공식 공지 WebSocket",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://docs.upbit.com/kr/reference/websocket-announcement",
+      "additionalUrls": [
+        "https://docs.upbit.com/kr/kr/reference/rate-limits",
+        "https://support.upbit.com/hc/ko/articles/33754022559129-%EC%B6%94%EC%B2%9C%EC%9D%B8-%EC%BD%94%EB%93%9C%EB%8A%94-%EC%96%B4%EB%96%BB%EA%B2%8C-%EB%93%B1%EB%A1%9D%ED%95%A0-%EC%88%98-%EC%9E%88%EB%82%98%EC%9A%94"
+      ],
+      "collectorType": "disabled",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://docs.upbit.com/robots.txt",
+          "https://support.upbit.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "docs.upbit.com robots Allow / (Disallow edit/login/api-next); support.upbit.com disallows only account/request paths",
+        "verdict": "allowed",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [
+          "https://docs.upbit.com/kr/kr/reference/rate-limits"
+        ],
+        "checkedAt": "2026-10-02",
+        "result": "rate limits and event-specific recommendation-code guide identified; public channel posting permission and applicable terms not verified",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "문서는 실시간 공지 스트림과 요청 제한을 설명하지만, 수집 권한은 별도 확인이 필요.",
+      "collectionEndpoint": {
+        "url": "https://api-manager.upbit.com/api/v1/notices?page=1&per_page=20",
+        "method": "GET",
+        "robotsPathAllowed": false
+      },
+      "collectionObservation": {
+        "endpoint": "https://api-manager.upbit.com/api/v1/notices?page=1&per_page=20",
+        "method": "GET",
+        "observedStatus": 404,
+        "rawRowsReturned": 0,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "rest_candidate_404_official_docs_publish_websocket_announcement"
+      },
+      "blockedReason": "rest_candidate_404_official_docs_publish_websocket_announcement"
+    },
+    {
+      "id": "bithumb-notices",
+      "label": "빗썸 공식 공지·이벤트",
+      "trust": "primary",
+      "sourceCheck": "partial",
+      "url": "https://m-feed.bithumb.com/notice/1650269",
+      "additionalUrls": [
+        "https://support.bithumb.com/hc/ko/categories/53957742971545-%EC%A3%BC%EC%9A%94%EC%9D%B4%EB%B2%A4%ED%8A%B8"
+      ],
+      "collectorType": "bithumb_notice_api",
+      "robotsReview": {
+        "robotsUrls": [
+          "https://m-feed.bithumb.com/robots.txt",
+          "https://support.bithumb.com/robots.txt"
+        ],
+        "checkedAt": "2026-10-02",
+        "method": "node fetch, browser UA, ko-KR",
+        "result": "m-feed.bithumb.com/robots.txt 403; support.bithumb.com robots disallows only account/request paths",
+        "verdict": "unknown",
+        "historicalNote": "regulation-report.md는 https://www.bithumb.com/robots.txt 루트만 열어 User-agent:* 차단 규칙이 보이지 않았다고 기록했으나, m-feed/support 서브도메인은 미확인.",
+        "evidenceFile": "C:/Users/User/Documents/Codex/2026-10-02/income-expansion/robots-check-2026-10-02.jsonl"
+      },
+      "termsReview": {
+        "termsUrl": null,
+        "relatedTermsUrls": [
+          "https://support.bithumb.com/hc/ko/articles/55114244548889",
+          "https://support.bithumb.com/hc/ko/articles/55114597024025"
+        ],
+        "checkedAt": "2026-10-02",
+        "result": "referral reward guides identified; public SNS/channel posting clause and crawler terms not verified",
+        "verdict": "unknown"
+      },
+      "autoCollect": false,
+      "minIntervalSeconds": 3,
+      "notes": "이벤트 원문 공지만 검토하며 공개 게시 허용은 별도 확인.",
+      "collectionEndpoint": {
+        "url": "https://api.bithumb.com/v1/notices?count=20",
+        "method": "GET",
+        "robotsPathAllowed": true
+      },
+      "collectionObservation": {
+        "endpoint": "https://api.bithumb.com/v1/notices?count=20",
+        "method": "GET",
+        "observedStatus": 200,
+        "rawRowsReturned": 20,
+        "normalizedRowsReturned": 0,
+        "blockedReason": "live_notice_rows_lack_explicit_event_periods"
+      },
+      "blockedReason": "live_notice_rows_lack_explicit_event_periods"
+    }
+  ],
+  "eventRecordSchema": {
+    "required": [
+      "id",
+      "title",
+      "provider",
+      "eventType",
+      "sourceUrls",
+      "checkedAt",
+      "complianceRuleId"
+    ],
+    "fields": {
+      "provider": {
+        "type": "Provider",
+        "requiredKeys": [
+          "name",
+          "type",
+          "domesticReportingStatus"
+        ]
+      },
+      "rewardRule": {
+        "type": "RewardRule",
+        "fields": [
+          "form",
+          "amount",
+          "currencyOrUnit",
+          "payoutDate",
+          "conditions",
+          "limits",
+          "officialSourceUrl"
+        ]
+      },
+      "eligibility": {
+        "type": "Eligibility",
+        "fields": [
+          "who",
+          "requirements",
+          "exclusions",
+          "sourceUrl"
+        ]
+      },
+      "referralProgram": {
+        "type": "ReferralProgram",
+        "fields": [
+          "inviterReward",
+          "inviteeReward",
+          "officialProgramUrl",
+          "publicPostingAllowed",
+          "publicPostingEvidenceUrls",
+          "validFrom",
+          "validUntil"
+        ]
+      },
+      "ipoSchedule": {
+        "type": "IPOSchedule",
+        "fields": [
+          "subscriptionStart",
+          "subscriptionEnd",
+          "refundOrPaymentDate",
+          "listingDate",
+          "dartUrl",
+          "kindUrl"
+        ]
+      },
+      "airdrop": {
+        "type": "Airdrop",
+        "fields": [
+          "exchangeNoticeUrl",
+          "projectNoticeUrl",
+          "conditions",
+          "distributionDate"
+        ]
+      },
+      "assumption": "Unverified computed or interpreted fields must include { status: 'assumption', rationale, sourceUrl }."
+    }
+  },
+  "referralRegistry": {
+    "runtimePath": "%LOCALAPPDATA%\\affiliate-content-operations\\income-events\\referrals.json",
+    "schemaFile": "income-events-referrals.schema.json",
+    "exampleFile": "income-events-referrals.example.json",
+    "repositoryStoresOwnerCodes": false,
+    "fields": [
+      "service",
+      "codeOrLink",
+      "officialProgramUrl",
+      "inviterReward",
+      "inviteeReward",
+      "publicPostingAllowed",
+      "publicPostingEvidenceUrls",
+      "validFrom",
+      "validUntil"
+    ],
+    "note": "현재 사용자 상태 파일은 만들거나 수정하지 않는다. 저장소에는 schema와 가짜 예시만 둔다."
+  },
+  "postFormats": [
+    {
+      "id": "telegram-short",
+      "platform": "telegram",
+      "channel": "@lifehack_ailab",
+      "priority": 1,
+      "shape": [
+        "실제 숫자·차이를 포함한 첫 줄(추천 보상은 같은 첫 부분에 광고 고지)",
+        "혜택과 조건",
+        "기간·지급일",
+        "공식 원문 URL",
+        "그래서 한 줄",
+        "투자 권유가 아님을 표시"
+      ],
+      "maxCharacters": 1200,
+      "disclosurePlacement": "opening"
+    },
+    {
+      "id": "x-threads-quick-fact",
+      "platform": [
+        "x",
+        "threads"
+      ],
+      "priority": 2,
+      "shape": [
+        "숫자·차이와 광고 고지를 포함한 첫 문장",
+        "확인된 사실 1~2개",
+        "공식 원문",
+        "그래서 한 줄",
+        "투자 권유가 아님"
+      ],
+      "maxCharacters": 500,
+      "disclosurePlacement": "opening"
+    },
+    {
+      "id": "blog-information",
+      "platform": "blog",
+      "priority": 3,
+      "shape": [
+        "혜택·마감 숫자 후킹",
+        "대상·행동·보상·조건·한도",
+        "공식 근거 링크",
+        "변경·손실 유의점",
+        "그래서 한 줄"
+      ],
+      "maxCharacters": 4000,
+      "disclosurePlacement": "opening"
+    }
+  ],
+  "quickfactConnection": {
+    "proposedDomain": "G",
+    "workerDomainEnabled": true,
+    "candidateFunction": "incomeEventCandidates",
+    "textBuilder": "buildIncomeEventPost",
+    "module": "income-events.mjs",
+    "preferredChannel": "telegram",
+    "status": "worker_integrated_source_gates_closed",
+    "note": "G 워커는 후보를 판정하고 pass 초안만 전달한다. 약관과 robots가 모두 allowed인 출처가 없어 autoCollect는 0곳이다."
+  },
+  "referralProgramExamples": [
+    {
+      "id": "bithumb-example-terms-only",
+      "service": "빗썸",
+      "officialProgramUrl": "https://feed.bithumb.com/notice/1648694",
+      "inviterReward": "조건 충족 친구 1명당 30,000원 (보고서 확인값; 게시 전 재확인)",
+      "inviteeReward": "조건부 최대 50,000원 (보고서 확인값; 게시 전 재확인)",
+      "freshness": "superseded_unconfirmed: 2026-10-10 audit reports the notice was updated 2026-03-17 (effective 2026-03-26) to '계좌 연결 시 1만원, 원화마켓 30만원 이상 거래 시 4만원 지급'; the official notice answers scripts with 403, so the new conditions are not yet verified by us — do not publish invitee conditions until rechecked in a browser.",
+      "publicPostingAllowed": "unknown",
+      "publicPostingEvidenceUrls": [],
+      "validFrom": null,
+      "validUntil": "2027-05-27",
+      "assumption": false,
+      "notes": "금액은 2026-10-02 market-report.md 조사표에서 옮긴 값이며, 공개 채널 게시 허용을 뜻하지 않는다."
+    },
+    {
+      "id": "coinone-example-terms-only",
+      "service": "코인원",
+      "officialProgramUrl": "https://support.coinone.co.kr/support/solutions/articles/31000154563-%EC%B9%9C%EA%B5%AC-%EC%B4%88%EB%8C%80-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%95%88%EB%82%B4",
+      "inviterReward": "4,000원 상당 (보고서 확인값; 게시 전 재확인)",
+      "inviteeReward": "4,000원 상당 (보고서 확인값; 게시 전 재확인)",
+      "publicPostingAllowed": "unknown",
+      "publicPostingEvidenceUrls": [],
+      "validFrom": null,
+      "validUntil": null,
+      "assumption": false,
+      "notes": "공식 보상 조건이 보고서에서 확인됐으나 공개 채널 홍보 허용 여부는 확인되지 않았다."
+    },
+    {
+      "id": "naver-store-example-terms-only",
+      "service": "네이버플러스 스토어",
+      "officialProgramUrl": "https://mkt.naver.com/naverdetails/point",
+      "inviterReward": "구매 완료 시 5,000원 (보고서 확인값; 게시 전 재확인)",
+      "inviteeReward": "구매 완료 시 5,000원 (보고서 확인값; 게시 전 재확인)",
+      "publicPostingAllowed": "unknown",
+      "publicPostingEvidenceUrls": [],
+      "validFrom": null,
+      "validUntil": null,
+      "assumption": false,
+      "notes": "공식 보상 조건이 보고서에서 확인됐으나 공개 채널 홍보 허용 여부는 확인되지 않았다."
+    }
+  ]
+}

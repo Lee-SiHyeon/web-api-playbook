@@ -1,0 +1,557 @@
+{
+  "schema": "gemini-attachment-v8-hnv-readonly-v2",
+  "service": "gemini-web",
+  "operation": "attachment_chain_hNv_readback",
+  "recordedAt": "2026-10-06T14:22:52.241791+00:00",
+  "purpose": "fresh direct hNvQHb read of the already-dispatched v8 attachment task; no mutation replay",
+  "sourceSnapshotBefore": {
+    "files": [
+      {
+        "path": "discovery/observed-contract.json",
+        "bytes": 39297,
+        "sha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239"
+      },
+      {
+        "path": "src/history-turn-response.mjs",
+        "bytes": 12176,
+        "sha256": "1669d8f814a669ba354bf4cb65755107be6a7b95ba7a98602e3a82938ee6ebf7"
+      },
+      {
+        "path": "src/attachment-chain.mjs",
+        "bytes": 53454,
+        "sha256": "dbed2637b4ff5222e015b6f08202f734938d4a1538ed6f5c45ce108fec8a7fe5"
+      },
+      {
+        "path": "src/history-detail.mjs",
+        "bytes": 13856,
+        "sha256": "2605b37c565ab57fdd49a4c96e42191c1d35bc8a36a96882b667aa743aeb9374"
+      },
+      {
+        "path": "src/client.mjs",
+        "bytes": 38001,
+        "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+      }
+    ],
+    "aggregateSha256": "815c75b87882121ddfcd0680e296797f7f40f4004db18e418a1946e391ef1c21"
+  },
+  "sourceSnapshotStableThroughRead": true,
+  "browserSessionBootstrap": {
+    "resetQuietVerified": true,
+    "browserClosed": false,
+    "contextClosed": false,
+    "browserBusinessWriteDispatchCount": 0,
+    "blockedPostCount": 63
+  },
+  "directRead": {
+    "schema": "gemini-attachment-v8-hnv-readonly-v1",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "listHttpStatus": 200,
+    "listResponseBytes": 6178,
+    "listResponseSha256": "c4999c09f96c3332cebbcf90ce5b6678f42c6bbaade0105c2ed9c574ad629885",
+    "searchHttpStatus": 200,
+    "searchResponseBytes": 996,
+    "searchResponseSha256": "73d94ebd7eb999352679ac5aa46bb5153eb072cfd5d1f5d2e0cef741f0899ea9",
+    "searchCandidateCount": 2,
+    "searchCandidatesMatchedOwnerListCount": 2,
+    "exactTaskMatchCount": 2,
+    "exactTask": null,
+    "candidateReports": [
+      {
+        "exactTaskMatch": true,
+        "searchCandidateMatchedOwnerList": true,
+        "listUpdatedAtAvailable": true,
+        "listUpdatedAt": "2026-10-06T10:59:24.946Z",
+        "listUpdatedAtWithinV8IntentWindow": true,
+        "directDetailHttpStatus": 200,
+        "detailResponseBytes": 12013,
+        "detailResponseSha256": "e66fe3e5259ae5763baecb2f7f1e55e8dbd9fa9bf6aeeadbb38d0b387f8b5235",
+        "routeBindingMatched": true,
+        "detailRpcMatchCount": 1,
+        "apiConversationIdMatched": true,
+        "exactPromptMatched": true,
+        "exactPromptTurnCount": 1,
+        "turnId": {
+          "present": true,
+          "utf8Bytes": 18,
+          "sha256": "52f69a38183e72575ac1734cb7415a4c1a2fbb7e0b02e5a3b5cf2429128321ac"
+        },
+        "draftId": {
+          "present": true,
+          "utf8Bytes": 19,
+          "sha256": "5fabcf565a9009f4747033dfe1c39cc1dd0ed950717999163e3c34ae3a3adfcf"
+        },
+        "plainTextCandidate": {
+          "present": true,
+          "utf8Bytes": 21,
+          "sha256": "b6e6f4dac77835492e189bf0ddbbcab688589bfa5928f337f32c893f80af981e"
+        },
+        "structuredContentPresent": true,
+        "structuredContentDecodeState": "source_mapped_raw_subtree",
+        "structuredContentShape": {
+          "type": "array",
+          "length": 1,
+          "items": [
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    {
+                      "type": "array",
+                      "length": 14,
+                      "items": [
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        {
+                          "type": "array",
+                          "length": 1,
+                          "items": [
+                            {
+                              "type": "array",
+                              "length": 2,
+                              "items": [
+                                {
+                                  "type": "array",
+                                  "length": 2,
+                                  "items": [
+                                    "null",
+                                    {
+                                      "type": "array",
+                                      "length": 3,
+                                      "items": [
+                                        "null",
+                                        "number",
+                                        "string"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "array",
+                                  "length": 32,
+                                  "items": [
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    {
+                                      "type": "array",
+                                      "length": 1,
+                                      "items": [
+                                        {
+                                          "type": "array",
+                                          "length": 3,
+                                          "items": [
+                                            {
+                                              "type": "array",
+                                              "length": 2,
+                                              "items": [
+                                                "string",
+                                                "number"
+                                              ]
+                                            },
+                                            {
+                                              "type": "array",
+                                              "length": 1,
+                                              "items": [
+                                                {
+                                                  "type": "array",
+                                                  "length": 2,
+                                                  "items": [
+                                                    "null",
+                                                    {
+                                                      "type": "array",
+                                                      "length": 7,
+                                                      "items": [
+                                                        {
+                                                          "type": "array",
+                                                          "length": 12,
+                                                          "items": [
+                                                            "null",
+                                                            "number",
+                                                            "string",
+                                                            "null",
+                                                            {
+                                                              "type": "array",
+                                                              "length": 3,
+                                                              "items": [
+                                                                "number",
+                                                                "null",
+                                                                "string"
+                                                              ]
+                                                            },
+                                                            "null",
+                                                            "null",
+                                                            "null",
+                                                            "number",
+                                                            "null",
+                                                            "null",
+                                                            "string"
+                                                          ]
+                                                        },
+                                                        "null",
+                                                        "null",
+                                                        "null",
+                                                        "null",
+                                                        "null",
+                                                        "string"
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "array",
+                                              "length": 2,
+                                              "items": [
+                                                "string",
+                                                "number"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "structuredTextCandidateCount": 0,
+        "structuredUnclassifiedChildCount": 1,
+        "structuredSourceShapeComplete": false,
+        "exactStructuredFileTextMatchCount": 0,
+        "exactStructuredFileTextPaths": [],
+        "exactPlainTextCandidateMatched": false,
+        "exactRenderedFileTextMatched": false,
+        "exactV8FileAnswerAndJournalWindowMatched": false,
+        "oldStreamResponseIdAvailable": false,
+        "oldStreamResponseIdPairingAvailable": false,
+        "oldCallerJournalReconciled": false
+      },
+      {
+        "exactTaskMatch": true,
+        "searchCandidateMatchedOwnerList": true,
+        "listUpdatedAtAvailable": true,
+        "listUpdatedAt": "2026-10-06T09:47:16.904Z",
+        "listUpdatedAtWithinV8IntentWindow": false,
+        "directDetailHttpStatus": 200,
+        "detailResponseBytes": 12007,
+        "detailResponseSha256": "fc297b396d72c446ec04aef872f28e094f26a0b9b0bbb1c00cf8f005302b6221",
+        "routeBindingMatched": true,
+        "detailRpcMatchCount": 1,
+        "apiConversationIdMatched": true,
+        "exactPromptMatched": true,
+        "exactPromptTurnCount": 1,
+        "turnId": {
+          "present": true,
+          "utf8Bytes": 18,
+          "sha256": "082f27694bc600664f94f6936fbd8366002d1e9eabf10f32437d7c1960f52730"
+        },
+        "draftId": {
+          "present": true,
+          "utf8Bytes": 19,
+          "sha256": "ba2410dac51cb67cfe5f095ec222a2ad4edb24babd061af3aca8f094d85cc1f8"
+        },
+        "plainTextCandidate": {
+          "present": true,
+          "utf8Bytes": 21,
+          "sha256": "f6f29e7c41d78674e9bcab87274cd4f679dfd8025c220b49440c293ba3ca7502"
+        },
+        "structuredContentPresent": true,
+        "structuredContentDecodeState": "source_mapped_raw_subtree",
+        "structuredContentShape": {
+          "type": "array",
+          "length": 1,
+          "items": [
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    {
+                      "type": "array",
+                      "length": 14,
+                      "items": [
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        "null",
+                        {
+                          "type": "array",
+                          "length": 1,
+                          "items": [
+                            {
+                              "type": "array",
+                              "length": 2,
+                              "items": [
+                                {
+                                  "type": "array",
+                                  "length": 2,
+                                  "items": [
+                                    "null",
+                                    {
+                                      "type": "array",
+                                      "length": 3,
+                                      "items": [
+                                        "null",
+                                        "number",
+                                        "string"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "array",
+                                  "length": 32,
+                                  "items": [
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    "null",
+                                    {
+                                      "type": "array",
+                                      "length": 1,
+                                      "items": [
+                                        {
+                                          "type": "array",
+                                          "length": 3,
+                                          "items": [
+                                            {
+                                              "type": "array",
+                                              "length": 2,
+                                              "items": [
+                                                "string",
+                                                "number"
+                                              ]
+                                            },
+                                            {
+                                              "type": "array",
+                                              "length": 1,
+                                              "items": [
+                                                {
+                                                  "type": "array",
+                                                  "length": 2,
+                                                  "items": [
+                                                    "null",
+                                                    {
+                                                      "type": "array",
+                                                      "length": 7,
+                                                      "items": [
+                                                        {
+                                                          "type": "array",
+                                                          "length": 12,
+                                                          "items": [
+                                                            "null",
+                                                            "number",
+                                                            "string",
+                                                            "null",
+                                                            {
+                                                              "type": "array",
+                                                              "length": 3,
+                                                              "items": [
+                                                                "number",
+                                                                "null",
+                                                                "string"
+                                                              ]
+                                                            },
+                                                            "null",
+                                                            "null",
+                                                            "null",
+                                                            "number",
+                                                            "null",
+                                                            "null",
+                                                            "string"
+                                                          ]
+                                                        },
+                                                        "null",
+                                                        "null",
+                                                        "null",
+                                                        "null",
+                                                        "null",
+                                                        "string"
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "type": "array",
+                                              "length": 2,
+                                              "items": [
+                                                "string",
+                                                "number"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "structuredTextCandidateCount": 0,
+        "structuredUnclassifiedChildCount": 1,
+        "structuredSourceShapeComplete": false,
+        "exactStructuredFileTextMatchCount": 0,
+        "exactStructuredFileTextPaths": [],
+        "exactPlainTextCandidateMatched": false,
+        "exactRenderedFileTextMatched": false,
+        "exactV8FileAnswerAndJournalWindowMatched": false,
+        "oldStreamResponseIdAvailable": false,
+        "oldStreamResponseIdPairingAvailable": false,
+        "oldCallerJournalReconciled": false
+      }
+    ],
+    "uniqueV8FileAnswerAndTimeMatchCount": 0,
+    "uniqueV8FileAnswerAndTimeMatch": null,
+    "oldMessageJournalWindow": {
+      "state": "response_received",
+      "dispatchCount": 1,
+      "httpStatus": 200,
+      "createdAt": "2026-10-06T10:59:24.684Z",
+      "dispatchStartedAt": "2026-10-06T10:59:24.686Z",
+      "responseReceivedAt": "2026-10-06T10:59:29.018Z",
+      "reconciled": false
+    },
+    "oldV8Receipt": {
+      "path": "discovery/gemini-attachment-v8-final-chain-2026-10-06.json",
+      "outputStatus": "needs_review_unverified_attachment_chain",
+      "textJournalState": "response_received",
+      "textJournalDispatchCount": 1,
+      "textJournalReconciled": false,
+      "directResponseIdPersisted": false,
+      "responseIdReclassifiedFromFreshRead": false,
+      "journalUpdated": false
+    },
+    "rawOwnerEmailPersisted": false,
+    "rawPromptOrFileTextPersisted": false,
+    "rawConversationOrResponseIdentifiersPersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "responseBodiesPersisted": false,
+    "journalReconciled": false
+  },
+  "oldV8OutcomePreserved": {
+    "receiptPath": "discovery/gemini-attachment-v8-final-chain-2026-10-06.json",
+    "outputStatus": "needs_review_unverified_attachment_chain",
+    "textJournalState": "response_received",
+    "textJournalDispatchCount": 1,
+    "textJournalReconciledBeforeRead": false,
+    "oldRawStreamResponseIdAvailable": false,
+    "oldStreamResponseIdBindingInferred": false,
+    "journalUpdatedByThisRead": false
+  },
+  "persistence": {
+    "ownerEmailPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "promptPersisted": false,
+    "fileTextPersisted": false,
+    "conversationIdentifiersPersisted": false,
+    "turnOrDraftIdentifiersPersisted": false,
+    "responseBodiesPersisted": false
+  }
+}

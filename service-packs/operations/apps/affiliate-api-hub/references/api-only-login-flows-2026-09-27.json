@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "observedOn": "2026-09-27",
+  "mode": "browser_discovery",
+  "signupSubmissions": 0,
+  "flows": [
+    {
+      "service": "gmarket",
+      "stage": "google_signup_form_observed",
+      "loginPage": "https://signinssl.gmarket.co.kr/login/login",
+      "loginMethodsShown": [
+        "password",
+        "passkey",
+        "kakao",
+        "toss",
+        "apple",
+        "naver",
+        "google"
+      ],
+      "performed": [
+        "Opened the normal login page",
+        "Selected Google sign-in",
+        "Selected the existing Google account",
+        "Continued ordinary Google sign-in with basic name/profile/email scope"
+      ],
+      "resultPage": "https://mobile.gmarket.co.kr/Login/SocialRegister",
+      "visibleResult": "Google account registration form; no Gmarket member session verified",
+      "profileFields": [
+        "login ID: 6-10 alphanumeric characters",
+        "name",
+        "mobile phone",
+        "email"
+      ],
+      "requiredAgreementsShown": [
+        "Gmarket buyer terms",
+        "Smile Payments terms",
+        "SmilePay electronic financial transaction terms",
+        "required personal data collection/use",
+        "third-party personal data provision",
+        "age at least 14"
+      ],
+      "optionalAgreementsShown": [
+        "optional personal data collection/use",
+        "marketing notifications"
+      ],
+      "agreementsChecked": false,
+      "submitEnabled": false,
+      "formCandidate": {
+        "method": "POST",
+        "url": "https://mobile.gmarket.co.kr/login/addSocialMember",
+        "fieldNames": [
+          "_csrf",
+          "targetUrl",
+          "socialType",
+          "socialSessionId",
+          "usernameFromSocial",
+          "emailFromSocial",
+          "gmktBuyAgreeYN",
+          "eFinanceAgreeYN",
+          "privacyInfoAgreeRequiredYN",
+          "privacyInfoAgreeOptionalYN",
+          "shopRcvAgreeYN",
+          "loginId",
+          "mobileNum",
+          "email",
+          "username",
+          "pushAgreeYn",
+          "autoLoginYn"
+        ],
+        "evidenceType": "rendered_form_attributes",
+        "requestCaptured": false,
+        "liveReplay": false
+      },
+      "alternativeLogin": {
+        "method": "naver",
+        "result": "Naver credential screen shown in Chrome; independent HTTP Naver owner read succeeded in the same run",
+        "next": "Resolve supported existing-session propagation to the Gmarket Naver SSO flow before asking for another login"
+      },
+      "accountExistence": "unknown; Google registration branch does not prove absence of an existing password or other social account",
+      "resume": "First check the existing account through the authorized Naver path; if new registration is needed, bind exact profile and required terms before the final action"
+    },
+    {
+      "service": "threads",
+      "stage": "authenticated_session_protected_owner_verified",
+      "loginPage": "https://www.threads.com/login",
+      "loginMethodsShown": [
+        "Instagram username/phone/email and password",
+        "Continue with Instagram"
+      ],
+      "googleLoginShown": false,
+      "performed": [
+        "Opened Threads login",
+        "Selected Continue with Instagram",
+        "Observed Instagram credential fields",
+        "Opened the visible new-account link",
+        "Inspected the Instagram signup form",
+        "Returned via the existing-account action",
+        "Submitted authorized existing-account Instagram login",
+        "Completed the matching email-code challenge via connected Gmail",
+        "Continued to Threads with the existing Instagram session",
+        "Stored scoped sessions with Windows DPAPI",
+        "Verified both owners in fresh independent Node HTTP processes"
+      ],
+      "signupPage": "https://www.instagram.com/accounts/emailsignup/",
+      "signupFieldsShown": [
+        "mobile phone or email",
+        "password",
+        "date of birth: year/month/day",
+        "full name",
+        "username"
+      ],
+      "credentialFieldsFilled": true,
+      "requestCaptured": false,
+      "authenticatedSessionAcquired": true,
+      "accountExistence": "confirmed_existing",
+      "resume": "Use the stored Threads session through meta-auth-session.mjs; run the protected owner query before observing the next authorized feature.",
+      "passwordLoginRequestCaptured": false,
+      "owner": "lifehack__ailab",
+      "sessionProvider": "windows_dpapi_current_user",
+      "liveReplay": true,
+      "sessionRenewalVerified": false,
+      "latestEvidence": "workflow-runs/api-only-onboarding/20260927-meta-login-1438-utc/auth-receipt.json"
+    },
+    {
+      "service": "instagram",
+      "stage": "authenticated_session_protected_owner_verified",
+      "loginPage": "https://www.instagram.com/accounts/login/",
+      "loginMethodsShown": [
+        "Instagram username/phone/email and password"
+      ],
+      "performed": [
+        "Used the existing Instagram account lifehack__ailab through the authorized first-party login flow",
+        "Completed the matching email-code challenge through the connected Gmail account",
+        "Stored the service-scoped Instagram session with Windows DPAPI",
+        "Verified the protected Instagram owner through independent HTTP requests"
+      ],
+      "resultPage": "https://www.instagram.com/lifehack__ailab/",
+      "credentialFieldsFilled": true,
+      "requestCaptured": false,
+      "authenticatedSessionAcquired": true,
+      "accountExistence": "confirmed_existing",
+      "resume": "Use meta-auth-session.mjs instagram for the protected owner check. If reauthentication is required, use the normal Instagram UI login and one-time encrypted DPAPI handoff; do not replay an unobserved password request.",
+      "passwordLoginRequestCaptured": false,
+      "emailCodeRequestCaptured": true,
+      "owner": "lifehack__ailab",
+      "sessionProvider": "windows_dpapi_current_user",
+      "liveReplay": true,
+      "sessionRenewalVerified": false,
+      "latestEvidence": "docs/instagram-threads-login-2026-09-27.md"
+    }
+  ],
+  "credentialValuesInArtifacts": false,
+  "plaintextCredentialValuesPersisted": false
+}

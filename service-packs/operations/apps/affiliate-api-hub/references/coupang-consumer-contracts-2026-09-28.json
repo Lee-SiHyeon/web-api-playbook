@@ -1,0 +1,690 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-27T18:26:02.229Z",
+  "source": "coupang",
+  "sourceScope": "consumer_site",
+  "origin": "https://www.coupang.com",
+  "host": "local_windows",
+  "browserDiscovery": {
+    "tool": "cua_repl Chrome",
+    "authenticatedUiObserved": true,
+    "authenticationRequirementOfReviewEndpoint": "anonymous_403_protected_200_observed_individual_cookie_necessity_not_isolated",
+    "requestAndResponseObserved": true,
+    "rawBodiesPersisted": false,
+    "credentialsExtracted": true,
+    "challengeTokensExtracted": false,
+    "ownedTabClosedAfterDiscovery": true,
+    "captureLimit": "Product document, review page, quantity-info and other-seller-info were observed; complete site coverage is not claimed.",
+    "authenticatedReviewResponseObserved": true,
+    "credentialHandling": "11 observed application cookies encrypted in memory to current-user DPAPI; no plaintext files or logs",
+    "boundProofTransferred": false
+  },
+  "authentication": {
+    "providerChecked": "shopping-session-store:coupang-consumer",
+    "present": true,
+    "usableForAttempt": true,
+    "protectedHandoffCookieCount": 11,
+    "importFidelityComplete": true,
+    "applicationAuthenticated": true,
+    "authenticatedOwnerVerified": false,
+    "detailOrReviewCredentialProviderImplemented": true,
+    "authenticatedReviewReplayPerformed": true,
+    "responseCookieRotationPersisted": true,
+    "runnerRestartVerified": true,
+    "renewalImplemented": false,
+    "browserAuthEquivalent": false,
+    "boundProofTransferred": false,
+    "allowedRequestPolicy": "exact observed GET URLs and matching product/item/vendor identifiers",
+    "localHandoffLifetimeHours": 6,
+    "note": "Initial authorized browser bootstrap is separate from recurring pure HTTP reads. Server session expiry and complete renewal are not verified."
+  },
+  "operations": {
+    "productDocument": {
+      "method": "GET",
+      "pathTemplate": "/vp/products/{productId}",
+      "queryFields": [
+        "itemId",
+        "vendorItemId"
+      ],
+      "observedUrl": "https://www.coupang.com/vp/products/6159950381?itemId=11948008563&vendorItemId=3299873959",
+      "browser": {
+        "status": 200,
+        "contentType": "text/html",
+        "protocol": "h2",
+        "fromDiskCache": false,
+        "fromServiceWorker": false,
+        "bodyCharacters": 331208,
+        "productJsonLdCount": 1,
+        "sku": "6159950381-11948008563",
+        "price": 25570,
+        "currency": "KRW",
+        "ratingValue": 4.8,
+        "ratingCount": 25722
+      },
+      "schema": {
+        "locator": "script[type=application/ld+json]:Product",
+        "fields": [
+          "sku",
+          "name",
+          "brand.name",
+          "offers.url",
+          "offers.price",
+          "offers.priceCurrency",
+          "offers.availability",
+          "offers.shippingDetails.shippingRate",
+          "aggregateRating.ratingValue",
+          "aggregateRating.ratingCount"
+        ],
+        "identityCheck": "sku matches productId-itemId and offer URL matches productId/itemId/vendorItemId"
+      },
+      "implementation": "adapters/coupang-consumer.mjs:readCoupangConsumerProduct",
+      "directReplay": {
+        "receipt": {
+          "checkedAt": "2026-09-27T18:15:07.109Z",
+          "operation": "product_document",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/vp/products/6159950381",
+          "query": {
+            "itemId": "11948008563",
+            "vendorItemId": "3299873959"
+          },
+          "status": 403,
+          "contentType": "text/html",
+          "bytes": 554,
+          "bodyComplete": true,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "authenticationMode": "protected",
+          "sessionProvider": "windows_current_user_dpapi",
+          "credentialSent": true,
+          "credentialPropagated": true,
+          "authenticatedOwnerVerified": false,
+          "applicationAuthenticated": null,
+          "cookieRotationApplied": false,
+          "cookieRotationPersisted": false,
+          "transport": "native_fetch",
+          "retry": false,
+          "redirectsFollowed": false,
+          "boundProofTransferred": false,
+          "browserAuthEquivalent": false,
+          "server": "AkamaiGHost",
+          "responseSha256": "82c0b40a67877405f6511012f57d161715cc36880b414d9c44714d114e1027c0",
+          "bodyError": null,
+          "challengeConfirmed": true,
+          "accessDeniedTitle": true,
+          "denialSignals": {
+            "requestBlocked": false,
+            "automatedAccess": false,
+            "permissionDenied": true,
+            "loginPage": false
+          }
+        },
+        "evidenceFile": "runs/coupang-consumer-2026-09-27T18-15-07-535Z/product.json",
+        "states": {
+          "captured": true,
+          "client_exists": true,
+          "remnant_free": true,
+          "credential_propagated": true,
+          "live_replay": false
+        }
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": false
+      }
+    },
+    "reviewPage": {
+      "method": "GET",
+      "path": "/next-api/review",
+      "requestHeaderNamesObserved": [
+        "Accept",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform"
+      ],
+      "applicationHeadersUsedByClient": [
+        "accept",
+        "referer",
+        "cookie"
+      ],
+      "queryFields": [
+        "productId",
+        "page",
+        "size",
+        "sortBy",
+        "ratingSummary",
+        "ratings",
+        "market"
+      ],
+      "queryConstants": {
+        "size": "10",
+        "ratingSummary": "true",
+        "ratings": "",
+        "market": ""
+      },
+      "browserObservations": [
+        {
+          "uiAction": "latest sort",
+          "page": 1,
+          "sortBy": "DATE_DESC",
+          "status": 200,
+          "contentType": "application/json",
+          "applicationCode": "RET0000",
+          "rowCount": 10,
+          "bodyCharacters": 18611
+        },
+        {
+          "uiAction": "page 2 after normal document reload; selected sort button state not separately recorded",
+          "page": 2,
+          "sortBy": "ORDER_SCORE_ASC",
+          "status": 200,
+          "contentType": "application/json",
+          "applicationCode": "RET0000",
+          "rowCount": 10,
+          "bodyCharacters": 76125
+        }
+      ],
+      "responseSchema": {
+        "successCode": "RET0000",
+        "rowsPath": "rData.paging.contents",
+        "pagingFields": [
+          "page",
+          "currentPage",
+          "sizePerPage",
+          "totalCount",
+          "totalPage",
+          "isNext"
+        ],
+        "aggregateFields": [
+          "rData.ratingSummaryTotal.ratingCount",
+          "rData.ratingSummaryTotal.ratingAverage",
+          "rData.ratingSummaryTotal.ratingSummaries",
+          "rData.reviewTotalCount"
+        ],
+        "reviewFieldsUsed": [
+          "reviewId",
+          "productId",
+          "vendorItemId",
+          "itemId",
+          "rating",
+          "commentCount",
+          "helpfulCount",
+          "itemName",
+          "reviewAt",
+          "attachments",
+          "videoAttachments"
+        ],
+        "reviewAtType": "13-digit epoch milliseconds",
+        "existenceOnlyFields": [
+          "title",
+          "content"
+        ],
+        "excludedFields": [
+          "member",
+          "displayWriter",
+          "displayName",
+          "reviewerDisplayImage",
+          "rCookies"
+        ]
+      },
+      "observedAggregateDifference": {
+        "pagingTotalCount": 25724,
+        "ratingCount": 25722,
+        "reviewApiRatingAverage": 5,
+        "productJsonLdRatingValue": 4.8,
+        "resolution": "Keep independent values and provenance; no assumption that they are interchangeable."
+      },
+      "implementation": "adapters/coupang-consumer.mjs:readCoupangConsumerReviews",
+      "directReplay": {
+        "receipt": {
+          "checkedAt": "2026-09-27T18:14:59.238Z",
+          "operation": "review_page",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/next-api/review",
+          "query": {
+            "productId": "6159950381",
+            "page": "1",
+            "size": "10",
+            "sortBy": "DATE_DESC",
+            "ratingSummary": "true",
+            "ratings": "",
+            "market": ""
+          },
+          "status": 200,
+          "contentType": "application/json",
+          "bytes": 20524,
+          "bodyComplete": true,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "authenticationMode": "protected",
+          "sessionProvider": "windows_current_user_dpapi",
+          "credentialSent": true,
+          "credentialPropagated": true,
+          "authenticatedOwnerVerified": false,
+          "applicationAuthenticated": true,
+          "cookieRotationApplied": true,
+          "cookieRotationPersisted": true,
+          "transport": "native_fetch",
+          "retry": false,
+          "redirectsFollowed": false,
+          "boundProofTransferred": false,
+          "browserAuthEquivalent": false,
+          "server": "envoy",
+          "responseSha256": "923206597882611680d2e7a5fb65642f8e459fb184e03f7f2973a3599acb7f93",
+          "bodyError": null,
+          "challengeConfirmed": false,
+          "accessDeniedTitle": false,
+          "denialSignals": {
+            "requestBlocked": false,
+            "automatedAccess": false,
+            "permissionDenied": false,
+            "loginPage": false
+          }
+        },
+        "evidenceFile": "runs/coupang-consumer-2026-09-27T18-14-59-238Z/reviews.json",
+        "states": {
+          "captured": true,
+          "client_exists": true,
+          "remnant_free": true,
+          "credential_propagated": true,
+          "live_replay": true
+        }
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "previousDirectReplay": {
+        "checkedAt": "2026-09-27T18:00:09.773Z",
+        "requestCount": 1,
+        "browserUsed": false,
+        "authenticationMode": "anonymous",
+        "credentialPropagated": false,
+        "status": 403,
+        "contentType": "text/html",
+        "server": "envoy",
+        "bytes": 3810,
+        "bodyComplete": true,
+        "challengeConfirmed": false,
+        "accessDeniedTitle": false,
+        "responseSha256": "0a25f80e531191da1e428766c713d71d7a5ade7d84fe9c95bd04028e593f3376",
+        "retry": false,
+        "code": "COUPANG_CONSUMER_ACCESS_BLOCKED",
+        "receiptFile": "runs/coupang-consumer-2026-09-27T18-00-09-993Z/reviews.json",
+        "cause": "unresolved; anonymous response does not test the authenticated browser contract"
+      },
+      "repeatedDirectReplay": {
+        "receipt": {
+          "checkedAt": "2026-09-27T18:26:02.229Z",
+          "operation": "review_page",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/next-api/review",
+          "query": {
+            "productId": "6159950381",
+            "page": "1",
+            "size": "10",
+            "sortBy": "DATE_DESC",
+            "ratingSummary": "true",
+            "ratings": "",
+            "market": ""
+          },
+          "status": 200,
+          "contentType": "application/json",
+          "bytes": 20534,
+          "bodyComplete": true,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "authenticationMode": "protected",
+          "sessionProvider": "windows_current_user_dpapi",
+          "credentialSent": true,
+          "credentialPropagated": true,
+          "authenticatedOwnerVerified": false,
+          "applicationAuthenticated": true,
+          "cookieRotationApplied": true,
+          "cookieRotationPersisted": true,
+          "transport": "native_fetch",
+          "retry": false,
+          "redirectsFollowed": false,
+          "boundProofTransferred": false,
+          "browserAuthEquivalent": false,
+          "server": "envoy",
+          "responseSha256": "eee5d84c1eaf66d9e77f4bd18600734d1e6e420c9678c3e0b3a2f67cbc052ea6",
+          "bodyError": null,
+          "challengeConfirmed": false,
+          "accessDeniedTitle": false,
+          "denialSignals": {
+            "requestBlocked": false,
+            "automatedAccess": false,
+            "permissionDenied": false,
+            "loginPage": false
+          }
+        },
+        "evidenceFile": "runs/coupang-consumer-2026-09-27T18-26-02-229Z/product.json",
+        "parsedRows": 10
+      }
+    },
+    "consumerSearch": {
+      "method": "GET",
+      "path": "/np/search",
+      "historicalReceipt": "docs/coupang-account-rsc-replay-2026-09-27.json",
+      "historicalProtectedReplayStatus": 403,
+      "automaticReplayEnabled": false,
+      "partnerFallbackEnabled": false,
+      "states": {
+        "captured": true,
+        "client_exists": false,
+        "remnant_free": "not_applicable",
+        "credential_propagated": false,
+        "live_replay": false
+      }
+    },
+    "quantityInfo": {
+      "method": "GET",
+      "path": "/next-api/products/quantity-info",
+      "queryFields": [
+        "productId",
+        "vendorItemId"
+      ],
+      "browser": {
+        "status": 200,
+        "contentType": "application/json",
+        "rows": 1
+      },
+      "schema": {
+        "responseType": "array",
+        "fields": [
+          "quantity",
+          "priceUnit",
+          "price.salePrice",
+          "price.couponPrice",
+          "price.finalPrice",
+          "price.i18nSalePrice",
+          "price.i18nCouponPrice",
+          "shippingFee"
+        ],
+        "identityEvidence": "request_scope"
+      },
+      "implementation": "adapters/coupang-consumer.mjs:readCoupangConsumerOffer",
+      "directReplay": {
+        "receipt": {
+          "checkedAt": "2026-09-27T18:24:25.077Z",
+          "operation": "quantity_info",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/next-api/products/quantity-info",
+          "query": {
+            "productId": "6159950381",
+            "vendorItemId": "3299873959"
+          },
+          "status": 403,
+          "contentType": "text/html",
+          "bytes": 419,
+          "bodyComplete": true,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "authenticationMode": "protected",
+          "sessionProvider": "windows_current_user_dpapi",
+          "credentialSent": true,
+          "credentialPropagated": true,
+          "authenticatedOwnerVerified": false,
+          "applicationAuthenticated": null,
+          "cookieRotationApplied": false,
+          "cookieRotationPersisted": false,
+          "transport": "native_fetch",
+          "retry": false,
+          "redirectsFollowed": false,
+          "boundProofTransferred": false,
+          "browserAuthEquivalent": false,
+          "server": "AkamaiGHost",
+          "responseSha256": "5088da2f771a0a6dd33b196dd8142c41ed720b524e3c7687bb1637bfcf63f1cc",
+          "bodyError": null,
+          "challengeConfirmed": true,
+          "accessDeniedTitle": true,
+          "denialSignals": {
+            "requestBlocked": false,
+            "automatedAccess": false,
+            "permissionDenied": true,
+            "loginPage": false
+          }
+        },
+        "evidenceFile": "runs/coupang-consumer-2026-09-27T18-24-25-499Z/product.json",
+        "states": {
+          "captured": true,
+          "client_exists": true,
+          "remnant_free": true,
+          "credential_propagated": true,
+          "live_replay": false
+        }
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": false
+      },
+      "enabledInDefaultProfile": false
+    },
+    "otherSellers": {
+      "method": "GET",
+      "path": "/next-api/products/other-seller-info",
+      "queryFields": [
+        "productId",
+        "selectedId",
+        "itemId"
+      ],
+      "browser": {
+        "status": 200,
+        "contentType": "application/json",
+        "rows": 12
+      },
+      "schema": {
+        "fields": [
+          "title",
+          "items[].vendorItemId",
+          "items[].selected",
+          "items[].vendorName",
+          "items[].i18nPrice",
+          "items[].sellerStoreRating",
+          "totalCount"
+        ],
+        "sellerScoreType": "display_string_unknown_scale",
+        "identityEvidence": "request_scope_and_selected_vendorItemId"
+      },
+      "implementation": "adapters/coupang-consumer.mjs:readCoupangConsumerSellers",
+      "directReplay": {
+        "receipt": {
+          "checkedAt": "2026-09-27T18:25:07.962Z",
+          "operation": "other_sellers",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/next-api/products/other-seller-info",
+          "query": {
+            "productId": "6159950381",
+            "selectedId": "3299873959",
+            "itemId": "11948008563"
+          },
+          "status": 200,
+          "contentType": "application/json",
+          "bytes": 11123,
+          "bodyComplete": true,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "authenticationMode": "protected",
+          "sessionProvider": "windows_current_user_dpapi",
+          "credentialSent": true,
+          "credentialPropagated": true,
+          "authenticatedOwnerVerified": false,
+          "applicationAuthenticated": null,
+          "cookieRotationApplied": true,
+          "cookieRotationPersisted": true,
+          "transport": "native_fetch",
+          "retry": false,
+          "redirectsFollowed": false,
+          "boundProofTransferred": false,
+          "browserAuthEquivalent": false,
+          "server": "envoy",
+          "responseSha256": "9430743420cc1cbc2b4091587807e6b15c3131254134c755399d6817b9d17d68",
+          "bodyError": null,
+          "challengeConfirmed": false,
+          "accessDeniedTitle": false,
+          "denialSignals": {
+            "requestBlocked": false,
+            "automatedAccess": false,
+            "permissionDenied": false,
+            "loginPage": false
+          }
+        },
+        "evidenceFile": "runs/coupang-consumer-2026-09-27T18-25-07-962Z/sellers.json",
+        "states": {
+          "captured": true,
+          "client_exists": true,
+          "remnant_free": true,
+          "credential_propagated": true,
+          "live_replay": true
+        }
+      },
+      "repeatedDirectReplay": {
+        "receipt": {
+          "checkedAt": "2026-09-27T18:26:04.692Z",
+          "operation": "other_sellers",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/next-api/products/other-seller-info",
+          "query": {
+            "productId": "6159950381",
+            "selectedId": "3299873959",
+            "itemId": "11948008563"
+          },
+          "status": 200,
+          "contentType": "application/json",
+          "bytes": 11137,
+          "bodyComplete": true,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "authenticationMode": "protected",
+          "sessionProvider": "windows_current_user_dpapi",
+          "credentialSent": true,
+          "credentialPropagated": true,
+          "authenticatedOwnerVerified": false,
+          "applicationAuthenticated": null,
+          "cookieRotationApplied": true,
+          "cookieRotationPersisted": true,
+          "transport": "native_fetch",
+          "retry": false,
+          "redirectsFollowed": false,
+          "boundProofTransferred": false,
+          "browserAuthEquivalent": false,
+          "server": "envoy",
+          "responseSha256": "8300f2197927ff2f2b45f908446046b71f2d3f2bf0951714d2f3a2f398c02bc2",
+          "bodyError": null,
+          "challengeConfirmed": false,
+          "accessDeniedTitle": false,
+          "denialSignals": {
+            "requestBlocked": false,
+            "automatedAccess": false,
+            "permissionDenied": false,
+            "loginPage": false
+          }
+        },
+        "evidenceFile": "runs/coupang-consumer-2026-09-27T18-26-02-229Z/product.json",
+        "parsedRows": 12
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "enabledInDefaultProfile": true
+    },
+    "productProfile": {
+      "implementation": "adapters/coupang-consumer.mjs:readCoupangConsumerProfile",
+      "operations": [
+        "review_page",
+        "other_sellers"
+      ],
+      "directReplay": {
+        "receipt": {
+          "checkedAt": "2026-09-27T18:26:02.229Z",
+          "operation": "product_profile",
+          "execution": "pure_http",
+          "browserUsed": false,
+          "authenticationMode": "protected",
+          "sessionProvider": "windows_current_user_dpapi",
+          "credentialPropagated": true,
+          "applicationAuthenticated": true,
+          "authenticatedOwnerVerified": false,
+          "requestCount": 2,
+          "operationAttemptCount": 2,
+          "retries": 0
+        },
+        "evidenceFile": "runs/coupang-consumer-2026-09-27T18-26-02-229Z/product.json",
+        "states": {
+          "captured": true,
+          "client_exists": true,
+          "remnant_free": true,
+          "credential_propagated": true,
+          "live_replay": true
+        }
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "coverage": {
+        "productFields": "ids_and_reviewed_option_label",
+        "currentPrice": "selected_vendor_offer_listing",
+        "reviewPages": 1,
+        "sellerOffers": "one_observed_response",
+        "htmlDetails": "blocked_403_not_requested_by_profile",
+        "quantityPricing": "blocked_403_not_requested_by_profile"
+      },
+      "observedIdentity": {
+        "productId": "6159950381",
+        "itemId": "11948008563",
+        "vendorItemId": "3299873959"
+      }
+    }
+  },
+  "coverage": {
+    "consumerSearchReady": false,
+    "consumerProductDirectReadReady": false,
+    "consumerReviewDirectReadReady": true,
+    "consumerOntologyRowsAddedFromBrowser": 0,
+    "automaticPaginationEnabled": false,
+    "productionCollectorEnabled": false,
+    "browserEngineRequiredByHttpClient": false,
+    "consumerSellerPriceReadReady": true,
+    "consumerJsonProfileReady": true,
+    "verifiedProductCount": 1,
+    "verifiedReviewPageCount": 1,
+    "keywordCollectorIntegrationEnabled": false,
+    "fullProductFieldsReady": false
+  },
+  "previousCheckedAt": "2026-09-27T18:00:42.809Z",
+  "verification": {
+    "localTestsPassed": 48,
+    "taskBrowserTabsClosedBeforeFinalProfile": true,
+    "finalProfileRequestCount": 2,
+    "reviewBodiesStored": false,
+    "reviewerIdentitiesStored": false,
+    "rawResponsesStored": false,
+    "credentialsInEvidence": false
+  }
+}

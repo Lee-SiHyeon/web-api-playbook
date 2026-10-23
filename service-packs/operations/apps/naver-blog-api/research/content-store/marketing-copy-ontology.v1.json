@@ -1,0 +1,416 @@
+{
+  "schemaVersion": 1,
+  "ontologyId": "acada:marketing-copy",
+  "label": "마케터 카피 온톨로지 (quick-fact·SNS·블로그 공통 작법층)",
+  "createdAt": "2026-10-01",
+  "purpose": "글을 마케터처럼 쓰기 위한 작법층. 훅 패턴은 hook-ontology, 채널별 형식은 sns-writing-ontology, 가상인물 표시는 ai-influencer-ontology에 이미 있으므로 중복하지 않고 링크한다. 여기에는 (1) 카피 원칙 (2) 호기심·손실회피 레버와 그 한계 (3) AI 문체 금지 패턴 (4) 한국 표시·광고 준수 항목 (5) quick-fact 도메인 A~E 플레이북만 둔다. 모든 규칙은 sources의 id를 달고, 우리 설계 판단은 strength=assumption으로 표시한다.",
+  "designPrinciples": [
+    "출처 없는 규칙은 넣지 않는다. 우리 추정은 assumption으로 밝힌다 (ontology-sources-rule).",
+    "감정 레버(호기심·손실회피)는 원문에 있는 사실·숫자·날짜로만 건다. 만든 긴박감·만든 공포는 금지.",
+    "린트는 경고만 한다. 게시를 막지 않는다. 막는 것은 기존 게이트(공시 문구, 중복, 링크 규칙)뿐이다.",
+    "찾은 문제와 미확인 항목은 openQuestions에 남기고 추측으로 메우지 않는다."
+  ],
+  "sources": {
+    "corey_copywriting": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/copywriting/SKILL.md",
+      "strength": "guide",
+      "note": "GitHub ★51,985, MIT. 명확 > 영리, 구체 > 모호, 능동, 확신, 느낌표 제거, CTA는 [동사]+[얻는 것]",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_copy_frameworks": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/copywriting/references/copy-frameworks.md",
+      "strength": "guide",
+      "note": "'Now you can' 테스트, Human Action Model, Perception Gap",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_copy_editing": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/copy-editing/SKILL.md",
+      "strength": "guide",
+      "note": "7 sweeps: Clarity, Voice and Tone, So What, Prove It, Specificity, Heightened Emotion, Zero Risk. So What 테스트 = 모든 문장에 '그래서?'",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_social": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/social/SKILL.md",
+      "strength": "guide",
+      "note": "첫 줄이 승부. 훅 계열: 호기심·스토리·가치·역발상·사회적 증거. 본문 외부 링크 지양",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_social_platform_limits": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/social/references/platform-limits.md",
+      "strength": "guide",
+      "note": "Threads 500자·토픽태그 1개, X 280·해시태그 1~2, IG 노출 약 125자, TikTok 약 150자",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_social_hooks": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/social/references/post-templates.md",
+      "strength": "guide",
+      "note": "훅 공식 5계열 (Curiosity/Story/Value/Contrarian/Social proof)",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_psychology": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/marketing-psychology/SKILL.md",
+      "strength": "guide",
+      "note": "손실회피(약 2배), 앵커링, 프레이밍, 대비, 100의 법칙(100달러 미만은 %, 초과는 절대액), 희소성은 진짜일 때만, 후회회피, 사회적 증거",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_ad_creative": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/ad-creative/SKILL.md",
+      "strength": "guide",
+      "note": "앵글: pain, outcome, curiosity, comparison, urgency, identity, contrarian(+social proof). 앵글별 변형은 서로 다르게",
+      "retrievedAt": "2026-10-01"
+    },
+    "corey_offers": {
+      "url": "https://github.com/coreyhaines31/marketingskills/blob/5b2c0007766c6a1cf1d53fd8fc73e979e0821022/skills/offers/SKILL.md",
+      "strength": "guide",
+      "note": "가짜 희소성은 신뢰를 무너뜨린다",
+      "retrievedAt": "2026-10-01"
+    },
+    "antislop": {
+      "url": "https://github.com/miqdadbadjuber/anti-slop/blob/main/skills/antislop-copywriting/SKILL.md",
+      "strength": "guide",
+      "note": "GitHub ★4,129, MIT. AI 문체 패턴 카탈로그와 '군집으로 판단, 단발 징후는 넘어간다' 원칙",
+      "retrievedAt": "2026-10-01"
+    },
+    "cialdini": {
+      "url": "https://www.influenceatwork.com/7-principles-of-persuasion/",
+      "strength": "official",
+      "note": "설득 7원칙: 상호성, 희소성, 권위, 일관성, 호감, 사회적 증거, 일체감",
+      "retrievedAt": "2026-10-01"
+    },
+    "nng_concise": {
+      "url": "https://www.nngroup.com/articles/concise-scannable-and-objective-how-to-write-for-the-web/",
+      "strength": "measured",
+      "note": "간결 +58%, 훑기 쉬움 +47%, 객관적 +27%, 세 가지 합쳐 +124% (1997, 51명, 사용성 측정치)",
+      "retrievedAt": "2026-10-01"
+    },
+    "nng_reading": {
+      "url": "https://www.nngroup.com/articles/how-users-read-on-the-web/",
+      "strength": "measured",
+      "note": "79%가 훑고 16%만 단어별로 읽는다. 역피라미드",
+      "retrievedAt": "2026-10-01"
+    },
+    "ogilvy_headline": {
+      "url": "https://www.goodreads.com/quotes/191457-on-the-average-five-times-as-many-people-read-the",
+      "strength": "guide",
+      "note": "'평균적으로 본문보다 헤드라인을 읽는 사람이 5배' (오길비 인용; 출간 연도는 검색 결과가 엇갈려 적지 않는다)",
+      "retrievedAt": "2026-10-01"
+    },
+    "schwartz_awareness": {
+      "url": "https://breakthroughadvertisingbook.com/the-five-states-of-awareness-the-key-to-marketing-that-actually-works/",
+      "strength": "guide",
+      "note": "Breakthrough Advertising(1966) 인지 5단계: Unaware, Problem Aware, Solution Aware, Product Aware, Most Aware",
+      "retrievedAt": "2026-10-01"
+    },
+    "hormozi_value": {
+      "url": "https://alexhormozi.wiki/frameworks/value-equation-explained",
+      "strength": "guide",
+      "note": "가치 = (꿈의 결과 × 성공 가능성 인식) ÷ (걸리는 시간 × 노력·희생)",
+      "retrievedAt": "2026-10-01"
+    },
+    "kftc_endorsement_easylaw": {
+      "url": "https://easylaw.go.kr/CSP/CnpClsMain.laf?popMenu=ov&csmSeq=1575&ccfNo=2&cciNo=3&cnpClsNo=1",
+      "strength": "official",
+      "note": "경제적 이해관계는 제목 또는 첫 부분에 눈에 띄게. 허용 문구: 광고·유료광고·상업광고·광고비/수수료 지급·협찬. 금지: 체험단·기자단·서포터즈 같은 모호한 표현, 대가 받고 내돈내산 표시. 추천글과 같은 언어(한글)로 표시, AD·PR·spon은 부적절",
+      "retrievedAt": "2026-10-01"
+    },
+    "kftc_deceptive_guideline": {
+      "url": "https://www.kimchang.com/ko/insights/detail.kc?sch_section=4&idx=32881",
+      "strength": "official",
+      "note": "기만적 표시·광고 심사지침 개정 (김앤장 요약, 행정예고안 기준; 시행일은 공정위 게시글 https://www.ftc.go.kr/www/selectBbsNttView.do?key=12&bordCd=3&nttSn=46562 에 2025-10-30). 유료 추천 은폐, 안전 정보 누락, 근거가 잘 안 보이는 '1위' 표시, 기간이 끝났는데 계속되는 '금일 마감·남은 시간' 표시를 기만으로 본다",
+      "retrievedAt": "2026-10-01"
+    },
+    "kftc_virtual_person": {
+      "url": "https://www.ftc.go.kr/www/selectBbsNttView.do?pageUnit=10&pageIndex=1&searchCnd=all&key=12&bordCd=3&searchCtgry=01%2C02&nttSn=47547",
+      "strength": "official",
+      "note": "추천·보증 심사지침 개정: AI 생성 가상인물을 추천·보증인으로 추가, 2026-06-01 시행. 글은 제목·첫 부분에 'AI를 기반으로 생성된 가상인물이 포함된 게시물입니다.' 또는 '가상인물 포함', 영상은 등장 중 '가상인물' 표시",
+      "retrievedAt": "2026-10-01"
+    },
+    "hook_ontology": {
+      "url": "file:apps/naver-blog-api/research/content-store/hook-ontology.v1.json",
+      "strength": "measured",
+      "note": "검색·피드 채널별 훅 lift (네이버 상위 vs 하위 제목, YouTube/Shorts 조회 중앙값 배율). 피드 측정은 쇼츠 대리 지표이며 X·스레드 실측이 아니다",
+      "retrievedAt": "2026-10-01"
+    },
+    "sns_writing_ontology": {
+      "url": "file:apps/naver-blog-api/research/content-store/sns-writing-ontology.v1.json",
+      "strength": "official",
+      "note": "브랜드 보이스(결론 먼저, 얼버무림·과장 금지), 플랫폼 하드 리밋, 어조",
+      "retrievedAt": "2026-10-01"
+    },
+    "owner_rules": {
+      "url": "memory:feedback-so-what-hook.md, memory:blog-writing-style-feedback.md, memory:report-in-korean.md",
+      "strength": "official",
+      "note": "사장님 지시: 모든 quick-fact는 훅 리드 + 그래서 줄, 원문 숫자만, 투자 권유 금지, 얼버무림 금지",
+      "retrievedAt": "2026-10-01"
+    }
+  },
+  "links": {
+    "hookOntology": "hook-ontology.v1.json",
+    "snsWritingOntology": "sns-writing-ontology.v1.json",
+    "aiInfluencerOntology": "ai-influencer-ontology.v1.json"
+  },
+  "principles": [
+    {
+      "id": "clear_over_clever",
+      "rule": "영리한 문장보다 한 번에 읽히는 문장. 읽다가 멈춰서 뜻을 따져야 하면 진 것이다.",
+      "sources": ["corey_copywriting", "corey_copy_frameworks"]
+    },
+    {
+      "id": "specific_over_vague",
+      "rule": "형용사 대신 숫자·기간·이름. '저렴해요'가 아니라 '2,100원(19%) 싸요'.",
+      "sources": ["corey_copywriting", "corey_copy_editing"]
+    },
+    {
+      "id": "so_what_bridge",
+      "rule": "모든 사실 뒤에 독자가 할 일이나 얻는 것을 한 줄로 잇는다 ('그래서 어쩌라고'에 답한다).",
+      "sources": ["corey_copy_editing", "owner_rules"]
+    },
+    {
+      "id": "prove_it",
+      "rule": "최저가·1위·최고 같은 주장은 비교 대상과 기준 시각을 같은 글에 붙인다.",
+      "sources": ["corey_copy_editing", "kftc_deceptive_guideline", "hook_ontology"]
+    },
+    {
+      "id": "now_you_can",
+      "rule": "혜택 줄을 '이제 ~할 수 있어요'로 바꿔 읽어 본다. 구체적이고 사실이면 통과, 막연하면 다시 쓴다.",
+      "sources": ["corey_copy_frameworks"]
+    },
+    {
+      "id": "headline_carries_the_post",
+      "rule": "헤드라인·첫 줄이 글의 대부분을 판가름한다. 첫 줄에 결과와 숫자 하나를 둔다.",
+      "sources": ["ogilvy_headline", "nng_reading", "corey_social"]
+    },
+    {
+      "id": "scannable_short",
+      "rule": "짧게, 훑을 수 있게, 과장 없이. 간결·훑기·객관 세 가지를 함께 쓴 글이 사용성 측정에서 가장 높았다.",
+      "sources": ["nng_concise", "nng_reading"]
+    },
+    {
+      "id": "action_cta",
+      "rule": "CTA는 [동사]+[얻는 것] ('신청하세요' 보다 '10/15까지 신청해 지원금 받으세요'). '자세히 보기·클릭' 같은 약한 CTA는 피한다.",
+      "sources": ["corey_copywriting"]
+    },
+    {
+      "id": "no_exclamation",
+      "rule": "느낌표는 빼고 사실의 크기로 강조한다.",
+      "sources": ["corey_copywriting", "sns_writing_ontology"]
+    }
+  ],
+  "emotionalLevers": {
+    "note": "사장님 2026-10-01 '호기심 혹은 공포심리를 자극할 수 있겠나'. 두 레버 모두 쓴다. 레버는 원문에 있는 사실에만 건다.",
+    "curiosity": {
+      "mechanism": "첫 줄에 원문 숫자·사실 하나로 궁금증(정보 간극)을 열고, 같은 글 안에서 답을 준다. 답 없이 끌기만 하면 낚시다.",
+      "hookPatterns": ["curiosity_story", "timing_insight", "community_question"],
+      "formulas": [
+        "{원문 숫자}인데, {의외의 대비}. 이유는 아래에",
+        "{대상}이 {행동}한 이유, 숫자로 보면 {값}이에요",
+        "왜 {의외의 사실}일까요? 답은 {원문 근거 한 줄}"
+      ],
+      "evidence": "피드형 쇼츠 제목 lift: curiosity_story 3.24, crowd_pick 1.38, community_question 1.28 (쇼츠 대리 지표)",
+      "sources": ["hook_ontology", "corey_social", "corey_social_hooks", "corey_ad_creative"],
+      "limits": ["답을 글 안에서 준다", "원문에 없는 반전을 만들지 않는다", "promise_kept: 궁금하게 만든 약속을 지킨다"]
+    },
+    "lossAversion": {
+      "mechanism": "'얻는다'보다 '놓치면 잃는다'가 더 세게 작동한다 (약 2배로 소개됨). 잃는 것은 실제 차액·실제 마감일·실제 조건이어야 한다.",
+      "hookPatterns": ["deadline_loss", "regret_aversion", "negative_warning", "scarcity_discontinue"],
+      "formulas": [
+        "{다른 판매처}에서 사면 {차액}원({퍼센트}%) 더 내요",
+        "{날짜}까지예요. 지나면 {잃는 것}",
+        "{행동}하기 전에 확인하세요: {원문에 있는 위험 조건}"
+      ],
+      "evidence": "네이버 상위 1~3위 제목 중 손실회피형 12% vs 7~10위 1% (검색형 채널). 피드형 쇼츠에서는 deadline_loss lift 0.41이라 첫 문장을 마감으로만 열지 않는다",
+      "sources": ["corey_psychology", "hook_ontology", "kftc_deceptive_guideline"],
+      "limits": [
+        "차액·마감·조건은 원문 URL이 있는 값만 쓴다 (guardrail sourced_urgency)",
+        "'금일 마감'·'남은 시간' 류는 실제로 그 시점에 끝나는 경우만. 같은 조건이 이후에도 계속되면 기만이다",
+        "안전·건강·금융 위험을 부풀리지 않는다 (no_overclaim)",
+        "공포 자극어(폭락·사기·경고)는 숫자·날짜·출처와 함께일 때만",
+        "투자 권유·매수매도 표현 금지 (owner_rules)"
+      ]
+    },
+    "forbidden": [
+      "원문에 없는 위기감·공포·긴급성",
+      "존재하지 않는 마감·재고·인원 제한",
+      "출처 없는 '전문가들은' 식 권위",
+      "독자를 불안하게 해 상품·링크로 몰아가는 문구 (수익이 걸린 제휴 글일수록 더 조심한다)"
+    ]
+  },
+  "psychology": [
+    { "id": "loss_aversion", "rule": "손실 프레임이 이득 프레임보다 강하다 (약 2배).", "use": "차액·마감을 '더 낸다·놓친다'로 쓴다", "sources": ["corey_psychology"] },
+    { "id": "anchoring", "rule": "먼저 본 숫자가 기준이 된다.", "use": "'네이버 11,000원 → 토스쇼핑 8,900원'처럼 비교 대상을 먼저 보인다", "sources": ["corey_psychology"] },
+    { "id": "contrast", "rule": "나란히 놓으면 차이가 크게 보인다.", "use": "어디서 얼마 답글의 표", "sources": ["corey_psychology"] },
+    { "id": "rule_of_100", "rule": "가격이 100달러 미만이면 퍼센트 할인이, 넘으면 절대 금액 할인이 더 크게 느껴진다.", "use": "저가 특가는 %도 같이 쓴다. 원화 환산 기준(약 10만 원)은 우리 추정이다", "strength": "assumption", "sources": ["corey_psychology"] },
+    { "id": "social_proof", "rule": "다른 사람들의 선택이 근거가 된다.", "use": "실제 판매량·리뷰 수가 원문에 있을 때만", "sources": ["corey_psychology", "cialdini"] },
+    { "id": "genuine_scarcity", "rule": "희소성은 진짜일 때만 작동하고, 가짜면 신뢰를 잃는다.", "use": "재고·기한은 원문 날짜 기준", "sources": ["corey_psychology", "corey_offers", "cialdini"] },
+    { "id": "regret_aversion", "rule": "사고 후 후회할 가능성을 줄여 주는 문구가 결정을 돕는다.", "use": "'배송비 반영 최저가'처럼 후회 요인을 미리 지운다", "sources": ["corey_psychology"] }
+  ],
+  "frameworks": [
+    {
+      "id": "awareness_stage",
+      "rule": "독자의 인지 단계에 맞춰 첫 줄을 고른다: Unaware(문제 자체를 모름) → Problem Aware → Solution Aware → Product Aware → Most Aware(가격·조건만 남음).",
+      "use": "특가는 Product/Most Aware라 가격·차액, 정책은 Problem Aware라 대상·기한, 해외뉴스는 Unaware라 호기심으로 연다",
+      "sources": ["schwartz_awareness"]
+    },
+    {
+      "id": "value_equation",
+      "rule": "가치 = (결과 × 가능성 인식) ÷ (걸리는 시간 × 노력). 시간과 노력을 줄이는 정보(신청 경로·기한)를 그래서 줄에 넣는다.",
+      "sources": ["hormozi_value"]
+    },
+    {
+      "id": "seven_sweeps",
+      "rule": "쓴 뒤 순서대로 훑는다: Clarity → Voice and Tone → So What → Prove It → Specificity → Heightened Emotion → Zero Risk.",
+      "sources": ["corey_copy_editing"]
+    },
+    {
+      "id": "ad_angles",
+      "rule": "한 소재를 앵글 3~5개(pain, outcome, curiosity, comparison, urgency, identity, contrarian)로 써 보고 고른다. 변형끼리 같은 소리를 하지 않는다.",
+      "sources": ["corey_ad_creative"]
+    }
+  ],
+  "channelRules": {
+    "x": {
+      "limits": "가중치 280 (링크 23, 한글·이모지 2), 해시태그 1~2",
+      "opener": "첫 줄은 호기심·손실을 원문 숫자로. 가격·마감은 근거로 둘째 줄부터가 피드 규칙이지만 특가 글은 가격 자체가 숫자 훅이라 tensions 참조",
+      "sources": ["corey_social_platform_limits", "sns_writing_ontology", "hook_ontology"]
+    },
+    "threads": {
+      "limits": "500자, 토픽태그 1개",
+      "opener": "해요체, 마지막은 질문 (질문으로 끝내면 답글 2~3배: platform-styles.mjs 인용치)",
+      "sources": ["corey_social_platform_limits", "sns_writing_ontology"]
+    },
+    "daangn": {
+      "limits": "제휴 링크 금지, '당근:' 줄의 일반 최저가 링크만",
+      "opener": "동네 이웃 말투, 한 문단 한 줄",
+      "sources": ["owner_rules"]
+    },
+    "naver_tistory": {
+      "opener": "검색형: 키워드 먼저, 마감·손실·대상 특정 제목이 상위 제목에서 강함",
+      "sources": ["hook_ontology", "nng_reading"]
+    }
+  },
+  "bannedPatterns": {
+    "note": "영문 카탈로그는 antislop에서 옮기고, 한국어 대응어 목록은 우리 추정(assumption)이다. 군집으로 볼 때만 문제 삼고, 하나씩은 넘어간다.",
+    "patterns": [
+      { "id": "empty_vocab", "en": "unlock, elevate, seamless, cutting-edge, revolutionary, game-changer", "ko": ["혁신적", "획기적", "게임체인저", "최첨단", "패러다임", "시너지", "압도적"], "lint": "slop_vocab", "sources": ["antislop", "corey_copy_editing"] },
+      { "id": "brand_banned", "ko": ["역대급", "무조건", "100%", "대박", "미쳤"], "lint": "brand_banned", "sources": ["sns_writing_ontology"] },
+      { "id": "weasel_attribution", "en": "Experts say / Studies show (no name)", "ko": ["전문가들은", "업계에서는", "알려져 있", "많은 사람들이"], "lint": "weasel_attribution", "sources": ["antislop", "corey_copy_editing"] },
+      { "id": "chatbot_closer", "en": "I hope this helps", "ko": ["도움이 되셨", "도움이 되었으면", "궁금한 점이 있으시면"], "lint": "chatbot_closer", "sources": ["antislop"] },
+      { "id": "em_dash", "en": "em dash and ' -- '", "lint": "em_dash", "sources": ["antislop"] },
+      { "id": "exclamation", "en": "exclamation points", "lint": "exclamation", "sources": ["corey_copywriting", "antislop"] },
+      { "id": "emoji_headings_and_bold", "en": "emojis in headings, boldface overuse", "lint": null, "note": "우리 quick-fact 리드는 이모지로 시작한다. tensions 참조", "sources": ["antislop"] },
+      { "id": "all_caps_emphasis", "en": "ALL-CAPS emphasis", "lint": null, "note": "한국어 글에서는 빈도가 낮아 린트하지 않는다", "sources": ["antislop"] },
+      { "id": "rule_of_three_staccato", "en": "rule of three, staccato drama, negative parallelism", "lint": null, "note": "군집 판단이 필요해 사람이 검토", "sources": ["antislop"] }
+    ]
+  },
+  "compliance": {
+    "note": "확인한 항목만 적는다. 법조문 원문과 '최저가' 입증 기준은 못 구했으므로 openQuestions에 둔다.",
+    "items": [
+      { "id": "disclosure_first_part", "rule": "경제적 이해관계(제휴 수수료)는 제목이나 첫 부분에 눈에 띄게 적는다. 본문 중간, 댓글만, 더보기 뒤, 작은 글씨는 안 된다.", "lint": "disclosure_position", "sources": ["kftc_endorsement_easylaw"] },
+      { "id": "disclosure_wording", "rule": "'광고·유료광고·수수료 지급·협찬'처럼 분명한 한글 표현. 체험단·기자단·서포터즈는 모호, 대가를 받고 '내돈내산' 표시는 금지, AD·PR·spon 같은 외국어 약어는 부적절.", "lint": ["ambiguous_disclosure_terms", "foreign_abbrev_ad"], "sources": ["kftc_endorsement_easylaw"] },
+      { "id": "no_fake_urgency", "rule": "실제로 끝나지 않는 '금일 마감·남은 시간' 표시는 기만. 긴급 표현에는 날짜를 붙인다.", "lint": "urgency_without_date", "sources": ["kftc_deceptive_guideline", "hook_ontology"] },
+      { "id": "superlative_basis", "rule": "'1위·최저가' 같은 표시는 근거가 잘 보이게. 비교 대상과 기준 시각을 같은 글에 둔다. (법적 입증 기준 자체는 미확인)", "lint": "superlative_without_basis", "sources": ["kftc_deceptive_guideline", "corey_copy_editing"] },
+      { "id": "ai_virtual_person_label", "rule": "AI 생성 가상인물이 나오면 글은 제목·첫 부분에, 영상은 등장 중에 가상인물 표시. 구현은 ai-influencer-ontology, daangn-story.mjs에 있다.", "lint": null, "link": "ai-influencer-ontology.v1.json", "sources": ["kftc_virtual_person"] },
+      { "id": "no_investment_advice", "rule": "금융 소재는 사실·일정만. 매수·매도·수익 보장 표현 금지 (사장님 규칙).", "lint": "no_investment_advice", "sources": ["owner_rules"] }
+    ]
+  },
+  "quickFactDomainPlaybook": {
+    "note": "훅 id는 hook-ontology의 id. 앵글·인지 단계·그래서 줄 템플릿은 우리 설계라 assumption이고, A/B 테스트 전에는 확정으로 보지 않는다.",
+    "strength": "assumption",
+    "domains": {
+      "A_deal": {
+        "angles": ["comparison", "pain"],
+        "lever": "lossAversion + anchoring",
+        "hookPatterns": ["price_anchor", "regret_aversion"],
+        "awareness": "product_aware",
+        "leadTemplate": "{다른 판매처}에서 사면 {차액}원({퍼센트}%) 더 내요. {판매처} {가격}원(배송비 반영)이 지금 최저가예요.",
+        "soWhat": "살 거면 {판매처}에서. 비교 기준 시각은 답글에.",
+        "proof": "+++ 답글에 판매처별 가격·기준 시각·쿠폰·배송비 반영"
+      },
+      "B_policy": {"status": "not_scheduled",
+        "angles": ["outcome", "urgency"],
+        "lever": "lossAversion (실제 마감일)",
+        "hookPatterns": ["deadline_loss", "segment_specific"],
+        "awareness": "problem_aware",
+        "leadTemplate": "{대상}이면 {날짜}까지 {받는 것}을 신청할 수 있어요.",
+        "soWhat": "{날짜}까지 {경로}에서 신청하세요. 대상이 아니면 넘어가세요.",
+        "proof": "원문 URL과 기한 날짜 필수 (sourced_urgency)"
+      },
+      "C_overseas_news": {"status": "not_scheduled",
+        "angles": ["curiosity", "social_proof"],
+        "lever": "curiosity",
+        "hookPatterns": ["curiosity_story", "timing_insight"],
+        "awareness": "unaware",
+        "leadTemplate": "{회사}가 {원문 숫자}를 내다봤어요. {의외의 대비}.",
+        "soWhat": "한국 독자에게 뜻하는 것 한 줄 (사실 범위 안에서). 투자 판단은 하지 않는다.",
+        "proof": "1차 출처 링크"
+      },
+      "D_ai_news": {
+        "angles": ["outcome", "curiosity"],
+        "lever": "curiosity + now_you_can",
+        "hookPatterns": ["outcome_gain", "demo_reveal", "curiosity_story"],
+        "awareness": "solution_aware",
+        "leadTemplate": "이제 {할 수 있는 것}. {회사}가 {날짜}에 {제품}을 공개했어요.",
+        "soWhat": "지금 써 볼 수 있는지·무료인지·대상은 누구인지 한 줄.",
+        "proof": "공식 발표 링크"
+      },
+      "E_flight": {
+        "angles": ["comparison", "urgency"],
+        "lever": "anchoring + dated urgency",
+        "hookPatterns": ["price_anchor", "timing_insight"],
+        "awareness": "product_aware",
+        "leadTemplate": "{구간} {왕복/편도} {가격}원, 최근 60일 중간값보다 {퍼센트}% 싸요.",
+        "soWhat": "{조회 시각} 기준이에요. 출발 가능일은 {날짜}. 같은 구간은 하루 한 번만 올려요.",
+        "proof": "조회 시각과 비교 기간을 본문에 둔다"
+      }, "F_contest": {"status": "scheduled", "note": "run by the quick-fact worker (x-quickfact-worker.mjs config A,E,D,F,G; blog accepts A,D,E,F); no hook playbook written yet (ontology gap audit ONT-29)"}, "G_income_event": {"status": "scheduled", "note": "run by the quick-fact worker (config A,E,D,F,G); not accepted by the blog path; no hook playbook written yet (ONT-29)"}
+    }
+  },
+  "lintRules": [
+    { "id": "lead_has_number", "severity": "warn", "sources": ["corey_copywriting", "corey_copy_editing"], "check": "첫 본문 줄에 숫자가 있다" },
+    { "id": "so_what", "severity": "warn", "sources": ["corey_copy_editing", "owner_rules"], "check": "행동·이득으로 끝나는 '그래서' 줄이 있다 (휴리스틱)" },
+    { "id": "slop_vocab", "severity": "warn", "sources": ["antislop", "corey_copy_editing"], "strength": "assumption" },
+    { "id": "brand_banned", "severity": "warn", "sources": ["sns_writing_ontology"] },
+    { "id": "em_dash", "severity": "info", "sources": ["antislop"] },
+    { "id": "exclamation", "severity": "info", "sources": ["corey_copywriting", "antislop"] },
+    { "id": "weasel_attribution", "severity": "warn", "sources": ["antislop", "corey_copy_editing"], "strength": "assumption" },
+    { "id": "chatbot_closer", "severity": "info", "sources": ["antislop"], "strength": "assumption" },
+    { "id": "urgency_without_date", "severity": "warn", "sources": ["kftc_deceptive_guideline", "hook_ontology"] },
+    { "id": "superlative_without_basis", "severity": "warn", "sources": ["kftc_deceptive_guideline", "corey_copy_editing"], "strength": "assumption" },
+    { "id": "fear_without_source", "severity": "warn", "sources": ["kftc_deceptive_guideline", "hook_ontology", "corey_offers"], "strength": "assumption" },
+    { "id": "disclosure_position", "severity": "warn", "sources": ["kftc_endorsement_easylaw"] },
+    { "id": "ambiguous_disclosure_terms", "severity": "warn", "sources": ["kftc_endorsement_easylaw"] },
+    { "id": "foreign_abbrev_ad", "severity": "warn", "sources": ["kftc_endorsement_easylaw"] },
+    { "id": "no_investment_advice", "severity": "warn", "sources": ["owner_rules"] },
+    { "id": "feed_opener_price_or_deadline", "severity": "info", "sources": ["hook_ontology"], "check": "첫 줄이 가격·마감으로 열린다 (피드 규칙과의 긴장을 눈에 보이게)" },
+    { "id": "rule_of_100", "severity": "info", "sources": ["corey_psychology"], "strength": "assumption", "check": "저가 특가 리드가 원 단위 차액만 쓰고 %가 없다" }
+  ],
+  "tensions": [
+    {
+      "id": "feed_opener_vs_price_first",
+      "what": "hook-ontology 피드 규칙은 X·스레드 첫 줄을 호기심·순위·질문으로 열고 가격·마감은 둘째 줄 이후로 미루라고 한다. 현재 quick-fact 리드는 가격·사실 우선이다.",
+      "evidence": "쇼츠 제목 lift: curiosity_story 3.24 vs price_anchor 0.48, deadline_loss 0.41. X·스레드 게시글에서 측정한 값이 아니다",
+      "resolution": "미정. 후보: (1) 리드를 '차액을 잃는' 손실 프레임 + 원문 숫자로 바꿔 호기심과 가격을 함께 쓴다 (2) qf-compose 템플릿 A/B. 사장님 결정 또는 실측 후 확정",
+      "sources": ["hook_ontology"]
+    },
+    {
+      "id": "source_link_in_main_post",
+      "what": "corey social과 sns-writing-ontology는 첫 글에 외부 링크를 넣으면 도달이 줄어든다고 한다. quick-fact는 파서가 본문 링크를 필수로 요구한다 (1차 출처 또는 제휴 링크).",
+      "resolution": "미정. 제휴 딜은 링크가 본문에 있어야 공시가 성립하고, 뉴스류는 링크를 답글로 옮기는 A/B 후보",
+      "sources": ["corey_social", "sns_writing_ontology"]
+    },
+    {
+      "id": "emoji_lead",
+      "what": "antislop은 이모지 머리말을 AI 징후로 본다. quick-fact 리드는 🛒 ✈️ 같은 이모지로 시작한다.",
+      "resolution": "단발 징후는 넘어간다는 antislop 원칙에 따라 린트하지 않는다. 다른 징후가 군집으로 나오면 같이 본다",
+      "sources": ["antislop"]
+    }
+  ],
+  "openQuestions": [
+    "표시광고법 제3조·제5조 조문 원문 미확보 (원문은 HWP/PDF 첨부). 조문 인용 전 확인 필요",
+    "'최저가' 표시의 법적 입증 기준(기간·범위) 미확인. 현재는 비교 대상·기준 시각을 같은 글에 붙이는 관행 수준",
+    "기만적 표시·광고 심사지침 개정 내용은 행정예고안 요약(김앤장) 기준이다. 확정 시행본 대조 필요 (시행일 2025-10-30은 공정위 게시글 근거)",
+    "100의 법칙 원화 환산 기준(약 10만 원)은 우리 추정",
+    "손실회피 '약 2배'는 마케팅 스킬 문서의 소개 수치다. 우리 게시글에서 측정한 값이 아니다",
+    "피드 훅 lift는 쇼츠 대리 지표다. X·스레드 실측(도달·답글) A/B 필요",
+    "한국어 슬롭·과장어 목록은 우리 추정. 실제 게시글 샘플로 오탐률 점검 필요"
+  ]
+}

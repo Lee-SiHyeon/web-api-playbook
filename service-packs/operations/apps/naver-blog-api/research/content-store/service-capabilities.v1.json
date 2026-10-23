@@ -1,0 +1,771 @@
+{
+  "schemaVersion": 1,
+  "id": "service-capabilities",
+  "updatedAt": "2026-09-30",
+  "purpose": "What each external service can actually do for us through the maintained HTTP clients, at what verification level, with which evidence — so briefs, mirrors and ontologies only rely on verified operations. First filled from Codex's 2026-09-27/28 work (owner 2026-09-28: '코덱스 작업하던것들 검토해서 온톨로지 반영좀 해줘라'), reviewed by Claude.",
+  "verificationLevels": [
+    {
+      "id": "live_replay_verified",
+      "rank": 4,
+      "label": "브라우저 없는 HTTP 재현 성공(소유자/응답 확인)"
+    },
+    {
+      "id": "contract_observed",
+      "rank": 3,
+      "label": "요청 계약 관측(재현 전)"
+    },
+    {
+      "id": "prepared_unexecuted",
+      "rank": 2,
+      "label": "구현·준비만(변경 요청 0건)"
+    },
+    {
+      "id": "observed_only",
+      "rank": 1,
+      "label": "화면·폼 관측만"
+    },
+    {
+      "id": "blocked",
+      "rank": 0,
+      "label": "차단·거절(우회하지 않음)"
+    },
+    {
+      "id": "not_implemented",
+      "rank": 0,
+      "label": "미구현"
+    }
+  ],
+  "rules": [
+    "Pipelines may call only operations at live_replay_verified; writes additionally need the owner's instruction, a journal and readback.",
+    "A write marked prepared_unexecuted is not a capability until one owner-instructed live write is reconciled.",
+    "Blocked sources are never retried by automation; recovery needs a new observed contract, not a bypass."
+  ],
+  "services": [
+    {
+      "id": "toss_sharelink",
+      "domain": "affiliate",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-28",
+      "client": "apps/toss-sharelink/client.mjs (check | <read op> | issue <tacaItemId> | reconcile <tacaItemId>)",
+      "auth": {
+        "mode": "first_party_browser_bootstrap (phone SMS) → DPAPI toss-sharelink-state (TGSID, TBIZAUTH scoped to sharelink.toss.im)",
+        "renewal": "manual; TOSS_REAUTH_REQUIRED",
+        "pending": "email-login conversion awaiting owner's new password"
+      },
+      "operations": [
+        {
+          "id": "member",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "owner matched"
+        },
+        {
+          "id": "shopping-products",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "118 curated products (captured query values; pagination/filters not established)"
+        },
+        {
+          "id": "shopping-issued-links",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "1 existing link"
+        },
+        {
+          "id": "me-performance",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "empty"
+        },
+        {
+          "id": "me-settlement",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "empty"
+        },
+        {
+          "id": "link-issue",
+          "kind": "write",
+          "level": "live_replay_verified",
+          "note": "POST /api-public/v3/shopping/sharelink/link/issue {tacaItemId} → shortUrl (https://toss.shopping/_m/…); contract from first-party /home bundle; live 2026-09-28 on the already-issued item returned the same link, list unchanged (1); journal per item in %LOCALAPPDATA%/affiliate-content-operations/toss-sharelink/links"
+        },
+        {
+          "id": "open-api-apply",
+          "kind": "write",
+          "level": "observed_only",
+          "note": "stopped at the application form; Open API needs approval + static IP"
+        },
+        {
+          "id": "creator-info-register",
+          "kind": "write",
+          "level": "live_replay_verified",
+          "note": "2026-09-28 owner-approved single POST /me/creator-info (creatorName 생활이득AI연구소 + 7 channel URLs), readback via member/detail matched; journal %LOCALAPPDATA%/affiliate-content-operations/toss-sharelink/journal/creator-info-2026-09-28.json"
+        },
+        {
+          "id": "product-detail",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "GET /api-public/v3/shopping/sharelink/v2/products/{tacaItemId}: seller (merchantInfo.name, reviewStat), price, delivery fee, origin, product reviews; used by produce-compare enrichToss to find the same seller on public malls"
+        }
+      ],
+      "evidence": [
+        "C:/Users/User/Documents/Codex/2026-09-27/toss-sharelink/verification.json",
+        "C:/Users/User/Documents/Codex/2026-09-27/toss-sharelink/observed-contracts.json"
+      ],
+      "ontologyUse": [
+        "shopping-shorts-ontology monetizationLinks.toss_sharelink",
+        "affiliate network candidate (disclosure: '이 콘텐츠는 토스쇼핑 쉐어링크 활동의 일환으로, 링크를 통한 구매가 발생하면 일정 수수료를 지급받습니다.')"
+      ],
+      "gaps": [
+        "no tests in repo",
+        "product web URL: only the issued short link (clicking it counts as a click — never fetch it in automation)"
+      ]
+    },
+    {
+      "id": "cps_commerce_linkprice",
+      "domain": "commerce",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-27",
+      "client": "apps/affiliate-api-hub/scripts/linkprice-cps-commerce.mjs (collect|export|coverage|query|search|product|reviews)",
+      "auth": {
+        "mode": "public_anonymous for consumer sources; coupang Partners web search via protected session",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "offerings",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "71 of 112 merchants with product samples (2,136 offerings)"
+        },
+        {
+          "id": "prices",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "49 merchants, 2,541 offer observations; quoted_price only counts as purchase price"
+        },
+        {
+          "id": "ratings",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "42 merchants, 1,449 aggregates"
+        },
+        {
+          "id": "reviews",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "7 merchants, 43 sample reviews without identity/body"
+        },
+        {
+          "id": "blocked_sources",
+          "kind": "read",
+          "level": "blocked",
+          "note": "39 merchants without data (403/429/challenge); diagnosis only, no bypass"
+        }
+      ],
+      "evidence": [
+        "apps/affiliate-api-hub/references/cps-reverify/coverage.json",
+        "apps/affiliate-api-hub/references/cps-reverify/ontology.jsonl",
+        "apps/affiliate-api-hub/docs/cps-commerce-ontology.md"
+      ],
+      "ontologyUse": [
+        "catalog cps_sources / cps_offerings / cps_offer_prices / cps_ratings",
+        "shopping-sources registry (per-site capability)",
+        "grocery-compare / price-comparison briefs"
+      ],
+      "gaps": [
+        "samples, not full catalogs (catalogComplete=false)",
+        "942 offerings without canonical URL",
+        "uncommitted in repo (Codex)"
+      ]
+    },
+    {
+      "id": "place_kakao_map",
+      "domain": "place",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-27",
+      "client": "apps/affiliate-api-hub/adapters/place-info.mjs (npm run places:read -- kakao-search|kakao-place)",
+      "auth": {
+        "mode": "public_anonymous GET, no cookies/captcha token",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "search",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "first page, up to 15 places"
+        },
+        {
+          "id": "place-detail",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "address, category, coordinates, phone, hours, menu, ratings, review counts"
+        },
+        {
+          "id": "visitor-reviews",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "first recommended page (20) only when restrict.review_read allows; no identities, contact info redacted"
+        }
+      ],
+      "evidence": [
+        "apps/affiliate-api-hub/references/place-info-observed-contracts-2026-09-27.json",
+        "apps/affiliate-api-hub/docs/place-info-api-only-2026-09-27.md"
+      ],
+      "ontologyUse": [
+        "place-ontology.v1.json (국내 맛집)"
+      ],
+      "gaps": [
+        "pagination not implemented",
+        "uncommitted in repo (Codex)"
+      ]
+    },
+    {
+      "id": "place_naver",
+      "domain": "place",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-27",
+      "client": "apps/affiliate-api-hub/adapters/place-info.mjs (naver-summary --id)",
+      "auth": {
+        "mode": "public_anonymous GET with same-origin Referer",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "place-summary",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "by known Place ID: name, category, coordinates, hours, visitor rating/count, blog-review total"
+        },
+        {
+          "id": "search",
+          "kind": "read",
+          "level": "not_implemented",
+          "note": "search XHR not captured"
+        },
+        {
+          "id": "review-text",
+          "kind": "read",
+          "level": "not_implemented"
+        }
+      ],
+      "evidence": [
+        "apps/affiliate-api-hub/references/place-info-observed-contracts-2026-09-27.json"
+      ],
+      "ontologyUse": [
+        "place-ontology.v1.json (국내 맛집)"
+      ]
+    },
+    {
+      "id": "instagram_brand",
+      "domain": "social",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-27",
+      "handle": "lifehack__ailab",
+      "client": "apps/naver-blog-api/scripts/meta-auth-session.mjs instagram",
+      "auth": {
+        "mode": "browser login (password + Gmail code) → DPAPI instagram-auth-session",
+        "renewal": "not implemented (re-login manual)"
+      },
+      "operations": [
+        {
+          "id": "owner-read",
+          "kind": "read",
+          "level": "live_replay_verified"
+        },
+        {
+          "id": "follow",
+          "kind": "write",
+          "level": "prepared_unexecuted",
+          "note": "apps/social-actions"
+        },
+        {
+          "id": "post-carousel-reel",
+          "kind": "write",
+          "level": "not_implemented"
+        }
+      ],
+      "evidence": [
+        "docs/instagram-threads-login-2026-09-27.md",
+        "docs/social-follow-api-only-2026-09-28.md"
+      ],
+      "ontologyUse": [
+        "publication-channels instagram (status session_verified_read_only)"
+      ],
+      "gaps": [
+        "LinkPrice SNS site (type I) needs an SNS linkage step in the LinkPrice UI — owner"
+      ]
+    },
+    {
+      "id": "threads_brand",
+      "domain": "social",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-27",
+      "handle": "lifehack__ailab",
+      "client": "apps/naver-blog-api/scripts/meta-auth-session.mjs threads",
+      "auth": {
+        "mode": "continue-with-Instagram → DPAPI threads-auth-session",
+        "renewal": "not implemented"
+      },
+      "operations": [
+        {
+          "id": "owner-read",
+          "kind": "read",
+          "level": "live_replay_verified"
+        },
+        {
+          "id": "follow",
+          "kind": "write",
+          "level": "prepared_unexecuted"
+        },
+        {
+          "id": "post-thread",
+          "kind": "write",
+          "level": "not_implemented"
+        }
+      ],
+      "evidence": [
+        "docs/instagram-threads-login-2026-09-27.md"
+      ],
+      "ontologyUse": [
+        "publication-channels threads (status session_verified_read_only)"
+      ],
+      "gaps": [
+        "LinkPrice SNS site (type I) needs an SNS linkage step in the LinkPrice UI — owner"
+      ]
+    },
+    {
+      "id": "social_follow",
+      "domain": "social",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-28",
+      "client": "apps/social-actions (npm run social:actions -- capabilities|prepare|execute|pending|reconcile)",
+      "auth": {
+        "mode": "existing DPAPI sessions per service",
+        "renewal": "per service"
+      },
+      "operations": [
+        {
+          "id": "naver-neighbor-add",
+          "kind": "write",
+          "level": "prepared_unexecuted"
+        },
+        {
+          "id": "tistory-subscribe",
+          "kind": "write",
+          "level": "prepared_unexecuted"
+        },
+        {
+          "id": "x-follow",
+          "kind": "write",
+          "level": "prepared_unexecuted"
+        },
+        {
+          "id": "threads-follow",
+          "kind": "write",
+          "level": "prepared_unexecuted"
+        },
+        {
+          "id": "instagram-follow",
+          "kind": "write",
+          "level": "prepared_unexecuted"
+        },
+        {
+          "id": "relationship-reads",
+          "kind": "read",
+          "level": "live_replay_verified"
+        }
+      ],
+      "evidence": [
+        "docs/social-follow-api-only-2026-09-28.md",
+        "apps/naver-blog-api/research/content-store/social-follow-contracts-2026-09-28.json"
+      ],
+      "ontologyUse": [
+        "distribution: neighbor/follow growth — every relationship change needs a named target from the owner"
+      ],
+      "gaps": [
+        "test suite not run",
+        "no live write; Meta follow response shape unverified",
+        "one unintended X follow during earlier browser tracing (undone, re-read)"
+      ]
+    },
+    {
+      "id": "blogger",
+      "domain": "publishing",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-27",
+      "handle": "everyintheworld.blogspot.com",
+      "client": null,
+      "auth": {
+        "mode": "existing browser UI only",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "dashboard-read",
+          "kind": "read",
+          "level": "observed_only",
+          "note": "11 posts visible in UI; XHR contract not captured (capture blocked by policy in exec runs)"
+        },
+        {
+          "id": "publish",
+          "kind": "write",
+          "level": "not_implemented"
+        },
+        {
+          "id": "linkprice-site",
+          "kind": "write",
+          "level": "live_replay_verified",
+          "note": "LinkPrice site A100708141 registered 2026-09-28 (add-site W, readback in sites list); merchant applications not done"
+        }
+      ],
+      "evidence": [
+        "apps/blogger-api/research/observed-contracts-2026-09-27.json"
+      ],
+      "ontologyUse": [
+        "publication-channels (future mirror)"
+      ]
+    },
+    {
+      "id": "coupang_consumer",
+      "domain": "commerce",
+      "builtBy": "codex+claude",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-27",
+      "client": "apps/naver-blog-api/research/content-store/grocery-compare.mjs (via Danawa)",
+      "auth": {
+        "mode": "consumer search blocked (Akamai edge); prices through Danawa catalog mall lists",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "consumer-search",
+          "kind": "read",
+          "level": "blocked"
+        },
+        {
+          "id": "price-via-danawa",
+          "kind": "read",
+          "level": "live_replay_verified"
+        }
+      ],
+      "evidence": [
+        "docs/coupang-403-diagnosis-2026-09-27.json"
+      ],
+      "ontologyUse": [
+        "shopping-sources coupang.price_via_danawa"
+      ]
+    },
+    {
+      "id": "naver_shopping",
+      "domain": "shopping",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-30",
+      "client": "Lee-SiHyeon/naver-shopping-travel-crawler (private, 3e80266): scripts/naver-shopping.mjs (feed | integrated-search | search | product | reviews | catalog), scripts/naver-shopping-deals.mjs",
+      "auth": {
+        "mode": "public_anonymous native fetch; no cookies, proxy or browser",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "today-deals",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "오늘끝딜 기본 스페셜딜: 70 products (repo 01:50Z), 40 priced over 2 pages (rerun). Display prices, not checkout or market-lowest"
+        },
+        {
+          "id": "promotion-feed",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "shopsquare 쇼핑블록 promotion RSC: 16 items, 6 priced"
+        },
+        {
+          "id": "integrated-search",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "search.naver.com shopping cards only (3 per query); conditional coupon price kept separate"
+        },
+        {
+          "id": "store-search",
+          "kind": "read",
+          "level": "blocked",
+          "note": "brand.naver.com store search: browser 27 results, standalone 429 (repo and rerun)"
+        },
+        {
+          "id": "product-detail",
+          "kind": "read",
+          "level": "blocked",
+          "note": "brand.naver.com product JSON: standalone 429 (repo and rerun)"
+        },
+        {
+          "id": "reviews",
+          "kind": "read",
+          "level": "blocked",
+          "note": "query-pages POST: standalone 429 (repo and rerun); STORE_PICK is not a substitute"
+        }
+      ],
+      "evidence": [
+        "Lee-SiHyeon/naver-shopping-travel-crawler (private, 3e80266) references/live-read-verification-20260930.json (01:07–01:29Z)",
+        "Lee-SiHyeon/naver-shopping-travel-crawler (private, 3e80266) references/naver-today-deals-read-20260930.json (01:50Z)",
+        "Claude rerun 2026-09-30 03:14Z (scratchpad nstc-check.json): results in each operation note"
+      ],
+      "ontologyUse": [
+        "shopping-sources.v1.json naver_shopping (promotion_products ×2, search via 통합검색 카드)",
+        "quick-fact domain A candidate source (still needs Danawa beats_market)"
+      ]
+    },
+    {
+      "id": "naver_travel",
+      "domain": "travel",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-30",
+      "client": "Lee-SiHyeon/naver-shopping-travel-crawler (private, c666f52): scripts/naver-travel.mjs (flight-search | flight-cards | hotel-search | hotel-rates | travel-products | travel-autocomplete | catalog)",
+      "auth": {
+        "mode": "public_anonymous native fetch (SSE / GraphQL named read queries only; mutations blocked in client)",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "flight-search-international",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "flight-api.naver.com SSE, price per adult. Crawler a0f5893 (2026-09-30) reads streams up to 64 MiB (were 25-37 MB: ICN-NRT 471, ICN-KIX 316, ICN-DAD 460 itineraries) and keeps partnerOffers: every partner fare per itinerary, cheapest first (about 53 offers from 20 partners; codes only, e.g. AGD, VGT, MRT, HDT, CTR, YNJ; names not in the stream)"
+        },
+        {
+          "id": "flight-calendar",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "flight-api.naver.com/graphql minPricesByDate (the site calendar query, crawler c666f52): lowest fare per departure date ~1 year ahead; RT uses tripDays [n,n]. 2026-09-30: ICN-KIX 4일 RT 299 dates, GMP-CJU OW 324. Used by travel-deal-check.mjs (60-day median, 30% rule, live search re-check)"
+        },
+        {
+          "id": "flight-search-domestic",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "per leg (s.minFare), not round-trip combined; rerun GMP–CJU 11/10 22 legs, from 28,700원 (에어서울)"
+        },
+        {
+          "id": "flight-cards",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "65 card-company promotion cards (즉시/청구할인 metadata, no prices)"
+        },
+        {
+          "id": "hotel-search",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "domestic only; indicative min rate without dates; rerun 부산 1,146 hotels"
+        },
+        {
+          "id": "hotel-rates",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "OTA quoted listing rates per stay (rate.userRate), cancellation/breakfast; rerun 95 rates for hotel 11583218"
+        },
+        {
+          "id": "travel-products",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "travel.naver.com/domestic SSR: 20 tours + 20 hotels, indicative starting price (e.g. 경주시티투어 25,000원)"
+        },
+        {
+          "id": "travel-autocomplete",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "domestic region rcode + official name"
+        },
+        {
+          "id": "overseas-hotel-search",
+          "kind": "read",
+          "level": "not_implemented"
+        },
+        {
+          "id": "travel-hot-deal-collector",
+          "kind": "read",
+          "level": "not_implemented",
+          "note": "no collector judges time-limited travel deals or validates the reference price"
+        },
+        {
+          "id": "booking-payment",
+          "kind": "write",
+          "level": "not_implemented",
+          "note": "out of scope by design"
+        }
+      ],
+      "evidence": [
+        "Lee-SiHyeon/naver-shopping-travel-crawler (private, 3e80266) references/live-read-verification-20260930.json (01:07–01:29Z)",
+        "Lee-SiHyeon/naver-shopping-travel-crawler (private, 3e80266) references/naver-today-deals-read-20260930.json (01:50Z)",
+        "Claude rerun 2026-09-30 03:14Z (scratchpad nstc-check.json): results in each operation note"
+      ],
+      "ontologyUse": [
+        "travel deal posts: same-route/same-hotel date comparison (domestic flights, hotel rates)",
+        "video/travel story briefs: hotel & tour starting prices with date stamp"
+      ]
+    },
+    {
+      "id": "skyscanner_consumer",
+      "domain": "travel",
+      "builtBy": "claude",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-30",
+      "client": "none (probe only: scratchpad skyscanner-probe.mjs)",
+      "auth": {
+        "mode": "public_anonymous",
+        "renewal": "n/a"
+      },
+      "operations": [
+        {
+          "id": "flight-search",
+          "kind": "read",
+          "level": "blocked",
+          "note": "www.skyscanner.co.kr/transport/flights/... (ICN-OSA, GMP-CJU) answers 307 to /sttc/px/captcha-v2 (PerimeterX) for plain HTTP; robots also disallows /transport/. Not bypassed"
+        },
+        {
+          "id": "partner-api",
+          "kind": "read",
+          "level": "not_implemented",
+          "note": "official route: Skyscanner Partner APIs need an owner application and API key (travel-adapters.json skyscanner-partner-api)"
+        }
+      ],
+      "evidence": [
+        "2026-09-30 anonymous probe: home 200, flight search 307 → px captcha"
+      ],
+      "ontologyUse": [
+        "use naver_travel.flight-search-international partnerOffers for seller comparison instead"
+      ]
+    },
+    {
+      "id": "toss_sharelink_openapi",
+      "domain": "affiliate",
+      "builtBy": "claude",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-09-30",
+      "client": "apps/affiliate-api-hub/adapters/toss-openapi.mjs (health | best | today-deals | categories | category-best | detail | link | performance)",
+      "auth": {
+        "mode": "OAuth client_credentials (oauth2.cert.toss.im) with owner-issued Access/Secret Key; token ~1 year, cached",
+        "renewal": "automatic 7 days before expiry",
+        "storage": "DPAPI ProtectedStore toss-sharelink-openapi",
+        "sourceIpAllowList": "220.86.121.120 (home Wi-Fi egress, dynamic — re-register if calls fail with SHARELINK_OPENAPI_ACCESS_DENIED)"
+      },
+      "limits": "10 rps per partner (burst 30); daily 10,000 products read and 10,000 new links; HTTP 200 + resultType FAIL is a failure",
+      "terms": "SNS/blog posting allowed; a price-comparison website or stored commerce catalogue is not; price crawling restricted; disclosure required next to the product introduction",
+      "operations": [
+        {
+          "id": "health",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "2026-09-30 status ok"
+        },
+        {
+          "id": "today-deals",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "하루특가; displayPrice includes shipping, no personal coupons"
+        },
+        {
+          "id": "best-selling",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "hourly ranking"
+        },
+        {
+          "id": "product-detail",
+          "kind": "read",
+          "level": "live_replay_verified",
+          "note": "up to 30 tacaItemIds; latest price/sold-out"
+        },
+        {
+          "id": "link-issue",
+          "kind": "write",
+          "level": "live_replay_verified",
+          "note": "POST /openapi/links {tacaItemId, publisherId=회원 연동 ID}; idempotent per tacaItemId; 2026-09-30 스파클 생수 90382271 → https://toss.shopping/_m/xGQjaVIa; cache %LOCALAPPDATA%/affiliate-content-operations/toss-openapi/links.json"
+        },
+        {
+          "id": "category-best",
+          "kind": "read",
+          "level": "contract_observed"
+        },
+        {
+          "id": "performance",
+          "kind": "read",
+          "level": "contract_observed"
+        },
+        {
+          "id": "order-events-push",
+          "kind": "read",
+          "level": "not_implemented",
+          "note": "needs a public HTTPS receiver URL"
+        }
+      ],
+      "evidence": [
+        "https://sharelink-docs.toss.im/llms-full.txt (2026-09-30)"
+      ],
+      "ontologyUse": [
+        "toss-deal-check.mjs: 하루특가/베스트 as deal candidates, priceVerdict route toss_sharelink",
+        "quick-fact AFFILIATE toss_sharelink (toss.im|toss.shopping /_m/ only)"
+      ]
+    },
+    {
+      "id": "inpock_linkpage",
+      "domain": "link_hub",
+      "builtBy": "codex",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-10-06",
+      "client": "apps/affiliate-api-hub/scripts/inpock-links.mjs (status | publish | backfill) -> web-api-playbook scripts/inpock.mjs",
+      "origins": [
+        "link.inpock.co.kr",
+        "upload-image.inpock.co.kr"
+      ],
+      "auth": {
+        "mode": "DPAPI login inpock-login (owner)"
+      },
+      "terms": "[광고] title prefix on every partner card (owner 2026-10-06); page-level notice block is an owner action",
+      "operations": [
+        {
+          "id": "card-publish",
+          "kind": "write",
+          "level": "contract_observed",
+          "note": "write-once journal per source with management + anonymous readback; replay evidence not recorded in this file (verify before raising the level)"
+        }
+      ],
+      "registeredOn": "2026-10-06",
+      "note": "ontology gap audit ONT-11 / ONT-05"
+    },
+    {
+      "id": "threads_graph_api",
+      "domain": "social",
+      "builtBy": "claude",
+      "reviewedBy": "claude",
+      "checkedAt": "2026-10-06",
+      "client": "apps/affiliate-api-hub/scripts/sns/writers/threads-graph.mjs",
+      "origins": [
+        "graph.threads.net"
+      ],
+      "auth": {
+        "mode": "long-lived user token threads-graph-api-token in DPAPI ProtectedStore (Threads tester lifehack__ailab)",
+        "renewal": "GET /refresh_access_token?grant_type=th_refresh_token (token >= 24 h old; extends to 60 days)"
+      },
+      "operations": [
+        {
+          "id": "post",
+          "kind": "write",
+          "level": "contract_observed",
+          "note": "POST /me/threads (container) then POST /me/threads_publish; replies via reply_to_id; carousel for several images; no disclosure logic in the writer"
+        }
+      ],
+      "sourceUrl": "https://developers.facebook.com/docs/threads/posts",
+      "registeredOn": "2026-10-06",
+      "note": "ontology gap audit ONT-11 (CH-11); owner 2026-10-05 \"공식 api부터 쓰자\"; level to be verified"
+    }
+  ]
+}

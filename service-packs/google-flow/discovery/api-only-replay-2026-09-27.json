@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-27",
+  "scope": { "site": "https://flow.google.com", "projectId": "a8ae183d-74d6-4314-98f4-3e853539f22c", "host": "local Windows Node.js 24", "billingTarget": "Flow web credits only", "geminiDeveloperApiUsed": false },
+  "execution": {
+    "mode": "pure_http reads after one-time browser session bootstrap; normal browser generation trace separate",
+    "browserUsedForRecurringReads": false,
+    "browserUsedForGenerationTrace": true,
+    "extensionUsed": false,
+    "credentialProvider": "Windows DPAPI CurrentUser",
+    "credentialOrigin": "https://flow.google.com",
+    "loginRenewalAfterExpiry": "unverified"
+  },
+  "preGenerationReadOnlyProbe": {
+    "checkedAt": "2026-09-27T06:58:32Z",
+    "flowProjectHtml": { "httpStatus": 200, "authenticated": true },
+    "flowPageRuntime": { "recaptchaEnterpriseScriptPresent": true, "enterpriseExecuteFunctionPresent": true },
+    "generationButtonUsed": false,
+    "generationPostSent": false,
+    "scopeNote": "Presence of the browser token provider corroborates the earlier captured YhhmEf contract; it is not a browserless token issuer or a generation replay."
+  },
+  "observations": [
+    { "operation": "projectDocument", "method": "GET", "path": "/project/{projectId}", "httpStatus": 200, "mime": "text/html", "pageFieldsParsed": ["SNlM0e", "FdrFJe", "cfb2h"], "directHttpReplay": true },
+    { "operation": "projectMedia", "rpcId": "Zzl0ze", "method": "POST", "path": "/_/AiSandboxAngularFrontend/data/batchexecute", "httpStatus": 200, "mime": "application/json", "firstResponseBytes": 11194, "mediaCountBefore": 2, "mediaCountAfter": 3, "directHttpReplay": true },
+    { "operation": "pollGeneration", "rpcId": "jwpduf", "method": "POST", "path": "/_/AiSandboxAngularFrontend/data/batchexecute", "httpStatus": 200, "mime": "application/json", "observedFinalStateCode": 3, "observedVideoBytes": 553769, "directHttpReplay": true },
+    { "operation": "getMedia", "rpcId": "as29s", "method": "POST", "path": "/_/AiSandboxAngularFrontend/data/batchexecute", "httpStatus": 200, "mime": "application/json", "responseBytes": 2338, "signedVideoUrlPresent": true, "directHttpReplay": true },
+    { "operation": "existingVideoDownload", "method": "GET", "origin": "https://flow-content.google", "httpStatus": 200, "bytes": 3428523, "mp4SignatureVerified": true, "directHttpReplay": true },
+    { "operation": "newVideoDownload", "method": "GET", "origin": "https://flow-content.google", "httpStatus": 200, "bytes": 553769, "mp4SignatureVerified": true, "directHttpReplay": true },
+    { "operation": "generateTextVideo", "rpcId": "YhhmEf", "browserRequestCapturedNow": true, "browserCreateRequests": 1, "directHttpCreateRequests": 0, "directHttpReplay": false, "blocker": "Fresh first-party reCAPTCHA Enterprise token has no verified browser-free issuer" }
+  ],
+  "fiveStates": {
+    "projectMedia": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+    "pollGeneration": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+    "getMedia": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+    "existingVideoDownload": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+    "generateTextVideo": { "captured": true, "client_exists": false, "remnant_free": false, "credential_propagated": null, "live_replay": false }
+  }
+}

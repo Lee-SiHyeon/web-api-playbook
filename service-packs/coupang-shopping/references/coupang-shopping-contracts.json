@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "provider": "coupang-consumer-shopping",
+  "observedOn": "2026-09-30",
+  "overallState": "partial",
+  "runtimeRoute": "independent_http_only",
+  "normalExecutionBrowserRequired": false,
+  "defaultAuthentication": "anonymous",
+  "authenticatedReplayVerified": false,
+  "completionGatePassed": false,
+  "entityHierarchy": {
+    "productId": "Base catalog product group identifier (e.g. 8035983162)",
+    "itemId": "Specific SKU / option variation identifier (e.g. 22483457378)",
+    "vendorItemId": "Specific seller listing identifier determining stock, price and Buy Box selection (e.g. 95036224970)",
+    "relationship": "One productId contains multiple itemIds (options), each itemId is sold by one or more vendorItemIds (sellers)."
+  },
+  "priceTaxonomy": {
+    "basePriceKrw": "Original regular/list price (정상가/기준가), kept null if unobserved",
+    "salePriceKrw": "Observed feed listing price; membership/coupon eligibility and checkout price unverified",
+    "couponDiscountKrw": "Conditional instant coupon discount",
+    "disclaimers": [
+      "Payable price at final checkout requires separate verification.",
+      "No absolute lowest price guarantee (전체최저가 보장 금지).",
+      "No final payment price guarantee (최종결제가 보장 금지).",
+      "No conditional reward guarantee (조건적립보장 금지)."
+    ]
+  },
+  "operations": [
+    {
+      "name": "feed",
+      "kind": "read",
+      "endpoint": {
+        "method": "POST",
+        "origin": "https://www.coupang.com",
+        "path": "/n-api/recommend/feeds",
+        "bodyFields": [
+          "nextFeedsToken"
+        ]
+      },
+      "scope": "consumer_recommend_feed_products",
+      "nature": "XHR_JSON_API",
+      "browserXhrObserved": true,
+      "independentReplayVerified": true,
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "feedTitles": [
+          "골드박스 기간한정 파격 특가",
+          "오늘의 할인"
+        ],
+        "rowCount": 30,
+        "priceCount": 30,
+        "responseFields": [
+          "productId",
+          "itemId",
+          "vendorItemId",
+          "title",
+          "currency",
+          "basePriceKrw",
+          "salePriceKrw",
+          "discountRatePercent",
+          "unitPrice",
+          "cleanUrl",
+          "imageUrl",
+          "delivery",
+          "signals",
+          "disclaimers"
+        ]
+      },
+      "supportedFilters": {
+        "query": "Case-insensitive substring match on product title",
+        "section": "Case-insensitive substring match on feed title or feed type",
+        "minPrice": "Minimum salePriceKrw filter",
+        "maxPrice": "Maximum salePriceKrw filter",
+        "minDiscount": "Minimum discountRatePercent filter",
+        "productId": "Exact match on catalog productId",
+        "vendorItemId": "Exact match on listing vendorItemId",
+        "itemId": "Exact match on option itemId"
+      },
+      "supportedSorting": [
+        "price_asc",
+        "price_desc",
+        "discount_desc",
+        "rating_signal_desc",
+        "reviews_desc",
+        "none"
+      ],
+      "sortingBehavior": "Sorting and limit are applied to the full eligible inventory after bounded traversal completes, avoiding premature truncation.",
+      "continuationHandling": "Server-issued continuationToken held strictly in memory during page flow and never exposed or persisted.",
+      "rateLimiting": "1-second pacing between requests; maxPages 1-5 (default 3), plus one bootstrap request.",
+      "limitations": [
+        "Traverses observed consumer recommend feed blocks (e.g. 골드박스 파격 특가, 오늘의 할인).",
+        "All filtering and sorting are performed locally across observed feed products.",
+        "Not a global keyword search engine index."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      }
+    },
+    {
+      "name": "deals",
+      "kind": "read",
+      "scope": "consumer_recommend_feed_deals",
+      "nature": "DERIVED_FEED_READ",
+      "browserXhrObserved": true,
+      "independentReplayVerified": true,
+      "description": "Convenience operation filtering observed feed products by discount threshold (default >=20%) and sorting by discount percentage descending.",
+      "parameters": {
+        "minDiscount": "Minimum discount threshold percent (default 20)",
+        "section": "Optional section name filter",
+        "sort": "Sort order (default discount_desc)",
+        "limit": "Max items to return (default 20)",
+        "maxPages": "Max feed pages to traverse (default 3)"
+      },
+      "limitations": [
+        "Local filter on fetched feed inventory.",
+        "Discounts are relative to observed original regular price."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      }
+    },
+    {
+      "name": "sections",
+      "kind": "read",
+      "scope": "consumer_recommend_feed_sections",
+      "nature": "DERIVED_FEED_READ",
+      "browserXhrObserved": true,
+      "independentReplayVerified": true,
+      "description": "Convenience operation summarizing observed feed sections, total product counts, and representative product samples.",
+      "parameters": {
+        "maxPages": "Max feed pages to traverse (default 3)"
+      },
+      "limitations": [
+        "Summary over fetched feed inventory across traversed pages.",
+        "Does not guarantee un-traversed sections are included."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      }
+    },
+    {
+      "name": "find",
+      "kind": "read",
+      "scope": "consumer_recommend_feed_find",
+      "nature": "DERIVED_FEED_READ",
+      "browserXhrObserved": true,
+      "independentReplayVerified": true,
+      "description": "Convenience lookup for a specific productId, vendorItemId, or itemId within traversed feed inventory.",
+      "parameters": {
+        "productId": "Catalog product ID to match",
+        "vendorItemId": "Vendor item ID to match",
+        "itemId": "Option item ID to match",
+        "maxPages": "Max feed pages to traverse (default 3)"
+      },
+      "limitations": [
+        "Scans observed feed inventory only; returns matched: false if the product is not present in the traversed feed blocks.",
+        "Never pretend to be an arbitrary product-detail lookup service."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      }
+    },
+    {
+      "name": "line-banner",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/n-api/homeunit/LINE_BANNER"
+      },
+      "scope": "consumer_homeunit_line_banners",
+      "nature": "XHR_JSON_API",
+      "browserXhrObserved": true,
+      "independentReplayVerified": true,
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "rowCount": 3,
+        "responseFields": [
+          "bannerId",
+          "adId",
+          "linkUrl",
+          "imageUrl",
+          "trCid"
+        ]
+      },
+      "limitations": [
+        "Home unit promotional marketing banner feed.",
+        "Contains campaign event banners; not a product search catalog."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      }
+    },
+    {
+      "name": "categories",
+      "kind": "read",
+      "scope": "public_home_category_metadata",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/n-api/homeunit/BEST_CATEGORY"
+      },
+      "browserXhrObserved": true,
+      "independentReplayVerified": true,
+      "responseFields": [
+        "defaultBestCategories"
+      ],
+      "returnedFields": [
+        "categoryId",
+        "name",
+        "title"
+      ],
+      "limitations": [
+        "Category metadata only; no category product inventory or price listing."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required_for_anonymous_public_read",
+        "live_replay": true
+      },
+      "observedReplay": {
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "rowCount": 18,
+        "inventoryIncluded": false
+      },
+      "fieldMapping": {
+        "categoryId": "defaultBestCategories[].code (home category group code, not product-list category identifier)",
+        "name": "defaultBestCategories[].name",
+        "title": "defaultBestCategories[].title"
+      }
+    }
+  ],
+  "discoveryFrontier": [
+    {
+      "name": "cart-count",
+      "endpoint": "GET /n-api/web-adapter/cart-count",
+      "classification": "personal_cart_data",
+      "status": "excluded_from_catalog_scope"
+    },
+    {
+      "name": "recently-viewed",
+      "endpoint": "GET /n-api/gw/recently-viewed",
+      "classification": "personal_browsing_history",
+      "status": "excluded_from_catalog_scope"
+    },
+    {
+      "name": "viewed-products",
+      "endpoint": "GET https://reco.coupang.com/api/v2/viewed-products",
+      "classification": "personal_browsing_history",
+      "status": "excluded_from_catalog_scope"
+    },
+    {
+      "name": "search",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/np/search",
+        "queryFields": [
+          "q",
+          "component",
+          "channel"
+        ]
+      },
+      "scope": "consumer_search_products",
+      "nature": "SSR_DOCUMENT",
+      "browserXhrObserved": false,
+      "browserObserved": "Access Denied response observed",
+      "independentReplayVerified": false,
+      "independentReplay": {
+        "httpStatus": 403,
+        "errorCode": "WAF_BLOCKED",
+        "details": "Access Denied response observed"
+      },
+      "limitations": [
+        "SSR HTML document route; not an XHR JSON API.",
+        "Direct HTTP requests receive HTTP 403 Access Denied.",
+        "No runtime operation; historical HTTP403 response preserved as discovery evidence only."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": false,
+        "remnant_free": true,
+        "credential_propagated": "anonymous_only",
+        "live_replay": false
+      },
+      "runtimeOperationAvailable": false
+    },
+    {
+      "name": "product",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/vp/products/{productId}",
+        "queryFields": [
+          "itemId",
+          "vendorItemId"
+        ]
+      },
+      "scope": "consumer_product_detail",
+      "nature": "SSR_DOCUMENT",
+      "browserXhrObserved": false,
+      "browserObserved": "Access Denied response observed",
+      "independentReplayVerified": false,
+      "independentReplay": {
+        "httpStatus": 403,
+        "errorCode": "WAF_BLOCKED",
+        "details": "Access Denied response observed"
+      },
+      "limitations": [
+        "SSR HTML document route; not an XHR JSON API.",
+        "Direct HTTP requests receive HTTP 403 Access Denied.",
+        "Listed prices are unverified seller claims and do not guarantee final checkout price.",
+        "No runtime operation; historical HTTP403 response preserved as discovery evidence only."
+      ],
+      "state": {
+        "captured": true,
+        "client_exists": false,
+        "remnant_free": true,
+        "credential_propagated": "anonymous_only",
+        "live_replay": false
+      },
+      "runtimeOperationAvailable": false
+    },
+    {
+      "name": "reviews",
+      "kind": "read",
+      "endpoint": {
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/vp/product/reviews",
+        "queryFields": [
+          "productId",
+          "page",
+          "size",
+          "sortBy"
+        ]
+      },
+      "scope": "consumer_product_reviews",
+      "nature": "HTML_FRAGMENT_CANDIDATE",
+      "browserXhrObserved": false,
+      "browserObserved": "Unobserved candidate during consumer flow",
+      "independentReplayVerified": false,
+      "independentReplay": {
+        "httpStatus": 404,
+        "errorCode": "HTTP_STATUS",
+        "details": "Coupang returned unexpected HTTP status 404"
+      },
+      "privacyPolicy": "Reviewer usernames, customer IDs, order numbers, phone numbers, and emails are stripped.",
+      "limitations": [
+        "Review endpoint was not observed as an active XHR during consumer browsing.",
+        "Direct HTTP probe returned 404/403. Kept as unobserved candidate."
+      ],
+      "state": {
+        "captured": false,
+        "client_exists": false,
+        "remnant_free": true,
+        "credential_propagated": "anonymous_only",
+        "live_replay": false
+      },
+      "runtimeOperationAvailable": false
+    }
+  ],
+  "provenance": "Sanitized contract metadata. No raw browser dump, cookies, tokens, customer identities, or order identifiers stored.",
+  "supportedRuntimeOperations": [
+    "feed",
+    "deals",
+    "sections",
+    "find",
+    "line-banner",
+    "catalog",
+    "categories"
+  ],
+  "limitations": [
+    "Feed keyword filtering is local, not global product search.",
+    "General search and product detail were access-restricted; review endpoint is an unobserved candidate.",
+    "Prices are feed display claims, not checkout quotes."
+  ],
+  "latestIndependentReplay": "references/live-http-reads-20260930.json",
+  "headerProfileRequirement": {
+    "compatibilityProfileObservedSuccessful": true,
+    "applicationIdentificationProfileObservedStatus": 403,
+    "clientHintOrSdkSignatureUsed": false,
+    "longTermAvailabilityGuaranteed": false
+  },
+  "ratingSignal": {
+    "sourceField": "ratingAverage",
+    "observedExampleValue": 100,
+    "starScaleVerified": false,
+    "normalizedStarRating": null
+  },
+  "latestIndependentReadRecord": "references/host-live-http-reads-20260930.json"
+}

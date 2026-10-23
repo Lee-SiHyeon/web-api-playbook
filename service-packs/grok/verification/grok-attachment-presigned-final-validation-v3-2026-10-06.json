@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T08:49:41.944267Z",
+  "operation": "attachment.upload.presigned",
+  "state": "failed",
+  "ownerVerified": false,
+  "intentId": null,
+  "sourcePolicy": {
+    "v2Enabled": true,
+    "direct": 16,
+    "directToHttp": true,
+    "maxFile": 150,
+    "maxVideo": 150,
+    "multipart": true,
+    "concurrency": 4,
+    "configUpdatedAt": 1791276452292
+  },
+  "taskFile": {
+    "bytes": null,
+    "sha256": null,
+    "fileNameMatched": true
+  },
+  "nativeCapture": {
+    "role": "codex-grok-uploads-20261006",
+    "registeredTargetMatched": true,
+    "method": "POST",
+    "path": "/rest/app-chat/upload-file-v2/init",
+    "requestFieldNames": [
+      "fileMimeType",
+      "fileName",
+      "multipartSupported",
+      "sizeBytes"
+    ],
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "rawHeaderValuesPersisted": false
+  },
+  "directApi": {
+    "reasonCode": null,
+    "initHttpStatus": null,
+    "signedPutRequestCount": null,
+    "completeHttpStatus": null,
+    "initPolicyDiagnostics": null,
+    "stageDiagnostics": null,
+    "independentReadback": null,
+    "cleanupOutcome": null,
+    "uploadReference": null
+  },
+  "browserGuard": {
+    "nativeBusinessWriteAttempts": 4,
+    "nativeBusinessWriteFulfillments": 0,
+    "nativeBusinessWritesForwarded": 0,
+    "nativePutAttemptCount": 0,
+    "directPutCountAcknowledgedToNativeSdk": 0,
+    "blockedUnexpectedMutationKinds": [
+      "other_write_blocked",
+      "other_write_blocked",
+      "other_write_blocked"
+    ],
+    "duplicateNativeAttemptsBlocked": 0,
+    "pendingNativeWriteRoutes": 0,
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "completeHeaderNames": [],
+    "initBodyMatched": true,
+    "initPolicyDiagnostic": {
+      "normalizedMethod": "single_put",
+      "methodSource": "explicit_single_put",
+      "endpointCount": 0,
+      "signedStorageOrigins": [],
+      "requiredHeadersState": "invalid",
+      "requiredHeaderNames": [
+        "Content-Length",
+        "Content-Type",
+        "x-amz-meta-upload-id"
+      ],
+      "validationCode": "ATTACHMENT_SIGNED_HEADERS_INVALID",
+      "serverReplyWasParsed": true
+    }
+  },
+  "safety": {
+    "businessBrowserRequestsForwarded": 0,
+    "cookiesPersisted": false,
+    "dynamicHeaderValuesPersisted": false,
+    "signedUrlsPersisted": false,
+    "uploadIdsPersisted": false,
+    "rawBodiesPersisted": false
+  },
+  "incompleteReasonCode": "DIRECT_UPLOAD_INCOMPLETE"
+}

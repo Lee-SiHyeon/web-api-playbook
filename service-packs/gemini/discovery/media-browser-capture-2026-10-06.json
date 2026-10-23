@@ -1,0 +1,4709 @@
+{
+  "schema": "gemini-media-browser-capture-v1",
+  "capturedOn": "2026-10-06",
+  "service": "gemini-web",
+  "origin": "https://gemini.google.com",
+  "runtime": {
+    "platform": "linux",
+    "browser": "Chrome/154.0.8037.97",
+    "taskOwnedProfile": true,
+    "webdriverOverride": false
+  },
+  "ui": {
+    "imageRoute": "/images",
+    "videoRoute": "/videos",
+    "composerLabel": "Gemini 프롬프트 입력",
+    "imageToolsObserved": true,
+    "videoFileUploadControlObserved": true,
+    "fileInputPresentBeforeUpload": false,
+    "visibleModelChoices": [
+      "3.5 Flash-Lite",
+      "3.8 Flash",
+      "3.1 Pro"
+    ],
+    "planOrQuotaVisible": false,
+    "modelChoicesAreEntitlementProof": false
+  },
+  "readOnlyMediaBootstrap": {
+    "routeFamily": "/_/BardChatUi/data/batchexecute",
+    "requestMethod": "POST",
+    "formFieldNames": [
+      "at",
+      "f.req"
+    ],
+    "responses": [
+      {
+        "featureRoute": "/images",
+        "rpcId": "ku4Jyf",
+        "requestArgumentShape": {
+          "arrayLength": 10,
+          "items": [
+            "string",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            {
+              "arrayLength": 1,
+              "items": [
+                "number"
+              ]
+            }
+          ]
+        },
+        "status": 200,
+        "responseBytes": 2395
+      },
+      {
+        "featureRoute": "/images",
+        "rpcId": "V8rlHe",
+        "requestArgumentShape": {
+          "arrayLength": 2,
+          "items": [
+            {
+              "arrayLength": 1,
+              "items": [
+                "string"
+              ]
+            },
+            {
+              "arrayLength": 1,
+              "items": [
+                {
+                  "arrayLength": 20,
+                  "items": [
+                    "number",
+                    "number",
+                    "number",
+                    "number",
+                    "number",
+                    "number",
+                    "number",
+                    "number"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "status": 200,
+        "responseBytes": 47552
+      },
+      {
+        "featureRoute": "/images",
+        "rpcId": "XhaU0b",
+        "requestArgumentShape": {
+          "arrayLength": 3,
+          "items": [
+            "number",
+            {
+              "arrayLength": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "number"
+          ]
+        },
+        "status": 200,
+        "responseBytes": 6339
+      },
+      {
+        "featureRoute": "/videos",
+        "rpcId": "qpEbW",
+        "requestArgumentShape": {
+          "arrayLength": 1,
+          "items": [
+            {
+              "arrayLength": 1,
+              "items": [
+                {
+                  "arrayLength": 2,
+                  "items": [
+                    "number",
+                    "number"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "status": 200,
+        "responseBytes": 198
+      },
+      {
+        "featureRoute": "/videos",
+        "rpcId": "MyzX6c",
+        "requestArgumentShape": {
+          "arrayLength": 0,
+          "items": []
+        },
+        "status": 200,
+        "responseBytes": 859
+      },
+      {
+        "featureRoute": "both",
+        "rpcId": "XhaU0b",
+        "requestArgumentShape": {
+          "arrayLength": 3,
+          "items": [
+            "number",
+            "null",
+            "number"
+          ]
+        },
+        "status": 200,
+        "responseBytes": 11625
+      }
+    ],
+    "namedPlanQuotaOrMediaEntitlementFieldsObserved": 0,
+    "entitlementConclusion": "unresolved"
+  },
+  "firstPartySourceCandidates": {
+    "moduleId": "LQaXg",
+    "bodyBytes": 3052738,
+    "sha256": "f123950ac67484e4c4a63ea80e226ae5bc7fbf8b66476fcf9bc84da947211536",
+    "mappings": [
+      {
+        "route": "/assistant.lamda.BardFrontendService/StreamGenerate",
+        "rpcId": "RxAFq"
+      },
+      {
+        "route": "/assistant.lamda.BardFrontendService/StreamGenerateArtifact",
+        "rpcId": "ZiDWTc"
+      }
+    ],
+    "sourceOnly": true,
+    "rpcIdObservedInCapturedWriteBody": false
+  },
+  "writeCapture": {
+    "capturedBusinessIntentCount": 2,
+    "image": {
+      "route": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+      "method": "POST",
+      "resourceType": "xhr",
+      "contentType": "application/x-www-form-urlencoded",
+      "requestFieldNames": [
+        "at",
+        "f.req"
+      ],
+      "requestBytes": 2866,
+      "headerNamePatterns": [
+        "x-goog-ext-525001261-jspb",
+        "x-goog-ext-525005358-jspb",
+        "x-goog-ext-73010989-jspb",
+        "x-goog-ext-73010990-jspb",
+        "x-same-domain"
+      ],
+      "requestArgumentShape": "not_recorded",
+      "promptMatch": true,
+      "outcome": "aborted_before_network",
+      "serverSubmission": false,
+      "responseReceived": false
+    },
+    "video": {
+      "route": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+      "method": "POST",
+      "resourceType": "xhr",
+      "contentType": "application/x-www-form-urlencoded",
+      "requestFieldNames": [
+        "at",
+        "f.req"
+      ],
+      "requestBytes": 2851,
+      "headerNamePatterns": [
+        "x-goog-ext-525001261-jspb",
+        "x-goog-ext-525005358-jspb",
+        "x-goog-ext-73010989-jspb",
+        "x-goog-ext-73010990-jspb",
+        "x-same-domain"
+      ],
+      "requestArgumentShape": {
+        "arrayLength": 2,
+        "items": [
+          "null",
+          "string"
+        ]
+      },
+      "promptMatch": true,
+      "outcome": "aborted_before_network",
+      "serverSubmission": false,
+      "responseReceived": false
+    },
+    "neutralGeometryIntentOnly": true,
+    "promptTextPersisted": false,
+    "rawRequestBodiesPersisted": false,
+    "headerValuesPersisted": false,
+    "queryValuesPersisted": false,
+    "directHttpReplay": false,
+    "mediaArtifactReadback": false,
+    "browserSubmissionsAbortedBeforeNetwork": 5,
+    "directHttpMutationDispatches": 3,
+    "directHttpResponsesReceived": 3,
+    "verifiedMediaArtifactReadbacks": 1,
+    "directMediaRunReceiptKey": "directMediaRunsByIntent"
+  },
+  "attachments": {
+    "uploadControlObserved": true,
+    "fileChooserOpenedReadOnly": true,
+    "inputAcceptAttribute": null,
+    "multipleFilesSupportedByInput": true,
+    "fileSelected": false,
+    "uploadContractCaptured": false,
+    "fileUploaded": false,
+    "downloadContractCaptured": false,
+    "mediaDownloaded": false
+  },
+  "securityAndPrivacy": {
+    "cookiesTokensCsrfValuesPersisted": false,
+    "privateIdentifiersPersisted": false,
+    "signedUrlsPersisted": false,
+    "cspEnforcementChanged": false,
+    "initialGuardBlockedReportOnlyCspPosts": 4,
+    "finalCaptureAllowedCspReportRoutes": true
+  },
+  "remainingEvidence": [
+    "The StreamGenerate request values and typed-proto serialization are not captured in a replayable form.",
+    "No current-owner plan or eligible media quota has been verified.",
+    "No direct HTTP media request has been replayed.",
+    "No generated artifact exists for MIME, magic-byte, or read-back verification.",
+    "The upload and download contracts remain unobserved."
+  ],
+  "directMediaRuns": {
+    "image": {
+      "capability": "image",
+      "capture": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "pathFamily": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+        "queryKeys": [
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "contentType": "application/x-www-form-urlencoded",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "bodyBytes": 2763,
+        "outerFReqShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            "string"
+          ]
+        },
+        "innerFReqDecoded": true,
+        "promptPaths": [
+          [
+            0,
+            0
+          ]
+        ],
+        "intentMatch": true,
+        "browserAbortVerified": true,
+        "browserAbortFailureReason": "net_error_other"
+      },
+      "ownerMatched": true,
+      "httpStatus": 200,
+      "responseMime": "application/json",
+      "responseBytes": 46094,
+      "credentialPropagated": true,
+      "redirectsFollowed": false,
+      "dispatchCount": 1,
+      "responseInspection": {
+        "framing": "not_persisted_from_completed_run",
+        "mime": "application/json",
+        "bodyBytes": 46094,
+        "responseShape": "not_persisted_from_completed_run",
+        "statusErrorEnums": "not_persisted_from_completed_run",
+        "mediaMagicMatched": false,
+        "assetUrlCandidateCount": 0,
+        "taskJobIdObserved": "unknown",
+        "artifact": null,
+        "readback": "no_verified_media_artifact"
+      },
+      "readOnlyRpcReceipts": [
+        "otAQ7b",
+        "L5adhe"
+      ],
+      "recordedAt": "2026-10-05T17:16:54.867Z",
+      "canonicalParserAppliedToLiveResponse": false,
+      "canonicalParserNote": "added after consumed response; raw response not retained for reparse"
+    },
+    "video": {
+      "capability": "video",
+      "capture": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "pathFamily": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+        "queryKeys": [
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-525005358-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-goog-ext-73010990-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "bodyBytes": 2792,
+        "outerFReqShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            "string"
+          ]
+        },
+        "innerFReqDecoded": true,
+        "innerFReqShape": {
+          "type": "array",
+          "length": 99,
+          "items": [
+            {
+              "type": "array",
+              "length": 10,
+              "items": [
+                "string",
+                "number",
+                "null",
+                "null",
+                "null",
+                "null",
+                "number",
+                "null",
+                "null",
+                {
+                  "type": "array",
+                  "length": 7,
+                  "items": [
+                    "null",
+                    "null",
+                    "null",
+                    "null",
+                    "null",
+                    "null",
+                    {
+                      "type": "array",
+                      "length": 1,
+                      "items": [
+                        {
+                          "type": "array",
+                          "length": 4,
+                          "items": [
+                            "null",
+                            "null",
+                            "null",
+                            "number"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "string"
+              ]
+            },
+            "null",
+            "string",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "number",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    "number"
+                  ]
+                }
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                "number",
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "number",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    "number"
+                  ]
+                }
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number"
+          ]
+        },
+        "promptPaths": [
+          [
+            0,
+            0
+          ]
+        ],
+        "intentMatch": true,
+        "browserAbortVerified": true,
+        "browserAbortFailureReason": "net_error_other"
+      },
+      "ownerMatched": true,
+      "httpStatus": 200,
+      "responseMime": "application/json",
+      "responseBytes": 966,
+      "credentialPropagated": true,
+      "redirectsFollowed": false,
+      "dispatchCount": 1,
+      "responseInspection": {
+        "framing": "utf16_length_frames",
+        "mime": "application/json",
+        "bodyBytes": 966,
+        "responseShape": [
+          {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 3,
+                "items": [
+                  "string",
+                  "null",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "items": [
+                      "null",
+                      {
+                        "type": "array",
+                        "length": 2,
+                        "items": [
+                          "string",
+                          "string"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "fieldCount": 3,
+                        "fields": {
+                          "18": "string",
+                          "21": {
+                            "type": "array",
+                            "length": 1,
+                            "items": [
+                              "depth_limit"
+                            ]
+                          },
+                          "44": "boolean"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 3,
+                "items": [
+                  "string",
+                  "null",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "items": [
+                      "null",
+                      {
+                        "type": "array",
+                        "length": 2,
+                        "items": [
+                          "string",
+                          "string"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "fieldCount": 2,
+                        "fields": {
+                          "11": {
+                            "type": "array",
+                            "length": 1,
+                            "items": [
+                              "depth_limit"
+                            ]
+                          },
+                          "44": "boolean"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 3,
+                "items": [
+                  "string",
+                  "null",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "items": [
+                      "null",
+                      {
+                        "type": "array",
+                        "length": 2,
+                        "items": [
+                          "string",
+                          "string"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "fieldCount": 2,
+                        "fields": {
+                          "7": {
+                            "type": "array",
+                            "length": 2,
+                            "items": [
+                              "depth_limit",
+                              "depth_limit"
+                            ]
+                          },
+                          "44": "boolean"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 3,
+                "items": [
+                  "string",
+                  "null",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "items": [
+                      "null",
+                      {
+                        "type": "array",
+                        "length": 2,
+                        "items": [
+                          "string",
+                          "string"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "fieldCount": 3,
+                        "fields": {
+                          "44": "boolean",
+                          "46": {
+                            "type": "array",
+                            "length": 2,
+                            "items": [
+                              "depth_limit",
+                              "depth_limit"
+                            ]
+                          },
+                          "52": {
+                            "type": "array",
+                            "length": 0,
+                            "items": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "length": 2,
+            "items": [
+              {
+                "type": "array",
+                "length": 2,
+                "items": [
+                  "string",
+                  "number"
+                ]
+              },
+              {
+                "type": "array",
+                "length": 4,
+                "items": [
+                  "string",
+                  "number",
+                  "string",
+                  "number"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "array",
+                "length": 5,
+                "items": [
+                  "string",
+                  "number",
+                  "null",
+                  "null"
+                ]
+              }
+            ]
+          }
+        ],
+        "statusErrorEnums": [],
+        "taskJobIdFieldPresent": false,
+        "mediaMagicMatched": false,
+        "assetUrlCandidateCount": 0,
+        "assetHost": null,
+        "assetPathFamily": null,
+        "assetQueryKeyNames": null,
+        "assetDownloadStatus": null,
+        "artifact": null
+      },
+      "readOnlyRpcReceipts": [
+        {
+          "rpcIds": [
+            "otAQ7b"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 123,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 13246,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "otAQ7b"
+          ]
+        },
+        {
+          "rpcIds": [
+            "L5adhe"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 869,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 144,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "L5adhe"
+          ]
+        },
+        {
+          "rpcIds": [
+            "L5adhe"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 1997,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 145,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "L5adhe"
+          ]
+        },
+        {
+          "rpcIds": [
+            "L5adhe"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 814,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 145,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "L5adhe"
+          ]
+        },
+        {
+          "rpcIds": [
+            "L5adhe"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 1416,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 144,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "L5adhe"
+          ]
+        },
+        {
+          "rpcIds": [
+            "L5adhe"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 827,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 145,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "L5adhe"
+          ]
+        },
+        {
+          "rpcIds": [
+            "L5adhe"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 750,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 144,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "L5adhe"
+          ]
+        }
+      ],
+      "measurementBeaconCountBlocked": 0,
+      "measurementPathFamiliesBlocked": [],
+      "recordedAt": "2026-10-05T17:26:47.985730+00:00",
+      "canonicalParserAppliedToLiveResponse": false,
+      "canonicalParserNote": "added after consumed response; raw response not retained for reparse"
+    }
+  },
+  "directMediaRunsByIntent": {
+    "gemini-image-tool-verification-20261006-v1": {
+      "capability": "image",
+      "callerIntentId": "gemini-image-tool-verification-20261006-v1",
+      "capture": {
+        "capability": "image",
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "pathFamily": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+        "queryKeys": [
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-525005358-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-goog-ext-73010990-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "bodyBytes": 2841,
+        "outerFReqShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            "string"
+          ]
+        },
+        "innerFReqDecoded": true,
+        "innerFReqShape": {
+          "type": "array",
+          "length": 99,
+          "items": [
+            {
+              "type": "array",
+              "length": 7,
+              "items": [
+                "string",
+                "number",
+                "null",
+                "null",
+                "null",
+                "null",
+                "number"
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "string"
+              ]
+            },
+            "null",
+            "string",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "number",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    "number"
+                  ]
+                }
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                "number",
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "number",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            "null",
+            "null",
+            "null",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number"
+          ]
+        },
+        "promptPaths": [
+          [
+            0,
+            0
+          ]
+        ],
+        "intentMatch": true,
+        "browserAbortVerified": true,
+        "browserAbortFailureReason": "net_error_other",
+        "businessServerSubmission": false,
+        "directHttpSubmission": true,
+        "measurementBeaconCountBlocked": 0,
+        "measurementPathFamiliesBlocked": [],
+        "readOnlyRpcReceipts": [
+          {
+            "rpcIds": [
+              "otAQ7b"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 123,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 13243,
+            "responseFraming": "utf16_length_frames",
+            "responseRpcIds": [
+              "otAQ7b"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 25,
+                "itemTypes": [
+                  "number",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "itemTypes": [
+                      "boolean",
+                      "null",
+                      "boolean"
+                    ]
+                  },
+                  "boolean",
+                  "null",
+                  "null",
+                  "null",
+                  "boolean",
+                  "null"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "ownerMatched": null,
+      "directHttp": {},
+      "directErrorCode": "HTTP_SESSION_CONTEXT_MISSING",
+      "historyReadbackVerified": false,
+      "nativeGet": null,
+      "directDownload": null,
+      "assetErrorCode": null,
+      "resetQuietVerified": false,
+      "guardFailure": null,
+      "unexpectedPostCount": 0,
+      "measurementBeaconCountBlocked": 0,
+      "measurementPathFamiliesBlocked": [],
+      "preferenceMutationCandidateAbortRequestedCount": 4,
+      "preferenceMutationCandidateAbortCommandFailures": 0,
+      "readOnlyRpcReceipts": [
+        {
+          "rpcIds": [
+            "otAQ7b"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 123,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 13243,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "otAQ7b"
+          ]
+        }
+      ],
+      "secretsPersisted": false,
+      "rawApiIdsPersisted": false,
+      "taskUrlPersisted": false,
+      "cookieValuesPersisted": false,
+      "expectedIntentPersisted": false,
+      "recordedAt": "2026-10-05T22:51:22.954833+00:00"
+    },
+    "gemini-image-tool-verification-20261006-v1.attempt-2": {
+      "capability": "image",
+      "callerIntentId": "gemini-image-tool-verification-20261006-v1",
+      "auditAttemptKey": "gemini-image-tool-verification-20261006-v1.attempt-2",
+      "capture": {
+        "capability": "image",
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "pathFamily": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+        "queryKeys": [
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-525005358-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-goog-ext-73010990-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "bodyBytes": 2821,
+        "outerFReqShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            "string"
+          ]
+        },
+        "innerFReqDecoded": true,
+        "innerFReqShape": {
+          "type": "array",
+          "length": 99,
+          "items": [
+            {
+              "type": "array",
+              "length": 7,
+              "items": [
+                "string",
+                "number",
+                "null",
+                "null",
+                "null",
+                "null",
+                "number"
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "string"
+              ]
+            },
+            "null",
+            "string",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "number",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    "number"
+                  ]
+                }
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                "number",
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "number",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            "null",
+            "null",
+            "null",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number"
+          ]
+        },
+        "promptPaths": [
+          [
+            0,
+            0
+          ]
+        ],
+        "intentMatch": true,
+        "browserAbortVerified": true,
+        "browserAbortFailureReason": "net_error_other",
+        "businessServerSubmission": false,
+        "directHttpSubmission": true,
+        "measurementBeaconCountBlocked": 0,
+        "measurementPathFamiliesBlocked": [],
+        "readOnlyRpcReceipts": [
+          {
+            "rpcIds": [
+              "otAQ7b"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 123,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 13246,
+            "responseFraming": "utf16_length_frames",
+            "responseRpcIds": [
+              "otAQ7b"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 25,
+                "itemTypes": [
+                  "number",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "itemTypes": [
+                      "boolean",
+                      "null",
+                      "boolean"
+                    ]
+                  },
+                  "boolean",
+                  "null",
+                  "null",
+                  "null",
+                  "boolean",
+                  "null"
+                ]
+              }
+            ]
+          },
+          {
+            "rpcIds": [
+              "MaZiqc"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 153,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 139,
+            "responseFraming": "utf16_length_frames",
+            "responseRpcIds": [
+              "MaZiqc"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 0,
+                "itemTypes": []
+              }
+            ]
+          },
+          {
+            "rpcIds": [
+              "MaZiqc"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 153,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 6227,
+            "responseFraming": "utf16_length_frames",
+            "responseRpcIds": [
+              "MaZiqc"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 3,
+                "itemTypes": [
+                  "null",
+                  "string",
+                  {
+                    "type": "array",
+                    "length": 28,
+                    "itemTypes": [
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "ownerMatched": null,
+      "directHttp": {},
+      "directErrorCode": "MEDIA_ONESHOT_FAILED",
+      "historyReadbackVerified": false,
+      "nativeGet": null,
+      "directDownload": null,
+      "assetErrorCode": null,
+      "resetQuietVerified": true,
+      "guardFailure": null,
+      "unexpectedPostCount": 0,
+      "measurementBeaconCountBlocked": 0,
+      "measurementPathFamiliesBlocked": [],
+      "preferenceMutationCandidateAbortRequestedCount": 7,
+      "preferenceMutationCandidateAbortCommandFailures": 0,
+      "readOnlyRpcReceipts": [
+        {
+          "rpcIds": [
+            "otAQ7b"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 123,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 13246,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "otAQ7b"
+          ]
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 139,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "MaZiqc"
+          ]
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 6227,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "MaZiqc"
+          ]
+        },
+        {
+          "rpcIds": [
+            "otAQ7b"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 123,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 3841,
+          "responseFraming": null,
+          "responseRpcIds": []
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 1141,
+          "responseFraming": null,
+          "responseRpcIds": []
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 3347,
+          "responseFraming": null,
+          "responseRpcIds": []
+        }
+      ],
+      "secretsPersisted": false,
+      "rawApiIdsPersisted": false,
+      "taskUrlPersisted": false,
+      "cookieValuesPersisted": false,
+      "expectedIntentPersisted": false,
+      "recordedAt": "2026-10-05T23:01:29.075221+00:00"
+    },
+    "gemini-image-tool-verification-20261006-v1.attempt-3": {
+      "capability": "image",
+      "callerIntentId": "gemini-image-tool-verification-20261006-v1",
+      "auditAttemptKey": "gemini-image-tool-verification-20261006-v1.attempt-3",
+      "capture": {
+        "capability": "image",
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "pathFamily": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+        "queryKeys": [
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-525005358-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-goog-ext-73010990-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "bodyBytes": 2811,
+        "outerFReqShape": {
+          "type": "array",
+          "length": 2,
+          "items": [
+            "null",
+            "string"
+          ]
+        },
+        "innerFReqDecoded": true,
+        "innerFReqShape": {
+          "type": "array",
+          "length": 99,
+          "items": [
+            {
+              "type": "array",
+              "length": 7,
+              "items": [
+                "string",
+                "number",
+                "null",
+                "null",
+                "null",
+                "null",
+                "number"
+              ]
+            },
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "string"
+              ]
+            },
+            "null",
+            "string",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "number",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    "number"
+                  ]
+                }
+              ]
+            },
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                "number",
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                "number"
+              ]
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "number",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            "null",
+            "null",
+            "null",
+            "string",
+            "null",
+            {
+              "type": "array",
+              "length": 0,
+              "items": []
+            },
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "number"
+          ]
+        },
+        "promptPaths": [
+          [
+            0,
+            0
+          ]
+        ],
+        "intentMatch": true,
+        "browserAbortVerified": true,
+        "browserAbortFailureReason": "net_error_other",
+        "businessServerSubmission": false,
+        "directHttpSubmission": true,
+        "measurementBeaconCountBlocked": 0,
+        "measurementPathFamiliesBlocked": [],
+        "readOnlyRpcReceipts": [
+          {
+            "rpcIds": [
+              "otAQ7b"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 123,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 13245,
+            "responseFraming": "body_not_finished",
+            "responseRpcIds": [
+              "otAQ7b"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 25,
+                "itemTypes": [
+                  "number",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "itemTypes": [
+                      "boolean",
+                      "null",
+                      "boolean"
+                    ]
+                  },
+                  "boolean",
+                  "null",
+                  "null",
+                  "null",
+                  "boolean",
+                  "null"
+                ]
+              }
+            ]
+          },
+          {
+            "rpcIds": [
+              "MaZiqc"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 153,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 141,
+            "responseFraming": "body_not_finished",
+            "responseRpcIds": [
+              "MaZiqc"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 0,
+                "itemTypes": []
+              }
+            ]
+          },
+          {
+            "rpcIds": [
+              "MaZiqc"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 153,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 6228,
+            "responseFraming": "body_not_finished",
+            "responseRpcIds": [
+              "MaZiqc"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 3,
+                "itemTypes": [
+                  "null",
+                  "string",
+                  {
+                    "type": "array",
+                    "length": 28,
+                    "itemTypes": [
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "rpcIds": [
+              "otAQ7b"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 123,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 13246,
+            "responseFraming": "utf16_length_frames",
+            "responseRpcIds": [
+              "otAQ7b"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 25,
+                "itemTypes": [
+                  "number",
+                  {
+                    "type": "array",
+                    "length": 3,
+                    "itemTypes": [
+                      "boolean",
+                      "null",
+                      "boolean"
+                    ]
+                  },
+                  "boolean",
+                  "null",
+                  "null",
+                  "null",
+                  "boolean",
+                  "null"
+                ]
+              }
+            ]
+          },
+          {
+            "rpcIds": [
+              "MaZiqc"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 153,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 140,
+            "responseFraming": "utf16_length_frames",
+            "responseRpcIds": [
+              "MaZiqc"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 0,
+                "itemTypes": []
+              }
+            ]
+          },
+          {
+            "rpcIds": [
+              "MaZiqc"
+            ],
+            "method": "POST",
+            "host": "gemini.google.com",
+            "pathFamily": "/_/BardChatUi/data/batchexecute",
+            "queryKeyNames": [
+              "rpcids",
+              "source-path",
+              "bl",
+              "f.sid",
+              "hl",
+              "_reqid",
+              "rt"
+            ],
+            "headerNames": [
+              "accept",
+              "content-type",
+              "cookie",
+              "origin",
+              "referer",
+              "sec-ch-ua",
+              "sec-ch-ua-arch",
+              "sec-ch-ua-bitness",
+              "sec-ch-ua-form-factors",
+              "sec-ch-ua-full-version",
+              "sec-ch-ua-full-version-list",
+              "sec-ch-ua-mobile",
+              "sec-ch-ua-model",
+              "sec-ch-ua-platform",
+              "sec-ch-ua-platform-version",
+              "sec-ch-ua-wow64",
+              "user-agent",
+              "x-goog-ext-525001261-jspb",
+              "x-goog-ext-73010989-jspb",
+              "x-same-domain"
+            ],
+            "formFieldNames": [
+              "f.req",
+              "at"
+            ],
+            "bodyBytes": 153,
+            "status": 200,
+            "mime": "application/json",
+            "responseBytes": 6228,
+            "responseFraming": "utf16_length_frames",
+            "responseRpcIds": [
+              "MaZiqc"
+            ],
+            "responseShapes": [
+              {
+                "type": "array",
+                "length": 3,
+                "itemTypes": [
+                  "null",
+                  "string",
+                  {
+                    "type": "array",
+                    "length": 28,
+                    "itemTypes": [
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 22,
+                        "itemTypes": [
+                          "string",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 2,
+                            "itemTypes": [
+                              "number",
+                              "number"
+                            ]
+                          },
+                          "null",
+                          "null"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "ownerMatched": true,
+      "directHttp": {
+        "service": "gemini-web",
+        "operation": "image",
+        "ownerMatched": true,
+        "anonymousOwnerAbsent": true,
+        "browserRequestAborted": true,
+        "exactIntentMatched": true,
+        "directDispatchCount": 1,
+        "retryCount": 0,
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "responseBytes": 34708,
+        "responseSha256": "e49318832c892729254962717cb19b400b0c51e0c8dbc7c274c0c644ee07f6fe",
+        "credentialPropagated": true,
+        "responseFraming": "utf16_length_frames",
+        "responseRpcIds": [],
+        "responseStatusFieldCount": 0,
+        "responseTaskIdentifierFieldCount": 0,
+        "responseAssetUrlCandidateCount": 12,
+        "responseInlineMediaCandidateCount": 0,
+        "responsePromptEchoMatched": false,
+        "historyListBeforeCount": 28,
+        "historyListAfterCount": 28,
+        "newConversationCount": 1,
+        "detailHttpStatus": 200,
+        "detailResponseBytes": 12928,
+        "detailResponseSha256": "9869983c39d4d1b181c6f4c85c09175cbd1d78c794c621e1e127d75d87a31342",
+        "detailResponseCount": 1,
+        "detailPromptMatched": true,
+        "detailApiIdEchoed": true,
+        "detailRouteBound": true,
+        "detailAssetUrlCandidateCount": 6,
+        "detailInlineMediaCandidateCount": 0,
+        "mainDetailAssetUrlMatched": false,
+        "taskReadbackVerified": false,
+        "journalReconciled": false,
+        "assetDownloadPending": false,
+        "outputStatus": "task_readback_verified_asset_unresolved"
+      },
+      "directErrorCode": null,
+      "historyReadbackVerified": false,
+      "nativeGet": null,
+      "directDownload": null,
+      "assetErrorCode": null,
+      "resetQuietVerified": true,
+      "guardFailure": null,
+      "unexpectedPostCount": 0,
+      "measurementBeaconCountBlocked": 0,
+      "measurementPathFamiliesBlocked": [],
+      "preferenceMutationCandidateAbortRequestedCount": 11,
+      "preferenceMutationCandidateAbortCommandFailures": 0,
+      "readOnlyRpcReceipts": [
+        {
+          "rpcIds": [
+            "otAQ7b"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 123,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 13245,
+          "responseFraming": "body_not_finished",
+          "responseRpcIds": [
+            "otAQ7b"
+          ]
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 141,
+          "responseFraming": "body_not_finished",
+          "responseRpcIds": [
+            "MaZiqc"
+          ]
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 6228,
+          "responseFraming": "body_not_finished",
+          "responseRpcIds": [
+            "MaZiqc"
+          ]
+        },
+        {
+          "rpcIds": [
+            "otAQ7b"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 123,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 13246,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "otAQ7b"
+          ]
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 140,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "MaZiqc"
+          ]
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 6228,
+          "responseFraming": "utf16_length_frames",
+          "responseRpcIds": [
+            "MaZiqc"
+          ]
+        },
+        {
+          "rpcIds": [
+            "otAQ7b"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 123,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 3630,
+          "responseFraming": null,
+          "responseRpcIds": []
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 1189,
+          "responseFraming": null,
+          "responseRpcIds": []
+        },
+        {
+          "rpcIds": [
+            "MaZiqc"
+          ],
+          "method": "POST",
+          "host": "gemini.google.com",
+          "pathFamily": "/_/BardChatUi/data/batchexecute",
+          "queryKeyNames": [
+            "rpcids",
+            "source-path",
+            "bl",
+            "f.sid",
+            "hl",
+            "_reqid",
+            "rt"
+          ],
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-same-domain"
+          ],
+          "formFieldNames": [
+            "f.req",
+            "at"
+          ],
+          "bodyBytes": 153,
+          "status": 200,
+          "mime": "application/json",
+          "responseBytes": 3344,
+          "responseFraming": null,
+          "responseRpcIds": []
+        }
+      ],
+      "secretsPersisted": false,
+      "rawApiIdsPersisted": false,
+      "taskUrlPersisted": false,
+      "cookieValuesPersisted": false,
+      "expectedIntentPersisted": false,
+      "recordedAt": "2026-10-05T23:16:03.607951+00:00",
+      "postDispatchReadback": {
+        "historyHttpStatus": 200,
+        "historyRpcId": "MaZiqc",
+        "historySummaryCount": 28,
+        "detailReadLimit": 8,
+        "detailReadCount": 8,
+        "exactTaskMatchCount": 1,
+        "detailHttpStatus": 200,
+        "detailResponseSha256": "fd9337c8b455ac9601a99ba7e995286f98b024232a33e692c63d80ed6a35a664",
+        "detailResponseCount": 1,
+        "exactPromptMatched": true,
+        "apiConversationIdEchoed": true,
+        "routeBound": true,
+        "assetCandidateCount": 2,
+        "assetCandidates": [
+          {
+            "origin": "https://lh3.googleusercontent.com",
+            "pathFamily": "/gg/{id}",
+            "queryKeyNames": [],
+            "fieldPath": [
+              "frame",
+              0,
+              0,
+              2,
+              0,
+              0,
+              3,
+              0,
+              0,
+              12,
+              7,
+              0,
+              0,
+              0,
+              3,
+              3
+            ],
+            "sourceFieldContext": [
+              {
+                "path": [
+                  0,
+                  0,
+                  3,
+                  0,
+                  0,
+                  12,
+                  7,
+                  0,
+                  0,
+                  0,
+                  3,
+                  3
+                ],
+                "ancestorObjectKeys": []
+              },
+              {
+                "path": [
+                  0,
+                  0,
+                  3,
+                  12,
+                  0,
+                  0,
+                  0,
+                  9,
+                  0,
+                  0,
+                  0,
+                  3,
+                  3
+                ],
+                "ancestorObjectKeys": []
+              },
+              {
+                "path": [
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3,
+                  3
+                ],
+                "ancestorObjectKeys": []
+              }
+            ],
+            "mimeHint": null
+          },
+          {
+            "origin": "https://contribution.usercontent.google.com",
+            "pathFamily": "/download",
+            "queryKeyNames": [
+              "c",
+              "filename",
+              "opi"
+            ],
+            "fieldPath": [
+              "frame",
+              0,
+              0,
+              2,
+              0,
+              0,
+              3,
+              0,
+              0,
+              12,
+              7,
+              0,
+              0,
+              3,
+              22,
+              7,
+              1
+            ],
+            "sourceFieldContext": [
+              {
+                "path": [
+                  0,
+                  0,
+                  3,
+                  0,
+                  0,
+                  12,
+                  7,
+                  0,
+                  0,
+                  3,
+                  22,
+                  7,
+                  1
+                ],
+                "ancestorObjectKeys": []
+              },
+              {
+                "path": [
+                  0,
+                  0,
+                  3,
+                  12,
+                  0,
+                  0,
+                  0,
+                  9,
+                  0,
+                  0,
+                  3,
+                  22,
+                  7,
+                  1
+                ],
+                "ancestorObjectKeys": []
+              },
+              {
+                "path": [
+                  3,
+                  0,
+                  0,
+                  0,
+                  0,
+                  3,
+                  22,
+                  7,
+                  1
+                ],
+                "ancestorObjectKeys": []
+              }
+            ],
+            "mimeHint": null
+          }
+        ],
+        "journalReconciled": true,
+        "nativeGet": {
+          "exactUrlMatched": true,
+          "method": "GET",
+          "origin": "https://lh3.googleusercontent.com",
+          "pathFamily": "/gg/{id}",
+          "queryKeyNames": [],
+          "httpStatus": 200,
+          "mime": "image/png",
+          "headerNames": [
+            ":authority",
+            ":method",
+            ":path",
+            ":scheme",
+            "accept",
+            "accept-encoding",
+            "accept-language",
+            "cache-control",
+            "pragma",
+            "priority",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "sec-fetch-dest",
+            "sec-fetch-mode",
+            "sec-fetch-site",
+            "sec-fetch-storage-access",
+            "user-agent",
+            "x-browser-channel",
+            "x-browser-copyright",
+            "x-browser-validation",
+            "x-browser-year",
+            "x-client-data"
+          ],
+          "cookieHeaderPresent": false,
+          "cookieNames": []
+        },
+        "nativeAttemptSummary": null,
+        "directDownload": {
+          "phase": "direct_http_media_download",
+          "status": "verified",
+          "httpStatus": 200,
+          "contentType": "image/png",
+          "mime": "image/png",
+          "capability": "image",
+          "bytes": 155225,
+          "sha256": "9cbcf13b14d38bf4f49483508007325a2f4603ecd08ba3e1122879edbaa40a66",
+          "mimeMagicMatched": true,
+          "independentFileReadback": true,
+          "credentialForwarding": {
+            "sourceOrigin": "https://lh3.googleusercontent.com",
+            "cookieNames": [
+              "AEC",
+              "APISID",
+              "HSID",
+              "NID",
+              "SAPISID",
+              "SEARCH_SAMESITE",
+              "SID",
+              "SIDCC",
+              "SSID",
+              "__Secure-1PAPISID",
+              "__Secure-1PSID",
+              "__Secure-1PSIDCC",
+              "__Secure-1PSIDTS",
+              "__Secure-3PAPISID",
+              "__Secure-3PSID",
+              "__Secure-3PSIDCC",
+              "__Secure-3PSIDTS"
+            ],
+            "cookieDomainScopes": [
+              {
+                "name": "SEARCH_SAMESITE",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "AEC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "SID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "__Secure-1PSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "HSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "SSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "APISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "SAPISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-1PAPISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PAPISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "NID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-1PSIDTS",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PSIDTS",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "SIDCC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "__Secure-1PSIDCC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PSIDCC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              }
+            ],
+            "cookiesForwardedToSource": false,
+            "cookiesForwardedToCrossOriginRedirects": true,
+            "cookiesByRequestHop": [
+              {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/gg/{id}",
+                "cookieNames": []
+              },
+              {
+                "origin": "https://lh3.google.com",
+                "pathFamily": "/rd-gg/{id}",
+                "cookieNames": [
+                  "AEC",
+                  "APISID",
+                  "HSID",
+                  "NID",
+                  "SAPISID",
+                  "SEARCH_SAMESITE",
+                  "SID",
+                  "SIDCC",
+                  "SSID",
+                  "__Secure-1PAPISID",
+                  "__Secure-1PSID",
+                  "__Secure-1PSIDCC",
+                  "__Secure-1PSIDTS",
+                  "__Secure-3PAPISID",
+                  "__Secure-3PSID",
+                  "__Secure-3PSIDCC",
+                  "__Secure-3PSIDTS"
+                ]
+              },
+              {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/rd-gg/{id}",
+                "cookieNames": []
+              }
+            ]
+          },
+          "redirects": [
+            {
+              "httpStatus": 302,
+              "from": {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/gg/{id}",
+                "queryKeyNames": []
+              },
+              "to": {
+                "origin": "https://lh3.google.com",
+                "pathFamily": "/rd-gg/{id}",
+                "queryKeyNames": []
+              },
+              "resourceIdentityNormalization": "observed_queryless_gg_rd_gg_redirect_family",
+              "cookieNamesSentOnFromHop": [],
+              "cookieNamesObservedOnTargetHop": [
+                "AEC",
+                "APISID",
+                "HSID",
+                "NID",
+                "SAPISID",
+                "SEARCH_SAMESITE",
+                "SID",
+                "SIDCC",
+                "SSID",
+                "__Secure-1PAPISID",
+                "__Secure-1PSID",
+                "__Secure-1PSIDCC",
+                "__Secure-1PSIDTS",
+                "__Secure-3PAPISID",
+                "__Secure-3PSID",
+                "__Secure-3PSIDCC",
+                "__Secure-3PSIDTS"
+              ]
+            },
+            {
+              "httpStatus": 302,
+              "from": {
+                "origin": "https://lh3.google.com",
+                "pathFamily": "/rd-gg/{id}",
+                "queryKeyNames": []
+              },
+              "to": {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/rd-gg/{id}",
+                "queryKeyNames": []
+              },
+              "resourceIdentityNormalization": "observed_queryless_gg_rd_gg_redirect_family",
+              "cookieNamesSentOnFromHop": [
+                "AEC",
+                "APISID",
+                "HSID",
+                "NID",
+                "SAPISID",
+                "SEARCH_SAMESITE",
+                "SID",
+                "SIDCC",
+                "SSID",
+                "__Secure-1PAPISID",
+                "__Secure-1PSID",
+                "__Secure-1PSIDCC",
+                "__Secure-1PSIDTS",
+                "__Secure-3PAPISID",
+                "__Secure-3PSID",
+                "__Secure-3PSIDCC",
+                "__Secure-3PSIDTS"
+              ],
+              "cookieNamesObservedOnTargetHop": []
+            }
+          ],
+          "artifact": {
+            "filename": "gemini-image-teal-sphere-white-cube-20261006.direct-http.png",
+            "path": "/home/worker/artifacts/gemini-media-20261006/gemini-image-teal-sphere-white-cube-20261006.direct-http.png",
+            "mime": "image/png",
+            "kind": "image",
+            "bytes": 155225,
+            "sha256": "9cbcf13b14d38bf4f49483508007325a2f4603ecd08ba3e1122879edbaa40a66",
+            "magicVerified": true,
+            "independentFileReadback": true,
+            "previousArtifactHashMatched": false
+          },
+          "sourceUrlPersisted": false,
+          "cookieValuesPersisted": false
+        },
+        "assetErrorCode": null,
+        "assetErrorDetails": null,
+        "resetQuietVerified": true,
+        "rawConversationIdsPersisted": false,
+        "taskUrlsPersisted": false,
+        "cookieValuesPersisted": false,
+        "responseBodiesPersisted": false,
+        "recordedAt": "2026-10-06T00:03:43.404663+00:00",
+        "alternateCandidateRead": {
+          "origin": "https://contribution.usercontent.google.com",
+          "pathFamily": "/download",
+          "queryKeyNames": [
+            "c",
+            "filename",
+            "opi"
+          ],
+          "nativeHttpStatus": 200,
+          "nativeMime": "application/protobuf",
+          "rejectedAsImage": true,
+          "directHttpFetchAttempted": false
+        },
+        "browserFreeDownload": {
+          "status": "verified",
+          "authorization": "hNv_task_contract_and_current_session",
+          "browserAssetGetPerformed": false,
+          "taskBinding": "hNvQHb_prompt_and_api_id",
+          "taskPromptMatched": true,
+          "apiConversationIdEchoed": true,
+          "routeBound": true,
+          "taskAssetCandidateCount": 6,
+          "excludedTaskCandidateCount": 3,
+          "httpStatus": 200,
+          "contentType": "image/png",
+          "mime": "image/png",
+          "bytes": 155225,
+          "sha256": "9cbcf13b14d38bf4f49483508007325a2f4603ecd08ba3e1122879edbaa40a66",
+          "mimeMagicMatched": true,
+          "independentFileReadback": true,
+          "dimensions": {
+            "width": 512,
+            "height": 279
+          },
+          "independentDimensionReadback": true,
+          "credentialForwarding": {
+            "sourceOrigin": "https://lh3.googleusercontent.com",
+            "cookieNames": [
+              "AEC",
+              "APISID",
+              "HSID",
+              "NID",
+              "SAPISID",
+              "SEARCH_SAMESITE",
+              "SID",
+              "SIDCC",
+              "SSID",
+              "__Secure-1PAPISID",
+              "__Secure-1PSID",
+              "__Secure-1PSIDCC",
+              "__Secure-1PSIDTS",
+              "__Secure-3PAPISID",
+              "__Secure-3PSID",
+              "__Secure-3PSIDCC",
+              "__Secure-3PSIDTS"
+            ],
+            "cookieDomainScopes": [
+              {
+                "name": "SEARCH_SAMESITE",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "AEC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "SID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "__Secure-1PSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "HSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "SSID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "APISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "SAPISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-1PAPISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PAPISID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "NID",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-1PSIDTS",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PSIDTS",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "SIDCC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": false
+              },
+              {
+                "name": "__Secure-1PSIDCC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              },
+              {
+                "name": "__Secure-3PSIDCC",
+                "domain": ".google.com",
+                "path": "/",
+                "secure": true
+              }
+            ],
+            "cookiesForwardedToSource": false,
+            "cookiesForwardedToCrossOriginRedirects": true,
+            "cookiesByRequestHop": [
+              {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/gg/{id}",
+                "cookieNames": []
+              },
+              {
+                "origin": "https://lh3.google.com",
+                "pathFamily": "/rd-gg/{id}",
+                "cookieNames": [
+                  "AEC",
+                  "APISID",
+                  "HSID",
+                  "NID",
+                  "SAPISID",
+                  "SEARCH_SAMESITE",
+                  "SID",
+                  "SIDCC",
+                  "SSID",
+                  "__Secure-1PAPISID",
+                  "__Secure-1PSID",
+                  "__Secure-1PSIDCC",
+                  "__Secure-1PSIDTS",
+                  "__Secure-3PAPISID",
+                  "__Secure-3PSID",
+                  "__Secure-3PSIDCC",
+                  "__Secure-3PSIDTS"
+                ]
+              },
+              {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/rd-gg/{id}",
+                "cookieNames": []
+              }
+            ]
+          },
+          "redirects": [
+            {
+              "httpStatus": 302,
+              "from": {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/gg/{id}",
+                "queryKeyNames": []
+              },
+              "to": {
+                "origin": "https://lh3.google.com",
+                "pathFamily": "/rd-gg/{id}",
+                "queryKeyNames": []
+              },
+              "resourceIdentityNormalization": "hNv_bound_source_and_observed_redirect_path_family",
+              "cookieNamesSentOnFromHop": [],
+              "cookieNamesObservedOnTargetHop": [
+                "AEC",
+                "APISID",
+                "HSID",
+                "NID",
+                "SAPISID",
+                "SEARCH_SAMESITE",
+                "SID",
+                "SIDCC",
+                "SSID",
+                "__Secure-1PAPISID",
+                "__Secure-1PSID",
+                "__Secure-1PSIDCC",
+                "__Secure-1PSIDTS",
+                "__Secure-3PAPISID",
+                "__Secure-3PSID",
+                "__Secure-3PSIDCC",
+                "__Secure-3PSIDTS"
+              ]
+            },
+            {
+              "httpStatus": 302,
+              "from": {
+                "origin": "https://lh3.google.com",
+                "pathFamily": "/rd-gg/{id}",
+                "queryKeyNames": []
+              },
+              "to": {
+                "origin": "https://lh3.googleusercontent.com",
+                "pathFamily": "/rd-gg/{id}",
+                "queryKeyNames": []
+              },
+              "resourceIdentityNormalization": "hNv_bound_source_and_observed_redirect_path_family",
+              "cookieNamesSentOnFromHop": [
+                "AEC",
+                "APISID",
+                "HSID",
+                "NID",
+                "SAPISID",
+                "SEARCH_SAMESITE",
+                "SID",
+                "SIDCC",
+                "SSID",
+                "__Secure-1PAPISID",
+                "__Secure-1PSID",
+                "__Secure-1PSIDCC",
+                "__Secure-1PSIDTS",
+                "__Secure-3PAPISID",
+                "__Secure-3PSID",
+                "__Secure-3PSIDCC",
+                "__Secure-3PSIDTS"
+              ],
+              "cookieNamesObservedOnTargetHop": []
+            }
+          ],
+          "artifact": {
+            "filename": "gemini-task-asset-browser-free-readback.png",
+            "mime": "image/png",
+            "bytes": 155225,
+            "sha256": "9cbcf13b14d38bf4f49483508007325a2f4603ecd08ba3e1122879edbaa40a66",
+            "magicVerified": true,
+            "independentFileReadback": true,
+            "previousArtifactHashMatched": true,
+            "scratchFileRemovedAfterReadback": true,
+            "dimensions": {
+              "width": 512,
+              "height": 279
+            },
+            "independentDimensionReadback": true
+          },
+          "sourceUrlPersisted": false,
+          "cookieValuesPersisted": false
+        }
+      }
+    }
+  }
+}

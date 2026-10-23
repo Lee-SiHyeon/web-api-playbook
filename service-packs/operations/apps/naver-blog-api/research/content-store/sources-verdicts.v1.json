@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "id": "sources-verdicts",
+  "target": "apps/naver-blog-api/research/content-store/sources.json",
+  "createdAt": "2026-10-06",
+  "note": "Sidecar for sources.json (ontology gap audit ONT-06). collect.mjs validateConfig rejects unknown keys on sources.json rows, so verdict/checkedAt live here, keyed by source id, until the code accepts them. Vocabulary: usable|usable_limited|html_only|key_required|challenge_blocked|excluded|unverified (rank-sources.v1.json, travel-price/sources.v1.json). Every row is `unverified`: no per-source access check is recorded; checkedAt stays null until a source is probed (never guess usable).",
+  "verdicts": [
+    {
+      "id": "creator-ai-choi-threads",
+      "kind": "threads_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-travel-lsh5755",
+      "kind": "naver_blog_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-travel-nau2001",
+      "kind": "naver_blog_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-ai",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-travel",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-deals",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-finance",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-kr-tech",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-kr-business",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-finance-einfomax",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-travel-traveltimes",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "news-travel-travie",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "intent-ai",
+      "kind": "naver_autocomplete",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "intent-travel",
+      "kind": "naver_autocomplete",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "intent-deals",
+      "kind": "naver_autocomplete",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "intent-finance",
+      "kind": "naver_autocomplete",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "realtime-kr-signal",
+      "kind": "signal_realtime",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-openai-rss",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-google-rss",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-deepmind-rss",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-photoroom-docs",
+      "kind": "photoroom_docs",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-gemini-models-rss",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-anthropic-sitemap",
+      "kind": "anthropic_sitemap",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-deepseek-docs",
+      "kind": "deepseek_docs_news",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-qwen-hf",
+      "kind": "hf_qwen_models",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-ai-deepseek-hf",
+      "kind": "hf_deepseek_models",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-travel-kto",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-travel-myrealtrip",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-deals-coupang",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "official-finance-bok",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "watch-ai-musk",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "watch-ai-grok",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "watch-ai-altman",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "watch-ai-altman-blog-rss",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "watch-ai-amodei",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "watch-ai-gemini",
+      "kind": "google_news_rss",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "community-ai-geeknews",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "community-ai-hn",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "community-side-hustle-daangn",
+      "kind": "daangn_side_hustle",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "community-ai-reddit-openai",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-simonw",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "papers-ai-hf",
+      "kind": "hf_daily_papers",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "community-deals-ppomppu",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "community-deals-ppomppu-overseas",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "community-deals-ruliweb",
+      "kind": "rss_feed",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "seller-deals-naver-today",
+      "kind": "naver_today_deals",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "seller-deals-11st",
+      "kind": "eleventh_street_deals",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "seller-deals-coupang-goldbox",
+      "kind": "coupang_goldbox",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "seller-travel-airlines",
+      "kind": "airline_promos",
+      "verdict": "unverified",
+      "checkedAt": null,
+      "registry": "apps/affiliate-api-hub/references/airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "seller-travel-agencies",
+      "kind": "travel_agency_deals",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "seller-travel-online",
+      "kind": "travel_online_deals",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "seller-travel-platforms",
+      "kind": "travel_platform_deals",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-elonmusk",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-sama",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-darioamodei",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-spacexai",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-alibaba-qwen",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-anthropicai",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-openai",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-googleai",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    },
+    {
+      "id": "creator-ai-x-deepseek",
+      "kind": "x_xhr_profile",
+      "verdict": "unverified",
+      "checkedAt": null
+    }
+  ]
+}

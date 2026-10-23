@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "auth.login",
+  "requirementId": "auth.google.oauth-start",
+  "recordedAt": "2026-10-06T14:46:20.266906+00:00",
+  "evidenceClass": "native_google_oauth_phase_observation",
+  "scope": "current_owner_applicability_and_separate_anonymous_provider-start-observations",
+  "ownerApplicability": {
+    "ownerApiStatus": 200,
+    "ownerApiResponseBytes": 648,
+    "ownerIdentityMatchedExpected": true,
+    "googleEmailMatchesOwner": true,
+    "accountHasPassword": false,
+    "rawEmailPersisted": false,
+    "normalizedOwnerDigestPersisted": false
+  },
+  "nativeUi": {
+    "loginHost": "accounts.x.ai",
+    "loginPath": "/sign-in",
+    "visibleButton": "Login with Google",
+    "buttonClickObserved": true,
+    "credentialsEntered": false,
+    "initialAnonymousCookieCount": 0,
+    "providerSelectionExplicitlyMade": false,
+    "oauthCallbackCompleted": false,
+    "expectedGoogleAccountSelected": false
+  },
+  "attempts": [
+    {
+      "attempt": "initial-anonymous-native-button-flow",
+      "request": {
+        "method": "POST",
+        "host": "accounts.x.ai",
+        "path": "/api/auth/oauth/start",
+        "status": null,
+        "requestBodyFieldNamesPersisted": false,
+        "requestBodyDigestPersisted": false,
+        "requestBytesPersisted": false
+      },
+      "response": {
+        "status": 200,
+        "contentType": null,
+        "responseBytes": null,
+        "responseDigestPersisted": false
+      },
+      "downstream": {
+        "googleAuthorizationStartObserved": true,
+        "authorizationPath": "/o/oauth2/v2/auth",
+        "authorizationQueryKeyNames": [
+          "client_id",
+          "code_challenge",
+          "code_challenge_method",
+          "prompt",
+          "redirect_uri",
+          "response_type",
+          "scope",
+          "state"
+        ],
+        "googleIdentifierStatus": 200,
+        "googleIdentifierPath": "/v3/signin/identifier",
+        "oauthCallbackCompleted": false,
+        "rawQueryValuesPersisted": false
+      },
+      "auditLimitation": "This successful event did not retain request field names, response byte count, or raw response digest; it is not merged with the separate 403 event."
+    },
+    {
+      "attempt": "current-anonymous-native-button-contract-capture",
+      "request": {
+        "method": "POST",
+        "host": "accounts.x.ai",
+        "path": "/api/auth/oauth/start",
+        "status": null,
+        "requestBodyFieldNames": [
+          "castleRequestToken",
+          "provider"
+        ],
+        "requestBodyFieldTypes": {
+          "castleRequestToken": "string",
+          "provider": "string"
+        },
+        "requestBytes": 5850,
+        "requestSha256": "2857dedf909b1184bcbc2aa1cf98b010180899c0735dbd760d164f3c6a57678f",
+        "googleProviderValueObservedInMemory": true,
+        "castleRequestTokenFieldPresent": true,
+        "castleTokenValuePersisted": false,
+        "requestHeaderNames": [
+          ":authority",
+          ":method",
+          ":path",
+          ":scheme",
+          "accept",
+          "accept-encoding",
+          "accept-language",
+          "baggage",
+          "content-length",
+          "content-type",
+          "origin",
+          "priority",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "sentry-trace",
+          "user-agent"
+        ],
+        "cookieHeaderPresent": true
+      },
+      "response": {
+        "status": 403,
+        "contentType": "text/html",
+        "responseBytes": 4539,
+        "responseSha256": "86610a831f09da367a4682b8109e7b26954537789450f188a8fc9c522cc8499c",
+        "jsonParsed": false
+      },
+      "downstream": {
+        "googleIdentifierReached": false,
+        "oauthCallbackCompleted": false
+      },
+      "boundary": {
+        "challengePlatformPostObserved": true,
+        "challengeSolvedOrBypassed": false,
+        "borrowedClearanceUsed": false
+      }
+    }
+  ],
+  "currentSession": {
+    "ownerStatus": 200,
+    "ownerResponseBytes": 648,
+    "ownerVerified": true,
+    "googleEmailMatchesOwner": true,
+    "accountHasPassword": false,
+    "ssoCookieExpiryMetadataPresent": true,
+    "providerCookieRotationObserved": false,
+    "expiredSessionRecoveryVerified": false,
+    "rawCookieValuesPersisted": false
+  },
+  "defaultOwnedContextSigninCheck": {
+    "sameContextGoogleSessionVerified": true,
+    "grokSsoCookieNamePresent": true,
+    "navigationStatus": 200,
+    "finalHost": "accounts.x.ai",
+    "finalPath": "/cookie-chain",
+    "loginControlsVisible": false,
+    "oauthButtonClicked": false,
+    "ownerSessionRemained200": true
+  },
+  "directClientReadiness": {
+    "oauthStartDirectHttpImplemented": false,
+    "reason": "the observed request contains a first-party castleRequestToken; one source-native attempt returned 403 and the only 200 event lacks retained request and response audit fields",
+    "pkceVerifierFabricated": false,
+    "pkceVerifierPersisted": false
+  },
+  "rawIdentityPersisted": false,
+  "rawSessionIdsPersisted": false,
+  "rawCookieValuesPersisted": false,
+  "rawRequestBodiesPersisted": false,
+  "rawResponseBodiesPersisted": false,
+  "rawQueryValuesPersisted": false
+}

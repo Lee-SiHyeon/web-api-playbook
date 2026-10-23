@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "id": "acada:consignment-store-launch-checklist",
+  "label": "내 스토어 시작 준비 체크리스트 (위탁판매 · 스마트스토어/쿠팡)",
+  "createdAt": "2026-09-26",
+  "extends": { "ontologyId": "acada:consignment-commerce", "file": "consignment-ontology.v1.json", "relationship": "operational checklist over its classes; the base file is not modified" },
+  "note": "owner 2026-09-26: '나 위탁판매까지 할거야 … 체크리스트 추가해놔'. 각 항목은 확인할 질문이다. status가 verified인 항목만 원문 문구를 인용했고, to_verify 항목은 공식 원문을 열어 확인하기 전까지 숫자·기한을 단정하지 않는다. 이 체크리스트는 법률·세무 자문이 아니다.",
+  "statusValues": ["verified", "ledger", "to_verify"],
+  "sources": [
+    { "id": "L-ECA12", "title": "전자상거래법 제12조(통신판매업자의 신고 등)", "url": "https://www.law.go.kr/법령/전자상거래등에서의소비자보호에관한법률/제12조", "status": "verified", "checkedOn": "2026-09-26",
+      "quote": "통신판매업자는 대통령령으로 정하는 바에 따라 다음 각 호의 사항을 공정거래위원회 또는 특별자치시장ㆍ특별자치도지사ㆍ시장ㆍ군수ㆍ구청장에게 신고하여야 한다. 다만, 통신판매의 거래횟수, 거래규모 등이 공정거래위원회가 고시로 정하는 기준 이하인 경우에는 그러하지 아니하다." },
+    { "id": "L-ECA13", "title": "전자상거래법 제13조(신원 및 거래조건에 대한 정보의 제공)", "url": "https://www.law.go.kr/법령/전자상거래등에서의소비자보호에관한법률/제13조", "status": "verified", "checkedOn": "2026-09-26",
+      "quote": "통신판매업자가 재화등의 거래에 관한 청약을 받을 목적으로 표시ㆍ광고를 할 때에는 그 표시ㆍ광고에 다음 각 호의 사항을 포함하여야 한다. 1. 상호 및 대표자 성명 2. 주소ㆍ전화번호ㆍ전자우편주소 3. 제12조에 따라 … 한 신고의 신고번호와 그 신고를 받은 기관의 이름 등" },
+    { "id": "L-VAT8", "title": "부가가치세법 제8조(사업자등록)", "url": "https://www.law.go.kr/법령/부가가치세법/제8조", "status": "verified", "checkedOn": "2026-09-26",
+      "quote": "사업자는 사업장마다 대통령령으로 정하는 바에 따라 사업 개시일부터 20일 이내에 사업장 관할 세무서장에게 사업자등록을 신청하여야 한다. 다만, 신규로 사업을 시작하려는 자는 사업 개시일 이전이라도 사업자등록을 신청할 수 있다." },
+    { "id": "D5", "ledger": "consignment-source-ledger-2026-09-26.json", "status": "ledger" },
+    { "id": "D3", "ledger": "consignment-source-ledger-2026-09-26.json", "status": "ledger" },
+    { "id": "D4", "ledger": "consignment-source-ledger-2026-09-26.json", "status": "ledger" },
+    { "id": "D6", "ledger": "consignment-source-ledger-2026-09-26.json", "status": "ledger" },
+    { "id": "D7", "ledger": "consignment-source-ledger-2026-09-26.json", "status": "ledger" },
+    { "id": "D1", "ledger": "consignment-source-ledger-2026-09-26.json", "status": "ledger" },
+    { "id": "D2", "ledger": "consignment-source-ledger-2026-09-26.json", "status": "ledger" },
+    { "id": "T-FTC-EXEMPT", "title": "통신판매업 신고 면제 기준에 대한 고시 (공정거래위원회)", "url": "https://www.law.go.kr/행정규칙/통신판매업신고면제기준에대한고시", "status": "to_verify" },
+    { "id": "T-ECA-ESCROW", "title": "전자상거래법의 구매안전서비스·소비자피해보상보험 조항 (제13조제2항, 제24조)", "url": "https://www.law.go.kr/법령/전자상거래등에서의소비자보호에관한법률/제24조", "status": "to_verify" },
+    { "id": "T-SS-SELLER", "title": "스마트스토어센터 판매자 가입·서류 안내", "url": "https://help.sell.smartstore.naver.com/", "status": "to_verify" },
+    { "id": "T-CP-WING", "title": "쿠팡 Wing 판매자 가입·정산 안내", "url": "https://wing.coupang.com/", "status": "to_verify" },
+    { "id": "T-FTC-ENDORSE", "title": "추천·보증 등에 관한 표시·광고 심사지침 (공정거래위원회)", "url": "https://www.law.go.kr/행정규칙/추천ㆍ보증등에관한표시ㆍ광고심사지침", "status": "to_verify" },
+    { "id": "T-PIPA", "title": "개인정보 보호법 제26조(업무위탁에 따른 개인정보의 처리 제한)", "url": "https://www.law.go.kr/법령/개인정보보호법/제26조", "status": "to_verify" }
+  ],
+  "stages": [
+    { "id": "S1", "label": "신고·등록", "items": [
+      { "id": "C01", "check": "사업자등록을 했는가? (개인 판매라도 사업을 시작하면 신청 대상인지 확인)", "why": "사업 개시일부터 20일 이내 신청 의무. 개시 전에도 신청 가능.", "ontologyClass": "Actor", "sourceIds": ["L-VAT8"] },
+      { "id": "C02", "check": "통신판매업 신고를 했는가, 또는 공정위 고시의 면제 기준 이하인지 근거가 있는가?", "why": "온라인 판매자는 신고 대상이고, 거래횟수·규모가 고시 기준 이하면 면제. 기준 숫자는 고시 원문으로 확인.", "ontologyClass": "Actor", "sourceIds": ["L-ECA12", "T-FTC-EXEMPT"] },
+      { "id": "C03", "check": "통신판매업 신고에 필요한 구매안전서비스 이용 확인증을 판매 채널에서 받을 수 있는가?", "why": "신고 서류와 에스크로 요건은 원문 확인 전까지 단정하지 않는다.", "ontologyClass": "ChannelAccount", "sourceIds": ["T-ECA-ESCROW", "T-SS-SELLER"] }
+    ] },
+    { "id": "S2", "label": "판매 채널 개설", "items": [
+      { "id": "C04", "check": "스마트스토어·쿠팡 판매자 가입 유형(개인/사업자)과 요구 서류, 정산 계좌 명의를 확인했는가?", "why": "채널마다 가입 요건과 정산 계좌 조건이 다르다.", "ontologyClass": "ChannelAccount", "sourceIds": ["T-SS-SELLER", "T-CP-WING"] },
+      { "id": "C05", "check": "상품 페이지와 광고에 상호·대표자·주소·전화·이메일·통신판매업 신고번호가 표시되는가?", "why": "통신판매업자의 표시 의무.", "ontologyClass": "ChannelListing", "sourceIds": ["L-ECA13"] }
+    ] },
+    { "id": "S3", "label": "공급사 계약", "items": [
+      { "id": "C06", "check": "거래 관계가 무엇인가: 재판매 / 판매대행 수수료 / 소유권 유보 위탁 / 혼합? 재고 소유·보관·발송·고객 계약 당사자는 누구인가?", "why": "이름이 '위탁'이어도 책임과 돈의 흐름이 다르다. 모르는 축은 unknown으로 둔다.", "ontologyClass": "SupplyArrangement", "sourceIds": ["D1"] },
+      { "id": "C07", "check": "공급가·배송비·출고 마감·배송 리드타임·반품지 주소·반품비 부담·품절 통보 방식이 계약서(또는 공급 조건표)에 있는가?", "why": "주문 뒤 품절·지연·반품에서 누가 비용을 내는지가 여기서 정해진다.", "ontologyClass": "SupplyAgreement", "sourceIds": ["D1", "D3"] },
+      { "id": "C08", "check": "공급사 상품 이미지·상세 설명을 내 채널에 써도 된다는 허락이 있는가? 범위·기간은?", "why": "이미지를 가져다 쓰는 것은 별도 권리. 허락 근거를 RightsGrant로 남긴다.", "ontologyClass": "RightsGrant", "sourceIds": [] },
+      { "id": "C09", "check": "품절 때 대체 공급처로 바꾸는 규칙이 있는가? 같은 규격·구성·수량·배송 조건인지 확인하는 절차가 있는가?", "why": "상품명이 같아도 동일상품이 아닐 수 있다.", "ontologyClass": "SkuMapping", "sourceIds": ["D2"] },
+      { "id": "C10", "check": "주문자 이름·주소·전화번호를 공급사에 넘기는 것을 개인정보 처리 위탁으로 고지하는가?", "why": "직배송이면 고객 정보가 공급사로 간다. 고지 방법은 원문 확인.", "ontologyClass": "Actor", "sourceIds": ["T-PIPA"] }
+    ] },
+    { "id": "S4", "label": "상품 등록 전", "items": [
+      { "id": "C11", "check": "품목에 별도 인증·신고가 필요한가? (식품·건강기능식품·전기용품·어린이제품·화장품 등)", "why": "품목마다 판매 조건이 다르다. 해당 법령·기관 원문으로 품목별 확인.", "ontologyClass": "ComplianceCheck", "sourceIds": [] },
+      { "id": "C12", "check": "판매 옵션 1개가 공급 SKU 몇 개인지(예: 판매 1세트 = 공급 3개) 양쪽 단위를 적었는가?", "why": "환산 방향이 모호하면 발주 수량이 틀린다.", "ontologyClass": "SkuMapping", "sourceIds": [] },
+      { "id": "C13", "check": "판매가 − 공급가 − 채널 수수료 − 배송비 − 광고비 − 반품 충당으로 한 건당 남는 돈을 계산했는가? (세금·고정비·내 작업시간은 따로)", "why": "판매액을 이익으로 세지 않는다. 온톨로지의 기여이익 산식.", "ontologyClass": "CostAllocation", "sourceIds": [] }
+    ] },
+    { "id": "S5", "label": "주문·배송", "items": [
+      { "id": "C14", "check": "주문이 들어오면 공급사 발주·송장 입력까지 누가 언제 하는가? 하루 몇 번 확인하는가?", "why": "CS와 송장 입력은 사람 시간이 든다(WorkLog).", "ontologyClass": "PurchaseOrder", "sourceIds": [] },
+      { "id": "C15", "check": "송장 등록과 실제 집화·배달을 구분해서 확인하는가?", "why": "송장 번호만으로 배송 시작이 확인되지 않는다.", "ontologyClass": "Shipment", "sourceIds": [] }
+    ] },
+    { "id": "S6", "label": "취소·반품·환불", "items": [
+      { "id": "C16", "check": "청약철회 기간·예외와 환급 의무를 상품 페이지 안내와 맞췄는가?", "why": "법 조문의 조건을 요약해 짧은 규칙으로 바꾸지 않는다.", "ontologyClass": "ClaimCase", "sourceIds": ["D6", "D7"] },
+      { "id": "C17", "check": "반품 한 건을 접수·회수·검수·환불·정산 반영으로 나눠 기록하는가?", "why": "스마트스토어에서도 반품배송비 결제, 회수, 반품 완료, 환불이 다른 단계.", "ontologyClass": "ClaimCase", "sourceIds": ["D3", "D4"] }
+    ] },
+    { "id": "S7", "label": "정산·자금", "items": [
+      { "id": "C18", "check": "채널 정산예정일과 실제 입금일을 따로 기록하는가? 공급사 선결제부터 입금까지 필요한 자금은 얼마인가?", "why": "정산 예정은 입금이 아니다. 온톨로지 예시에서는 첫 주문에도 입금 전 19,200원이 먼저 나간다(가정).", "ontologyClass": "SettlementLine", "sourceIds": ["D5"] },
+      { "id": "C19", "check": "쿠팡 정산 주기와 지급 방식을 판매자 센터 원문으로 확인했는가?", "why": "채널마다 정산 주기가 다르다.", "ontologyClass": "SettlementLine", "sourceIds": ["T-CP-WING"] }
+    ] },
+    { "id": "S8", "label": "세금", "items": [
+      { "id": "C20", "check": "부가가치세 신고 기간과 과세 유형(간이/일반), 종합소득세 신고를 캘린더에 넣었는가?", "why": "과세 유형과 신고 기한은 국세청 원문으로 확인한다.", "ontologyClass": "FinancialEvent", "sourceIds": [] }
+    ] },
+    { "id": "S9", "label": "블로그에서 내 상품 소개", "items": [
+      { "id": "C21", "check": "블로그 글에서 내 스토어 상품을 소개할 때 '제가 판매하는 상품'임을 첫 부분에 밝히는가?", "why": "제휴 링크 대신 내 상품이어도 경제적 이해관계 표시는 필요하다. 지침 원문으로 문구 확인.", "ontologyClass": "ChannelListing", "sourceIds": ["T-FTC-ENDORSE"] },
+      { "id": "C22", "check": "후기·평점 문구는 실제 구매 후기만 인용하는가? 체험단·지인 후기를 섞지 않는가?", "why": "후기 조작은 표시광고 위반 소지.", "ontologyClass": "ChannelListing", "sourceIds": ["T-FTC-ENDORSE"] }
+    ] }
+  ]
+}

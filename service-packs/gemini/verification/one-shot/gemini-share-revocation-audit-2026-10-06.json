@@ -1,0 +1,49 @@
+{
+  "schema": "gemini-share-revocation-audit-v1",
+  "service": "gemini-web",
+  "feature": "share",
+  "operation": "share_revoke",
+  "outcome": "verified_owner_links_removed_anonymous_lookup_empty",
+  "verifiedAt": "2026-10-06T02:47:45.676216+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "taskBinding": {
+    "exactTaskRowsBeforeRevoke": 2,
+    "promptContentCidBound": true,
+    "rawConversationIdPersisted": false
+  },
+  "directMutations": {
+    "dispatchCount": 2,
+    "dispatchesExactlyOnce": true,
+    "journalState": "reconciled",
+    "readbackCategory": "share_link_absent_after_owner_readback",
+    "retryPolicy": "never"
+  },
+  "ownerReadback": {
+    "clientEntryPoint": "GeminiWebClient.readPublicShareLinks",
+    "httpStatus": 200,
+    "ownerMatched": true,
+    "shareCount": 7,
+    "targetTaskLinkPresent": false,
+    "targetTaskRowCount": 0,
+    "unrelatedRowsModified": false
+  },
+  "anonymousReadback": {
+    "httpStatus": 200,
+    "rpcId": "ujx1Bf",
+    "validRpcFrameCount": 2,
+    "nullDataRootCount": 2,
+    "taskTitleReturned": false,
+    "taskMarkerReturned": false,
+    "cookiesSent": false,
+    "authorizationHeadersSent": false,
+    "explicitDenialTextOrErrorField": false,
+    "classification": "empty_null_result_not_explicit_denial"
+  },
+  "persistence": {
+    "shareIdsPersisted": false,
+    "shareUrlsPersisted": false,
+    "rawRequestOrResponseBodiesPersisted": false,
+    "ownerIdentityPersisted": false
+  }
+}

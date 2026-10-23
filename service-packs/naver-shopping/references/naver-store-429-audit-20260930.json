@@ -1,0 +1,406 @@
+{
+  "observedOn": "2026-09-30",
+  "executionScope": "current_linux_worker_only",
+  "historicalCaptureReference": "discovery/20260930/paged-contracts.json and additional-contracts.json",
+  "requestContractComparison": {
+    "productPathAndWithWindowMatch": true,
+    "reviewMethodAndBodyFieldsMatch": true,
+    "observedBrowserRequestHeaderFieldNames": [
+      "x-service-type",
+      "sec-ch-ua-platform",
+      "x-client-rts",
+      "referer",
+      "accept-language",
+      "sec-ch-ua",
+      "x-client-lct",
+      "x-client-rtk",
+      "sec-ch-ua-mobile",
+      "baggage",
+      "sentry-trace",
+      "user-agent",
+      "accept",
+      "x-client-version",
+      "content-type"
+    ],
+    "testedPublicHeaderFields": [
+      "x-service-type",
+      "accept",
+      "x-client-version",
+      "content-type"
+    ],
+    "additionalClientHeaderFieldNames": [
+      "x-client-rts",
+      "x-client-lct",
+      "x-client-rtk"
+    ],
+    "additionalHeaderValuesCollected": false,
+    "additionalHeadersRequired": null,
+    "fullBrowserHeaderContextReplayed": false
+  },
+  "directHttp": [
+    {
+      "label": "store_document",
+      "method": "GET",
+      "origin": "https://brand.naver.com",
+      "path": "/hera",
+      "queryFields": [],
+      "requestHeaderFields": [
+        "accept"
+      ],
+      "requestBodyFields": [],
+      "checkedAt": "2026-09-30T03:56:21.366Z",
+      "cookiesUsed": false,
+      "proxyConfigured": false,
+      "browserUsed": false,
+      "httpStatus": 429,
+      "contentType": "text/html",
+      "server": "nfront",
+      "retryAfter": null,
+      "bytes": 23585,
+      "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+      "markers": {
+        "temporaryRestriction": true,
+        "captcha": false,
+        "tooManyRequests": false
+      },
+      "responseHeaderFields": [
+        "content-length",
+        "content-type",
+        "date",
+        "etag",
+        "referrer-policy",
+        "server"
+      ]
+    },
+    {
+      "label": "product_document",
+      "method": "GET",
+      "origin": "https://brand.naver.com",
+      "path": "/hera/products/9215718713",
+      "queryFields": [],
+      "requestHeaderFields": [
+        "accept"
+      ],
+      "requestBodyFields": [],
+      "checkedAt": "2026-09-30T03:56:24.520Z",
+      "cookiesUsed": false,
+      "proxyConfigured": false,
+      "browserUsed": false,
+      "httpStatus": 429,
+      "contentType": "text/html",
+      "server": "nfront",
+      "retryAfter": null,
+      "bytes": 23585,
+      "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+      "markers": {
+        "temporaryRestriction": true,
+        "captcha": false,
+        "tooManyRequests": false
+      },
+      "responseHeaderFields": [
+        "content-length",
+        "content-type",
+        "date",
+        "etag",
+        "referrer-policy",
+        "server"
+      ]
+    },
+    {
+      "label": "product_api_client_headers",
+      "method": "GET",
+      "origin": "https://brand.naver.com",
+      "path": "/n/v2/channels/2sWDz2YCMY4Gyf6AdRQpf/products/9215718713",
+      "queryFields": [
+        "withWindow"
+      ],
+      "requestHeaderFields": [
+        "accept"
+      ],
+      "requestBodyFields": [],
+      "checkedAt": "2026-09-30T03:56:27.560Z",
+      "cookiesUsed": false,
+      "proxyConfigured": false,
+      "browserUsed": false,
+      "httpStatus": 429,
+      "contentType": "text/html",
+      "server": "nfront",
+      "retryAfter": null,
+      "bytes": 23585,
+      "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+      "markers": {
+        "temporaryRestriction": true,
+        "captcha": false,
+        "tooManyRequests": false
+      },
+      "responseHeaderFields": [
+        "content-length",
+        "content-type",
+        "date",
+        "etag",
+        "referrer-policy",
+        "server"
+      ]
+    },
+    {
+      "label": "product_api_captured_public_headers",
+      "method": "GET",
+      "origin": "https://brand.naver.com",
+      "path": "/n/v2/channels/2sWDz2YCMY4Gyf6AdRQpf/products/9215718713",
+      "queryFields": [
+        "withWindow"
+      ],
+      "requestHeaderFields": [
+        "x-service-type",
+        "accept",
+        "x-client-version",
+        "content-type"
+      ],
+      "requestBodyFields": [],
+      "checkedAt": "2026-09-30T03:56:30.600Z",
+      "cookiesUsed": false,
+      "proxyConfigured": false,
+      "browserUsed": false,
+      "httpStatus": 429,
+      "contentType": "text/html",
+      "server": "nfront",
+      "retryAfter": null,
+      "bytes": 23585,
+      "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+      "markers": {
+        "temporaryRestriction": true,
+        "captcha": false,
+        "tooManyRequests": false
+      },
+      "responseHeaderFields": [
+        "content-length",
+        "content-type",
+        "date",
+        "etag",
+        "referrer-policy",
+        "server"
+      ]
+    },
+    {
+      "label": "review_api_observed_contract",
+      "method": "POST",
+      "origin": "https://brand.naver.com",
+      "path": "/n/v1/contents/reviews/query-pages",
+      "queryFields": [],
+      "requestHeaderFields": [
+        "x-service-type",
+        "accept",
+        "x-client-version",
+        "content-type"
+      ],
+      "requestBodyFields": [
+        "checkoutMerchantNo",
+        "originProductNo",
+        "page",
+        "pageSize",
+        "reviewSearchSortType"
+      ],
+      "checkedAt": "2026-09-30T03:56:33.634Z",
+      "cookiesUsed": false,
+      "proxyConfigured": false,
+      "browserUsed": false,
+      "httpStatus": 429,
+      "contentType": "text/html",
+      "server": "nfront",
+      "retryAfter": null,
+      "bytes": 23585,
+      "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+      "markers": {
+        "temporaryRestriction": true,
+        "captcha": false,
+        "tooManyRequests": false
+      },
+      "responseHeaderFields": [
+        "content-length",
+        "content-type",
+        "date",
+        "etag",
+        "referrer-policy",
+        "server"
+      ]
+    }
+  ],
+  "freshAnonymousBrowser": {
+    "transport": "fresh_anonymous_chromium",
+    "host": "current_linux_worker",
+    "proxyConfigured": false,
+    "stealthOrFingerprintChanges": false,
+    "requestsConsidered": 5,
+    "freshCookieCount": 0,
+    "authenticatedCookiePresent": false,
+    "records": [
+      {
+        "checkedAt": "2026-09-30T04:00:07.729462+00:00",
+        "transport": "fresh_anonymous_chromium",
+        "method": "GET",
+        "endpoint": "https://brand.naver.com/hera",
+        "httpStatus": 429,
+        "browserUsed": true,
+        "existingProfileUsed": false,
+        "contentType": "text/html",
+        "server": "nfront",
+        "retryAfter": null,
+        "requestHeaderFields": [
+          "accept",
+          "upgrade-insecure-requests",
+          "user-agent",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform"
+        ],
+        "cookiesSent": false,
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "temporaryRestriction": true,
+        "captcha": false
+      }
+    ],
+    "normalProductApiObserved": false
+  },
+  "positiveControl": {
+    "label": "positive_control_today_deals",
+    "method": "GET",
+    "origin": "https://shopping.naver.com",
+    "path": "/promotion",
+    "httpStatus": 200,
+    "contentType": "text/html; charset=utf-8",
+    "server": "nfront",
+    "bytes": 110695,
+    "sha256": "75395fb10c67aac11414fe17f14c029809cb8f1a1c82b3e1d60fa02d9b0eba60",
+    "nextDataPresent": true,
+    "checkedAt": "2026-09-30T04:02:00.094Z",
+    "cookiesUsed": false,
+    "browserUsed": false
+  },
+  "findings": {
+    "blockedResponsesShareIdenticalBodyHash": true,
+    "sameBlockPageInFreshBrowser": true,
+    "currentAnonymousProductJsonReplaySucceeded": false,
+    "currentAnonymousReviewReplaySucceeded": false,
+    "inputMistakeAloneExplainsObservedFailure": false,
+    "additionalHeaderRequirementStillUnverified": true,
+    "ipOnlyRootCauseConfirmed": false,
+    "authenticatedOrOtherNetworkReplayVerified": false,
+    "portalEntryRequiresUnresolvedAuthenticationOrContext": true,
+    "productOrReviewAggregatesUniversallyUnavailable": false
+  },
+  "officialAlternative": {
+    "shoppingSearchApiRetiredOn": "2026-07-31",
+    "replacementInApiHub": false,
+    "source": "https://developers.naver.com/notice/article/32530"
+  },
+  "codeChange": {
+    "http429ClassifiedBeforeBodyRestrictionMarkers": true,
+    "retryAfterRetainedInReceipt": true,
+    "regressionCasesPassed": 4
+  },
+  "sourceHashes": {
+    "adapters/naver-shopping.mjs": "14b2563a707a4d87fc04671fb56f46b48a43d36390f3c6ff7deb2faadce1c18a"
+  },
+  "portalEntryComparison": {
+    "host": "current_linux_worker",
+    "source": "fresh_anonymous_browser_visited_public_shopping_portal_first",
+    "browserRuntime": "Chrome for Testing 151",
+    "existingProfileUsed": false,
+    "proxyConfigured": false,
+    "fingerprintOverridesUsed": false,
+    "requestsConsidered": 48,
+    "cookiesPresentAfterFlow": 4,
+    "authenticatedCookiePresent": false,
+    "records": [
+      {
+        "checkedAt": "2026-09-30T04:10:32.436982+00:00",
+        "transport": "fresh_chromium_via_shopping_portal",
+        "endpoint": "https://shopping.naver.com/promotion",
+        "method": "GET",
+        "status": 307,
+        "bodyReadError": true
+      },
+      {
+        "checkedAt": "2026-09-30T04:10:32.534490+00:00",
+        "transport": "fresh_chromium_via_shopping_portal",
+        "endpoint": "https://nid.naver.com/nidlogin.login",
+        "method": "GET",
+        "status": 200,
+        "contentType": "text/html;charset=utf-8",
+        "retryAfter": null,
+        "cookiesSent": false,
+        "requestHeaderFields": [
+          ":authority",
+          ":method",
+          ":path",
+          ":scheme",
+          "accept",
+          "accept-encoding",
+          "accept-language",
+          "cache-control",
+          "pragma",
+          "priority",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "sec-fetch-user",
+          "upgrade-insecure-requests",
+          "user-agent"
+        ],
+        "bytes": 19335,
+        "sha256": "700a1b138512629b22acb215a6f38bc6b8df52bdd1c92cdd428f99f169c03d74",
+        "temporaryRestriction": false,
+        "captchaMarkerPresent": true
+      },
+      {
+        "checkedAt": "2026-09-30T04:10:39.952168+00:00",
+        "transport": "fresh_chromium_via_shopping_portal",
+        "endpoint": "https://brand.naver.com/hera",
+        "method": "GET",
+        "status": 429,
+        "contentType": "text/html",
+        "retryAfter": null,
+        "cookiesSent": true,
+        "requestHeaderFields": [
+          "accept",
+          "cookie",
+          "referer",
+          "upgrade-insecure-requests",
+          "user-agent",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform"
+        ],
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "temporaryRestriction": true,
+        "captchaMarkerPresent": false
+      }
+    ],
+    "normalShoppingPortalReached": false,
+    "entryRedirectedToLogin": true,
+    "activeCaptchaChallengeVerified": false,
+    "loginAttempted": false,
+    "normalSessionOrClientHeadersIssuedAndReplayed": false
+  },
+  "userReportedBrowserObservation": {
+    "source": "user_supplied_page_text",
+    "pageReportedAccessible": true,
+    "device": "awaiting_user_identification",
+    "productTitle": "헤라 리플렉션 스킨 글로우 파운데이션 SPF15/PA++ 30g",
+    "listPriceKrw": 72000,
+    "displayPriceKrw": 64800,
+    "displayDiscountPercent": 10,
+    "reviewCount": 9910,
+    "rating": 4.79,
+    "recentSixMonthRating": 4.82,
+    "freeShippingDisplayed": true,
+    "productUrlIndependentlyVerified": false,
+    "fullReviewBodyApiIndependentlyVerified": false,
+    "authenticatedStateVerified": false
+  }
+}

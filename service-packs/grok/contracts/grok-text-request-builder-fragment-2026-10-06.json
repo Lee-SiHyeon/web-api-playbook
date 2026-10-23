@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "fragmentId": "grok-text-request-builder",
+  "observedAt": "2026-10-06",
+  "sourceAssets": [
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/1_d8j0f-0qmq9.js",
+      "sha256": "e8168ceb7b6a967d9df7c35ba41d40d40ed8982f3c1fe8ef901e83bb07be71a1",
+      "sourceFunctions": {
+        "castleMinterRegistration": "registerCastleChatMinter",
+        "outboundEventHook": "gatewayConnectionManager.setOutboundEventPreparer",
+        "preparedEventTypes": ["response.create", "conversation.queue.add", "conversation.queue.interject"]
+      },
+      "observedBehavior": {
+        "freshTokenTtlMs": 60000,
+        "freshTokenConsumedOnce": true,
+        "mintStartedWhenMissing": true,
+        "waitAfterPrimeMs": 1500,
+        "tokenField": "castle_request_token",
+        "tokenValueCapturedOrPersisted": false
+      }
+    },
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/10q5dv8u72u1k.js",
+      "sha256": "6d3ad60f78aeb5e82041c5beabdc70ef106158de47328d2ff58057313e40a757",
+      "sourceFunctions": {
+        "gatewaySessionCreate": "GatewaySession create-session source path",
+        "sessionCreateEventId": "evt_init_${crypto.randomUUID()}",
+        "internalGatewayControlEnvelopeFields": ["session_id", "event.type", "event.event_id", "event.session"]
+      }
+    },
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/1j2ho_pz_0gci.js",
+      "sha256": "3589d3596012d0d05552e9273c7c20c5f1c26f0df929e35952b8ff476b3561e1",
+      "sourceFunctions": {
+        "regenerateUiCallsite": "use-response-actions handleClickRegenerate",
+        "nativeInputFields": ["message", "parentResponseId", "conversationId", "fileAttachmentIds", "setUserResponse", "skipCancelCurrentInflightRequests"]
+      },
+      "note": "This UI callsite feeds the native chat store. A WSS wire mapping for isRegenRequest and parent_response_id was not found in the inspected source cache."
+    },
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/27akar72ihacg.js",
+      "sha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+      "sourceFunctions": {
+        "restCreateRequestSerializer": "chatCreateConversationAndRespondRaw",
+        "restRegenField": "isRegenRequest",
+        "restParentField": "parentResponseId"
+      },
+      "boundary": "Generated REST API schema; not evidence of the current WSS regeneration shape."
+    }
+  ],
+  "nativeControlCapture": {
+    "receipt": "verification/grok-core-text-live-2026-10-06.json",
+    "controlFrameTopLevelKeys": ["event"],
+    "sessionFieldNames": ["model", "x_grok"],
+    "connectorIdCount": 3,
+    "conversationTargetPresent": false,
+    "rawFrameOrIdentifierPersisted": false
+  },
+  "builder": {
+    "module": "src/grok-text-request-builder.mjs",
+    "submitterFactory": "createGrokTextRequestSubmitter",
+    "castleEventAdapter": "src/grok-castle-event-preparer.mjs",
+    "sessionControlProviderRequired": true,
+    "firstPartyRequestMetadataProducerRequired": true,
+    "missingProducerError": "TEXT_FIRST_PARTY_REQUEST_METADATA_PRODUCER_REQUIRED",
+    "modeIdMapping": "delegated_to_injected_first_party_session_control_provider",
+    "socketUrlAndHandshakeHeaders": "delegated_to_injected_first_party_request_metadata_producer",
+    "sessionControlProviderOutput": ["model", "x_grok"],
+    "sessionCreateControlTopLevelKeys": ["event"],
+    "businessSessionIdAuthority": "new_direct_socket_session.created_ack",
+    "dispatchBoundary": "default two-phase Python WSS dispatcher sends source control, waits for the new socket acknowledgement, calls buildBusinessFrameText with that acknowledged session ID, then sends one validated business frame",
+    "defaultDispatcher": "src/grok-text-request-dispatcher.mjs:createPythonGrokTextRequestDispatcher",
+    "transportHelper": "scripts/grok-text-request-transport.py",
+    "transportDependency": "websocket-client==1.7.0",
+    "ipcStages": ["start", "session_ack", "business_frame_or_abort", "result"],
+    "dispatchOutcomeAfterBusinessIpcTimeout": "TEXT_REQUEST_DISPATCH_OUTCOME_UNKNOWN",
+    "journalOperationId": "chat.text.wss",
+    "completionRequiresIndependentHistoryReadback": true,
+    "businessFrameShape": {
+      "outerFields": ["session_id", "event"],
+      "eventType": "response.create",
+      "eventId": "UUIDv4",
+      "itemFields": ["type", "role", "x_grok"],
+      "xGrokFields": ["client_message_id", "input_chunks"],
+      "promptPath": "event.item.x_grok.input_chunks[].text.text",
+      "castleField": "event.castle_request_token"
+    },
+    "businessDataPersistence": false,
+    "normalConnectorIdAdvertisementsAccepted": true,
+    "clientToolBusinessFramesBuilt": false,
+    "imageGenerationControlAllowed": false,
+    "defaultTransportExecutionPerformed": false,
+    "liveGenerationPerformed": false,
+    "capturedReplayPathChanged": false,
+    "capturedReplayJournalPreserved": true
+  },
+  "nativeEventPreparationBoundary": {
+    "helper": "prepareGrokOutboundEvent(event, {requestMetadataProducer})",
+    "providerMustAddToken": true,
+    "providerMustPreserveBusinessEvent": true,
+    "sanitizedNativeCapture": {
+      "tokenWasString": true,
+      "tokenWasNonempty": true,
+      "tokenHadControlCharacters": false,
+      "observedCharacterLength": 5941,
+      "tokenValueCapturedOrPersisted": false
+    },
+    "maximumCastleTokenBytes": 8192,
+    "maximumBusinessFrameBytes": 4194304,
+    "tokenFallbackSynthesized": false,
+    "alreadyPreparedEventValidator": "validatePreparedGrokOutboundEvent(event)",
+    "providerValuesPersisted": false
+  }
+}

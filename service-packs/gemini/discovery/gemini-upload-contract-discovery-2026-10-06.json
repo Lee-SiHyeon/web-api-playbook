@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "feature": "attachments_upload",
+  "recordedAt": "2026-10-06T00:10:45.624467+00:00",
+  "observedOwnerMatched": true,
+  "ui": {
+    "uploadAndToolsMenu": true,
+    "documentFilePicker": true,
+    "textFileAccepted": true
+  },
+  "testFile": {
+    "name": "protocol42.txt",
+    "bytes": 14
+  },
+  "nativeInitRequestsBlocked": 4,
+  "requestMetadata": {
+    "method": "POST",
+    "origin": "https://push.clients6.google.com",
+    "pathFamily": "/upload/",
+    "rpcId": "",
+    "bodyBytes": 25,
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "push-id",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-client-pctx",
+      "x-goog-upload-command",
+      "x-goog-upload-header-content-length",
+      "x-goog-upload-protocol",
+      "x-tenant-id"
+    ],
+    "bodySha256": "73662342e19b32036753b5ff2ff152d3c463f2de0fe5de05b6011c07ae9140db",
+    "testFileContentMatched": false
+  },
+  "independentHttpUploadExecuted": false,
+  "resumeFinalizeContractVerified": false,
+  "uploadedFileReadbackVerified": false,
+  "guardLifecycle": {
+    "taskPageResetToBlankAfterDiscovery": true,
+    "noNativeServerDeliveryClaimFromResourceTimingOnly": true,
+    "initialDriverDisconnectBeforePageReset": true,
+    "lateNativeResource200Observations": 2,
+    "nativeUploadOutcome": "delivery_unknown; not direct API proof",
+    "fix": "reset task page while guard remains active, then quiet before disconnect"
+  },
+  "rawBodiesOrCredentialValuesPersisted": false
+}

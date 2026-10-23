@@ -73,6 +73,41 @@ test('Meta resolves a sibling helper and prefers an explicit ACO_ROOT override',
   assert.equal(JSON.parse(explicit.stderr).code, 'META_SESSION_HELPER_INVALID');
 });
 
+test('Meta resolves the bundled helper before a sibling checkout without opening a provider', async (t) => {
+  const { directory, checkout } = await fixture(t);
+  await copyScript(checkout, 'meta-session-from-canary.mjs');
+  const helper = 'apps/naver-blog-api/scripts/meta-auth-session.mjs';
+  await file(checkout, 'service-packs/operations/' + helper, 'export const storeMetaSession = null;');
+  await file(path.join(directory, 'affiliate-content-operations'), helper, 'throw Error("SIBLING_MUST_NOT_LOAD");');
+  const result = run(checkout, 'meta-session-from-canary.mjs');
+  assert.equal(result.status, 2, result.stderr);
+  assert.equal(JSON.parse(result.stderr).code, 'META_SESSION_HELPER_INVALID');
+  assert.equal(result.stdout, '');
+});
+
+test('consolidated HTTP adapters load bundled auth modules from a relocated checkout and honor explicit roots', async (t) => {
+  const { directory, checkout } = await fixture(t);
+  const helper = 'service-packs/operations/apps/affiliate-api-hub/adapters/web-auth-provider.mjs';
+  await file(checkout, helper, await readFile(path.join(root, helper), 'utf8'));
+  await file(checkout, 'lib/web-auth/myrealtrip.mjs', 'export const createMyrealtripAuth = () => ({ source: "bundled-stub" });');
+  await file(checkout, 'scripts/probe-auth.mjs', `
+    import { webApiPlaybookRoot, loadWebAuth } from '../${helper}';
+    console.log(JSON.stringify({ root: webApiPlaybookRoot(), auth: await loadWebAuth('myrealtrip') }));
+  `);
+  const bundled = run(checkout, 'probe-auth.mjs', { WEB_API_PLAYBOOK_ROOT: '', WEB_API_PLAYBOOK: '' });
+  assert.equal(bundled.status, 0, bundled.stderr);
+  const actual = JSON.parse(bundled.stdout);
+  assert.equal(path.resolve(actual.root), checkout);
+  assert.deepEqual(actual.auth, { source: 'bundled-stub' });
+  const explicit = path.join(directory, 'explicit playbook');
+  await file(explicit, 'lib/web-auth/myrealtrip.mjs', 'export const createMyrealtripAuth = () => ({ source: "explicit-stub" });');
+  for (const variable of ['WEB_API_PLAYBOOK_ROOT', 'WEB_API_PLAYBOOK']) {
+    const result = run(checkout, 'probe-auth.mjs', { WEB_API_PLAYBOOK_ROOT: '', WEB_API_PLAYBOOK: '', [variable]: explicit });
+    assert.equal(result.status, 0, result.stderr);
+    assert.deepEqual(JSON.parse(result.stdout), { root: explicit, auth: { source: 'explicit-stub' } });
+  }
+});
+
 test('doctor checks every declared runtime dependency and fails when any one is unavailable', async (t) => {
   const { checkout } = await fixture(t);
   await copyScript(checkout, 'doctor.mjs');

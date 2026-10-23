@@ -1,0 +1,1501 @@
+{
+  "schema": "gemini-model-catalog-read-live-v1",
+  "service": "gemini-web",
+  "operation": "model_list",
+  "recordedAt": "2026-10-06T13:29:37.511371+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-settings-update-20261006",
+  "ownerProbe": {
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "expectedOwnerSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "expectedOwnerSha256AfterRun": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "expectedOwnerImmutable": true,
+    "expectedOwnerPersisted": false
+  },
+  "sourceBeforeImports": {
+    "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+    "implementationFiles": [
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#performModelRead",
+        "sha256": "022feae610562583a7c938c0bd0532691bd376731356a7c0d67a2167d371c0bf"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#readInput",
+        "sha256": "e8e5b9811fd12d9c32e30420d3dc9aca50014534fe1a5aad69cb2e34757e61e8"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#sourceSnapshot",
+        "sha256": "3687c8a82fa29bf5d47eb5219665c95fbacb8afaaf9ac4eae7cd60931bb2d5fe"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-read-once.py#run_model_read",
+        "sha256": "7cc176b49b2d4a4af43314aad8ecf3b7d16b1733fefcf67c6ea8e282a3206a96"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-read-once.py#safe_model_result",
+        "sha256": "d7413515e1817d9f7b08d65187cc3639b7bde72b02f246915690064cbc055afa"
+      },
+      {
+        "path": "src/batch-response.mjs#__module__",
+        "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+      },
+      {
+        "path": "src/cli.mjs#lifecycleReadMetadata",
+        "sha256": "725e91db00a0219359583dd5c5418fb3ba5eb6860a6773421d6f20d68c3d8fc6"
+      },
+      {
+        "path": "src/cli.mjs#runLifecycleReadOnce",
+        "sha256": "1a016f4ddf3003daa502537f76d8e3652436578ffd5faf4e6e15243a5adf4d04"
+      },
+      {
+        "path": "src/client.mjs#listModels",
+        "sha256": "14f369377f1bd960408ef0da6997fd7119d4a7734cda1beed543b79250dcc947"
+      },
+      {
+        "path": "src/client.mjs#read",
+        "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+      },
+      {
+        "path": "src/client.mjs#refreshSession",
+        "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+      },
+      {
+        "path": "src/client.mjs#verifyOwner",
+        "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+      },
+      {
+        "path": "src/constants.mjs#CREDENTIAL_NAME",
+        "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ID",
+        "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ORIGIN",
+        "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+      },
+      {
+        "path": "src/contract.mjs#requireCapturedOperation",
+        "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#bindRpcArgsTemplate",
+        "sha256": "1978ba94754b1180e2e441e9bd2228628f4b0121e985e0c3f2327fa9ca707577"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#buildReadRequest",
+        "sha256": "30c8ac57ea0105396a1f93905320d497ee184e664c63bd23fa9366f90b9219e1"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#computeModelCapacity",
+        "sha256": "588077e9a82f1e6cc9c2d4c4932911a8ce939fdbb92abdfb1575065359cf10c4"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#countRpcPlaceholder",
+        "sha256": "7492b92286e9291d1c1b17feb08ed76e98d6b3cdd805fe8bc48b17713dfa36bc"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#executeReadRpc",
+        "sha256": "c4c45ffb78c91666a60571c43d82456a3061b3ae340f28f0c3b02919693b3ab4"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#fail",
+        "sha256": "ce0c40ed310b548b0038b7a408cff04c5165d2665bd3c60a2f5342612a65f27d"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#GEMINI_MODEL_STATUS_RPC",
+        "sha256": "e9ba9f1a222a3cf035826015a52528aeb01fcabb09d26b33e91102bcdea8b52b"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#HISTORY_PATH",
+        "sha256": "cee6f12463aad50959e4263fc9e262f6c8d552029b82aff630394cfc16ec34c8"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#isRecord",
+        "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#matchesRpcArgsTemplate",
+        "sha256": "b9dee5de9d7e68e189427b4fdccab5550f536b7c37c7f1e0bfa86fd4137fc151"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#MODEL_ID",
+        "sha256": "98aaf0776be20ad7fb1e4733b161262381bd672ab2c6bf95e479ccf1dc646552"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#nextRequestId",
+        "sha256": "23486f89d2df62d34132f61d378e541d87431b23afc957f310c64981f1b42915"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#numberList",
+        "sha256": "698d1422130d92f459fb71d9899f1d6aa82153376235a1d60d24781e8903a3d6"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#parseModel",
+        "sha256": "69b17442714fefcffecc2a2938357af1e032b2ad1a47dbe0ed5a918cf2e9a92f"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#parseModelStatus",
+        "sha256": "c33db6a5a473d1ac94296793c535ebd37b1cc4876abcee5df4c01a666624ed41"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#readModels",
+        "sha256": "d7e469c74d66a88aa4deaa662c192c494ca7d1e083ba482f68a20be3f69e8d8b"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#requireClient",
+        "sha256": "99aec53f9d8fbe8cadfb67268cb2c8ba69521e71b8b418c65953a5a7a8a6e236"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#safeResponseShape",
+        "sha256": "b849ef061fddd204ce87bc1f7a5a6216bb27f56922c52020388e112ecb2321ab"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#toModelName",
+        "sha256": "455d841dbe7d8378b01a5f35fa7fc487d84276bffe1298f67316f8012f5dcbb3"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#verifyOwner",
+        "sha256": "25fe1a770997cb61293c992d29bcb8bee9d52477a0cc8485136487add4cdefe1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+        "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#clearBody",
+        "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+        "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+        "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+        "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+        "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#isPlainObject",
+        "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+        "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#missingContext",
+        "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+        "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+        "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#requiredWizString",
+        "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+      },
+      {
+        "path": "src/http-transport.mjs#cancelResponseBody",
+        "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+      },
+      {
+        "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+        "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+      },
+      {
+        "path": "src/http-transport.mjs#mimeType",
+        "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+      },
+      {
+        "path": "src/http-transport.mjs#readBoundedBody",
+        "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+      },
+      {
+        "path": "src/http-transport.mjs#request",
+        "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+      },
+      {
+        "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+        "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+      },
+      {
+        "path": "src/http-transport.mjs#toBodyBuffer",
+        "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+      },
+      {
+        "path": "src/https-transport.mjs#countHeaderBytes",
+        "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+      },
+      {
+        "path": "src/https-transport.mjs#createHttpsFetch",
+        "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+      },
+      {
+        "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+        "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+      },
+      {
+        "path": "src/https-transport.mjs#incomingHeaders",
+        "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+      },
+      {
+        "path": "src/session.mjs#assertValue",
+        "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+      },
+      {
+        "path": "src/session.mjs#isRecord",
+        "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+      },
+      {
+        "path": "src/session.mjs#makeCookieHeader",
+        "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+      },
+      {
+        "path": "src/session.mjs#readLifecycleReadEnvelopeFromStdin",
+        "sha256": "1d494ac39937b3b05098436062e49b775f8db08207e96b755b27f5b28820dedb"
+      },
+      {
+        "path": "src/session.mjs#validateBatchContext",
+        "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+      },
+      {
+        "path": "src/session.mjs#validateRequestHeaders",
+        "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+      },
+      {
+        "path": "src/session.mjs#validateSessionBundle",
+        "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+      }
+    ],
+    "implementationSetSha256": "76c3afa3d55b15364dd7e936e3db81c793c1dcce55e3f8dfddd3db7509ca3c6d",
+    "sourceScope": {
+      "schema": "gemini-feature-source-scope-v1",
+      "featureId": "model_catalog",
+      "operationNames": [
+        "model_list"
+      ],
+      "authOperation": "identity",
+      "contractScopeSha256": "557df8d2467491cc6fe7109e521937bd0c9307df0a50dbeea7cd269f5c6fe569",
+      "implementationUnits": [
+        {
+          "path": "scripts/gemini-model-catalog-http-once.mjs#performModelRead",
+          "sha256": "022feae610562583a7c938c0bd0532691bd376731356a7c0d67a2167d371c0bf"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-http-once.mjs#readInput",
+          "sha256": "e8e5b9811fd12d9c32e30420d3dc9aca50014534fe1a5aad69cb2e34757e61e8"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-http-once.mjs#sourceSnapshot",
+          "sha256": "3687c8a82fa29bf5d47eb5219665c95fbacb8afaaf9ac4eae7cd60931bb2d5fe"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-read-once.py#run_model_read",
+          "sha256": "7cc176b49b2d4a4af43314aad8ecf3b7d16b1733fefcf67c6ea8e282a3206a96"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-read-once.py#safe_model_result",
+          "sha256": "d7413515e1817d9f7b08d65187cc3639b7bde72b02f246915690064cbc055afa"
+        },
+        {
+          "path": "src/batch-response.mjs#__module__",
+          "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+        },
+        {
+          "path": "src/cli.mjs#lifecycleReadMetadata",
+          "sha256": "725e91db00a0219359583dd5c5418fb3ba5eb6860a6773421d6f20d68c3d8fc6"
+        },
+        {
+          "path": "src/cli.mjs#runLifecycleReadOnce",
+          "sha256": "1a016f4ddf3003daa502537f76d8e3652436578ffd5faf4e6e15243a5adf4d04"
+        },
+        {
+          "path": "src/client.mjs#listModels",
+          "sha256": "14f369377f1bd960408ef0da6997fd7119d4a7734cda1beed543b79250dcc947"
+        },
+        {
+          "path": "src/client.mjs#read",
+          "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+        },
+        {
+          "path": "src/client.mjs#refreshSession",
+          "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+        },
+        {
+          "path": "src/client.mjs#verifyOwner",
+          "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+        },
+        {
+          "path": "src/constants.mjs#CREDENTIAL_NAME",
+          "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ID",
+          "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ORIGIN",
+          "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+        },
+        {
+          "path": "src/contract.mjs#requireCapturedOperation",
+          "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#bindRpcArgsTemplate",
+          "sha256": "1978ba94754b1180e2e441e9bd2228628f4b0121e985e0c3f2327fa9ca707577"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#buildReadRequest",
+          "sha256": "30c8ac57ea0105396a1f93905320d497ee184e664c63bd23fa9366f90b9219e1"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#computeModelCapacity",
+          "sha256": "588077e9a82f1e6cc9c2d4c4932911a8ce939fdbb92abdfb1575065359cf10c4"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#countRpcPlaceholder",
+          "sha256": "7492b92286e9291d1c1b17feb08ed76e98d6b3cdd805fe8bc48b17713dfa36bc"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#executeReadRpc",
+          "sha256": "c4c45ffb78c91666a60571c43d82456a3061b3ae340f28f0c3b02919693b3ab4"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#fail",
+          "sha256": "ce0c40ed310b548b0038b7a408cff04c5165d2665bd3c60a2f5342612a65f27d"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#GEMINI_MODEL_STATUS_RPC",
+          "sha256": "e9ba9f1a222a3cf035826015a52528aeb01fcabb09d26b33e91102bcdea8b52b"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#HISTORY_PATH",
+          "sha256": "cee6f12463aad50959e4263fc9e262f6c8d552029b82aff630394cfc16ec34c8"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#isRecord",
+          "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#matchesRpcArgsTemplate",
+          "sha256": "b9dee5de9d7e68e189427b4fdccab5550f536b7c37c7f1e0bfa86fd4137fc151"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#MODEL_ID",
+          "sha256": "98aaf0776be20ad7fb1e4733b161262381bd672ab2c6bf95e479ccf1dc646552"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#nextRequestId",
+          "sha256": "23486f89d2df62d34132f61d378e541d87431b23afc957f310c64981f1b42915"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#numberList",
+          "sha256": "698d1422130d92f459fb71d9899f1d6aa82153376235a1d60d24781e8903a3d6"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#parseModel",
+          "sha256": "69b17442714fefcffecc2a2938357af1e032b2ad1a47dbe0ed5a918cf2e9a92f"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#parseModelStatus",
+          "sha256": "c33db6a5a473d1ac94296793c535ebd37b1cc4876abcee5df4c01a666624ed41"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#readModels",
+          "sha256": "d7e469c74d66a88aa4deaa662c192c494ca7d1e083ba482f68a20be3f69e8d8b"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#requireClient",
+          "sha256": "99aec53f9d8fbe8cadfb67268cb2c8ba69521e71b8b418c65953a5a7a8a6e236"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#safeResponseShape",
+          "sha256": "b849ef061fddd204ce87bc1f7a5a6216bb27f56922c52020388e112ecb2321ab"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#toModelName",
+          "sha256": "455d841dbe7d8378b01a5f35fa7fc487d84276bffe1298f67316f8012f5dcbb3"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#verifyOwner",
+          "sha256": "25fe1a770997cb61293c992d29bcb8bee9d52477a0cc8485136487add4cdefe1"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+          "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#clearBody",
+          "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+          "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+          "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+          "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+          "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#isPlainObject",
+          "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+          "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#missingContext",
+          "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+          "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+          "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#requiredWizString",
+          "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+        },
+        {
+          "path": "src/http-transport.mjs#cancelResponseBody",
+          "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+        },
+        {
+          "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+          "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+        },
+        {
+          "path": "src/http-transport.mjs#mimeType",
+          "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+        },
+        {
+          "path": "src/http-transport.mjs#readBoundedBody",
+          "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+        },
+        {
+          "path": "src/http-transport.mjs#request",
+          "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+        },
+        {
+          "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+          "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+        },
+        {
+          "path": "src/http-transport.mjs#toBodyBuffer",
+          "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+        },
+        {
+          "path": "src/https-transport.mjs#countHeaderBytes",
+          "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+        },
+        {
+          "path": "src/https-transport.mjs#createHttpsFetch",
+          "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+        },
+        {
+          "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+          "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+        },
+        {
+          "path": "src/https-transport.mjs#incomingHeaders",
+          "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+        },
+        {
+          "path": "src/session.mjs#assertValue",
+          "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+        },
+        {
+          "path": "src/session.mjs#isRecord",
+          "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+        },
+        {
+          "path": "src/session.mjs#makeCookieHeader",
+          "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+        },
+        {
+          "path": "src/session.mjs#readLifecycleReadEnvelopeFromStdin",
+          "sha256": "1d494ac39937b3b05098436062e49b775f8db08207e96b755b27f5b28820dedb"
+        },
+        {
+          "path": "src/session.mjs#validateBatchContext",
+          "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+        },
+        {
+          "path": "src/session.mjs#validateRequestHeaders",
+          "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+        },
+        {
+          "path": "src/session.mjs#validateSessionBundle",
+          "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+        }
+      ],
+      "implementationScopeSha256": "76c3afa3d55b15364dd7e936e3db81c793c1dcce55e3f8dfddd3db7509ca3c6d"
+    }
+  },
+  "sourceAfterRun": {
+    "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+    "implementationFiles": [
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#performModelRead",
+        "sha256": "022feae610562583a7c938c0bd0532691bd376731356a7c0d67a2167d371c0bf"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#readInput",
+        "sha256": "e8e5b9811fd12d9c32e30420d3dc9aca50014534fe1a5aad69cb2e34757e61e8"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-http-once.mjs#sourceSnapshot",
+        "sha256": "3687c8a82fa29bf5d47eb5219665c95fbacb8afaaf9ac4eae7cd60931bb2d5fe"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-read-once.py#run_model_read",
+        "sha256": "7cc176b49b2d4a4af43314aad8ecf3b7d16b1733fefcf67c6ea8e282a3206a96"
+      },
+      {
+        "path": "scripts/gemini-model-catalog-read-once.py#safe_model_result",
+        "sha256": "d7413515e1817d9f7b08d65187cc3639b7bde72b02f246915690064cbc055afa"
+      },
+      {
+        "path": "src/batch-response.mjs#__module__",
+        "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+      },
+      {
+        "path": "src/cli.mjs#lifecycleReadMetadata",
+        "sha256": "725e91db00a0219359583dd5c5418fb3ba5eb6860a6773421d6f20d68c3d8fc6"
+      },
+      {
+        "path": "src/cli.mjs#runLifecycleReadOnce",
+        "sha256": "1a016f4ddf3003daa502537f76d8e3652436578ffd5faf4e6e15243a5adf4d04"
+      },
+      {
+        "path": "src/client.mjs#listModels",
+        "sha256": "14f369377f1bd960408ef0da6997fd7119d4a7734cda1beed543b79250dcc947"
+      },
+      {
+        "path": "src/client.mjs#read",
+        "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+      },
+      {
+        "path": "src/client.mjs#refreshSession",
+        "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+      },
+      {
+        "path": "src/client.mjs#verifyOwner",
+        "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+      },
+      {
+        "path": "src/constants.mjs#CREDENTIAL_NAME",
+        "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ID",
+        "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ORIGIN",
+        "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+      },
+      {
+        "path": "src/contract.mjs#requireCapturedOperation",
+        "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#bindRpcArgsTemplate",
+        "sha256": "1978ba94754b1180e2e441e9bd2228628f4b0121e985e0c3f2327fa9ca707577"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#buildReadRequest",
+        "sha256": "30c8ac57ea0105396a1f93905320d497ee184e664c63bd23fa9366f90b9219e1"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#computeModelCapacity",
+        "sha256": "588077e9a82f1e6cc9c2d4c4932911a8ce939fdbb92abdfb1575065359cf10c4"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#countRpcPlaceholder",
+        "sha256": "7492b92286e9291d1c1b17feb08ed76e98d6b3cdd805fe8bc48b17713dfa36bc"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#executeReadRpc",
+        "sha256": "c4c45ffb78c91666a60571c43d82456a3061b3ae340f28f0c3b02919693b3ab4"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#fail",
+        "sha256": "ce0c40ed310b548b0038b7a408cff04c5165d2665bd3c60a2f5342612a65f27d"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#GEMINI_MODEL_STATUS_RPC",
+        "sha256": "e9ba9f1a222a3cf035826015a52528aeb01fcabb09d26b33e91102bcdea8b52b"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#HISTORY_PATH",
+        "sha256": "cee6f12463aad50959e4263fc9e262f6c8d552029b82aff630394cfc16ec34c8"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#isRecord",
+        "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#matchesRpcArgsTemplate",
+        "sha256": "b9dee5de9d7e68e189427b4fdccab5550f536b7c37c7f1e0bfa86fd4137fc151"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#MODEL_ID",
+        "sha256": "98aaf0776be20ad7fb1e4733b161262381bd672ab2c6bf95e479ccf1dc646552"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#nextRequestId",
+        "sha256": "23486f89d2df62d34132f61d378e541d87431b23afc957f310c64981f1b42915"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#numberList",
+        "sha256": "698d1422130d92f459fb71d9899f1d6aa82153376235a1d60d24781e8903a3d6"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#parseModel",
+        "sha256": "69b17442714fefcffecc2a2938357af1e032b2ad1a47dbe0ed5a918cf2e9a92f"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#parseModelStatus",
+        "sha256": "c33db6a5a473d1ac94296793c535ebd37b1cc4876abcee5df4c01a666624ed41"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#readModels",
+        "sha256": "d7e469c74d66a88aa4deaa662c192c494ca7d1e083ba482f68a20be3f69e8d8b"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#requireClient",
+        "sha256": "99aec53f9d8fbe8cadfb67268cb2c8ba69521e71b8b418c65953a5a7a8a6e236"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#safeResponseShape",
+        "sha256": "b849ef061fddd204ce87bc1f7a5a6216bb27f56922c52020388e112ecb2321ab"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#toModelName",
+        "sha256": "455d841dbe7d8378b01a5f35fa7fc487d84276bffe1298f67316f8012f5dcbb3"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs#verifyOwner",
+        "sha256": "25fe1a770997cb61293c992d29bcb8bee9d52477a0cc8485136487add4cdefe1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+        "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#clearBody",
+        "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+        "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+        "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+        "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+        "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#isPlainObject",
+        "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+        "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#missingContext",
+        "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+        "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+        "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#requiredWizString",
+        "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+      },
+      {
+        "path": "src/http-transport.mjs#cancelResponseBody",
+        "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+      },
+      {
+        "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+        "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+      },
+      {
+        "path": "src/http-transport.mjs#mimeType",
+        "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+      },
+      {
+        "path": "src/http-transport.mjs#readBoundedBody",
+        "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+      },
+      {
+        "path": "src/http-transport.mjs#request",
+        "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+      },
+      {
+        "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+        "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+      },
+      {
+        "path": "src/http-transport.mjs#toBodyBuffer",
+        "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+      },
+      {
+        "path": "src/https-transport.mjs#countHeaderBytes",
+        "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+      },
+      {
+        "path": "src/https-transport.mjs#createHttpsFetch",
+        "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+      },
+      {
+        "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+        "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+      },
+      {
+        "path": "src/https-transport.mjs#incomingHeaders",
+        "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+      },
+      {
+        "path": "src/session.mjs#assertValue",
+        "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+      },
+      {
+        "path": "src/session.mjs#isRecord",
+        "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+      },
+      {
+        "path": "src/session.mjs#makeCookieHeader",
+        "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+      },
+      {
+        "path": "src/session.mjs#readLifecycleReadEnvelopeFromStdin",
+        "sha256": "1d494ac39937b3b05098436062e49b775f8db08207e96b755b27f5b28820dedb"
+      },
+      {
+        "path": "src/session.mjs#validateBatchContext",
+        "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+      },
+      {
+        "path": "src/session.mjs#validateRequestHeaders",
+        "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+      },
+      {
+        "path": "src/session.mjs#validateSessionBundle",
+        "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+      }
+    ],
+    "implementationSetSha256": "76c3afa3d55b15364dd7e936e3db81c793c1dcce55e3f8dfddd3db7509ca3c6d",
+    "sourceScope": {
+      "schema": "gemini-feature-source-scope-v1",
+      "featureId": "model_catalog",
+      "operationNames": [
+        "model_list"
+      ],
+      "authOperation": "identity",
+      "contractScopeSha256": "557df8d2467491cc6fe7109e521937bd0c9307df0a50dbeea7cd269f5c6fe569",
+      "implementationUnits": [
+        {
+          "path": "scripts/gemini-model-catalog-http-once.mjs#performModelRead",
+          "sha256": "022feae610562583a7c938c0bd0532691bd376731356a7c0d67a2167d371c0bf"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-http-once.mjs#readInput",
+          "sha256": "e8e5b9811fd12d9c32e30420d3dc9aca50014534fe1a5aad69cb2e34757e61e8"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-http-once.mjs#sourceSnapshot",
+          "sha256": "3687c8a82fa29bf5d47eb5219665c95fbacb8afaaf9ac4eae7cd60931bb2d5fe"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-read-once.py#run_model_read",
+          "sha256": "7cc176b49b2d4a4af43314aad8ecf3b7d16b1733fefcf67c6ea8e282a3206a96"
+        },
+        {
+          "path": "scripts/gemini-model-catalog-read-once.py#safe_model_result",
+          "sha256": "d7413515e1817d9f7b08d65187cc3639b7bde72b02f246915690064cbc055afa"
+        },
+        {
+          "path": "src/batch-response.mjs#__module__",
+          "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+        },
+        {
+          "path": "src/cli.mjs#lifecycleReadMetadata",
+          "sha256": "725e91db00a0219359583dd5c5418fb3ba5eb6860a6773421d6f20d68c3d8fc6"
+        },
+        {
+          "path": "src/cli.mjs#runLifecycleReadOnce",
+          "sha256": "1a016f4ddf3003daa502537f76d8e3652436578ffd5faf4e6e15243a5adf4d04"
+        },
+        {
+          "path": "src/client.mjs#listModels",
+          "sha256": "14f369377f1bd960408ef0da6997fd7119d4a7734cda1beed543b79250dcc947"
+        },
+        {
+          "path": "src/client.mjs#read",
+          "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+        },
+        {
+          "path": "src/client.mjs#refreshSession",
+          "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+        },
+        {
+          "path": "src/client.mjs#verifyOwner",
+          "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+        },
+        {
+          "path": "src/constants.mjs#CREDENTIAL_NAME",
+          "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ID",
+          "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ORIGIN",
+          "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+        },
+        {
+          "path": "src/contract.mjs#requireCapturedOperation",
+          "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#bindRpcArgsTemplate",
+          "sha256": "1978ba94754b1180e2e441e9bd2228628f4b0121e985e0c3f2327fa9ca707577"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#buildReadRequest",
+          "sha256": "30c8ac57ea0105396a1f93905320d497ee184e664c63bd23fa9366f90b9219e1"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#computeModelCapacity",
+          "sha256": "588077e9a82f1e6cc9c2d4c4932911a8ce939fdbb92abdfb1575065359cf10c4"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#countRpcPlaceholder",
+          "sha256": "7492b92286e9291d1c1b17feb08ed76e98d6b3cdd805fe8bc48b17713dfa36bc"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#executeReadRpc",
+          "sha256": "c4c45ffb78c91666a60571c43d82456a3061b3ae340f28f0c3b02919693b3ab4"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#fail",
+          "sha256": "ce0c40ed310b548b0038b7a408cff04c5165d2665bd3c60a2f5342612a65f27d"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#GEMINI_MODEL_STATUS_RPC",
+          "sha256": "e9ba9f1a222a3cf035826015a52528aeb01fcabb09d26b33e91102bcdea8b52b"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#HISTORY_PATH",
+          "sha256": "cee6f12463aad50959e4263fc9e262f6c8d552029b82aff630394cfc16ec34c8"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#isRecord",
+          "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#matchesRpcArgsTemplate",
+          "sha256": "b9dee5de9d7e68e189427b4fdccab5550f536b7c37c7f1e0bfa86fd4137fc151"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#MODEL_ID",
+          "sha256": "98aaf0776be20ad7fb1e4733b161262381bd672ab2c6bf95e479ccf1dc646552"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#nextRequestId",
+          "sha256": "23486f89d2df62d34132f61d378e541d87431b23afc957f310c64981f1b42915"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#numberList",
+          "sha256": "698d1422130d92f459fb71d9899f1d6aa82153376235a1d60d24781e8903a3d6"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#parseModel",
+          "sha256": "69b17442714fefcffecc2a2938357af1e032b2ad1a47dbe0ed5a918cf2e9a92f"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#parseModelStatus",
+          "sha256": "c33db6a5a473d1ac94296793c535ebd37b1cc4876abcee5df4c01a666624ed41"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#readModels",
+          "sha256": "d7e469c74d66a88aa4deaa662c192c494ca7d1e083ba482f68a20be3f69e8d8b"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#requireClient",
+          "sha256": "99aec53f9d8fbe8cadfb67268cb2c8ba69521e71b8b418c65953a5a7a8a6e236"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#safeResponseShape",
+          "sha256": "b849ef061fddd204ce87bc1f7a5a6216bb27f56922c52020388e112ecb2321ab"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#toModelName",
+          "sha256": "455d841dbe7d8378b01a5f35fa7fc487d84276bffe1298f67316f8012f5dcbb3"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#verifyOwner",
+          "sha256": "25fe1a770997cb61293c992d29bcb8bee9d52477a0cc8485136487add4cdefe1"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+          "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#clearBody",
+          "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+          "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+          "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+          "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+          "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#isPlainObject",
+          "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+          "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#missingContext",
+          "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+          "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+          "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#requiredWizString",
+          "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+        },
+        {
+          "path": "src/http-transport.mjs#cancelResponseBody",
+          "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+        },
+        {
+          "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+          "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+        },
+        {
+          "path": "src/http-transport.mjs#mimeType",
+          "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+        },
+        {
+          "path": "src/http-transport.mjs#readBoundedBody",
+          "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+        },
+        {
+          "path": "src/http-transport.mjs#request",
+          "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+        },
+        {
+          "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+          "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+        },
+        {
+          "path": "src/http-transport.mjs#toBodyBuffer",
+          "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+        },
+        {
+          "path": "src/https-transport.mjs#countHeaderBytes",
+          "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+        },
+        {
+          "path": "src/https-transport.mjs#createHttpsFetch",
+          "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+        },
+        {
+          "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+          "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+        },
+        {
+          "path": "src/https-transport.mjs#incomingHeaders",
+          "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+        },
+        {
+          "path": "src/session.mjs#assertValue",
+          "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+        },
+        {
+          "path": "src/session.mjs#isRecord",
+          "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+        },
+        {
+          "path": "src/session.mjs#makeCookieHeader",
+          "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+        },
+        {
+          "path": "src/session.mjs#readLifecycleReadEnvelopeFromStdin",
+          "sha256": "1d494ac39937b3b05098436062e49b775f8db08207e96b755b27f5b28820dedb"
+        },
+        {
+          "path": "src/session.mjs#validateBatchContext",
+          "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+        },
+        {
+          "path": "src/session.mjs#validateRequestHeaders",
+          "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+        },
+        {
+          "path": "src/session.mjs#validateSessionBundle",
+          "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+        }
+      ],
+      "implementationScopeSha256": "76c3afa3d55b15364dd7e936e3db81c793c1dcce55e3f8dfddd3db7509ca3c6d"
+    }
+  },
+  "sourceSnapshotStable": true,
+  "identitySourceBeforeImports": {
+    "schema": "gemini-feature-source-scope-v1",
+    "featureId": "identity",
+    "operationNames": [
+      "identity"
+    ],
+    "authOperation": "identity",
+    "contractScopeSha256": "09a588ee41a57496011ef64b9fccfa328c14147a8bfc86e0ab8d5a48507f7ed2",
+    "implementationUnits": [
+      {
+        "path": "src/client.mjs#read",
+        "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+      },
+      {
+        "path": "src/client.mjs#refreshSession",
+        "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+      },
+      {
+        "path": "src/client.mjs#verifyOwner",
+        "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+      },
+      {
+        "path": "src/constants.mjs#CREDENTIAL_NAME",
+        "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ID",
+        "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ORIGIN",
+        "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+      },
+      {
+        "path": "src/contract.mjs#requireCapturedOperation",
+        "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+        "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#clearBody",
+        "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+        "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+        "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+        "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+        "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#isPlainObject",
+        "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+        "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#missingContext",
+        "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+        "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+        "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#requiredWizString",
+        "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+      },
+      {
+        "path": "src/http-transport.mjs#cancelResponseBody",
+        "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+      },
+      {
+        "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+        "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+      },
+      {
+        "path": "src/http-transport.mjs#mimeType",
+        "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+      },
+      {
+        "path": "src/http-transport.mjs#readBoundedBody",
+        "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+      },
+      {
+        "path": "src/http-transport.mjs#request",
+        "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+      },
+      {
+        "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+        "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+      },
+      {
+        "path": "src/http-transport.mjs#toBodyBuffer",
+        "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+      },
+      {
+        "path": "src/https-transport.mjs#countHeaderBytes",
+        "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+      },
+      {
+        "path": "src/https-transport.mjs#createHttpsFetch",
+        "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+      },
+      {
+        "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+        "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+      },
+      {
+        "path": "src/https-transport.mjs#incomingHeaders",
+        "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+      },
+      {
+        "path": "src/session.mjs#assertValue",
+        "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+      },
+      {
+        "path": "src/session.mjs#isRecord",
+        "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+      },
+      {
+        "path": "src/session.mjs#makeCookieHeader",
+        "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+      },
+      {
+        "path": "src/session.mjs#validateBatchContext",
+        "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+      },
+      {
+        "path": "src/session.mjs#validateRequestHeaders",
+        "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+      },
+      {
+        "path": "src/session.mjs#validateSessionBundle",
+        "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+      }
+    ],
+    "implementationScopeSha256": "785eadb2325c7bb332eafb7b09e847fae26f37f7e9982223f731f21204fb9152"
+  },
+  "identitySourceAfterRun": {
+    "schema": "gemini-feature-source-scope-v1",
+    "featureId": "identity",
+    "operationNames": [
+      "identity"
+    ],
+    "authOperation": "identity",
+    "contractScopeSha256": "09a588ee41a57496011ef64b9fccfa328c14147a8bfc86e0ab8d5a48507f7ed2",
+    "implementationUnits": [
+      {
+        "path": "src/client.mjs#read",
+        "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+      },
+      {
+        "path": "src/client.mjs#refreshSession",
+        "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+      },
+      {
+        "path": "src/client.mjs#verifyOwner",
+        "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+      },
+      {
+        "path": "src/constants.mjs#CREDENTIAL_NAME",
+        "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ID",
+        "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+      },
+      {
+        "path": "src/constants.mjs#SERVICE_ORIGIN",
+        "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+      },
+      {
+        "path": "src/contract.mjs#requireCapturedOperation",
+        "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+        "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#clearBody",
+        "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+        "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+        "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+        "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+        "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#isPlainObject",
+        "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+        "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#missingContext",
+        "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+        "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+        "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs#requiredWizString",
+        "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+      },
+      {
+        "path": "src/http-transport.mjs#cancelResponseBody",
+        "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+      },
+      {
+        "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+        "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+      },
+      {
+        "path": "src/http-transport.mjs#mimeType",
+        "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+      },
+      {
+        "path": "src/http-transport.mjs#readBoundedBody",
+        "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+      },
+      {
+        "path": "src/http-transport.mjs#request",
+        "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+      },
+      {
+        "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+        "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+      },
+      {
+        "path": "src/http-transport.mjs#toBodyBuffer",
+        "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+      },
+      {
+        "path": "src/https-transport.mjs#countHeaderBytes",
+        "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+      },
+      {
+        "path": "src/https-transport.mjs#createHttpsFetch",
+        "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+      },
+      {
+        "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+        "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+      },
+      {
+        "path": "src/https-transport.mjs#incomingHeaders",
+        "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+      },
+      {
+        "path": "src/session.mjs#assertValue",
+        "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+      },
+      {
+        "path": "src/session.mjs#isRecord",
+        "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+      },
+      {
+        "path": "src/session.mjs#makeCookieHeader",
+        "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+      },
+      {
+        "path": "src/session.mjs#validateBatchContext",
+        "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+      },
+      {
+        "path": "src/session.mjs#validateRequestHeaders",
+        "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+      },
+      {
+        "path": "src/session.mjs#validateSessionBundle",
+        "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+      }
+    ],
+    "implementationScopeSha256": "785eadb2325c7bb332eafb7b09e847fae26f37f7e9982223f731f21204fb9152"
+  },
+  "httpStatus": 200,
+  "contentType": "application/json",
+  "responseBytes": 13244,
+  "responseSha256": "01d6438f24cfae36ebbf6c496010d6996e930147a4cc3da30a56d46493774b26",
+  "rpcId": "otAQ7b",
+  "request": {
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "headerNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "formFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+    "bodyBytes": 122,
+    "valuesPersisted": false
+  },
+  "modelCount": 3,
+  "accountStatusPersisted": false,
+  "modelIdsOrNamesPersisted": false,
+  "canonicalEvidence": {
+    "receiptPath": "verification/features/model_catalog.json",
+    "receiptSha256": "d891dda4b9044a0904bfebcc2d6b2634923af7bcb77ecd734358c65949e70221",
+    "modelPairPath": "verification/feature-evidence/model_catalog--model_list--available.json",
+    "modelPairSha256": "821f26414a00b37bf53086c4f44c1877ecbb593839d50927c4582716f14c3e0d",
+    "identityPairPath": "verification/feature-evidence/identity--identity--model_catalog_owner.json",
+    "identityPairSha256": "11064c78e3279d15f0ce3404bfcbd2d74945d2f4791207aa10f68d0e04999215",
+    "archivedPriorEvidence": [
+      "verification/one-shot/gemini-model-before-refresh-identity--identity--model_catalog_owner.json-1a647e7cdfda.json",
+      "verification/one-shot/gemini-model-before-refresh-model_catalog--model_list--available.json-ef06aad0ae07.json",
+      "verification/one-shot/gemini-model-before-refresh-model_catalog.json-1eb002511ce0.json"
+    ]
+  },
+  "browserCapture": {
+    "startupPreferenceWritesAborted": 9,
+    "startupPreferenceAbortAcknowledged": 9,
+    "browserBusinessWrites": 0
+  },
+  "persistence": {
+    "expectedOwnerPersisted": false,
+    "emailPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "modelIdsPersisted": false,
+    "modelNamesPersisted": false,
+    "requestValuesPersisted": false,
+    "responseValuesPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false
+  }
+}

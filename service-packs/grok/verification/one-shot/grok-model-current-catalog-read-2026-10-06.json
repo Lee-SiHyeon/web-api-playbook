@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "evidenceClass": "direct_private_model_catalog_read",
+  "featureId": "models.private-selection",
+  "operationId": "models.modes",
+  "recordedAt": "2026-10-06T13:42:51Z",
+  "execution": "main_cli_owner_bound_read",
+  "liveReplay": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "pageRole": "codex-grok-model-current-validation-20261006",
+  "request": {
+    "method": "POST",
+    "path": "/rest/modes",
+    "bodyFieldNames": ["locale"],
+    "serverPreferenceWrite": false
+  },
+  "response": {
+    "status": 200,
+    "contentType": "application/json",
+    "responseBytes": 1110,
+    "defaultModeId": "auto",
+    "choiceCount": 5,
+    "choices": [
+      { "modeId": "auto", "title": "Auto", "availability": "unknown" },
+      { "modeId": "fast", "title": "Fast", "availability": "unknown" },
+      { "modeId": "expert", "title": "Expert", "availability": "unknown" },
+      { "modeId": "heavy", "title": "Heavy", "availability": "unknown", "minimumSubscriptionTier": "TIER_SUPERGROK_HEAVY" },
+      { "modeId": "build", "title": "Build", "availability": "unknown", "badgeText": "Beta" }
+    ]
+  },
+  "selectionState": {
+    "processMemoryModeStoreSelectedModeId": null,
+    "processSelectionSource": "catalog_default",
+    "normalUiModeIdObservedSeparately": "auto",
+    "normalUiVisibleModeTitle": "Auto",
+    "normalUiStoredSelectionMatched": true,
+    "uiSelectionChangedByThisRead": false
+  },
+  "browserGuard": {
+    "httpMutationRequestsBlocked": 23,
+    "websocketFramesForwarded": 0,
+    "businessFramesDelivered": 0,
+    "sharedBrowserOrContextClosed": false
+  },
+  "sourceBinding": {
+    "firstPartyModeStoreSourceVerified": true,
+    "firstPartyChatCallsiteSourceVerified": true,
+    "firstPartyGatewaySessionSourceVerified": true,
+    "clientCodeSnapshotCapturedAtInvocation": false,
+    "sourceSnapshotStatus": "not_recorded_for_this_catalog_read"
+  },
+  "persistenceAssertions": {
+    "ownerIdentityPersisted": false,
+    "cookiesPersisted": false,
+    "requestBodyPersisted": false,
+    "responseBodyPersisted": false,
+    "conversationIdsPersisted": false,
+    "responseIdsPersisted": false,
+    "businessTextPersisted": false
+  }
+}

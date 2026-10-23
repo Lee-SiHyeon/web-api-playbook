@@ -1,0 +1,311 @@
+{
+  "verificationMode": "actual_anonymous_http_reads",
+  "observedOn": "2026-09-30",
+  "runtime": "Node.js 24",
+  "browserCaptureObserved": false,
+  "sourceDiscovery": "document_and_client_js_analysis",
+  "scope": "Selected public read operations; price snapshots are not checkout quotes",
+  "flightConditions": {
+    "international": {
+      "departure": "ICN",
+      "arrival": "NRT",
+      "departureDate": "2026-10-15",
+      "returnDate": "2026-10-20",
+      "adult": 2
+    },
+    "domestic": {
+      "departure": "GMP",
+      "arrival": "CJU",
+      "departureDate": "2026-10-15",
+      "returnDate": "2026-10-20",
+      "adult": 1
+    }
+  },
+  "hotelRateConditions": {
+    "hotelId": "11583218",
+    "checkIn": "2026-10-15",
+    "checkOut": "2026-10-20",
+    "adult": 2
+  },
+  "shopping": [
+    {
+      "operation": "integrated-search",
+      "ok": true,
+      "count": 3,
+      "pricedCount": 3,
+      "receipt": {
+        "method": "GET",
+        "origin": "https://search.naver.com",
+        "path": "/search.naver",
+        "queryFields": [
+          "where",
+          "query"
+        ],
+        "bodyFields": [],
+        "httpStatus": 200,
+        "responseContentType": "text/html; charset=UTF-8",
+        "responseDate": "Wed, 30 Sep 2026 01:07:13 GMT",
+        "responseBytes": 1439853,
+        "responseSha256": "ba00581fc555c53115f75167fa9b6e4c75513bb3f5d8b31e25b00d1ea58cf496",
+        "checkedAt": "2026-09-30T01:07:14.044Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    },
+    {
+      "operation": "feed",
+      "ok": true,
+      "count": 16,
+      "pricedCount": 6,
+      "receipt": {
+        "method": "GET",
+        "origin": "https://shopsquare.naver.com",
+        "path": "/promotion",
+        "queryFields": [],
+        "bodyFields": [],
+        "httpStatus": 200,
+        "responseContentType": "text/x-component",
+        "responseDate": "Wed, 30 Sep 2026 01:08:30 GMT",
+        "responseBytes": 34347,
+        "responseSha256": "d31310b36922aa46958c59156ecc9dba4b06759646291d81c07c69647b3831ab",
+        "checkedAt": "2026-09-30T01:08:30.476Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    }
+  ],
+  "travel": [
+    {
+      "operation": "flight-international",
+      "ok": true,
+      "count": 200,
+      "totalCount": 200,
+      "streamCompleted": true,
+      "fullyResolved": 200,
+      "priceScope": "per_adult",
+      "pricedCount": 200,
+      "knownAirportsCount": 200,
+      "knownAirlineCount": 200,
+      "receipt": {
+        "method": "POST",
+        "origin": "https://flight-api.naver.com",
+        "path": "/flight/international/searchFlights",
+        "queryFields": [],
+        "bodyFields": [
+          "tripType",
+          "device",
+          "seatClass",
+          "adultCount",
+          "childCount",
+          "infantCount",
+          "isNonstop",
+          "openReturnDays",
+          "itineraries",
+          "initialRequest"
+        ],
+        "httpStatus": 201,
+        "responseContentType": "text/event-stream",
+        "responseDate": "Wed, 30 Sep 2026 01:28:53 GMT",
+        "responseBytes": 2602113,
+        "responseSha256": "d036cf9ed350506618a6442182fb05a248c5d5cad8abac360f39befc047915d3",
+        "checkedAt": "2026-09-30T01:28:54.697Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    },
+    {
+      "operation": "flight-domestic",
+      "ok": true,
+      "count": 24,
+      "totalCount": 24,
+      "streamCompleted": true,
+      "fullyResolved": 0,
+      "priceScope": "per_leg",
+      "pricedCount": 24,
+      "knownAirportsCount": 24,
+      "knownAirlineCount": 24,
+      "receipt": {
+        "method": "POST",
+        "origin": "https://flight-api.naver.com",
+        "path": "/flight/domestic/searchFlights",
+        "queryFields": [],
+        "bodyFields": [
+          "type",
+          "device",
+          "fareType",
+          "person",
+          "tripType",
+          "itineraries"
+        ],
+        "httpStatus": 201,
+        "responseContentType": "text/event-stream",
+        "responseDate": "Wed, 30 Sep 2026 01:28:56 GMT",
+        "responseBytes": 246853,
+        "responseSha256": "e1f8223711323fbb4e7bf5bf6b156554efbdb1bb13340fbd80d34ca6a6e2d61d",
+        "checkedAt": "2026-09-30T01:28:58.157Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    },
+    {
+      "operation": "hotel-search",
+      "ok": true,
+      "count": 3,
+      "totalCount": 2094,
+      "streamCompleted": null,
+      "fullyResolved": 0,
+      "priceScope": "indicative_hotel_min_rate_without_dates",
+      "pricedCount": 3,
+      "knownAirportsCount": 0,
+      "knownAirlineCount": 0,
+      "receipt": {
+        "method": "POST",
+        "origin": "https://hermes-hotel-svc-api.naver.com",
+        "path": "/graphql",
+        "queryFields": [],
+        "bodyFields": [
+          "query",
+          "variables"
+        ],
+        "httpStatus": 200,
+        "responseContentType": "application/json; charset=utf-8",
+        "responseDate": "Wed, 30 Sep 2026 01:28:59 GMT",
+        "responseBytes": 4926,
+        "responseSha256": "369ece50e137d9a6811ae76e5f8126358c0dfaf14dc9a2dd9eb61986220c04bc",
+        "checkedAt": "2026-09-30T01:28:59.440Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    },
+    {
+      "operation": "hotel-rates",
+      "ok": true,
+      "count": 7,
+      "totalCount": 7,
+      "streamCompleted": null,
+      "fullyResolved": 0,
+      "priceScope": "quoted_listing_rate",
+      "pricedCount": 7,
+      "knownAirportsCount": 0,
+      "knownAirlineCount": 0,
+      "receipt": {
+        "method": "POST",
+        "origin": "https://hermes-hotel-svc-api.naver.com",
+        "path": "/graphql",
+        "queryFields": [],
+        "bodyFields": [
+          "query",
+          "variables"
+        ],
+        "httpStatus": 200,
+        "responseContentType": "application/json; charset=utf-8",
+        "responseDate": "Wed, 30 Sep 2026 01:29:02 GMT",
+        "responseBytes": 3523,
+        "responseSha256": "274c025752160d203d4c638fe2eb3496cb81e594fc4ca366a202215582ea3077",
+        "checkedAt": "2026-09-30T01:29:02.463Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    },
+    {
+      "operation": "travel-products",
+      "ok": true,
+      "count": 2,
+      "totalCount": null,
+      "streamCompleted": null,
+      "fullyResolved": 0,
+      "priceScope": "indicative_starting_price",
+      "pricedCount": 2,
+      "knownAirportsCount": 0,
+      "knownAirlineCount": 0,
+      "receipt": {
+        "method": "GET",
+        "origin": "https://travel.naver.com",
+        "path": "/domestic",
+        "queryFields": [],
+        "bodyFields": [],
+        "httpStatus": 200,
+        "responseContentType": "text/html; charset=utf-8",
+        "responseDate": "Wed, 30 Sep 2026 01:29:04 GMT",
+        "responseBytes": 546038,
+        "responseSha256": "db1944747eccd603a0d495ead68114fb47ab016345319da7df44e4e637bf7971",
+        "checkedAt": "2026-09-30T01:29:04.215Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    },
+    {
+      "operation": "travel-autocomplete",
+      "ok": true,
+      "count": 3,
+      "totalCount": 3,
+      "streamCompleted": null,
+      "fullyResolved": 0,
+      "priceScope": null,
+      "pricedCount": 0,
+      "knownAirportsCount": 0,
+      "knownAirlineCount": 0,
+      "receipt": {
+        "method": "POST",
+        "origin": "https://travelsearch-api.naver.com",
+        "path": "/graphql",
+        "queryFields": [],
+        "bodyFields": [
+          "query",
+          "variables"
+        ],
+        "httpStatus": 200,
+        "responseContentType": "application/json; charset=utf-8",
+        "responseDate": "Wed, 30 Sep 2026 01:29:05 GMT",
+        "responseBytes": 293,
+        "responseSha256": "2812a007447b5e01b3b0973bf528a5783ece365789499e51d943b128819f7e63",
+        "checkedAt": "2026-09-30T01:29:05.395Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    },
+    {
+      "operation": "flight-cards",
+      "ok": true,
+      "count": 65,
+      "totalCount": 65,
+      "streamCompleted": null,
+      "fullyResolved": 0,
+      "priceScope": null,
+      "pricedCount": 0,
+      "knownAirportsCount": 0,
+      "knownAirlineCount": 0,
+      "receipt": {
+        "method": "POST",
+        "origin": "https://flight-api.naver.com",
+        "path": "/graphql",
+        "queryFields": [],
+        "bodyFields": [
+          "query"
+        ],
+        "httpStatus": 200,
+        "responseContentType": "application/json; charset=utf-8",
+        "responseDate": "Wed, 30 Sep 2026 01:29:06 GMT",
+        "responseBytes": 7216,
+        "responseSha256": "f5fbebd1648a8c26dc3b45bc318e4910475ac879a2f3ebefb0efd12d966c534f",
+        "checkedAt": "2026-09-30T01:29:06.587Z",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "transport": "anonymous_native_fetch"
+      }
+    }
+  ],
+  "sourceHashes": {
+    "adapters/naver-travel.mjs": "72b51cfb5df8f4baf45fa62998660c9e61176ac54cef28fd661a0b104748ddc4",
+    "adapters/naver-shopping.mjs": "0c2b3edaf426a551f6ff6ab8e411c7617aeb7ec1b3f1433567f8f2e645532792",
+    "adapters/naver-price-observations.mjs": "e72eea820fd68e5e66607dc7fc68b422b6305bd7eb14ea670f0dcdfd10f37f5a"
+  }
+}

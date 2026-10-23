@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "service": "chatgpt-web",
+  "scope": "temporary disposable DPAPI store only",
+  "originalCredentialStoreTouched": false,
+  "credentialValuesRead": false,
+  "observedAtUtc": "2026-10-04",
+  "processWrapper": {
+    "timeoutMs": 20000,
+    "regressions": {
+      "unusedStdinClosesAtEof": "passed",
+      "inputPipeClosesAtEof": "passed",
+      "nonzeroExitIsClassified": "passed",
+      "hungChildReturnsWithinTimeout": "passed",
+      "passed": 4,
+      "failed": 0
+    }
+  },
+  "powerShellObservations": [
+    {
+      "attempt": 1,
+      "boundMs": 8000,
+      "result": "timeout_before_first_helper_stage_marker",
+      "interpretation": "cold startup or early initialization remains possible"
+    },
+    {
+      "attempt": 2,
+      "boundMs": 8000,
+      "result": "timeout_after_acl_write_stage_marker",
+      "interpretation": "the helper reached the SetAccessControl call boundary; completion was not observed"
+    },
+    {
+      "attempt": 3,
+      "elapsedMs": 630,
+      "result": "disposable_status_passed"
+    }
+  ],
+  "disposableIntegration": {
+    "operation": "first status call",
+    "boundMs": 20000,
+    "result": "NATIVE_HELPER_TIMEOUT",
+    "dpapiWriteReached": false,
+    "aclOptimizationShipped": false,
+    "boundaryVerified": false
+  },
+  "validation": {
+    "defaultTestSuite": { "passed": 28, "failed": 0, "skipped": 1 },
+    "lint": "passed",
+    "diffCheck": "passed"
+  }
+}

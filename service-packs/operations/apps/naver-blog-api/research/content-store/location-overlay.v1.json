@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "location-overlay",
+  "origin": "owner 2026-09-29: \"지금 어디를 걷고있는지도 표현 가능 온톨로지가 있나 ? 어울려야할텐데\", \"위치표현 어디갔음?\"",
+  "renderer": "Codex/2026-09-28/gods-eye-test/loc/render_loc.py (nameplate_frames, bridge_frames)",
+  "sources": {
+    "talkcraft_map_route_pin": { "url": "https://github.com/Vincentwei1021/video-talkcraft/blob/HEAD/references/cards/map-route-pin.md", "stars": 1277, "rule": "Common in Johnny Harris, Wendover, LEMMiNO, Half as Interesting. Abstract coastline base map (no real map screenshots: noise and copyright risk); origin pin lights first; one dashed Bezier leg at a time, grow 1.1 s power1.inOut (0.8–1.5 s); pin slams 60 px in 0.25 s power2.in, squash 1.3/0.7, back.out(3) rebound 0.28 s; dust ring 0.2→1.6 over 0.45 s; label slides x −14→0 in 0.2 s; 0.4 s pause between legs." },
+    "talkcraft_lower_third": { "url": "https://github.com/Vincentwei1021/video-talkcraft/blob/HEAD/gallery/i18n/en/lower-third-nameplate.md", "stars": 1277, "rule": "Bar scaleX 0→1 0.3 s power4.out → name clip reveal 0.25 s starting at 70 % of the bar → subtitle +0.15 s; hold 3–5 s; reverse exit ≤0.5 s (subtitle, name, bar last); saturated bar, shadowed text; never under the caption zone; one line ≤ 12 chars." },
+    "natural_earth": { "url": "https://www.naturalearthdata.com/", "rule": "Coastlines from ne_10m_admin_0_countries (public domain)." },
+    "nominatim": { "url": "https://operations.osmfoundation.org/policies/nominatim/", "rule": "Place coordinates and district/city from OSM Nominatim (ODbL); ≤1 request/s with an identifying UA; attribute OpenStreetMap." }
+  },
+  "elements": {
+    "nameplate": { "when": "every shot of a real place", "content": "📍 place name / DAY n · district", "position": "upper left, above the AI label row, away from subtitles", "source": "talkcraft_lower_third" },
+    "day_bridge": { "when": "between shots whose day label changes", "content": "abstract map, route from previous place to next, pin + label, day header", "source": "talkcraft_map_route_pin" }
+  },
+  "placeRules": [
+    { "rule": "Every place must be in the article's itinerary for this package (quote the sentence).", "source": "narration.mjs EVIDENCE check (2026-09-29 Hong Kong night market slip)" },
+    { "rule": "Verify the district when the first geocoder hit sits on a boundary (시먼딩 → 완화구, not 중정구); use the city when the village name is too fine or renders badly (공항 → 타오위안시).", "source": "nominatim results 2026-09-29" }
+  ]
+}

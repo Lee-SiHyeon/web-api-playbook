@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T07:52:26.812Z",
+  "operation": "attachment.upload.presigned",
+  "state": "needs_review",
+  "ownerVerified": true,
+  "executionMode": {
+    "requestInput": "normal_browser_capture_paused",
+    "businessRequest": "direct_http",
+    "readback": "direct_http"
+  },
+  "sourcePolicy": {
+    "sourceFeature": "web_file_upload",
+    "v2Enabled": true,
+    "directToHttp": true,
+    "directUploadMaxSizeBytes": 16777216,
+    "maxUploadFileSizeBytes": 157286400,
+    "multipartSupported": true,
+    "multipartConcurrency": 4
+  },
+  "taskFile": {
+    "bytes": 16777217,
+    "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+    "mimeType": "application/octet-stream",
+    "fileNameMatched": true
+  },
+  "nativeCapture": {
+    "role": "codex-grok-uploads-20261006",
+    "registeredTargetMatched": true,
+    "method": "POST",
+    "path": "/rest/app-chat/upload-file-v2/init",
+    "requestFieldNames": [
+      "fileMimeType",
+      "fileName",
+      "multipartSupported",
+      "sizeBytes"
+    ],
+    "requestHeaderNames": [
+      "accept",
+      "baggage",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sentry-trace",
+      "user-agent",
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "bodyMatchedDirectApiInput": true,
+    "freshDynamicHeaderValuesUsedForDirectInit": true,
+    "rawHeaderValuesPersisted": false
+  },
+  "directApi": {
+    "intentId": "grok-large-presigned-threshold-probe-20261006-v1",
+    "init": {
+      "httpStatus": 200,
+      "responseBytes": 1332,
+      "requestHeaderNames": [
+        "content-type",
+        "cookie",
+        "origin",
+        "referer",
+        "x-statsig-id",
+        "x-xai-request-id"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "journalAttemptCount": 1,
+      "journalState": "accepted",
+      "resourceIssuedCheckpoint": "completed"
+    },
+    "signedPutCount": 0,
+    "completeHttpStatus": null,
+    "finalUploadState": "needs_review",
+    "reason": "normal_sdk_init_response_bridge_did_not_fulfill",
+    "rawResponseBodyPersisted": false
+  },
+  "browserGuard": {
+    "nativeNonReadRequestAttempts": 4,
+    "nativeResponsesFulfilled": 0,
+    "browserBusinessWritesForwarded": 0,
+    "additionalNonReadAttemptsBlocked": 3,
+    "pendingRoutesAtExit": 0
+  },
+  "readback": {
+    "operation": "attachment.assets.search",
+    "queryWasExactTaskFileName": true,
+    "httpStatus": 200,
+    "responseBytes": 13,
+    "assetCount": 0,
+    "exactFileNameMatches": 0
+  },
+  "safety": {
+    "signedStorageOriginPersisted": false,
+    "signedUrlsPersisted": false,
+    "uploadIdsPersisted": false,
+    "cookiesPersisted": false,
+    "dynamicHeaderValuesPersisted": false,
+    "rawBodiesPersisted": false,
+    "conversationMessageSent": false,
+    "taskAssetDeleted": false
+  },
+  "limitations": [
+    "The direct init request and 200 response were observed, but the paused normal SDK init did not receive that response.",
+    "No signed PUT or complete request was sent by the direct client.",
+    "The response and upload reference were cleared from process memory; only hashed checkpoints remain, so status and abort could not be called.",
+    "The owner-bound exact-file search found no finalized asset."
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "operationId": "conversation.files.artifact-readback",
+  "recordedAt": "2026-10-06T13:41:47.522Z",
+  "status": "content_and_files_zip_verified",
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "task": {
+    "conversationIdSha256": "02e9bdfd8bd1c531194d60cd154d0abb5097a39f6d96e5a8d2e30cfbc6d67aa6",
+    "exactTaskPromptSha256": "105aeefe4a091e9183d87f258d0a40edfa0ff94708922f5bf79ab25bc8ed931e",
+    "exactTaskPromptBytes": 347,
+    "fileNameSha256": "59b573f9e2f2469477dd6a0372e0eaf9156fe58367f0eeaff29cd1354f1f5e3f",
+    "fileNamePersisted": false,
+    "listExactFileCandidateCount": 1,
+    "sourceListRowCount": 1,
+    "sourceListShapeAccepted": true
+  },
+  "sourceReads": {
+    "filesList": {
+      "status": 200,
+      "responseBytes": 237,
+      "requestDigest": "6a3b2835b4b169edfc36628bb97f8e4402711d7f903ae610c016ffc12db07303",
+      "responseDigest": "1ae6949b4074a46d84779e01f15fede0c5000d84cfc666480aec6aed40dfd978",
+      "contentType": "application/json",
+      "responseShape": {
+        "type": "object",
+        "topLevelFieldNames": [
+          "files",
+          "nextPageToken",
+          "path"
+        ],
+        "fields": {
+          "files": {
+            "type": "array",
+            "count": 1,
+            "itemFieldNames": [
+              "isDirectory",
+              "mimeType",
+              "modifiedAt",
+              "name",
+              "path",
+              "size"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "nextPageToken": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "artifact": {
+    "resolverStatus": 200,
+    "httpStatus": 200,
+    "mimeType": "text/csv",
+    "bytes": 22,
+    "sha256": "5f48115cd84c12645bde114b877fa86d491757e8d5c67b2d787d33cb3679135f",
+    "requestDigest": "a5de60335a1b81ff1849197a7ce790873b81ddb835703030e34473d1707240f1",
+    "resolverRequestDigest": "4f63467247fe97fe9ac4a0669d152d158a87f63f56fc0dd2d1e3e7b68ea29471",
+    "resolverResponseDigest": "447441672d56b6b1e77a3e20c6cef7dda6f87ba5df74cbb53a360c5f920d4468",
+    "redirectCount": 0,
+    "redirectOrigins": [
+      "https://storage.googleapis.com"
+    ],
+    "magicVerified": false,
+    "utf8Verified": true,
+    "csvSemanticMatch": true,
+    "diskReadbackVerified": true,
+    "pathSha256": "84df293dee946da6399a4b0b7901cc8cc27f4441d4469883ad9b71fa25260cc4",
+    "artifactPath": "/home/worker/artifacts/grok-conversation-files-20261006/grok-task-file.csv-c5cfde6a-55d0-49cf-bc69-01808e66fb4f.csv"
+  },
+  "filesZip": {
+    "resolverStatus": 200,
+    "httpStatus": 200,
+    "fileCount": 1,
+    "totalSize": 22,
+    "mimeType": "application/zip",
+    "bytes": 194,
+    "sha256": "b8887f71f0268c662de52fc3cac68f68cdaab47b9139b74f71e9e62302ee5b12",
+    "magicVerified": true,
+    "redirectCount": 0,
+    "redirectOrigins": [
+      "https://storage.googleapis.com"
+    ],
+    "independentInspector": {
+      "status": "verified",
+      "archiveBytes": 194,
+      "entryCount": 1,
+      "entryBytes": 22,
+      "entrySha256": "5f48115cd84c12645bde114b877fa86d491757e8d5c67b2d787d33cb3679135f",
+      "csvRows": 2,
+      "csvColumns": 2,
+      "crcVerified": true,
+      "archiveMagicVerified": true,
+      "entryNamePersisted": false
+    },
+    "entryBytesMatchedCsv": true,
+    "archivePath": "/home/worker/artifacts/grok-conversation-files-20261006/grok-task-files.zip-7053fba2-3af0-45d8-827e-d051a42fc80f.zip"
+  },
+  "workspaceZip": {
+    "resolverStatus": 200,
+    "httpStatus": 200,
+    "bytes": 395,
+    "sha256": "3be6f59036d219b76d075806b68cfd52eb70d171849d1501ff4e50afc83cedc3",
+    "magicVerified": true,
+    "responseMimeType": "application/octet-stream",
+    "redirectCount": 0,
+    "redirectOrigins": [
+      "https://assets.grok.com"
+    ],
+    "independentInspector": {
+      "status": "needs_review",
+      "errorCode": "archive_expected_entry_missing"
+    },
+    "entryBytesMatchedCsv": false,
+    "entryIsExpectedCsv": false,
+    "archivePath": "/home/worker/artifacts/grok-conversation-files-20261006/grok-task-workspace.zip-278514a8-a016-48c8-91d4-31245468300b.zip"
+  },
+  "persistenceAssertions": {
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "rawConversationIdsPersisted": false,
+    "rawResponseIdsPersisted": false,
+    "rawRequestBodiesPersisted": false,
+    "rawResponseBodiesPersisted": false,
+    "fileNamesPersisted": false,
+    "filePathsPersisted": false,
+    "signedUrlsPersisted": false,
+    "rawUrlsPersisted": false
+  }
+}

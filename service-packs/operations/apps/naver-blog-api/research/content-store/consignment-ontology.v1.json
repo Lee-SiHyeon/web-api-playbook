@@ -1,0 +1,2703 @@
+{
+  "schemaVersion": 1,
+  "schemaDialect": "acada-declarative-field-catalog/v1 (not JSON Schema or an executable reasoner)",
+  "ontologyId": "acada:consignment-commerce",
+  "label": "국내 온라인 위탁판매 온톨로지",
+  "createdAt": "2026-09-26",
+  "purpose": "위탁판매 자료와 운영 흐름을 같은 개념 체계로 수집·정제하고, 공급·수익·현금·작업·권한의 미확인 지점을 찾아 글 후보와 다음 조사로 연결한다.",
+  "scope": {
+    "primary": "국내 공급처가 소비자에게 직배송하는 온라인 판매",
+    "adjacent": [
+      "사입 후 직접 배송",
+      "판매자 소유 재고의 3PL/4PL 물류",
+      "수수료형 판매대행",
+      "전통적 위탁재고"
+    ],
+    "notAssumed": [
+      "무자본",
+      "무노동",
+      "실제 순이익",
+      "무조건 재택",
+      "자동 주문·발주 실행"
+    ]
+  },
+  "extends": {
+    "ontologyId": "acada:side-hustle",
+    "file": "side-hustle-ontology.v1.json",
+    "anchorPath": "modelTaxonomy",
+    "anchorId": "commerce_resale",
+    "relationship": "specializes",
+    "baseFileModified": false,
+    "baseAnchorIsBusinessEvidence": false
+  },
+  "modelLayers": {
+    "conceptDefinitions": "classes and relations",
+    "sourceStatements": "claimLedger",
+    "observedOperations": "collection receipt only",
+    "realOrdersOrSettlements": "not_collected",
+    "workedExample": "syntheticExamples; exclude from facts and performance statistics"
+  },
+  "designPrinciples": [
+    "한 행위자의 여러 역할을 허용한다. 물류 이행과 계약·대금 역할을 동일시하지 않는다.",
+    "상품·공급 SKU·마켓 옵션·주문 당시 스냅샷을 구분한다.",
+    "공급 재고·검색 신호·정산의 시점과 유효 범위를 보존한다.",
+    "매출·기여이익·예상 손실충당·현금흐름·노동 기회비용을 별도로 계산한다.",
+    "클래스, 자기보고, 실제 사건, 가상 예시를 혼합하지 않는다.",
+    "공식 문서도 적용 범위·버전·이해관계를 기록한다.",
+    "미확인 금액·수량·시간은 null과 unknownReason으로 남긴다.",
+    "공급·주문 데이터가 없는 상태에서 수익 추천 점수나 자동 실행 상태를 만들지 않는다."
+  ],
+  "classificationAxes": {
+    "commercialRelation": [
+      "resale",
+      "agency_commission",
+      "consignment_title_retained",
+      "mixed",
+      "unknown"
+    ],
+    "inventoryOwnership": [
+      "supplier",
+      "seller",
+      "other",
+      "unknown"
+    ],
+    "physicalCustody": [
+      "supplier",
+      "seller",
+      "third_party_warehouse",
+      "unknown"
+    ],
+    "fulfillment": [
+      "supplier_direct",
+      "seller_direct",
+      "seller_owned_3pl",
+      "other",
+      "unknown"
+    ],
+    "remuneration": [
+      "resale_margin",
+      "commission",
+      "mixed",
+      "unknown"
+    ],
+    "opportunityDiscoveryChannel": [
+      "cafe",
+      "search",
+      "ebook",
+      "supplier_platform",
+      "direct_contact",
+      "other"
+    ],
+    "salesChannel": [
+      "marketplace",
+      "own_store",
+      "social_commerce",
+      "other",
+      "unknown"
+    ],
+    "homeWork": [
+      "online_core_with_physical_work_outsourced",
+      "online_plus_samples_or_returns",
+      "physical_handling_required",
+      "unknown"
+    ],
+    "interpretation": "축 조합으로 실제 방식을 판별한다. 위탁판매라는 명칭만으로 축값을 채우지 않는다."
+  },
+  "termDisambiguation": [
+    {
+      "term": "위탁판매",
+      "meaning": "이 문서의 주 범위는 공급처 직배송 온라인 판매",
+      "classification": "supplier_fulfilled_online_resale"
+    },
+    {
+      "term": "위탁판매",
+      "meaning": "소유권을 맡긴 물품의 판매 관계",
+      "classification": "consignment_title_retained",
+      "relationToScope": "requires separate contract evidence"
+    },
+    {
+      "term": "위탁판매",
+      "meaning": "도매꾹 구매뉴얼의 홍보·판매대행 명칭",
+      "classification": "platform_specific_agency",
+      "sourceIds": [
+        "D1"
+      ],
+      "relationToScope": "not equivalent by name alone"
+    }
+  ],
+  "valueTypes": {
+    "Identifier": {
+      "type": "string",
+      "rule": "stable local ID unique in its document namespace; canonical form = namespace + # + localId; no credentials or customer direct identifiers"
+    },
+    "SourceId": {
+      "type": "string",
+      "references": {
+        "fileProperty": "evidencePolicy.sourceLedgerFile",
+        "relativeTo": "directory containing this ontology file",
+        "target": "records[].id",
+        "namespace": "external ledger.id"
+      }
+    },
+    "ClaimId": {
+      "type": "string",
+      "references": "evidencePolicy.claimLedger.id"
+    },
+    "RuleId": {
+      "type": "string",
+      "references": "reviewRules.id"
+    },
+    "QuantityUnit": [
+      "EA",
+      "BOX",
+      "KG",
+      "SET",
+      "other"
+    ],
+    "CommercialRelation": [
+      "resale",
+      "agency_commission",
+      "consignment_title_retained",
+      "mixed",
+      "unknown"
+    ],
+    "Timestamp": {
+      "type": "string",
+      "format": "RFC3339 with timezone"
+    },
+    "TimeWindow": {
+      "fields": {
+        "start": "Timestamp|null",
+        "end": "Timestamp|null",
+        "timeZone": "IANA name",
+        "boundary": "closed_open|closed_closed|unknown",
+        "reportedLabel": "string|null"
+      },
+      "rule": "게시일과 성과기간을 분리한다."
+    },
+    "Quantity": {
+      "fields": {
+        "value": "number|null",
+        "unit": "EA|BOX|KG|SET|other",
+        "unknownReason": "string|null"
+      },
+      "rule": "수량은 0 이상. 환산 근거 없이는 단위를 합산하지 않는다."
+    },
+    "UnitConversion": {
+      "fields": {
+        "saleQuantity": "Quantity",
+        "supplyQuantity": "Quantity",
+        "direction": "literal:sale_to_supply",
+        "evidence": "EvidenceRef[]"
+      },
+      "rule": "양쪽 수량은 양수이며 단위를 기록한다. saleQuantity.unit은 ListingOption.saleUnit.unit과, supplyQuantity.unit은 SupplierOffer.supplyUnit.unit과 일치해야 한다. 공급 수량 = 주문한 판매 단위 수량 * supplyQuantity.value / saleQuantity.value; SKU·포장 근거와 맞춰 확인한다."
+    },
+    "Money": {
+      "fields": {
+        "amountMinor": "integer|null",
+        "currency": "ISO4217",
+        "taxBasis": "included|excluded|exempt|unknown|synthetic_no_tax",
+        "nature": "quoted|estimated|booked|settled|paid|synthetic",
+        "basisRef": "string",
+        "unknownReason": "string|null"
+      },
+      "rule": "KRW는 원 단위 정수. unknown이면 값은 null; synthetic_no_tax는 가상 예시에서만 허용한다."
+    },
+    "EvidenceRef": {
+      "fields": {
+        "sourceId": "SourceId",
+        "locator": "string",
+        "observedAt": "Timestamp|null",
+        "effectiveDuring": "TimeWindow|null"
+      }
+    },
+    "StatusEvent": {
+      "fields": {
+        "sourceStatus": "string",
+        "normalizedStatus": "string",
+        "observedAt": "Timestamp",
+        "effectiveAt": "Timestamp|null",
+        "evidence": "EvidenceRef[]"
+      },
+      "rule": "상태를 덮어쓰지 않고 append-only 관측으로 저장한다."
+    },
+    "Role": [
+      "supplier",
+      "retail_seller",
+      "customer",
+      "marketplace_operator",
+      "warehouse",
+      "carrier",
+      "payment_operator",
+      "instructor",
+      "unknown"
+    ],
+    "EvidenceKind": [
+      "documented_flow",
+      "documented_feature",
+      "documented_platform_process",
+      "legal_applicability_reference",
+      "author_method",
+      "conflicted_author_heuristic",
+      "unvalidated_author_heuristic",
+      "scope_conflict",
+      "unverified_tool_claim",
+      "self_report",
+      "mixed_model_self_report",
+      "observed_sample_boundary",
+      "promotion_context"
+    ],
+    "DecisionOutcome": [
+      "needs_evidence",
+      "needs_manual_review",
+      "hold_income_claim",
+      "exclude_unread_source",
+      "manual_or_unimplemented",
+      "conditional_home"
+    ]
+  },
+  "classes": [
+    {
+      "id": "Actor",
+      "label": "행위자",
+      "description": "역할은 거래별로 부여하며 하나의 조직이 여러 역할을 맡을 수 있다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "actorKind",
+          "type": "enum:organization|person_pseudonym",
+          "required": true
+        },
+        {
+          "name": "publicName",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "possibleRoles",
+          "type": "Role[]",
+          "required": true,
+          "note": "실제 역할은 SupplyArrangement 등 해당 거래의 관계에서 확정한다."
+        }
+      ]
+    },
+    {
+      "id": "SupplyArrangement",
+      "label": "판매·공급 방식",
+      "description": "재판매/대리/전통적 위탁과 물류·소유·대금 역할을 독립 축으로 기록한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "seller",
+          "type": "ref:Actor",
+          "required": true
+        },
+        {
+          "name": "supplier",
+          "type": "ref:Actor",
+          "required": true
+        },
+        {
+          "name": "commercialRelation",
+          "type": "CommercialRelation",
+          "required": true
+        },
+        {
+          "name": "inventoryOwner",
+          "type": "ref:Actor|null",
+          "required": true
+        },
+        {
+          "name": "physicalCustodian",
+          "type": "ref:Actor|null",
+          "required": true
+        },
+        {
+          "name": "outboundFulfiller",
+          "type": "ref:Actor|null",
+          "required": true
+        },
+        {
+          "name": "customerContractParty",
+          "type": "ref:Actor|null",
+          "required": true
+        },
+        {
+          "name": "remuneration",
+          "type": "enum:resale_margin|commission|mixed|unknown",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ChannelAccount",
+      "label": "판매 채널 계정",
+      "description": "채널 운영사와 실제 판매 계정을 분리한다. 비밀값을 담지 않는다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "channelOperator",
+          "type": "ref:Actor",
+          "required": true
+        },
+        {
+          "name": "seller",
+          "type": "ref:Actor",
+          "required": true
+        },
+        {
+          "name": "externalAccountRef",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "observedAt",
+          "type": "Timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "SupplyAgreement",
+      "label": "공급·발주 조건",
+      "description": "배송 마감, 결제, 품절, 반품, 비용, 이미지 이용 조건의 유효 버전.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "arrangement",
+          "type": "ref:SupplyArrangement",
+          "required": true
+        },
+        {
+          "name": "validDuring",
+          "type": "TimeWindow",
+          "required": true
+        },
+        {
+          "name": "paymentTiming",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "dispatchPromise",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "returnTerms",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ProductVariant",
+      "label": "상품 규격",
+      "description": "옵션·구성·규격을 기준으로 비교할 실물 정의. 제목만으로 동일상품 판정하지 않는다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "attributes",
+          "type": "object",
+          "required": true
+        },
+        {
+          "name": "baseUnit",
+          "type": "QuantityUnit",
+          "required": true
+        },
+        {
+          "name": "packageContents",
+          "type": "Quantity",
+          "required": true
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "identityEvidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "SupplierOffer",
+      "label": "공급처 판매조건",
+      "description": "공급사별 SKU·옵션·원가·최소주문량·발송 조건의 시점별 제안.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "supplier",
+          "type": "ref:Actor",
+          "required": true
+        },
+        {
+          "name": "variant",
+          "type": "ref:ProductVariant",
+          "required": true
+        },
+        {
+          "name": "supplierSku",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "unitPrice",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "supplyUnit",
+          "type": "Quantity",
+          "required": true,
+          "note": "공급 SKU의 가격·발주 기준 수량과 단위."
+        },
+        {
+          "name": "minimumQuantity",
+          "type": "Quantity",
+          "required": true
+        },
+        {
+          "name": "agreement",
+          "type": "ref:SupplyAgreement|null",
+          "required": true
+        },
+        {
+          "name": "observedAt",
+          "type": "Timestamp",
+          "required": true
+        },
+        {
+          "name": "validUntil",
+          "type": "Timestamp|null",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ChannelListing",
+      "label": "마켓 상품 등록",
+      "description": "같은 실물도 채널·판매계정별 등록을 별도로 식별한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "account",
+          "type": "ref:ChannelAccount",
+          "required": true
+        },
+        {
+          "name": "externalListingId",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "publicationStatus",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "observedAt",
+          "type": "Timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ListingOption",
+      "label": "마켓 판매 옵션",
+      "description": "구매자가 주문하는 옵션과 수량 단위의 판매조건 스냅샷.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "listing",
+          "type": "ref:ChannelListing",
+          "required": true
+        },
+        {
+          "name": "externalOptionId",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "variant",
+          "type": "ref:ProductVariant",
+          "required": true
+        },
+        {
+          "name": "unitPrice",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "saleUnit",
+          "type": "Quantity",
+          "required": true
+        },
+        {
+          "name": "observedAt",
+          "type": "Timestamp",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "SkuMapping",
+      "label": "공급·판매 옵션 매핑",
+      "description": "공급 SKU와 판매 옵션의 대응·환산·대체 검토 근거.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "option",
+          "type": "ref:ListingOption",
+          "required": true
+        },
+        {
+          "name": "offer",
+          "type": "ref:SupplierOffer",
+          "required": true
+        },
+        {
+          "name": "unitConversion",
+          "type": "UnitConversion|null",
+          "required": true
+        },
+        {
+          "name": "equivalence",
+          "type": "enum:verified|candidate|rejected|unknown",
+          "required": true
+        },
+        {
+          "name": "validDuring",
+          "type": "TimeWindow",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "InventoryObservation",
+      "label": "재고 관측",
+      "description": "누가 어느 SKU의 어떤 종류의 재고를 언제 확인했는지.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "offer",
+          "type": "ref:SupplierOffer",
+          "required": true
+        },
+        {
+          "name": "quantity",
+          "type": "Quantity|null",
+          "required": true
+        },
+        {
+          "name": "availability",
+          "type": "enum:available|out_of_stock|stopped|unknown",
+          "required": true
+        },
+        {
+          "name": "stockMeaning",
+          "type": "enum:physical|sellable|reserved|supplier_statement|unknown",
+          "required": true
+        },
+        {
+          "name": "observedAt",
+          "type": "Timestamp",
+          "required": true
+        },
+        {
+          "name": "expiresAt",
+          "type": "Timestamp|null",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "DemandObservation",
+      "label": "수요·경쟁 신호",
+      "description": "검색량·검색지수·추정 시장규모·자기보고 판매·실제 주문은 다른 지표.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "metricKind",
+          "type": "enum:search_count|relative_index|estimated_market_size|review_count|own_order_count|claimed_sales",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "number|null",
+          "required": true
+        },
+        {
+          "name": "unit",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "window",
+          "type": "TimeWindow",
+          "required": true
+        },
+        {
+          "name": "population",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "method",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "RightsGrant",
+      "label": "콘텐츠 사용 허락",
+      "description": "이미지·상세설명·상표에 관한 적용 채널·기간·범위.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "grantor",
+          "type": "ref:Actor|null",
+          "required": true
+        },
+        {
+          "name": "assetRef",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "allowedChannels",
+          "type": "string[]",
+          "required": true
+        },
+        {
+          "name": "validDuring",
+          "type": "TimeWindow",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "enum:verified|denied|unknown",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ComplianceCheck",
+      "label": "상품·거래 적합성 확인",
+      "description": "품목·모델·판매 방식별 확인 항목. 법률 자동 판정 엔진이 아니다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "variant",
+          "type": "ref:ProductVariant|null",
+          "required": true
+        },
+        {
+          "name": "ruleSourceIds",
+          "type": "SourceId[]",
+          "required": true
+        },
+        {
+          "name": "applicability",
+          "type": "enum:applies|not_applicable|needs_review",
+          "required": true
+        },
+        {
+          "name": "result",
+          "type": "enum:verified|failed|unknown",
+          "required": true
+        },
+        {
+          "name": "checkedAt",
+          "type": "Timestamp",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "CustomerOrder",
+      "label": "고객 주문",
+      "description": "고객 결제 주문과 공급사 발주를 구분한다. 고객 개인정보는 별도 보호 저장소 참조.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "account",
+          "type": "ref:ChannelAccount",
+          "required": true
+        },
+        {
+          "name": "externalOrderId",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "orderedAt",
+          "type": "Timestamp",
+          "required": true
+        },
+        {
+          "name": "customerProtectedRef",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "statusEvents",
+          "type": "StatusEvent[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "OrderLine",
+      "label": "주문 항목",
+      "description": "주문 당시 옵션·금액·수량 스냅샷을 보존한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "order",
+          "type": "ref:CustomerOrder",
+          "required": true
+        },
+        {
+          "name": "option",
+          "type": "ref:ListingOption",
+          "required": true
+        },
+        {
+          "name": "orderedQuantity",
+          "type": "Quantity",
+          "required": true
+        },
+        {
+          "name": "itemGross",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "buyerShipping",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "sellerDiscount",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "snapshotAt",
+          "type": "Timestamp",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "PurchaseOrder",
+      "label": "공급사 발주",
+      "description": "한 고객 주문이 여러 공급처 발주로 나뉠 수 있다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "supplier",
+          "type": "ref:Actor",
+          "required": true
+        },
+        {
+          "name": "agreement",
+          "type": "ref:SupplyAgreement",
+          "required": true
+        },
+        {
+          "name": "externalPurchaseId",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "statusEvents",
+          "type": "StatusEvent[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "PurchaseOrderLine",
+      "label": "공급사 발주 항목",
+      "description": "발주 시 원가와 환산 수량을 고정한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "purchaseOrder",
+          "type": "ref:PurchaseOrder",
+          "required": true
+        },
+        {
+          "name": "offer",
+          "type": "ref:SupplierOffer",
+          "required": true
+        },
+        {
+          "name": "quantity",
+          "type": "Quantity",
+          "required": true
+        },
+        {
+          "name": "cost",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "FulfillmentAllocation",
+      "label": "수량별 이행 연결",
+      "description": "주문 항목과 발주·배송·클레임의 다대다 연결에 수량과 단위를 부여한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "orderLine",
+          "type": "ref:OrderLine",
+          "required": true
+        },
+        {
+          "name": "purchaseLine",
+          "type": "ref:PurchaseOrderLine|null",
+          "required": true
+        },
+        {
+          "name": "shipment",
+          "type": "ref:Shipment|null",
+          "required": true
+        },
+        {
+          "name": "claimCase",
+          "type": "ref:ClaimCase|null",
+          "required": true
+        },
+        {
+          "name": "quantity",
+          "type": "Quantity",
+          "required": true
+        },
+        {
+          "name": "purpose",
+          "type": "enum:initial|replacement|return",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "Shipment",
+      "label": "배송 건",
+      "description": "송장 생성·집화·이동·배달 완료를 서로 다른 관측으로 남긴다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "fulfiller",
+          "type": "ref:Actor",
+          "required": true
+        },
+        {
+          "name": "carrier",
+          "type": "ref:Actor|null",
+          "required": true
+        },
+        {
+          "name": "trackingProtectedRef",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "statusEvents",
+          "type": "StatusEvent[]",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "ClaimCase",
+      "label": "문의·취소·반품·교환",
+      "description": "상품 항목별 사유·수량·회수·비용부담·환불을 연결한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "orderLines",
+          "type": "ref:OrderLine[]",
+          "required": true
+        },
+        {
+          "name": "claimKind",
+          "type": "enum:inquiry|cancel|return|exchange|dispute",
+          "required": true
+        },
+        {
+          "name": "reasonCode",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "responsibility",
+          "type": "enum:seller|supplier|buyer|carrier|shared|undetermined",
+          "required": true
+        },
+        {
+          "name": "statusEvents",
+          "type": "StatusEvent[]",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "SettlementLine",
+      "label": "정산 항목",
+      "description": "예정·보류·공제·환급·지급을 항목 단위로 대사한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "externalStatementRef",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "orderLines",
+          "type": "ref:OrderLine[]",
+          "required": true
+        },
+        {
+          "name": "kind",
+          "type": "enum:sales|commission|reimbursement|fee|discount|shipping|refund|adjustment|hold",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "basisAt",
+          "type": "Timestamp|null",
+          "required": true
+        },
+        {
+          "name": "expectedAt",
+          "type": "Timestamp|null",
+          "required": true
+        },
+        {
+          "name": "statusEvents",
+          "type": "StatusEvent[]",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "FinancialEvent",
+      "label": "실제 자금 이동",
+      "description": "입금·지출 사건은 정산 예정과 독립적이다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "Money",
+          "required": true,
+          "note": "음수가 아닌 절대액과 direction을 사용한다."
+        },
+        {
+          "name": "direction",
+          "type": "enum:inflow|outflow",
+          "required": true
+        },
+        {
+          "name": "occurredAt",
+          "type": "Timestamp",
+          "required": true
+        },
+        {
+          "name": "accountProtectedRef",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "allocations",
+          "type": "ref:FinancialAllocation[]",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "FinancialAllocation",
+      "label": "입출금 금액 배부",
+      "description": "합산 입금·통합 지급·환불·비용 지급의 귀속 금액을 식별한다. 여러 문서 참조는 같은 배부액의 맥락이다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "financialEvent",
+          "type": "ref:FinancialEvent",
+          "required": true
+        },
+        {
+          "name": "reconciliationGroup",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "settlementLine",
+          "type": "ref:SettlementLine|null",
+          "required": true
+        },
+        {
+          "name": "purchaseOrder",
+          "type": "ref:PurchaseOrder|null",
+          "required": true
+        },
+        {
+          "name": "claimCase",
+          "type": "ref:ClaimCase|null",
+          "required": true
+        },
+        {
+          "name": "costAllocation",
+          "type": "ref:CostAllocation|null",
+          "required": true
+        },
+        {
+          "name": "allocationBasis",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "CostAllocation",
+      "label": "비용 배부",
+      "description": "광고·배송·반품비가 어떤 주문/기간에 배부됐는지 기록한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "category",
+          "type": "enum:goods|platform_fee|outbound|return_loss|advertising|tool|fixed|labor",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "Money",
+          "required": true
+        },
+        {
+          "name": "orderLines",
+          "type": "ref:OrderLine[]",
+          "required": true
+        },
+        {
+          "name": "window",
+          "type": "TimeWindow",
+          "required": true
+        },
+        {
+          "name": "basis",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "nature",
+          "type": "enum:actual|estimated_reserve|opportunity_cost",
+          "required": true
+        },
+        {
+          "name": "sourceEventRef",
+          "type": "string|null",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "WorkLog",
+      "label": "작업시간",
+      "description": "소싱·등록·발주·송장·CS·반품·정산의 시간과 측정 방식을 구분한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "activity",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "minutes",
+          "type": "number|null",
+          "required": true
+        },
+        {
+          "name": "window",
+          "type": "TimeWindow",
+          "required": true
+        },
+        {
+          "name": "measurement",
+          "type": "enum:timer|self_report|estimate|unknown",
+          "required": true
+        },
+        {
+          "name": "evidence",
+          "type": "EvidenceRef[]",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "Source",
+      "label": "근거 출처",
+      "description": "문서, 자기보고, 원장, 정산내역, 실제 입금의 출처 역할을 구분한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "sourceType",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "url",
+          "type": "string|null",
+          "required": true
+        },
+        {
+          "name": "access",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "checkedOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "independenceGroup",
+          "type": "string|null",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "EvidenceClaim",
+      "label": "근거가 붙은 주장",
+      "description": "원문이 주장했다는 관측과 주장이 사실이라는 검증을 분리한다.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "kind",
+          "type": "EvidenceKind",
+          "required": true
+        },
+        {
+          "name": "statement",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "sourceIds",
+          "type": "SourceId[]",
+          "required": true
+        },
+        {
+          "name": "locator",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "consequence",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "Decision",
+      "label": "검토 결정",
+      "description": "입력 근거·빈칸·규칙 버전과 다음 행동을 기록한다. 외부 작업 권한은 별도.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "subjectRef",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "outcome",
+          "type": "DecisionOutcome",
+          "required": true
+        },
+        {
+          "name": "ruleIds",
+          "type": "RuleId[]",
+          "required": true
+        },
+        {
+          "name": "missingEvidence",
+          "type": "string[]",
+          "required": true
+        },
+        {
+          "name": "decidedAt",
+          "type": "Timestamp",
+          "required": true
+        },
+        {
+          "name": "authority",
+          "type": "enum:advisory_only",
+          "required": true
+        }
+      ]
+    },
+    {
+      "id": "TopicCandidate",
+      "label": "글 후보",
+      "description": "독자의 문제, 반례, 근거, 미확인 수치와 발행 준비 상태.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "Identifier",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "readerQuestion",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "sourceIds",
+          "type": "SourceId[]",
+          "required": true
+        },
+        {
+          "name": "claimIds",
+          "type": "ClaimId[]",
+          "required": true
+        },
+        {
+          "name": "missingEvidence",
+          "type": "string[]",
+          "required": true
+        },
+        {
+          "name": "publicationReady",
+          "type": "boolean",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "hasSeller",
+      "from": "SupplyArrangement",
+      "to": "Actor",
+      "cardinality": "many:one",
+      "note": "판매 역할; 소비자 계약 당사자 여부는 별도 확인"
+    },
+    {
+      "id": "hasSupplier",
+      "from": "SupplyArrangement",
+      "to": "Actor",
+      "cardinality": "many:one",
+      "note": "상품 공급 역할"
+    },
+    {
+      "id": "governedBy",
+      "from": "SupplyArrangement",
+      "to": "SupplyAgreement",
+      "cardinality": "one:many",
+      "note": "유효기간별 조건"
+    },
+    {
+      "id": "operatesAccount",
+      "from": "Actor",
+      "to": "ChannelAccount",
+      "cardinality": "one:many",
+      "note": "채널 운영사와 판매자 계정 구분"
+    },
+    {
+      "id": "offersVariant",
+      "from": "SupplierOffer",
+      "to": "ProductVariant",
+      "cardinality": "many:one",
+      "note": "공급 SKU별 규격"
+    },
+    {
+      "id": "suppliedBy",
+      "from": "SupplierOffer",
+      "to": "Actor",
+      "cardinality": "many:one",
+      "note": "공급처"
+    },
+    {
+      "id": "listedThrough",
+      "from": "ChannelListing",
+      "to": "ChannelAccount",
+      "cardinality": "many:one",
+      "note": "채널별 상품 등록"
+    },
+    {
+      "id": "hasOption",
+      "from": "ChannelListing",
+      "to": "ListingOption",
+      "cardinality": "one:many",
+      "note": "상품 등록과 판매 옵션 구분"
+    },
+    {
+      "id": "mapsSalesOption",
+      "from": "SkuMapping",
+      "to": "ListingOption",
+      "cardinality": "many:one",
+      "note": "같은 옵션의 여러 공급 후보"
+    },
+    {
+      "id": "mapsSupplyOffer",
+      "from": "SkuMapping",
+      "to": "SupplierOffer",
+      "cardinality": "many:one",
+      "note": "시점별 SKU 환산"
+    },
+    {
+      "id": "observesInventory",
+      "from": "InventoryObservation",
+      "to": "SupplierOffer",
+      "cardinality": "many:one",
+      "note": "재고의 시점·의미 보존"
+    },
+    {
+      "id": "measuresDemandFor",
+      "from": "DemandObservation",
+      "to": "ProductVariant",
+      "cardinality": "many:many",
+      "note": "키워드 신호를 주문량으로 동일시하지 않음"
+    },
+    {
+      "id": "permittedBy",
+      "from": "ChannelListing",
+      "to": "RightsGrant",
+      "cardinality": "many:many",
+      "note": "콘텐츠 이용 범위"
+    },
+    {
+      "id": "checkedBy",
+      "from": "ProductVariant",
+      "to": "ComplianceCheck",
+      "cardinality": "one:many",
+      "note": "품목/모델별 확인"
+    },
+    {
+      "id": "contains",
+      "from": "CustomerOrder",
+      "to": "OrderLine",
+      "cardinality": "one:many",
+      "note": "주문 항목별 부분 취소 지원"
+    },
+    {
+      "id": "orderedAs",
+      "from": "OrderLine",
+      "to": "ListingOption",
+      "cardinality": "many:one",
+      "note": "주문 당시 옵션 스냅샷"
+    },
+    {
+      "id": "hasPurchaseLine",
+      "from": "PurchaseOrder",
+      "to": "PurchaseOrderLine",
+      "cardinality": "one:many",
+      "note": "공급사 발주 항목"
+    },
+    {
+      "id": "procuresOffer",
+      "from": "PurchaseOrderLine",
+      "to": "SupplierOffer",
+      "cardinality": "many:one",
+      "note": "발주 원가 스냅샷"
+    },
+    {
+      "id": "allocatesCustomerLine",
+      "from": "FulfillmentAllocation",
+      "to": "OrderLine",
+      "cardinality": "many:one",
+      "note": "수량 배분 연결"
+    },
+    {
+      "id": "allocatesPurchaseLine",
+      "from": "FulfillmentAllocation",
+      "to": "PurchaseOrderLine",
+      "cardinality": "many:zero_or_one",
+      "note": "분할 발주"
+    },
+    {
+      "id": "allocatesShipment",
+      "from": "FulfillmentAllocation",
+      "to": "Shipment",
+      "cardinality": "many:zero_or_one",
+      "note": "분할/합배송"
+    },
+    {
+      "id": "allocatesClaim",
+      "from": "FulfillmentAllocation",
+      "to": "ClaimCase",
+      "cardinality": "many:zero_or_one",
+      "note": "부분 반품·교환"
+    },
+    {
+      "id": "concernsLine",
+      "from": "ClaimCase",
+      "to": "OrderLine",
+      "cardinality": "many:many",
+      "note": "한 클레임이 여러 항목에 해당할 수 있음"
+    },
+    {
+      "id": "accountsFor",
+      "from": "SettlementLine",
+      "to": "OrderLine",
+      "cardinality": "many:many",
+      "note": "공제·환급 배부 방식과 함께 사용"
+    },
+    {
+      "id": "allocatesMoneyEvent",
+      "from": "FinancialAllocation",
+      "to": "FinancialEvent",
+      "cardinality": "many:one",
+      "note": "입출금 한 사건을 금액별로 배부"
+    },
+    {
+      "id": "dischargesSettlement",
+      "from": "FinancialAllocation",
+      "to": "SettlementLine",
+      "cardinality": "many:zero_or_one",
+      "note": "합산 입금과 분할 지급의 귀속 금액"
+    },
+    {
+      "id": "paysPurchase",
+      "from": "FinancialAllocation",
+      "to": "PurchaseOrder",
+      "cardinality": "many:zero_or_one",
+      "note": "선결제/통합 지급의 귀속 금액"
+    },
+    {
+      "id": "refundsClaim",
+      "from": "FinancialAllocation",
+      "to": "ClaimCase",
+      "cardinality": "many:zero_or_one",
+      "note": "동일 주문의 복수 클레임별 환불 귀속"
+    },
+    {
+      "id": "paysOrReversesCost",
+      "from": "FinancialAllocation",
+      "to": "CostAllocation",
+      "cardinality": "many:zero_or_one",
+      "note": "광고·도구·운송 등 실제 비용의 지급 또는 환급 귀속"
+    },
+    {
+      "id": "allocatesCostTo",
+      "from": "CostAllocation",
+      "to": "OrderLine",
+      "cardinality": "many:many",
+      "note": "같은 비용 중복 차감 방지"
+    },
+    {
+      "id": "documentsLaborFor",
+      "from": "WorkLog",
+      "to": "SupplyArrangement",
+      "cardinality": "many:many",
+      "note": "작업시간 측정"
+    },
+    {
+      "id": "supportedBy",
+      "from": "EvidenceClaim",
+      "to": "Source",
+      "cardinality": "many:many",
+      "note": "근거는 주장 유형을 넘어 승격시키지 않음"
+    },
+    {
+      "id": "informedBy",
+      "from": "Decision",
+      "to": "EvidenceClaim",
+      "cardinality": "many:many",
+      "note": "검토 결론의 출처"
+    },
+    {
+      "id": "usesEvidence",
+      "from": "TopicCandidate",
+      "to": "EvidenceClaim",
+      "cardinality": "many:many",
+      "note": "글 후보의 주장 범위"
+    },
+    {
+      "id": "sourcedFrom",
+      "from": "TopicCandidate",
+      "to": "Source",
+      "cardinality": "many:many",
+      "note": "독립성 그룹을 함께 확인"
+    }
+  ],
+  "evidencePolicy": {
+    "sourceLedgerFile": "consignment-source-ledger-2026-09-26.json",
+    "claimLedger": [
+      {
+        "id": "K01",
+        "kind": "documented_flow",
+        "statement": "공급자 직배송, 상품 노출, 고객 주문은 별도 역할과 단계로 기술된다.",
+        "sourceIds": [
+          "D1"
+        ],
+        "locator": "physical pp.17-18",
+        "consequence": "Actor, SupplyArrangement, ListingOption, CustomerOrder를 분리한다."
+      },
+      {
+        "id": "K02",
+        "kind": "documented_feature",
+        "statement": "품절 대안 교체 기능도 동일상품이라는 조건을 둔다.",
+        "sourceIds": [
+          "D2"
+        ],
+        "locator": "상품 교체 기능 안내",
+        "consequence": "대체 공급처는 SKU 속성·단위·조건을 확인한 뒤 매핑한다."
+      },
+      {
+        "id": "K03",
+        "kind": "documented_platform_process",
+        "statement": "반품 배송비 확인·회수·환불 완료는 다른 관측이다.",
+        "sourceIds": [
+          "D3"
+        ],
+        "locator": "반품 배송비 결제 확인",
+        "consequence": "ClaimCase와 FinancialEvent를 분리한다."
+      },
+      {
+        "id": "K04",
+        "kind": "documented_platform_process",
+        "statement": "완료된 취소·반품의 복구 제한과 품절 사유 처리가 있다.",
+        "sourceIds": [
+          "D4"
+        ],
+        "locator": "취소/반품 완료 주문",
+        "consequence": "이전 상태를 덮어쓰지 않고 이벤트 및 재주문 관계를 남긴다."
+      },
+      {
+        "id": "K05",
+        "kind": "documented_platform_process",
+        "statement": "정산에는 결제·구매확정·예정·공제·보류 등 서로 다른 기준이 있다.",
+        "sourceIds": [
+          "D5"
+        ],
+        "locator": "항목별 정산 내역",
+        "consequence": "SettlementLine, FinancialEvent, effectiveAt을 분리한다."
+      },
+      {
+        "id": "K06",
+        "kind": "legal_applicability_reference",
+        "statement": "청약철회와 환급은 사유·조건·거래 당사자의 적용성 검토가 필요하다.",
+        "sourceIds": [
+          "D6",
+          "D7"
+        ],
+        "locator": "제17조 및 제18조",
+        "consequence": "공급사 직배송만으로 고객에 대한 책임이 사라진다고 추론하지 않는다."
+      },
+      {
+        "id": "K07",
+        "kind": "author_method",
+        "statement": "키워드·경쟁 신호와 고객 불편을 소싱 후보에 활용한다.",
+        "sourceIds": [
+          "E1"
+        ],
+        "locator": "pp.37-46,58,96",
+        "consequence": "DemandObservation은 실제 주문량과 구분한다."
+      },
+      {
+        "id": "K08",
+        "kind": "author_method",
+        "statement": "위탁 후 사입·브랜딩으로 전환하는 경로를 제안한다.",
+        "sourceIds": [
+          "E1"
+        ],
+        "locator": "pp.59-60,144",
+        "consequence": "공급 방식 전환 시 재고·운전자금·반품 조건을 다시 평가한다."
+      },
+      {
+        "id": "K09",
+        "kind": "conflicted_author_heuristic",
+        "statement": "시장규모 임계값이 페이지별로 다르다.",
+        "sourceIds": [
+          "E1"
+        ],
+        "locator": "p.40 and p.63",
+        "consequence": "임계값을 기본 자동 통과 기준으로 사용하지 않는다.",
+        "authorValues": [
+          {
+            "page": 40,
+            "amountKRW": 300000000,
+            "window": null
+          },
+          {
+            "page": 63,
+            "amountKRW": 100000000,
+            "windowMonths": 6
+          }
+        ],
+        "activated": false
+      },
+      {
+        "id": "K10",
+        "kind": "unvalidated_author_heuristic",
+        "statement": "마진 목표값은 제시되지만 산식·포함 비용이 충분히 고정되지 않았다.",
+        "sourceIds": [
+          "E1"
+        ],
+        "locator": "pp.54,56-57",
+        "consequence": "제시 비율 대신 확인된 비용 항목을 계산한다.",
+        "authorTargetPercent": 30,
+        "activated": false
+      },
+      {
+        "id": "K11",
+        "kind": "scope_conflict",
+        "statement": "상품을 매입해 창고에 입고하는 물류 모델도 설명한다.",
+        "sourceIds": [
+          "E1"
+        ],
+        "locator": "pp.20-24",
+        "consequence": "supplier_direct와seller_owned_3pl을 다른 축값으로 분리한다."
+      },
+      {
+        "id": "K12",
+        "kind": "unverified_tool_claim",
+        "statement": "송장·CS·리뷰 분석·상품명 도구를 소개한다.",
+        "sourceIds": [
+          "E1"
+        ],
+        "locator": "pp.21,122-129,135-136",
+        "consequence": "자동화 기능과 절감 시간은 별도 실행 근거가 필요하다."
+      },
+      {
+        "id": "K13",
+        "kind": "self_report",
+        "statement": "품절 후 대체 공급처에 발주한 경험을 서술한다.",
+        "sourceIds": [
+          "C615"
+        ],
+        "locator": "본문의 품절 대응 단락",
+        "consequence": "대체 공급처와 그 검증 상태를 기록한다."
+      },
+      {
+        "id": "K14",
+        "kind": "self_report",
+        "statement": "CS·송장 입력과 일일 장부의 부담을 서술한다.",
+        "sourceIds": [
+          "C776"
+        ],
+        "locator": "본문의 작업/정산 단락",
+        "consequence": "WorkLog, tracking_received, settlement_reconciled를 구분한다."
+      },
+      {
+        "id": "K15",
+        "kind": "mixed_model_self_report",
+        "statement": "광고비 손실과 사입 재고·물류를 함께 설명한다.",
+        "sourceIds": [
+          "C23"
+        ],
+        "locator": "본문 전체",
+        "consequence": "매출 성과로만 분류하지 않으며 위탁 전용 수익 근거에서 제외한다."
+      },
+      {
+        "id": "K16",
+        "kind": "observed_sample_boundary",
+        "statement": "검토한 첫 8개 댓글은 학습 반응이며 정산 증거를 확인하지 않았다.",
+        "sourceIds": [
+          "C21comments"
+        ],
+        "locator": "first eight comments",
+        "consequence": "감사·희망 수입을 실현 수익이나 성공률로 변환하지 않는다."
+      },
+      {
+        "id": "K17",
+        "kind": "promotion_context",
+        "statement": "자료 배포는 강의·추가 자료 안내와 연결된다.",
+        "sourceIds": [
+          "C21"
+        ],
+        "locator": "본문의 배포/강의 안내",
+        "consequence": "출처 이해관계와 독립성을 기록한다."
+      }
+    ],
+    "sourcePriorityByQuestion": {
+      "operational_rule": "current applicable official rule or agreement",
+      "personal_profit": "reconciled orders, costs, settlement and payment records",
+      "user_problem": "scoped self-report with incentives and independent-case count",
+      "tool_capability": "observed contract and independent execution"
+    },
+    "forbiddenPromotions": [
+      "search signal -> verified demand",
+      "gross sales -> net profit",
+      "gratitude -> success rate",
+      "shipment label -> carrier pickup",
+      "scheduled payout -> bank receipt",
+      "ebook threshold -> proven universal decision rule",
+      "member-only source -> publicly reusable full text"
+    ],
+    "rawPrivateContentExported": false
+  },
+  "stateModels": {
+    "CustomerOrder": [
+      "created",
+      "awaiting_payment",
+      "paid",
+      "cancel_requested",
+      "partially_cancelled",
+      "cancelled",
+      "completed",
+      "disputed",
+      "unknown"
+    ],
+    "PurchaseOrder": [
+      "draft",
+      "submitted",
+      "accepted",
+      "rejected",
+      "partially_fulfilled",
+      "fulfilled",
+      "cancelled",
+      "unknown"
+    ],
+    "Shipment": [
+      "label_created",
+      "handed_to_carrier",
+      "in_transit",
+      "delivered",
+      "failed",
+      "returned",
+      "unknown"
+    ],
+    "ClaimCase": [
+      "requested",
+      "under_review",
+      "approved",
+      "collecting",
+      "received",
+      "inspected",
+      "refund_authorized",
+      "refunded",
+      "rejected",
+      "closed",
+      "unknown"
+    ],
+    "SettlementLine": [
+      "scheduled",
+      "eligible",
+      "held",
+      "paid",
+      "adjusted",
+      "reversed",
+      "disputed",
+      "unknown"
+    ],
+    "boundary": "표준 상태 사전이며 플랫폼 코드 매핑/전이 엔진은 아직 구현하지 않았다. 완료 후 사건은 조정·새 사건으로 남긴다."
+  },
+  "workflow": [
+    {
+      "stage": "discover",
+      "input": [
+        "Source",
+        "DemandObservation"
+      ],
+      "decision": "운영 방식·홍보·접근 범위 분류",
+      "output": "근거가 붙은 소싱 후보",
+      "exception": "비공개/403는 discovery_only",
+      "owner": "researcher"
+    },
+    {
+      "stage": "qualify_supply",
+      "input": [
+        "SupplyAgreement",
+        "SupplierOffer",
+        "InventoryObservation",
+        "SkuMapping"
+      ],
+      "decision": "공급조건·동일성·재고 유효성",
+      "output": "검토된 공급 후보와 빈칸",
+      "exception": "품절/불명 MOQ/조건 변경",
+      "owner": "seller"
+    },
+    {
+      "stage": "qualify_product",
+      "input": [
+        "ProductVariant",
+        "RightsGrant",
+        "ComplianceCheck"
+      ],
+      "decision": "샘플·규격·콘텐츠 권리·품목 적용성",
+      "output": "등록 검토 후보",
+      "exception": "미확인 권리/품목 조건",
+      "owner": "seller"
+    },
+    {
+      "stage": "evaluate_economics",
+      "input": [
+        "Money",
+        "CostAllocation",
+        "WorkLog"
+      ],
+      "decision": "기여이익·운전자금·노동 민감도",
+      "output": "가정 명시 계산 또는 insufficient_data",
+      "exception": "금액/기간/세금 기준 불일치",
+      "owner": "seller"
+    },
+    {
+      "stage": "list_and_order",
+      "input": [
+        "ChannelListing",
+        "ListingOption",
+        "CustomerOrder",
+        "OrderLine"
+      ],
+      "decision": "권한과 채널별 정책·최신 조건",
+      "output": "등록/주문 스냅샷",
+      "exception": "채널상태·옵션 오매핑",
+      "owner": "seller"
+    },
+    {
+      "stage": "procure_and_fulfill",
+      "input": [
+        "PurchaseOrder",
+        "FulfillmentAllocation",
+        "Shipment"
+      ],
+      "decision": "수량·원가·발송 약속 대조",
+      "output": "발주·배송 관측",
+      "exception": "품절·분할배송·모호한 요청은 대사",
+      "owner": "seller_and_supplier"
+    },
+    {
+      "stage": "handle_claim",
+      "input": [
+        "ClaimCase",
+        "Shipment",
+        "FinancialEvent"
+      ],
+      "decision": "사유·회수·부담·환불 상태 확인",
+      "output": "항목별 처리 기록",
+      "exception": "책임 미확정/분쟁은 수동검토",
+      "owner": "seller_with_supplier"
+    },
+    {
+      "stage": "reconcile_and_learn",
+      "input": [
+        "SettlementLine",
+        "FinancialEvent",
+        "CostAllocation",
+        "WorkLog"
+      ],
+      "decision": "정산·실입금·실현 손익 대사",
+      "output": "검증된 성과 또는 미확인 차이",
+      "exception": "보류·공제·누락비용",
+      "owner": "seller"
+    }
+  ],
+  "reviewRules": [
+    {
+      "id": "R01",
+      "dimension": "model_scope",
+      "label": "위탁·사입·물류대행 구분",
+      "rule": "재고 소유·보관·발송·계약 당사자·보상 방식 중 미확인 축은 unknown으로 남긴다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K01",
+        "K11"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R02",
+      "dimension": "sku_equivalence",
+      "label": "대체 공급처 동일성",
+      "rule": "상품명 일치만으로 공급 SKU를 교체하지 않는다. 규격·구성·환산·배송조건과 근거를 확인한다. 환산의 판매 단위는 ListingOption.saleUnit과, 공급 단위는 SupplierOffer.supplyUnit과 일치해야 한다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K02",
+        "K13"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R03",
+      "dimension": "inventory_freshness",
+      "label": "재고 시점",
+      "rule": "만료 기준을 넘기거나 기준 자체가 없는 관측은 발주 가능으로 자동 승격하지 않는다. freshness TTL은 공급처 계약/실측에 맞춰 정한다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K02",
+        "K13"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R04",
+      "dimension": "rights_and_compliance",
+      "label": "권리·품목 조건",
+      "rule": "이미지 이용범위와 품목별 요구사항 확인이 없으면 등록 후보는 검토 보류한다. 법률 예외를 모델명만으로 자동 적용하지 않는다.",
+      "outcome": "needs_manual_review",
+      "claimIds": [
+        "K06"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R05",
+      "dimension": "economics_completeness",
+      "label": "비용의 완결성",
+      "rule": "금액·통화·세금 기준·단위·기간이 비교 가능하고 직접비가 확인되어야 실현 기여이익으로 계산한다. 미확인은 null이다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K05",
+        "K10",
+        "K15"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R06",
+      "dimension": "cash_timing",
+      "label": "운전자금",
+      "rule": "공급사 지급일과 채널 실입금일을 따로 놓는다. 예정 정산을 지급 완료나 가용 현금으로 세지 않는다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K05",
+        "K14"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R07",
+      "dimension": "partial_fulfillment",
+      "label": "수량 보존",
+      "rule": "동일 단위로 초기 배정 합계가 주문 수량을 넘지 않도록 한다. 추가 교환발송은 원래 배송과 별도 purpose 및 claimCase를 연결한다.",
+      "outcome": "needs_manual_review",
+      "claimIds": [
+        "K03"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R08",
+      "dimension": "state_evidence",
+      "label": "상태 근거",
+      "rule": "송장 등록은 집화 증거가 아니고 정산 완료 표시도 은행 입금 확인과 다를 수 있다. 원본 상태와 기준 시각을 함께 보존한다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K05",
+        "K14"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R09",
+      "dimension": "profit_claim",
+      "label": "성과 주장",
+      "rule": "자기보고 매출·목표 수입·감사 댓글을 순이익·성공률·평균 수익으로 변환하지 않는다.",
+      "outcome": "hold_income_claim",
+      "claimIds": [
+        "K15",
+        "K16",
+        "K17"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R10",
+      "dimension": "threshold_conflict",
+      "label": "저자 임계값",
+      "rule": "페이지별 기준이 다르거나 지표 정의가 불명확하면 해당 수치를 기본 통과 임계값으로 활성화하지 않는다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K09",
+        "K10"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R11",
+      "dimension": "independence",
+      "label": "표본 독립성",
+      "rule": "한 강의 커뮤니티의 홍보/후속 글과 동일 출처의 댓글은 독립된 시장 검증 자료로 합산하지 않는다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K14",
+        "K16",
+        "K17"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R12",
+      "dimension": "permission_scope",
+      "label": "접근 범위",
+      "rule": "FORBIDDEN 본문은 제목만으로 내용을 추정하지 않으며 근거·전체 수집 완료에 포함하지 않는다.",
+      "outcome": "exclude_unread_source",
+      "claimIds": [],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R13",
+      "dimension": "automation_evidence",
+      "label": "자동화 상태",
+      "rule": "API 계약·인증·실행·리드백이 각각 확인된 단계만 implemented로 표시한다. 카페 조회 성공은 공급사 발주 성공의 근거가 아니다.",
+      "outcome": "manual_or_unimplemented",
+      "claimIds": [
+        "K12"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R14",
+      "dimension": "home_fit",
+      "label": "집에서 수행 가능 여부",
+      "rule": "주문·CS·정산이 온라인이어도 샘플·포장·반품 수령 등 실물 작업 담당을 확인한다.",
+      "outcome": "conditional_home",
+      "claimIds": [
+        "K01",
+        "K08",
+        "K11"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R15",
+      "dimension": "evidence_chronology",
+      "label": "기간·모순",
+      "rule": "게시일, 성과 기간, 데이터 관측일을 구분한다. 기간이 모순된 수익 주장은 수정 확인 전 비교에서 보류한다.",
+      "outcome": "hold_income_claim",
+      "claimIds": [
+        "K15"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    },
+    {
+      "id": "R16",
+      "dimension": "money_allocation",
+      "label": "입출금 배부 대사",
+      "rule": "같은 금융사건·대사그룹의 배부합계는 원금액을 넘지 않는다. 통화·세금 기준과 환불 클레임을 확인한다. 광고·도구·운송 비용은 CostAllocation으로 연결하며 충당 추정이나 기회비용을 현금 지급으로 배부하지 않는다. 다른 대사 뷰를 합쳐 중복 집계하지 않는다.",
+      "outcome": "needs_evidence",
+      "claimIds": [
+        "K03",
+        "K05"
+      ],
+      "mode": "declarative_advisory",
+      "hardCodedNumericThreshold": false
+    }
+  ],
+  "calculations": {
+    "remunerationBranches": {
+      "resale_margin": "retainedSales 및 contribution 산식 적용",
+      "commission": "agencyRevenue - 판매자가 부담한 직접비. 거래 상품총액(GMV)을 수익이나 수익률 분모로 대입하지 않는다.",
+      "mixed": "계약별 재판매/대행 구성요소를 먼저 분리하고 중복 수익·비용을 제거한 뒤 합산",
+      "unknown": "result=null; needs_evidence"
+    },
+    "agencyRevenue": "취소·환수를 반영한 확정 판매대행 수수료 + 계약상 귀속 비용보전 순액",
+    "currencyRule": "환율 근거 없이 통화를 합산하지 않는다.",
+    "unknownRule": "필수 입력 누락이면 result=null, status=insufficient_data, missingFields 반환",
+    "retainedSales": "item_gross + buyer_shipping - seller_funded_discount - customer_refunds",
+    "contribution": "retained_sales - product_cost_net_of_supplier_refunds - platform_fees_net_of_reversals - outbound_cost - return_cost - attributed_ad_cost - other_direct_cost",
+    "antiDoubleCounting": "총액에서 수수료를 빼는 방식과 이미 차감된 순정산액 기반 방식을 섞지 않는다. 동일 금융사건의 배부합계는 그 금액을 넘지 않는다.",
+    "financialAllocationRules": [
+      "FinancialAllocation의 settlementLine/purchaseOrder/claimCase/costAllocation 중 적어도 하나를 연결한다.",
+      "여러 대상 참조는 한 배부액의 맥락이며 각각 별도 금액으로 합산하지 않는다.",
+      "같은 금융사건 및 reconciliationGroup 안의 배부합계는 사건 절대액 이하여야 한다.",
+      "다른 reconciliationGroup은 같은 돈의 다른 대사 관점이므로 그룹끼리 합산하지 않는다.",
+      "costAllocation은 nature=actual인 비용에만 연결하고 지급·환급 근거를 확인한다. estimated_reserve와 opportunity_cost는 현금 사건으로 배부하지 않는다.",
+      "서로 다른 통화는 환율 근거와 별도 환산 사건 없이 대사하지 않는다."
+    ],
+    "contributionMargin": {
+      "resale_margin": "resale_contribution / retained_sales",
+      "commission": "agency_contribution / agency_revenue",
+      "mixed": "각 계약 구성요소의 분모로 별도 표시. 공통 수익 인식 기준과 중복 제거 근거 없이는 통합 비율을 계산하지 않는다.",
+      "unknown": "result=null; needs_evidence",
+      "denominatorRule": "해당 방식의 분모가 누락되거나 0 이하이면 null"
+    },
+    "expectedReturnReserve": "return_probability * expected_incremental_loss_given_return; 관측 표본/기간 없으면 시나리오 입력으로만 사용",
+    "laborOpportunityCost": "work_minutes / 60 * user_assumed_hourly_value; 실제 지급 노동비와 구분",
+    "cashBalance": "opening_cash + cumulative_actual_inflows - cumulative_actual_outflows",
+    "fundingGap": "max(0, -minimum(projected_cash_balance)); 완전한 지급시점 시나리오에서만 계산",
+    "incomeMetricBoundary": "기여이익은 고정비·세금·전체 노동까지 차감한 최종 순이익이 아니다. 매입 현금지출과 매출원가도 재고 모델에 따라 다를 수 있다."
+  },
+  "competencyQuestions": [
+    {
+      "id": "Q1",
+      "question": "이 제안은 공급처 직배송 위탁인가, 사입 재고의 물류대행인가?",
+      "traverse": [
+        "SupplyArrangement",
+        "SupplyAgreement"
+      ],
+      "rules": [
+        "R01",
+        "R14"
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "이 옵션을 품절 시 다른 공급처로 바꿔도 같은 상품인가?",
+      "traverse": [
+        "ListingOption",
+        "SkuMapping",
+        "SupplierOffer",
+        "ProductVariant"
+      ],
+      "rules": [
+        "R02",
+        "R03"
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "이 주문의 기여이익을 계산하기에 무엇이 빠졌나?",
+      "traverse": [
+        "OrderLine",
+        "CostAllocation",
+        "SettlementLine"
+      ],
+      "rules": [
+        "R05"
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "정산 전 공급사 결제에 필요한 자금은 얼마인가?",
+      "traverse": [
+        "PurchaseOrder",
+        "FinancialEvent",
+        "SettlementLine"
+      ],
+      "rules": [
+        "R06"
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "한 항목만 반품했을 때 배송·환불·정산이 어떻게 연결되나?",
+      "traverse": [
+        "OrderLine",
+        "FulfillmentAllocation",
+        "ClaimCase",
+        "SettlementLine",
+        "FinancialAllocation"
+      ],
+      "rules": [
+        "R07",
+        "R08",
+        "R16"
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "월매출 인증을 실제 순이익 근거로 써도 되나?",
+      "traverse": [
+        "EvidenceClaim",
+        "Source",
+        "FinancialEvent",
+        "CostAllocation"
+      ],
+      "rules": [
+        "R09",
+        "R11",
+        "R15"
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "이 기준은 공식 규칙인가, 저자의 검증되지 않은 임계값인가?",
+      "traverse": [
+        "EvidenceClaim",
+        "Source"
+      ],
+      "rules": [
+        "R10"
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "자동화됐다는 주장 중 실제로 실행된 단계는 어디인가?",
+      "traverse": [
+        "Source",
+        "Decision"
+      ],
+      "rules": [
+        "R13"
+      ]
+    }
+  ],
+  "syntheticExamples": [
+    {
+      "id": "EX1",
+      "recordKind": "synthetic",
+      "isUserPerformance": false,
+      "label": "거래 한 건의 비용·자금 시차 설명",
+      "assumptions": [
+        "설명용 가상 주문 1건, 실존 상품·요율·성과 아님",
+        "동일 KRW 단위, 예시에 한해 세금 미모형화(synthetic_no_tax)",
+        "판매자 현금 기초잔액 0, 정산은 가정상 day 7",
+        "반품충당과 자기 노동가치는 아직 실제 지출이 아님"
+      ],
+      "input": {
+        "itemGrossKRW": 25000,
+        "buyerShippingKRW": 3000,
+        "sellerDiscountKRW": 1000,
+        "productCostKRW": 15000,
+        "outboundCostKRW": 3000,
+        "platformFeeKRW": 1800,
+        "adCostKRW": 1200,
+        "expectedReturnReserveKRW": 600,
+        "workMinutes": 10,
+        "assumedHourlyValueKRW": 15000
+      },
+      "calculated": {
+        "retainedSalesKRW": 27000,
+        "contributionBeforeReserveLaborFixedAndTaxKRW": 6000,
+        "afterHypotheticalReturnReserveKRW": 5400,
+        "afterReserveAndLaborOpportunityCostKRW": 2900,
+        "netProfitKRW": null,
+        "projectedFundingGapKRW": 19200
+      },
+      "cashEvents": [
+        {
+          "day": 0,
+          "direction": "outflow",
+          "amountKRW": 18000,
+          "label": "공급사 대금·발송비",
+          "projectedBalanceKRW": -18000
+        },
+        {
+          "day": 1,
+          "direction": "outflow",
+          "amountKRW": 1200,
+          "label": "광고비",
+          "projectedBalanceKRW": -19200
+        },
+        {
+          "day": 7,
+          "direction": "inflow",
+          "amountKRW": 25200,
+          "label": "수수료 차감 후 가정 정산금",
+          "projectedBalanceKRW": 6000
+        }
+      ]
+    }
+  ],
+  "articleCandidates": [
+    {
+      "id": "T1",
+      "title": "스마트스토어 정산예정액과 통장 입금은 왜 다를까",
+      "readerQuestion": "공급사 선결제를 가정하면 입금 전 자금 시차는 어떻게 계산하나?",
+      "sourceIds": [
+        "D5"
+      ],
+      "claimIds": [
+        "K05"
+      ],
+      "missingEvidence": [
+        "사용자의 실제 지급·입금 시각, 비용 장부"
+      ],
+      "safeWritingScope": [
+        "스마트스토어 공식 정산 구조 설명",
+        "공급사 선결제를 가정한 현금흐름 예시"
+      ],
+      "publicationReady": false,
+      "status": "research_candidate"
+    },
+    {
+      "id": "T2",
+      "title": "같은 상품처럼 보여도 공급처를 바로 바꾸면 안 되는 이유",
+      "readerQuestion": "품절 대체상품의 옵션·구성·배송조건은 어떻게 확인하나?",
+      "sourceIds": [
+        "D2",
+        "C615"
+      ],
+      "claimIds": [
+        "K02",
+        "K13"
+      ],
+      "missingEvidence": [
+        "대체 공급 SKU 2개와 동일성 자료"
+      ],
+      "safeWritingScope": [
+        "공식 도구 조건",
+        "SKU 매핑 체크 항목"
+      ],
+      "publicationReady": false,
+      "status": "research_candidate"
+    },
+    {
+      "id": "T3",
+      "title": "위탁·사입·물류대행을 한 번에 구별하는 질문",
+      "readerQuestion": "재고를 누가 소유·보관하고 누가 발송하는가?",
+      "sourceIds": [
+        "D1",
+        "E1",
+        "C23"
+      ],
+      "claimIds": [
+        "K01",
+        "K08",
+        "K11",
+        "K15"
+      ],
+      "missingEvidence": [
+        "개별 계약의 권리·책임은 미확인"
+      ],
+      "safeWritingScope": [
+        "모델 분류 설명",
+        "혼합 사례를 분류하는 예시"
+      ],
+      "publicationReady": false,
+      "status": "research_candidate"
+    },
+    {
+      "id": "T4",
+      "title": "반품 한 건을 주문·회수·환불·정산으로 나눠보기",
+      "readerQuestion": "반품 완료와 돈이 돌아오는 시점은 왜 다른가?",
+      "sourceIds": [
+        "D3",
+        "D5",
+        "D6",
+        "D7"
+      ],
+      "claimIds": [
+        "K03",
+        "K05",
+        "K06"
+      ],
+      "missingEvidence": [
+        "실제 반품 원장과 사유별 적용성"
+      ],
+      "safeWritingScope": [
+        "공식 처리 단계",
+        "확인해야 할 근거"
+      ],
+      "publicationReady": false,
+      "status": "research_candidate"
+    },
+    {
+      "id": "T5",
+      "title": "소싱 전자책의 숫자를 자동 판별기에 넣기 전 확인할 것",
+      "readerQuestion": "시장규모와 마진 목표는 어떤 산식·기간의 값인가?",
+      "sourceIds": [
+        "E1"
+      ],
+      "claimIds": [
+        "K07",
+        "K09",
+        "K10"
+      ],
+      "missingEvidence": [
+        "도구 지표 정의·현재 데이터·독립 반복 사례"
+      ],
+      "safeWritingScope": [
+        "지표 정의와 모순 점검",
+        "수치 자체는 효과 검증으로 사용하지 않음"
+      ],
+      "publicationReady": false,
+      "status": "research_candidate"
+    }
+  ],
+  "integration": {
+    "existingOntologyAnchor": "acada:side-hustle/modelTaxonomy/commerce_resale",
+    "contentCollector": "existing apps/naver-cafe-api read client",
+    "cafeReadStatus": "live_read",
+    "supplierInventoryConnector": "not_implemented_in_this_task",
+    "marketplaceOrderConnector": "not_implemented_in_this_task",
+    "reconciliationEngine": "schema_only",
+    "reasoner": "declarative_not_executable",
+    "automaticPurchasesEnabled": false,
+    "automaticPublicationEnabled": false,
+    "jev": {
+      "mode": "off",
+      "waiver": "user standing instruction 2026-09-25"
+    },
+    "actualUserOrdersCollected": 0,
+    "actualUserProfitVerified": false
+  },
+  "nextEvidenceNeeded": [
+    "공급사 한 곳의 실제 계약·SKU·배송/반품 조건",
+    "대응되는 판매 옵션·수수료 적용 근거",
+    "주문 항목과 발주·배송의 비식별 샘플",
+    "정산 명세·실입금·직접비·작업시간"
+  ],
+  "integrity": {
+    "checkedAt": "2026-09-26T07:04:55.641Z",
+    "kind": "static_references_and_generated_arithmetic",
+    "classCount": 29,
+    "relationCount": 35,
+    "claimCount": 17,
+    "ruleCount": 16,
+    "topicCount": 5,
+    "realTransactionEvidenceCount": 0
+  },
+  "sources": [
+    {
+      "url": "https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=282793",
+      "kind": "Official Korean statute",
+      "rule": "Current Electronic Commerce Consumer Protection Act text for online seller and intermediary obligations.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031806495",
+      "kind": "Official Korean statute, Article 20-3",
+      "rule": "Provides the current statutory text on duties of mail-order intermediaries.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://m.gov.kr/mw/AA020InfoCappView.do?CappBizCD=11300000006&HighCtgCD=A09006&Mcode=10020&srhQuery=2023&tp_seq=01",
+      "kind": "Government24 official service page",
+      "rule": "Describes the mail-order reporting service and its statutory basis.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://www.ifrs.org/news-and-events/updates/ifric/2021/ifric-update-november-2021/",
+      "kind": "Official IFRS Interpretations Committee update",
+      "rule": "Discusses principal-versus-agent assessment under IFRS 15, including control of specified goods or services and contextual indicators.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    }
+  ],
+  "sourcedAdditions": [
+    {
+      "path": "/reviewRules/-",
+      "value": "Determine legal roles and duties from the current law and the actual activities and agreements; a supplier's direct fulfillment or the label 위탁판매 alone does not settle whether a party is a seller or intermediary.",
+      "sourceUrl": "https://www.law.go.kr/lsLinkCommonInfo.do?chrClsCd=010202&lsJoLnkSeq=1031806495",
+      "why": "Adds a narrow, source-backed legal check and avoids treating a commercial label as a legal classification.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    },
+    {
+      "path": "/reviewRules/-",
+      "value": "When reporting revenue under IFRS 15, assess whether the entity controls the specified good or service before transfer; fulfillment, inventory risk, and pricing discretion are contextual indicators, not stand-alone tests.",
+      "sourceUrl": "https://www.ifrs.org/news-and-events/updates/ifric/2021/ifric-update-november-2021/",
+      "why": "Separates accounting principal-agent analysis from the ontology's operational sales and contribution calculations.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    }
+  ],
+  "reviewFlags": [
+    "Lines 49–51, 66–68, 83–85, and 102–104 of the referenced consignment-source-ledger-2026-09-26.json contain source URLs; the ontology file itself does not.",
+    "Lines 2304–2336: the calculations are internal management metrics, and the file expressly distinguishes contribution from after-tax profit and fixed labor. Do not present them as statutory accounting or tax formulas.",
+    "Lines 2443 onward: synthetic examples are fictional scenarios, not market data or evidence of typical earnings. Assumption: any classification of a specific consignment arrangement requires its actual agreement and activity facts.",
+    "Not verified: no seller contract, transaction, or accountant review was examined; the cited legal and accounting sources do not classify a particular seller's arrangement."
+  ]
+}

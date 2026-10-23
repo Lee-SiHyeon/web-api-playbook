@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 2,
+  "note": "Target keywords per genre for choosing writing references. A genre is a keyword list (Naver blog tab only) or {keywords, sources}. Sources: naver_blog, daum_blog (Tistory + Naver via Daum), naver_web (personal sites). Blogs and sites that rank for many keywords become reference candidates. excludeHosts (regex per web host, grouped by reason) drops web results that are not editorial writing: institutions, news, forums, shops and price tools. Edit freely; the scout reads this file each run, and --rescore re-applies it to an earlier result without new requests. minSubscribers drops Naver and Tistory blogs whose public subscriber count is known and below it (user, 2026-09-25).",
+  "minSubscribers": 1000,
+  "excludeBlogIds": [
+    "aicandoanything",
+    "i-never-stop-study.tistory.com"
+  ],
+  "excludeHosts": {
+    "vendors_and_references": [
+      "(^|\\.)claude\\.(ai|com)$",
+      "(^|\\.)anthropic\\.com$",
+      "(^|\\.)openai\\.com$",
+      "(^|\\.)chatgpt\\.com$",
+      "(^|\\.)google\\.com$",
+      "(^|\\.)youtube\\.com$",
+      "(^|\\.)namu\\.wiki$",
+      "wikipedia\\.org$",
+      "(^|\\.)apple\\.com$",
+      "(^|\\.)microsoft\\.com$",
+      "(^|\\.)adobe\\.com$",
+      "(^|\\.)samsung\\.com$",
+      "wondershare\\.kr$",
+      "^morphic\\.com$",
+      "^boardmix\\.com$",
+      "^docs\\.kanaries\\.net$"
+    ],
+    "institutions_and_courses": [
+      "\\.go\\.kr$",
+      "(^|\\.)gov\\.kr$",
+      "^korea\\.kr$",
+      "\\.ac\\.kr$",
+      "\\.or\\.kr$",
+      "\\.re\\.kr$",
+      "\\.seoul\\.kr$",
+      "korcham\\.net$",
+      "^kobic\\.net$",
+      "^gseek\\.kr$",
+      "^kcisa\\.kr$",
+      "^kll\\.kr$",
+      "^kitpa\\.org$",
+      "^spartaclub\\.kr$",
+      "^xn--2z1bw8k1pjz5ccumkb\\.kr$",
+      "^daejeonyouthportal\\.kr$"
+    ],
+    "news": [
+      "(^|\\.)chosun\\.com$",
+      "hankyung\\.com$",
+      "sedaily\\.com$",
+      "wikitree\\.co\\.kr$",
+      "zdnet\\.co\\.kr$",
+      "hellot\\.net$",
+      "datanet\\.co\\.kr$",
+      "fnnews\\.com$",
+      "bizwatch\\.co\\.kr$",
+      "iheadlinenews\\.co\\.kr$",
+      "cadgraphics\\.co\\.kr$",
+      "hwlab\\.com$",
+      "medicaldaily\\.co\\.kr$",
+      "ddanzi\\.com$",
+      "nanumpress\\.com$",
+      "younaild\\.com$",
+      "gukjenews\\.com$",
+      "nocutnews\\.co\\.kr$",
+      "asiae\\.co\\.kr$",
+      "einfomax\\.co\\.kr$",
+      "issue-economy\\.com$"
+    ],
+    "forums_and_communities": [
+      "ppomppu",
+      "fmkorea\\.com$",
+      "clien\\.net$",
+      "theqoo\\.net$",
+      "quasarzone\\.com$",
+      "dcinside\\.com$",
+      "eomisae\\.co\\.kr$",
+      "itcm\\.co\\.kr$",
+      "daangn\\.com$",
+      "i-boss\\.co\\.kr$",
+      "philgo\\.com$",
+      "telegram\\.pe\\.kr$",
+      "daumland\\.co\\.kr$"
+    ],
+    "shops_and_services": [
+      "(^|\\.)coupang\\.com$",
+      "(^|\\.)danawa\\.com$",
+      "(^|\\.)gmarket\\.co\\.kr$",
+      "(^|\\.)11st\\.co\\.kr$",
+      "enuri\\.com$",
+      "skyscanner\\.",
+      "trip\\.com$",
+      "banksalad\\.com$",
+      "allstay\\.com$",
+      "lotteimall\\.com$",
+      "lottedfs\\.com$",
+      "poizon\\.com$",
+      "onestore\\.co\\.kr$",
+      "wishket\\.com$",
+      "doctornow\\.co\\.kr$",
+      "my-doctor\\.io$",
+      "phonesawa\\.co\\.kr$",
+      "airportrentcar\\.co\\.kr$",
+      "jejuauction\\.kr$",
+      "sinchadream\\.co\\.kr$",
+      "pping\\.kr$",
+      "nakdeal\\.com$",
+      "justone\\.co\\.kr$",
+      "luktkindy\\.co\\.kr$",
+      "mumu-coupon\\.com$",
+      "statscrop\\.com$",
+      "compromispertorrent\\.com$",
+      "cc80f63x1z\\.com$",
+      "withuslees\\.com$",
+      "sesac"
+    ],
+    "price_tools_and_deal_feeds": [
+      "hotdealview\\.com$",
+      "roochas\\.co\\.kr$",
+      "couprice\\.co\\.kr$",
+      "alltimeprice\\.com$",
+      "ddobby\\.best$",
+      "ttalkkak\\.shop$",
+      "algumon\\.com$",
+      "hotdeal\\.zip$",
+      "hotdeal-press\\.com$",
+      "dajupma\\.com$",
+      "onlydeals\\.net$",
+      "adrything\\.com$",
+      "informationhot\\.kr$",
+      "halinpick\\.com$",
+      "dikr\\.co\\.kr$",
+      "ko\\.accio\\.com$",
+      "xn--ai-4y0jo46a\\.com$",
+      "gptaitool\\.netlify\\.app$",
+      "imbench\\.com$",
+      "sseoba\\.com$"
+    ]
+  },
+  "genres": {
+    "travel_deals": [
+      "연휴 여행 추천",
+      "패키지 여행 특가",
+      "항공권 특가",
+      "해외여행 할인코드",
+      "일본 여행 패키지",
+      "호텔 특가",
+      "가을 여행지 추천"
+    ],
+    "hotdeal": {
+      "sources": [
+        "naver_blog",
+        "daum_blog",
+        "naver_web"
+      ],
+      "keywords": [
+        "가격비교 사이트",
+        "최저가 비교",
+        "최저가 찾는 방법",
+        "다나와 최저가",
+        "쿠팡 최저가 확인",
+        "역대 최저가",
+        "핫딜 사이트 추천",
+        "오늘의 핫딜",
+        "쇼핑 할인 정보",
+        "가성비 추천템"
+      ]
+    },
+    "ai": {
+      "sources": [
+        "naver_blog",
+        "daum_blog",
+        "naver_web"
+      ],
+      "keywords": [
+        "클로드 사용법",
+        "챗GPT 활용법",
+        "AI 코딩 도구 비교",
+        "AI 업무 자동화",
+        "생성형 AI 신기능",
+        "클로드 코드",
+        "AI 툴 추천"
+      ]
+    },
+    "life_tips": {
+      "sources": [
+        "naver_blog",
+        "daum_blog",
+        "naver_web"
+      ],
+      "keywords": [
+        "신혼부부 혜택 총정리",
+        "신혼부부 특별공급 조건",
+        "생애최초 특별공급",
+        "청약 가점 계산",
+        "이번주 청약 일정",
+        "정부지원금 신청 방법",
+        "청년 월세 지원",
+        "부모급여 신청",
+        "출산 지원금 총정리",
+        "신생아 특례대출 조건"
+      ]
+    }
+  }
+}

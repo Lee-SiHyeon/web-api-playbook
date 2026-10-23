@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "date": "2026-10-13",
+  "scope": {"cafeId": "31796283", "cafeSlug": "lifehackailab"},
+  "mode": "pure_http",
+  "derivation": ["protected articleEditor JSON", "HTTP editor page and web-section bundles", "SmartEditor ONE 1.78.1 launcher and component/uploader bundles", "fresh cafepc001 service_config"],
+  "appCode": "cafepc001",
+  "photoSession": {"method": "GET", "origin": "https://platform.editor.naver.com", "path": "/api/cafepc001/v1/photo-uploader/session-key", "credentialHeaderNames": ["SE-Authorization", "SE-App-Id"]},
+  "photoUpload": {"method": "POST", "origin": "https://cafe.upphoto.naver.com", "pathTemplate": "/:sessionKey/simpleUpload/0", "body": "multipart/form-data", "bodyFieldNames": ["image"], "cookieForwarded": false, "response": "XML item", "readbackOrigin": "https://cafeptthumb-phinf.pstatic.net", "exactByteReadbackVerified": true},
+  "components": {"image": ["src", "internalResource", "represent", "path", "domain", "fileSize", "width", "height", "originalWidth", "originalHeight", "fileName", "caption", "origin", "format", "displayFormat", "contentMode", "ai", "link"], "caption": "paragraph[] containing textNode[]", "heading": "quotation with nodeStyle bold/fontSizeCode", "table": "table > rows:tableRow[] > cells:tableCell[] > value:paragraph[]", "link": "textNode.link is urlLink object; image.link is URL string", "oglink": "advertised component and first-party crawler; source runs use urlLink"},
+  "representative": {"write": "image.represent=true in contentJson", "read": "list.result.articleList[].representImage", "detailReadOmitsField": true, "selection": "first real content image excluding disclosure, sticker, banner and video fallback"},
+  "serverNormalization": ["object key ordering", "tableCell.textAlign discarded; do not emit"],
+  "video": {"nativeSeparateFlow": true, "sessionPath": "/api/cafepc001/v1/video-uploader/session-url", "tokenPath": "/api/cafepc001/v1/video-uploader/token", "implementedMirror": "verified source video thumbnail uploaded as PNG and hyperlinked to source blog", "nativeUploadAttempted": false},
+  "liveProof": {"firstArticleId": "6", "testUploadIsFirstRealContentImage": true, "orphanTestArticles": 0, "articleUpdateSendCount": 1, "textEqual": true, "images": 3, "captions": 3, "tables": 2, "representativeListReadback": true},
+  "rawCapture": {"directory": "C:/Users/User/Documents/Codex/2026-10-13/naver-cafe-media-backfill/captures", "encryption": "Windows DPAPI CurrentUser", "plaintextCredentialsPersisted": false},
+  "browserUse": {"login": false, "contractDerivation": false, "finalThumbnailReview": true}
+}

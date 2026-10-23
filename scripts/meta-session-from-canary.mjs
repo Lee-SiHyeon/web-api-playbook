@@ -1,17 +1,20 @@
 // Capture the logged-in Instagram web session from the automation Canary (CDP 9333) into DPAPI via
-// OPTIONAL external affiliate-content-operations integration: meta-auth-session storeMetaSession('instagram', …).
-// Set ACO_ROOT to that checkout, or place it beside this repository. Nothing secret is printed.
+// Uses the bundled operations pack; ACO_ROOT explicitly selects a separate checkout.
+// The legacy sibling checkout remains a fallback. Nothing secret is printed.
 //   node scripts/meta-session-from-canary.mjs [<instagramTabId>]
 // The owner check uses the observed owner read GET /api/v1/accounts/edit/web_form_data/ (headers captured from the page's
 // own request). 2026-10-19: @lifehack_ailab (new account; old lifehack__ailab IG deactivated).
 // Login path that worked: instagram.com as the personal Meta account → 전환 → lifehack_ailab → password →
 // email code (Gmail, "Verify your profile") → 정보 저장.
 import path from 'node:path';
+import { existsSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-const ACO = process.env.ACO_ROOT || fileURLToPath(new URL('../../affiliate-content-operations/', import.meta.url));
+const BUNDLED = fileURLToPath(new URL('../service-packs/operations/', import.meta.url));
+const ACO = process.env.ACO_ROOT || (existsSync(path.join(BUNDLED, 'apps/naver-blog-api/scripts/meta-auth-session.mjs'))
+  ? BUNDLED : fileURLToPath(new URL('../../affiliate-content-operations/', import.meta.url)));
 const failSetup = (code) => {
   console.error(JSON.stringify({ ok: false, code, integration: 'affiliate-content-operations',
-    hint: 'Set ACO_ROOT to a checkout containing apps/naver-blog-api/scripts/meta-auth-session.mjs with storeMetaSession and loadMetaSession exports; this optional integration is not included in web-api-playbook.' }));
+    hint: 'Use the bundled operations pack or set ACO_ROOT to a checkout containing apps/naver-blog-api/scripts/meta-auth-session.mjs with storeMetaSession and loadMetaSession exports.' }));
   process.exit(2);
 };
 let sessionHelper;

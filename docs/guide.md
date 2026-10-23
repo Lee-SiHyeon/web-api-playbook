@@ -193,7 +193,8 @@ node scripts/web-login.mjs inpock ensure
 쓰기 저널·중복 방지·쿠키 없는 public readback과 실제 공개 화면까지 검증했다.
 [발행 증거](../verification/inpock-publication-proof-2026-10-05.json)를 참고한다.
 
-외부 Gemini·Grok·ChatGPT·Google Flow 클라이언트의 로그인 producer 경계와
+Gemini·Grok·ChatGPT·Flow 등의 클라이언트는 [통합 현황](../references/repository-consolidation.md)과
+`npm run clients`에서 찾을 수 있다. 원본 로그인 producer 경계와 과거
 Google UA/Cloudflare 실측은 [로그인 진단 기록](../references/provider-login-diagnostics.md)을 참고한다.
 
 먼저 [서비스별 실행표](../service-packs/README.md)에서 필요한 pack을 고릅니다. 공통 CLI에 서비스 인증을 억지로 변환할 필요 없이, 각 pack의 기존 로그인/발행 런처를 사용할 수 있습니다.
