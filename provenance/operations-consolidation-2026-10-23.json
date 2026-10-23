@@ -1288,7 +1288,10 @@
       "sourcePath": "apps/affiliate-api-hub/tests/coupang-flash-sale-inventory.test.mjs",
       "path": "service-packs/operations/apps/affiliate-api-hub/tests/coupang-flash-sale-inventory.test.mjs",
       "sourceSha256": "1910c6ff84ac6ac8ed579ed03a6a43c5f055bb412ebf3d5039c7cf74cffc34a6",
-      "sha256": "1910c6ff84ac6ac8ed579ed03a6a43c5f055bb412ebf3d5039c7cf74cffc34a6"
+      "sha256": "ed4f7a29f5e7a5817a5fe575a6b3a2c144b1a45519e2251071ac2614bea1e4f6",
+      "modifications": [
+        "Offline inventory tests use an isolated temporary output directory, verify the persisted report, and remove it after each test instead of writing runtime results into the pack"
+      ]
     },
     {
       "sourcePath": "apps/affiliate-api-hub/tests/coupang-goldbox-catalog.test.mjs",
@@ -1609,7 +1612,10 @@
       "sourcePath": "apps/affiliate-api-hub/tests/x-media.test.mjs",
       "path": "service-packs/operations/apps/affiliate-api-hub/tests/x-media.test.mjs",
       "sourceSha256": "93c1212923a21ce3c622cc031e53ae213e99c18ab3c20437c1c51a953bc3f7fc",
-      "sha256": "93c1212923a21ce3c622cc031e53ae213e99c18ab3c20437c1c51a953bc3f7fc"
+      "sha256": "5649c473f94b630342398c1bf93977849f99b14b27383bbec260fd2e011ee1f7",
+      "modifications": [
+        "Validate journal digest/timestamp fields before checking semantic fields for raw short media IDs, avoiding incidental numeric substring matches in hashes without weakening persisted-data checks"
+      ]
     },
     {
       "sourcePath": "apps/affiliate-api-hub/tests/youtube-discovery.test.mjs",

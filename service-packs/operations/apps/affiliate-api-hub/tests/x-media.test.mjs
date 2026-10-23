@@ -109,7 +109,14 @@ test('X requires explicit processing state and an APPEND service error stops the
     } }), error => error.code === 'X_MEDIA_APPEND_REJECTED' && !error.message.includes('must-not-leak'));
   assert.deepEqual(failedCommands, ['INIT', 'APPEND']);
   const journal = (await Promise.all((await readdir(failedJournal)).map(file => readFile(path.join(failedJournal, file), 'utf8')))).join('');
-  assert.equal(journal.includes('1002'), false);
+  // A four-digit ID can occur by chance inside a digest or ISO timestamp.
+  // Validate those typed fields before checking all remaining persisted data.
+  const semanticJournal = JSON.stringify(journal.trim().split('\n').map(JSON.parse), (key, value) => {
+    if (key === 'bodySha256') { assert.match(value, /^[a-f0-9]{64}$/); return '[sha256]'; }
+    if (key === 'at') { assert.equal(new Date(value).toISOString(), value); return '[timestamp]'; }
+    return value;
+  });
+  assert.equal(semanticJournal.includes('1002'), false);
   assert.equal(journal.includes('must-not-leak'), false);
 });
 

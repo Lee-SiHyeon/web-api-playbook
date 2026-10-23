@@ -17,7 +17,9 @@ test('installer excludes known session/provider artifacts case-insensitively wit
     await writeFile(path.join(source,'package.json'),JSON.stringify({type:'module',version:'fixture'}));
     const forbidden=['auth.json','nested/Auth.JSON','cookies.json','session.backup.json','token.json',
       'nested/test.sealed','.venv/marker.txt','.venv-oliveyoung/marker.txt','.AUTH/marker.txt','.env.production',
-      'research/DoTs/capture.json','research/GROKBOT/request.json','.tmp-verify-mrt.mjs','.TMP-output/marker.json'];
+      'research/DoTs/capture.json','research/GROKBOT/request.json','.tmp-verify-mrt.mjs','.TMP-output/marker.json',
+      'service-packs/demo/affiliate-content-operations/coupang-flash-sale/inventory-fixture/inventory.json',
+      'nested/AFFILIATE-CONTENT-OPERATIONS/inpock/queue.jsonl'];
     const allowed=['.env.example','research/README.md','research/other/notes.md',
       'service-packs/demo/research/dots/notes.md','service-packs/demo/research/grokbot/notes.md',
       'nested/.tmp-allowed.mjs'];

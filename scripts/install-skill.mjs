@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { options, fail, safeError } from '../lib/cli.mjs';
 
 const source = path.resolve(fileURLToPath(new URL('../', import.meta.url)));
-const excluded = new Set(['.git', 'node_modules', '.venv', 'venv', '.auth', '.vercel', '.runtime', 'runtime', 'work', 'runs', 'workflow-runs', '__pycache__', 'credentials', 'private', 'secrets', 'raw-captures']);
+const excluded = new Set(['.git', 'node_modules', '.venv', 'venv', '.auth', '.vercel', '.runtime', 'runtime', 'work', 'runs', 'workflow-runs', '__pycache__', 'credentials', 'private', 'secrets', 'raw-captures', 'affiliate-content-operations']);
 // These working-checkout captures are not distribution assets. Other research docs remain distributable.
 const excludedRootPaths = new Set(['research/dots', 'research/grokbot']);
 const forbidden = file => /\.(?:dpapi|sealed|har|log|pem|key|pfx|p12|db|sqlite)$/i.test(file)

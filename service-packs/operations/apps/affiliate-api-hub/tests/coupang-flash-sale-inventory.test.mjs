@@ -1,8 +1,22 @@
-import test from 'node:test';
+import test, { beforeEach } from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtemp, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { collectCoupangFlashSaleInventory } from '../scripts/coupang-flash-sale-inventory.mjs';
 
 const nativeFetch = globalThis.fetch;
+
+beforeEach(async t => {
+  const previous = process.env.COUPANG_FLASH_SALE_DIR;
+  const directory = await mkdtemp(path.join(tmpdir(), 'coupang-flash-sale-test-'));
+  process.env.COUPANG_FLASH_SALE_DIR = directory;
+  t.after(async () => {
+    if (previous === undefined) delete process.env.COUPANG_FLASH_SALE_DIR;
+    else process.env.COUPANG_FLASH_SALE_DIR = previous;
+    await rm(directory, { recursive: true, force: true });
+  });
+});
 
 test('flash-sale inventory stops on its first 403 and does not rotate visitors or retry', async () => {
   const calls = [];
@@ -14,7 +28,9 @@ test('flash-sale inventory stops on its first 403 and does not rotate visitors o
     });
   };
   try {
-    const { report } = await collectCoupangFlashSaleInventory({ maxPages: 5 });
+    const { report, inventoryPath } = await collectCoupangFlashSaleInventory({ maxPages: 5 });
+    assert.equal(path.dirname(path.dirname(inventoryPath)), process.env.COUPANG_FLASH_SALE_DIR);
+    assert.deepEqual(JSON.parse(await readFile(inventoryPath, 'utf8')), report);
     assert.equal(calls.length, 1);
     assert.equal(calls[0].options.method, 'GET');
     assert.equal(calls[0].options.credentials, 'omit');
@@ -39,7 +55,9 @@ test('flash-sale inventory keeps empty successful traversal distinct from price 
     } }), { headers: { 'content-type': 'application/json' } });
   };
   try {
-    const { report } = await collectCoupangFlashSaleInventory({ maxPages: 1 });
+    const { report, inventoryPath } = await collectCoupangFlashSaleInventory({ maxPages: 1 });
+    assert.equal(path.dirname(path.dirname(inventoryPath)), process.env.COUPANG_FLASH_SALE_DIR);
+    assert.deepEqual(JSON.parse(await readFile(inventoryPath, 'utf8')), report);
     assert.equal(calls, 1);
     assert.equal(report.complete, true);
     assert.equal(report.inventoryTraversalComplete, true);
