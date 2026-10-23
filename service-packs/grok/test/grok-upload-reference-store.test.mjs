@@ -71,7 +71,8 @@ async function setupPreDispatchAbort(t, { ownerScopeSha256 = OWNER_A, stageState
 }
 
 async function fixture(t, { ownerScopeSha256 = OWNER_A, operationJournal } = {}) {
-  const base = path.join(homedir(), '.nad-scratch', 'tmp', `upload-reference-test-${randomUUID()}`);
+  // Own every checked ancestor instead of relying on a shared tmp's mode.
+  const base = path.join(homedir(), '.nad-scratch', `upload-reference-test-${randomUUID()}`);
   const rootDirectory = path.join(base, 'grok-upload-references');
   const checkpointRoot = path.join(base, 'grok-attachment-stage-audits');
   await mkdir(rootDirectory, { recursive: true, mode: 0o700 });

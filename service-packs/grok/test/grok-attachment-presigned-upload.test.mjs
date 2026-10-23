@@ -138,7 +138,8 @@ function makeApi(runtime, { signedUrlPolicy, onStageReceipt, onCompleteResponse,
 }
 
 async function configureReferenceFixture(t, runtime, { failResponseObservedOnce = false } = {}) {
-  const base = path.join(homedir(), '.nad-scratch', 'tmp', `presigned-reference-integration-${randomUUID()}`);
+  // The store checks every ancestor below .nad-scratch for owner-only access.
+  const base = path.join(homedir(), '.nad-scratch', `presigned-reference-integration-${randomUUID()}`);
   const checkpointRoot = path.join(base, 'grok-attachment-stage-audits');
   const referenceRoot = path.join(base, 'grok-upload-references');
   await mkdir(checkpointRoot, { recursive: true, mode: 0o700 });
