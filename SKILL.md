@@ -294,8 +294,18 @@ One episode, every channel (all browser-assisted, each resumable and verified by
 | Shorts to YouTube (+thumbnail, related video, pin), Naver Clip, TikTok, Instagram | `shorts-distribute.mjs` |
 | Pinned comment; long link lists as replies (one 41-link comment was silently dropped) | `youtube-pin-comment.mjs`, `youtube-reply-comment.mjs` |
 | Facebook Page: login with checkpoint, post/reel with AI label | `facebook-web.mjs` |
+| Facebook Page: SRT caption tracks on a published video/Reel, one per language (`name.en_US.srt`) | `facebook-captions.mjs` |
 | Threads / X with media | `sns-web-post.mjs` |
 | Blogs: tables as images, lab site, Naver, Tistory/Blogger HTML, Blogger with hosted uploads | `blog-md.mjs tables`, `blog-md.mjs lab-run`/`se-html`, `blog-tistory-html.mjs`, `naver-se-paste.mjs`, `blogger-post.mjs` |
+
+Caption tracks beyond YouTube (checked 2026-10-23). Burn the original-language captions into the picture, because only some platforms take caption files:
+
+| Platform | Uploaded caption files |
+|---|---|
+| YouTube | Yes, one track per language, after publishing |
+| Facebook | Yes, one `.srt` per language, after publishing. Every Page video is now a Reel, and Reels take them too. The file name sets the language (`name.ll_CC.srt`) |
+| X | One `.srt` per video, only while composing ("Upload caption file" under the video) |
+| Instagram, TikTok | No; only the platform's own auto captions and translations |
 
 Keep a per-episode distribution record (channel → url/id + re-check time) and gate "done" on it. A channel that is missing
 from the record is a channel that was forgotten.
