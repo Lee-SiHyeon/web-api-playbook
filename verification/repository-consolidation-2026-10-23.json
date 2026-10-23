@@ -1,9 +1,9 @@
 {
   "schema": "web-api-repository-consolidation-offline-verification-v1",
-  "checkedAt": "2026-10-23T04:04:57.721223+00:00",
+  "checkedAt": "2026-10-23T04:07:57.946959+00:00",
   "targetRepository": "Lee-SiHyeon/web-api-playbook",
   "baseCommit": "cf5e7876fc271ca1f019fddd1a547b6f9f7b21cc",
-  "checkedCodeCommit": "dc3961289da3fa65f4e0809bdef1bdba4d050491",
+  "checkedCodeCommit": "4c88a9a028a963a49f601cf365f0afe05066e01f",
   "environment": {
     "platform": "linux",
     "node": "24.21.0",
@@ -46,7 +46,9 @@
         "skipped": 0,
         "cancelled": 0
       },
-      "logSha256": "bb356a4a9654a1284478dbb54ded95bd60af6fcb4c05baea217d6885aca32eca"
+      "logSha256": "bb356a4a9654a1284478dbb54ded95bd60af6fcb4c05baea217d6885aca32eca",
+      "lastExecutedCodeCommit": "dc3961289da3fa65f4e0809bdef1bdba4d050491",
+      "note": "Subsequent code changes affect only two Grok fixture directories; root runtime and tests are unchanged."
     },
     "clientPackTests": {
       "results": [
@@ -211,7 +213,7 @@
         "skipped": 2,
         "cancelled": 0
       },
-      "logSha256": "c1ffb23e576036d90de6208c1f617b638daf684ceca9955057cf1dc55d125032"
+      "logSha256": "1e2e4f4bdb8422e8a4be1965c8c10735536a23d3bd967f0d2a826bc1cb562dcc"
     },
     "myrealtripCompatibilityTests": {
       "results": [
@@ -271,7 +273,9 @@
       "scope": "transferred and integration code, syntax only",
       "followupCheckedFiles": [
         "scripts/test-client-packs.mjs",
-        "service-packs/grok/test/feature-checklist.test.mjs"
+        "service-packs/grok/test/feature-checklist.test.mjs",
+        "service-packs/grok/test/grok-upload-reference-store.test.mjs",
+        "service-packs/grok/test/grok-attachment-presigned-upload.test.mjs"
       ]
     },
     "literalScan": {
@@ -329,11 +333,13 @@
     "initialConclusion": "failure",
     "causes": [
       "Grok test read a historical receipt from an original absolute checkout path.",
-      "Fresh CI scratch directory permissions did not meet exact owner-only native helper checks."
+      "Fresh CI scratch directory permissions did not meet exact owner-only native helper checks.",
+      "Two reference-store fixtures included a shared tmp ancestor that can preexist with mode 0755; the store deliberately requires every checked ancestor to be owner-only."
     ],
     "changes": [
       "Test reads the existing bundled verification artifact by filename; historical receipts and production proof rules are unchanged.",
-      "Offline harness creates an owner-only home scratch root and a separate private directory for each run."
+      "Offline harness creates an owner-only home scratch root and a separate private directory for each run.",
+      "Reference-store fixtures now own their entire checked directory path directly below home scratch; no global scratch permissions or production guards are relaxed."
     ],
     "localRecheck": {
       "rootPassed": 1281,
@@ -341,6 +347,8 @@
       "clientTestsSkipped": 2,
       "grokPrivateScratchTestsPassed": 349
     },
-    "remoteRerunResult": "Read GitHub Actions for the final PR head; this document does not pre-claim its outcome."
+    "remoteRerunResult": "Read GitHub Actions for the final PR head; this document does not pre-claim its outcome.",
+    "additionalRun": "https://github.com/Lee-SiHyeon/web-api-playbook/actions/runs/39898408914",
+    "additionalConclusion": "failure"
   }
 }
