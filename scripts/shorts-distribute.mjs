@@ -1,5 +1,5 @@
 // Distribute a set of finished vertical Shorts to every channel from ONE manifest; resumable (state file next to it).
-//   node scripts/shorts-distribute.mjs <distribute.json> [--channels=youtube,youtube-pin,naver-clip,tiktok,instagram] [--only=s1,s2] [--dry]
+//   node scripts/shorts-distribute.mjs <distribute.json> [--channels=youtube,youtube-pin,naver-clip,tiktok,instagram,facebook,threads,x] [--only=s1,s2] [--dry] [--retry-x] [--check]
 // Default channels: all. Re-running skips what the state file already records, so the daily follow-up is the same command:
 //   - youtube      upload (s1 public now, the rest scheduled one per day), then thumbnail + related long video (youtube-studio-edit)
 //   - youtube-pin  post + pin the comment on every uploaded short; scheduled ones go through youtube-prepin.mjs (they take no
@@ -29,7 +29,7 @@ const M = JSON.parse(fs.readFileSync(manFile, 'utf8'));
 const stateFile = manFile.replace(/\.json$/, '') + '.state.json';
 const S = fs.existsSync(stateFile) ? JSON.parse(fs.readFileSync(stateFile, 'utf8')) : { shorts: {} };
 const save = () => { if (!opt.dry) fs.writeFileSync(stateFile, JSON.stringify(S, null, 2) + '\n'); }; // a dry run records nothing
-const channels = (opt.channels || 'youtube,youtube-pin,naver-clip,tiktok,instagram').split(',');
+const channels = (opt.channels || 'youtube,youtube-pin,naver-clip,tiktok,instagram,facebook,threads,x').split(',');
 const only = opt.only ? opt.only.split(',') : null;
 const work = path.join(os.tmpdir(), 'shorts-distribute', path.basename(manFile, '.json')); fs.mkdirSync(work, { recursive: true });
 const st = (id) => (S.shorts[id] ||= {});
@@ -47,7 +47,19 @@ function run(script, args, timeoutMs = 600000) {
 // ---------- texts ----------
 const linkBlock = (s) => (s.links?.length ? ['', M.common.affiliateDisclosure, ...s.links.map((l) => `- ${l.label}\n  ${l.url}`)] : []);
 const fullLine = () => (M.longform?.url ? ['', `🎬 풀영상: ${M.longform.url}`] : []); // standalone Shorts have no long video
-const ytDesc = (s) => [s.desc, ...linkBlock(s), ...fullLine(), '', M.common.footer].join('\n');
+// The Short's own hashtags were missing from YouTube (only the shared footer ones went in): one merged, de-duplicated tag
+// line at the end; YouTube shows the first three above the title.
+const cut = (t, n) => { let s = String(t); while ([...s].length > n) s = s.replace(/\s*\S+$/, ''); return s; };
+// X counts CJK as 2: title, the first link, then hashtags while the weighted length stays under 280 (links count 23)
+const xWeight = (t) => [...t.replace(/https?:\/\/\S+/g, 'x'.repeat(23))].reduce((n, ch) => n + (/[ᄀ-￿]/.test(ch) ? 2 : 1), 0);
+const xText = (s) => {
+  const link = (String(s.desc).match(/https?:\/\/\S+/) || [])[0];
+  let t = [s.title, link ? `🎮 ${link}` : ''].filter(Boolean).join('\n');
+  for (const tag of String(s.hashtags || '').split(/\s+/).filter(Boolean)) if (xWeight(t + ' ' + tag) <= 270) t += (t.includes('#') ? ' ' : '\n') + tag;
+  return t;
+};
+const tagLine = (...texts) => [...new Set(texts.join(' ').match(/#[^\s#]+/g) || [])].join(' ');
+const ytDesc = (s) => [s.desc, ...linkBlock(s), ...fullLine(), '', String(M.common.footer).replace(/#[^\s#]+/g, '').trim(), '', tagLine(s.hashtags || '', M.common.footer)].join('\n');
 const pinText = (s) => s.pin || [s.question, ...fullLine(), ...linkBlock(s)].join('\n'); // s.pin: a custom pinned comment
 const socialText = (s) => [s.title, '', s.desc, '', s.question, '', M.common.socialNote, '', s.hashtags].join('\n');
 // Naver Clip shows the description as plain text: links are not clickable and long URLs wrap mid-word. Keep paragraphs
@@ -95,7 +107,7 @@ function tiktokGate() {
 }
 function tiktokRecord() { const L = ttRead(); L.posts = [...(L.posts || []), new Date().toISOString()].slice(-200); fs.mkdirSync(path.dirname(ttLedger), { recursive: true }); fs.writeFileSync(ttLedger, JSON.stringify(L, null, 1)); }
 
-const list = M.shorts.map((s, i) => ({ s, i })).filter(({ s }) => !only || only.includes(s.id));
+const list = opt.check ? [] : M.shorts.map((s, i) => ({ s, i })).filter(({ s }) => !only || only.includes(s.id)); // --check: gate only, posts nothing
 for (const { s, i } of list) {
   const x = st(s.id);
   if (channels.includes('youtube') && !x.youtube?.videoId) {
@@ -134,18 +146,45 @@ for (const { s, i } of list) {
     // One ledger for every manifest: a new account that got 6 posts in 5 minutes (2026-10-22) dropped from 100-245 views per
     // post to 0 from the next post on. Pause date, daily cap and minimum gap apply across series.
     const gate = tiktokGate();
-    if (gate) { log({ id: s.id, ch: 'tiktok', skipped: gate }); continue; }
-    const r = run('tiktok-studio-upload.mjs', [videoOf(s), write(`${s.id}.tiktok.txt`, noUrl(socialText(s))), '--ai', '--post', `--shots=${path.join(work, 'tt-' + s.id)}`]);
-    x.tiktok = r.last || { ok: !!r.dry }; save(); log({ id: s.id, ch: 'tiktok', ...x.tiktok });
-    if (x.tiktok.ok && !opt.dry) tiktokRecord();
+    if (gate) { x.tiktokDeferred = gate; log({ id: s.id, ch: 'tiktok', skipped: gate }); }
+    else {
+      const r = run('tiktok-studio-upload.mjs', [videoOf(s), write(`${s.id}.tiktok.txt`, noUrl(socialText(s))), '--ai', '--post', `--shots=${path.join(work, 'tt-' + s.id)}`]);
+      x.tiktok = r.last || { ok: !!r.dry }; delete x.tiktokDeferred; save(); log({ id: s.id, ch: 'tiktok', ...x.tiktok });
+      if (x.tiktok.ok && !opt.dry) tiktokRecord();
+    }
   }
   if (channels.includes('instagram') && !x.instagram?.ok) {
     const recent = Object.values(S.shorts).map((v) => v.instagram?.at).filter(Boolean).filter((a) => Date.now() - new Date(a) < 20 * 3600e3).length;
-    if (recent >= (M.instagramPerDay ?? 1)) { log({ id: s.id, ch: 'instagram', skipped: `daily limit ${M.instagramPerDay ?? 1} reached; run again tomorrow` }); continue; }
-    const r = run('instagram-web-post.mjs', [write(`${s.id}.social.txt`, socialText(s)), videoOf(s), '--ai']);
-    x.instagram = { ...(r.last || { ok: !!r.dry }), at: new Date().toISOString() }; if (!x.instagram.ok) delete x.instagram.at; save(); log({ id: s.id, ch: 'instagram', ...x.instagram });
+    if (recent >= (M.instagramPerDay ?? 1)) log({ id: s.id, ch: 'instagram', skipped: `daily limit ${M.instagramPerDay ?? 1} reached; run again tomorrow` });
+    else {
+      const r = run('instagram-web-post.mjs', [write(`${s.id}.social.txt`, socialText(s)), videoOf(s), '--ai']);
+      x.instagram = { ...(r.last || { ok: !!r.dry }), at: new Date().toISOString() }; if (!x.instagram.ok) delete x.instagram.at; save(); log({ id: s.id, ch: 'instagram', ...x.instagram });
+    }
+  }
+  // Facebook Page, Threads and X were posted by hand before 2026-10-23 and two of them were forgotten: they are channels here now
+  if (channels.includes('facebook') && !x.facebook?.ok) {
+    const r = run('facebook-web.mjs', ['post', videoOf(s), write(`${s.id}.facebook.txt`, s.facebookText || socialText(s))], 900000);
+    x.facebook = { ok: !!r.last?.posted || !!r.dry, aiLabel: r.last?.aiLabel, actor: r.last?.actor }; save(); log({ id: s.id, ch: 'facebook', ...x.facebook });
+  }
+  if (channels.includes('threads') && !x.threads?.ok) {
+    const r = run('sns-web-post.mjs', ['threads', write(`${s.id}.threads.txt`, cut(s.threadsText || socialText(s), 500)), videoOf(s)], 900000);
+    x.threads = { ok: !!(r.last?.posted && (r.last?.url || '').includes('/' + (r.last?.account || '@?') + '/')) || !!r.dry, url: r.last?.url, account: r.last?.account, error: r.last?.error }; save(); log({ id: s.id, ch: 'threads', ...x.threads });
+  }
+  if (channels.includes('x') && !x.x?.ok) {
+    // never auto-retry X: a "failed" run has posted before (the composer closed late) and the retry made a duplicate
+    if (x.x?.attempted && !opt['retry-x']) log({ id: s.id, ch: 'x', skipped: 'an earlier attempt did not confirm; check the profile, then rerun with --retry-x' });
+    else {
+      x.x = { attempted: new Date().toISOString() }; save();
+      const r = run('sns-web-post.mjs', ['x', write(`${s.id}.x.txt`, s.xText || xText(s)), videoOf(s)], 900000);
+      x.x = { ...x.x, ok: !!r.last?.posted || !!r.dry, url: r.last?.url, osClick: r.last?.osClick, error: r.last?.error }; save(); log({ id: s.id, ch: 'x', ...x.x });
+    }
   }
 }
-// summary: what is still open
-const open = M.shorts.map((s) => { const x = S.shorts[s.id] || {}; return { id: s.id, youtube: x.youtube?.videoId || '-', pinned: !!x.youtube?.pinned, publishAt: x.youtube?.publishAt?.slice(0, 16), naverClip: !!x.naverClip?.ok, tiktok: !!x.tiktok?.ok, instagram: !!x.instagram?.ok }; });
-console.table(open);
+// gate: every requested channel must be confirmed for every Short; a pacing deferral is a warning, anything else fails the run
+const okOf = { youtube: (x) => !!x.youtube?.videoId && x.youtube.uploaded !== false, 'youtube-pin': (x) => !!x.youtube?.pinned, 'naver-clip': (x) => !!x.naverClip?.ok,
+  tiktok: (x) => !!x.tiktok?.ok, instagram: (x) => !!x.instagram?.ok, facebook: (x) => !!x.facebook?.ok, threads: (x) => !!x.threads?.ok, x: (x) => !!x.x?.ok };
+const rows = M.shorts.filter((s) => !only || only.includes(s.id)).map((s) => { const x = S.shorts[s.id] || {}; return { id: s.id, ...Object.fromEntries(channels.filter((c) => okOf[c]).map((c) => [c, okOf[c](x) ? 'ok' : c === 'tiktok' && x.tiktokDeferred ? 'deferred' : 'MISSING'])) }; });
+console.table(rows);
+const missing = rows.flatMap((r) => Object.entries(r).filter(([, v]) => v === 'MISSING').map(([c]) => `${r.id}:${c}`));
+console.log(JSON.stringify({ gate: 'DIST_SHORTS', ok: !missing.length, missing, deferred: rows.filter((r) => Object.values(r).includes('deferred')).map((r) => r.id) }));
+if (missing.length && !opt.dry) process.exitCode = 1;
