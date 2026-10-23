@@ -272,7 +272,7 @@ Finish by recording sanitized evidence, first failure, successful change, counte
 Some first-party publishing (YouTube Studio, Facebook Pages, Naver blog/Clip, Instagram, TikTok Studio, X, Threads, Blogger,
 Tistory) is driven through the site's own UI in a logged-in browser instead of a reconstructed HTTP client. The setup is one
 unattended Windows PC with a **dedicated, non-default Chrome Canary profile** on `--remote-debugging-port=9333` (scripts attach
-over CDP, open their own tab, close only that tab) plus a **Windows desktop MCP** for what CDP cannot reach. That includes OS-level
+over CDP, open their own tab, close only that tab) plus a **Windows desktop MCP** ([Windows-MCP](https://github.com/CursorTouch/Windows-MCP), one shared HTTP server on localhost, started by a logon task) for what CDP cannot reach. That includes OS-level
 real mouse/keyboard when a site ignores synthetic input, native dialogs, and full-desktop screenshots. A desktop MCP yields when it sees
 input that isn't its own (`USER_CONTROL`), which on an unattended PC is often another agent; wait and retry. Read
 [the setup and the rules learned](references/windows-canary-automation-setup-2026-10-23.md) before writing a new one:
