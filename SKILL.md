@@ -295,7 +295,7 @@ One episode, every channel (all browser-assisted, each resumable and verified by
 | Pinned comment; long link lists as replies (one 41-link comment was silently dropped) | `youtube-pin-comment.mjs`, `youtube-reply-comment.mjs` |
 | Facebook Page: login with checkpoint, post/reel with AI label | `facebook-web.mjs` |
 | Facebook Page: SRT caption tracks on a published video/Reel, one per language (`name.en_US.srt`) | `facebook-captions.mjs` |
-| Owner's own footage from Google Photos (phone backups are there, not in Drive): list videos, search, shot date/place/file, download originals. Read-only; ask before publishing personal media | `google-photos-web.mjs` |
+| Owner's own footage from Google Photos (phone backups are there, not in Drive): list videos, search, shot date/place/file, download originals one by one or in bulk by date range/search (resumable). Read-only; ask before publishing personal media | `google-photos-web.mjs` |
 | Threads / X with media | `sns-web-post.mjs` |
 | Blogs: tables as images, lab site, Naver, Tistory/Blogger HTML, Blogger with hosted uploads | `blog-md.mjs tables`, `blog-md.mjs lab-run`/`se-html`, `blog-tistory-html.mjs`, `naver-se-paste.mjs`, `blogger-post.mjs` |
 
