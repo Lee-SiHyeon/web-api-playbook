@@ -31,6 +31,12 @@ for (const client of all.filter(client => !selected || client.id === selected)) 
   const env = Object.fromEntries(['PATH', 'HOME', 'TMPDIR', 'TEMP', 'TMP', 'LANG', 'LC_ALL', 'SystemRoot', 'COMSPEC']
     .filter(name => typeof process.env[name] === 'string').map(name => [name, process.env[name]]));
   env.TMPDIR = scratch;
+  if (client.id === 'social-actions') {
+    // Exercise the real consolidated peers without inheriting caller credentials.
+    env.WEB_API_PLAYBOOK_ROOT = root;
+    env.WEB_API_PLAYBOOK = root;
+    env.SNS_X_ROOT = path.join(root, 'service-packs', 'social-x');
+  }
   const exit = await new Promise(resolve => {
     const child = spawn(process.execPath, [...(client.testNodeArgs ?? []), '--test', '--test-reporter=spec', ...[...files].sort()],
       { cwd: directory, env, stdio: 'inherit', shell: false });

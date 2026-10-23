@@ -28,4 +28,5 @@ Threads configure의 HTTP 202 재전송 루프를 제거했습니다.
 유효하지 않은 topic/context는 업로드와 저널 접근 전에 거절합니다.
 
 검증 목록·변경은 provenance/operations-consolidation-2026-10-23.json에 있습니다.
+공통 테스트 실행기는 묶인 Playbook·X 원본을 peer로 연결하여 합성 HTTP 통합 검사를 실행합니다.
 Windows 전용 DPAPI 캐시는 Linux에서 건너뜁니다. 모의 HTTP·과거 fixture를 현재 계정 성공으로 해석하지 않습니다.
