@@ -1,17 +1,18 @@
 {
   "schema": "web-api-repository-consolidation-offline-verification-v1",
-  "checkedAt": "2026-10-23T03:58:21.550437+00:00",
+  "checkedAt": "2026-10-23T04:04:57.721223+00:00",
   "targetRepository": "Lee-SiHyeon/web-api-playbook",
   "baseCommit": "cf5e7876fc271ca1f019fddd1a547b6f9f7b21cc",
-  "checkedCodeCommit": "1774267aaf4e0991e877fc87a7aa7cd8ad31effd",
+  "checkedCodeCommit": "dc3961289da3fa65f4e0809bdef1bdba4d050491",
   "environment": {
     "platform": "linux",
     "node": "24.21.0",
     "freshClone": true,
-    "cloneMode": "git clone --no-local into a separate directory followed by fast-forward of the runner-only follow-up",
+    "cloneMode": "git clone --no-local into a separate directory, then fast-forward of reviewed portability fixes",
     "installCommand": "npm ci --ignore-scripts",
     "installExitCode": 0,
-    "externalDonorCheckoutRequired": false
+    "externalDonorCheckoutRequired": false,
+    "clientTestTemporaryStorage": "Fresh owner-only directory under the user home scratch; also verified with a caller TMPDIR having mode 0755"
   },
   "inventory": {
     "ownerRepositoriesEnumerated": 44,
@@ -45,7 +46,7 @@
         "skipped": 0,
         "cancelled": 0
       },
-      "logSha256": "fb81fca7f351aba0e5fc3e27136a7ba83505ed94bf8db8ea077d901a22a79983"
+      "logSha256": "bb356a4a9654a1284478dbb54ded95bd60af6fcb4c05baea217d6885aca32eca"
     },
     "clientPackTests": {
       "results": [
@@ -210,7 +211,7 @@
         "skipped": 2,
         "cancelled": 0
       },
-      "logSha256": "815f808a9ab03513af85b6d7f5c5fc6309a1b28cc9941a8f4b7c833884a3b77b"
+      "logSha256": "c1ffb23e576036d90de6208c1f617b638daf684ceca9955057cf1dc55d125032"
     },
     "myrealtripCompatibilityTests": {
       "results": [
@@ -267,7 +268,11 @@
       "javascriptFiles": 1108,
       "pythonFiles": 61,
       "failures": [],
-      "scope": "transferred and integration code, syntax only"
+      "scope": "transferred and integration code, syntax only",
+      "followupCheckedFiles": [
+        "scripts/test-client-packs.mjs",
+        "service-packs/grok/test/feature-checklist.test.mjs"
+      ]
     },
     "literalScan": {
       "scope": "changed tracked files relative to original main",
@@ -318,5 +323,24 @@
     "Stored Gemini/Grok receipts remain incomplete; historical SHEIN/iHerb receipts remain stale for the updated dependency lock.",
     "Inherited upstream whitespace was preserved; this migration does not claim a whitespace lint pass.",
     "GitHub Actions results must be read separately after the PR is created."
-  ]
+  ],
+  "ciPortabilityCorrections": {
+    "initialRun": "https://github.com/Lee-SiHyeon/web-api-playbook/actions/runs/39897886295",
+    "initialConclusion": "failure",
+    "causes": [
+      "Grok test read a historical receipt from an original absolute checkout path.",
+      "Fresh CI scratch directory permissions did not meet exact owner-only native helper checks."
+    ],
+    "changes": [
+      "Test reads the existing bundled verification artifact by filename; historical receipts and production proof rules are unchanged.",
+      "Offline harness creates an owner-only home scratch root and a separate private directory for each run."
+    ],
+    "localRecheck": {
+      "rootPassed": 1281,
+      "clientTestsPassed": 2845,
+      "clientTestsSkipped": 2,
+      "grokPrivateScratchTestsPassed": 349
+    },
+    "remoteRerunResult": "Read GitHub Actions for the final PR head; this document does not pre-claim its outcome."
+  }
 }
