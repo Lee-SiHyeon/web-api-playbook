@@ -18,7 +18,7 @@ const json = (value, { status = 200, mime = 'application/json' } = {}) =>
   new Response(JSON.stringify(value), { status, headers: { 'content-type': mime } });
 
 async function tempDirectory(t) {
-  const root = '/home/worker/.nad-scratch/tmp';
+  const root = process.env.TMPDIR || path.join(os.homedir(), '.nad-scratch/tmp');
   await mkdir(root, { recursive: true });
   const directory = await mkdtemp(path.join(root, 'jobs-cli-'));
   t.after(() => rm(directory, { recursive: true, force: true }));

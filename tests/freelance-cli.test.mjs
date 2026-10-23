@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, readFile, rm, stat } from 'node:fs/promises';
 import path from 'node:path';
+import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { Writable } from 'node:stream';
 import { runFreelanceCli, runFreelanceCommand } from '../scripts/freelance.mjs';
@@ -13,7 +14,7 @@ const response = (body, mime = 'text/html; charset=utf-8', status = 200) => new 
 });
 
 async function tempDirectory(t) {
-  const root = '/home/worker/.nad-scratch/tmp';
+  const root = process.env.TMPDIR || path.join(os.homedir(), '.nad-scratch/tmp');
   await mkdir(root, { recursive: true });
   const directory = await mkdtemp(path.join(root, 'freelance-cli-'));
   t.after(() => rm(directory, { recursive: true, force: true }));
