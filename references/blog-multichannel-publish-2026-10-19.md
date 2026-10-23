@@ -134,6 +134,7 @@ Measured in `affiliate-content-operations/.../blog-performance/style-cards/style
   - Choose 공개, set 홈주제 to 해외여행, then press 공개 발행.
   - **Category: 여행 > <country>** (owner 2026-10-19: "여행카테고리 만들고 국가로 나눠"). The tree is 여행 (topic 여행·맛집) > 태국. For a new country: open manage/category, press 추가 on the 여행 row, name the country, choose 여행·맛집, press 확인, then 변경사항 저장.
   - To move a post without touching its HTML, use manage/posts: tick the post, open 변경 and pick the category there. Re-saving through the editor risks the body.
+  - A category created while an editor tab is open does not show up in that tab's category list, and 홈주제 options can be missing too. Publish with no category, then move the post in manage/posts. The 변경 menu lists every category (child categories are prefixed with "ㄴ"), so scroll it to the new one. Real mouse events on the checkbox and the menu item work, and no confirm dialog appears. Read the category back from the post row ("여행/<country>").
   - The editor keeps at most 10 tags.
 - **Verify:** open the post in the browser, scroll it (images are lazy) and check `.contents_style` for text length, loaded images, `a[href*=myrealt]` and the iframe. Here that gave 4,053 chars, 15/15 images, 17 links, the YouTube embed and 9 heading bars.
 

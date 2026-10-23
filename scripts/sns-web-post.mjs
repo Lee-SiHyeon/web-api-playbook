@@ -33,10 +33,11 @@ const clickAt = async ([x, y]) => { await send('Input.dispatchMouseEvent', { typ
 const center = (expr) => ev(`(() => { const e = ${expr}; if (!e) return null; const r = e.getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; })()`);
 const out = { site };
 try {
-  await send('Emulation.setDeviceMetricsOverride', { width: 1300, height: 950, deviceScaleFactor: 1, mobile: false });
+  // Threads collapses its left menu to unlabeled icons below ~1400 px (the create icon has no aria-label): keep it wide
+  await send('Emulation.setDeviceMetricsOverride', { width: site === 'threads' ? 1600 : 1300, height: 950, deviceScaleFactor: 1, mobile: false });
   await send('Page.bringToFront'); await send('DOM.enable');
   await sleep(9000);
-  if (SITE.open) { const o = await center(SITE.open); if (!o) throw new Error('NO_COMPOSER_OPEN'); await clickAt(o); await sleep(2500); }
+  if (SITE.open) { let o = null; for (let i = 0; i < 20 && !o; i++) { o = await center(SITE.open); if (!o) await sleep(1000); } if (!o) { out.debug = await ev(`location.href + ' | ' + document.body.innerText.replace(/\s+/g, ' ').slice(0, 160)`); throw new Error('NO_COMPOSER_OPEN'); } await clickAt(o); await sleep(2500); }
   const ed = await center(`document.querySelector(${JSON.stringify(SITE.editor)})`); if (!ed) throw new Error('NO_EDITOR');
   await clickAt(ed); await sleep(500);
   // newlines: Shift+Enter keeps the composer open on both sites
