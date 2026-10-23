@@ -1,0 +1,56 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "jobs-public",
+  "capabilityId": "ats.greenhouse.collect",
+  "checkedAt": "2026-10-23T10:58:01.687Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 19,
+  "request": {
+    "method": "GET",
+    "origin": "https://boards-api.greenhouse.io",
+    "path": "/v1/boards/greenhouse/jobs",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 233471,
+    "responseSha256": "1d7dc90baec17a3ece95d6aaff643c2b74d056956932e58eab7dfac8768f49bd",
+    "checkedAt": "2026-10-23T10:58:01.358Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "content"
+    ]
+  },
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://docs.greenhouse.io/job-board.html"
+  },
+  "implementation": {
+    "lib/jobs/model.mjs": "fa60e7477f92a121b81b44d904db5dedb39a45560903c39fe13f339f0909e15a",
+    "lib/jobs/providers.mjs": "937559d228854181e48dbb0512c22abeaaec3917cd3dc54542adea9ad0c0feed",
+    "lib/jobs/boards.mjs": "af27dc37f558c75aee067417f7a9ab41b3ea082b290b339039c64d4943ffa6a9",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "scripts/jobs.mjs": "138c8ea8a006a57a415b1f38c9e232070b62bddb4ec511278d1108f446cc4290",
+    "scripts/playbook.mjs": "07559e34ce2a93bbef3e8a373137e70eee1c515ab5366b4147b6537afda0e5bd",
+    "lib/service-operations/index.mjs": "46389e65cab7ed6e7ba31585ee4029fe55aa782bf0062b7424ed2b6a9651336c",
+    "lib/service-operations/jobs.mjs": "e42aa2856c9745d4f7bb498acf7ebdbb3b1e8621a59ee19aaa3b0aa736222398",
+    "lib/service-operations/freelance.mjs": "9ecc695236ea49532eeec82b590ae79c9698493b5578652ceeaca3f757ae391f",
+    "lib/operation-registry.mjs": "e63a3c61a97a934774f1d682a05229195200956ead92d995bf603e6f0fb1891e"
+  },
+  "scope": {
+    "provider": "greenhouse",
+    "board": "greenhouse",
+    "region": "global",
+    "filters": {
+      "includeContent": true
+    }
+  },
+  "sourceResultSha256": "114c2551403eedf87cf5627f8a97944e8186a05a9c8b3464809cd8f1bc7071c6",
+  "implementationStableDuringRun": true
+}

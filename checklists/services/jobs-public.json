@@ -1,0 +1,692 @@
+{
+  "schemaVersion": 1,
+  "service": "jobs-public",
+  "description": "Read-only job posting adapters for Greenhouse, Lever, Ashby, TokyoDev, Remotive, Reed, and offline job snapshots. Public listing access does not expose private candidate status. Current live evidence is recorded per capability in evidence; absent evidence remains pending. See references/jobs-public-apis.md.",
+  "capabilities": [
+    {
+      "id": "ats.ashby.list",
+      "title": "Read only listed Ashby public jobs and preserve source pay tier and geographic conditions",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs",
+            "exports": [
+              "createJobsClient"
+            ]
+          },
+          {
+            "path": "lib/jobs/model.mjs",
+            "exports": [
+              "normalizeJob"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "ashby",
+              "list",
+              "detail"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.ashbyhq.com",
+          "path": "/posting-api/job-board/Ashby",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/ashby-list-ats-ashby-list-proof.json",
+            "verification/jobs-freelance-2026-10-23/ashby-list-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ats.greenhouse.list",
+      "title": "Read exact public Greenhouse board listing, detail and completeness metadata",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "greenhouse",
+              "list",
+              "detail"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://boards-api.greenhouse.io",
+          "path": "/v1/boards/greenhouse/jobs",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/greenhouse-list-ats-greenhouse-list-proof.json",
+            "verification/jobs-freelance-2026-10-23/greenhouse-list-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ats.lever.list",
+      "title": "Read a named Lever global or EU public posting feed and preserve offset continuation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "lever",
+              "list",
+              "collect",
+              "--region"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.lever.co",
+          "path": "/v0/postings/spotify",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/lever-list-ats-lever-list-proof.json",
+            "verification/jobs-freelance-2026-10-23/lever-list-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "jobs.reed.list",
+      "title": "Read a named Reed Jobseeker query using caller-provided in-memory API credentials",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/boards.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "reed",
+              "list",
+              "--credentials-stdin"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "A registered Reed API key is required. Credentials are not included in source, output receipts, or URL; no key is issued or live read recorded here."
+    },
+    {
+      "id": "jobs.remotive.list",
+      "title": "Read documented Remotive remote-job feed within documented daily request guidance",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/boards.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "remotive",
+              "list"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://remotive.com",
+          "path": "/api/remote-jobs",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/remotive-list-jobs-remotive-list-proof.json",
+            "verification/jobs-freelance-2026-10-23/remotive-list-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Live Node-client probe on 2026-10-23 returned HTTP 200 JSON with 9 jobs (105611 bytes; SHA-256 53bfb5ff0cf4ef32f2486686209bf3ee17ef1ae673b94158c903902d15794921). Attribution and original listing link are required; feed data is delayed approximately 24 hours and the provider recommends at most four calls per day. Store a code-hash-bound receipt before claiming current revision evidence."
+    },
+    {
+      "id": "jobs.snapshot.compare",
+      "title": "Compare only matching scopes and report additions/changes; missing IDs are not closed jobs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/snapshots.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "diff"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-snapshots.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Offline operation. Fixture and integration tests prove local comparison behavior; it does not perform an external read."
+    },
+    {
+      "id": "jobs.snapshot.create",
+      "title": "Create a local snapshot bound to provider, board, region, filters, coverage and public request receipt",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/snapshots.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "snapshot"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-snapshots.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Offline operation. Fixture and integration tests prove local comparison behavior; it does not perform an external read."
+    },
+    {
+      "id": "tokyodev.jobs.detail",
+      "title": "Read one exact public TokyoDev job URL and bind its canonical URL, company, ID, and title",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/japan.mjs",
+            "exports": [
+              "createTokyoDevJobsClient",
+              "parseTokyoDevJobDetail"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "tokyodev",
+              "detail",
+              "--url"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-japan.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Read one caller-selected exact job URL; no inferred URL slugs or job eligibility claims.",
+      "blocker": "The current Node HTTP reader and a task-owned Chromium navigation receive Cloudflare HTTP 403. No usable site cookies were issued. Document parsing is verified separately; current HTTP replay remains unverified."
+    },
+    {
+      "id": "tokyodev.jobs.list",
+      "title": "Read public TokyoDev job cards and source-provided job facts from one rendered page",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/japan.mjs",
+            "exports": [
+              "createTokyoDevJobsClient",
+              "parseTokyoDevJobsPage"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "tokyodev",
+              "list"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-japan.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The public list is an HTML Document, not XHR. `complete` is true only when the rendered card count equals the page-advertised count.",
+      "blocker": "The current Node HTTP reader and a task-owned Chromium navigation receive Cloudflare HTTP 403. No usable site cookies were issued. Document parsing is verified separately; current HTTP replay remains unverified."
+    },
+    {
+      "id": "tokyodev.document.parse",
+      "title": "Parse caller-supplied TokyoDev listing/detail HTML without claiming a current HTTP read",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/japan.mjs",
+            "exports": [
+              "parseTokyoDevJobsPage",
+              "parseTokyoDevJobDetail"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "tokyodev",
+              "parse"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-japan.test.mjs",
+          "tests/jobs-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ats.greenhouse.detail",
+      "title": "Read an exact greenhouse job and bind its source ID to the requested board/job",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "greenhouse",
+              "list",
+              "detail"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://boards-api.greenhouse.io",
+          "path": "/v1/boards/greenhouse/jobs/8126988",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/greenhouse-detail-ats-greenhouse-detail-proof.json",
+            "verification/jobs-freelance-2026-10-23/greenhouse-detail-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "lib/service-operations/index.mjs",
+            "lib/service-operations/jobs.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/operation-registry.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ats.lever.detail",
+      "title": "Read an exact lever job and bind its source ID to the requested board/job",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "lever",
+              "list",
+              "collect",
+              "--region"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.lever.co",
+          "path": "/v0/postings/spotify/f7eb82ce-b57e-4dc0-b84a-7f7ec05bf66e",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/lever-detail-ats-lever-detail-proof.json",
+            "verification/jobs-freelance-2026-10-23/lever-detail-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "lib/service-operations/index.mjs",
+            "lib/service-operations/jobs.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/operation-registry.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ats.ashby.detail",
+      "title": "Read an exact ashby job and bind its source ID to the requested board/job",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs",
+            "exports": [
+              "createJobsClient"
+            ]
+          },
+          {
+            "path": "lib/jobs/model.mjs",
+            "exports": [
+              "normalizeJob"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "ashby",
+              "list",
+              "detail"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.ashbyhq.com",
+          "path": "/posting-api/job-board/Ashby",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/ashby-detail-ats-ashby-detail-proof.json",
+            "verification/jobs-freelance-2026-10-23/ashby-detail-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "lib/service-operations/index.mjs",
+            "lib/service-operations/jobs.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/operation-registry.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ats.greenhouse.collect",
+      "title": "Collect bounded greenhouse pages with truthful complete/partial scope",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "greenhouse",
+              "list",
+              "detail"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://boards-api.greenhouse.io",
+          "path": "/v1/boards/greenhouse/jobs",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/greenhouse-readback-ats-greenhouse-collect-proof.json",
+            "verification/jobs-freelance-2026-10-23/greenhouse-readback-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "lib/service-operations/index.mjs",
+            "lib/service-operations/jobs.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/operation-registry.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "ats.lever.collect",
+      "title": "Collect bounded lever pages with truthful complete/partial scope",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/jobs/providers.mjs"
+          },
+          {
+            "path": "lib/jobs/model.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "lever",
+              "list",
+              "collect",
+              "--region"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/jobs-providers.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.lever.co",
+          "path": "/v0/postings/spotify",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/lever-list-ats-lever-collect-proof.json",
+            "verification/jobs-freelance-2026-10-23/lever-list-result.json"
+          ],
+          "hashPaths": [
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/jobs.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    }
+  ]
+}

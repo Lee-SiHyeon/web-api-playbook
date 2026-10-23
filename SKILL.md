@@ -216,6 +216,22 @@ It bootstraps a server-issued anonymous token in memory, sends no cookies or log
 keeps a 3 s request interval. Creator reward enrollment and reward-link creation need a
 logged-in account and stay blocked in [its checklist](checklists/services/ably.json).
 
+For jobs and recruitment research, use `scripts/jobs.mjs` and
+[the public job-board contracts](references/jobs-public-apis.md). Public postings
+are separate from private application status and employer candidate records.
+Preserve salary intervals, location restrictions and provider-specific source facts;
+never infer visa eligibility or worldwide remote permission. Snapshot comparisons
+require matching source scope. Missing from two complete reads is not proof of
+closure. Reed needs an approved caller key; TokyoDev's parser tests do not prove
+that the current worker can read its site.
+
+For freelance services, use `scripts/freelance.mjs` and
+[the Kmong, Soomgo and Upwork contracts](references/freelance-public-apis.md).
+Keep starting prices, named package prices and negotiated quotes distinct.
+Use bounded, explicit pages and omit personal review/order/contact details.
+Upwork uses the caller's approved OAuth token in memory; fixture tests are not
+live API proof. These readers do not submit applications, quotes or orders.
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.

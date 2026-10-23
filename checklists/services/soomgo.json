@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "service": "soomgo",
+  "description": "Read-only public category and provider-summary search through a current first-party bundle contract. Detailed profile reads, quote requests, contact, reservation, payment, and account writes are outside the verified scope. See references/freelance-public-apis.md.",
+  "capabilities": [
+    {
+      "id": "categories.top",
+      "title": "Read public Soomgo top categories from the current first-party client contract",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "categories"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/api2/categories/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/soomgo-categories-categories-top-proof.json",
+            "verification/jobs-freelance-2026-10-23/soomgo-categories-result.json"
+          ],
+          "hashPaths": [
+            "lib/freelance/soomgo.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/freelance.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Contract provenance is first_party_bundle_contract with a pinned SHA in the client."
+    },
+    {
+      "id": "categories.sub",
+      "title": "Read exact subcategories/services for a caller-selected parent category",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "subcategories",
+              "--category-1"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/api2/categories/%EC%9D%B4%EC%82%AC-%EC%B2%AD%EC%86%8CA",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/soomgo-subcategories-categories-sub-proof.json",
+            "verification/jobs-freelance-2026-10-23/soomgo-subcategories-result.json"
+          ],
+          "hashPaths": [
+            "lib/freelance/soomgo.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/freelance.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": []
+    },
+    {
+      "id": "providers.search",
+      "title": "Search public provider summary for explicitly supplied service and optional region filters",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "search",
+              "--keyword"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/search/pro",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/soomgo-collect-providers-search-proof.json",
+            "verification/jobs-freelance-2026-10-23/soomgo-collect-result.json"
+          ],
+          "hashPaths": [
+            "lib/freelance/soomgo.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/freelance.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Returned profiles are public search summaries. A match is not a quote, availability guarantee, recommendation, or transaction."
+    },
+    {
+      "id": "providers.collect",
+      "title": "Collect a bounded number of cursor pages while retaining incomplete coverage",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "collect",
+              "--max-pages"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/search/pro",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-23/soomgo-collect-providers-collect-proof.json",
+            "verification/jobs-freelance-2026-10-23/soomgo-collect-result.json"
+          ],
+          "hashPaths": [
+            "lib/freelance/soomgo.mjs",
+            "lib/commerce/http.mjs",
+            "scripts/freelance.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Bounded collection. A provider omitted from one result is not considered inactive or closed."
+    }
+  ]
+}

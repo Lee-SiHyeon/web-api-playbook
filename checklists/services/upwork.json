@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "service": "upwork",
+  "description": "Official Upwork GraphQL Marketplace Job Postings client. API authorization and use-case approval are separate from local implementation; no credentials are in evidence and no live Upwork call was made. See references/freelance-public-apis.md.",
+  "capabilities": [
+    {
+      "id": "marketplace.search",
+      "title": "Search Marketplace Job Postings using the official GraphQL API and an approved caller token",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/upwork.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "upwork",
+              "credentials-stdin",
+              "search"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-upwork.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Offline request/fixture tests pass; no approved token or live request is present. Status remains pending_live.",
+      "blocker": "Requires approved API application, OAuth token, and approved Marketplace Job Postings use case."
+    },
+    {
+      "id": "marketplace.detail",
+      "title": "Read one exact public marketplace posting by source ID with caller credentials",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/upwork.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "upwork",
+              "credentials-stdin",
+              "detail"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-upwork.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Offline request/fixture tests pass; no approved token or live request is present. Status remains pending_live.",
+      "blocker": "Requires approved API application, OAuth token, and approved Marketplace Job Postings use case."
+    },
+    {
+      "id": "marketplace.collect",
+      "title": "Collect bounded API cursors and preserve continuation and completeness metadata",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/upwork.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/jobs.mjs",
+            "tokens": [
+              "upwork",
+              "credentials-stdin",
+              "collect"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-upwork.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Bounded local fixture tests; no approved token, API permission, or live request was used.",
+      "blocker": "Requires approved API application and marketplace search permissions."
+    }
+  ]
+}

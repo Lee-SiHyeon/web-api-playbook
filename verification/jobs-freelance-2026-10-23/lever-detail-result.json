@@ -1,0 +1,68 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "jobs-public",
+  "provider": "lever",
+  "operation": "detail",
+  "checkedAt": "2026-10-23T10:58:04.073Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "f7eb82ce-b57e-4dc0-b84a-7f7ec05bf66e",
+        "key": "lever:global:spotify:f7eb82ce-b57e-4dc0-b84a-7f7ec05bf66e",
+        "title": "Agency Development Lead - France",
+        "company": null,
+        "url": "https://jobs.lever.co/spotify/f7eb82ce-b57e-4dc0-b84a-7f7ec05bf66e",
+        "location": "Paris",
+        "workplaceType": "onsite",
+        "employmentType": "Permanent",
+        "compensation": null,
+        "sourceFacts": null,
+        "descriptionSha256": "e67e7b143112789d367f0d519e7aa270e9dd7c4c0630b7e5692b6664b135acf1"
+      }
+    ]
+  },
+  "dataSha256": "cfdba797f688d9071e4179a5da3191a31ab33a2dcda3a431ec0fb9b14b0c55b4",
+  "coverage": {
+    "complete": true,
+    "reason": "provider_detail_read",
+    "returned": 1,
+    "sourceTotal": 1,
+    "providerTotal": null,
+    "filteredOut": 0,
+    "next": null,
+    "pages": 1
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://api.lever.co",
+      "path": "/v0/postings/spotify/f7eb82ce-b57e-4dc0-b84a-7f7ec05bf66e",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 12422,
+      "responseSha256": "8bdd86581f9aaa06e7b69a3bc5a463112b87fd5ac6a79ad2b382aedb57cb7f46",
+      "checkedAt": "2026-10-23T10:58:03.329Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "queryFields": []
+    }
+  ],
+  "runner": "scripts/playbook.mjs",
+  "sourceResultSha256": "0007a610289280806062f83a781a65f697488c88cd648b95ae8f56fc72ae4cba"
+}

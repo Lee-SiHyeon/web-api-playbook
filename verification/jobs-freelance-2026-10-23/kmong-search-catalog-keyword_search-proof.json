@@ -1,0 +1,55 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "kmong",
+  "capabilityId": "catalog.keyword_search",
+  "checkedAt": "2026-10-23T10:58:03.443Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 40,
+  "request": {
+    "method": "GET",
+    "origin": "https://api.kmong.com",
+    "path": "/gig-app/gig/v2/gigs/search",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 72029,
+    "responseSha256": "57b4731896849c355010c71b360a827f99eb140a91ffe2bbc47f41acbdac8bc3",
+    "checkedAt": "2026-10-23T10:58:03.443Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "hasPortfolios",
+      "includeAggregations",
+      "isCompany",
+      "isFastReaction",
+      "isNowContactable",
+      "isPrime",
+      "keyword",
+      "page",
+      "perPage"
+    ]
+  },
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "sourceURL": "https://api.kmong.com/gig-app/gig/v2/gigs/search",
+    "responseFormat": "json_response",
+    "sourceSha256": "57b4731896849c355010c71b360a827f99eb140a91ffe2bbc47f41acbdac8bc3",
+    "projectionSha256": "06d1d8a6b866cb5b766027b9c727e6d2bb5294618f8663f88e480a338dc2650d"
+  },
+  "implementation": {
+    "lib/freelance/kmong.mjs": "27f9440f714a595464ee88ce40cea567ee747bd294346f27dc24233eb2edb47a",
+    "scripts/freelance.mjs": "d1999ad3209e075a52363851c01a87eaab69af05db26d27e5f0084381f5c328e"
+  },
+  "scope": {
+    "operation": "search",
+    "gigId": null
+  },
+  "sourceResultSha256": "a4c14eea7a468d40755e76a4ce666d3a4cc605e16419a5b2b6138593de6006c3",
+  "implementationStableDuringRun": true
+}

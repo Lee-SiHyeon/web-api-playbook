@@ -32,6 +32,8 @@
 | SNS·크리에이터 | [X·Reddit](service-packs/social-x/README.md), [Threads](service-packs/threads/README.md), 인포크 프로필·카드 발행, YouTube Studio 업로드 |
 | AI 웹 클라이언트 | [Gemini](service-packs/gemini/README.md), [Grok](service-packs/grok/README.md), [ChatGPT](service-packs/chatgpt/README.md), [Flow](service-packs/google-flow/README.md), [Whisk](service-packs/whisk/README.md) |
 | 운영 | Gabia 도메인·DNS 조회 |
+| 채용·구직 | [공개 채용공고](references/jobs-public-apis.md): Greenhouse·Lever·Ashby·Remotive, Reed 키 기반 검색, TokyoDev 문서 파서, 공고 스냅샷·변경 비교 |
+| 프리랜서·외주 | [크몽·숨고·Upwork](references/freelance-public-apis.md): 공개 서비스 검색·패키지 가격·리뷰, 전문가 검색, 승인 토큰 기반 Upwork 읽기 |
 
 전체 목록은 [상세 가이드](docs/guide.md#무엇이-들어-있나)와 `npm run services`로 볼 수 있습니다.
 다른 저장소에서 옮긴 클라이언트와 고정 버전·실행 경계는 [통합 현황](references/repository-consolidation.md)에 있습니다.
@@ -72,7 +74,13 @@ npm run services                                       # 연결된 서비스와 
 npm run clients                                        # 이식한 native CLI·라이브러리와 실행 모드
 npm run --silent gemini -- help
 node scripts/playbook.mjs run --service=ably --operation=categories
+node scripts/jobs.mjs greenhouse list --board=greenhouse
+node scripts/freelance.mjs kmong search --keyword=상세페이지
 ```
+
+채용공고는 공개 게시판의 관측 범위와 원문 조건을 보존합니다. 두 완전한 조회에서 빠진
+공고도 자동으로 채용 종료라고 판정하지 않습니다. Reed·Upwork의 실 계정 API 검증과
+TokyoDev의 Node HTTP 재실행은 미확인이며, 서비스별 현재 증거는 위 가이드에 있습니다.
 
 서비스별 로그인·실행법은 [서비스 공통 CLI](references/service-cli.md)와 [서비스 pack 목록](service-packs/README.md)을 보세요.
 AI 에이전트(Codex 등)에서 쓰려면 [SKILL.md](SKILL.md)를 읽히거나 `npm run install:skill`로 설치합니다.

@@ -1,0 +1,54 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "jobs-public",
+  "capabilityId": "ats.lever.list",
+  "checkedAt": "2026-10-23T10:58:02.873Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 79,
+  "request": {
+    "method": "GET",
+    "origin": "https://api.lever.co",
+    "path": "/v0/postings/spotify",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 378305,
+    "responseSha256": "b2335d6c433fa80ef1fe43a444d3714602b41555d476ce6c47323b5f3cb9493e",
+    "checkedAt": "2026-10-23T10:58:01.408Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "mode",
+      "limit",
+      "skip"
+    ]
+  },
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://github.com/lever/postings-api"
+  },
+  "implementation": {
+    "lib/jobs/model.mjs": "fa60e7477f92a121b81b44d904db5dedb39a45560903c39fe13f339f0909e15a",
+    "lib/jobs/providers.mjs": "937559d228854181e48dbb0512c22abeaaec3917cd3dc54542adea9ad0c0feed",
+    "lib/jobs/boards.mjs": "af27dc37f558c75aee067417f7a9ab41b3ea082b290b339039c64d4943ffa6a9",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "scripts/jobs.mjs": "138c8ea8a006a57a415b1f38c9e232070b62bddb4ec511278d1108f446cc4290"
+  },
+  "scope": {
+    "provider": "lever",
+    "board": "spotify",
+    "region": "global",
+    "filters": {
+      "limit": 40,
+      "offset": 0
+    }
+  },
+  "sourceResultSha256": "7518cb3b31c43ec39765098aa1fcd0007847256db133bb3df7e2b2e4e6f7eb76",
+  "implementationStableDuringRun": true
+}
