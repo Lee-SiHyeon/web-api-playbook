@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "operationId": "chat.text.continuation.wss.source-diagnosis",
+  "observedAt": "2026-10-06T13:51:04Z",
+  "sourceProvenance": "first_party_bundle_direct_browser_read",
+  "ownedTargetMatched": true,
+  "businessActionPerformedDuringSourceRead": false,
+  "sources": [
+    {
+      "origin": "https://cdn.grok.com",
+      "pathClass": "/_next/static/chunks/3myiqa38fkng_.js",
+      "httpStatus": 200,
+      "bytes": 95605,
+      "sha256": "81ebd2a3d9da7b43c8884ffbf7a918b9fb2b0c4f3e4b920af8e585639e73f165",
+      "observedSymbols": {
+        "nativeWebSocketWrapper": "tH",
+        "gatewaySessionClass": "nR",
+        "gatewayConnectionManager": "nU"
+      },
+      "observedBehavior": {
+        "gatewaySessionQueuesPendingMessages": true,
+        "queueFlushRequiresOpenConnectionAndReadyOrStreamingSession": true,
+        "pendingWorkCanCallEnsureRemoteSession": true,
+        "ensureRemoteSessionBuildsSessionCreate": true,
+        "sessionCreateSentViaConnectionManagerSend": true
+      }
+    },
+    {
+      "origin": "https://cdn.grok.com",
+      "pathClass": "/_next/static/chunks/0skqp8k76tn6n.js",
+      "httpStatus": 200,
+      "bytes": 2124938,
+      "sha256": "75825269a3d1759576d6c45cddca05ed2b86b19e836108804830e128f4a60ca7",
+      "markerCounts": {
+        "GatewaySession": 2,
+        "session.create": 1,
+        "response.create": 7,
+        "client_message_id": 3,
+        "file_attachment_ids": 9,
+        "conversation_id": 12
+      }
+    }
+  ],
+  "reconciliation": {
+    "passiveAppLoadWebSocketCreates": 0,
+    "passiveAppLoadWebSocketFramesSent": 0,
+    "guardedClickCaptureWebSocketFrames": 0,
+    "guardedClickCaptureAppChatHttpWrites": 0,
+    "laterOwnerReadbackContainsExactPromptAndAttachment": true,
+    "queueFlushAfterPageGuardTeardownIsSourceConsistentHypothesis": true,
+    "actualCausalPathProven": false,
+    "directApiDispatchAttempted": false,
+    "retryAllowed": false
+  },
+  "sourceBodiesPersisted": false,
+  "cookiesPersisted": false,
+  "rawFramesPersisted": false,
+  "rawConversationIdPersisted": false
+}

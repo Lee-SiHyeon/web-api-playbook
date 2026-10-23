@@ -1,0 +1,165 @@
+{
+  "schema": "gemini-live-one-shot-receipt-v1",
+  "service": "gemini-web",
+  "operation": "text",
+  "taskIntent": "gemini-lifecycle-fixture-20261006-v1",
+  "outcome": "needs_review",
+  "executionHost": "linux_worker",
+  "transport": "direct_https",
+  "observedAt": "2026-10-06T14:16:53.471528+00:00",
+  "ownerMatched": true,
+  "anonymousOwnerAbsent": true,
+  "sourceVerification": {
+    "expectedOwnerSourceSha256": "da6d415129ac8e349b8632f1ef9defe1ca7ecf30fedb4c28abf3a519766af7bb",
+    "staticOwnerHashVerified": true
+  },
+  "browserCapture": {
+    "pageRoleMatched": true,
+    "requestObserved": true,
+    "requestAbortAck": true,
+    "networkIdMatched": true,
+    "loadingFailedCount": 1,
+    "responseCount": 0,
+    "exactPromptMatch": true,
+    "newTaskChatIdentifierCheck": true,
+    "currentCookieCount": 18,
+    "currentHistoryReadPaired": true,
+    "preferenceMutationCandidateAbortRequestedCount": 4,
+    "preferenceMutationCandidateAbortCommandFailures": 0,
+    "ancillaryPostsAborted": 36,
+    "ancillaryPostFamilies": [
+      {
+        "host": "ogads-pa.clients6.google.com",
+        "method": "POST",
+        "pathFamily": "/$rpc/google.internal.onegoogle.asyncdata.v1.AsyncData/GetAsyncData",
+        "queryKeyNames": [],
+        "contentType": "application/json+protobuf",
+        "formFieldNames": [],
+        "rpcIds": [],
+        "bodyBytes": 1158
+      },
+      {
+        "host": "waa-pa.clients6.google.com",
+        "method": "POST",
+        "pathFamily": "/$rpc/google.internal.waa.v1.Waa/Create",
+        "queryKeyNames": [],
+        "contentType": "application/json+protobuf",
+        "formFieldNames": [],
+        "rpcIds": [],
+        "bodyBytes": 24
+      },
+      {
+        "host": "signaler-pa.clients6.google.com",
+        "method": "POST",
+        "pathFamily": "/punctual/v1/chooseServer",
+        "queryKeyNames": [
+          "key"
+        ],
+        "contentType": "application/json+protobuf",
+        "formFieldNames": [],
+        "rpcIds": [],
+        "bodyBytes": 98
+      },
+      {
+        "host": "waa-pa.clients6.google.com",
+        "method": "POST",
+        "pathFamily": "/$rpc/google.internal.waa.v1.Waa/Create",
+        "queryKeyNames": [],
+        "contentType": "application/json+protobuf",
+        "formFieldNames": [],
+        "rpcIds": [],
+        "bodyBytes": 24
+      },
+      {
+        "host": "signaler-pa.clients6.google.com",
+        "method": "POST",
+        "pathFamily": "/punctual/v1/chooseServer",
+        "queryKeyNames": [
+          "key"
+        ],
+        "contentType": "application/json+protobuf",
+        "formFieldNames": [],
+        "rpcIds": [],
+        "bodyBytes": 98
+      },
+      {
+        "host": "signaler-pa.clients6.google.com",
+        "method": "POST",
+        "pathFamily": "/punctual/v1/chooseServer",
+        "queryKeyNames": [
+          "key"
+        ],
+        "contentType": "application/json+protobuf",
+        "formFieldNames": [],
+        "rpcIds": [],
+        "bodyBytes": 98
+      }
+    ],
+    "quietResetVerified": true
+  },
+  "directDispatch": {
+    "count": 1,
+    "retryCount": 0,
+    "httpStatus": 200,
+    "responseDecoded": true,
+    "contentType": "application/json",
+    "responseBytes": 22945,
+    "responseSha256": "bdec33edddc77beb8c5bb8ab53163cbfe5e20d1729320f325ce43568e184d20f",
+    "browserResponseContractCaptured": false,
+    "responseFraming": "utf16_length_frames",
+    "nullSelectorFrameCount": 8,
+    "mainCandidateChunkCount": 4,
+    "requestBodyMatchesCapturedSha256": true
+  },
+  "readback": {
+    "browserPairMatched": true,
+    "directDetailStatus": 200,
+    "promptMatched": true,
+    "assistantMarkerMatched": false,
+    "responseIdMatched": true,
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "browserHttpStatus": 200,
+    "browserResponseBytes": 1461,
+    "rpcArgsTemplateInstalled": true,
+    "directDetailResponseBytes": 915,
+    "directDetailResponseSha256": "d924d381d326b729931e8ec86a4c249649e66547b7533713ab894a1125ec953d",
+    "apiRouteBindingVerified": true,
+    "detailResponseCount": 1
+  },
+  "mutationJournal": {
+    "intentRecordCount": 1,
+    "dispatchCount": 1,
+    "state": "reconciled",
+    "resultCategory": null
+  },
+  "captureAttempts": [],
+  "persistence": {
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodyPersisted": false,
+    "responseBodyPersisted": false,
+    "conversationIdentifiersPersisted": false,
+    "rawPromptPersisted": false
+  },
+  "historyListReadback": {
+    "beforeHttpStatus": 200,
+    "afterHttpStatus": 200,
+    "newConversationCount": 1,
+    "promptMatched": false,
+    "conversationIdMatched": false,
+    "conversationIdSource": "stream_response_id"
+  },
+  "lifecycleFixture": {
+    "intent": "gemini-lifecycle-fixture-20261006-v1",
+    "promptSha256": "32cba296bf0a96175e0557ef661d8167be0ae5acf31e7bc11895904b1fc74efa",
+    "role": "codex-gemini-lifecycle-canonical-20261006",
+    "roleTargetRegistered": true,
+    "roleTargetReused": false,
+    "browserBusinessWrites": 0,
+    "contractChanged": false,
+    "preStopQuietResetVerifiedOnFailure": false,
+    "rawPromptOrConversationIdPersisted": false
+  }
+}

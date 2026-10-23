@@ -1,0 +1,498 @@
+{
+  "schemaVersion": 1,
+  "id": "acada:world-leaders",
+  "label": "영향력 인물 발언·한국 이슈·일본/중국 반응·시장 영향 온톨로지 (트럼프부터)",
+  "createdAt": "2026-09-30",
+  "purpose": "owner 2026-09-30: \"일단 트럼프. 한국에 대한 이슈의 일본 중국 각각 반응? … 경제에 미칠 영향이나 사람들 주식에 영향 끼칠만한 것들, 오늘의 특징주도 괜찮고\". 발언(원문 링크) → 한국과 관련된 이슈 종류 → 일본·중국 공식 채널의 반응 → 시장에서 실제로 움직인 종목/지수(기사 제목 근거) 순으로 잇는다. 글의 소재를 찾는 수집기이고 투자 권유가 아니다.",
+  "policy": [
+    "발언은 원문 게시물·문서 링크와 함께 그대로 옮긴다. 요약할 때는 인물·날짜·채널을 앞에 붙이고, 원문에 없는 의도·전망을 지어내지 않는다.",
+    "일본·중국 '반응'은 두 정부의 공식 채널(외무성 회견록, 외교부 대변인 정례브리핑)에서 같은 이슈 종류의 문단이 실제로 나왔을 때만 붙인다. 없으면 '공식 반응 미확인'이라고 쓴다.",
+    "시장 영향은 (a) 실제로 움직인 종목·지수 데이터와 (b) 그 종목을 직접 언급한 기사 제목이 함께 있을 때만 '이유'로 적는다. 기사가 없으면 '이유 미확인'. 인과를 단정하지 않고 '~라는 보도에 강세'처럼 기사 표현을 인용한다.",
+    "매수·매도 권유, 목표가, 상승 예측, '다음 수혜주'를 쓰지 않는다. 업종 연결(relatedSectors)은 가정이며 이벤트 스터디로 검증되기 전에는 글에 확정 표현으로 쓰지 않는다.",
+    "필터가 걸린 채널(트루스소셜 직접 RSS 등)은 우회하지 않는다. 공개 미러와 정부 공개 페이지만 쓴다. 로그인·챌린지가 필요한 채널은 수집 대상에서 뺀다.",
+    "이슈 판별 키워드는 어휘 매칭 휴리스틱이다. 정밀도를 실측하기 전까지 assumption으로 표시하고, 판별 결과는 '후보'로만 쓴다.",
+    "sourced 규칙의 출처에는 checked(body_verified=본문 수치·문구를 직접 확인, title_verified=URL 200·제목만 확인, agent_only=조사 에이전트 보고에만 의존)와 confidence(primary=정부·중앙은행 원문, institute=공공 연구기관 분석, wire=통신사, secondary=언론 2차)를 붙인다. agent_only 규칙은 글에 쓰기 전에 원문을 직접 열어 다시 확인한다(postUse=reverify_first).",
+    "규칙 문장의 등락률은 기사가 적은 시점(장중·시초·종가)을 그대로 옮긴다. 장중 수치를 종가처럼 쓰지 않는다. 규칙 하나는 사례 한 건이므로 '관세 위협이 나오면 주가가 떨어진다' 같은 일반화로 쓰지 않는다."
+  ],
+  "classes": {
+    "Leader": "발언이 시장·외교에 영향을 주는 인물. 필드: id, label, role, channels[]. 현재 수집 대상: trump.",
+    "Statement": "인물의 공개 발언 한 건. 필드: leaderId, text, publishedAt, originalUrl, mirrorUrl, issueKinds[].",
+    "StatementChannel": "발언을 읽는 공개 경로. 필드: id, kind(social_mirror|federal_register|government_page), url, format, observedAt, limits.",
+    "KoreaIssue": "한국과 관련된 이슈 종류(관세·대미투자·반도체·철강자동차·안보·미중·미일·환율금리·중동에너지). 필드: id, label, patterns[], relatedSectors[].",
+    "CountryReaction": "일본 또는 중국 정부 공식 채널에서 같은 이슈 종류를 다룬 문단. 필드: country(jp|cn), speaker, date, paragraph, answer, sourceUrl, issueKinds[].",
+    "ReactionChannel": "반응을 읽는 정부 공개 페이지. 필드: country, url, listPattern, bodyFormat, latency.",
+    "MarketImpactRule": "이슈 종류가 어느 시장 변수에 어떻게 연결되는지에 대한 규칙. 필드: issueKind, sectors, evidence(sourceId), status(sourced|observed|assumption), measurementPlan.",
+    "FeaturedStock": "당일 급등·상한가 종목과 그 종목을 직접 언급한 기사 제목. 필드: code, name, market, changePct, upperLimit, reason{title,office,url}|null."
+  },
+  "relations": [
+    ["Leader", "makes", "Statement"],
+    ["Statement", "readVia", "StatementChannel"],
+    ["Statement", "concerns", "KoreaIssue"],
+    ["CountryReaction", "respondsTo", "KoreaIssue"],
+    ["CountryReaction", "readVia", "ReactionChannel"],
+    ["KoreaIssue", "linkedBy", "MarketImpactRule"],
+    ["MarketImpactRule", "observedIn", "FeaturedStock"]
+  ],
+  "leaders": [
+    {
+      "id": "trump",
+      "label": "도널드 트럼프 (미국 대통령)",
+      "status": "collecting",
+      "channels": ["trump_truth_mirror", "federal_register_eo", "whitehouse_news", "ustr_press"]
+    },
+    {
+      "id": "expansion_queue",
+      "label": "확장 후보 (아직 수집 안 함)",
+      "status": "not_collected",
+      "candidates": [
+        { "who": "시진핑·왕이(중국)", "via": "외교부 발언·readout", "url": "https://www.mfa.gov.cn/eng/xw/" },
+        { "who": "일본 총리·외무상", "via": "외무성 회견록, 총리관저", "url": "https://www.mofa.go.jp/press/kaiken/index.html" },
+        { "who": "연준 의장", "via": "FOMC 성명·기자회견", "url": "https://www.federalreserve.gov/newsevents/pressreleases.htm" }
+      ],
+      "note": "owner가 물은 '영향력 100인'은 이 표를 채널이 확인되는 인물부터 한 명씩 늘려 만든다. 채널이 불확실한 인물은 넣지 않는다."
+    }
+  ],
+  "statementChannels": {
+    "trump_truth_mirror": {
+      "kind": "social_mirror",
+      "url": "https://www.trumpstruth.org/feed",
+      "format": "RSS 2.0, 항목마다 title/description(CDATA)/pubDate/truth:originalUrl",
+      "observedAt": "2026-09-30",
+      "limits": "최근 약 100건(나흘 분)이고 그중 본문이 있는 글은 27건이었다. 이미지·리포스트는 title이 '[No Title]'이고 본문이 비어 있다. truthsocial.com 직접 RSS는 SPA 셸만 돌려줘 쓰지 않는다."
+    },
+    "federal_register_eo": {
+      "kind": "federal_register",
+      "url": "https://www.federalregister.gov/api/v1/documents.json?conditions[presidential_document_type]=executive_order&order=newest&per_page=5",
+      "format": "JSON results[]: title, executive_order_number, signing_date, publication_date, html_url",
+      "observedAt": "2026-09-30",
+      "limits": "행정명령은 서명 후 며칠 뒤 게재된다. 발언보다 늦고 공식이다."
+    },
+    "whitehouse_news": {
+      "kind": "government_page",
+      "url": "https://www.whitehouse.gov/news/",
+      "format": "HTML 목록(피드 없음)",
+      "observedAt": "2026-09-30",
+      "limits": "발표문·팩트시트를 링크 근거로 쓴다. 목록 파서는 아직 없음."
+    },
+    "ustr_press": {
+      "kind": "government_page",
+      "url": "https://ustr.gov/about-us/policy-offices/press-office/press-releases",
+      "format": "HTML 목록",
+      "observedAt": "2026-09-30",
+      "limits": "무역·관세 보도자료의 1차 출처. 목록 파서는 아직 없음."
+    }
+  },
+  "reactionChannels": {
+    "jp_mofa_press": {
+      "country": "jp",
+      "url": "https://www.mofa.go.jp/press/kaiken/index.html",
+      "listPattern": "a[href^=/press/kaiken/kaikenwe_000001_NNNNN.html] 제목 끝의 (Month D, YYYY, h:mm p.m.)",
+      "bodyFormat": "<p> 문단, 'Foreign Minister MOTEGI Toshimitsu: …' 답변과 언론사 질문이 번갈아 나온다",
+      "latency": "회견 직후에는 본문이 없고 'The text will be coming soon.'만 있다(2026-09-29 회견이 이 상태였다). 며칠 뒤 본문이 붙는다.",
+      "observedAt": "2026-09-30"
+    },
+    "cn_mfa_spokesperson": {
+      "country": "cn",
+      "url": "https://www.mfa.gov.cn/eng/xw/fyrbt/",
+      "listPattern": "a[href^=./lxjzh/YYYYMM/tYYYYMMDD_id.html] 제목 'Foreign Ministry Spokesperson … Regular Press Conference on <date>'",
+      "bodyFormat": "<p> 문단, '<기관>: 질문' 다음에 'Guo Jiakun: 답변'이 나온다",
+      "latency": "당일 게재된다(2026-09-30 회견이 당일 목록에 있었다). 주말·휴일은 건너뛴다.",
+      "observedAt": "2026-09-30"
+    }
+  },
+  "issueKinds": [
+    {
+      "id": "tariff_trade",
+      "label": "관세·무역합의",
+      "patterns": [["tariff"], ["trade (deal|agreement|war)"], ["reciprocal"], ["section 232"]],
+      "relatedSectors": ["자동차", "철강", "수출주 전반"],
+      "basis": "assumption"
+    },
+    {
+      "id": "korea_us_investment",
+      "label": "한국의 대미투자·LNG·조선",
+      "patterns": [["korea", "invest"], ["korea", "\\blng\\b"], ["korea", "shipbuild"], ["alaska", "\\blng\\b"]],
+      "relatedSectors": ["철강·강관", "조선", "에너지"],
+      "basis": "observed",
+      "observed": "2026-09-30 연합뉴스 '[특징주] '韓 LNG 대미투자' 전망에 철강주 등 강세(종합)': 트럼프 대통령이 한국의 대미투자 프로젝트를 발표할 것으로 예상되며 알래스카 LNG 사업도 포함될 것이라는 보도에 철강·관이음쇠 관련주가 강세, KBI동양철관·TCC스틸 등 상한가.",
+      "sourceId": "yna_20260930_lng"
+    },
+    {
+      "id": "semiconductors",
+      "label": "반도체·칩",
+      "patterns": [["semiconductor"], ["\\bchips?\\b"], ["export control"]],
+      "relatedSectors": ["반도체", "반도체 장비"],
+      "basis": "assumption"
+    },
+    {
+      "id": "steel_autos",
+      "label": "철강·자동차",
+      "patterns": [["\\bsteel\\b"], ["aluminum"], ["\\bautos?\\b"], ["\\bcars?\\b"], ["vehicles?"]],
+      "relatedSectors": ["철강", "자동차·부품"],
+      "basis": "assumption"
+    },
+    {
+      "id": "security_usfk",
+      "label": "안보·주한미군·북한",
+      "patterns": [["north korea"], ["kim jong"], ["troops", "korea"], ["usfk"]],
+      "relatedSectors": ["방산", "남북 경협주(테마)"],
+      "basis": "assumption"
+    },
+    {
+      "id": "us_china",
+      "label": "미중 관계·희토류",
+      "patterns": [["\\bchina\\b"], ["\\bxi\\b"], ["rare earth"], ["taiwan"]],
+      "reactionPatterns": [["united states|u\\.s\\.|trump", "rare earth|tariff|export control|taiwan|trade|summit"]],
+      "relatedSectors": ["반도체", "2차전지", "희토류·소재"],
+      "basis": "assumption"
+    },
+    {
+      "id": "us_japan",
+      "label": "미일 관계",
+      "patterns": [["\\bjapan\\b"], ["japan-u\\.s\\."], ["\\bSOFA\\b"]],
+      "reactionPatterns": [["united states|u\\.s\\.|trump|\\bSOFA\\b", "alliance|tariff|\\bSOFA\\b|trade|investment"]],
+      "relatedSectors": ["자동차", "조선"],
+      "basis": "assumption"
+    },
+    {
+      "id": "fx_rates",
+      "label": "환율·금리·달러",
+      "patterns": [["currency"], ["interest rates?"], ["federal reserve|\\bthe fed\\b"], ["dollar (index|strength)|strong dollar|weak dollar|devalu"]],
+      "relatedSectors": ["은행·증권", "수출주", "수입 원가 업종"],
+      "basis": "assumption"
+    },
+    {
+      "id": "mideast_energy",
+      "label": "중동·유가·해협",
+      "patterns": [["\\biran\\b"], ["strait"], ["hormuz"], ["\\boil\\b"]],
+      "relatedSectors": ["정유", "항공·해운", "에너지"],
+      "basis": "observed",
+      "observed": "2026-09-29 트럼프 게시물 'Iran Has Lost Control of the Strait'와 같은 날 중국 외교부 대변인의 이란·미국 대화 촉구 답변이 같은 주제(이란)로 잡혔다.",
+      "sourceId": "trump_feed_20260930"
+    }
+  ],
+  "marketImpactRules": [
+    {
+      "id": "obs_20260930_korea_lng_steel",
+      "issueKind": "korea_us_investment",
+      "status": "observed",
+      "statement": "한국 대미투자·알래스카 LNG 발표 전망 보도 → 같은 날 철강·강관주 상한가(KBI동양철관, TCC스틸 등). 기사가 인과를 '전망에 강세'로 서술했을 뿐 실제 발표 후 움직임은 별도 검증이 필요하다.",
+      "sourceId": "yna_20260930_lng",
+      "measurementPlan": "발표 다음 거래일과 5거래일 뒤 같은 종목의 등락률을 featured-stocks 스냅샷으로 저장해 '전망 보도 강세 → 발표 후' 패턴이 반복되는지 사건별로 기록한다."
+    },
+    {
+      "id": "src_deal_terms",
+      "issueKind": "tariff_trade",
+      "status": "sourced",
+      "statement": "2025-11-13 한미 공동 팩트시트(백악관): 한국산 자동차·부품·목재의 232조 관세를 15%로 낮추고, 상호관세는 15% 수준으로 정리한다. 반도체 232조 관세는 확정 세율 없이 '미국이 판단하는 미래 협정 조건보다 불리하지 않은 조건을 제공할 의향(intends)'이라고만 적었다. 대미 투자는 조선 1,500억 달러(승인 투자)와 별도 2,000억 달러(MOU)이고, 외환시장 안정을 위해 한국의 연간 달러 조달 상한을 200억 달러로 둔다.",
+      "numbers": ["자동차·부품·목재 232조 관세 15%", "상호관세 15%", "조선 1,500억 달러 + 별도 2,000억 달러", "연간 달러 조달 상한 200억 달러"],
+      "sourceId": "wh_kr_us_factsheet_20251113",
+      "caveat": "반도체 문구는 세율이 아니라 의향이다. 상호관세 부분은 2026-02-20 대법원 판결(src_legal_basis)로 법적 기반이 달라졌다. 232조 자동차 관세는 별개다.",
+      "postUse": "트럼프의 한국 관세 발언은 이 문서의 15%·투자 약속 대비 무엇이 바뀌는지로 읽는다."
+    },
+    {
+      "id": "src_legal_basis",
+      "issueKind": "tariff_trade",
+      "status": "sourced",
+      "statement": "KIEP(2026-03-18): 2026-02-20 미 연방대법원이 6대 3으로 IEEPA는 대통령에게 관세 부과 권한을 위임하지 않았다고 판단했다. 트럼프 행정부는 122조에 근거해 2026-02-24부터 일률 10% 글로벌 관세를 부과했고, 122·301·232조 등 다른 조항의 관세는 이 판결의 직접 영향을 받지 않는다. KIEP는 판결의 직접 효과를 'IEEPA 관세 체제의 종료이며 고관세 정책 자체의 중단은 아니다'라고 정리했다.",
+      "numbers": ["대법원 판결 2026-02-20, 6대 3", "122조 글로벌 관세 10%, 2026-02-24부터"],
+      "sourceId": "kiep_20260318_ieepa",
+      "postUse": "관세 발언은 어느 법 조항(IEEPA·122·232·301)에 근거한 조치인지 확인한 뒤에야 지속성을 말한다. 자동차·철강은 232조라 판결과 별개다."
+    },
+    {
+      "id": "src_20260127_threat",
+      "issueKind": "tariff_trade",
+      "status": "sourced",
+      "statement": "2026-01-27 로이터 보도: 트럼프는 한국 국회가 합의를 입법하지 않았다며 'Autos, Lumber, Pharma, and all other Reciprocal TARIFFS, from 15% to 25%'로 올린다고 밝혔다. 같은 날 코스피는 장중 1.19% 하락했다가 2.73% 상승으로 마감했고 원화는 0.5% 약세였다. 오전 9시32분 기준 현대차 -3.05%, 기아 -4.06%, 현대모비스 -2.90%였다(아시아경제, 장중 수치).",
+      "numbers": ["관세 15% -> 25% 발언", "코스피 장중 -1.19% 후 종가 +2.73%", "원화 약 0.5% 약세", "오전 9시32분 현대차 -3.05%, 기아 -4.06%, 현대모비스 -2.90%"],
+      "sourceId": "ajot_reuters_20260127",
+      "alsoSourceIds": ["asiae_20260127_autos"],
+      "assumptionNote": "같은 날 자동차주는 장중 하락하고 지수는 상승 마감했다. 지수 방향을 관세 발언 하나로 설명하지 않는다(해석은 가정). 한 건이므로 '관세 위협 → 지수 하락'으로 일반화하지 않는다.",
+      "postUse": "종가가 아니라 장중 수치가 섞여 있으니 시점을 함께 쓴다."
+    },
+    {
+      "id": "src_sector_view_kiet",
+      "issueKind": "tariff_trade",
+      "status": "sourced",
+      "statement": "산업연구원(KIET, 2025-11-24 '2026년 경제·산업 전망')은 미국 관세의 영향을 자동차와 철강에는 부정적으로, 조선(수주산업이라 직접 영향 없음)·반도체·2차전지에는 작게 평가했다. 주가 반응이 아니라 연구기관의 정성 평가다.",
+      "numbers": [],
+      "sourceId": "kiet_20251124_outlook",
+      "postUse": "reverify_first"
+    },
+    {
+      "id": "src_bok_outlook",
+      "issueKind": "semiconductors",
+      "status": "sourced",
+      "statement": "한국은행 경제전망(2026-08-27): 국내경제는 올해 3.3%, 내년 2.9%의 높은 성장세를 지속할 전망이며 '중동상황 불확실성에도 반도체 경기 호황과 파급효과 확산'을 이유로 들었다. 소비자물가는 올해 2.7%, 내년 2.3%로 봤고, 전망 경로상 불확실성으로 반도체 경기와 중동상황을 꼽았다. 같은 해 2월 전망은 올해 2.0%였고 '미국 관세 영향과 건설투자 부진에도 반도체 경기 활황 등에 힘입은 반등'이라고 적었다(통상환경·지정학적 긴장을 향후 경로 변수로 언급).",
+      "numbers": ["2026-08 전망: 올해 3.3%, 내년 2.9%", "소비자물가 올해 2.7%, 내년 2.3%", "2026-02 전망: 올해 2.0% (2025-11 전망 1.8%)"],
+      "sourceId": "bok_202608_outlook",
+      "alsoSourceIds": ["bok_202602_outlook"],
+      "postUse": "반도체 업황이 거시 방향을 좌우하고 중동·통상 변수가 불확실성이라는 근거로만 쓴다. 최신 전망은 매 분기 바뀌므로 쓰기 전에 한은 경제전망 페이지의 최신본을 다시 확인한다."
+    },
+    {
+      "id": "src_semi_targeted_tariff",
+      "issueKind": "semiconductors",
+      "status": "sourced",
+      "statement": "서울신문 2026-09-04 제목: '美상무 “미국서 안 만들면 대가”… ‘반도체 표적관세’ 예고'. 미 정부가 반도체에 표적 관세 방침을 내비쳤다는 보도이며, 한국은 한미 팩트시트에서 반도체 조건을 '의향' 수준으로만 받아 둔 상태다(src_deal_terms).",
+      "numbers": [],
+      "sourceId": "seoul_20260904_semi_tariff",
+      "caveat": "제목만 확인했고 본문 수치(삼성·SK하이닉스 미국 투자액 등)는 확인하지 못해 옮기지 않는다. 미 정부 원문은 확인하지 못했다.",
+      "postUse": "본문·미 정부 원문을 다시 열어 확인하기 전에는 제목 인용까지만 쓴다."
+    },
+    {
+      "id": "src_us_china_truce",
+      "issueKind": "us_china",
+      "status": "sourced",
+      "statement": "백악관 팩트시트(2025-11-01): 미국은 펜타닐 관련 관세를 10%p 낮추고(2025-11-10 발효) 고율 상호관세 유예를 2026-11-10까지 유지한다(현행 10% 상호관세는 유지). 중국은 2025-10-09 발표한 희토류 등 수출통제의 글로벌 시행을 유예하고 희토류·갈륨·게르마늄·안티모니·흑연 일반허가를 발급하며, 미국은 301조 해운·조선 조치 시행을 2025-11-10부터 1년 유예하고 중국은 이에 대한 보복 조치를 철회한다.",
+      "numbers": ["펜타닐 관세 10%p 인하, 2025-11-10 발효", "고율 상호관세 유예 2026-11-10까지", "301조 해운·조선 조치 1년 유예, 2025-11-10부터"],
+      "sourceId": "wh_china_deal_20251101",
+      "watch": { "date": "2026-11-10", "what": "고율 상호관세 유예 및 301조 해운·조선 조치 유예의 문서상 만료일" },
+      "caveat": "미국 정부 측 서술이다. 2026-02-20 IEEPA 판결(src_legal_basis) 이후 이 문서의 상호관세 유예가 지금도 같은 의미인지, 만료일이 이후 연장·변경됐는지는 확인하지 못했다. 만료일을 글에 쓰려면 최신 공식 발표를 먼저 확인한다.",
+      "postUse": "만료일은 '문서상 기한'으로만 쓰고, 연장 여부를 단정하지 않는다."
+    },
+    {
+      "id": "src_rare_earth_scope",
+      "issueKind": "us_china",
+      "status": "sourced",
+      "statement": "한국관세무역개발원 분석(2025-10): 중국의 2025-10-09 희토류 수출통제 확대는 통제 대상을 7종에서 12종으로 늘리고, 중국산 희토류를 0.1% 이상 함유하거나 중국 제련·분리 기술을 쓴 제품도 통제 대상에 넣었다. 인용된 보고서는 한국이 첨단산업 필수 광물의 95% 이상을 수입하고 일부 광물의 중국 의존도는 90%를 웃돈다고 밝혔다.",
+      "numbers": ["통제 대상 7종 -> 12종", "0.1% 이상 함유 제품 통제", "필수 광물 수입 95% 이상, 일부 광물 중국 의존도 90% 초과"],
+      "sourceId": "kctdi_20251020_rare_earth",
+      "caveat": "이 통제는 src_us_china_truce에서 유예됐다. 시장 민감도는 휴전 유지 여부에 달려 있다는 해석은 가정이다.",
+      "postUse": "95%·90% 수치는 KCTDI가 인용한 보고서 기준이다."
+    },
+    {
+      "id": "src_japan_auto_gap",
+      "issueKind": "us_japan",
+      "status": "sourced",
+      "statement": "한국무역협회(2025-09-19): 트럼프가 2025-09-04 일본 자동차 관세를 25%에서 12.5%로 낮추는 대통령령에 서명해 기존 2.5%와 합한 관세가 27.5%에서 15%로 내려갔다. 일본 재무성 8월 통계에서 일본의 대미 자동차 수출은 전년 동월 대비 30% 가까이 줄었고, 일본 기업 관계자들은 한국과의 경쟁에서 유리해졌다는 반응을 보였다(일본무역회장은 9월 17일 회견에서 관세 인하를 언급).",
+      "numbers": ["일본 자동차 관세 27.5% -> 15%", "일본 8월 대미 자동차 수출 약 -30%"],
+      "sourceId": "kita_20250919_japan_autos",
+      "caveat": "2025-11 한미 합의로 한국 자동차 관세도 15%로 정리돼 이 격차는 해소됐다(src_deal_terms). 일본 정부(총리·외무성)의 대한국 발언에 시장이 어떻게 반응했는지는 확인하지 못했다(gap_market_reactions).",
+      "postUse": "한일 자동차 경쟁이 관세 차이에 민감했다는 사례로만 쓴다."
+    },
+    {
+      "id": "src_kr_jp_finmin",
+      "issueKind": "fx_rates",
+      "status": "sourced",
+      "statement": "뉴스핌 2026-03-14 제목: '한일 재무장관 “원·엔화 약세 심각한 우려…경제·에너지 협력 강화”'. 두 나라 재무장관이 같은 시기 원화와 엔화의 약세에 우려를 표명했다는 보도다.",
+      "numbers": [],
+      "sourceId": "newspim_20260314_finmin",
+      "caveat": "제목만 확인했다. 통화스와프 협력 재확인 등 본문 내용과 회의 배경(중동 정세 등)은 확인하지 못해 옮기지 않는다.",
+      "postUse": "본문을 다시 열어 확인하기 전에는 제목 인용까지만 쓴다."
+    },
+    {
+      "id": "src_security_terms",
+      "issueKind": "security_usfk",
+      "status": "sourced",
+      "statement": "2025-11-13 한미 공동 팩트시트(백악관) 안보 부분: 한국은 국방비를 GDP의 3.5%로 늘리는 계획을 밝혔고(법적 요건에 따라 가능한 한 빨리), 2030년까지 250억 달러어치 미국산 군장비를 구매하며, 주한미군에 대한 포괄 지원 330억 달러 계획을 공유했다. 미국은 한국의 핵추진 공격잠수함 건조를 승인했다.",
+      "numbers": ["국방비 GDP 대비 3.5%", "2030년까지 미국산 군장비 250억 달러", "주한미군 지원 330억 달러", "핵추진 공격잠수함 건조 승인"],
+      "sourceId": "wh_kr_us_factsheet_20251113",
+      "postUse": "주한미군 감축·방위비 재협상 발언은 이 약속 대비 무엇이 새로운지로 읽는다."
+    },
+    {
+      "id": "src_defense_stocks",
+      "issueKind": "security_usfk",
+      "status": "sourced",
+      "statement": "2026-01-08 트럼프가 2027년 국방예산을 1조5000억 달러로 늘려야 한다고 주장하자, 같은 날 거래 중 엠앤씨솔루션 +10.41%, LIG넥스원 +7.05%, 한화에어로스페이스 +6.93%로 방산주가 강세였다(제목: '[특징주] 트럼프 “국방예산 1.5조달러로 증액” 발언에 방산주 강세'). 2025-10-30 오전 11시45분 기준 한화오션은 +8.11%였고, 국제신문은 트럼프의 핵추진잠수함 건조 승인과 한화오션 낙점 영향으로 보인다고 썼다.",
+      "numbers": ["2026-01-08 거래 중 엠앤씨솔루션 +10.41%, LIG넥스원 +7.05%, 한화에어로스페이스 +6.93%", "2025-10-30 11:45 한화오션 +8.11%"],
+      "sourceId": "daum_20260108_defense",
+      "alsoSourceIds": ["kookje_20251030_hanwha_ocean"],
+      "caveat": "모두 장중 등락률이고 종가가 아니다. 기사의 '~것으로 보인다' 표현을 넘어 인과를 단정하지 않는다. 주한미군·방위비 협상 발언 자체에 대한 반응은 확인하지 못했다(gap_market_reactions).",
+      "assumptionNote": "방산·조선이 미 정부의 국방·조선 협력 발언에 직접 반응한다는 일반화는 이 두 사례만으로는 가정이다."
+    },
+    {
+      "id": "src_kr_cn_summit",
+      "issueKind": "us_china",
+      "status": "sourced",
+      "statement": "정책브리핑(2026-01-06): 2026-01-05 한중 정상회담에서 양측이 수용 가능한 분야부터 점진적·단계적으로 문화·콘텐츠 교류를 확대하기로 하고 경제·디지털·환경·식품 등 14건의 양해각서(MOU)를 체결했다. 시진핑 주석이 APEC 참석으로 11년 만에 방한한 다음 날인 2025-10-31 MTN은 제목 '시진핑 오고 엔터주 껑충...한한령 빗장 진짜 풀리나'로, 오전 9시30분 기준 하이브 +3.85%, 에스엠 +1.34%, YG +0.11%, JYP +0.12%, ACE KPOP 포커스 ETF +2.12%를 전하며 방한이 한한령 해제 신호로 읽혀 투심을 끌어올린 것으로 보인다고 썼다.",
+      "numbers": ["MOU 14건", "2025-10-31 오전 9시30분 기준 하이브 +3.85%, 에스엠 +1.34%, YG +0.11%, JYP +0.12%, ACE KPOP 포커스 ETF +2.12%"],
+      "sourceId": "koreakr_20260106_summit",
+      "alsoSourceIds": ["mtn_20251031_entertainment"],
+      "caveat": "한한령의 공식 해제는 확인하지 못했고 '단계적 확대'라는 정부 발표만 확인했다. 주가 수치는 장 초반 값이고, 인과('신호로 읽혀')는 기사의 추정 표현이다. MTN 기사는 걸그룹의 중국 공연 등 다른 요인도 함께 언급했다.",
+      "postUse": "'한한령 해제'라고 쓰지 않는다."
+    },
+    {
+      "id": "src_cosmetics_mix",
+      "issueKind": "us_china",
+      "status": "sourced",
+      "statement": "전자신문(식약처 발표 인용, 2026-01-09): 2025년 화장품 수출은 114억3000만 달러로 전년 대비 12.3% 늘었다. 국가별로 미국이 22억 달러로 가장 많고 중국과 일본이 각각 20억 달러, 11억 달러였으며, 미국·중국 수출 비중은 43.1%에서 36.7%로 줄었다.",
+      "numbers": ["2025 화장품 수출 114억3000만 달러 (+12.3%)", "미국 22억 달러, 중국 20억 달러", "미국·중국 비중 43.1% -> 36.7%"],
+      "sourceId": "etnews_20260109_cosmetics",
+      "assumptionNote": "중국 관련 발언에 대한 화장품 업종의 민감도가 과거보다 낮아졌을 것이라는 해석은 가정이다(수출 비중 감소는 사실, 주가 민감도는 미측정)."
+    },
+    {
+      "id": "src_china_steel_export",
+      "issueKind": "steel_autos",
+      "status": "sourced",
+      "statement": "MarketScreener(통신사 기사 재게시, 2026-01-14): 중국의 2025년 철강 수출은 1억1902만 톤(+7.5%)으로 사상 최대였고, 2026-01-01부터 약 300개 철강 품목에 수출허가제를 도입했다.",
+      "numbers": ["2025 중국 철강 수출 1억1902만 톤 (+7.5%)", "수출허가제 2026-01-01, 약 300개 품목"],
+      "sourceId": "marketscreener_20260114_china_steel",
+      "caveat": "이 머신에서는 403이라 직접 열지 못했고 조사 에이전트 보고에만 의존한다. 한국 철강주의 주가 반응은 확인하지 못했다.",
+      "postUse": "reverify_first"
+    },
+    {
+      "id": "assump_sector_links",
+      "issueKind": "*",
+      "status": "assumption",
+      "statement": "issueKinds[].relatedSectors는 통상적 업종 연결(예: 관세 → 자동차·철강)이며 이 저장소에서 검증하지 않았다.",
+      "measurementPlan": "이슈 종류가 잡힌 날마다 leader-statements 브리프와 featured-stocks 스냅샷을 같이 저장하고, 발언 시각 이후 첫 정규장에서 관련 업종 지수·상위 상승 종목에 그 업종이 몇 번 들어왔는지 센다. 표본이 10건 넘기 전에는 확정 표현 금지."
+    },
+    {
+      "id": "gap_market_reactions",
+      "issueKind": "*",
+      "status": "assumption",
+      "statement": "아래 항목은 2026-09-30 조사에서 검증된 시장 반응 자료를 찾지 못했다. 근거가 생기기 전에는 글에서 반응을 서술하지 않고 '확인된 자료 없음'으로 둔다.",
+      "gaps": [
+        "일본 정부(총리·외무성)의 대한국 발언에 대한 원·엔·자동차주 반응",
+        "주한미군 감축·방위비 재협상 발언 자체에 대한 방산·조선주 반응",
+        "한한령 관련 중국 정부의 공식 발표와 중국 경기부양책이 한국 증시에 준 영향",
+        "중국 철강 수출 규제·미국 철강 관세가 한국 철강주에 준 반응(2026-09-30 LNG 사례만 observed)",
+        "2차전지·코스닥 종목의 미중 발언 반응",
+        "부산 미중 정상회담(2025-10-30) 당일 코스피 반응"
+      ],
+      "channelNotes": "조사 에이전트 보고(재확인 안 함): KRX 업종지수는 로그인이 필요해 익명 수집 대상이 아니고 한국은행 ECOS는 API 키가 필요하다. 익명으로 확인된 시세 채널은 네이버 모바일 증권 JSON(featured-stocks.mjs)이다.",
+      "measurementPlan": "leader-statements 브리프에 이슈 종류가 잡힌 날마다 featured-stocks 스냅샷(지수·상한가·급등 종목)을 같은 날짜 키로 저장하고, 발언 이후 첫 정규장의 등락을 이슈 종류별로 기록한다. 이슈 종류마다 사례가 10건 쌓이기 전에는 위 공백을 채운 것으로 취급하지 않는다."
+    }
+  ],
+  "dailyUse": {
+    "domainC": "C(해외 돈 되는 핫뉴스): node leader-statements.mjs 로 최근 96시간 발언 중 한국 이슈 후보와 일본·중국 반응 문단을 본 뒤, 발언 원문 링크가 있는 것만 1건 쓴다.",
+    "featuredStocks": "node featured-stocks.mjs 로 지수와 상한가·급등 종목, 종목별 기사 제목(이유)을 본다. 이유 미확인 종목은 글에 이유를 쓰지 않는다.",
+    "hook": "'그래서' 줄: 발언이 어떤 업종·품목에 닿는지(가정이면 가정이라고), 독자가 확인할 것(발표 일정·공식 문서 링크)만 쓴다. 종목 추천은 쓰지 않는다."
+  },
+  "sources": {
+    "trump_feed_20260930": {
+      "url": "https://www.trumpstruth.org/feed",
+      "what": "트루스소셜 게시물 공개 미러(RSS). 2026-09-30 수집에서 100건 중 본문 27건, 이란 해협 게시물(2026-09-29)과 자동차 연비 기준 게시물(2026-09-26)이 포함됐다."
+    },
+    "yna_20260930_lng": {
+      "url": "https://n.news.naver.com/mnews/article/001/0016347847",
+      "what": "연합뉴스 2026-09-30 16:33 '[특징주] '韓 LNG 대미투자' 전망에 철강주 등 강세(종합)'."
+    },
+    "federal_register_api": {
+      "url": "https://www.federalregister.gov/api/v1/documents.json?conditions[presidential_document_type]=executive_order&order=newest&per_page=5",
+      "what": "연방관보 공식 API. 익명 HTTP 200 확인(2026-09-30)."
+    },
+    "mofa_jp_press": {
+      "url": "https://www.mofa.go.jp/press/kaiken/index.html",
+      "what": "일본 외무성 기자회견 목록. 2026-09-18 회견(모테기 외무상 재임명 직후) 본문에 미일 동맹·SOFA 질문이, 2026-09-15 회견 본문에 한일 유해 DNA 감정 협력 질문이 있었다."
+    },
+    "mfa_cn_spokesperson": {
+      "url": "https://www.mfa.gov.cn/eng/xw/fyrbt/",
+      "what": "중국 외교부 대변인 정례브리핑 영어 목록. 2026-09-30 회견 본문에서 이란·미국 대화 촉구 답변 확인."
+    },
+    "wh_kr_us_factsheet_20251113": {
+      "url": "https://www.whitehouse.gov/fact-sheets/2025/11/joint-fact-sheet-on-president-donald-j-trumps-meeting-with-president-lee-jae-myung/",
+      "what": "백악관 '한미 정상회담 공동 팩트시트' (2025-11-13). 관세 15%, 반도체 조건 의향 문구, 투자 3,500억 달러, 연간 200억 달러 상한, 안보(3.5%·250억·330억 달러·핵추진잠수함 승인)를 담았다.",
+      "publisher": "백악관", "date": "2025-11-13", "confidence": "primary", "checked": "body_verified"
+    },
+    "kiep_20260318_ieepa": {
+      "url": "https://www.kiep.go.kr/gallery.es?mid=a10102020000&bid=0003&act=view&list_no=12294&cg_code=",
+      "what": "KIEP 오늘의 세계경제 26-08 'IEEPA 관세에 관한 미 연방대법원 판결의 주요 쟁점과 후속 관세 조치' (2026-03-18, 이천기).",
+      "publisher": "대외경제정책연구원", "date": "2026-03-18", "confidence": "institute", "checked": "body_verified"
+    },
+    "ajot_reuters_20260127": {
+      "url": "https://www.ajot.com/news/south-korea-reassures-on-us-investment-pledge-after-trump-threatens-to-hike-tariffs",
+      "what": "로이터 기사 AJOT 전재 (2026-01-27) 'South Korea reassures on US investment pledge after Trump threatens to hike tariffs'. 트럼프 발언 인용과 코스피·원화 수치.",
+      "publisher": "Reuters (AJOT 전재)", "date": "2026-01-27", "confidence": "wire", "checked": "body_verified"
+    },
+    "asiae_20260127_autos": {
+      "url": "https://view.asiae.co.kr/article/2026012709432049354",
+      "what": "아시아경제 2026-01-27 오전 9시32분 기준 현대차·기아·현대모비스 하락 기사.",
+      "publisher": "아시아경제", "date": "2026-01-27", "confidence": "secondary", "checked": "body_verified"
+    },
+    "kiet_20251124_outlook": {
+      "url": "https://kiet.re.kr/trends/ecolookView?ecolook_no=54",
+      "what": "산업연구원 '2026년 경제·산업 전망' (2025-11-24). 업종별 관세 영향 정성 평가.",
+      "publisher": "산업연구원", "date": "2025-11-24", "confidence": "institute", "checked": "agent_only",
+      "note": "2026-09-30 재확인 시 페이지가 시간 초과·503이었다. 조사 에이전트가 미러 PDF로 확인했다고 보고했다."
+    },
+    "bok_202608_outlook": {
+      "url": "https://www.bok.or.kr/portal/bbs/B0000502/view.do?nttId=11064211&oldMenuNo=201150&menuNo=201265&programType=newsData&depth=201265&relate=Y",
+      "what": "한국은행 경제전망(2026년 8월) 보도자료 (2026-08-27). 올해 3.3%·내년 2.9%, 반도체 경기 호황.",
+      "publisher": "한국은행", "date": "2026-08-27", "confidence": "primary", "checked": "body_verified"
+    },
+    "bok_202602_outlook": {
+      "url": "https://www.bok.or.kr/portal/bbs/B0000502/view.do?nttId=10096681&menuNo=201265&programType=newsData&relate=Y&depth=201265",
+      "what": "한국은행 경제전망(2026년 2월) 보도자료. 올해 2.0%(직전 1.8%), 미국 관세·건설투자 부진에도 반도체 활황.",
+      "publisher": "한국은행", "date": "2026-02", "confidence": "primary", "checked": "body_verified"
+    },
+    "seoul_20260904_semi_tariff": {
+      "url": "https://www.seoul.co.kr/news/economy/industry/2026/09/04/20260904006007",
+      "what": "서울신문 2026-09-04 '美상무 “미국서 안 만들면 대가”… ‘반도체 표적관세’ 예고'.",
+      "publisher": "서울신문", "date": "2026-09-04", "confidence": "secondary", "checked": "title_verified"
+    },
+    "wh_china_deal_20251101": {
+      "url": "https://www.whitehouse.gov/fact-sheets/2025/11/fact-sheet-president-donald-j-trump-strikes-deal-on-economic-and-trade-relations-with-china/",
+      "what": "백악관 팩트시트 'President Donald J. Trump Strikes Deal on Economic and Trade Relations with China' (2025-11-01). 관세 10%p 인하, 유예 만료 2026-11-10, 희토류 통제 유예.",
+      "publisher": "백악관", "date": "2025-11-01", "confidence": "primary", "checked": "body_verified"
+    },
+    "kctdi_20251020_rare_earth": {
+      "url": "https://www.kctdi.or.kr/kctdi/research/research11.do?mode=view&articleNo=4874",
+      "what": "한국관세무역개발원 [이주의 초점] '중국, 희토류 0.1% 함량 제품도 수출통제' (2025-10).",
+      "publisher": "한국관세무역개발원", "date": "2025-10", "confidence": "institute", "checked": "body_verified"
+    },
+    "kita_20250919_japan_autos": {
+      "url": "https://www.kita.net/board/totalTradeNews/totalTradeNewsDetail.do;JSESSIONID_KITA=6348DA3BFBCDB8198417BE4B6D9145BA.Hyper?no=95240&siteId=2",
+      "what": "한국무역협회 무역뉴스 (2025-09-19). 일본 자동차 관세 인하와 대미 수출 감소.",
+      "publisher": "한국무역협회", "date": "2025-09-19", "confidence": "secondary", "checked": "body_verified",
+      "note": "URL에 세션 ID가 들어 있어 만료될 수 있다. 게시물 번호 no=95240 으로 다시 찾는다."
+    },
+    "newspim_20260314_finmin": {
+      "url": "https://www.newspim.com/news/view/20260314000116",
+      "what": "뉴스핌 2026-03-14 '한일 재무장관 “원·엔화 약세 심각한 우려…경제·에너지 협력 강화”'.",
+      "publisher": "뉴스핌", "date": "2026-03-14", "confidence": "secondary", "checked": "title_verified"
+    },
+    "daum_20260108_defense": {
+      "url": "https://v.daum.net/v/20260108100903356",
+      "what": "다음뉴스 전재 '[특징주] 트럼프 “국방예산 1.5조달러로 증액” 발언에 방산주 강세' (2026-01-08, 원 매체 표기 미확인).",
+      "publisher": "Daum 전재(원 매체 미확인)", "date": "2026-01-08", "confidence": "secondary", "checked": "body_verified"
+    },
+    "kookje_20251030_hanwha_ocean": {
+      "url": "https://www.kookje.co.kr/news2011/asp/newsbody.asp?code=0200&key=20251030.99099008023",
+      "what": "국제신문 2025-10-30 '한국 핵추진잠수함 건조 낙점 ‘한화오션’ 주가 급등'. 11시45분 기준 +8.11%.",
+      "publisher": "국제신문", "date": "2025-10-30", "confidence": "secondary", "checked": "body_verified"
+    },
+    "koreakr_20260106_summit": {
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148957531",
+      "what": "정책브리핑 '이재명 대통령, 시진핑 주석과 정상회담…“한중관계 전면 복원의 원년으로”' (2026-01-06). 문화·콘텐츠 교류 단계적 확대, MOU 14건.",
+      "publisher": "대한민국 정책브리핑", "date": "2026-01-06", "confidence": "primary", "checked": "body_verified"
+    },
+    "mtn_20251031_entertainment": {
+      "url": "https://news.mtn.co.kr/news-detail/2025103110044921204",
+      "what": "MTN 2025-10-31 '시진핑 오고 엔터주 껑충...한한령 빗장 진짜 풀리나'. 오전 9시30분 기준 엔터주·ETF 상승.",
+      "publisher": "MTN 머니투데이방송", "date": "2025-10-31", "confidence": "secondary", "checked": "body_verified"
+    },
+    "etnews_20260109_cosmetics": {
+      "url": "https://www.etnews.com/20260109000233",
+      "what": "전자신문 2026-01-09 '2025년 K뷰티 수출 114억불…역대 최대치 경신' (식약처 발표 인용).",
+      "publisher": "전자신문", "date": "2026-01-09", "confidence": "secondary", "checked": "body_verified"
+    },
+    "marketscreener_20260114_china_steel": {
+      "url": "https://www.marketscreener.com/news/china-s-steel-exports-iron-ore-imports-hit-record-highs-ce7e58d8da89f32d",
+      "what": "MarketScreener 'China's steel exports, iron ore imports hit record highs' (2026-01-14, 통신사 기사 재게시로 추정).",
+      "publisher": "MarketScreener", "date": "2026-01-14", "confidence": "secondary", "checked": "agent_only",
+      "note": "2026-09-30 이 머신에서 403. 조사 에이전트 보고에만 의존한다."
+    },
+    "naver_stock_mobile_api": {
+      "url": "https://m.stock.naver.com/api/stocks/up/KOSPI?page=1&pageSize=5",
+      "what": "네이버 모바일 증권 상승 종목 JSON(referer m.stock.naver.com 필요). 익명 200, 상한가 플래그 compareToPreviousPrice.name=UPPER_LIMIT 확인."
+    },
+    "naver_stock_news_api": {
+      "url": "https://m.stock.naver.com/api/news/stock/002710?pageSize=5&page=1",
+      "what": "종목별 뉴스 JSON(officeName, datetime, title, body, mobileNewsUrl)."
+    },
+    "yna_economy_rss": {
+      "url": "https://www.yna.co.kr/rss/economy.xml",
+      "what": "연합뉴스 경제 RSS. 제목에 '[특징주]'가 들어간 기사를 시장 전반 이유 후보로 쓴다."
+    },
+    "whitehouse_news": {
+      "url": "https://www.whitehouse.gov/news/",
+      "what": "백악관 뉴스 목록(HTML)."
+    },
+    "ustr_press": {
+      "url": "https://ustr.gov/about-us/policy-offices/press-office/press-releases",
+      "what": "미국 무역대표부 보도자료(HTML)."
+    }
+  }
+}
+

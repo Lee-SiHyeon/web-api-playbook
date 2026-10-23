@@ -1,0 +1,114 @@
+{
+  "schema": "gemini-delete-ui-request-capture-v1",
+  "service": "gemini-web",
+  "feature": "delete",
+  "operation": "delete",
+  "outcome": "normal_ui_request_captured_browser_mutation_aborted",
+  "capturedAt": "2026-10-06T03:32:57.327669+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "sourceMapping": {
+    "rpcId": "GzXR5e",
+    "operationName": "DeleteConversation",
+    "mappingClass": "normal_ui_capture_plus_first_party_source_candidate"
+  },
+  "targetBinding": {
+    "ownerMatched": true,
+    "exactTaskTitleSelectedOnce": true,
+    "taskPromptMarkerVisible": true,
+    "apiConversationIdBoundToRoute": true,
+    "conversationIdSha256": "56001f5b3651a2f93620c149182f23de554f4a17d57a9d1ff8b57ef978b56de8",
+    "targetOccurrenceCountInDeleteArgs": 1,
+    "rawConversationIdPersisted": false
+  },
+  "request": {
+    "rpcId": "GzXR5e",
+    "request": {
+      "method": "POST",
+      "origin": "https://gemini.google.com",
+      "path": "/_/BardChatUi/data/batchexecute",
+      "queryKeys": [
+        "rpcids",
+        "source-path",
+        "bl",
+        "f.sid",
+        "hl",
+        "_reqid",
+        "rt"
+      ],
+      "headerNames": [
+        "accept",
+        "content-type",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-goog-ext-525001261-jspb",
+        "x-goog-ext-73010989-jspb",
+        "x-same-domain"
+      ],
+      "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+      "formFieldNames": [
+        "f.req",
+        "at"
+      ]
+    },
+    "rpcCallTail": [
+      null,
+      "generic"
+    ],
+    "argsShape": {
+      "type": "array",
+      "length": 1,
+      "items": [
+        {
+          "type": "string",
+          "length": 18,
+          "targetMatched": true
+        }
+      ]
+    },
+    "targetConversationOccurrenceCount": 1,
+    "requestBytes": 153,
+    "requestHeaderValuesPersisted": false,
+    "rawArgumentsPersisted": false
+  },
+  "guard": {
+    "browserDeleteRequestReachedServer": false,
+    "browserAbortAcknowledged": true,
+    "targetRequestCaptureCount": 1,
+    "blockedNonReadRequestCount": 182,
+    "guardParseFailureCount": 0,
+    "allowedReadRequestCount": 19
+  },
+  "postAbortReadback": {
+    "sameTaskRouteRestored": true,
+    "exactTitleVisible": true,
+    "promptMarkerVisible": true,
+    "serverMutationObserved": false
+  },
+  "browserPageRestored": true,
+  "directMutation": {
+    "dispatchCount": 0,
+    "deferredUntilTaskDeleteLast": true
+  },
+  "persistence": {
+    "requestHeaderValuesPersisted": false,
+    "rawArgumentsPersisted": false,
+    "cookiesPersisted": false,
+    "sessionValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "promptOrAssistantTextPersisted": false,
+    "rawRequestOrResponseBodyPersisted": false
+  }
+}

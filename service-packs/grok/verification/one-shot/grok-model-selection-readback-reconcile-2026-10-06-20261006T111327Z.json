@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "models.private-selection",
+  "observedAt": "2026-10-06T11:13:27.691326+00:00",
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "exactPromptSha256": "87022acfad1ae0916ed351a0b720967217ebdb9b6c25194f5a32ca4777ab0ede",
+  "wssTerminalEventType": "response.done",
+  "wssTerminalStatusObserved": false,
+  "reconciliation": {
+    "ownerMatched": true,
+    "promptHashMatchesReceipt": true,
+    "listStatus": 200,
+    "listResponseBytes": 9591,
+    "listCount": 24,
+    "timestampFieldCount": 24,
+    "candidateCount": 1,
+    "candidateReadCount": 0,
+    "exactPromptCandidateCount": 1,
+    "exactPromptWithAssistantCount": 1,
+    "exactExpectedAssistantCount": 1,
+    "candidates": [
+      {
+        "conversationIdSha256": "0cadb1e23ddbe14255578ea88b6fb40dcb4d2538c422aa152656f395afeba016",
+        "listIndex": 0,
+        "timeField": "createTime",
+        "withinWriterWindow": true,
+        "detailStatus": 200,
+        "nodeReadStatus": 200,
+        "responseReadStatus": 200,
+        "nodeCount": 2,
+        "userTurnCount": 1,
+        "assistantTurnCount": 1,
+        "exactPromptMatchCount": 1,
+        "assistantTextLengths": [
+          2
+        ],
+        "assistantTextSha256": [
+          "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+        ],
+        "assistantExact42Count": 1,
+        "assistantHas42Count": 1,
+        "assistantHasLabelCount": 0,
+        "nestedJsonObjectDecodedCount": 0,
+        "typedStatusFieldNames": [
+          "streamErrors"
+        ],
+        "typedStatusCodes": [],
+        "typedStatusCounts": {},
+        "errorOrQuotaCodes": []
+      }
+    ],
+    "readOnly": true,
+    "rawValuesPersisted": false,
+    "windowMode": "createTime_or_modifyTime_11:04-11:08Z_exact_prompt",
+    "classification": "exact_task_assistant_42_verified",
+    "browserWriteGuardBlocked": 17,
+    "noBrowserBusinessWriteForwarded": true,
+    "roleResetToAboutBlank": true
+  },
+  "rawPromptPersisted": false,
+  "rawAssistantTextPersisted": false,
+  "rawConversationIdsPersisted": false,
+  "rawResponseIdsPersisted": false,
+  "rawBodiesPersisted": false,
+  "cookiesPersisted": false
+}

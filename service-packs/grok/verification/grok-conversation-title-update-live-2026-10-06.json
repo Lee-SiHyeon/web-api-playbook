@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-05T22:44:10.749719Z",
+  "operationId": "conversation.update",
+  "dispatch": "GrokWebClient.submit through createAuthenticatedChromeFetch and curl-cffi chrome150",
+  "pageRoleVerified": true,
+  "freshOwnerVerifiedBeforeDispatch": true,
+  "taskTargetExactPromptHashMatchedBeforeDispatch": true,
+  "taskTargetAssistantPatternMatchedBeforeDispatch": true,
+  "targetOwnerVerifiedBeforeDispatch": true,
+  "targetIdentifierPersisted": false,
+  "titlePersisted": false,
+  "source": {
+    "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+    "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+    "sourceFunctionName": "chatUpdateConversationRaw",
+    "firstLiveSourcePermitUsed": true
+  },
+  "mutation": {
+    "method": "PUT",
+    "pathTemplate": "/rest/app-chat/conversations/{conversationId}",
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 369,
+    "confirmedResponseFieldPaths": [
+      "/conversationId"
+    ],
+    "responseDigestPersisted": false,
+    "requestDigest": "591b04f0320ae980aeabec86aff0d4855b1836606d6b27818a5a159e3745e7fc",
+    "intentDigest": "9d2544bdc93f869c5fca25a2fad263960cb666e3fd34e30d2ba3c3fe5068f2f3",
+    "requestHeaderNames": [
+      "content-type",
+      "cookie"
+    ],
+    "cookieNames": [
+      "sso"
+    ],
+    "httpVersion": "h2",
+    "tlsVerified": true,
+    "trustEnv": false,
+    "redirectsFollowed": false,
+    "explicitRetries": 0,
+    "attemptCount": 1,
+    "ownerVerified": true,
+    "responseParsed": true,
+    "requestBodyPersisted": false
+  },
+  "independentReadback": {
+    "method": "GET",
+    "operationId": "conversation.read",
+    "status": 200,
+    "sameConversationId": true,
+    "viewerIsOwner": true,
+    "titleMatched": true,
+    "exactPromptHashMatched": true,
+    "assistantResponsePatternMatched": true,
+    "messageContentPersisted": false
+  },
+  "journal": {
+    "state": "completed",
+    "reasonCode": "CONVERSATION_READBACK_VERIFIED",
+    "attemptCount": 1
+  },
+  "automaticRetry": false,
+  "verified": true
+}

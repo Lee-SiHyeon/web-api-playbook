@@ -3,6 +3,7 @@ import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const helper = fileURLToPath(new URL('./secure-credential-store.ps1', import.meta.url));
+export const CREDENTIAL_HELPER_TIMEOUT_MS = 180_000;
 const validName = /^[a-z0-9][a-z0-9.-]{0,63}$/;
 const testMemory = process.env.NODE_TEST_CONTEXT ? new Map() : null;
 
@@ -32,12 +33,18 @@ function invoke(operation, name, input) {
       input,
       encoding: 'utf8',
       windowsHide: true,
-      timeout: 15000,
+      // Busy Windows hosts have exceeded the former 60 s helper deadline.
+      timeout: CREDENTIAL_HELPER_TIMEOUT_MS,
       maxBuffer: 262144,
       stdio: ['pipe', 'pipe', 'pipe'],
     });
-  } catch {
-    throw new Error(operation === 'read' ? 'CREDENTIAL_STORE_UNREADABLE' : 'CREDENTIAL_STORE_FAILED');
+  } catch (cause) {
+    const code = operation === 'read' ? 'CREDENTIAL_STORE_UNREADABLE' : 'CREDENTIAL_STORE_FAILED';
+    // Keep diagnostics useful without retaining stdout, stderr or secret input.
+    throw Object.assign(new Error(code), { code, detail: {
+      timedOut: cause?.code === 'ETIMEDOUT' || cause?.signal === 'SIGTERM',
+      exitStatus: Number.isInteger(cause?.status) ? cause.status : null,
+    } });
   }
 }
 

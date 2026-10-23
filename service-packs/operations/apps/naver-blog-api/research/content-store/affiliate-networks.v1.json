@@ -1,0 +1,573 @@
+{
+  "schemaVersion": 1,
+  "id": "affiliate-networks",
+  "checkedOn": "2026-10-13",
+  "note": "Single registry of partner (affiliate) networks, created 2026-10-06 from the ontology gap audit 2026-10-05 (ONT-02/04/07/08). Values are the ones the code uses today (quick-fact.mjs AFFILIATE, qf-compose.mjs DISCLOSURE, marketing-copy.mjs DISCLOSURES, travel-compose.mjs, inpock-links.mjs, mirror-daangn.mjs, sns-writing-ontology.v1.json, shopping-sources.v1.json affiliateNetworks); the code does not import this file yet (see docs/audits/ontology-gap-fixes-2026-10-06.md). A null commission means the repo holds no measured value; never publish a rate without sourceUrl.",
+  "channelVocabulary": {
+    "allowed": "link may be posted with the registered disclosure",
+    "seller_page_only": "the mirror keeps the seller page URL, not the partner link; the network disclosure is dropped (mirror-daangn / Tistory / Naver cafe rules)",
+    "never": "partner link refused in code or by owner rule",
+    "unverified": "no repo evidence either way; do not post"
+  },
+  "channelIds": {
+    "naverBlog": "naver",
+    "tistory": "tistory",
+    "naverCafe": "naverCafe",
+    "daangn": "daangn",
+    "x": "x",
+    "threads": "threads",
+    "telegram": "telegram",
+    "inpock": "inpock"
+  },
+  "disclosureRules": {
+    "quickFact": "quick-fact.parsePosts requires the network's `quickFactSubstring` (or an `alsoSubstrings` entry) in a main-body line; no first-lines position check yet (ONT-09)",
+    "inpock": "every partner card title starts with [광고] (inpock-links.mjs AD_PREFIX, ONT-01, fixed in code 2026-10-06)",
+    "unregisteredHost": "quick-fact refuses a link whose host is in UNREGISTERED_PARTNER_HOST (ONT-03, fixed in code 2026-10-06)"
+  },
+  "policyHistory": [
+    {
+      "date": "2026-09-27",
+      "source": "sns-writing-ontology.v1.json links.pendingNetworks",
+      "text": "SNS affiliate networks registered: toss_sharelink and tiktok_invite only; coupang_partners \"SNS 채널 미등록\", naver_shopping_connect and linkprice pending."
+    },
+    {
+      "date": "2026-09-28",
+      "source": "publication-channels.json x/threads statusNote",
+      "text": "owner \"전부 허용\": auto-post to X and Threads after the Naver mirrors."
+    },
+    {
+      "date": "2026-09-30",
+      "source": "quick-fact.mjs comment above AFFILIATE",
+      "text": "owner: deal posts carry only affiliate links (쿠팡 파트너스 / 네이버 쇼핑 커넥트) plus the network's disclosure; the comparison goes in a chained reply after a +++ line."
+    },
+    {
+      "date": "2026-10-04",
+      "source": "approval-actions.mjs:583, blog-telegram.mjs:1",
+      "text": "owner \"자동으로 넣어\": verified blog articles also go to Telegram @lifehack_ailab."
+    },
+    {
+      "date": "2026-10-05",
+      "source": "inpock-links.mjs:1",
+      "text": "owner: partner links of posted deals are collected on the Inpock link page."
+    },
+    {
+      "date": "2026-10-06",
+      "source": "owner (task brief of this change)",
+      "text": "Real current policy: quick-fact posts registered networks on X, Threads and Telegram (coupang, naver.me, myrealt.rip, toss /_m/); sns-publish (blog -> SNS) still carries the blog link plus the 토스 쉐어링크 reply only; 당근 never takes a partner link. The program-side SNS channel registration for 쿠팡 파트너스 and 네이버 커넥트 is not evidenced in the repo (status unverified); owner to confirm Naver/Coupang program terms allow off-blog use (audit QF-03)."
+    }
+  ],
+  "networks": [
+    {
+      "id": "coupang_partners",
+      "label": "쿠팡 파트너스",
+      "status": "in_use",
+      "kind": "cps_network",
+      "quickFactNetwork": "coupang_partners",
+      "link": {
+        "host": "link.coupang.com",
+        "hostRegex": "^link\\.coupang\\.com$",
+        "shape": "https://link.coupang.com/a/<code>",
+        "note": "never open a returned short link: it can count as a click"
+      },
+      "disclosure": {
+        "quickFactSubstring": "쿠팡 파트너스 활동",
+        "alsoSubstrings": [],
+        "fullSentence": "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+        "sources": [
+          "apps/affiliate-api-hub/scripts/quick-fact.mjs AFFILIATE",
+          "apps/affiliate-api-hub/scripts/qf-compose.mjs DISCLOSURE",
+          "apps/affiliate-api-hub/scripts/marketing-copy.mjs DISCLOSURES",
+          "apps/affiliate-api-hub/scripts/mirror-daangn.mjs CONNECT_DISCLOSURE (blog regex 쿠팡 ?파트너스 활동의 일환으로)"
+        ]
+      },
+      "channels": {
+        "naverBlog": "allowed",
+        "tistory": "seller_page_only",
+        "naverCafe": "seller_page_only",
+        "daangn": "never",
+        "x": "allowed",
+        "threads": "allowed",
+        "telegram": "allowed",
+        "inpock": "allowed",
+        "instagram": "unverified",
+        "tiktok": "unverified",
+        "youtube": "unverified"
+      },
+      "channelBasis": {
+        "x/threads/telegram": "quick-fact AFFILIATE; owner 2026-09-30 and 2026-10-04",
+        "daangn": "quick-fact QUICKFACT_DAANGN_AFFILIATE_LINK; publication-channels daangnRules (official seller URLs only)",
+        "tistory/naverCafe": "publication-channels naverCafeRules; mirror rules",
+        "sns-publish": "sns-writing-ontology pendingNetworks says 'SNS 채널 미등록' for blog->SNS posts; no coupang link goes through sns-publish"
+      },
+      "creation": {
+        "adapter": "apps/affiliate-api-hub/adapters/coupang-partners-link.mjs",
+        "contract": "GET https://partners.coupang.com/api/v1/url/any?coupangUrl=… with the owner's DPAPI session coupang-web-state",
+        "approval": "owner link-approval rule"
+      },
+      "commission": {
+        "ratePct": null,
+        "source": null,
+        "checkedOn": null,
+        "note": "no measured or documented rate in the repo"
+      },
+      "program": {
+        "url": "https://partners.coupang.com/"
+      },
+      "sourceUrl": "https://partners.coupang.com/",
+      "checkedOn": "2026-09-27"
+    },
+    {
+      "id": "naver_shopping_connect",
+      "label": "네이버 쇼핑 커넥트",
+      "status": "in_use",
+      "kind": "cps_network",
+      "quickFactNetwork": "naver_connect",
+      "link": {
+        "host": "naver.me",
+        "hostRegex": "^naver\\.me$",
+        "shape": "https://naver.me/<code>",
+        "note": "naver.me is shared with naver_travel_connect; the program is told apart by the disclosure wording and the issuing path"
+      },
+      "disclosure": {
+        "quickFactSubstring": "쇼핑 커넥트 활동",
+        "alsoSubstrings": [],
+        "fullSentence": "이 포스팅은 네이버 쇼핑 커넥트 활동의 일환으로, 판매 발생 시 수수료를 제공받습니다.",
+        "sources": [
+          "apps/affiliate-api-hub/scripts/quick-fact.mjs AFFILIATE",
+          "apps/affiliate-api-hub/scripts/qf-compose.mjs DISCLOSURE",
+          "apps/affiliate-api-hub/scripts/marketing-copy.mjs DISCLOSURES"
+        ]
+      },
+      "channels": {
+        "naverBlog": "allowed",
+        "tistory": "seller_page_only",
+        "naverCafe": "seller_page_only",
+        "daangn": "never",
+        "x": "allowed",
+        "threads": "allowed",
+        "telegram": "allowed",
+        "inpock": "allowed",
+        "instagram": "unverified",
+        "tiktok": "unverified",
+        "youtube": "unverified"
+      },
+      "channelBasis": {
+        "x/threads/telegram": "quick-fact AFFILIATE; owner 2026-09-30 (쿠팡 파트너스 / 네이버 쇼핑 커넥트)",
+        "tistory/naverCafe": "shopping-sources naver_connect note: 'naver.me links, Naver blog only; Tistory and text mirrors link the seller page'",
+        "sns-publish": "sns-writing-ontology pendingNetworks.naver_shopping_connect: X/Threads/TikTok 미확인; owner to confirm Naver program terms allow off-blog use"
+      },
+      "creation": {
+        "adapter": "owner BrandConnect session via web-api-playbook scripts/brandconnect.mjs; the shopping-link creation call is not located in this repo (verify)",
+        "approval": "owner link-approval rule"
+      },
+      "commission": {
+        "ratePct": null,
+        "source": null,
+        "checkedOn": null,
+        "note": "no measured or documented rate in the repo"
+      },
+      "program": {
+        "url": "https://brandconnect.naver.com"
+      },
+      "sourceUrl": "https://brandconnect.naver.com",
+      "checkedOn": "2026-09-27"
+    },
+    {
+      "id": "naver_travel_connect",
+      "label": "네이버 여행 커넥트",
+      "status": "in_use",
+      "kind": "cps_network",
+      "quickFactNetwork": "naver_connect",
+      "productTypes": [
+        "TRAVEL_PACKAGE"
+      ],
+      "link": {
+        "host": "naver.me",
+        "hostRegex": "^naver\\.me$",
+        "shape": "https://naver.me/<code>",
+        "note": "issued for pkgtour.naver.com package product URLs with ?reqChannel=brandconnect; per-product affiliateEnabled gate"
+      },
+      "disclosure": {
+        "quickFactSubstring": "여행 커넥트 활동",
+        "alsoSubstrings": [],
+        "fullSentence": null,
+        "fullSentenceNote": "the code holds only the fragment (quick-fact alsoDisclosure, travel-compose networks[]); blog regex mirror-daangn accepts '네이버 여행 커넥트 활동의 일환으로'. Audit QF-11 proposes '이 포스팅은 네이버 여행 커넥트 활동의 일환으로, 판매 발생 시 수수료를 제공받습니다.' — not in code yet.",
+        "composedShort": "여행 커넥트 활동 수수료를 받아요.",
+        "sources": [
+          "apps/affiliate-api-hub/scripts/quick-fact.mjs AFFILIATE naver_connect.alsoDisclosure",
+          "apps/affiliate-api-hub/scripts/travel-compose.mjs:51-53",
+          "apps/affiliate-api-hub/scripts/marketing-copy.mjs DISCLOSURES"
+        ]
+      },
+      "channels": {
+        "naverBlog": "allowed",
+        "tistory": "seller_page_only",
+        "naverCafe": "seller_page_only",
+        "daangn": "never",
+        "x": "allowed",
+        "threads": "allowed",
+        "telegram": "allowed",
+        "inpock": "allowed",
+        "instagram": "unverified",
+        "tiktok": "unverified",
+        "youtube": "unverified"
+      },
+      "channelBasis": {
+        "x/threads/telegram": "quick-fact travel companion (travel-compose.mjs) posts naver.me links with the 여행 커넥트 wording",
+        "blog": "affiliatePolicy of the blog says no affiliate/disclosure for domain E posts (ONT-23, code work)"
+      },
+      "creation": {
+        "adapter": "apps/affiliate-api-hub/scripts/travel-links.mjs issuePackageLink -> web-api-playbook scripts/brandconnect.mjs travel-create-link (own write journal); journal network id 'naver-travel-connect'",
+        "approval": "owner 2026-10-05 \"링크 발급도 자동으로\""
+      },
+      "commission": {
+        "ratePct": 3,
+        "scope": "TRAVEL_PACKAGE only; per-product affiliateEnabled",
+        "source": "owner brief 2026-10-06 (Naver Travel Connect product data)",
+        "sourceUrl": null,
+        "checkedOn": "2026-10-06",
+        "note": "owner to supply the program page URL; do not publish the rate in posts without it"
+      },
+      "program": {
+        "url": "https://brandconnect.naver.com"
+      },
+      "sourceUrl": "https://brandconnect.naver.com",
+      "checkedOn": "2026-10-06"
+    },
+    {
+      "id": "myrealtrip_partner",
+      "label": "마이리얼트립 파트너",
+      "status": "in_use",
+      "kind": "cps_network",
+      "quickFactNetwork": "myrealtrip_partner",
+      "link": {
+        "host": "myrealt.rip",
+        "hostRegex": "^myrealt\\.rip$",
+        "shape": "https://myrealt.rip/<code>"
+      },
+      "disclosure": {
+        "quickFactSubstring": "마이리얼트립 파트너 활동",
+        "alsoSubstrings": [],
+        "fullSentence": "이 포스팅은 마이리얼트립 파트너 활동의 일환으로 수수료를 제공받습니다.",
+        "composedShort": "마이리얼트립 파트너 활동 수수료를 받아요.",
+        "sources": [
+          "apps/affiliate-api-hub/scripts/quick-fact.mjs AFFILIATE",
+          "apps/affiliate-api-hub/prompts/draft-brief.md:69 (fullSentence)",
+          "apps/affiliate-api-hub/scripts/travel-compose.mjs:51-53 (composedShort)",
+          "apps/affiliate-api-hub/scripts/marketing-copy.mjs DISCLOSURES"
+        ]
+      },
+      "channels": {
+        "naverBlog": "allowed",
+        "tistory": "seller_page_only",
+        "naverCafe": "seller_page_only",
+        "daangn": "never",
+        "x": "allowed",
+        "threads": "allowed",
+        "telegram": "allowed",
+        "inpock": "allowed",
+        "instagram": "unverified",
+        "tiktok": "unverified",
+        "youtube": "unverified"
+      },
+      "channelBasis": {
+        "x/threads/telegram": "quick-fact AFFILIATE (domain E travel companion); qf-compose POSTABLE excludes it (ONT-04 code note)",
+        "blog": "draft-brief.md youtuber-follow briefs link myrealt.rip with the fullSentence"
+      },
+      "creation": {
+        "adapter": "apps/affiliate-api-hub/adapters/myrealtrip-partner-api.mjs mylink --approved (POST /v1/mylink) via scripts/travel-links.mjs issueMyrealtripLink",
+        "approval": "owner link-approval rule; owner 2026-10-05 \"링크 발급도 자동으로\"",
+        "evidence": "live mylink 201 recorded 2026-10-05 (travel-links.mjs / myrealtrip-partner-api.mjs)"
+      },
+      "commission": {
+        "source": "GET https://partner-ext-api.myrealtrip.com/v1/revenues/commission-rates (adapters/myrealtrip-partner-api.mjs commission-rates)",
+        "measuredOn": "2026-10-06",
+        "checkedOn": "2026-10-06",
+        "unit": "percent",
+        "sourceUrl": "https://docs.myrealtrip.com",
+        "note": "measured from the live endpoint on 2026-10-06; re-measure before quoting. Rates are not for publication in posts.",
+        "rates": [
+          {
+            "category": "투어",
+            "ratePct": 6
+          },
+          {
+            "category": "액티비티",
+            "ratePct": 4
+          },
+          {
+            "category": "티켓",
+            "ratePct": 2
+          },
+          {
+            "category": "숙소(호텔)",
+            "ratePct": 2
+          },
+          {
+            "category": "항공",
+            "ratePct": 1
+          },
+          {
+            "category": "패키지",
+            "ratePctMin": 0,
+            "ratePctMax": 1
+          },
+          {
+            "category": "키즈",
+            "ratePct": 3
+          },
+          {
+            "category": "클래스",
+            "ratePct": 2.5
+          },
+          {
+            "category": "여행용품",
+            "ratePct": 5
+          },
+          {
+            "category": "마이심(MySim)",
+            "ratePct": 20
+          }
+        ]
+      },
+      "program": {
+        "url": "https://partner.myrealtrip.com/",
+        "docs": "https://docs.myrealtrip.com"
+      },
+      "sourceUrl": "https://docs.myrealtrip.com",
+      "checkedOn": "2026-10-06"
+    },
+    {
+      "id": "toss_sharelink",
+      "label": "토스쇼핑 쉐어링크",
+      "status": "in_use",
+      "kind": "cps_network",
+      "quickFactNetwork": "toss_sharelink",
+      "link": {
+        "host": "toss.shopping|toss.im",
+        "hostRegex": "^(toss\\.im|toss\\.shopping)$",
+        "pathRegex": "^/_m/",
+        "shape": "https://toss.shopping/_m/<code>",
+        "note": "only /_m/ paths track; toss.shopping/t/… product URLs on the same host earn nothing and are not partner links"
+      },
+      "disclosure": {
+        "quickFactSubstring": "토스쇼핑 쉐어링크 활동",
+        "alsoSubstrings": [],
+        "fullSentence": "[광고] 토스쇼핑 쉐어링크 활동으로, 링크 구매 시 수수료를 지급받습니다.",
+        "drift": [
+          {
+            "where": "apps/naver-blog-api/research/content-store/sns-writing-ontology.v1.json links.affiliateNetworks.toss_sharelink",
+            "text": "이 글은 토스쇼핑 쉐어링크 활동의 일환으로, 링크를 통한 구매가 발생하면 일정 수수료를 지급받습니다.",
+            "disclosureMatch": "토스쇼핑 쉐어링크 활동의 일환으로"
+          },
+          {
+            "where": "apps/affiliate-api-hub/scripts/mirror-daangn.mjs ANY_NETWORK_DISCLOSURE",
+            "text": "토스쇼핑 쉐어링크 활동의 일환으로"
+          }
+        ],
+        "driftNote": "qf-compose emits the fullSentence above, which the sns-writing ontology matcher ('활동의 일환으로') cannot match (ONT-10, code work). fullSentence is the one the code emits for quick-fact.",
+        "sources": [
+          "apps/affiliate-api-hub/scripts/quick-fact.mjs AFFILIATE",
+          "apps/affiliate-api-hub/scripts/qf-compose.mjs DISCLOSURE",
+          "apps/affiliate-api-hub/scripts/marketing-copy.mjs DISCLOSURES"
+        ]
+      },
+      "channels": {
+        "naverBlog": "allowed",
+        "tistory": "unverified",
+        "naverCafe": "allowed",
+        "daangn": "never",
+        "x": "allowed",
+        "threads": "allowed",
+        "telegram": "allowed",
+        "inpock": "allowed",
+        "instagram": "unverified",
+        "tiktok": "never",
+        "youtube": "never"
+      },
+      "channelBasis": {
+        "x/threads": "sns-writing-ontology registered: creator-info channels threads and x 2026-09-28 (readback verified)",
+        "telegram": "quick-fact AFFILIATE",
+        "naverCafe": "mirror-daangn.mjs:96: Toss links stay as issued; 네이버 카페 registered Sharelink channel 2026-09-28",
+        "tistory": "no repo evidence of Tistory Sharelink registration",
+        "daangn": "quick-fact QUICKFACT_DAANGN_AFFILIATE_LINK blocks every affiliateOf host incl. toss; mirror text-only policy (owner 2026-10-01)",
+        "tiktok/youtube": "sns-writing-ontology notOn"
+      },
+      "creation": {
+        "adapter": "apps/toss-sharelink/client.mjs issue <tacaItemId> (POST /api-public/v3/shopping/sharelink/link/issue); Open API alternative apps/affiliate-api-hub/adapters/toss-openapi.mjs link",
+        "approval": "owner link-approval rule"
+      },
+      "commission": {
+        "ratePct": null,
+        "source": null,
+        "checkedOn": null,
+        "note": "no measured or documented rate in the repo"
+      },
+      "program": {
+        "url": "https://sharelink.toss.im"
+      },
+      "sourceUrl": "https://sharelink.toss.im",
+      "checkedOn": "2026-09-28"
+    },
+    {
+      "id": "linkprice",
+      "label": "링크프라이스",
+      "status": "in_use_blog_mirrors_only",
+      "kind": "cps_network",
+      "quickFactNetwork": null,
+      "link": {
+        "host": "click.linkprice.com",
+        "hostRegex": "^click\\.linkprice\\.com$",
+        "shape": "https://click.linkprice.com/click.php?m=<merchant>&a=<site>&l=9999&l_cd1=3&l_cd2=0&tu=<encoded product url>"
+      },
+      "disclosure": {
+        "quickFactSubstring": null,
+        "alsoSubstrings": [],
+        "fullSentence": "이 포스팅은 링크프라이스 제휴 활동의 일환으로 판매 발생 시 수수료를 제공받습니다.",
+        "sources": [
+          "apps/affiliate-api-hub/scripts/mirror-daangn.mjs LINKPRICE_DISCLOSURE",
+          "apps/naver-blog-api/research/content-store/shopping-sources.v1.json affiliateNetworks.linkprice"
+        ]
+      },
+      "sites": {
+        "naverBlog": "A100708014",
+        "tistory": "A100708029",
+        "daangn": "A100708123",
+        "naverCafe": "A100708124",
+        "blogger": "A100708141"
+      },
+      "sitesNote": "blogger A100708141 registered 2026-09-28, merchants not applied (publication-channels blogger.linkpriceMerchantsApplied=false). 당근·네이버 카페 registered 2026-09-27 (categories 912/914).",
+      "merchants": {
+        "approvedApr": [
+          "lotteon",
+          "gmarket",
+          "auction",
+          "myrealtrip",
+          "klook",
+          "agoda"
+        ],
+        "source": "shopping-sources.v1.json affiliateNetworks.linkprice.sitesNote",
+        "checkedOn": "2026-09-27",
+        "rule": "web-auth linkprice link refuses non-APR merchants"
+      },
+      "channels": {
+        "naverBlog": "allowed",
+        "tistory": "allowed",
+        "naverCafe": "allowed",
+        "daangn": "allowed",
+        "x": "never",
+        "threads": "never",
+        "telegram": "never",
+        "inpock": "never",
+        "instagram": "unverified",
+        "tiktok": "never",
+        "youtube": "never"
+      },
+      "channelBasis": {
+        "blog/mirrors": "owner 2026-09-27 \"당근이랑 네이버카페에도 제휴링크 넣어\"; site id swapped per mirror",
+        "x/threads/telegram/inpock": "no AFFILIATE entry; quick-fact refuses linkprice.com via UNREGISTERED_PARTNER_HOST (ONT-03); sns-writing-ontology: 인스타·스레드는 SNS 타입 I 연동 필요, X는 사이트 등록 필요",
+        "daangn": "mirror-daangn keeps the link with site A100708123; quick-fact daangn channel is forbidden for affiliate posts"
+      },
+      "creation": {
+        "adapter": "apps/affiliate-api-hub/scripts/linkprice-links.mjs after the owner's Telegram '🔗 링크 만들기' approval; gate config/publication-registry.json (file not in repo, audit CH-14)"
+      },
+      "commission": {
+        "ratePct": null,
+        "source": null,
+        "checkedOn": null,
+        "note": "per merchant on the LinkPrice console; not recorded in the repo"
+      },
+      "program": {
+        "url": "https://www.linkprice.com/"
+      },
+      "sourceUrl": "https://www.linkprice.com/",
+      "checkedOn": "2026-09-27"
+    },
+    {
+      "id": "adpick",
+      "label": "애드픽 쇼핑메이트",
+      "status": "vercel_adapter_auth_pending",
+      "kind": "cps_network",
+      "quickFactNetwork": null,
+      "link": {
+        "hostRegex": "^(deg\\.kr|bitl\\.bz|adpick\\.co\\.kr|www\\.adpick\\.co\\.kr)$",
+        "shape": "Provider-issued HTTPS buyurl or short link; never expose apikey query"
+      },
+      "disclosure": {
+        "quickFactSubstring": null,
+        "alsoSubstrings": [],
+        "fullSentence": "이 링크를 통해 구매하면 제휴 수수료를 받을 수 있습니다.",
+        "sources": [
+          "https://www.adpick.co.kr/?ac=guide&tac=sdk",
+          "https://github.com/Lee-SiHyeon/lifehackailab-web/blob/main/src/components/hub/deal/deal-header.tsx"
+        ]
+      },
+      "channels": {
+        "naverBlog": "unverified",
+        "tistory": "unverified",
+        "naverCafe": "unverified",
+        "daangn": "never",
+        "x": "never",
+        "threads": "never",
+        "telegram": "never",
+        "inpock": "unverified",
+        "website": "allowed"
+      },
+      "channelBasis": {
+        "website": "Owner 2026-10-13 requested Vercel product-link integration. Other publishing channels are outside this request."
+      },
+      "creation": {
+        "adapter": "https://github.com/Lee-SiHyeon/adpick-api/blob/main/src/sdk.js",
+        "contract": "POST /api/sdk-link -> GET https://deg.kr/cps/click.php with server-only apikey, print=1, url; Lifehack DB intent before request and separate exact-product attachment/readback"
+      },
+      "commission": {
+        "ratePct": null,
+        "source": "SDK list.commission, per observed product; no global rate inferred",
+        "checkedOn": "2026-10-13"
+      },
+      "program": {
+        "url": "https://www.adpick.co.kr/?ac=guide&tac=sdk"
+      },
+      "sourceUrl": "https://www.adpick.co.kr/?ac=guide&tac=sdk",
+      "checkedOn": "2026-10-13",
+      "ontology": "adpick-commerce-ontology.v1.json",
+      "runtime": {
+        "host": "vercel",
+        "apiProject": "adpick-api",
+        "webProject": "lifehackailab-web",
+        "credentials": [
+          "ADPICK_SERVICE_TOKEN",
+          "ADPICK_AFFID",
+          "ADPICK_API_KEY",
+          "ADPICK_COOKIE"
+        ],
+        "credentialValuesStored": false,
+        "liveOwnerVerified": false,
+        "liveProductLinkVerified": false
+      }
+    }
+  ],
+  "neverPartnerChannels": [
+    {
+      "id": "daangn",
+      "reason": "당근 모임 정책 and owner 2026-10-01: informational posts only; quick-fact QUICKFACT_DAANGN_CHANNEL_FORBIDDEN / QUICKFACT_DAANGN_AFFILIATE_LINK. Exception: LinkPrice with site A100708123 on the blog mirror (owner 2026-09-27).",
+      "quickFact": "forbidden"
+    }
+  ],
+  "refusedHostsInQuickFact": {
+    "regexSource": "apps/affiliate-api-hub/scripts/quick-fact.mjs UNREGISTERED_PARTNER_HOST",
+    "hosts": [
+      "linkprice.com",
+      "lpweb.kr",
+      "coupa.ng",
+      "adpick.co.kr",
+      "tenping.kr",
+      "s.click.aliexpress.com",
+      "a.aliexpress.com",
+      "amzn.to",
+      "ali.ski",
+      "deg.kr",
+      "bitl.bz"
+    ]
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "verifiedAt": "2026-10-06T04:19:41.523Z",
+  "implementation": "maintained src/cli.mjs default Node issuer",
+  "wholeOperationPureHttp": true,
+  "initialLoginBootstrapOutsideGeneration": true,
+  "authentication": {
+    "provider": "Windows DPAPI CurrentUser",
+    "officialUiOwnerAndProObserved": true,
+    "scopedCookieCount": 21,
+    "protectedHttpReadbackAt": "2026-10-06T04:09:36.927Z",
+    "baselineProjectMediaCount": 40,
+    "expiredLoginRecoveryProven": false
+  },
+  "startedAt": "2026-10-06T04:10:53.078Z",
+  "finishedAt": "2026-10-06T04:12:22.056Z",
+  "createAttempts": 1,
+  "createRetries": 0,
+  "mediaId": "c7039e27-0692-498e-ba3d-fe283d9efe52",
+  "jobId": "e50792f1-ecd9-4a4b-bfd8-0c2a19c07de2",
+  "requestId": "F31777F5-DB02-4836-BAC0-B6245DACCBBB",
+  "protectedProjectReadAfterCreate": true,
+  "serverCompletionPollCount": 4,
+  "download": {
+    "at": "2026-10-06T04:12:21.089Z",
+    "method": "GET",
+    "host": "flow-content.google",
+    "path": "/video/c7039e27-0692-498e-ba3d-fe283d9efe52",
+    "httpStatus": 200,
+    "mime": "video/mp4"
+  },
+  "sameJournalDownloaded": true,
+  "issuer": {
+    "mode": "node_jsdom_unmodified_sdk",
+    "nodeVersion": "v24.10.0",
+    "jsdomVersion": "26.1.0",
+    "siteKeyFromCurrentFlowDocument": true,
+    "cookieValuesRecorded": false,
+    "tokenValuesRecorded": false,
+    "browserEngineUsed": false,
+    "browserSignalsOverridden": false,
+    "sdkSourceModified": false,
+    "stage": "reload_verified",
+    "workerStage": "reload_verified",
+    "failureCode": null,
+    "elapsedMs": 35707,
+    "workerOnline": true,
+    "blockedRequests": [],
+    "loader": {
+      "host": "www.google.com",
+      "path": "/recaptcha/enterprise.js",
+      "method": "GET",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 1309,
+      "sha256": "ac45863cd2098c66751a91aee2c1a79c18dfdf659e84cf3d1a8d6a669250acfd"
+    },
+    "runtime": {
+      "host": "www.gstatic.com",
+      "path": "/recaptcha/releases/guXhH0v-XMxlzmbTwqkaT4i5/recaptcha__en.js",
+      "method": "GET",
+      "locale": "en",
+      "sdkVersion": "guXhH0v-XMxlzmbTwqkaT4i5",
+      "status": 200,
+      "mime": "text/javascript",
+      "bytes": 850516,
+      "sha256": "c179033168f7b2b948eb1eb42b149e93ce638499680f360413102471e38c765e"
+    },
+    "anchor": {
+      "host": "www.google.com",
+      "path": "/recaptcha/enterprise/anchor",
+      "method": "GET",
+      "status": 200,
+      "mime": "text/html",
+      "bytes": 39617,
+      "queryKeyCount": 9,
+      "configuredKeyMatches": true,
+      "hiddenTokenPresent": true
+    },
+    "worker": {
+      "constructed": true,
+      "host": "www.google.com",
+      "path": "/recaptcha/enterprise/webworker.js",
+      "sourceModified": false,
+      "scriptStatus": 200,
+      "scriptBytes": 102,
+      "scriptSha256": "d99b8a22e67ebfdd3518cf95e07cc705ced9ac5339aa442f7e91e9c7b5673787",
+      "runtimeStatus": 200,
+      "runtimeBytes": 850516,
+      "runtimeSha256": "c179033168f7b2b948eb1eb42b149e93ce638499680f360413102471e38c765e",
+      "initialized": true
+    },
+    "execute": {
+      "callCount": 1,
+      "returnedNonemptyToken": true,
+      "returnedTokenLength": 2382,
+      "matchesReloadReply": true
+    },
+    "reload": {
+      "postCount": 1,
+      "requestBytes": 9448,
+      "responseBytes": 2305,
+      "decodedResponseBytes": 2995,
+      "responseSchemaValid": true,
+      "sdkVersionMatchesAnchor": true,
+      "anchorTokenMatchesRequest": true,
+      "actionMatches": true,
+      "siteKeyMatches": true,
+      "outcomeUncertain": false,
+      "sendFinishedAt": "2026-10-06T04:11:34.723Z",
+      "status": 200,
+      "mime": "application/json",
+      "responseEndedAt": "2026-10-06T04:11:34.908Z"
+    },
+    "clear": {
+      "postCount": 0,
+      "responseBytes": 0
+    },
+    "networkBlockedCount": 0,
+    "completedAt": "2026-10-06T04:11:34.959Z"
+  },
+  "native": {
+    "file": "dancing-cat-8s-native720.mp4",
+    "sha256": "28f615427fcce4b76c70a8821378549b23a8d9b13529aa331748fd3117d52aa7",
+    "bytes": 1716385,
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": 8,
+    "fps": 24,
+    "frames": 192,
+    "videoCodec": "h264",
+    "audioCodec": "aac"
+  },
+  "deliverable": {
+    "file": "dancing-cat-8s-480p.mp4",
+    "sha256": "b09e2aba5fcc7be18e791cf1c5f95a718d4fbc2037f66eec57fd24e3ad7de25e",
+    "bytes": 737502,
+    "width": 854,
+    "height": 480,
+    "durationSeconds": 8,
+    "fps": 24,
+    "frames": 192,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "transformation": "local 720p-to-480p conversion; not native Flow 480p generation"
+  },
+  "validation": {
+    "fullDecodePassed": true,
+    "videoKitProbeOk": true,
+    "blackSpans": [],
+    "frozenSpans": [],
+    "integratedLufs": -19.5,
+    "truePeakDbfs": -7.6,
+    "motionReview": {
+      "schemaVersion": 1,
+      "id": "flow-dancing-cat-8s-motion-review-2026-10-06",
+      "reviewType": "independent_sampled_frame_visual_review",
+      "status": "motion_reviewed_with_deviations",
+      "reviewedAt": "2026-10-06T04:17:37.144Z",
+      "reviewMethod": "Viewed motion-contact-sheet.png directly with view_image. This is a visual review of sampled stills, not playback of the full clip.",
+      "reviewCoverage": {
+        "contactSheet": "motion-contact-sheet.png",
+        "sampleCount": 32,
+        "samplingFramesPerSecond": 4,
+        "sampleIntervalSeconds": 0.25,
+        "estimatedTotalVideoFrames": 192,
+        "estimatedTotalBasis": "8.000 second clip at 24 fps from local ffprobe metadata",
+        "allFramesReviewed": false,
+        "fullMotionViewed": false,
+        "audioListened": false
+      },
+      "evidenceSeparation": {
+        "userReferenceClassification": "text_only",
+        "userReferenceDescription": "User-provided summary of studio_jongsori account and workflow.",
+        "referenceVideoViewed": false,
+        "referenceAccountPerformanceVerified": false,
+        "generatedSampleEvidenceClassification": "sampled_frames",
+        "generationReceipt": "generation-receipt.json",
+        "generationSucceeded": true
+      },
+      "summary": "생성 및 다운로드는 성공했다. 접촉 시트에서 고양이 정체성·스튜디오·고정 구도와 춤은 대체로 일관되지만, 회전은 계획한 작은 1/4회전보다 훨씬 커 거의 한 바퀴 도는 듯 보인다. 각 샘플에 흰색 네 갈래 반짝임 표식이 보여 무표식 결과는 아니다.",
+      "observations": {
+        "characterIdentity": {
+          "result": "pass_in_sampled_frames",
+          "details": "32개 샘플에서 주황색 줄무늬, 흰 주둥이와 가슴, 얼굴 비율, 스타일라이즈드 털 표현이 같은 고양이로 유지된다."
+        },
+        "anatomy": {
+          "result": "no_obvious_extra_limbs_in_sampled_frames_with_occlusion_limits",
+          "expected": "two forepaws, two hind paws, one attached tail",
+          "details": "뚜렷한 추가 팔다리나 복제 꼬리는 보이지 않는다. 회전 중 일부 발은 몸통이나 서로 겹쳐 보여 모든 샘플에서 네 발을 각각 분리해 확인할 수는 없다."
+        },
+        "choreography": {
+          "openingSideSteps": {
+            "result": "partially_visible_in_samples",
+            "details": "초반에 좌우 체중 이동과 작은 발 이동이 보인다. 4 fps 정지 샘플만으로 정확히 두 번의 좌우 스텝 타이밍을 확정할 수 없다."
+          },
+          "forepawRhythmAndSway": {
+            "result": "visible_in_samples",
+            "details": "중간 구간에 앞발을 번갈아 들고 몸통을 흔드는 동작이 보인다."
+          },
+          "plannedSmallQuarterTurn": {
+            "result": "deviation",
+            "details": "약 5초 이후 회전은 계획한 작은 1/4회전보다 훨씬 크게 보이며, 샘플상 거의 한 바퀴 도는 동작에 가깝다. 4 fps 표본으로 정확한 회전 각도는 측정하지 않았다."
+          },
+          "finalFrontalPose": {
+            "result": "visible_in_final_samples",
+            "details": "마지막 샘플 구간에는 정면을 향해 자세를 잡는다."
+          },
+          "exactChoreographyMatch": false
+        },
+        "cameraAndSet": {
+          "fixedFullBodyComposition": "consistent_in_sampled_frames",
+          "visibleCuts": false,
+          "warmMinimalStudio": "consistent_in_sampled_frames",
+          "limitation": "중간 프레임을 전부 재생하지 않아 샘플 사이의 순간적인 컷이나 카메라 변화를 완전히 배제하지 않는다."
+        },
+        "prohibitedElements": {
+          "otherAnimalsOrPeople": "none_observed_in_sampled_frames",
+          "legibleTextOrLogo": "none_observed_in_sampled_frames",
+          "providerSparkleMark": {
+            "visible": true,
+            "description": "각 샘플 타일의 화면 오른쪽 아래 부근에 같은 위치로 보이는 작고 흰 네 갈래 반짝임 표식.",
+            "attribution": "화면상 표식은 확인했다. Flow 제공자 표식이라는 귀속은 영상 샘플만으로 독립 검증하지 않았으며 root의 관찰과 일치한다."
+          },
+          "markFree": false
+        },
+        "soundAndPerformance": {
+          "audioListened": false,
+          "soundQuality": null,
+          "viewerPerformance": null,
+          "userOutcomes": null
+        }
+      },
+      "reviewerLimits": [
+        "192개 전체 프레임을 모두 보거나 전체 클립을 재생하지 않았다.",
+        "검토 범위는 4 fps로 뽑은 정지 프레임 32개가 담긴 contact sheet뿐이다.",
+        "실제 생성 비용과 사용 크레딧은 측정되지 않아 null이다.",
+        "사용자가 제공한 스튜디오 설명은 text_only 참고이며 원 게시물 영상이나 성과를 확인하지 않았다."
+      ],
+      "measurements": {
+        "productionCost": null,
+        "creditsUsed": null,
+        "viewerPerformance": null,
+        "audioListened": false,
+        "soundQuality": null
+      }
+    }
+  },
+  "creditsUsed": null,
+  "commercialPerformance": null,
+  "secretsPersistedInArtifacts": false,
+  "limitations": [
+    "Visual review used 32 still samples at 4 fps, not every frame or full playback.",
+    "The rotation is larger than the planned quarter-turn; exact choreography was not reproduced.",
+    "A white sparkle mark is visible; its attribution was not independently verified.",
+    "Audio stream exists, but audio listening and music-rights verification were not performed."
+  ]
+}

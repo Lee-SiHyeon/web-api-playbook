@@ -1,0 +1,284 @@
+{
+  "schemaVersion": 1,
+  "researchDate": "2026-09-21",
+  "timeZone": "Asia/Seoul",
+  "executionHost": "DESKTOP-TO2H6OD",
+  "scope": {
+    "airlines": 12,
+    "domestic": 10,
+    "foreign": 2,
+    "implementedAirlineClients": 0,
+    "fullSiteCoverage": false,
+    "checkoutPricesVerified": false
+  },
+  "fields": [
+    "campaign_id",
+    "source_url",
+    "collected_at",
+    "booking_start",
+    "booking_end",
+    "travel_start",
+    "travel_end",
+    "blackout_dates",
+    "origin",
+    "destination",
+    "oneway_or_roundtrip",
+    "passenger_basis",
+    "currency",
+    "display_price",
+    "tax_inclusion",
+    "baggage",
+    "coupon_code",
+    "minimum_spend",
+    "discount_cap",
+    "payment_method",
+    "membership_eligibility",
+    "availability_checked_at"
+  ],
+  "sources": [
+    {
+      "id": "asiana",
+      "name": "아시아나항공",
+      "priority": "P0",
+      "urls": [
+        "https://flyasiana.com/C/KR/KO/event/list"
+      ],
+      "state": "anonymous_html_list_and_selected_detail_verified",
+      "example": {
+        "title": "추석 항공 특가",
+        "url": "https://flyasiana.com/C/KR/KO/event/detail/CM202609140002530589",
+        "bookingStart": "2026-09-16",
+        "bookingEnd": "2026-09-27",
+        "travelStart": "2026-09-16",
+        "travelEnd": "2026-11-30",
+        "detailVerified": true
+      },
+      "note": "공식 웹/앱 구매. 마일리지·공동운항편 제외. 전체 목록 페이지 순회 미검증."
+    },
+    {
+      "id": "jejuair",
+      "name": "제주항공",
+      "priority": "P0",
+      "urls": [
+        "https://www.jejuair.net/ko/main/base/index.do",
+        "https://www.jejuair.net/ko/event/pastEvent.do"
+      ],
+      "state": "anonymous_html_mixed_current_and_past_list_verified",
+      "example": {
+        "title": "태국 최대 50% 할인 코드",
+        "url": "https://www.jejuair.net/ko/event/eventDetail.do?eventNo=0000004282",
+        "listedStart": "2026-09-15",
+        "listedEnd": "2026-09-27",
+        "detailVerified": false
+      },
+      "note": "pastEvent HTML에도 현재 행사 카드가 섞여 있음. 날짜로 구분; 제목 할인율만으로 글 발행 금지."
+    },
+    {
+      "id": "trinity",
+      "name": "트리니티항공 (기존 티웨이)",
+      "priority": "P0",
+      "urls": [
+        "https://www.trinityairways.com/app/promotion/event/being",
+        "https://www.trinityairways.com/app/upcomingDeparture/route",
+        "https://www.trinityairways.com/app/lowestFare/compareLowestFare"
+      ],
+      "state": "anonymous_html_event_list_verified",
+      "example": {
+        "title": "트리니티항공의 첫 프로모션",
+        "listedStart": "2026-09-14",
+        "listedEnd": "2026-09-30",
+        "detailVerified": false
+      },
+      "note": "twayair.com의 현 도메인 리다이렉트 확인. 이벤트 첫 페이지 9개. 임박·최저가 경로는 공식 공개 메뉴에서 발견; 운임 미검증."
+    },
+    {
+      "id": "jinair",
+      "name": "진에어",
+      "priority": "P0",
+      "urls": [
+        "https://www.jinair.com/promotion/inprogressEvent",
+        "https://www.jinair.com/promotion/anytime",
+        "https://www.jinair.com/discount/promotioncode"
+      ],
+      "state": "browser_events_verified_json_captured_independent_http_403",
+      "example": {
+        "title": "9월 네이버페이 더블 결제혜택",
+        "url": "https://www.jinair.com/promotion/eventView?evntSeq=15563",
+        "listedStart": "2026-09-16",
+        "listedEnd": "2026-09-30",
+        "detailVerified": false
+      },
+      "note": "16개 행사 중 첫 15개 화면 + 추가 목록 1개 JSON 확인. 모든 항목이 특가는 아님. 홈페이지 표시 운임은 결제 재고 미확인.",
+      "observedContract": {
+        "method": "POST",
+        "origin": "https://www.jinair.com",
+        "path": "/promotion/events/inprogressJson",
+        "body": {
+          "searchStatus": "01",
+          "page": 2,
+          "listSize": 15,
+          "evtCtgrList": []
+        },
+        "responseSchema": {
+          "listResult": {
+            "list": "array",
+            "totalCount": "number",
+            "page": {
+              "listSize": "number",
+              "pageSize": "number",
+              "totalCount": "number",
+              "currentPage": "number"
+            }
+          }
+        },
+        "captured": true,
+        "client_exists": false,
+        "credential_propagated": "not_attempted",
+        "live_replay": false,
+        "anonymousReplayStatus": 403
+      }
+    },
+    {
+      "id": "peach",
+      "name": "피치항공",
+      "priority": "P0",
+      "urls": [
+        "https://www.flypeach.com/kr",
+        "https://www.flypeach.com/kr/um/specials/sale/sale"
+      ],
+      "state": "anonymous_html_campaign_verified_dynamic_fares_unverified",
+      "example": {
+        "title": "가을맞이 세일",
+        "url": "https://www.flypeach.com/kr/um/specials/sale/sale",
+        "bookingStart": "2026-09-18T12:00:00+09:00",
+        "bookingEnd": "2026-09-21T23:59:00+09:00",
+        "detailVerified": "campaign_terms_only"
+      },
+      "note": "노선별 탑승 기간과 운임 숫자는 동적 데이터 미검증. 한국 출발 편도 총액, 위탁 수하물·좌석 별도."
+    },
+    {
+      "id": "airpremia",
+      "name": "에어프레미아",
+      "priority": "P1",
+      "urls": [
+        "https://www.airpremia.com/a/ko",
+        "https://www.airpremia.com/p/2026-talk-id"
+      ],
+      "state": "official_campaign_content_verified_home_http_403",
+      "example": {
+        "title": "카카오톡 학생증 항공권 할인",
+        "url": "https://www.airpremia.com/p/2026-talk-id",
+        "bookingStart": "2026-05-14",
+        "bookingEnd": "2026-12-31",
+        "detailVerified": true,
+        "conditions": [
+          "대학/대학원 재학생 학생증 인증",
+          "졸업생 제외",
+          "카카오페이 원화 결제",
+          "항공 운임 최대 15%, 세금·유류할증료 제외",
+          "다른 쿠폰 중복 불가"
+        ],
+        "travelEndByRoute": "미주 기본 2027-04-30, IAD 03-31, HNL 02-28; 아시아 기본 03-31, SGN 03-27"
+      },
+      "note": "미국 시장 프로모션 목록을 한국 시장으로 대체하지 않음."
+    },
+    {
+      "id": "airseoul",
+      "name": "에어서울",
+      "priority": "P1",
+      "urls": [
+        "https://flyairseoul.com/CM/ko/ingEvent.do"
+      ],
+      "state": "official_event_list_verified_direct_http_403",
+      "example": {
+        "title": "괌 혜택",
+        "listedStart": "2026-09-10",
+        "listedEnd": "2026-09-30",
+        "detailVerified": false
+      },
+      "note": "토스페이 추첨형 혜택과 확정 할인 분리. 진행중 페이지에 09-14 종료 얼리버드도 있어 날짜 필터 필요."
+    },
+    {
+      "id": "aerok",
+      "name": "에어로케이",
+      "priority": "P1",
+      "urls": [
+        "https://www.aerok.com/ko-KR/event-benefit/event/being"
+      ],
+      "state": "browser_event_list_and_selected_detail_verified_direct_http_403",
+      "example": {
+        "title": "청주-마쓰야마 10월 특별 운항",
+        "url": "https://www.aerok.com/ko-KR/event-benefit/event/395",
+        "listedStart": "2026-08-13",
+        "listedEnd": "2026-09-27",
+        "travelPeriodText": "10월",
+        "observedPromoCode": "CJJMYJ",
+        "detailVerified": "title_and_booking_link_only"
+      },
+      "note": "현재 목록 6개 링크. 이미지 세부 조건·운임 숫자 미검증."
+    },
+    {
+      "id": "eastarjet",
+      "name": "이스타항공",
+      "priority": "P1",
+      "urls": [
+        "https://main.eastarjet.com/",
+        "https://main.eastarjet.com/fare-insight",
+        "https://www.eastarjet.com/newstar/PGWTA00001"
+      ],
+      "state": "browser_current_fare_cards_verified_home_http_shell_only",
+      "example": {
+        "title": "날짜별 편도 총액 카드",
+        "origin": "ICN",
+        "destination": "YNT",
+        "travelDate": "2026-11-22",
+        "displayFare": 71400,
+        "currency": "KRW",
+        "basis": "성인 1인 편도 총액",
+        "detailVerified": false,
+        "checkoutAvailabilityVerified": false
+      },
+      "note": "홈페이지 브라우저 카드만 검증. 레거시 행사 메뉴는 안내창 후 빈 페이지. 제3자 얼리버드 설명을 공식 검증으로 승격하지 않음."
+    },
+    {
+      "id": "airbusan",
+      "name": "에어부산",
+      "priority": "P1",
+      "urls": [
+        "https://www.airbusan.com/content/common/flynjoy/flyNEvent/",
+        "https://www.airbusan.com/"
+      ],
+      "state": "official_event_navigation_verified_current_airfare_promotion_unverified",
+      "example": null,
+      "excludedExpiredExample": {
+        "url": "https://www.airbusan.com/content/common/flynjoy/event/event/20260907_ko",
+        "bookingEnd": "2026-09-15",
+        "travelEnd": "2026-12-31"
+      },
+      "note": "9월 국내선 특가는 판매 기간 종료로 제외. 정상 Chrome 홈페이지와 공식 이벤트 목록 경로 확인. 루트 직접 HTTP 403."
+    },
+    {
+      "id": "koreanair",
+      "name": "대한항공",
+      "priority": "P1",
+      "urls": [
+        "https://www.koreanair.com/contents/promotion/list",
+        "https://www.koreanair.com/flights/ko-kr/?subfolder=flights"
+      ],
+      "state": "official_market_home_and_promotion_navigation_verified_items_unverified",
+      "example": null,
+      "note": "한국 시장 운임 페이지 HTTP 200. 프로모션 동적 목록 미검증. /ko/ 언어 경로만으로 KR 시장·KRW를 보장하지 않음."
+    },
+    {
+      "id": "scoot",
+      "name": "스쿠트",
+      "priority": "deferred",
+      "urls": [
+        "https://www.flyscoot.com/ko"
+      ],
+      "state": "official_root_identified_current_promotion_unverified",
+      "example": null,
+      "note": "공식 홈페이지 웹 추출 결과가 비어 현재 특가·API 경로 미확보."
+    }
+  ]
+}

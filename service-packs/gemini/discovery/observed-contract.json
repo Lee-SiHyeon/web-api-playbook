@@ -1,0 +1,1576 @@
+{
+  "version": 1,
+  "service": "gemini-web",
+  "origin": "https://gemini.google.com",
+  "observedAt": "2026-10-06T04:44:48.535252+00:00",
+  "auth": {
+    "origins": [
+      "https://gemini.google.com"
+    ],
+    "cookieNames": [
+      "AEC",
+      "APISID",
+      "COMPASS",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "headerNames": []
+  },
+  "assetOrigins": [
+    "https://gemini.gstatic.com",
+    "https://contribution.usercontent.google.com",
+    "https://lh3.google.com",
+    "https://lh3.googleusercontent.com",
+    "https://www.gstatic.com"
+  ],
+  "operations": {
+    "identity": {
+      "observation": {
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "method": "GET",
+        "origin": "https://gemini.google.com",
+        "path": "/app",
+        "queryKeys": [],
+        "headerNames": [
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "upgrade-insecure-requests",
+          "user-agent"
+        ]
+      },
+      "response": {
+        "contentType": "text/html",
+        "framing": "text"
+      }
+    },
+    "history_list": {
+      "observation": {
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "rpcId": "MaZiqc",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2
+      }
+    },
+    "history_read": {
+      "observation": {
+        "request": true,
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "rpcId": "hNvQHb",
+        "rpcArgsTemplate": [
+          "{{apiConversationId}}",
+          10,
+          null,
+          1,
+          [
+            1
+          ],
+          [
+            4
+          ],
+          null,
+          1
+        ],
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "selectorMode": "rpc_id",
+        "rpcId": "hNvQHb",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2
+      }
+    },
+    "text": {
+      "observation": {
+        "request": true,
+        "requestResponse": false
+      },
+      "effect": "mutation",
+      "retryPolicy": "never",
+      "request": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+        "queryKeys": [
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-525005358-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-goog-ext-73010990-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ]
+      }
+    },
+    "history_search": {
+      "observation": {
+        "request": true,
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "rpcId": "unqWSc",
+        "rpcArgsTemplate": [
+          "{{searchQuery}}"
+        ],
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "selectorMode": "rpc_id",
+        "rpcId": "unqWSc",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2
+      }
+    },
+    "model_list": {
+      "observation": {
+        "request": true,
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "rpcId": "otAQ7b",
+        "rpcArgsTemplate": [],
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "selectorMode": "rpc_id",
+        "rpcId": "otAQ7b",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2
+      }
+    },
+    "settings_read": {
+      "observation": {
+        "request": true,
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "rpcId": "ESY5D",
+        "rpcArgsTemplate": [
+          null,
+          "{{preferenceFieldIds}}"
+        ],
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "allowlistedPreferenceKeys": [
+          "voice_language",
+          "voice_name",
+          "enable_advanced_mode",
+          "enable_memory",
+          "enable_personal_context",
+          "web_and_app_activity_enabled",
+          "side_nav_open_by_default"
+        ],
+        "preferenceFieldIds": [
+          2,
+          3,
+          7,
+          8,
+          9,
+          10,
+          11,
+          16,
+          18,
+          19,
+          20,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          31,
+          32,
+          33,
+          34,
+          35,
+          37,
+          39,
+          40,
+          41,
+          42,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          64,
+          65,
+          66,
+          67,
+          68,
+          70,
+          72,
+          77,
+          78,
+          79,
+          87,
+          89,
+          91,
+          92,
+          93,
+          94,
+          96,
+          97,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          121,
+          122,
+          123,
+          124,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          145,
+          146,
+          147,
+          148,
+          152,
+          154,
+          155,
+          158,
+          160,
+          161,
+          162,
+          163,
+          165,
+          166,
+          171,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          187,
+          188,
+          189,
+          191,
+          192,
+          193,
+          194,
+          195,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          210,
+          211,
+          215,
+          217,
+          221,
+          222,
+          223,
+          228,
+          232,
+          233,
+          234,
+          235,
+          236,
+          238,
+          239,
+          244,
+          245,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252,
+          254,
+          255,
+          259,
+          260,
+          261,
+          265,
+          266,
+          270,
+          272,
+          280,
+          287,
+          291,
+          293,
+          296,
+          297,
+          301
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "selectorMode": "rpc_id",
+        "rpcId": "ESY5D",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2
+      }
+    },
+    "settings_update": {
+      "observation": {
+        "request": true,
+        "requestResponse": true
+      },
+      "effect": "mutation",
+      "retryPolicy": "never",
+      "request": {
+        "rpcId": "L5adhe",
+        "rpcArgsTemplate": [
+          "{{preferenceValueVector}}",
+          null,
+          [
+            "{{preferenceFieldId}}"
+          ]
+        ],
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "preferenceUpdateBranch": "field3",
+        "preferenceValueEncoding": "dense_jspb_array_numeric_boolean",
+        "preferenceArrayIndexOffset": -1,
+        "preferenceVectorLengthEqualsFieldId": true,
+        "preferenceFieldIds": [
+          41
+        ],
+        "writablePreferenceKeys": [
+          "side_nav_open_by_default"
+        ],
+        "preferenceValueType": "boolean",
+        "sourceBundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+        "sourceMethod": "/BardFrontendService.UpdateUserPreferences"
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "selectorMode": "rpc_id",
+        "rpcId": "L5adhe",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2,
+        "sourceResponseErrorField": 1,
+        "sourceResponseErrorValue": 2
+      }
+    },
+    "share_read": {
+      "observation": {
+        "request": true,
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "rpcId": "OXxBcc",
+        "rpcArgsTemplate": [],
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ]
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "selectorMode": "rpc_id",
+        "rpcId": "OXxBcc",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2
+      }
+    },
+    "share_create": {
+      "observation": {
+        "request": true,
+        "requestResponse": false
+      },
+      "effect": "mutation",
+      "retryPolicy": "never",
+      "request": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "rpcId": "fuVx7",
+        "rpcCallTail": [
+          null,
+          "generic"
+        ]
+      }
+    },
+    "share_public_read": {
+      "observation": {
+        "request": true,
+        "requestResponse": true
+      },
+      "effect": "read",
+      "request": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "rpcId": "ujx1Bf",
+        "rpcArgsTemplate": [
+          null,
+          "{{shareId}}",
+          [
+            4
+          ]
+        ],
+        "sharePathFamily": "/share/{id}"
+      },
+      "response": {
+        "contentType": "application/json",
+        "framing": "batchexecute",
+        "selectorMode": "rpc_id",
+        "rpcId": "ujx1Bf",
+        "frameLengthUnit": "utf16_code_units",
+        "frameLengthOverheadUnits": 2
+      }
+    },
+    "share_revoke": {
+      "observation": {
+        "request": true,
+        "requestResponse": false
+      },
+      "effect": "mutation",
+      "retryPolicy": "never",
+      "request": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "rpcId": "SgORbf",
+        "rpcCallTail": [
+          null,
+          "generic"
+        ],
+        "rpcArgsTemplate": [
+          null,
+          "{{shareId}}"
+        ]
+      }
+    },
+    "delete": {
+      "observation": {
+        "request": true,
+        "requestResponse": false
+      },
+      "effect": "mutation",
+      "retryPolicy": "never",
+      "request": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "rpcId": "GzXR5e",
+        "rpcArgsTemplate": [
+          "{{conversationId}}"
+        ],
+        "rpcCallTail": [
+          null,
+          "generic"
+        ]
+      }
+    },
+    "edit": {
+      "observation": {
+        "request": true,
+        "requestResponse": false
+      },
+      "effect": "mutation",
+      "retryPolicy": "never",
+      "request": {
+        "method": "POST",
+        "origin": "https://gemini.google.com",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "rpcId": "MUAZcd",
+        "rpcArgsTemplate": [
+          null,
+          [
+            [
+              {
+                "$literal": "title"
+              }
+            ]
+          ],
+          [
+            "{{conversationId}}",
+            "{{newTitle}}"
+          ]
+        ],
+        "rpcCallTail": [
+          null,
+          "generic"
+        ]
+      }
+    }
+  },
+  "mediaAssetDownload": {
+    "version": 1,
+    "taskBinding": "hNvQHb_prompt_and_api_id",
+    "sources": [
+      {
+        "capability": "image",
+        "origin": "https://lh3.googleusercontent.com",
+        "pathFamily": "/gg/{id}",
+        "queryKeyNames": [],
+        "mimeTypes": [
+          "image/png"
+        ],
+        "headerNames": [
+          "accept",
+          "accept-encoding",
+          "accept-language",
+          "cache-control",
+          "pragma",
+          "priority",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "sec-fetch-storage-access",
+          "user-agent",
+          "x-browser-channel",
+          "x-browser-copyright",
+          "x-browser-validation",
+          "x-browser-year",
+          "x-client-data"
+        ]
+      }
+    ],
+    "redirectEdges": [
+      {
+        "httpStatus": 302,
+        "from": {
+          "origin": "https://lh3.googleusercontent.com",
+          "pathFamily": "/gg/{id}",
+          "queryKeyNames": []
+        },
+        "to": {
+          "origin": "https://lh3.google.com",
+          "pathFamily": "/rd-gg/{id}",
+          "queryKeyNames": []
+        },
+        "resourceIdentity": "task_bound_source_reference_with_observed_path_family",
+        "cookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "headerNames": []
+      },
+      {
+        "httpStatus": 302,
+        "from": {
+          "origin": "https://lh3.google.com",
+          "pathFamily": "/rd-gg/{id}",
+          "queryKeyNames": []
+        },
+        "to": {
+          "origin": "https://lh3.googleusercontent.com",
+          "pathFamily": "/rd-gg/{id}",
+          "queryKeyNames": []
+        },
+        "resourceIdentity": "task_bound_source_reference_with_observed_path_family",
+        "cookieNames": [],
+        "headerNames": []
+      }
+    ],
+    "cookieScopes": [
+      {
+        "name": "AEC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "APISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "HSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "NID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SEARCH_SAMESITE",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      }
+    ],
+    "excludedCandidates": [
+      {
+        "origin": "https://contribution.usercontent.google.com",
+        "pathFamily": "/download",
+        "queryKeyNames": [
+          "c",
+          "filename",
+          "opi"
+        ],
+        "mimeType": "application/protobuf"
+      }
+    ],
+    "resolution": {
+      "semantics": "original_or_full_resolution_unverified",
+      "observedWidth": 512,
+      "observedHeight": 279
+    }
+  },
+  "attachmentUpload": {
+    "version": 1,
+    "capability": "attachment_upload",
+    "source": {
+      "origin": "https://push.clients6.google.com",
+      "method": "POST",
+      "pathFamily": "/upload/",
+      "queryKeyNames": [],
+      "contentType": "application/x-www-form-urlencoded",
+      "metadataBodyPrefix": "File name: ",
+      "startProtocol": "resumable",
+      "startCommand": "start",
+      "fileLengthHeader": "x-goog-upload-header-content-length",
+      "headerNames": [
+        "accept",
+        "content-type",
+        "cookie",
+        "origin",
+        "push-id",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-client-pctx",
+        "x-goog-upload-command",
+        "x-goog-upload-header-content-length",
+        "x-goog-upload-protocol",
+        "x-tenant-id"
+      ],
+      "cookieNames": [
+        "AEC",
+        "APISID",
+        "HSID",
+        "NID",
+        "SAPISID",
+        "SEARCH_SAMESITE",
+        "SID",
+        "SIDCC",
+        "SSID",
+        "__Secure-1PAPISID",
+        "__Secure-1PSID",
+        "__Secure-1PSIDCC",
+        "__Secure-1PSIDTS",
+        "__Secure-3PAPISID",
+        "__Secure-3PSID",
+        "__Secure-3PSIDCC",
+        "__Secure-3PSIDTS"
+      ],
+      "cookieScopes": [
+        {
+          "name": "AEC",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "APISID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": false
+        },
+        {
+          "name": "HSID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": false
+        },
+        {
+          "name": "NID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "SAPISID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "SEARCH_SAMESITE",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": false
+        },
+        {
+          "name": "SID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": false
+        },
+        {
+          "name": "SIDCC",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": false
+        },
+        {
+          "name": "SSID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-1PAPISID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-1PSID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-1PSIDCC",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-1PSIDTS",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-3PAPISID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-3PSID",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-3PSIDCC",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        },
+        {
+          "name": "__Secure-3PSIDTS",
+          "domain": ".google.com",
+          "path": "/",
+          "secure": true
+        }
+      ]
+    },
+    "resumable": {
+      "startSuccessStatus": 200,
+      "uploadUrlHeader": "x-goog-upload-url",
+      "uploadUrlOrigins": [
+        "https://push.clients6.google.com"
+      ],
+      "uploadUrlPathPrefixes": [
+        "/upload/"
+      ],
+      "uploadMethod": "POST",
+      "commandHeader": "x-goog-upload-command",
+      "finalizeCommand": "upload, finalize",
+      "querySupported": true,
+      "queryMethod": "POST",
+      "queryCommand": "query",
+      "uploadStatusHeader": "x-goog-upload-status",
+      "sizeReceivedHeader": "x-goog-upload-size-received",
+      "chunkGranularityHeader": "x-goog-upload-chunk-granularity",
+      "resumeSupported": true,
+      "offsetHeader": "x-goog-upload-offset",
+      "cancelSupported": true,
+      "protocolSource": "https://ai.google.dev/api/files",
+      "serviceSpecificContinuationObserved": true,
+      "cancelReason": "First-party web uploader source sends the cancel command only while the local SDK state is Upload or Query.",
+      "nativeContinuation": {
+        "method": "POST",
+        "contentType": "application/x-www-form-urlencoded",
+        "headerNames": [
+          "accept",
+          "content-type",
+          "cookie",
+          "origin",
+          "push-id",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-client-pctx",
+          "x-goog-upload-command",
+          "x-goog-upload-offset",
+          "x-tenant-id"
+        ],
+        "cookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "commandHeader": "x-goog-upload-command",
+        "commandValue": "upload, finalize",
+        "offsetHeader": "x-goog-upload-offset",
+        "initialOffset": 0,
+        "bodySemantics": "selected_file_bytes",
+        "headerValuesCompleteForDefaultCli": true,
+        "headerValueSource": "start_request_custom_header_map",
+        "headerValuePolicy": {
+          "sourceBundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+          "sourceFunction": "oF.Lsc",
+          "headerMapExpression": "a.Ja",
+          "transportFunction": "Hsc.send",
+          "sourceEffectiveHeaderNames": [
+            "content-type"
+          ],
+          "sourceEffectiveHeaderValues": {
+            "content-type": "application/x-www-form-urlencoded"
+          },
+          "sourceEffectiveHeaderValueSource": "xhr_transport_default_content_type",
+          "requiredStartMapHeaderNames": [
+            "push-id",
+            "x-client-pctx",
+            "x-tenant-id"
+          ],
+          "protocolManagedHeaderNames": [
+            "x-goog-upload-command",
+            "x-goog-upload-offset"
+          ],
+          "optionalBrowserManagedHeaderNames": [
+            "accept",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent"
+          ],
+          "optionalDirectValuePolicy": "current_start_request_custom_header_map_value",
+          "optionalNativeValuePolicy": "allow_captured_browser_variation",
+          "exactBindingFields": [
+            "url",
+            "method",
+            "command",
+            "offset",
+            "selected_file_bytes"
+          ]
+        }
+      },
+      "serviceSpecificResumeObserved": true,
+      "resumeReason": "First-party web uploader source uses the server-reported size to resume each chunk at its current offset.",
+      "relatedGooglePhotosProtocolSource": "https://developers.google.com/photos/library/guides/resumable-uploads",
+      "relatedFirstPartyDocumentation": {
+        "url": "https://ai.google.dev/api/files",
+        "product": "Gemini Files API",
+        "documentsOffsetHeader": "x-goog-upload-offset",
+        "documentsInitialOffset": 0,
+        "documentsFinalizeCommand": "upload, finalize",
+        "scopeBoundary": "Public Gemini Files API examples are related protocol documentation, while internal Gemini web behavior is evidenced by the first-party web bundle and native capture."
+      },
+      "cancelMethod": "POST",
+      "cancelCommand": "cancel",
+      "cancelEligibleStates": [
+        "Upload",
+        "Query"
+      ]
+    }
+  }
+}

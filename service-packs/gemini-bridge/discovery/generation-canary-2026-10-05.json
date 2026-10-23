@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-04T20:08:48.336Z",
+  "origin": "https://gemini.google.com",
+  "operation": "browser_text_canary_and_protected_http_readback",
+  "directHttpGenerationRequests": 0,
+  "browserReplyVerified": true,
+  "protectedHttpPromptAndReplyReadbackVerified": true,
+  "request": {
+    "method": "POST",
+    "path": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+    "queryKeys": [
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "formKeys": [
+      "f.req",
+      "at"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json"
+  },
+  "source": {
+    "kind": "current generation request initiator chunk",
+    "httpStatus": 200,
+    "bytes": 3052708,
+    "sha256": "9faed20fb85ae98f0f5938faf92b4a982a339eddd50d4241fe26f7ba1120bf4c"
+  },
+  "dynamicFields": [
+    {
+      "slot": 3,
+      "role": "BotGuard snapshot attestation",
+      "observedLength": 1631,
+      "producer": "ssd -> EK.snapshot -> BotGuard challenge manager; hash binds text, nonce and conversation/prior-turn context",
+      "sourceLines": [
+        3915,
+        4132,
+        4133,
+        4135
+      ],
+      "valuePersisted": false
+    },
+    {
+      "slot": 4,
+      "role": "16 random bytes as lowercase 32-hex nonce",
+      "sourceLines": [
+        3915,
+        3927,
+        4051,
+        4135
+      ],
+      "valuePersisted": false
+    },
+    {
+      "slot": 59,
+      "role": "clientTurnId UUID",
+      "valuePersisted": false
+    }
+  ],
+  "modelMetadata": {
+    "extension": "x-goog-ext-525001261-jspb",
+    "field": "modeId",
+    "humanModelMappingVerified": false
+  },
+  "browserlessAttestationIssuerVerified": false,
+  "generationClientImplemented": false,
+  "syntheticReadTestsPassed": 11,
+  "browserSubmitActions": 1,
+  "capturedGenerationRequestsAtLeast": 1
+}

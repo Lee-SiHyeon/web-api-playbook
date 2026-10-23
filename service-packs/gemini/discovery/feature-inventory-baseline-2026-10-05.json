@@ -1,0 +1,58 @@
+{
+  "schema": "gemini-feature-inventory-baseline-v1",
+  "checkedDate": "2026-10-05",
+  "service": "gemini-web",
+  "origin": "https://gemini.google.com",
+  "repositoryHeadReviewed": "e0732e7df0a11276220df4bdc07d1a150976877a",
+  "sourceEvidence": {
+    "kind": "published_static_source_candidate",
+    "reference": "discovery/public-source-contracts-2026-10-03.json",
+    "moduleId": "LQaXg",
+    "capturedBrowserRequestResponse": false,
+    "directApiReplay": false,
+    "rawHtmlOrSourcePersisted": false,
+    "candidateOperations": [
+      { "name": "BardFrontendService.StreamGenerate", "path": "/assistant.lamda.BardFrontendService/StreamGenerate", "rpcId": "RxAFq", "feature": "text_generation" },
+      { "name": "BardFrontendService.StreamGenerateArtifact", "path": "/assistant.lamda.BardFrontendService/StreamGenerateArtifact", "rpcId": "ZiDWTc", "feature": "image_or_artifact_generation" },
+      { "name": "BardFrontendService.StreamGenerateCurationDocument", "path": "/assistant.lamda.BardFrontendService/StreamGenerateCurationDocument", "rpcId": "XOgkKc", "feature": "curation_candidate" },
+      { "name": "BardFrontendService.StreamGenerateProjectDetail", "path": "/assistant.lamda.BardFrontendService/StreamGenerateProjectDetail", "rpcId": "G4wK8e", "feature": "project_detail_candidate" },
+      { "name": "BardFrontendService.StreamGenerateYourDay", "path": "/assistant.lamda.BardFrontendService/StreamGenerateYourDay", "rpcId": "Skfdkd", "feature": "daily_brief_candidate" },
+      { "name": "ListConversations", "feature": "history_candidate" },
+      { "name": "BardFrontendService.SearchConversations", "feature": "history_candidate" },
+      { "name": "CreateConversation", "feature": "conversation_creation_candidate" },
+      { "name": "GenerateAnswer", "feature": "text_generation_candidate" }
+    ],
+    "modelLiterals": [
+      { "name": "gemini-3.1-flash-image", "candidateFeature": "image_generation" },
+      { "name": "imagen-4.0-generate-001", "candidateFeature": "image_generation" },
+      { "name": "gemini-3-pro-image", "candidateFeature": "image_generation" },
+      { "name": "veo-2.0-generate-001", "candidateFeature": "video_generation" }
+    ],
+    "transportCandidate": {
+      "assembly": "dynamic base field eptZe plus data/batchexecute",
+      "queryNames": ["rpcids", "source-path"],
+      "optionalQueryName": "fcd.retries",
+      "typedProtoFieldSerialization": "not derived",
+      "GeminiLiveResponseFraming": "not observed"
+    }
+  },
+  "featureClassification": {
+    "requiredCore": ["login", "identity", "text_generation", "history", "readbacks"],
+    "sourceCandidateConditional": ["model_selection", "image_generation", "video_generation"],
+    "applicabilityUnknownUntilAuthenticatedUiReview": [
+      "edit", "delete", "share", "attachments_upload", "attachments_download", "settings", "session_renewal"
+    ],
+    "notObservedInBoundedSourcePass": [
+      "edit", "delete", "share", "attachments_upload", "attachments_download", "settings", "session_renewal"
+    ]
+  },
+  "contractBoundary": {
+    "affiliateOperationsCheckoutContainsGeminiWebContract": false,
+    "googleFlowContractReusableForGemini": false,
+    "flowBoundaryNote": "The playbook Flow receipts describe flow.google.com with a separate session, cookies, assets, and RPCs. They are not Gemini web evidence.",
+    "serializerAvailable": false,
+    "genericBatchParserIsLiveGeminiValidated": false
+  },
+  "secretsPersisted": false,
+  "authenticatedFeatureRequestSent": false
+}

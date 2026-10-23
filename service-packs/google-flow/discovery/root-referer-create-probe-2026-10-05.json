@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "executionMode": "pure_http",
+  "inputMode": "absent_probe",
+  "changedHypothesis": "Observed Flow root Referer replaces previous project-path Referer; normal document/session rotation retained",
+  "generationPostCount": 1,
+  "downloadCount": 0,
+  "startedAt": "2026-10-05T09:07:55.199Z",
+  "rawValuesRecorded": false,
+  "trace": [
+    {
+      "method": "GET",
+      "origin": "https://flow.google.com",
+      "path": "/project/a8ae183d-74d6-4314-98f4-3e853539f22c",
+      "rpcId": null,
+      "status": 200,
+      "mime": "text/html",
+      "at": "2026-10-05T09:07:56.113Z"
+    },
+    {
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "Zzl0ze",
+      "status": 200,
+      "mime": "application/json",
+      "at": "2026-10-05T09:07:57.984Z"
+    },
+    {
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "jwpduf",
+      "status": 200,
+      "mime": "application/json",
+      "at": "2026-10-05T09:07:59.160Z"
+    },
+    {
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "YhhmEf",
+      "status": 200,
+      "mime": "application/json",
+      "at": "2026-10-05T09:08:00.507Z",
+      "refererRoot": true,
+      "bytes": 228,
+      "publicErrors": [
+        "PUBLIC_ERROR_UNUSUAL_ACTIVITY"
+      ]
+    },
+    {
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "Zzl0ze",
+      "status": 200,
+      "mime": "application/json",
+      "at": "2026-10-05T09:08:02.420Z"
+    },
+    {
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "jwpduf",
+      "status": 200,
+      "mime": "application/json",
+      "at": "2026-10-05T09:08:03.663Z"
+    },
+    {
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "Zzl0ze",
+      "status": 200,
+      "mime": "application/json",
+      "at": "2026-10-05T09:08:20.809Z"
+    },
+    {
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "jwpduf",
+      "status": 200,
+      "mime": "application/json",
+      "at": "2026-10-05T09:08:22.079Z"
+    }
+  ],
+  "baseline": {
+    "at": "2026-10-05T09:07:59.935Z",
+    "mediaCount": 36,
+    "creditBalance": 1038
+  },
+  "accepted": false,
+  "error": {
+    "code": "PUBLIC_ERROR_UNUSUAL_ACTIVITY",
+    "rpcStatus": 7,
+    "httpStatus": 200,
+    "ambiguous": true,
+    "rejected": false
+  },
+  "jobId": "bc0c195d-28ce-423f-9cb2-d0290f544ee7",
+  "jobState": "needs_reconciliation",
+  "requestIdPersisted": true,
+  "requestId": "90EFB1F5-4F86-4FEC-BC8F-FD992808D074",
+  "readbacks": [
+    {
+      "at": "2026-10-05T09:08:04.126Z",
+      "mediaCount": 36,
+      "creditBalance": 1038,
+      "exactRequestMatch": false
+    },
+    {
+      "at": "2026-10-05T09:08:22.534Z",
+      "mediaCount": 36,
+      "creditBalance": 1038,
+      "exactRequestMatch": false
+    },
+    {
+      "at": "2026-10-05T09:11:00.456Z",
+      "mediaCount": 36,
+      "creditBalance": 1038,
+      "exactRequestMatch": false,
+      "elapsedSecondsAfterCreate": 179.949
+    }
+  ],
+  "checkedAt": "2026-10-05T09:11:00.476Z",
+  "finalJournalState": "needs_reconciliation",
+  "retransmissionPerformed": false,
+  "interpretation": "The observed root Referer did not make the absent-input request succeed. Explicit RPC error plus unchanged protected readbacks did not yield a media acknowledgement; the conservative journal hold remains and no retry was sent. This does not prove a sole anti-abuse input cause."
+}

@@ -35,7 +35,11 @@ async function fixture(t) {
   }
   for (const file of files) {
     await mkdir(path.dirname(path.join(root, file)), { recursive: true });
-    await copyFile(path.join(source, file), path.join(root, file));
+    // These are historical-receipt fixtures, bound to their original dependency
+    // graph. New workspaces must not rewrite or re-attest the old receipts.
+    await copyFile(file === 'package-lock.json'
+      ? path.join(source, 'tests/fixtures/recorded-runtime/package-lock-2026-10-15.json')
+      : path.join(source, file), path.join(root, file));
   }
   const proofFiles = [...files].filter(file => /verification\/.+-direct-http-proof-/.test(file));
   const snapshot = async () => Promise.all(proofFiles.map(file => readFile(path.join(root, file), 'utf8')));
@@ -58,6 +62,11 @@ test('changed runtime code is rejected without binding old evidence to new code'
   await appendFile(path.join(f.root, 'lib/retail/shein.mjs'), '\n// changed parser\n');
   await assert.rejects(() => verifyOverseasRetailEvidence({ root: f.root }));
   assert.deepEqual(await f.snapshot(), before);
+});
+
+test('the expanded current workspace does not inherit the historical runtime proof', async () => {
+  await assert.rejects(() => verifyOverseasRetailEvidence({ root: source }),
+    error => error.code === 'RECORDED_RUNTIME_IMPLEMENTATION_CHANGED' && error.path === 'package-lock.json');
 });
 
 test('changed historical response and projection are rejected without rewriting proof', async t => {

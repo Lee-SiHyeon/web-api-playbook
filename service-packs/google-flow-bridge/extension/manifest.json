@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Local Google Flow XHR Bridge",
+  "version": "0.1.0",
+  "description": "Runs scoped Google Flow XHRs from the user's signed-in Flow page without exporting session credentials.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyQeHjJQsopRgMz/LOC3Rso2CvlPaV4ssBmTPG0fd5wQiFFVieSxa6dq2vKisiIm2KStlVts/h+uV2RFpU2fJFt+VjCqINcXM1/pu0R5IS8aTiGr+K/WgCy6I7pSIklr3wcCJlOtUsFfSjUOLspsdBFBceFaszuLcm5/Ai5aj/sFIdIQ8rsjZD7XNm8bp6rSbY+b3wiIzU0ZY1AZwVGzOo74OmwF7EeMJ/ar+Br+HF0WMucDZgHvWdcY6Pghm+QHV9x/LwNm+hPM1ENQZXNlGPkc1R8YiHQBjhFXI8rHHsxI3VE2pm1JwOrK+D4Ib6093rzto5xqLdhIv75Jo1NyclwIDAQAB",
+  "minimum_chrome_version": "116",
+  "permissions": ["scripting"],
+  "host_permissions": [
+    "https://flow.google.com/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' ws://127.0.0.1:9417"
+  }
+}

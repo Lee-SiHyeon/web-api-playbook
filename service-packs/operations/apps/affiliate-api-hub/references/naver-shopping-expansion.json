@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "provider": "naver-shopping-connect",
+  "checkedAt": "2026-09-20T17:33:43.000Z",
+  "baseCommit": "79a0c25a2d64caba79d63e197aa5463a763ff391",
+  "scope": "Prepare Shopping Connect creator integration with affiliate content operations",
+  "entryUrl": "https://brandconnect.naver.com/about/creator",
+  "observedSetupUrl": "https://brandconnect.naver.com/space/create/creator",
+  "currentBoundary": "affiliate_active_business_http_contracts_pending",
+  "receipt": "naver-shopping-activated-2026-09-21.json",
+  "previousReceipt": "naver-shopping-space-created-2026-09-21.json",
+  "officialSources": [
+    "https://help.naver.com/service/30027/contents/24101?lang=ko&osType=COMMONOS",
+    "https://help.naver.com/service/30027/contents/24104?osType=COMMONOS",
+    "https://help.naver.com/service/30027/contents/24106?osType=COMMONOS"
+  ],
+  "operations": [
+    {
+      "name": "brandconnect.account",
+      "kind": "read",
+      "endpoint": {"method":"GET","origin":"https://gw-brandconnect.naver.com","path":"/brand-connect/query/me","queryFields":[]},
+      "browserRequestObserved": true,
+      "schemaFields": ["loginId","accountId","partner","creator","activeSpaceIds","existsWaitingSpace","spaces","space","groupAccount"],
+      "states": {"captured":true,"client_exists":true,"credential_propagated":true,"live_replay":true,"remnant_free":true},
+      "remnantFreeScope": "independent_HTTP_read_only_initial_session_handoff_uses_browser"
+    },
+    {
+      "name": "brandconnect.creator-space.create",
+      "kind": "write",
+      "endpoint": {"method":"POST","origin":"https://gw-brandconnect.naver.com","path":"/brand-connect/command/creator-space"},
+      "browserRequestObserved": true,
+      "browserResponse": {"httpStatus":200,"successDialogObserved":true},
+      "executionMode": "browser_automation",
+      "independentAccountReadback": {"activeSpaceCount":1,"selectedSpaceAssigned":true},
+      "states": {"captured":true,"client_exists":false,"credential_propagated":false,"live_replay":false,"remnant_free":false},
+      "remaining": "Creation completed through the authorized browser workflow; not an independently replayed creation client."
+    },
+    {
+      "name": "shopping.terms.agree",
+      "kind": "write",
+      "endpoint": {"method":"PUT","origin":"https://gw-brandconnect.naver.com","pathTemplate":"/brand-connect/command/creator-spaces/:spaceId/affiliate-terms/agree"},
+      "browserRequestObserved": true,
+      "browserResponse": {"httpStatus":200},
+      "executionMode": "browser_automation",
+      "browserAccountReadback": {"affiliateTermsAgreed":true,"spaceActive":true},
+      "states": {"captured":true,"client_exists":false,"credential_propagated":false,"live_replay":false,"remnant_free":false},
+      "remaining": "Authorized agreement completed; product search, links and outcomes still require independent HTTP contracts."
+    },
+    {
+      "name": "shopping.categories",
+      "kind": "read",
+      "endpoint": {"method":"GET","origin":"https://gw-brandconnect.naver.com","path":"/affiliate/query/smart-store-product-categories","queryFields":[]},
+      "browserRequestObserved": true,
+      "browserResponse": {"httpStatus":200,"bodyType":"array","count":11,"itemFields":{"category1Id":"string","category1Name":"string","children":"array"}},
+      "anonymousHttpProbe": {"httpStatus":403,"mime":"application/problem+json","conclusion":"anonymous_request_not_authorized"},
+      "states": {"captured":true,"client_exists":false,"credential_propagated":false,"live_replay":false,"remnant_free":null},
+      "remaining": "Observe nested category schema and verify a scoped authenticated independent replay before implementing a category client."
+    },
+    {"name":"shopping.products.search","kind":"read","endpoint":null,"state":"unobserved","dependsOn":["active_creator_space","affiliate_terms_status"],"completion":"Observe pagination, filters and product identity; independently replay and normalize without inventing options or prices."},
+    {"name":"shopping.products.detail","kind":"read","endpoint":null,"state":"unobserved","dependsOn":["shopping.products.search"],"completion":"Verify seller, variant, quantity, stock, shipping and commission terms for the intended offer."},
+    {"name":"shopping.links.issue","kind":"write","endpoint":null,"state":"unobserved","dependsOn":["shopping.products.detail","reviewed_target_product"],"completion":"Capture the actual request contract under write controls, implement a bounded writer, and reconcile unknown outcomes before retry."},
+    {"name":"shopping.links.list","kind":"read","endpoint":null,"state":"unobserved","dependsOn":["active_creator_space"],"completion":"Observe issued-link listing and verify generated link owner, destination and product match."},
+    {"name":"shopping.outcomes.read","kind":"read","endpoint":null,"state":"unobserved","dependsOn":["shopping.links.list"],"completion":"Keep direct/indirect orders, cancellation, purchase confirmation and payable commission separate; verify available attribution granularity."}
+  ],
+  "unreplayedAutomaticRequests": [
+    {"method":"POST","path":"/brand-connect/command/search-external-channels","context":"Automatically emitted by the setup page; not implemented or replayed by this preparation."}
+  ],
+  "publicationRequirements": [
+    "Provider-specific economic-interest disclosure before body content",
+    "Full claim evidence and fair comparison under existing publication gates",
+    "Fresh price, stock, seller, option, quantity, shipping, coupon and membership checks",
+    "Issued affiliate link with independently verified destination and product identity",
+    "Unique internal post/product/placement mapping; provider sub-ID support remains unverified",
+    "Independent desktop/mobile render and full ordered public read-back"
+  ],
+  "additionalUserAuthorization": {"link_existing_blog_channel":"completed","create_creator_space":"completed","groupBuyingExperience":"none_explicit_user_answer","accept_affiliate_terms":"confirmed_and_completed","create_blog_categories":"six_completed"},
+  "notAuthorizedByPreparation": ["issue_live_affiliate_link","publish_post","change_bank_or_settlement_settings"],
+  "parallelWork": {"myrealtrip":"Adjacent session; no changes to its working tree or browser tabs","naverPublishing":"Existing publication-gate and structural-repair branch; integrate verified final-document checks before commercial publication"}
+}

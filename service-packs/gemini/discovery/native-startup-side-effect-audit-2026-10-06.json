@@ -1,0 +1,64 @@
+{
+  "schema": "gemini-native-startup-side-effect-audit-v1",
+  "service": "gemini-web",
+  "recordedAt": "2026-10-05T21:20:54.279Z",
+  "historicalCandidate": {
+    "sourceReceipt": "discovery/media-browser-capture-2026-10-06.json",
+    "sourceReceiptSha256": "aae2ee3b55bbe8fd74fc299b448c24d7fc809b167dfd9ef2bddcd3ceb22c485b",
+    "sourcePointer": "/directMediaRuns/video/readOnlyRpcReceipts",
+    "rpcId": "L5adhe",
+    "priorLabel": "read_only_rpc_receipt",
+    "observedCount": 6,
+    "http200Count": 6,
+    "mimeTypes": [
+      "application/json"
+    ],
+    "responseBytesRange": {
+      "min": 144,
+      "max": 145
+    },
+    "classification": "preference_mutation_candidate",
+    "savedPreferenceChangeConfirmed": false,
+    "preferenceStateReadbackVerified": false,
+    "restorationAttempted": false
+  },
+  "sourceMappingReview": {
+    "sourceType": "published_wrapper_maintainer_not_provider_first_party",
+    "repositoryFile": "HanaokaYuzu/Gemini-API/src/gemini_webapi/constants.py",
+    "commit": "8c5b1dcbf54ecf093551cc20bd25cef438190ba8",
+    "fileSha256": "b445833aa7bc2b8acc9cb6b07223672ba74949e6f7829fc1fbfe57d1cce4bd77",
+    "observedLines": [
+      125,
+      134
+    ],
+    "mapping": {
+      "rpcId": "L5adhe",
+      "wrapperName": "UPDATE_USER_PREFERENCES"
+    },
+    "readRpcMapping": {
+      "rpcId": "ESY5D",
+      "wrapperName": "READ_USER_PREFERENCES"
+    },
+    "firstPartySemanticsVerified": false,
+    "classificationLimit": "wrapper naming is not proof of provider-side saved-state change"
+  },
+  "priorTextRun": {
+    "rpcBreakdownPersisted": false,
+    "l5adheOccurrence": "not_determinable_from_safe_receipt",
+    "attributedToHistoricalCandidateCount": false
+  },
+  "currentGuards": {
+    "l5adheInReadAllowlist": false,
+    "browserRequestForwardingAllowed": false,
+    "guardAction": "abort_candidate_and_record_abort_attempt",
+    "automaticPreferenceRestore": false
+  },
+  "persistence": {
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "preferenceValuesPersisted": false,
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false
+  }
+}

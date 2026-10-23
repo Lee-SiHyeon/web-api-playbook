@@ -1,0 +1,499 @@
+{
+  "schemaVersion": 1,
+  "observationDate": "2026-09-21",
+  "host": "home Windows DESKTOP-TO2H6OD",
+  "source": {
+    "url": "https://dffoxz5he03rp.cloudfront.net/partner-build/production/js/8306.8dd8937291523726.js",
+    "sha256": "28c46a27e4a43d8996e1cf4238b8426d93d17bf5c251492fdb085a1c0bf5fb79",
+    "role": "Public source guided browser request observation; source alone is not a verified contract"
+  },
+  "operations": [
+    {
+      "name": "createLink",
+      "method": "POST",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/partner/v2/mylink",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "targetUrl": "https://www.myrealtrip.com/offers/174730"
+      },
+      "queryFields": [],
+      "bodyFields": [
+        "targetUrl"
+      ],
+      "responseSchema": {
+        "data": {
+          "id": "number",
+          "mylink": "string",
+          "expirationMinutes": "number"
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:54:28.319Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": []
+    },
+    {
+      "name": "createFlightLanding",
+      "method": "POST",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/flight/api/partner/shopping/fare/query-landing-url",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "depAirportCd": "SEL",
+        "arrAirportCd": "NRT",
+        "airline": "KE",
+        "depDate": "2026-10-15",
+        "arrDate": "2026-10-18",
+        "tripTypeCd": "RT",
+        "adult": 1,
+        "child": 0,
+        "infant": 0,
+        "cabinClass": "ECONOMY"
+      },
+      "queryFields": [],
+      "bodyFields": [
+        "depAirportCd",
+        "arrAirportCd",
+        "airline",
+        "depDate",
+        "arrDate",
+        "tripTypeCd",
+        "adult",
+        "child",
+        "infant",
+        "cabinClass"
+      ],
+      "responseSchema": {
+        "data": {
+          "url": "string",
+          "gid": "number"
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:56:40.023Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": [
+        "Round-trip economy variant only"
+      ]
+    },
+    {
+      "name": "searchAirports",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/search/flight/v1/ac",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "keyword": "도쿄"
+      },
+      "queryFields": [
+        "keyword"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "type": "array",
+          "length": 3,
+          "item": {
+            "airportCode": "string",
+            "airportKoName": "string",
+            "airportEnName": "string",
+            "cityCode": "string",
+            "cityKoName": "string",
+            "cityEnName": "string",
+            "countryCode": "string",
+            "countryKoName": "string",
+            "countryEnName": "string",
+            "isoCode": "string"
+          }
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:56:06.029Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": []
+    },
+    {
+      "name": "searchAirlines",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/flight/api/partner/shopping/airline",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "keyword": "대한"
+      },
+      "queryFields": [
+        "keyword"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "airlines": {
+            "type": "array",
+            "length": 1,
+            "item": {
+              "airlineCd": "string",
+              "airlineKorNm": "string",
+              "airlineEngNm": "string",
+              "airlineImgUrl": "string"
+            }
+          }
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:56:20.273Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": []
+    },
+    {
+      "name": "reservations",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/order-admin/partner/partnership-marketing/reservations",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "dateSearchType": "TRIP_END_DATE",
+        "endDate": "2026-09-21",
+        "page": "1",
+        "pageSize": "15",
+        "reservationStatus": "",
+        "startDate": "2026-09-01"
+      },
+      "queryFields": [
+        "dateSearchType",
+        "endDate",
+        "page",
+        "pageSize",
+        "reservationStatus",
+        "startDate"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "type": "array",
+          "length": 0,
+          "item": "unobserved"
+        },
+        "meta": {
+          "pagination": {
+            "page": "number",
+            "pageSize": "number",
+            "totalCount": "number"
+          }
+        },
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:54:51.753Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": [
+        "Only empty live result sets observed",
+        "Counts and pagination returned; individual rows withheld until schema observed"
+      ]
+    },
+    {
+      "name": "flightReservations",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/order-admin/partner/partnership-marketing/flight-reservations",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "startDate": "2026-09-01",
+        "endDate": "2026-09-21"
+      },
+      "queryFields": [
+        "startDate",
+        "endDate"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "type": "array",
+          "length": 0,
+          "item": "unobserved"
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:55:15.362Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": [
+        "Only empty live result sets observed",
+        "Counts and pagination returned; individual rows withheld until schema observed"
+      ]
+    },
+    {
+      "name": "sales",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/payments",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "fromDate": "2026-09-01",
+        "toDate": "2026-09-30"
+      },
+      "queryFields": [
+        "fromDate",
+        "toDate"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "type": "array",
+          "length": 0,
+          "item": "unobserved"
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:55:04.259Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": [
+        "Only empty live result sets observed",
+        "Counts and pagination returned; individual rows withheld until schema observed"
+      ]
+    },
+    {
+      "name": "salesSummary",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/payments/aggregation",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "fromDate": "2026-09-01",
+        "toDate": "2026-09-30"
+      },
+      "queryFields": [
+        "fromDate",
+        "toDate"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "quantity": "number",
+          "commissionBase": "number",
+          "salePrice": "number",
+          "partnershipCommission": "number",
+          "settlementAmount": "number",
+          "taxCharges": "number"
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:55:04.270Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": []
+    },
+    {
+      "name": "flightSales",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/flight/payments",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "fromDate": "2026-09-01",
+        "toDate": "2026-09-30"
+      },
+      "queryFields": [
+        "fromDate",
+        "toDate"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "type": "array",
+          "length": 0,
+          "item": "unobserved"
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:55:22.715Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": [
+        "Only empty live result sets observed",
+        "Counts and pagination returned; individual rows withheld until schema observed"
+      ]
+    },
+    {
+      "name": "flightSalesSummary",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/settle-v2/api/v1/partner/marketing/partnership/sales-overview/flight/payments/aggregation",
+      "credentialHeader": "partner-access-token",
+      "requestExample": {
+        "fromDate": "2026-09-01",
+        "toDate": "2026-09-30"
+      },
+      "queryFields": [
+        "fromDate",
+        "toDate"
+      ],
+      "bodyFields": [],
+      "responseSchema": {
+        "data": {
+          "quantity": "number",
+          "commissionBase": "number",
+          "salePrice": "number",
+          "partnershipCommission": "number",
+          "settlementAmount": "number",
+          "taxCharges": "number"
+        },
+        "meta": {},
+        "result": {
+          "status": "number",
+          "message": "string",
+          "code": "string"
+        }
+      },
+      "observedAt": "2026-09-20T16:55:22.726Z",
+      "evidence": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": true,
+        "live_replay": true
+      },
+      "remnantFreeScope": "Normal HTTP transport only; initial session acquisition uses the browser",
+      "replayEvidence": "myrealtrip-marketing-replay-2026-09-21.json",
+      "limitations": []
+    }
+  ],
+  "compositeOperations": [
+    {
+      "name": "createFlightLink",
+      "steps": [
+        "createFlightLanding",
+        "createLink"
+      ],
+      "verified": true
+    }
+  ],
+  "blocked": [
+    {
+      "operation": "settlementHistory",
+      "boundary": "ui_requires_identity_document_and_bank_information",
+      "requestObserved": false
+    }
+  ],
+  "unverified": [
+    "Automatic independent HTTP token renewal",
+    "Persistent unattended session provider",
+    "Nonempty report row schemas",
+    "One-way/multicity and non-economy flight variants",
+    "Other product URL host/path families",
+    "Settlement and tax reports; exports; API-key issuance"
+  ],
+  "retryPolicy": "No automatic POST retry. Unknown outcomes require review; completed flight landing step is retained if shortening fails."
+}

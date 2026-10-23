@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T09:08:17.717279Z",
+  "operation": "attachment.upload.abort.recovery",
+  "state": "aborted",
+  "ownerVerified": true,
+  "referenceKey": "67c2c1d6-227f-4bfd-88ed-1818f690f85d",
+  "noWireRecovery": {
+    "priorStageContract": "attachment.upload.stage.abort",
+    "priorReasonCode": "SOURCE_DISCOVERY_PERMIT_ALREADY_USED",
+    "priorHttpStatus": null,
+    "matchingBusinessAbortRows": 0,
+    "typedRecoveryCompleted": true
+  },
+  "abort": {
+    "cliExitCode": 0,
+    "state": "aborted",
+    "httpStatus": 200,
+    "abortVerified": true,
+    "reasonCode": null
+  },
+  "statusReadback": {
+    "cliExitCode": 0,
+    "state": "aborted",
+    "httpStatus": 200,
+    "httpReadCount": 1,
+    "reasonCode": null
+  },
+  "safety": {
+    "rawUploadIdsPersistedInReceipt": false,
+    "signedUrlsPersisted": false,
+    "cookieValuesPersisted": false,
+    "browserBusinessWritesForwarded": 0
+  }
+}

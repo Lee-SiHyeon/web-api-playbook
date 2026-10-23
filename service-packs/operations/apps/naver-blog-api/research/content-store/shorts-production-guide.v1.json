@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 1,
+  "id": "acada:shorts-production-guide",
+  "createdAt": "2026-09-27",
+  "purpose": "쇼츠(유튜브 쇼츠·틱톡·릴스·네이버 클립)를 어떤 영상으로, 어떤 방법으로, 어떤 레퍼런스와 음성으로 만들지. owner 2026-09-27: \"쇼츠화에 대해서 자료조사좀. 어떤 영상 어떤방법으로 어떻게 만드는게 좋은지. 레퍼런스 영상을 뭐로 가져가야하는지 tts어떻게 하는게 나은지\".",
+  "evidence": {
+    "ownMeasurement": "hook-ontology.v1.json observations.youtube: 641 YouTube search results for our 16 topic queries (397 Shorts), 2026-09-27. Shorts lift vs titles with no hook: curiosity '~하는 이유' ×3.24, ranking ×1.38, question ×1.28; price ×0.48, deadline ×0.41, segment ×0.13.",
+    "topShortsByTopic": {
+      "shopping": [
+        { "views": 7090000, "title": "요즘 청소기 미쳤네요ㄷㄷ(개발자가 이걸 숨겨놨습니다)", "format": "hidden-feature reveal, product in hand", "url": "https://www.youtube.com/shorts/ztQxrmFqFXI" },
+        { "views": 5100000, "title": "예뻐서 샀다가 큰 코 다친다는 레고", "format": "warning", "url": "https://www.youtube.com/shorts/UfhtcfuFY9s" },
+        { "views": 4690000, "title": "🥚계란을 에어프라이어에 넣어보세요.", "format": "do-this demonstration", "url": "https://www.youtube.com/shorts/aFIC5GZYyTs" },
+        { "views": 4210000, "title": "비싼 청소기가 필요없는 이유", "format": "curiosity reason", "url": "https://www.youtube.com/shorts/MHgJ1D6z4dI" }
+      ],
+      "travel": [
+        { "views": 6780000, "title": "프랑스 파리 가방 소매치기 당하기", "format": "experience / situation", "url": "https://www.youtube.com/shorts/uDA1FJZOZhI" },
+        { "views": 4570000, "title": "도쿄와 오사카의 차이점ㅋㅋㅋ", "format": "comparison", "url": "https://www.youtube.com/shorts/qZ-EA_1hM88" },
+        { "views": 3520000, "title": "파리에서 함부로 크루아상 먹으면 안 되는 이유", "format": "curiosity reason + warning", "url": "https://www.youtube.com/shorts/_r4U_P4g6mo" }
+      ],
+      "life": [
+        { "views": 770000, "title": "앞으로 막대한 현금 없이 새아파트 청약 분양 힘든 이유? 50초 안에 설명하기", "format": "reason + time-boxed explainer", "url": "https://www.youtube.com/shorts/pO9x4EbHetA" },
+        { "views": 290000, "title": "6억 아파트 청약당첨! 내돈 얼마 필요할까?", "format": "worked number example", "url": "https://www.youtube.com/shorts/GkOUPwm-2kc" }
+      ],
+      "ai": [
+        { "views": 5240000, "title": "챗 GPT 200% 활용 방법", "format": "screen demo", "url": "https://www.youtube.com/shorts/fevn01oGy8o" },
+        { "views": 4110000, "title": "어느 쪽이 AI가 만든 냉면🍜 일까요? 맞혀보세요!", "format": "quiz / A-B guess", "url": "https://www.youtube.com/shorts/38nDwQ0XwqY" }
+      ]
+    },
+    "observation": "The top Shorts in our topics are real footage or screen demos (product in hand, do-this, experience, comparison, screen demo), not text cards over stills. Info topics (청약·지원금) reach 20–80만 with explainer + worked numbers.",
+    "external": [
+      { "claim": "30–50% of viewers leave in the first 0–3 s; burned-in captions from the first word, 2–4 words per frame, lift retention 15–25%; 15–30 s best retention, 30–60 s algorithm range", "source": "https://www.opus.pro/blog/ideal-youtube-shorts-length-format-retention", "also": "https://joinbrands.com/blog/youtube-shorts-best-practices/" },
+      { "claim": "YouTube demonetizes 'inauthentic' mass-produced repetitive content, e.g. AI voice reading text over simple image slides or repeated clips; AI itself is allowed", "source": "https://www.digitalfocus.news/news/articleView.html?idxno=22454", "also": "https://support.google.com/youtube/answer/1311392?hl=ko" },
+      { "claim": "Shorts YPP: 1,000 subscribers + 10M Shorts views in 90 days now; 20M from 2027-02-01 and existing channels under 10M/90 days lose Shorts revenue", "source": "https://news.nate.com/view/20260812n23702" },
+      { "claim": "TikTok Creator Rewards 2X for Korean content from 2026-04-01: 10k followers, 100k views/30 days, ≥1 min original", "source": "https://news.mtn.co.kr/news-detail/2026040212174151717" },
+      { "claim": "Naver Clip 2026: up to 20,000 creators, activity pay; posts (text+image) now monetizable", "source": "https://byline.network/2026/03/09_naver_clip/" }
+    ]
+  },
+  "formats": [
+    { "id": "screen_proof", "label": "실제 화면 증거", "fit": ["deal", "grocery_compare", "ai"], "how": "상품·가격 페이지나 앱 화면을 녹화/캡처해 스크롤·확대·하이라이트. 가격 비교는 두 화면을 나란히", "why": "우리 글의 근거(판매 페이지 캡처)를 그대로 쓰는 원본 영상. 슬라이드쇼 판정을 피함", "risk": "화면 속 개인정보·로그인 정보 가리기" },
+    { "id": "data_motion", "label": "숫자·차트 모션", "fit": ["grocery_compare", "life", "economy"], "how": "100g당 가격 막대가 자라는 애니메이션, 지도 경로가 그려지는 애니메이션(파리 동선)", "why": "우리 데이터로 만든 독자적 시각물", "risk": "수치는 글과 같은 확인 시각" },
+    { "id": "demo_b_roll", "label": "시연·실사 B롤", "fit": ["shopping", "travel"], "how": "직접 촬영이 최선. 없으면 Flow Omni 9:16 클립(분위기 컷)에 실제 화면을 섞음", "why": "상위 쇼츠 대부분이 실사·시연", "risk": "AI 생성 컷은 실제 상품·여행처럼 보이면 'AI 이미지' 표기" },
+    { "id": "quiz_ab", "label": "A/B 맞히기", "fit": ["ai", "shopping"], "how": "두 선택지를 보여주고 2초 뒤 정답(어느 쪽이 더 쌀까요?)", "why": "재시청·댓글 유도" }
+  ],
+  "structure": {
+    "length": "20–35초 (정보형), 틱톡 리워드용은 60초 이상 별도 편집",
+    "beats": ["0–2초: 호기심·질문 한 줄 + 결과 화면 먼저", "2–8초: 답(픽)과 근거 숫자 하나", "8–25초: 이유 2~3개, 장면당 2~4초", "마지막: 루프되는 한 줄 + '자세한 건 프로필 링크'"],
+    "captions": "첫 단어부터, 한 화면 2~4단어, 고대비, 화면 중앙 상단~중앙(하단 20%·오른쪽은 버튼 영역)",
+    "cuts": "2~3초마다 장면 변화 또는 줌·하이라이트",
+    "firstLine": "피드형 채널은 가격·마감으로 열지 않는다(hook-ontology channelPreferences)"
+  },
+  "tts": {
+    "recommendation": "사람 목소리 녹음이 최선. TTS를 쓰면 감정 표현이 되는 한국어 음성(타입캐스트 등) + 채널 고정 목소리 1개, 대본은 영상마다 새로 쓰고 화면은 원본 자료로. Windows Heami(현재 기본)는 기계음이라 발행용으로는 쓰지 않는다",
+    "options": [
+      { "id": "typecast", "label": "타입캐스트", "note": "한국어 감정·톤 자동 반영, 베이직 월 9,900원(월 60분 다운로드). API 있음 — 코덱스가 video.mjs에 어댑터 작업 중", "source": "https://typecast.ai/kr/learn/best-ai-voice-tools-2026/" },
+      { "id": "clova_dubbing", "label": "클로바더빙(네이버)", "note": "한국어 억양 안정성 평이 좋음. 네이버 클립과 궁합", "source": "https://stra.ai/blog/tts-dubbing" },
+      { "id": "elevenlabs", "label": "일레븐랩스", "note": "리얼리즘 최상급, 다국어. 보이스 클로닝은 본인 목소리만", "source": "https://www.mstoday.co.kr/news/articleView.html?idxno=102517" },
+      { "id": "windows_sapi", "label": "Windows Heami (현재)", "note": "오프라인·무료지만 기계음 — 미리보기용" }
+    ],
+    "rules": ["실존 인물 목소리 복제 금지(유튜브 유사성 감지·삭제)", "같은 목소리·같은 템플릿으로 뉴스를 읽기만 하는 반복 포맷은 수익 제외 위험", "속도 1.1~1.2배, 문장 끝 쉼 0.2~0.3초, 숫자는 읽기 쉽게('1,043원' → '천사십삼 원')"]
+  },
+  "referencePolicy": {
+    "pick": "같은 주제·같은 채널 규모에서 조회수가 채널 평균보다 튄 쇼츠(아웃라이어). 좋아요 수만으로 고르지 않는다",
+    "extract": "첫 문장 유형, 첫 장면 무엇을 보여주는지, 컷 간격, 자막 스타일, 목소리(사람/TTS), 길이만 기록하고 영상·음악·캐릭터는 가져오지 않는다 (reference-video-production skill)",
+    "collector": "youtube-hook-scout.mjs (제목·조회수, 공개 요청). 인스타·틱톡은 비로그인 공개 데이터가 없어 유튜브 쇼츠로 대신"
+  },
+  "pipelineChanges": [
+    "mirror-sns: 첫 장면은 카드가 아니라 근거 화면(판매 페이지 캡처·차트)으로, 자막은 2~4단어 단위로 쪼개 표시",
+    "TTS 제공자 선택(타입캐스트 어댑터) — 채널 고정 목소리 1개",
+    "장면당 줌/팬/하이라이트 모션, 2~3초 컷",
+    "가능하면 Flow Omni 분위기 B롤 1~2컷(설정 후)"
+  ],
+  "productCommercialVideo": {
+    "scope": "제품 모양·브랜드 요소가 중요한 광고/히어로 영상 제작 선택지. 기존 정보형·가격 비교 쇼츠 규칙을 대체하지 않는다.",
+    "methodRecord": "knowhow/product-commercial-video-workflow.json",
+    "automatedConsumer": null,
+    "pipelineStatus": "guide_and_knowhow_only",
+    "stages": [
+      {
+        "id": "storyboard",
+        "recommendationStatus": "codex_adaptation",
+        "mode": "recommended_for_product_or_brand_led_shots",
+        "methodRecordClaims": ["c1"],
+        "record": ["shot id", "framing", "product pose", "lighting", "camera intent", "duration", "reference asset revision"]
+      },
+      {
+        "id": "previs",
+        "recommendationStatus": "codex_adaptation",
+        "conditionalityBasis": "inferred_review_heuristic; not verified as the account's own selection criteria",
+        "mode": "conditional",
+        "useWhen": ["camera movement is hard to judge from stills", "multi-step physical action or shot timing is uncertain"],
+        "skipWhen": ["simple one-shot concept with no unresolved blocking question"],
+        "sourceStatus": "user_provided_description_text_only; account-specific method not independently verified"
+      },
+      {
+        "id": "identity_asset",
+        "recommendationStatus": "codex_adaptation",
+        "mode": "conditional_on_brand_accuracy_need",
+        "methodRecordClaims": ["c2"],
+        "record": ["master asset revision or input image hash", "identity invariants", "forbidden changes", "per-shot overrides"],
+        "identityGuaranteeFrom3dOrReference": false
+      },
+      {
+        "id": "provider_generation",
+        "recommendationStatus": "codex_adaptation",
+        "mode": "provider_specific",
+        "methodRecordClaims": ["c4", "c5"],
+        "record": ["provider", "model", "workflow version", "mode", "prompt reference", "input asset revision", "run id", "output id"]
+      },
+      {
+        "id": "editable_composite",
+        "recommendationStatus": "codex_adaptation",
+        "mode": "recommended",
+        "methodRecordClaims": ["c3"],
+        "keepSeparate": ["logo", "product name", "legal copy", "captions", "color treatment"]
+      },
+      {
+        "id": "frame_review",
+        "recommendationStatus": "codex_adaptation",
+        "mode": "required_for_generated_output",
+        "record": ["reviewed frame count", "sampling rate or full-frame scope", "identity/anatomy observations", "motion deviations", "visible marks", "reviewer limits"]
+      },
+      {
+        "id": "file_validation",
+        "recommendationStatus": "codex_adaptation",
+        "mode": "required_before_delivery",
+        "record": ["full decode", "codec and dimensions", "duration and frame count", "black/frozen spans", "audio stream and listening/rights status"]
+      }
+    ],
+    "defaults": {
+      "threeDimensionalAssetRequired": false,
+      "previsRequired": false,
+      "generatedOutputFrameReviewRequired": true,
+      "mediaFileValidationRequired": true
+    },
+    "sourceBoundary": {
+      "officialAndProjectAuthorSources": "See the seven primary/project-author sources in the linked knowhow record. Blender and ComfyUI first-party documentation are separate from the third-party ahujasid/mcp-for-blender connector.",
+      "studioJongsori": {
+        "accountHandle": "@studio_jongsori",
+        "sourceStatus": "user_provided_description",
+        "access": "text_only",
+        "sourceUrl": null,
+        "summary": "사용자가 전달한 설명은 이미지 콘티를 먼저 잠그고, 필요시 프리비즈를 거친 뒤 Blender 장면·영상화·합성·사람의 최종 확인으로 이어지는 계정의 작업 흐름을 소개한다.",
+        "reportedFollowerCount": "약 230명이라고 전달됨; 확인하지 않음",
+        "unverified": ["계정의 실제 게시물과 신원", "Blender/Opus/After Effects/Seedance 실제 사용", "작업 시간 절감", "광고 성과·수익", "팔로워 수"]
+      },
+      "inferenceLimit": "3D 마스터나 입력 이미지는 생성 결과의 제품·로고 동일성을 보증하지 않는다. 이 자료들은 제작 도구의 기능과 절차 선택지를 뒷받침할 뿐, 광고 성과나 계정 성과를 입증하지 않는다."
+    },
+    "pilotEvidence": {
+      "id": "flow-dancing-cat-2026-10-06",
+      "status": "candidate_with_deviations",
+      "provider": "Google Flow maintained HTTP CLI",
+      "createAttempts": 1,
+      "inputMode": "text_only",
+      "referenceVideoViewed": false,
+      "artifacts": {
+        "receipt": "C:/Users/User/Documents/Codex/2026-10-06/flow-dancing-cat/generation-receipt.json",
+        "verificationReceipt": "apps/google-flow-api/discovery/cat-dance-http-generation-2026-10-06.json",
+        "frameReview": "C:/Users/User/Documents/Codex/2026-10-06/flow-dancing-cat/motion-review.json",
+        "contactSheet": "C:/Users/User/Documents/Codex/2026-10-06/flow-dancing-cat/motion-contact-sheet.png",
+        "nativeVideo": "C:/Users/User/Documents/Codex/2026-10-06/flow-dancing-cat/dancing-cat-8s-native720.mp4",
+        "convertedVideo": "C:/Users/User/Documents/Codex/2026-10-06/flow-dancing-cat/dancing-cat-8s-480p.mp4"
+      },
+      "nativeMedia": { "width": 1280, "height": 720, "durationSeconds": 8, "fps": 24, "frames": 192, "bytes": 1716385 },
+      "convertedMedia": { "width": 854, "height": 480, "durationSeconds": 8, "fps": 24, "frames": 192, "bytes": 737502, "videoCodec": "H.264", "audioCodec": "AAC" },
+      "visualReview": {
+        "status": "motion_reviewed_with_deviations",
+        "method": "32 stills sampled at 4 fps from 192 total frames; not full playback and not every frame reviewed",
+        "observed": ["sampled frames show a consistent stylized orange tabby", "no obvious extra limbs or duplicate tail in sampled frames", "fixed full-body camera and warm studio remain consistent in sampled frames", "opening steps and forepaw rhythm are visible in sampled frames", "final samples show a front-facing pose", "a small white four-point sparkle mark is visible in sampled frames"],
+        "deviations": ["planned small quarter-turn appears much larger, close to a full turn in sampled frames", "exact choreography timing and the mark's attribution were not independently established"],
+        "allFramesReviewed": false,
+        "fullMotionViewed": false,
+        "audioListened": false
+      },
+      "fileValidation": {
+        "fullDecode": "passed",
+        "videoKitProbe": true,
+        "blackSpans": [],
+        "frozenSpans": []
+      },
+      "unmeasured": {
+        "productionTimeSaved": null,
+        "creditsUsed": null,
+        "commercialOutcome": null,
+        "viewerPerformance": null,
+        "originalMusicRights": null,
+        "soundQuality": null
+      },
+      "scopeLimit": "한 번의 텍스트 기반 고양이 영상 생성과 표본 프레임·파일 검증 사례다. 제품 광고, 3D 자산, 제품 동일성, 재현성 또는 상업적 성과의 근거로 일반화하지 않는다."
+    },
+    "futurePipelineCandidate": {
+      "status": "deferred",
+      "methodRecordTask": "t2",
+      "proposal": "브랜드 정확성이 필요한 별도 brief에 샷·참조 자산·provider run·합성 레이어를 보존하는 연결 검토",
+      "consumerExists": false,
+      "doesNotChange": "기존 가격 비교 planner와 전 쇼츠의 3D/프리비즈 요구 여부"
+    }
+  }
+}

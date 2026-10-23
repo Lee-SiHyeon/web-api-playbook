@@ -1,0 +1,151 @@
+{
+  "schema": "grok-settings-current-source-roundtrip-v1",
+  "startedAt": "2026-10-06T13:07:36.336Z",
+  "sourceBeforeImports": {
+    "src/grok-conversations.mjs": "97b5896c9413bc961d09938b12041e70bbd6c731d1b875e1de1a3e32239f0a17",
+    "src/client.mjs": "fbc42db06aada43768e7b20f10e5279a62414be0b57be90682164f2a1c51534c",
+    "src/runtime.mjs": "9a98d7e64f3b5cf7128dc421420c31d3cff9f0e6a5507a84742a65182284e34e",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+    "src/journal.mjs": "eb5ae0dd987ca2b9551a0fe007ab853e0c671b4d6173907bd9e15a2a2f8ccef7",
+    "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b",
+    "src/authenticated-chrome-fetch.mjs": "b4db2f6cb2d601f40526bd0690d63b165b1ad3f8c26f32c2e5c386717213bf34",
+    "scripts/authenticated-chrome-transport.py": "fd538ac05d96585630bee2ff3e243ddbed2f4b1f0dc0f0868e658a252e9a8a58",
+    "contracts/grok-web.v1.json": "97bc3099a8a9ef53b30e7e5fa727d092425f2bc2bf1ada3c026c815ca4130afc"
+  },
+  "preference": "autoWrapLongLinesCode",
+  "writeAttempts": {
+    "apply": 1,
+    "restore": 1
+  },
+  "remotePrivacyFieldsSubmitted": false,
+  "rawSettingsCredentialsValuesPersisted": false,
+  "ownerVerified": true,
+  "before": {
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 838,
+    "rawBodySha256": "a908aad9880046aee374dffdfaba1973281315ee2478c73007ad90ca77c09509",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "5db425117fb59b04a830b9816ce02a2d297f34af4734b89faa75abf65b7aaf37"
+  },
+  "baseline": false,
+  "apply": {
+    "state": "completed",
+    "verified": true,
+    "httpStatus": 200,
+    "readbackStatus": 200,
+    "responseReceipt": {
+      "operationId": "settings.update",
+      "observedAt": "2026-10-06T13:07:38.267Z",
+      "method": "POST",
+      "requestDigest": "2dfc34b1bcd343ff60248fb5773428ffc83331e5f8c9d4b9dd17ea92bb938bf7",
+      "intentDigest": "15ea692844326a03991cd1fec41a82a01ea78f985846f9dc4a1c609c9ec65ca1",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 837,
+      "responseDigest": "1294febf9190233277ffd0cbbe64f5ae24a04e800295399ff911825d147602f0",
+      "responseDigestKind": "raw_http_body",
+      "responseTopLevelFieldNames": [
+        "agentCustomizations",
+        "allowAutoShare",
+        "allowCompanionNotifications",
+        "allowGrokFinishedNotification",
+        "allowShareIndexing",
+        "allowXPersonalization",
+        "audioRefConsent",
+        "enableMemory",
+        "excludeFromTraining",
+        "mutedBotPushAgentIds",
+        "preferences"
+      ],
+      "requestHeaderNames": [
+        "content-type",
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "transportHttpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "businessResponsePersisted": false
+    },
+    "otherPreferencesUnchanged": true,
+    "otherSettingsUnchanged": true
+  },
+  "afterApply": {
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 837,
+    "rawBodySha256": "1294febf9190233277ffd0cbbe64f5ae24a04e800295399ff911825d147602f0",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "5db425117fb59b04a830b9816ce02a2d297f34af4734b89faa75abf65b7aaf37"
+  },
+  "changedValueMatched": true,
+  "restore": {
+    "state": "completed",
+    "verified": true,
+    "httpStatus": 200,
+    "readbackStatus": 200,
+    "responseReceipt": {
+      "operationId": "settings.update",
+      "observedAt": "2026-10-06T13:07:45.077Z",
+      "method": "POST",
+      "requestDigest": "a49f739ca6d6378d71c874e6f23c47b10b84f93a472774ecfb44d004bcc494b4",
+      "intentDigest": "9f5f51ab3c2074e8fbf609256a8fdc650e8fbe627749f0edaa06a59f47056c6b",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 838,
+      "responseDigest": "a908aad9880046aee374dffdfaba1973281315ee2478c73007ad90ca77c09509",
+      "responseDigestKind": "raw_http_body",
+      "responseTopLevelFieldNames": [
+        "agentCustomizations",
+        "allowAutoShare",
+        "allowCompanionNotifications",
+        "allowGrokFinishedNotification",
+        "allowShareIndexing",
+        "allowXPersonalization",
+        "audioRefConsent",
+        "enableMemory",
+        "excludeFromTraining",
+        "mutedBotPushAgentIds",
+        "preferences"
+      ],
+      "requestHeaderNames": [
+        "content-type",
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "transportHttpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "businessResponsePersisted": false
+    },
+    "otherPreferencesUnchanged": true,
+    "otherSettingsUnchanged": true
+  },
+  "afterRestore": {
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 838,
+    "rawBodySha256": "a908aad9880046aee374dffdfaba1973281315ee2478c73007ad90ca77c09509",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "5db425117fb59b04a830b9816ce02a2d297f34af4734b89faa75abf65b7aaf37"
+  },
+  "baselineRestored": true,
+  "wholeSettingsRestored": true,
+  "outcome": "verified",
+  "finishedAt": "2026-10-06T13:07:45.977Z",
+  "sourceStable": true
+}

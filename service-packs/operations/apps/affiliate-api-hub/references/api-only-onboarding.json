@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 1,
+  "purpose": "API-only 자동 작업의 계정 확인, 로그인, 회원가입, 세션 재사용과 기능 연결",
+  "services": [
+    {
+      "id": "threads",
+      "sourceHosts": ["threads.com", "threads.net"],
+      "priority": 100,
+      "label": "Threads",
+      "provider": "meta-auth",
+      "login": "Instagram 비밀번호·Gmail 이메일 인증 후 기존 계정으로 Threads 연결; 서비스별 DPAPI 세션 재사용 및 owner HTTP 조회 확인",
+      "signup": "기존 lifehack__ailab 계정 확인 완료; 신규 가입 불필요",
+      "nextTask": "저장 세션으로 owner 보호 조회부터 실행한 뒤 요청된 Threads 기능의 관측 계약을 추가한다. 글쓰기 계약 및 만료 세션 자동 재로그인은 아직 미검증",
+      "evidence": "docs/threads-xhr-status-2026-09-27.md",
+      "flowEvidence": "apps/affiliate-api-hub/references/api-only-login-flows-2026-09-27.json"
+    },
+    {
+      "id": "instagram",
+      "sourceHosts": [
+        "instagram.com",
+        "www.instagram.com",
+        "static.cdninstagram.com"
+      ],
+      "priority": 99,
+      "label": "Instagram",
+      "provider": "meta-auth",
+      "sessionKey": "instagram-auth-session",
+      "login": "기존 계정 lifehack__ailab의 DPAPI 세션을 복원하고 Instagram owner HTTP 조회로 확인; 만료 뒤 비밀번호 HTTP 로그인·자동 갱신은 미검증",
+      "signup": "기존 계정 확인 완료; 신규 가입 불필요",
+      "nextTask": "저장 세션으로 프로필·게시물·댓글·답글 읽기를 직접 재생한다. 사진·영상·캐러셀 게시와 댓글 변경은 소스 계약 클라이언트가 있으나 쓰기 재생 및 브라우저 XHR 캡처는 미검증이다. 세션 거절 시 정상 Instagram UI 로그인 뒤 일회용 암호화 DPAPI handoff를 사용한다.",
+      "evidence": "docs/instagram-api-only-2026-09-28.md",
+      "flowEvidence": "apps/affiliate-api-hub/references/api-only-login-flows-2026-09-27.json"
+    },
+    {
+      "id": "gmarket",
+      "sourceHosts": ["gmarket.co.kr", "mobile.gmarket.co.kr", "browse.gmarket.co.kr", "item.gmarket.co.kr"],
+      "priority": 98,
+      "label": "G마켓",
+      "provider": "shopping",
+      "sessionKey": "gmarket-search",
+      "login": "검색용 보호 세션과 회원 로그인은 별도; 계정 보호 조회·로그인·갱신 계약 관측 필요",
+      "signup": "기존 회원/통합 계정 확인 후 실제 가입 경로와 인증 요구 관측",
+      "nextTask": "HTTP에서 확인된 기존 네이버 세션을 G마켓 Naver SSO에 전달하고 기존 회원 연결 여부 확인; Google 경로는 가입 폼까지 관측",
+      "evidence": "docs/gmarket-protected-replay-2026-09-27.json",
+      "flowEvidence": "apps/affiliate-api-hub/references/api-only-login-flows-2026-09-27.json"
+    },
+    {
+      "id": "auction",
+      "sourceHosts": ["auction.co.kr", "mobile.auction.co.kr", "browse.auction.co.kr", "itempage3.auction.co.kr"],
+      "priority": 97,
+      "label": "옥션",
+      "provider": "shopping",
+      "sessionKey": "auction",
+      "login": "후기 읽기와 회원 로그인은 별도; 계정 보호 조회·로그인·갱신 계약 관측 필요",
+      "signup": "기존 회원/통합 계정 여부를 확인하고 실제 가입 흐름 관측",
+      "nextTask": "회원 로그인·가입 분기와 갱신 경계를 관측하고 수집 HTTP 경로에 연결",
+      "evidence": "apps/affiliate-api-hub/adapters/auction-photo-reviews.mjs"
+    },
+    {
+      "id": "naver-shopping",
+      "sourceHosts": ["shopping.naver.com", "search.shopping.naver.com"],
+      "priority": 96,
+      "label": "네이버 쇼핑",
+      "provider": "shopping",
+      "sessionKey": "naver-search",
+      "login": "네이버 계정과 쇼핑 요청 전달 상태를 따로 확인; 수집 세션에는 owner 보호 조회 없음",
+      "signup": "기존 네이버 계정 상태 우선; 쇼핑 응답 거절로 미가입을 추정하지 않음",
+      "nextTask": "현재 네이버 계정·쇼핑 세션 경계와 관측한 문서/XHR 취득 흐름 확인",
+      "evidence": "apps/affiliate-api-hub/lib/shopping-session-store.mjs"
+    },
+    {
+      "id": "naver",
+      "sourceHosts": ["naver.com", "nid.naver.com", "blog.naver.com", "m.blog.naver.com"],
+      "priority": 95,
+      "label": "네이버 계정",
+      "provider": "keeper",
+      "login": "보호 owner 조회 → 인증 부재/로그인 리다이렉트에 한해 저장된 ID의 HTTP 로그인",
+      "signup": "owner 확인 성공이면 기존 계정으로 기록; 보호조치는 가입 분기로 넘기지 않음",
+      "nextTask": "네이버 로그인 준비 상태와 본인 확인 필요 지점을 최신 관측으로 갱신",
+      "evidence": "apps/naver-blog-api/scripts/naver-login-cli.mjs"
+    },
+    {
+      "id": "brandconnect",
+      "sourceHosts": ["brandconnect.naver.com"],
+      "priority": 90,
+      "label": "네이버 브랜드커넥트",
+      "provider": "keeper",
+      "login": "계정·creator·space 보호 조회 → 유효한 기존 네이버 세션으로 갱신",
+      "signup": "기존 creator/space 보호 조회 성공 시 추가 가입 불필요; 권한 부족은 별도 가입·심사 단계",
+      "nextTask": "인증 확인 후 쇼핑/여행 검색과 제휴 링크 기능의 미완료 작업 진행",
+      "evidence": "apps/affiliate-api-hub/docs/api-only-auth-migration-2026-09-24.md"
+    },
+    {
+      "id": "x",
+      "sourceHosts": ["x.com", "twitter.com"],
+      "priority": 89,
+      "label": "X",
+      "provider": "web-auth",
+      "login": "DPAPI 웹 세션 → account/settings owner 대조; 세션 만료 후 새 로그인은 미구현",
+      "signup": "기존 계정 보호 조회를 먼저 시도; 비밀번호/SSO/가입 경로는 현재 화면 관측 필요",
+      "nextTask": "저장 세션의 owner 확인 후 만료 시 정상 로그인 복구 계약 발견",
+      "evidence": "docs/x-xhr-api.md"
+    },
+    {
+      "id": "adpick",
+      "sourceHosts": ["adpick.co.kr"],
+      "priority": 85,
+      "label": "애드픽",
+      "provider": "discovery",
+      "login": "네이버 OAuth 관측 이력; 기존 기록의 네이버 계정 보호조치는 현재 재확인 필요",
+      "signup": "OAuth 이후 전화 인증 관측 이력; 기존 계정 조회와 등록 상태부터 재확인",
+      "nextTask": "현재 OAuth 로그인·가입 분기와 서비스 세션 획득·보호 조회 관측",
+      "evidence": "docs/account-onboarding-checklist-2026-09-20.md"
+    },
+    {
+      "id": "myrealtrip",
+      "sourceHosts": ["myrealtrip.com", "partner.myrealtrip.com"],
+      "priority": 80,
+      "label": "마이리얼트립",
+      "provider": "web-auth",
+      "login": "owner 조회 → refresh → 저장된 비밀번호 로그인; OTP 단계는 보호 상태에 보존",
+      "signup": "보호 partner 조회 성공이면 기존 계정; OTP 요구를 신규 가입 필요로 해석하지 않음",
+      "nextTask": "현재 owner 확인과 OTP·불확실 응답의 재개 경계 점검",
+      "evidence": "apps/affiliate-api-hub/docs/api-only-auth-migration-2026-09-24.md"
+    },
+    {
+      "id": "coupang",
+      "sourceHosts": ["partners.coupang.com"],
+      "priority": 78,
+      "label": "쿠팡 파트너스",
+      "provider": "web-auth",
+      "login": "config의 계정·affiliate 확인 → 필요시 관측된 prelogin SSO; 비밀번호 로그인 미구현",
+      "signup": "기존 파트너 계정 확인 우선; 개인·사업자·정산정보는 관측된 상태로 구분",
+      "nextTask": "현재 owner 확인 후 SSO 만료 복구와 최초 로그인 경로 관측",
+      "evidence": "apps/affiliate-api-hub/docs/api-only-auth-migration-2026-09-24.md"
+    },
+    {
+      "id": "linkprice",
+      "sourceHosts": ["linkprice.com", "center.linkprice.com"],
+      "priority": 75,
+      "label": "링크프라이스",
+      "provider": "keeper",
+      "login": "owner 조회 → token refresh → 저장된 비밀번호 로그인; 불확실 쓰기 journal 보존",
+      "signup": "현재 보호 조회 결과를 우선하며 예전 미가입 문서를 현재 상태로 쓰지 않음",
+      "nextTask": "현재 계정 확인과 갱신 결과를 근거로 등록 매체·캠페인 읽기 연결",
+      "evidence": "apps/affiliate-api-hub/docs/api-only-auth-migration-2026-09-24.md"
+    },
+    {
+      "id": "tistory",
+      "sourceHosts": ["tistory.com", "i-never-stop-study.tistory.com"],
+      "priority": 70,
+      "label": "Tistory",
+      "provider": "keeper",
+      "login": "계정·블로그 보호 조회 → 필요시 저장된 Kakao 계정의 HTTP 로그인",
+      "signup": "기존 owner 확인 성공이면 가입 불필요; Kakao 재로그인 요구는 기존 계정 복구 단계",
+      "nextTask": "현재 owner 확인과 저장 계정 재사용 경계 점검",
+      "evidence": "apps/tistory-api/research/login-observed-20260924.json"
+    },
+    {
+      "id": "oliveyoung",
+      "sourceHosts": ["oliveyoung.co.kr", "m.oliveyoung.co.kr"],
+      "priority": 60,
+      "label": "올리브영 큐레이터",
+      "provider": "discovery",
+      "login": "기존 API-only 작업의 서비스 로그인 세션·링크 활동 상태 재확인",
+      "signup": "일반 회원과 큐레이터 자격·교육 단계를 현재 첫 화면에서 구분",
+      "nextTask": "기존 올리브영 checkout과 현재 로그인·가입·자격 흐름을 연결",
+      "evidence": "docs/account-onboarding-checklist-2026-09-20.md"
+    },
+    {
+      "id": "travelpayouts",
+      "sourceHosts": ["travelpayouts.com", "app.travelpayouts.com"],
+      "priority": 50,
+      "label": "Travelpayouts",
+      "provider": "discovery",
+      "login": "Google 계정 선택 관측 이력; 현재 SSO·기존 계정 여부 미확인",
+      "signup": "기존 계정·가입 화면·필수 조건을 실제 페이지에서 관측",
+      "nextTask": "저장된 가입 중단점과 현재 Google SSO 계정 상태 확인",
+      "evidence": "docs/account-onboarding-checklist-2026-09-20.md"
+    }
+  ]
+}

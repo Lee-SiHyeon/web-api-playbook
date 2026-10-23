@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "conversation.crud",
+  "requirementId": "conversation.delete",
+  "operationId": "conversation.soft-delete",
+  "observedAt": "2026-10-06T09:52:11.251Z",
+  "recordedAt": "2026-10-06T10:48:24.805Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "bfed37fbf64e2c46562d41e6a2be7a8507c0a6d2ba0eae8cecf59f6b12f57fd4",
+  "ownerProofPath": "verification/owner-proofs/bfed37fbf64e2c46562d41e6a2be7a8507c0a6d2ba0eae8cecf59f6b12f57fd4.json",
+  "ownerProofSha256": "bfed37fbf64e2c46562d41e6a2be7a8507c0a6d2ba0eae8cecf59f6b12f57fd4",
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 2,
+  "capturedOperationSha256": "5a94db17105f822eeb53fde81dc903af61bc51ef7217b0e06a9057c20ddec4ce",
+  "requestDigest": "f5bf0372b4699b0180b934072470f1d6358e2840a60ceb6e2332bf63ec147bd0",
+  "intentDigest": "c2a7f9796f95c4820e1ee491d389f122fdefe9877d7e2aad1c2ba5e15e515638",
+  "responseDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "responseDigestKind": "raw_http_body",
+  "handlerId": "client.submit",
+  "dispatchBinding": {
+    "handlerId": "client.submit",
+    "operationId": "conversation.soft-delete",
+    "operationKind": "submit",
+    "mode": "validated_registry_generic"
+  },
+  "codeSha256": {
+    "src/client.mjs": "cb62a2424ef2db9446b26107083f20136ad9913f731b16d1e3c6901f103d8d7a",
+    "src/transport.mjs": "f4b0c6c5bb4e38cc1490d83f6a6d2e7e61ddbc87adb9f5f0cf2c28a6160df6b1"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "semanticReadback": {
+    "readbackVerified": true,
+    "readbackStatus": 200,
+    "conversationAbsent": true,
+    "otherConversationsUnchanged": true
+  },
+  "sourceProofPath": "verification/grok-conversation-crud-live-2026-10-06.json",
+  "sourceProofSha256": "e503601f59645cd738c5ebd4a0312aa890a135264a4f5fc740b68febfabf7f03",
+  "codeHashCapturedAtExecution": true
+}

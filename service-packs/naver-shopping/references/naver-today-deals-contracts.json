@@ -1,0 +1,45 @@
+{
+  "sourceRepository": "https://github.com/Lee-SiHyeon/affiliate-content-operations",
+  "sourcePullRequest": 11,
+  "sourceCommit": "258790f697d02e6dcddcd1fc2212efc3c2387f24",
+  "sourceDirectory": "apps/affiliate-api-hub",
+  "migratedOn": "2026-09-30",
+  "originalHashes": {
+    "adapters/naver-shopping-deals.mjs": "0482e7abcdc5f6a4935cfcc5e967055d4bb9554fb0d934bc97459ab06d772639",
+    "scripts/naver-shopping-deals.mjs": "3bde63d9ce2ab18fc9783f7d6c04dc25c6c1fe6ddf3f094559e770cc163f5a67"
+  },
+  "contracts": [
+    {
+      "operation": "promotionManifest",
+      "method": "GET",
+      "url": "https://shopping.naver.com/promotion",
+      "response": "HTML __NEXT_DATA__ props.pageProps.waffleData selected AUTO_SORT_PRODUCT IDs and dates"
+    },
+    {
+      "operation": "autoSortProducts",
+      "method": "GET",
+      "origin": "https://vertical-api.shopping.naver.com",
+      "path": "/v1/waffle-maker/layouts/{layoutId}/auto-sort-products",
+      "queryFields": [
+        "first",
+        "page",
+        "type"
+      ],
+      "observedType": "VIEW",
+      "requiredResponseKeys": [
+        "itemLayoutId",
+        "page",
+        "hasNext",
+        "contents"
+      ]
+    }
+  ],
+  "historicalReplay": {
+    "startedAt": "2026-09-20T18:00:22.936Z",
+    "productCount": 85,
+    "complete": true,
+    "note": "Source repository observation; current replay is recorded separately."
+  },
+  "normalExecution": "anonymous_direct_http",
+  "scope": "Default promotion AUTO_SORT_PRODUCT layouts; no native shopping search, store/reviews or booking operations."
+}

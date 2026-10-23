@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "conversation.history",
+  "requirementId": "history.response-nodes",
+  "operationId": "history.response-nodes",
+  "observedAt": "2026-10-06T05:39:59.296Z",
+  "recordedAt": "2026-10-06T05:39:59.296Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "7360b0c3925a6c92ae4f17492f3fce59312631e9ae65633b9d3012315bfad440",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 1918,
+  "requestDigest": "d1ac1ae679f5bb4ddfbf1f4f299f4c0d0534fa958993bd2e7d5def1d569c687a",
+  "responseDigest": "7c168c0358bce4ae68b2b9c968d428332f771e2ddc03cd340ba4b020090e32c2",
+  "capturedOperationSha256": "a9d1308914146350f173edc659a4f4b2810f1a22d14531e2acd5023ac8b46e37",
+  "handlerId": "client.read",
+  "dispatchBinding": {
+    "handlerId": "client.read",
+    "operationId": "history.response-nodes",
+    "operationKind": "read",
+    "mode": "validated_registry_generic"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "codeSha256": {
+    "src/client.mjs": "51c2768d8d0beb52427988d1f5d48e8c78b36f67d6ec60a1fb2ac57e688764e7",
+    "src/transport.mjs": "4cd42d32e99173500464d2d98a6a76bc203cd279ebdcc6ab0883924cfa786588",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/runtime.mjs": "e55e7b9440842d87eed783d721b2a55a36489d64133f8ae570c2c448319db57d",
+    "src/grok-conversations.mjs": "a47761cc119dafc539e74d57e75c1cfb70998ce1360b48468784f4567a592f38"
+  },
+  "semanticReadback": {
+    "responseNodeCount": 14,
+    "inflightResponseCount": 0
+  }
+}

@@ -1,0 +1,720 @@
+{
+  "observedOn": "2026-09-30",
+  "scope": "HERA7195971829 transport controls; merchant mapping also Dyson13613936141; live product-page matrix is separate",
+  "javaAndVerifiedTokenReuse": {
+    "startedAt": "2026-09-30T10:05:51.643874+00:00",
+    "scope": "HERA7195971829",
+    "rawValuesOrResponsesStored": false,
+    "secretsPassedInProcessArguments": false,
+    "ordinaryFreshHeadedChrome": true,
+    "rows": [
+      {
+        "transport": "standard_java21_httpclient",
+        "requestedVersion": "HTTP_2",
+        "actualVersion": "HTTP_2",
+        "status": 429,
+        "mime": "text/html",
+        "contentEncoding": "",
+        "decoded": true,
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "rootProductIdPrefixMatches": false,
+        "locationPresent": false,
+        "label": "java_first_document_h2"
+      },
+      {
+        "transport": "standard_java21_httpclient",
+        "requestedVersion": "HTTP_1_1",
+        "actualVersion": "HTTP_1_1",
+        "status": 429,
+        "mime": "text/html",
+        "contentEncoding": "",
+        "decoded": true,
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "rootProductIdPrefixMatches": false,
+        "locationPresent": false,
+        "label": "java_first_document_h1"
+      },
+      {
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "bytes": 34518,
+        "identityMatches": true,
+        "label": "same_lct_browser_replay_before"
+      },
+      {
+        "transport": "standard_java21_httpclient",
+        "requestedVersion": "HTTP_2",
+        "actualVersion": "HTTP_2",
+        "status": 429,
+        "mime": "text/html",
+        "contentEncoding": "",
+        "decoded": true,
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "rootProductIdPrefixMatches": false,
+        "locationPresent": false,
+        "label": "java_h2_same_browser_verified_lct",
+        "cookieJarAtDispatchMatchesBrowserReplay": true,
+        "dynamicHeaderFields": [
+          "x-client-lct"
+        ]
+      },
+      {
+        "transport": "standard_java21_httpclient",
+        "requestedVersion": "HTTP_1_1",
+        "actualVersion": "HTTP_1_1",
+        "status": 429,
+        "mime": "text/html",
+        "contentEncoding": "",
+        "decoded": true,
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "rootProductIdPrefixMatches": false,
+        "locationPresent": false,
+        "label": "java_h1_same_browser_verified_lct",
+        "cookieJarAtDispatchMatchesBrowserReplay": true,
+        "dynamicHeaderFields": [
+          "x-client-lct"
+        ]
+      },
+      {
+        "transport": "node24_fetch",
+        "status": 429,
+        "mime": "text/html",
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "identityMatches": null,
+        "label": "node24_same_browser_verified_lct",
+        "cookieJarAtDispatchMatchesBrowserReplay": false,
+        "dynamicHeaderFields": [
+          "x-client-lct"
+        ]
+      },
+      {
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "bytes": 34518,
+        "identityMatches": true,
+        "label": "same_lct_browser_replay_after"
+      }
+    ],
+    "browserRequestSequence": [
+      {
+        "phase": "ui",
+        "method": "GET",
+        "resourceType": "xhr",
+        "elapsedMs": 1086,
+        "status": 200,
+        "bytes": 34518,
+        "identityMatches": true,
+        "dynamicHeaderFieldNames": [
+          "x-client-rts",
+          "x-client-lct",
+          "x-client-rtk"
+        ],
+        "setCookieHeaderPresent": false
+      },
+      {
+        "phase": "same_lct_browser_replay_before",
+        "method": "GET",
+        "resourceType": "fetch",
+        "elapsedMs": 3278,
+        "status": 200,
+        "bytes": 34518,
+        "identityMatches": true,
+        "dynamicHeaderFieldNames": [
+          "x-client-lct"
+        ],
+        "setCookieHeaderPresent": false,
+        "lctEqualsCapturedSuccessfulValue": true,
+        "cookieEqualsCapturedRequest": false
+      },
+      {
+        "phase": "same_lct_browser_replay_after",
+        "method": "GET",
+        "resourceType": "fetch",
+        "elapsedMs": 5072,
+        "status": 200,
+        "bytes": 34518,
+        "identityMatches": true,
+        "dynamicHeaderFieldNames": [
+          "x-client-lct"
+        ],
+        "setCookieHeaderPresent": false,
+        "lctEqualsCapturedSuccessfulValue": true,
+        "cookieEqualsCapturedRequest": false
+      }
+    ],
+    "officialProductAddresses": [
+      {
+        "sourceField": "productUrl",
+        "origin": "https://smartstore.naver.com",
+        "path": "/main/products/7195971829"
+      },
+      {
+        "sourceField": "mobileProductUrl",
+        "origin": "https://m.smartstore.naver.com",
+        "path": "/main/products/7195971829"
+      }
+    ],
+    "documentStatus": 200,
+    "checkedAt": "2026-09-30T10:05:58.000953+00:00"
+  },
+  "curlWireAndConnectionControls": {
+    "startedAt": "2026-09-30T10:31:15.923312+00:00",
+    "scope": "HERA7195971829",
+    "rawValuesOrResponsesStored": false,
+    "secretsPassedInProcessArguments": false,
+    "ordinaryFreshHeadedChrome": true,
+    "transportProfileEmulationTested": true,
+    "sdkValuesGeneratedOutsideNormalSiteFlow": false,
+    "sameFrozenHttpHeadersCookieAndLctForBothCurlModes": true,
+    "rows": [
+      {
+        "transport": "curl_cffi_persistent_session",
+        "libraryVersion": "0.16.3",
+        "profile": null,
+        "defaultHeadersAdded": false,
+        "status": 200,
+        "mime": "text/html; charset=utf-8",
+        "bytes": 175842,
+        "sha256": "fd70ea584e3ae7df625c9d7c8ea8bfb046e39538eab66247b53baa499ae5e88e",
+        "identityMatches": null,
+        "httpVersionCode": 3,
+        "newConnections": 1,
+        "responseSetCookiePresent": false,
+        "outgoingRequestHeaderFields": [
+          "host",
+          "accept",
+          "accept-encoding",
+          "accept-language",
+          "cache-control",
+          "pragma",
+          "priority",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "sec-fetch-user",
+          "upgrade-insecure-requests",
+          "user-agent"
+        ],
+        "outgoingDifferentHeaderFields": [],
+        "outgoingAdditionalHeaderFields": [
+          "host"
+        ],
+        "destinationPeerMatchesBrowser": false,
+        "label": "curl_document_profile_control"
+      },
+      {
+        "transport": "curl_cffi_persistent_session",
+        "libraryVersion": "0.16.3",
+        "profile": "chrome150",
+        "defaultHeadersAdded": false,
+        "status": 200,
+        "mime": "text/html; charset=utf-8",
+        "bytes": 175842,
+        "sha256": "404e0fdeead20262380ca9cb34218dd45c1bc22f86d1b0e5a8376fc32b68f14c",
+        "identityMatches": null,
+        "httpVersionCode": 3,
+        "newConnections": 1,
+        "responseSetCookiePresent": false,
+        "outgoingRequestHeaderFields": [
+          "host",
+          "accept",
+          "accept-encoding",
+          "accept-language",
+          "cache-control",
+          "pragma",
+          "priority",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "sec-fetch-user",
+          "upgrade-insecure-requests",
+          "user-agent"
+        ],
+        "outgoingDifferentHeaderFields": [],
+        "outgoingAdditionalHeaderFields": [
+          "host"
+        ],
+        "destinationPeerMatchesBrowser": true,
+        "label": "curl_document_profile_control"
+      },
+      {
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "bytes": 34518,
+        "identityMatches": true,
+        "label": "same_lct_browser_replay_before"
+      },
+      {
+        "transport": "curl_cffi_persistent_session",
+        "libraryVersion": "0.16.3",
+        "profile": null,
+        "defaultHeadersAdded": false,
+        "status": 429,
+        "mime": "text/html",
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "identityMatches": null,
+        "httpVersionCode": 3,
+        "newConnections": 0,
+        "responseSetCookiePresent": false,
+        "outgoingRequestHeaderFields": [
+          "host",
+          "accept",
+          "accept-encoding",
+          "accept-language",
+          "baggage",
+          "cache-control",
+          "content-type",
+          "cookie",
+          "pragma",
+          "priority",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "sentry-trace",
+          "user-agent",
+          "x-client-lct",
+          "x-client-version",
+          "x-service-type"
+        ],
+        "outgoingDifferentHeaderFields": [],
+        "outgoingAdditionalHeaderFields": [
+          "host"
+        ],
+        "destinationPeerMatchesBrowser": false,
+        "label": "curl_default_same_browser_verified_lct",
+        "cookieJarAtDispatchMatchesBrowserReplay": true,
+        "dynamicHeaderFields": [
+          "x-client-lct"
+        ]
+      },
+      {
+        "transport": "curl_cffi_persistent_session",
+        "libraryVersion": "0.16.3",
+        "profile": "chrome150",
+        "defaultHeadersAdded": false,
+        "status": 429,
+        "mime": "text/html",
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "identityMatches": null,
+        "httpVersionCode": 3,
+        "newConnections": 0,
+        "responseSetCookiePresent": false,
+        "outgoingRequestHeaderFields": [
+          "host",
+          "accept",
+          "accept-encoding",
+          "accept-language",
+          "baggage",
+          "cache-control",
+          "content-type",
+          "cookie",
+          "pragma",
+          "priority",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sec-fetch-dest",
+          "sec-fetch-mode",
+          "sec-fetch-site",
+          "sentry-trace",
+          "user-agent",
+          "x-client-lct",
+          "x-client-version",
+          "x-service-type"
+        ],
+        "outgoingDifferentHeaderFields": [],
+        "outgoingAdditionalHeaderFields": [
+          "host"
+        ],
+        "destinationPeerMatchesBrowser": true,
+        "label": "curl_chrome150_same_browser_verified_lct",
+        "cookieJarAtDispatchMatchesBrowserReplay": true,
+        "dynamicHeaderFields": [
+          "x-client-lct"
+        ]
+      },
+      {
+        "transport": "node24_fetch",
+        "status": 429,
+        "mime": "text/html",
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "identityMatches": null,
+        "label": "node24_same_browser_verified_lct",
+        "cookieJarAtDispatchMatchesBrowserReplay": true,
+        "dynamicHeaderFields": [
+          "x-client-lct"
+        ]
+      },
+      {
+        "status": 200,
+        "mime": "application/json; charset=utf-8",
+        "bytes": 34518,
+        "identityMatches": true,
+        "label": "same_lct_browser_replay_after"
+      }
+    ],
+    "browserRequestSequence": [
+      {
+        "phase": "ui",
+        "method": "GET",
+        "resourceType": "xhr",
+        "elapsedMs": 1100,
+        "status": 200,
+        "bytes": 34518,
+        "identityMatches": true,
+        "cookieFieldNames": [
+          "_fwb",
+          "NAC",
+          "wcs_bt"
+        ],
+        "dynamicHeaderFieldNames": [
+          "x-client-rts",
+          "x-client-lct",
+          "x-client-rtk"
+        ],
+        "setCookieHeaderPresent": false
+      },
+      {
+        "phase": "same_lct_browser_replay_before",
+        "method": "GET",
+        "resourceType": "fetch",
+        "elapsedMs": 2152,
+        "status": 200,
+        "bytes": 34518,
+        "identityMatches": true,
+        "cookieFieldNames": [
+          "_fwb",
+          "NAC",
+          "wcs_bt"
+        ],
+        "dynamicHeaderFieldNames": [
+          "x-client-lct"
+        ],
+        "setCookieHeaderPresent": false,
+        "lctEqualsCapturedSuccessfulValue": true,
+        "cookieEqualsCapturedRequest": true
+      },
+      {
+        "phase": "same_lct_browser_replay_after",
+        "method": "GET",
+        "resourceType": "fetch",
+        "elapsedMs": 2648,
+        "status": 200,
+        "bytes": 34518,
+        "identityMatches": true,
+        "cookieFieldNames": [
+          "_fwb",
+          "NAC",
+          "wcs_bt"
+        ],
+        "dynamicHeaderFieldNames": [
+          "x-client-lct"
+        ],
+        "setCookieHeaderPresent": false,
+        "lctEqualsCapturedSuccessfulValue": true,
+        "cookieEqualsCapturedRequest": true
+      }
+    ],
+    "officialProductAddresses": [
+      {
+        "sourceField": "productUrl",
+        "origin": "https://smartstore.naver.com",
+        "path": "/main/products/7195971829"
+      },
+      {
+        "sourceField": "mobileProductUrl",
+        "origin": "https://m.smartstore.naver.com",
+        "path": "/main/products/7195971829"
+      }
+    ],
+    "documentStatus": 200,
+    "lctMetadata": {
+      "length": 25,
+      "numericOnly": false,
+      "longValuePresentLiterallyInDocument": false,
+      "iso8601DateTimeWithOffsetShape": false,
+      "valuePrinted": false
+    },
+    "checkedAt": "2026-09-30T10:31:19.884484+00:00"
+  },
+  "merchantFieldMapping": [
+    {
+      "store": "hera",
+      "productId": "7195971829",
+      "apiIdentityVerified": true,
+      "naverPayNoMatchesApiMerchant": false,
+      "payReferenceKeyMatchesApiMerchant": true,
+      "ssrOriginMatchesApi": true
+    },
+    {
+      "store": "dyson",
+      "productId": "13613936141",
+      "apiIdentityVerified": true,
+      "naverPayNoMatchesApiMerchant": false,
+      "payReferenceKeyMatchesApiMerchant": true,
+      "ssrOriginMatchesApi": true
+    }
+  ],
+  "browserlessReviewRead": {
+    "checkedAt": "2026-09-30T10:48:20.503083+00:00",
+    "browserUsed": false,
+    "browserStateUsed": false,
+    "sdkSecurityValuesUsed": false,
+    "curlCffiVersion": "0.16.3",
+    "profile": "chrome150",
+    "reads": [
+      {
+        "method": "GET",
+        "path": "/hera/products/7195971829",
+        "status": 200,
+        "mime": "text/html; charset=utf-8",
+        "bytes": 175842,
+        "sha256": "3176f4558d837e5e4cd922045ef38ec9bf9a21bdc0a597c486f350910f0e877a",
+        "newConnections": 1
+      },
+      {
+        "method": "POST",
+        "path": "/n/v1/contents/reviews/query-pages",
+        "status": 429,
+        "mime": "text/html",
+        "bytes": 23585,
+        "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+        "newConnections": 0,
+        "requestBodyFieldNames": [
+          "checkoutMerchantNo",
+          "originProductNo",
+          "page",
+          "pageSize",
+          "reviewSearchSortType"
+        ],
+        "requestHeaderFieldNames": [
+          "accept",
+          "content-type",
+          "x-service-type",
+          "origin",
+          "referer",
+          "sec-fetch-site",
+          "sec-fetch-mode",
+          "sec-fetch-dest",
+          "sec-fetch-user",
+          "upgrade-insecure-requests",
+          "x-client-version"
+        ]
+      }
+    ],
+    "publicDocumentBuildTimeCandidateCount": 1
+  },
+  "officialAliasReads": [
+    {
+      "origin": "https://smartstore.naver.com",
+      "path": "/main/products/7195971829",
+      "status": 307,
+      "locationOrigin": "https://nid.naver.com",
+      "locationPath": "/nidlogin.login"
+    },
+    {
+      "origin": "https://m.smartstore.naver.com",
+      "path": "/main/products/7195971829",
+      "status": 307,
+      "locationOrigin": "https://nid.naver.com",
+      "locationPath": "/nidlogin.login"
+    }
+  ],
+  "discardedControlNotes": [
+    "Initial Java comparison had no positive browser reference and supplied no independent HTTP conclusion.",
+    "A later all-SDK-header browser replay returned429, so that run did not establish reusable full SDK context; it was not counted as an independent-client failure."
+  ],
+  "conclusions": [
+    "Browser LCT reuse was verified before/after native reads; Java H1/H2 remained429 with matching cookies.",
+    "curl_cffi can retrieve product documents without browser or issuer state; the product-page CLI reports SSR_DOCUMENT.",
+    "Same-connection and outgoing-header controls did not restore product JSON XHR. Exact provider protection rule remains unconfirmed.",
+    "Actual review merchant mapping is channel.payReferenceKey in the document, not channel.naverPayNo. Correctly mapped native review POST still429.",
+    "A fresh, not-yet-transmitted full SDK request was tried in persistent curl_cffi:429. The original unedited browser request then succeeded200 with identical SDK values and cookie, confirming that stale or consumed SDK values alone do not explain that native failure."
+  ],
+  "rawCookiesSdkValuesRawBodiesOrIpAddressesStored": false,
+  "transportProfileEmulationUsed": true,
+  "runtimeLiveRecord": "references/naver-product-page-live-20260930.json",
+  "freshSdkNativeThenOriginalBrowserControl": {
+    "checkedAt": "2026-09-30T11:12:31.194490+00:00",
+    "scope": "HERA7195971829_live_task_owned_anonymous_issuer_context_only",
+    "browserOnlyIssuesContextForNativeReads": true,
+    "siteSdkContextForgedOrGeneratedOutsideNormalPage": false,
+    "securityValuesPersistedPrintedOrPutInProcessArguments": false,
+    "rawBodiesStored": false,
+    "nativeCertificateValidationDisabled": false,
+    "browserSettingsOrFingerprintOverrides": false,
+    "baselines": [
+      {
+        "phase": "before",
+        "sdkValuesMatchNativeAttempt": null,
+        "cookieMatchesNativeAttempt": null,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "de0a4115fea2b82875705533acba08e02f6d0e484dcb6cc7af720d54218682f4",
+        "identityMatches": true
+      },
+      {
+        "phase": "fresh_full_sdk_curl",
+        "sdkValuesMatchNativeAttempt": null,
+        "cookieMatchesNativeAttempt": null,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "de0a4115fea2b82875705533acba08e02f6d0e484dcb6cc7af720d54218682f4",
+        "identityMatches": true
+      },
+      {
+        "phase": "fresh_full_sdk_curl",
+        "sdkValuesMatchNativeAttempt": true,
+        "cookieMatchesNativeAttempt": true,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "de0a4115fea2b82875705533acba08e02f6d0e484dcb6cc7af720d54218682f4",
+        "identityMatches": true
+      },
+      {
+        "phase": "after",
+        "sdkValuesMatchNativeAttempt": false,
+        "cookieMatchesNativeAttempt": false,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "798f8ce1643c97836f28512104ecfa1bac445713c3e4151aa86c82db979aef79",
+        "identityMatches": true
+      }
+    ],
+    "rows": [
+      {
+        "mode": "native_document_warmup",
+        "result": {
+          "status": 200,
+          "mime": "text/html; charset=utf-8",
+          "bytes": 175842,
+          "sha256": "4abd53a24db9f2a8caa43effd64174509d29f6c5cc380f2e5f945e8da69bc0b8",
+          "identityMatches": null,
+          "newConnections": 1
+        }
+      },
+      {
+        "mode": "fresh_full_sdk_curl",
+        "freshBeforeBrowserTransmission": true,
+        "result": {
+          "status": 429,
+          "mime": "text/html",
+          "bytes": 23585,
+          "sha256": "5f4fb552ab36eb82dd328727e335542d99dd5d309e1c0d47f5eb50153f671e9b",
+          "identityMatches": null,
+          "newConnections": 0
+        },
+        "dynamicHeaderFields": [
+          "x-client-rts",
+          "x-client-lct",
+          "x-client-rtk"
+        ]
+      }
+    ],
+    "nativeTransport": "curl_cffi0.16.3",
+    "httpCompatibilityProfile": "chrome150",
+    "tlsHttp2ProfileEmulation": true
+  },
+  "forcedHttp1CompatibilityControl": {
+    "checkedAt": "2026-09-30T11:16:33.310295+00:00",
+    "scope": "HERA7195971829_live_task_owned_anonymous_issuer_context_only",
+    "browserOnlyIssuesContextForNativeReads": true,
+    "siteSdkContextForgedOrGeneratedOutsideNormalPage": false,
+    "securityValuesPersistedPrintedOrPutInProcessArguments": false,
+    "rawBodiesStored": false,
+    "nativeCertificateValidationDisabled": false,
+    "browserSettingsOrFingerprintOverrides": false,
+    "baselines": [
+      {
+        "phase": "before",
+        "sdkValuesMatchNativeAttempt": null,
+        "cookieMatchesNativeAttempt": null,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "3faae7b5a603216b428434d7bae88ec4bf7d43b6c043ae4f0eb01711bf1034ae",
+        "identityMatches": true
+      },
+      {
+        "phase": "fresh_full_sdk_curl_http1",
+        "sdkValuesMatchNativeAttempt": null,
+        "cookieMatchesNativeAttempt": null,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "3faae7b5a603216b428434d7bae88ec4bf7d43b6c043ae4f0eb01711bf1034ae",
+        "identityMatches": true
+      },
+      {
+        "phase": "fresh_full_sdk_curl_http1",
+        "sdkValuesMatchNativeAttempt": true,
+        "cookieMatchesNativeAttempt": true,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "3faae7b5a603216b428434d7bae88ec4bf7d43b6c043ae4f0eb01711bf1034ae",
+        "identityMatches": true
+      },
+      {
+        "phase": "after",
+        "sdkValuesMatchNativeAttempt": false,
+        "cookieMatchesNativeAttempt": false,
+        "status": 200,
+        "bytes": 34518,
+        "sha256": "3faae7b5a603216b428434d7bae88ec4bf7d43b6c043ae4f0eb01711bf1034ae",
+        "identityMatches": true
+      }
+    ],
+    "rows": [
+      {
+        "mode": "native_document_warmup",
+        "result": {
+          "status": 490,
+          "mime": "text/html",
+          "bytes": 583,
+          "sha256": "e1683fb4d5e4128ccaaf54f9556768c27a873ad72ca1e9daa71276c42b85c70c",
+          "identityMatches": null,
+          "newConnections": 1
+        }
+      },
+      {
+        "mode": "fresh_full_sdk_curl_http1",
+        "freshBeforeBrowserTransmission": true,
+        "result": {
+          "status": 490,
+          "mime": "text/html",
+          "bytes": 583,
+          "sha256": "e1683fb4d5e4128ccaaf54f9556768c27a873ad72ca1e9daa71276c42b85c70c",
+          "identityMatches": null,
+          "newConnections": 0
+        },
+        "dynamicHeaderFields": [
+          "x-client-rts",
+          "x-client-lct",
+          "x-client-rtk"
+        ]
+      }
+    ],
+    "nativeTransport": "curl_cffi0.16.3",
+    "httpCompatibilityProfile": "chrome150",
+    "forcedHttpVersion": "HTTP/1.1",
+    "documentWarmupSucceeded": false,
+    "interpretation": "Document and API both490. This does not supply a successful document control or establish an SDK-only cause."
+  }
+}

@@ -9,6 +9,22 @@ test('X replies retain author and require a parent path; quoted, unrelated and p
  const result=decodeConversation([{entries:[{content:root},{content:{items:[{item:b},{item:a},{item:unrelated},{item:ad}]}}]}],'1');
  assert.deepEqual(result.replies.map(t=>t.id),['3','2']);assert.equal(result.excludedUnconnected,1);assert.equal(result.replies[0].metrics.likes,null);assert.equal(result.complete,false);
 });
+test('X conversation readback exposes attached media identity and type without media URLs',()=>{
+ const post=tweet('10',null,'lifehack__ailab');
+ const legacy=post.itemContent.tweet_results.result.legacy;
+ legacy.extended_entities={media:[{id_str:'2104487500400267264',type:'video',original_info:{width:1080,height:1920},video_info:{duration_millis:58500,variants:[{url:'https://video.twimg.com/private'}]},media_url_https:'https://pbs.twimg.com/private'}]};
+ const result=decodeConversation([{entries:[{content:post}]}],'10');
+ assert.deepEqual(result.focal.media,[{id:'2104487500400267264',type:'video',width:1080,height:1920,durationMs:58500,variantCount:1}]);
+ assert.equal(JSON.stringify(result).includes('video.twimg.com'),false);
+ assert.equal(JSON.stringify(result).includes('pbs.twimg.com'),false);
+});
+test('X note tweet readback restores URLs from the note entity set, not only legacy entities',()=>{
+ const post=tweet('11',null,'lifehack__ailab');
+ const result=post.itemContent.tweet_results.result;
+ result.note_tweet={note_tweet_results:{result:{text:'긴 글 https://t.co/NOTEAAAAAA\n\n본문',entity_set:{urls:[{url:'https://t.co/NOTEAAAAAA',expanded_url:'https://toss.shopping/_m/abc'}]}}}};
+ result.legacy.entities={urls:[{url:'https://t.co/LEGACYBBBB',expanded_url:'https://toss.shopping/_m/abc'}]};
+ assert.equal(decodeConversation([{entries:[{content:post}]}],'11').focal.text,'긴 글 https://toss.shopping/_m/abc\n\n본문');
+});
 const listing=children=>({kind:'Listing',data:{children}});
 test('Reddit comment tree preserves deleted-parent replies and incomplete more placeholders',()=>{
  const data=[listing([{kind:'t3',data:{id:'abc',title:'Grok'}}]),listing([{kind:'t1',data:{id:'def',body:'[deleted]',replies:listing([{kind:'t1',data:{id:'ghi',body:'Price matters',parent_id:'t1_def'}}])}},{kind:'more',data:{count:8}}])];

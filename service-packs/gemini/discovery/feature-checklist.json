@@ -1,0 +1,712 @@
+{
+  "schema": "gemini-feature-checklist-v1",
+  "service": "gemini-web",
+  "origin": "https://gemini.google.com",
+  "policy": {
+    "ownerIdentityFeatureId": "identity",
+    "ownerIdentityOperationId": "identity",
+    "privateCompletionRequires": [
+      "installed validated request-response contract",
+      "operation-specific client implementation bound by source SHA-256",
+      "positive authenticated direct-HTTP replay receipt bound to both"
+    ],
+    "unknownApplicabilityBlocksStrict": true,
+    "publicStatusCanCompletePrivateFeature": false,
+    "ownerIdentityOperationCaseId": "owner"
+  },
+  "features": [
+    {
+      "id": "login",
+      "title": "Owner login and session handoff",
+      "applicability": "required",
+      "basis": {
+        "kind": "native_profile_session_handoff",
+        "reference": "verification/features/login.json; verification/one-shot/gemini-owner-handoff-current-2026-10-06.json",
+        "note": "The current registered native Chrome profile session was passed to the direct HTTP client, refreshed, and verified against an anonymous /app control. No provider password endpoint or challenge bypass is claimed."
+      },
+      "contractOperations": [
+        "identity"
+      ],
+      "requiredEffects": {
+        "identity": "read"
+      },
+      "readbackOperations": [],
+      "requiresOwnerIdentity": true,
+      "receiptPath": "verification/features/login.json",
+      "requiredOperationCases": [
+        {
+          "operation": "identity",
+          "caseId": "owner"
+        }
+      ]
+    },
+    {
+      "id": "identity",
+      "title": "Authenticated account identity read",
+      "applicability": "required",
+      "basis": {
+        "kind": "user_scope",
+        "reference": "User request: complete Gemini feature set",
+        "note": "Private operations must be attributable to the authorized account before they are counted."
+      },
+      "contractOperations": [
+        "identity"
+      ],
+      "requiredEffects": {
+        "identity": "read"
+      },
+      "readbackOperations": [],
+      "requiresOwnerIdentity": true,
+      "receiptPath": "verification/features/identity.json",
+      "requiredOperationCases": [
+        {
+          "operation": "identity",
+          "caseId": "owner"
+        }
+      ]
+    },
+    {
+      "id": "text_generation",
+      "title": "Text generation",
+      "applicability": "required",
+      "basis": {
+        "kind": "published_source_candidate",
+        "reference": "discovery/public-source-contracts-2026-10-03.json",
+        "note": "StreamGenerate/RxAFq and GenerateAnswer are source candidates only; capture and direct replay remain required."
+      },
+      "contractOperations": [
+        "text",
+        "history_read"
+      ],
+      "requiredEffects": {
+        "text": "mutation",
+        "history_read": "read"
+      },
+      "readbackOperations": [
+        "history_read"
+      ],
+      "requiresOwnerIdentity": true,
+      "requiresReadback": true,
+      "receiptPath": "verification/features/text_generation.json",
+      "requiredOperationCases": [
+        {
+          "operation": "text",
+          "caseId": "generate"
+        },
+        {
+          "operation": "history_read",
+          "caseId": "generated_response"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "text",
+          "writeCaseId": "generate",
+          "readOperation": "history_read",
+          "readCaseId": "generated_response"
+        }
+      ]
+    },
+    {
+      "id": "history",
+      "title": "Conversation history list, search, and read",
+      "applicability": "required",
+      "basis": {
+        "kind": "owner_scoped_direct_http",
+        "reference": "verification/features/history.json; verification/one-shot/gemini-history-readonly-current-v3-2026-10-06.json",
+        "note": "The current owner session passed authenticated and anonymous app checks. MaZiqc list, unqWSc search, and hNvQHb detail returned HTTP 200; one exact task-intent detail matched in memory. Other conversations and mutations are outside this receipt."
+      },
+      "contractOperations": [
+        "history_list",
+        "history_search",
+        "history_read"
+      ],
+      "requiredEffects": {
+        "history_list": "read",
+        "history_search": "read",
+        "history_read": "read"
+      },
+      "readbackOperations": [],
+      "requiresOwnerIdentity": true,
+      "ownerIdentityEvidenceCaseId": "history_owner",
+      "receiptPath": "verification/features/history.json",
+      "requiredOperationCases": [
+        {
+          "operation": "history_list",
+          "caseId": "list"
+        },
+        {
+          "operation": "history_search",
+          "caseId": "search"
+        },
+        {
+          "operation": "history_read",
+          "caseId": "conversation"
+        }
+      ]
+    },
+    {
+      "id": "readbacks",
+      "title": "Mutation readbacks tied to the originating action",
+      "applicability": "required",
+      "basis": {
+        "kind": "user_scope",
+        "reference": "User request: complete feature set",
+        "note": "Each completed write needs an independent readback tied to that exact action."
+      },
+      "contractOperations": [
+        "history_read",
+        "share_read",
+        "settings_read",
+        "attachment_readback"
+      ],
+      "requiredEffects": {
+        "history_read": "read",
+        "share_read": "read",
+        "settings_read": "read",
+        "attachment_readback": "read"
+      },
+      "readbackOperations": [],
+      "requiresOwnerIdentity": true,
+      "requiresBoundReadbackCases": [
+        "text_generation",
+        "edit",
+        "delete",
+        "share",
+        "attachments_upload",
+        "settings",
+        "image_generation",
+        "video_generation"
+      ],
+      "receiptPath": "verification/features/readbacks.json",
+      "requiredOperationCases": [
+        {
+          "operation": "history_read",
+          "caseId": "history"
+        },
+        {
+          "operation": "share_read",
+          "caseId": "share"
+        },
+        {
+          "operation": "settings_read",
+          "caseId": "settings"
+        },
+        {
+          "operation": "attachment_readback",
+          "caseId": "attachment"
+        }
+      ]
+    },
+    {
+      "id": "edit",
+      "title": "Edit an existing conversation or message",
+      "applicability": "unknown",
+      "basis": {
+        "kind": "bounded_source_review",
+        "reference": "discovery/public-source-contracts-2026-10-03.json",
+        "note": "No edit operation was identified in the bounded published-source pass. This does not establish that the signed-in UI lacks editing."
+      },
+      "contractOperations": [
+        "edit",
+        "history_read"
+      ],
+      "requiredEffects": {
+        "edit": "mutation",
+        "history_read": "read"
+      },
+      "readbackOperations": [
+        "history_read"
+      ],
+      "requiresOwnerIdentity": true,
+      "ownerIdentityEvidenceCaseId": "lifecycle_owner",
+      "requiresReadback": true,
+      "receiptPath": "verification/features/edit.json",
+      "requiredOperationCases": [
+        {
+          "operation": "edit",
+          "caseId": "update"
+        },
+        {
+          "operation": "history_read",
+          "caseId": "updated"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "edit",
+          "writeCaseId": "update",
+          "readOperation": "history_read",
+          "readCaseId": "updated"
+        }
+      ]
+    },
+    {
+      "id": "delete",
+      "title": "Delete a conversation or message",
+      "applicability": "required",
+      "basis": {
+        "kind": "observed_ui_and_direct_runtime",
+        "reference": "discovery/gemini-lifecycle-contract-fragment-2026-10-06.json",
+        "note": "Current owned task conversation menu exposes Delete. Direct same-task deletion and independent absence remain pending; deletion is tested last."
+      },
+      "contractOperations": [
+        "delete",
+        "history_list",
+        "history_search"
+      ],
+      "requiredEffects": {
+        "delete": "mutation",
+        "history_list": "read",
+        "history_search": "read"
+      },
+      "readbackOperations": [
+        "history_list",
+        "history_search"
+      ],
+      "requiresOwnerIdentity": true,
+      "ownerIdentityEvidenceCaseId": "lifecycle_owner",
+      "requiresReadback": true,
+      "receiptPath": "verification/features/delete.json",
+      "requiredOperationCases": [
+        {
+          "operation": "delete",
+          "caseId": "remove"
+        },
+        {
+          "operation": "history_list",
+          "caseId": "absence"
+        },
+        {
+          "operation": "history_search",
+          "caseId": "absence"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "delete",
+          "writeCaseId": "remove",
+          "readOperation": "history_list",
+          "readCaseId": "absence"
+        },
+        {
+          "writeOperation": "delete",
+          "writeCaseId": "remove",
+          "readOperation": "history_search",
+          "readCaseId": "absence"
+        }
+      ]
+    },
+    {
+      "id": "share",
+      "title": "Create, inspect, and revoke a share link",
+      "applicability": "required",
+      "basis": {
+        "kind": "observed_ui_and_direct_runtime",
+        "reference": "discovery/gemini-lifecycle-contract-fragment-2026-10-06.json",
+        "note": "Canonical share proof requires one lifecycle-only task, a normal UI share-create request aborted before network submission, an owner-bound direct create, anonymous ujx1Bf readback with credentials omitted, OXxBcc owner-list readback, and one direct revoke followed by both owner and anonymous absence checks."
+      },
+      "contractOperations": [
+        "share_create",
+        "share_revoke",
+        "share_read",
+        "share_public_read",
+        "history_read"
+      ],
+      "requiredEffects": {
+        "share_create": "mutation",
+        "share_revoke": "mutation",
+        "share_read": "read",
+        "share_public_read": "read",
+        "history_read": "read"
+      },
+      "readbackOperations": [
+        "share_read",
+        "share_public_read"
+      ],
+      "requiresOwnerIdentity": true,
+      "ownerIdentityEvidenceCaseId": "lifecycle_owner",
+      "requiresReadback": true,
+      "receiptPath": "verification/features/share.json",
+      "requiredOperationCases": [
+        {
+          "operation": "share_create",
+          "caseId": "create"
+        },
+        {
+          "operation": "share_read",
+          "caseId": "created"
+        },
+        {
+          "operation": "share_public_read",
+          "caseId": "created_anonymously"
+        },
+        {
+          "operation": "share_revoke",
+          "caseId": "revoke"
+        },
+        {
+          "operation": "share_public_read",
+          "caseId": "revoked_anonymously"
+        },
+        {
+          "operation": "share_read",
+          "caseId": "revoked"
+        },
+        {
+          "operation": "history_read",
+          "caseId": "conversation"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "share_create",
+          "writeCaseId": "create",
+          "readOperation": "share_read",
+          "readCaseId": "created"
+        },
+        {
+          "writeOperation": "share_revoke",
+          "writeCaseId": "revoke",
+          "readOperation": "share_read",
+          "readCaseId": "revoked"
+        },
+        {
+          "writeOperation": "share_create",
+          "writeCaseId": "create",
+          "readOperation": "share_public_read",
+          "readCaseId": "created_anonymously"
+        },
+        {
+          "writeOperation": "share_revoke",
+          "writeCaseId": "revoke",
+          "readOperation": "share_public_read",
+          "readCaseId": "revoked_anonymously"
+        }
+      ]
+    },
+    {
+      "id": "attachments_upload",
+      "title": "Upload and attach files",
+      "applicability": "required",
+      "basis": {
+        "kind": "observed_ui_and_direct_runtime",
+        "reference": "discovery/gemini-upload-contract-discovery-2026-10-06.json",
+        "note": "Current Upload and tools menu accepts text files; native resumable init POST to push.clients6.google.com/upload was captured. Initial discovery had late native delivery uncertainty after driver disconnect. Independent upload/finalize/readback is pending."
+      },
+      "contractOperations": [
+        "attachment_upload",
+        "attachment_readback"
+      ],
+      "requiredEffects": {
+        "attachment_upload": "mutation",
+        "attachment_readback": "read"
+      },
+      "readbackOperations": [
+        "attachment_readback"
+      ],
+      "requiresOwnerIdentity": true,
+      "requiresReadback": true,
+      "receiptPath": "verification/features/attachments_upload.json",
+      "requiredOperationCases": [
+        {
+          "operation": "attachment_upload",
+          "caseId": "upload"
+        },
+        {
+          "operation": "attachment_readback",
+          "caseId": "attached"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "attachment_upload",
+          "writeCaseId": "upload",
+          "readOperation": "attachment_readback",
+          "readCaseId": "attached"
+        }
+      ]
+    },
+    {
+      "id": "attachments_download",
+      "title": "Retrieve attached files",
+      "applicability": "unknown",
+      "basis": {
+        "kind": "bounded_source_review",
+        "reference": "discovery/public-source-contracts-2026-10-03.json",
+        "note": "No download route or media origin was established. Signed-in UI applicability remains unknown."
+      },
+      "contractOperations": [
+        "attachment_download"
+      ],
+      "requiredEffects": {
+        "attachment_download": "read"
+      },
+      "readbackOperations": [],
+      "requiresOwnerIdentity": true,
+      "receiptPath": "verification/features/attachments_download.json",
+      "requiredOperationCases": [
+        {
+          "operation": "attachment_download",
+          "caseId": "download"
+        }
+      ]
+    },
+    {
+      "id": "model_catalog",
+      "title": "Read the authenticated model catalog",
+      "applicability": "required",
+      "basis": {
+        "kind": "observed_ui_and_direct_runtime",
+        "reference": "verification/features/model_catalog.json; verification/one-shot/gemini-model-catalog-read-current-v4-2026-10-06.json; discovery/gemini-model-selection-live-2026-10-06.json",
+        "note": "The read-only otAQ7b catalog request was executed with the current owner session and parsed into typed model records. Per-model eligibility and local UI selection remain separate capabilities."
+      },
+      "contractOperations": [
+        "model_list"
+      ],
+      "requiredEffects": {
+        "model_list": "read"
+      },
+      "readbackOperations": [],
+      "requiresOwnerIdentity": true,
+      "ownerIdentityEvidenceCaseId": "model_catalog_owner",
+      "receiptPath": "verification/features/model_catalog.json",
+      "requiredOperationCases": [
+        {
+          "operation": "model_list",
+          "caseId": "available"
+        }
+      ]
+    },
+    {
+      "id": "model_selection",
+      "title": "List and select available models",
+      "applicability": "conditional",
+      "basis": {
+        "kind": "guarded_source_and_ui_observation",
+        "reference": "discovery/gemini-model-selection-live-2026-10-06.json",
+        "note": "The direct catalog lists three model IDs and the guarded UI exposes a separate Extended Thinking control. Selection updates local request metadata; per-model quota availability and mode-category mapping remain unknown."
+      },
+      "contractOperations": [
+        "model_list",
+        "model_select",
+        "selection_state"
+      ],
+      "requiredEffects": {
+        "model_list": "read",
+        "model_select": "mutation",
+        "selection_state": "read"
+      },
+      "readbackOperations": [
+        "selection_state"
+      ],
+      "requiresOwnerIdentity": true,
+      "requiresReadback": true,
+      "receiptPath": "verification/features/model_selection.json",
+      "requiredOperationCases": [
+        {
+          "operation": "model_list",
+          "caseId": "available"
+        },
+        {
+          "operation": "model_select",
+          "caseId": "select"
+        },
+        {
+          "operation": "model_list",
+          "caseId": "selected"
+        },
+        {
+          "operation": "selection_state",
+          "caseId": "selected"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "model_select",
+          "writeCaseId": "select",
+          "readOperation": "selection_state",
+          "readCaseId": "selected"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Read and update supported settings",
+      "applicability": "required",
+      "basis": {
+        "kind": "observed_ui_and_direct_read",
+        "reference": "discovery/gemini-settings-update-contract-fragment-2026-10-06.json; verification/features/settings.json; verification/one-shot/gemini-settings-update-live-v2-2026-10-06.json; verification/one-shot/gemini-settings-update-offset-correction-2026-10-06.json; https://support.google.com/gemini/answer/15277943; https://support.google.com/gemini/answer/13542227",
+        "note": "The first-party L5adhe update path is source-mapped for the non-privacy side_nav_open_by_default preference (field 41). ESY5D minimal selector 41 verified its current boolean, one source-correct direct flip and exact readback succeeded, then one direct restore and readback returned the original value. Memory, personal-context, activity, and security preferences remain outside the writer allowlist."
+      },
+      "contractOperations": [
+        "settings_read",
+        "settings_update"
+      ],
+      "requiredEffects": {
+        "settings_read": "read",
+        "settings_update": "mutation"
+      },
+      "readbackOperations": [
+        "settings_read"
+      ],
+      "requiresOwnerIdentity": true,
+      "requiresReadback": true,
+      "receiptPath": "verification/features/settings.json",
+      "requiredOperationCases": [
+        {
+          "operation": "settings_read",
+          "caseId": "before"
+        },
+        {
+          "operation": "settings_update",
+          "caseId": "update"
+        },
+        {
+          "operation": "settings_read",
+          "caseId": "after"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "settings_update",
+          "writeCaseId": "update",
+          "readOperation": "settings_read",
+          "readCaseId": "before"
+        },
+        {
+          "writeOperation": "settings_update",
+          "writeCaseId": "update",
+          "readOperation": "settings_read",
+          "readCaseId": "after"
+        }
+      ]
+    },
+    {
+      "id": "image_generation",
+      "title": "Image generation and artifact retrieval",
+      "applicability": "required",
+      "basis": {
+        "kind": "observed_ui_and_direct_runtime",
+        "reference": "discovery/media-browser-capture-2026-10-06.json",
+        "note": "One new genuine image-tool SDK request was independently sent once; exact hNv prompt/CID/route readback and browser-free PNG download are verified. Artifact is512x279; original/full-resolution remains unverified."
+      },
+      "contractOperations": [
+        "image",
+        "history_read"
+      ],
+      "requiredEffects": {
+        "image": "mutation",
+        "history_read": "read"
+      },
+      "readbackOperations": [
+        "history_read"
+      ],
+      "requiresOwnerIdentity": true,
+      "requiresReadback": true,
+      "receiptPath": "verification/features/image_generation.json",
+      "requiredOperationCases": [
+        {
+          "operation": "image",
+          "caseId": "generate"
+        },
+        {
+          "operation": "history_read",
+          "caseId": "artifact_record"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "image",
+          "writeCaseId": "generate",
+          "readOperation": "history_read",
+          "readCaseId": "artifact_record"
+        }
+      ]
+    },
+    {
+      "id": "video_generation",
+      "title": "Video generation and artifact retrieval",
+      "applicability": "required",
+      "basis": {
+        "kind": "observed_ui_and_direct_runtime",
+        "reference": "discovery/media-download-direct-2026-10-06.json",
+        "note": "Independent video creation and exact-task readback were observed; authenticated HTTPS MP4 download has matching magic/file/hash readback. Canonical installed operation evidence is still being integrated."
+      },
+      "contractOperations": [
+        "video",
+        "history_read"
+      ],
+      "requiredEffects": {
+        "video": "mutation",
+        "history_read": "read"
+      },
+      "readbackOperations": [
+        "history_read"
+      ],
+      "requiresOwnerIdentity": true,
+      "requiresReadback": true,
+      "receiptPath": "verification/features/video_generation.json",
+      "requiredOperationCases": [
+        {
+          "operation": "video",
+          "caseId": "generate"
+        },
+        {
+          "operation": "history_read",
+          "caseId": "artifact_record"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "video",
+          "writeCaseId": "generate",
+          "readOperation": "history_read",
+          "readCaseId": "artifact_record"
+        }
+      ]
+    },
+    {
+      "id": "session_renewal",
+      "title": "Detect expiry and renew an authenticated session",
+      "applicability": "unknown",
+      "basis": {
+        "kind": "bounded_source_review",
+        "reference": "discovery/linux-login-boundary-2026-10-05.json",
+        "note": "No Gemini web session renewal request or expiry recovery contract is captured."
+      },
+      "contractOperations": [
+        "session_renewal",
+        "identity"
+      ],
+      "requiredEffects": {
+        "session_renewal": "mutation",
+        "identity": "read"
+      },
+      "readbackOperations": [
+        "identity"
+      ],
+      "requiresOwnerIdentity": true,
+      "requiresReadback": true,
+      "receiptPath": "verification/features/session_renewal.json",
+      "requiredOperationCases": [
+        {
+          "operation": "session_renewal",
+          "caseId": "renew"
+        },
+        {
+          "operation": "identity",
+          "caseId": "after_renewal"
+        }
+      ],
+      "requiredReadbackBindings": [
+        {
+          "writeOperation": "session_renewal",
+          "writeCaseId": "renew",
+          "readOperation": "identity",
+          "readCaseId": "after_renewal"
+        }
+      ]
+    }
+  ]
+}

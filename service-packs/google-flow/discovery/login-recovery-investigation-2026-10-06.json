@@ -1,0 +1,472 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-06T06:28:37.138Z",
+  "scope": "Google Flow browser-free login and session-recovery investigation; current Windows DPAPI provider",
+  "status": "unresolved_login_recovery_and_browser_discovery_blocked",
+  "earlierFullBundleProtectedRead": {
+    "checkedAt": "2026-10-06T05:55:07.542Z",
+    "session": "authenticated",
+    "projectMediaCount": 41,
+    "googlePrincipalVerified": false
+  },
+  "isolatedSharedCookieGetChain": {
+    "checkedAt": "2026-10-06T06:05:02.786Z",
+    "startingState": "Flow_host_cookies_omitted_in_isolated_memory_jar; original_protected_bundle_preserved",
+    "initialSharedGoogleCookieCount": 17,
+    "normalCookieRotation": null,
+    "sequence": [
+      {
+        "method": "GET",
+        "host": "flow.google.com",
+        "path": "/project/{storedProjectId}",
+        "queryKeys": [],
+        "httpStatus": 302,
+        "mime": "application/binary",
+        "setCookieNames": [
+          "NID"
+        ],
+        "redirect": {
+          "host": "accounts.google.com",
+          "path": "/ServiceLogin",
+          "queryKeys": [
+            "authuser",
+            "continue",
+            "followup",
+            "osid",
+            "passive"
+          ]
+        }
+      },
+      {
+        "method": "GET",
+        "host": "accounts.google.com",
+        "path": "/ServiceLogin",
+        "queryKeys": [
+          "authuser",
+          "continue",
+          "followup",
+          "osid",
+          "passive"
+        ],
+        "httpStatus": 302,
+        "mime": "application/binary",
+        "setCookieNames": [
+          "__Host-GAPS"
+        ],
+        "redirect": {
+          "host": "accounts.google.com",
+          "path": "/v3/signin/identifier",
+          "queryKeys": [
+            "authuser",
+            "continue",
+            "dsh",
+            "flowEntry",
+            "flowName",
+            "followup",
+            "osid",
+            "passive"
+          ]
+        }
+      },
+      {
+        "method": "GET",
+        "host": "accounts.google.com",
+        "path": "/v3/signin/identifier",
+        "queryKeys": [
+          "authuser",
+          "continue",
+          "dsh",
+          "flowEntry",
+          "flowName",
+          "followup",
+          "osid",
+          "passive"
+        ],
+        "httpStatus": 200,
+        "mime": "text/html",
+        "setCookieNames": [],
+        "redirect": null,
+        "flowRequestTokenMarkerPresent": false,
+        "identifierFieldPresent": true,
+        "passwordShapedFieldPresent": true
+      }
+    ],
+    "protectedReadback": null,
+    "stoppedReason": "normal_signin_not_completed",
+    "protectedStoreWrites": 0,
+    "flowCreateCount": 0
+  },
+  "isolatedSharedCookieRotationGetChain": {
+    "checkedAt": "2026-10-06T06:24:58.055Z",
+    "startingState": "Flow_host_cookies_omitted_in_isolated_memory_jar; original_protected_bundle_preserved",
+    "initialSharedGoogleCookieCount": 17,
+    "normalCookieRotation": {
+      "method": "GET",
+      "host": "accounts.google.com",
+      "path": "/RotateCookiesPage",
+      "httpStatus": 200,
+      "requestCookieCount": 17,
+      "rotatedCookieNames": [
+        "SIDCC",
+        "__Secure-1PSIDCC",
+        "__Secure-3PSIDCC"
+      ],
+      "storedInMemoryOnly": true
+    },
+    "sequence": [
+      {
+        "method": "GET",
+        "host": "flow.google.com",
+        "path": "/project/{storedProjectId}",
+        "queryKeys": [],
+        "httpStatus": 302,
+        "mime": "application/binary",
+        "setCookieNames": [
+          "NID"
+        ],
+        "redirect": {
+          "host": "accounts.google.com",
+          "path": "/ServiceLogin",
+          "queryKeys": [
+            "authuser",
+            "continue",
+            "followup",
+            "osid",
+            "passive"
+          ]
+        }
+      },
+      {
+        "method": "GET",
+        "host": "accounts.google.com",
+        "path": "/ServiceLogin",
+        "queryKeys": [
+          "authuser",
+          "continue",
+          "followup",
+          "osid",
+          "passive"
+        ],
+        "httpStatus": 302,
+        "mime": "application/binary",
+        "setCookieNames": [
+          "__Host-GAPS"
+        ],
+        "redirect": {
+          "host": "accounts.google.com",
+          "path": "/v3/signin/identifier",
+          "queryKeys": [
+            "authuser",
+            "continue",
+            "dsh",
+            "flowEntry",
+            "flowName",
+            "followup",
+            "osid",
+            "passive"
+          ]
+        }
+      },
+      {
+        "method": "GET",
+        "host": "accounts.google.com",
+        "path": "/v3/signin/identifier",
+        "queryKeys": [
+          "authuser",
+          "continue",
+          "dsh",
+          "flowEntry",
+          "flowName",
+          "followup",
+          "osid",
+          "passive"
+        ],
+        "httpStatus": 200,
+        "mime": "text/html",
+        "setCookieNames": [],
+        "redirect": null,
+        "flowRequestTokenMarkerPresent": false,
+        "identifierFieldPresent": true,
+        "passwordShapedFieldPresent": true
+      }
+    ],
+    "protectedReadback": null,
+    "stoppedReason": "normal_signin_not_completed",
+    "protectedStoreWrites": 0,
+    "flowCreateCount": 0
+  },
+  "fullBundleNormalRotationReadback": {
+    "checkedAt": "2026-10-06T06:28:37.138Z",
+    "operation": "observed_normal_rotation_full_bundle_protected_readback",
+    "browserUsed": false,
+    "initialCookieCount": 21,
+    "initialExpiredCookieNames": [
+      "__Secure-1PSIDRTS",
+      "__Secure-3PSIDRTS"
+    ],
+    "normalRotation": {
+      "method": "GET",
+      "host": "accounts.google.com",
+      "path": "/RotateCookiesPage",
+      "httpStatus": 200,
+      "requestCookieCount": 17,
+      "rotatedCookieNames": [
+        "SIDCC",
+        "__Secure-1PSIDCC",
+        "__Secure-3PSIDCC"
+      ]
+    },
+    "requestRows": [
+      {
+        "method": "GET",
+        "host": "accounts.google.com",
+        "pathKind": "/RotateCookiesPage",
+        "queryKeys": [
+          "exp_id",
+          "og_pid",
+          "origin",
+          "rot"
+        ],
+        "httpStatus": 200,
+        "mime": "text/html",
+        "setCookieNames": [
+          "SIDCC",
+          "__Secure-1PSIDCC",
+          "__Secure-3PSIDCC"
+        ]
+      },
+      {
+        "method": "GET",
+        "host": "flow.google.com",
+        "pathKind": "project",
+        "queryKeys": [],
+        "httpStatus": 200,
+        "mime": "text/html",
+        "setCookieNames": []
+      }
+    ],
+    "protectedReadback": null,
+    "protectedStoreWrites": 0,
+    "failure": {
+      "code": "FLOW_DOCUMENT_REQUEST_TOKEN_MISSING",
+      "sessionStatus": "undetermined",
+      "documentDiagnostics": {
+        "httpStatus": 200,
+        "mime": "text/html",
+        "sourcePathHints": {
+          "requestPathKind": "project",
+          "responsePathKind": "project",
+          "responsePathMatchesRequestedProject": true
+        },
+        "markerPresence": {
+          "inspected": true,
+          "SNlM0e": false,
+          "FdrFJe": true,
+          "cfb2h": true,
+          "xZbWve": true
+        },
+        "validStringPresence": {
+          "inspected": true,
+          "SNlM0e": false,
+          "FdrFJe": true,
+          "cfb2h": true,
+          "xZbWve": true
+        }
+      }
+    },
+    "flowCreateCount": 0,
+    "confirmedExpiredGoogleLoginRecovery": false,
+    "secretsRecorded": false
+  },
+  "findings": {
+    "expiredCookieNamesObserved": [
+      "__Secure-1PSIDRTS",
+      "__Secure-3PSIDRTS"
+    ],
+    "expiredCookiesEstablishedAsCause": false,
+    "confirmedExpiredGoogleLoginRecovery": false,
+    "firstPartyLoginSubmitContractCaptured": false,
+    "loginFormPosts": 0,
+    "flowCreates": 0,
+    "postRotationFlowRequestContextNotRestoredInTestedState": true,
+    "postRotationProtectedRpcReadbackCompleted": false
+  },
+  "browserDiscovery": {
+    "classification": "blocked_runtime",
+    "inventoryAndCapabilityDocumentationAvailable": true,
+    "domSnapshotTimedOut": true,
+    "screenshotTimedOut": true,
+    "supportedScopedCookieReadTimedOut": true,
+    "newOwnerOrProStateObserved": false,
+    "latestRecheck": {
+      "domFocusCommandTimedOut": true,
+      "supportedPageFrameReadTimedOut": true,
+      "supportedNetworkEventReadTimedOut": true,
+      "loginSequenceCaptured": false
+    }
+  },
+  "hostResources": {
+    "freeMemoryMB": 140,
+    "totalMemoryMB": 7866,
+    "chromeProcessCount": 26,
+    "chromeWorkingSetMB": 988,
+    "resourcePressureEstablishedAsTimeoutCause": false
+  },
+  "codeImprovement": {
+    "missingRequestTokenCode": "FLOW_DOCUMENT_REQUEST_TOKEN_MISSING",
+    "missingRequestTokenSessionStatus": "undetermined",
+    "safeCliResponseMetadata": true,
+    "observedAuthCookieDeletionPrioritized": true,
+    "redirectFollowing": false,
+    "regressionTests": {
+      "command": "npm test",
+      "tests": 134,
+      "passed": 134,
+      "failed": 0,
+      "scope": "local regression only; not login recovery proof"
+    }
+  },
+  "nextRequiredEvidence": "Supported browser connection must respond before capturing the normal owner-supervised first-party sign-in request sequence. No guessed password or account-selector POST was sent.",
+  "secrets": {
+    "cookieValuesRecorded": false,
+    "tokenValuesRecorded": false,
+    "htmlRecorded": false,
+    "credentialFingerprintsRecorded": false,
+    "signInQueryValuesRecorded": false
+  },
+  "goalComplete": false,
+  "latestObservationAt": "2026-10-06T06:51:10.366Z",
+  "publicSourceFollowup": {
+    "anonymousRootInspection": {
+      "checkedAt": "2026-10-06T06:39:08.060Z",
+      "operation": "public_first_party_auth_source_inspection",
+      "rows": [
+        {
+          "method": "GET",
+          "host": "flow.google.com",
+          "path": "/",
+          "httpStatus": 200,
+          "mime": "text/html",
+          "bytes": 155243,
+          "cookiesSent": false
+        },
+        {
+          "method": "GET",
+          "host": "www.gstatic.com",
+          "pathKind": "observed_public_flow_application_bundle",
+          "httpStatus": 200,
+          "mime": "text/javascript",
+          "bytes": 995891,
+          "cookiesSent": false
+        }
+      ],
+      "flowApplicationBundleObserved": true,
+      "authIdentifierPresence": {
+        "IdentityRotateCookiesHttp": false,
+        "RotateCookiesPage": false,
+        "RotateCookies": false,
+        "PSIDRTS": false,
+        "PSIDTS": false,
+        "ServiceLogin": false,
+        "CheckCookie": false,
+        "ListAccounts": false
+      },
+      "authenticated": false,
+      "protectedStoreReads": 0,
+      "protectedStoreWrites": 0,
+      "loginSubmissions": 0,
+      "flowCreates": 0,
+      "htmlPersisted": false,
+      "staticSourceSaved": true,
+      "credentialValuesRecorded": false
+    },
+    "scopedProjectInspection": {
+      "checkedAt": "2026-10-06T06:48:23.243Z",
+      "operation": "scoped_project_document_public_source_inspection",
+      "documentStatus": 200,
+      "documentMime": "text/html",
+      "documentError": {
+        "code": "FLOW_DOCUMENT_REQUEST_TOKEN_MISSING",
+        "sessionStatus": "undetermined"
+      },
+      "scriptReferenceCount": 2,
+      "referencedFlowApplicationBundle": true,
+      "publicBundle": {
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "bytes": 995891,
+        "cookiesSent": false,
+        "authIdentifierPresence": {
+          "IdentityRotateCookiesHttp": false,
+          "RotateCookiesPage": false,
+          "RotateCookies": false,
+          "PSIDRTS": false,
+          "PSIDTS": false,
+          "ServiceLogin": false,
+          "CheckCookie": false,
+          "ListAccounts": false
+        }
+      },
+      "protectedStoreWrites": 0,
+      "flowRpcCount": 0,
+      "flowCreateCount": 0,
+      "htmlPersisted": false,
+      "credentialValuesRecorded": false
+    },
+    "otherObservedScriptInspection": {
+      "checkedAt": "2026-10-06T06:51:10.366Z",
+      "operation": "scoped_project_document_other_observed_public_source_inspection",
+      "documentStatus": 200,
+      "documentMime": "text/html",
+      "documentError": {
+        "code": "FLOW_DOCUMENT_REQUEST_TOKEN_MISSING",
+        "sessionStatus": "undetermined"
+      },
+      "scriptReferenceCount": 2,
+      "scriptReferenceMetadata": [
+        {
+          "host": "www.gstatic.com",
+          "isFlowApplication": false,
+          "isAccountWidgetPath": false
+        },
+        {
+          "host": "www.gstatic.com",
+          "isFlowApplication": true,
+          "isAccountWidgetPath": false
+        }
+      ],
+      "publicBundle": {
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "bytes": 79905,
+        "cookiesSent": false,
+        "authIdentifierPresence": {
+          "IdentityRotateCookiesHttp": false,
+          "RotateCookiesPage": false,
+          "RotateCookies": false,
+          "PSIDRTS": false,
+          "PSIDTS": false,
+          "ServiceLogin": false,
+          "CheckCookie": false,
+          "ListAccounts": false
+        }
+      },
+      "protectedStoreWrites": 0,
+      "flowRpcCount": 0,
+      "flowCreateCount": 0,
+      "htmlPersisted": false,
+      "credentialValuesRecorded": false,
+      "referencedOtherPublicScript": true
+    },
+    "rootAndProjectBundlesByteEquivalent": true,
+    "knownProtectedFlowRpcIdentifiersPresent": {
+      "YhhmEf": false,
+      "Zzl0ze": false,
+      "jwpduf": false
+    },
+    "scope": "Only the public scripts referenced by these documents were inspected. Their absence of auth/RPC producers does not rule out separately loaded authenticated code.",
+    "firstPartyLoginSubmitContractCaptured": false
+  },
+  "historicalObservationSupersededBy": "login-recovery-live-2026-10-06.json",
+  "currentFlowSessionRecovery": "maintained_http_sso_and_new_generation_verified_with_valid_google_session"
+}

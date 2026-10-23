@@ -37,6 +37,18 @@ historical proof and current implementation-hash freshness separately.
 
 For commands and installation, start with [README](README.md). For service-specific code and limits, open [service-packs](service-packs/README.md). Historical success is scoped to its date, account, operation and revision; it is not a current session check.
 
+Before cloning a provider repository, inspect `npm run clients` and the
+[consolidation map](references/repository-consolidation.md). Gemini, Grok,
+ChatGPT, both Flow implementations, Whisk, social actions, Adpick and additional
+shopping/travel readers are bundled with their native contracts and tests.
+Use `scripts/client-packs.mjs run --service=... -- ...` or the named npm command
+to preserve original stdin/provider and write guards. `list`/`describe` read
+metadata only; the generic read registry does not replace native writers.
+Run `test:client-packs` and `audit:consolidation` for packaging checks.
+`check:ai` defaults to the bundled Gemini/Grok audits and checks stored receipts.
+Flow's bridge, optional UI backend and creator browser helpers retain their
+declared browser phase. Current authentication and live replay stay separate.
+
 For a shared typed CLI/MCP interface, use [the operation runtime](references/operation-runtime.md).
 Extend a v2 profile or bind an existing adapter rather than replacing working packs.
 Offline `prepare` produces candidates, `check` replays declared reads, and `flow`/`collect`

@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "service": "grok",
+  "checkedAt": "2026-10-05T13:55:02.268Z",
+  "executionHost": "linux_worker",
+  "secretsPersistedInEvidence": false,
+  "testsPassed": 26,
+  "publicRead": {
+    "data": {
+      "models": [
+        {
+          "modelId": "grok-3",
+          "name": "",
+          "description": ""
+        },
+        {
+          "modelId": "grok-420",
+          "name": "",
+          "description": ""
+        },
+        {
+          "modelId": "grok-4-1-thinking-1129",
+          "name": "",
+          "description": ""
+        }
+      ],
+      "unavailableModels": [],
+      "defaults": {
+        "defaultAnonModel": "grok-3",
+        "defaultFreeModel": "grok-3",
+        "defaultProModel": "grok-4",
+        "defaultHeavyModel": "grok-4",
+        "defaultAnonMode": "MODEL_MODE_AUTO",
+        "defaultFreeMode": "MODEL_MODE_AUTO",
+        "defaultProMode": "MODEL_MODE_AUTO",
+        "defaultHeavyMode": "MODEL_MODE_AUTO"
+      }
+    },
+    "evidence": {
+      "operationId": "public.models",
+      "sourceDerived": true,
+      "browserCaptured": false,
+      "transport": "curl_cffi_chrome150_linux",
+      "credentialPropagated": "not_applicable",
+      "credentialsUsed": false,
+      "directReadVerified": true,
+      "requestSucceeded": true,
+      "liveReplay": true,
+      "liveResponseStatus": 200,
+      "httpVersion": "h2",
+      "liveResponseBytes": 898,
+      "liveResponseSha256": "7b751e71ddb6a5e035763763736374683fae683abe45d519fda6d6ec69ad37ce",
+      "sourceFile": "https://cdn.grok.com/_next/static/chunks/35ntlely29ab3.js",
+      "sourceFunction": "modelsGetModelsRaw",
+      "sourceSha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316",
+      "priorDirectReplay": {
+        "observedAt": "2026-10-03",
+        "status": 200,
+        "responseContentType": "application/json",
+        "responseBytes": 898,
+        "responseSha256": "7b751e71ddb6a5e035763763736374683fae683abe45d519fda6d6ec69ad37ce",
+        "availableModelIds": [
+          "grok-3",
+          "grok-420",
+          "grok-4-1-thinking-1129"
+        ],
+        "unavailableModelCount": 0,
+        "credentialFree": true,
+        "browserCaptured": false
+      }
+    }
+  },
+  "authenticatedOwnerVerified": false,
+  "implementationSha256": {
+    "src/cli.mjs": "291a840499c7bfff54e1577f1450e8a5e112e02c2cc8cb579bd8ab9f4f5e2b4a",
+    "src/public-models.mjs": "27bc9b7fd5c38b092d410a875744a66e785a04de33942900af8f2cebfc5299e3",
+    "src/chrome-http-fetch.mjs": "2d2cc9d1bc1ceda6a96dbb39a4b3bc04ae9f1e628acabe1bec98d4803f179ab9",
+    "scripts/chrome-http-transport.py": "330bb4617b1866cd6d426ea09c7a2d7ebce81c468ba66e6bfa06c581e3e6e084",
+    "scripts/requirements-chrome-transport.txt": "d5ee14158341721db5e28522b0e121050d2b98f54726657175462e00fad3a14c"
+  }
+}

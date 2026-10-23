@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "feature": "auth-session-client-handoff",
+  "recordedAt": "2026-10-05T23:14:18.440730+00:00",
+  "executionHost": "Linux",
+  "execution": "main_cli_direct_http",
+  "command": "session-refresh --session-stdin --python",
+  "sameAuthenticatedOwner": true,
+  "result": {
+    "serviceId": "grok-web",
+    "operation": "session-refresh",
+    "renewed": true,
+    "ownerVerified": true,
+    "mechanism": "fresh_session_handoff_and_direct_owner_verification",
+    "httpStatus": 200,
+    "responseBytes": 648,
+    "credentialChanged": false,
+    "providerCookieRotationVerified": false,
+    "mutationRetried": false
+  },
+  "initialAndFreshHandoffsFromOwnedRuntime": true,
+  "currentOriginCookieNameAllowlist": [
+    "sso"
+  ],
+  "serverAuthCookieRotationVerified": false,
+  "expiredServerSessionRecoveryVerified": false,
+  "mutationDispatchCount": 0,
+  "rawCredentialsOrIdentityValuesPersisted": false,
+  "codeSha256": {
+    "src/client.mjs": "57d748523b92e6c19019125ae61ab9286858663d8a6f85b6c24ea485b8fda0a3",
+    "src/cli.mjs": "b1ca7c206cbe80a4f4485429000b9f867ae6512386eff089de2671308ba86fa4",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/grok-session-renewal.mjs": "4c8ea69ac11f6e02824ca829a76db2b2ee932cd0d67d81e63b4f15f1e83d46ce",
+    "src/transport.mjs": "e3e3632f9a2c7e9e38f25a38c521b4d775af445de87644ee322581cb2a4a0e73",
+    "src/authenticated-chrome-fetch.mjs": "f44682535b812ef65b6e5f39f3b0d1479904664de3a606df234322de6c296188"
+  }
+}

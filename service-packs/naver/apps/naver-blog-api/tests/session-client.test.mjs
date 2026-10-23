@@ -9,7 +9,13 @@ const cookies = () => [cookie('NID_AUT', 'synthetic-aut'), cookie('NID_SES', 'sy
 const input = { operation: 'daily/cv', query: { timeDimension: 'fixture', startDate: 'fixture', exclude: '', _: 'fixture' } };
 const success = () => Response.json({ statusCode: 200, result: { statDataList: [] } });
 const rootHTML = '<a href="/4053103/config/bloginfo">settings</a><a href="/4053103/stat/today">statistics</a>';
+const ownerHTML = '<div id="lnbMenu">블로그 관리</div><a href="/aicandoanything/config/bloginfo">settings</a>';
 const html = (body = rootHTML, headers = {}) => new Response(body, { headers: { 'content-type': 'text/html; charset=utf-8', ...headers } });
+const deferred = () => {
+  let resolve;
+  const promise = new Promise(done => { resolve = done; });
+  return { promise, resolve };
+};
 const responseCookies = values => {
   const headers = new Headers();
   for (const value of values) headers.append('set-cookie', value);
@@ -132,6 +138,238 @@ test('protected root accepts a substantial authenticated admin shell after menu 
   assert.equal(result.actorMatched, false);
   assert.equal(result.adminShell, true);
   assert.equal(result.substantialAdminDocument, true);
+});
+
+test('fresh private owner proof is reused once for persistence without another request', async () => {
+  let now = 200000;
+  let calls = 0;
+  const session = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', now: () => now,
+    persistRotation: false, fetchImpl: async () => { calls++; return html(ownerHTML); } });
+  const verification = await session.verifyRoot();
+  assert.equal(verification.verified, true);
+  assert.equal(calls, 1);
+  const saved = await session.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(saved.stored, true);
+  assert.equal(saved.verification.actor, 'aicandoanything');
+  assert.equal(calls, 1);
+  await session.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(calls, 2);
+});
+
+test('owner proof is isolated from caller mutation and caller-supplied proof is ignored', async () => {
+  let calls = 0;
+  const session = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { calls++; return html(ownerHTML); } });
+  const first = await session.verifyRoot();
+  first.actor = 'attacker'; first.verified = false;
+  const persisted = await session.persistVerifiedSession({ reuseFreshOwnerVerification: true,
+    verification: { verified: true, actorMatched: true, adminShell: true } });
+  assert.equal(persisted.stored, true);
+  assert.equal(persisted.verification.actor, 'aicandoanything');
+  assert.equal(calls, 1);
+
+  let forgedCalls = 0;
+  const forged = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { forgedCalls++; return html('<div id="lnbMenu">블로그 관리</div><a href="/other/config/bloginfo">settings</a>'); } });
+  await assert.rejects(forged.persistVerifiedSession({ reuseFreshOwnerVerification: true,
+    verification: { verified: true, actorMatched: true, adminShell: true } }), { code: 'AUTH_UNVERIFIED' });
+  assert.equal(forgedCalls, 1);
+
+  let privateCookieCalls = 0;
+  const privateCookies = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { privateCookieCalls++; return html(ownerHTML); } });
+  privateCookies.cookieFor = () => { throw new Error('caller-controlled cookie checker'); };
+  await privateCookies.verifyRoot();
+  await privateCookies.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(privateCookieCalls, 1);
+});
+
+test('owner proof snapshots the completed jar after an observed in-verification rotation', async () => {
+  let ownerCalls = 0;
+  const laterHeaders = [];
+  const session = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async (url, init) => {
+      if (url.startsWith('https://admin.blog.naver.com/')) {
+        ownerCalls++;
+        return html(ownerHTML, { 'set-cookie': 'NID_SES=synthetic-owner-rotated; Domain=.naver.com; Path=/; Secure' });
+      }
+      laterHeaders.push(new Headers(init.headers).get('cookie'));
+      return success();
+    } });
+  await session.verifyRoot();
+  await session.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(ownerCalls, 1);
+  await session.fetch('https://blog.naver.com/aicandoanything');
+  assert.equal(laterHeaders.length, 1);
+  assert.match(laterHeaders[0], /NID_SES=synthetic-owner-rotated/);
+});
+
+test('proof reuse expires locally and falls back to a new owner read', async () => {
+  let now = 200000;
+  let calls = 0;
+  const session = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', now: () => now,
+    persistRotation: false, fetchImpl: async () => { calls++; return html(ownerHTML); } });
+  await session.verifyRoot();
+  now += 30_001;
+  const persisted = await session.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(persisted.stored, true);
+  assert.equal(calls, 2);
+});
+
+test('any later request or cookie mutation invalidates the owner proof', async () => {
+  let calls = 0;
+  const afterFetch = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async url => {
+      if (url.startsWith('https://admin.blog.naver.com/')) { calls++; return html(ownerHTML); }
+      return success();
+    } });
+  await afterFetch.verifyRoot();
+  await afterFetch.fetch('https://blog.naver.com/aicandoanything');
+  await afterFetch.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(calls, 2);
+
+  let rotatedCalls = 0;
+  const afterRotation = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { rotatedCalls++; return html(ownerHTML); } });
+  await afterRotation.verifyRoot();
+  afterRotation.acceptResponse(responseCookies(['NID_SES=synthetic-rotated; Domain=.naver.com; Path=/; Secure']), PROTECTED_ROOT);
+  await afterRotation.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(rotatedCalls, 2);
+});
+
+test('an earlier pending request blocks owner verification until its rotation is merged', async () => {
+  const pendingResponse = deferred();
+  const sent = [];
+  const session = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async (url, init) => {
+      if (url === 'https://blog.naver.com/rotate') {
+        sent.push(new Headers(init.headers).get('cookie'));
+        return pendingResponse.promise;
+      }
+      sent.push(new Headers(init.headers).get('cookie'));
+      return html(ownerHTML);
+    } });
+  const pending = session.fetch('https://blog.naver.com/rotate');
+  await assert.rejects(session.verifyRoot(), { code: 'SESSION_BUSY' });
+  await assert.rejects(session.persistVerifiedSession({ reuseFreshOwnerVerification: true }), { code: 'SESSION_BUSY' });
+  assert.throws(() => session.acceptResponse(responseCookies(['NID_SES=synthetic-forged; Domain=.naver.com; Path=/; Secure']), PROTECTED_ROOT),
+    { code: 'SESSION_BUSY' });
+  assert.throws(() => session.clear(), { code: 'SESSION_BUSY' });
+
+  pendingResponse.resolve(new Response('rotation observed', { headers: {
+    'set-cookie': 'NID_SES=synthetic-rotated; Domain=.naver.com; Path=/; Secure',
+  } }));
+  await pending;
+  const persisted = await session.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(persisted.stored, true);
+  assert.equal(sent.length, 2);
+  assert.match(sent[1], /NID_SES=synthetic-rotated/);
+});
+
+test('persistence owns the session from fresh proof mint through vault continuation', async () => {
+  let nowCalls = 0;
+  let attemptBetweenProofAndContinuation;
+  let session;
+  let ownerCalls = 0;
+  const now = () => {
+    nowCalls++;
+    // Constructor checks both cookies first. The fifth verification-time clock
+    // read is the private proof timestamp, immediately before it is stamped.
+    if (nowCalls === 7) {
+      queueMicrotask(() => {
+        attemptBetweenProofAndContinuation = session.fetch('https://blog.naver.com/interleave')
+          .then(() => 'unexpected-success', error => error.code);
+      });
+    }
+    return 200000;
+  };
+  session = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', now, persistRotation: false,
+    fetchImpl: async url => {
+      if (url.startsWith('https://admin.blog.naver.com/')) ownerCalls++;
+      return html(ownerHTML);
+    } });
+  const stored = await session.persistVerifiedSession();
+  assert.equal(stored.stored, true);
+  assert.equal(await attemptBetweenProofAndContinuation, 'SESSION_BUSY');
+  assert.equal(ownerCalls, 1);
+
+  await session.verifyRoot();
+  const secondSave = session.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  const requestDuringSave = session.fetch('https://blog.naver.com/during-vault-write')
+    .then(() => 'unexpected-success', error => error.code);
+  assert.throws(() => session.acceptResponse(responseCookies([]), PROTECTED_ROOT), { code: 'SESSION_BUSY' });
+  assert.throws(() => session.clear(), { code: 'SESSION_BUSY' });
+  assert.equal(await requestDuringSave, 'SESSION_BUSY');
+  assert.equal((await secondSave).stored, true);
+});
+
+test('api retry backoff retains its operation token and failure releases it', async () => {
+  let fetchCalls = 0;
+  let retryReadyResolve;
+  const retryReady = new Promise(resolve => { retryReadyResolve = resolve; });
+  const session = new SessionClient({ cookies: cookies(), persistRotation: false, fetchImpl: async () => {
+    fetchCalls++;
+    if (fetchCalls > 1) return success();
+    const body = new ReadableStream({ cancel() { retryReadyResolve(); } });
+    return new Response(body, { status: 429, headers: { 'retry-after': '0.1' } });
+  } });
+  const pendingApi = session.api(input);
+  await retryReady;
+  assert.equal(fetchCalls, 1);
+  await assert.rejects(session.verifyRoot(), { code: 'SESSION_BUSY' });
+  await assert.rejects(session.persistVerifiedSession(), { code: 'SESSION_BUSY' });
+  assert.equal((await pendingApi).evidence.attempts, 2);
+  assert.equal(fetchCalls, 2);
+
+  const failed = new SessionClient({ cookies: cookies(), fetchImpl: async () => { throw Error('synthetic-secret'); } });
+  await assert.rejects(failed.fetch(PROTECTED_ROOT), { code: 'TRANSPORT' });
+  await assert.rejects(failed.verifyRoot(), { code: 'TRANSPORT' });
+  failed.clear();
+  assert.equal(failed.status().active, false);
+});
+
+test('a failed owner validation is never cached, and default persistence always verifies again', async () => {
+  let calls = 0;
+  const invalid = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { calls++; return html('<div id="lnbMenu">블로그 관리</div><a href="/other/config/bloginfo">settings</a>'); } });
+  const verification = await invalid.verifyRoot();
+  assert.equal(verification.actorMatched, false);
+  await assert.rejects(invalid.persistVerifiedSession({ reuseFreshOwnerVerification: true }), { code: 'AUTH_UNVERIFIED' });
+  assert.equal(calls, 2);
+
+  const injected = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { calls++; return html('<div id="lnbMenu">블로그 관리</div><a href="/other/config/bloginfo">settings</a>'); } });
+  injected.verifyRoot = async () => ({ verified: true, actorMatched: true, adminShell: true });
+  await assert.rejects(injected.persistVerifiedSession(), { code: 'AUTH_UNVERIFIED' });
+  assert.equal(calls, 3);
+
+  let validCalls = 0;
+  const valid = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { validCalls++; return html(ownerHTML); } });
+  await valid.verifyRoot();
+  await valid.persistVerifiedSession();
+  assert.equal(validCalls, 2);
+  await valid.persistVerifiedSession({ reuseFreshOwnerVerification: true });
+  assert.equal(validCalls, 3);
+});
+
+test('proof reuse requires an intact live NID pair and clearing removes it', async () => {
+  let now = 200000;
+  let calls = 0;
+  const nearExpiry = cookies().map(item => ({ ...item, expires: 205 }));
+  const expiring = new SessionClient({ cookies: nearExpiry, ownerBlogId: 'aicandoanything', now: () => now,
+    persistRotation: false, fetchImpl: async () => { calls++; return html(ownerHTML); } });
+  await expiring.verifyRoot();
+  now += 6_000;
+  await assert.rejects(expiring.persistVerifiedSession({ reuseFreshOwnerVerification: true }), { code: 'AUTH_MISSING' });
+  assert.equal(calls, 1);
+
+  const cleared = new SessionClient({ cookies: cookies(), ownerBlogId: 'aicandoanything', persistRotation: false,
+    fetchImpl: async () => { calls++; return html(ownerHTML); } });
+  await cleared.verifyRoot();
+  cleared.clear();
+  await assert.rejects(cleared.persistVerifiedSession({ reuseFreshOwnerVerification: true }), { code: 'AUTH_MISSING' });
+  assert.equal(calls, 2);
 });
 
 test('actor-scoped admin shell is not rejected by dormant embedded login markup', async () => {

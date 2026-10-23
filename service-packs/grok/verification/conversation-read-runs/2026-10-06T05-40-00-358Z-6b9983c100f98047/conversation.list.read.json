@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "conversation.list",
+  "requirementId": "conversation.list.read",
+  "operationId": "conversation.list.read",
+  "observedAt": "2026-10-06T05:39:58.371Z",
+  "recordedAt": "2026-10-06T05:39:58.371Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "7360b0c3925a6c92ae4f17492f3fce59312631e9ae65633b9d3012315bfad440",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 489,
+  "requestDigest": "074dc6c656588d3635a89e034b3a765056f530af6ab530f62d37b1dcafb6d01b",
+  "responseDigest": "a87a8e8e8089f38dd97c01e29184cfdf1e5beff8a8bb8c790c60371e65975100",
+  "capturedOperationSha256": "49a54c6ecd86b3e1d0f74ecd577a57f59f735d6c91822a2db604231e87a3a5ee",
+  "handlerId": "client.read",
+  "dispatchBinding": {
+    "handlerId": "client.read",
+    "operationId": "conversation.list.read",
+    "operationKind": "read",
+    "mode": "validated_registry_generic"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "codeSha256": {
+    "src/client.mjs": "51c2768d8d0beb52427988d1f5d48e8c78b36f67d6ec60a1fb2ac57e688764e7",
+    "src/transport.mjs": "4cd42d32e99173500464d2d98a6a76bc203cd279ebdcc6ab0883924cfa786588",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/runtime.mjs": "e55e7b9440842d87eed783d721b2a55a36489d64133f8ae570c2c448319db57d",
+    "src/grok-conversations.mjs": "a47761cc119dafc539e74d57e75c1cfb70998ce1360b48468784f4567a592f38"
+  },
+  "readVariants": [
+    {
+      "name": "first_page",
+      "requestDigest": "074dc6c656588d3635a89e034b3a765056f530af6ab530f62d37b1dcafb6d01b",
+      "responseDigest": "a87a8e8e8089f38dd97c01e29184cfdf1e5beff8a8bb8c790c60371e65975100",
+      "httpStatus": 200,
+      "responseBytes": 489,
+      "requestFieldNames": [
+        "pageSize"
+      ],
+      "conversationCount": 1,
+      "nextPageTokenPresent": true
+    },
+    {
+      "name": "next_page",
+      "requestDigest": "83b981a5328c17f2639ff8ce0182b86d40ae13937709c34571da768c546418c4",
+      "responseDigest": "2cbe937412c842d307cf549367d093fb304ee1800cf6cf9f69a6dd6078bdd414",
+      "httpStatus": 200,
+      "responseBytes": 476,
+      "requestFieldNames": [
+        "pageSize",
+        "pageToken"
+      ],
+      "conversationCount": 1,
+      "nextPageTokenPresent": true
+    },
+    {
+      "name": "search",
+      "requestDigest": "53c188c76df50f3177194819071df21ea5afac9c77510d7306666d70c4d160bf",
+      "responseDigest": "e725d83167035a482b7f372e2f00c5d8aeb1c74d2b6a8e437916b6f28f22926e",
+      "httpStatus": 200,
+      "responseBytes": 10618,
+      "requestFieldNames": [
+        "pageSize",
+        "searchQuery"
+      ],
+      "conversationCount": 10,
+      "nextPageTokenPresent": true,
+      "searchQuerySha256": "08812be0e320dad4c628cd2459498e220cf71bae9316b23494c274070e97cb52",
+      "textSearchMatchCount": 10,
+      "targetConversationMatched": true
+    }
+  ]
+}

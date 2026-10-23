@@ -1,0 +1,278 @@
+{
+  "schemaVersion": 1,
+  "id": "ai-influencer",
+  "origin": "owner 2026-09-29: \"다음부터는 ai가상 모델 세울꺼니까 아래 내용참조하고, 관련 자료조사해와\" (owner brief: persona → face consistency → I2V reels → captions/DM; sponsorship, affiliate, fan platforms, digital goods; Meta AI label, uncanny valley, niche storytelling)",
+  "checkedAt": "2026-09-29",
+  "sources": {
+    "meta_labeling": {
+      "url": "https://about.fb.com/news/2024/04/metas-approach-to-labeling-ai-generated-content-and-manipulated-media/",
+      "kind": "official",
+      "rule": "Label shown as \"AI info\"; detection uses C2PA/IPTC provenance; people must use the disclosure tool for photorealistic video or realistic audio that was digitally created or altered, and Meta may apply penalties if they don't."
+    },
+    "meta_transparency": {
+      "url": "https://transparency.meta.com/governance/tracking-impact/labeling-ai-content/",
+      "kind": "official",
+      "rule": "Meta Transparency Center page on labeling AI content."
+    },
+    "kftc_2026": {
+      "url": "https://www.ftc.go.kr/www/selectBbsNttView.do?pageUnit=10&pageIndex=1&searchCnd=all&key=12&bordCd=3&searchCtgry=01%2C02&nttSn=47547",
+      "kind": "official_kr",
+      "rule": "공정위 「추천·보증 등에 관한 표시·광고 심사지침」 개정, 2026-06-01 시행: AI로 생성한 가상인물을 추천·보증 주체로 추가. 문자 매체는 제목 또는 첫 부분에 \"AI를 기반으로 생성된 가상인물이 포함된 게시물입니다\" 또는 \"가상인물 포함\"; 사진·영상은 가상인물이 등장하는 동안 인물과 가까운 위치에 \"가상인물\" 표시. 광고주·인플루언서가 준수 주체."
+    },
+    "kr_ai_basic_act": {
+      "url": "https://www.law.go.kr/lsInfoP.do?lsiSeq=268543",
+      "kind": "law_kr",
+      "rule": "인공지능 기본법 2026-01-22 시행: 생성형 AI 결과물 표시 의무. 실제와 구별하기 어려운 결과물(딥페이크)은 이용자가 인식할 수 있는 가시적 표시가 원칙, 영상은 전체 재생 구간 (가이드라인, 계도기간 1년 이상 — hellodd.com/news/articleView.html?idxno=110602)."
+    },
+    "aitana_euronews": {
+      "url": "https://www.euronews.com/2024/12/27/meet-the-first-spanish-ai-model-earning-up-to-10000-per-month",
+      "kind": "press",
+      "rule": "Aitana López (The Clueless, Barcelona, founder Rubén Cruz): up to €10,000/month, average about €3,000; just over €1,000 per ad; face of supplement brand Big; also posts on Fanvue; 343k+ followers in 1.5 years."
+    },
+    "aitana_fortune": {
+      "url": "https://fortune.com/europe/2023/11/23/spanish-influencer-agency-earned-11000-ai-model-posers",
+      "kind": "press",
+      "rule": "Created because influencer/model problems kept stalling client projects; persona: pink hair, 25, fitness and gaming, Scorpio."
+    },
+    "comfyui": {
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "stars": 135358,
+      "license": "GPL-3.0",
+      "rule": "Node-based diffusion workflow engine used to chain base model + identity adapters + upscalers."
+    },
+    "flux": {
+      "url": "https://github.com/black-forest-labs/flux",
+      "stars": 25986,
+      "license": "Apache-2.0 (code; model weights have their own licenses)",
+      "rule": "FLUX.1 base models for photoreal images."
+    },
+    "ai_toolkit": {
+      "url": "https://github.com/ostris/ai-toolkit",
+      "stars": 12147,
+      "license": "MIT",
+      "rule": "Most-used trainer for Flux character LoRAs (needs a CUDA GPU with 24 GB or a cloud GPU)."
+    },
+    "kohya": {
+      "url": "https://github.com/bmaltais/kohya_ss",
+      "stars": 12607,
+      "license": "Apache-2.0",
+      "rule": "GUI trainer for SD/SDXL/Flux LoRAs (kohya-ss/sd-scripts 7.2k)."
+    },
+    "instantid": {
+      "url": "https://github.com/instantX-research/InstantID",
+      "stars": 11996,
+      "license": "Apache-2.0",
+      "rule": "Zero-shot identity from one face image (no training)."
+    },
+    "ip_adapter": {
+      "url": "https://github.com/tencent-ailab/IP-Adapter",
+      "stars": 6694,
+      "license": "Apache-2.0",
+      "rule": "Image-prompt adapter incl. FaceID variants; ComfyUI_IPAdapter_plus (6.1k, GPL-3.0) wraps it."
+    },
+    "pulid": {
+      "url": "https://github.com/ToTheBeginning/PuLID",
+      "stars": 3554,
+      "license": "Apache-2.0",
+      "rule": "Tuning-free ID customization (NeurIPS 2024), has a FLUX variant."
+    },
+    "insightface": {
+      "url": "https://github.com/deepinsight/insightface",
+      "stars": 29856,
+      "license": "code MIT; pretrained models non-commercial research only",
+      "rule": "Face detection/embedding used by FaceID/InstantID; its model weights are not licensed for commercial use — check before monetizing."
+    },
+    "owner_brief": {
+      "url": "chat 2026-09-29",
+      "kind": "owner",
+      "rule": "Pipeline, monetization routes and cautions as given by the owner; items not yet confirmed by a source stay marked assumption."
+    },
+    "gi2": {
+      "url": "https://github.com/freestylefly/awesome-gpt-image-2",
+      "stars": 33653,
+      "rule": "imperfection cues; character sheet identity anchors"
+    },
+    "nano_banana": {
+      "url": "https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts",
+      "stars": 13509,
+      "rule": "smartphone photography realism block"
+    },
+    "beatrix_build_2026": {
+      "url": "https://beatrixmeszaros.co.uk/building-an-ai-influencer",
+      "kind": "creator_experiment_self_report",
+      "rule": "Blythe AI-influencer build: author reports 5-6 generations per good video, manual review, aspect-ratio/model/caption/identity failures and wasted credits.",
+      "evidenceBoundary": "One creator live experiment; not a representative cost or quality benchmark."
+    },
+    "beatrix_month_one_2026": {
+      "url": "https://beatrixmeszaros.co.uk/an-ai-influencer-one-month-in",
+      "kind": "creator_experiment_self_report",
+      "rule": "One-month account report: creator approval/QA/posting and AI-label controls remain human work; cost and platform-specific reach-to-follow observations are self-reported.",
+      "evidenceBoundary": "One account and one month; no independently verified revenue; article has a 14-vs-15 QA denominator inconsistency."
+    },
+    "vynzo_production_demo_2026": {
+      "url": "https://vynzo.ai/learn/ai-video/ai-influencer",
+      "kind": "vendor_demo",
+      "rule": "Vendor states a non-monetized 1m37s production took 8h34 and cost $85.45, with tool-level cost breakdown.",
+      "evidenceBoundary": "Vendor demonstration, not typical unit economics."
+    },
+    "time_granny_spills_2025": {
+      "url": "https://time.com/7329699/ai-influencers-tiktok-granny-spills/",
+      "kind": "press_interview",
+      "rule": "2025-11-18 report quotes creators on rapid video production, follower growth and TikTok Creator Rewards removal for alleged unoriginal content; future brand/Cameo routes are hopes, not evidence of payment.",
+      "evidenceBoundary": "Journalistic report of creator claims; no independent account or payout records."
+    },
+    "aut_virtual_influencer_thesis": {
+      "url": "https://openrepository.aut.ac.nz/server/api/core/bitstreams/47abe9df-732a-423f-95a6-f340a12f6324/content",
+      "kind": "academic_qualitative_study",
+      "rule": "Thesis uses 16 purposively sampled New Zealand users and distinguishes persona/message realness and relatability in interview findings.",
+      "evidenceBoundary": "Qualitative, geographically and demographically limited; not a causal or representative performance estimate."
+    }
+  },
+  "pipeline": [
+    {
+      "step": "persona",
+      "do": "age, nationality, job, hobbies, fashion, feed tone; a niche with a life story (e.g. 러닝하는 직장인, 카페 투어리스트)",
+      "source": "owner_brief; aitana_fortune (specific persona: fitness + gaming)"
+    },
+    {
+      "step": "face_consistency",
+      "do": "one fixed face across posts",
+      "options": [
+        "character LoRA on FLUX (ai_toolkit/kohya) — best consistency, needs a CUDA GPU (this PC has Intel Iris Xe only → cloud GPU)",
+        "zero-shot identity adapters (InstantID, PuLID, IP-Adapter FaceID) in ComfyUI — no training, one reference face",
+        "reference-image consistency in hosted models (Flow/Gemini image with the same reference photos) — no GPU, lower control"
+      ],
+      "source": "ai_toolkit, kohya, instantid, pulid, ip_adapter, comfyui"
+    },
+    {
+      "step": "reels_i2v",
+      "do": "turn stills into short video for reach",
+      "tools": [
+        "Veo/Flow (in use: Omni 1.1 Flash 360p, upscale ×3 locally)",
+        "Kling, Runway, Luma (owner_brief, not yet evaluated)"
+      ],
+      "source": "owner_brief; our Flow measurements"
+    },
+    {
+      "step": "captions_dm",
+      "do": "daily-voice captions; DM automation",
+      "tools": [
+        "our sns-writing-ontology + LLM",
+        "ManyChat (owner_brief; Meta-approved DM automation partner — to verify)"
+      ],
+      "source": "owner_brief"
+    }
+  ],
+  "disclosure": {
+    "instagram": "Turn on the AI label (\"AI info\") for every photoreal AI post/reel; hiding it risks penalties.",
+    "korea_ads": "Any sponsored/affiliate post with the virtual model: text posts start with \"AI를 기반으로 생성된 가상인물이 포함된 게시물입니다\" (or \"가상인물 포함\"); images/video show \"가상인물\" near the model while she is on screen.",
+    "korea_ai_act": "Photoreal AI results need a visible label; for video, through the whole playback.",
+    "source": "meta_labeling, kftc_2026, kr_ai_basic_act"
+  },
+  "realism": {
+    "cues": [
+      "skin pores, freckles, slight film grain — add imperfections, a too-perfect face looks fake",
+      "shot on a modern smartphone, ~24–26 mm equivalent wide-angle, handheld front-facing camera, vertical 9:16, natural HDR, realistic smartphone dynamic range, slight computational-photography characteristics, subtle lens softness",
+      "feel like an authentic smartphone travel photograph rather than a polished professional photograph",
+      "no perfect bilateral symmetry"
+    ],
+    "source": "model-variety.v1.json realism (awesome-gpt-image-2 templates, awesome-nano-banana-pro-prompts, facial-expression-prompting); owner_brief said the same"
+  },
+  "monetization": {
+    "routes": [
+      "brand sponsorship / PPL",
+      "affiliate links (our registered networks only)",
+      "paid fan platforms (Patreon, Fanvue)",
+      "digital goods (presets/LUT, photobook)"
+    ],
+    "benchmarks": "Aitana: avg ~€3k/month, up to €10k, ~€1k per ad (aitana_euronews)",
+    "notes": [
+      "Fan platforms: Aitana's creators use Fanvue for racier photos (aitana_euronews); not planned for our brand account unless the owner decides.",
+      "Coupang Partners is not a registered network in our flow (coupang-not-lowest memory); affiliate links follow our network registry."
+    ],
+    "source": "owner_brief, aitana_euronews"
+  },
+  "risks": [
+    {
+      "risk": "InsightFace pretrained weights are non-commercial",
+      "mitigation": "use training-based LoRA or hosted models for commercial output; verify each weight license",
+      "source": "insightface"
+    },
+    {
+      "risk": "no local NVIDIA GPU",
+      "mitigation": "cloud GPU for LoRA training, or hosted reference-image generation",
+      "source": "this PC: Intel Iris Xe"
+    },
+    {
+      "risk": "undisclosed AI in ads",
+      "mitigation": "disclosure block above on every post",
+      "source": "kftc_2026, meta_labeling"
+    }
+  ],
+  "sourcedAdditions": [
+    {
+      "id": "operating-cost-and-generation-events",
+      "status": "proposed_review",
+      "proposal": "Track each generation/retry with model, output duration, cost/credits, rejection reason, accepted artifact, and whether a human review gate approved it.",
+      "ontologyRefs": [
+        "ai-influencer#pipeline",
+        "ai-influencer#risks"
+      ],
+      "sourceIds": [
+        "beatrix_build_2026",
+        "beatrix_month_one_2026",
+        "vynzo_production_demo_2026"
+      ]
+    },
+    {
+      "id": "platform-funnel-and-payment-stages",
+      "status": "proposed_review",
+      "proposal": "Separate reach, profile visit/tap, follow, reward eligibility, removal/appeal, brand proposal, signed contract, invoice and cash received; retain platform, period, denominator and source type.",
+      "ontologyRefs": [
+        "ai-influencer#monetization"
+      ],
+      "sourceIds": [
+        "beatrix_month_one_2026",
+        "time_granny_spills_2025"
+      ]
+    },
+    {
+      "id": "persona-message-audience-fit",
+      "status": "proposed_review",
+      "proposal": "Measure visual identity consistency separately from behavioral/narrative coherence, message relatability, disclosure response and two-way interaction; do not presume photorealism alone yields trust.",
+      "ontologyRefs": [
+        "ai-influencer#realism",
+        "ai-influencer#pipeline",
+        "ai-influencer#risks"
+      ],
+      "sourceIds": [
+        "beatrix_build_2026",
+        "beatrix_month_one_2026",
+        "aut_virtual_influencer_thesis"
+      ]
+    },
+    {
+      "id": "reported-evidence-boundaries",
+      "status": "proposed_review",
+      "proposal": "Every production cost and audience metric records author/vendor/journalist report vs independently observed account data; attach sample, dates and denominator before using a benchmark.",
+      "ontologyRefs": [
+        "ai-influencer#pipeline",
+        "ai-influencer#monetization"
+      ],
+      "sourceIds": [
+        "beatrix_month_one_2026",
+        "vynzo_production_demo_2026",
+        "time_granny_spills_2025",
+        "aut_virtual_influencer_thesis"
+      ]
+    }
+  ],
+  "pendingVerificationSources": [
+    {
+      "sourceUrl": "https://support.tiktok.com/en/using-tiktok/creating-videos/ai-generated-content",
+      "rewardsUrl": "https://support.tiktok.com/en/business-and-creator/creator-rewards-program/creator-rewards-program",
+      "status": "deferred_unread",
+      "note": "Official article bodies were not retrievable in this run; no policy rules are inferred or added to current disclosure rules."
+    }
+  ]
+}

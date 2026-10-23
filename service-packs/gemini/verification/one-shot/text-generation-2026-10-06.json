@@ -1,0 +1,63 @@
+{
+  "schema": "gemini-live-one-shot-receipt-v1",
+  "service": "gemini-web",
+  "operation": "text",
+  "runLabel": "core_text_smoke",
+  "outcome": "needs_review",
+  "executionHost": "linux_worker",
+  "transport": "direct_https",
+  "observedAt": "2026-10-05T17:32:53.496Z",
+  "ownerMatched": true,
+  "anonymousOwnerAbsent": true,
+  "credentialPropagated": true,
+  "browserCapture": {
+    "requestObserved": true,
+    "requestAbortConfirmed": true,
+    "method": "POST",
+    "path": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+    "queryKeys": ["bl", "f.sid", "hl", "_reqid", "rt"],
+    "bodyFieldNames": ["f.req", "at"],
+    "ancillaryPostAbortCount": 1,
+    "ancillaryPostAbortConfirmed": true
+  },
+  "directDispatch": {
+    "count": 1,
+    "retryCount": 0,
+    "httpStatus": 200,
+    "responseContentType": "application/json",
+    "responseBytes": 34269,
+    "responseSha256": "0dfe78b8eafb6c8c1febfe98e0a677c5af2bdb18e224d5f1e61c34b9d06e8aaf",
+    "expectedResponseRpc": "RxAFq",
+    "responseRpcFound": false,
+    "responseSchemaRecognized": false,
+    "responseOutputExtracted": false,
+    "parsedIdentifierCandidateCount": 0,
+    "responseContractCaptured": false
+  },
+  "readback": {
+    "operation": "MaZiqc",
+    "beforeHttpStatus": 200,
+    "afterHttpStatus": 200,
+    "immediateHistoryChanged": true,
+    "immediateNewSummaryCount": 1,
+    "promptOrResponseCorrelationVerified": false,
+    "freshTimestampCandidateCount": 0,
+    "uiOutputMarkerVisible": false,
+    "journalReconciled": false
+  },
+  "mutationJournal": {
+    "state": "response_received",
+    "createdAt": "2026-10-05T17:32:50.450Z",
+    "dispatchCount": 1,
+    "reconciled": false
+  },
+  "persistence": {
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodyPersisted": false,
+    "responseBodyPersisted": false,
+    "conversationIdentifiersPersisted": false
+  },
+  "currentUiScreenshot": "/home/worker/artifacts/gemini-text-20261006/core-chat-area.png"
+}

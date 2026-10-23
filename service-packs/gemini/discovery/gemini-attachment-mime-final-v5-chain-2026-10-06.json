@@ -1,0 +1,1540 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_chain",
+  "sourceSnapshotBeforeChain": {
+    "files": [
+      {
+        "path": "discovery/observed-contract.json",
+        "bytes": 36978,
+        "sha256": "357c3dfab4ea5321c8b4e8d723ceeed661d22818ace4af4fd00b329e57547cb3"
+      },
+      {
+        "path": "scripts/gemini-attachment-chain-controlled-once.py",
+        "bytes": 90343,
+        "sha256": "eff2435165a70555ea671c6c5089b9ceb03afb378dd23b98a5fb21407710c142"
+      },
+      {
+        "path": "src/attachment-chain.mjs",
+        "bytes": 44995,
+        "sha256": "e71737bafad7abb13a65bbdfca28a904e186837c738ed8e83aaf185977cfa673"
+      },
+      {
+        "path": "src/attachment-upload.mjs",
+        "bytes": 73285,
+        "sha256": "1af2ee26759fbff9d28868117f9e2cd8ba3cddb7456db0946d09a3c262a774af"
+      },
+      {
+        "path": "src/batch-response.mjs",
+        "bytes": 13763,
+        "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+      },
+      {
+        "path": "src/bootstrap-receive.mjs",
+        "bytes": 4471,
+        "sha256": "bbbd40b2c5ac74fa994d8e14c76a59d1b354210ae03097990b62f74e54542536"
+      },
+      {
+        "path": "src/chrome-public-document-transport.mjs",
+        "bytes": 5264,
+        "sha256": "fa4a464e47aee7c61794046ca83380924378df5fa98d4e018b04038d50826c2f"
+      },
+      {
+        "path": "src/cli.mjs",
+        "bytes": 91564,
+        "sha256": "d69be2b3c8a975f3ba569716752166709804c58bd333bdf4ab8b022dbf0461e5"
+      },
+      {
+        "path": "src/client.mjs",
+        "bytes": 36550,
+        "sha256": "7589eaa3354b5e4db372fdfa8e9d1a9c8fb71dbdccb5ba1a49b1db7810963f4c"
+      },
+      {
+        "path": "src/constants.mjs",
+        "bytes": 632,
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "bytes": 33313,
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs",
+        "bytes": 33635,
+        "sha256": "5bfe0f5c23d9b1639f8db0242487682182aab16c316071ff362950ab1bce2b60"
+      },
+      {
+        "path": "src/errors.mjs",
+        "bytes": 332,
+        "sha256": "8337ec3eda6bd34b1d5303af5793986e1ed3730c3a138caa3f0ab9fa4dfd4075"
+      },
+      {
+        "path": "src/evidence.mjs",
+        "bytes": 1067,
+        "sha256": "73ded090b948798eb6b3fc86f99272efcaa5e69b16eb6d376e381b99d9c6d8c3"
+      },
+      {
+        "path": "src/feature-checklist.mjs",
+        "bytes": 89714,
+        "sha256": "395ae5048bb3e14abf9f57a3cd98fc6fdc1bf747be0b538e15e4922522cbdcef"
+      },
+      {
+        "path": "src/history-detail.mjs",
+        "bytes": 13856,
+        "sha256": "2605b37c565ab57fdd49a4c96e42191c1d35bc8a36a96882b667aa743aeb9374"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "bytes": 10277,
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "bytes": 12425,
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "bytes": 2959,
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/journal.mjs",
+        "bytes": 12548,
+        "sha256": "0d9e2ba7cf4c66c3bf3a6298c25b4c37e2f687825682419ae5d04ff92f893754"
+      },
+      {
+        "path": "src/lifecycle-mutation.mjs",
+        "bytes": 27008,
+        "sha256": "c8ade48d0e0c7eba2f5d1f89d829ec889d64a1b7321ebd027702e98aeb265b79"
+      },
+      {
+        "path": "src/media-capture.mjs",
+        "bytes": 7336,
+        "sha256": "44cfd457a1ea6fb2744da671c3be31887d5510ab869abf4d432111a6f7a55d80"
+      },
+      {
+        "path": "src/media-direct-once.mjs",
+        "bytes": 6881,
+        "sha256": "81a15f509517520db9932c05763619128e4706dba74f8b97c9192940cbd9931f"
+      },
+      {
+        "path": "src/media-download.mjs",
+        "bytes": 31131,
+        "sha256": "616e0cb33b433d335726f6d33c7149bf7002e7837f017d308e9d0d0b151d10fa"
+      },
+      {
+        "path": "src/media-response.mjs",
+        "bytes": 16108,
+        "sha256": "5c29417091ed491986c256d0f4a5f2398823f3727f0bba80cf8e719eed90c08b"
+      },
+      {
+        "path": "src/media.mjs",
+        "bytes": 5635,
+        "sha256": "31003f9ba7e60102db2bbd803fe66d302cea7cb376323ba9d0a1b9101e8f51be"
+      },
+      {
+        "path": "src/model-selection.mjs",
+        "bytes": 20284,
+        "sha256": "809e41645f266185757991643d9ee4239b358d4dc71f0b03bd97248f4d5b9c74"
+      },
+      {
+        "path": "src/mutation.mjs",
+        "bytes": 1917,
+        "sha256": "5bda23914e7f4d658932a4ff0cda907821b400f1cefcd9e96942a620606b0394"
+      },
+      {
+        "path": "src/original-image-download.mjs",
+        "bytes": 29408,
+        "sha256": "ef9f38adea89f3c98049ad08f5b2e708810c3f3a47864321836b67fd49d2e6c6"
+      },
+      {
+        "path": "src/public-document.mjs",
+        "bytes": 6120,
+        "sha256": "9b81f4957c4dc6596aafcd85262ee333b40980be0267a5e9f3df36deff66631c"
+      },
+      {
+        "path": "src/rpc-adapters.mjs",
+        "bytes": 1738,
+        "sha256": "ff4618cef8ffa148fa6177094c8bf73b7457909870f18b1a68976c4985998400"
+      },
+      {
+        "path": "src/secure-credential-store.mjs",
+        "bytes": 6192,
+        "sha256": "5e296377c88c7a2920abfce12f103d63438e82742166f4cd3a60bf86094a6c25"
+      },
+      {
+        "path": "src/session-renewal.mjs",
+        "bytes": 4065,
+        "sha256": "c899fad625b68e8b3471732c9e39b7c9fd16da904318d74463956c46f89bd56e"
+      },
+      {
+        "path": "src/session.mjs",
+        "bytes": 34873,
+        "sha256": "a3a02377afa893e4c85092794eade87faaaa9f23ef337792ba3ee876b02c55b3"
+      },
+      {
+        "path": "src/text-adapter.mjs",
+        "bytes": 27584,
+        "sha256": "736449b689f76f648dda8dc99e737995b94157e7b574f18fbd75b3942d40cc1c"
+      },
+      {
+        "path": "src/text-readback.mjs",
+        "bytes": 2735,
+        "sha256": "d3af2bed11b6f48ad029da89706aa870b4b742e682352af07a08ed2ba46de8e9"
+      },
+      {
+        "path": "src/text-response.mjs",
+        "bytes": 5010,
+        "sha256": "a5a5e993518ed83c4e30753311b2e2957233639d25c79f9b2fe35d0c4e0074de"
+      }
+    ],
+    "aggregateSha256": "95f7a02e2832406f08851ecdf3d68d7290c8315f0f270fd69cac4cc5368416e0"
+  },
+  "sourceSnapshotStableThroughReceipt": true,
+  "callerIntent": "gemini-attachment-mime-final-v5-20261006-v1",
+  "messageCallerIntent": "gemini-attachment-mime-final-v5-message-20261006-v1",
+  "recordedAt": "2026-10-06T09:11:09.067073+00:00",
+  "outputStatus": "incomplete",
+  "failureCode": "ATTACHMENT_CHAIN_ATTACHMENT_MESSAGE_BINDING_MISMATCH",
+  "ownerDigestMatchedApproved": true,
+  "file": {
+    "name": "gemini-attachment-mime-final-v5-20261006.txt",
+    "mimeType": "text/plain",
+    "bytes": 12,
+    "sha256": "162a35ade59d27df8709d9ca438661c5303de138e07ae1d18f36da554e804dbb"
+  },
+  "directDispatchCount": 2,
+  "mutationJournal": {
+    "attachment_upload": {
+      "state": "reconciled",
+      "dispatchCount": 1,
+      "httpStatus": 200
+    },
+    "attachment_upload_transfer": {
+      "state": "reconciled",
+      "dispatchCount": 1,
+      "httpStatus": 200
+    }
+  },
+  "childError": {
+    "errorCode": "TEXT_ATTACHMENT_CAPTURE_MISMATCH",
+    "errorClass": "GeminiClientError",
+    "attachmentBinding": {
+      "sourceShapeMatchCount": 0,
+      "responsePayloadMatchCount": 1,
+      "filenameMatchCount": 1,
+      "mimeTypeMatchCount": 1,
+      "fileSizeMatchCount": 0,
+      "uploadedFilesArrayCount": 0,
+      "candidateCount": 2,
+      "sourceTupleMatchCount": 0,
+      "sourceProtoTupleMatchCount": 0,
+      "sourceParentValueMatchCount": 0,
+      "expectedFileSizeBytes": 12,
+      "capturedRequestBodyBytes": 1297,
+      "expectedFilenameBytes": 44,
+      "expectedResponsePayloadBytes": 125,
+      "fileIdPresent": false,
+      "expectedFileTypePresent": false,
+      "sourceValueCorrelationMatch": false,
+      "capturedPromptContainsReferenceValue": false,
+      "capturedRequestBodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+      "expectedFilenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+      "expectedResponsePayloadSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+      "expectedMimeType": "text/plain",
+      "candidates": [
+        {
+          "kind": "array",
+          "elementTypes": [
+            "array",
+            "string",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "null",
+            "array"
+          ],
+          "length": 9,
+          "filenameMatched": true,
+          "mimeTypeMatched": false,
+          "dhMatched": false
+        },
+        {
+          "kind": "array",
+          "elementTypes": [
+            "string",
+            "number",
+            "null",
+            "string"
+          ],
+          "length": 4,
+          "filenameMatched": false,
+          "mimeTypeMatched": true,
+          "dhMatched": true
+        }
+      ],
+      "sourceProtoCandidates": [
+        {
+          "vePath": [
+            0,
+            3,
+            0
+          ],
+          "dqcPath": [
+            0,
+            3,
+            0,
+            0
+          ],
+          "veLength": 9,
+          "tupleLength": 4,
+          "filenameBytes": 44,
+          "dhBytes": 125,
+          "dhArrayIndex": 0,
+          "filenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+          "dhSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+          "filenameMatched": true,
+          "dhMatched": true,
+          "sizeMatched": false,
+          "mimeTypeMatched": false,
+          "sourceParentValueMatch": false,
+          "matched": false,
+          "tupleLayout": "unclassified_nested_array",
+          "tupleElementTypes": [
+            "string",
+            "number",
+            "null",
+            "string"
+          ]
+        }
+      ],
+      "uploadedFilesTupleCandidates": []
+    }
+  },
+  "directUploadSafeSummary": {
+    "status": "verified",
+    "directDispatchCount": 2,
+    "startDispatchCount": 1,
+    "transferDispatchCount": 1,
+    "transferHttpStatus": 200,
+    "transferResponseBytes": 125,
+    "fileBytes": 12,
+    "uploadedFileReadbackVerified": true,
+    "journalReconciled": true,
+    "attachmentReferenceAvailable": true,
+    "transferContentType": "text/html",
+    "fileMimeType": "text/plain",
+    "transferResponseSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+    "fileSha256": "162a35ade59d27df8709d9ca438661c5303de138e07ae1d18f36da554e804dbb",
+    "query": {
+      "httpStatus": 200,
+      "responseBytes": 125,
+      "sizeReceived": 12,
+      "uploadStatus": "final",
+      "responseSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+      "responseHeaderNames": [
+        "access-control-allow-credentials",
+        "access-control-allow-origin",
+        "alt-svc",
+        "content-length",
+        "content-security-policy",
+        "content-type",
+        "date",
+        "environment-prefix",
+        "server",
+        "x-goog-upload-chunk-granularity",
+        "x-goog-upload-size-received",
+        "x-goog-upload-status",
+        "x-guploader-uploadid"
+      ]
+    }
+  },
+  "attachmentMessage": {
+    "method": "POST",
+    "pathFamily": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+    "bodyBytes": 1297,
+    "bodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+    "contentType": "application/x-www-form-urlencoded",
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-525005358-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-goog-ext-73010990-jspb",
+      "x-same-domain"
+    ],
+    "browserNetworkDispatchCount": 0
+  },
+  "attachmentBindingDiagnostics": {
+    "sourceShapeMatchCount": 0,
+    "responsePayloadMatchCount": 1,
+    "filenameMatchCount": 1,
+    "mimeTypeMatchCount": 1,
+    "fileSizeMatchCount": 0,
+    "uploadedFilesArrayCount": 0,
+    "candidateCount": 2,
+    "sourceTupleMatchCount": 0,
+    "sourceProtoTupleMatchCount": 0,
+    "sourceParentValueMatchCount": 0,
+    "expectedFileSizeBytes": 12,
+    "capturedRequestBodyBytes": 1297,
+    "expectedFilenameBytes": 44,
+    "expectedResponsePayloadBytes": 125,
+    "fileIdPresent": false,
+    "expectedFileTypePresent": false,
+    "sourceValueCorrelationMatch": false,
+    "capturedPromptContainsReferenceValue": false,
+    "capturedRequestBodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+    "expectedFilenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+    "expectedResponsePayloadSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+    "expectedMimeType": "text/plain",
+    "candidates": [
+      {
+        "kind": "array",
+        "elementTypes": [
+          "array",
+          "string",
+          "null",
+          "null",
+          "null",
+          "null",
+          "null",
+          "null",
+          "array"
+        ],
+        "length": 9,
+        "filenameMatched": true,
+        "mimeTypeMatched": false,
+        "dhMatched": false
+      },
+      {
+        "kind": "array",
+        "elementTypes": [
+          "string",
+          "number",
+          "null",
+          "string"
+        ],
+        "length": 4,
+        "filenameMatched": false,
+        "mimeTypeMatched": true,
+        "dhMatched": true
+      }
+    ],
+    "sourceProtoCandidates": [
+      {
+        "vePath": [
+          0,
+          3,
+          0
+        ],
+        "dqcPath": [
+          0,
+          3,
+          0,
+          0
+        ],
+        "veLength": 9,
+        "tupleLength": 4,
+        "filenameBytes": 44,
+        "dhBytes": 125,
+        "dhArrayIndex": 0,
+        "filenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+        "dhSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+        "filenameMatched": true,
+        "dhMatched": true,
+        "sizeMatched": false,
+        "mimeTypeMatched": false,
+        "sourceParentValueMatch": false,
+        "matched": false,
+        "tupleLayout": "unclassified_nested_array",
+        "tupleElementTypes": [
+          "string",
+          "number",
+          "null",
+          "string"
+        ]
+      }
+    ],
+    "uploadedFilesTupleCandidates": []
+  },
+  "bindingDiagnosticAttempts": [
+    {
+      "attempt": 1,
+      "diagnostics": {
+        "sourceShapeMatchCount": 0,
+        "responsePayloadMatchCount": 1,
+        "filenameMatchCount": 1,
+        "mimeTypeMatchCount": 1,
+        "fileSizeMatchCount": 0,
+        "uploadedFilesArrayCount": 0,
+        "candidateCount": 2,
+        "sourceTupleMatchCount": 0,
+        "sourceProtoTupleMatchCount": 0,
+        "sourceParentValueMatchCount": 0,
+        "expectedFileSizeBytes": 12,
+        "capturedRequestBodyBytes": 1297,
+        "expectedFilenameBytes": 44,
+        "expectedResponsePayloadBytes": 125,
+        "fileIdPresent": false,
+        "expectedFileTypePresent": false,
+        "sourceValueCorrelationMatch": false,
+        "capturedPromptContainsReferenceValue": false,
+        "capturedRequestBodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+        "expectedFilenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+        "expectedResponsePayloadSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+        "expectedMimeType": "text/plain",
+        "candidates": [
+          {
+            "kind": "array",
+            "elementTypes": [
+              "array",
+              "string",
+              "null",
+              "null",
+              "null",
+              "null",
+              "null",
+              "null",
+              "array"
+            ],
+            "length": 9,
+            "filenameMatched": true,
+            "mimeTypeMatched": false,
+            "dhMatched": false
+          },
+          {
+            "kind": "array",
+            "elementTypes": [
+              "string",
+              "number",
+              "null",
+              "string"
+            ],
+            "length": 4,
+            "filenameMatched": false,
+            "mimeTypeMatched": true,
+            "dhMatched": true
+          }
+        ],
+        "sourceProtoCandidates": [
+          {
+            "vePath": [
+              0,
+              3,
+              0
+            ],
+            "dqcPath": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "veLength": 9,
+            "tupleLength": 4,
+            "filenameBytes": 44,
+            "dhBytes": 125,
+            "dhArrayIndex": 0,
+            "filenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+            "dhSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+            "filenameMatched": true,
+            "dhMatched": true,
+            "sizeMatched": false,
+            "mimeTypeMatched": false,
+            "sourceParentValueMatch": false,
+            "matched": false,
+            "tupleLayout": "unclassified_nested_array",
+            "tupleElementTypes": [
+              "string",
+              "number",
+              "null",
+              "string"
+            ]
+          }
+        ],
+        "uploadedFilesTupleCandidates": []
+      },
+      "directTextDispatchCountBeforeRecapture": 0
+    }
+  ],
+  "nativeAttachmentMessageCaptureAttempts": [
+    {
+      "url": "https://gemini.google.com/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate?bl=boq_gemini-web-uiserver_20261005.02_p0&f.sid=4433540858760391749&hl=ko&_reqid=3865451&rt=c",
+      "method": "POST",
+      "bodyBytes": 1297,
+      "bodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+      "headerNames": [
+        "accept",
+        "content-type",
+        "cookie",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-goog-ext-525001261-jspb",
+        "x-goog-ext-525005358-jspb",
+        "x-goog-ext-73010989-jspb",
+        "x-goog-ext-73010990-jspb",
+        "x-same-domain"
+      ],
+      "contentType": "application/x-www-form-urlencoded"
+    }
+  ],
+  "attachmentReferenceRecovery": {
+    "referenceAvailableNonEnumerablyAtApiReturn": true,
+    "capturedRequestAvailableNonEnumerablyAtApiReturn": true,
+    "clientAvailableNonEnumerablyAtApiReturn": true,
+    "sessionRetainedUntilRelease": true,
+    "releaseAvailableNonEnumerablyAtApiReturn": true,
+    "rawReferencePersisted": false,
+    "rawCapturePersisted": false,
+    "directTextDispatchCount": 0,
+    "recoverableByOrchestratorAfterCliSerialization": false
+  },
+  "selectedFileType": "text/plain",
+  "nativeContinuation": {
+    "selectedFileType": "text/plain",
+    "selectedFileTypeReadCount": 11,
+    "selectedFileTypeReadMimeValues": [
+      "text/plain"
+    ],
+    "nativeTransferMimeType": "application/x-www-form-urlencoded",
+    "nativeContentTypeHeaderPresent": true,
+    "command": "upload, finalize",
+    "offset": "0",
+    "bodyBytes": 12,
+    "bodySha256": "162a35ade59d27df8709d9ca438661c5303de138e07ae1d18f36da554e804dbb",
+    "bodyMatchesSelectedFile": true,
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "push-id",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-client-pctx",
+      "x-goog-upload-command",
+      "x-goog-upload-offset",
+      "x-tenant-id"
+    ],
+    "ordinaryCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "nativeRequestHeadersIndependentFromStartCapture": true
+  },
+  "nativeStartObserved": true,
+  "nativeContinuationObserved": true,
+  "continuationCookieSnapshot": {
+    "currentCookieCount": 17,
+    "currentCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "currentCookieScopes": [
+      {
+        "name": "AEC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "APISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "HSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "NID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SEARCH_SAMESITE",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      }
+    ],
+    "nativeCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "rotatedCookieNamesSinceStart": [],
+    "cookieValuesPersisted": false
+  },
+  "nativeAttachmentMessageObserved": true,
+  "normalHistoryTemplate": {
+    "captured": true,
+    "rpcId": "MaZiqc",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "observedHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "directReadHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "cursorAdjustedToCapturedFirstPageTemplate": false,
+    "canonicalFirstPageTemplateSource": "scripts/run-linux-text-smoke.py:FIRST_PAGE_HISTORY_ARGS",
+    "atPresentInMemory": true,
+    "rawQueryAndTokenValuesPersisted": false
+  },
+  "historyArgsMismatch": null,
+  "directStart": {
+    "httpStatus": 200,
+    "responseHeaderNames": [
+      "access-control-allow-credentials",
+      "access-control-allow-origin",
+      "access-control-expose-headers",
+      "content-type",
+      "x-goog-upload-chunk-granularity",
+      "x-goog-upload-control-url",
+      "x-goog-upload-status",
+      "x-goog-upload-url",
+      "x-guploader-uploadid"
+    ],
+    "contentType": "text/plain",
+    "responseBytes": 0,
+    "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sessionUrlRef": {
+      "origin": "https://push.clients6.google.com",
+      "pathFamily": "/upload/",
+      "queryKeyNames": [
+        "upload_id",
+        "upload_protocol"
+      ]
+    }
+  },
+  "directTransferResponse": {
+    "httpStatus": 200,
+    "responseHeaderNames": [
+      "access-control-allow-credentials",
+      "access-control-allow-origin",
+      "access-control-expose-headers",
+      "alt-svc",
+      "content-length",
+      "content-security-policy",
+      "content-type",
+      "date",
+      "environment-prefix",
+      "server",
+      "x-goog-upload-status",
+      "x-guploader-uploadid"
+    ],
+    "contentType": "text/html",
+    "responseBytes": 125,
+    "responseSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+    "uploadStatus": "final"
+  },
+  "guardLifecycle": {
+    "registeredTargetIdMatched": true,
+    "resetQuietVerifiedThroughDisconnect": false,
+    "lateBlockedRequestCount": 0,
+    "browserClosed": false,
+    "contextClosed": false
+  },
+  "rawBodiesOrCredentialValuesPersisted": false,
+  "rawOwnerEmailPersisted": false,
+  "rawUploadSessionUrlPersisted": false,
+  "rawAttachmentReferencePersisted": false,
+  "rawPromptOrFileContentsPersisted": false,
+  "attemptCount": 1,
+  "attempts": [
+    {
+      "recordedAt": "2026-10-06T09:11:09.067073+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_ATTACHMENT_MESSAGE_BINDING_MISMATCH",
+      "directDispatchCount": 2,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": true,
+      "nativeAttachmentMessageObserved": true,
+      "historyArgsMismatch": null,
+      "childError": {
+        "errorCode": "TEXT_ATTACHMENT_CAPTURE_MISMATCH",
+        "errorClass": "GeminiClientError",
+        "attachmentBinding": {
+          "sourceShapeMatchCount": 0,
+          "responsePayloadMatchCount": 1,
+          "filenameMatchCount": 1,
+          "mimeTypeMatchCount": 1,
+          "fileSizeMatchCount": 0,
+          "uploadedFilesArrayCount": 0,
+          "candidateCount": 2,
+          "sourceTupleMatchCount": 0,
+          "sourceProtoTupleMatchCount": 0,
+          "sourceParentValueMatchCount": 0,
+          "expectedFileSizeBytes": 12,
+          "capturedRequestBodyBytes": 1297,
+          "expectedFilenameBytes": 44,
+          "expectedResponsePayloadBytes": 125,
+          "fileIdPresent": false,
+          "expectedFileTypePresent": false,
+          "sourceValueCorrelationMatch": false,
+          "capturedPromptContainsReferenceValue": false,
+          "capturedRequestBodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+          "expectedFilenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+          "expectedResponsePayloadSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+          "expectedMimeType": "text/plain",
+          "candidates": [
+            {
+              "kind": "array",
+              "elementTypes": [
+                "array",
+                "string",
+                "null",
+                "null",
+                "null",
+                "null",
+                "null",
+                "null",
+                "array"
+              ],
+              "length": 9,
+              "filenameMatched": true,
+              "mimeTypeMatched": false,
+              "dhMatched": false
+            },
+            {
+              "kind": "array",
+              "elementTypes": [
+                "string",
+                "number",
+                "null",
+                "string"
+              ],
+              "length": 4,
+              "filenameMatched": false,
+              "mimeTypeMatched": true,
+              "dhMatched": true
+            }
+          ],
+          "sourceProtoCandidates": [
+            {
+              "vePath": [
+                0,
+                3,
+                0
+              ],
+              "dqcPath": [
+                0,
+                3,
+                0,
+                0
+              ],
+              "veLength": 9,
+              "tupleLength": 4,
+              "filenameBytes": 44,
+              "dhBytes": 125,
+              "dhArrayIndex": 0,
+              "filenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+              "dhSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+              "filenameMatched": true,
+              "dhMatched": true,
+              "sizeMatched": false,
+              "mimeTypeMatched": false,
+              "sourceParentValueMatch": false,
+              "matched": false,
+              "tupleLayout": "unclassified_nested_array",
+              "tupleElementTypes": [
+                "string",
+                "number",
+                "null",
+                "string"
+              ]
+            }
+          ],
+          "uploadedFilesTupleCandidates": []
+        }
+      },
+      "directUploadSafeSummary": {
+        "status": "verified",
+        "directDispatchCount": 2,
+        "startDispatchCount": 1,
+        "transferDispatchCount": 1,
+        "transferHttpStatus": 200,
+        "transferResponseBytes": 125,
+        "fileBytes": 12,
+        "uploadedFileReadbackVerified": true,
+        "journalReconciled": true,
+        "attachmentReferenceAvailable": true,
+        "transferContentType": "text/html",
+        "fileMimeType": "text/plain",
+        "transferResponseSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+        "fileSha256": "162a35ade59d27df8709d9ca438661c5303de138e07ae1d18f36da554e804dbb",
+        "query": {
+          "httpStatus": 200,
+          "responseBytes": 125,
+          "sizeReceived": 12,
+          "uploadStatus": "final",
+          "responseSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+          "responseHeaderNames": [
+            "access-control-allow-credentials",
+            "access-control-allow-origin",
+            "alt-svc",
+            "content-length",
+            "content-security-policy",
+            "content-type",
+            "date",
+            "environment-prefix",
+            "server",
+            "x-goog-upload-chunk-granularity",
+            "x-goog-upload-size-received",
+            "x-goog-upload-status",
+            "x-guploader-uploadid"
+          ]
+        }
+      },
+      "attachmentBindingDiagnostics": {
+        "sourceShapeMatchCount": 0,
+        "responsePayloadMatchCount": 1,
+        "filenameMatchCount": 1,
+        "mimeTypeMatchCount": 1,
+        "fileSizeMatchCount": 0,
+        "uploadedFilesArrayCount": 0,
+        "candidateCount": 2,
+        "sourceTupleMatchCount": 0,
+        "sourceProtoTupleMatchCount": 0,
+        "sourceParentValueMatchCount": 0,
+        "expectedFileSizeBytes": 12,
+        "capturedRequestBodyBytes": 1297,
+        "expectedFilenameBytes": 44,
+        "expectedResponsePayloadBytes": 125,
+        "fileIdPresent": false,
+        "expectedFileTypePresent": false,
+        "sourceValueCorrelationMatch": false,
+        "capturedPromptContainsReferenceValue": false,
+        "capturedRequestBodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+        "expectedFilenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+        "expectedResponsePayloadSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+        "expectedMimeType": "text/plain",
+        "candidates": [
+          {
+            "kind": "array",
+            "elementTypes": [
+              "array",
+              "string",
+              "null",
+              "null",
+              "null",
+              "null",
+              "null",
+              "null",
+              "array"
+            ],
+            "length": 9,
+            "filenameMatched": true,
+            "mimeTypeMatched": false,
+            "dhMatched": false
+          },
+          {
+            "kind": "array",
+            "elementTypes": [
+              "string",
+              "number",
+              "null",
+              "string"
+            ],
+            "length": 4,
+            "filenameMatched": false,
+            "mimeTypeMatched": true,
+            "dhMatched": true
+          }
+        ],
+        "sourceProtoCandidates": [
+          {
+            "vePath": [
+              0,
+              3,
+              0
+            ],
+            "dqcPath": [
+              0,
+              3,
+              0,
+              0
+            ],
+            "veLength": 9,
+            "tupleLength": 4,
+            "filenameBytes": 44,
+            "dhBytes": 125,
+            "dhArrayIndex": 0,
+            "filenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+            "dhSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+            "filenameMatched": true,
+            "dhMatched": true,
+            "sizeMatched": false,
+            "mimeTypeMatched": false,
+            "sourceParentValueMatch": false,
+            "matched": false,
+            "tupleLayout": "unclassified_nested_array",
+            "tupleElementTypes": [
+              "string",
+              "number",
+              "null",
+              "string"
+            ]
+          }
+        ],
+        "uploadedFilesTupleCandidates": []
+      },
+      "bindingDiagnosticAttempts": [
+        {
+          "attempt": 1,
+          "diagnostics": {
+            "sourceShapeMatchCount": 0,
+            "responsePayloadMatchCount": 1,
+            "filenameMatchCount": 1,
+            "mimeTypeMatchCount": 1,
+            "fileSizeMatchCount": 0,
+            "uploadedFilesArrayCount": 0,
+            "candidateCount": 2,
+            "sourceTupleMatchCount": 0,
+            "sourceProtoTupleMatchCount": 0,
+            "sourceParentValueMatchCount": 0,
+            "expectedFileSizeBytes": 12,
+            "capturedRequestBodyBytes": 1297,
+            "expectedFilenameBytes": 44,
+            "expectedResponsePayloadBytes": 125,
+            "fileIdPresent": false,
+            "expectedFileTypePresent": false,
+            "sourceValueCorrelationMatch": false,
+            "capturedPromptContainsReferenceValue": false,
+            "capturedRequestBodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+            "expectedFilenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+            "expectedResponsePayloadSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+            "expectedMimeType": "text/plain",
+            "candidates": [
+              {
+                "kind": "array",
+                "elementTypes": [
+                  "array",
+                  "string",
+                  "null",
+                  "null",
+                  "null",
+                  "null",
+                  "null",
+                  "null",
+                  "array"
+                ],
+                "length": 9,
+                "filenameMatched": true,
+                "mimeTypeMatched": false,
+                "dhMatched": false
+              },
+              {
+                "kind": "array",
+                "elementTypes": [
+                  "string",
+                  "number",
+                  "null",
+                  "string"
+                ],
+                "length": 4,
+                "filenameMatched": false,
+                "mimeTypeMatched": true,
+                "dhMatched": true
+              }
+            ],
+            "sourceProtoCandidates": [
+              {
+                "vePath": [
+                  0,
+                  3,
+                  0
+                ],
+                "dqcPath": [
+                  0,
+                  3,
+                  0,
+                  0
+                ],
+                "veLength": 9,
+                "tupleLength": 4,
+                "filenameBytes": 44,
+                "dhBytes": 125,
+                "dhArrayIndex": 0,
+                "filenameSha256": "0a5ff9dcae6f1d24529c5dfa78201bcd61c125af329f71e761907896d18ee214",
+                "dhSha256": "14e250ccbb59781870169772c2a11dabdb40563bcfc38c09cf75f6de5ed55fb3",
+                "filenameMatched": true,
+                "dhMatched": true,
+                "sizeMatched": false,
+                "mimeTypeMatched": false,
+                "sourceParentValueMatch": false,
+                "matched": false,
+                "tupleLayout": "unclassified_nested_array",
+                "tupleElementTypes": [
+                  "string",
+                  "number",
+                  "null",
+                  "string"
+                ]
+              }
+            ],
+            "uploadedFilesTupleCandidates": []
+          },
+          "directTextDispatchCountBeforeRecapture": 0
+        }
+      ],
+      "nativeAttachmentMessageCaptureAttempts": [
+        {
+          "url": "https://gemini.google.com/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate?bl=boq_gemini-web-uiserver_20261005.02_p0&f.sid=4433540858760391749&hl=ko&_reqid=3865451&rt=c",
+          "method": "POST",
+          "bodyBytes": 1297,
+          "bodySha256": "42478083a27e8cc21cba11a5b5b9a54b44fe177b30d06c6eab89826c979d10c3",
+          "headerNames": [
+            "accept",
+            "content-type",
+            "cookie",
+            "origin",
+            "referer",
+            "sec-ch-ua",
+            "sec-ch-ua-arch",
+            "sec-ch-ua-bitness",
+            "sec-ch-ua-form-factors",
+            "sec-ch-ua-full-version",
+            "sec-ch-ua-full-version-list",
+            "sec-ch-ua-mobile",
+            "sec-ch-ua-model",
+            "sec-ch-ua-platform",
+            "sec-ch-ua-platform-version",
+            "sec-ch-ua-wow64",
+            "user-agent",
+            "x-goog-ext-525001261-jspb",
+            "x-goog-ext-525005358-jspb",
+            "x-goog-ext-73010989-jspb",
+            "x-goog-ext-73010990-jspb",
+            "x-same-domain"
+          ],
+          "contentType": "application/x-www-form-urlencoded"
+        }
+      ],
+      "sourceBindingResolutionPlan": null,
+      "attachmentReferenceRecovery": {
+        "referenceAvailableNonEnumerablyAtApiReturn": true,
+        "capturedRequestAvailableNonEnumerablyAtApiReturn": true,
+        "clientAvailableNonEnumerablyAtApiReturn": true,
+        "sessionRetainedUntilRelease": true,
+        "releaseAvailableNonEnumerablyAtApiReturn": true,
+        "rawReferencePersisted": false,
+        "rawCapturePersisted": false,
+        "directTextDispatchCount": 0,
+        "recoverableByOrchestratorAfterCliSerialization": false
+      },
+      "nativeContinuation": {
+        "selectedFileType": "text/plain",
+        "selectedFileTypeReadCount": 11,
+        "selectedFileTypeReadMimeValues": [
+          "text/plain"
+        ],
+        "nativeTransferMimeType": "application/x-www-form-urlencoded",
+        "nativeContentTypeHeaderPresent": true,
+        "command": "upload, finalize",
+        "offset": "0",
+        "bodyBytes": 12,
+        "bodySha256": "162a35ade59d27df8709d9ca438661c5303de138e07ae1d18f36da554e804dbb",
+        "bodyMatchesSelectedFile": true,
+        "headerNames": [
+          "accept",
+          "content-type",
+          "cookie",
+          "origin",
+          "push-id",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-client-pctx",
+          "x-goog-upload-command",
+          "x-goog-upload-offset",
+          "x-tenant-id"
+        ],
+        "ordinaryCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "nativeRequestHeadersIndependentFromStartCapture": true
+      },
+      "continuationCookieSnapshot": {
+        "currentCookieCount": 17,
+        "currentCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "currentCookieScopes": [
+          {
+            "name": "AEC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "APISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "HSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "NID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "SAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "SEARCH_SAMESITE",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSIDTS",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSIDTS",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          }
+        ],
+        "nativeCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "rotatedCookieNamesSinceStart": [],
+        "cookieValuesPersisted": false
+      },
+      "mutationJournal": {
+        "attachment_upload": {
+          "state": "reconciled",
+          "dispatchCount": 1,
+          "httpStatus": 200
+        },
+        "attachment_upload_transfer": {
+          "state": "reconciled",
+          "dispatchCount": 1,
+          "httpStatus": 200
+        }
+      },
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    }
+  ]
+}

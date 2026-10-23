@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "service": "gemini",
+  "executionHost": "linux_worker",
+  "secretsPersistedInEvidence": false,
+  "testsPassed": 39,
+  "publicRead": {
+    "operation": "public_document_metadata",
+    "checkedAt": "2026-10-05T13:54:18.312Z",
+    "executionMode": "chrome_compatible_http",
+    "status": 200,
+    "contentType": "text/html; charset=utf-8",
+    "bodyBytes": 867269,
+    "bodySha256": "1f2d3175b988ab5292e8386f26f13208629b90915b6e9603f26f25824c84a13f",
+    "credentialsSent": false,
+    "directReadVerified": true,
+    "title": "Google Gemini",
+    "lang": "en-US",
+    "scripts": 18,
+    "externalScripts": 3,
+    "appElements": 1,
+    "layoutMatched": true,
+    "challengeDocument": false,
+    "bootstrapMarkers": {
+      "AF_initDataCallback": true,
+      "WIZ_global_data": true,
+      "FdrFJe": true,
+      "cfb2h": true
+    },
+    "authenticationVerified": false,
+    "browserCaptured": false,
+    "chatLiveReplay": false,
+    "imageLiveReplay": false,
+    "videoLiveReplay": false,
+    "transport": {
+      "library": "curl_cffi",
+      "libraryVersion": "0.16.3",
+      "browserProfile": "chrome150",
+      "platform": "Linux x86_64",
+      "negotiatedHttpVersion": "h2",
+      "responseHeaderBytes": 28854
+    }
+  },
+  "authenticatedOwnerVerified": false,
+  "implementationSha256": {
+    "src/cli.mjs": "71507b1d9781f892cd10c323e603c6511207f4b9cfabab389927ace203d6166a",
+    "src/public-document.mjs": "9b81f4957c4dc6596aafcd85262ee333b40980be0267a5e9f3df36deff66631c",
+    "src/chrome-public-document-transport.mjs": "fa4a464e47aee7c61794046ca83380924378df5fa98d4e018b04038d50826c2f",
+    "scripts/gemini-public-document-chrome.py": "4795a8d308b2f81b49be24b69889f8c51da096ef099151b011b697342ab1b9fe"
+  }
+}

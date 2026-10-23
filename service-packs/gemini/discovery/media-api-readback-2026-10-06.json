@@ -1,0 +1,236 @@
+{
+  "schema": "gemini-media-api-readback-v1",
+  "service": "gemini-web",
+  "operation": "history_read",
+  "executionHost": "linux_worker",
+  "readbackTransport": "direct_https_gemini_web_client",
+  "browserUse": {
+    "sessionBootstrap": "owned_profile_gemini_read_only_batch_context",
+    "historyDetailReads": 0,
+    "artifactResponseBodiesReadByBrowser": false,
+    "browserUsedForDetailExecution": false
+  },
+  "browserBootstrap": {
+    "uiBatchContextStatus": 200,
+    "uiBatchContextMime": "application/json",
+    "uiBatchContextResponseBytes": 12573,
+    "uiBatchContextRpcIds": [
+      "CNgdBe"
+    ],
+    "uiBatchContextResponseBodyCaptured": false,
+    "headerNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "formFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "queryKeyNames": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "blockedBrowserDetailRequests": 0,
+    "visibleHistoryRouteCount": 28
+  },
+  "directHttp": {
+    "phase": "direct_http_history_readback",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "directHistoryList": {
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseBytes": 6223,
+      "responseSha256": "b62f7d1257a5708453f4c2a7727f0c6d54e4dd1b46f79008d939aec68a6fe208",
+      "rpcId": "MaZiqc",
+      "summaryCount": 28,
+      "detailReadCount": 2,
+      "detailReadLimit": 2
+    },
+    "candidates": [
+      {
+        "rowIndex": 3,
+        "timeWindowHint": "image",
+        "deltaFromWindowMidpointSeconds": 2.319,
+        "routeVisibleInCurrentHistoryList": true,
+        "routeBindingVerified": true,
+        "rawApiIdUsedInRequest": true,
+        "prefixRemovedFromRequest": false,
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "responseBytes": 1034,
+        "responseSha256": "d6935c35fbbe9534584624b549277b15f89056e4ea7b5339294782376bc7a63c",
+        "detailResponseCount": 1,
+        "responseFrameCount": 2,
+        "responseFraming": "utf16_length_frames",
+        "apiIdEchoedInDetail": true,
+        "matchedTaskCapabilities": [
+          "image"
+        ],
+        "exactTaskPromptHashMatched": true,
+        "exactTaskTurnLocated": true,
+        "assistantTextStatus": {
+          "classification": "service_error_or_transient_failure",
+          "candidateTextCount": 2,
+          "mainTextLength": 19,
+          "mainTextSha256": "b37a703fbce583c572354a65fd0fe5235a67d8a7f36d904131d8cf9c7a13fe4d",
+          "allCandidateTextSha256": "c71dd6800e75ea574c3f318f6e99614e0950266700744692969809cf8f52b37c"
+        },
+        "assistantServiceStatus": {
+          "fieldCount": 0,
+          "classification": "no_named_status_field"
+        },
+        "taskMediaUrlCandidateCount": 0,
+        "permittedTaskMediaReferences": [],
+        "cdpObservedAssetOrigins": [],
+        "directTaskTurnAssetOrigins": [],
+        "blockedTaskMediaReferenceCount": 0,
+        "inlineArtifact": null,
+        "directAssetFetch": null,
+        "credentialPropagatedToDetail": true
+      },
+      {
+        "rowIndex": 2,
+        "timeWindowHint": "video",
+        "deltaFromWindowMidpointSeconds": 0.911,
+        "routeVisibleInCurrentHistoryList": true,
+        "routeBindingVerified": true,
+        "rawApiIdUsedInRequest": true,
+        "prefixRemovedFromRequest": false,
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "responseBytes": 106458,
+        "responseSha256": "572076e8a5ad59ccb7e5c9833d5df8001aea6707f6705723442ed93918766d8e",
+        "detailResponseCount": 1,
+        "responseFrameCount": 3,
+        "responseFraming": "utf16_length_frames",
+        "apiIdEchoedInDetail": true,
+        "matchedTaskCapabilities": [
+          "video"
+        ],
+        "exactTaskPromptHashMatched": true,
+        "exactTaskTurnLocated": true,
+        "assistantTextStatus": {
+          "classification": "assistant_text_present",
+          "candidateTextCount": 123,
+          "mainTextLength": 19,
+          "mainTextSha256": "202ac78503565e94f6f9851c14d0aef89a38e6635067963a0da894051a6f5764",
+          "allCandidateTextSha256": "10a221d8b9c3815a9ec18af6b0b5ee55ff7a0cc4b7d9e76441d45f7820f69d71"
+        },
+        "assistantServiceStatus": {
+          "fieldCount": 0,
+          "classification": "no_named_status_field"
+        },
+        "taskMediaUrlCandidateCount": 5,
+        "permittedTaskMediaReferences": [
+          {
+            "origin": "https://lh3.googleusercontent.com",
+            "pathFamily": "/gg/{id}",
+            "queryKeyNames": []
+          },
+          {
+            "origin": "https://contribution.usercontent.google.com",
+            "pathFamily": "/download",
+            "queryKeyNames": [
+              "c",
+              "filename",
+              "opi"
+            ]
+          },
+          {
+            "origin": "https://lh3.googleusercontent.com",
+            "pathFamily": "/gg/{id}",
+            "queryKeyNames": []
+          },
+          {
+            "origin": "https://contribution.usercontent.google.com",
+            "pathFamily": "/download",
+            "queryKeyNames": [
+              "c",
+              "filename",
+              "opi"
+            ]
+          },
+          {
+            "origin": "https://www.gstatic.com",
+            "pathFamily": "/images/branding/productlogos/gemini_2025_blue/v1/192px.svg",
+            "queryKeyNames": []
+          }
+        ],
+        "cdpObservedAssetOrigins": [
+          "https://contribution.usercontent.google.com",
+          "https://lh3.googleusercontent.com",
+          "https://www.gstatic.com"
+        ],
+        "directTaskTurnAssetOrigins": [
+          "https://lh3.googleusercontent.com",
+          "https://contribution.usercontent.google.com",
+          "https://www.gstatic.com"
+        ],
+        "blockedTaskMediaReferenceCount": 0,
+        "inlineArtifact": null,
+        "directAssetFetch": {
+          "status": "redirect_origin_unobserved",
+          "httpStatus": 302,
+          "redirects": [],
+          "artifact": null,
+          "credentialsSent": false
+        },
+        "credentialPropagatedToDetail": true
+      }
+    ],
+    "persistence": {
+      "rawApiIdsPersisted": false,
+      "expectedTaskTextPersisted": false,
+      "signedUrlValuesPersisted": false,
+      "detailResponseBodiesPersisted": false,
+      "sessionValuesPersisted": false
+    }
+  },
+  "persistence": {
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "rawApiIdsPersisted": false,
+    "expectedTaskTextPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "detailResponseBodiesPersisted": false
+  },
+  "recordedAt": "2026-10-05T20:13:02.138926+00:00",
+  "priorUiReadbackPhase": {
+    "receiptAvailable": true,
+    "detailReadCount": 5,
+    "verifiedArtifactCount": 1,
+    "videoArtifactSource": "browser_network",
+    "imageArtifactVerified": false,
+    "receiptPath": "/home/worker/work/provider-login-20261004/gemini-web-xhr-client/discovery/media-browser-readback-2026-10-06.json"
+  },
+  "detailReadAccounting": {
+    "priorUiDetailReads": 5,
+    "additionalDirectHttpDetailReads": 2,
+    "directHttpDetailReadLimit": 2
+  },
+  "directAssetCredentialPolicy": "no cookies or Gemini credentials sent to asset origins"
+}

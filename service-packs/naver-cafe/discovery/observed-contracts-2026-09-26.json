@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "observedAt": "2026-09-26T06:28:04.832Z",
+  "source": "supported CUA Chrome tab cdp capability, Network events and response bodies",
+  "sourcePage": "https://m.cafe.naver.com/ca-fe/web/cafes/serenacademmy/articles/21?useCafeId=false&tc",
+  "scope": {
+    "cafeId": 31714934,
+    "cafeSlug": "serenacademmy",
+    "articleId": 21,
+    "writes": false
+  },
+  "browserEvidence": {
+    "loggedIn": true,
+    "cafeMember": true,
+    "memberLevelName": "신규회원",
+    "articleReadable": true,
+    "downloadAllowed": true
+  },
+  "collector": {
+    "active": false,
+    "stoppedAt": "2026-09-26T06:28:22.083Z",
+    "ownedTabClosed": true,
+    "truncated": false
+  },
+  "requestHeaders": {
+    "Accept": "application/json, text/plain, */*",
+    "X-Cafe-Product": "mweb",
+    "Referer": "source page or cafe page"
+  },
+  "credentials": {
+    "storedValuesIncluded": false,
+    "rawTrafficSaved": false,
+    "minimalNamesIndependentlyVerified": [
+      "NID_AUT",
+      "NID_SES"
+    ]
+  },
+  "operations": [
+    {
+      "name": "identity",
+      "method": "GET",
+      "origin": "https://apis.cafe.naver.com",
+      "path": "/home/v1/member/identifier",
+      "queryFields": [
+        "cafeUrl"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "message.result",
+      "assertions": [
+        "loggedIn === true",
+        "nonempty userId",
+        "account hash matches expected account"
+      ],
+      "normalizedBodyBytes": 250,
+      "normalizedBodySha256": "3f1326c206439e06bcee56dd55818a90baedc8fb3050df065994832e9eccb628"
+    },
+    {
+      "name": "membership",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/CafeMemberInfo.json",
+      "queryFields": [
+        "cafeId"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "message.result",
+      "assertions": [
+        "cafeMember === true"
+      ],
+      "normalizedBodyBytes": 543,
+      "normalizedBodySha256": "34078144bfc74333331276ef5baadbbfee091563b6eed92e91b0f0559b177323"
+    },
+    {
+      "name": "article",
+      "method": "GET",
+      "origin": "https://article.cafe.naver.com",
+      "path": "/gw/v4/cafes/{cafeSlug}/articles/{articleId}",
+      "queryFields": [
+        "useCafeId",
+        "buid"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "result",
+      "resultFields": [
+        "cafeId",
+        "articleId",
+        "article",
+        "comments",
+        "cafe",
+        "user",
+        "attaches",
+        "authority"
+      ],
+      "normalization": "useCafeId=false; buid omission verified by independent HTTP replay",
+      "normalizedBodyBytes": 39230,
+      "normalizedBodySha256": "a035a81a3ec128a51628d2db61601ef11b684af66c9368372b3e83840b430285"
+    },
+    {
+      "name": "comments",
+      "method": "GET",
+      "origin": "https://article.cafe.naver.com",
+      "path": "/gw/v4/cafes/{cafeId}/articles/{articleId}/comments",
+      "queryFields": [
+        "requestFrom",
+        "orderBy",
+        "fromPopular"
+      ],
+      "observedDefaults": {
+        "requestFrom": "B",
+        "orderBy": "asc",
+        "fromPopular": "false"
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "result",
+      "resultFields": [
+        "comments.items",
+        "displayCommentCount",
+        "hasPrev",
+        "hasNext",
+        "user"
+      ],
+      "normalizedBodyBytes": 123662,
+      "normalizedBodySha256": "bbeba0bc8607b99040675af2fb087ed86b65f241f00a2911a3aa88570bdab34a"
+    },
+    {
+      "name": "menus",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/SideMenuList",
+      "queryFields": [
+        "cafeId"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "message.result",
+      "resultFields": [
+        "menus",
+        "linkMenus"
+      ],
+      "normalizedBodyBytes": 10688,
+      "normalizedBodySha256": "d3c755054f5718129c6afd301162b6f712913bc95c60c61e9ca2fe96f692d67d"
+    },
+    {
+      "name": "articles",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/ArticleListV3dot1.json",
+      "queryFields": [
+        "search.clubid",
+        "search.queryType",
+        "search.page",
+        "search.perPage",
+        "ad",
+        "uuid",
+        "adUnit",
+        "newPopularArticle"
+      ],
+      "observedDefaults": {
+        "search.queryType": "lastArticle",
+        "search.page": 1,
+        "search.perPage": 50,
+        "newPopularArticle": true
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "message.result",
+      "normalization": "ad, uuid, adUnit omitted; independently returned 50 direct article objects instead of ARTICLE/AD wrappers",
+      "normalizedBodyBytes": 87422,
+      "normalizedBodySha256": "e225b02c422d3c0fd7c34f3f6b313c5d95b5d4722794eac88d35029d88aaa409",
+      "independentNormalizationVerified": "ad, uuid, adUnit and newPopularArticle omitted; pages 1 and 2 return 50 articles each"
+    },
+    {
+      "name": "boardArticles",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/ArticleListV3dot1.json",
+      "queryFields": [
+        "search.clubid",
+        "search.queryType",
+        "search.menuid",
+        "search.page",
+        "search.perPage",
+        "ad",
+        "uuid",
+        "adUnit"
+      ],
+      "observedDefaults": {
+        "search.menuid": 1,
+        "search.queryType": "lastArticle",
+        "search.page": 1,
+        "search.perPage": 50
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "message.result",
+      "normalizedBodyBytes": 15167,
+      "normalizedBodySha256": "e7189d57298377101a3370bca8b8bbee017ce73fd030ebea581905892fad3c28"
+    },
+    {
+      "name": "search",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe-search-api/v2/cafes/{cafeId}/search/articles",
+      "queryFields": [
+        "query",
+        "searchBy",
+        "sortBy",
+        "page",
+        "perPage",
+        "adUnit",
+        "ad",
+        "views"
+      ],
+      "observedOptionalFields": [
+        "menuId"
+      ],
+      "observedDefaults": {
+        "query": "소싱",
+        "searchBy": "0",
+        "sortBy": "RECENCY",
+        "page": 1,
+        "perPage": 20,
+        "views": "MEMBER_LEVEL,COUNT,SALE_INFO,CAFE_MENU"
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "resultPath": "result",
+      "resultFields": [
+        "articleList",
+        "pageInfo",
+        "nextRequestParameter"
+      ],
+      "normalizedBodyBytes": 55046,
+      "normalizedBodySha256": "d4a2b9c14b60c4765e1cd545bd0085bb2daf89670324b14c1065f44f0b7d1ecc",
+      "independentNormalizationVerified": "ad and adUnit omitted; views retained; 20 articles and totalArticleCount 876"
+    }
+  ],
+  "attachmentLink": {
+    "discoveryType": "article JSON attaches[].url",
+    "origin": "https://downapi.cafe.naver.com",
+    "pathTemplate": "/v1.0/cafes/article/file/{opaqueFileId}/download",
+    "fileName": "힘찬 전자책 - 소싱편.pdf",
+    "declaredBytes": 15259748,
+    "requestReplay": "see live-replay receipt; link observation alone does not prove download",
+    "independentReplay": {
+      "httpStatus": 200,
+      "mimeType": "application/octet-stream",
+      "bytes": 15259748,
+      "sha256": "8ee88c12275f23886aadf0b74e316a6819272c2ee11d2517e10086de865ef778",
+      "pdfSignatureAndEofChecked": true,
+      "redirected": false,
+      "browserUsed": false
+    }
+  },
+  "browserFingerprints": {
+    "articleHtmlSha256": "b5830dce083bdd1a067e38e0fa2a9218193c04b4e3ae7f06ed8d9855245e7a55",
+    "commentsProjection": "JSON.stringify(items.map(x => ({id:x.id,refId:x.refId,content:x.content})))",
+    "commentsSha256": "08de78d857a1c1a90662fed38ce05e882ad275f218ce910f3bd5f0da0bdc3112",
+    "commentCount": 83,
+    "menuCount": 27,
+    "homeArticleCount": 50,
+    "board1ArticleCount": 6,
+    "searchQuery": "소싱",
+    "searchTotal": 876
+  },
+  "excluded": [
+    "ads",
+    "analytics",
+    "income-share",
+    "alarm changes",
+    "posting",
+    "comment writes",
+    "member management",
+    "login/password changes"
+  ]
+}

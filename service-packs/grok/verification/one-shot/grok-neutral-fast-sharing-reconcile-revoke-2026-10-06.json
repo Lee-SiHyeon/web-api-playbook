@@ -1,0 +1,94 @@
+{
+  "schema": "grok-sharing-reconcile-revoke-v1",
+  "startedAt": "2026-10-06T11:53:36.990Z",
+  "sourceBeforeImports": {
+    "src/client.mjs": "fbc42db06aada43768e7b20f10e5279a62414be0b57be90682164f2a1c51534c",
+    "src/grok-conversations.mjs": "97b5896c9413bc961d09938b12041e70bbd6c731d1b875e1de1a3e32239f0a17",
+    "src/runtime.mjs": "9a98d7e64f3b5cf7128dc421420c31d3cff9f0e6a5507a84742a65182284e34e",
+    "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+    "src/journal.mjs": "eb5ae0dd987ca2b9551a0fe007ab853e0c671b4d6173907bd9e15a2a2f8ccef7",
+    "src/authenticated-chrome-fetch.mjs": "b4db2f6cb2d601f40526bd0690d63b165b1ad3f8c26f32c2e5c386717213bf34",
+    "scripts/authenticated-chrome-transport.py": "fd538ac05d96585630bee2ff3e243ddbed2f4b1f0dc0f0868e658a252e9a8a58",
+    "contracts/grok-web.v1.json": "e5e123d62e8525f8705ee4a8b41f952c63a518498df6ec4627bdf5cf0071c5db"
+  },
+  "originalCreateReceiptPath": "verification/one-shot/grok-neutral-fast-sharing-lifecycle-2026-10-06.json",
+  "createRequestsRepeated": 0,
+  "revokeAttempts": 1,
+  "rawIdentifiersBodiesCredentialsPersisted": false,
+  "ownerVerified": true,
+  "scopedSharing": {
+    "status": 200,
+    "mime": "application/json",
+    "bytes": 516,
+    "rawSha256": "6070075be7eaf0c3466262c91d740ebdf4b03086aafb4ed82a0ad36de42de535",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "f7f7c065adeabde0b71dfc36cd83970b117e6a7268fe21b89d8069c987c58969"
+  },
+  "issuedLink": {
+    "status": 200,
+    "mime": "application/json",
+    "bytes": 3594,
+    "rawSha256": "c05f58a3b8eededc08166621ef838b3bebbb066a46e159e3b21f31e1627c9ae8",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "af6292d6ecdfcd231df956090aaa36bc12a2133f553c1b6cda75b62206ed050e"
+  },
+  "facts": {
+    "issuedAliasMatchesPublicId": true,
+    "recordIdDiffersFromPublicAlias": true,
+    "recordIdPresent": true,
+    "sameConversation": true,
+    "sameResponse": true,
+    "isPublic": true,
+    "indexingDisabled": true
+  },
+  "originalCreateReceiptSha256": "63e687f04c227d71d2d6c8097e35d52a4e67c8a5fefed27370a5e1fc52417441",
+  "createJournalReconciled": true,
+  "revoke": {
+    "state": "completed",
+    "verified": true,
+    "httpStatus": 200,
+    "readbackStatus": 200,
+    "shareLinkAbsent": true,
+    "responseReceipt": {
+      "operationId": "conversation.share.revoke",
+      "observedAt": "2026-10-06T11:53:45.888Z",
+      "method": "DELETE",
+      "requestDigest": "9529806063329ca7715dc633eef5d546bf458d35b656bc78bf58729f4f4ec48b",
+      "intentDigest": "e970204a97ec053e37d922565eb906a0fdede4fab7e7a72799e3d33d81d8835f",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 2,
+      "responseDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "responseDigestKind": "raw_http_body",
+      "responseTopLevelFieldNames": [],
+      "requestHeaderNames": [
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "transportHttpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "businessResponsePersisted": false
+    }
+  },
+  "independentAfterRevoke": {
+    "status": 200,
+    "mime": "application/json",
+    "bytes": 111,
+    "rawSha256": "1ffcc711e2fdadb42988cf1b13d5267a314967a652500c80ff9268fe456c8615",
+    "rawDigestKind": "raw_http_body",
+    "requestDigest": "f7f7c065adeabde0b71dfc36cd83970b117e6a7268fe21b89d8069c987c58969"
+  },
+  "originalShareAbsent": true,
+  "outcome": "verified",
+  "finishedAt": "2026-10-06T11:53:47.128Z",
+  "sourceStable": true
+}

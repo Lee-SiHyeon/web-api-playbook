@@ -30,9 +30,11 @@
 | 제휴 링크 | 쿠팡 파트너스, 네이버 브랜드커넥트, 마이리얼트립, 애드픽, 링크프라이스 상품 검색·링크 발급 |
 | 여행 | 아고다 날짜별 요금·행사, 쿠팡 트래블, 마이리얼트립 투어·티켓 검색 |
 | SNS·크리에이터 | [X·Reddit](service-packs/social-x/README.md), [Threads](service-packs/threads/README.md), 인포크 프로필·카드 발행, YouTube Studio 업로드 |
+| AI 웹 클라이언트 | [Gemini](service-packs/gemini/README.md), [Grok](service-packs/grok/README.md), [ChatGPT](service-packs/chatgpt/README.md), [Flow](service-packs/google-flow/README.md), [Whisk](service-packs/whisk/README.md) |
 | 운영 | Gabia 도메인·DNS 조회 |
 
 전체 목록은 [상세 가이드](docs/guide.md#무엇이-들어-있나)와 `npm run services`로 볼 수 있습니다.
+다른 저장소에서 옮긴 클라이언트와 고정 버전·실행 경계는 [통합 현황](references/repository-consolidation.md)에 있습니다.
 
 ## 빠른 시작
 
@@ -67,6 +69,8 @@ node scripts/playbook.mjs describe --profile=templates/profile-v2.example.json
 
 ```sh
 npm run services                                       # 연결된 서비스와 작업 목록 (네트워크 요청 없음)
+npm run clients                                        # 이식한 native CLI·라이브러리와 실행 모드
+npm run --silent gemini -- help
 node scripts/playbook.mjs run --service=ably --operation=categories
 ```
 
@@ -105,6 +109,8 @@ AI 에이전트(Codex 등)에서 쓰려면 [SKILL.md](SKILL.md)를 읽히거나 
 ```sh
 npm run test:operations
 npm run test:services
+npm run test:client-packs
+npm run audit:consolidation
 npm test   # 전체 회귀. Python 3 필요
 ```
 

@@ -1,0 +1,572 @@
+{
+  "schemaVersion": 1,
+  "packagedOn": "2026-10-23",
+  "donor": {
+    "repository": "https://github.com/Lee-SiHyeon/affiliate-content-automation.git",
+    "branch": "main",
+    "commit": "34cd396f9f2ae2c93d58f57dbb501d34d90d7b6e",
+    "sparseCheckoutPaths": [
+      "src/",
+      "test/",
+      "config/",
+      "package.json",
+      "package-lock.json",
+      "README.md",
+      "docs/"
+    ],
+    "businessDataKnowledgeIndexRawLogsAndSessionFilesCopied": false
+  },
+  "overlapReview": {
+    "tistoryConsolidationRef": "153e5e127f1e3d683cf085b9f9fa27c881f917b3",
+    "coveredDonorModules": [
+      "src/tistory-draft.mjs",
+      "src/tistory-publication-context.mjs",
+      "src/tistory-publish.mjs",
+      "src/tistory-content-update.mjs",
+      "src/tistory-private-comment.mjs"
+    ],
+    "decision": "not duplicated in automation pack; represented by service-packs/tistory/lib/workflows"
+  },
+  "scope": {
+    "httpSurfaces": [
+      "Coupang category root and lazy branch",
+      "Coupang Partners dashboard, search, product link and daily report",
+      "Coupang product review sampling",
+      "Tistory aggregate and selected-post statistics",
+      "Tistory sanitized paginated comment intake",
+      "Tistory public publication marker check"
+    ],
+    "remainingDonorAdapters": [
+      "Hourly intake scheduling, intake-review scheduling, publication-health scheduling, and price-maintenance scheduling depend on OPERATIONS.json, case records, knowledge-index.json and the donor executor; their HTTP-facing clients/workflows are migrated.",
+      "Standalone visual article checks use Playwright/browser automation and are outside this HTTP pack."
+    ],
+    "readOnlyListingAndHelp": "Use only package.json, README.md and docs/api-contracts.md, or node scripts/help.mjs. Every CLI --help exits before stdin, environment, or network access. Do not import or execute clients for list/help."
+  },
+  "runtime": {
+    "node": "24.21.0",
+    "minimum": "24",
+    "dependencies": [],
+    "entrypoints": [
+      "scripts/category-tree.mjs",
+      "scripts/category-branch.mjs",
+      "scripts/partners.mjs",
+      "scripts/daily-report.mjs",
+      "scripts/reviews.mjs",
+      "scripts/measurements.mjs",
+      "scripts/intake-poll.mjs",
+      "scripts/publication-health.mjs",
+      "scripts/price-check.mjs",
+      "scripts/affiliate-link.mjs",
+      "scripts/help.mjs",
+      "scripts/cli.mjs"
+    ],
+    "testGlob": "tests/*.test.mjs",
+    "testCommand": "node --test"
+  },
+  "verification": {
+    "command": "/home/worker/.nad-scratch/gabia-playbook-node24/node_modules/node/bin/node --test",
+    "result": "PASS: 37 tests",
+    "syntaxCheck": "PASS: every .mjs file under src/, scripts/, and tests/ passed node --check",
+    "credentialFreeHelp": "PASS: static help and all CLI --help commands exited successfully with no credentials or stdin",
+    "liveServiceCalls": false,
+    "externalWrites": false
+  },
+  "sourceFiles": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "d08481616ba2d1279318258d8ec318d429440a698ca9c19dab1d70019e1a9384"
+    },
+    {
+      "path": "package.json",
+      "sha256": "607963687566aa756f64d5d6b0c05c852b9f2e172a164ede52aba4a6d8de673e"
+    },
+    {
+      "path": "src/affiliate-link.mjs",
+      "sha256": "230c5c29fa9c96466192f2af6eeb7a9c3b70490a18c7c553839467b56b66ca9e"
+    },
+    {
+      "path": "src/category-branch.mjs",
+      "sha256": "331246247a384f5d5d99627951de8eab06126ae19603473ddcd40704948acc9f"
+    },
+    {
+      "path": "src/category-client.mjs",
+      "sha256": "e0d4f62449b6faac0e5ce456bbae958de96a726af930887e084429709350e754"
+    },
+    {
+      "path": "src/category-frontier.mjs",
+      "sha256": "266578f2ba19630fe636bbde77ea25d59a527ccd9e0441dca6ec99f703ab7edb"
+    },
+    {
+      "path": "src/category-listing-decoder.mjs",
+      "sha256": "5301f0cd10b0aae2f84dbc97033621c45e5dcb1c0ff251b403e6283ff23f9b4d"
+    },
+    {
+      "path": "src/category-refresh.mjs",
+      "sha256": "4ab24749312bb42f8f098aba8adb967222680374383499ecfee68b01f6512ef1"
+    },
+    {
+      "path": "src/measurement-snapshot.mjs",
+      "sha256": "e1dc341c6ef7eb6d46687132996d0e18535e1d102a2ffcc06afa58206632b297"
+    },
+    {
+      "path": "src/partners-client.mjs",
+      "sha256": "8976a91da1c1dd50d78772a24ecb6b1ad8a7283b9e25f54645c632e37afb6a25"
+    },
+    {
+      "path": "src/partners-report.mjs",
+      "sha256": "ddbbac845a317c1928b186f44042de130b273b8215b06dd51a7599d93d80fc06"
+    },
+    {
+      "path": "src/price-maintenance.mjs",
+      "sha256": "d6e9f081a7e03119708373cfc0daa0b66c1a86e256b30a5652879bc4bd272210"
+    },
+    {
+      "path": "src/publication-health.mjs",
+      "sha256": "3d9bcaea8fd7018cc25c95f43197867e12d0e11248162005e90a98da585a39a1"
+    },
+    {
+      "path": "src/request-intake.mjs",
+      "sha256": "7d0deb1bc4c91826e13c1111778c5317a857c9d63b05db1bac0830d9876be590"
+    },
+    {
+      "path": "src/review-client.mjs",
+      "sha256": "872e2c3b13b3a76c51cb63861e4c2ce3b1eb39f98b02212ea9f5c82d2f2699cb"
+    },
+    {
+      "path": "test/category-branch.test.mjs",
+      "sha256": "b54de03445f1b35e23d1ed472554e6207a82a7e36f0e6d8d71eaa2932dd3b273"
+    },
+    {
+      "path": "test/category-frontier.test.mjs",
+      "sha256": "06e34d0bb667e80af2df70c2153f89cd2dcf6617cf5f91dd38df9b572eacf6ad"
+    },
+    {
+      "path": "test/category-listing-decoder.test.mjs",
+      "sha256": "c23a00d8a0955f614276742358871b359eca32e4b86e6e7d006514072f631367"
+    },
+    {
+      "path": "test/category-refresh.test.mjs",
+      "sha256": "dfa45bb081b49e7a5206a7b70f587eabedd9b8dcf74397ac6a3e5db044d8b018"
+    },
+    {
+      "path": "test/measurement-snapshot.test.mjs",
+      "sha256": "ab8300790db256a642af2f5b3cc00502e53850cb4716fb37f5ff66475083cfb9"
+    },
+    {
+      "path": "test/partners-report.test.mjs",
+      "sha256": "2ae3800a12a903d0a4f9cd5456a19144681d71e7b63cbe7f5a8d82a839d8e930"
+    },
+    {
+      "path": "test/price-maintenance.test.mjs",
+      "sha256": "42bf637167da23e68efe75ca339d252bc1aa3825d68eb72520a8d9e0d84f33a8"
+    },
+    {
+      "path": "test/publication-health.test.mjs",
+      "sha256": "62f541ac4b3378e101161185792a19c6ece216e876ba7f8fcf44f2f235f3893d"
+    },
+    {
+      "path": "test/request-intake.test.mjs",
+      "sha256": "84b4a8097d34d0581214b399f6098177ca2e8b7a95aebd7972796e333df13d59"
+    }
+  ],
+  "outputFiles": [
+    {
+      "path": "service-packs/automation/.gitignore",
+      "sha256": "6395302c1493c783b06b33158d7d95a7b279088cfd32917a4562adaef7187589",
+      "derivedFrom": [],
+      "modification": "New pack-local exclusions for credentials, runtime receipts, raw logs and local data."
+    },
+    {
+      "path": "service-packs/automation/README.md",
+      "sha256": "43d230b420648d4fe9d66ba4d9183f1b899101a177cc1a0625ec4957c90d27e8",
+      "derivedFrom": [
+        "AGENTS.md",
+        "package.json"
+      ],
+      "modification": "New portable usage and credential boundaries derived from the migrated entrypoints."
+    },
+    {
+      "path": "service-packs/automation/docs/api-contracts.md",
+      "sha256": "026a4fccf5de68ab96f1f604cb74a28304e473c73153d395224255c5cb7888e9",
+      "derivedFrom": [
+        "AGENTS.md",
+        "package.json",
+        "src/affiliate-link.mjs",
+        "src/category-branch.mjs",
+        "src/category-client.mjs",
+        "src/category-frontier.mjs",
+        "src/category-listing-decoder.mjs",
+        "src/category-refresh.mjs",
+        "src/measurement-snapshot.mjs",
+        "src/partners-client.mjs",
+        "src/partners-report.mjs",
+        "src/price-maintenance.mjs",
+        "src/publication-health.mjs",
+        "src/request-intake.mjs",
+        "src/review-client.mjs",
+        "test/category-branch.test.mjs",
+        "test/category-frontier.test.mjs",
+        "test/category-listing-decoder.test.mjs",
+        "test/category-refresh.test.mjs",
+        "test/measurement-snapshot.test.mjs",
+        "test/partners-report.test.mjs",
+        "test/price-maintenance.test.mjs",
+        "test/publication-health.test.mjs",
+        "test/request-intake.test.mjs"
+      ],
+      "modification": "New contract inventory, Tistory overlap, queue omissions, and evidence boundaries."
+    },
+    {
+      "path": "service-packs/automation/package.json",
+      "sha256": "d2fff6b0bfd6d7559ecbf1711fc006d9dcac162f12621e8e3b4a76140e364e8a",
+      "derivedFrom": [
+        "package.json"
+      ],
+      "modification": "New dependency-free Node 24 pack manifest with test and static-help commands; donor browser/rendering dependencies are not used."
+    },
+    {
+      "path": "service-packs/automation/scripts/affiliate-link.mjs",
+      "sha256": "77394519a69feed83f27382cd4961b56019609854cb981fd677b3188fc2fa51a",
+      "derivedFrom": [
+        "src/affiliate-link.mjs"
+      ],
+      "modification": "New stdin CLI wrapper over the journal-first link operation; --help exits before stdin/env/network."
+    },
+    {
+      "path": "service-packs/automation/scripts/category-branch.mjs",
+      "sha256": "23294f296cea819ec449917fa967485ee3cb06343157b4c7e33617f473fc8455",
+      "derivedFrom": [
+        "src/category-branch.mjs",
+        "src/category-client.mjs"
+      ],
+      "modification": "New bounded traversal CLI; --help exits before stdin/env/network."
+    },
+    {
+      "path": "service-packs/automation/scripts/category-tree.mjs",
+      "sha256": "a88975ac769514df32c3b2eb84e2fef8757e6d8a0279b77ba2890aa279a6fd49",
+      "derivedFrom": [
+        "src/category-client.mjs",
+        "src/category-refresh.mjs"
+      ],
+      "modification": "New explicit-output category refresh CLI; --help exits before env/network."
+    },
+    {
+      "path": "service-packs/automation/scripts/daily-report.mjs",
+      "sha256": "04141d344aecc56a5a408c86e2264e5f97c8959ef393e44ead63fb74dd7fa398",
+      "derivedFrom": [
+        "src/partners-report.mjs"
+      ],
+      "modification": "New stdin CLI wrapper for dated account report collection; credential-free --help."
+    },
+    {
+      "path": "service-packs/automation/scripts/help.mjs",
+      "sha256": "b914ab57ea6e11592f8ddc8c2c3cf52d38a808586f936fdfac2e4af2daa55577",
+      "derivedFrom": [
+        "AGENTS.md"
+      ],
+      "modification": "Static help reads only the README command section and imports no clients or credentials."
+    },
+    {
+      "path": "service-packs/automation/scripts/intake-poll.mjs",
+      "sha256": "8a17f64f04f7973459d9688f27a712a065b379f6d0ae25f40ed5e11872b67d5f",
+      "derivedFrom": [
+        "src/request-intake.mjs"
+      ],
+      "modification": "New CLI for sanitized paginated comment intake; no queue/executor coupling."
+    },
+    {
+      "path": "service-packs/automation/scripts/measurements.mjs",
+      "sha256": "4467b16d8cda61c92018b5005065f1c421fa52938e8a945a024351bdca8fc21d",
+      "derivedFrom": [
+        "src/measurement-snapshot.mjs"
+      ],
+      "modification": "New explicit-output CLI with optional post IDs."
+    },
+    {
+      "path": "service-packs/automation/scripts/partners.mjs",
+      "sha256": "c557e668074090546a768dc3ac951f32c61828c3bc104123b7cf6d914d05844f",
+      "derivedFrom": [
+        "src/partners-client.mjs",
+        "src/affiliate-link.mjs"
+      ],
+      "modification": "New stdin CLI; metadata-only default; rejects unjournalled productLink and directs callers to affiliate-link."
+    },
+    {
+      "path": "service-packs/automation/scripts/price-check.mjs",
+      "sha256": "7278ffadc4f37dd9d2def453ee1dad4453a790bf92b5741b4d62dffdfc4c1cf5",
+      "derivedFrom": [
+        "src/price-maintenance.mjs"
+      ],
+      "modification": "New stdin CLI wrapper for local exact-option observations."
+    },
+    {
+      "path": "service-packs/automation/scripts/publication-health.mjs",
+      "sha256": "ebdceaf2c75b68ad5c176035110f811d3ddc081d0f1e5ba1469ea92e6af28c6f",
+      "derivedFrom": [
+        "src/publication-health.mjs"
+      ],
+      "modification": "New stdin CLI wrapper for unauthenticated public marker checks."
+    },
+    {
+      "path": "service-packs/automation/scripts/reviews.mjs",
+      "sha256": "b7df07e3eca8319de4d10a1bba5fe80e8921bf86f4947d18d7b36907e1381b1b",
+      "derivedFrom": [
+        "src/review-client.mjs"
+      ],
+      "modification": "New stdin CLI wrapper for bounded review sampling."
+    },
+    {
+      "path": "service-packs/automation/scripts/usage.mjs",
+      "sha256": "e77bacf03718afad0f923d2d6399dfcb71a969f561ac1943df98edde46004a14",
+      "derivedFrom": [],
+      "modification": "New static usage guard used by every CLI before reading stdin or accessing env/network."
+    },
+    {
+      "path": "service-packs/automation/src/affiliate-link.mjs",
+      "sha256": "84e75590ec2e84d643c7878bc7ef0bf441c4bac22df1ab4bbd192978ed84d7c1",
+      "derivedFrom": [
+        "src/affiliate-link.mjs",
+        "src/partners-client.mjs"
+      ],
+      "modification": "Root-parameterized function replacing the fixed-path stdin script; preserves durable intent, single POST, generated reuse and destinationVerified=false; shields request errors."
+    },
+    {
+      "path": "service-packs/automation/src/category-branch.mjs",
+      "sha256": "331246247a384f5d5d99627951de8eab06126ae19603473ddcd40704948acc9f",
+      "derivedFrom": [
+        "src/category-branch.mjs"
+      ],
+      "modification": "Copied unchanged: lock-protected resumable lazy traversal and bounded coverage."
+    },
+    {
+      "path": "service-packs/automation/src/category-client.mjs",
+      "sha256": "25169e418a0f2b4881c68a4ba334bf25877371fa539e1f0e78bfca9b663e5ded",
+      "derivedFrom": [
+        "src/category-client.mjs",
+        "src/category-frontier.mjs"
+      ],
+      "modification": "Preserves endpoint/query/header/schema contracts; adds injectable fetch/clock and removes embedded CLI."
+    },
+    {
+      "path": "service-packs/automation/src/category-frontier.mjs",
+      "sha256": "266578f2ba19630fe636bbde77ea25d59a527ccd9e0441dca6ec99f703ab7edb",
+      "derivedFrom": [
+        "src/category-frontier.mjs"
+      ],
+      "modification": "Copied unchanged: navigation graph, lazy edge merge and preserved frontier state."
+    },
+    {
+      "path": "service-packs/automation/src/category-listing-decoder.mjs",
+      "sha256": "5301f0cd10b0aae2f84dbc97033621c45e5dcb1c0ff251b403e6283ff23f9b4d",
+      "derivedFrom": [
+        "src/category-listing-decoder.mjs"
+      ],
+      "modification": "Copied unchanged: narrow RSC parser with unverified final-page boundary."
+    },
+    {
+      "path": "service-packs/automation/src/category-refresh.mjs",
+      "sha256": "14d66dae90804e21264e39ceb5f167d2d25fb85650297623497c0f5f06d464a7",
+      "derivedFrom": [
+        "src/category-refresh.mjs",
+        "src/category-frontier.mjs"
+      ],
+      "modification": "Preserves atomic lock/checkpoint semantics; removes implicit default-output CLI."
+    },
+    {
+      "path": "service-packs/automation/src/intake-collector.mjs",
+      "sha256": "ae1412b14c4d34db052390aa73abadf4cfd37bea2943b7fb394f37770b1fa874",
+      "derivedFrom": [
+        "src/request-intake.mjs",
+        "src/measurement-snapshot.mjs"
+      ],
+      "modification": "Ports hash-only merge, revision matcher and paginated GET; validates configurable Tistory origin; adds fetch/time/UUID injection; omits donor queue adapters."
+    },
+    {
+      "path": "service-packs/automation/src/measurement-snapshot.mjs",
+      "sha256": "dc09dcdc1ff257e9c7fa40d8c987ead8984afb2791244acea58cfa54315151dd",
+      "derivedFrom": [
+        "src/measurement-snapshot.mjs"
+      ],
+      "modification": "Preserves metrics and GET contracts; injects fetch/time/UUID; removes implicit CLI; validates configurable TISTORY_BLOG_ORIGIN instead of embedding donor blog."
+    },
+    {
+      "path": "service-packs/automation/src/partners-client.mjs",
+      "sha256": "3c73e3ebbf7cb10326f519dcb3e4067202fb0727ca40b8eb0a4b73e3e73cc8b2",
+      "derivedFrom": [
+        "src/partners-client.mjs",
+        "src/partners-report.mjs",
+        "src/price-maintenance.mjs"
+      ],
+      "modification": "Refactors stdin script into injectable operation library while preserving endpoint, method, headers, body and response checks."
+    },
+    {
+      "path": "service-packs/automation/src/partners-report.mjs",
+      "sha256": "c8a63297722ea3162ec728f3172214169385f3cb19d8059ea0057d270a89a3ba",
+      "derivedFrom": [
+        "src/partners-report.mjs",
+        "src/partners-client.mjs"
+      ],
+      "modification": "Preserves date filters and response decoder; uses shared transport and injectable fetch/time/UUID."
+    },
+    {
+      "path": "service-packs/automation/src/partners-transport.mjs",
+      "sha256": "ea6b12c36f1823a45f420f7ff5a5e4fa054aeec4384a89c0127081f46711f295",
+      "derivedFrom": [
+        "src/partners-client.mjs",
+        "src/partners-report.mjs",
+        "src/price-maintenance.mjs"
+      ],
+      "modification": "New shared Partners transport preserving observed headers, manual redirects, JSON bodies and injection."
+    },
+    {
+      "path": "service-packs/automation/src/price-maintenance.mjs",
+      "sha256": "4bff22f9046ad46d961ddcb0db868f642c2d74f163370318060c046fe5377ef2",
+      "derivedFrom": [
+        "src/price-maintenance.mjs",
+        "src/partners-client.mjs"
+      ],
+      "modification": "Preserves exact option comparisons, first-page search and local receipt; shares transport and adds injection; omits donor scheduler."
+    },
+    {
+      "path": "service-packs/automation/src/publication-health.mjs",
+      "sha256": "5bb06126583f66ee0394890f97d9221ac20bb889830b530ff09c036b8c8b566c",
+      "derivedFrom": [
+        "src/publication-health.mjs",
+        "src/measurement-snapshot.mjs"
+      ],
+      "modification": "Ports public marker check and unauthenticated GET receipt; validates configured origin and injects fetch/time/UUID; omits scheduler."
+    },
+    {
+      "path": "service-packs/automation/src/review-client.mjs",
+      "sha256": "939ae3a3892625b042f72226f34ad51ec69b6612bd9c8b7f20c6b9308efbb036",
+      "derivedFrom": [
+        "src/review-client.mjs"
+      ],
+      "modification": "Refactors stdin script into injectable function; keeps bounded samples and hash-only evidence default."
+    },
+    {
+      "path": "service-packs/automation/tests/affiliate-link.test.mjs",
+      "sha256": "ca980946527a811f4dc7d18bcec7b8e81115401b9735f64e56443ebdbfa2f084",
+      "derivedFrom": [
+        "src/affiliate-link.mjs",
+        "src/partners-client.mjs"
+      ],
+      "modification": "New offline tests for intent-before-POST, reuse, and no automatic retry after uncertain issuance."
+    },
+    {
+      "path": "service-packs/automation/tests/category-branch.test.mjs",
+      "sha256": "b54de03445f1b35e23d1ed472554e6207a82a7e36f0e6d8d71eaa2932dd3b273",
+      "derivedFrom": [
+        "test/category-branch.test.mjs"
+      ],
+      "modification": "Copied unchanged: atomic checkpoints, bounded traversal, resume and failure behavior."
+    },
+    {
+      "path": "service-packs/automation/tests/category-client.test.mjs",
+      "sha256": "d7a8d00c2e81f38724b16805aca0a27ef135f5a075badc587e8238ad7bddfd92",
+      "derivedFrom": [
+        "src/category-client.mjs"
+      ],
+      "modification": "New stubbed-HTTP tests for URL, query, headers, scope and failures."
+    },
+    {
+      "path": "service-packs/automation/tests/category-frontier.test.mjs",
+      "sha256": "06e34d0bb667e80af2df70c2153f89cd2dcf6617cf5f91dd38df9b572eacf6ad",
+      "derivedFrom": [
+        "test/category-frontier.test.mjs"
+      ],
+      "modification": "Copied unchanged: graph edges and frontier merge behavior."
+    },
+    {
+      "path": "service-packs/automation/tests/category-listing-decoder.test.mjs",
+      "sha256": "c23a00d8a0955f614276742358871b359eca32e4b86e6e7d006514072f631367",
+      "derivedFrom": [
+        "test/category-listing-decoder.test.mjs"
+      ],
+      "modification": "Copied unchanged: RSC references, exact-option identity and pagination boundaries."
+    },
+    {
+      "path": "service-packs/automation/tests/category-refresh.test.mjs",
+      "sha256": "dfa45bb081b49e7a5206a7b70f587eabedd9b8dcf74397ac6a3e5db044d8b018",
+      "derivedFrom": [
+        "test/category-refresh.test.mjs"
+      ],
+      "modification": "Copied unchanged: failure preservation and concurrent refresh lock."
+    },
+    {
+      "path": "service-packs/automation/tests/help.test.mjs",
+      "sha256": "96c3847f730efa6f1d52017eb9a12b25b5bd26400a6e84bd6869eafa34079fa2",
+      "derivedFrom": [
+        "AGENTS.md"
+      ],
+      "modification": "New smoke test verifies static help and every CLI --help exit with no credentials or stdin."
+    },
+    {
+      "path": "service-packs/automation/tests/intake-collector.test.mjs",
+      "sha256": "aecaf67dc41e2af2bd2d08e99ade6a6772018b037f27bb33d47ecbf3aaca97e0",
+      "derivedFrom": [
+        "test/request-intake.test.mjs",
+        "src/request-intake.mjs"
+      ],
+      "modification": "Offline tests for page walk, sanitized persistence, deduplication and changed revisions; excludes operator queue tests."
+    },
+    {
+      "path": "service-packs/automation/tests/measurement-snapshot.test.mjs",
+      "sha256": "8872fbd471068871b9e1ec16064d4c54a6d6c9c28b6c91f8191525b42a74dab2",
+      "derivedFrom": [
+        "test/measurement-snapshot.test.mjs",
+        "src/measurement-snapshot.mjs"
+      ],
+      "modification": "Derived decoder and HTTP tests cover no credential persistence and strict configured-origin guard."
+    },
+    {
+      "path": "service-packs/automation/tests/partners-client.test.mjs",
+      "sha256": "6b2fc9e3d2517acb1ba1690c65a296c898e2b88380eb45591f2d3f1d8c12b3e9",
+      "derivedFrom": [
+        "src/partners-client.mjs"
+      ],
+      "modification": "New stubbed-HTTP tests for operation contracts, output policy and schema failures."
+    },
+    {
+      "path": "service-packs/automation/tests/partners-report.test.mjs",
+      "sha256": "d1f2c1cbcee0a0009cb7e60180b784a926db741525baa454c62e514e9fda77ef",
+      "derivedFrom": [
+        "test/partners-report.test.mjs",
+        "src/partners-report.mjs"
+      ],
+      "modification": "Retains donor decoder tests; adds offline POST and persisted receipt checks."
+    },
+    {
+      "path": "service-packs/automation/tests/price-maintenance.test.mjs",
+      "sha256": "498197df3af50b44ae26971153f7595376c07ac079aa31a9f078fcc6e6faf465",
+      "derivedFrom": [
+        "test/price-maintenance.test.mjs",
+        "src/price-maintenance.mjs"
+      ],
+      "modification": "Derived offline tests cover option matching, request shape, query cache and sanitized failure receipts; omits executor queue integration tests."
+    },
+    {
+      "path": "service-packs/automation/tests/publication-health.test.mjs",
+      "sha256": "014ff7b4a4a508e0bf0b6e04e4dfa3663ab1ca13e6bde0046e195300fba7b5df",
+      "derivedFrom": [
+        "test/publication-health.test.mjs",
+        "src/publication-health.mjs"
+      ],
+      "modification": "Retains donor marker tests; adds offline GET, hash-only receipt and host-scope tests."
+    },
+    {
+      "path": "service-packs/automation/tests/review-client.test.mjs",
+      "sha256": "f2eb978a49f1b9a994ddb1f3ed68098748bc48b272104a4245acd7b30b26ce1b",
+      "derivedFrom": [
+        "src/review-client.mjs"
+      ],
+      "modification": "New stubbed-HTTP tests cover selectors, raw text opt-in and pagination limits."
+    },
+    {
+      "path": "service-packs/automation/scripts/cli.mjs",
+      "sha256": "f89717b739578c845763adb7392c0dac3b421e29dfe43615f01becc72a440a52",
+      "derivedFrom": [],
+      "modification": "Root dispatcher routes fixed command names to the native stdin CLI; shell disabled"
+    }
+  ]
+}

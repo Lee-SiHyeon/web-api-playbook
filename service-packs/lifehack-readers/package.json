@@ -1,0 +1,17 @@
+{
+  "name": "@web-api-playbook/lifehack-readers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --import=tsx --test tests/danawa-collector.test.mjs tests/danawa-discovery.test.ts tests/coupang-openapi.test.ts"
+  },
+  "dependencies": {
+    "parse5": "8.0.1",
+    "tough-cookie": "5.1.2",
+    "tsx": "4.23.15"
+  }
+}

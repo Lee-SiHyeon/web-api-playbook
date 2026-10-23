@@ -1,0 +1,135 @@
+{
+  "schema": "gemini-settings-update-contract-fragment-v1",
+  "service": "gemini-web",
+  "recordedAt": "2026-10-06T10:34:19Z",
+  "feature": "settings_update",
+  "scope": "one_reversible_nonprivacy_ui_preference",
+  "sourceEvidence": {
+    "sourceClass": "live_google_first_party_web_client",
+    "origin": "https://gemini.gstatic.com",
+    "pathFamily": "/_/mss/boq-gemini-web-uiserver/_/js/.../m=LQaXg",
+    "moduleId": "LQaXg",
+    "bundleBytes": 3057476,
+    "bundleSha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+    "readRpc": {
+      "rpcId": "ESY5D",
+      "serviceMethod": "/BardFrontendService.ReadUserPreferences"
+    },
+    "updateRpc": {
+      "rpcId": "L5adhe",
+      "serviceMethod": "/BardFrontendService.UpdateUserPreferences"
+    },
+    "updateMessage": {
+      "type": "Ukc",
+      "field1": "By preference value message",
+      "field3": "typed repeated integer selector array in the active first-party branch",
+      "sourceUpdateSetter": "_.dE.prototype.Uja",
+      "sourcePreferenceWriter": "_.Plc.prototype.BC"
+    },
+    "preference41": {
+      "fieldId": 41,
+      "name": "side_nav_open_by_default",
+      "getter": "_.Zh(message, 41)",
+      "setter": "_.vi(message, 41, value)",
+      "defaultValue": "undefined_when_unreported",
+      "valueType": "boolean"
+    },
+    "denseArrayFieldOffset": {
+      "encoding": "jspb_dense_zero_based_array",
+      "fieldNumberBase": 1,
+      "arraySlotFormula": "fieldId - 1",
+      "field41ArraySlot": 40,
+      "field41VectorLength": 41,
+      "corroboratingPreference": 40,
+      "corroboratingSetter": "Nlc[40].Fd -> _.vi(message, 40, value)",
+      "corroboratingAbortedUiRequest": {
+        "arg0VectorLength": 40,
+        "arg0Slot39BooleanPresent": true,
+        "arg3Selector": [40],
+        "browserAbortAcknowledged": true
+      }
+    },
+    "preferenceWriterCallShape": {
+      "valueExpression": "_.Mh(_.Nlc[this.ha].Fd(new _.By, this.value))",
+      "requestArgs": [
+        "dense By value vector",
+        null,
+        "[preferenceFieldId]"
+      ],
+      "rpcCallTail": [null, "generic"]
+    },
+    "responseContract": {
+      "contentType": "application/json",
+      "framing": "batchexecute",
+      "selectorMode": "rpc_id",
+      "rpcId": "L5adhe",
+      "frameLengthUnit": "utf16_code_units",
+      "frameLengthOverheadUnits": 2,
+      "sourceErrorField": 1,
+      "sourceErrorValue": 2
+    }
+  },
+  "requestContract": {
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "rpcId": "L5adhe",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "bodyFieldNames": ["f.req", "at"],
+    "rpcArgsTemplate": [
+      "{{preferenceValueVector}}",
+      null,
+      ["{{preferenceFieldId}}"]
+    ],
+    "field41FalseExampleShape": {
+      "arg0Length": 41,
+      "arg0Slot40Type": "number_0",
+      "arg1": null,
+      "arg2": [41],
+      "callTail": [null, "generic"]
+    },
+    "writablePreferenceKeys": ["side_nav_open_by_default"],
+    "privacyMemoryPersonalContextKeysAllowlisted": false,
+    "retryPolicy": "never"
+  },
+  "normalUiCapture": {
+    "ownerMatched": true,
+    "pageRole": "codex-gemini-settings-update-20261006",
+    "pageScopedGuard": "rewrite ESY5D to selector 41 only; abort L5adhe and all other non-read posts",
+    "settingsReadRpcForwarded": true,
+    "minimalSelectorIdsSent": [41],
+    "startupL5adheCount": 8,
+    "startupL5adheAbortAcknowledgedCount": 8,
+    "businessWriteForwarded": false,
+    "sidebarOpenCloseEmittedL5adhe": false,
+    "sidebarRestoredToOriginalUiState": true
+  },
+  "directRead": {
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "rpcId": "ESY5D",
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 157,
+    "responseSha256": "312ef04040a9329a0dddac5dc30b904bf9b332ce86d9fad3a60b2090b4a4f27b",
+    "frameCount": 2,
+    "field41ReturnedAs": "boolean",
+    "baselineValue": true,
+    "rawResponsePersisted": false
+  },
+  "persistence": {
+    "rawSourcePersisted": false,
+    "rawRequestOrResponseBodiesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "otherPreferenceValuesPersisted": false
+  }
+}

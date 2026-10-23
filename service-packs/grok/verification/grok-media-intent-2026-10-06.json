@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "createdAt": "2026-10-06",
+  "state": "browser_write_contracts_captured_and_aborted",
+  "ownerReadiness": {
+    "source": "independent_private_core_http_identity_replay",
+    "httpStatus": 200,
+    "matchedExpectedUser": true,
+    "identityValuePersisted": false
+  },
+  "currentQuotaRead": {
+    "source": "normal_imagine_ui_read",
+    "httpStatus": 200,
+    "modes": {
+      "image": {
+        "available": true,
+        "windowSizeSeconds": 64800
+      },
+      "imagePro": {
+        "available": true,
+        "windowSizeSeconds": 64800
+      },
+      "imageEdit": {
+        "available": true,
+        "windowSizeSeconds": 64800
+      },
+      "video": {
+        "available": true,
+        "windowSizeSeconds": 64800
+      },
+      "video720p": {
+        "available": true,
+        "windowSizeSeconds": 64800
+      }
+    },
+    "remainingCountExposed": false,
+    "purchaseOrSubscriptionChangeAllowed": false
+  },
+  "boundedOperations": [
+    {
+      "operation": "image_generation",
+      "maxSubmits": 1,
+      "promptLabel": "neutral-geometric-test",
+      "promptPersisted": false,
+      "shareMode": "not_set"
+    },
+    {
+      "operation": "video_generation",
+      "maxSubmits": 1,
+      "promptLabel": "neutral-geometric-test",
+      "promptPersisted": false,
+      "shareMode": "not_set"
+    }
+  ],
+  "controls": {
+    "automaticRetries": false,
+    "browserWriteCaptureMustAbortBeforeNetworkDelivery": true,
+    "httpSubmitRequiresCapturedRequestSchema": true,
+    "httpSubmitRequiresDurableIntentUpdate": true,
+    "readbackRequired": true,
+    "unknownOutcomeHold": true,
+    "existingMediaModified": false,
+    "uploads": 0,
+    "purchases": 0
+  },
+  "captureResults": {
+    "browserWritesDelivered": 0,
+    "responseBodiesDelivered": 0,
+    "image": {
+      "transport": "websocket",
+      "path": "/ws/imagine/listen",
+      "captureMode": "page-scoped-mock-without-server-forwarding",
+      "nativeSingleOutputSettingAvailable": false,
+      "uiCountMenu": [
+        "Auto"
+      ],
+      "nativeBatchObserved": {
+        "mode": "Quality 2.0",
+        "num_generations": 4,
+        "enable_side_by_side": true
+      },
+      "browserWriteForwarded": false,
+      "directSubmitAttempted": false
+    },
+    "video": {
+      "transport": "http",
+      "method": "POST",
+      "path": "/rest/app-chat/conversations/new",
+      "contentType": "application/json",
+      "captureMode": "page-scoped-abort",
+      "browserAbortAttempts": 3,
+      "browserWriteForwarded": false,
+      "directSubmitAttempted": false,
+      "observedSettings": {
+        "durationSeconds": 6,
+        "resolution": "480p",
+        "audioSkipped": true
+      }
+    },
+    "limits": {
+      "maxImageGenerationRequests": 1,
+      "maxVideoGenerationRequests": 1,
+      "imageOutputBatch": 4,
+      "automaticClientRetries": false,
+      "purchaseOrSubscriptionChangeAllowed": false,
+      "publicSharingAllowed": false
+    }
+  },
+  "directReadPreflight": {
+    "transport": "curl_cffi Chrome150 over HTTP/2",
+    "tlsVerified": true,
+    "credentialBinding": [
+      "sso"
+    ],
+    "ownerStatus": 200,
+    "ownerMatchedExpectedUser": true,
+    "quotaStatus": 200,
+    "quotaAllModesAvailable": true,
+    "directReadReplayCount": 5,
+    "readReplayRetries": 0,
+    "rawValuesPersisted": false
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "camera-rigs",
+  "origin": "owner 2026-09-29: \"인스타 360알아 ? 그런 시야로 주인공 1인칭 시점말고 주인공 포함 주변 모습도 나왔으면 좋겠는데 약간 뒤 상단에서 주인공 뒷모습 나오면서. 약간 드론시야처럼\"",
+  "sources": {
+    "snubroot": { "url": "https://github.com/snubroot/Veo-3-Prompting-Guide", "stars": 321, "rule": "Always include \"(thats where the camera is)\" when specifying camera position; state camera height, angle, distance and movement explicitly (Camera Fix Examples: \"Camera held at chest height (thats where the camera is) tracking smoothly behind the walking subject\")." },
+    "insta360_blog": { "url": "https://www.insta360.com/blog/tips/invisible-selfie-stick-how-to-use.html", "rule": "Behind-the-back, video-game-style third-person shots: extend the invisible selfie stick to its maximum length; a straight, centred stick gives the floating-camera / third-person view (summary via search; page returns 403 to fetchers)." },
+    "google_veo31": { "url": "https://cloud.google.com/blog/products/ai-machine-learning/ultimate-prompting-guide-for-veo-3-1", "rule": "Prompt order: cinematography + subject + action + context + style; clip lengths 4/6/8 s." },
+    "flow_measured": { "url": "C:/Users/User/Documents/Codex/2026-09-28/gods-eye-test/street-pov-v2/asr-check.json", "rule": "Omni 1.1 Flash 4 s clips: speech start varied 0.0–2.14 s; shot 6 got cut off. Use 6 s clips when a line is spoken." }
+  },
+  "rigs": {
+    "first_person_pov": {
+      "label": "1인칭 폰 시점 (v1/v2)",
+      "prompt": "First-person POV, handheld phone camera at eye level (thats where the camera is), slight walking bounce",
+      "source": "snubroot"
+    },
+    "insta360_third_person_follow": {
+      "label": "인스타360 투명 셀카봉 3인칭 (뒤 상단, 드론 느낌)",
+      "prompt": "Third-person follow shot from a 360 camera on a fully extended invisible selfie stick, camera floating about 2 meters behind and 1 meter above the traveler (thats where the camera is), her back, head and shoulders in the lower third of the frame, the whole street around and ahead of her visible, slight wide-angle 360-camera look, smooth floating drone-like motion keeping the same distance as she walks",
+      "source": "insta360_blog + snubroot"
+    },
+    "selfie_vlog": {
+      "label": "셀카 브이로그",
+      "prompt": "A selfie video of [CHARACTER] exploring [LOCATION] ... says: \"[LINE]\"",
+      "source": "snubroot (Advanced Selfie Video Mastery: start with \"A selfie video of...\")"
+    }
+  },
+  "continuity": {
+    "rule": "Describe the same protagonist identically in every shot so the series reads as one trip.",
+    "source": "google_veo31 (subject description) — wording of the character is ours (assumption)"
+  }
+}

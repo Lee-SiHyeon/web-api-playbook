@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "observedAt": "2026-09-28T17:34:38Z",
+  "operation": "generation_button_xhr_capture",
+  "scope": {
+    "service": "google_flow",
+    "buttonClicked": true,
+    "syntheticPromptValueRecorded": false,
+    "flowOriginRequestsBlockedBeforeClick": true
+  },
+  "createRequest": {
+    "rpcId": "YhhmEf",
+    "method": "POST",
+    "origin": "https://flow.google.com",
+    "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+    "queryKeys": ["rpcids", "source-path", "bl", "f.sid", "hl", "_reqid", "rt"],
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+    "formKeys": ["f.req", "at"],
+    "observedHeaderNames": ["Content-Type", "Origin", "Referer", "Sec-Fetch-*", "X-Same-Domain"],
+    "requestBodyRecorded": false,
+    "blockedReason": "inspector",
+    "responseReceived": false,
+    "reachedFlowService": false,
+    "directHttpReplay": false
+  },
+  "firstPartyRecaptcha": {
+    "issuanceObserved": true,
+    "httpStatus": 200,
+    "tokenPersisted": false,
+    "tokenReused": false,
+    "generationRequestReachedService": false
+  },
+  "outcome": {
+    "serviceCreateCount": 0,
+    "expectedCreditDelta": 0,
+    "creditBalanceReadback": null,
+    "claimOfApiOnlyGeneration": false
+  },
+  "httpBootstrapCheck": {
+    "documentStatus": 200,
+    "documentMime": "text/html",
+    "sameProjectPathReturned": true,
+    "hasFdrFJe": true,
+    "hascfb2h": true,
+    "hasSNlM0e": false,
+    "browserRuntimeHasSNlM0e": true,
+    "reauthenticationConcluded": false
+  },
+  "redaction": {
+    "requestBodyAndCookieValuesPersisted": false,
+    "transientTokenValueAppearedInToolOutput": true,
+    "mitigation": "No value was written to files or reused; the one-time token was left unused and allowed to expire."
+  },
+  "remainingBlockers": [
+    "No verified browser-free issuer for the fresh first-party Flow reCAPTCHA token.",
+    "The direct HTTP document response currently omits required SNlM0e while the browser runtime has it.",
+    "No direct HTTP create replay or owner readback was performed."
+  ]
+}

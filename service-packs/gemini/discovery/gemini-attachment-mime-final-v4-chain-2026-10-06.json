@@ -1,0 +1,981 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_chain",
+  "sourceSnapshotBeforeChain": {
+    "files": [
+      {
+        "path": "discovery/observed-contract.json",
+        "bytes": 36978,
+        "sha256": "357c3dfab4ea5321c8b4e8d723ceeed661d22818ace4af4fd00b329e57547cb3"
+      },
+      {
+        "path": "scripts/gemini-attachment-chain-controlled-once.py",
+        "bytes": 86276,
+        "sha256": "b6edd3523366fb9e6e9d6b334b0ad1ac1dbc73d0b8cee3d72fe2ca5ae08d81d9"
+      },
+      {
+        "path": "src/attachment-chain.mjs",
+        "bytes": 42237,
+        "sha256": "fa198365362f0e756ef2d4ac829e0475bfe24b97848dcddc9256d1a41cc03a77"
+      },
+      {
+        "path": "src/attachment-upload.mjs",
+        "bytes": 73285,
+        "sha256": "1af2ee26759fbff9d28868117f9e2cd8ba3cddb7456db0946d09a3c262a774af"
+      },
+      {
+        "path": "src/batch-response.mjs",
+        "bytes": 13763,
+        "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+      },
+      {
+        "path": "src/bootstrap-receive.mjs",
+        "bytes": 4471,
+        "sha256": "bbbd40b2c5ac74fa994d8e14c76a59d1b354210ae03097990b62f74e54542536"
+      },
+      {
+        "path": "src/chrome-public-document-transport.mjs",
+        "bytes": 5264,
+        "sha256": "fa4a464e47aee7c61794046ca83380924378df5fa98d4e018b04038d50826c2f"
+      },
+      {
+        "path": "src/cli.mjs",
+        "bytes": 83490,
+        "sha256": "f5e0efee7c095fd7ef173c69ae52abcd7dbfced08e74bae89a18fb6fa2f4a3b9"
+      },
+      {
+        "path": "src/client.mjs",
+        "bytes": 33986,
+        "sha256": "71dc36ef0dbb17226ba4e40be11111750a7e125aa04348b6b0e4c222d5f0b691"
+      },
+      {
+        "path": "src/constants.mjs",
+        "bytes": 632,
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "bytes": 33313,
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs",
+        "bytes": 33635,
+        "sha256": "5bfe0f5c23d9b1639f8db0242487682182aab16c316071ff362950ab1bce2b60"
+      },
+      {
+        "path": "src/errors.mjs",
+        "bytes": 332,
+        "sha256": "8337ec3eda6bd34b1d5303af5793986e1ed3730c3a138caa3f0ab9fa4dfd4075"
+      },
+      {
+        "path": "src/evidence.mjs",
+        "bytes": 1067,
+        "sha256": "73ded090b948798eb6b3fc86f99272efcaa5e69b16eb6d376e381b99d9c6d8c3"
+      },
+      {
+        "path": "src/feature-checklist.mjs",
+        "bytes": 89714,
+        "sha256": "395ae5048bb3e14abf9f57a3cd98fc6fdc1bf747be0b538e15e4922522cbdcef"
+      },
+      {
+        "path": "src/history-detail.mjs",
+        "bytes": 13856,
+        "sha256": "2605b37c565ab57fdd49a4c96e42191c1d35bc8a36a96882b667aa743aeb9374"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "bytes": 10277,
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "bytes": 12425,
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "bytes": 2959,
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/journal.mjs",
+        "bytes": 12548,
+        "sha256": "0d9e2ba7cf4c66c3bf3a6298c25b4c37e2f687825682419ae5d04ff92f893754"
+      },
+      {
+        "path": "src/lifecycle-mutation.mjs",
+        "bytes": 27008,
+        "sha256": "c8ade48d0e0c7eba2f5d1f89d829ec889d64a1b7321ebd027702e98aeb265b79"
+      },
+      {
+        "path": "src/media-capture.mjs",
+        "bytes": 7336,
+        "sha256": "44cfd457a1ea6fb2744da671c3be31887d5510ab869abf4d432111a6f7a55d80"
+      },
+      {
+        "path": "src/media-direct-once.mjs",
+        "bytes": 6881,
+        "sha256": "81a15f509517520db9932c05763619128e4706dba74f8b97c9192940cbd9931f"
+      },
+      {
+        "path": "src/media-download.mjs",
+        "bytes": 31131,
+        "sha256": "616e0cb33b433d335726f6d33c7149bf7002e7837f017d308e9d0d0b151d10fa"
+      },
+      {
+        "path": "src/media-response.mjs",
+        "bytes": 16108,
+        "sha256": "5c29417091ed491986c256d0f4a5f2398823f3727f0bba80cf8e719eed90c08b"
+      },
+      {
+        "path": "src/media.mjs",
+        "bytes": 5635,
+        "sha256": "31003f9ba7e60102db2bbd803fe66d302cea7cb376323ba9d0a1b9101e8f51be"
+      },
+      {
+        "path": "src/model-selection.mjs",
+        "bytes": 20284,
+        "sha256": "809e41645f266185757991643d9ee4239b358d4dc71f0b03bd97248f4d5b9c74"
+      },
+      {
+        "path": "src/mutation.mjs",
+        "bytes": 1917,
+        "sha256": "5bda23914e7f4d658932a4ff0cda907821b400f1cefcd9e96942a620606b0394"
+      },
+      {
+        "path": "src/original-image-download.mjs",
+        "bytes": 28610,
+        "sha256": "1e5f93b7a6685d43e0203318ef3b730d4a0cec717edbc553df87c1c9b9b44600"
+      },
+      {
+        "path": "src/public-document.mjs",
+        "bytes": 6120,
+        "sha256": "9b81f4957c4dc6596aafcd85262ee333b40980be0267a5e9f3df36deff66631c"
+      },
+      {
+        "path": "src/rpc-adapters.mjs",
+        "bytes": 1738,
+        "sha256": "ff4618cef8ffa148fa6177094c8bf73b7457909870f18b1a68976c4985998400"
+      },
+      {
+        "path": "src/secure-credential-store.mjs",
+        "bytes": 6192,
+        "sha256": "5e296377c88c7a2920abfce12f103d63438e82742166f4cd3a60bf86094a6c25"
+      },
+      {
+        "path": "src/session-renewal.mjs",
+        "bytes": 4065,
+        "sha256": "c899fad625b68e8b3471732c9e39b7c9fd16da904318d74463956c46f89bd56e"
+      },
+      {
+        "path": "src/session.mjs",
+        "bytes": 34873,
+        "sha256": "a3a02377afa893e4c85092794eade87faaaa9f23ef337792ba3ee876b02c55b3"
+      },
+      {
+        "path": "src/text-adapter.mjs",
+        "bytes": 18307,
+        "sha256": "88cfb0b7f2d856d09ffaa108790c156252d7efa12d5079d05fd0844daf4cfc0c"
+      },
+      {
+        "path": "src/text-readback.mjs",
+        "bytes": 2735,
+        "sha256": "d3af2bed11b6f48ad029da89706aa870b4b742e682352af07a08ed2ba46de8e9"
+      },
+      {
+        "path": "src/text-response.mjs",
+        "bytes": 5010,
+        "sha256": "a5a5e993518ed83c4e30753311b2e2957233639d25c79f9b2fe35d0c4e0074de"
+      }
+    ],
+    "aggregateSha256": "6c300f5dabaa0b3919ee393939b7a02e1282c37a7b8b5a2fbe683ac429223bb2"
+  },
+  "sourceSnapshotStableThroughReceipt": true,
+  "callerIntent": "gemini-attachment-mime-final-v4-20261006-v1",
+  "messageCallerIntent": "gemini-attachment-mime-final-v4-message-20261006-v1",
+  "recordedAt": "2026-10-06T08:24:18.575897+00:00",
+  "outputStatus": "incomplete",
+  "failureCode": "ATTACHMENT_CHAIN_ATTACHMENT_MESSAGE_BINDING_MISMATCH",
+  "ownerDigestMatchedApproved": true,
+  "file": {
+    "name": "gemini-attachment-mime-final-v4-20261006.txt",
+    "mimeType": "text/plain",
+    "bytes": 12,
+    "sha256": "1ac00ccfe7eedbff8da431d527048e6d500e42c343d0681395919da540fdd05b"
+  },
+  "directDispatchCount": 2,
+  "mutationJournal": {
+    "attachment_upload": {
+      "state": "reconciled",
+      "dispatchCount": 1,
+      "httpStatus": 200
+    },
+    "attachment_upload_transfer": {
+      "state": "reconciled",
+      "dispatchCount": 1,
+      "httpStatus": 200
+    }
+  },
+  "childError": {
+    "errorCode": "TEXT_ATTACHMENT_CAPTURE_MISMATCH",
+    "errorClass": "GeminiClientError",
+    "attachmentBinding": {
+      "sourceShapeMatchCount": 0,
+      "responsePayloadMatchCount": 0,
+      "filenameMatchCount": 0,
+      "mimeTypeMatchCount": 0,
+      "fileSizeMatchCount": 0,
+      "uploadedFilesArrayCount": 0,
+      "candidateCount": 0,
+      "sourceTupleMatchCount": 0,
+      "sourceProtoTupleMatchCount": 0,
+      "expectedFileSizeBytes": 12,
+      "capturedRequestBodyBytes": 991,
+      "expectedFilenameBytes": 44,
+      "expectedResponsePayloadBytes": 125,
+      "fileIdPresent": false,
+      "expectedFileTypePresent": false,
+      "sourceValueCorrelationMatch": false,
+      "capturedPromptContainsReferenceValue": false,
+      "capturedRequestBodySha256": "904a9384de1727b8c6de3b6744213a4fcfbf54fdb9a93e55abaa5dcdb3f9d2fb",
+      "expectedFilenameSha256": "98bfe2f5807f55e54ad5a3538c826e62b4d8caf57df26b7542572712b480aaeb",
+      "expectedResponsePayloadSha256": "3354ff52a0bddf3078f2f4d8abb2e7fa0e94fb144404e36562c3989c877e5877",
+      "expectedMimeType": "text/plain",
+      "candidates": [],
+      "sourceProtoCandidates": [],
+      "uploadedFilesTupleCandidates": []
+    }
+  },
+  "attachmentMessage": {
+    "method": "POST",
+    "pathFamily": "/_/BardChatUi/data/assistant.lamda.BardFrontendService/StreamGenerate",
+    "bodyBytes": 991,
+    "bodySha256": "904a9384de1727b8c6de3b6744213a4fcfbf54fdb9a93e55abaa5dcdb3f9d2fb",
+    "contentType": "application/x-www-form-urlencoded",
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-525005358-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-goog-ext-73010990-jspb",
+      "x-same-domain"
+    ],
+    "browserNetworkDispatchCount": 0
+  },
+  "attachmentBindingDiagnostics": {
+    "sourceShapeMatchCount": 0,
+    "responsePayloadMatchCount": 0,
+    "filenameMatchCount": 0,
+    "mimeTypeMatchCount": 0,
+    "fileSizeMatchCount": 0,
+    "uploadedFilesArrayCount": 0,
+    "candidateCount": 0,
+    "sourceTupleMatchCount": 0,
+    "sourceProtoTupleMatchCount": 0,
+    "expectedFileSizeBytes": 12,
+    "capturedRequestBodyBytes": 991,
+    "expectedFilenameBytes": 44,
+    "expectedResponsePayloadBytes": 125,
+    "fileIdPresent": false,
+    "expectedFileTypePresent": false,
+    "sourceValueCorrelationMatch": false,
+    "capturedPromptContainsReferenceValue": false,
+    "capturedRequestBodySha256": "904a9384de1727b8c6de3b6744213a4fcfbf54fdb9a93e55abaa5dcdb3f9d2fb",
+    "expectedFilenameSha256": "98bfe2f5807f55e54ad5a3538c826e62b4d8caf57df26b7542572712b480aaeb",
+    "expectedResponsePayloadSha256": "3354ff52a0bddf3078f2f4d8abb2e7fa0e94fb144404e36562c3989c877e5877",
+    "expectedMimeType": "text/plain",
+    "candidates": [],
+    "sourceProtoCandidates": [],
+    "uploadedFilesTupleCandidates": []
+  },
+  "attachmentReferenceRecovery": {
+    "referenceAvailableNonEnumerablyAtApiReturn": true,
+    "capturedRequestAvailableNonEnumerablyAtApiReturn": true,
+    "clientAvailableNonEnumerablyAtApiReturn": true,
+    "sessionRetainedUntilRelease": true,
+    "releaseAvailableNonEnumerablyAtApiReturn": true,
+    "rawReferencePersisted": false,
+    "rawCapturePersisted": false,
+    "directTextDispatchCount": 0,
+    "recoverableByOrchestratorAfterCliSerialization": false
+  },
+  "selectedFileType": "text/plain",
+  "nativeContinuation": {
+    "selectedFileType": "text/plain",
+    "selectedFileTypeReadCount": 11,
+    "selectedFileTypeReadMimeValues": [
+      "text/plain"
+    ],
+    "nativeTransferMimeType": "application/x-www-form-urlencoded",
+    "nativeContentTypeHeaderPresent": true,
+    "command": "upload, finalize",
+    "offset": "0",
+    "bodyBytes": 12,
+    "bodySha256": "1ac00ccfe7eedbff8da431d527048e6d500e42c343d0681395919da540fdd05b",
+    "bodyMatchesSelectedFile": true,
+    "headerNames": [
+      "accept",
+      "content-type",
+      "cookie",
+      "origin",
+      "push-id",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-client-pctx",
+      "x-goog-upload-command",
+      "x-goog-upload-offset",
+      "x-tenant-id"
+    ],
+    "ordinaryCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "nativeRequestHeadersIndependentFromStartCapture": true
+  },
+  "nativeStartObserved": true,
+  "nativeContinuationObserved": true,
+  "continuationCookieSnapshot": {
+    "currentCookieCount": 17,
+    "currentCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "currentCookieScopes": [
+      {
+        "name": "AEC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "APISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "HSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "NID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SEARCH_SAMESITE",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      }
+    ],
+    "nativeCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "rotatedCookieNamesSinceStart": [],
+    "cookieValuesPersisted": false
+  },
+  "nativeAttachmentMessageObserved": true,
+  "normalHistoryTemplate": {
+    "captured": true,
+    "rpcId": "MaZiqc",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "observedHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "directReadHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "cursorAdjustedToCapturedFirstPageTemplate": false,
+    "canonicalFirstPageTemplateSource": "scripts/run-linux-text-smoke.py:FIRST_PAGE_HISTORY_ARGS",
+    "atPresentInMemory": true,
+    "rawQueryAndTokenValuesPersisted": false
+  },
+  "historyArgsMismatch": null,
+  "directStart": {
+    "httpStatus": 200,
+    "responseHeaderNames": [
+      "access-control-allow-credentials",
+      "access-control-allow-origin",
+      "access-control-expose-headers",
+      "content-type",
+      "x-goog-upload-chunk-granularity",
+      "x-goog-upload-control-url",
+      "x-goog-upload-status",
+      "x-goog-upload-url",
+      "x-guploader-uploadid"
+    ],
+    "contentType": "text/plain",
+    "responseBytes": 0,
+    "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sessionUrlRef": {
+      "origin": "https://push.clients6.google.com",
+      "pathFamily": "/upload/",
+      "queryKeyNames": [
+        "upload_id",
+        "upload_protocol"
+      ]
+    }
+  },
+  "directTransferResponse": {
+    "httpStatus": 200,
+    "responseHeaderNames": [
+      "access-control-allow-credentials",
+      "access-control-allow-origin",
+      "access-control-expose-headers",
+      "alt-svc",
+      "content-length",
+      "content-security-policy",
+      "content-type",
+      "date",
+      "environment-prefix",
+      "server",
+      "x-goog-upload-status",
+      "x-guploader-uploadid"
+    ],
+    "contentType": "text/html",
+    "responseBytes": 125,
+    "responseSha256": "3354ff52a0bddf3078f2f4d8abb2e7fa0e94fb144404e36562c3989c877e5877",
+    "uploadStatus": "final"
+  },
+  "guardLifecycle": {
+    "registeredTargetIdMatched": true,
+    "resetQuietVerifiedThroughDisconnect": false,
+    "lateBlockedRequestCount": 0,
+    "browserClosed": false,
+    "contextClosed": false
+  },
+  "rawBodiesOrCredentialValuesPersisted": false,
+  "rawOwnerEmailPersisted": false,
+  "rawUploadSessionUrlPersisted": false,
+  "rawAttachmentReferencePersisted": false,
+  "rawPromptOrFileContentsPersisted": false,
+  "attemptCount": 1,
+  "attempts": [
+    {
+      "recordedAt": "2026-10-06T08:24:18.575897+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_ATTACHMENT_MESSAGE_BINDING_MISMATCH",
+      "directDispatchCount": 2,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": true,
+      "nativeAttachmentMessageObserved": true,
+      "historyArgsMismatch": null,
+      "childError": {
+        "errorCode": "TEXT_ATTACHMENT_CAPTURE_MISMATCH",
+        "errorClass": "GeminiClientError",
+        "attachmentBinding": {
+          "sourceShapeMatchCount": 0,
+          "responsePayloadMatchCount": 0,
+          "filenameMatchCount": 0,
+          "mimeTypeMatchCount": 0,
+          "fileSizeMatchCount": 0,
+          "uploadedFilesArrayCount": 0,
+          "candidateCount": 0,
+          "sourceTupleMatchCount": 0,
+          "sourceProtoTupleMatchCount": 0,
+          "expectedFileSizeBytes": 12,
+          "capturedRequestBodyBytes": 991,
+          "expectedFilenameBytes": 44,
+          "expectedResponsePayloadBytes": 125,
+          "fileIdPresent": false,
+          "expectedFileTypePresent": false,
+          "sourceValueCorrelationMatch": false,
+          "capturedPromptContainsReferenceValue": false,
+          "capturedRequestBodySha256": "904a9384de1727b8c6de3b6744213a4fcfbf54fdb9a93e55abaa5dcdb3f9d2fb",
+          "expectedFilenameSha256": "98bfe2f5807f55e54ad5a3538c826e62b4d8caf57df26b7542572712b480aaeb",
+          "expectedResponsePayloadSha256": "3354ff52a0bddf3078f2f4d8abb2e7fa0e94fb144404e36562c3989c877e5877",
+          "expectedMimeType": "text/plain",
+          "candidates": [],
+          "sourceProtoCandidates": [],
+          "uploadedFilesTupleCandidates": []
+        }
+      },
+      "directUploadSafeSummary": null,
+      "attachmentBindingDiagnostics": {
+        "sourceShapeMatchCount": 0,
+        "responsePayloadMatchCount": 0,
+        "filenameMatchCount": 0,
+        "mimeTypeMatchCount": 0,
+        "fileSizeMatchCount": 0,
+        "uploadedFilesArrayCount": 0,
+        "candidateCount": 0,
+        "sourceTupleMatchCount": 0,
+        "sourceProtoTupleMatchCount": 0,
+        "expectedFileSizeBytes": 12,
+        "capturedRequestBodyBytes": 991,
+        "expectedFilenameBytes": 44,
+        "expectedResponsePayloadBytes": 125,
+        "fileIdPresent": false,
+        "expectedFileTypePresent": false,
+        "sourceValueCorrelationMatch": false,
+        "capturedPromptContainsReferenceValue": false,
+        "capturedRequestBodySha256": "904a9384de1727b8c6de3b6744213a4fcfbf54fdb9a93e55abaa5dcdb3f9d2fb",
+        "expectedFilenameSha256": "98bfe2f5807f55e54ad5a3538c826e62b4d8caf57df26b7542572712b480aaeb",
+        "expectedResponsePayloadSha256": "3354ff52a0bddf3078f2f4d8abb2e7fa0e94fb144404e36562c3989c877e5877",
+        "expectedMimeType": "text/plain",
+        "candidates": [],
+        "sourceProtoCandidates": [],
+        "uploadedFilesTupleCandidates": []
+      },
+      "bindingDiagnosticAttempts": null,
+      "nativeAttachmentMessageCaptureAttempts": null,
+      "attachmentReferenceRecovery": {
+        "referenceAvailableNonEnumerablyAtApiReturn": true,
+        "capturedRequestAvailableNonEnumerablyAtApiReturn": true,
+        "clientAvailableNonEnumerablyAtApiReturn": true,
+        "sessionRetainedUntilRelease": true,
+        "releaseAvailableNonEnumerablyAtApiReturn": true,
+        "rawReferencePersisted": false,
+        "rawCapturePersisted": false,
+        "directTextDispatchCount": 0,
+        "recoverableByOrchestratorAfterCliSerialization": false
+      },
+      "nativeContinuation": {
+        "selectedFileType": "text/plain",
+        "selectedFileTypeReadCount": 11,
+        "selectedFileTypeReadMimeValues": [
+          "text/plain"
+        ],
+        "nativeTransferMimeType": "application/x-www-form-urlencoded",
+        "nativeContentTypeHeaderPresent": true,
+        "command": "upload, finalize",
+        "offset": "0",
+        "bodyBytes": 12,
+        "bodySha256": "1ac00ccfe7eedbff8da431d527048e6d500e42c343d0681395919da540fdd05b",
+        "bodyMatchesSelectedFile": true,
+        "headerNames": [
+          "accept",
+          "content-type",
+          "cookie",
+          "origin",
+          "push-id",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-client-pctx",
+          "x-goog-upload-command",
+          "x-goog-upload-offset",
+          "x-tenant-id"
+        ],
+        "ordinaryCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "nativeRequestHeadersIndependentFromStartCapture": true
+      },
+      "continuationCookieSnapshot": {
+        "currentCookieCount": 17,
+        "currentCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "currentCookieScopes": [
+          {
+            "name": "AEC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "APISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "HSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "NID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "SAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "SEARCH_SAMESITE",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSIDTS",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSIDTS",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          }
+        ],
+        "nativeCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "rotatedCookieNamesSinceStart": [],
+        "cookieValuesPersisted": false
+      },
+      "mutationJournal": {
+        "attachment_upload": {
+          "state": "reconciled",
+          "dispatchCount": 1,
+          "httpStatus": 200
+        },
+        "attachment_upload_transfer": {
+          "state": "reconciled",
+          "dispatchCount": 1,
+          "httpStatus": 200
+        }
+      },
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    }
+  ],
+  "postRunReconciliation": {
+    "recordedAt": "2026-10-06T08:25:56Z",
+    "sameProcessRecaptureHandshake": {
+      "safeMismatchEventExchanged": true,
+      "sameUploadReferenceAndClientRetainedInNodeUntilSecondCaptureOrAbandon": true,
+      "recaptureOutcomePersisted": false,
+      "secondCaptureBodyBytes": 991,
+      "secondCaptureBodySha256": "904a9384de1727b8c6de3b6744213a4fcfbf54fdb9a93e55abaa5dcdb3f9d2fb",
+      "secondCaptureResponsePayloadOccurrenceCount": 0,
+      "secondCaptureFilenameOccurrenceCount": 0,
+      "secondCaptureMimeOccurrenceCount": 0,
+      "secondCaptureFileSizeOccurrenceCount": 0,
+      "directTextDispatchCount": 0,
+      "rawCaptureOrReferencePersisted": false,
+      "reason": "The Python attempt receipt omitted bindingDiagnosticAttempts and nativeAttachmentMessageCaptureAttempts, so the first-capture diagnostics/recapture count are unavailable after runner exit."
+    },
+    "directUpload": {
+      "transferHttpStatus": 200,
+      "transferUploadStatus": "final",
+      "transferResponseBytes": 125,
+      "transferResponseSha256": "3354ff52a0bddf3078f2f4d8abb2e7fa0e94fb144404e36562c3989c877e5877",
+      "startJournalReconciled": true,
+      "transferJournalReconciled": true,
+      "queryHttpStatus": null,
+      "queryUploadStatus": null,
+      "querySizeReceived": null,
+      "querySummaryPersisted": false,
+      "queryUnavailableReason": "The partial child upload query summary was not projected into the attempt receipt; current evidence does not establish query status/size."
+    },
+    "referenceRecovery": {
+      "nonEnumerableReferenceCaptureClientAndReleaseReturnedByModuleApi": true,
+      "clientSessionRetainedUntilRelease": true,
+      "referenceRecoverableAfterCliChildExit": false,
+      "v4FileBytesMayBeResent": false
+    },
+    "guardedCleanupAfterRunner": {
+      "originalRunnerResetQuietVerified": false,
+      "finalTargetId": "09785F429FF4F598F4839B11CA21C289",
+      "exactRoleMarkerVerified": true,
+      "finalUrl": "about:blank",
+      "quietMilliseconds": 1800,
+      "blockedRequestsDuringCleanup": 0,
+      "browserClosed": false,
+      "contextClosed": false
+    },
+    "rawReferenceOrPromptFileTextPersisted": false
+  }
+}

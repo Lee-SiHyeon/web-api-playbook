@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "id": "knowhow-ontology",
+  "updatedAt": "2026-09-28",
+  "purpose": "노하우 흡수 (owner 2026-09-28 '노하우 흡수 온톨로지를 만들어놔'): turn a video/article/tool that teaches a method (쇼츠 부업, 수익화, 소싱, 편집 도구) into a checked, reusable record — what the steps are, what is only claimed, what breaks our rules, and what we adopt, adapt, test or reject, wired to the pipeline component that would change. Complements reference-knowledge (source observations → claims → tasks); entries live in research/content-store/knowhow/*.json and are validated by knowhow.mjs.",
+  "classes": [
+    {
+      "id": "KnowHow",
+      "label": "노하우",
+      "description": "A reproducible method someone teaches or a tool enables (one entry file)."
+    },
+    {
+      "id": "Source",
+      "label": "출처",
+      "description": "Video, article, repo or post the method was learned from; access records what could actually be read (full transcript, description+chapters, docs)."
+    },
+    {
+      "id": "Step",
+      "label": "단계",
+      "description": "One action of the method, in order, with its source locator (time range or section)."
+    },
+    {
+      "id": "Tool",
+      "label": "도구",
+      "description": "Software/service used by a step, with license and cost."
+    },
+    {
+      "id": "Claim",
+      "label": "주장",
+      "description": "A statement the source makes: result (돈·조회수), mechanism (why it works), requirement, or fact; carries an evidence level."
+    },
+    {
+      "id": "Risk",
+      "label": "위험",
+      "description": "Why a step could hurt us (copyright, platform policy, affiliate terms, 표시광고, account, bot defense, cost, quality)."
+    },
+    {
+      "id": "Decision",
+      "label": "채택 판단",
+      "description": "adopt | adapt | test | watch | reject, with reasons and per-step replacements."
+    },
+    {
+      "id": "PipelineComponent",
+      "label": "우리 파이프라인 구성요소",
+      "description": "Where an adopted/adapted step lands."
+    },
+    {
+      "id": "Task",
+      "label": "작업",
+      "description": "Follow-up with acceptance criteria (tests, measurements)."
+    }
+  ],
+  "relations": [
+    {
+      "id": "learnedFrom",
+      "domain": "KnowHow",
+      "range": "Source"
+    },
+    {
+      "id": "hasStep",
+      "domain": "KnowHow",
+      "range": "Step"
+    },
+    {
+      "id": "uses",
+      "domain": "Step",
+      "range": "Tool"
+    },
+    {
+      "id": "asserts",
+      "domain": "Source",
+      "range": "Claim"
+    },
+    {
+      "id": "threatens",
+      "domain": "Risk",
+      "range": "Step"
+    },
+    {
+      "id": "replacedBy",
+      "domain": "Step",
+      "range": "PipelineComponent",
+      "description": "adapt: the step is done our way instead."
+    },
+    {
+      "id": "landsIn",
+      "domain": "Decision",
+      "range": "PipelineComponent"
+    },
+    {
+      "id": "yields",
+      "domain": "Decision",
+      "range": "Task"
+    },
+    {
+      "id": "sameAs",
+      "domain": "KnowHow",
+      "range": "reference-knowledge concept/claim id"
+    }
+  ],
+  "domains": [
+    {
+      "id": "shorts_production",
+      "label": "쇼츠·영상 제작"
+    },
+    {
+      "id": "sourcing",
+      "label": "소재·영상 소스 확보"
+    },
+    {
+      "id": "hooks_titles",
+      "label": "훅·제목"
+    },
+    {
+      "id": "monetization",
+      "label": "수익화(제휴·광고·태그)"
+    },
+    {
+      "id": "distribution",
+      "label": "배포·채널 운영"
+    },
+    {
+      "id": "tooling",
+      "label": "도구·자동화"
+    },
+    {
+      "id": "writing",
+      "label": "글쓰기·SEO"
+    },
+    {
+      "id": "operations",
+      "label": "운영·계정·세금"
+    }
+  ],
+  "claimKinds": [
+    "result",
+    "mechanism",
+    "requirement",
+    "fact"
+  ],
+  "evidenceLevels": [
+    {
+      "id": "claimed",
+      "rank": 0,
+      "label": "주장만 있음",
+      "use": "never stated as fact in our content; numbers stay attributed ('~라고 주장')"
+    },
+    {
+      "id": "shown",
+      "rank": 1,
+      "label": "화면·자료로 시연",
+      "use": "technique reference"
+    },
+    {
+      "id": "documented",
+      "rank": 2,
+      "label": "공식 문서·약관",
+      "use": "may drive rules (e.g. YPP thresholds, affiliate terms)"
+    },
+    {
+      "id": "measured",
+      "rank": 3,
+      "label": "우리가 측정",
+      "use": "may drive defaults and targets"
+    }
+  ],
+  "riskKinds": [
+    {
+      "id": "copyright",
+      "label": "저작권(타인 영상·음성·이미지)",
+      "blockerByDefault": true
+    },
+    {
+      "id": "platform_policy",
+      "label": "플랫폼 정책(재사용·비진정성 콘텐츠, 스팸)",
+      "blockerByDefault": true
+    },
+    {
+      "id": "affiliate_terms",
+      "label": "제휴 약관(쿠팡·링크프라이스·토스 등)",
+      "blockerByDefault": true
+    },
+    {
+      "id": "ad_disclosure",
+      "label": "표시광고법·대가성 고지",
+      "blockerByDefault": false
+    },
+    {
+      "id": "account_safety",
+      "label": "계정 안전(대량 업로드, 자동화 탐지)",
+      "blockerByDefault": false
+    },
+    {
+      "id": "bot_defense",
+      "label": "봇 방어 우회·로그인 뒤 수집",
+      "blockerByDefault": true
+    },
+    {
+      "id": "voice_likeness",
+      "label": "타인 음성·초상",
+      "blockerByDefault": true
+    },
+    {
+      "id": "license",
+      "label": "도구·모델 라이선스(비상업 등)",
+      "blockerByDefault": true
+    },
+    {
+      "id": "cost",
+      "label": "비용",
+      "blockerByDefault": false
+    },
+    {
+      "id": "quality",
+      "label": "품질·신뢰(허위·과장)",
+      "blockerByDefault": false
+    }
+  ],
+  "severities": [
+    "blocker",
+    "major",
+    "minor"
+  ],
+  "decisions": [
+    {
+      "id": "adopt",
+      "label": "그대로 채택",
+      "requires": "no unmitigated blocker/major risk"
+    },
+    {
+      "id": "adapt",
+      "label": "바꿔서 채택",
+      "requires": "every blocked step has a replacement"
+    },
+    {
+      "id": "test",
+      "label": "시험",
+      "requires": "no unmitigated blocker; a task with acceptance criteria"
+    },
+    {
+      "id": "watch",
+      "label": "지켜보기",
+      "requires": "reason"
+    },
+    {
+      "id": "reject",
+      "label": "버림",
+      "requires": "reason"
+    }
+  ],
+  "pipelineComponents": [
+    {
+      "id": "shorts_v2",
+      "label": "쇼츠 v2 생성기",
+      "path": "apps/affiliate-api-hub/scripts/sns/video-plan.mjs"
+    },
+    {
+      "id": "sns_versions",
+      "label": "SNS 버전 변환",
+      "path": "apps/affiliate-api-hub/scripts/sns/versions.mjs"
+    },
+    {
+      "id": "tts_provider",
+      "label": "TTS 공급자",
+      "path": "apps/affiliate-api-hub/scripts/sns/shorts.mjs"
+    },
+    {
+      "id": "hook_ontology",
+      "label": "훅 온톨로지",
+      "path": "apps/naver-blog-api/research/content-store/hook-ontology.v1.json"
+    },
+    {
+      "id": "shopping_shorts_scout",
+      "label": "쇼핑 쇼츠 분석·원본 추적",
+      "path": "apps/naver-blog-api/research/content-store/shopping-shorts.mjs"
+    },
+    {
+      "id": "shorts_guide",
+      "label": "쇼츠 제작 가이드",
+      "path": "apps/naver-blog-api/research/content-store/shorts-production-guide.v1.json"
+    },
+    {
+      "id": "video_kit",
+      "label": "쇼츠 렌더·프레임 검토·파일 검증 도구",
+      "path": "apps/video-kit/cli.mjs"
+    },
+    {
+      "id": "affiliate_links",
+      "label": "제휴 링크(링크프라이스·커넥트·쉐어링크)",
+      "path": "apps/affiliate-api-hub/scripts/linkprice-links.mjs"
+    },
+    {
+      "id": "publication_channels",
+      "label": "배포 채널",
+      "path": "apps/naver-blog-api/research/content-store/publication-channels.json"
+    },
+    {
+      "id": "draft_prompt",
+      "label": "초안 작성 규칙",
+      "path": "prompts/draft-brief.md"
+    }
+  ],
+  "rules": [
+    {
+      "id": "claimed_stays_claimed",
+      "text": "A claim at evidence 'claimed' is never used as fact; published text attributes it to the source."
+    },
+    {
+      "id": "blocker_gates_decision",
+      "text": "adopt/test are invalid while any risk of severity 'blocker' has no mitigation."
+    },
+    {
+      "id": "adapt_names_replacement",
+      "text": "adapt requires, for every step threatened by a blocker, a replacement naming our component or method."
+    },
+    {
+      "id": "steps_are_located",
+      "text": "Every step and claim cites a source id and a locator (time range 'mm:ss-mm:ss', section, or 'description')."
+    },
+    {
+      "id": "tasks_are_testable",
+      "text": "test and adapt decisions yield at least one task with acceptance criteria."
+    },
+    {
+      "id": "access_is_honest",
+      "text": "Source.access says what was actually read; a method learned only from a title/description is marked access 'description' and cannot claim step detail beyond the chapters."
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://schema.org/HowTo",
+      "kind": "Schema.org",
+      "rule": "Defines a how-to procedure with steps, tools, supplies, estimated cost, and time-related properties.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://schema.org/HowToStep",
+      "kind": "Schema.org",
+      "rule": "Defines individual steps within a how-to procedure.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://searchadvisor.naver.com/guide/content-basic",
+      "kind": "Official Naver Search Advisor guide",
+      "rule": "Supports accurate titles, readable organization, original information, and clear use of sources.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://api.github.com/repos/schemaorg/schemaorg",
+      "kind": "GitHub REST API, schema.org vocabulary repository",
+      "stars": 6262,
+      "rule": "6,262 stars; last pushed 2026-09-24T08:52:55Z. Repository metadata for the vocabulary used by the HowTo and HowToStep types.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    }
+  ],
+  "sourcedAdditions": [
+    {
+      "path": "/validationRules/-",
+      "value": "For procedural how-tos, record steps, tools, supplies, estimated cost, and preparation, performance, and total time only when supported; leave unknown values unset.",
+      "sourceUrl": "https://schema.org/HowTo",
+      "why": "Aligns how-to records with established procedural fields without requiring unsupported estimates.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    },
+    {
+      "path": "/validationRules/-",
+      "value": "Use accurate, descriptive titles and readable sections for how-to content; do not promise a search-ranking result.",
+      "sourceUrl": "https://searchadvisor.naver.com/guide/content-basic",
+      "why": "Adds official platform guidance to the existing source and evidence requirements.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    }
+  ],
+  "reviewFlags": [
+    "Lines 39–44: the 0–3 evidence ranks are an internal ordinal scheme; they are not calibrated probabilities or an externally established quality scale. Assumption: rank order is intended only as a local convention.",
+    "Not verified: no individual how-to claim or procedure was sampled against its cited source."
+  ]
+}

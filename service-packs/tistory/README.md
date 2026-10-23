@@ -284,3 +284,24 @@ const postContent = videoMarkup + '\n' + videoScript;
 오프라인 단위 테스트는 `npm test`로 실행할 수 있습니다. 통과해도 현재 Tistory 세션이나 서비스의 live API 동작을 증명하지는 않습니다.
 
 문서 기준은 2026-09-24의 현재 코드입니다. 이번 README 정리에서는 로그인·업로드·발행이나 테스트를 새로 실행하지 않았습니다.
+
+## Consolidated workflows (2026-10-14)
+
+This pack is the single source of truth for Tistory HTTP code. Consumers vendor it with
+`node scripts/vendor-pack.mjs --pack tistory --dest <consumer>` and keep `PLAYBOOK_VENDOR.json`
+(commit + sha256 per file); edit here, then re-vendor.
+
+Ported from other repos:
+
+| Module | From | Phase / status |
+| --- | --- | --- |
+| `lib/login-identity.mjs` + `tools/session-handoff.mjs` login identity storage | affiliate-content-operations/apps/tistory-api | auth; DPAPI only |
+| `lib/workflows/publication-context.mjs` (`/manage/newpost/` bootstrap parser) | affiliate-content-automation | read, `bootstrap-observed-not-publication-verified` |
+| `lib/workflows/autosave-draft.mjs` (`/manage/autosave` existing draft update) | affiliate-content-automation | write, read-before/read-after, never publishes |
+| `lib/workflows/publish-reviewed.mjs` (`POST /manage/post.json`) | affiliate-content-automation | write, journal `create-intended` → `create-acknowledged` / `needs-reconciliation` → `readback-verified` |
+| `lib/workflows/content-update.mjs` (`PUT /manage/post/{id}.json`) | affiliate-content-automation | write, `update-intended` → `needs-reconciliation` / `readback-verified` |
+| `lib/workflows/owner-comments.mjs` (`/manage/comments.json`, `/m/api/{id}/comment`) | affiliate-content-automation | read + write, private owner comments only |
+
+No workflow retries a business write; an indeterminate write requires reconciliation by readback.
+Workflows accept an injected `request`; the default is the `TISTORY_COOKIE` env transport used by the
+original consumer. Contracts stay metadata-only; no cookie or token values are stored in this repo.

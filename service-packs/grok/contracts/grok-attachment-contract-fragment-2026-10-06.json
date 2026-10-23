@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "fragmentId": "grok-attachment-upload",
+  "observedAt": "2026-10-06",
+  "sourceAssets": [
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/1e3r6boa1v4lr.js",
+      "sha256": "0d8f5bd1ba17b16404c055b9fbcf854cf492e06784aaa9660753e2d9d1f2cc13",
+      "sourceFunctions": {
+        "attachment.upload.direct": "uploadFileV2",
+        "webFileUploadTransport": "parseWebFileUpload"
+      }
+    },
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/27akar72ihacg.js",
+      "sha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+      "sourceFunctions": {
+        "attachment.file-metadata.read": "chatGetFileMetadataRaw",
+        "attachment.upload.status": "chatUploadFileStatusRaw",
+        "attachment.upload.abort": "chatUploadFileAbortRaw"
+      }
+    },
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/3hel26q5vkbwb.js",
+      "sha256": "cbd84c6ccfa030f8e6d962e6d20a39242b1d3e3d54d70259f81a68aef0f12ec3",
+      "sourceFunctions": {
+        "attachment.assets.search": "assetRepositoryListAssetMetadataRaw",
+        "attachment.asset.read": "assetRepositoryGetAssetMetadataRaw",
+        "attachment.asset.delete": "assetRepositoryDeleteAssetRaw"
+      }
+    }
+  ],
+  "liveOperation": {
+    "id": "attachment.upload.direct",
+    "method": "POST",
+    "path": "/http/upload-file-v2/direct",
+    "contentType": "multipart/form-data",
+    "fieldNames": [
+      "file"
+    ],
+    "smallFileBytes": 14,
+    "filenameMatchedNativeCapture": true,
+    "fileSourceOmitted": true,
+    "browserCaptureWriteDelivered": false,
+    "independentDirectHttpRequestCount": 1,
+    "httpStatus": 200,
+    "operationJournal": {
+      "state": "completed",
+      "reasonCode": "ATTACHMENT_READBACK_AND_CLEANUP_VERIFIED",
+      "requestDigest": "bcf809fae7f3872e1e8a0e3387bc1e97c53f7a6a6720feb93a4c91a5a1a3324b",
+      "intentDigest": "90bb840f1fb0832c5495f47f8e5d870417300230571fbadee0707e76a49e9bc9",
+      "attemptCount": 1
+    },
+    "uploadIdObserved": true,
+    "responseByteCountRecorded": false,
+    "responseByteCountOmissionReason": "safe audit callback failed after completion; no response bytes are synthesized",
+    "metadataReadbackVerified": true,
+    "assetBytesReadbackVerified": true,
+    "artifact": {
+      "path": "/home/worker/artifacts/grok-attachments-20261006/upload-roundtrip-14b.txt",
+      "mimeType": "text/plain",
+      "bytes": 14,
+      "sha256": "ea625e61c345553c8460eb993d5cb6b9758e4b7768fc348a7f28580eb5c4bd4c"
+    },
+    "taskAssetDelete": {
+      "method": "DELETE",
+      "pathTemplate": "/rest/assets/{assetId}",
+      "httpStatus": 200,
+      "state": "completed",
+      "reasonCode": "ATTACHMENT_TASK_CLEANUP_VERIFIED",
+      "requestDigest": "1fb9ebe4a338394ac5dbb780b74df712bf8e3f0860f1bd6d1dc44e14dcf66a25",
+      "intentDigest": "2b9748ebf29733a987a7b997d37cc678617445e307a45f9a8778d8cd14502d25",
+      "exactTaskAssetOnly": true,
+      "verified": true
+    },
+    "postCleanupExactNameSearch": {
+      "status": 200,
+      "exactMatches": 0,
+      "requestDigest": "00bfcaf99b175811c0aab9180f297bb06a7c59577bb0c2733b952114127c01a4",
+      "responseBytes": 13
+    },
+    "receipt": "verification/grok-attachment-upload-live-2026-10-06.json"
+  },
+  "remainingSourceCandidates": {
+    "initPatchPresignedMultipart": true,
+    "abortCallsiteUsed": false,
+    "note": "The current 14-byte UI selected directToHttp. Larger/init/PATCH/presigned flows remain unverified."
+  },
+  "security": {
+    "ownerVerified": true,
+    "assetServerOrigin": "https://assets.grok.com",
+    "cookieName": "sso",
+    "cookieDomain": ".grok.com",
+    "cookiePath": "/",
+    "challengeCookiesUsed": false,
+    "rawCookiesPersisted": false,
+    "rawServerIdsPersisted": false,
+    "signedAssetUrlsPersisted": false,
+    "chatMessageSent": false,
+    "generationRequested": false,
+    "assetWasDeletedAfterReadback": true
+  }
+}

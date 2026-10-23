@@ -1,7 +1,9 @@
 import { openSync, writeFileSync, closeSync } from 'node:fs';
-import { loginWithNaverPassword, NAVER_LOGIN_ACTOR, validateLoginIdentity } from './naver-login-http.mjs';
+import { loginWithNaverPassword, NAVER_LOGIN_ACTOR, requestedLoginChallengeMode, validateLoginIdentity } from './naver-login-http.mjs';
 import { loadNaverLoginIdentity, storeNaverLoginIdentity, naverLoginIdentityReady } from './naver-login-identity.mjs';
-import { loadLoginControl, recordAccountProtection, acknowledgeAccountRecovery } from './naver-login-state.mjs';
+import { loadLoginControl, recordAccountProtection, acknowledgeAccountRecovery, automaticReloginBlocked, recordLoginSuccess } from './naver-login-state.mjs';
+import { reuseStoredNaverSession } from './naver-session-reuse.mjs';
+import { acquireNaverSessionLock } from './naver-session-lock.mjs';
 
 const args = process.argv.slice(2);
 const known = new Set(['--identity-stdin', '--remember-identity', '--remember-session', '--challenge-stdin',
@@ -10,34 +12,18 @@ let output = null;
 let outputFd = null;
 let result;
 let identity;
+let releaseSessionLock;
+
+function safeFailureCode(error, fallback) {
+  const candidate = error?.code || error?.message;
+  return typeof candidate === 'string' && /^[A-Z_]+$/.test(candidate) ? candidate : fallback;
+}
 
 async function reuseSession() {
   const { loadNaverCookies } = await import('./session-vault.mjs');
-  let saved;
-  try { saved = await loadNaverCookies({ env: {} }); }
-  catch (error) {
-    if (error?.message === 'NAVER_AUTH_COOKIES_MISSING') return null;
-    throw error;
-  }
-  if (!saved.cookies.length) return null;
   const { SessionClient } = await import('./session-client.mjs');
-  const client = new SessionClient({ cookies: saved.cookies, ownerBlogId: NAVER_LOGIN_ACTOR,
-    defaultHeaders: saved.userAgent ? { 'user-agent': saved.userAgent } : {} });
-  try {
-    const verified = await client.verifyRoot();
-    if (verified.loginHTML) return null;
-    if (!verified.verified || !verified.actorMatched || !verified.adminShell) throw new Error('LOGIN_SESSION_OWNER_MISMATCH');
-    return { actor: NAVER_LOGIN_ACTOR, checkedAt: verified.checkedAt, executionMode: 'stored_session_http',
-      browserEngineUsed: false, sessionReused: true, sessionStored: saved.persisted,
-      protectedOwnerRead: true, protectedReadStatus: verified.httpStatus, loginPostCount: 0,
-      imageModelInvoked: false, credentialProvider: saved.provider, userAgentRestored: !!saved.userAgent,
-      states: { captured: true, client_exists: true, credential_propagated: true, remnant_free: true, live_replay: true } };
-  } catch (error) {
-    if (error?.code === 'AUTH_MISSING' || (error?.code === 'AUTH_UNVERIFIED'
-      && error.details?.finalPath === 'https://nid.naver.com/nidlogin.login')) return null;
-    // A network error, forbidden page or wrong owner is not evidence of expiry.
-    throw error;
-  } finally { client.clear(); saved.cookies.length = 0; }
+  return reuseStoredNaverSession({ loadNaverCookies: () => loadNaverCookies({ env: {} }), SessionClient,
+    ownerBlogId: NAVER_LOGIN_ACTOR, rememberSession: args.includes('--remember-session') });
 }
 
 try {
@@ -48,17 +34,23 @@ try {
       output = args[i];
     }
   }
+  const challengeMode = requestedLoginChallengeMode(args);
   if (output) {
     try { outputFd = openSync(output, 'wx'); } catch { throw new Error('LOGIN_OUTPUT_RESERVATION_FAILED'); }
   }
-  if (args.includes('--account-recovered')) acknowledgeAccountRecovery();
-  if (args.includes('--challenge-stdin') && args.includes('--challenge-codex')) throw new Error('LOGIN_CHALLENGE_MODE_CONFLICT');
   if (args.includes('--reuse-session') && args.includes('--identity-stdin')) throw new Error('LOGIN_IDENTITY_REUSE_CONFLICT');
-  const control = loadLoginControl();
+  // A pure status read does not rotate state. A recovery acknowledgement does.
+  if (!args.includes('--status') || args.includes('--account-recovered')) {
+    releaseSessionLock = await acquireNaverSessionLock();
+  }
   if (args.includes('--status')) {
+    if (args.includes('--account-recovered')) acknowledgeAccountRecovery();
+    const control = loadLoginControl();
     result = { actor: NAVER_LOGIN_ACTOR, identityProvider: 'windows_dpapi_current_user', identityAvailable: naverLoginIdentityReady(),
       loginBlocked: control.blocked, blockCode: control.code || null };
   } else {
+    if (args.includes('--account-recovered')) acknowledgeAccountRecovery();
+    const control = loadLoginControl();
     if (control.blocked) {
       result = { actor: NAVER_LOGIN_ACTOR, loginPostCount: 0, browserEngineUsed: false,
         protectedOwnerRead: false, nextAction: 'complete_naver_account_recovery_before_another_login' };
@@ -78,24 +70,77 @@ try {
         const input = Buffer.concat(chunks);
         try { identity = validateLoginIdentity(JSON.parse(input.toString('utf8'))); }
         finally { input.fill(0); for (const chunk of chunks) chunk.fill(0); }
-      } else identity = loadNaverLoginIdentity();
+      } else {
+        // Automatic (stored-identity) logins stop after a recent verified login whose session was rejected again.
+        if (automaticReloginBlocked(control)) {
+          result = { actor: NAVER_LOGIN_ACTOR, loginPostCount: 0, browserEngineUsed: false, protectedOwnerRead: false,
+            lastLoginAt: control.lastLoginAt, nextAction: 'investigate_session_reuse_before_another_password_login' };
+          throw new Error('NAVER_RECENT_LOGIN_SESSION_REJECTED');
+        }
+        identity = loadNaverLoginIdentity();
+      }
       let handleChallenge;
-      if (args.includes('--challenge-stdin')) {
+      if (challengeMode === 'stdin') {
         if (!process.stdin.isTTY) throw new Error('LOGIN_CHALLENGE_TTY_REQUIRED');
         ({ inspectAndContinueChallenge: handleChallenge } = await import('../tools/discovery/naver-login-challenge-inspector.mjs'));
-      } else ({ answerLoginChallengeWithCodex: handleChallenge } = await import('./naver-login-vision.mjs'));
+      } else if (challengeMode === 'codex') {
+        ({ answerLoginChallengeWithCodex: handleChallenge } = await import('./naver-login-vision.mjs'));
+      }
       const { receipt, session } = await loginWithNaverPassword(identity, { handleChallenge });
       result = receipt;
       if (receipt.code === 'ACCOUNT_PROTECTION_REQUIRED') recordAccountProtection();
+      const ownerVerified = receipt.protectedOwnerRead === true;
+      const persistenceFailures = [];
       try {
-        if (receipt.protectedOwnerRead && args.includes('--remember-session')) {
-          result.sessionStored = (await session.persistVerifiedSession()).stored;
-          result.cookiesPersisted = result.sessionStored;
+        // The login flow has already made the protected owner GET. Reuse only
+        // SessionClient's private fresh proof so DPAPI work does not trigger a
+        // redundant second owner read after a successful login.
+        if (ownerVerified && args.includes('--remember-session')) {
+          try {
+            result.sessionStored = (await session.persistVerifiedSession({ reuseFreshOwnerVerification: true })).stored;
+            result.cookiesPersisted = result.sessionStored;
+            if (!result.sessionStored) persistenceFailures.push('CREDENTIAL_STORE_WRITE_FAILED');
+          } catch (error) {
+            result.sessionStored = false;
+            result.cookiesPersisted = false;
+            const code = safeFailureCode(error, 'CREDENTIAL_STORE_WRITE_FAILED');
+            result.sessionPersistenceCode = code;
+            persistenceFailures.push(code);
+          }
         }
-        if (receipt.protectedOwnerRead && args.includes('--remember-identity')) {
-          result.identityStored = storeNaverLoginIdentity(identity).stored;
+        // A successful explicit password login authorizes storing that exact
+        // identity independently of whether cookie persistence succeeded.
+        if (ownerVerified && args.includes('--remember-identity')) {
+          try {
+            result.identityStored = storeNaverLoginIdentity(identity).stored;
+            if (!result.identityStored) persistenceFailures.push('CREDENTIAL_STORE_WRITE_FAILED');
+          } catch (error) {
+            result.identityStored = false;
+            const code = safeFailureCode(error, 'CREDENTIAL_STORE_WRITE_FAILED');
+            result.identityPersistenceCode = code;
+            persistenceFailures.push(code);
+          }
         }
-      } finally { session?.clear(); }
+      } finally {
+        // Record the verified login even when a later DPAPI write failed, so an
+        // automatic worker cannot immediately retry the password flow.
+        if (ownerVerified) {
+          try {
+            result.loginControlStored = recordLoginSuccess().stored;
+            if (!result.loginControlStored) persistenceFailures.push('LOGIN_CONTROL_WRITE_FAILED');
+          } catch (error) {
+            result.loginControlStored = false;
+            const code = safeFailureCode(error, 'LOGIN_CONTROL_WRITE_FAILED');
+            result.loginControlPersistenceCode = code;
+            persistenceFailures.push(code);
+          }
+        }
+        session?.clear();
+      }
+      if (persistenceFailures.length) {
+        result.persistenceFailures = [...persistenceFailures];
+        throw Object.assign(new Error(persistenceFailures[0]), { code: persistenceFailures[0] });
+      }
       if (!receipt.protectedOwnerRead) process.exitCode = 2;
     }
   }
@@ -105,6 +150,7 @@ try {
   process.exitCode = 2;
 } finally {
   if (identity) { identity.username = ''; identity.password = ''; }
+  releaseSessionLock?.();
 }
 if (outputFd != null) {
   try { writeFileSync(outputFd, JSON.stringify(result, null, 2) + '\n'); }

@@ -1,0 +1,46 @@
+{
+  "schema": "gemini-settings-panel-guard-incident-v1",
+  "service": "gemini-web",
+  "feature": "settings",
+  "stage": "settings_panel_navigation",
+  "outcome": "possible_unobserved_startup_write_unknown_state",
+  "recordedAt": "2026-10-06T02:58:52.811389+00:00",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "surface": {
+    "pathFamily": "/gemini-spark",
+    "classifiedAs": "Chat/Spark panel",
+    "usedAsAccountSettings": false,
+    "voiceNameSelectorFound": false
+  },
+  "guardedObservations": {
+    "duringPanelEntryBlockedNonReadPosts": 1,
+    "duringGuardedReturnToAppBlockedNonReadPosts": 52,
+    "guardParserFailures": 0,
+    "allowedTypedPreferenceReads": 1,
+    "finalAppRootQuietWindowMs": 6000,
+    "finalQuietWindowNonReadPosts": 0,
+    "settingsHelpThemeMenuBlockedNonReadPosts": 3,
+    "settingsHelpThemeMenuParserFailures": 0,
+    "settingsHelpThemeMenuPreferenceChanged": false
+  },
+  "unguardedInterval": {
+    "exactCount": null,
+    "rpcClassification": "not_retained",
+    "requestOrResponseBodiesPersisted": false,
+    "settingEffect": "unknown",
+    "mayHaveReachedServer": true,
+    "confirmedReachedServer": false
+  },
+  "handling": {
+    "noDirectSettingsMutationAttempted": true,
+    "noBlindRollbackAttempted": true,
+    "pageRestoredToAppRoot": true,
+    "browserOrContextClosed": false
+  },
+  "persistence": {
+    "ownerIdentityPersisted": false,
+    "preferenceValuesPersisted": false,
+    "sessionValuesPersisted": false,
+    "rawRequestOrResponseBodiesPersisted": false
+  }
+}

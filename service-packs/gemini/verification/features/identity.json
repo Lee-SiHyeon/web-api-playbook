@@ -1,0 +1,89 @@
+{
+  "schema": "gemini-feature-live-receipt-v1",
+  "service": "gemini-web",
+  "featureId": "identity",
+  "outcome": "verified",
+  "checkedAt": "2026-10-06T11:57:06.945470+00:00",
+  "evidenceClass": "direct_http_live",
+  "transport": "direct_http",
+  "executionHost": "linux_worker",
+  "mocked": false,
+  "publicOnly": false,
+  "authenticatedOwnerVerified": true,
+  "secretsPersisted": false,
+  "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+  "implementationFiles": [
+    {
+      "path": "src/client.mjs",
+      "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+    },
+    {
+      "path": "src/constants.mjs",
+      "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+    },
+    {
+      "path": "src/contract.mjs",
+      "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+    },
+    {
+      "path": "src/http-session-bootstrap.mjs",
+      "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+    },
+    {
+      "path": "src/http-transport.mjs",
+      "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+    },
+    {
+      "path": "src/https-transport.mjs",
+      "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+    },
+    {
+      "path": "src/session.mjs",
+      "sha256": "293a9c906df60cfadced39f49012bdbe1739a83ed4b9b928086954aa0c3bc53c"
+    }
+  ],
+  "implementationSetSha256": "4ea4ee265be7801df89fa761504054c4072ed3d53a34a29b831c91422dcdae37",
+  "ownerIdentityEvidence": {
+    "path": "verification/feature-evidence/identity--identity--owner.json",
+    "sha256": "8f1106e99d1605555696237b31ee47a6dce8192ded63c4405034312e6e1ddcf3",
+    "implementationFiles": [
+      {
+        "path": "src/client.mjs",
+        "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+      },
+      {
+        "path": "src/constants.mjs",
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/session.mjs",
+        "sha256": "293a9c906df60cfadced39f49012bdbe1739a83ed4b9b928086954aa0c3bc53c"
+      }
+    ],
+    "implementationSetSha256": "4ea4ee265be7801df89fa761504054c4072ed3d53a34a29b831c91422dcdae37"
+  },
+  "operationEvidence": [
+    {
+      "operationId": "identity",
+      "caseId": "owner",
+      "path": "verification/feature-evidence/identity--identity--owner.json",
+      "sha256": "8f1106e99d1605555696237b31ee47a6dce8192ded63c4405034312e6e1ddcf3"
+    }
+  ]
+}

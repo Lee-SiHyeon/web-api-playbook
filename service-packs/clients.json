@@ -1,0 +1,454 @@
+{
+  "schema": "playbook-client-packs-v1",
+  "clients": [
+    {
+      "id": "gemini",
+      "title": "Gemini web HTTP client",
+      "directory": "service-packs/gemini",
+      "entrypoint": "src/cli.mjs",
+      "executionMode": "pure_http_with_observed_session_inputs",
+      "testGlobs": [
+        "test/*.test.mjs"
+      ],
+      "scope": [
+        "owner",
+        "history",
+        "text",
+        "models",
+        "settings",
+        "sharing",
+        "attachments",
+        "media"
+      ],
+      "note": "Historical evidence and source-bound inputs; authentication and each operation require current validation."
+    },
+    {
+      "id": "grok",
+      "title": "Grok web HTTP client",
+      "directory": "service-packs/grok",
+      "entrypoint": "src/cli.mjs",
+      "executionMode": "operation_specific_http_or_websocket",
+      "testGlobs": [
+        "test/*.test.mjs"
+      ],
+      "scope": [
+        "owner",
+        "conversations",
+        "workspaces",
+        "model-selection",
+        "text",
+        "attachments",
+        "media"
+      ],
+      "note": "Some operations need declared Python transports or captured inputs; inspect the native feature audit."
+    },
+    {
+      "id": "chatgpt",
+      "title": "ChatGPT web contract client",
+      "directory": "service-packs/chatgpt",
+      "entrypoint": "src/cli.mjs",
+      "executionMode": "pure_http_contract_gated",
+      "testGlobs": [
+        "tests/*.test.mjs"
+      ],
+      "scope": [
+        "contracts",
+        "session",
+        "read",
+        "stream",
+        "send",
+        "media",
+        "reconciliation"
+      ],
+      "note": "Uncaptured contracts remain blocked; a packaged scaffold is not live success."
+    },
+    {
+      "id": "google-flow",
+      "aliases": [
+        "flow"
+      ],
+      "title": "Flow direct HTTP and optional UI backend",
+      "directory": "service-packs/google-flow",
+      "entrypoint": "src/cli.mjs",
+      "executionMode": "phase_specific_http_with_optional_profile_or_gflow",
+      "testGlobs": [
+        "test/*.test.mjs"
+      ],
+      "scope": [
+        "project-media",
+        "generation",
+        "download",
+        "session",
+        "profile-sync"
+      ],
+      "note": "Session/bootstrap and optional gflow backend have separate browser requirements; see the native README."
+    },
+    {
+      "id": "google-flow-bridge",
+      "aliases": [
+        "flow-bridge"
+      ],
+      "title": "Flow extension bridge",
+      "directory": "service-packs/google-flow-bridge",
+      "entrypoint": "src/cli.mjs",
+      "executionMode": "browser_automation",
+      "testGlobs": [],
+      "scope": [
+        "project-media",
+        "generation",
+        "download",
+        "reconciliation"
+      ],
+      "note": "Preserved distinct XHR bridge; recurring RPCs need a signed-in Flow page and extension. No donor tests."
+    },
+    {
+      "id": "gemini-bridge",
+      "title": "Gemini retained protocol and bootstrap client",
+      "directory": "service-packs/gemini-bridge",
+      "entrypoint": "src/verify.mjs",
+      "executionMode": "phase_specific",
+      "testGlobs": [
+        "test/*.test.mjs"
+      ],
+      "scope": [
+        "protocol",
+        "bootstrap",
+        "verification"
+      ],
+      "note": "The verify command is a live operation; read its README before invocation."
+    },
+    {
+      "id": "grok-public-modes",
+      "title": "Grok public model-mode reader",
+      "directory": "service-packs/grok-public-modes",
+      "entrypoint": "src/verify.mjs",
+      "executionMode": "pure_http",
+      "testGlobs": [
+        "test/*.test.mjs"
+      ],
+      "scope": [
+        "public-models"
+      ],
+      "note": "The verify command sends public HTTP requests; listing this pack does not."
+    },
+    {
+      "id": "adpick",
+      "title": "Adpick authenticated HTTP and serverless handlers",
+      "directory": "service-packs/adpick",
+      "entrypoint": null,
+      "testGlobs": [
+        "test/*.test.js"
+      ],
+      "executionMode": "pure_http",
+      "scope": [
+        "login",
+        "search",
+        "campaigns",
+        "malls",
+        "links",
+        "sdk",
+        "banners",
+        "reports"
+      ],
+      "note": "Library and api/ handlers; native write guards are preserved. No generic writer is added."
+    },
+    {
+      "id": "threads-actions",
+      "aliases": [
+        "threads-client"
+      ],
+      "title": "Threads profile, views and text-chain client",
+      "directory": "service-packs/threads-actions",
+      "entrypoint": "src/cli.mjs",
+      "executionMode": "pure_http_with_caller_session",
+      "testGlobs": [
+        "test/*.test.mjs"
+      ],
+      "scope": [
+        "profile",
+        "views",
+        "publish",
+        "reply"
+      ],
+      "note": "Donor live_replay=false and protected-owner/readback limits remain explicit."
+    },
+    {
+      "id": "naver-shopping",
+      "title": "Naver shopping and travel HTTP readers",
+      "directory": "service-packs/naver-shopping",
+      "entrypoint": "scripts/naver-shopping.mjs",
+      "executionMode": "pure_http",
+      "testGlobs": [
+        "tests/*.test.mjs"
+      ],
+      "scope": [
+        "feed",
+        "integrated-search",
+        "product",
+        "reviews",
+        "travel"
+      ],
+      "note": "Product Document transport has an optional Python dependency; blocked JSON/review contracts remain blocked."
+    },
+    {
+      "id": "naver-travel",
+      "title": "Naver flight and hotel HTTP readers",
+      "directory": "service-packs/naver-shopping",
+      "entrypoint": "scripts/naver-travel.mjs",
+      "executionMode": "pure_http",
+      "testGlobs": [],
+      "scope": [
+        "flights",
+        "calendar",
+        "price-graph",
+        "hotels",
+        "hotel-rates",
+        "travel-products"
+      ],
+      "note": "Tests are included in naver-shopping; no booking or payment writer."
+    },
+    {
+      "id": "coupang-shopping",
+      "title": "Coupang public feed HTTP reader",
+      "directory": "service-packs/coupang-shopping",
+      "entrypoint": "scripts/coupang-shopping.mjs",
+      "executionMode": "pure_http",
+      "testGlobs": [],
+      "scope": [
+        "feed",
+        "deals",
+        "sections",
+        "find",
+        "categories",
+        "banner"
+      ],
+      "note": "Bounded observed feed; no donor tests and no whole-market search claim."
+    },
+    {
+      "id": "naver-cafe",
+      "title": "Naver Cafe HTTP management client",
+      "directory": "service-packs/naver-cafe",
+      "entrypoint": "scripts/cafe.mjs",
+      "executionMode": "pure_http_with_protected_session",
+      "testGlobs": [
+        "tests/*.test.mjs"
+      ],
+      "scope": [
+        "read",
+        "session",
+        "management",
+        "attachments"
+      ],
+      "note": "Shared Naver helpers resolve to the existing canonical pack; native journal/readback guards remain."
+    },
+    {
+      "id": "social-actions",
+      "title": "Naver/Tistory/X/Threads/Instagram social HTTP clients",
+      "directory": "service-packs/operations",
+      "entrypoint": "apps/social-actions/cli.mjs",
+      "executionMode": "operation_specific_http_with_declared_session_provider",
+      "scope": [
+        "capabilities",
+        "prepare",
+        "execute",
+        "reconcile",
+        "instagram",
+        "tiktok",
+        "youtube",
+        "naver-clip"
+      ],
+      "note": "Original service-specific journal, readback and explicit write boundaries remain. Bot schedulers are separate application logic.",
+      "testManifest": "provenance/operations-consolidation-2026-10-23.json"
+    },
+    {
+      "id": "affiliate-operations",
+      "title": "Additional affiliate, vendor, place and creator HTTP adapters",
+      "directory": "service-packs/operations",
+      "entrypoint": "apps/affiliate-api-hub/scripts/xhr-tools.mjs",
+      "executionMode": "operation_specific",
+      "testGlobs": [],
+      "scope": [
+        "provider-contracts",
+        "shopping",
+        "vendor-reviews",
+        "places",
+        "creator-reads",
+        "media"
+      ],
+      "note": "Library modules and native allowlisted scripts; tests run under social-actions for this shared dependency pack."
+    },
+    {
+      "id": "automation",
+      "title": "Coupang Partners, categories, reviews and Tistory observation workflows",
+      "directory": "service-packs/automation",
+      "entrypoint": "scripts/cli.mjs",
+      "executionMode": "pure_http_with_caller_session",
+      "testGlobs": [
+        "tests/*.test.mjs"
+      ],
+      "scope": [
+        "categories",
+        "partners",
+        "reports",
+        "reviews",
+        "measurements",
+        "price-check",
+        "intake",
+        "public-health"
+      ],
+      "note": "Run the individual scripts listed by help. No account state or private operator queue is bundled."
+    },
+    {
+      "id": "whisk",
+      "title": "Whisk image/project/reference SDK wrapper",
+      "directory": "service-packs/whisk",
+      "entrypoint": null,
+      "executionMode": "pinned_sdk_not_live_verified",
+      "testGlobs": [],
+      "scope": [
+        "projects",
+        "references",
+        "images",
+        "media"
+      ],
+      "note": "Pinned @rohitaryal/whisk-api 4.0.0 wrapper; caller supplies the authorized session. No donor offline tests or live proof."
+    },
+    {
+      "id": "creator-tools",
+      "title": "Creator HTTP, TTS and declared browser helpers",
+      "directory": "service-packs/creator-tools",
+      "entrypoint": null,
+      "executionMode": "helper_specific_http_or_browser_automation",
+      "testGlobs": [],
+      "scope": [
+        "gemini-tts",
+        "elevenlabs",
+        "myrealtrip",
+        "grok-quota",
+        "flow-account-ledger"
+      ],
+      "note": "Flow account credits/handoff helpers depend on commands absent from the pinned Flow client and remain source-only. No generation is run during migration."
+    },
+    {
+      "id": "lifehack-readers",
+      "title": "Danawa, Naver/11st feeds, Toss and partner protocols",
+      "directory": "service-packs/lifehack-readers",
+      "entrypoint": "scripts/cli.mjs",
+      "nodeArgs": [
+        "--import=tsx"
+      ],
+      "testNodeArgs": [
+        "--import=tsx"
+      ],
+      "executionMode": "pure_http_with_operation_specific_credentials",
+      "testGlobs": [
+        "tests/danawa-collector.test.mjs",
+        "tests/danawa-discovery.test.ts",
+        "tests/coupang-openapi.test.ts"
+      ],
+      "scope": [
+        "danawa-target",
+        "danawa-search",
+        "danawa-offers",
+        "eleventh",
+        "naver-deals",
+        "rss",
+        "toss-protocol",
+        "adpick-projection",
+        "coupang-openapi"
+      ],
+      "note": "Portable reader/protocol modules from the app. UI, database job scheduler and production sessions remain application-owned."
+    },
+    {
+      "id": "naver-blog",
+      "title": "Canonical Naver Blog API pack",
+      "directory": "service-packs/naver",
+      "entrypoint": "apps/naver-blog-api/scripts/client.mjs",
+      "executionMode": "phase_specific_http_with_optional_native_sdk_preview",
+      "testGlobs": [
+        "apps/naver-blog-api/tests/authorized-session.test.mjs",
+        "apps/naver-blog-api/tests/client-auth-rotation.test.mjs",
+        "apps/naver-blog-api/tests/datalab-trend-web.test.mjs",
+        "apps/naver-blog-api/tests/media-upload.test.mjs",
+        "apps/naver-blog-api/tests/naver-handoff-options.test.mjs",
+        "apps/naver-blog-api/tests/naver-handoff-persistence.test.mjs",
+        "apps/naver-blog-api/tests/naver-login-cli-persistence.test.mjs",
+        "apps/naver-blog-api/tests/naver-login-http-handoff.test.mjs",
+        "apps/naver-blog-api/tests/naver-login-http.test.mjs",
+        "apps/naver-blog-api/tests/naver-login-relogin-cooldown.test.mjs",
+        "apps/naver-blog-api/tests/naver-session-lock.test.mjs",
+        "apps/naver-blog-api/tests/naver-session-reuse.test.mjs",
+        "apps/naver-blog-api/tests/session-client.test.mjs",
+        "apps/naver-blog-api/tests/session-persistence.test.mjs",
+        "apps/naver-blog-api/tests/trend-radar.test.mjs"
+      ],
+      "scope": [
+        "session",
+        "owner",
+        "posts",
+        "statistics",
+        "media",
+        "publisher",
+        "trends"
+      ],
+      "note": "Tests here cover the consolidated login/session/media/trend changes; native preview and account writes need their own runner/evidence."
+    },
+    {
+      "id": "tistory",
+      "title": "Canonical Tistory pack and consolidated write workflows",
+      "directory": "service-packs/tistory",
+      "entrypoint": "scripts/cli.mjs",
+      "executionMode": "pure_http_with_protected_session",
+      "testGlobs": [
+        "tests/*.test.mjs"
+      ],
+      "scope": [
+        "session",
+        "statistics",
+        "draft",
+        "publish",
+        "update",
+        "owner-comments",
+        "media"
+      ],
+      "note": "Keeps the existing Windows protected provider and journal/readback boundaries."
+    },
+    {
+      "id": "blogger",
+      "title": "Blogger web/feed and official OAuth API pack",
+      "directory": "service-packs/blogger",
+      "entrypoint": "scripts/cli.mjs",
+      "executionMode": "operation_specific_http",
+      "testGlobs": [
+        "tests/*.test.mjs"
+      ],
+      "scope": [
+        "web-read",
+        "feed-read",
+        "oauth-read",
+        "journaled-oauth-write"
+      ],
+      "note": "Web write RPCs remain uncaptured. OAuth and each mutation need live account proof."
+    },
+    {
+      "id": "social-x",
+      "title": "Canonical X and Reddit client",
+      "directory": "service-packs/social-x",
+      "entrypoint": "src/cli.mjs",
+      "executionMode": "pure_http_with_caller_provider",
+      "testGlobs": [
+        "test/*.test.mjs"
+      ],
+      "scope": [
+        "profile",
+        "timeline",
+        "conversations",
+        "text",
+        "long-text",
+        "reactions",
+        "reddit"
+      ],
+      "note": "Pinned donor deltas preserve existing Playbook MIME/access-denied and uncertain-response receipts."
+    }
+  ]
+}

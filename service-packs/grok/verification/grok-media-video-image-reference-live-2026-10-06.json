@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "operation": "media.video.create.image_reference.direct_live",
+  "observedAt": "2026-10-06T04:14:07.331281Z",
+  "ownerVerified": true,
+  "sourceImageTaskVerified": true,
+  "assetServerConfig": {
+    "present": true,
+    "origin": "https://assets.grok.com",
+    "source": "current_page_first_party_inline_bootstrap"
+  },
+  "assetNativeRead": {
+    "status": 200,
+    "mimeType": "image/jpeg",
+    "fromDiskCache": false,
+    "fromServiceWorker": false,
+    "protocol": "h2",
+    "ssoCookieObserved": true,
+    "ordinaryHeaderNames": [
+      "accept",
+      "accept-language",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-agent"
+    ]
+  },
+  "intentIdSha256": "d4923cb1248e500f1c63b0e78eb1df34be5f3352070b5a1fb10d08d028cfd298",
+  "promptSha256": "d35a282311314c656d16b8b9b54dc6c72f75b293b43507c2168fde3b361abdee",
+  "promptLength": 132,
+  "generationMode": "image_reference",
+  "profileName": "video-image-reference-6s-480p-no-audio",
+  "nativeCapture": {
+    "captured": true,
+    "intentMatch": true,
+    "method": "POST",
+    "pathClass": "create-conversation",
+    "bodyLength": 704,
+    "bodySha256": "4d79984abc00cf3f8d4a03687eb0301b13365d4bee0b45e782a983fd7bebffb4",
+    "topLevelFieldNames": [
+      "enableImageStreaming",
+      "enableSideBySide",
+      "kind",
+      "mediaGenInput",
+      "message",
+      "modelName",
+      "responseMetadata",
+      "sendFinalMetadata"
+    ],
+    "mediaGenInputModes": [
+      "imageToVideo"
+    ],
+    "inputFieldNames": [
+      "aspectRatio",
+      "duration",
+      "inputAssets",
+      "mode",
+      "prompt",
+      "resolutionName",
+      "skipAudio"
+    ],
+    "inputAssetCount": 1,
+    "inputAssetMatched": true,
+    "promptMatched": true,
+    "profile": {
+      "aspectRatio": "2:3",
+      "duration": 6,
+      "resolutionName": "480p",
+      "mode": "custom",
+      "skipAudio": true
+    },
+    "ordinaryHeaderNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "user-agent"
+    ],
+    "dynamicHeaderNames": [
+      "x-statsig-id",
+      "x-xai-request-id"
+    ],
+    "ssoCookieObserved": true,
+    "abortProof": {
+      "verified": true,
+      "failRequestAck": true,
+      "networkIdPresent": true,
+      "loadingFailedCount": 1,
+      "responseCount": 0,
+      "intentMatch": true,
+      "loadingFailedMissing": false
+    }
+  },
+  "sourceImage": {
+    "taskHistoryVerified": true,
+    "ownerVerified": true,
+    "mimeType": "image/jpeg",
+    "createTime": "2026-10-05T22:11:22.273Z",
+    "assetIdSha256": "ba6e5f36f5540035769fd761d62629f09b13cd6dc1aa5c668630238078c4e661",
+    "conversationIdSha256": "cf525680c9587422e0d5c9ba1648ed7cbf2339180155e3fa1ae22bff436d81a6",
+    "assetServerOrigin": "https://assets.grok.com"
+  },
+  "browserGuard": {
+    "pagewideVerified": true,
+    "browserMutationAttemptsBlocked": 39,
+    "lateBrowserRetriesBlocked": 6,
+    "failRequestAckCount": 62,
+    "networkIdMissingCount": 0,
+    "blockedBusinessWriteCount": 39,
+    "matchingNativeVideoIntentAttempts": 3,
+    "blockedSdkRetryAttempts": 2,
+    "browserServerWritesDelivered": 0,
+    "blockedWriteResponses": 0,
+    "asset": {
+      "requestCount": 2,
+      "requestHeaderNames": [
+        "accept",
+        "accept-language",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "sec-fetch-dest",
+        "sec-fetch-mode",
+        "sec-fetch-site",
+        "user-agent"
+      ],
+      "ssoObserved": true,
+      "response": {
+        "status": 200,
+        "mimeType": "image/jpeg"
+      },
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "protocol": "h2"
+    }
+  },
+  "browserWriteRequestsSent": 0,
+  "promptOrPrivateIdsPersisted": false,
+  "cookiesOrTokensPersisted": false,
+  "rawBodiesOrFramesPersisted": false,
+  "publicSharingChanged": false,
+  "purchaseOrSubscriptionChanged": false,
+  "directSubmission": {
+    "stage": "media_api_preflight_and_submit",
+    "responseContentType": null,
+    "securitySignal": null,
+    "processExitCode": 1,
+    "errorCode": "JOURNAL_TRANSITION_INVALID"
+  },
+  "directVideoCreateRequestsSent": null,
+  "automaticRetries": 0,
+  "promptPersisted": false,
+  "rawIdsKeysUrlsPersisted": false,
+  "rawFramesPersisted": false,
+  "finalState": "outcome_unknown",
+  "transportEvidenceAvailable": false,
+  "transportRequestStarted": null,
+  "transportResponseReceived": null,
+  "httpStatus": null,
+  "responseBytesRead": null,
+  "directWriteDispatchCountKnown": false,
+  "reconciledAt": "2026-10-06T05:16:36.513Z"
+}

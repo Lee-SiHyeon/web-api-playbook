@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-05T07:40:54.929Z",
+  "operation": "actual_http_create_diagnostic_and_download_control",
+  "scope": {
+    "mode": "pure_http",
+    "inputMode": "absent_probe",
+    "activeProjectOnly": true,
+    "duration": 8,
+    "nativeResolution": "720p",
+    "requestedFinalResolution": "480p",
+    "aspect": "16:9",
+    "sdkExecuted": false,
+    "challengeReplay": false
+  },
+  "generation": {
+    "postAttempts": 1,
+    "responses": 1,
+    "responseAt": "2026-10-05T07:33:51.700Z",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 228,
+    "rpcId": "YhhmEf",
+    "rpcStatus": 7,
+    "serverCode": "PUBLIC_ERROR_UNUSUAL_ACTIVITY",
+    "captchaMentioned": false,
+    "mediaIdReturned": false,
+    "newVideoDownloaded": false,
+    "readback": {
+      "attempts": 3,
+      "projectMediaBefore": 35,
+      "projectMediaAfter": 35,
+      "creditBefore": 1050,
+      "creditAfter": 1050,
+      "laterCheckedAt": "2026-10-05T07:37:21.185Z",
+      "laterProjectMedia": 35,
+      "laterCredit": 1050,
+      "legacyClientIdLookupMatched": false,
+      "exactRequestCorrelationVerified": false,
+      "requestIdPersisted": false,
+      "limitation": "The former client-ID lookup targeted the wrong scene field. Rejection is grounded in explicit RPC denial and delayed unchanged owner snapshots, not that lookup."
+    },
+    "journal": {
+      "jobId": "8c6c3c6a-3b20-4bc9-b5a5-461ceabe115f",
+      "state": "rejected",
+      "fenceHeld": false,
+      "automaticRetry": false,
+      "initialState": "needs_reconciliation",
+      "manuallyReconciledAt": "2026-10-05T07:56:30.920Z",
+      "method": "manual_explicit_rpc_denial_and_delayed_owner_snapshot"
+    },
+    "causeAssessment": "Observed server denial for this absent-input diagnostic; generic unusual-activity enum does not prove missing CAPTCHA is the sole cause."
+  },
+  "downloadControl": {
+    "newlyGenerated": false,
+    "mediaId": "024dfde6-fab7-4626-9b34-6a7d0fd16371",
+    "httpStatus": 200,
+    "mime": "video/mp4",
+    "bytes": 789297,
+    "ffprobe": {
+      "width": 360,
+      "height": 640,
+      "durationSeconds": 4.01,
+      "videoCodec": "h264",
+      "audioCodec": "aac"
+    },
+    "requestedOutputReused": false
+  },
+  "verification": {
+    "offlineTests": 62,
+    "passed": 62,
+    "sourceSyntaxPassed": true
+  },
+  "redaction": {
+    "credentialValuesRecorded": false,
+    "rawResponseBodiesRecorded": false,
+    "signedUrlsRecorded": false,
+    "requestTokenRecorded": false
+  },
+  "correctedAfterObservedSceneSchema": true
+}

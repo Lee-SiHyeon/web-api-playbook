@@ -1,0 +1,1240 @@
+{
+  "schemaVersion": 2,
+  "researchDate": "2026-09-21",
+  "timeZone": "Asia/Seoul",
+  "executionHost": "DESKTOP-TO2H6OD",
+  "market": "KR",
+  "purpose": "핫딜 글감 수집처 선정. 우선순위는 편집 적합성과 이번 접근 결과에 따른 판단이며 트래픽 순위가 아니다.",
+  "scope": {
+    "researchOnly": false,
+    "newCollectorsImplemented": 1,
+    "newStructuredApiContractsReplayed": 1,
+    "schedulerCreated": false,
+    "articlesPublished": false,
+    "http200DoesNotProveApiContract": true,
+    "fullPaginationVerified": false,
+    "checkoutPricesVerified": false,
+    "verifiedPaginationScopes": [
+      {
+        "source": "naver-today-deals",
+        "layoutId": "I_6aad022e5e35254ed60da510",
+        "pages": 5,
+        "productCount": 85,
+        "terminal": "hasNext_false"
+      }
+    ],
+    "airlineCollectorsImplemented": 0
+  },
+  "sources": [
+    {
+      "id": "naver-today-deals",
+      "name": "네이버 오늘끝딜 스페셜딜",
+      "priority": "P0",
+      "role": "merchant_discovery_and_price",
+      "urls": [
+        "https://shopping.naver.com/promotion"
+      ],
+      "categories": [
+        "종합쇼핑"
+      ],
+      "fieldsToCollect": [
+        "product_id",
+        "title",
+        "sale_price",
+        "discounted_price",
+        "shipping",
+        "sold_out",
+        "campaign_start",
+        "campaign_end",
+        "checked_at"
+      ],
+      "collectionState": "anonymous_engine_free_json_pagination_verified",
+      "integration": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_required",
+        "live_replay": true
+      },
+      "pagination": [
+        {
+          "layoutId": "I_6aad022e5e35254ed60da510",
+          "title": "스페셜딜",
+          "startAt": "2026-09-20T02:00:00.000Z",
+          "endAt": "2026-09-21T01:59:59.000Z",
+          "pages": 5,
+          "returnedItems": 85,
+          "complete": true,
+          "stopReason": "hasNext_false"
+        }
+      ],
+      "client": "../adapters/naver-shopping-deals.mjs",
+      "evidence": "naver-shopping-today-deals-replay-2026-09-21.json",
+      "nextStep": "동일 규격 단가와 배송비를 비교하고 발행 직전에 재수집. 다른 탭과 키워드 검색은 별도 계약."
+    },
+    {
+      "id": "naver-shopping-keyword-internal",
+      "name": "네이버 쇼핑 내부 키워드 검색",
+      "priority": "P1",
+      "role": "product_search_candidate",
+      "urls": [
+        "https://search.shopping.naver.com/"
+      ],
+      "categories": [
+        "종합쇼핑"
+      ],
+      "collectionState": "browser_xhr_captured_independent_http_418",
+      "integration": {
+        "captured": true,
+        "client_exists": "bounded_replay_probe_only",
+        "credential_propagated": "delivered_in_memory_not_verified_by_successful_read",
+        "live_replay": false
+      },
+      "evidence": "naver-shopping-observed-contracts-2026-09-21.json",
+      "nextStep": "현재 관측은 검색 추가 페이지. 서비스가 허용하는 독립 요청 요건 확인 전 운영 수집기로 승격하지 않음."
+    },
+    {
+      "id": "ppomppu",
+      "name": "뽐뿌 뽐뿌게시판",
+      "priority": "P0",
+      "role": "community_discovery",
+      "urls": [
+        "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu"
+      ],
+      "categories": [
+        "생활용품",
+        "식품",
+        "가전",
+        "디지털"
+      ],
+      "fieldsToCollect": [
+        "post_id",
+        "title",
+        "merchant_url",
+        "published_at",
+        "recommendations",
+        "comments",
+        "views",
+        "expiry_status"
+      ],
+      "collectionState": "anonymous_html_list_verified",
+      "probeIds": [
+        "ppomppu"
+      ],
+      "nextStep": "EUC-KR 목록·상세 파서와 공지 제외, 원 판매처 URL 추출 검증",
+      "httpObservations": [
+        {
+          "id": "ppomppu",
+          "url": "https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu",
+          "checkedAt": "2026-09-20T17:32:56.780Z",
+          "status": 200,
+          "title": "뽐뿌 - 뽐뿌게시판",
+          "contentType": "text/html; charset=euc-kr",
+          "charset": "euc-kr",
+          "visibleTextChars": 2712,
+          "challenge": false,
+          "contentLinkCount": 62,
+          "priceTextCount": 22
+        }
+      ]
+    },
+    {
+      "id": "ruliweb",
+      "name": "루리웹 유저 핫딜",
+      "priority": "P0",
+      "role": "community_discovery",
+      "urls": [
+        "https://bbs.ruliweb.com/market/board/1020"
+      ],
+      "categories": [
+        "게임",
+        "PC",
+        "가전",
+        "먹거리"
+      ],
+      "fieldsToCollect": [
+        "post_id",
+        "title",
+        "merchant_url",
+        "published_at",
+        "recommendations",
+        "comments",
+        "ended",
+        "poster_type"
+      ],
+      "collectionState": "anonymous_html_list_verified",
+      "probeIds": [
+        "ruliweb"
+      ],
+      "nextStep": "공지·댓글 링크 중복 제거 및 상세 판매 링크 검증",
+      "httpObservations": [
+        {
+          "id": "ruliweb",
+          "url": "https://bbs.ruliweb.com/market/board/1020",
+          "checkedAt": "2026-09-20T17:32:56.881Z",
+          "status": 200,
+          "title": "핫딜예판 유저 핫딜 중고장터",
+          "contentType": "text/html; charset=UTF-8",
+          "charset": "UTF-8",
+          "visibleTextChars": 7003,
+          "challenge": false,
+          "contentLinkCount": 53,
+          "priceTextCount": 25
+        }
+      ]
+    },
+    {
+      "id": "11st",
+      "name": "11번가 쇼킹딜",
+      "priority": "P0",
+      "role": "merchant_discovery_and_price",
+      "urls": [
+        "https://www.11st.co.kr/html/nc/deal/main.html"
+      ],
+      "categories": [
+        "종합쇼핑"
+      ],
+      "fieldsToCollect": [
+        "product_id",
+        "title",
+        "display_price",
+        "price_is_from",
+        "shipping",
+        "card_conditions",
+        "points",
+        "remaining_quantity",
+        "checked_at"
+      ],
+      "collectionState": "anonymous_html_list_verified",
+      "probeIds": [
+        "11st"
+      ],
+      "nextStep": "HTML meta EUC-KR 적용, 옵션·쿠폰 조건을 상품 상세와 연결",
+      "httpObservations": [
+        {
+          "id": "11st",
+          "url": "https://www.11st.co.kr/html/nc/deal/main.html",
+          "checkedAt": "2026-09-20T17:33:41.705Z",
+          "status": 200,
+          "title": "쇼킹딜 | 11번가",
+          "contentType": "text/html",
+          "charset": "euc-kr",
+          "visibleTextChars": 4737,
+          "contentLinkCount": 34,
+          "priceTextCount": 62
+        }
+      ]
+    },
+    {
+      "id": "danawa",
+      "name": "다나와",
+      "priority": "P0",
+      "role": "price_comparison",
+      "urls": [
+        "https://www.danawa.com/",
+        "https://plan.danawa.com/"
+      ],
+      "categories": [
+        "PC",
+        "가전",
+        "종합쇼핑"
+      ],
+      "fieldsToCollect": [
+        "model",
+        "variant",
+        "merchant_prices",
+        "shipping",
+        "comparison_checked_at",
+        "price_history_scope"
+      ],
+      "collectionState": "anonymous_homepage_verified_product_contract_unverified",
+      "probeIds": [
+        "danawa"
+      ],
+      "nextStep": "동일 모델 가격 비교 상세와 가격 이력의 실제 계약 확인",
+      "httpObservations": [
+        {
+          "id": "danawa",
+          "url": "https://www.danawa.com/",
+          "checkedAt": "2026-09-20T17:31:27.136Z",
+          "status": 200,
+          "title": "비교하고 잘 사는, 다나와 : 가격비교 사이트",
+          "contentType": "text/html; charset=UTF-8",
+          "charset": "UTF-8",
+          "visibleTextChars": 10442,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "id": "myrealtrip-consumer",
+      "name": "마리트 소비자 항공·패키지",
+      "priority": "P0",
+      "role": "travel_merchant_discovery_and_price",
+      "urls": [
+        "https://www.myrealtrip.com/main/flights",
+        "https://www.myrealtrip.com/pkc/search?promotionGroupId=42",
+        "https://www.myrealtrip.com/pkc/search?promotionGroupId=28"
+      ],
+      "categories": [
+        "항공",
+        "패키지",
+        "에어텔"
+      ],
+      "fieldsToCollect": [
+        "product_id",
+        "route",
+        "departure_date",
+        "travel_period",
+        "traveler_basis",
+        "display_price",
+        "coupon_conditions",
+        "included_services",
+        "availability",
+        "checked_at"
+      ],
+      "collectionState": "flight_partial_html_verified_package_feed_unverified",
+      "probeIds": [
+        "myrealtrip-flights",
+        "myrealtrip-packages"
+      ],
+      "existingIntegration": {
+        "scope": "marketing_link_generation_only_not_consumer_deal_feed",
+        "captured": true,
+        "client_exists": true,
+        "credential_propagated": "verified_during_prior_2026-09-21_run_not_rechecked_in_this_research",
+        "live_replay": "verified_during_prior_2026-09-21_run",
+        "evidence": "myrealtrip-marketing-replay-2026-09-21.json"
+      },
+      "nextStep": "소비자 특가 목록의 실제 데이터 계약 관측 후 독립 HTTP 재현; 패키지 앱 HTML 200을 상품 수집 성공으로 취급하지 않음",
+      "httpObservations": [
+        {
+          "id": "myrealtrip-flights",
+          "url": "https://www.myrealtrip.com/main/flights",
+          "checkedAt": "2026-09-20T17:32:57.108Z",
+          "status": 200,
+          "title": "마이리얼트립 항공",
+          "contentType": "text/html; charset=utf-8",
+          "charset": "utf-8",
+          "visibleTextChars": 1859,
+          "challenge": false,
+          "contentLinkCount": 0,
+          "priceTextCount": 5
+        },
+        {
+          "id": "myrealtrip-packages",
+          "url": "https://www.myrealtrip.com/pkc/search?promotionGroupId=42",
+          "checkedAt": "2026-09-20T17:32:56.962Z",
+          "status": 200,
+          "title": "기획전 - 패키지 여행 - 마이리얼트립 패키지",
+          "contentType": "text/html; charset=utf-8",
+          "charset": "utf-8",
+          "visibleTextChars": 1338,
+          "challenge": false,
+          "contentLinkCount": 0,
+          "priceTextCount": 0
+        }
+      ]
+    },
+    {
+      "id": "coupang-partners-goldbox",
+      "name": "쿠팡 파트너스 골드박스",
+      "priority": "P0",
+      "role": "affiliate_product_discovery",
+      "urls": [
+        "https://partners.coupang.com/"
+      ],
+      "categories": [
+        "생활용품",
+        "가전",
+        "식품",
+        "종합쇼핑"
+      ],
+      "fieldsToCollect": [
+        "product_id",
+        "variant",
+        "display_price",
+        "shipping",
+        "membership_conditions",
+        "merchant_url",
+        "affiliate_url"
+      ],
+      "collectionState": "prior_authenticated_browser_capture_only",
+      "probeIds": [],
+      "priorObservation": {
+        "date": "2026-09-19",
+        "method": "GET",
+        "origin": "https://partners.coupang.com",
+        "path": "/api/v1/discovery/goldbox",
+        "status": 200,
+        "independentHttpReplayVerified": false,
+        "evidence": "coupang-portal-contracts.json",
+        "note": "본문 스키마와 현재 자격증명 전달 상태는 이번 조사에서 재확인하지 않음"
+      },
+      "nextStep": "현재 계정의 관측된 골드박스 읽기와 독립 HTTP 실행 검증"
+    },
+    {
+      "id": "klook",
+      "name": "클룩 공식 프로모션",
+      "priority": "P1",
+      "role": "official_travel_campaign",
+      "urls": [
+        "https://www.klook.com/ko/blog/klook-discounts-kr/",
+        "https://www.klook.com/ko/deals/"
+      ],
+      "categories": [
+        "입장권",
+        "교통패스",
+        "투어"
+      ],
+      "fieldsToCollect": [
+        "campaign",
+        "product_url",
+        "benefit_type",
+        "discount",
+        "start_date",
+        "end_date",
+        "currency",
+        "market",
+        "eligibility"
+      ],
+      "collectionState": "official_web_content_verified_direct_http_403",
+      "probeIds": [
+        "klook"
+      ],
+      "nextStep": "정상 세션 또는 공식 데이터 제공 경로 확인; 한국어 경로와 한국 시장·통화 구분",
+      "httpObservations": [
+        {
+          "id": "klook",
+          "url": "https://www.klook.com/ko/blog/klook-discounts-kr/",
+          "checkedAt": "2026-09-20T17:31:27.137Z",
+          "status": 403,
+          "title": "klook.com",
+          "contentType": "text/html;charset=utf-8",
+          "charset": "utf-8",
+          "visibleTextChars": 53,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "id": "kkday",
+      "name": "KKday 시즌 프로모션",
+      "priority": "P1",
+      "role": "official_travel_campaign",
+      "urls": [
+        "https://www.kkday.com/ko/promo/season_tour"
+      ],
+      "categories": [
+        "투어",
+        "체험",
+        "입장권",
+        "교통"
+      ],
+      "fieldsToCollect": [
+        "coupon",
+        "minimum_spend",
+        "discount_cap",
+        "eligible_products",
+        "booking_period",
+        "use_period",
+        "market",
+        "currency"
+      ],
+      "collectionState": "official_web_content_verified_direct_http_403_challenge",
+      "probeIds": [
+        "kkday"
+      ],
+      "nextStep": "정상 접근 경로 및 쿠폰 상세 조건 확인; 오래된 시즌 페이지와 종료 쿠폰 제외",
+      "httpObservations": [
+        {
+          "id": "kkday",
+          "url": "https://www.kkday.com/ko/promo/season_tour",
+          "checkedAt": "2026-09-20T17:31:27.138Z",
+          "status": 403,
+          "title": "Just a moment...",
+          "contentType": "text/html; charset=UTF-8",
+          "charset": "UTF-8",
+          "visibleTextChars": 119,
+          "challenge": true
+        }
+      ]
+    },
+    {
+      "id": "quasarzone",
+      "name": "퀘이사존 지름·할인정보",
+      "priority": "P1",
+      "role": "community_discovery",
+      "urls": [
+        "https://quasarzone.com/bbs/qb_saleinfo"
+      ],
+      "categories": [
+        "PC",
+        "노트북",
+        "주변기기",
+        "가전"
+      ],
+      "fieldsToCollect": [
+        "post_id",
+        "category",
+        "price",
+        "currency",
+        "shipping",
+        "recommendations",
+        "comments",
+        "ended"
+      ],
+      "collectionState": "indexed_content_verified_direct_http_403",
+      "probeIds": [
+        "quasarzone"
+      ],
+      "nextStep": "정상 세션 또는 제공 피드 확인 전 자동 수집기로 승격하지 않음",
+      "httpObservations": [
+        {
+          "id": "quasarzone",
+          "url": "https://quasarzone.com/bbs/qb_saleinfo",
+          "checkedAt": "2026-09-20T17:31:26.886Z",
+          "status": 403,
+          "title": "퀘이사존 QUASARZONE",
+          "contentType": "text/html; charset=UTF-8",
+          "charset": "UTF-8",
+          "visibleTextChars": 691,
+          "challenge": false
+        }
+      ]
+    },
+    {
+      "id": "gmarket",
+      "name": "G마켓",
+      "priority": "P1",
+      "role": "merchant_discovery_and_price",
+      "urls": [
+        "https://www.gmarket.co.kr/"
+      ],
+      "categories": [
+        "종합쇼핑"
+      ],
+      "fieldsToCollect": [
+        "product_id",
+        "coupon_price",
+        "membership_conditions",
+        "points",
+        "shipping",
+        "quantity"
+      ],
+      "collectionState": "official_web_content_verified_direct_http_403_challenge",
+      "probeIds": [
+        "gmarket"
+      ],
+      "nextStep": "정상 데이터 경로 확인과 상품별 쿠폰 자격 분리",
+      "httpObservations": [
+        {
+          "id": "gmarket",
+          "url": "https://www.gmarket.co.kr/",
+          "checkedAt": "2026-09-20T17:32:57.153Z",
+          "status": 403,
+          "title": "G마켓 - 쇼핑을 바꾸는 쇼핑",
+          "visibleTextChars": 332,
+          "contentLinkCount": 0,
+          "priceTextCount": 0
+        }
+      ]
+    },
+    {
+      "id": "algumon",
+      "name": "알구몬",
+      "priority": "deferred",
+      "role": "discovery_candidate",
+      "urls": [
+        "https://www.algumon.com/"
+      ],
+      "collectionState": "web_research_challenge",
+      "probeIds": [],
+      "nextStep": "정상 제공 경로 확인 전 목록 수집 가능성을 확정하지 않음"
+    },
+    {
+      "id": "fmkorea",
+      "name": "에펨코리아 핫딜",
+      "priority": "deferred",
+      "role": "discovery_candidate",
+      "urls": [
+        "https://www.fmkorea.com/hotdeal"
+      ],
+      "collectionState": "web_research_http_429",
+      "probeIds": [],
+      "nextStep": "재시도 반복 없이 별도 정상 접근 및 제공 경로 확인"
+    },
+    {
+      "id": "eomisae",
+      "name": "어미새",
+      "priority": "deferred",
+      "role": "discovery_candidate",
+      "urls": [
+        "https://eomisae.co.kr/os"
+      ],
+      "collectionState": "web_research_http_403",
+      "probeIds": [],
+      "nextStep": "현재 목록과 수집 경로 추가 확인"
+    },
+    {
+      "id": "naver-shopping-live",
+      "name": "네이버 쇼핑라이브",
+      "priority": "deferred",
+      "role": "official_campaign_candidate",
+      "urls": [
+        "https://shoppinglive.naver.com/"
+      ],
+      "collectionState": "web_research_robots_restricted",
+      "probeIds": [],
+      "nextStep": "공식 피드 또는 정상 접근 경로와 현재 방송·혜택 계약 확인"
+    },
+    {
+      "id": "asiana",
+      "name": "아시아나항공",
+      "priority": "P0",
+      "urls": [
+        "https://flyasiana.com/C/KR/KO/event/list"
+      ],
+      "state": "anonymous_html_list_and_selected_detail_verified",
+      "example": {
+        "title": "추석 항공 특가",
+        "url": "https://flyasiana.com/C/KR/KO/event/detail/CM202609140002530589",
+        "bookingStart": "2026-09-16",
+        "bookingEnd": "2026-09-27",
+        "travelStart": "2026-09-16",
+        "travelEnd": "2026-11-30",
+        "detailVerified": true
+      },
+      "note": "공식 웹/앱 구매. 마일리지·공동운항편 제외. 전체 목록 페이지 순회 미검증.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "anonymous_html_list_and_selected_detail_verified",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "jejuair",
+      "name": "제주항공",
+      "priority": "P0",
+      "urls": [
+        "https://www.jejuair.net/ko/main/base/index.do",
+        "https://www.jejuair.net/ko/event/pastEvent.do"
+      ],
+      "state": "anonymous_html_mixed_current_and_past_list_verified",
+      "example": {
+        "title": "태국 최대 50% 할인 코드",
+        "url": "https://www.jejuair.net/ko/event/eventDetail.do?eventNo=0000004282",
+        "listedStart": "2026-09-15",
+        "listedEnd": "2026-09-27",
+        "detailVerified": false
+      },
+      "note": "pastEvent HTML에도 현재 행사 카드가 섞여 있음. 날짜로 구분; 제목 할인율만으로 글 발행 금지.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "anonymous_html_mixed_current_and_past_list_verified",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "trinity",
+      "name": "트리니티항공 (기존 티웨이)",
+      "priority": "P0",
+      "urls": [
+        "https://www.trinityairways.com/app/promotion/event/being",
+        "https://www.trinityairways.com/app/upcomingDeparture/route",
+        "https://www.trinityairways.com/app/lowestFare/compareLowestFare"
+      ],
+      "state": "anonymous_html_event_list_verified",
+      "example": {
+        "title": "트리니티항공의 첫 프로모션",
+        "listedStart": "2026-09-14",
+        "listedEnd": "2026-09-30",
+        "detailVerified": false
+      },
+      "note": "twayair.com의 현 도메인 리다이렉트 확인. 이벤트 첫 페이지 9개. 임박·최저가 경로는 공식 공개 메뉴에서 발견; 운임 미검증.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "anonymous_html_event_list_verified",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "jinair",
+      "name": "진에어",
+      "priority": "P0",
+      "urls": [
+        "https://www.jinair.com/promotion/inprogressEvent",
+        "https://www.jinair.com/promotion/anytime",
+        "https://www.jinair.com/discount/promotioncode"
+      ],
+      "state": "browser_events_verified_json_captured_independent_http_403",
+      "example": {
+        "title": "9월 네이버페이 더블 결제혜택",
+        "url": "https://www.jinair.com/promotion/eventView?evntSeq=15563",
+        "listedStart": "2026-09-16",
+        "listedEnd": "2026-09-30",
+        "detailVerified": false
+      },
+      "note": "16개 행사 중 첫 15개 화면 + 추가 목록 1개 JSON 확인. 모든 항목이 특가는 아님. 홈페이지 표시 운임은 결제 재고 미확인.",
+      "observedContract": {
+        "method": "POST",
+        "origin": "https://www.jinair.com",
+        "path": "/promotion/events/inprogressJson",
+        "body": {
+          "searchStatus": "01",
+          "page": 2,
+          "listSize": 15,
+          "evtCtgrList": []
+        },
+        "responseSchema": {
+          "listResult": {
+            "list": "array",
+            "totalCount": "number",
+            "page": {
+              "listSize": "number",
+              "pageSize": "number",
+              "totalCount": "number",
+              "currentPage": "number"
+            }
+          }
+        },
+        "captured": true,
+        "client_exists": false,
+        "credential_propagated": "not_attempted",
+        "live_replay": false,
+        "anonymousReplayStatus": 403
+      },
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "browser_events_verified_json_captured_independent_http_403",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "peach",
+      "name": "피치항공",
+      "priority": "P0",
+      "urls": [
+        "https://www.flypeach.com/kr",
+        "https://www.flypeach.com/kr/um/specials/sale/sale"
+      ],
+      "state": "anonymous_html_campaign_verified_dynamic_fares_unverified",
+      "example": {
+        "title": "가을맞이 세일",
+        "url": "https://www.flypeach.com/kr/um/specials/sale/sale",
+        "bookingStart": "2026-09-18T12:00:00+09:00",
+        "bookingEnd": "2026-09-21T23:59:00+09:00",
+        "detailVerified": "campaign_terms_only"
+      },
+      "note": "노선별 탑승 기간과 운임 숫자는 동적 데이터 미검증. 한국 출발 편도 총액, 위탁 수하물·좌석 별도.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "anonymous_html_campaign_verified_dynamic_fares_unverified",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "airpremia",
+      "name": "에어프레미아",
+      "priority": "P1",
+      "urls": [
+        "https://www.airpremia.com/a/ko",
+        "https://www.airpremia.com/p/2026-talk-id"
+      ],
+      "state": "official_campaign_content_verified_home_http_403",
+      "example": {
+        "title": "카카오톡 학생증 항공권 할인",
+        "url": "https://www.airpremia.com/p/2026-talk-id",
+        "bookingStart": "2026-05-14",
+        "bookingEnd": "2026-12-31",
+        "detailVerified": true,
+        "conditions": [
+          "대학/대학원 재학생 학생증 인증",
+          "졸업생 제외",
+          "카카오페이 원화 결제",
+          "항공 운임 최대 15%, 세금·유류할증료 제외",
+          "다른 쿠폰 중복 불가"
+        ],
+        "travelEndByRoute": "미주 기본 2027-04-30, IAD 03-31, HNL 02-28; 아시아 기본 03-31, SGN 03-27"
+      },
+      "note": "미국 시장 프로모션 목록을 한국 시장으로 대체하지 않음.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "official_campaign_content_verified_home_http_403",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "airseoul",
+      "name": "에어서울",
+      "priority": "P1",
+      "urls": [
+        "https://flyairseoul.com/CM/ko/ingEvent.do"
+      ],
+      "state": "official_event_list_verified_direct_http_403",
+      "example": {
+        "title": "괌 혜택",
+        "listedStart": "2026-09-10",
+        "listedEnd": "2026-09-30",
+        "detailVerified": false
+      },
+      "note": "토스페이 추첨형 혜택과 확정 할인 분리. 진행중 페이지에 09-14 종료 얼리버드도 있어 날짜 필터 필요.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "official_event_list_verified_direct_http_403",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "aerok",
+      "name": "에어로케이",
+      "priority": "P1",
+      "urls": [
+        "https://www.aerok.com/ko-KR/event-benefit/event/being"
+      ],
+      "state": "browser_event_list_and_selected_detail_verified_direct_http_403",
+      "example": {
+        "title": "청주-마쓰야마 10월 특별 운항",
+        "url": "https://www.aerok.com/ko-KR/event-benefit/event/395",
+        "listedStart": "2026-08-13",
+        "listedEnd": "2026-09-27",
+        "travelPeriodText": "10월",
+        "observedPromoCode": "CJJMYJ",
+        "detailVerified": "title_and_booking_link_only"
+      },
+      "note": "현재 목록 6개 링크. 이미지 세부 조건·운임 숫자 미검증.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "browser_event_list_and_selected_detail_verified_direct_http_403",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "eastarjet",
+      "name": "이스타항공",
+      "priority": "P1",
+      "urls": [
+        "https://main.eastarjet.com/",
+        "https://main.eastarjet.com/fare-insight",
+        "https://www.eastarjet.com/newstar/PGWTA00001"
+      ],
+      "state": "browser_current_fare_cards_verified_home_http_shell_only",
+      "example": {
+        "title": "날짜별 편도 총액 카드",
+        "origin": "ICN",
+        "destination": "YNT",
+        "travelDate": "2026-11-22",
+        "displayFare": 71400,
+        "currency": "KRW",
+        "basis": "성인 1인 편도 총액",
+        "detailVerified": false,
+        "checkoutAvailabilityVerified": false
+      },
+      "note": "홈페이지 브라우저 카드만 검증. 레거시 행사 메뉴는 안내창 후 빈 페이지. 제3자 얼리버드 설명을 공식 검증으로 승격하지 않음.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "browser_current_fare_cards_verified_home_http_shell_only",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "airbusan",
+      "name": "에어부산",
+      "priority": "P1",
+      "urls": [
+        "https://www.airbusan.com/content/common/flynjoy/flyNEvent/",
+        "https://www.airbusan.com/"
+      ],
+      "state": "official_event_navigation_verified_current_airfare_promotion_unverified",
+      "example": null,
+      "excludedExpiredExample": {
+        "url": "https://www.airbusan.com/content/common/flynjoy/event/event/20260907_ko",
+        "bookingEnd": "2026-09-15",
+        "travelEnd": "2026-12-31"
+      },
+      "note": "9월 국내선 특가는 판매 기간 종료로 제외. 정상 Chrome 홈페이지와 공식 이벤트 목록 경로 확인. 루트 직접 HTTP 403.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "official_event_navigation_verified_current_airfare_promotion_unverified",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "koreanair",
+      "name": "대한항공",
+      "priority": "P1",
+      "urls": [
+        "https://www.koreanair.com/contents/promotion/list",
+        "https://www.koreanair.com/flights/ko-kr/?subfolder=flights"
+      ],
+      "state": "official_market_home_and_promotion_navigation_verified_items_unverified",
+      "example": null,
+      "note": "한국 시장 운임 페이지 HTTP 200. 프로모션 동적 목록 미검증. /ko/ 언어 경로만으로 KR 시장·KRW를 보장하지 않음.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "official_market_home_and_promotion_navigation_verified_items_unverified",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    },
+    {
+      "id": "scoot",
+      "name": "스쿠트",
+      "priority": "deferred",
+      "urls": [
+        "https://www.flyscoot.com/ko"
+      ],
+      "state": "official_root_identified_current_promotion_unverified",
+      "example": null,
+      "note": "공식 홈페이지 웹 추출 결과가 비어 현재 특가·API 경로 미확보.",
+      "role": "official_airline_campaign",
+      "categories": [
+        "항공"
+      ],
+      "collectionState": "official_root_identified_current_promotion_unverified",
+      "fieldsToCollect": [
+        "campaign_id",
+        "source_url",
+        "collected_at",
+        "booking_start",
+        "booking_end",
+        "travel_start",
+        "travel_end",
+        "blackout_dates",
+        "origin",
+        "destination",
+        "oneway_or_roundtrip",
+        "passenger_basis",
+        "currency",
+        "display_price",
+        "tax_inclusion",
+        "baggage",
+        "coupon_code",
+        "minimum_spend",
+        "discount_cap",
+        "payment_method",
+        "membership_eligibility",
+        "availability_checked_at"
+      ],
+      "evidence": "airline-hot-deal-sources-2026-09-21.json"
+    }
+  ],
+  "excludedAsConsumerDeals": [
+    {
+      "name": "마리트 파트너 수수료 이벤트",
+      "reason": "파트너 보상 조건은 일반 소비자 판매가격 할인과 다름. 상태와 종료일을 함께 확인해야 함"
+    },
+    {
+      "name": "마리트 공동구매·협찬 모집",
+      "url": "https://myrealtrip-admatchplus.softr.app/market",
+      "reason": "9/21 직전 조사에서 공개 JSON 2건을 직접 확인했으나 판매 상품은 준비 중. 소비자 구매 가능한 특가로 분류하지 않음"
+    }
+  ],
+  "excludedApis": [
+    {
+      "id": "naver-shopping-search-api",
+      "status": "discontinued_per_official_notice",
+      "effectiveDate": "2026-07-31",
+      "replacementProvided": false,
+      "sources": [
+        "https://developers.naver.com/notice/article/32564",
+        "https://developers.naver.com/notice/article/32530"
+      ],
+      "note": "인증 호출 실패를 직접 확인한 것이 아니라 공식 공지에 따른 판정. Search Trend와 Shopping Insight는 별도 이관 대상으로 일반화 금지"
+    }
+  ],
+  "editorialPolicy": {
+    "sourceFactsNotCopiedArticles": true,
+    "canonicalProductAndVariantRequired": true,
+    "shippingIncludedComparison": true,
+    "conditionalPricesLabelled": true,
+    "pointsSeparateFromCheckoutPrice": true,
+    "bookingAndUsePeriodsSeparate": true,
+    "unknownExpiryNotOngoing": true,
+    "historicalLowRequiresObservedHistory": true,
+    "priceAndAvailabilityRecheckBeforePublishing": true,
+    "communityPopularityDoesNotProveDiscount": true,
+    "affiliateDestinationMustMatchClaimedMerchant": true
+  },
+  "httpVerification": {
+    "checkedUrls": 10,
+    "method": "anonymous direct HTTP GET; no browser, credentials or cookies; public HTML diagnostics only",
+    "structuredApiContractsVerified": 0,
+    "fullPaginationVerified": false
+  },
+  "sourceCount": 28
+}

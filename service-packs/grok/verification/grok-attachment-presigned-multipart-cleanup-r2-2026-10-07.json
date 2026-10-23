@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T15:13:45.267044Z",
+  "operation": "attachment.upload.abort",
+  "state": "aborted",
+  "sourceUploadState": "needs_review",
+  "serverSelectedMethod": "single_put",
+  "sourceInitHttpStatus": 200,
+  "signedPutRequestCount": 0,
+  "completeHttpStatus": null,
+  "referenceMatchedExactTask": true,
+  "statusBefore": {
+    "returnCode": 0,
+    "resultParsed": true,
+    "operation": "attachment.upload.status",
+    "state": "unknown",
+    "httpReadCount": 1,
+    "httpStatus": null,
+    "abortRequestCount": null,
+    "abortVerified": null,
+    "reasonCode": null,
+    "diagnostics": [
+      {
+        "stage": "status",
+        "state": "completed",
+        "httpStatus": 200,
+        "responseStatus": 200,
+        "responseBytes": 123,
+        "reasonCode": null
+      }
+    ]
+  },
+  "abort": {
+    "returnCode": 0,
+    "resultParsed": true,
+    "operation": "attachment.upload.abort",
+    "state": "aborted",
+    "httpReadCount": null,
+    "httpStatus": 200,
+    "abortRequestCount": 1,
+    "abortVerified": true,
+    "reasonCode": null,
+    "diagnostics": [
+      {
+        "stage": "abort",
+        "state": "completed",
+        "httpStatus": 200,
+        "responseStatus": 200,
+        "responseBytes": 44,
+        "reasonCode": null
+      }
+    ]
+  },
+  "statusAfter": {
+    "returnCode": 0,
+    "resultParsed": true,
+    "operation": "attachment.upload.status",
+    "state": "aborted",
+    "httpReadCount": 1,
+    "httpStatus": null,
+    "abortRequestCount": null,
+    "abortVerified": null,
+    "reasonCode": null,
+    "diagnostics": [
+      {
+        "stage": "status",
+        "state": "completed",
+        "httpStatus": 200,
+        "responseStatus": 200,
+        "responseBytes": 121,
+        "reasonCode": null
+      }
+    ]
+  },
+  "ownerVerifiedByMainCli": true,
+  "browserOtherNonReadAttemptsBlocked": 16,
+  "finalizer": {
+    "status": "blank_quiet",
+    "quietVerified": true,
+    "guardStillActive": true,
+    "ownedTargetClosed": false
+  },
+  "safety": {
+    "uploadInitResent": false,
+    "signedPutSent": false,
+    "completeSent": false,
+    "conversationChanged": false,
+    "referenceKeyPersistedInReceipt": false,
+    "uploadIdsPersistedInReceipt": false,
+    "cookiesPersisted": false,
+    "rawBodiesPersisted": false
+  }
+}

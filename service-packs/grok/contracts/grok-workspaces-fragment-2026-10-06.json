@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "fragmentId": "grok-workspaces",
+  "observedAt": "2026-10-06",
+  "provenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+    "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+    "sourceFunctions": {
+      "workspaces.list": "workspaceRepositoryListWorkspacesRaw",
+      "workspaces.shared.list": "workspaceRepositoryListSharedWorkspacesRaw",
+      "workspaces.read": "workspaceRepositoryGetWorkspaceRaw",
+      "workspaces.create": "workspaceRepositoryCreateWorkspaceRaw",
+      "workspaces.update": "workspaceRepositoryUpdateWorkspaceRaw",
+      "workspaces.delete": "workspaceRepositoryDeleteWorkspaceRaw"
+    },
+    "sourceDeclaredHeaders": {
+      "workspaces.list": [],
+      "workspaces.shared.list": [],
+      "workspaces.read": [],
+      "workspaces.create": ["Content-Type"],
+      "workspaces.update": ["Content-Type"],
+      "workspaces.delete": []
+    },
+    "browserWriteCapture": false,
+    "clientCallsiteFabricated": false,
+    "browserHeadersCaptured": false
+  },
+  "credentialBinding": {
+    "authMode": "session",
+    "cookieNames": ["sso"],
+    "cookieValuesPersisted": false,
+    "ownerMatchedExpectedIdentityInMemory": true
+  },
+  "operations": [
+    {
+      "id": "workspaces.list",
+      "kind": "read",
+      "method": "GET",
+      "pathTemplate": "/rest/workspaces",
+      "queryFieldNames": ["query", "pageSize", "pageToken", "orderBy", "kind"],
+      "responseFieldNames": ["workspaces", "nextPageToken"],
+      "workspaceFieldNames": ["workspaceId", "name", "isPublic", "kind", "isReadonly", "accessLevel"]
+    },
+    {
+      "id": "workspaces.shared.list",
+      "kind": "read",
+      "method": "GET",
+      "pathTemplate": "/rest/workspaces/shared",
+      "queryFieldNames": ["pageSize", "pageToken", "orderBy"],
+      "responseFieldNames": ["workspaces", "nextPageToken"],
+      "workspaceFieldNames": ["workspaceId", "name", "isPublic", "kind", "isReadonly", "accessLevel"]
+    },
+    {
+      "id": "workspaces.read",
+      "kind": "read",
+      "method": "GET",
+      "pathTemplate": "/rest/workspaces/{workspaceId}",
+      "pathInputFieldNames": ["workspaceId"],
+      "workspaceFieldNames": ["workspaceId", "name", "isPublic", "kind", "isReadonly", "accessLevel"]
+    },
+    {
+      "id": "workspaces.create",
+      "kind": "submit",
+      "effect": "workspace_management",
+      "method": "POST",
+      "pathTemplate": "/rest/workspaces",
+      "requestBodyFieldNames": ["name", "kind"],
+      "requestBody": {"name": "Codex API verification 20261006", "kind": "WORKSPACE_KIND_UNIFIED"},
+      "responseJobIdPointer": "/workspaceId",
+      "responseFieldNames": ["workspaceId", "name", "kind", "isPublic", "accessLevel", "isReadonly"],
+      "responseStatuses": [200],
+      "responseContentType": "application/json"
+    },
+    {
+      "id": "workspaces.update",
+      "kind": "submit",
+      "effect": "workspace_management",
+      "method": "PUT",
+      "pathTemplate": "/rest/workspaces/{workspaceId}",
+      "pathInputFieldNames": ["workspaceId"],
+      "requestBodyFieldNames": ["name"],
+      "requestBody": {"name": "Codex API verification complete 20261006"},
+      "responseJobIdPointer": "/workspaceId",
+      "responseFieldNames": ["workspaceId", "name", "kind", "isPublic", "accessLevel", "isReadonly"],
+      "responseStatuses": [200],
+      "responseContentType": "application/json"
+    },
+    {
+      "id": "workspaces.delete",
+      "kind": "submit",
+      "effect": "workspace_management",
+      "method": "DELETE",
+      "pathTemplate": "/rest/workspaces/{workspaceId}",
+      "pathInputFieldNames": ["workspaceId"],
+      "responseStatuses": [200],
+      "responseContentType": "application/json",
+      "responseMayBeEmptyObject": true
+    }
+  ],
+  "implementationBoundary": {
+    "workspaceClientRequestAllowlist": {
+      "create": ["name", "kind"],
+      "update": ["name"],
+      "createTarget": "independent detail read requires accessLevel OWNER and isPublic false; explicit isReadonly true is rejected",
+      "updateTarget": "fresh detail read requires accessLevel OWNER; explicit isReadonly true is rejected; current public state is preserved",
+      "deleteTarget": "fresh detail read requires accessLevel OWNER; explicit isReadonly true is rejected"
+    },
+    "publicAccessMutationExposed": false,
+    "connectorsAssetsFilesPurchasesExposed": false,
+    "browserWriteCaptureClaimed": false,
+    "productionReadinessClaimedByThisFragment": false
+  },
+  "directHttpReplay": {
+    "verified": true,
+    "transport": "curl_cffi 0.16.3 / chrome150",
+    "tlsVerified": true,
+    "trustEnv": false,
+    "explicitRetries": 0,
+    "redirectsFollowed": false,
+    "requestHeaderNames": ["accept", "content-type", "cookie"],
+    "cookieNames": ["sso"],
+    "cookieValuesPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "ownerRead": {
+      "status": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 648,
+      "responseSha256": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+      "matchedExpectedOwner": true,
+      "identityValuePersisted": false
+    },
+    "initialPrivateList": {
+      "status": 200,
+      "responseBytes": 4650,
+      "workspaceCount": 4,
+      "complete": true,
+      "targetNameAlreadyPresent": false
+    },
+    "initialSharedList": {
+      "status": 200,
+      "responseBytes": 17,
+      "workspaceCount": 0,
+      "complete": true
+    },
+    "mutations": [
+      {
+        "operationId": "workspaces.create",
+        "status": 200,
+        "responseContentType": "application/json",
+        "requestFieldNames": ["name", "kind"],
+        "requestDigest": "c03bcb23ef4dd6f8cf6b13f0665bb1bf0f0c3ac46ecde74706015d46bc3c1e01",
+        "intentDigest": "44b9bd1b25c77df337733a5a2cb489232cce5c98b203079511f2017c860e7626",
+        "responseBytes": 382,
+        "responseSha256": "4d56055df0c2a40c43973cb3283ad2437c84f373f5258b43ebedb49bef88f86d",
+        "responseJsonSubstantive": true,
+        "returnedIdPersisted": false,
+        "detailReadback": {
+          "status": 200,
+          "responseBytes": 401,
+          "idMatchedReturnedId": true,
+          "nameMatched": true,
+          "kindMatched": true,
+          "private": true
+        }
+      },
+      {
+        "operationId": "workspaces.update",
+        "status": 200,
+        "responseContentType": "application/json",
+        "requestFieldNames": ["name"],
+        "requestDigest": "f8f754f3d21e946cb9ebe61e89f3807378aaf203a86d3db087b55ef3a36c2cb2",
+        "intentDigest": "2433608c23ef688ed63b32f1623c2cd9cd2927908ae5c52f301d1732b8c31942",
+        "responseBytes": 402,
+        "responseSha256": "56e3efee4d48e7efceeba360c362c0e502b34afc3a76cd38f20f2775a0258fd2",
+        "responseJsonSubstantive": true,
+        "detailReadback": {
+          "status": 200,
+          "responseBytes": 410,
+          "idMatchedReturnedId": true,
+          "renamedNameMatched": true,
+          "kindMatched": true,
+          "private": true
+        }
+      },
+      {
+        "operationId": "workspaces.delete",
+        "status": 200,
+        "responseContentType": "application/json",
+        "requestDigest": "e32ce91753eea4114614e25d5d1681df1e8dae3421509754be0ff2bb349445f3",
+        "intentDigest": "1fea8017491f79e054defe578c905bf38406ea968028bdc3a99100e99fde32a7",
+        "responseBytes": 2,
+        "responseSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "responseJsonParsed": true,
+        "responseJsonSubstantive": false,
+        "independentPrivateListReadback": {
+          "status": 200,
+          "responseBytes": 4650,
+          "createdIdAbsent": true,
+          "baselineIdSetRestored": true,
+          "finalWorkspaceCount": 4
+        }
+      }
+    ],
+    "attemptCountPerMutation": 1,
+    "nonSecretOperationJournal": {
+      "persistent": true,
+      "priorMatchingMutations": 0,
+      "completedMutationCount": 3,
+      "allAttemptCountsOne": true,
+      "workspaceIdStoredRaw": false
+    }
+  }
+}

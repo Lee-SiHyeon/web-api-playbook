@@ -1,0 +1,804 @@
+{
+  "schemaVersion": 1,
+  "ontologyId": "acada:sns-writing",
+  "label": "SNS 글쓰기 온톨로지 (X · 스레드 · 인스타그램)",
+  "createdAt": "2026-09-28",
+  "purpose": "블로그 한 편(네이버 원본)을 X·스레드·인스타그램 글로 옮길 때의 글자 수 제한, 구성, 말투, 이어쓰기(본인 답글·대댓글)와 후속 답글 규칙. owner 2026-09-28: \"X랑 스레드, 인스타 글 작성 어떻게할지 온톨로지 작업부터해 몇자 제한있는지, 어떻게 구성할지 무슨톤으로 할지 대댓글로 추가작성 어떻게 가져갈지\".",
+  "designPrinciples": [
+    "하드 제한은 플랫폼 공식 웹 코드에서 확인한 값만 hard로 둔다. 확인 못 한 값은 reported로 표시하고, 우리 정책값을 그보다 보수적으로 잡는다.",
+    "숫자·가격·조건은 네이버 원본(document.json)에 있는 것만 쓴다. SNS 글이 새 사실을 만들지 않는다.",
+    "첫 글은 멈추게 하는 역할만 한다. 근거·목록·링크는 본인 답글(스레드 체인)로 넘긴다.",
+    "본문이 제한에 차면 자르지 말고 본인 답글·첫 댓글로 넘긴다 (당근 댓글 보충과 같은 원칙, owner 2026-09-28 \"앞으로도 댓글로 보충\").",
+    "본문 글타래의 링크는 블로그 원문 하나다. 제휴 링크는 그 채널이 등록된 제휴 네트워크(links.affiliateNetworks)만, 글타래 맨 끝의 제휴 답글(affiliateReply) 한 개에 넣고, 그 답글 맨 위에 네트워크 고지 문구를, 첫 글에 \"(제휴 링크 포함)\"을 둔다 (owner 2026-09-28 \"바로 파트너 링크 붙이면 안되는건가\" → 1·2번 진행). 등록 안 된 네트워크(커넥트·쿠팡·링크프라이스 미연동)는 SNS에 넣지 않는다.",
+    "말투는 브랜드 한 목소리(생활이득AI연구소)에서 플랫폼별 높낮이만 바꾼다. 얼버무림·변명 말투는 쓰지 않는다 (owner feedback: '못했습니다' 톤 금지, 추천을 먼저)."
+  ],
+  "classes": {
+    "Platform": "글이 올라가는 서비스 (x, threads, instagram)",
+    "Surface": "한 플랫폼 안의 글 형태 (X 본문·답글, 스레드 게시물·답글, 인스타 캐러셀 캡션·카드·첫 댓글·릴스 캡션)",
+    "Limit": "하드 제한(서버·작성기가 막음)과 정책 제한(우리가 스스로 거는 값)",
+    "PostRole": "체인 안에서 한 글이 맡는 역할 (hook, point, proof, list, link, question, overflow, followup)",
+    "Structure": "장르별 체인 구성 (역할의 순서와 개수)",
+    "Tone": "브랜드 목소리와 플랫폼별 말투 규칙",
+    "ReplyPolicy": "게시 시점의 본인 답글 체인, 게시 후 후속 답글, 다른 사람 댓글에 대한 답글 규칙",
+    "Evidence": "규칙의 근거 (공식 코드, 측정한 레퍼런스, 외부 자료)"
+  },
+  "relations": [
+    [
+      "Platform",
+      "hasSurface",
+      "Surface"
+    ],
+    [
+      "Surface",
+      "hasLimit",
+      "Limit"
+    ],
+    [
+      "Structure",
+      "orders",
+      "PostRole"
+    ],
+    [
+      "PostRole",
+      "placedOn",
+      "Surface"
+    ],
+    [
+      "Platform",
+      "speaksIn",
+      "Tone"
+    ],
+    [
+      "Platform",
+      "continuesVia",
+      "ReplyPolicy"
+    ],
+    [
+      "Limit",
+      "supportedBy",
+      "Evidence"
+    ],
+    [
+      "Tone",
+      "supportedBy",
+      "Evidence"
+    ]
+  ],
+  "platforms": {
+    "x": {
+      "account": "@lifehack__ailab (생활이득AI연구소)",
+      "surfaces": {
+        "post": {
+          "limits": {
+            "weightedChars": {
+              "value": 280,
+              "kind": "hard",
+              "verification": "x_web_bundle",
+              "note": "작성기가 twitter-text weightedLength > maxWeightedTweetLength 이면 막는다 (main.js). 한글·한자·이모지는 2, 라틴·숫자는 1, URL은 길이와 무관하게 23. 한글만 쓰면 약 140자."
+            },
+            "urlWeight": {
+              "value": 23,
+              "kind": "hard",
+              "verification": "twitter_text_v3"
+            },
+            "images": {
+              "value": 4,
+              "kind": "hard",
+              "verification": "reported"
+            }
+          },
+          "policy": {
+            "hookWeighted": [
+              60,
+              200
+            ],
+            "linkAllowed": false,
+            "hashtagsMax": 1
+          }
+        },
+        "reply": {
+          "limits": {
+            "weightedChars": {
+              "value": 280,
+              "kind": "hard",
+              "verification": "x_web_bundle"
+            }
+          },
+          "policy": {
+            "linkAllowed": true,
+            "linkOnlyInLastReply": true
+          }
+        }
+      },
+      "chain": {
+        "minPosts": 3,
+        "maxPosts": 6,
+        "numbering": "n/ 접두어 (첫 글은 🧵 표시)"
+      }
+    },
+    "threads": {
+      "account": "@lifehack__ailab",
+      "surfaces": {
+        "post": {
+          "limits": {
+            "chars": {
+              "value": 500,
+              "kind": "hard",
+              "verification": "threads_web_bundle",
+              "note": "BarcelonaComposerConstants.MAX_NUMBER_OF_CHARACTERS_IN_POST = 500. 작성기는 Array.from(text).length(코드 포인트)로 센다. 이모지 하나가 코드 포인트 여러 개일 수 있다."
+            },
+            "links": {
+              "value": 5,
+              "kind": "hard",
+              "verification": "threads_web_bundle",
+              "note": "MAX_NUMBER_OF_LINKS_IN_POST"
+            },
+            "topicTags": {
+              "value": 1,
+              "kind": "hard",
+              "verification": "reported",
+              "note": "태그 길이는 50자 (MAX_TAG_CHARACTER_LIMIT, threads_web_bundle)"
+            },
+            "topicTagChars": {
+              "value": 50,
+              "kind": "hard",
+              "verification": "threads_web_bundle"
+            },
+            "mediaPerPost": {
+              "value": 20,
+              "kind": "hard",
+              "verification": "threads_web_bundle",
+              "note": "MAX_NUMBER_OF_MEDIA_ATTACHMENTS_IN_THREAD"
+            },
+            "videoSeconds": {
+              "value": 500,
+              "kind": "hard",
+              "verification": "threads_web_bundle"
+            },
+            "altTextChars": {
+              "value": 1000,
+              "kind": "hard",
+              "verification": "threads_web_bundle"
+            }
+          },
+          "policy": {
+            "hookChars": [
+              20,
+              100
+            ],
+            "hookLinesMax": 4,
+            "bodyChars": [
+              80,
+              350
+            ],
+            "linkAllowed": false,
+            "topicTag": "글의 핵심 품목 한 단어 (예: 고구마)"
+          }
+        },
+        "reply": {
+          "limits": {
+            "chars": {
+              "value": 500,
+              "kind": "hard",
+              "verification": "threads_web_bundle"
+            }
+          },
+          "policy": {
+            "linkAllowed": true,
+            "linkOnlyInLastReply": true
+          }
+        }
+      },
+      "chain": {
+        "minPosts": 2,
+        "maxPosts": 6,
+        "numbering": "없음 (스레드는 번호 없이 이어진다)"
+      }
+    },
+    "instagram": {
+      "account": "@lifehack__ailab",
+      "surfaces": {
+        "carouselCaption": {
+          "limits": {
+            "chars": {
+              "value": 2200,
+              "kind": "hard",
+              "verification": "instagram_web_bundle",
+              "note": "maxDescriptionLength 2200"
+            },
+            "cards": {
+              "value": [
+                2,
+                20
+              ],
+              "kind": "hard",
+              "verification": "reported"
+            },
+            "hashtags": {
+              "value": 30,
+              "kind": "hard",
+              "verification": "reported",
+              "note": "공식 코드에서 확인 못 함. 2025년 말 5개로 줄였다는 보도가 있어 정책은 5개로 둔다."
+            },
+            "clickableLinks": {
+              "value": 0,
+              "kind": "hard",
+              "verification": "reported",
+              "note": "캡션 링크는 눌리지 않는다 → 프로필 링크 안내"
+            }
+          },
+          "policy": {
+            "firstLineChars": [
+              15,
+              40
+            ],
+            "chars": [
+              150,
+              900
+            ],
+            "hashtagsMax": 5,
+            "cards": [
+              6,
+              10
+            ],
+            "cardTitleChars": 20,
+            "cardBodyChars": 90
+          }
+        },
+        "firstComment": {
+          "limits": {
+            "chars": {
+              "value": 2200,
+              "kind": "hard",
+              "verification": "reported"
+            }
+          },
+          "policy": {
+            "use": "캡션에 못 넣은 목록·출처·기준 시각. 본인이 첫 댓글로 단다.",
+            "chars": [
+              80,
+              1000
+            ]
+          }
+        },
+        "reelsCaption": {
+          "limits": {
+            "chars": {
+              "value": 2200,
+              "kind": "hard",
+              "verification": "instagram_web_bundle"
+            }
+          },
+          "policy": {
+            "firstLineChars": [
+              15,
+              40
+            ],
+            "chars": [
+              60,
+              400
+            ],
+            "hashtagsMax": 5
+          }
+        }
+      },
+      "chain": {
+        "minPosts": 1,
+        "maxPosts": 1,
+        "numbering": "해당 없음 (이어쓰기는 첫 댓글)"
+      }
+    },
+    "tiktok": {
+      "account": "@lifehack__aibal (세션 저장 2026-09-28, 핸들 철자 확인 필요)",
+      "surfaces": {
+        "video": {
+          "limits": {
+            "seconds": {
+              "value": 600,
+              "kind": "hard",
+              "verification": "reported",
+              "note": "업로드 길이. 리워드(크리에이터 보상)는 1분 이상 오리지널 (platform-styles.mjs)"
+            },
+            "aspect": {
+              "value": "9:16",
+              "kind": "policy",
+              "verification": "reported"
+            }
+          },
+          "policy": {
+            "seconds": [
+              25,
+              65
+            ],
+            "hookSeconds": 3,
+            "keywordSpokenInFirst3s": true
+          }
+        },
+        "caption": {
+          "limits": {
+            "chars": {
+              "value": 4000,
+              "kind": "hard",
+              "verification": "reported",
+              "note": "TikTok Studio 설명 한도(보도). 업로드 계약 관측 때 확인"
+            }
+          },
+          "policy": {
+            "chars": [
+              40,
+              300
+            ],
+            "hashtagsMax": 5,
+            "hashtagsMin": 3,
+            "keywordInFirstSentence": true,
+            "linkAllowed": false
+          }
+        },
+        "pinnedComment": {
+          "limits": {
+            "chars": {
+              "value": 150,
+              "kind": "hard",
+              "verification": "reported"
+            }
+          },
+          "policy": {
+            "use": "블로그 검색 안내 한 줄 (링크는 눌리지 않을 수 있음)"
+          }
+        }
+      },
+      "chain": {
+        "minPosts": 1,
+        "maxPosts": 1,
+        "numbering": "해당 없음 (영상 1개 + 캡션 + 고정 댓글)"
+      }
+    },
+    "youtube": {
+      "account": "SseolInTheBox (UCtLdZc1Ooz6KLbDNfo60E5A, 세션 저장 2026-09-28 — 브랜드 채널인지 확인 필요)",
+      "surfaces": {
+        "short": {
+          "limits": {
+            "seconds": {
+              "value": 180,
+              "kind": "hard",
+              "verification": "reported",
+              "note": "쇼츠 최대 3분"
+            },
+            "title": {
+              "value": 100,
+              "kind": "hard",
+              "verification": "reported"
+            },
+            "description": {
+              "value": 5000,
+              "kind": "hard",
+              "verification": "reported"
+            },
+            "tags": {
+              "value": 500,
+              "kind": "hard",
+              "verification": "reported",
+              "note": "태그 전체 글자 수"
+            }
+          },
+          "policy": {
+            "seconds": [
+              20,
+              35
+            ],
+            "titleKeywordOnce": true,
+            "descriptionFirstLineKeyword": true,
+            "descriptionBlogLink": true,
+            "hashtagsMax": 3
+          }
+        },
+        "pinnedComment": {
+          "limits": {
+            "chars": {
+              "value": 10000,
+              "kind": "hard",
+              "verification": "reported"
+            }
+          },
+          "policy": {
+            "use": "블로그 링크와 기준 시각. 제휴 링크는 등록된 네트워크만 (links.affiliateNetworks)"
+          }
+        }
+      },
+      "chain": {
+        "minPosts": 1,
+        "maxPosts": 1,
+        "numbering": "해당 없음 (쇼츠 1개 + 설명 + 고정 댓글)"
+      }
+    }
+  },
+  "postRoles": {
+    "hook": "첫 글. 멈추게 하는 한두 줄. 결론(추천)이나 의외의 숫자 하나. 링크·목록·출처 없음.",
+    "point": "핵심 한 가지. 숫자 먼저, 이유 한 줄.",
+    "list": "비교 목록. 한 줄에 한 항목 (이모지 + 이름 + 핵심 숫자).",
+    "proof": "기준·출처·조사 시각 (예: 2026년 9월 28일 새벽 상품 페이지 기준).",
+    "question": "답글을 부르는 질문 한 줄. 스레드 체인의 끝 직전 또는 첫 글 끝.",
+    "link": "블로그 링크 한 줄. 체인의 마지막 답글에만.",
+    "overflow": "제한에 걸려 넘긴 내용. X·스레드는 다음 본인 답글, 인스타는 첫 댓글, 당근은 작성자 댓글.",
+    "followup": "게시 후 새로 확인한 사실만 (가격 변동, 품절, 마감 임박). 원래 체인 끝에 본인 답글로."
+  },
+  "structures": {
+    "price_compare": {
+      "label": "가격 비교·최저가 (예: 제철 과일)",
+      "x": [
+        "hook",
+        "point",
+        "point",
+        "list",
+        "proof",
+        "link"
+      ],
+      "threads": [
+        "hook",
+        "list",
+        "point",
+        "question",
+        "link"
+      ],
+      "instagram": {
+        "cards": [
+          "cover",
+          "pick",
+          "pick",
+          "table",
+          "tip",
+          "summary",
+          "save_cta"
+        ],
+        "caption": [
+          "hook",
+          "point",
+          "proof",
+          "profile_link",
+          "hashtags"
+        ],
+        "firstComment": [
+          "list",
+          "proof"
+        ]
+      },
+      "hookPattern": "crowd_pick 또는 curiosity_story (hook-ontology feed 선호). 가격을 첫 줄에 내세우는 price_anchor는 첫 줄에 쓰지 않는다."
+    },
+    "travel_deal": {
+      "label": "여행 특가·패키지",
+      "x": [
+        "hook",
+        "point",
+        "point",
+        "proof",
+        "link"
+      ],
+      "threads": [
+        "hook",
+        "point",
+        "list",
+        "question",
+        "link"
+      ],
+      "instagram": {
+        "cards": [
+          "cover",
+          "route",
+          "price",
+          "include",
+          "summary",
+          "save_cta"
+        ],
+        "caption": [
+          "hook",
+          "point",
+          "proof",
+          "profile_link",
+          "hashtags"
+        ],
+        "firstComment": [
+          "list",
+          "proof"
+        ]
+      },
+      "hookPattern": "curiosity_story. 레퍼런스(@jumptofrog): 한 줄 후킹 + 사진, 세부 조건은 본인 답글로."
+    },
+    "life_benefit": {
+      "label": "생활 혜택·지원금·청약",
+      "x": [
+        "hook",
+        "point",
+        "point",
+        "point",
+        "proof",
+        "link"
+      ],
+      "threads": [
+        "hook",
+        "list",
+        "question",
+        "link"
+      ],
+      "instagram": {
+        "cards": [
+          "cover",
+          "who",
+          "how_much",
+          "how_to_apply",
+          "deadline",
+          "summary",
+          "save_cta"
+        ],
+        "caption": [
+          "hook",
+          "point",
+          "proof",
+          "profile_link",
+          "hashtags"
+        ],
+        "firstComment": [
+          "list",
+          "proof"
+        ]
+      },
+      "hookPattern": "regret_aversion (놓치면 손해) — 피드에서는 마감 숫자를 첫 줄에 두지 않고 대상부터 말한다."
+    },
+    "ai_news": {
+      "label": "AI 소식",
+      "x": [
+        "hook",
+        "point",
+        "point",
+        "point",
+        "proof",
+        "link"
+      ],
+      "threads": [
+        "hook",
+        "point",
+        "question",
+        "link"
+      ],
+      "instagram": {
+        "cards": [
+          "cover",
+          "what",
+          "why",
+          "how_to_use",
+          "summary",
+          "save_cta"
+        ],
+        "caption": [
+          "hook",
+          "point",
+          "proof",
+          "profile_link",
+          "hashtags"
+        ],
+        "firstComment": [
+          "proof"
+        ]
+      },
+      "hookPattern": "curiosity_story. 보도 출처를 문장마다 밝힌다 (naver-ai-news-post-lessons)."
+    }
+  },
+  "tone": {
+    "brandVoice": {
+      "persona": "생활이득AI연구소 — AI로 직접 비교해 보고 결과를 먼저 알려주는 동네 연구소",
+      "always": [
+        "추천·결론을 먼저",
+        "숫자는 원본 그대로 (100g당 198원처럼 단위까지)",
+        "짧은 문장",
+        "이모지는 항목 머리에만 (한 줄에 하나)"
+      ],
+      "never": [
+        "못했습니다·확인하지 못했어요 같은 변명",
+        "~인 것 같아요 식의 얼버무림",
+        "과장 (역대급, 무조건, 100%)",
+        "원본에 없는 숫자",
+        "제휴·협찬·수수료 문구 — 예외: 링크 글의 \"(제휴 링크 포함 글)\", 첫 글의 \"(제휴 링크 포함)\", 제휴 답글의 네트워크 고지 문구"
+      ]
+    },
+    "byPlatform": {
+      "x": {
+        "register": "해요체, 목록은 명사형으로 끝낸다",
+        "example": "제철 고구마, 박스로 사면 100g당 얼마일까요? 🧵",
+        "evidence": "x 정보형 계정은 짧은 개조식. 첫 글에 외부 링크를 넣으면 도달이 줄어든다 (platform-styles.mjs)."
+      },
+      "threads": {
+        "register": "해요체 (owner 2026-09-28 \"쓰레드는 해요체로\"). 친근하게 짧게, 마지막은 질문",
+        "example": "고구마 박스로 살 거면 이거 먼저 보세요",
+        "evidence": "owner decision 2026-09-28. 질문으로 끝내면 답글이 2~3배 (platform-styles.mjs). 레퍼런스 중앙값 57자·4줄 (sns-format-references-kr.json)."
+      },
+      "instagram": {
+        "register": "캡션은 해요체, 카드는 명사형 짧은 제목",
+        "example": "카드: '박스 고구마 100g당 198원' / 캡션: '저장해두고 장 볼 때 꺼내 보세요'",
+        "evidence": "캐러셀은 저장·공유가 도달을 끈다. 요약 장과 저장 안내 장 (platform-styles.mjs)."
+      },
+      "tiktok": {
+        "register": "해요체, 말하듯 짧게. 첫 3초에 결과",
+        "example": "고구마 박스, 가격표만 보면 손해 보는 이유",
+        "evidence": "platform-styles.mjs tiktok 규칙"
+      },
+      "youtube": {
+        "register": "제목은 검색어형, 설명은 해요체",
+        "example": "제목: 제철 고구마 박스 100g당 가격 비교 / 설명 첫 줄: 고구마 박스 100g당 155원부터",
+        "evidence": "platform-styles.mjs youtube 규칙"
+      }
+    }
+  },
+  "replyPolicy": {
+    "atPublish": {
+      "rule": "체인 전체를 한 번에 올린다. 첫 글 → 본인 답글 순서. 앞 글이 올라간 것을 확인한 뒤 다음 답글을 보낸다.",
+      "overflow": "한 글이 제한을 넘으면 문장 단위로 다음 답글로 넘긴다. maxPosts에 닿으면 우선순위가 낮은 point부터 빼고, 빠진 항목은 인스타 첫 댓글·블로그로 안내한다.",
+      "instagram": "캡션 제한이나 가독성 목표(policy.chars)를 넘는 목록·기준은 첫 댓글로 단다.",
+      "daangn": "본문 외부 링크 10개 제한을 넘는 항목은 작성자 댓글로 보충한다 (owner 2026-09-28 standing)."
+    },
+    "followUps": {
+      "rule": "게시 후 새로 확인한 사실만 원래 체인 끝에 본인 답글로 단다. 같은 내용을 다시 올리지 않는다.",
+      "triggers": [
+        {
+          "kind": "price_change",
+          "when": "재조회한 판매가가 원본과 다를 때",
+          "template": "📌 {date} 다시 보니 {item} {old} → {new}",
+          "maxPerPost": 2
+        },
+        {
+          "kind": "sold_out",
+          "when": "원본 추천 상품이 품절",
+          "template": "⚠️ {item} 품절됐어요. 대신 {alternative}",
+          "maxPerPost": 1
+        },
+        {
+          "kind": "deadline",
+          "when": "마감·특가 종료 24시간 전 (원본에 마감일이 있을 때만)",
+          "template": "⏰ {item} 내일 마감",
+          "maxPerPost": 1
+        }
+      ],
+      "maxTotalPerPost": 3,
+      "approval": "블로그 원본이 바뀐 경우(가격 갱신 업데이트)에만 자동. 그 밖에는 텔레그램 승인 후."
+    },
+    "repliesToOthers": {
+      "rule": "다른 사람 댓글·답글에 대한 대답은 원본에 있는 사실만으로 초안을 만들고, 텔레그램 승인 후 보낸다.",
+      "tone": "플랫폼 말투 그대로. 질문 답 → 근거 숫자 → 필요하면 블로그 링크",
+      "never": [
+        "제휴 링크",
+        "개인정보 요청",
+        "논쟁·정치"
+      ]
+    }
+  },
+  "links": {
+    "allowed": "본문 글타래: 블로그 원문 링크 한 개 (https://blog.naver.com/aicandoanything/<logNo>). 제휴 답글: 아래 네트워크 링크",
+    "placement": {
+      "x": "블로그 링크는 마지막 본문 글, 제휴 링크는 그 뒤 제휴 답글",
+      "threads": "같음",
+      "instagram": "캡션 링크는 눌리지 않음 → 프로필 링크(링크 모음)·스토리 링크 스티커",
+      "tiktok": "캡션 링크 없음 → 프로필 링크, 고정 댓글에 블로그 검색 안내",
+      "youtube": "설명 첫 줄 아래 블로그 링크 + 고정 댓글"
+    },
+    "affiliateReply": {
+      "maxLinks": 4,
+      "firstPostMarker": "(제휴 링크 포함)", "feedOrder": "owner 2026-09-28: 본문(첫 글)이 조회수를 가장 많이 받는다. 첫 글은 본문(훅+핵심, 링크 없음) → 바로 첫 댓글에 수익고지+링크(등록 네트워크 제휴 링크와 블로그 링크) → 이후 글을 이어서 쓴다 (versions.mjs feedOrder). 커넥트(naver.me)·쿠팡·링크프라이스 링크는 X·스레드에 직접 넣지 않는다(채널 정책) — 첫 댓글의 블로그 링크로 연결.",
+      "disclosureFirstLine": true,
+      "linksFromArticle": "제휴 링크는 네이버 원본 글의 gate-plan affiliate 링크 중에서만"
+    },
+    "affiliateNetworks": {
+      "toss_sharelink": {
+        "label": "토스쇼핑 쉐어링크",
+        "link": "^https://toss\\.shopping/_m/[A-Za-z0-9]{6,12}$",
+        "disclosure": "이 글은 토스쇼핑 쉐어링크 활동의 일환으로, 링크를 통한 구매가 발생하면 일정 수수료를 지급받습니다.",
+        "disclosureMatch": "토스쇼핑 쉐어링크 활동의 일환으로",
+        "channels": [
+          "x",
+          "threads"
+        ],
+        "registered": "creator-info channels: threads 2026-09-28, x 2026-09-28 (readback verified); instagram registered but caption links are not clickable",
+        "notOn": [
+          "tiktok",
+          "youtube"
+        ]
+      },
+      "tiktok_invite": {
+        "label": "틱톡 친구 초대 링크(사장님 본인)",
+        "link": "^https://www\\.tiktok\\.com/d/\\d+/[A-Za-z0-9_-]{8,40}/?$",
+        "disclosure": "이 글의 틱톡 링크는 제 친구 초대 링크라, 링크로 참여하시면 저도 룰렛 기회를 받아요.",
+        "disclosureMatch": "친구 초대 링크",
+        "channels": [
+          "x",
+          "threads"
+        ],
+        "registered": "사장님 본인 초대 링크, SNS 게시 요청 2026-09-28 (\"엑스 스레드에도 올려\")"
+      }
+    },
+    "pendingNetworks": {
+      "naver_shopping_connect": "quick-fact는 naver.me 링크를 X·스레드·텔레그램·인포크에 쇼핑/여행 커넥트 고지와 함께 올린다(affiliate-networks.v1.json). 공식 채널: 블로그·클립·인스타·유튜브. 유튜브 채널을 브랜드커넥트에 연동하면 쇼츠 설명·고정 댓글에 쓸 수 있다. X·스레드·틱톡은 미확인",
+      "linkprice": "인스타·스레드는 SNS 타입 I 연동(owner UI 작업) 필요, X는 사이트 등록 필요",
+      "coupang_partners": "SNS 채널(프로그램 측) 등록은 repo에 근거 없음(unverified). 단 quick-fact는 쿠팡 링크를 X·스레드·텔레그램에 올린다(owner 2026-09-30, 텔레그램 2026-10-04) — 현행 정책은 affiliate-networks.v1.json policyHistory 2026-10-06 참조. 이 온톨로지의 affiliateNetworks는 블로그→SNS 글(sns-publish)에만 적용된다.",
+      "youtube_shopping": "유튜브 쇼핑 제휴(쿠팡 등 상품 태그, 수수료 지급 표시) — 채널 자격 요건 확인 필요"
+    }
+  },
+  "evidence": [
+    {
+      "id": "x_web_bundle",
+      "source": "x.com main.js (2026-09-28 조회): composer isOverLimit = weightedLength > maxWeightedTweetLength"
+    },
+    {
+      "id": "twitter_text_v3",
+      "source": "twitter-text config v3: maxWeightedTweetLength 280, scale 100, CJK·이모지 weight 200, transformedURLLength 23"
+    },
+    {
+      "id": "threads_web_bundle",
+      "source": "threads.com BarcelonaComposerConstants (2026-09-28 조회): 500자, 링크 5, 미디어 20, 태그 50자, 영상 500초, 대체텍스트 1000"
+    },
+    {
+      "id": "instagram_web_bundle",
+      "source": "instagram.com 작성기 (2026-09-28 조회): maxDescriptionLength 2200"
+    },
+    {
+      "id": "sns_format_references_kr",
+      "source": "apps/naver-blog-api/research/content-store/sns-format-references-kr.json (2026-09-27 측정)"
+    },
+    {
+      "id": "platform_styles",
+      "source": "apps/affiliate-api-hub/scripts/sns/platform-styles.mjs (2026-09-27 조사)"
+    },
+    {
+      "id": "hook_ontology",
+      "source": "apps/naver-blog-api/research/content-store/hook-ontology.v1.json channelPreferences.feed"
+    }
+  ],
+  "openQuestions": [
+    "인스타 해시태그 실제 하드 제한 (30 또는 5) — 첫 게시 때 서버 응답으로 확인",
+    "인스타 댓글 글자 수 제한 — 첫 댓글 게시 때 확인",
+    "스레드 주제 태그 1개 제한 — 작성기 코드에서 값 확인 필요",
+    "게시 후 반응(좋아요·답글·저장)을 모아 structures와 hook 선택을 보정하는 측정 루프"
+  ],
+  "shortsStructure": {
+    "note": "쇼츠 v2 다섯 박자(37fb7d8)와 숏템메이커 장면 분석(훅·스토리라인·CTA)을 합친 장면 역할. 틱톡·유튜브 쇼츠·인스타 릴스 공통.",
+    "roles": [
+      {
+        "id": "hook",
+        "seconds": [
+          0,
+          3
+        ],
+        "rule": "결과·호기심 한 줄을 말과 자막으로. 검색 키워드를 3초 안에 말한다 (틱톡)"
+      },
+      {
+        "id": "problem",
+        "seconds": [
+          3,
+          8
+        ],
+        "rule": "왜 헷갈리는지 (박스 가격 vs 100g당)"
+      },
+      {
+        "id": "proof",
+        "seconds": [
+          8,
+          20
+        ],
+        "rule": "우리 차트·블로그 캡처로 근거 (남의 영상 원본은 쓰지 않는다)"
+      },
+      {
+        "id": "pick",
+        "seconds": [
+          20,
+          27
+        ],
+        "rule": "추천 하나와 숫자"
+      },
+      {
+        "id": "cta",
+        "seconds": [
+          27,
+          35
+        ],
+        "rule": "저장·프로필 링크 안내"
+      }
+    ],
+    "hookPatterns": "hook-ontology channelPreferences.feed.prefer (훅 게이트와 같다)"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T03:00:41.240104Z",
+  "operation": "attachment.assets.search",
+  "state": "readback_verified",
+  "ownerVerified": true,
+  "assetServerOrigin": "https://assets.grok.com",
+  "assetSearchReceipts": [
+    {
+      "observedAt": "2026-10-06T03:00:41.229Z",
+      "source": "direct_http",
+      "parsedData": true,
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 13,
+      "requestDigest": "00bfcaf99b175811c0aab9180f297bb06a7c59577bb0c2733b952114127c01a4",
+      "responseDigestPersisted": false,
+      "requestHeaderNames": [
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "httpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "assetResultCount": 0,
+      "exactNameMatchCount": 0,
+      "exactDeletedCount": 0,
+      "nextPagePresent": false
+    }
+  ],
+  "artifactProof": {
+    "exists": true,
+    "bytes": 14,
+    "sha256": "ea625e61c345553c8460eb993d5cb6b9758e4b7768fc348a7f28580eb5c4bd4c",
+    "matchesNeutralTaskBytes": true,
+    "mode": "0o600"
+  },
+  "source": {
+    "functionName": "assetRepositoryListAssetMetadataRaw",
+    "sourceUrl": "https://cdn.grok.com/_next/static/chunks/3hel26q5vkbwb.js",
+    "sourceSha256": "cbd84c6ccfa030f8e6d962e6d20a39242b1d3e3d54d70259f81a68aef0f12ec3"
+  },
+  "guardBeforeReset": {
+    "active": true,
+    "browserWriteAttempts": 27,
+    "failRequestAcknowledgements": 27,
+    "failRequestErrors": 0,
+    "browserBusinessWriteResponses": 0,
+    "writeLoadingFailedEvents": 24,
+    "pendingFetchRequests": 0,
+    "websocketFramesDropped": 0,
+    "writePathClassCounts": {
+      "other": 27
+    },
+    "businessWriteZeroProofComplete": true
+  },
+  "safety": {
+    "noWriteOperationSent": true,
+    "rawServerIdsPersisted": false,
+    "cookiesPersisted": false
+  },
+  "guardAfterReset": {
+    "active": true,
+    "browserWriteAttempts": 57,
+    "failRequestAcknowledgements": 57,
+    "failRequestErrors": 0,
+    "browserBusinessWriteResponses": 0,
+    "writeLoadingFailedEvents": 48,
+    "pendingFetchRequests": 0,
+    "websocketFramesDropped": 0,
+    "writePathClassCounts": {
+      "other": 57
+    },
+    "businessWriteZeroProofComplete": true
+  },
+  "targetResetPerformed": true
+}

@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-26T06:40:56.364Z",
+  "cafeId": "31714934",
+  "cafeSlug": "serenacademmy",
+  "mode": "pure_http_stored_session",
+  "browserUsedForHTTPRequest": false,
+  "publicWrites": 0,
+  "authentication": {
+    "provider": "windows_dpapi_current_user",
+    "sameAccount": true,
+    "cafeMember": true,
+    "memberLevelName": "신규회원",
+    "newProcessAfterBootstrap": true,
+    "storedSlot": "naver-cafe-session",
+    "secretValuesIncluded": false
+  },
+  "coverage": {
+    "menuCount": 27,
+    "boardCount": 18,
+    "menuIdsPresent": true,
+    "articleId": "21",
+    "articleReadable": true,
+    "articleHtmlMatchesBrowser": true,
+    "articleHtmlSha256": "b5830dce083bdd1a067e38e0fa2a9218193c04b4e3ae7f06ed8d9855245e7a55",
+    "commentsCount": 83,
+    "commentsTotal": 83,
+    "commentsHaveNext": false,
+    "commentIdsPresent": true,
+    "commentsMatchBrowser": true,
+    "commentsSha256": "08de78d857a1c1a90662fed38ce05e882ad275f218ce910f3bd5f0da0bdc3112",
+    "latestPage1Count": 50,
+    "latestPage2Count": 50,
+    "pagesDisjoint": true,
+    "board1Count": 6,
+    "searchCount": 20,
+    "searchTotal": 876,
+    "attachmentCount": 1
+  },
+  "operations": [
+    {
+      "operation": "identity",
+      "method": "GET",
+      "origin": "https://apis.cafe.naver.com",
+      "path": "/home/v1/member/identifier",
+      "queryFields": [
+        "cafeUrl"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 250,
+      "sha256": "3f1326c206439e06bcee56dd55818a90baedc8fb3050df065994832e9eccb628",
+      "checkedAt": "2026-09-26T06:40:53.600Z",
+      "browserUsedForHTTPRequest": false
+    },
+    {
+      "operation": "member",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/CafeMemberInfo.json",
+      "queryFields": [
+        "cafeId"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 543,
+      "sha256": "34078144bfc74333331276ef5baadbbfee091563b6eed92e91b0f0559b177323",
+      "checkedAt": "2026-09-26T06:40:53.646Z",
+      "browserUsedForHTTPRequest": false
+    },
+    {
+      "operation": "menus",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/SideMenuList",
+      "queryFields": [
+        "cafeId"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 10689,
+      "sha256": "be281a041c875210edc8e1f8df3dff762bbeb9754ee18850d96994bd00144424",
+      "checkedAt": "2026-09-26T06:40:53.748Z",
+      "browserUsedForHTTPRequest": false,
+      "menuCount": 27
+    },
+    {
+      "operation": "article",
+      "method": "GET",
+      "origin": "https://article.cafe.naver.com",
+      "path": "/gw/v4/cafes/:cafeSlug/articles/:articleId",
+      "queryFields": [
+        "useCafeId"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": null,
+      "mime": "application/json",
+      "bytes": 39278,
+      "sha256": "72720052d71a6abca55012c5f4c705d832367f646dbddd76705218f8c6cfce3a",
+      "checkedAt": "2026-09-26T06:40:54.131Z",
+      "browserUsedForHTTPRequest": false
+    },
+    {
+      "operation": "comments",
+      "method": "GET",
+      "origin": "https://article.cafe.naver.com",
+      "path": "/gw/v4/cafes/:cafeId/articles/:articleId/comments",
+      "queryFields": [
+        "fromPopular",
+        "orderBy",
+        "requestFrom"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": null,
+      "mime": "application/json",
+      "bytes": 123662,
+      "sha256": "bbeba0bc8607b99040675af2fb087ed86b65f241f00a2911a3aa88570bdab34a",
+      "checkedAt": "2026-09-26T06:40:54.915Z",
+      "browserUsedForHTTPRequest": false
+    },
+    {
+      "operation": "list",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/ArticleListV3dot1.json",
+      "queryFields": [
+        "search.clubid",
+        "search.page",
+        "search.perPage",
+        "search.queryType"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 57042,
+      "sha256": "183d1b2340677bdd0c3eeca5ae6cad7eadba1567e9942c4fc7ffc6e12ab875e5",
+      "checkedAt": "2026-09-26T06:40:55.327Z",
+      "browserUsedForHTTPRequest": false,
+      "articleCount": 50
+    },
+    {
+      "operation": "list",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/ArticleListV3dot1.json",
+      "queryFields": [
+        "search.clubid",
+        "search.page",
+        "search.perPage",
+        "search.queryType"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 56012,
+      "sha256": "5df286c8d5386b2b6dc0848ff2524e7e210040bcee2a2ef1e1aa8392dd19994d",
+      "checkedAt": "2026-09-26T06:40:55.680Z",
+      "browserUsedForHTTPRequest": false,
+      "articleCount": 50
+    },
+    {
+      "operation": "list",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/ArticleListV3dot1.json",
+      "queryFields": [
+        "search.clubid",
+        "search.menuid",
+        "search.page",
+        "search.perPage",
+        "search.queryType"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 7754,
+      "sha256": "cc2c3e5e6d4eeab7e60f88d7f3e072d9b3b5b9018541419153680a4343a5771b",
+      "checkedAt": "2026-09-26T06:40:55.845Z",
+      "browserUsedForHTTPRequest": false,
+      "articleCount": 6
+    },
+    {
+      "operation": "search",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe-search-api/v2/cafes/:cafeId/search/articles",
+      "queryFields": [
+        "page",
+        "perPage",
+        "query",
+        "searchBy",
+        "sortBy",
+        "views"
+      ],
+      "httpStatus": 200,
+      "applicationStatus": null,
+      "mime": "application/json",
+      "bytes": 29787,
+      "sha256": "cb50c67f98e1bb54eb14f5f035a5d1c5731d16b9fb667e0e1f846579a71780e5",
+      "checkedAt": "2026-09-26T06:40:56.363Z",
+      "browserUsedForHTTPRequest": false,
+      "articleCount": 20
+    }
+  ],
+  "download": {
+    "ok": true,
+    "articleId": "21",
+    "attachmentIndex": 0,
+    "filename": "힘찬 전자책 - 소싱편.pdf",
+    "bytes": 15259748,
+    "sha256": "8ee88c12275f23886aadf0b74e316a6819272c2ee11d2517e10086de865ef778",
+    "mimeType": "application/octet-stream",
+    "formatSignature": "%PDF-",
+    "declaredSizeMatched": true,
+    "browserUsed": false,
+    "credentialValuesReturned": false,
+    "sourceOrigin": "https://downapi.cafe.naver.com",
+    "httpStatus": 200,
+    "artifactPath": "runtime/downloads/힘찬 전자책 - 소싱편.pdf"
+  },
+  "bootstrap": {
+    "verifiedAt": "2026-09-26T06:39:42.749Z",
+    "protectedStoreWriteVerified": true,
+    "accountMatchedBrowser": true,
+    "source": "existing_naver_sso_dpapi",
+    "browserUsed": false
+  },
+  "browserPhases": {
+    "discovery": true,
+    "discoveryTabClosedAt": "2026-09-26T06:28:22.083Z",
+    "bootstrap": false,
+    "recurringReads": false,
+    "download": false
+  },
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": true,
+    "live_replay": true,
+    "remnantFreeScope": "complete recurring read and PDF-download operations using an already verified saved session; excludes first login and expiry recovery"
+  },
+  "renewal": {
+    "automaticExpiryRecovery": "not_verified",
+    "rejectedSession": "reauth_required",
+    "restartBoundary": "new Node process, same Windows user and host",
+    "serviceMutations": 0
+  },
+  "finalCliReadback": {
+    "command": "node scripts/cafe.mjs article --id 21",
+    "checkedAt": "2026-09-26T06:41:48.030Z",
+    "httpStatus": 200,
+    "articleId": "21",
+    "readable": true,
+    "textCharacters": 589,
+    "contentHtmlSha256": "b5830dce083bdd1a067e38e0fa2a9218193c04b4e3ae7f06ed8d9855245e7a55",
+    "browserUsed": false
+  },
+  "sourceFiles": [
+    {
+      "path": "lib/session.mjs",
+      "sha256": "8fc8408df958364d31eb0f46c877589e096d42af633f7e7a616f3352fc0e6c0f"
+    },
+    {
+      "path": "lib/client.mjs",
+      "sha256": "f326464fefb630b4f4b7de65e171ae99f438c42a3031a5d1d9e1150a5402d569"
+    },
+    {
+      "path": "lib/download.mjs",
+      "sha256": "cda23b674795d9186840efca744e45e7d82c53c9e76ff79e5244584a374d266a"
+    },
+    {
+      "path": "scripts/cafe.mjs",
+      "sha256": "e06791936642c2ba04f3c2943538cb12c33c428c1a6f8b76eb480a4e36bdb7ab"
+    },
+    {
+      "path": "scripts/download.mjs",
+      "sha256": "c64fb70fa698fdfc83d60147b15184e6e75986ac404da7a06395a44e4a0a2f8f"
+    }
+  ],
+  "postReplayStaticCorrections": [
+    "Cancellation failure cannot prevent session invalidation",
+    "Unknown attachment size reports null rather than a successful size comparison"
+  ]
+}

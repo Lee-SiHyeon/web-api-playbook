@@ -16,6 +16,7 @@ try {
     $startInfo = [Diagnostics.ProcessStartInfo]::new((Get-Command node).Source)
     $startInfo.ArgumentList.Add((Join-Path $PSScriptRoot 'naver-login-cli.mjs'))
     $startInfo.ArgumentList.Add('--identity-stdin')
+    $startInfo.ArgumentList.Add('--challenge-codex')
     if ($RememberIdentity) { $startInfo.ArgumentList.Add('--remember-identity') }
     if ($RememberSession) { $startInfo.ArgumentList.Add('--remember-session') }
     if ($OutputPath) { $startInfo.ArgumentList.Add('--output'); $startInfo.ArgumentList.Add($OutputPath) }

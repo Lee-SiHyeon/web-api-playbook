@@ -7,6 +7,7 @@ import { checkOperations } from '../lib/operation-health.mjs';
 import { runOperationFlow, collectOperationPages } from '../lib/operation-flow.mjs';
 import { createServiceRegistry, listServiceOperations } from '../lib/service-operations/index.mjs';
 import { verifyServiceOperations } from '../lib/service-operations/verify.mjs';
+import { clientPacks } from '../lib/client-packs.mjs';
 
 const usage = {
   commands: ['list', 'describe', 'tools', 'run', 'check', 'flow', 'collect', 'mcp', 'verify'],
@@ -83,7 +84,8 @@ async function main() {
   };
   let result;
   const signal = AbortSignal.timeout(timeoutMs);
-  if (command === 'list') result = await listServiceOperations({ includeUnconnected: args.all === true });
+  if (command === 'list') result = { ...await listServiceOperations({ includeUnconnected: args.all === true }),
+    clientPacks: await clientPacks() };
   if (command === 'verify') {
     result = await verifyServiceOperations({ ...bindingOptions, timeoutMs, ...(args.service ? { services: [args.service] } : {}),
       includeUnconnected: args['include-unconnected'] === true,

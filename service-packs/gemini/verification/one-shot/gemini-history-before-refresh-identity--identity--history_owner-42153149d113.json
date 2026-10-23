@@ -1,0 +1,51 @@
+{
+  "schema": "gemini-feature-pair-evidence-v1",
+  "service": "gemini-web",
+  "featureId": "identity",
+  "operationId": "identity",
+  "caseId": "history_owner",
+  "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+  "clientCodeSha256": "4ea4ee265be7801df89fa761504054c4072ed3d53a34a29b831c91422dcdae37",
+  "observedAt": "2026-10-06T12:22:46.910Z",
+  "executionHost": "linux_worker",
+  "transport": "direct_http",
+  "evidenceClass": "direct_http_live",
+  "mocked": false,
+  "publicOnly": false,
+  "requestResponsePaired": true,
+  "authenticatedOwnerVerified": true,
+  "expectedOutcomeVerified": true,
+  "identityMatchVerified": true,
+  "credentialPropagated": true,
+  "request": {
+    "method": "GET",
+    "origin": "https://gemini.google.com",
+    "path": "/app",
+    "queryKeys": [],
+    "headerNames": [
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "upgrade-insecure-requests",
+      "user-agent"
+    ],
+    "bodyFieldNames": [],
+    "valuesPersisted": false
+  },
+  "response": {
+    "status": 200,
+    "contentType": "text/html",
+    "bytes": 786292,
+    "bodySha256": "2e139f79f9ad7fc05e0ad4ad451f30608d58b40f9a201dd7afd46ed02871b2a2",
+    "framing": "text"
+  },
+  "secretsPersisted": false
+}

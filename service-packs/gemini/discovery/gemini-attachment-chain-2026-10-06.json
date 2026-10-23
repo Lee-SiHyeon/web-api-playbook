@@ -1,0 +1,287 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_chain",
+  "callerIntent": "gemini-attachment-default-chain-20261006-v1",
+  "messageCallerIntent": "gemini-attachment-message-20261006-v1",
+  "recordedAt": "2026-10-06T04:12:26.482374+00:00",
+  "outputStatus": "incomplete",
+  "failureCode": "ATTACHMENT_CHAIN_CHILD_ATTACHMENT_UPLOAD_COOKIE_SET_MISMATCH",
+  "ownerDigestMatchedApproved": true,
+  "file": {
+    "name": "gemini-attachment-chain-20261006.txt",
+    "mimeType": "text/plain",
+    "bytes": 12,
+    "sha256": "3797d8f7d3f19601befc6346a076aa01c49cdf34176dc97f676d0ff8acd3ace9"
+  },
+  "directDispatchCount": 1,
+  "mutationJournal": {
+    "attachment_upload": {
+      "state": "response_received",
+      "dispatchCount": 1,
+      "httpStatus": 200
+    }
+  },
+  "childError": {
+    "errorCode": "ATTACHMENT_UPLOAD_COOKIE_SET_MISMATCH",
+    "errorClass": "GeminiClientError"
+  },
+  "nativeStartObserved": true,
+  "nativeContinuationObserved": true,
+  "nativeAttachmentMessageObserved": false,
+  "normalHistoryTemplate": {
+    "captured": true,
+    "rpcId": "MaZiqc",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "observedHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "directReadHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "cursorAdjustedToCapturedFirstPageTemplate": false,
+    "canonicalFirstPageTemplateSource": "scripts/run-linux-text-smoke.py:FIRST_PAGE_HISTORY_ARGS",
+    "atPresentInMemory": true,
+    "rawQueryAndTokenValuesPersisted": false
+  },
+  "historyArgsMismatch": null,
+  "directStart": {
+    "httpStatus": 200,
+    "responseHeaderNames": [
+      "access-control-allow-credentials",
+      "access-control-allow-origin",
+      "access-control-expose-headers",
+      "content-type",
+      "x-goog-upload-chunk-granularity",
+      "x-goog-upload-control-url",
+      "x-goog-upload-status",
+      "x-goog-upload-url",
+      "x-guploader-uploadid"
+    ],
+    "contentType": "text/plain",
+    "responseBytes": 0,
+    "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sessionUrlRef": {
+      "origin": "https://push.clients6.google.com",
+      "pathFamily": "/upload/",
+      "queryKeyNames": [
+        "upload_id",
+        "upload_protocol"
+      ]
+    }
+  },
+  "directTransferResponse": null,
+  "guardLifecycle": {
+    "registeredTargetIdMatched": true,
+    "resetQuietVerifiedThroughDisconnect": false,
+    "lateBlockedRequestCount": 0,
+    "browserClosed": false,
+    "contextClosed": false
+  },
+  "rawBodiesOrCredentialValuesPersisted": false,
+  "rawOwnerEmailPersisted": false,
+  "rawUploadSessionUrlPersisted": false,
+  "rawAttachmentReferencePersisted": false,
+  "rawPromptOrFileContentsPersisted": false,
+  "attemptCount": 7,
+  "attempts": [
+    {
+      "schema": 1,
+      "service": "gemini-web",
+      "operation": "attachment_chain",
+      "callerIntent": "gemini-attachment-default-chain-20261006-v1",
+      "messageCallerIntent": "gemini-attachment-message-20261006-v1",
+      "recordedAt": "2026-10-06T03:49:41.042626+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_CHILD_EOF",
+      "ownerDigestMatchedApproved": true,
+      "file": {
+        "name": "gemini-attachment-chain-20261006.txt",
+        "mimeType": "text/plain",
+        "bytes": 12,
+        "sha256": "3797d8f7d3f19601befc6346a076aa01c49cdf34176dc97f676d0ff8acd3ace9"
+      },
+      "directDispatchCount": 0,
+      "mutationJournal": {},
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": false,
+      "nativeAttachmentMessageObserved": false,
+      "directStart": null,
+      "directTransferResponse": null,
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      },
+      "rawBodiesOrCredentialValuesPersisted": false,
+      "rawOwnerEmailPersisted": false,
+      "rawUploadSessionUrlPersisted": false,
+      "rawAttachmentReferencePersisted": false,
+      "rawPromptOrFileContentsPersisted": false,
+      "auditCorrection": {
+        "recordedAt": "2026-10-06T03:52:56.131185+00:00",
+        "originalRunnerResetQuietVerified": false,
+        "recoveredByExactRegisteredTargetId": true,
+        "recoveredResetQuietVerifiedThroughFreshGuard": true,
+        "businessRequestsBlockedDuringRecovery": 0,
+        "lateBlockedRequestsDuringRecovery": 0,
+        "browserClosed": false,
+        "contextClosed": false,
+        "directMutationDispatches": 0,
+        "rawValuesPersisted": false
+      }
+    },
+    {
+      "recordedAt": "2026-10-06T03:53:57.652618+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_CHILD_CLIENT_FAILED",
+      "directDispatchCount": 0,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": false,
+      "nativeAttachmentMessageObserved": false,
+      "mutationJournal": {},
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    },
+    {
+      "recordedAt": "2026-10-06T03:59:37.502168+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_CHILD_CLIENT_FAILED",
+      "directDispatchCount": 0,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": false,
+      "nativeAttachmentMessageObserved": false,
+      "mutationJournal": {},
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    },
+    {
+      "recordedAt": "2026-10-06T04:01:54.959370+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_CHILD_CLIENT_FAILED",
+      "directDispatchCount": 0,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": false,
+      "nativeAttachmentMessageObserved": false,
+      "mutationJournal": {},
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    },
+    {
+      "recordedAt": "2026-10-06T04:04:02.418259+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_CHILD_HTTP_SESSION_CONTEXT_MISSING",
+      "directDispatchCount": 0,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": false,
+      "nativeAttachmentMessageObserved": false,
+      "mutationJournal": {},
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    },
+    {
+      "recordedAt": "2026-10-06T04:10:34.082492+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_HISTORY_ARGS_MISMATCH",
+      "directDispatchCount": 0,
+      "nativeStartObserved": false,
+      "nativeContinuationObserved": false,
+      "nativeAttachmentMessageObserved": false,
+      "historyArgsMismatch": {
+        "observedHistoryArgs": [
+          28,
+          null,
+          [
+            1,
+            null,
+            1
+          ]
+        ],
+        "observedHistoryArgsLength": 3,
+        "observedHistoryArgsPrimitiveTypes": [
+          "number",
+          "null",
+          "array"
+        ]
+      },
+      "mutationJournal": {},
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    },
+    {
+      "recordedAt": "2026-10-06T04:12:26.482374+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_CHILD_ATTACHMENT_UPLOAD_COOKIE_SET_MISMATCH",
+      "directDispatchCount": 1,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": true,
+      "nativeAttachmentMessageObserved": false,
+      "historyArgsMismatch": null,
+      "mutationJournal": {
+        "attachment_upload": {
+          "state": "response_received",
+          "dispatchCount": 1,
+          "httpStatus": 200
+        }
+      },
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    }
+  ]
+}

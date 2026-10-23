@@ -1,0 +1,403 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "serviceOrigin": "https://grok.com",
+  "allowedOrigins": [
+    "https://grok.com"
+  ],
+  "identityOperationId": null,
+  "fragmentId": "grok-conversation-files-source-contracts",
+  "observedAt": "2026-10-06T10:58:02.436Z",
+  "operations": [
+    {
+      "id": "conversation.files.list",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/conversations/files/list",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "conversationId": "{{input.conversationId}}",
+          "path": "{{input.path}}",
+          "pageToken": "{{input.pageToken}}",
+          "pageSize": "{{input.pageSize}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "pageToken": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 8192
+            },
+            "pageSize": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 4194304
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/conversations/files/list",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0-4zkotdeiwyn.js",
+        "sourceSha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+        "sourceFunctionName": "filesServiceListFilesV2Raw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "files:array",
+          "files[].name:string",
+          "files[].path:string",
+          "files[].isDirectory:boolean",
+          "files[].size:number",
+          "files[].mimeType:string",
+          "files[].modifiedAt:string",
+          "path:string",
+          "nextPageToken:string"
+        ]
+      }
+    },
+    {
+      "id": "conversation.file.content.resolve",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/conversations/files/content",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "conversationId": "{{input.conversationId}}",
+          "path": "{{input.path}}",
+          "isDownload": true
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            }
+          },
+          "required": [
+            "conversationId",
+            "path"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/conversations/files/content",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0-4zkotdeiwyn.js",
+        "sourceSha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+        "sourceFunctionName": "filesServiceGetFileContentV2Raw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "dataUrl:string",
+          "mimeType:string",
+          "size:number",
+          "isTruncated:boolean",
+          "signedUrl:string",
+          "downloadSignedUrl:string"
+        ]
+      }
+    },
+    {
+      "id": "conversation.files.zip.resolve",
+      "kind": "read",
+      "method": "GET",
+      "urlTemplate": "https://grok.com/rest/conversations/files/download-zip",
+      "authMode": "session",
+      "request": {
+        "queryTemplate": {
+          "conversationId": "{{input.conversationId}}",
+          "path": "{{input.path}}"
+        },
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "path": {
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "required": [
+            "conversationId"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "GET",
+        "requestPath": "/rest/conversations/files/download-zip",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0-4zkotdeiwyn.js",
+        "sourceSha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+        "sourceFunctionName": "filesServiceDownloadFilesAsZipRaw",
+        "sourceDeclaredHeaders": [],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "downloadUrl:string",
+          "fileCount:number",
+          "totalSize:number"
+        ]
+      }
+    },
+    {
+      "id": "conversation.workspace.zip.resolve",
+      "kind": "read",
+      "method": "POST",
+      "urlTemplate": "https://grok.com/rest/app-chat/conversations/{{input.conversationId}}/download-workspace",
+      "authMode": "session",
+      "request": {
+        "bodyTemplate": {
+          "path": "{{input.body.path}}"
+        },
+        "bodyEncoding": "json",
+        "contentType": "application/json",
+        "inputSchema": {
+          "properties": {
+            "conversationId": {
+              "type": "string",
+              "minLength": 16,
+              "maxLength": 128
+            },
+            "body": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "maxLength": 4096
+                }
+              },
+              "required": []
+            }
+          },
+          "required": [
+            "conversationId",
+            "body"
+          ]
+        },
+        "credentialBindings": {
+          "cookies": [
+            "sso"
+          ],
+          "headers": []
+        }
+      },
+      "response": {
+        "mode": "json",
+        "statuses": [
+          200
+        ],
+        "contentTypes": [
+          "application/json"
+        ],
+        "maxBytes": 262144
+      },
+      "evidence": {
+        "source": "first_party_sdk_contract",
+        "capturedAt": "2026-10-06T10:58:02.436Z",
+        "requestMethod": "POST",
+        "requestPath": "/rest/app-chat/conversations/__grok_input_segment__/download-workspace",
+        "httpStatus": null,
+        "responseContentType": "unknown",
+        "securityBoundary": "not_applicable",
+        "securitySignals": [],
+        "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+        "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+        "sourceFunctionName": "chatDownloadAppWorkspaceRaw",
+        "sourceDeclaredHeaders": [
+          "Content-Type"
+        ],
+        "browserWriteCapture": false,
+        "clientCallsiteFabricated": false,
+        "browserHeadersCaptured": false,
+        "directReplayReceipt": "verification/grok-conversation-files-live-2026-10-06.json",
+        "firstLiveReadPermit": true,
+        "observedResponseShape": [
+          "downloadUrl:string",
+          "sizeBytes:number",
+          "expiresAt:string"
+        ]
+      }
+    }
+  ],
+  "sourceAssets": [
+    {
+      "id": "filesApi",
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0-4zkotdeiwyn.js",
+      "sourceSha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+      "checkedAt": "2026-10-06"
+    },
+    {
+      "id": "filesQueries",
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0skqp8k76tn6n.js",
+      "sourceSha256": "75825269a3d1759576d6c45cddca05ed2b86b19e836108804830e128f4a60ca7",
+      "checkedAt": "2026-10-06"
+    },
+    {
+      "id": "zipButton",
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0_gos2zzergk5.js",
+      "sourceSha256": "7c3ad06212a5dec71a2b654330f7dfba14135ca8065ec3212586738aee9dcac2",
+      "checkedAt": "2026-10-06"
+    },
+    {
+      "id": "fileDownloadUi",
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/4016hrlsoifk1.js",
+      "sourceSha256": "b7c623d9630d274db6380143b14bb091265a57c90768edd97b7e45e2f994b99d",
+      "checkedAt": "2026-10-06"
+    },
+    {
+      "id": "chatApi",
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+      "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+      "checkedAt": "2026-10-06"
+    },
+    {
+      "id": "appAdapter",
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/2-k05sa9g904_.js",
+      "sourceSha256": "5c2319a0c5f3ec8293f26a2c936eeea71c6f037465ba76e805202b4d1e60e4d2",
+      "checkedAt": "2026-10-06"
+    }
+  ],
+  "uiCallsites": [
+    {
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0skqp8k76tn6n.js",
+      "sourceSha256": "75825269a3d1759576d6c45cddca05ed2b86b19e836108804830e128f4a60ca7",
+      "functions": [
+        "listFiles",
+        "getFileContent",
+        "fetchFileContent"
+      ]
+    },
+    {
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/0_gos2zzergk5.js",
+      "sourceSha256": "7c3ad06212a5dec71a2b654330f7dfba14135ca8065ec3212586738aee9dcac2",
+      "functions": [
+        "Download All",
+        "downloadUrl click"
+      ]
+    },
+    {
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/4016hrlsoifk1.js",
+      "sourceSha256": "b7c623d9630d274db6380143b14bb091265a57c90768edd97b7e45e2f994b99d",
+      "functions": [
+        "per-file download",
+        "gatewayFsEligible branch"
+      ]
+    },
+    {
+      "sourceUrl": "https://cdn.grok.com/_next/static/chunks/2-k05sa9g904_.js",
+      "sourceSha256": "5c2319a0c5f3ec8293f26a2c936eeea71c6f037465ba76e805202b4d1e60e4d2",
+      "functions": [
+        "downloadAppWorkspace adapter"
+      ]
+    }
+  ],
+  "captureBoundary": {
+    "browserNetworkCapture": false,
+    "firstPartySdkSource": true,
+    "sourceLiveReplay": false,
+    "downloadBytesVerified": false,
+    "rawSignedUrlsPersisted": false
+  }
+}

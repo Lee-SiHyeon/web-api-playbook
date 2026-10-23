@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "observedAt": "2026-10-06T11:58:51.118256+00:00",
+  "source": {
+    "origin": "https://cdn.grok.com",
+    "path": "/_next/static/chunks/10t97pb3h-x4o.js",
+    "sha256": "2f83492e1ffd8d59116a46395b8b5ef3fa3b4d32c311c8606beace91765167cd",
+    "sourceCalls": [
+      "openShareResponseForTeams.useFetchData: shareUrl uses sharing.publicId",
+      "openShareResponseForTeams.onSave: deleteShareLink uses sharing.shareLinkId"
+    ]
+  },
+  "identifiers": {
+    "createResponseShareLinkId": "public URL alias",
+    "sharingReadPublicId": "public URL alias matching the creation response",
+    "sharingReadShareLinkId": "owner record ID required by DELETE"
+  },
+  "verification": {
+    "receiptPath": "verification/one-shot/grok-neutral-fast-sharing-reconcile-revoke-2026-10-06.json",
+    "receiptSha256": "188d59e242b0680bbd71d9be10cd4b9a8fac52539ff1c4ce59e59db3cd4aaf86",
+    "createHttpStatus": 200,
+    "deleteHttpStatus": 200,
+    "publicAliasAndOwnerRecordDiffer": true,
+    "sameConversationAndResponse": true,
+    "allowIndexing": false,
+    "independentAfterDeleteAbsent": true
+  },
+  "originalIncompleteCreateReceiptPreserved": true,
+  "resourceValuesPersisted": false
+}

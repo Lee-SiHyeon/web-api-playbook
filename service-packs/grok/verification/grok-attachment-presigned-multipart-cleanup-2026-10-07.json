@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T15:12:50.128464Z",
+  "operation": "attachment.upload.abort",
+  "state": "abort_cli_failed",
+  "sourceUploadState": "needs_review",
+  "serverSelectedMethod": "single_put",
+  "sourceInitHttpStatus": 200,
+  "signedPutRequestCount": 0,
+  "completeHttpStatus": null,
+  "referenceMatchedExactTask": true,
+  "statusBefore": {
+    "returnCode": 0,
+    "resultParsed": true,
+    "operation": "attachment.upload.status",
+    "state": "unknown",
+    "httpReadCount": 1,
+    "httpStatus": null,
+    "abortRequestCount": null,
+    "abortVerified": null,
+    "reasonCode": null,
+    "diagnostics": [
+      {
+        "stage": "status",
+        "state": "completed",
+        "httpStatus": 200,
+        "responseStatus": 200,
+        "responseBytes": 123,
+        "reasonCode": null
+      }
+    ]
+  },
+  "abort": {
+    "returnCode": 1,
+    "resultParsed": false,
+    "errorCode": "SESSION_COOKIE_INVALID"
+  },
+  "statusAfter": null,
+  "ownerVerifiedByMainCli": false,
+  "browserOtherNonReadAttemptsBlocked": 16,
+  "finalizer": {
+    "status": "blank_quiet",
+    "quietVerified": true,
+    "guardStillActive": true,
+    "ownedTargetClosed": false
+  },
+  "safety": {
+    "uploadInitResent": false,
+    "signedPutSent": false,
+    "completeSent": false,
+    "conversationChanged": false,
+    "referenceKeyPersistedInReceipt": false,
+    "uploadIdsPersistedInReceipt": false,
+    "cookiesPersisted": false,
+    "rawBodiesPersisted": false
+  },
+  "reasonCode": "SESSION_COOKIE_INVALID"
+}

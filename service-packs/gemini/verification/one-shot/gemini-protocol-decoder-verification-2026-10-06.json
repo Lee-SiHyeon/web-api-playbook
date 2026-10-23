@@ -1,0 +1,495 @@
+{
+  "schema": "gemini-live-one-shot-receipt-v1",
+  "service": "gemini-web",
+  "operation": "text",
+  "taskIntent": "gemini-protocol-decoder-verification-20261006-v1",
+  "outcome": "verified",
+  "executionHost": "linux_worker",
+  "transport": "direct_https",
+  "observedAt": "2026-10-05T20:42:28.610382+00:00",
+  "ownerMatched": true,
+  "anonymousOwnerAbsent": true,
+  "sourceVerification": {
+    "expectedOwnerSourceSha256": "da6d415129ac8e349b8632f1ef9defe1ca7ecf30fedb4c28abf3a519766af7bb",
+    "staticOwnerHashVerified": true
+  },
+  "browserCapture": {
+    "pageRoleMatched": true,
+    "requestObserved": true,
+    "requestAbortAck": true,
+    "networkIdMatched": true,
+    "loadingFailedCount": 1,
+    "responseCount": 0,
+    "exactPromptMatch": true,
+    "newTaskChatIdentifierCheck": true,
+    "currentCookieCount": 18,
+    "currentHistoryReadPaired": true,
+    "ancillaryPostsAborted": 18,
+    "ancillaryPostCount": 6,
+    "readbackAncillaryPostsAborted": 21,
+    "readbackAncillaryPostAbortFailures": 0,
+    "quietResetVerified": true
+  },
+  "directDispatch": {
+    "count": 1,
+    "retryCount": 0,
+    "httpStatus": 200,
+    "responseDecoded": true,
+    "contentType": "application/json",
+    "responseBytes": 23051,
+    "responseSha256": "6f48b0020ee2b21b6c00bf8958014d5a9b9581518aba26db56a849f8258582b4",
+    "browserResponseContractCaptured": false,
+    "responseFraming": "utf16_length_frames",
+    "nullSelectorFrameCount": 8,
+    "mainCandidateChunkCount": 4,
+    "requestBodyMatchesCapturedSha256": true
+  },
+  "readback": {
+    "browserPairMatched": true,
+    "directDetailStatus": 200,
+    "promptMatched": true,
+    "assistantMarkerMatched": true,
+    "responseIdMatched": null,
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "historyRowCount": 0,
+    "exactPromptRowCount": 0,
+    "taskMarkerRowCount": 0,
+    "promptCorrelatedIdCount": 0,
+    "historyDataShape": {
+      "type": "array",
+      "topLength": 0,
+      "summarySlotType": "missing",
+      "summarySlotLength": null,
+      "rpcId": "MaZiqc"
+    },
+    "directHistoryListStatus": 200,
+    "browserHistoryRowGroupCount": 0,
+    "directHistoryRowGroupCount": 0,
+    "browserHistoryRows": 0,
+    "directHistoryRows": 0,
+    "browserHistoryDataType": "array",
+    "directHistoryDataType": "array",
+    "browserHistoryTaskIdCount": 0,
+    "directHistoryTaskIdCount": 0,
+    "historyRequestComparison": {
+      "methodAndPathMatched": true,
+      "queryKeysMatched": true,
+      "formFieldNamesMatched": true,
+      "rpcIdMatched": true,
+      "rpcArgsMatched": true,
+      "queryValuesMatchedExceptFreshFields": true,
+      "freshQueryValueKeysChanged": [
+        "bl",
+        "f.sid"
+      ],
+      "atTokenChangedAfterBootstrap": true,
+      "bodyHasAtField": true,
+      "browserHeaderNameCount": 19,
+      "directHeaderNameCount": 19,
+      "sharedHeaderNames": 19,
+      "browserOnlyHeaderNames": [],
+      "directOnlyHeaderNames": []
+    },
+    "browserHistoryRootLength": 0,
+    "directHistoryRootLength": 0,
+    "browserHistoryRpcPayloads": [
+      {
+        "rpcId": "MaZiqc",
+        "data": {
+          "rootType": "array",
+          "rootArrayLength": 0,
+          "rootObjectFieldCount": null,
+          "exactPromptPresent": false,
+          "taskMarkerPresent": false,
+          "taskConversationIdCandidateCount": 0,
+          "taskConversationIdCandidate": null,
+          "rowGroups": [],
+          "rowGroupCount": 0,
+          "statusErrorEnums": [],
+          "statusErrorEnumCount": 0
+        }
+      }
+    ],
+    "directHistoryRpcPayloads": [
+      {
+        "rpcId": "MaZiqc",
+        "data": {
+          "rootType": "array",
+          "rootArrayLength": 0,
+          "rootObjectFieldCount": null,
+          "exactPromptPresent": false,
+          "taskMarkerPresent": false,
+          "taskConversationIdCandidateCount": 0,
+          "taskConversationIdCandidate": null,
+          "rowGroups": [],
+          "rowGroupCount": 0,
+          "statusErrorEnums": [],
+          "statusErrorEnumCount": 0
+        }
+      }
+    ],
+    "historyListCaptureCount": 2,
+    "historyListComparisons": [
+      {
+        "captureIndex": 0,
+        "browserStatus": 200,
+        "browserBytes": 1134,
+        "browserRpcPayloads": [
+          {
+            "rpcId": "MaZiqc",
+            "data": {
+              "rootType": "array",
+              "rootArrayLength": 0,
+              "rootObjectFieldCount": null,
+              "exactPromptPresent": false,
+              "taskMarkerPresent": false,
+              "taskConversationIdCandidateCount": 0,
+              "taskConversationIdCandidate": null,
+              "rowGroups": [],
+              "rowGroupCount": 0,
+              "statusErrorEnums": [],
+              "statusErrorEnumCount": 0
+            }
+          }
+        ],
+        "directStatus": 200,
+        "directBytes": 6223,
+        "directRpcPayloads": [
+          {
+            "rpcId": "MaZiqc",
+            "data": {
+              "rootType": "array",
+              "rootArrayLength": 3,
+              "rootObjectFieldCount": null,
+              "exactPromptPresent": false,
+              "taskMarkerPresent": false,
+              "taskConversationIdCandidateCount": 0,
+              "taskConversationIdCandidate": null,
+              "rowGroups": [
+                {
+                  "path": [
+                    2
+                  ],
+                  "rowCount": 28,
+                  "firstRowIdPatternMatched": true,
+                  "firstRowIdLength": 18,
+                  "taskMarkerRowCount": 0,
+                  "exactPromptRowCount": 0
+                }
+              ],
+              "rowGroupCount": 1,
+              "statusErrorEnums": [],
+              "statusErrorEnumCount": 0
+            }
+          }
+        ],
+        "requestComparison": {
+          "methodAndPathMatched": true,
+          "queryKeysMatched": true,
+          "formFieldNamesMatched": true,
+          "rpcIdMatched": true,
+          "rpcArgsMatched": false,
+          "queryValuesMatchedExceptFreshFields": true,
+          "freshQueryValueKeysChanged": [
+            "bl",
+            "f.sid"
+          ],
+          "atTokenChangedAfterBootstrap": true,
+          "bodyHasAtField": true,
+          "browserHistoryArgs": {
+            "type": "array",
+            "topLength": 3,
+            "numbers": [
+              {
+                "path": [
+                  0
+                ],
+                "value": 28
+              },
+              {
+                "path": [
+                  2,
+                  0
+                ],
+                "value": 1
+              },
+              {
+                "path": [
+                  2,
+                  2
+                ],
+                "value": 1
+              }
+            ],
+            "nullPaths": [
+              [
+                1
+              ],
+              [
+                2,
+                1
+              ]
+            ],
+            "booleans": [],
+            "strings": []
+          },
+          "directHistoryArgs": {
+            "type": "array",
+            "topLength": 3,
+            "numbers": [
+              {
+                "path": [
+                  0
+                ],
+                "value": 28
+              },
+              {
+                "path": [
+                  2,
+                  0
+                ],
+                "value": 0
+              },
+              {
+                "path": [
+                  2,
+                  2
+                ],
+                "value": 1
+              }
+            ],
+            "nullPaths": [
+              [
+                1
+              ],
+              [
+                2,
+                1
+              ]
+            ],
+            "booleans": [],
+            "strings": []
+          },
+          "browserHeaderNameCount": 19,
+          "directHeaderNameCount": 19,
+          "sharedHeaderNames": 19,
+          "browserOnlyHeaderNames": [],
+          "directOnlyHeaderNames": []
+        },
+        "taskConversationIdCandidateCount": 0,
+        "historyArgsSource": "observed_first_page_template",
+        "timeWindowCandidateCount": 1,
+        "timeWindowStartEpoch": 1791229949.98,
+        "timeWindowEndEpoch": 1791232187.834,
+        "candidateSource": "request_time_window"
+      },
+      {
+        "captureIndex": 1,
+        "browserStatus": 200,
+        "browserBytes": 3596,
+        "browserRpcPayloads": [
+          {
+            "rpcId": "MaZiqc",
+            "data": {
+              "rootType": "array",
+              "rootArrayLength": 3,
+              "rootObjectFieldCount": null,
+              "exactPromptPresent": false,
+              "taskMarkerPresent": false,
+              "taskConversationIdCandidateCount": 0,
+              "taskConversationIdCandidate": null,
+              "rowGroups": [
+                {
+                  "path": [
+                    2
+                  ],
+                  "rowCount": 28,
+                  "firstRowIdPatternMatched": true,
+                  "firstRowIdLength": 18,
+                  "taskMarkerRowCount": 0,
+                  "exactPromptRowCount": 0
+                }
+              ],
+              "rowGroupCount": 1,
+              "statusErrorEnums": [],
+              "statusErrorEnumCount": 0
+            }
+          }
+        ],
+        "directStatus": 200,
+        "directBytes": 6222,
+        "directRpcPayloads": [
+          {
+            "rpcId": "MaZiqc",
+            "data": {
+              "rootType": "array",
+              "rootArrayLength": 3,
+              "rootObjectFieldCount": null,
+              "exactPromptPresent": false,
+              "taskMarkerPresent": false,
+              "taskConversationIdCandidateCount": 0,
+              "taskConversationIdCandidate": null,
+              "rowGroups": [
+                {
+                  "path": [
+                    2
+                  ],
+                  "rowCount": 28,
+                  "firstRowIdPatternMatched": true,
+                  "firstRowIdLength": 18,
+                  "taskMarkerRowCount": 0,
+                  "exactPromptRowCount": 0
+                }
+              ],
+              "rowGroupCount": 1,
+              "statusErrorEnums": [],
+              "statusErrorEnumCount": 0
+            }
+          }
+        ],
+        "requestComparison": {
+          "methodAndPathMatched": true,
+          "queryKeysMatched": true,
+          "formFieldNamesMatched": true,
+          "rpcIdMatched": true,
+          "rpcArgsMatched": true,
+          "queryValuesMatchedExceptFreshFields": true,
+          "freshQueryValueKeysChanged": [
+            "bl",
+            "f.sid"
+          ],
+          "atTokenChangedAfterBootstrap": true,
+          "bodyHasAtField": true,
+          "browserHistoryArgs": {
+            "type": "array",
+            "topLength": 3,
+            "numbers": [
+              {
+                "path": [
+                  0
+                ],
+                "value": 28
+              },
+              {
+                "path": [
+                  2,
+                  0
+                ],
+                "value": 0
+              },
+              {
+                "path": [
+                  2,
+                  2
+                ],
+                "value": 1
+              }
+            ],
+            "nullPaths": [
+              [
+                1
+              ],
+              [
+                2,
+                1
+              ]
+            ],
+            "booleans": [],
+            "strings": []
+          },
+          "directHistoryArgs": {
+            "type": "array",
+            "topLength": 3,
+            "numbers": [
+              {
+                "path": [
+                  0
+                ],
+                "value": 28
+              },
+              {
+                "path": [
+                  2,
+                  0
+                ],
+                "value": 0
+              },
+              {
+                "path": [
+                  2,
+                  2
+                ],
+                "value": 1
+              }
+            ],
+            "nullPaths": [
+              [
+                1
+              ],
+              [
+                2,
+                1
+              ]
+            ],
+            "booleans": [],
+            "strings": []
+          },
+          "browserHeaderNameCount": 19,
+          "directHeaderNameCount": 19,
+          "sharedHeaderNames": 19,
+          "browserOnlyHeaderNames": [],
+          "directOnlyHeaderNames": []
+        },
+        "taskConversationIdCandidateCount": 0,
+        "historyArgsSource": "observed_first_page_template",
+        "timeWindowCandidateCount": 1,
+        "timeWindowStartEpoch": 1791229949.98,
+        "timeWindowEndEpoch": 1791232187.834,
+        "candidateSource": "request_time_window"
+      }
+    ],
+    "targetConversationIdCandidateCount": 1,
+    "timeCorrelatedCandidateCount": 2,
+    "conversationIdSource": "request_time_window",
+    "browserHttpStatus": 200,
+    "browserResponseBytes": 1421,
+    "targetConversationCount": 1,
+    "directDetailResponseBytes": 873,
+    "directDetailResponseSha256": "ce3c6a5401b97584fe37e00f0838fef3148963023e96ca0f0516c93d02117d64",
+    "apiRouteBindingVerified": true,
+    "apiIdEchoedInDetail": true,
+    "responseIdMatchAvailable": false,
+    "detailResponseCount": 1
+  },
+  "mutationJournal": {
+    "intentRecordCount": 1,
+    "dispatchCount": 1,
+    "state": "reconciled",
+    "resultCategory": "history_detail_readback"
+  },
+  "captureAttempts": [
+    {
+      "attempt": 1,
+      "outcome": "capture_stopped_before_direct_dispatch",
+      "failureCode": "UNCLASSIFIED_BUSINESS_POST_ABORTED",
+      "directDispatchCount": 0
+    }
+  ],
+  "persistence": {
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodyPersisted": false,
+    "responseBodyPersisted": false,
+    "conversationIdentifiersPersisted": false,
+    "rawPromptPersisted": false
+  },
+  "historyListReadback": {
+    "beforeHttpStatus": 200,
+    "afterHttpStatus": 200,
+    "newConversationCount": 0,
+    "promptMatched": false,
+    "conversationIdMatched": false
+  }
+}

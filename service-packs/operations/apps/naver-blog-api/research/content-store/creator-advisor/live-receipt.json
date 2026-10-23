@@ -1,0 +1,456 @@
+{
+  "startedAt": "2026-10-03T14:01:50.517Z",
+  "mode": "pure_http",
+  "channelId": "aicandoanything",
+  "date": "2026-10-02",
+  "previousWorkerRequests": "unknown, conservatively reserve two diagnostic requests",
+  "diagnosticLimit": 10,
+  "reservedUnknownRequests": 2,
+  "requests": [
+    {
+      "sequence": 1,
+      "phase": "diagnostic",
+      "variant": "deduplicate-ca",
+      "startedAt": "2026-10-03T14:02:09.190Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/accounts/channels",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": [
+        "__ca_key"
+      ]
+    },
+    {
+      "sequence": 2,
+      "phase": "diagnostic",
+      "variant": "deduplicate-ca",
+      "startedAt": "2026-10-03T14:03:02.356Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/home/yesterday-summary?date=2026-10-02&service=naver_blog&channelId=aicandoanything",
+      "status": 403,
+      "headerNames": [
+        "X-CA-Nonce",
+        "X-CA-Sig",
+        "X-CA-Ts",
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": true,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 3,
+      "phase": "diagnostic",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:03:04.459Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/home/yesterday-summary?date=2026-10-02&service=naver_blog&channelId=aicandoanything",
+      "status": 200,
+      "headerNames": [
+        "X-CA-Nonce",
+        "X-CA-Sig",
+        "X-CA-Ts",
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": true,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 4,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:03:06.566Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/home/popular-demo-keyword?service=naver_blog&channelId=aicandoanything&date=2026-10-02",
+      "status": 400,
+      "headerNames": [
+        "X-CA-Nonce",
+        "X-CA-Sig",
+        "X-CA-Ts",
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": true,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 5,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:17.001Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/accounts/channels",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 6,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:19.105Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/home/popular-category-keyword?service=naver_blog&channelId=aicandoanything&date=2026-10-02",
+      "status": 400,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": [],
+      "errorResponse": {
+        "status": "fail",
+        "message": "date is not monday: 2026-10-02"
+      }
+    },
+    {
+      "sequence": 7,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:21.206Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/accounts/channels",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 8,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:23.314Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/home/soaring-contents?service=naver_blog&channelId=aicandoanything&interval=day&date=2026-10-02",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 9,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:25.417Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/accounts/channels",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 10,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:27.519Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/inflow-analysis/referrer-query-rank?service=naver_blog&channelId=aicandoanything&metric=cv&interval=day&date=2026-10-02&ct=text&limit=20",
+      "status": 403,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": [],
+      "errorResponse": {
+        "status": "fail",
+        "message": "Forbidden"
+      }
+    },
+    {
+      "sequence": 11,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:29.621Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/accounts/channels",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 12,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:31.732Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/trend/demo?service=naver_blog&interval=day&metric=cv&date=2026-10-02&age=05&gender=f&hasRankChange=true&limit=20",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 13,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:33.838Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/accounts/channels",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    },
+    {
+      "sequence": 14,
+      "phase": "collection",
+      "variant": "referer",
+      "startedAt": "2026-10-03T14:15:35.938Z",
+      "method": "GET",
+      "url": "https://creator-advisor.naver.com/api/v6/trend/category?service=naver_blog&categories=IT%C2%B7%EC%BB%B4%ED%93%A8%ED%84%B0&contentType=text&interval=day&date=2026-10-02&hasRankChange=true&limit=20",
+      "status": 200,
+      "headerNames": [
+        "accept",
+        "accept-language",
+        "cookie",
+        "instanceId",
+        "referer",
+        "user-agent"
+      ],
+      "cookieNames": [
+        "NID_AUT",
+        "NID_SES",
+        "__ca_key"
+      ],
+      "signaturePresent": false,
+      "setCookieNames": []
+    }
+  ],
+  "samples": [
+    {
+      "endpoint": "yesterdaySummary",
+      "file": "samples/yesterdaySummary.json",
+      "topLevelKeys": [
+        "path",
+        "parameters",
+        "data"
+      ]
+    },
+    {
+      "endpoint": "popularDemoKeyword",
+      "file": "samples/popularDemoKeyword.json",
+      "topLevelKeys": [
+        "ok",
+        "httpStatus",
+        "error"
+      ]
+    },
+    {
+      "endpoint": "popularCategoryKeyword",
+      "file": "samples/popularCategoryKeyword.json",
+      "topLevelKeys": [
+        "ok",
+        "httpStatus",
+        "error"
+      ]
+    },
+    {
+      "endpoint": "soaringContents",
+      "file": "samples/soaringContents.json",
+      "topLevelKeys": [
+        "path",
+        "parameters",
+        "data"
+      ]
+    },
+    {
+      "endpoint": "referrerQueryRank",
+      "file": "samples/referrerQueryRank.json",
+      "topLevelKeys": [
+        "ok",
+        "httpStatus",
+        "error"
+      ]
+    },
+    {
+      "endpoint": "trendDemo",
+      "file": "samples/trendDemo.json",
+      "topLevelKeys": [
+        "path",
+        "parameters",
+        "data"
+      ]
+    },
+    {
+      "endpoint": "trendCategory",
+      "file": "samples/trendCategory.json",
+      "topLevelKeys": [
+        "path",
+        "parameters",
+        "data"
+      ]
+    }
+  ],
+  "status": "partial",
+  "hypotheses": [
+    {
+      "variant": "deduplicate-ca",
+      "result": "CREATOR_ADVISOR_FORBIDDEN",
+      "status": 403
+    }
+  ],
+  "successfulVariant": "referer",
+  "error": {
+    "code": "CREATOR_ADVISOR_HTTP_ERROR",
+    "httpStatus": 400
+  },
+  "resumedAt": "2026-10-03T14:15:08.390Z",
+  "failedEndpoints": [
+    "popularDemoKeyword",
+    "popularCategoryKeyword",
+    "referrerQueryRank"
+  ],
+  "finishedAt": "2026-10-03T14:15:35.972Z",
+  "diagnosticRequestCount": 8,
+  "finalOfflineChanges": {
+    "caKeyJarFallback": true,
+    "liveReplayedAfterFallback": false,
+    "testsPassed": 9
+  }
+}

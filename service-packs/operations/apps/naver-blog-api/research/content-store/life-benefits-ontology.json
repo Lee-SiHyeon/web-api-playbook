@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "note": "생활꿀팁(정부 지원금·신혼 혜택·주거·청약) 온톨로지 (2026-09-25). Domains and programs are topic seeds for collection, scouting and briefs, not publishable facts: every amount, age, income limit and deadline in a post must come from the official source listed here, checked on the day. Program names are search seeds and may be renamed or ended by the government; the collector and the brief confirm them against the official source.",
+  "lifeStages": [
+    { "id": "youth", "label": "청년", "hint": "만 19~34세 전후, 사회초년생·취업준비" },
+    { "id": "newlywed", "label": "신혼·예비신혼", "hint": "혼인신고 전후, 혼인 7년 이내가 흔한 기준" },
+    { "id": "pregnancy_birth", "label": "임신·출산", "hint": "임신 확인부터 출생신고까지" },
+    { "id": "child_parent", "label": "영유아·자녀 양육", "hint": "0~18세 자녀를 둔 가구" },
+    { "id": "homeless_household", "label": "무주택 세대", "hint": "청약·전세대출·공공임대의 기본 조건" },
+    { "id": "worker_low_income", "label": "근로·저소득 가구", "hint": "장려금·바우처·긴급복지" },
+    { "id": "small_business", "label": "소상공인·자영업", "hint": "정책자금·환급" },
+    { "id": "senior", "label": "노년·부모 부양", "hint": "기초연금·노부모 부양 특별공급" }
+  ],
+  "eligibilityDimensions": [
+    { "id": "age", "label": "나이", "unit": "만 나이" },
+    { "id": "income", "label": "소득", "unit": "기준중위소득 % 또는 도시근로자 월평균소득 %", "note": "제도마다 기준표가 다르므로 연도와 기준표 이름을 함께 적는다" },
+    { "id": "assets", "label": "자산", "unit": "총자산·자동차가액 원" },
+    { "id": "household", "label": "가구 구성", "unit": "세대원 수·세대주 여부" },
+    { "id": "marriage", "label": "혼인 상태·기간", "unit": "혼인신고일 기준 연수" },
+    { "id": "children", "label": "자녀", "unit": "자녀 수·출생일" },
+    { "id": "housing", "label": "주택 소유", "unit": "무주택 기간·세대 전원 무주택 여부" },
+    { "id": "residence", "label": "거주지", "unit": "시·도, 해당지역 거주기간" },
+    { "id": "subscription_account", "label": "청약통장", "unit": "가입기간·납입횟수·예치금" },
+    { "id": "employment", "label": "취업·소득 활동", "unit": "재직·구직·사업자 여부" }
+  ],
+  "domains": [
+    {
+      "id": "housing_subscription", "label": "부동산·청약", "stages": ["homeless_household", "newlywed", "youth", "pregnancy_birth", "senior"],
+      "topics": [
+        { "id": "apt_subscription", "label": "APT 분양 청약(일반·특별공급)", "seeds": ["아파트 청약 일정", "청약 가점 계산", "특별공급 조건", "청약 1순위 조건"], "sources": ["applyhome-apt-list", "applyhome-apt-detail", "odcloud-applyhome"] },
+        { "id": "special_supply", "label": "특별공급 유형", "seeds": ["신혼부부 특별공급", "생애최초 특별공급", "신생아 특별공급", "다자녀 특별공급", "노부모 부양 특별공급", "청년 특별공급"], "sources": ["applyhome-apt-detail"] },
+        { "id": "unranked_resale", "label": "무순위·잔여세대(줍줍)", "seeds": ["무순위 청약", "줍줍 청약 일정", "잔여세대 청약"], "sources": ["applyhome-remndr-list"] },
+        { "id": "public_rental", "label": "공공임대(영구·국민·행복·매입·전세임대)", "seeds": ["행복주택 모집", "매입임대 신청", "전세임대 조건", "국민임대 자격"], "sources": ["lh-notice-list", "odcloud-lh-notice"] },
+        { "id": "subscription_account", "label": "청약통장", "seeds": ["청약통장 납입 인정 금액", "청약통장 소득공제", "청약통장 전환"], "sources": [] }
+      ]
+    },
+    {
+      "id": "newlywed", "label": "결혼·신혼", "stages": ["newlywed", "homeless_household"],
+      "topics": [
+        { "id": "newlywed_housing_loan", "label": "신혼부부 전세·구입자금 대출", "seeds": ["신혼부부 전세자금대출", "신혼부부 디딤돌대출", "버팀목 전세자금대출 신혼"], "sources": ["gov24-benefits"] },
+        { "id": "newlywed_supply", "label": "신혼부부 특별공급·신혼희망타운", "seeds": ["신혼부부 특별공급 소득기준", "신혼희망타운 모집"], "sources": ["applyhome-apt-detail", "lh-notice-list"] },
+        { "id": "marriage_tax", "label": "결혼 관련 세제 혜택", "seeds": ["결혼 세액공제", "혼인 증여재산 공제"], "sources": ["gov24-benefits"] },
+        { "id": "local_marriage_grant", "label": "지자체 결혼·신혼 지원금", "seeds": ["결혼축하금 지자체", "신혼부부 지원금"], "sources": ["gov24-benefits"] }
+      ]
+    },
+    {
+      "id": "birth_childcare", "label": "임신·출산·육아", "stages": ["pregnancy_birth", "child_parent"],
+      "topics": [
+        { "id": "birth_cash", "label": "출산·양육 현금 지원", "seeds": ["부모급여", "첫만남이용권", "아동수당", "출산지원금 지자체"], "sources": ["gov24-benefits", "bokjiro-national"] },
+        { "id": "pregnancy_medical", "label": "임신·출산 진료비·난임", "seeds": ["임신 출산 진료비 바우처", "난임시술 지원"], "sources": ["gov24-benefits", "bokjiro-national"] },
+        { "id": "parental_leave", "label": "육아휴직·단축근무", "seeds": ["육아휴직급여", "육아기 근로시간 단축"], "sources": ["gov24-benefits"] },
+        { "id": "newborn_loan", "label": "신생아 특례대출·주거", "seeds": ["신생아 특례대출", "신생아 특별공급"], "sources": ["gov24-benefits", "applyhome-apt-detail"] }
+      ]
+    },
+    {
+      "id": "youth", "label": "청년", "stages": ["youth"],
+      "topics": [
+        { "id": "youth_asset", "label": "청년 자산형성", "seeds": ["청년도약계좌", "청년 적금 지원"], "sources": ["gov24-benefits"] },
+        { "id": "youth_housing", "label": "청년 주거", "seeds": ["청년 월세 지원", "청년 전세자금대출", "청년 행복주택"], "sources": ["gov24-benefits", "lh-notice-list"] },
+        { "id": "youth_job", "label": "청년 취업·교육", "seeds": ["국민취업지원제도", "국민내일배움카드"], "sources": ["gov24-benefits"] }
+      ]
+    },
+    {
+      "id": "subsidies", "label": "정부 지원금·바우처", "stages": ["worker_low_income", "senior", "small_business"],
+      "topics": [
+        { "id": "tax_credit_cash", "label": "근로·자녀장려금", "seeds": ["근로장려금 신청", "자녀장려금 조건"], "sources": ["gov24-benefits"] },
+        { "id": "vouchers", "label": "에너지·문화 바우처", "seeds": ["에너지바우처", "문화누리카드"], "sources": ["gov24-benefits", "bokjiro-national"] },
+        { "id": "emergency_welfare", "label": "긴급복지·생계 지원", "seeds": ["긴급복지지원", "생계급여 조건"], "sources": ["bokjiro-national"] },
+        { "id": "small_business_support", "label": "소상공인 지원", "seeds": ["소상공인 지원금", "소상공인 정책자금"], "sources": ["gov24-benefits"] }
+      ]
+    },
+    {
+      "id": "living_costs", "label": "생활비 절약", "stages": ["youth", "worker_low_income", "child_parent"],
+      "topics": [
+        { "id": "transport", "label": "교통비 환급", "seeds": ["K-패스 환급", "기후동행카드"], "sources": ["gov24-benefits"] },
+        { "id": "tax_refund", "label": "연말정산·환급", "seeds": ["연말정산 공제 항목", "숨은 환급금 조회"], "sources": ["gov24-benefits"] },
+        { "id": "utility_discount", "label": "공과금·통신비 할인", "seeds": ["전기요금 복지할인", "통신비 감면"], "sources": ["gov24-benefits", "bokjiro-national"] }
+      ]
+    }
+  ],
+  "sources": [
+    { "id": "applyhome-apt-list", "owner": "한국부동산원 청약홈", "kind": "official_http", "access": "keyless", "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancListView.do", "provides": "APT 분양 공고 목록: 지역, 민영/국민, 분양/임대, 주택명, 시공사, 모집공고일, 청약기간, 당첨자발표", "cadenceHours": 6 },
+    { "id": "applyhome-apt-detail", "owner": "한국부동산원 청약홈", "kind": "official_http", "access": "keyless", "url": "https://www.applyhome.co.kr/ai/aia/selectAPTLttotPblancDetail.do?houseManageNo={id}&pblancNo={id}", "provides": "공급위치·규모, 특별공급/1·2순위 접수일, 당첨자 발표일, 계약일, 규제지역, 주택형별 일반·특별 세대수, 특별공급 유형별(다자녀·신혼부부·생애최초·청년·노부모·신생아 등) 세대수", "cadenceHours": 6 },
+    { "id": "applyhome-remndr-list", "owner": "한국부동산원 청약홈", "kind": "official_http", "access": "keyless", "url": "https://www.applyhome.co.kr/ai/aia/selectAPTRemndrLttotPblancListView.do", "provides": "APT 무순위·잔여세대·재공급 목록", "cadenceHours": 6 },
+    { "id": "lh-notice-list", "owner": "LH 청약플러스", "kind": "official_http", "access": "keyless", "url": "https://apply.lh.or.kr/lhapply/apply/wt/wrtanc/selectWrtancList.do?mi=1026", "provides": "임대·분양 공고 목록: 유형, 공고명, 지역, 게시일, 마감일, 상태(공고중·접수중·정정공고중)", "cadenceHours": 6 },
+    { "id": "gov24-benefits", "owner": "행정안전부 (정부24 보조금24)", "kind": "official_api", "access": "data_go_kr_key", "dataset": "https://www.data.go.kr/data/15113968/openapi.do", "url": "https://api.odcloud.kr/api/gov24/v3/serviceList", "provides": "공공서비스(혜택) 목록·상세·지원조건: 서비스명, 소관기관, 지원대상, 선정기준, 지원내용, 신청기한, 신청방법, 수정일시", "cadenceHours": 24 },
+    { "id": "odcloud-applyhome", "owner": "한국부동산원", "kind": "official_api", "access": "data_go_kr_key", "dataset": "https://www.data.go.kr/data/15098547/openapi.do", "url": "https://api.odcloud.kr/api/ApplyhomeInfoDetailSvc/v1/getAPTLttotPblancDetail", "provides": "청약홈 분양정보 API (HTML 목록의 정식 대체)", "cadenceHours": 6 },
+    { "id": "bokjiro-national", "owner": "한국사회보장정보원 (복지로)", "kind": "official_api", "access": "data_go_kr_key", "dataset": "https://www.data.go.kr/data/15090532/openapi.do", "provides": "중앙부처 복지서비스 목록·상세", "cadenceHours": 24 },
+    { "id": "odcloud-lh-notice", "owner": "LH", "kind": "official_api", "access": "data_go_kr_key", "dataset": "https://www.data.go.kr/data/15058530/openapi.do", "provides": "분양임대공고문 조회 API", "cadenceHours": 6 }
+  ],
+  "excludedSources": [
+    { "url": "https://plus.gov.kr/portal/benefitV2/", "reason": "정부24 혜택알리미 화면은 트래픽 제어(Mbuster) 페이지로 넘어감. 보호 장치를 우회하지 않고 공식 Open API(gov24-benefits)를 쓴다." },
+    { "url": "https://www.korea.kr/rss/rssList.do", "reason": "정책브리핑 RSS 서비스 중단(2026-09-25 확인)." }
+  ],
+  "articleFormats": [
+    { "id": "housing_schedule", "label": "이번 주 청약 일정", "domain": "housing_subscription", "event": "housing_notices", "readerQuestion": "이번 주·다음 주 접수하는 단지 중 내 조건(신혼·생애최초·지역)으로 넣을 만한 곳은?", "mustInclude": ["단지별 접수일·당첨자 발표일 표", "특별공급 유형별 세대수", "모집공고문 원문 링크", "공고 확인 시각"] },
+    { "id": "program_guide", "label": "지원 제도 한 편 정리", "domain": "*", "event": "benefit_programs", "readerQuestion": "나는 받을 수 있나, 얼마, 언제까지, 어디서 신청하나?", "mustInclude": ["대상·선정기준 요약표", "지원 내용과 금액", "신청 기간과 방법", "소관기관 원문 링크", "기준일"] },
+    { "id": "life_stage_bundle", "label": "상황별 혜택 모음", "domain": "*", "readerQuestion": "신혼부부(또는 출산 가구·청년)가 올해 챙길 혜택 전부는?", "mustInclude": ["혜택별 대상·금액·신청처 표", "놓치기 쉬운 신청 기한", "각 제도 원문 링크"] },
+    { "id": "deadline_alert", "label": "마감 임박 알림", "domain": "*", "event": "benefit_deadline", "readerQuestion": "이번 달 안에 신청해야 하는 지원금은?", "mustInclude": ["마감일 순 표", "신청 링크", "기준일"] }
+  ],
+  "claimTypes": [
+    { "id": "eligibility", "label": "대상·자격 조건", "freshnessHours": 168 },
+    { "id": "benefit_amount", "label": "지원 금액·한도", "freshnessHours": 168 },
+    { "id": "application_window", "label": "신청·접수 기간", "freshnessHours": 24 },
+    { "id": "housing_schedule", "label": "청약 접수일·발표일", "freshnessHours": 24 },
+    { "id": "supply_units", "label": "공급 세대수", "freshnessHours": 72 },
+    { "id": "legal_basis", "label": "근거 법령·고시", "freshnessHours": 720 }
+  ],
+  "category": { "tistoryCategoryId": 1059152, "tistoryCategory": "생활정보", "naverCategory": "to be chosen when the first post is drafted" }
+}

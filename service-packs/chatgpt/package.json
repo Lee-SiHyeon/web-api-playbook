@@ -1,0 +1,16 @@
+{
+  "name": "@private/chatgpt-web-xhr-client",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "status": "node src/cli.mjs status",
+    "contracts": "node src/cli.mjs contracts",
+    "bootstrap": "node src/bootstrap-receive.mjs",
+    "lint": "node src/lint.mjs",
+    "test": "node --test"
+  }
+}

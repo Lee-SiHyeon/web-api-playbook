@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "host": "DESKTOP-TO2H6OD",
+  "checkedAt": "2026-09-20T17:33:43.000Z",
+  "scope": "User-confirmed affiliate activation and six requested blog categories",
+  "previousReceipt": "naver-shopping-space-created-2026-09-21.json",
+  "affiliateActivation": {
+    "authorization": "explicit_user_confirmation_after_terms_review",
+    "executionMode": "browser_automation",
+    "agreementSubmitted": true,
+    "request": {"method":"PUT","origin":"https://gw-brandconnect.naver.com","pathTemplate":"/brand-connect/command/creator-spaces/:spaceId/affiliate-terms/agree","httpStatus":200},
+    "followupAccountRead": {"method":"GET","path":"/brand-connect/query/me","httpStatus":200,"affiliateTermsAgreed":true,"spaceActive":true,"executionMode":"browser_automation"},
+    "productListVisible": true,
+    "enabledMenus": ["products","issued_links","sales_dashboard"],
+    "agreementIndependentHttpReplay": false,
+    "productIndependentHttpReplay": false,
+    "affiliateLinkIssued": false,
+    "postPublished": false,
+    "payoutDetailsSubmitted": false
+  },
+  "blogCategories": {
+    "authorization": "explicit_user_request",
+    "executionMode": "browser_automation",
+    "existingCategoriesPreserved": ["낙서장"],
+    "addedCategories": ["리빙·수납","주방·생활용품","가전·디지털","여행 준비물","여행·숙소","쇼핑 가이드"],
+    "allAddedAtTopLevel": true,
+    "totalSavedCategoryCount": 7,
+    "existingPostCountBefore": 7,
+    "existingPostCountAfter": 7,
+    "postsMoved": false,
+    "saveRequest": {"method":"POST","origin":"https://admin.blog.naver.com","path":"/BlogCategoryUpdateAsync.naver","httpStatus":200,"isSuccess":"success"},
+    "readback": {"reloadedManagementListMatches":true,"liveBlogCategoryWidgetMatches":true,"independentHttpWrite":false}
+  },
+  "remaining": ["Independent HTTP product search and detail","Issued-link writer and readback","Outcome integration","Commercial publication gates"],
+  "credentialsPersisted": false
+}

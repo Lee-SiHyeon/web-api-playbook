@@ -124,6 +124,13 @@ export async function read(input, {
       });
       if (persistedCookies) {
         const rotated = mergeNaverSetCookies(persistedCookies, response, url.href, now());
+        // A rejected session comes back with NID_AUT/NID_SES deletions. Persisting that would wipe the
+        // shared login used by the publisher (observed 2026-09-24), so fail without touching the vault.
+        const authIntact = ['NID_AUT', 'NID_SES'].every(name => rotated.cookies.some(c => c.name === name && c.value));
+        if (rotated.changed && !authIntact) {
+          await response.body?.cancel();
+          throw new ApiError('AUTH_MISSING', 'The server rejected the stored Naver session; the vault was left unchanged');
+        }
         if (rotated.changed) {
           try { await storeNaverCookies(rotated.cookies, { allowIncomplete: true, userAgent }); }
           catch { throw new ApiError('CREDENTIAL_STORE_WRITE_FAILED', 'Rotated session could not be saved in the Windows DPAPI vault'); }

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "operationId": "conversation.create",
+  "status": "normal_ui_request_not_observed",
+  "observedAt": "2026-10-06T09:39:55.368Z",
+  "pageRole": "codex-grok-conversation-crud-20261006",
+  "normalUiRequestObserved": false,
+  "exactCreateRequestCount": 0,
+  "firstPartySdkSourceContractAvailable": true,
+  "sourceFunctionName": "chatCreateConversationRaw",
+  "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+  "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+  "adapterSourceVerified": true,
+  "adapterSourceSha256": "45e567d74dfd50b5a111359914000af956061ada3dc9e76531eec31c1c4dfeec",
+  "observedSdkBodyFieldNames": [
+    "systemPromptName",
+    "temporary"
+  ],
+  "systemPromptNameEmpty": true,
+  "temporaryFalse": true,
+  "sourceBodyValuesPersisted": false,
+  "lastGuardedProbe": {
+    "exactCreateRequestCount": 0,
+    "blockedOtherPostAttemptCount": 15,
+    "websocketInterceptCount": 6,
+    "browserBusinessFrameCount": 0,
+    "browserBusinessFramesDelivered": 0,
+    "guardErrorCount": 0,
+    "composerControlUnique": true,
+    "sendControlUnique": true
+  },
+  "browserRequestBodiesPersisted": false,
+  "conversationIdsPersisted": false,
+  "ownerDataPersisted": false,
+  "cookieOrTokenValuesPersisted": false,
+  "note": "The normal UI new-chat submit used a different path or no standalone REST create call. All browser mutation attempts and WebSocket messages in this probe were blocked before provider delivery. No direct conversation create was dispatched.",
+  "sourceBodySha256": "6388f40ce2bd7dd541e3251be12cc1c6fbef75a7a7cb416cef35183b14ac0981"
+}

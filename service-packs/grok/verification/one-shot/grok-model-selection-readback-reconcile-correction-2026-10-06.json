@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "evidenceClass": "readback_reconciliation_addendum",
+  "featureId": "models.private-selection",
+  "requirementId": "models.selection-in-chat",
+  "operationId": "chat.text.wss",
+  "recordedAt": "2026-10-06T11:56:04.330302+00:00",
+  "correctsReceiptPath": "verification/one-shot/grok-model-selection-readback-reconcile-2026-10-06-20261006T111327Z.json",
+  "directRunReceiptPath": "verification/one-shot/grok-model-selection-direct-text-live-2026-10-06-20261006T110616Z-f4298b1a43.json",
+  "sourceBoundConversationIdCallsite": {
+    "origin": "https://cdn.grok.com",
+    "path": "/_next/static/chunks/3myiqa38fkng_.js",
+    "sha256": "81ebd2a3d9da7b43c8884ffbf7a918b9fb2b0c4f3e4b920af8e585639e73f165",
+    "callsite": "GatewaySession.handleServerEvent consumes conversation.attached event.conversation.id"
+  },
+  "auditDigests": {
+    "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "exactPromptSha256": "87022acfad1ae0916ed351a0b720967217ebdb9b6c25194f5a32ca4777ab0ede",
+    "conversationIdSha256": "0cadb1e23ddbe14255578ea88b6fb40dcb4d2538c422aa152656f395afeba016",
+    "assistantResponseIdSha256": "70a87c26204ec55856384f78d6204f2bb2599ff5634f3317172214f44f8b217e",
+    "assistantTextSha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049"
+  },
+  "readbackReconciliation": {
+    "boundedPageSize": 24,
+    "timeWindow": "2026-10-06T11:04:00Z/2026-10-06T11:08:00Z",
+    "sourceTimeField": "createTime",
+    "candidateCount": 1,
+    "candidateReadCount": 1,
+    "exactPromptCandidateCount": 1,
+    "detailStatus": 200,
+    "responseNodesStatus": 200,
+    "loadResponsesStatus": 200,
+    "userTurnCount": 1,
+    "assistantTurnCount": 1,
+    "assistantTextLengthCodePoints": 2,
+    "assistantExactExpectedValueMatched": true,
+    "assistantContains42": true,
+    "assistantContainsRequestLabel": false,
+    "nestedJsonObjectDecoded": false,
+    "typedStatusFields": [
+      "streamErrors"
+    ],
+    "errorOrQuotaCodes": [],
+    "explicitPendingProgressFields": []
+  },
+  "directTransport": {
+    "handshakeStatus": 101,
+    "controlFrameCount": 1,
+    "directBusinessFrameCount": 1,
+    "businessFrameBoundToServerSession": true,
+    "terminalEventObserved": true,
+    "terminalEventType": "response.done",
+    "terminalStatusOrErrorClassWasCapturedByOriginalRun": false,
+    "browserBusinessFramesDelivered": 0
+  },
+  "modelSelection": {
+    "localSelectedModeId": "fast",
+    "nativeSessionModel": "fast",
+    "serverSessionAcknowledgedMode": "fast",
+    "modelSelectionAcceptance": "server_acknowledged_selected_mode_with_exact_history_readback",
+    "providerBackendModelVersion": null,
+    "providerBackendVersionStatus": "unreported"
+  },
+  "sessionHandoffPhase": {
+    "mechanism": "fresh_session_handoff_and_direct_owner_verification",
+    "credentialChanged": false,
+    "providerCookieRotationVerified": false,
+    "expiredProviderSessionRecoveryVerified": false,
+    "mutationRetried": false
+  },
+  "journalCorrection": {
+    "priorState": "outcome_unknown",
+    "finalState": "completed",
+    "attemptCount": 1,
+    "reasonCode": "TEXT_WSS_READBACK_VERIFIED",
+    "reconciledBy": "history.load-responses",
+    "rawLocalOperationIdPersisted": false,
+    "localOperationIdSha256": "42b156f415cfbd79479acd593cf1252ac9323e9ce519f55c9080ad24d6c97df6"
+  },
+  "correction": {
+    "field": "reconciliation.candidateReadCount",
+    "previousSummaryValue": 0,
+    "correctedValue": 1,
+    "basis": "One candidate record in the original receipt has exact prompt match and detail, response-node, and load-responses status 200."
+  },
+  "persistenceSafety": {
+    "rawPromptPersisted": false,
+    "rawAssistantTextPersisted": false,
+    "rawConversationIdPersisted": false,
+    "rawResponseIdPersisted": false,
+    "rawWssFramesOrCastleTokenPersisted": false,
+    "cookiesPersisted": false,
+    "signedUrlsPersisted": false,
+    "businessBodiesPersisted": false
+  }
+}

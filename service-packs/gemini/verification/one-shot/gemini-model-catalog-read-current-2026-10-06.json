@@ -1,0 +1,260 @@
+{
+  "schema": "gemini-model-catalog-read-live-v1",
+  "service": "gemini-web",
+  "operation": "model_list",
+  "recordedAt": "2026-10-06T12:49:14.776031+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-settings-update-20261006",
+  "ownerProbe": {
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "expectedOwnerSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "expectedOwnerSha256AfterRun": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "expectedOwnerImmutable": true,
+    "expectedOwnerPersisted": false
+  },
+  "sourceBeforeImports": {
+    "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+    "implementationFiles": [
+      {
+        "path": "src/batch-response.mjs",
+        "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+      },
+      {
+        "path": "src/cli.mjs",
+        "sha256": "9eed5ab931901db9ba644bd173c2a8a774aad51648630f2f33488a292aec454c"
+      },
+      {
+        "path": "src/client.mjs",
+        "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+      },
+      {
+        "path": "src/constants.mjs",
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs",
+        "sha256": "5bfe0f5c23d9b1639f8db0242487682182aab16c316071ff362950ab1bce2b60"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/rpc-adapters.mjs",
+        "sha256": "ff4618cef8ffa148fa6177094c8bf73b7457909870f18b1a68976c4985998400"
+      },
+      {
+        "path": "src/session.mjs",
+        "sha256": "293a9c906df60cfadced39f49012bdbe1739a83ed4b9b928086954aa0c3bc53c"
+      }
+    ],
+    "implementationSetSha256": "192c0f26e530d1c983771d1d6e004815b0d754fa6c6420dd43c5f7ec7b5dcee0"
+  },
+  "sourceAfterRun": {
+    "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+    "implementationFiles": [
+      {
+        "path": "src/batch-response.mjs",
+        "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+      },
+      {
+        "path": "src/cli.mjs",
+        "sha256": "9eed5ab931901db9ba644bd173c2a8a774aad51648630f2f33488a292aec454c"
+      },
+      {
+        "path": "src/client.mjs",
+        "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+      },
+      {
+        "path": "src/constants.mjs",
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/conversation-lifecycle.mjs",
+        "sha256": "5bfe0f5c23d9b1639f8db0242487682182aab16c316071ff362950ab1bce2b60"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/rpc-adapters.mjs",
+        "sha256": "ff4618cef8ffa148fa6177094c8bf73b7457909870f18b1a68976c4985998400"
+      },
+      {
+        "path": "src/session.mjs",
+        "sha256": "293a9c906df60cfadced39f49012bdbe1739a83ed4b9b928086954aa0c3bc53c"
+      }
+    ],
+    "implementationSetSha256": "192c0f26e530d1c983771d1d6e004815b0d754fa6c6420dd43c5f7ec7b5dcee0"
+  },
+  "sourceSnapshotStable": true,
+  "identitySourceBeforeImports": {
+    "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+    "implementationFiles": [
+      {
+        "path": "src/client.mjs",
+        "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+      },
+      {
+        "path": "src/constants.mjs",
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/session.mjs",
+        "sha256": "293a9c906df60cfadced39f49012bdbe1739a83ed4b9b928086954aa0c3bc53c"
+      }
+    ],
+    "implementationSetSha256": "4ea4ee265be7801df89fa761504054c4072ed3d53a34a29b831c91422dcdae37"
+  },
+  "identitySourceAfterRun": {
+    "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+    "implementationFiles": [
+      {
+        "path": "src/client.mjs",
+        "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+      },
+      {
+        "path": "src/constants.mjs",
+        "sha256": "a9adaa4da7844096fd3991da04e14dbcfac6c6c72885c74c2402a094600fd59b"
+      },
+      {
+        "path": "src/contract.mjs",
+        "sha256": "0faf32e0c818ffa424cd18ca77195ec22360ac9d20b28e001ae52c55e6e64343"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "sha256": "eb0a330926aebcd487a619585e02353b737db20d0f3890e664ec6f801ffa7986"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "sha256": "a20c1d91be51065b0d27c55928327e6f00e35770e4c99d4e0251a156b48f09bb"
+      },
+      {
+        "path": "src/https-transport.mjs",
+        "sha256": "d1fcd02e74a6b6f9dacde8fe6c066e53c53231213475799f39ecad495c545eb0"
+      },
+      {
+        "path": "src/session.mjs",
+        "sha256": "293a9c906df60cfadced39f49012bdbe1739a83ed4b9b928086954aa0c3bc53c"
+      }
+    ],
+    "implementationSetSha256": "4ea4ee265be7801df89fa761504054c4072ed3d53a34a29b831c91422dcdae37"
+  },
+  "httpStatus": 200,
+  "contentType": "application/json",
+  "responseBytes": 13246,
+  "responseSha256": "2cc90f566e347a66f71096f72943d4214e5d05f4dc3ffb410f35337533472bd0",
+  "rpcId": "otAQ7b",
+  "request": {
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "headerNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "formFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+    "bodyBytes": 122,
+    "valuesPersisted": false
+  },
+  "modelCount": 3,
+  "accountStatusPersisted": false,
+  "modelIdsOrNamesPersisted": false,
+  "canonicalEvidence": {
+    "receiptPath": "verification/features/model_catalog.json",
+    "receiptSha256": "7d87bacd78d5262b925616a074a3ed1707e807884cc0527fa1d88cae7cdaa532",
+    "modelPairPath": "verification/feature-evidence/model_catalog--model_list--available.json",
+    "modelPairSha256": "c6869495de37002745d1003c27abfd82d0e649ed7ad7dccbe1996ecb9b985a04",
+    "identityPairPath": "verification/feature-evidence/identity--identity--model_catalog_owner.json",
+    "identityPairSha256": "9f54d2b585348df00d901ee339f276634d979cdc8477e04b12913e085b9de57a"
+  },
+  "browserCapture": {
+    "startupPreferenceWritesAborted": 9,
+    "startupPreferenceAbortAcknowledged": 9,
+    "browserBusinessWrites": 0
+  },
+  "persistence": {
+    "expectedOwnerPersisted": false,
+    "emailPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "modelIdsPersisted": false,
+    "modelNamesPersisted": false,
+    "requestValuesPersisted": false,
+    "responseValuesPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false
+  }
+}
