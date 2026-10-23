@@ -1,5 +1,5 @@
 import { spawn } from 'node:child_process';
-import { glob, readFile, mkdir } from 'node:fs/promises';
+import { glob, readFile, mkdir, mkdtemp, rm } from 'node:fs/promises';
 import { homedir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -10,8 +10,11 @@ const args = process.argv.slice(2);
 if (args.length > 1 || args.length === 1 && !/^--service=[a-z][a-z0-9-]*$/.test(args[0])) throw Error('CLIENT_TEST_ARGUMENT_INVALID');
 const selected = args[0]?.slice('--service='.length);
 const all = await clientPacks();
-const scratch = process.env.TMPDIR || path.join(homedir(), '.nad-scratch', 'tmp');
-await mkdir(scratch, { recursive: true, mode: 0o700 });
+const scratchRoot = path.join(homedir(), '.nad-scratch', 'tmp');
+await mkdir(scratchRoot, { recursive: true, mode: 0o700 });
+// npm may pre-create a caller TMPDIR with public permissions. Each test run
+// owns a fresh private directory below the home scratch used by native helpers.
+const scratch = await mkdtemp(path.join(scratchRoot, 'playbook-client-tests-'));
 if (selected && !all.some(client => client.id === selected)) throw Error('CLIENT_PACK_UNKNOWN');
 let failed = false, tested = 0;
 for (const client of all.filter(client => !selected || client.id === selected)) {
@@ -46,4 +49,5 @@ for (const client of all.filter(client => !selected || client.id === selected)) 
 }
 if (!tested && selected) throw Error('CLIENT_TESTS_NOT_PROVIDED');
 process.stdout.write(JSON.stringify({ testedPacks: tested, ok: !failed, liveServiceVerification: false }) + '\n');
+await rm(scratch, { recursive: true, force: true });
 process.exitCode = failed ? 1 : 0;
