@@ -34,7 +34,9 @@ export function parse(md) {
     if ((m = line.match(/^(#{2,3}) (.+)/))) { flush(); blocks.push({ type: 'heading', level: m[1].length, text: m[2] }); continue; }
     if ((m = line.match(/^> (.+)/))) { flush(); blocks.push({ type: 'notice', text: m[1] }); continue; }
     if ((m = line.match(/^\[(?:배너|banner): (img\/\S+) \| (https:\/\/\S+) \| (.+)\]$/))) { flush(); blocks.push({ type: 'image', file: m[1], href: m[2], caption: m[3] }); continue; }
-    if ((m = line.match(/^\[(?:이미지|image): (img\/[^\s\]]+)(?:\s*[—(-]\s*(.*?))?\)?\]$/))) { flush(); blocks.push({ type: 'image', file: m[1], caption: (m[2] || '').replace(/\)$/, '') }); continue; }
+    // "[이미지: img/x.jpg — caption]" or "[이미지: img/x.jpg (caption)]". Only the "(" form drops its closing ")": a caption that
+    // itself ends in ")" — "AI 생성 이미지(가상 인물)" — kept losing its bracket on every surface (fixed 2026-10-23).
+    if ((m = line.match(/^\[(?:이미지|image): (img\/[^\s\]]+)(?:\s*([—(-])\s*(.*?))?\]$/))) { flush(); blocks.push({ type: 'image', file: m[1], caption: m[2] === '(' ? (m[3] || '').replace(/\)$/, '') : (m[3] || '') }); continue; }
     if (/^\|/.test(line)) { flushPara(); flushList(); if (/^\|[\s|:-]+\|$/.test(line)) continue; (table ||= []).push(line.replace(/^\||\|$/g, '').split('|').map((c) => c.trim())); continue; }
     if ((m = line.match(/^(?:- |(\d+)\. )(.+)/))) { flushPara(); flushTable(); const ordered = !!m[1]; if (!list || list.ordered !== ordered) { flushList(); list = { ordered, items: [] }; } list.items.push(m[2]); continue; }
     flushList(); flushTable(); para.push(line);
@@ -88,7 +90,46 @@ if (cmd === 'lab-run') {
   fs.writeFileSync(out, seHtml(doc, JSON.parse(fs.readFileSync(mapFile, 'utf8')), { headings: opt.headings, palette: opt.palette }));
   fs.writeFileSync(out.replace(/\.html$/, '') + '.title.txt', doc.meta.title || '');
   console.log(JSON.stringify({ out, title: doc.meta.title, blocks: doc.blocks.length }));
+} else if (cmd === 'tables') {
+  // Tables as images (owner 2026-10-23, Naver mobile cut a 4-column table off at the right: "앞으로 표는 이미지로 다시생성해서 넣어줘").
+  //   node scripts/blog-md.mjs tables <post.md> <imgDir> [--out=<post.tables.md>] [--width=720]
+  // Every | table | becomes img/table-NN.jpg (rendered at phone width, cells wrap, notebook palette) and the markdown gets
+  // "[이미지: img/table-NN.jpg — 표: <caption>]" in its place. Run it before lab-run / se-html / Blogger and publish the *.tables.md.
+  const [md, imgDir] = args; const width = Number(opt.width || 720);
+  const src = fs.readFileSync(md, 'utf8').replace(/\r/g, '');
+  const lines = src.split('\n'); const tables = []; let cur = null;
+  lines.forEach((l, i) => { if (/^\|/.test(l)) { if (!cur) { cur = { start: i, rows: [] }; tables.push(cur); } if (!/^\|[\s|:-]+\|$/.test(l)) cur.rows.push(l.replace(/^\||\|$/g, '').split('|').map((c) => c.trim())); cur.end = i; } else cur = null; });
+  if (!tables.length) { console.log(JSON.stringify({ tables: 0 })); } else {
+    const cell = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, '<b class="hl">$1</b>');
+    const page = `<!doctype html><meta charset="utf-8"><style>
+      body{margin:0;background:#fff;font-family:"Noto Sans KR","Malgun Gothic",sans-serif}
+      section{width:${width}px;padding:18px;box-sizing:border-box;background:#fff}
+      table{width:100%;border-collapse:separate;border-spacing:0;border:2px solid #1d1a16;border-radius:14px;overflow:hidden;table-layout:auto}
+      th{background:#ffc83d;color:#1d1a16;font-size:24px;font-weight:800;padding:14px 12px;text-align:left;border-bottom:2px solid #1d1a16}
+      td{font-size:23px;line-height:1.45;color:#1d1a16;padding:13px 12px;vertical-align:top;border-top:1px solid #e6dcc6;word-break:keep-all;overflow-wrap:anywhere}
+      tr:nth-child(even) td{background:#fbf6ea}
+      th+th,td+td{border-left:1px solid #e6dcc6}
+      b.hl{background:#ffe08a}
+      th.nw{white-space:nowrap;width:1%}
+    </style>${tables.map((t, k) => `<section id="table-${String(k + 1).padStart(2, '0')}"><table><tr>${t.rows[0].map((c) => `<th${[...c].length <= 4 ? ' class="nw"' : ''}>${cell(c)}</th>`).join('')}</tr>${t.rows.slice(1).map((r) => `<tr>${r.map((c) => `<td>${cell(c)}</td>`).join('')}</tr>`).join('')}</table></section>`).join('\n')}`;
+    const htmlFile = path.join(imgDir, '_tables.html'); fs.mkdirSync(imgDir, { recursive: true }); fs.writeFileSync(htmlFile, page);
+    const ids = tables.map((_, k) => `table-${String(k + 1).padStart(2, '0')}`);
+    const { spawnSync } = await import('node:child_process');
+    const here = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'));
+    const r = spawnSync(process.execPath, [path.join(here, 'html-capture.mjs'), htmlFile, imgDir, ids.join(','), `--width=${width}`, '--format=jpeg'], { encoding: 'utf8' });
+    if (r.status !== 0) throw new Error('html-capture failed: ' + (r.stderr || r.stdout).slice(-300));
+    fs.rmSync(htmlFile, { force: true });
+    // replace each table (bottom-up so line numbers stay valid); the caption names the columns for screen readers / SEO
+    const out = [...lines];
+    tables.map((t, k) => [t, k]).reverse().forEach(([t, k]) => {
+      const cap = `표: ${t.rows[0].join(' · ')} (${t.rows.length - 1}행)`;
+      out.splice(t.start, t.end - t.start + 1, `[이미지: img/${ids[k]}.jpg — ${cap}]`);
+    });
+    const outMd = opt.out || md.replace(/\.md$/, '.tables.md');
+    fs.writeFileSync(outMd, out.join('\n'));
+    console.log(JSON.stringify({ tables: tables.length, out: outMd, images: ids.map((i) => `img/${i}.jpg`) }));
+  }
 } else if (MAIN) {
-  console.error('usage: blog-md.mjs lab-run <md> <imgDir> <runDir> [--youtube=id] | se-html <md> <urlMap.json> <out.html> [--headings=quote] [--palette=notebook]');
+  console.error('usage: blog-md.mjs lab-run <md> <imgDir> <runDir> [--youtube=id] | se-html <md> <urlMap.json> <out.html> [--headings=quote] [--palette=notebook] | tables <md> <imgDir> [--out=x.md] [--width=720]');
   process.exitCode = 2;
 }

@@ -17,6 +17,11 @@ ko-main.md ──► fact-check agent (facts.verified.json, script.md, links.jso
    └─ templates/affiliate-banner + scripts/html-capture.mjs ─► banner JPGs with affiliate links
 ```
 
+0. **Tables become images** (owner 2026-10-23, after a 4-column table was cut off at the right on Naver mobile: "앞으로 표는 이미지로 다시생성해서 넣어줘").
+   Run `node scripts/blog-md.mjs tables <post.md> <imgDir>` first. It renders every `| table |` at phone width (720 px, cells wrap,
+   short headers kept on one line) into `img/table-NN.jpg` through `html-capture.mjs` and writes `<post>.tables.md` with
+   `[이미지: img/table-NN.jpg — 표: <columns> (n행)]` in place of each table. Publish the `.tables.md` on every surface.
+   For a second language in the same img/ folder, rename its files (e.g. `table-en-NN.jpg`) and the references.
 1. **Review gate:** `mirror-lab --site-first` refuses to run without `independent-review.json` set to `{decision:"pass", hardBlocks:[]}`. Get it from a separate agent that compares the draft with the fact files.
    - On this run, three rounds were needed.
    - Round 1 caught 24 hard issues: estimated items written as confirmed, single-source facts written as certain, an unsupported "most overlapped" claim, a wrong exchange rate, and links missing from the English version.
@@ -30,8 +35,8 @@ ko-main.md ──► fact-check agent (facts.verified.json, script.md, links.jso
 
 - **Command:** `HUB_IMPORT_TOKEN=… node scripts/mirror-lab.mjs --run=<dir> --published-at=<ISO> --updated-at=<ISO> --site-first --slug=<slug>`
   - **Token:** DPAPI `lab-hub-import-token` (JSON `{token}`). Read it with ProtectedStore and pass it only through the child process env.
-  - **Refresh the token** (only when the import says it is invalid). Run from the linked project `C:\Users\sihyeon\dev\lifehackailab-web`:
-    `npx vercel env pull <scratch>\lab.env --environment=production --yes --global-config C:\Users\sihyeon\AppData\Local\lifehack-cloud-ops\vercel`.
+  - **Refresh the token** (only when the import says it is invalid). Run from the linked project folder (the site repository):
+    `npx vercel env pull <scratch>\lab.env --environment=production --yes --global-config %LOCALAPPDATA%\lifehack-cloud-ops\vercel`.
     Then write `HUB_IMPORT_TOKEN` to DPAPI and delete the env file.
   - Without `--global-config` the CLI is not logged in and waits for a login that never comes. On 2026-10-21 the blog agent stalled there twice.
     Check the login with `npx vercel whoami --global-config …`.
@@ -41,7 +46,7 @@ ko-main.md ──► fact-check agent (facts.verified.json, script.md, links.jso
   - **Workaround:** verify in Canary instead: title, `[data-testid=lab-body]`, images loaded after scrolling (lazy), the YouTube nocookie iframe, `data-updated-at`.
   - **Resolved 2026-10-19 (final state, firewall version 15):**
     - The cause was the managed rule `bot_protection` with action `challenge`.
-    - The challenge stays on for everyone. A custom rule **"Allow lifehack operator IP"** `bypass`es only `ip_address eq 220.86.121.120`, the automation PC's public IP. The script readback, curl and Canary from this PC all get 200.
+    - The challenge stays on for everyone. A custom rule **"Allow lifehack operator IP"** `bypass`es only `ip_address eq <the automation PC's public IP>`. The script readback, curl and Canary from this PC all get 200.
     - **If the ISP changes the IP:** check it with `curl https://api.ipify.org` and update that rule (`rules.update`, or delete and insert).
     - **API:** `PATCH /v1/security/firewall/config?projectId=…&teamId=…` with `{"action":"rules.insert","value":{name,description,active,conditionGroup:[{conditions:[{type:"ip_address",op:"eq",value:"<ip>"}]}],action:{mitigate:{action:"bypass"}}}}`. The Vercel token is the CLI one in `lifehack-cloud-opserceluth.json`; never print it.
     - **Cloud runners (GitHub Actions, Dots):** they have no fixed IP. Give them a header-secret bypass rule instead, with the secret kept in DPAPI or Actions secrets.
@@ -118,7 +123,7 @@ Measured in `affiliate-content-operations/.../blog-performance/style-cards/style
 ## Tistory (Kakao login, HTML mode)
 
 - **Login:** in Canary go to tistory.com/auth/login, choose "카카오계정으로 로그인", then run `node scripts/kakao-login-fill.mjs <tab>`.
-  - It reads the identity from the playbook ProtectedStore key `tistory-kakao-login`, saved 2026-10-19 for hyeon0528@nate.com.
+  - It reads the identity from the playbook ProtectedStore key `tistory-kakao-login`, saved 2026-10-19 (the owner's Kakao account).
   - Kakao then asks for **2-step verification through KakaoTalk**, and the owner has to approve it on the phone. Tick "이 브라우저에서 2단계 인증 사용 안 함" first so this browser is not asked again.
   - After approval comes a consent page; press 계속하기.
 - **Design:** `node scripts/blog-tistory-html.mjs post.md urlmap.json out.html --youtube=<id>` renders the full notebook design in inline CSS: dark heading bars with a mustard border, highlighter bold, cream list cards, rounded tables, pill CTA buttons and a responsive YouTube iframe. All of it survived publishing.
@@ -129,6 +134,7 @@ Measured in `affiliate-content-operations/.../blog-performance/style-cards/style
   - Choose 공개, set 홈주제 to 해외여행, then press 공개 발행.
   - **Category: 여행 > <country>** (owner 2026-10-19: "여행카테고리 만들고 국가로 나눠"). The tree is 여행 (topic 여행·맛집) > 태국. For a new country: open manage/category, press 추가 on the 여행 row, name the country, choose 여행·맛집, press 확인, then 변경사항 저장.
   - To move a post without touching its HTML, use manage/posts: tick the post, open 변경 and pick the category there. Re-saving through the editor risks the body.
+  - A category created while an editor tab is open does not show up in that tab's category list, and 홈주제 options can be missing too. Publish with no category, then move the post in manage/posts. The 변경 menu lists every category (child categories are prefixed with "ㄴ"), so scroll it to the new one. Real mouse events on the checkbox and the menu item work, and no confirm dialog appears. Read the category back from the post row ("여행/<country>").
   - The editor keeps at most 10 tags.
 - **Verify:** open the post in the browser, scroll it (images are lazy) and check `.contents_style` for text length, loaded images, `a[href*=myrealt]` and the iframe. Here that gave 4,053 chars, 15/15 images, 17 links, the YouTube embed and 9 heading bars.
 

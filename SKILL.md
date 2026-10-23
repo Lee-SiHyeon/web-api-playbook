@@ -266,3 +266,36 @@ Report these five states independently, with evidence or `unknown`/`not_applicab
 Publish/update claims require target-specific owner and public readback where relevant. Media upload acknowledgement, file-card rendering, inline playback and final public content are separate outcomes. See [media recipes](references/media-and-publishing.md).
 
 Finish by recording sanitized evidence, first failure, successful change, counterexample, revision and next resume point. Consult [Naver experience](case-studies/naver.md), [other services](case-studies/non-naver.md), and [provenance](provenance/README.md). Generalize only what the evidence supports; keep unverified alternatives explicit.
+
+## When a site still needs its own web UI: browser-assisted publishing
+
+Some first-party publishing (YouTube Studio, Facebook Pages, Naver blog/Clip, Instagram, TikTok Studio, X, Threads, Blogger,
+Tistory) is driven through the site's own UI in a logged-in browser instead of a reconstructed HTTP client. The setup is one
+unattended Windows PC with a **dedicated, non-default Chrome Canary profile** on `--remote-debugging-port=9333` (scripts attach
+over CDP, open their own tab, close only that tab) plus a **Windows desktop MCP** for what CDP cannot reach. That includes OS-level
+real mouse/keyboard when a site ignores synthetic input, native dialogs, and full-desktop screenshots. A desktop MCP yields when it sees
+input that isn't its own (`USER_CONTROL`), which on an unattended PC is often another agent; wait and retry. Read
+[the setup and the rules learned](references/windows-canary-automation-setup-2026-10-23.md) before writing a new one:
+- bring the tab to the front before clicking;
+- choose the right upload method (file input, chooser interception, or drag-and-drop for cross-origin pickers);
+- Shift+Enter for newlines;
+- success only by readback;
+- check the active account before posting.
+
+One episode, every channel (all browser-assisted, each resumable and verified by readback):
+
+| Step | Script |
+|---|---|
+| Long video upload, A/B, schedule | `youtube-studio.mjs upload` |
+| Original captions + localized title/description/SRT, resumable | `youtube-studio.mjs captions`, many videos: `youtube-captions-batch.mjs` |
+| Which videos still lack languages | `youtube-studio-languages.mjs <channelId> --min=9` |
+| Shorts SRTs from the long video's SRTs, or from on-screen captions | `srt-slice.mjs cut` / `srt-slice.mjs captions` |
+| Shorts cut, render kit | `longform-to-shorts.mjs` |
+| Shorts to YouTube (+thumbnail, related video, pin), Naver Clip, TikTok, Instagram | `shorts-distribute.mjs` |
+| Pinned comment; long link lists as replies (one 41-link comment was silently dropped) | `youtube-pin-comment.mjs`, `youtube-reply-comment.mjs` |
+| Facebook Page: login with checkpoint, post/reel with AI label | `facebook-web.mjs` |
+| Threads / X with media | `sns-web-post.mjs` |
+| Blogs: tables as images, lab site, Naver, Tistory/Blogger HTML, Blogger with hosted uploads | `blog-md.mjs tables`, `blog-md.mjs lab-run`/`se-html`, `blog-tistory-html.mjs`, `naver-se-paste.mjs`, `blogger-post.mjs` |
+
+Keep a per-episode distribution record (channel → url/id + re-check time) and gate "done" on it. A channel that is missing
+from the record is a channel that was forgotten.

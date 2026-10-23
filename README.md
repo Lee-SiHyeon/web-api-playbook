@@ -122,4 +122,6 @@ npm test   # 전체 회귀. Python 3 필요
 
 ## 라이선스
 
-`package.json`은 `UNLICENSED`이며 [NOTICE](NOTICE.md)는 개인 재사용을 전제로 합니다. 공개 여부와 오픈소스 사용 허가는 별개입니다. 출처는 [provenance](provenance/README.md)에 있습니다.
+[MIT](LICENSE): 개인·상업적 용도 모두 자유롭게 쓰고, 고치고, 재배포하셔도 됩니다. 저작권 표시만 남겨 주세요. 사용에 따른 결과는 사용자 책임입니다.
+
+`node_modules`로 설치되는 타사 라이브러리와 [provenance](provenance/README.md)에 출처가 적힌 외부 자료는 각 원저작자의 라이선스를 따릅니다. 자동화하는 각 사이트의 이용약관도 직접 확인하고 쓰세요. 자세한 내용은 [NOTICE](NOTICE.md)에 있습니다.
