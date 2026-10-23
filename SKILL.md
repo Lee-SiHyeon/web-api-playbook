@@ -296,6 +296,7 @@ One episode, every channel (all browser-assisted, each resumable and verified by
 | Facebook Page: login with checkpoint, post/reel with AI label | `facebook-web.mjs` |
 | Facebook Page: SRT caption tracks on a published video/Reel, one per language (`name.en_US.srt`) | `facebook-captions.mjs` |
 | Owner's own footage from Google Photos (phone backups are there, not in Drive): list videos, search, shot date/place/file, download originals one by one or in bulk by date range/search (resumable). Read-only; ask before publishing personal media | `google-photos-web.mjs` |
+| Blur every face before publishing real footage: CenterFace + YuNet merged, boxes held across frames, HDR tone-mapped, audio kept, re-detection pass and contact sheet (exit 3 if a face is left outside the blur) | `face-blur.py` (Python venv: deface, opencv-python, onnxruntime, onnx) |
 | Threads / X with media | `sns-web-post.mjs` |
 | Blogs: tables as images, lab site, Naver, Tistory/Blogger HTML, Blogger with hosted uploads | `blog-md.mjs tables`, `blog-md.mjs lab-run`/`se-html`, `blog-tistory-html.mjs`, `naver-se-paste.mjs`, `blogger-post.mjs` |
 
