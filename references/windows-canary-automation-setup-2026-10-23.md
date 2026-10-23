@@ -51,7 +51,7 @@ The setup here wraps the same `serve` command in a small launcher (`launch.py`, 
 - Then take one Screenshot. Run the check from **two clients at once** to confirm that the server is shared rather than started
   twice.
 - If it stops answering, restart the scheduled task (end the old listener on 8765 first) and read the server log.
-- `ControlStatus` reports `USER_CONTROL` when it sees outside input. Rule 11 below covers what that means on an unattended PC.
+- `ControlStatus` reports `USER_CONTROL` for outside input, and also after an internal fault. Rule 11 below covers how to tell them apart.
 
 ## Launching the automation Canary
 
@@ -95,9 +95,16 @@ The setup here wraps the same `serve` command in a small launcher (`launch.py`, 
 10. **Check the profile, then the post URL, before you retry.** X's own profile timeline lagged by minutes. A "failed" first run
     had in fact posted, so the retry made a duplicate (which was then deleted). Before re-posting, look the item up by URL or oEmbed
     (`publish.twitter.com/oembed?url=…` → 200/404), or poll the list for a while.
-11. **The desktop MCP yields to "the user".** It reports `USER_CONTROL` when it sees input that isn't its own. On an unattended
-    PC that input came from somewhere else, such as another automation agent on the same desktop. Wait and retry; don't assume a
-    person is there.
+11. **`USER_CONTROL` on an unattended PC can be a false alarm.** Windows-MCP 0.8.8 reports it for real physical input (hooked
+    mouse/keyboard events without the injected flag, raw input from a real device). It also reports it after **recovering from
+    its own internal fault**: watchdog heartbeat over 1 s under load, a busy lock, a failed indicator or hook check.
+    `_recover_after_rehook()` always switches to "user" with a 10 s wait. On 2026-10-23 a logger (low-level hooks + raw input)
+    recorded no physical input at all while the MCP kept reporting `USER_CONTROL`, and a server that had run for five days also
+    failed region screenshots. What to do:
+    - Restart the server (`manage.ps1 restart`) when it has run for days, or after capture errors.
+    - Patch `_recover_after_rehook()` to choose "user" only when physical input was seen in the last 10 s, else "ready". A
+      reinstall overwrites the patch. uv hard-links site-packages to its cache, so break the link before editing the file.
+    - If someone may really be at the PC, stop and ask rather than retrying.
 12. **On an unattended PC, OS pop-ups pile up** (a firewall prompt for an unknown publisher, an app's first-run guide). Clear them
     the safe way: Cancel a permission prompt rather than granting it, and Skip a guide. Then retry the click.
 
