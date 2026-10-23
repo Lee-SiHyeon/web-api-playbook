@@ -1,0 +1,50 @@
+{
+  "schema": "sephora-live-revalidation-run-v1",
+  "startedAt": "2026-10-15T16:17:57.950Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "accountCredentialsUsed": false,
+  "secretsPersistedInEvidence": false,
+  "externalWrites": 0,
+  "implementation": {
+    "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+    "lib/commerce/sephora-reviews.mjs": "031a64aa4e98fbfb1ec9c638df0ddf96474c0bf92cc45eb9edad411678d2dc2f",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "capabilities": {
+    "catalog.search": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:17:57.954Z"
+    },
+    "catalog.pagination": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:17:59.314Z"
+    },
+    "catalog.product_detail": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:17:59.824Z"
+    },
+    "catalog.variants": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:17:59.824Z"
+    },
+    "catalog.sale_price": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:17:59.824Z"
+    },
+    "catalog.reviews.read": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:18:00.912Z"
+    },
+    "catalog.reviews.pagination": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:18:01.258Z"
+    },
+    "catalog.reviews.variant_filter": {
+      "outcome": "success",
+      "checkedAt": "2026-10-15T16:18:01.483Z"
+    }
+  },
+  "completedAt": "2026-10-15T16:18:01.721Z"
+}

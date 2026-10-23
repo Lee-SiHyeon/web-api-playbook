@@ -1,0 +1,468 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "fragmentId": "grok-conversations",
+  "observedAt": "2026-10-06",
+  "sourceAssets": [
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/0uf56-pwxogcp.js",
+      "sha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a",
+      "sourceFunctions": {
+        "conversation.list.read": "chatListConversationsRaw",
+        "conversation.read": "chatGetConversationV2Raw",
+        "history.response-nodes": "chatListResponseNodesRaw",
+        "history.load-responses": "chatLoadResponsesRaw",
+        "conversation.update": "chatUpdateConversationRaw",
+        "conversation.delete": "chatDeleteConversationRaw",
+        "conversation.soft-delete": "chatSoftDeleteConversationRaw",
+        "conversation.share.read": "chatGetConversationSharingRaw",
+        "conversation.share.set": "chatShareConversationRaw",
+        "upload.init": "chatUploadFileInitRaw",
+        "upload.patch": "chatUploadFilePatchRaw",
+        "upload.complete": "chatUploadFileCompleteRaw",
+        "upload.status": "chatUploadFileStatusRaw",
+        "upload.abort": "chatUploadFileAbortRaw"
+      }
+    },
+    {
+      "origin": "cdn.grok.com",
+      "path": "/_next/static/chunks/35ntlely29ab3.js",
+      "sha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316",
+      "sourceFunctions": {
+        "settings.read": "settingsGetUserSettingsRaw",
+        "settings.update": "settingsSetUserSettingsRaw",
+        "public.models": "modelsGetModelsRaw",
+        "models.imagine-overrides": "modelsGetModelsImagineOverridesRaw",
+        "models.modes": "modelsListModesRaw",
+        "history.task-responses": "grokTasksGetGrokCreatedTasksByConversationIdRaw"
+      }
+    }
+  ],
+  "readOperations": [
+    {
+      "id": "conversation.list.read",
+      "method": "GET",
+      "pathTemplate": "/rest/app-chat/conversations",
+      "sdkQueryFieldNames": [
+        "pageSize",
+        "pageToken",
+        "searchQuery",
+        "workspaceId",
+        "filterIsStarred",
+        "forceElastic",
+        "kind",
+        "isKidsMode",
+        "enableNsfw",
+        "excludeProjects",
+        "includeComputer"
+      ],
+      "responseFieldNames": [
+        "conversations",
+        "nextPageToken",
+        "textSearchMatches"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "firstPageStatus": 200,
+        "firstPageCount": 24,
+        "secondPageStatus": 200,
+        "secondPageCount": 24,
+        "searchStatus": 200,
+        "searchMatchCount": 6,
+        "queryValuesPersisted": false
+      }
+    },
+    {
+      "id": "conversation.read",
+      "method": "GET",
+      "pathTemplate": "/rest/app-chat/conversations_v2/{conversationId}",
+      "queryFieldNames": [
+        "includeTaskResult",
+        "includeWorkspaces"
+      ],
+      "responseFieldNames": [
+        "conversation",
+        "conversation.conversationId",
+        "conversation.title",
+        "conversation.viewerIsOwner"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "status": 200,
+        "conversationIdMatchedInMemory": true,
+        "viewerIsOwnerInMemory": true,
+        "identifiersPersisted": false
+      }
+    },
+    {
+      "id": "history.response-nodes",
+      "method": "GET",
+      "pathTemplate": "/rest/app-chat/conversations/{conversationId}/response-node",
+      "optionalQueryFieldNames": [
+        "includeThreads"
+      ],
+      "responseFieldNames": [
+        "responseNodes",
+        "inflightResponses"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "status": 200,
+        "responseNodeCount": 2
+      }
+    },
+    {
+      "id": "history.load-responses",
+      "method": "POST",
+      "pathTemplate": "/rest/app-chat/conversations/{conversationId}/load-responses",
+      "requestBodyFieldNames": [
+        "responseIds"
+      ],
+      "responseFieldNames": [
+        "responses"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "status": 200,
+        "responseCount": 2,
+        "responseContentPersisted": false
+      }
+    },
+    {
+      "id": "history.task-responses",
+      "method": "GET",
+      "pathTemplate": "/rest/tasks/responses/{conversationId}",
+      "responseFieldNames": [
+        "taskIdWithResponseIds"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "status": 200,
+        "responseCount": 0
+      }
+    },
+    {
+      "id": "conversation.share.read",
+      "method": "GET",
+      "pathTemplate": "/rest/app-chat/conversations/{conversationId}/sharing",
+      "queryFieldNames": [
+        "responseId"
+      ],
+      "sourceResponseFieldNamesWhenShared": [
+        "sharing.scope",
+        "sharing.users",
+        "sharing.teams",
+        "sharing.shareLinkId",
+        "sharing.publicId",
+        "sharing.viewCount"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "status": 200,
+        "sharingObjectPresent": false,
+        "workspaceSeedEligibilityPresent": true,
+        "shareStateVerified": false
+      }
+    },
+    {
+      "id": "settings.read",
+      "method": "GET",
+      "pathTemplate": "/rest/user-settings",
+      "responseFieldNames": [
+        "excludeFromTraining",
+        "preferences",
+        "allowXPersonalization",
+        "enableMemory",
+        "allowShareIndexing",
+        "allowCompanionNotifications",
+        "allowAutoShare",
+        "agentCustomizations",
+        "allowGrokFinishedNotification",
+        "audioRefConsent",
+        "mutedBotPushAgentIds"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "status": 200,
+        "responseBytes": 812,
+        "preferenceValuesPersisted": false
+      }
+    },
+    {
+      "id": "models.modes",
+      "method": "POST",
+      "pathTemplate": "/rest/modes",
+      "requestBodyFieldNames": [
+        "locale"
+      ],
+      "responseFieldNames": [
+        "modes",
+        "defaultModeId"
+      ],
+      "directClientReplay": {
+        "verified": true,
+        "receipt": "verification/grok-conversation-client-live-reads-2026-10-06.json",
+        "status": 200,
+        "modeCount": 5
+      }
+    }
+  ],
+  "writeAndConditionalCandidates": [
+    {
+      "id": "conversation.create",
+      "method": "POST",
+      "pathTemplate": "/rest/app-chat/conversations",
+      "sourceRequestBodyFieldNames": [
+        "systemPromptName",
+        "temporary",
+        "addResponseRequest",
+        "workspaceIds",
+        "taskResultId",
+        "templateId",
+        "kind"
+      ],
+      "dispatchVerified": false,
+      "note": "Source-only create candidate; no additional conversation was created during this pass."
+    },
+    {
+      "id": "conversation.update",
+      "method": "PUT",
+      "pathTemplate": "/rest/app-chat/conversations/{conversationId}",
+      "sourceRequestBodyFieldNames": [
+        "title",
+        "starred",
+        "botAgentId"
+      ],
+      "dispatchVerified": false,
+      "note": "Generated SDK contract only before the task-specific native capture."
+    },
+    {
+      "id": "conversation.delete",
+      "method": "DELETE",
+      "pathTemplate": "/rest/app-chat/conversations/{conversationId}",
+      "sourceQueryFieldNames": [
+        "deleteMedia"
+      ],
+      "dispatchVerified": false,
+      "note": "Hard-delete source candidate; the guarded native Delete action selected conversation.soft-delete, which is documented separately."
+    },
+    {
+      "id": "conversation.soft-delete",
+      "method": "DELETE",
+      "pathTemplate": "/rest/app-chat/conversations/soft/{conversationId}",
+      "dispatchVerified": false,
+      "dispatchCaptured": true,
+      "browserRequestAbortVerified": true,
+      "browserRequestReachedProvider": false,
+      "sourceFunctionName": "chatSoftDeleteConversationRaw",
+      "sourceAssetSha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a",
+      "directReplayVerified": true,
+      "directReplayStatus": 200,
+      "directReplayAttemptCount": 1,
+      "independentListReadbackStatus": 200,
+      "targetAbsent": true,
+      "nonTargetConversationIdSetUnchanged": true,
+      "note": "Guarded header-menu Delete capture matched this exact route; the browser request was aborted before provider delivery. One installed-client replay used this path and a complete independent list read confirmed target absence with all other conversation IDs unchanged."
+    },
+    {
+      "id": "conversation.share.set",
+      "method": "POST",
+      "pathTemplate": "/rest/app-chat/conversations/{conversationId}/share",
+      "sourceRequestBodyFieldNames": [
+        "responseId",
+        "teamMembersToShare",
+        "shareWithTeamMembers",
+        "sharePublicly",
+        "allowIndexing",
+        "targetTeamIds",
+        "shareWithOrg",
+        "shareWorkspace"
+      ],
+      "dispatchVerified": false,
+      "note": "Sharing-state read did not return a sharing object for the sampled private conversation. No share was created."
+    },
+    {
+      "id": "settings.update",
+      "method": "POST",
+      "pathTemplate": "/rest/user-settings",
+      "sourceRequestBodyFieldNames": [
+        "excludeFromTraining",
+        "preferences",
+        "allowXPersonalization",
+        "enableMemory",
+        "allowShareIndexing",
+        "allowCompanionNotifications",
+        "allowAutoShare",
+        "agentCustomizationsDeprecated",
+        "agentCustomizations",
+        "agentLibrary",
+        "allowGrokFinishedNotification",
+        "imagineEnabledConnectors",
+        "audioRefConsent"
+      ],
+      "dispatchVerified": false,
+      "safeRestoreContractVerified": false
+    },
+    {
+      "id": "models.imagine-overrides",
+      "method": "POST",
+      "pathTemplate": "/rest/models/imagine/overrides",
+      "sourceRequestBodySchema": "opaque-json-object-required",
+      "responseFieldNames": [
+        "modelMapOverrides"
+      ],
+      "directReadVerified": false,
+      "privateModelSelectionVerified": false
+    },
+    {
+      "id": "upload.init",
+      "method": "POST",
+      "pathTemplate": "/rest/app-chat/upload-file-v2/init",
+      "sourceRequestBodyFieldNames": [
+        "fileName",
+        "fileMimeType",
+        "fileSource",
+        "thirdPartyFileId",
+        "sizeBytes",
+        "resumableSupported",
+        "multipartSupported"
+      ],
+      "responseFieldNames": [
+        "uploadId",
+        "assetId",
+        "expiresAt",
+        "uploadMethod",
+        "singlePut",
+        "resumable",
+        "multipart"
+      ],
+      "dispatchVerified": false,
+      "note": "First-party SDK source candidate retained; the one live tiny-file test used the feature-selected /http/upload-file-v2/direct route instead."
+    },
+    {
+      "id": "upload.patch",
+      "method": "PATCH",
+      "pathTemplate": "/rest/app-chat/upload-file-v2/patch",
+      "sourceRequestBodyFieldNames": [
+        "uploadId",
+        "completedParts"
+      ],
+      "dispatchVerified": false,
+      "note": "First-party SDK source candidate retained; the one live tiny-file test used the feature-selected /http/upload-file-v2/direct route instead."
+    },
+    {
+      "id": "upload.complete",
+      "method": "POST",
+      "pathTemplate": "/rest/app-chat/upload-file-v2/complete",
+      "sourceRequestBodyFieldNames": [
+        "presigned",
+        "directUpload"
+      ],
+      "presignedFieldNames": [
+        "uploadId",
+        "completedParts"
+      ],
+      "completedPartFieldNames": [
+        "partNumber",
+        "etag"
+      ],
+      "directUploadFieldNames": [
+        "fileData",
+        "fileName",
+        "fileMimeType",
+        "fileSource"
+      ],
+      "dispatchVerified": false,
+      "note": "First-party SDK source candidate retained; the one live tiny-file test used the feature-selected /http/upload-file-v2/direct route instead."
+    },
+    {
+      "id": "upload.status",
+      "method": "GET",
+      "pathTemplate": "/rest/app-chat/upload-file-v2/status",
+      "queryFieldNames": [
+        "uploadId"
+      ],
+      "responseFieldNames": [
+        "uploadId",
+        "assetId",
+        "status",
+        "fileMetadata",
+        "errorMessage"
+      ],
+      "directReadVerified": false,
+      "reason": "No uploadId exists; no upload was initiated to obtain one.",
+      "dispatchVerified": false,
+      "note": "First-party SDK source candidate retained; the one live tiny-file test used the feature-selected /http/upload-file-v2/direct route instead."
+    },
+    {
+      "id": "upload.abort",
+      "method": "POST",
+      "pathTemplate": "/rest/app-chat/upload-file-v2/abort",
+      "sourceRequestBodyFieldNames": [
+        "uploadId"
+      ],
+      "dispatchVerified": false,
+      "note": "First-party SDK source candidate retained; the one live tiny-file test used the feature-selected /http/upload-file-v2/direct route instead."
+    },
+    {
+      "id": "attachment.upload.direct",
+      "method": "POST",
+      "pathTemplate": "/http/upload-file-v2/direct",
+      "sourceFunctionName": "uploadFileV2",
+      "sourceAsset": "https://cdn.grok.com/_next/static/chunks/1e3r6boa1v4lr.js",
+      "requestContentType": "multipart/form-data",
+      "nativeFormFieldNames": [
+        "file"
+      ],
+      "fileSourceFieldObserved": false,
+      "dispatchVerified": true,
+      "httpStatus": 200,
+      "semanticReadbackVerified": true,
+      "taskAssetCleanupVerified": true,
+      "directReplayReceipt": "verification/grok-attachment-upload-api-live-2026-10-06.json",
+      "note": "One unique neutral 14-byte text file uploaded through the current directToHttp route, independently downloaded and byte-verified, then the exact task asset was deleted and an exact-name search returned zero."
+    }
+  ],
+  "privateModelSelection": {
+    "selectorOpenedOnDedicatedPage": true,
+    "imagineOverridesRequestObserved": false,
+    "publicModelCatalogUsedAsPrivateProof": false,
+    "status": "not_verified"
+  },
+  "safety": {
+    "ownerMatchedInMemory": true,
+    "readPageRole": "codex-grok-lifecycle-20261006",
+    "conversationIdsPersisted": false,
+    "responseIdsPersisted": false,
+    "userContentPersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "uploadsInitiated": true,
+    "shareLinksCreated": false,
+    "settingsChanged": false,
+    "privateResponseJsonPersisted": false,
+    "rootTaskHistoryChangedDuringNativeCapture": "possible WSS regeneration delivery; see verification/grok-conversation-regeneration-delivery-uncertainty-2026-10-06.json",
+    "normalUserConversationMutations": 0,
+    "uploadsCompletedAndDeleted": 1,
+    "chatMessageSentForUpload": false,
+    "generationRequestedForUpload": false,
+    "uploadedFileBytesRetainedRemotely": false
+  },
+  "implementationBoundary": {
+    "readFacade": "src/grok-conversations.mjs",
+    "productionClientDispatchVerified": true,
+    "writeHelpersAreNotLiveProof": true,
+    "shareWriteEnabled": false,
+    "settingsWriteEnabled": false,
+    "uploadTransferEnabled": true,
+    "uploadDirectHttpVerified": true,
+    "uploadInitPatchCompleteStatusCandidateOnly": true
+  }
+}

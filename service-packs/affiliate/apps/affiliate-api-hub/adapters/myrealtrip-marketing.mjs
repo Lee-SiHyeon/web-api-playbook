@@ -50,22 +50,29 @@ function targetUrl(value) {
   // 2026-09-26 for the "유튜버 따라가기" posts), so those product pages are link targets too.
   if (!(url.origin === 'https://www.myrealtrip.com' && /^\/offers\/\d+$/.test(url.pathname)) &&
       !(url.origin === 'https://experiences.myrealtrip.com' && /^\/products\/\d+$/.test(url.pathname) && !url.search) &&
+      // Accommodation product pages (owner 2026-10-18 "숙소 링크 로직 추가"): accommodation.myrealtrip.com/union/products/<id>,
+      // observed from the public search (서머셋 라마 9 방콕 = 1488714). Dates are dropped so the link never expires with a stay date.
+      !(url.origin === 'https://accommodation.myrealtrip.com' && /^\/union\/products\/\d+$/.test(url.pathname) && !url.search) &&
       !(url.origin === 'https://air-web.myrealtrip.com' && url.pathname === '/results')) fail('TARGET_SCOPE');
   return url.href;
 }
 // Shared with the journaled link flow so idempotency keys use the same normalized,
 // allowlisted target that the POST client sends.
 export function normalizeMyrealtripLinkTarget(value) { return targetUrl(value); }
+const FLIGHT_CABINS = ['ECONOMY', 'PREMIUM_ECONOMY', 'BUSINESS', 'FIRST'];
+// Observed 2026-10-18 against query-landing-url: tripTypeCd enum is [OW, RT, MT]; MT (multi-city) leg shape is not
+// captured, so only OW/RT are enabled. Omitting `airline` means all airlines (an empty string is rejected with 400).
+// The four cabin values above each returned 200; PRESTIGE is not an accepted enum value.
 function flightInput(input) {
   const keys = ['depAirportCd', 'arrAirportCd', 'airline', 'depDate', 'arrDate', 'tripTypeCd', 'adult', 'child', 'infant', 'cabinClass'];
   fields(input, keys);
   if (!['depAirportCd', 'arrAirportCd'].every(k => typeof input[k] === 'string' && /^[A-Z]{3}$/.test(input[k])) || input.depAirportCd === input.arrAirportCd) fail('AIRPORT');
-  if (typeof input.airline !== 'string' || !/^[A-Z0-9]{2}$/.test(input.airline)) fail('AIRLINE');
-  range(input, 'depDate', 'arrDate');
-  // Only the browser-observed round-trip economy variant is enabled.
-  if (input.tripTypeCd !== 'RT' || input.cabinClass !== 'ECONOMY') fail('UNOBSERVED_VARIANT');
+  if (input.airline !== undefined && input.airline !== null && (typeof input.airline !== 'string' || !/^[A-Z0-9]{2}$/.test(input.airline))) fail('AIRLINE');
+  if (!['RT', 'OW'].includes(input.tripTypeCd) || !FLIGHT_CABINS.includes(input.cabinClass)) fail('UNOBSERVED_VARIANT');
+  if (input.tripTypeCd === 'RT') range(input, 'depDate', 'arrDate');
+  else { date(input.depDate); if (input.arrDate !== undefined && input.arrDate !== null) fail('DATE_RANGE'); }
   if (!integer(input.adult, 1, 9) || !integer(input.child, 0, 8) || !integer(input.infant, 0, input.adult) || input.adult + input.child > 9) fail('PASSENGERS');
-  return Object.fromEntries(keys.map(key => [key, input[key]]));
+  return Object.fromEntries(keys.filter(key => input[key] !== undefined && input[key] !== null).map(key => [key, input[key]]));
 }
 function prepare(operation, input) {
   if (!Object.hasOwn(MYREALTRIP_OPERATIONS, operation)) fail('SCOPE');
@@ -151,14 +158,18 @@ function decode(operation, body, input) {
     const url = httpsUrl(data.url);
     if (url.origin !== 'https://air-web.myrealtrip.com' || url.pathname !== '/results') fail('SCHEMA');
     // Check user-supplied travel fields before using the response as another API input.
-    for (const [key, value] of Object.entries({ adult: input.adult, child: input.child, infant: input.infant, cabins: input.cabinClass, airlines: input.airline, tripType: 'ROUND_TRIP' })) {
+    const roundTrip = input.tripTypeCd === 'RT';
+    const expected = { adult: input.adult, child: input.child, infant: input.infant, cabins: input.cabinClass, tripType: roundTrip ? 'ROUND_TRIP' : 'ONE_WAY' };
+    for (const [key, value] of Object.entries(expected)) {
       if (url.searchParams.getAll(key).length !== 1 || url.searchParams.get(key) !== String(value)) fail('FLIGHT_MISMATCH');
     }
+    if (input.airline ? url.searchParams.getAll('airlines').length !== 1 || url.searchParams.get('airlines') !== input.airline : url.searchParams.has('airlines')) fail('FLIGHT_MISMATCH');
     const trip = url.searchParams.get('trip');
     const legs = typeof trip === 'string' ? trip.split('/') : [];
     const pattern = /^([AC])\.([A-Z]{3})\.([AC])\.([A-Z]{3})\.(\d{4}-\d{2}-\d{2})$/;
     const outward = legs[0]?.match(pattern), inward = legs[1]?.match(pattern);
-    if (legs.length !== 2 || !outward || !inward || outward[2] !== input.depAirportCd || outward[4] !== input.arrAirportCd || outward[5] !== input.depDate || inward[2] !== input.arrAirportCd || inward[4] !== input.depAirportCd || inward[5] !== input.arrDate) fail('FLIGHT_MISMATCH');
+    if (legs.length !== (roundTrip ? 2 : 1) || !outward || outward[2] !== input.depAirportCd || outward[4] !== input.arrAirportCd || outward[5] !== input.depDate) fail('FLIGHT_MISMATCH');
+    if (roundTrip && (!inward || inward[2] !== input.arrAirportCd || inward[4] !== input.depAirportCd || inward[5] !== input.arrDate)) fail('FLIGHT_MISMATCH');
     return { url: url.href, gid: data.gid };
   }
   if (operation === 'searchAirports') return { airports: publicRows(data, airportFields) };

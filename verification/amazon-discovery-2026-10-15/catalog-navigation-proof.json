@@ -1,0 +1,81 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "amazon",
+  "capabilityId": "catalog.navigation",
+  "checkedAt": "2026-10-15T05:55:27.557Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "request": {
+    "checkedAt": "2026-10-15T05:55:26.921Z",
+    "method": "GET",
+    "origin": "https://www.amazon.com",
+    "path": "/nav/ajax/hMenuDesktopFirstLayer",
+    "queryFields": [
+      "ajaxTemplate",
+      "pageType",
+      "hmDataAjaxHint",
+      "navDeviceType",
+      "isBackup",
+      "languageCode",
+      "customerCountryCode",
+      "isFreshRegion",
+      "isFreshCustomer",
+      "isPrimeMember",
+      "isPrimeDay"
+    ],
+    "browserUsed": false,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "readOnly": true,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 15890,
+    "responseSha256": "b6025695c859db721cafa7309a7ccd631abddc7c6de8654038e10b1fa080c645",
+    "anonymous": true
+  },
+  "secondLayerRequest": {
+    "checkedAt": "2026-10-15T05:55:27.557Z",
+    "method": "GET",
+    "origin": "https://www.amazon.com",
+    "path": "/nav/ajax/hamburgerMainContent",
+    "queryFields": [
+      "ajaxTemplate",
+      "pageType",
+      "hmDataAjaxHint",
+      "navDeviceType",
+      "isBackup",
+      "languageCode",
+      "customerCountryCode",
+      "isSmile",
+      "isPrime",
+      "secondLayerTreeName"
+    ],
+    "browserUsed": false,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "readOnly": true,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 71453,
+    "responseSha256": "acebb628a5afb913eca3cce4b6e902de2d29c55b0761ec94446b09c84b64ac1e",
+    "anonymous": true
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.amazon.com/nav/ajax/hMenuDesktopFirstLayer"
+  },
+  "result": {
+    "menuCount": 37,
+    "destinationCount": 342,
+    "edgeCount": 418,
+    "returnedReferencesResolved": true,
+    "completeCatalog": false
+  },
+  "implementation": {
+    "lib/retail/amazon-navigation.mjs": "584984d6c9d5d8658b6f1dbace09d8542f4cbc2c529a58c6178f4333ac950225"
+  }
+}

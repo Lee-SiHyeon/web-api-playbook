@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "service": "operation-runtime",
+  "description": "Common executable operation layer. All requirements are local synthetic verification, not proof of current live service support or deployment.",
+  "capabilities": [
+    {
+      "id": "operations.typed_registry",
+      "title": "Register v1/v2 definitions, validate typed inputs/outputs and retain existing adapter bindings",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": {
+        "files": [{ "path": "lib/operation-registry.mjs", "exports": ["validateOperationProfile", "createOperationRegistry", "operationInputSchema"] }],
+        "tests": ["tests/operation-registry.test.mjs"],
+        "cli": [{ "path": "scripts/playbook.mjs", "tokens": ["describe", "run"] }]
+      },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "operations.mcp_stdio",
+      "title": "Generate tools from the same operation schema and execute MCP stdio calls",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": {
+        "files": [{ "path": "lib/operation-mcp.mjs", "exports": ["createOperationMcpHandler", "serveOperationMcp"] }],
+        "tests": ["tests/operation-mcp.test.mjs", "tests/operation-cli.test.mjs"],
+        "cli": [{ "path": "scripts/playbook.mjs", "tokens": ["mcp", "tools"] }]
+      },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "operations.offline_prepare",
+      "title": "Merge local HAR, HTML and bundle evidence without promoting candidates to verified operations",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": {
+        "files": [{ "path": "lib/prepare-operations.mjs", "exports": ["prepareOperations"] }],
+        "tests": ["tests/prepare-operations.test.mjs"],
+        "cli": [{ "path": "scripts/prepare-operations.mjs", "tokens": ["har", "bundle", "intent"] }]
+      },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "operations.response_extraction",
+      "title": "Extract JSON, HTML records and literal SSR JSON through shared declarations",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": {
+        "files": [{ "path": "lib/operation-extract.mjs", "exports": ["extractOperationResponse"] }],
+        "tests": ["tests/operation-extract.test.mjs"], "cli": []
+      },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "operations.deterministic_health",
+      "title": "Replay declared reads with result bindings and honest failure classification",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": {
+        "files": [{ "path": "lib/operation-health.mjs", "exports": ["checkOperations"] }],
+        "tests": ["tests/operation-health.test.mjs"],
+        "cli": [{ "path": "scripts/playbook.mjs", "tokens": ["check"] }]
+      },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "operations.resumable_execution",
+      "title": "Execute bound workflows and bounded page/cursor/offset/next-link collection with real checkpoints",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": {
+        "files": [{ "path": "lib/operation-flow.mjs", "exports": ["runOperationFlow", "collectOperationPages"] }],
+        "tests": ["tests/operation-flow.test.mjs", "tests/operation-cli.test.mjs"],
+        "cli": [{ "path": "scripts/playbook.mjs", "tokens": ["flow", "collect", "checkpoint"] }]
+      },
+      "evidence": [], "sourceEvidence": []
+    }
+  ]
+}

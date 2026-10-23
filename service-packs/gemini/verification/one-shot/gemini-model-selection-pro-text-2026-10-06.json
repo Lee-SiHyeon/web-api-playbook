@@ -1,0 +1,168 @@
+{
+  "schema": "gemini-model-selection-text-one-shot-v1",
+  "service": "gemini-web",
+  "taskIntent": "gemini-model-selection-pro-20261006-v1",
+  "captureAttempts": [
+    {
+      "attempt": 1,
+      "outcome": "native_request_captured_and_aborted_before_direct_dispatch",
+      "failureCode": "CLIENT_FAILED",
+      "requestAbortAcknowledged": true,
+      "directDispatchCount": 0
+    },
+    {
+      "attempt": 2,
+      "outcome": "native_request_captured_and_aborted_before_direct_dispatch",
+      "requestAbortAcknowledged": true,
+      "browserResponseCount": 0,
+      "browserLoadingFailedCount": 1,
+      "directDispatchCount": 0
+    },
+    {
+      "attempt": 3,
+      "outcome": "native_request_captured_and_aborted_before_direct_dispatch",
+      "requestAbortAcknowledged": true,
+      "browserResponseCount": 0,
+      "browserLoadingFailedCount": 1,
+      "directDispatchCount": 0
+    },
+    {
+      "attempt": 4,
+      "outcome": "native_request_captured_and_aborted_before_direct_dispatch",
+      "requestAbortAcknowledged": true,
+      "browserResponseCount": 0,
+      "browserLoadingFailedCount": 1,
+      "directDispatchCount": 0
+    }
+  ],
+  "outcome": "capture_aborted_before_dispatch",
+  "recordedAt": "2026-10-06T03:30:54.466293+00:00",
+  "ownerMatched": true,
+  "sourceVerification": {
+    "contractSha256": "e3e84b016645b5776aea313c891af4b83c9a0703e063c656b45dcea81e152633",
+    "implementationSetSha256": "6d430888c26e51c65786d29090e43543c821aa1a61b201b4180e1e313b625491",
+    "implementationFiles": [
+      {
+        "path": "discovery/observed-contract.json",
+        "sha256": "e3e84b016645b5776aea313c891af4b83c9a0703e063c656b45dcea81e152633"
+      },
+      {
+        "path": "src/cli.mjs",
+        "sha256": "2e561cca62fc998cc35c9a0c3116b0e0ad0d90c786264fe43c6b43933dc595e3"
+      },
+      {
+        "path": "src/client.mjs",
+        "sha256": "a7e8264a4737e22d5cf72b4797d642faf90d59652f262e1bca8fe6c23d02b01c"
+      },
+      {
+        "path": "src/contract.mjs",
+        "sha256": "64bb0462b65827061bc5b4ac992fd1924b3d81ae00933540d66f0ac138c5cb3e"
+      },
+      {
+        "path": "src/history-detail.mjs",
+        "sha256": "2605b37c565ab57fdd49a4c96e42191c1d35bc8a36a96882b667aa743aeb9374"
+      },
+      {
+        "path": "src/http-session-bootstrap.mjs",
+        "sha256": "8404ed006edbbca40d15a4896b8d2401abe839afdc0bc5a271bd1dc685b50ac6"
+      },
+      {
+        "path": "src/http-transport.mjs",
+        "sha256": "b5da85bf48e22122d052876f28888b19e09fa0464931ad9f5c429cf7b0551694"
+      },
+      {
+        "path": "src/journal.mjs",
+        "sha256": "b480ff22aecaa81e708e01c82dfef45c5e0d04cc2981f28a18d4aab4281652c8"
+      },
+      {
+        "path": "src/model-selection.mjs",
+        "sha256": "809e41645f266185757991643d9ee4239b358d4dc71f0b03bd97248f4d5b9c74"
+      },
+      {
+        "path": "src/mutation.mjs",
+        "sha256": "33261a7f4cb7f2667c222d5d82b8a5c728e17a5a6278864de23ee737889d6050"
+      },
+      {
+        "path": "src/session-renewal.mjs",
+        "sha256": "c899fad625b68e8b3471732c9e39b7c9fd16da904318d74463956c46f89bd56e"
+      },
+      {
+        "path": "src/session.mjs",
+        "sha256": "a3a02377afa893e4c85092794eade87faaaa9f23ef337792ba3ee876b02c55b3"
+      },
+      {
+        "path": "src/text-adapter.mjs",
+        "sha256": "8c0ea1bd6e9ed87f0aae88084ef36992d31b83bb21b02743904633c1411b5f9d"
+      }
+    ],
+    "firstPartyBundleHashes": [
+      {
+        "moduleId": "HwBxOc",
+        "sha256": "d01b7d0af88adc4d498080b76ab1e1ff770dd9720b02d9f19f36ae69a6d6c364"
+      },
+      {
+        "moduleId": "LQaXg",
+        "sha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa"
+      },
+      {
+        "moduleId": "OpU7Tc",
+        "sha256": "6d6fac08f2db2cb171b2714c67032f44f8b5314ac246abb77d7d69af5830a415"
+      },
+      {
+        "moduleId": "TRJwtb",
+        "sha256": "813451d8daabd1d9972ba4e7d4b277a59d6b7fc100863d27ff4e81c9a5ef57d1"
+      }
+    ]
+  },
+  "browserCapture": {
+    "targetIdMatched": true,
+    "requestObserved": true,
+    "requestAbortAcknowledged": true,
+    "loadingFailedCount": 1,
+    "responseCount": 0,
+    "dispatchCount": 0,
+    "proSelected": true,
+    "selectedModeId": "e6fa609c3fa255c0",
+    "modeCategoryCode": 3,
+    "thinkingLevelCode": 1,
+    "metadataHeaderName": "x-goog-ext-525001261-jspb",
+    "modelIdFieldPath": "[4]",
+    "modeCategoryFieldPath": "[14]",
+    "thinkingLevelFieldPath": "[15]",
+    "restoredToBaselineFlash": true,
+    "targetIdPreservedThroughReset": true,
+    "blockedPostCount": 50,
+    "preferenceRpcBlockedCount": 6,
+    "readRpcCount": 32,
+    "webSocketHandshakeDropCount": 0,
+    "rawPromptPersisted": false,
+    "rawRequestBodyPersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "exactPromptMatchedInMemory": true,
+    "capturedModelIdMatchesProUi": true,
+    "capturedModeCategoryCode": 3,
+    "capturedThinkingLevelCode": 1,
+    "capturedMetadataHeader": "x-goog-ext-525001261-jspb",
+    "capturedMetadataFieldIndexes": {
+      "modeId": 4,
+      "isTemporaryChat": 7,
+      "modeCategory": 14,
+      "thinkingLevel": 15
+    },
+    "unlistedBusinessPostForwarded": false,
+    "modelPreferenceWriteForwarded": false
+  },
+  "directDispatch": {
+    "count": 0,
+    "retryCount": 0,
+    "ownerMatched": null,
+    "anonymousOwnerAbsent": null,
+    "journalDispatchCount": 0,
+    "journalState": "not_observed"
+  },
+  "readback": {
+    "httpStatus": null,
+    "verified": false
+  },
+  "failureCode": "TASK_RECEIPT_ALREADY_EXISTS"
+}

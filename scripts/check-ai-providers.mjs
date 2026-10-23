@@ -7,6 +7,8 @@ const PROVIDERS = ['gemini', 'grok'];
 const MAX_OUTPUT = 4 * 1024 * 1024;
 const ENV_NAMES = ['PATH', 'HOME', 'TMPDIR', 'LANG', 'LC_ALL'];
 const LOCAL_CONFIG_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'ai-providers.local.json');
+export const BUNDLED_PROVIDER_REPOS = Object.freeze(Object.fromEntries(PROVIDERS.map(provider =>
+  [provider, fileURLToPath(new URL('../service-packs/' + provider + '/', import.meta.url))])));
 const identifier = value => typeof value === 'string' && /^[a-z][a-z0-9._-]{0,127}$/.test(value);
 const count = value => Number.isSafeInteger(value) && value >= 0;
 
@@ -132,7 +134,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   try {
     const options = parseProviderOptions(process.argv.slice(2));
     const configured = await loadProviderRepoConfig(options.configPath ?? LOCAL_CONFIG_PATH, { optional: !options.configPath });
-    options.repos = { ...configured, ...options.repos };
+    options.repos = { ...BUNDLED_PROVIDER_REPOS, ...configured, ...options.repos };
     const { report, exitCode } = await checkProviders(options);
     process.stdout.write(JSON.stringify(report, null, 2) + '\n');
     process.exitCode = exitCode;

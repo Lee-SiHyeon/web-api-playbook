@@ -6,9 +6,13 @@ import { createAliExpressPublicClient } from '../lib/retail/aliexpress.mjs';
 import { createEbayPublicClient } from '../lib/retail/ebay.mjs';
 import { createAllbirdsPublicClient } from '../lib/retail/shopify.mjs';
 import { createAmazonPublicClient } from '../lib/retail/amazon.mjs';
+import { createAmazonNavigationClient } from '../lib/retail/amazon-navigation.mjs';
+import { crawlAmazonSearch } from '../lib/retail/amazon-crawl.mjs';
+import { getAmazonProduct } from '../lib/retail/amazon-retail-session.mjs';
+import { createWalmartPublicClient } from '../lib/retail/walmart.mjs';
 
 const services = ['aliexpress', 'amazon', 'ebay', 'walmart', 'shopify'];
-const supported = { aliexpress: ['product-seo'], ebay: ['suggest'], shopify: ['product', 'predictive-search'], amazon: ['search'], walmart: [] };
+const supported = { aliexpress: ['product-seo'], ebay: ['suggest'], shopify: ['product', 'predictive-search'], amazon: ['search', 'navigation', 'crawl', 'product'], walmart: ['search'] };
 let output;
 try {
   const [service, operation, ...args] = process.argv.slice(2);
@@ -30,8 +34,10 @@ try {
       process.exitCode = 2;
     } else {
       const flags = service === 'aliexpress' ? ['product-id', 'subject', 'output']
-        : service === 'amazon' ? ['query', 'page', 'output']
+        : service === 'amazon' ? operation === 'navigation' ? ['output'] : operation === 'product' ? ['asin','output'] : operation === 'crawl'
+          ? ['query', 'max-pages', 'checkpoint', 'output'] : ['query', 'page', 'output']
         : service === 'ebay' ? ['query', 'output']
+          : service === 'walmart' ? ['query', 'output']
           : operation === 'product' ? ['handle', 'output'] : ['query', 'limit', 'output'];
       const opts = options(args, flags);
       if (opts.output !== undefined && typeof opts.output !== 'string') throw Object.assign(new Error(), { code: 'RETAIL_ARGUMENT_INVALID' });
@@ -39,11 +45,26 @@ try {
       let data;
       if (service === 'aliexpress') data = await createAliExpressPublicClient().getProductSeo({ productId: opts['product-id'], subject: opts.subject });
       else if (service === 'ebay') data = await createEbayPublicClient().suggestCatalogHints({ query: opts.query });
+      else if (service === 'walmart') data = await createWalmartPublicClient().searchProducts({ query: opts.query });
       else if (service === 'amazon') {
-        if (opts.page !== undefined && (typeof opts.page !== 'string' || !/^(?:[1-9]|1[0-9]|20)$/.test(opts.page))) {
-          throw Object.assign(new Error(), { code: 'RETAIL_ARGUMENT_INVALID' });
+        if (operation === 'product') data = await getAmazonProduct({ asin: opts.asin });
+        else if (operation === 'navigation') data = await createAmazonNavigationClient().getNavigation();
+        else if (operation === 'crawl') {
+          if (opts['max-pages'] !== undefined && !/^[1-5]$/.test(opts['max-pages'])) throw Object.assign(new Error(), { code: 'RETAIL_ARGUMENT_INVALID' });
+          let checkpoint = null;
+          if (opts.checkpoint !== undefined) {
+            if (typeof opts.checkpoint !== 'string') throw Object.assign(new Error(), { code: 'RETAIL_ARGUMENT_INVALID' });
+            const saved = JSON.parse(await readFile(opts.checkpoint, 'utf8'));
+            checkpoint = saved?.data?.checkpoint ?? saved;
+          }
+          data = await crawlAmazonSearch({ query: opts.query, maxPages: Number(opts['max-pages'] ?? 3), checkpoint });
+          if (data.failure) process.exitCode = 2;
+        } else {
+          if (opts.page !== undefined && (typeof opts.page !== 'string' || !/^(?:[1-9]|1[0-9]|20)$/.test(opts.page))) {
+            throw Object.assign(new Error(), { code: 'RETAIL_ARGUMENT_INVALID' });
+          }
+          data = await createAmazonPublicClient().searchProducts({ query: opts.query, page: opts.page === undefined ? 1 : Number(opts.page) });
         }
-        data = await createAmazonPublicClient().searchProducts({ query: opts.query, page: opts.page === undefined ? 1 : Number(opts.page) });
       }
       else if (operation === 'product') data = await createAllbirdsPublicClient().getProduct({ handle: opts.handle });
       else {
@@ -53,8 +74,9 @@ try {
         data = await createAllbirdsPublicClient().searchProducts({ query: opts.query,
           ...(opts.limit === undefined ? {} : { limit: Number(opts.limit) }) });
       }
-      await report({ schema: 'web-api-retail-result-v1', ok: true, service, operation,
-        executionMode: 'pure_http', anonymous: true, credentialsUsed: false, browserUsed: false, data }, output);
+      await report({ schema: 'web-api-retail-result-v1', ok: !data.failure, service, operation,
+        executionMode: 'pure_http', anonymous: !data.receipt?.credentialsUsed,
+        credentialsUsed: Boolean(data.receipt?.credentialsUsed), browserUsed: false, data }, output);
     }
   }
 } catch (error) {

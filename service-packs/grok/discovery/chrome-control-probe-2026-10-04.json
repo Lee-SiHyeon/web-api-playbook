@@ -1,0 +1,38 @@
+{
+  "checkedAtUtc": "2026-10-04 12:07:11 UTC",
+  "scope": "Chrome control readiness for Grok, Gemini, ChatGPT consumer-web XHR discovery",
+  "browserInventoryAvailableAtInitialProbe": true,
+  "latestReadinessProbe": {
+    "checkedAtUtc": "2026-10-04 12:35:52 UTC",
+    "selectedBrowserRebind": "timed_out",
+    "browserInventory": "timed_out"
+  },
+  "debuggerAttachmentVerified": false,
+  "probes": {
+    "grok": {
+      "freshTaskTabCreated": true,
+      "frameTree": "debugger_unattached",
+      "debuggerEvents": "debugger_unattached",
+      "screenshot": "debugger_unattached"
+    },
+    "gemini": {
+      "existingTabControl": "timed_out"
+    },
+    "chatgpt": {
+      "pageControlAttempted": false
+    },
+    "windows": {
+      "appInventory": "native_pipe_unavailable",
+      "screenshotCaptured": false,
+      "debugPermissionButtonObserved": false,
+      "debugPermissionButtonClicked": false
+    }
+  },
+  "classification": "blocked_runtime",
+  "websiteAuthentication": "not_inferred_from_browser_control_failure",
+  "consumerContractsCaptured": 0,
+  "authenticatedHttpReplays": 0,
+  "generationCreateRequests": 0,
+  "credentialValuesPersisted": false,
+  "nextRequiredEvidence": "Working page control through the selected Chrome connection, followed by observed service requests and independent protected HTTP readback"
+}

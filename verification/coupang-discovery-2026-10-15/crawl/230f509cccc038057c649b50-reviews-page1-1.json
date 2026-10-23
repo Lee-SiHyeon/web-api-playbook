@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:36:00.134Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/178105049/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 21463,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 1,
+      "countPerPage": 5,
+      "totalCount": 81,
+      "totalPages": 17,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "175402531",
+        "productId": "178105049",
+        "rating": 5,
+        "itemName": "[제주] 우도선상낚시",
+        "reviewedAt": 1623678462000
+      },
+      {
+        "reviewId": "155433545",
+        "productId": "178105049",
+        "rating": 5,
+        "itemName": "[제주] 우도선상낚시",
+        "reviewedAt": 1616369347000
+      },
+      {
+        "reviewId": "126271274",
+        "productId": "178105049",
+        "rating": 5,
+        "itemName": "[제주] 우도선상낚시",
+        "reviewedAt": 1599473168000
+      },
+      {
+        "reviewId": "112208051",
+        "productId": "178105049",
+        "rating": 4,
+        "itemName": "[제주] 우도선상낚시",
+        "reviewedAt": 1588681966000
+      },
+      {
+        "reviewId": "105356945",
+        "productId": "178105049",
+        "rating": 5,
+        "itemName": "마라도왕복여객선+에코랜드",
+        "reviewedAt": 1583632461000
+      }
+    ]
+  },
+  "projectionSha256": "90124a8fe8a28358098cdeaa2782b792b472c77b51434b8bb8826ce43bd0b5dc",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "recordType": "grok-media-source-bound-run",
+  "requirementId": "artifact.image.download",
+  "observedAt": "2026-10-06T12:25:23.193Z",
+  "sourceExecution": {
+    "capturedAt": "2026-10-06T12:25:08.387Z",
+    "capturedBeforeDispatch": true,
+    "stableThroughReadback": true,
+    "codeSha256": {
+      "scripts/grok_media_image_asset_readback.mjs": "24632dd34d6d8351c34725b37293262d2740b13563fe0ba175c0c585b98ace95",
+      "scripts/grok_media_image_asset_readback_once.py": "b6839c71e0bb107cb73e726ef444094b617a52c45ea8d55c9b8447de2b5fc53c",
+      "scripts/grok_media_capture_guard.py": "91088b38517e928059b3554c4291969c6caf7bbda8d81c5a8a16b0e5ed9c0104",
+      "scripts/grok_media_asset_download.py": "a0229c2f5dbef0d3dd69ee9706fad4cbc2cf6f5914980b5e804b7ed5ef495eb9",
+      "src/grok-media-api.mjs": "5b40d4eefe6c54d47ebf322027a7fd935b06d2a47d143df06bc60363c9f11bc0",
+      "src/grok-media-asset-reader.mjs": "a18f59304772f1601f170755b46c7e27c597a79b1f44cc0bcd56f734e264e276",
+      "src/grok-media-proof-receipts.mjs": "11eb83389d2ab5bd4b1cea6d6eee10a4fc14ae7f9ce43d9334d98c74ffe4d8ab",
+      "src/feature-checklist.mjs": "04b2ac83efeabe4a724b7bfbe1616d68ef14d94d8b8c370d823c738fdc5663fd",
+      "src/runtime.mjs": "9a98d7e64f3b5cf7128dc421420c31d3cff9f0e6a5507a84742a65182284e34e",
+      "src/client.mjs": "fbc42db06aada43768e7b20f10e5279a62414be0b57be90682164f2a1c51534c",
+      "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b",
+      "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+      "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+      "src/journal.mjs": "eb5ae0dd987ca2b9551a0fe007ab853e0c671b4d6173907bd9e15a2a2f8ccef7",
+      "src/nonsecret-json-store.mjs": "4dcbdc335d0499bc6f76e0b25c04d16b5c6b14e4fe5eb74b5735681bf1777b8b",
+      "src/protected-json-store.mjs": "bf0b397609efb94bbb06dbbb43d476a97ec4854ba00ec58c4a3962c34e61351e",
+      "src/authenticated-chrome-fetch.mjs": "b4db2f6cb2d601f40526bd0690d63b165b1ad3f8c26f32c2e5c386717213bf34",
+      "scripts/authenticated-chrome-transport.py": "fd538ac05d96585630bee2ff3e243ddbed2f4b1f0dc0f0868e658a252e9a8a58",
+      "contracts/grok-web.v1.json": "97bc3099a8a9ef53b30e7e5fa727d092425f2bc2bf1ada3c026c815ca4130afc",
+      "contracts/grok-feature-checklist.v1.json": "26168bbb8c121f73136ef94fb2825454966354e4def9c85a45ab1855e6cc227b"
+    }
+  },
+  "owner": {
+    "canonicalSha256": "529c36ddd8d88cc6308aa5470ef31d913ec4389d84d072b94445ced09e4e2365",
+    "identityReceiptSha256": "529c36ddd8d88cc6308aa5470ef31d913ec4389d84d072b94445ced09e4e2365",
+    "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "proofPath": "verification/owner-proofs/529c36ddd8d88cc6308aa5470ef31d913ec4389d84d072b94445ced09e4e2365.json",
+    "sameAuthenticatedOwner": true,
+    "verified": true
+  },
+  "requestDigest": "9a7181fc22fcb681294527dc9f407eab8f67e1729970dcb1b2664ade4b366903",
+  "intentDigest": "9901151c1dd4c5b375adbda26c62716e044ce60c30a7c56df9d18260ea08efa5",
+  "promptSha256": "fa21011b6f00c49841b25a44f8c83edcc04489b9fe630e9ce071afb5f2a811eb",
+  "browserCapture": {
+    "captureMode": "native_read_capture",
+    "pageRoleMatched": true,
+    "intentMatched": true,
+    "requestCaptured": true,
+    "businessActionBlocked": false,
+    "networkFailureCorrelated": false,
+    "browserBusinessWritesDelivered": 0,
+    "browserResponseCount": 1,
+    "rawRequestPersisted": false,
+    "rawResponsePersisted": false
+  },
+  "directTransport": {
+    "transport": "asset_http",
+    "origin": "https://assets.grok.com",
+    "path": "/users/{owner}/generated/{assetKey}",
+    "method": "GET",
+    "requestStarted": true,
+    "responseReceived": true,
+    "httpStatus": 200,
+    "responseMime": "image/jpeg",
+    "responseBytes": 184352,
+    "responseDigest": "7f4405dc7fd1fbcb08ba4b0ace69a89ef3fdbd007be8086a3abc71c1ac4b4d56",
+    "directDispatchCount": 1,
+    "automaticRetries": 0,
+    "tlsVerified": true,
+    "redirectsFollowed": false,
+    "trustEnv": false,
+    "attemptCount": 1
+  },
+  "operationReadbacks": [
+    {
+      "operationId": "media.assets.list",
+      "httpStatus": 200,
+      "responseBytes": 13799,
+      "responseDigest": "52800d49454f77ab23406afb4bf2da34377b62c1f01ab8abfddee57064fa0bf9",
+      "responseDigestKind": "raw_http_body"
+    },
+    {
+      "operationId": "conversation.read",
+      "httpStatus": 200,
+      "responseBytes": 432,
+      "responseDigest": "09f38c22eef6c4676f1a2a710f317997345c6f754a9561352ffb6b911bdb6a83",
+      "responseDigestKind": "raw_http_body"
+    },
+    {
+      "operationId": "history.response-nodes",
+      "httpStatus": 200,
+      "responseBytes": 251,
+      "responseDigest": "7fc10959194447ad47b2e0f6d005d7a5acd859bf3bd855ae692077718550a12c",
+      "responseDigestKind": "raw_http_body"
+    },
+    {
+      "operationId": "history.load-responses",
+      "httpStatus": 200,
+      "responseBytes": 8099,
+      "responseDigest": "a1b14624fde1720d3cc3b395b289a473af721904560d9edb32e0bc596b20f987",
+      "responseDigestKind": "raw_http_body"
+    }
+  ],
+  "semanticReadback": {
+    "taskBoundToIntent": true,
+    "exactPromptMatched": true,
+    "assetOwnerVerified": true,
+    "assetPromptMatched": true,
+    "sourceConversationMatched": true
+  },
+  "artifacts": [
+    {
+      "httpStatus": 200,
+      "mimeType": "image/jpeg",
+      "bytes": 184352,
+      "sha256": "7f4405dc7fd1fbcb08ba4b0ace69a89ef3fdbd007be8086a3abc71c1ac4b4d56",
+      "magicVerified": true,
+      "independentFileReadback": true,
+      "taskAssetMatched": true
+    }
+  ],
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false,
+    "rawFramesPersisted": false,
+    "assetBytesPersisted": false,
+    "assetIdsPersisted": false,
+    "promptPersisted": false,
+    "rawIdsOrKeysOrUrlsPersisted": false,
+    "cookiesOrTokensPersisted": false
+  }
+}

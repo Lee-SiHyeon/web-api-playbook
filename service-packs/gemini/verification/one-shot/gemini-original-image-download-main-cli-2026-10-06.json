@@ -1,0 +1,122 @@
+{
+  "schema": "gemini-original-image-download-main-cli-v1",
+  "service": "gemini-web",
+  "feature": "original_image_download",
+  "operation": "c8o8Fe",
+  "outcome": "verified",
+  "verifiedAt": "2026-10-06T09:03:26.874821+00:00",
+  "entryPoint": {
+    "command": "src/cli.mjs original-image-download --envelope-stdin --expect-owner",
+    "ownerGatePassed": true,
+    "outputStatus": "verified",
+    "structuredResultReturned": true,
+    "taskReadback": {
+      "rpcId": "hNvQHb",
+      "httpStatus": 200,
+      "rpcMatchCount": 1,
+      "taskPromptMatched": true,
+      "apiConversationIdMatched": true,
+      "visibleRouteBound": true
+    }
+  },
+  "normalUiSourceCapture": {
+    "pageRole": "codex-gemini-image-fullsize-20261006",
+    "originalSizeControlObserved": true,
+    "controlEnabled": true,
+    "controlClicked": true,
+    "browserDownloadEventSeen": true,
+    "c8o8FeRequestCount": 1,
+    "c8o8FeResponseCount": 1,
+    "c8o8FeHttpStatus": 200,
+    "c8o8FeContentType": "application/json",
+    "c8o8FeResponseBytes": 531,
+    "decodedResultKind": "one HTTPS download URL",
+    "argumentTopLevelCount": 5,
+    "normalSdkPreparedArgumentsRequired": true
+  },
+  "directHttpReplay": {
+    "dispatchCount": 1,
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 532,
+    "xssiPrefix": true,
+    "framing": {
+      "unit": "utf16_code_units",
+      "overheadUnits": 2,
+      "frameCount": 2
+    },
+    "taskBound": true,
+    "sizeTransform": {
+      "sourceFunction": "vPd",
+      "setSize": 0,
+      "observedSuffixLength": 4
+    },
+    "assetChain": [
+      {
+        "origin": "https://lh3.googleusercontent.com",
+        "pathFamily": "/gg/{id}",
+        "httpStatus": 200,
+        "contentType": "text/plain",
+        "responseBytes": 590,
+        "requestExtraInfoObserved": true,
+        "cookieNameCount": 0
+      },
+      {
+        "origin": "https://lh3.google.com",
+        "pathFamily": "/rd-gg/{id}",
+        "httpStatus": 200,
+        "contentType": "text/plain",
+        "responseBytes": 1503,
+        "requestExtraInfoObserved": true,
+        "cookieNameCount": 18,
+        "cookieScopesValidated": true
+      },
+      {
+        "origin": "https://lh3.googleusercontent.com",
+        "pathFamily": "/rd-gg/{id}",
+        "httpStatus": 200,
+        "contentType": "image/png",
+        "responseBytes": 7585633,
+        "requestExtraInfoObserved": true,
+        "cookieNameCount": 0
+      }
+    ],
+    "finalMimeMagicMatched": true,
+    "independentFileReadback": true
+  },
+  "artifactComparison": {
+    "actualArtifact": "/home/worker/artifacts/gemini-media-20261006/gemini-image-teal-sphere-white-cube-20261006.full-size.cli-direct-http-v7.png",
+    "independentUiArtifact": "/home/worker/artifacts/gemini-media-20261006/gemini-image-teal-sphere-white-cube-20261006.full-size.ui-native-verified.png",
+    "bytes": 7585633,
+    "dimensions": {
+      "width": 2816,
+      "height": 1536
+    },
+    "sha256": "577b4a42dabfc0d854450052062e8c687288b9751b60c4beb1da0617f5a3be62",
+    "exactByteMatch": true
+  },
+  "guard": {
+    "blockedBusinessPosts": 62,
+    "webSocketBusinessFramesForwarded": 0
+  },
+  "limitations": {
+    "sourcePreparedC8RequestRequired": true,
+    "opaqueArgumentsSynthesized": false,
+    "newImageGenerationPerformed": false
+  },
+  "sourceSnapshot": {
+    "src/cli.mjs": "d69be2b3c8a975f3ba569716752166709804c58bd333bdf4ab8b022dbf0461e5",
+    "src/client.mjs": "7589eaa3354b5e4db372fdfa8e9d1a9c8fb71dbdccb5ba1a49b1db7810963f4c",
+    "src/original-image-download.mjs": "ef9f38adea89f3c98049ad08f5b2e708810c3f3a47864321836b67fd49d2e6c6",
+    "discovery/observed-contract.json": "357c3dfab4ea5321c8b4e8d723ceeed661d22818ace4af4fd00b329e57547cb3",
+    "discovery/gemini-original-image-download-contract-fragment-2026-10-06.json": "b5dc688516cb94c1c78c8fc0ab320070afa70a1d8aa3400aaa2a982d4398bbf8"
+  },
+  "persistence": {
+    "rawPromptPersisted": false,
+    "rawConversationIdPersisted": false,
+    "rawSignedUrlPersisted": false,
+    "rawCookieValuesPersisted": false,
+    "rawRequestBodyPersisted": false,
+    "rawResponseBodyPersisted": false
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "claimBoundaries": {
+    "assistantRoleSemanticBindingVerified": false,
+    "attachmentChainFeaturePromoted": false,
+    "cookiesOrTokensPersisted": false,
+    "directBusinessWriteSent": false,
+    "rawConversationOrResponseIdsPersisted": false,
+    "rawPromptPersisted": false,
+    "rawRequestResponseOrDomTextPersisted": false,
+    "streamGenerateResponseIdObserved": false,
+    "streamGenerateResponseIdSemanticallyBoundToHnvTurnId": false
+  },
+  "evidenceClass": "source_runtime_hnv_field_correlation",
+  "evidenceScope": "one_registered_owner_page_read_only_source_probe",
+  "recordedAt": "2026-10-06T14:17:38.614Z",
+  "schemaVersion": 1,
+  "serviceId": "gemini-web",
+  "sourceCaptures": [
+    {
+      "anonymousOwnerAbsent": true,
+      "browserClosed": false,
+      "bytes": 68076,
+      "capturedAt": "2026-10-06T13:33:07.440477+00:00",
+      "contextClosed": false,
+      "hNvExactTargetMatched": true,
+      "hNvReadThroughCount": 1,
+      "historyDetailExactPromptMatched": true,
+      "historyDetailHttpStatus": 200,
+      "historyDetailRouteBindingMatched": true,
+      "historyDetailRpcMatchCount": 1,
+      "historyDetailTaskIntentMatched": true,
+      "mode": "0600",
+      "ownerMatched": true,
+      "pageRoleRegistered": true,
+      "promptHnvPath": [
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "promptSha256": "87bf3a9ecd11121c6864a91a36f3f07989021deaa2bdacb214b9e066aaca5117",
+      "promptUtf8Bytes": 97,
+      "rawPayloadOrIdentifiersPersisted": false,
+      "resetQuietVerified": true,
+      "scratchPath": ".nad-scratch/tmp/gemini-hnv-source-map-readonly-20261006T133307Z.json",
+      "sha256": "379dda58a3f39400f242ba70ddf2eaa881d219be850802224cfc365b0414b993",
+      "targetMarkerMatched": true
+    },
+    {
+      "anonymousOwnerAbsent": true,
+      "browserClosed": false,
+      "bytes": 40716,
+      "capturedAt": "2026-10-06T13:41:16.841176+00:00",
+      "contextClosed": false,
+      "hNvExactTargetMatched": true,
+      "hNvReadThroughCount": 1,
+      "historyDetailExactPromptMatched": true,
+      "historyDetailHttpStatus": 200,
+      "historyDetailRouteBindingMatched": true,
+      "historyDetailRpcMatchCount": 1,
+      "historyDetailTaskIntentMatched": true,
+      "mode": "0600",
+      "ownerMatched": true,
+      "pageRoleRegistered": true,
+      "promptHnvPath": [
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "promptSha256": "87bf3a9ecd11121c6864a91a36f3f07989021deaa2bdacb214b9e066aaca5117",
+      "promptUtf8Bytes": 97,
+      "rawPayloadOrIdentifiersPersisted": false,
+      "resetQuietVerified": true,
+      "scratchPath": ".nad-scratch/tmp/gemini-hnv-source-map-readonly-20261006T134116Z.json",
+      "sha256": "2cb7d0cc4c8d8182addba503789dba9b52281c2a8fa7c965c8a8cf9e512f8996",
+      "targetMarkerMatched": true
+    }
+  ],
+  "sourceCorrelation": {
+    "assistantRoleMapVerified": false,
+    "candidateObjectSharedWithComponentData": true,
+    "directHistoryPromptMatchesSourceProbe": true,
+    "directHistoryPromptSha256": "87bf3a9ecd11121c6864a91a36f3f07989021deaa2bdacb214b9e066aaca5117",
+    "hNvFields": [
+      {
+        "pathMatchCount": 1,
+        "rawHnvPaths": [
+          [
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "runtimeField": "response.turnId",
+        "sha256": "5e53e92963dee51e1b28a5935b7600a0cca4c5c376223127ef2bbc26c90dcff8",
+        "utf8Bytes": 18
+      },
+      {
+        "pathMatchCount": 2,
+        "rawHnvPaths": [
+          [
+            0,
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            3
+          ]
+        ],
+        "runtimeField": "response.Ya.id",
+        "sha256": "e3a8917033dcb45e5ec84eb847e3823fa940e06f978df79c91ece84fb3df7dcb",
+        "utf8Bytes": 19
+      },
+      {
+        "pathMatchCount": 1,
+        "rawHnvPaths": [
+          [
+            0,
+            0,
+            3,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "runtimeField": "response.Ya.vda",
+        "sha256": "58d79f81028349a878b49344c3da17fea87aae3170606255a91b3462b0847a33",
+        "utf8Bytes": 128
+      },
+      {
+        "pathMatchCount": 1,
+        "rawHnvPaths": [
+          [
+            0,
+            0,
+            3,
+            12,
+            0,
+            0,
+            2,
+            1,
+            2
+          ]
+        ],
+        "runtimeField": "response.Ya.structuredContent.children[2].text",
+        "sha256": "b0b05aecb86c8c4388d29b046498f66f89a62ebc962ad1ba42af74b9dbbda42b",
+        "utf8Bytes": 13
+      }
+    ],
+    "primaryCaptureScratchPath": ".nad-scratch/tmp/gemini-hnv-source-map-readonly-20261006T133307Z.json",
+    "readerImplementation": {
+      "capturedAtSourceProbe": false,
+      "path": "src/history-turn-response.mjs",
+      "relativePathsMatchObservedHnvShape": true,
+      "sha256AtReceiptTime": "1669d8f814a669ba354bf4cb65755107be6a7b95ba7a98602e3a82938ee6ebf7"
+    },
+    "runtimeSourcePathSha256": "c5a5126e382f3520bb042cf45a13556db85b1e19fc13c6b58701b0bfad13d971",
+    "runtimeSourceSha256": "a4f0ddd44a05c353b72a60708d1780ddf743da4cd13c30f210eb89fd2998dcc9",
+    "sourceBreakpointCount": 2,
+    "sourceBreakpointInstalled": true,
+    "sourceBreakpointPauseCount": 9,
+    "sourceBreakpointRemoved": true,
+    "sourceBreakpointUnmatchedCount": 3,
+    "sourceProbePromptDomHashMatchCount": 2,
+    "sourceProbePromptMatchesDirectHistoryPrompt": true,
+    "sourceProbePromptSha256": "87bf3a9ecd11121c6864a91a36f3f07989021deaa2bdacb214b9e066aaca5117",
+    "sourceProbePromptUtf8Bytes": 97,
+    "structuredObjectSharedWithComponentData": true,
+    "structuredTextDomHashMatchCount": 1,
+    "uiRuntimeSameActiveTurnObject": false
+  }
+}

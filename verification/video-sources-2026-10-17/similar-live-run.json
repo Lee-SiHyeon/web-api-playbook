@@ -1,0 +1,135 @@
+{
+  "schema": "video-sources-similar-run-v1",
+  "checkedAt": "2026-10-17T13:05:00Z",
+  "seed": {
+    "title": "IRIN PJ88C 접이식 디지털 피아노 88키 휴대용 블루투스 MIDI",
+    "imageHost": "ae-pic-a1.aliexpress-media.com",
+    "imageHash": "2a36786080b0b0ac"
+  },
+  "keywords": {
+    "ko": "접이식 디지털 피아노 88키",
+    "zh": "折叠电钢琴 88键",
+    "en": "folding digital piano 88 key",
+    "provider": "agy"
+  },
+  "sources": {
+    "1688": {
+      "keyword": "折叠电钢琴 88键",
+      "found": 60,
+      "used": 30,
+      "httpStatus": null
+    },
+    "aliexpress": {
+      "keyword": "접이식 디지털 피아노 88키",
+      "found": 60,
+      "used": 30,
+      "httpStatus": 200
+    },
+    "amazon": {
+      "keyword": "folding digital piano 88 key",
+      "found": 49,
+      "used": 30,
+      "httpStatus": 200
+    }
+  },
+  "judge": {
+    "provider": "agy",
+    "judged": 25
+  },
+  "top": [
+    {
+      "source": "aliexpress",
+      "id": "1005013075520990",
+      "verdict": "same",
+      "score": 1,
+      "modelMatch": [
+        "PJ88C"
+      ],
+      "imageDistance": 6,
+      "hasVideo": true,
+      "price": 136297,
+      "currency": "KRW"
+    },
+    {
+      "source": "1688",
+      "id": "707398236915",
+      "verdict": "same",
+      "score": 0.9469,
+      "modelMatch": [
+        "PJ88C"
+      ],
+      "imageDistance": 29,
+      "hasVideo": true,
+      "price": "460",
+      "currency": "CNY"
+    },
+    {
+      "source": "amazon",
+      "id": "B0GCD8VG45",
+      "verdict": "type",
+      "score": 0.6563,
+      "modelMatch": [],
+      "imageDistance": 22,
+      "hasVideo": false,
+      "price": null,
+      "currency": null
+    },
+    {
+      "source": "1688",
+      "id": "1044739368480",
+      "verdict": "type",
+      "score": 0.6406,
+      "modelMatch": [],
+      "imageDistance": 23,
+      "hasVideo": true,
+      "price": "390",
+      "currency": "CNY"
+    },
+    {
+      "source": "amazon",
+      "id": "B0D561M3PS",
+      "verdict": "type",
+      "score": 0.6406,
+      "modelMatch": [],
+      "imageDistance": 23,
+      "hasVideo": true,
+      "price": null,
+      "currency": null
+    },
+    {
+      "source": "amazon",
+      "id": "B0GX55PRZM",
+      "verdict": "type",
+      "score": 0.625,
+      "modelMatch": [],
+      "imageDistance": 24,
+      "hasVideo": false,
+      "price": null,
+      "currency": null
+    },
+    {
+      "source": "1688",
+      "id": "1086961870131",
+      "verdict": "type",
+      "score": 0.5938,
+      "modelMatch": [],
+      "imageDistance": 26,
+      "hasVideo": false,
+      "price": "177.2",
+      "currency": "CNY"
+    },
+    {
+      "source": "amazon",
+      "id": "B0HB4B3Q25",
+      "verdict": "type",
+      "score": 0.5938,
+      "modelMatch": [],
+      "imageDistance": 26,
+      "hasVideo": false,
+      "price": null,
+      "currency": null
+    }
+  ],
+  "notes": "Run 1 (per-source 15, no model-code boost) found the 1688 PJ88C OEM offer; run 2 missed it (search drift); run 3 (per-source 30 + model-code boost) ranked both PJ88C listings first. Image dHash distances 22-29 for different sellers: weak signal.",
+  "secretsPersistedInEvidence": false
+}

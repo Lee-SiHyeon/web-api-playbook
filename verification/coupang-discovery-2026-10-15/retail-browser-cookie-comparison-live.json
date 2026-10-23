@@ -1,0 +1,1364 @@
+{
+  "schema": "coupang-browser-cookie-comparison-v1",
+  "checkedAt": "2026-10-15T02:59:12.428Z",
+  "sourceCapturedAt": "2026-10-15T02:55:57.815Z",
+  "browserResponse": {
+    "status": 200,
+    "mime": "text/x-component",
+    "protocol": "h2"
+  },
+  "source": "actual_current_origin_browser_request_header",
+  "transport": "node_native_fetch",
+  "operation": "retail_search_rsc",
+  "inputSource": "observed_browser_request",
+  "cookieValuesPersisted": false,
+  "browserUsedForTransport": false,
+  "browserUsedForInputs": true,
+  "nonCookieHeadersChanged": false,
+  "headerScope": "Same five observed RSC application headers in each variant; native Node transport headers",
+  "tlsImpersonation": false,
+  "retries": 0,
+  "redirectsFollowed": false,
+  "visitorBootstraps": 0,
+  "writesSubmitted": 0,
+  "ownerAuthenticationVerified": false,
+  "wholeOperationBrowserIndependent": false,
+  "runs": [
+    {
+      "name": "browser_visitor_only",
+      "inputAgeMs": 194794,
+      "requestCount": 1,
+      "exactCookieHeaderSent": true,
+      "ok": false,
+      "code": "COUPANG_RSC_HTTP_403",
+      "receipt": {
+        "origin": "https://www.coupang.com",
+        "path": "/np/search",
+        "queryFields": [
+          "q",
+          "channel",
+          "sorter",
+          "_rsc"
+        ],
+        "headerNames": [
+          "rsc",
+          "next-url",
+          "next-router-state-tree",
+          "referer",
+          "accept"
+        ],
+        "authenticationMode": "observed_browser_cookie",
+        "cookieSent": true,
+        "ownerCredentialUsed": "not_determined_from_cookie_names",
+        "browserUsedForTransport": false,
+        "inputSource": "observed_browser_request",
+        "runtimeInputsPersisted": false,
+        "status": 403,
+        "contentType": "text/html",
+        "server": "AkamaiGHost",
+        "retries": 0,
+        "redirectsFollowed": false,
+        "bytes": 536,
+        "bodySha256": "88d81c28c93c65f2ba0e12e825b06fefd994f6c61d8c0204324fdd9e455c29f7",
+        "accessDeniedTitle": true,
+        "cookieNames": [
+          "x-coupang-target-market",
+          "x-coupang-accept-language",
+          "PCID"
+        ],
+        "credentialSource": "current_origin_cdp_request",
+        "credentialPropagated": true,
+        "outgoingHeaderNames": [
+          "rsc",
+          "next-url",
+          "next-router-state-tree",
+          "referer",
+          "accept",
+          "cookie",
+          "accept-language",
+          "sec-fetch-mode",
+          "user-agent",
+          "accept-encoding"
+        ]
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": "transport_only_browser_inputs_required",
+        "credential_propagated": true,
+        "live_replay": false
+      }
+    },
+    {
+      "name": "browser_visitor_plus_akamai",
+      "inputAgeMs": 196058,
+      "requestCount": 1,
+      "exactCookieHeaderSent": true,
+      "ok": false,
+      "code": "COUPANG_RSC_HTTP_403",
+      "receipt": {
+        "origin": "https://www.coupang.com",
+        "path": "/np/search",
+        "queryFields": [
+          "q",
+          "channel",
+          "sorter",
+          "_rsc"
+        ],
+        "headerNames": [
+          "rsc",
+          "next-url",
+          "next-router-state-tree",
+          "referer",
+          "accept"
+        ],
+        "authenticationMode": "observed_browser_cookie",
+        "cookieSent": true,
+        "ownerCredentialUsed": "not_determined_from_cookie_names",
+        "browserUsedForTransport": false,
+        "inputSource": "observed_browser_request",
+        "runtimeInputsPersisted": false,
+        "status": 403,
+        "contentType": "text/html",
+        "server": "envoy",
+        "retries": 0,
+        "redirectsFollowed": false,
+        "bytes": 3436,
+        "bodySha256": "5e6fb905eab04159e4d62a612b47a4277b6c1912f877a6e8b3f1750052a7b1c4",
+        "accessDeniedTitle": false,
+        "cookieNames": [
+          "x-coupang-target-market",
+          "x-coupang-accept-language",
+          "PCID",
+          "bm_mi",
+          "bm_so",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_sz",
+          "bm_s",
+          "_abck",
+          "bm_sv"
+        ],
+        "credentialSource": "current_origin_cdp_request",
+        "credentialPropagated": true,
+        "outgoingHeaderNames": [
+          "rsc",
+          "next-url",
+          "next-router-state-tree",
+          "referer",
+          "accept",
+          "cookie",
+          "accept-language",
+          "sec-fetch-mode",
+          "user-agent",
+          "accept-encoding"
+        ]
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": "transport_only_browser_inputs_required",
+        "credential_propagated": true,
+        "live_replay": false
+      }
+    },
+    {
+      "name": "browser_full_cookie_header",
+      "inputAgeMs": 198212,
+      "requestCount": 1,
+      "exactCookieHeaderSent": true,
+      "ok": true,
+      "checkedAt": "2026-10-15T02:59:16.027Z",
+      "executionMode": "pure_http_with_observed_inputs",
+      "receipt": {
+        "origin": "https://www.coupang.com",
+        "path": "/np/search",
+        "queryFields": [
+          "q",
+          "channel",
+          "sorter",
+          "_rsc"
+        ],
+        "headerNames": [
+          "rsc",
+          "next-url",
+          "next-router-state-tree",
+          "referer",
+          "accept"
+        ],
+        "authenticationMode": "observed_browser_cookie",
+        "cookieSent": true,
+        "ownerCredentialUsed": "not_determined_from_cookie_names",
+        "browserUsedForTransport": false,
+        "inputSource": "observed_browser_request",
+        "runtimeInputsPersisted": false,
+        "status": 200,
+        "contentType": "text/x-component",
+        "server": "envoy",
+        "retries": 0,
+        "redirectsFollowed": false,
+        "bytes": 1627919,
+        "bodySha256": "bb860230ad3b2c3addcbba246789cec61582d6300dee31ce77217bc28ea922cd",
+        "accessDeniedTitle": false,
+        "cookieNames": [
+          "x-coupang-target-market",
+          "x-coupang-accept-language",
+          "PCID",
+          "sg_local_id",
+          "MARKETID",
+          "trac_src",
+          "trac_spec",
+          "trac_addtag",
+          "trac_ctag",
+          "trac_lptag",
+          "trac_itime",
+          "gd1",
+          "AFATK",
+          "cf_clearance",
+          "_ga_RCWXX8WZKQ",
+          "sid",
+          "_ga",
+          "_ga_MM7Y29P0HZ",
+          "travelSearchCondition",
+          "authCodeVerifier",
+          "authLoginChallenge",
+          "CT_LSID",
+          "authLoginSessionId",
+          "authRedirectUri",
+          "bm_mi",
+          "bm_so",
+          "ak_bmsc",
+          "bm_lso",
+          "bm_sz",
+          "bm_s",
+          "_abck",
+          "bm_sv",
+          "x-cp-s"
+        ],
+        "credentialSource": "current_origin_cdp_request",
+        "credentialPropagated": true,
+        "outgoingHeaderNames": [
+          "rsc",
+          "next-url",
+          "next-router-state-tree",
+          "referer",
+          "accept",
+          "cookie",
+          "accept-language",
+          "sec-fetch-mode",
+          "user-agent",
+          "accept-encoding"
+        ]
+      },
+      "data": {
+        "kind": "retail_rsc_listing",
+        "sourceUrl": "https://www.coupang.com/np/search?q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4&channel=relate&sorter=salePriceAsc",
+        "products": [
+          {
+            "productId": "9748657596",
+            "itemId": "29188614223",
+            "vendorItemId": "96169615097",
+            "productUrl": "https://www.coupang.com/vp/products/9748657596?itemId=29188614223&vendorItemId=96169615097&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "무소음 무선 마우스 2.4GHz 좌우대칭 블랙, JD577, 1개",
+            "price": {
+              "amount": 900,
+              "currency": "KRW",
+              "label": "900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 3,000원 조건부 무료배송",
+            "sponsored": false,
+            "rating": null,
+            "reviewCount": null
+          },
+          {
+            "productId": "7626373741",
+            "itemId": "20230510367",
+            "vendorItemId": "91816891001",
+            "productUrl": "https://www.coupang.com/vp/products/7626373741?itemId=20230510367&vendorItemId=91816891001&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "TGICCOMPUTER TGC-WM4100 무선 마우스 화이트 (USB), 선택하세요",
+            "price": {
+              "amount": 3180,
+              "currency": "KRW",
+              "label": "3,180",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,500원",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 76
+          },
+          {
+            "productId": "8565282190",
+            "itemId": "24808854390",
+            "vendorItemId": "91816452841",
+            "productUrl": "https://www.coupang.com/vp/products/8565282190?itemId=24808854390&vendorItemId=91816452841&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "(RHINO GEAR) 무선 마우스 라이노기어 RG-WM02 저소음 블랙",
+            "price": {
+              "amount": 3300,
+              "currency": "KRW",
+              "label": "3,300",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,500원",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 14
+          },
+          {
+            "productId": "4919504214",
+            "itemId": "6444042472",
+            "vendorItemId": "93857693858",
+            "productUrl": "https://www.coupang.com/vp/products/4919504214?itemId=6444042472&vendorItemId=93857693858&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "Murray 충전식 블루투스 무선마우스, 실버그레이, BM-350",
+            "price": {
+              "amount": 3900,
+              "currency": "KRW",
+              "label": "3,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,500원",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 126
+          },
+          {
+            "productId": "8074993853",
+            "itemId": "25055064300",
+            "vendorItemId": "92059469183",
+            "productUrl": "https://www.coupang.com/vp/products/8074993853?itemId=25055064300&vendorItemId=92059469183&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "홈플래닛 저소음 조약돌 슬림 & 패블디자인 무선마우스, CM101, 블랙",
+            "price": {
+              "amount": 4380,
+              "currency": "KRW",
+              "label": "4,380",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 2113
+          },
+          {
+            "productId": "8074993853",
+            "itemId": "22745100957",
+            "vendorItemId": "89780330567",
+            "productUrl": "https://www.coupang.com/vp/products/8074993853?itemId=22745100957&vendorItemId=89780330567&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "홈플래닛 저소음 조약돌 슬림 & 패블디자인 무선마우스, CM101, 화이트",
+            "price": {
+              "amount": 4380,
+              "currency": "KRW",
+              "label": "4,380",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 2113
+          },
+          {
+            "productId": "9025752700",
+            "itemId": "26470135778",
+            "vendorItemId": "93966066609",
+            "productUrl": "https://www.coupang.com/vp/products/9025752700?itemId=26470135778&vendorItemId=93966066609&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "넷메이트 NM-MS03 무선 마우스 3단계 DPI 설정 5버튼 광센서, 블랙, 10m",
+            "price": {
+              "amount": 4400,
+              "currency": "KRW",
+              "label": "4,400",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 3,000원",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 8
+          },
+          {
+            "productId": "5511006107",
+            "itemId": "8590493466",
+            "vendorItemId": "75877780157",
+            "productUrl": "https://www.coupang.com/vp/products/5511006107?itemId=8590493466&vendorItemId=75877780157&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "TGIC 저소음 무선 마우스, 블랙, DJWM-3200",
+            "price": {
+              "amount": 4480,
+              "currency": "KRW",
+              "label": "4,480",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 1404
+          },
+          {
+            "productId": "8790277927",
+            "itemId": "25584168856",
+            "vendorItemId": "92635018496",
+            "productUrl": "https://www.coupang.com/vp/products/8790277927?itemId=25584168856&vendorItemId=92635018496&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "지클릭커 마들렌 미니 블루투스 듀얼 모드 무선 마우스, 블랙, OP25",
+            "price": {
+              "amount": 4730,
+              "currency": "KRW",
+              "label": "4,730",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3130
+          },
+          {
+            "productId": "8790277927",
+            "itemId": "25584168852",
+            "vendorItemId": "92627206377",
+            "productUrl": "https://www.coupang.com/vp/products/8790277927?itemId=25584168852&vendorItemId=92627206377&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "지클릭커 마들렌 미니 블루투스 듀얼 모드 무선 마우스, PINK, OP25",
+            "price": {
+              "amount": 4730,
+              "currency": "KRW",
+              "label": "4,730",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3130
+          },
+          {
+            "productId": "8790277927",
+            "itemId": "25584168854",
+            "vendorItemId": "92627206363",
+            "productUrl": "https://www.coupang.com/vp/products/8790277927?itemId=25584168854&vendorItemId=92627206363&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "지클릭커 마들렌 미니 블루투스 듀얼 모드 무선 마우스, GREEN, OP25",
+            "price": {
+              "amount": 4730,
+              "currency": "KRW",
+              "label": "4,730",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3130
+          },
+          {
+            "productId": "8790277927",
+            "itemId": "26898938698",
+            "vendorItemId": "93868390741",
+            "productUrl": "https://www.coupang.com/vp/products/8790277927?itemId=26898938698&vendorItemId=93868390741&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "지클릭커 마들렌 미니 블루투스 듀얼 모드 무선 마우스, 스카이블루, OP25",
+            "price": {
+              "amount": 4730,
+              "currency": "KRW",
+              "label": "4,730",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3130
+          },
+          {
+            "productId": "8790277927",
+            "itemId": "26898938702",
+            "vendorItemId": "93868390737",
+            "productUrl": "https://www.coupang.com/vp/products/8790277927?itemId=26898938702&vendorItemId=93868390737&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "지클릭커 마들렌 미니 블루투스 듀얼 모드 무선 마우스, 레트로, OP25",
+            "price": {
+              "amount": 4730,
+              "currency": "KRW",
+              "label": "4,730",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3130
+          },
+          {
+            "productId": "9130999231",
+            "itemId": "26867400545",
+            "vendorItemId": "93837036011",
+            "productUrl": "https://www.coupang.com/vp/products/9130999231?itemId=26867400545&vendorItemId=93837036011&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "PLEIGO 블루투스 리시버 듀얼 파스텔 무소음 무선 마우스, BLACK, M30",
+            "price": {
+              "amount": 4500,
+              "currency": "KRW",
+              "label": "4,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 698
+          },
+          {
+            "productId": "9130999231",
+            "itemId": "26867400539",
+            "vendorItemId": "93837036010",
+            "productUrl": "https://www.coupang.com/vp/products/9130999231?itemId=26867400539&vendorItemId=93837036010&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "PLEIGO 블루투스 리시버 듀얼 파스텔 무소음 무선 마우스, WHITE, M30",
+            "price": {
+              "amount": 4500,
+              "currency": "KRW",
+              "label": "4,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 698
+          },
+          {
+            "productId": "9037114012",
+            "itemId": "26512316762",
+            "vendorItemId": "93486855115",
+            "productUrl": "https://www.coupang.com/vp/products/9037114012?itemId=26512316762&vendorItemId=93486855115&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "스마텍 리시버 블루투스 겸용 무소음 무선 마우스, 블랙, STM-BT1200",
+            "price": {
+              "amount": 4700,
+              "currency": "KRW",
+              "label": "4,700",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 1397
+          },
+          {
+            "productId": "9037114012",
+            "itemId": "26512362790",
+            "vendorItemId": "93486901162",
+            "productUrl": "https://www.coupang.com/vp/products/9037114012?itemId=26512362790&vendorItemId=93486901162&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "스마텍 블루투스 리시버 겸용 무선 듀얼 무소음 마우스, 화이트, STM-BT1200",
+            "price": {
+              "amount": 4700,
+              "currency": "KRW",
+              "label": "4,700",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 1397
+          },
+          {
+            "productId": "6237678978",
+            "itemId": "12571797557",
+            "vendorItemId": "79839956592",
+            "productUrl": "https://www.coupang.com/vp/products/6237678978?itemId=12571797557&vendorItemId=79839956592&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "맥스틸 무소음 무선 마우스, GM-WN100L, 블랙",
+            "price": {
+              "amount": 5330,
+              "currency": "KRW",
+              "label": "5,330",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 10
+          },
+          {
+            "productId": "4971807634",
+            "itemId": "20168327280",
+            "vendorItemId": "87260584270",
+            "productUrl": "https://www.coupang.com/vp/products/4971807634?itemId=20168327280&vendorItemId=87260584270&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "홈플래닛 저소음 슬림 메탈 휠 무선 마우스, HP-04, 핑크",
+            "price": {
+              "amount": 6290,
+              "currency": "KRW",
+              "label": "6,290",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 10393
+          },
+          {
+            "productId": "88292067",
+            "itemId": "276407861",
+            "vendorItemId": "3670652464",
+            "productUrl": "https://www.coupang.com/vp/products/88292067?itemId=276407861&vendorItemId=3670652464&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "플레오맥스 무선마우스, MOC-WM10, 혼합색상",
+            "price": {
+              "amount": 6330,
+              "currency": "KRW",
+              "label": "6,330",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 2308
+          },
+          {
+            "productId": "8727320238",
+            "itemId": "25354159012",
+            "vendorItemId": "94401228808",
+            "productUrl": "https://www.coupang.com/vp/products/8727320238?itemId=25354159012&vendorItemId=94401228808&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "강원전자 넷메이트 NM-MS03 무선 마우스, 본상품선택, 본상품선택",
+            "price": {
+              "amount": 6400,
+              "currency": "KRW",
+              "label": "6,400",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 29
+          },
+          {
+            "productId": "4971807634",
+            "itemId": "6602194665",
+            "vendorItemId": "73896221830",
+            "productUrl": "https://www.coupang.com/vp/products/4971807634?itemId=6602194665&vendorItemId=73896221830&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "홈플래닛 저소음 슬림 메탈 휠 무선 마우스, HP-04, 화이트",
+            "price": {
+              "amount": 6490,
+              "currency": "KRW",
+              "label": "6,490",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 10393
+          },
+          {
+            "productId": "289424332",
+            "itemId": "916170773",
+            "vendorItemId": "94341019495",
+            "productUrl": "https://www.coupang.com/vp/products/289424332?itemId=916170773&vendorItemId=94341019495&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "앱코 사무용 노트북 무선 마우스, WM410, 블랙",
+            "price": {
+              "amount": 6500,
+              "currency": "KRW",
+              "label": "6,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 168
+          },
+          {
+            "productId": "6126315654",
+            "itemId": "11649800362",
+            "vendorItemId": "78924248346",
+            "productUrl": "https://www.coupang.com/vp/products/6126315654?itemId=11649800362&vendorItemId=78924248346&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "큐센 무선 마우스 M1000, QSENN M1000, 블랙",
+            "price": {
+              "amount": 6620,
+              "currency": "KRW",
+              "label": "6,620",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3244
+          },
+          {
+            "productId": "9682073567",
+            "itemId": "28952701920",
+            "vendorItemId": "95883232515",
+            "productUrl": "https://www.coupang.com/vp/products/9682073567?itemId=28952701920&vendorItemId=95883232515&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "큐센 저소음 무선 마우스, 슈팅스타, M7314",
+            "price": {
+              "amount": 6630,
+              "currency": "KRW",
+              "label": "6,630",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 7
+          },
+          {
+            "productId": "310774469",
+            "itemId": "980281605",
+            "vendorItemId": "5397453085",
+            "productUrl": "https://www.coupang.com/vp/products/310774469?itemId=980281605&vendorItemId=5397453085&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "홈플래닛 저소음 조약돌 슬림디자인 무선마우스, HP-01, 블랙",
+            "price": {
+              "amount": 7290,
+              "currency": "KRW",
+              "label": "7,290",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 26631
+          },
+          {
+            "productId": "310774469",
+            "itemId": "18667129661",
+            "vendorItemId": "85801575522",
+            "productUrl": "https://www.coupang.com/vp/products/310774469?itemId=18667129661&vendorItemId=85801575522&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "홈플래닛 저소음 조약돌 슬림디자인 무선마우스, HP-01, 베이지",
+            "price": {
+              "amount": 7290,
+              "currency": "KRW",
+              "label": "7,290",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 26631
+          },
+          {
+            "productId": "9735873299",
+            "itemId": "29136448543",
+            "vendorItemId": "96060240067",
+            "productUrl": "https://www.coupang.com/vp/products/9735873299?itemId=29136448543&vendorItemId=96060240067&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "지클릭커 마들렌 미니 무선 블루투스 듀얼모드 마우스 + 마우스패드, 퍼플, OP25+마우스패드",
+            "price": {
+              "amount": 7400,
+              "currency": "KRW",
+              "label": "7,400",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 1
+          },
+          {
+            "productId": "9735873299",
+            "itemId": "29136448547",
+            "vendorItemId": "96060240063",
+            "productUrl": "https://www.coupang.com/vp/products/9735873299?itemId=29136448547&vendorItemId=96060240063&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "지클릭커 마들렌 미니 무선 블루투스 듀얼모드 마우스 + 마우스패드, 옐로우, OP25+마우스패드",
+            "price": {
+              "amount": 7400,
+              "currency": "KRW",
+              "label": "7,400",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 1
+          },
+          {
+            "productId": "9146400135",
+            "itemId": "26927679842",
+            "vendorItemId": "93896917201",
+            "productUrl": "https://www.coupang.com/vp/products/9146400135?itemId=26927679842&vendorItemId=93896917201&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "COX 2.4GHz 저소음 무선 마우스, 블랙, CWM40",
+            "price": {
+              "amount": 7900,
+              "currency": "KRW",
+              "label": "7,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 113
+          },
+          {
+            "productId": "7965058338",
+            "itemId": "22034704477",
+            "vendorItemId": "92976085442",
+            "productUrl": "https://www.coupang.com/vp/products/7965058338?itemId=22034704477&vendorItemId=92976085442&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "TGIC 무선 광마우스 TGC-WM4100 블랙 화이트., 무선 TGC-WM4100 블랙",
+            "price": {
+              "amount": 7600,
+              "currency": "KRW",
+              "label": "7,600",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 32
+          },
+          {
+            "productId": "310774469",
+            "itemId": "980281611",
+            "vendorItemId": "5397453104",
+            "productUrl": "https://www.coupang.com/vp/products/310774469?itemId=980281611&vendorItemId=5397453104&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "홈플래닛 저소음 조약돌 슬림디자인 무선마우스, HP-01, 화이트",
+            "price": {
+              "amount": 7690,
+              "currency": "KRW",
+              "label": "7,690",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 26631
+          },
+          {
+            "productId": "1079878687",
+            "itemId": "2031785509",
+            "vendorItemId": "70031247574",
+            "productUrl": "https://www.coupang.com/vp/products/1079878687?itemId=2031785509&vendorItemId=70031247574&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "필립스 M404 사무용 무선 마우스, SPK7404, 혼합 색상",
+            "price": {
+              "amount": 7730,
+              "currency": "KRW",
+              "label": "7,730",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 39
+          },
+          {
+            "productId": "1258237514",
+            "itemId": "2259135133",
+            "vendorItemId": "88082412978",
+            "productUrl": "https://www.coupang.com/vp/products/1258237514?itemId=2259135133&vendorItemId=88082412978&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "플레오맥스 저소음 무선 마우스, MOC-WM60, 블랙",
+            "price": {
+              "amount": 7900,
+              "currency": "KRW",
+              "label": "7,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 158
+          },
+          {
+            "productId": "8243214327",
+            "itemId": "23722081860",
+            "vendorItemId": "90843835607",
+            "productUrl": "https://www.coupang.com/vp/products/8243214327?itemId=23722081860&vendorItemId=90843835607&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "[PLEOMAX] PBM-20 무선 블루투스 듀얼 무소음 마우스",
+            "price": {
+              "amount": 7900,
+              "currency": "KRW",
+              "label": "7,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 116
+          },
+          {
+            "productId": "9371214938",
+            "itemId": "27814215293",
+            "vendorItemId": "94774025869",
+            "productUrl": "https://www.coupang.com/vp/products/9371214938?itemId=27814215293&vendorItemId=94774025869&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "다오 무소음 무선마우스 미니 사무용 2.4G 10M 1600dpi, 화이트, wm26",
+            "price": {
+              "amount": 7900,
+              "currency": "KRW",
+              "label": "7,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 43
+          },
+          {
+            "productId": "5723539122",
+            "itemId": "9581222921",
+            "vendorItemId": "95109060347",
+            "productUrl": "https://www.coupang.com/vp/products/5723539122?itemId=9581222921&vendorItemId=95109060347&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "플레오맥스 MOC-WM40 무선 마우스 블랙/레드",
+            "price": {
+              "amount": 7930,
+              "currency": "KRW",
+              "label": "7,930",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 3,000원",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3
+          },
+          {
+            "productId": "6126315654",
+            "itemId": "22732710420",
+            "vendorItemId": "84226406046",
+            "productUrl": "https://www.coupang.com/vp/products/6126315654?itemId=22732710420&vendorItemId=84226406046&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "큐센 QSENN M1000 무선 마우스 (화이트), 화이트",
+            "price": {
+              "amount": 8300,
+              "currency": "KRW",
+              "label": "8,300",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 3244
+          },
+          {
+            "productId": "6851234189",
+            "itemId": "16321817113",
+            "vendorItemId": "83513896979",
+            "productUrl": "https://www.coupang.com/vp/products/6851234189?itemId=16321817113&vendorItemId=83513896979&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "펜톤 컴팩트 무소음 무선 마우스, COMPACT P, 라이트 핑크",
+            "price": {
+              "amount": 8360,
+              "currency": "KRW",
+              "label": "8,360",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 2256
+          },
+          {
+            "productId": "7566284617",
+            "itemId": "19944587636",
+            "vendorItemId": "87043738104",
+            "productUrl": "https://www.coupang.com/vp/products/7566284617?itemId=19944587636&vendorItemId=87043738104&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "코시 무소음 무선 마우스, M4091WL, 블랙",
+            "price": {
+              "amount": 8500,
+              "currency": "KRW",
+              "label": "8,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 139
+          },
+          {
+            "productId": "9701846615",
+            "itemId": "29022833590",
+            "vendorItemId": "95950507284",
+            "productUrl": "https://www.coupang.com/vp/products/9701846615?itemId=29022833590&vendorItemId=95950507284&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "필립스 3000 시리즈 무선 마우스 SPK7347, 화이트, W/97",
+            "price": {
+              "amount": 8640,
+              "currency": "KRW",
+              "label": "8,640",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,500원 조건부 무료배송",
+            "sponsored": false,
+            "rating": null,
+            "reviewCount": null
+          },
+          {
+            "productId": "9337251327",
+            "itemId": "27688270778",
+            "vendorItemId": "94650167117",
+            "productUrl": "https://www.coupang.com/vp/products/9337251327?itemId=27688270778&vendorItemId=94650167117&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "코시 멀티 충전식 무소음 블루투스 무선 마우스, 블랙, M4161WLBTR",
+            "price": {
+              "amount": 10500,
+              "currency": "KRW",
+              "label": "10,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 80
+          },
+          {
+            "productId": "9553314047",
+            "itemId": "28505104588",
+            "vendorItemId": "95454830730",
+            "productUrl": "https://www.coupang.com/vp/products/9553314047?itemId=28505104588&vendorItemId=95454830730&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "멀티페어링 C타입 마우스 충전식 저소음 초경량 듀얼 블루투스 무선 마우스, 블랙",
+            "price": {
+              "amount": 8970,
+              "currency": "KRW",
+              "label": "8,970",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 3,000원",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 8
+          },
+          {
+            "productId": "9552714191",
+            "itemId": "28503035549",
+            "vendorItemId": "95452826942",
+            "productUrl": "https://www.coupang.com/vp/products/9552714191?itemId=28503035549&vendorItemId=95452826942&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "컴스 블루투스 5.1 2.4Ghz 충전식 저소음 가벼운 듀얼모드 마우스, White, AB077",
+            "price": {
+              "amount": 8970,
+              "currency": "KRW",
+              "label": "8,970",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 37
+          },
+          {
+            "productId": "8205484503",
+            "itemId": "23534376226",
+            "vendorItemId": "90560080421",
+            "productUrl": "https://www.coupang.com/vp/products/8205484503?itemId=23534376226&vendorItemId=90560080421&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "Cosy 휴대용 미니 무소음 블루투스 무선 마우스 노트북 맥북 아이패드 갤럭시탭 삼성 갤럭시북 아이폰 갤럭시 태블릿 핸드폰 추천, 화이트, SilentMouseBT",
+            "price": {
+              "amount": 9690,
+              "currency": "KRW",
+              "label": "9,690",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 28
+          },
+          {
+            "productId": "7721038206",
+            "itemId": "20721960814",
+            "vendorItemId": "88520669617",
+            "productUrl": "https://www.coupang.com/vp/products/7721038206?itemId=20721960814&vendorItemId=88520669617&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "맥스틸 무소음 버티컬 무선 마우스, GM-WEM100, Black",
+            "price": {
+              "amount": 10230,
+              "currency": "KRW",
+              "label": "10,230",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 961
+          },
+          {
+            "productId": "41571273",
+            "itemId": "151344271",
+            "vendorItemId": "4753207515",
+            "productUrl": "https://www.coupang.com/vp/products/41571273?itemId=151344271&vendorItemId=4753207515&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "엑토 갤럭시 무선 광마우스, MSC-175, 블랙",
+            "price": {
+              "amount": 9800,
+              "currency": "KRW",
+              "label": "9,800",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,900원",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 91
+          },
+          {
+            "productId": "6643180935",
+            "itemId": "15194459766",
+            "vendorItemId": "82415625896",
+            "productUrl": "https://www.coupang.com/vp/products/6643180935?itemId=15194459766&vendorItemId=82415625896&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "아이리버 6버튼 무소음 무선마우스, 크림레몬, MEDIC-WM5",
+            "price": {
+              "amount": 9890,
+              "currency": "KRW",
+              "label": "9,890",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 78
+          },
+          {
+            "productId": "9570458065",
+            "itemId": "28564364639",
+            "vendorItemId": "95508875319",
+            "productUrl": "https://www.coupang.com/vp/products/9570458065?itemId=28564364639&vendorItemId=95508875319&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "창이로운 무소음 무선 마우스 독서실 사무실, 화이트, ERW2",
+            "price": {
+              "amount": 9900,
+              "currency": "KRW",
+              "label": "9,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4,
+            "reviewCount": 5
+          },
+          {
+            "productId": "4673203669",
+            "itemId": "5845687905",
+            "vendorItemId": "96120307197",
+            "productUrl": "https://www.coupang.com/vp/products/4673203669?itemId=5845687905&vendorItemId=96120307197&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "펭수 저소음 무선 마우스, VSA-WLMOUSE20, 블랙",
+            "price": {
+              "amount": 9900,
+              "currency": "KRW",
+              "label": "9,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 201
+          },
+          {
+            "productId": "8552506476",
+            "itemId": "24764868060",
+            "vendorItemId": "74243269269",
+            "productUrl": "https://www.coupang.com/vp/products/8552506476?itemId=24764868060&vendorItemId=74243269269&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "로지텍 무선마우스, M185, Gray",
+            "price": {
+              "amount": 9990,
+              "currency": "KRW",
+              "label": "9,990",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,500원 조건부 무료배송",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 343
+          },
+          {
+            "productId": "239293538",
+            "itemId": "760696416",
+            "vendorItemId": "93822267071",
+            "productUrl": "https://www.coupang.com/vp/products/239293538?itemId=760696416&vendorItemId=93822267071&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "코시 볼트 무선 마우스, 블랙, M3394WL",
+            "price": {
+              "amount": 9500,
+              "currency": "KRW",
+              "label": "9,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 5
+          },
+          {
+            "productId": "7210026442",
+            "itemId": "18243733582",
+            "vendorItemId": "85390613290",
+            "productUrl": "https://www.coupang.com/vp/products/7210026442?itemId=18243733582&vendorItemId=85390613290&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "스톰엑스 제닉스 무소음 무선 마우스 WM1, STORMX WM1, 블랙",
+            "price": {
+              "amount": 10400,
+              "currency": "KRW",
+              "label": "10,400",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 4175
+          },
+          {
+            "productId": "7210026442",
+            "itemId": "18243733586",
+            "vendorItemId": "85390613303",
+            "productUrl": "https://www.coupang.com/vp/products/7210026442?itemId=18243733586&vendorItemId=85390613303&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "스톰엑스 제닉스 무소음 무선 마우스 WM1, STORMX WM1, 화이트",
+            "price": {
+              "amount": 10400,
+              "currency": "KRW",
+              "label": "10,400",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 4175
+          },
+          {
+            "productId": "4321329583",
+            "itemId": "5029910759",
+            "vendorItemId": "82815202941",
+            "productUrl": "https://www.coupang.com/vp/products/4321329583?itemId=5029910759&vendorItemId=82815202941&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "PANWEST PW815 팬웨스트 무소음 무선마우스 4color, 라이트 블루, 선택하세요",
+            "price": {
+              "amount": 10500,
+              "currency": "KRW",
+              "label": "10,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 901
+          },
+          {
+            "productId": "9510055911",
+            "itemId": "28339318137",
+            "vendorItemId": "95336055650",
+            "productUrl": "https://www.coupang.com/vp/products/9510055911?itemId=28339318137&vendorItemId=95336055650&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "로지텍 무소음 블루투스 마우스 M240 라벤더 국내달일발송 출 고 예 정",
+            "price": {
+              "amount": 10500,
+              "currency": "KRW",
+              "label": "10,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 3,900원",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 25
+          },
+          {
+            "productId": "2352716938",
+            "itemId": "4081597100",
+            "vendorItemId": "82815202927",
+            "productUrl": "https://www.coupang.com/vp/products/2352716938?itemId=4081597100&vendorItemId=82815202927&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "팬웨스트 무선 마우스, PANWEST-PW815, 라이트핑크",
+            "price": {
+              "amount": 10500,
+              "currency": "KRW",
+              "label": "10,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 3624
+          },
+          {
+            "productId": "2352716938",
+            "itemId": "4081597098",
+            "vendorItemId": "72065610445",
+            "productUrl": "https://www.coupang.com/vp/products/2352716938?itemId=4081597098&vendorItemId=72065610445&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "팬웨스트 무선 마우스, PANWEST-PW815, 블랙",
+            "price": {
+              "amount": 10500,
+              "currency": "KRW",
+              "label": "10,500",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,500원",
+            "sponsored": false,
+            "rating": 5,
+            "reviewCount": 3624
+          },
+          {
+            "productId": "1632219714",
+            "itemId": "2784142109",
+            "vendorItemId": "74243269502",
+            "productUrl": "https://www.coupang.com/vp/products/1632219714?itemId=2784142109&vendorItemId=74243269502&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "로지텍 무선마우스, Gray, M170",
+            "price": {
+              "amount": 10690,
+              "currency": "KRW",
+              "label": "10,690",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "배송비 2,500원 조건부 무료배송",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 310
+          },
+          {
+            "productId": "150982056",
+            "itemId": "435941907",
+            "vendorItemId": "4077186481",
+            "productUrl": "https://www.coupang.com/vp/products/150982056?itemId=435941907&vendorItemId=4077186481&q=%EB%AC%B4%EC%84%A0%EB%A7%88%EC%9A%B0%EC%8A%A4",
+            "title": "아이리버 무소음 무선 마우스, EQwear-V10, 블랙",
+            "price": {
+              "amount": 11900,
+              "currency": "KRW",
+              "label": "11,900",
+              "basis": "rsc_displayed_sales_price",
+              "accountApplied": false
+            },
+            "shippingLabel": "",
+            "sponsored": false,
+            "rating": 4.5,
+            "reviewCount": 2136
+          }
+        ],
+        "pagination": {
+          "hasNext": null,
+          "completeCatalog": false
+        },
+        "membershipEligibilityVerified": false
+      },
+      "projectionSha256": "8fd80df5c4e3b6464413e93dd4455222046e9e11776415556b6457ac088d1a80",
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": "transport_only_browser_inputs_required",
+        "credential_propagated": true,
+        "live_replay": true
+      }
+    }
+  ],
+  "endedAt": "2026-10-15T02:59:16.027Z",
+  "browserDomVerification": {
+    "checkedAt": "2026-10-15T03:00:29.873Z",
+    "domRows": 62,
+    "directHttpProducts": 60,
+    "exactIdentityAndTitleMatches": 60,
+    "displayedPriceMatches": 60,
+    "source": "current_rendered_sorted_search",
+    "completeCatalog": false
+  }
+}

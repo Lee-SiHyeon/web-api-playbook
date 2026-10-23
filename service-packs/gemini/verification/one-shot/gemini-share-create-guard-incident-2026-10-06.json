@@ -1,0 +1,40 @@
+{
+  "schema": "gemini-share-create-guard-incident-v1",
+  "service": "gemini-web",
+  "feature": "share",
+  "stage": "share_create",
+  "outcome": "possible_browser_request_escape_unconfirmed",
+  "recordedAt": "2026-10-06T02:47:45.676216+00:00",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "guard": {
+    "failureClass": "request_url_origin_parse_exception",
+    "failClosedAtTheTime": false,
+    "browserRequestReachedServer": "unknown",
+    "requestOrResponseBodyPersisted": false
+  },
+  "separateDirectDispatch": {
+    "dispatchCount": 1,
+    "httpStatus": 200,
+    "rpcResponseDecoded": false,
+    "retryCount": 0
+  },
+  "ownerEvidence": {
+    "preOperationLinkCount": 7,
+    "laterOwnerLinkCount": 9,
+    "exactTaskRowsObserved": 2,
+    "rowsBoundToTaskContentAndConversation": true,
+    "browserVsDirectCreateAttribution": "unknown"
+  },
+  "handling": {
+    "noFurtherShareCreates": true,
+    "bothVerifiedTaskLinksRevoked": true,
+    "ownerListRestoredToBaseline7": true,
+    "incidentKeptSeparateFromDirectDispatch": true
+  },
+  "persistence": {
+    "shareIdsPersisted": false,
+    "shareUrlsPersisted": false,
+    "conversationIdsPersisted": false,
+    "rawRequestOrResponseBodiesPersisted": false
+  }
+}

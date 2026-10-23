@@ -1,0 +1,542 @@
+{
+  "schema": "playbook-audit-comparison-v1",
+  "checkedAt": "2026-10-15T16:57:07.007Z",
+  "beforePath": "verification/playbook-path-audit-2026-10-15/audit.json",
+  "afterPath": "verification/remaining-problems-audit-2026-10-16-final/audit.json",
+  "before": {
+    "manifestCount": 41,
+    "auditedServices": 41,
+    "allManifestAuditsCompleted": true,
+    "allReferencedFilesPresent": false,
+    "capabilities": 379,
+    "byStatus": {
+      "blocked": 71,
+      "code_inventory": 3,
+      "needs_reverification": 29,
+      "not_applicable": 66,
+      "pending_live": 16,
+      "pending_local_test": 17,
+      "recorded_live": 54,
+      "scope_unknown": 10,
+      "source_candidate": 30,
+      "unimplemented": 83
+    },
+    "byPriority": {
+      "conditional": 23,
+      "optional": 93,
+      "required": 263
+    },
+    "requiredGaps": 212,
+    "unmappedEntrypoints": 120,
+    "declaredRuntimeEntrypoints": 3,
+    "tests": {},
+    "allRequiredGatesPassed": false,
+    "currentRemoteReadiness": "not_established_by_offline_audit"
+  },
+  "after": {
+    "manifestCount": 42,
+    "auditedServices": 42,
+    "allManifestAuditsCompleted": true,
+    "allReferencedFilesPresent": false,
+    "capabilities": 387,
+    "byStatus": {
+      "blocked": 67,
+      "code_inventory": 3,
+      "needs_reverification": 5,
+      "not_applicable": 66,
+      "pending_live": 16,
+      "pending_local_test": 18,
+      "recorded_live": 84,
+      "scope_unknown": 10,
+      "source_candidate": 30,
+      "unimplemented": 88
+    },
+    "byPriority": {
+      "conditional": 23,
+      "optional": 93,
+      "required": 271
+    },
+    "requiredGaps": 192,
+    "unmappedEntrypoints": 120,
+    "declaredRuntimeEntrypoints": 3,
+    "tests": {},
+    "allRequiredGatesPassed": false,
+    "currentRemoteReadiness": "not_established_by_offline_audit"
+  },
+  "auditErrors": [],
+  "missingReferences": [
+    {
+      "path": "lib/inpock-card-management.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "lib/inpock-collections.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "lib/inpock-content.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "lib/inpock-media.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "lib/retail/ebay-catalog.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "tests/inpock-card-management.test.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "tests/inpock-collections.test.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "tests/inpock-content.test.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "tests/inpock-media.test.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "tests/retail-ebay-catalog.test.mjs",
+      "code": "AUDIT_FILE_MISSING"
+    },
+    {
+      "path": "verification/inpock-profile-edit-live.json",
+      "code": "AUDIT_FILE_MISSING"
+    }
+  ],
+  "interpretation": "Offline status transitions compare recorded evidence and implementation hashes; they do not themselves establish a remote service regression or a fresh live replay.",
+  "added": [
+    {
+      "service": "elevenlabs",
+      "capabilityId": "auth.session_handoff",
+      "status": "pending_local_test",
+      "required": true
+    },
+    {
+      "service": "elevenlabs",
+      "capabilityId": "auth.owner_read",
+      "status": "unimplemented",
+      "required": true
+    },
+    {
+      "service": "elevenlabs",
+      "capabilityId": "voice.options",
+      "status": "unimplemented",
+      "required": true
+    },
+    {
+      "service": "elevenlabs",
+      "capabilityId": "model.options",
+      "status": "unimplemented",
+      "required": true
+    },
+    {
+      "service": "elevenlabs",
+      "capabilityId": "generation.settings",
+      "status": "unimplemented",
+      "required": true
+    },
+    {
+      "service": "elevenlabs",
+      "capabilityId": "generation.create",
+      "status": "unimplemented",
+      "required": true
+    },
+    {
+      "service": "elevenlabs",
+      "capabilityId": "generation.history_readback",
+      "status": "unimplemented",
+      "required": true
+    },
+    {
+      "service": "elevenlabs",
+      "capabilityId": "generation.idempotency",
+      "status": "unimplemented",
+      "required": true
+    }
+  ],
+  "removed": [],
+  "transitions": [
+    {
+      "service": "commerce",
+      "capabilityId": "collection.public_feed",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "commerce",
+      "capabilityId": "collection.public_storefront",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.shopping",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "ebay",
+      "capabilityId": "suggestions.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "auth.owner",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "auth.reuse",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "profile.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "cards.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "stats.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.search_prices",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.product_description",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.options",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.product_images",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.summary",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.body",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.images",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.search_pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "ranking.top_products",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.search",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.product_detail",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.variants",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.sale_price",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.reviews.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.reviews.pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.reviews.variant_filter",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.product_description",
+      "before": "unimplemented",
+      "after": "blocked"
+    },
+    {
+      "service": "shopify",
+      "capabilityId": "catalog.product_detail",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "shopify",
+      "capabilityId": "catalog.predictive_search",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "ulta",
+      "capabilityId": "catalog.common_collector",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "walmart",
+      "capabilityId": "catalog.search",
+      "before": "unimplemented",
+      "after": "blocked"
+    }
+  ],
+  "lostRecordedLive": [],
+  "gainedRecordedLive": [
+    {
+      "service": "commerce",
+      "capabilityId": "collection.public_feed",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "commerce",
+      "capabilityId": "collection.public_storefront",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "creator-access-gaps",
+      "capabilityId": "naver.shopping",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "ebay",
+      "capabilityId": "suggestions.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "auth.owner",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "auth.reuse",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "profile.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "cards.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "inpock",
+      "capabilityId": "stats.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.search_prices",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.product_description",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.options",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.product_images",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.summary",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.body",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.images",
+      "before": "blocked",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "reviews.pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "catalog.search_pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "oliveyoung-public",
+      "capabilityId": "ranking.top_products",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.search",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.product_detail",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.variants",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.sale_price",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.reviews.read",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.reviews.pagination",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "sephora",
+      "capabilityId": "catalog.reviews.variant_filter",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "shopify",
+      "capabilityId": "catalog.product_detail",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "shopify",
+      "capabilityId": "catalog.predictive_search",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    },
+    {
+      "service": "ulta",
+      "capabilityId": "catalog.common_collector",
+      "before": "needs_reverification",
+      "after": "recorded_live"
+    }
+  ]
+}

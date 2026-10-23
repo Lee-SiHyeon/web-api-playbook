@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 1,
+  "id": "adpick-commerce-ontology",
+  "updatedAt": "2026-10-13",
+  "purpose": "Connect Adpick provider listings, exact merchant targets, observed prices and account-scoped link issuance for Vercel. Descriptions and implementation are separate from live account verification.",
+  "classes": [
+    {
+      "id": "AffiliateProgram",
+      "identity": "adpick + offer; offer is not a merchant product ID"
+    },
+    {
+      "id": "AdpickListing",
+      "identity": "sha256(provider buyurl); merchant SKU is null when not observed"
+    },
+    {
+      "id": "MerchantProductTarget",
+      "identity": "exact observed public HTTP or HTTPS merchant URL; preserve option query; profit-link API issuance requires HTTPS"
+    },
+    {
+      "id": "OfferObservation",
+      "identity": "listingId + observedAt",
+      "fields": {
+        "currency": "KRW",
+        "priceKrw": "groups[].list.price_sale parsed from plain or comma-formatted KRW strings",
+        "listPriceKrw": "groups[].list.price_org parsed as KRW integer",
+        "shippingFeeKrw": "null unless observed",
+        "eligibility": "unverified",
+        "stockStatus": "unknown",
+        "observedAt": "RFC3339",
+        "evidencePeriod": "startAt observedAt; endAt null unless observed"
+      }
+    },
+    {
+      "id": "AffiliateLinkIssue",
+      "identity": "configured account digest + stored hub item + exact target URL",
+      "states": [
+        "write_started",
+        "issued",
+        "attached",
+        "needs_reconciliation"
+      ]
+    },
+    {
+      "id": "CollectorReceipt",
+      "identity": "persistent UTC hour slot; each requested SDK has a source receipt"
+    }
+  ],
+  "relations": [
+    {
+      "id": "offeredBy",
+      "domain": "AdpickListing",
+      "range": "AffiliateProgram"
+    },
+    {
+      "id": "hasExactTarget",
+      "domain": "AdpickListing",
+      "range": "MerchantProductTarget",
+      "rule": "No target inferred from title or tracking-link clicks"
+    },
+    {
+      "id": "observedAs",
+      "domain": "AdpickListing",
+      "range": "OfferObservation"
+    },
+    {
+      "id": "linkedBy",
+      "domain": "MerchantProductTarget",
+      "range": "AffiliateLinkIssue",
+      "rule": "Reserve durable intent before dispatch; attach only if current stored target still matches; independently read back"
+    }
+  ],
+  "sources": {
+    "shoppingSdk": {
+      "url": "https://adpick.co.kr/apis/sdk_shopping.php",
+      "guide": "https://www.adpick.co.kr/?ac=guide&tac=sdk&md=shoppingapi",
+      "mode": "pure_http",
+      "auth": "ADPICK_AFFID",
+      "fields": [
+        "groups[].list.product_name",
+        "groups[].list.photo",
+        "groups[].list.mall",
+        "groups[].list.mall_name",
+        "groups[].list.price_sale",
+        "groups[].list.price_org",
+        "groups[].list.commission",
+        "groups[].list.buyurl"
+      ],
+      "state": "vercel_live_read_persisted_and_independently_read_back",
+      "envelope": "Vercel items contains a group array; each group contains list"
+    },
+    "hotdealSdk": {
+      "url": "https://adpick.co.kr/apis/sdk_shopping_hotdeal.php",
+      "guide": "https://www.adpick.co.kr/?ac=guide&tac=sdk&md=hotdealapi",
+      "mode": "pure_http",
+      "auth": "ADPICK_AFFID",
+      "state": "live_http_read_and_mapper_verified"
+    },
+    "profitLink": {
+      "url": "https://deg.kr/cps/click.php",
+      "guide": "https://www.adpick.co.kr/?ac=link&tac=shopping&md=linkapi",
+      "method": "GET",
+      "queryNames": [
+        "apikey",
+        "print",
+        "url"
+      ],
+      "mode": "pure_http",
+      "state": "vercel_replay_verified_persisted_attached_and_independently_read_back"
+    },
+    "privateCatalogAndTools": {
+      "repository": "https://github.com/Lee-SiHyeon/adpick-api",
+      "auth": "ADPICK_COOKIE plus ADPICK_SERVICE_TOKEN",
+      "capabilities": [
+        "search",
+        "malls",
+        "categories",
+        "keywords",
+        "recommend",
+        "links",
+        "report",
+        "campaigns",
+        "banner",
+        "shopbox",
+        "appbox",
+        "native"
+      ],
+      "state": "vercel_private_reads_verified_and_native_owner_link_records_match"
+    },
+    "sdkTrackingLink": {
+      "origin": "https://adpick.co.kr",
+      "path": "/apis/goshopping.php",
+      "queryNames": [
+        "affid",
+        "offer",
+        "url"
+      ],
+      "outerScheme": "HTTPS",
+      "observedMerchantSchemes": [
+        "HTTP",
+        "HTTPS"
+      ],
+      "originalTargetRule": "preserve observed scheme; do not invent HTTPS for legacy HTTP products"
+    }
+  },
+  "runtime": {
+    "providerRepository": "https://github.com/Lee-SiHyeon/adpick-api",
+    "webRepository": "https://github.com/Lee-SiHyeon/lifehackailab-web",
+    "collector": "src/lib/hub/collectors/adpick.ts",
+    "linkRuntime": "src/lib/adpick-runtime.ts",
+    "operatorPage": "/admin/adpick",
+    "cron": "/api/cron/hub-adpick",
+    "listKind": "sample",
+    "sdkCadence": "Alternating one successful SDK surface per UTC hour; known failed read-only collections may resume at most three times after 60-second cooldown; successful slots and uncertain link issues never repeat",
+    "publicRequests": "stored data only"
+  },
+  "invariants": [
+    "Configured credentials do not prove live owner authentication.",
+    "Never store credentials or raw sessions in ontology.",
+    "Never infer sold-out from a missing rotating listing.",
+    "Unknown shipping never supports delivered-price-lowest claims.",
+    "Do not guess merchant, option, seller identity or campaign expiry.",
+    "Link response timeout requires reconciliation, never blind resend.",
+    "DB readback proves persistence/attachment; provider link management and conversion performance need independent evidence."
+  ],
+  "verification": {
+    "asOf": "2026-10-13",
+    "liveOwnerVerified": true,
+    "liveProductLinkVerified": true,
+    "liveSdkPersistenceVerified": true,
+    "ownerEvidence": "task-owned native actor session and matching private link record IDs independently read from Vercel",
+    "productEvidence": "Vercel sdk-link issued one stored-product link; intent attached; result cache and exact target digest independently match",
+    "credentialValuesRecorded": false,
+    "blocker": null,
+    "sdkPersistenceEvidence": {
+      "products": 30,
+      "priced": 30,
+      "affiliateLinks": 30,
+      "observedMerchantUrls": 30,
+      "httpsMerchantTargets": 21,
+      "legacyHttpMerchantTargets": 9,
+      "successfulSlot": "2026-10-13T02:00:00Z",
+      "attempts": 2
+    },
+    "publicProductRedirectVerified": true
+  }
+}

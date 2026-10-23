@@ -81,11 +81,33 @@ test('commerce collection requires matching native output counts and independent
     jsonReadbackMatched:true,csvReadbackMatched:true,fullJsonSha256:'a'.repeat(64),fullCsvSha256:'b'.repeat(64),
     actualRunner:{entrypoint:'scripts/commerce.mjs',exitStatus:0},implementation:f.receipt.implementation};
   const sample={schema:'web-api-product-price-snapshot-v1',executionMode:'pure_http',offers:[{
-    schema:'web-api-product-offer-v1',productId:'1',title:'Observed product',price:{amount:'13.15',currency:'USD'},observedAt:'2026-10-05T00:00:00Z',
+    schema:'web-api-product-offer-v1',productId:'1',title:'Observed product',price:{amount:'13.15',currency:'USD',kind:'retail_list'},priceRange:null,observedAt:'2026-10-05T00:00:00Z',
   }]};
   await writeFile(path.join(f.root,'verification/sample.json'),JSON.stringify(sample));
   await f.save(proof);assert.equal(await f.audit(),'recorded_live');
   for(const fields of [{csvReadbackMatched:false},{csvDataRows:9},{sampleOfferCount:2},{browserUsed:true}]){
     await f.save({...proof,...fields});assert.equal(await f.audit(),'evidence_invalid');
   }
+});
+
+test('commerce collection accepts valid price ranges and rejects malformed bounds or currencies',async t=>{
+  const f=await fixture(t);f.entry.kind='commerce-collection-v1';f.entry.mime='application/zip';
+  f.entry.files.push('verification/sample.json');
+  const proof={schema:'web-api-commerce-collection-proof-v1',service:'partner',capabilityId:'catalog.search',checkedAt:'2026-10-05T00:00:00Z',
+    secretsPersistedInEvidence:false,executionMode:'pure_http',browserUsed:false,credentialsUsed:false,
+    sourceRequest:{...f.receipt.request,mime:'application/zip',anonymous:true,credentialsUsed:false},sampleOfferCount:1,fullOfferCount:10,csvDataRows:10,
+    jsonReadbackMatched:true,csvReadbackMatched:true,fullJsonSha256:'a'.repeat(64),fullCsvSha256:'b'.repeat(64),
+    actualRunner:{entrypoint:'scripts/commerce.mjs',exitStatus:0},implementation:f.receipt.implementation};
+  const base={schema:'web-api-product-offer-v1',productId:'1',title:'Observed price range',price:null,
+    priceRange:{min:{amount:'13.15',currency:'USD',kind:'retail_list'},max:{amount:'15.00',currency:'USD',kind:'retail_list'}},
+    observedAt:'2026-10-05T00:00:00Z'};
+  const saveOffer=async offer=>{
+    await writeFile(path.join(f.root,'verification/sample.json'),JSON.stringify({schema:'web-api-product-price-snapshot-v1',executionMode:'pure_http',offers:[offer]}));
+    await f.save(proof);
+    return f.audit();
+  };
+  assert.equal(await saveOffer(base),'recorded_live');
+  assert.equal(await saveOffer({...base,priceRange:{...base.priceRange,min:{...base.priceRange.min,amount:'16.00'}}}),'evidence_invalid');
+  assert.equal(await saveOffer({...base,priceRange:{...base.priceRange,max:{...base.priceRange.max,currency:'CAD'}}}),'evidence_invalid');
+  assert.equal(await saveOffer({...base,priceRange:{min:base.priceRange.min}}),'evidence_invalid');
 });

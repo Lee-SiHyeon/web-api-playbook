@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "service": "service-operations",
+  "description": "Concrete existing-service CLI bindings. Local tests verify wiring, not current authentication or all remote operations; named live checks have separate reports.",
+  "capabilities": [
+    {
+      "id": "services.catalog_and_cli", "title": "Load concrete service profiles and expose typed CLI/MCP without opening credentials for metadata",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": { "files": [{ "path": "lib/service-operations/index.mjs", "exports": ["createServiceRegistry", "listServiceOperations"] }], "tests": ["tests/service-cli.test.mjs", "tests/service-operations.test.mjs"], "cli": [{ "path": "scripts/playbook.mjs", "tokens": ["service", "verify", "list"] }] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "services.commerce", "title": "Bind implemented commerce/catalog reads and preserve credential requirements",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": { "files": [{ "path": "lib/service-operations/commerce.mjs", "exports": ["definitions"] }], "tests": ["tests/service-operations-commerce.test.mjs"], "cli": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "services.retail", "title": "Bind bounded public retail, Coupang and Japanese storefront reads",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": { "files": [{ "path": "lib/service-operations/retail.mjs", "exports": ["definitions"] }], "tests": ["tests/service-operations-retail.test.mjs"], "cli": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "services.native", "title": "Reuse native prepared providers for safe named social/blog/owner reads",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": { "files": [{ "path": "lib/service-operations/native.mjs", "exports": ["definitions"] }], "tests": ["tests/service-operations-native.test.mjs"], "cli": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "services.travel", "title": "Bind observed travel reads and separate HTTP ASIN discovery from CDP video work",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": { "files": [{ "path": "lib/service-operations/travel.mjs", "exports": ["definitions"] }], "tests": ["tests/service-operations-travel.test.mjs"], "cli": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "services.additional_native", "title": "Bind existing public creator feeds and explicit protected/local session operations",
+      "priority": "required", "applicability": "applicable", "requirement": "local",
+      "implementation": { "files": [{ "path": "lib/service-operations/extras.mjs", "exports": ["definitions"] }], "tests": ["tests/service-operations-extras.test.mjs"], "cli": [] },
+      "evidence": [], "sourceEvidence": []
+    }
+  ]
+}

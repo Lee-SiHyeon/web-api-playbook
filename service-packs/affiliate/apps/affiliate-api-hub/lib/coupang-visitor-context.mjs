@@ -69,8 +69,26 @@ function readScope(target, operation) {
     && ['DATE_DESC', 'ORDER_SCORE_ASC'].includes(url.searchParams.get('sortBy'))
     && url.searchParams.get('ratingSummary') === 'true' && url.searchParams.get('ratings') === ''
     && url.searchParams.get('market') === '';
+  // Public Document routes and the separately captured RSC search. RSC query
+  // fields do not authorize account reads or a generic cookie-export operation.
+  const page = url.searchParams.get('page');
+  const validPage = page === null || /^[1-9]\d{0,3}$/.test(page) && Number(page) <= 1000;
+  const freeFields = ['listSize', 'filterType', 'rating', 'filter'];
+  const hasFreeFilter = freeFields.some(key => url.searchParams.has(key));
+  const isRsc = operation === 'retail_search_rsc';
+  const searchKeys = ['q', 'channel', 'page', 'sorter', ...freeFields, ...(isRsc ? ['_rsc'] : [])];
+  const search = ['retail_search_document','retail_search_rsc'].includes(operation) && url.pathname === '/np/search'
+    && new Set(keys).size === keys.length && keys.every(key => searchKeys.includes(key))
+    && !!url.searchParams.get('q')?.trim() && url.searchParams.get('q').length <= 100
+    && ['user','recent','undefined','relate'].includes(url.searchParams.get('channel')) && validPage
+    && (!isRsc || /^[A-Za-z0-9_-]{1,128}$/.test(url.searchParams.get('_rsc') ?? ''))
+    && (!url.searchParams.has('sorter') || url.searchParams.get('sorter') === 'salePriceAsc')
+    && (!hasFreeFilter || url.searchParams.get('listSize') === '36' && url.searchParams.get('filterType') === 'free'
+      && url.searchParams.get('rating') === '0' && url.searchParams.get('filter') === '');
+  const category = operation === 'retail_category_document' && /^\/np\/categories\/[1-9]\d{0,19}$/.test(url.pathname)
+    && (keys.length === 0 || exactly(['page'])) && validPage;
   if (url.origin !== ORIGIN || url.username || url.password || url.port || url.hash
-    || !sellers && !offers && !goldbox && !reviews)
+    || !sellers && !offers && !goldbox && !reviews && !search && !category)
     fail('COUPANG_VISITOR_OPERATION_SCOPE');
   return url;
 }

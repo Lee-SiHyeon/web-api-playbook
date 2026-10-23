@@ -9,6 +9,15 @@ Carry an observed workflow from discovery to an independently executable HTTP cl
 
 ## Start from the existing evidence
 
+The workflow name does not restrict capture to XMLHttpRequest. Observe the full
+HTTP exchange, including Document navigation, Fetch, XHR, redirects and the
+resources that carry the requested data. Record each resource type accurately.
+When a click sends no new request, trace the initial Document or earlier response;
+parse embedded JSON or HTML through an independent HTTP client when it contains
+the needed data. Do not stop at a responsive tab or report absence of XHR as
+absence of a usable HTTP contract. With bounded CDP buffers, drain events during
+navigation and check truncation before claiming complete request/response pairs.
+
 The default scope for a new service includes a capability checklist, not only login.
 Read `checklists/template.json`, register the applicable functions in
 `checklists/services/<service>.json`, and run `npm run checklist` before delivery.
@@ -22,11 +31,29 @@ Source candidates and no-op calls do not count as live save evidence; report
 historical proof and current implementation-hash freshness separately.
 
 1. Read the project contract, runner and latest relevant receipt. Identify the actual host, account scope, requested operations, and allowed side effects. Prefer a working service pack or project adapter over rediscovery.
-2. Read [login phases and recovery](references/browserless-login-flow.md) and [credential propagation](references/runtime-credential-propagation.md) before opening a browser or requesting another login.
+2. For a service that needs login, pin down the login flow first with [login-flow-first](references/login-flow-first.md). Read [login phases and recovery](references/browserless-login-flow.md) and [credential propagation](references/runtime-credential-propagation.md) before opening a browser or requesting another login.
 3. Distinguish provider readiness from authentication. Use the same protected owner read through the same runner that will perform the business operation. Repair the first failed boundary: provider → consumer → transport → authentication → entitlement → schema.
 4. Preserve the user's earlier authorization. Do not require renewed approval merely because a generic example contains an execution flag. Still obey actual tool/service requirements. For uncertain writes, use the same journal and independent readback before any new attempt.
 
 For commands and installation, start with [README](README.md). For service-specific code and limits, open [service-packs](service-packs/README.md). Historical success is scoped to its date, account, operation and revision; it is not a current session check.
+
+Before cloning a provider repository, inspect `npm run clients` and the
+[consolidation map](references/repository-consolidation.md). Gemini, Grok,
+ChatGPT, both Flow implementations, Whisk, social actions, Adpick and additional
+shopping/travel readers are bundled with their native contracts and tests.
+Use `scripts/client-packs.mjs run --service=... -- ...` or the named npm command
+to preserve original stdin/provider and write guards. `list`/`describe` read
+metadata only; the generic read registry does not replace native writers.
+Run `test:client-packs` and `audit:consolidation` for packaging checks.
+`check:ai` defaults to the bundled Gemini/Grok audits and checks stored receipts.
+Flow's bridge, optional UI backend and creator browser helpers retain their
+declared browser phase. Current authentication and live replay stay separate.
+
+For a shared typed CLI/MCP interface, use [the operation runtime](references/operation-runtime.md).
+Extend a v2 profile or bind an existing adapter rather than replacing working packs.
+Offline `prepare` produces candidates, `check` replays declared reads, and `flow`/`collect`
+resume executable checkpoints; the discovery frontier is not an executable checkpoint.
+Use `npm run test:operations` for the common runtime's synthetic regression tests.
 
 For existing Vercel/Supabase native CLI credentials, follow
 [native cloud operations](references/native-cloud-operations.md). Preserve provider
@@ -35,6 +62,12 @@ entitlement and deployment/domain readback are independent. Resume only the curr
 pending OAuth callback after exact endpoint/state validation; never archive codes
 or replace native credentials with repository files. This package does not ship
 cloud login/deployment adapters.
+
+When deployment or collectors time out, compare per-service database health with
+project status before changing credentials or parsers. Do not skip schema gates,
+call a deployment ACK collection success, or count a different successful source
+as proof for the failed operation. Preserve invocation, persistence and catalog
+readback as separate evidence.
 
 For official creator tools and guides, use
 [source capabilities](references/official-source-capabilities.md). Keep public
@@ -96,6 +129,19 @@ and keep cross-service email equality unverified. Full domain-inventory
 pagination and the record-write candidate remain explicit gaps. See
 [`references/gabia-login-dns.md`](references/gabia-login-dns.md) and
 [`checklists/services/gabia.json`](checklists/services/gabia.json).
+
+For overseas marketplace crawling, read
+[official API first](references/overseas-official-api-first.md),
+[anti-bot detection](references/anti-bot-boundaries.md),
+[geo/locale/currency](references/geo-locale-currency.md),
+[region egress](references/region-egress-proxy.md),
+[rate-limit backoff](references/rate-limit-backoff.md),
+[pagination patterns](references/pagination-patterns.md),
+[sanctioned session refresh](references/session-refresh-sanctioned.md), and
+[legal/ToS notes](references/legal-tos-overseas.md).
+Prefer Creators API / AliExpress Affiliate / network feeds; keep Temu, SHEIN,
+iHerb and AliExpress Portals link-generate gaps in their checklists until live receipts exist.
+Reuse `lib/commerce/backoff.mjs` for classification and bounded read retries.
 
 For anonymous foreign storefront reads, reuse
 [the public retail clients and exact limits](references/retail-public-apis.md).
@@ -164,6 +210,12 @@ rebootstrap or retry a rate-limited job. Use the explicit Python HTTP transport
 dependency, with no browser fallback, and
 keep search/detail/review readiness separate from a successful ranking request.
 
+For Ably (에이블리) fashion rankings, search, product detail, outfits and influencer
+(셀럽) shops, use `scripts/ably.mjs` and [the Ably contract](references/commerce-ably.md).
+It bootstraps a server-issued anonymous token in memory, sends no cookies or login and
+keeps a 3 s request interval. Creator reward enrollment and reward-link creation need a
+logged-in account and stay blocked in [its checklist](checklists/services/ably.json).
+
 ## Establish the execution mode by phase
 
 Record **login acquisition**, **request-input preparation**, **business request**, and **readback** separately.
@@ -193,6 +245,8 @@ Tool interfaces: [discovery tools](references/discovery-tools.md). Connection fa
 - Use [runtime modules](references/runtime-modules.md) for protected storage, transport, session locks and journals. Authorized persistence is supported: Windows DPAPI CurrentUser locally; explicit memory/stdin integration elsewhere. Copying this repository does not copy a login.
 - Treat server cookie rotation, action-token reissuance, expired-session renewal, password login and process restart as separate capabilities. Never downgrade an existing protected credential provider to plaintext for convenience.
 - Use bounded size/time limits and distinct authentication, permission, throttling, transport and schema errors. A 200 login page is a failure. A 403 with unknown cause stays unknown.
+- A MIME mismatch is not an empty result. Inspect bounded HTML for DOM candidates, embedded JSON/Flight and explicit login/denial evidence without executing scripts. Record `parseAttempted`, `parseStatus`, and nullable `productCount`; only validated data can supply a measured count. Never initialize an unmeasured count to zero. Preserve a bounded failed response in authorized encrypted storage when needed for offline diagnosis; keep raw bodies out of Git, stdout and ordinary evidence. See [the Coupang counterexample](references/coupang-retail-vercel-2026-10-17.md).
+- Distinguish all URL-applicable cookies from a historical cookie-name subset, pre-request wire cookies from the post-response jar, and exact cookie propagation from successful business data. Preserve observed request inputs separately from locally derived inputs. A new response or an aged session cannot retroactively classify a discarded earlier body.
 - Read [client reliability](references/client-reliability.md) and [write reconciliation](references/write-and-reconcile.md) before mutations. Reserve output and record intent before sending. A timeout leaves the outcome unknown; no automatic retry of writes.
 
 ## Check and report the actual boundary

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "observationDate": "2026-09-21",
+  "host": "home Windows DESKTOP-TO2H6OD",
+  "operations": [
+    {
+      "name": "myrealtrip.account",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/partner/v1/partners",
+      "queryFields": [],
+      "credentialHeader": "partner-access-token",
+      "requestObserved": true,
+      "authenticatedBrowserResponseObserved": true,
+      "schema": {
+        "result.status": "number == 200",
+        "data.id": "integer",
+        "data.email": "string"
+      },
+      "identityCheck": "Match the expected partner ID and email in memory; return neither value",
+      "clientExists": true,
+      "credentialPropagated": true,
+      "authenticatedLiveReplay": true,
+      "replayEvidence": "partner-account-replay-2026-09-21.json"
+    },
+    {
+      "name": "brandconnect.account",
+      "method": "GET",
+      "origin": "https://gw-brandconnect.naver.com",
+      "path": "/brand-connect/query/me",
+      "queryFields": [],
+      "credentialNames": [
+        "NID_AUT",
+        "NID_SES",
+        "NID_JKL"
+      ],
+      "requiredCredentialNames": [
+        "NID_AUT",
+        "NID_SES"
+      ],
+      "browserRequestObserved": false,
+      "httpRequestVerified": true,
+      "publicSourceEndpointObserved": true,
+      "anonymousHttpResponseObserved": true,
+      "authenticatedBrowserResponseObserved": false,
+      "schema": {
+        "loginId": "string or null",
+        "accountId": "string, number or null",
+        "partner": "boolean",
+        "creator": "boolean",
+        "groupAccount": "boolean"
+      },
+      "identityCheck": "Nonempty loginId must exactly match the expected Naver login ID; null means anonymous even with HTTP 200",
+      "clientExists": true,
+      "credentialPropagated": true,
+      "authenticatedLiveReplay": true,
+      "replayEvidence": "partner-account-replay-2026-09-21.json",
+      "verifiedEntitlement": {
+        "partner": false,
+        "creator": true,
+        "accountAssigned": true
+      }
+    }
+  ],
+  "execution": {
+    "accountHttpTransport": "pure_http",
+    "accountHttpTransportRemnantFree": true,
+    "loginBootstrap": "Normal official login using existing Chrome saved credentials, previously verified in the browser",
+    "sessionHandoff": "Verified one-time current-origin provider directly to independent Node stdin child",
+    "loginRenewal": "unverified",
+    "providerRestartRecovery": "unverified"
+  },
+  "scopeLimits": [
+    "MyRealTrip link generation, airport/airline search and reservation/sales reads are tracked separately in myrealtrip-marketing-contracts.json",
+    "The captured POST /partner/v1/marketing/announcements has unverified semantics and is not replayed",
+    "No bank, settlement, identity-document, or account-setting mutation is implemented",
+    "Brandconnect account read verifies creator=true and partner=false; other business operations remain unverified"
+  ]
+}

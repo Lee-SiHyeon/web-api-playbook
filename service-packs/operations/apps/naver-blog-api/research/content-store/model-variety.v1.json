@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "id": "model-variety",
+  "origin": "owner 2026-09-29: \"머리 포즈가 너무 한결같고 표정도 웃는것만 있냐 … 관련 깃허브 스킬들 없어? 다채로운 표현이?\"",
+  "sources": {
+    "gi2_templates": {
+      "url": "https://github.com/freestylefly/awesome-gpt-image-2/blob/HEAD/docs/templates.md",
+      "stars": 33653,
+      "rule": "Character sheet: define identity anchors (face shape, main hairstyle, outfit markers, proportions) first, then pose and expression; state 'same character, same proportions' before the action list; lock the grid (panel count, numbering) for multi-panel sheets; identity preservation keeps face identity, main hairstyle and expression temperament."
+    },
+    "gi2_style_library": {
+      "url": "https://github.com/freestylefly/awesome-gpt-image-2/blob/HEAD/agents/skills/gpt-image-2-style-library/references/style-library.md",
+      "stars": 33653,
+      "rule": "Character Design Sheet: define identity anchors, outfit, proportions, pose count and layout; keep face, hairstyle and costume consistent; street-snap/phone-documentary looks add negative constraints against staged poses and fake ad lighting."
+    },
+    "facial_expression_skill": {
+      "url": "https://github.com/zhouwei713/facial-expression-prompting",
+      "stars": 33,
+      "rule": "Describe visible anatomy (FACS action units) instead of emotion words; intensity 1–5; avoid an instant full-tooth smile for restrained amusement; perfect bilateral symmetry looks posed or synthetic; strong cheek lift with fully widened eyes is inconsistent."
+    },
+    "facs": {
+      "url": "https://en.wikipedia.org/wiki/Facial_Action_Coding_System",
+      "kind": "standard",
+      "rule": "Ekman & Friesen Facial Action Coding System — the action-unit vocabulary used above."
+    },
+    "cinematic_catalog": {
+      "url": "cinematic-techniques.v1.json (melies.co)",
+      "rule": "Framing and camera-angle slugs for varying the shot."
+    },
+    "nano_banana_prompts": {
+      "url": "https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts",
+      "stars": 13509,
+      "rule": "Largest curated prompt library for Google's image model (Flow/Gemini); browse its portrait/selfie categories when a new look is needed."
+    }
+  },
+  "identityAnchors": {
+    "rule": "Lock these in every prompt, before anything else (gi2_templates).",
+    "persona-01": [
+      "same face as the reference image",
+      "light freckles across nose and cheeks",
+      "warm dark-brown eyes with soft double eyelids and aegyo-sal",
+      "small nose, full lips",
+      "black hair, bob length (shoulder-grazing)",
+      "slim waist, full bust, toned"
+    ]
+  },
+  "expressions": [
+    {
+      "id": "restrained_amusement",
+      "prompt": "mild cheek lift and lip corners rising with a slight asymmetry, outer eyes softly narrowed, lips closed",
+      "facs": "AU6 B + AU12 B (asym)",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "candid_laugh",
+      "prompt": "caught mid-laugh, eyes squeezed almost shut, head tipped back slightly, hand half covering the mouth",
+      "facs": "AU6 D + AU12 D + AU26 B + AU45",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "pensive",
+      "prompt": "neutral soft face, gaze drifting off-camera to the side, lips relaxed and slightly parted, brows at rest",
+      "facs": "AU25 A",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "surprised_delight",
+      "prompt": "brows lifted, upper lids raised, lips parted in a small O, just before a smile breaks",
+      "facs": "AU1+2 C + AU5 B + AU25/26 B",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "focused",
+      "prompt": "concentrating on a task, brows drawn slightly together, lower lids firm, lips pressed",
+      "facs": "AU4 A + AU7 B + AU24 A",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "confident_smirk",
+      "prompt": "one lip corner lifted, mild lid tension, direct gaze into the lens",
+      "facs": "AU12 unilateral B + AU7 A",
+      "source": "facial_expression_skill (contempt/smirk asymmetry)"
+    },
+    {
+      "id": "playful_pout",
+      "prompt": "lips gathered forward in a small pout, one brow raised, teasing look",
+      "facs": "AU18 B + AU2 unilateral A",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "sleepy_soft",
+      "prompt": "heavy relaxed lids, slow blink, faint smile, just woken up",
+      "facs": "AU43 B + AU12 A",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "wistful",
+      "prompt": "inner brows lifted slightly, gaze lowered, lips softly closed, quiet mood",
+      "facs": "AU1 B + AU64",
+      "source": "facial_expression_skill"
+    },
+    {
+      "id": "eating_candid",
+      "prompt": "mid-bite, cheeks full, eyes widening at the taste",
+      "facs": "AU5 A + AU26 B",
+      "source": "facial_expression_skill (visible behavior)"
+    }
+  ],
+  "poses": [
+    {
+      "id": "over_shoulder_walkaway",
+      "prompt": "walking away from the camera, glancing back over her shoulder"
+    },
+    {
+      "id": "profile_window",
+      "prompt": "side profile by a window, chin slightly raised"
+    },
+    {
+      "id": "crouch_street",
+      "prompt": "crouching on her heels on the street, forearms on knees"
+    },
+    {
+      "id": "lean_wall",
+      "prompt": "leaning back against a wall, one knee bent, hands in pockets"
+    },
+    {
+      "id": "hands_in_hair",
+      "prompt": "both hands pushing her hair back from her face"
+    },
+    {
+      "id": "sitting_cross_legged",
+      "prompt": "sitting cross-legged on the floor, leaning forward on her elbows"
+    },
+    {
+      "id": "mid_motion",
+      "prompt": "mid-step, spinning or jumping, slight motion blur on hair and hem"
+    },
+    {
+      "id": "lying_down",
+      "prompt": "lying on her stomach on a bed or grass, chin propped on her hands"
+    },
+    {
+      "id": "back_view",
+      "prompt": "back to the camera, looking at the view"
+    },
+    {
+      "id": "doing_task",
+      "prompt": "absorbed in a task (reading, cooking, tying shoes), not looking at the camera"
+    }
+  ],
+  "hairStyling": {
+    "rule": "Length and color are identity anchors; styling changes. Styling phrases seen in curated prompts: \"ponytail with soft front strands framing her face\", \"half-up with a delicate ribbon\", \"baseball cap\", \"wet-look texture\" (https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts (README, 13.5k stars)); the rest are common hair vocabulary (assumption until checked side by side).",
+    "styles": [
+      "tucked behind one ear",
+      "tiny half-up ponytail",
+      "clipped back with a claw clip",
+      "wet slicked-back after swimming",
+      "windblown messy",
+      "under a baseball cap",
+      "with a knit headband",
+      "low mini ponytail with loose strands",
+      "side part flipped to the other side"
+    ],
+    "sourced": [
+      "ponytail with soft front strands framing her face",
+      "half-up with a ribbon",
+      "under a baseball cap",
+      "wet-look texture"
+    ]
+  },
+  "framingAndAngle": {
+    "from": "cinematic_catalog",
+    "use": [
+      "extreme-close-up",
+      "close-up",
+      "medium-shot",
+      "cowboy-shot",
+      "full-body",
+      "wide-shot",
+      "high-angle",
+      "low-angle",
+      "overhead",
+      "profile",
+      "three-quarter",
+      "over-the-shoulder-frame",
+      "dirty-frame",
+      "reflections"
+    ]
+  },
+  "setRules": [
+    "In one set, no two images share the same expression, pose, hair styling or framing.",
+    "At most one broad full-tooth smile per set (facial_expression_skill: avoid the instant full-tooth smile as a default).",
+    "Keep slight asymmetry in expressions; no perfectly symmetrical faces (facial_expression_skill).",
+    "Candid/phone-documentary sets add 'not a staged pose, no ad lighting' (gi2_style_library)."
+  ],
+  "realism": {
+    "cues": [
+      {
+        "cue": "skin pores, freckles, slight film grain — add imperfections, a too-perfect face looks fake",
+        "source": "https://github.com/freestylefly/awesome-gpt-image-2/blob/HEAD/docs/templates.md (33.6k stars) line 772"
+      },
+      {
+        "cue": "shot on a modern smartphone, ~24–26 mm equivalent wide-angle, handheld front-facing camera, vertical 9:16, natural HDR, realistic smartphone dynamic range, slight computational-photography characteristics, subtle lens softness",
+        "source": "https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts (README, 13.5k stars) (prompt at README line ~1120)"
+      },
+      {
+        "cue": "feel like an authentic smartphone travel photograph rather than a polished professional photograph",
+        "source": "https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts (README, 13.5k stars)"
+      },
+      {
+        "cue": "no perfect bilateral symmetry",
+        "source": "facial_expression_skill"
+      }
+    ]
+  }
+}

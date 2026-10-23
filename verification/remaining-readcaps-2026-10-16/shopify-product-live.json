@@ -1,0 +1,67 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shopify",
+  "capabilityId": "catalog.product_detail",
+  "checkedAt": "2026-10-15T16:11:21.268Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "productHandleMatched": true,
+  "variantCount": 13,
+  "contractProvenance": {
+    "kind": "first_party_documented_api",
+    "sourceURL": "https://shopify.dev/docs/api/ajax/reference/product"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+    "checkedAt": "2026-10-15T16:11:21.268Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 12210,
+    "responseSha256": "cc0ea4b4200da94256580128e1f7536ac32ec578a146e85b4172dc329bd128b4",
+    "schemaVerified": true,
+    "productHandleMatched": true,
+    "currency": "USD",
+    "priceMinorUnitExponent": 2,
+    "priceField": "USD minor units"
+  },
+  "currencyRequest": {
+    "method": "GET",
+    "origin": "https://www.allbirds.com",
+    "path": "/cart.js",
+    "checkedAt": "2026-10-15T16:11:21.796Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "httpStatus": 200,
+    "mime": "text/javascript",
+    "responseBytes": 303,
+    "responseSha256": "f2675f7b367715ddf1f1b4284adb9525596bc46921c5b3a3493cc6c3f728f261",
+    "currency": "USD",
+    "itemCount": 0
+  },
+  "implementation": {
+    "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb",
+    "scripts/retail.mjs": "b406701b501f59af0420bd96f965029d93c7e16c0621cec53eaee04d591ca0ab",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190"
+  },
+  "execution": {
+    "entrypoint": "scripts/retail.mjs",
+    "operation": "product",
+    "exitStatus": 0,
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "credentialsUsed": false,
+    "resultCount": 1
+  }
+}

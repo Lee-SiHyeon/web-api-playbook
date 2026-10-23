@@ -1,0 +1,184 @@
+{
+  "cleanup": {
+    "baselinePrivateIdSetRestored": true,
+    "exactCreatedIdDeleted": true,
+    "finalListStatus": 200,
+    "independentPrivateListAbsenceVerified": true
+  },
+  "identity": {
+    "identityValuePersisted": false,
+    "ownerMatchedExpectedEmailHash": true,
+    "ownerResponseBytes": 648,
+    "ownerResponseSha256": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+    "ownerStatus": 200
+  },
+  "journal": {
+    "attemptCountPerMutation": 1,
+    "path": "/home/worker/.nad-scratch/grok-web-xhr-client/operations.json",
+    "persistent": true,
+    "priorWorkspaceMutations": 0,
+    "provider": "local-nonsecret-json-file",
+    "serviceIdsPersisted": false,
+    "workspaceMutationStates": {
+      "create": "completed",
+      "delete": "completed",
+      "update": "completed"
+    }
+  },
+  "mutations": [
+    {
+      "attemptCount": 1,
+      "method": "POST",
+      "operationId": "workspaces.create",
+      "path": "/rest/workspaces",
+      "readbackIdMatched": true,
+      "readbackKindMatched": true,
+      "readbackNameMatched": true,
+      "readbackPrivate": true,
+      "readbackResponseBytes": 401,
+      "readbackSha256": "40fe86a79895800aff212e63a9e88700ac553d029d5b279dc9e298997ec3981c",
+      "readbackStatus": 200,
+      "readbackVerified": true,
+      "requestFieldNames": [
+        "kind",
+        "name"
+      ],
+      "requestDigest": "c03bcb23ef4dd6f8cf6b13f0665bb1bf0f0c3ac46ecde74706015d46bc3c1e01",
+      "intentDigest": "44b9bd1b25c77df337733a5a2cb489232cce5c98b203079511f2017c860e7626",
+      "responseBytes": 382,
+      "responseContentType": "application/json",
+      "responseIdMatchesRequestedName": true,
+      "responseJsonParsed": true,
+      "responseJsonSubstantive": true,
+      "responseKindMatchesRequestedKind": true,
+      "responseSha256": "4d56055df0c2a40c43973cb3283ad2437c84f373f5258b43ebedb49bef88f86d",
+      "responseStatus": 200,
+      "returnedWorkspaceIdPresent": true,
+      "workspaceIdPersisted": false
+    },
+    {
+      "attemptCount": 1,
+      "method": "PUT",
+      "operationId": "workspaces.update",
+      "pathTemplate": "/rest/workspaces/{returnedWorkspaceId}",
+      "readbackIdMatched": true,
+      "readbackKindMatched": true,
+      "readbackPrivate": true,
+      "readbackRenamedNameMatched": true,
+      "readbackResponseBytes": 410,
+      "readbackSha256": "fa1ef3e71d1328709c358a7da1f5b55748b2a53d9d03eaff5d65965e838766fd",
+      "readbackStatus": 200,
+      "readbackVerified": true,
+      "requestFieldNames": [
+        "name"
+      ],
+      "requestDigest": "f8f754f3d21e946cb9ebe61e89f3807378aaf203a86d3db087b55ef3a36c2cb2",
+      "intentDigest": "2433608c23ef688ed63b32f1623c2cd9cd2927908ae5c52f301d1732b8c31942",
+      "responseBytes": 402,
+      "responseContentType": "application/json",
+      "responseJsonParsed": true,
+      "responseJsonSubstantive": true,
+      "responseSha256": "56e3efee4d48e7efceeba360c362c0e502b34afc3a76cd38f20f2775a0258fd2",
+      "responseStatus": 200
+    },
+    {
+      "attemptCount": 1,
+      "baselineIdSetRestored": true,
+      "createdIdAbsentFromPrivateList": true,
+      "finalPrivateWorkspaceCount": 4,
+      "independentListResponseBytes": 4650,
+      "independentListSha256": "75389f33b01b093d02581a2cb77dbf6f3a60bbe365c71886ce259ada7ebc75fa",
+      "independentListStatus": 200,
+      "method": "DELETE",
+      "operationId": "workspaces.delete",
+      "pathTemplate": "/rest/workspaces/{returnedWorkspaceId}",
+      "requestDigest": "e32ce91753eea4114614e25d5d1681df1e8dae3421509754be0ff2bb349445f3",
+      "intentDigest": "1fea8017491f79e054defe578c905bf38406ea968028bdc3a99100e99fde32a7",
+      "responseBytes": 2,
+      "responseContentType": "application/json",
+      "responseJsonParsed": true,
+      "responseJsonSubstantive": false,
+      "responseSha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "responseStatus": 200,
+      "targetIdMatchedReturnedId": true,
+      "targetNameAbsent": true
+    }
+  ],
+  "observedAt": "2026-10-05T19:32:27.640091+00:00",
+  "preflight": {
+    "privateListComplete": true,
+    "privateListResponseBytes": 4650,
+    "privateListStatus": 200,
+    "privateWorkspaceCount": 4,
+    "responseJsonParsed": true,
+    "sharedListComplete": true,
+    "sharedListResponseBytes": 17,
+    "sharedListStatus": 200,
+    "sharedWorkspaceCount": 0,
+    "targetNameAlreadyPresent": false
+  },
+  "result": {
+    "allMutationsHadSubstantiveJson": false,
+    "allResponsesWereJson": true,
+    "createVerified": true,
+    "deleteVerified": true,
+    "ownerVerified": true,
+    "renameVerified": true,
+    "status": "verified"
+  },
+  "schemaVersion": 1,
+  "sourceContract": {
+    "browserWriteCapture": false,
+    "createKind": "WORKSPACE_KIND_UNIFIED",
+    "createMethod": "POST",
+    "createPath": "/rest/workspaces",
+    "createRequestFieldNames": [
+      "kind",
+      "name"
+    ],
+    "deleteMethod": "DELETE",
+    "deletePathTemplate": "/rest/workspaces/{returnedWorkspaceId}",
+    "listMethod": "GET",
+    "listPath": "/rest/workspaces",
+    "provenance": "first_party_bundle_contract",
+    "readMethod": "GET",
+    "readPathTemplate": "/rest/workspaces/{returnedWorkspaceId}",
+    "sourceCallsiteFabricated": false,
+    "browserHeadersCaptured": false,
+    "sourceSha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+    "sourceUrl": "https://cdn.grok.com/_next/static/chunks/1xpv0qochhbm7.js",
+    "updateMethod": "PUT",
+    "updatePathTemplate": "/rest/workspaces/{returnedWorkspaceId}",
+    "updateRequestFieldNames": [
+      "name"
+    ]
+  },
+  "codeHashes": {
+    "workspaceClientAfterPolicyReviewSha256": "6873ffef5247f9989b866fe4f49694e87b0cb900beb6a423bd290d3a17208632",
+    "workspaceRuntimeSha256": "98694c0e061bcee9d94cc34c8676100625786b1d8964ac5103a41eda135b04bd",
+    "workspaceCliSha256": "1be5300c4c217a5cb5c4e75a9828a4de3a4726abc2eb78f2330e442594e03053",
+    "workspaceCoreClientSha256": "16a6f720e89dd9715e090c6b0d7d7840dc18966b665a5689e83726519b0b2d19",
+    "contractValidationSha256": "8e30801965523447b9cebe58f25c8d4878d17593d0ef7be33c98680ac5fe5a27",
+    "workspaceRegistrySha256": "e911fb83046f1d535c48c3da8073e2f1af35c3a9b421aecf66a12897ff9f872b",
+    "workspaceTestsSha256": "e878d7e52f63ba724e633b9fd800ed445fcb073d508075ca9b86a2e63dbbe5b7",
+    "workspaceRuntimeTestsSha256": "cb61841db3bbf83411ca2c1ca5eb021ad7f395de96ea1c2f0b107a2a99274a50",
+    "workspaceCliTestsSha256": "f1530a82c40a2e301d18d7cf22d095255675af2f71d69513812203746528988d",
+    "workspaceContractFragmentSha256": "1a94370ff894261ec899e940bc77f177f6e75e04a8f90cbf2db59651550a889b",
+    "liveExecutorSha256": "d6d6ecc548a6260fefb346e8e1e155fee4d092bf8ba6141d792bd03a395e4b58",
+    "liveExecutorCurrentSha256": "a8326b2ba0372813ecebfd4cb8068f9c8a3c0986130c8bfcc427ea83ba8402be"
+  },
+  "transport": {
+    "cookieNames": [
+      "sso"
+    ],
+    "cookieValuesPersisted": false,
+    "explicitRetries": 0,
+    "name": "curl_cffi direct HTTP",
+    "profile": "chrome150",
+    "rawBodiesPersisted": false,
+    "redirectsFollowed": false,
+    "tlsVerified": true,
+    "trustEnv": false,
+    "version": "0.16.3"
+  }
+}

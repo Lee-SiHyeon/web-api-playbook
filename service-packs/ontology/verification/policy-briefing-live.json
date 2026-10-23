@@ -1,0 +1,121 @@
+{
+  "status": "read",
+  "ok": true,
+  "liveReplay": true,
+  "clientExists": true,
+  "remnantFree": true,
+  "remnantFreeScope": "http_browser_dependency",
+  "captured": false,
+  "browserXhrCaptured": false,
+  "requestKind": "top_level_document",
+  "executionMode": "pure_http",
+  "maxBodyBytes": 5242880,
+  "credentialPropagation": "not_applicable_public_anonymous",
+  "checkedAt": "2026-10-14T15:12:56.735Z",
+  "sourceEvidence": "registered_public_document_seed",
+  "listPagesRead": 1,
+  "listPageLimit": 1,
+  "pageTraversal": "observed_form_post",
+  "itemLimit": 20,
+  "itemCount": 20,
+  "detailLimit": 1,
+  "detailReadCount": 1,
+  "detailErrorCount": 0,
+  "details": [
+    {
+      "id": "156785228",
+      "status": "read"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "url": {
+        "origin": "https://www.korea.kr",
+        "path": "/briefing/pressReleaseList.do",
+        "queryKeys": [
+          "pageIndex"
+        ]
+      },
+      "finalUrl": {
+        "origin": "https://www.korea.kr",
+        "path": "/briefing/pressReleaseList.do",
+        "queryKeys": [
+          "pageIndex"
+        ]
+      },
+      "pageType": "list",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "charset": "utf-8",
+      "bytes": 184072,
+      "sha256": "cedb92b1699c6a630a1a30afc2d34e7dc868f9ffc2ab9c6058a8005c2079563b",
+      "error": null,
+      "challenge": null,
+      "captureCleanupVerified": true,
+      "captureCleanupErrorCode": null,
+      "credentialState": "not_applicable_public_anonymous",
+      "requestedPage": 1
+    },
+    {
+      "method": "GET",
+      "url": {
+        "origin": "https://www.korea.kr",
+        "path": "/briefing/pressReleaseView.do",
+        "queryKeys": [
+          "endDate",
+          "newsId",
+          "pageIndex",
+          "period",
+          "repCode",
+          "repCodeType",
+          "srchWord",
+          "startDate"
+        ]
+      },
+      "finalUrl": {
+        "origin": "https://www.korea.kr",
+        "path": "/briefing/pressReleaseView.do",
+        "queryKeys": [
+          "endDate",
+          "newsId",
+          "pageIndex",
+          "period",
+          "repCode",
+          "repCodeType",
+          "srchWord",
+          "startDate"
+        ]
+      },
+      "pageType": "detail",
+      "status": 200,
+      "contentType": "text/html;charset=UTF-8",
+      "charset": "utf-8",
+      "bytes": 150900,
+      "sha256": "93956a0bce19c503e43878e0e52f7ad13fb725957d8e73693429b115bbab691f",
+      "error": null,
+      "challenge": null,
+      "captureCleanupVerified": true,
+      "captureCleanupErrorCode": null,
+      "credentialState": "not_applicable_public_anonymous"
+    }
+  ],
+  "layoutFingerprint": {
+    "selectors": [
+      "a[pressReleaseView]",
+      "div.list_type",
+      "li",
+      "span.lead",
+      "span.source",
+      "span.text",
+      "strong"
+    ],
+    "headerLabels": [],
+    "headerHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "hash": "c7e01489f89a8dad03ded7a961fee85dc88c8eec61e42708d9b2be3ad5fcfc65"
+  },
+  "error": null,
+  "captureCleanupVerified": true,
+  "captureCleanupErrorCode": null,
+  "source": "korea-policy-briefing"
+}

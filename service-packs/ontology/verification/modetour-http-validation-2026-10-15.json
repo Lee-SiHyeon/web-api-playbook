@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-14T23:53:13.026Z",
+  "scope": "Modetour Document reader and HTTP resource provenance; no full-site claim",
+  "tests": [
+    {
+      "command": "npm test (service-packs/ontology)",
+      "passed": 46,
+      "failed": 0
+    },
+    {
+      "command": "node --test tests/public-read-checklist.test.mjs tests/capability-checklist.test.mjs tests/anonymous-session-read-checklist.test.mjs tests/credentialed-read-checklist.test.mjs",
+      "passed": 29,
+      "failed": 0
+    }
+  ],
+  "checklist": {
+    "command": "node scripts/checklist.mjs --service=ontology-modetour --strict --json",
+    "strictPassed": true,
+    "recordedLive": 1,
+    "requiredGaps": [],
+    "testsExecutedByChecklist": false
+  },
+  "liveReceipt": "modetour-document-http-2026-10-15.json",
+  "liveBrowserComparison": {
+    "documentCount": 10,
+    "browserCount": 10,
+    "matched": 10
+  },
+  "otherSiteCaptureStatesUnchanged": true
+}

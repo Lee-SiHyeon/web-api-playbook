@@ -1,0 +1,74 @@
+{
+  "schema": "grok-presigned-upload-independent-file-readback-v1",
+  "checkedAt": "2026-10-06T09:30:15Z",
+  "operation": "attachment.upload.presigned.final_file_readback",
+  "state": "verified",
+  "ownerVerified": true,
+  "sourceUploadReceipt": {
+    "path": "verification/grok-attachment-presigned-final-validation-v4-2026-10-06.json",
+    "sha256": "c1ea90378ba87fdd51ac1c25a4d8a677d266530afc16203292a6e8e41f3a6a6f",
+    "originalState": "needs_review",
+    "originalReasonCode": "INDEPENDENT_READBACK_UNVERIFIED",
+    "initHttpStatus": 200,
+    "singlePutHttpStatus": 200,
+    "completeHttpStatus": 200,
+    "uploadState": "completed"
+  },
+  "expectedFile": {
+    "fileName": "grok-presigned-final-validation-v4-20261006.bin",
+    "bytes": 16777217,
+    "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18"
+  },
+  "independentReadback": {
+    "assetSearch": {
+      "operationId": "attachment.assets.search",
+      "httpStatus": 200,
+      "exactFileNameMatches": 1,
+      "listedSizeBytes": 16777217
+    },
+    "fileMetadata": {
+      "operationId": "attachment.file-metadata.read",
+      "httpStatus": 200,
+      "responseBytes": 364,
+      "fileNameMatched": true,
+      "mimeTypeMatched": true,
+      "resourceIdMatched": true,
+      "sizeBytesFieldPresent": false
+    },
+    "assetDownload": {
+      "httpStatus": 200,
+      "mimeType": "application/octet-stream",
+      "bodyBytes": 16777217,
+      "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+      "bytesMatch": true,
+      "verified": true,
+      "source": "curl_cffi-0.16.3-chrome150",
+      "cookieNamesUsed": ["sso"],
+      "requestHeaderNames": [
+        "accept",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ]
+    }
+  },
+  "localArtifact": {
+    "path": "/home/worker/artifacts/grok-attachments-20261006/grok-presigned-final-validation-v4-verify.bin",
+    "bytes": 16777217,
+    "sha256": "aeabf9d78d77fae42fb4f4eebc945f6942a23ad82e510a2a78b1fd60496e2b18",
+    "mode": "0600",
+    "regularFile": true
+  },
+  "safety": {
+    "businessWritesPerformed": 0,
+    "uploadRequestsRepeated": false,
+    "cookiesPersisted": false,
+    "rawAssetUrlPersisted": false,
+    "resourceIdentifierValuesPersisted": false,
+    "metadataSizeInferred": false
+  },
+  "conclusion": "The recorded upload stages completed and an independent asset download matches the original file byte count and SHA-256. The file-metadata response had no size field; byte equality is established by the downloaded asset hash and count. The original needs_review receipt is preserved as historical evidence."
+}

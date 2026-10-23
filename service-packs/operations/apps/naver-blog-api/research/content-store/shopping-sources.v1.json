@@ -1,0 +1,758 @@
+{
+  "schemaVersion": 1,
+  "id": "acada:shopping-sources",
+  "label": "쇼핑 수집원 레지스트리 (가격·검색·리뷰)",
+  "createdAt": "2026-09-26",
+  "purpose": "가격·리뷰 비교 글(grocery_compare, coupang_not_lowest 등)이 어느 사이트의 어떤 기능을 자동 수집에 써도 되는지 한 곳에서 정한다. Codex의 소비자 쇼핑 HTTP 클라이언트(Codex/2026-09-20/partner-xhr-api, 2026-09-26)와 grocery-compare.mjs가 확인한 접근 결과를 합친다.",
+  "policy": [
+    "robots.txt는 참고 기록으로만 남기고 관측한 소비자 Web API 직접 HTTP 계약의 판정 기준으로 쓰지 않는다.",
+    "일반 소비자 검색 화면이 부르는 공개 JSON 또는 HTML을 상태·MIME·스키마·상품 범위로 검증한다. 정기 검색은 각 수집원 제한을 지키고, 광고·조건부 가격을 별도 분리한다.",
+    "봇 확인·challenge(403/418/429 포함) 화면은 우회하지 않는다. 브라우저에서 뽑은 세션·쿠키로 봇 방어를 통과하는 방식은 수동 실행에도 쓰지 않는다.",
+    "공개 검색은 인증 없이 호출한다. 관측 계약과 독립 소유자 검증을 갖춘 계정 전용 검색은 해당 서비스 DPAPI 세션이 준비된 경우에만 호출하고 use_when_authenticated로 구분한다. 상품 ID 전용 기능은 manual_url_only로 유지한다.",
+    "Content-Signal ai-train=no는 학습에 쓰지 않는다는 뜻으로 지킨다. 우리 용도는 가격·평점 비교(reference)이며 리뷰 본문은 글에 인용하지 않는다.",
+    "막힌 사이트는 글에서 더 싸다/비싸다고 쓰지 않고, 비교 범위에서 빠졌다고만 쓴다."
+  ],
+  "controlledValues": {
+    "capability": [
+      "search",
+      "availability",
+      "price",
+      "product_options",
+      "reviews_list",
+      "reviews_photo",
+      "rating_summary",
+      "promotion_products",
+      "price_via_danawa",
+      "flash_sale_inventory",
+      "goldbox_deals"
+    ],
+    "access": [
+      "public_http",
+      "protected_session",
+      "observed_envelope_only",
+      "html_only",
+      "blocked"
+    ],
+    "decision": [
+      "use",
+      "manual_url_only",
+      "exclude",
+      "use_when_authenticated"
+    ],
+    "reason": [
+      "observed_public_http",
+      "bot_challenge",
+      "rate_limited",
+      "http_rejected",
+      "not_verified",
+      "empty_response",
+      "needs_browser_session",
+      "no_api_contract",
+      "allowed_public",
+      "item_id_required",
+      "observed_protected_http"
+    ]
+  },
+  "sites": [
+    {
+      "id": "homeplus",
+      "label": "홈플러스",
+      "robots": {
+        "host": "mfront.homeplus.co.kr",
+        "wildcard": "Disallow /favorite, /mypage",
+        "checkedOn": "2026-09-26"
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "https://mfront.homeplus.co.kr/totalsearch/total/search/item.json",
+          "decision": "use",
+          "reason": "allowed_public",
+          "limits": "키워드당 첫 페이지 1회, 최대 60개",
+          "evidence": "grocery-compare.mjs 2026-09-26: 22 items, HTTP 200"
+        },
+        {
+          "capability": "price",
+          "access": "public_http",
+          "endpoint": "item.json (salePrice, itemDcPrice, cardDcPrice, unit)",
+          "decision": "use",
+          "reason": "allowed_public"
+        },
+        {
+          "capability": "rating_summary",
+          "access": "public_http",
+          "endpoint": "item.json (grade, reviewCnt)",
+          "decision": "use",
+          "reason": "allowed_public"
+        },
+        {
+          "capability": "availability",
+          "access": "public_http",
+          "endpoint": "item.json soldOutYn",
+          "decision": "use",
+          "reason": "allowed_public"
+        }
+      ]
+    },
+    {
+      "id": "lotteon",
+      "label": "롯데ON",
+      "robots": {
+        "host": "www.lotteon.com",
+        "wildcard": "Allow /csearch/, /p/product/",
+        "checkedOn": "2026-09-26"
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "https://www.lotteon.com/csearch/search/search?render=qapi",
+          "decision": "use",
+          "reason": "allowed_public",
+          "limits": "키워드당 첫 페이지 1회, 최대 60개",
+          "evidence": "grocery-compare.mjs 2026-09-26: 60 of 10,573, HTTP 200"
+        },
+        {
+          "capability": "price",
+          "access": "public_http",
+          "endpoint": "qapi priceInfo.finalPrice, DF shipping flag",
+          "decision": "use",
+          "reason": "allowed_public"
+        },
+        {
+          "capability": "rating_summary",
+          "access": "public_http",
+          "endpoint": "qapi brazeData.reviewScore/reviewCount",
+          "decision": "use",
+          "reason": "allowed_public"
+        },
+        {
+          "capability": "availability",
+          "access": "public_http",
+          "endpoint": "qapi soldOutYn",
+          "decision": "use",
+          "reason": "allowed_public"
+        }
+      ],
+      "affiliate": {
+        "network": "linkprice",
+        "merchantId": "lotteon",
+        "status": {
+          "naver_blog": "APR",
+          "tistory": "APR"
+        },
+        "checkedOn": "2026-09-27"
+      }
+    },
+    {
+      "id": "kurly",
+      "label": "컬리",
+      "robots": {
+        "host": "www.kurly.com",
+        "wildcard": "Allow / (except /mypage/, /order/, /popup/, /games/)",
+        "checkedOn": "2026-09-26"
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "https://api.kurly.com/search/v4/sites/market/normal-search",
+          "decision": "use",
+          "reason": "allowed_public",
+          "limits": "키워드당 첫 페이지 1회, 최대 60개. 옵션 확인 상세 문서는 최대 12건",
+          "evidence": "grocery-compare.mjs 2026-09-26: 96 items"
+        },
+        {
+          "capability": "price",
+          "access": "public_http",
+          "endpoint": "normal-search discountedPrice / salesPrice / discountRate",
+          "decision": "use",
+          "reason": "allowed_public",
+          "evidence": "grocery-compare.mjs 2026-09-26 fromKurly normalized the observed consumer-search price fields"
+        },
+        {
+          "capability": "product_options",
+          "access": "public_http",
+          "endpoint": "https://www.kurly.com/goods/<no> __NEXT_DATA__ dealProducts",
+          "decision": "use",
+          "reason": "allowed_public"
+        },
+        {
+          "capability": "rating_summary",
+          "access": "public_http",
+          "endpoint": "product page reviewCount (no star rating)",
+          "decision": "use",
+          "reason": "allowed_public"
+        },
+        {
+          "capability": "availability",
+          "access": "public_http",
+          "endpoint": "normal-search isSoldOut",
+          "decision": "use",
+          "reason": "allowed_public"
+        }
+      ]
+    },
+    {
+      "id": "auction",
+      "label": "옥션",
+      "robots": {
+        "host": "www.auction.co.kr / itempage3.auction.co.kr / bamboo.auction.co.kr",
+        "wildcard": "www and itempage3: Allow /, Content-Signal search=yes, ai-train=no, use=reference; bamboo: robots 404. Search page footer prohibits unauthorized scraping.",
+        "checkedOn": "2026-09-27"
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "blocked",
+          "endpoint": "https://www.auction.co.kr/n/search",
+          "decision": "exclude",
+          "reason": "bot_challenge",
+          "evidence": "Direct GET 403; no independent permitted replay. Search cards are server-rendered HTML."
+        },
+        {
+          "capability": "reviews_photo",
+          "access": "public_http",
+          "endpoint": "https://bamboo.auction.co.kr/Review/Review/PhotoViewerReviewList?ItemNo&PageIndex",
+          "decision": "manual_url_only",
+          "reason": "item_id_required",
+          "client": "apps/naver-blog-api/research/content-store/shopping-sources.mjs auction-photo-reviews <itempage3 url> --pages=N; local apps/affiliate-api-hub/adapters/auction-photo-reviews.mjs",
+          "evidence": "Codex 2026-09-26 18:51: pages 1–2 = 62 photo reviews, HTTP 200 without cookies. Photo reviews only, not all reviews."
+        },
+        {
+          "capability": "reviews_list",
+          "access": "blocked",
+          "endpoint": "GetReviewList",
+          "decision": "exclude",
+          "reason": "bot_challenge",
+          "evidence": "Codex: 403 challenge even with a protected session"
+        },
+        {
+          "capability": "price",
+          "access": "html_only",
+          "decision": "exclude",
+          "reason": "no_api_contract",
+          "evidence": "Codex: server-rendered HTML; no price XHR observed"
+        }
+      ],
+      "affiliate": {
+        "network": "linkprice",
+        "merchantId": "auction",
+        "status": {
+          "naver_blog": "APR",
+          "tistory": "APR"
+        },
+        "checkedOn": "2026-09-27"
+      }
+    },
+    {
+      "id": "gmarket",
+      "label": "G마켓",
+      "robots": {
+        "host": "www.gmarket.co.kr / item.gmarket.co.kr",
+        "wildcard": "www: conflicting User-agent * groups (Allow / and later Disallow /); item: Allow /, Content-Signal search=yes, ai-train=no, use=reference",
+        "checkedOn": "2026-09-27"
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "protected_session",
+          "endpoint": "https://www.gmarket.co.kr/n/search",
+          "decision": "use_when_authenticated",
+          "reason": "observed_protected_http",
+          "limits": "현재 사용자 DPAPI 세션이 사용 가능할 때만 키워드 첫 페이지의 일반 비광고 상품 최대 40개. 쿠폰적용가는 추천에서 제외하며, 세션 만료 후 자동 갱신은 검증되지 않음.",
+          "evidence": "2026-09-27 독립 Node HTTP HTML 200 재생을 여러 번 확인했다. grocery-compare의 --gmarket, 세션 준비 시 기본 CLI 자동 포함, 수집 함수 직접 호출 모두에서 credentialPropagated=true, liveReplay=true, browserUsed=false였다. 세부 요약은 docs/gmarket-protected-replay-2026-09-27.json 및 docs/shopping-collector-status-2026-09-27.md에 기록했다."
+        },
+        {
+          "capability": "reviews_list",
+          "access": "protected_session",
+          "endpoint": "item.gmarket.co.kr /Review, /Review/Premium, /Review/Text",
+          "decision": "exclude",
+          "reason": "needs_browser_session",
+          "evidence": "Codex 2026-09-26 18:31: 30 reviews HTTP 200 only with the browser's observed headers and cookies (403 without). Not used for recurring collection."
+        },
+        {
+          "capability": "price",
+          "access": "protected_session",
+          "decision": "use_when_authenticated",
+          "reason": "observed_protected_http",
+          "limits": "세션 준비 시 첫 페이지에서 관측한 표시가격만 사용. 쿠폰적용가 제외, 추가 페이지와 결제가 확정된 최종가격은 미확인.",
+          "endpoint": "search __NEXT_DATA__ commonItemInfo.price",
+          "evidence": "보호 DPAPI 세션의 HTTP 200 HTML 재생에서 첫 페이지 40/40 행에 표시가격이 있었다. 쿠폰적용 가격은 추천 후보에서 제외한다."
+        },
+        {
+          "capability": "rating_summary",
+          "access": "protected_session",
+          "decision": "use_when_authenticated",
+          "reason": "observed_protected_http",
+          "limits": "세션 준비 시 첫 페이지 최대 40개 상품의 평점·리뷰 수 요약만 사용. 리뷰 본문 수집은 별도 계약이다.",
+          "endpoint": "search __NEXT_DATA__ commonItemInfo.score avgStarScore / feedbackCount",
+          "evidence": "보호 DPAPI 세션의 HTTP 200 HTML 재생에서 첫 페이지 40/40 행에 평점과 리뷰 수가 있었다."
+        },
+        {
+          "capability": "availability",
+          "access": "protected_session",
+          "decision": "exclude",
+          "reason": "needs_browser_session",
+          "endpoint": "search __NEXT_DATA__ item isSoldOut",
+          "evidence": "The observed product parser drops sold-out rows; no public unauthenticated listing replay is established."
+        }
+      ],
+      "affiliate": {
+        "network": "linkprice",
+        "merchantId": "gmarket",
+        "status": {
+          "naver_blog": "APR",
+          "tistory": "APR"
+        },
+        "checkedOn": "2026-09-27"
+      }
+    },
+    {
+      "id": "ssg",
+      "label": "SSG.COM·이마트몰",
+      "robots": {
+        "host": "www.ssg.com / emart.ssg.com",
+        "wildcard": "User-agent * Disallow: / (named crawlers only)",
+        "checkedOn": "2026-09-26",
+        "apiHost": {
+          "host": "search.ssg.com",
+          "robotsStatus": 404,
+          "checkedOn": "2026-09-26"
+        }
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "POST https://search.ssg.com/api/item/all (siteNo 6005, target pc_item, count ≤40, sort prcasc)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "limits": "실행당 1회, 쿠키 없음, 페이지 넘김 없음",
+          "evidence": "grocery-compare.mjs 2026-09-26 (Codex addition): 40 of 1,141, HTTP 200 JSON without cookies"
+        },
+        {
+          "capability": "price",
+          "access": "public_http",
+          "endpoint": "item/all displayPrc, shppcstInfo",
+          "decision": "use",
+          "reason": "observed_public_http"
+        },
+        {
+          "capability": "rating_summary",
+          "access": "public_http",
+          "endpoint": "item/all recompPoint, recomRegCnt",
+          "decision": "use",
+          "reason": "observed_public_http"
+        },
+        {
+          "capability": "availability",
+          "access": "public_http",
+          "endpoint": "item/all soldOutYn / stoppedSellingYn / usablInvQty",
+          "decision": "use",
+          "reason": "observed_public_http"
+        },
+        {
+          "capability": "reviews_list",
+          "access": "public_http",
+          "endpoint": "www.ssg.com review pages (Codex ssg-item-reviews)",
+          "decision": "exclude",
+          "reason": "not_verified",
+          "evidence": "Item review endpoint was observed separately; local collector has no independent replay and product-scoped review integration yet"
+        }
+      ]
+    },
+    {
+      "id": "naver_shopping",
+      "label": "네이버쇼핑",
+      "robots": {
+        "host": "shopping.naver.com / vertical-api.shopping.naver.com / brand.naver.com / m.shopping.naver.com",
+        "wildcard": "Disallow: / on all four",
+        "checkedOn": "2026-09-26"
+      },
+      "client": "Lee-SiHyeon/naver-shopping-travel-crawler (private, 3e80266): npm run naver:shopping | naver:deals",
+      "capabilities": [
+        {
+          "capability": "promotion_products",
+          "access": "public_http",
+          "endpoint": "shopping.naver.com/promotion __NEXT_DATA__ layout id → vertical-api.shopping.naver.com/v1/waffle-maker/layouts/<id>/auto-sort-products (오늘끝딜 스페셜딜)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "limits": "기본 스페셜딜 레이아웃만, 레이아웃당 30페이지·전체 100요청·요청 간 1초. 표시 할인가(discountedPrice)는 사이트 표시값이며 결제가·과거 최저가·시장 최저가가 아니다. 특가 판정은 다나와 비교(price_via_danawa)를 따로 거친다",
+          "evidence": "crawler repo 2026-09-30 01:50Z: 4 pages 70 products all priced (66 판매중, 4 품절), HTTP 200 JSON; Claude rerun 2026-09-30 03:14Z: 2 pages 40 priced. 2026-09-27 empty layout was a between-events state"
+        },
+        {
+          "capability": "promotion_products",
+          "access": "public_http",
+          "endpoint": "shopsquare.naver.com/promotion (RSC text/x-component, 쇼핑블록 피드)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "limits": "피드 순서는 인기 순위·전체 카탈로그가 아니다. 상품 ID 없는 프로모션 카드와 추적 링크는 상품 링크로 쓰지 않는다",
+          "evidence": "crawler repo 2026-09-30: 16 items, 6 with display price; Claude rerun 2026-09-30 03:14Z: 16 items"
+        },
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "search.naver.com/search.naver?where=...&query= (통합검색 쇼핑 카드)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "limits": "통합검색에 노출된 쇼핑 카드 몇 개(관측 3개)만. 전체 검색 결과·최저가 순위·동일 옵션 비교가 아니며 조건부 쿠폰가는 표시가와 분리한다. 요청 1회/키워드, 429·418은 재시도하지 않는다",
+          "evidence": "crawler repo 2026-09-30 01:07Z: HTTP 200 HTML, 3 cards all priced; Claude rerun 2026-09-30 03:14Z 에어프라이어: 3 cards (쿠진아트 TOA-60KR 116,560원)"
+        },
+        {
+          "capability": "price",
+          "access": "observed_envelope_only",
+          "endpoint": "brand.naver.com/n/v2/channels/{channelUid}/products/{id}?withWindow=false",
+          "decision": "exclude",
+          "reason": "rate_limited",
+          "evidence": "Contract seen in browser XHR (가격·리뷰 집계, channelProductId ≠ originProductNo); standalone HTTP 429 in the crawler repo and again in Claude rerun 2026-09-30 03:14Z (product, store search)"
+        },
+        {
+          "capability": "reviews_list",
+          "access": "observed_envelope_only",
+          "decision": "exclude",
+          "reason": "rate_limited",
+          "evidence": "brand.naver.com /n/v1/contents/reviews/query-pages POST: browser page 1 = 20 reviews; standalone 429 (Codex earlier, crawler repo, Claude rerun 2026-09-30 03:14Z); catalog reviews 418"
+        }
+      ],
+      "url": "https://shopping.naver.com",
+      "dealCheck": {
+        "client": "apps/naver-blog-api/research/content-store/naver-deal-check.mjs",
+        "via": "Brand Connect deals through naver-crawler-snapshot (affiliate network naver_connect)",
+        "access": "not re-verified in this registry",
+        "registeredOn": "2026-10-06",
+        "note": "ontology gap audit ONT-21; recorded as a field, not a capability, until the access level is checked"
+      }
+    },
+    {
+      "id": "elevenst",
+      "label": "11번가",
+      "robots": {
+        "host": "www.11st.co.kr",
+        "wildcard": "User-agent * Disallow: /",
+        "checkedOn": "2026-09-26",
+        "apiHost": {
+          "host": "apis.11st.co.kr",
+          "robotsStatus": "unverified (curl 000 and web read unavailable)",
+          "checkedOn": "2026-09-26"
+        }
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "GET https://apis.11st.co.kr/search/api/tab?kwd&tabId=TOTAL_SEARCH",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "limits": "실행당 1회, 쿠키 없음, 광고 상품 제외",
+          "evidence": "2026-09-26 direct JSON HTTP 200 without cookies; observed consumer search request, one page per run"
+        },
+        {
+          "capability": "price",
+          "access": "public_http",
+          "endpoint": "tab API finalPrc / maxDiscountInfo.finalPrice, deliveryDescription",
+          "decision": "use",
+          "reason": "observed_public_http"
+        },
+        {
+          "capability": "rating_summary",
+          "access": "public_http",
+          "endpoint": "tab API satisfactionScore, reviewCountText",
+          "decision": "use",
+          "reason": "observed_public_http"
+        },
+        {
+          "capability": "availability",
+          "access": "public_http",
+          "endpoint": "tab API soldOut",
+          "decision": "use",
+          "reason": "observed_public_http"
+        }
+      ],
+      "affiliate": {
+        "network": "linkprice",
+        "merchantId": "11st",
+        "status": {
+          "naver_blog": "NONE",
+          "tistory": "NONE"
+        },
+        "note": "manual-approval merchant, not applied (owner decision needed)",
+        "checkedOn": "2026-09-27"
+      }
+    },
+    {
+      "id": "coupang",
+      "label": "쿠팡",
+      "robots": {
+        "host": "www.coupang.com",
+        "wildcard": "robots.txt HTTP 403",
+        "checkedOn": "2026-09-26"
+      },
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "blocked",
+          "decision": "exclude",
+          "reason": "http_rejected",
+          "note": "www.coupang.com/np/search consumer search remains HTTP 403 in direct replay. Separate, observed partners.coupang.com/api/v1/search is now implemented with a verified current-owner DPAPI session; see coupang_partners. Do not treat the web catalog as the consumer search ranking."
+        },
+        {
+          "capability": "price_via_danawa",
+          "access": "public_http",
+          "endpoint": "Danawa search + product mall list (danawa-prices.mjs), 쿠팡 offers",
+          "decision": "use",
+          "reason": "allowed_public",
+          "limits": "catalogs that list a 쿠팡 offer only (냉동삼겹살: 3 of 29); no reviews; never a review pick",
+          "evidence": "grocery-compare.mjs --coupang-danawa 2026-09-27 (default on)"
+        },
+        {
+          "capability": "flash_sale_inventory",
+          "access": "public_http",
+          "endpoint": "https://m.coupang.com/vm/vendor-funded-discount/paged (promotionPage=LIGHTENING_DEAL)",
+          "decision": "use",
+          "reason": "allowed_public",
+          "limits": "<=50 pages, 1s delay, stops on a strong public challenge (cps-public-reader), no bypass",
+          "client": "apps/affiliate-api-hub/scripts/coupang-flash-sale-inventory.mjs",
+          "evidence": "coupang-flash-check.mjs",
+          "registeredOn": "2026-10-06",
+          "note": "ontology gap audit ONT-19; read by the quick-fact domain A flash source"
+        },
+        {
+          "capability": "goldbox_deals",
+          "access": "public_http",
+          "endpoint": "POST https://pages.coupang.com/api/products {goldbox:true}",
+          "decision": "use",
+          "reason": "allowed_public",
+          "limits": "no www.coupang.com search; no bypass",
+          "client": "apps/naver-blog-api/research/content-store/coupang-goldbox.mjs",
+          "registeredOn": "2026-10-06",
+          "note": "ontology gap audit ONT-20; the /vm/mlp widget used by the domain A goldbox source is covered by this entry"
+        }
+      ],
+      "affiliate": {
+        "network": "coupang_partners",
+        "status": "web_search_ready",
+        "checkedOn": "2026-09-27"
+      },
+      "blockedBy": {
+        "layer": "akamai_bot_manager",
+        "evidence": "docs/coupang-403-diagnosis-2026-09-27.json",
+        "decision": "no bypass"
+      },
+      "authenticatedAlternativeSourceId": "coupang_partners",
+      "url": "https://www.coupang.com"
+    },
+    {
+      "id": "danawa",
+      "label": "다나와",
+      "robots": {
+        "host": "search.danawa.com / prod.danawa.com",
+        "wildcard": "search: Disallow /api_ui/ and Crawl-delay 10; prod: Disallow /info/ajax/ (mall-list endpoint)",
+        "checkedOn": "2026-09-27"
+      },
+      "capabilities": [
+        {
+          "capability": "price",
+          "access": "public_http",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "note": "관측한 상품 상세 GET과 POST /info/ajax/getAllPriceCompareMallList.ajax.php를 동일 상품 pcode로 호출한다. 상품명·규격 일치 여부를 확인한 뒤 판매처별 가격을 비교한다."
+        }
+      ],
+      "url": "https://www.danawa.com"
+    },
+    {
+      "id": "coupang_partners",
+      "label": "쿠팡 파트너스 웹 상품검색",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "protected_session",
+          "endpoint": "POST https://partners.coupang.com/api/v1/search",
+          "decision": "use_when_authenticated",
+          "reason": "observed_protected_http",
+          "limits": "현재 사용자 DPAPI 세션과 /api/v1/config 소유자 확인 후 첫 페이지 1회, 최대 36개. 일반몰 전체 검색·리뷰 본문·HMAC Open API와 별도.",
+          "client": "apps/affiliate-api-hub/scripts/shopping-list.mjs; web-api-playbook/lib/web-auth/coupang.mjs search()",
+          "evidence": "2026-09-27 냉동삼겹살 독립 HTTP 36개; 노트북 거치대 독립 HTTP 6개, 가격·상품 URL·평점·리뷰 수. docs/shopping-list-recovery-2026-09-27.md"
+        },
+        {
+          "capability": "price",
+          "access": "protected_session",
+          "endpoint": "POST https://partners.coupang.com/api/v1/search",
+          "decision": "use_when_authenticated",
+          "reason": "observed_protected_http",
+          "limits": "현재 사용자 DPAPI 세션과 /api/v1/config 소유자 확인 후 첫 페이지 1회, 최대 36개. 일반몰 전체 검색·리뷰 본문·HMAC Open API와 별도.",
+          "client": "apps/affiliate-api-hub/scripts/shopping-list.mjs; web-api-playbook/lib/web-auth/coupang.mjs search()",
+          "evidence": "2026-09-27 냉동삼겹살 독립 HTTP 36개; 노트북 거치대 독립 HTTP 6개, 가격·상품 URL·평점·리뷰 수. docs/shopping-list-recovery-2026-09-27.md"
+        },
+        {
+          "capability": "rating_summary",
+          "access": "protected_session",
+          "endpoint": "POST https://partners.coupang.com/api/v1/search",
+          "decision": "use_when_authenticated",
+          "reason": "observed_protected_http",
+          "limits": "현재 사용자 DPAPI 세션과 /api/v1/config 소유자 확인 후 첫 페이지 1회, 최대 36개. 일반몰 전체 검색·리뷰 본문·HMAC Open API와 별도.",
+          "client": "apps/affiliate-api-hub/scripts/shopping-list.mjs; web-api-playbook/lib/web-auth/coupang.mjs search()",
+          "evidence": "2026-09-27 냉동삼겹살 독립 HTTP 36개; 노트북 거치대 독립 HTTP 6개, 가격·상품 URL·평점·리뷰 수. docs/shopping-list-recovery-2026-09-27.md"
+        }
+      ]
+    },
+    {
+      "id": "sikbom",
+      "label": "식봄 (마켓보로·CJ프레시웨이 계열 식자재 오픈마켓)",
+      "url": "https://www.foodspring.co.kr",
+      "audience": {
+        "businessOnly": true,
+        "quote": "식봄은 식당·카페 등 외식업 사업자를 위한 식자재 도매 플랫폼이에요. 사업자등록번호로 가입·인증한 뒤 이용할 수 있으며, 개인 소비자는 구매가 어려워요.",
+        "evidence": "https://blog.foodspring.co.kr/foodspring-faq",
+        "checkedOn": "2026-10-10",
+        "rule": "소비자 대상 최저가 비교에 넣을 때는 \"사업자 전용\" 을 가격 옆에 함께 쓴다; 자영업자·식당 대상 글에서는 일반 비교 대상."
+      },
+      "robots": {
+        "host": "www.foodspring.co.kr",
+        "wildcard": "Allow /goods/detail/, /category/goods_detail/, /plan/, /search/all, /seller/; Disallow /API/, /main/, /cart, /order/, /payment, /mypage/, /_next/",
+        "checkedOn": "2026-10-10"
+      },
+      "capabilities": [
+        {
+          "capability": "price",
+          "access": "public_http",
+          "endpoint": "https://www.foodspring.co.kr/goods/detail/<nid> __NEXT_DATA__ initialRecords GoodsPrice (salePrice, originalPrice, appliedCoupon/maxBenefitCoupon) + Product JSON-LD offers.price (must agree)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "note": "쿠폰가는 쿠폰 발급·기간·상한(예: 20%, 최대 3,000원)이 붙는다. 배송비는 판매사별: per_quantity(예 3,000원/6개), free_over(예 10만·7만 원 이상 무료), 도서산간·제주 별도.",
+          "evidence": "sikbom.mjs 2026-10-10: goods 640885 sale 5,550 / coupon 4,440 / 3,000원 per 6 units; category 227 total 1,309, 80 rows"
+        },
+        {
+          "capability": "availability",
+          "access": "public_http",
+          "endpoint": "goods page GoodsStock.quantity + JSON-LD availability + nonPurchasableReason",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "evidence": "sikbom.mjs 2026-10-10: goods 640885 sale 5,550 / coupon 4,440 / 3,000원 per 6 units; category 227 total 1,309, 80 rows"
+        },
+        {
+          "capability": "promotion_products",
+          "access": "public_http",
+          "endpoint": "https://www.foodspring.co.kr/category/goods_detail/<nid> __NEXT_DATA__ goodsList(first:80, sort:POPULAR_DESC)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "limits": "카테고리당 첫 80개(인기순) 1회; 다음 페이지는 /API/ 경유라 읽지 않음",
+          "evidence": "sikbom.mjs 2026-10-10: goods 640885 sale 5,550 / coupon 4,440 / 3,000원 per 6 units; category 227 total 1,309, 80 rows"
+        },
+        {
+          "capability": "search",
+          "access": "html_only",
+          "endpoint": "/search/all?keyword= returned 404 to a plain GET (client-side search over /API/, robots-disallowed)",
+          "decision": "exclude",
+          "reason": "no_api_contract",
+          "note": "키워드 검색 대신 카테고리 목록 또는 상품 nid(웹 검색 site:foodspring.co.kr/goods/detail)로 찾는다."
+        },
+        {
+          "capability": "product_options",
+          "access": "public_http",
+          "endpoint": "goods page Goods.standard / unit / goodsQuantity (min/max per order)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "evidence": "sikbom.mjs 2026-10-10: goods 640885 sale 5,550 / coupon 4,440 / 3,000원 per 6 units; category 227 total 1,309, 80 rows"
+        }
+      ]
+    }
+  ],
+  "affiliateNetworks": [
+    {
+      "id": "linkprice",
+      "label": "링크프라이스",
+      "kind": "cps_network",
+      "sites": {
+        "naver_blog": "A100708014",
+        "tistory": "A100708029",
+        "daangn_cafe": "A100708123",
+        "naver_cafe": "A100708124"
+      },
+      "linkShape": "https://click.linkprice.com/click.php?m=<merchant>&a=<site>&l=9999&l_cd1=3&l_cd2=0&tu=<encoded product url>",
+      "creation": "affiliate-api-hub/scripts/linkprice-links.mjs after the owner's Telegram \"🔗 링크 만들기\" approval; web-auth linkprice link refuses non-APR merchants",
+      "gate": "config/publication-registry.json affiliateNetworks.linkprice (merchant list, Naver site id, disclosure)",
+      "disclosure": "이 포스팅은 링크프라이스 제휴 활동의 일환으로 판매 발생 시 수수료를 제공받습니다.",
+      "mirrors": {
+        "tistory": "a= swapped to A100708029, disclosure kept",
+        "daangn": "none (owner 2026-10-01): 당근 gets no partner link; partner-link posts skip 당근, informational posts only",
+        "naverCafe": "a= swapped to A100708124, disclosure kept",
+        "sns": "no affiliate link"
+      },
+      "checkedOn": "2026-09-27",
+      "sitesNote": "당근·네이버 카페 registered 2026-09-27 as LinkPrice websites (categories 912/914) and approved (APR) for lotteon, gmarket, auction, myrealtrip, klook, agoda."
+    },
+    {
+      "id": "coupang_partners",
+      "label": "쿠팡 파트너스",
+      "kind": "cps_network",
+      "status": "web_search_ready",
+      "note": "Observed authenticated Partners web XHR product search is implemented and independently replayed. Uses the existing DPAPI web session, not HMAC Open API keys. Product title, displayed price, URL, rating and review count are available; affiliate-link generation and password login are separate capabilities.",
+      "checkedOn": "2026-09-27",
+      "url": "https://partners.coupang.com",
+      "linkShape": "https://link.coupang.com/a/<code>",
+      "host": "link.coupang.com",
+      "disclosure": "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "registry": "apps/naver-blog-api/research/content-store/affiliate-networks.v1.json"
+    },
+    {
+      "id": "naver_connect",
+      "label": "네이버 쇼핑·여행 커넥트",
+      "kind": "cps_network",
+      "status": "in_use",
+      "note": "naver.me links: Naver blog and quick-fact (X, Threads, Telegram, Inpock) with the 쇼핑 커넥트/여행 커넥트 disclosure (owner 2026-09-30); Tistory and text mirrors link the seller page. Owner to confirm the Naver program terms allow off-blog use.",
+      "checkedOn": "2026-09-27",
+      "url": "https://brandconnect.naver.com",
+      "linkShape": "https://naver.me/<code>",
+      "host": "naver.me",
+      "disclosure": "이 포스팅은 네이버 쇼핑 커넥트 활동의 일환으로, 판매 발생 시 수수료를 제공받습니다.",
+      "disclosureTravel": "여행 커넥트 활동",
+      "channels": [
+        "naver",
+        "x",
+        "threads",
+        "telegram",
+        "inpock"
+      ],
+      "registry": "apps/naver-blog-api/research/content-store/affiliate-networks.v1.json"
+    },
+    {
+      "id": "myrealtrip_partner",
+      "label": "마이리얼트립 파트너",
+      "kind": "cps_network",
+      "status": "in_use",
+      "host": "myrealt.rip",
+      "linkShape": "^https://myrealt\\.rip/[A-Za-z0-9]+$",
+      "creation": "apps/affiliate-api-hub/adapters/myrealtrip-partner-api.mjs mylink --approved (POST /v1/mylink)",
+      "disclosure": "이 포스팅은 마이리얼트립 파트너 활동의 일환으로 수수료를 제공받습니다.",
+      "url": "https://partner.myrealtrip.com/",
+      "note": "tna-search used for local picks; recommendations are 같이 보면 좋은 상품, not lowest price. Commission by category: affiliate-networks.v1.json (measured 2026-10-06).",
+      "registry": "apps/naver-blog-api/research/content-store/affiliate-networks.v1.json",
+      "checkedOn": "2026-10-06"
+    },
+    {
+      "id": "toss_sharelink",
+      "label": "토스쇼핑 쉐어링크",
+      "kind": "cps_network",
+      "status": "in_use",
+      "host": "toss.shopping|toss.im",
+      "pathPattern": "^/_m/",
+      "linkShape": "https://toss.shopping/_m/<code>",
+      "creation": "apps/toss-sharelink/client.mjs issue <tacaItemId>",
+      "disclosure": "[광고] 토스쇼핑 쉐어링크 활동으로, 링크 구매 시 수수료를 지급받습니다.",
+      "url": "https://sharelink.toss.im",
+      "note": "only /_m/ links track",
+      "registry": "apps/naver-blog-api/research/content-store/affiliate-networks.v1.json",
+      "checkedOn": "2026-10-06",
+      "dealCheck": {
+        "client": "apps/naver-blog-api/research/content-store/toss-deal-check.mjs",
+        "access": "not re-verified in this registry; Open API path is service-capabilities toss_sharelink_openapi",
+        "registeredOn": "2026-10-06",
+        "note": "ontology gap audit ONT-21; Toss deals are not a sites[] entry because the sites schema needs at least one capability and the access level is not verified here"
+      },
+      "shoppingSiteUrl": "https://shopping.toss.im"
+    }
+  ]
+}

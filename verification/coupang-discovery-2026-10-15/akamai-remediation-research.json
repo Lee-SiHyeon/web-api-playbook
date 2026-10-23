@@ -1,0 +1,109 @@
+{
+  "schema": "coupang-akamai-remediation-research-v1",
+  "researchedOn": "2026-10-15",
+  "scope": "Coupang public retail search/category HTTP 403; preserve independent HTTP target",
+  "outcome": "Follow-up verified independent HTTP retail RSC search using the exact full browser Cookie header: 200, 60 DOM-matched products. Browser visitor-only and visitor-plus-Akamai subsets remain 403. Recurring input preparation and cookie renewal remain unverified.",
+  "followupVerification": {
+    "file": "retail-browser-cookie-comparison-live.json",
+    "statuses": [403, 403, 200],
+    "cookieCounts": [3, 11, 33],
+    "exactCookieHeadersSent": true,
+    "directHttpProducts": 60,
+    "domIdentityTitlePriceMatches": 60,
+    "cookieValuesPersisted": false,
+    "wholeOperationBrowserIndependent": false
+  },
+  "evidence": [
+    {
+      "file": "retail-rsc-capture.json",
+      "observation": "Browser Fetch returned 200 text/x-component; 60 parsed listing products matched DOM identity and title."
+    },
+    {
+      "file": "retail-rsc-visitor-replay.json",
+      "observation": "Independent Node replay with HTTP-issued visitor cookies returned 403 AkamaiGHost."
+    },
+    {
+      "file": "retail-403-variants-live.json",
+      "observation": "Sort, delivery filter, Referer, native Node HTTP/2 and category variations returned 403. Same-visitor public offer controls before and after returned 200."
+    },
+    {
+      "file": "retail-schannel-comparison-live.json",
+      "observation": "Same visitor, URL and native-fetch header values: Node/OpenSSL and Windows curl 8.21.0/Schannel both returned search 403; public offer controls before and after returned 200. One bootstrap, five total requests, no identity replacement or automatic retry.",
+      "limitation": "This changes client implementation, not only TLS. Header serialization and connection behavior were not isolated. A raw-body reference regex did not match; that does not establish that the HTML contained no error reference."
+    }
+  ],
+  "remainingGaps": [
+    {
+      "dimension": "Session and telemetry",
+      "status": "not_isolated",
+      "finding": "Browser capture contains PCID, market/language and additional Akamai cookie names. The independent visitor provider deliberately sends only PCID plus market/language cookies. Browser and HTTP sessions are not equivalent. Cookie names alone establish neither validity nor the reason for rejection.",
+      "source": "https://techdocs.akamai.com/security-ctr/docs/dimensions-new",
+      "nextEvidence": "Observe the normal first-party issuance and renewal chain and record field lineage/presence, without exporting values into logs. Browser-supplied recurring inputs would remain a hybrid dependency."
+    },
+    {
+      "dimension": "Transport and request characteristics",
+      "status": "not_isolated",
+      "finding": "Akamai documents header anomalies and browser-version inconsistencies. Its false-positive workflow includes TLS fingerprints. Native HTTP/2 and Schannel alone did not resolve this case; the exact denied characteristic remains unknown.",
+      "sources": [
+        "https://techdocs.akamai.com/cloud-security/docs/detection-methods",
+        "https://techdocs.akamai.com/security-ctr/docs/improve-detection-accuracy"
+      ]
+    },
+    {
+      "dimension": "Exact security rule",
+      "status": "operator_diagnostics_required",
+      "finding": "Client-visible status, server and cookie names do not identify the actual WAF/Bot Manager rule. Existing public receipts do not retain the full error reference.",
+      "nextEvidence": "If operator investigation is available, collect the error reference, request UTC time, method and sanitized URL privately and correlate them with the operator's security logs."
+    }
+  ],
+  "researchedOptions": [
+    {
+      "name": "curl_cffi",
+      "purpose": "TLS and HTTP fingerprint compatibility",
+      "source": "https://github.com/lexiforest/curl_cffi",
+      "limitationsSource": "https://curl-cffi.readthedocs.io/en/latest/impersonate/faq.html",
+      "status": "research_only_not_installed_or_tested_here",
+      "limitation": "Does not contain a browser or JavaScript runtime. Matching JA3/Akamai fingerprint strings is not a guarantee of acceptance; maintainers document continued detection."
+    },
+    {
+      "name": "impers",
+      "purpose": "Node.js binding to curl-impersonate",
+      "source": "https://github.com/lexiforest/impers",
+      "status": "research_only_not_installed_or_tested_here",
+      "limitation": "Maintainer labels it alpha. It downloads a native library on first launch and needs dependency/runtime review before adoption. No Coupang success established."
+    },
+    {
+      "name": "Akamai Error Translator / Edge Diagnostics",
+      "purpose": "Determine the actual rejection reason",
+      "sources": [
+        "https://techdocs.akamai.com/application-security/reference/get-error-translator-lookup",
+        "https://techdocs.akamai.com/edge-diagnostics/docs/translate-error-string"
+      ],
+      "status": "requires_site_operator_account",
+      "retention": "Application Security Error Translator documents 31 days. Edge Diagnostics edge logs document 6 or 24 hours depending on conditions; these are separate retention windows.",
+      "limitation": "This workspace does not control Coupang's Akamai configuration. No operator API was called."
+    },
+    {
+      "name": "Scoped custom bot allowance or false-positive review",
+      "purpose": "Operator-approved access policy for a legitimate integration",
+      "sources": [
+        "https://techdocs.akamai.com/cloud-security/docs/detection-methods",
+        "https://techdocs.akamai.com/security-ctr/docs/improve-detection-accuracy"
+      ],
+      "status": "requires_site_operator_decision",
+      "limitation": "An automated client being denied is not automatically a false positive. No policy change or support message was submitted."
+    }
+  ],
+  "notEstablished": [
+    "Login required for ordinary retail search",
+    "PCID omission is the sole cause",
+    "All traffic from this IP is blocked",
+    "A universal waiting period will fix the rejection",
+    "TLS fingerprint alone causes the rejection",
+    "A copied cookie or an impersonation library will solve Coupang",
+    "Browser-dependent response collection is independent HTTP replay"
+  ],
+  "directSearchLiveReplay": true,
+  "writesSubmitted": 0,
+  "credentialValuesPersisted": false
+}

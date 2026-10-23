@@ -1,0 +1,152 @@
+{
+  "schema": "coupang-public-product-read-check-v1",
+  "checkedAt": "2026-10-15T16:17:42.286Z",
+  "operations": [
+    {
+      "operation": "public_offer_list",
+      "ok": true,
+      "checkedAt": "2026-10-15T16:17:41.875Z",
+      "status": 200,
+      "productId": "6247736560",
+      "itemId": "12646874013",
+      "vendorItemId": null,
+      "offerCount": 1,
+      "selectedPrice": {
+        "amount": 13200,
+        "currency": "KRW",
+        "priceKind": "offer_list_general_sale_price",
+        "basis": "public_offer_list"
+      },
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": false,
+        "live_replay": true
+      },
+      "receipt": {
+        "checkedAt": "2026-10-15T16:17:41.875Z",
+        "operation": "offer_list",
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/next-api/offer-list",
+        "query": {
+          "productId": "6247736560",
+          "itemId": "12646874013",
+          "selectedVendorItemId": "79914317500"
+        },
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 4414,
+        "bodyComplete": true,
+        "responseCookieHeadersAvailable": true,
+        "responseCookieCount": 7,
+        "retryAfterSeconds": null,
+        "durationMs": 406,
+        "execution": "pure_http",
+        "browserUsed": false,
+        "authenticationMode": "visitor",
+        "sessionProvider": "http_issued_memory_visitor",
+        "credentialSent": false,
+        "credentialPropagated": false,
+        "authenticatedOwnerVerified": false,
+        "applicationAuthenticated": null,
+        "cookieRotationApplied": false,
+        "cookieRotationPersisted": false,
+        "transport": "native_fetch",
+        "retry": false,
+        "redirectsFollowed": false,
+        "ownerCredentialUsed": false,
+        "visitorCookiesSent": true,
+        "visitorCookieNames": [
+          "PCID",
+          "x-coupang-accept-language",
+          "x-coupang-target-market"
+        ],
+        "visitorBootstrap": {
+          "operation": "public_visitor_bootstrap",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/n-api/web-adapter/proxy",
+          "status": 200,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "transport": "native_fetch",
+          "ownerCredentialUsed": false,
+          "valuesPersisted": false,
+          "redirectsFollowed": false,
+          "retries": 0,
+          "challengeConfirmed": false,
+          "contentType": "text/html",
+          "bytes": 1735,
+          "responseSha256": "3eb0847506e760a9a04ebafeb5b016b612640c0e6fc29bd1c030ed9eaeaaf1b2",
+          "cookieNames": [
+            "PCID",
+            "x-coupang-accept-language",
+            "x-coupang-target-market"
+          ],
+          "botCookiesAccepted": false,
+          "accountCookiesAccepted": false
+        },
+        "visitorValuesPersisted": false,
+        "server": "envoy",
+        "dpopChallengePresent": false,
+        "responseSha256": "bd229a5a37252cac14cccbf74caefae5f2c511c32e5f82f1f06ad02b8f909a86",
+        "bodyError": null,
+        "challengeConfirmed": false,
+        "accessDeniedTitle": false,
+        "denialSignals": {
+          "requestBlocked": false,
+          "automatedAccess": false,
+          "permissionDenied": false,
+          "loginPage": false
+        },
+        "visitorCookieRotationApplied": false,
+        "applicationStatus": 200
+      }
+    },
+    {
+      "operation": "product_document",
+      "ok": false,
+      "code": "COUPANG_VISITOR_OPERATION_SCOPE",
+      "status": null,
+      "mime": null,
+      "states": {
+        "live_replay": false
+      },
+      "receipt": {
+        "checkedAt": "2026-10-15T16:17:42.286Z",
+        "operation": "product_document",
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/vp/products/6247736560",
+        "query": {
+          "itemId": "12646874013",
+          "vendorItemId": "79914317500"
+        },
+        "status": null,
+        "contentType": null,
+        "bytes": null,
+        "bodyComplete": false,
+        "responseCookieHeadersAvailable": false,
+        "responseCookieCount": null,
+        "retryAfterSeconds": null,
+        "durationMs": null,
+        "execution": "pure_http",
+        "browserUsed": false,
+        "authenticationMode": "visitor",
+        "sessionProvider": "http_issued_memory_visitor",
+        "credentialSent": false,
+        "credentialPropagated": false,
+        "authenticatedOwnerVerified": false,
+        "applicationAuthenticated": null,
+        "cookieRotationApplied": false,
+        "cookieRotationPersisted": false,
+        "transport": "native_fetch",
+        "retry": false,
+        "redirectsFollowed": false,
+        "visitorBootstrap": null
+      }
+    }
+  ]
+}

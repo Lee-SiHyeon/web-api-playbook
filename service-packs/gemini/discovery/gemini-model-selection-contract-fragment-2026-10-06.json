@@ -1,0 +1,138 @@
+{
+  "schema": "gemini-local-control-contract-fragment-v1",
+  "service": "gemini-web",
+  "recordedAt": "2026-10-06T03:47:00Z",
+  "evidenceReference": "discovery/gemini-model-selection-live-2026-10-06.json",
+  "scope": "private_signed_in_model_selection",
+  "catalog": {
+    "operationId": "model_list",
+    "transport": "direct_http",
+    "rpcId": "otAQ7b",
+    "method": "POST",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "effect": "read",
+    "observedModelCount": 3,
+    "sourceBackedModelIdField": "modelId",
+    "uiModeIdAttribute": "data-mode-id",
+    "observedUiModeIdEqualsCatalogModelId": true,
+    "perModelAvailability": "unknown_without_a_decoded_model_specific_quota_mapping"
+  },
+  "controls": [
+    {
+      "operationId": "model_select",
+      "transport": "local_process_state",
+      "effect": "mutation",
+      "selectorCallsite": "HwBxOc:D2d.selectModel(category)",
+      "selectorService": "LQaXg:bardModeService.PEd",
+      "selectedModeIdSetterCallsite": "LQaXg:bardModeService.RD(modeId)",
+      "processStatePersistence": "in_memory_service_state",
+      "serverPreferenceEndpoint": null,
+      "serverPreferenceWriteObserved": false
+    },
+    {
+      "operationId": "selection_state",
+      "transport": "local_process_state",
+      "effect": "read",
+      "readbackCallsite": "LQaXg:bardModeService current mode and per-mode thinking-level state",
+      "nextRequestMetadataBuilder": "OpU7Tc:getBardApplicationMetadataHeader",
+      "metadataFields": ["modeId", "modeCategory", "thinkingLevel", "isTemporaryChat"],
+      "requiredReadbackComparison": "selected model ID, known category, and thinking level equal the next prepared request metadata",
+      "requestDispatchRequiredForReadback": false
+    }
+  ],
+  "thinkingLevel": {
+    "controlKind": "separate_mode_parameter",
+    "menuHasModelId": false,
+    "setterCallsite": "LQaXg:_.SE(...)->bardModeService.Dya(modeCategory, thinkingLevel)",
+    "sourceEnumModule": "TRJwtb",
+    "observedChoice": "THINKING_LEVEL_EXTENDED",
+    "modelId": null
+  },
+  "requestMetadataSerialization": {
+    "sourceModuleId": "OpU7Tc",
+    "sourceModuleSha256": "6d6fac08f2db2cb171b2714c67032f44f8b5314ac246abb77d7d69af5830a415",
+    "messageType": "Lt",
+    "builder": "getBardApplicationMetadataHeader",
+    "protobufFieldNumbers": {
+      "modeId": 5,
+      "isTemporaryChat": 8,
+      "modeCategory": 15,
+      "thinkingLevel": 16
+    },
+    "capturedHttpHeaderName": "x-goog-ext-525001261-jspb",
+    "capturedArrayIndexes": {
+      "modeId": 4,
+      "isTemporaryChat": 7,
+      "modeCategory": 14,
+      "thinkingLevel": 15
+    },
+    "modeCategoryWireCodes": {
+      "MODE_CATEGORY_UNSPECIFIED": 0,
+      "MODE_CATEGORY_FAST": 1,
+      "MODE_CATEGORY_THINKING": 2,
+      "MODE_CATEGORY_PRO": 3,
+      "MODE_CATEGORY_AUTO": 4,
+      "MODE_CATEGORY_FAST_DYNAMIC_THINKING": 5,
+      "MODE_CATEGORY_FLASH_LITE": 6,
+      "MODE_CATEGORY_FLASH_PLUS": 7,
+      "MODE_CATEGORY_ULTRA": 8
+    },
+    "thinkingLevelWireCodes": {
+      "THINKING_LEVEL_UNSPECIFIED": 0,
+      "THINKING_LEVEL_STANDARD": 1,
+      "THINKING_LEVEL_EXTENDED": 2,
+      "THINKING_LEVEL_DEEP_THINK": 3,
+      "THINKING_LEVEL_MEDIUM": 4
+    },
+    "capturedModeIdPath": "[4]",
+    "capturedModeCategoryAndThinkingValueReadbackPending": false
+  },
+  "mapping": {
+    "uiChoiceCount": 4,
+    "catalogBackedModelChoiceCount": 3,
+    "separateThinkingControlCount": 1,
+    "publicModelIdsInvented": false,
+    "modeCategoryForCatalogRows": "unknown",
+    "modeCategoryForGuardedProChoice": "MODE_CATEGORY_PRO",
+    "modeCategoryForGuardedFlashLiteChoice": "MODE_CATEGORY_FLASH_LITE",
+    "flashLiteMetadataCaptureReference": "discovery/gemini-flash-lite-current-metadata-capture-2026-10-06.json",
+    "flashLiteMetadataCaptureWireCodes": { "modeCategory": 6, "thinkingLevel": 1 },
+    "categorySelectorLiterals": ["pro", "fast", "auto"],
+    "quotaRpcId": "qpEbW",
+    "quotaSourceMethod": "/BardFrontendService.CheckGeminiQuota",
+    "quotaRpcEffect": "read_only_quota_check",
+    "quotaArgumentsObserved": [[1, 4], [6, 6], [1, 15]],
+    "quotaResponseDecodedToPerModelEligibility": false,
+    "globalAccountStatusUsedAsPerModelAvailability": false
+  },
+  "sourceAssets": [
+    {
+      "moduleId": "HwBxOc",
+      "sha256": "d01b7d0af88adc4d498080b76ab1e1ff770dd9720b02d9f19f36ae69a6d6c364",
+      "sourceFunction": "D2d.selectModel"
+    },
+    {
+      "moduleId": "LQaXg",
+      "sha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+      "sourceFunction": "bardModeService local mode and thinking-level state"
+    },
+    {
+      "moduleId": "OpU7Tc",
+      "sha256": "6d6fac08f2db2cb171b2714c67032f44f8b5314ac246abb77d7d69af5830a415",
+      "sourceFunction": "getBardApplicationMetadataHeader"
+    },
+    {
+      "moduleId": "TRJwtb",
+      "sha256": "813451d8daabd1d9972ba4e7d4b277a59d6b7fc100863d27ff4e81c9a5ef57d1",
+      "sourceFunction": "model menu and thinking-level mapping"
+    }
+  ],
+  "guardedObservation": {
+    "normalModelChoicesSelectedAndRestored": 2,
+    "serverPreferenceWriteForwarded": false,
+    "chatOrMediaRequestForwarded": false,
+    "webSocketBusinessFramesForwarded": false,
+    "rawRequestOrResponseValuesPersisted": false
+  },
+  "limitation": "A guarded native Pro text request capture confirmed the model ID, category, and thinking values in the source-defined request metadata and was aborted before dispatch. A separate Pro text dispatch was received, but its independent detail readback did not find the assistant answer marker; this fragment does not claim that dispatch is bound to the captured Pro metadata."
+}

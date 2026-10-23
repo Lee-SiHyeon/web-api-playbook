@@ -1,0 +1,77 @@
+{
+  "schema": "gemini-media-asset-verification-v1",
+  "service": "gemini-web",
+  "operation": "history_read_plus_media_download",
+  "recordedAt": "2026-10-05T20:50:59.081470+00:00",
+  "outcome": "native_cookie_domain_scope_mismatch",
+  "priorPhases": {
+    "uiDetailReads": 5,
+    "directHttpDetailReads": 2,
+    "videoArtifactSource": "browser_network",
+    "uiReceiptPath": "/home/worker/work/provider-login-20261004/gemini-web-xhr-client/discovery/media-browser-readback-2026-10-06.json",
+    "directReceiptPath": "/home/worker/work/provider-login-20261004/gemini-web-xhr-client/discovery/media-api-readback-2026-10-06.json"
+  },
+  "thisPhase": {
+    "directHttpDetailReads": 1,
+    "browserDetailReads": 0,
+    "directVideoDetailHttpStatus": 200,
+    "exactVideoTaskHashMatched": true,
+    "apiConversationIdEchoed": true,
+    "rawApiIdUsedInRequest": true,
+    "prefixRemovedFromRequest": false,
+    "routeBindingVerified": true,
+    "taskMediaSourceReference": {
+      "origin": "https://contribution.usercontent.google.com",
+      "pathFamily": "/download",
+      "queryKeyNames": [
+        "c",
+        "filename",
+        "opi"
+      ]
+    },
+    "nativeGet": {
+      "exactTaskUrlMatched": true,
+      "method": "GET",
+      "responseObserved": true,
+      "nativeCookieDomainScopeCheck": "failed",
+      "directAssetHttpRequestAttempted": false,
+      "artifactSavedByDirectHttp": false,
+      "browserNetworkResponseBodyRead": false,
+      "contextCookieAcquisitionCount": 1,
+      "cookieDomainScopeMismatch": true
+    },
+    "directHttpAssetGetAttempted": false,
+    "artifactHashComparedToBrowserMp4": false
+  },
+  "overallDetailReadAccounting": {
+    "priorUiDetailReads": 5,
+    "priorDirectHttpDetailReads": 2,
+    "thisPhaseDirectHttpDetailReads": 1,
+    "totalDetailReads": 8
+  },
+  "persistence": {
+    "rawConversationIdsPersisted": false,
+    "signedAssetUrlPersisted": false,
+    "cookieValuesPersisted": false,
+    "authorizationHeaderValuesPersisted": false,
+    "rawResponseBodiesPersisted": false
+  },
+  "implementation": {
+    "downloadModule": "src/media-download.mjs",
+    "oneShotDirectHttpClient": "scripts/gemini-media-download-once.mjs",
+    "taskVerifyHarness": "scripts/gemini-media-asset-verify-once.py"
+  },
+  "focusedVerification": {
+    "command": "node --test test/media-download.test.mjs",
+    "passed": 6,
+    "failed": 0,
+    "coverage": [
+      "exact origin/path/query binding",
+      "cookie name and domain/path/secure scope",
+      "no cookies across redirect",
+      "observed redirect edge enforcement",
+      "MIME and magic agreement",
+      "SVG format handling"
+    ]
+  }
+}

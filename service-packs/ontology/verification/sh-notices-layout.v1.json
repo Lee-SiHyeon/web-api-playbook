@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "sh-main-notices",
+  "list": {
+    "selectors": [
+      "a[onclick^=\"javascript:getDetailView(\"]",
+      "form#mainform",
+      "table>tbody>tr>td",
+      "table>thead>tr>th"
+    ],
+    "headerLabels": ["번호", "제목", "담당부서", "등록일", "조회수"],
+    "headerHash": "12ba4b3ba0fdae26cf4c37c421b12d382becb62a36911a2ed38a18c77ff6f729",
+    "hash": "219e3f8412c81c7cb2073f3afbd8bee5a842538876cf91388826361986e56a91"
+  },
+  "detail": {
+    "selectors": [
+      "div.detailTable",
+      "div.detailTable table>caption",
+      "div.detailTable td.cont"
+    ],
+    "headerLabels": ["등록일", "조회수"],
+    "headerHash": "84b85960564e0d7ad24165a2b43df752f32d559ab6c9dcccc18bf35161dfb599",
+    "hash": "9a689b70ea86ad05c06974db81cde7f6a3cbfbad2db767af6b1bc5b770bf20aa"
+  }
+}

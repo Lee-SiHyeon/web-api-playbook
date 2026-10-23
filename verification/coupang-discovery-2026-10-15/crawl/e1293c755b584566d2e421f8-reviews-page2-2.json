@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:36:06.208Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000000506705/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 16753,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 2,
+      "countPerPage": 5,
+      "totalCount": 61,
+      "totalPages": 13,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "932666240",
+        "productId": "10000000506705",
+        "rating": 5,
+        "itemName": "[여수] 엑스포카트 단품&여수해상케이블카PKG (~27/3/31)",
+        "reviewedAt": 1782533753000
+      },
+      {
+        "reviewId": "910598119",
+        "productId": "10000000506705",
+        "rating": 5,
+        "itemName": "[여수] 엑스포카트 단품&여수해상케이블카PKG (~27/3/31)",
+        "reviewedAt": 1780384422000
+      },
+      {
+        "reviewId": "907588953",
+        "productId": "10000000506705",
+        "rating": 5,
+        "itemName": "[여수] 엑스포카트 단품&여수해상케이블카PKG (~27/3/31)",
+        "reviewedAt": 1780124744000
+      },
+      {
+        "reviewId": "907587399",
+        "productId": "10000000506705",
+        "rating": 5,
+        "itemName": "[여수] 엑스포카트 단품&여수해상케이블카PKG (~27/3/31)",
+        "reviewedAt": 1780124732000
+      },
+      {
+        "reviewId": "899310616",
+        "productId": "10000000506705",
+        "rating": 5,
+        "itemName": "[여수] 엑스포카트 단품&여수해상케이블카PKG (~27/3/31)",
+        "reviewedAt": 1779337572000
+      }
+    ]
+  },
+  "projectionSha256": "42d61e3d9621f3cbf3bc8bd072ca9692f01f97296662108ae2f9bb228d14d673",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T18:03:07.617Z",
+  "origin": "https://search.shopping.naver.com",
+  "queryExamples": [
+    "멀티탭",
+    "공기청정기"
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/ns/v1/search/paged-composite-cards",
+      "queryFields": [
+        "cursor",
+        "pageSize",
+        "query",
+        "searchMethod",
+        "isFreshCategory",
+        "isOriginalQuerySearch",
+        "isCatalogDiversifyOff",
+        "listPage",
+        "previousSMESlotNvMids",
+        "categoryIdsForPromotions",
+        "hiddenNonProductCard",
+        "duplicatedNvMids",
+        "hasMoreAd",
+        "hasMore",
+        "usedVectorSearch"
+      ],
+      "headerNames": [
+        "Content-Type",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "x-wtm-ncaptcha-token"
+      ],
+      "requestBodyShape": null,
+      "browserStatus": 200,
+      "responseRootKeys": [
+        "data"
+      ],
+      "captured": true,
+      "client_exists": "bounded_replay_probe",
+      "remnant_free": "runner_only_inputs_require_browser_session_and_site_sdk",
+      "credential_propagated": "delivered_in_memory_not_verified_by_successful_read",
+      "live_replay": false,
+      "responseSchema": {
+        "data": {
+          "cursor": "number",
+          "hasMore": "boolean",
+          "total": "number",
+          "data": "array of {page,card:{product}}"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/ns/v1/product-benefits/list",
+      "queryFields": [],
+      "headerNames": [
+        "Content-Type",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "x-nstore-page-code",
+        "x-nstore-pagesession-id"
+      ],
+      "requestBodyShape": "array of product benefit read requests",
+      "browserStatus": 200,
+      "responseRootKeys": [
+        "data"
+      ],
+      "captured": true,
+      "client_exists": "bounded_replay_probe",
+      "remnant_free": "runner_only_inputs_require_browser_session_and_site_sdk",
+      "credential_propagated": "delivered_in_memory_not_verified_by_successful_read",
+      "live_replay": false,
+      "responseSchema": {
+        "data": "product-keyed optimalDiscount map"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/ns/v1/channel-products/by-ids",
+      "queryFields": [
+        "excludeSoldOut",
+        "includeNewShoppingExposureYn",
+        "ids"
+      ],
+      "headerNames": [
+        "Content-Type",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "x-nstore-page-code",
+        "x-nstore-pagesession-id"
+      ],
+      "requestBodyShape": null,
+      "browserStatus": 200,
+      "responseRootKeys": [
+        "data"
+      ],
+      "captured": true,
+      "client_exists": "bounded_replay_probe",
+      "remnant_free": "runner_only_inputs_require_browser_session_and_site_sdk",
+      "credential_propagated": "delivered_in_memory_not_verified_by_successful_read",
+      "live_replay": false,
+      "responseSchema": {
+        "data": "array of products with channelProductId,productName,salePrice,discountedSalePrice,soldout"
+      }
+    }
+  ],
+  "independentReplayReceipts": [
+    {
+      "checkedAt": "2026-09-20T17:47:34.064Z",
+      "path": "/ns/v1/search/paged-composite-cards",
+      "status": 418,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3104,
+      "mode": "anonymous_no_token",
+      "valid": false
+    },
+    {
+      "checkedAt": "2026-09-20T17:47:34.211Z",
+      "path": "/ns/v1/channel-products/by-ids",
+      "status": 418,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3104,
+      "mode": "anonymous_no_token",
+      "valid": false
+    },
+    {
+      "checkedAt": "2026-09-20T17:47:55.732Z",
+      "path": "/ns/v1/search/paged-composite-cards",
+      "status": 418,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3104,
+      "mode": "current_scoped_session_and_observed_inputs",
+      "valid": false
+    },
+    {
+      "checkedAt": "2026-09-20T17:47:55.926Z",
+      "path": "/ns/v1/channel-products/by-ids",
+      "status": 418,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3104,
+      "mode": "current_scoped_session_and_observed_inputs",
+      "valid": false
+    },
+    {
+      "checkedAt": "2026-09-20T17:48:53.067Z",
+      "path": "/ns/v1/channel-products/by-ids",
+      "status": 418,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3104,
+      "mode": "observed_wire_headers_and_service_cookies",
+      "valid": false
+    },
+    {
+      "checkedAt": "2026-09-20T17:48:53.232Z",
+      "path": "/ns/v1/search/paged-composite-cards",
+      "status": 418,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3104,
+      "mode": "observed_wire_headers_and_service_cookies",
+      "valid": false
+    },
+    {
+      "checkedAt": "2026-09-20T17:49:51.600Z",
+      "path": "/ns/v1/channel-products/by-ids",
+      "status": 418,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 3104,
+      "mode": "current_session_standard_http2",
+      "valid": false,
+      "responseTitle": "네이버쇼핑",
+      "challengeText": true
+    }
+  ],
+  "notes": [
+    "Continuation search page 2 was observed; initial search is not implemented.",
+    "HTTP 418 is not evidence of logout.",
+    "No header values, cookies, tokens or raw private response bodies persisted."
+  ]
+}

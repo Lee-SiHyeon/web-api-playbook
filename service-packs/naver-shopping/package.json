@@ -1,0 +1,19 @@
+{
+  "name": "naver-shopping-travel-crawler",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "description": "Direct HTTP Naver shopping and travel connectors",
+  "scripts": {
+    "naver:shopping": "node scripts/naver-shopping.mjs",
+    "naver:travel": "node scripts/naver-travel.mjs",
+    "naver:deals": "node scripts/naver-shopping-deals.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "parse5": "8.0.0"
+  }
+}

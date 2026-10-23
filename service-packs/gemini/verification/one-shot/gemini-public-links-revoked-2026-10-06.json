@@ -1,0 +1,72 @@
+{
+  "schema": "gemini-owner-public-links-read-v1",
+  "service": "gemini-web",
+  "feature": "share",
+  "operation": "share_read",
+  "stage": "revoked",
+  "outcome": "verified",
+  "verifiedAt": "2026-10-06T02:09:44.510224+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "browserPageRestored": false,
+  "normalUiPair": {
+    "rpcId": "OXxBcc",
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 1579,
+    "responseSha256": "da669a7e76f72cabaa900422deadfc4640f75a1fa2aa310a004265ae724c9026",
+    "request": {
+      "method": "POST",
+      "path": "/_/BardChatUi/data/batchexecute",
+      "queryKeys": [
+        "rpcids",
+        "source-path",
+        "bl",
+        "f.sid",
+        "hl",
+        "_reqid",
+        "rt"
+      ],
+      "formFieldNames": [
+        "f.req",
+        "at"
+      ],
+      "valuesPersisted": false
+    },
+    "ownerPublicLinksSurfaceVisible": true
+  },
+  "directReplay": {
+    "clientEntryPoint": "GeminiWebClient.readPublicShareLinks",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "credentialPropagated": true,
+    "identityHttpStatus": null,
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 1578,
+    "responseSha256": "0f19e8d06348d37deea3d3b0bd3a1a506d5fe459bfac9c1ca720f7f377d9b784",
+    "rpcId": "OXxBcc",
+    "shareCount": 7,
+    "targetConversationLinkPresent": false,
+    "targetShareRowCount": 0,
+    "taskTitleConversationCount": 1,
+    "taskConversationDetailBound": false,
+    "targetRowsBoundToConversationId": 0,
+    "targetRowShareUrlCandidateCounts": [],
+    "targetRowShareUrlHostFamilies": []
+  },
+  "ownerDeleteControl": {
+    "officialSurface": "Settings & help > Your public links > Delete public link",
+    "rowDeleteControlPresent": true,
+    "existingTaskLinkCount": 0,
+    "unrelatedLinksModified": false
+  },
+  "persistence": {
+    "expectedOwnerPersisted": false,
+    "cookiesPersisted": false,
+    "sessionValuesPersisted": false,
+    "publicLinkValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "rawRequestOrResponseBodyPersisted": false
+  }
+}

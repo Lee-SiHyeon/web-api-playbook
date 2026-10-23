@@ -1,0 +1,249 @@
+{
+  "schemaVersion": 1,
+  "schemaDialect": "acada-declarative-field-catalog/v1",
+  "ontologyId": "acada:cps-commerce",
+  "label": "제휴 광고주 상품·판매조건·리뷰 온톨로지",
+  "createdAt": "2026-09-27",
+  "purpose": "LinkPrice CPS 프로그램 정체성과 소비자 사이트의 상품·서비스·가격·평점·리뷰 관측을 서로 분리해 연결한다.",
+  "scope": {
+    "affiliateRoster": "LinkPrice에서 현재 활성으로 조회되는 CPS 프로그램",
+    "consumerEvidence": "광고주 소비자 페이지에서 관측한 직접 HTTP 응답 또는 허용된 공개 JSON-LD",
+    "notImplied": [
+      "CPS 등록이 상품 API 접근을 뜻하지 않는다",
+      "광고주 ID와 소비자 데이터 출처 ID는 같은 개념이 아니다",
+      "상품명 유사성만으로 서로 다른 판매처 상품을 같은 상품으로 합치지 않는다",
+      "첫 페이지 또는 JSON-LD review 배열은 전체 리뷰 집합이 아니다"
+    ]
+  },
+  "classes": [
+    {
+      "id": "AffiliateProgram",
+      "identity": "networkId + merchantId",
+      "fields": {
+        "networkId": "예: linkprice",
+        "merchantId": "제휴 네트워크의 광고주 ID",
+        "name": "사이트 표시명",
+        "siteUrl": "프로그램의 소비자 사이트 기본 URL",
+        "networkCategory": "원본 카테고리 코드; 코드 설명은 별도 근거 없이 추론하지 않음",
+        "verticalClassification": "이름·도메인 휴리스틱 힌트와 신뢰도; 소비자 API 근거가 아님",
+        "observedAt": "RFC3339"
+      }
+    },
+    {
+      "id": "ConsumerSource",
+      "identity": "sourceId",
+      "fields": {
+        "sourceId": "수집 계약을 검증한 소비자 사이트 식별자",
+        "origin": "정규 HTTPS origin",
+        "contractState": "verified_public_http|protected_session_only|blocked|not_captured|unverified",
+        "contractEvidence": "EvidenceRef[]"
+      }
+    },
+    {
+      "id": "CommercialOffering",
+      "identity": "consumerSourceId + sourceLocalId; 미매핑 시 LinkPrice merchant별 provisional namespace",
+      "subtypes": [
+        "RetailProduct",
+        "TravelOffering",
+        "ServiceOffering",
+        "DigitalContent",
+        "UnclassifiedOffering"
+      ],
+      "fields": {
+        "offeringType": "위 subtype 중 하나; 화면·구조화데이터 근거가 없으면 UnclassifiedOffering",
+        "title": "사이트가 반환한 상품 또는 서비스명",
+        "brand": "string|null",
+        "description": "string|null",
+        "sourceLocalId": "판매처 ID, SKU, ISBN, product code 등",
+        "identifiers": "GTIN|ISBN|MPN[]; 없으면 생략",
+        "canonicalUrl": "HTTPS URL|null",
+        "images": "HTTPS URL[]"
+      }
+    },
+    {
+      "id": "ProductVariant",
+      "identity": "consumerSourceId + variantLocalId",
+      "fields": {
+        "parentOfferingId": "CommercialOffering ID",
+        "variantLocalId": "SKU 또는 판매처 옵션 ID|null",
+        "attributes": "옵션명·규격·색상 등 관측된 키값만",
+        "availability": "in_stock|out_of_stock|preorder|backorder|unknown"
+      }
+    },
+    {
+      "id": "OfferObservation",
+      "identity": "sourceId + offeringId + observedAt",
+      "fields": {
+        "amountMinor": "integer|null; currency의 ISO 4217 minor unit 기준 (KRW 원, USD cent, CNY fen)",
+        "currency": "ISO 4217|null",
+        "listAmountMinor": "integer|null",
+        "shippingAmountMinor": "integer|null",
+        "discountCondition": "string|null; 쿠폰·카드·회원 조건을 일반 가격과 구분",
+        "availability": "in_stock|out_of_stock|preorder|backorder|unknown",
+        "observedAt": "RFC3339",
+        "validUntil": "RFC3339|null",
+        "externalProductId": "판매처 상품 ID (예: AliExpress productId, Temu goods_id, iHerb pid, SHEIN goods_id)|null",
+        "externalSkuId": "판매처 SKU ID|null",
+        "marketplace": "사이트/로케일 (예: aliexpress.com/ko, kr.iherb.com)|null",
+        "shipToCountry": "ISO 3166-1 alpha-2|null; 가격은 배송국가에 따라 달라짐",
+        "shipsFromCountry": "ISO 3166-1 alpha-2|null",
+        "importDutyMinor": "integer|null",
+        "importTaxMinor": "integer|null",
+        "landedCostMinor": "integer|null; 상품가+배송+관세+부가세, currency 기준",
+        "landedCostKrwMinor": "integer|null; fxRateId 환율로 환산",
+        "fxRateId": "FxRate ID|null"
+      }
+    },
+    {
+      "id": "RatingAggregate",
+      "identity": "sourceId + offeringId + observedAt",
+      "fields": {
+        "ratingValue": "number|null",
+        "bestRating": "number|null",
+        "worstRating": "number|null",
+        "reviewCount": "integer|null",
+        "ratingCount": "integer|null",
+        "observedAt": "RFC3339",
+        "coverage": "aggregate_displayed|sample_only|unknown"
+      }
+    },
+    {
+      "id": "ReviewObservation",
+      "identity": "sourceId + reviewLocalId; if absent, source page + position",
+      "fields": {
+        "offeringId": "CommercialOffering ID",
+        "ratingValue": "number|null",
+        "publishedAt": "date or RFC3339|null",
+        "title": "string|null",
+        "body": "transient string|null; do not persist or quote unless source-specific policy permits",
+        "optionText": "string|null",
+        "helpfulCount": "integer|null",
+        "hasMedia": "boolean|null",
+        "reviewerIdentity": "never stored",
+        "sampleCompleteness": "partial|verified_complete|unknown"
+      }
+    },
+    {
+      "id": "EvidenceRef",
+      "identity": "request receipt hash + field locator",
+      "fields": {
+        "sourceId": "ConsumerSource ID",
+        "requestMethod": "GET|POST|PUT",
+        "requestUrl": "credentials and sensitive query values redacted",
+        "responseStatus": "integer|null",
+        "contentType": "string|null",
+        "responseSha256": "hex|null",
+        "observedAt": "RFC3339",
+        "browserUsed": "boolean|null",
+        "cookiesSent": "boolean|null",
+        "authorizationSent": "boolean|null",
+        "pagination": "pagesRead, nextPageCandidate, complete, stopReason"
+      }
+    },
+    {
+      "id": "FxRate",
+      "identity": "baseCurrency + quoteCurrency + provider + observedAt",
+      "fields": {
+        "baseCurrency": "ISO 4217",
+        "quoteCurrency": "ISO 4217",
+        "rate": "decimal > 0",
+        "provider": "환율 출처",
+        "observedAt": "RFC3339"
+      }
+    },
+    {
+      "id": "CommissionTerm",
+      "identity": "sourceId + partnerNetwork + category + validFrom",
+      "fields": {
+        "sourceId": "ConsumerSource ID",
+        "partnerNetwork": "예: aliexpress-portals, linkprice, impact",
+        "category": "string|null",
+        "marketplace": "string|null",
+        "ratePercent": "number 0-100|null",
+        "flatAmountMinor": "integer|null",
+        "currency": "ISO 4217|null; flatAmount 있을 때 필수",
+        "cookieDays": "integer|null",
+        "validFrom": "RFC3339",
+        "validUntil": "RFC3339|null",
+        "evidenceUrl": "HTTPS URL|null"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "predicate": "targetsConsumerSource",
+      "domain": "AffiliateProgram",
+      "range": "ConsumerSource",
+      "basis": "explicit merchant ID mapping; never host-only when ambiguous"
+    },
+    {
+      "predicate": "offers",
+      "domain": "ConsumerSource",
+      "range": "CommercialOffering"
+    },
+    {
+      "predicate": "hasVariant",
+      "domain": "CommercialOffering",
+      "range": "ProductVariant"
+    },
+    {
+      "predicate": "hasOfferObservation",
+      "domain": "CommercialOffering",
+      "range": "OfferObservation"
+    },
+    {
+      "predicate": "hasRatingAggregate",
+      "domain": "CommercialOffering",
+      "range": "RatingAggregate"
+    },
+    {
+      "predicate": "hasReviewObservation",
+      "domain": "CommercialOffering",
+      "range": "ReviewObservation"
+    },
+    {
+      "predicate": "supportedBy",
+      "domain": "CommercialOffering|OfferObservation|RatingAggregate|ReviewObservation",
+      "range": "EvidenceRef"
+    }
+  ],
+  "capabilities": [
+    "product_search",
+    "product_detail",
+    "product_options",
+    "price",
+    "market_price_reference",
+    "availability",
+    "rating_summary",
+    "reviews_list",
+    "reviews_photo"
+  ],
+  "capabilityStates": [
+    "verified_public_http",
+    "protected_session_only",
+    "manual_url_only",
+    "blocked",
+    "not_captured",
+    "parser_available_source_unverified",
+    "unverified",
+    "not_applicable"
+  ],
+  "evidenceRules": [
+    "Each field keeps its source and observation time; missing fields stay null with a reason rather than being inferred.",
+    "Product identity is source-local unless a matching GTIN, ISBN, or other exact identifier is observed at both sources.",
+    "Price, stock and review totals are time-bound observations, not durable product facts.",
+    "A parser being implemented does not make a merchant capability verified; require a permitted response and a browserless replay receipt.",
+    "HTTP 403, 418, 429, confirmed challenges, or off-origin redirects stop the reader without retry or bypass.",
+    "Review samples are not complete unless the end-of-list and pagination contract are observed; reviewer names, IDs and profile URLs are excluded."
+  ],
+  "overseasSources": {
+    "ids": [
+      "aliexpress",
+      "temu",
+      "iherb",
+      "shein"
+    ],
+    "dbMirror": "lifehackailab-web supabase/migrations/202610150100_overseas_commerce.sql",
+    "note": "commerce_sources: coupang|naver|aliexpress|temu|iherb|shein|other; offers.currency는 ISO 4217 3자리"
+  }
+}

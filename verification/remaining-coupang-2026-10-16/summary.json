@@ -1,0 +1,268 @@
+{
+  "schema": "coupang-retail-current-check-v1",
+  "checkedAt": "2026-10-15T16:43:22.318Z",
+  "repositoryRevision": "6063743",
+  "provider": {
+    "store": "coupang-retail-public-v1",
+    "provider": "Windows DPAPI CurrentUser",
+    "persistent": true,
+    "ready": true,
+    "localContextLimitMs": 21600000,
+    "signatureRefreshDue": false,
+    "lastSuccessfulReadAt": "2026-10-15T16:43:22.318Z",
+    "opaqueContextRenewalVerified": false,
+    "liveCheckPerformed": true
+  },
+  "maintainedRscSearch": {
+    "operation": "retail_search_lowest_price_rsc",
+    "executionMode": "pure_http",
+    "browserUsed": false,
+    "attempts": [
+      {
+        "checkedAt": "2026-10-15T16:08:56.920Z",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "status": null,
+        "code": "COUPANG_RETAIL_RESPONSE_COOKIE_SCOPE",
+        "note": "Pre-diagnostics code aborted inside Set-Cookie callback before status/MIME reached the receipt."
+      },
+      {
+        "checkedAt": "2026-10-15T16:10:37.730Z",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "status": 200,
+        "mime": "text/html",
+        "codeAtRun": "COUPANG_RETAIL_RESPONSE_COOKIE_SCOPE",
+        "rejectedResponseCookieNames": [
+          "bm_sc"
+        ],
+        "credentialPropagated": true,
+        "liveReplay": false,
+        "note": "Run preceded the follow-up classifier patch; raw body and cookie values were not stored."
+      },
+      {
+        "checkedAt": "2026-10-15T16:24:39.478Z",
+        "receipt": "verification/remaining-coupang-2026-10-16/search-after-handoff-20261015T1623Z.json",
+        "status": 200,
+        "mime": "text/x-component",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "credentialPropagated": true,
+        "liveReplay": true,
+        "productCount": 59,
+        "completeCatalog": false,
+        "signatureRenewalPerformed": true,
+        "signatureRenewalVerifiedByRead": true,
+        "oldSignatureExpiredAtStart": false,
+        "cookieRotationObserved": true,
+        "opaqueContextRenewed": false,
+        "noBmSc": true,
+        "noBmMi": true
+      },
+      {
+        "checkedAt": "2026-10-15T16:39:29.238Z",
+        "receipt": "verification/remaining-coupang-2026-10-16/renew-after-handoff-20261015T1625Z.json",
+        "status": 200,
+        "mime": "text/x-component",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "credentialPropagated": true,
+        "liveReplay": true,
+        "productCount": 59,
+        "completeCatalog": false,
+        "signatureRenewalPerformed": true,
+        "signatureRenewalVerifiedByRead": true,
+        "oldSignatureExpiredAtStart": true,
+        "cookieRotationObserved": true,
+        "opaqueContextRenewed": false,
+        "noBmSc": true,
+        "noBmMi": true
+      },
+      {
+        "checkedAt": "2026-10-15T16:43:22.318Z",
+        "receipt": "verification/remaining-coupang-2026-10-16/search-after-cookie-scope-fix-20261015T1643Z.json",
+        "status": 200,
+        "mime": "text/x-component",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "credentialPropagated": true,
+        "liveReplay": true,
+        "productCount": 60,
+        "completeCatalog": false,
+        "signatureRenewalPerformed": true,
+        "signatureRenewalVerifiedByRead": true,
+        "oldSignatureExpiredAtStart": false,
+        "cookieRotationObserved": true,
+        "opaqueContextRenewed": false,
+        "noBmSc": true,
+        "noBmMi": true
+      }
+    ],
+    "localSignature": {
+      "expiredAtStart": false,
+      "locallyRenewedForRequest": true,
+      "verifiedBySuccessfulRscRead": true
+    },
+    "result": "verified_listing_search_with_60_product_cards_after_cookie_scope_filter_fix",
+    "currentServerOpaqueSessionExpiry": "unknown",
+    "currentClientPatch": "Records safe status/MIME and rejected-cookie name; HTTP status/MIME classification takes precedence, and unrecognized response cookies are filtered before protected persistence.",
+    "postHandoffEvidence": {
+      "browserUsed": false,
+      "executionMode": "pure_http",
+      "search": {
+        "checkedAt": "2026-10-15T16:24:39.478Z",
+        "receipt": "verification/remaining-coupang-2026-10-16/search-after-handoff-20261015T1623Z.json",
+        "status": 200,
+        "mime": "text/x-component",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "credentialPropagated": true,
+        "liveReplay": true,
+        "productCount": 59,
+        "completeCatalog": false,
+        "signatureRenewalPerformed": true,
+        "signatureRenewalVerifiedByRead": true,
+        "oldSignatureExpiredAtStart": false,
+        "cookieRotationObserved": true,
+        "opaqueContextRenewed": false,
+        "noBmSc": true,
+        "noBmMi": true
+      },
+      "forcedRenew": {
+        "checkedAt": "2026-10-15T16:39:29.238Z",
+        "receipt": "verification/remaining-coupang-2026-10-16/renew-after-handoff-20261015T1625Z.json",
+        "status": 200,
+        "mime": "text/x-component",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "credentialPropagated": true,
+        "liveReplay": true,
+        "productCount": 59,
+        "completeCatalog": false,
+        "signatureRenewalPerformed": true,
+        "signatureRenewalVerifiedByRead": true,
+        "oldSignatureExpiredAtStart": true,
+        "cookieRotationObserved": true,
+        "opaqueContextRenewed": false,
+        "noBmSc": true,
+        "noBmMi": true
+      },
+      "opaqueContextRenewalVerified": false,
+      "afterCookieScopeFix": {
+        "checkedAt": "2026-10-15T16:43:22.318Z",
+        "receipt": "verification/remaining-coupang-2026-10-16/search-after-cookie-scope-fix-20261015T1643Z.json",
+        "status": 200,
+        "mime": "text/x-component",
+        "requestCount": 1,
+        "exactCookieHeaderSent": true,
+        "credentialPropagated": true,
+        "liveReplay": true,
+        "productCount": 60,
+        "completeCatalog": false,
+        "signatureRenewalPerformed": true,
+        "signatureRenewalVerifiedByRead": true,
+        "oldSignatureExpiredAtStart": false,
+        "cookieRotationObserved": true,
+        "opaqueContextRenewed": false,
+        "noBmSc": true,
+        "noBmMi": true
+      }
+    }
+  },
+  "publicGeneralPrice": {
+    "checkedAt": "2026-10-15T16:17:41.875Z",
+    "operation": "GET /next-api/offer-list",
+    "status": 200,
+    "mime": "application/json",
+    "exactProductIdentity": {
+      "productId": "6247736560",
+      "itemId": "12646874013",
+      "vendorItemId": "79914317500"
+    },
+    "offerCount": 1,
+    "selectedGeneralPrice": {
+      "amount": 13200,
+      "currency": "KRW",
+      "basis": "public_offer_list",
+      "accountApplied": false
+    },
+    "executionMode": "pure_http",
+    "authenticationMode": "visitor",
+    "ownerCredentialUsed": false,
+    "liveReplay": true,
+    "evidence": "verification/remaining-coupang-2026-10-16/product-public-reads.json"
+  },
+  "productDetail": {
+    "operation": "consumer_product_document",
+    "attemptedVia": "maintained consumer reader with visitor mode",
+    "code": "COUPANG_VISITOR_OPERATION_SCOPE",
+    "httpRequests": 0,
+    "liveReplay": false,
+    "note": "No current product Document request was sent; do not report this preflight as HTTP 403."
+  },
+  "optionCoverage": {
+    "searchCardsContainExactItemAndVendorIds": true,
+    "completeCatalog": false,
+    "fullProductOptionInventory": "not captured",
+    "accountAppliedWowPrice": "unverified_without_owner_proof"
+  },
+  "renewalBoundary": {
+    "xCpSSignatureRenewal": "local_signature_renewal_verified_by_successful_200_RSC_read_after_old_signature_expired",
+    "opaqueContextRenewalVerified": false,
+    "localSixHourGuardMs": 21600000,
+    "serverOpaqueContextTtl": "unknown",
+    "browserBootstrap": "authorized current-origin bootstrap remains required when local guard trips or HTTP returns unusable content"
+  },
+  "tests": {
+    "targeted": {
+      "files": 3,
+      "total": 12,
+      "passed": 12,
+      "failed": 0
+    },
+    "offlinePack": {
+      "files": 36,
+      "total": 339,
+      "passed": 338,
+      "failed": 1,
+      "skipped": 0,
+      "syntaxChecked": 26,
+      "syntaxFailed": 0,
+      "soleFailure": "service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-partners-memory-provider.test.mjs:183 expects POSIX mode 0 but Windows reported 54; unrelated to this task"
+    },
+    "mockedTestsDoNotEstablishLiveReplay": true,
+    "latestTargeted": {
+      "files": 2,
+      "total": 10,
+      "passed": 10,
+      "failed": 0,
+      "fileList": [
+        "tests/coupang-retail-checklist.test.mjs",
+        "tests/coupang-retail-session.test.mjs"
+      ]
+    }
+  },
+  "changedFileSha256": {
+    "lib/retail/coupang-retail-session.mjs": "0111268fba73cd7cb0837aaa6ae97f88f6c9c3f6ba5df9ac1ea84f8559e0c3a4",
+    "tests/coupang-retail-session.test.mjs": "7c56f4569c90757549a903f7ceb29f6080d143fe1bc830de14dd415b0fe85a0c",
+    "checklists/services/coupang-retail.json": "08927e2d42be612987bd152ac743600d5f70e0f5b1620796606a528632933160"
+  },
+  "secretValuesPersistedInEvidence": false,
+  "writesSubmitted": 0,
+  "retries": 0,
+  "updatedArtifacts": [
+    "checklists/services/coupang-retail.json",
+    "verification/remaining-coupang-2026-10-16/search-after-handoff-proof-20261015T162439Z.json",
+    "verification/remaining-coupang-2026-10-16/search-after-handoff-20261015T1623Z.json",
+    "verification/remaining-coupang-2026-10-16/forced-renew-after-handoff-proof-20261015T163929Z.json",
+    "verification/remaining-coupang-2026-10-16/renew-after-handoff-20261015T1625Z.json",
+    "verification/remaining-coupang-2026-10-16/search-after-cookie-scope-fix-proof-20261015T164322Z.json",
+    "verification/remaining-coupang-2026-10-16/search-after-cookie-scope-fix-20261015T1643Z.json"
+  ],
+  "cookiePersistenceScope": {
+    "predicate": "allowlisted_name_and_coupang_domain_and_root_path",
+    "nonRootAllowlistedCookieRejected": true,
+    "storedJarExcludesRejectedCookie": true,
+    "test": "tests/coupang-retail-session.test.mjs"
+  }
+}

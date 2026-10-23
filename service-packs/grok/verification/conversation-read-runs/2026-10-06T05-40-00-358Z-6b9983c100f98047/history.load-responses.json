@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "conversation.history",
+  "requirementId": "history.load-responses",
+  "operationId": "history.load-responses",
+  "observedAt": "2026-10-06T05:40:00.355Z",
+  "recordedAt": "2026-10-06T05:40:00.355Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "7360b0c3925a6c92ae4f17492f3fce59312631e9ae65633b9d3012315bfad440",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 137798,
+  "requestDigest": "b9d1722b075cb4268088cadbe36d0a5529e99db4fd78f018b41a59387b87bb2a",
+  "responseDigest": "3346125214e497077d196c8a5e9b39b85be588440d1bc41152ba4ba4fbbb8190",
+  "capturedOperationSha256": "136f5575bef071496798eb08802bc4bd22526abde984119d4a6b26fc5db21e21",
+  "handlerId": "client.read",
+  "dispatchBinding": {
+    "handlerId": "client.read",
+    "operationId": "history.load-responses",
+    "operationKind": "read",
+    "mode": "validated_registry_generic"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "codeSha256": {
+    "src/client.mjs": "51c2768d8d0beb52427988d1f5d48e8c78b36f67d6ec60a1fb2ac57e688764e7",
+    "src/transport.mjs": "4cd42d32e99173500464d2d98a6a76bc203cd279ebdcc6ab0883924cfa786588",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/runtime.mjs": "e55e7b9440842d87eed783d721b2a55a36489d64133f8ae570c2c448319db57d",
+    "src/grok-conversations.mjs": "a47761cc119dafc539e74d57e75c1cfb70998ce1360b48468784f4567a592f38"
+  },
+  "semanticReadback": {
+    "loadedResponseCount": 14,
+    "loadedUserMessageCount": 7,
+    "loadedAssistantMessageCount": 7,
+    "responseIdsBoundInMemory": true
+  }
+}

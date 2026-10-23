@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "observedAt": "2026-10-05T13:43:52.395Z",
+  "scope": "Normal first-party Flow SDK issuance; consumer create aborted before transmission",
+  "wholeOperationPureHttp": false,
+  "generationPostsSent": 0,
+  "consumerGuard": {
+    "blockedRequests": 1,
+    "canceledLoadingFailure": true,
+    "consumerResponseSeen": false
+  },
+  "issuanceSequence": [
+    {"host":"www.google.com","path":"/recaptcha/enterprise.js","method":"GET","queryKeys":["trustedtypes","render"],"status":200,"mime":"text/javascript"},
+    {"host":"www.gstatic.com","path":"/recaptcha/releases/guXhH0v-XMxlzmbTwqkaT4i5/recaptcha__ko.js","method":"GET","queryKeys":[],"status":200,"mime":"text/javascript"},
+    {"host":"www.google.com","path":"/recaptcha/enterprise/anchor","method":"GET","queryKeys":["ar","k","co","hl","v","size","anchor-ms","execute-ms","cb"],"status":200,"mime":"text/html"},
+    {"host":"www.google.com","path":"/recaptcha/enterprise/webworker.js","method":"GET","queryKeys":["hl","v"],"responseObserved":false},
+    {"host":"www.google.com","path":"/recaptcha/enterprise/reload","method":"POST","queryKeys":["k"],"status":200,"mime":"application/json"},
+    {"host":"www.google.com","path":"/recaptcha/enterprise/clr","method":"POST","queryKeys":["k"],"status":200,"mime":"application/binary"}
+  ],
+  "reloadRequest": {
+    "contentType": "application/x-protobuffer",
+    "bytes": 12057,
+    "fullyParsedWireFormat": true,
+    "fields": [
+      {"number":1,"wireType":2,"bytes":24,"equalToObservedSource":"anchor.query.v"},
+      {"number":2,"wireType":2,"bytes":1742,"equalToObservedSource":"anchor.response.input#recaptcha-token"},
+      {"number":5,"wireType":2,"bytes":10,"producer":"unresolved"},
+      {"number":6,"wireType":2,"bytes":1,"producer":"unresolved"},
+      {"number":8,"wireType":2,"bytes":16,"equalToObservedSource":"Flow VIDEO_GENERATION action"},
+      {"number":14,"wireType":2,"bytes":40,"equalToObservedSource":"anchor.query.k"},
+      {"number":16,"wireType":2,"bytes":5704,"producer":"unresolved"},
+      {"number":20,"wireType":2,"bytes":590,"producer":"unresolved"},
+      {"number":21,"wireType":2,"bytes":73,"producer":"unresolved"},
+      {"number":22,"wireType":2,"bytes":3748,"producer":"unresolved"},
+      {"number":25,"wireType":2,"bytes":68,"producer":"unresolved"},
+      {"number":28,"wireType":0,"producer":"unresolved"},
+      {"number":29,"wireType":0,"producer":"unresolved"}
+    ]
+  },
+  "reloadResponse": {
+    "type": "array",
+    "length": 17,
+    "actionTokenField": "response[1]",
+    "actionTokenLength": 2489,
+    "equalsConsumerGenerationPayloadSlot": "payload[1][10][0]",
+    "equalityCheckedInMemory": true,
+    "actionTokenUsedOnServer": false
+  },
+  "independentHttpInitialization": {
+    "checkedAt": "2026-10-05T13:42:30.957Z",
+    "executionMode": "pure_http",
+    "inputProvenance": "Observed normal SDK anchor URL through a one-use encrypted handoff",
+    "credentialsSent": false,
+    "browserHeaderValuesCopied": false,
+    "status": 200,
+    "mime": "text/html",
+    "responseBytes": 39791,
+    "serverInitializationNoncePresent": true,
+    "serverInitializationNonceLength": 1870,
+    "finalActionTokenIssued": false,
+    "reloadPostsSent": 0,
+    "generationPostsSent": 0,
+    "scope": "Initialization GET only; not an implemented recurring issuer"
+  },
+  "limits": [
+    "Equality proves observed dataflow, not the full cryptographic binding of inputs.",
+    "A successful anchor GET does not establish that a standalone HTTP reload request will be accepted.",
+    "No raw token, cookie, SDK-derived field value, header value or signed URL is retained.",
+    "Node empty-VM bootstrap failure does not establish that an HTTP issuer is impossible.",
+    "The old pass log already observed a successful reload response; its missing request-body schema was the observation gap."
+  ],
+  "reloginPerformed": false
+}

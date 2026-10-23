@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "date": "2026-09-27",
+  "scope": { "cafeName": "생활이득AI연구소", "cafeId": "31796283", "cafeSlug": "lifehackailab", "role": "카페매니저" },
+  "implementation": { "client": "lib/manager.mjs", "transport": "lib/session.mjs#managerRequest", "cli": "scripts/manage.mjs", "auth": "Windows DPAPI-protected Naver Cafe session" },
+  "method": "First-party browser action requests were captured before sending where indicated. Temporary resources were written through standalone Node direct HTTP and read back. Browser capture was not the replay transport. Authentication headers, cookies, editor tokens, response bodies, and post content are omitted.",
+  "contracts": [
+    {
+      "operation": "articleCreate",
+      "browserRequestCaptured": true,
+      "method": "POST",
+      "urlTemplate": "https://apis.cafe.naver.com/editor/v2.0/cafes/{cafeId}/menus/{menuId}/articles",
+      "contentType": "application/json",
+      "bodyShape": { "article": ["cafeId", "contentJson", "from", "menuId", "subject", "tagList", "editorVersion", "parentId", "open", "naverOpen", "externalOpen", "enableComment", "enableScrap", "enableCopy", "useAutoSource", "cclTypes", "useCcl"] },
+      "contentJson": "Stringified SmartEditor document with text components and generated IDs; no copied editor telemetry",
+      "directHttpReplay": true,
+      "readback": "full article list plus owner article content",
+      "journalIds": ["5593f2c5-eb56-4416-8621-ad2fe06c99b7", "c0286c3d-8fa5-4497-8447-548fc2586732"]
+    },
+    {
+      "operation": "articleUpdate",
+      "browserRequestCaptured": true,
+      "method": "POST",
+      "urlTemplate": "https://apis.cafe.naver.com/editor/v2.0/cafes/{cafeId}/articles/{articleId}",
+      "contentType": "application/json",
+      "bodyShape": "article envelope matching create, including headId; current settings read from GET /editor/v2/cafes/{cafeId}/editor",
+      "directHttpReplay": true,
+      "readback": "owner article title and text",
+      "journalIds": ["64e6d599-b7d8-41ef-a8ed-7ac7e9dc9f41"]
+    },
+    {
+      "operation": "articleDelete",
+      "browserRequestCaptured": true,
+      "method": "POST",
+      "url": "https://apis.naver.com/cafe-web/cafe-mobile/ArticleDelete.json",
+      "contentType": "application/x-www-form-urlencoded",
+      "bodyFields": ["cafeId", "articleId", "requestFrom"],
+      "directHttpReplay": true,
+      "readback": "article ID absent from full list",
+      "journalIds": ["5bf517b6-af0b-46aa-88bf-133d755481b8", "bfe6d586-a1f3-4a2e-a889-9eed78ee1901"]
+    },
+    {
+      "operation": "boardAdd",
+      "browserRequestCaptured": true,
+      "method": "POST",
+      "url": "https://apis.naver.com/cafe-web/cafe-mobile/ManageMenuListSave.json",
+      "contentType": "application/x-www-form-urlencoded",
+      "bodyFields": ["cafeId", "editedMenuInfo"],
+      "editedMenuInfo": "encodeURIComponent(JSON.stringify({wholeArticleViewTypeCode,basicMenuCodes,menuIdOrder,addedMenus,modifiedMenus,deletedMenuIds})); addedMenus.NORMAL contains new board config",
+      "directHttpReplay": true,
+      "readback": "manager menu list contains assigned menu ID and name",
+      "journalIds": ["d9f2fa80-02ff-4c8d-b448-12e7b31e9b1a", "634bcf37-d9d6-4aa8-8849-9afd12371d84"]
+    },
+    {
+      "operation": "boardRename",
+      "browserRequestCaptured": true,
+      "method": "POST",
+      "url": "https://apis.naver.com/cafe-web/cafe-mobile/ManageMenuListSave.json",
+      "contentType": "application/x-www-form-urlencoded",
+      "editedMenuInfo": "modifiedMenus.NORMAL contains existing board settings with changed menuName",
+      "directHttpReplay": true,
+      "readback": "manager menu list contains new name for same menu ID",
+      "journalIds": ["1b318d88-e946-4d82-b933-4f2e55d97a60"]
+    },
+    {
+      "operation": "boardDelete",
+      "browserRequestCaptured": false,
+      "contractBasis": "same captured ManageMenuListSave endpoint, menu deletion payload shape from first-party bundle, successful direct replay",
+      "method": "POST",
+      "url": "https://apis.naver.com/cafe-web/cafe-mobile/ManageMenuListSave.json",
+      "contentType": "application/x-www-form-urlencoded",
+      "editedMenuInfo": "deletedMenuIds contains target menu ID and menuIdOrder excludes it; emptiness and ManageMenuDeletableCheck preflight",
+      "directHttpReplay": true,
+      "readback": "menu ID absent from manager menu list",
+      "journalIds": ["e3c72a9d-6b3e-4982-b695-1ab269c4d1dd", "9dcd7ae6-9863-4129-b33f-94773485fddf"]
+    }
+  ],
+  "verification": {
+    "executionMode": "pure_http",
+    "browserUse": "scoped contract discovery only; no recurring HTTP operation uses a browser",
+    "credentialProvider": "Windows DPAPI-protected Naver Cafe session",
+    "protectedActorRead": "Cafe membership returned 카페매니저 in the direct Node runner",
+    "renewalAfterExpiry": "unverified",
+    "statesByOperation": {
+      "articleCreate": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+      "articleUpdate": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+      "articleDelete": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+      "boardAdd": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+      "boardRename": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+      "boardDelete": { "captured": false, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true }
+    },
+    "directWriteCount": 10,
+    "verifiedJournalCount": 10,
+    "temporaryResourcesCreated": { "boards": 2, "articles": 2 },
+    "temporaryResourcesRemaining": 0,
+    "finalManagerMenuIds": [1],
+    "finalArticleIds": [1],
+    "limitations": ["plain-text new posts", "own text-only post body replacement", "normal boards", "authentication expiry renewal unverified"]
+  }
+}

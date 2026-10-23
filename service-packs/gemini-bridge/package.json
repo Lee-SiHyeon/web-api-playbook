@@ -1,0 +1,13 @@
+{
+  "name": "@affiliate-content-operations/gemini-web-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "verify": "node --max-http-header-size=65536 src/verify.mjs",
+    "test": "node --max-http-header-size=65536 --test test/*.test.mjs"
+  }
+}

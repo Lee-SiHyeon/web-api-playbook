@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "service": "iherb",
+  "description": "iHerb affiliate via Awin, CJ, Impact, or Partnerize (https://www.iherb.com/info/affiliates). Prefer network product feeds and APIs already patterned by lib/commerce/impact.mjs and awin.mjs. Checked 2026-10-14. 2026-10-15: storefront HTTP expansion is applicable; see references/overseas-retail-frontier.json. Affiliate approval remains independent.",
+  "capabilities": [
+    {
+      "id": "affiliate.network_join",
+      "title": "Approved publisher join on one of Awin/CJ/Impact/Partnerize for iHerb",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "No account approval or MID/campaign id recorded in this repo yet."
+    },
+    {
+      "id": "catalog.network_product_feed",
+      "title": "Read iHerb product feed with currency and deep links from the chosen network",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Await network credentials and campaign/feed ids. Do not guess Impact catalogId or Awin MID."
+    },
+    {
+      "id": "affiliate.deeplink",
+      "title": "Create tracking links for iHerb product URLs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Depends on network join. Preserve network-returned URLs; do not append Rewards codes contrary to programme FAQ."
+    },
+    {
+      "id": "catalog.storefront_anonymous",
+      "title": "Anonymous iherb storefront catalog through observed HTTP Documents, Fetch or XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Public www.iherb.com sitemap identities are verified separately. kr.iherb.com storefront returned HTTP 403 challenge; titles, prices, stock, options and reviews remain unverified.",
+      "discoveryFrontier": "references/overseas-retail-frontier.json"
+    },
+    {
+      "id": "claims.health",
+      "title": "Publish medical or efficacy claims from labels",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Existing content policy forbids medical/efficacy claims; affiliate copy stays factual."
+    },
+    {
+      "id": "checkout.write",
+      "title": "Cart or checkout writes",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Read-only affiliate scope."
+    },
+    {
+      "id": "catalog.sitemap_products",
+      "title": "Public XML sitemap product identities with bounded, snapshot-bound continuation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/overseas-sitemaps.mjs",
+            "exports": [
+              "createOverseasSitemapClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/overseas-retail.mjs",
+            "tokens": [
+              "iherb",
+              "sitemap-products"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-overseas-sitemaps.test.mjs",
+          "tests/overseas-retail-cli.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.iherb.com",
+          "path": "/sitemaps/products-0-www-0.xml",
+          "method": "GET",
+          "mime": "text/xml",
+          "files": [
+            "verification/retail-iherb-direct-http-proof-2026-10-15.json",
+            "verification/retail-iherb-sitemap-cli-2026-10-15-v2.json"
+          ],
+          "hashPaths": [
+            "lib/retail/overseas-sitemaps.mjs",
+            "scripts/overseas-retail.mjs",
+            "lib/cli.mjs",
+            "package-lock.json",
+            "verification/retail-iherb-sitemap-cli-2026-10-15-v2.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "100 identity rows from the first of 3 shards. First shard has 20,500 unique IDs. No price, stock, title or complete-catalog claim.",
+      "discoveryFrontier": "references/overseas-retail-frontier.json"
+    }
+  ]
+}

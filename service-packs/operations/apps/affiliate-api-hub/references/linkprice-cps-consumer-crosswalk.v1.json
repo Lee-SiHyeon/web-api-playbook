@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "networkId": "linkprice",
+  "ontologyId": "acada:cps-commerce",
+  "mappingKey": "exact_linkprice_merchant_id",
+  "policy": "Only explicit observed merchant ID mappings are joined to existing consumer-source contracts. Every other active CPS row remains unmapped and requires source discovery.",
+  "mappingEvidence": {
+    "state": "identity_crosswalk_only",
+    "basis": "exact LinkPrice merchant ID plus normalized site host cross-reference to a consumer source in the shopping capability registry",
+    "merchantSnapshot": "references/linkprice-cps-source-map-2026-09-27.json",
+    "consumerSourceRegistry": "../../naver-blog-api/research/content-store/shopping-sources.v1.json",
+    "checkedAt": "2026-09-27",
+    "doesNotProve": ["product detail replay", "merchant search support", "review access", "affiliate approval equivalence"]
+  },
+  "genericProductDetailParser": {
+    "format": "schema.org JSON-LD embedded in first-party HTML",
+    "capabilityState": "parser_available_source_unverified",
+    "condition": "User supplies an HTTPS product or service detail URL on the active merchant's allowed host; the page returns HTTP 200 HTML with recognized JSON-LD.",
+    "notAClaimOf": ["search support", "merchant-specific endpoint verification", "successful replay for every domain", "complete review history"]
+  },
+  "mappings": [
+    { "merchantId": "11st", "consumerSourceId": "elevenst", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["11st.co.kr"] },
+    { "merchantId": "auction", "consumerSourceId": "auction", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["auction.co.kr"] },
+    { "merchantId": "coupang", "consumerSourceId": "coupang", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["coupang.com"] },
+    { "merchantId": "emart", "consumerSourceId": "ssg", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["ssg.com"] },
+    { "merchantId": "gmarket", "consumerSourceId": "gmarket", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["gmarket.co.kr"] },
+    { "merchantId": "gmarket2", "consumerSourceId": "gmarket", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["gmarket.co.kr"], "note": "Same consumer host as gmarket; keep the LinkPrice program ID distinct." },
+    { "merchantId": "kurly", "consumerSourceId": "kurly", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["kurly.com"] },
+    { "merchantId": "lotteon", "consumerSourceId": "lotteon", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["lotteon.com"] },
+    { "merchantId": "nbtnaver", "consumerSourceId": "naver_shopping", "offeringTypeHint": "RetailProduct", "allowedHostRoots": ["shopping.naver.com", "smartstore.naver.com", "brand.naver.com"] }
+  ],
+  "unmappedDefaults": {
+    "consumerSourceId": null,
+    "offeringTypeHint": "UnclassifiedOffering",
+    "productSearch": "not_captured",
+    "productDetail": "parser_available_source_unverified",
+    "price": "not_captured",
+    "ratingSummary": "not_captured",
+    "reviews": "not_captured"
+  }
+}

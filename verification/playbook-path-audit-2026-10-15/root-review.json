@@ -1,0 +1,118 @@
+{
+  "schema": "web-api-maintained-path-review-v1",
+  "baseCommit": "914e580cfe9edbea51ac320e8fce46d63759388c",
+  "checkedAt": "2026-10-15T13:12:00Z",
+  "method": "Static manifest, implementation, command-dispatch and historical-receipt comparison; two maintained public commands replayed separately. No AliExpress live requests.",
+  "registeredScope": [
+    "aliexpress",
+    "aliexpress-partner",
+    "aliexpress-portals",
+    "iherb",
+    "shein",
+    "temu",
+    "walmart"
+  ],
+  "services": [
+    {
+      "service": "aliexpress",
+      "client": "lib/retail/aliexpress.mjs",
+      "cli": "scripts/retail.mjs product-seo",
+      "assessment": "No additional wrong-path verdict found in reviewed scope.",
+      "bounds": "Public SEO metadata is separate from search, offers, stock and reviews. Its historical receipt is stale after actual CLI/session-code changes. Sitemaps are a separate client.",
+      "currentLive": "excluded_by_user",
+      "references": [
+        "checklists/services/aliexpress.json",
+        "scripts/retail.mjs",
+        "scripts/overseas-retail.mjs"
+      ]
+    },
+    {
+      "service": "aliexpress-partner",
+      "client": "lib/commerce/aliexpress-affiliate.mjs",
+      "cli": "scripts/commerce.mjs",
+      "assessment": "Credential/entitlement prerequisite is not a measured server 403.",
+      "bounds": "Affiliate query/detail uses separate app credentials and does not substitute for consumer storefront or Portals. No credential or link-generation call performed.",
+      "currentLive": "excluded_by_user",
+      "references": [
+        "checklists/services/aliexpress-partner.json"
+      ]
+    },
+    {
+      "service": "aliexpress-portals",
+      "assessment": "Unimplemented/unverified portal operations are not a measured storefront failure.",
+      "bounds": "Portals and affiliate API approval have independent scope. No login, create-link or portal request performed.",
+      "currentLive": "excluded_by_user",
+      "references": [
+        "checklists/services/aliexpress-portals.json"
+      ]
+    },
+    {
+      "service": "iherb",
+      "client": "lib/retail/overseas-sitemaps.mjs",
+      "cli": "scripts/overseas-retail.mjs iherb sitemap-products --limit=10",
+      "assessment": "Maintained identity-only sitemap path replayed successfully; no false storefront status found.",
+      "currentLive": "passed_bounded",
+      "receipt": "iherb-live.json",
+      "bounds": "10 product IDs/URLs/lastmod from first sitemap. No product titles, prices, availability, options or full catalog verification. www XML success does not establish kr HTML access.",
+      "references": [
+        "checklists/services/iherb.json",
+        "scripts/overseas-retail.mjs"
+      ]
+    },
+    {
+      "service": "shein",
+      "client": "lib/retail/shein.mjs",
+      "cli": "scripts/overseas-retail.mjs shein home",
+      "assessment": "Maintained public home Document reader replayed successfully.",
+      "currentLive": "passed_bounded",
+      "receipt": "shein-live.json",
+      "bounds": "10 initial home cards and category menu; no detail, variant, review, pagination or whole-catalog verification.",
+      "references": [
+        "checklists/services/shein.json",
+        "scripts/overseas-retail.mjs"
+      ]
+    },
+    {
+      "service": "temu",
+      "cli": "scripts/overseas-retail.mjs",
+      "assessment": "No maintained implemented operation is hidden by an HTTP failure classification.",
+      "currentLive": "not_run_no_implemented_reader",
+      "bounds": "CLI declares no supported Temu operations and returns OVERSEAS_OPERATION_UNVERIFIED without network. Old browser/runtime or 200 Document diagnostics do not prove current product API success or 403.",
+      "references": [
+        "checklists/services/temu.json",
+        "references/overseas-retail-frontier.json"
+      ]
+    },
+    {
+      "service": "walmart",
+      "cli": "scripts/retail.mjs",
+      "assessment": "No maintained implemented reader is hidden by a generic blocked result.",
+      "currentLive": "not_run_no_implemented_reader",
+      "bounds": "Historical search returned a 200 challenge Document, not product data; non-product GraphQL 412 and HEAD diagnosis do not establish catalog replay. Current CLI has no supported Walmart operation.",
+      "references": [
+        "checklists/services/walmart.json",
+        "references/retail-walmart-contracts.json",
+        "verification/retail-walmart-live-2026-10-05.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "OVERSEAS_VERIFIER_REWROTE_HISTORY",
+      "confirmed": true,
+      "services": [
+        "iherb",
+        "shein"
+      ],
+      "before": "Offline verify command rewrote dated proof using current source hashes, without requiring a new observed execution.",
+      "after": "Read-only verifier validates original runtime/data hashes and current receipt contracts. Only the exact historical verifier path is provenance; old proof bytes and checkedAt are preserved.",
+      "verification": "tests/overseas-recorded-evidence.test.mjs"
+    }
+  ],
+  "liveSummary": "live-summary.json",
+  "serviceWideSuccessClaimed": false,
+  "completeCatalogClaimed": false,
+  "credentialsRead": false,
+  "browserUsed": false,
+  "remoteWrites": 0
+}

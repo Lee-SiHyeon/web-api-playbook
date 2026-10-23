@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "service": "naver-cafe",
+  "description": "Repository consolidation. Native source and offline tests exist; no login/write/live replay in this migration.",
+  "capabilities": [
+    {
+      "id": "owner",
+      "title": "owner",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver-cafe/lib/client.mjs",
+            "exports": []
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "service-packs/naver-cafe/tests/renew-shared.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Source migrated; current account/session, business result and any mutation readback remain unverified in this migration."
+    },
+    {
+      "id": "read",
+      "title": "read",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver-cafe/lib/client.mjs",
+            "exports": []
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "service-packs/naver-cafe/tests/renew-shared.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Source migrated; current account/session, business result and any mutation readback remain unverified in this migration."
+    },
+    {
+      "id": "manage",
+      "title": "manage",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver-cafe/lib/client.mjs",
+            "exports": []
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "service-packs/naver-cafe/tests/renew-shared.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Source migrated; current account/session, business result and any mutation readback remain unverified in this migration."
+    },
+    {
+      "id": "attachment",
+      "title": "attachment",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver-cafe/lib/client.mjs",
+            "exports": []
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "service-packs/naver-cafe/tests/renew-shared.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Source migrated; current account/session, business result and any mutation readback remain unverified in this migration."
+    },
+    {
+      "id": "renewal",
+      "title": "renewal",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "service-packs/naver-cafe/lib/client.mjs",
+            "exports": []
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "service-packs/naver-cafe/tests/renew-shared.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Source migrated; current account/session, business result and any mutation readback remain unverified in this migration."
+    }
+  ]
+}

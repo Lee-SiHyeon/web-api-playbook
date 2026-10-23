@@ -1,0 +1,68 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:31:04.194Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000001942887/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 18323,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 0,
+      "countPerPage": 5,
+      "totalCount": 3,
+      "totalPages": 1,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "865445567",
+        "productId": "10000001942887",
+        "rating": 5,
+        "itemName": "[제주] 벵가 스테이",
+        "reviewedAt": 1774445605000
+      },
+      {
+        "reviewId": "625187627",
+        "productId": "10000001942887",
+        "rating": 5,
+        "itemName": "[제주] 벵가 스테이",
+        "reviewedAt": 1723924984000
+      },
+      {
+        "reviewId": "544482090",
+        "productId": "10000001942887",
+        "rating": 5,
+        "itemName": "[제주] 벵가 스테이",
+        "reviewedAt": 1702124283000
+      }
+    ]
+  },
+  "projectionSha256": "6c04af36951e090e30bf0d1b945a5de1a3994501943572e4e4ec7bf5caa70a0d",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

@@ -1,0 +1,626 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:acada:cps-commerce:dataset:v2",
+  "title": "ACADA LinkPrice CPS commerce dataset",
+  "description": "Evidence-linked JSON graph emitted by lib/cps-ontology-dataset.mjs. Local entity shapes are validated here; graph-wide referential integrity is checked by the exporter validator.",
+  "type": "object",
+  "required": [
+    "ontologyId",
+    "schemaVersion",
+    "generatedAt",
+    "catalogObservedAt",
+    "summary",
+    "scope",
+    "entities",
+    "relations",
+    "coverage",
+    "quarantine"
+  ],
+  "properties": {
+    "ontologyId": { "const": "acada:cps-commerce" },
+    "schemaVersion": { "const": 2 },
+    "generatedAt": { "$ref": "#/$defs/nullableDateTime" },
+    "catalogObservedAt": { "$ref": "#/$defs/nullableDateTime" },
+    "summary": { "$ref": "#/$defs/summary" },
+    "scope": { "$ref": "#/$defs/scope" },
+    "entities": { "$ref": "#/$defs/entities" },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/relation" }
+    },
+    "coverage": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/coverageRow" }
+    },
+    "quarantine": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/quarantineRow" }
+    }
+  },
+  "additionalProperties": true,
+  "$comment": "IDs are required and typed locally. Cross-collection ID uniqueness and reference existence (entity, relation, and evidence links) are graph invariants and must also be checked by validateOntologyDataset; JSON Schema cannot express these dynamic referential checks portably.",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "nullableText": {
+      "type": ["string", "null"],
+      "minLength": 1
+    },
+    "dateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nullableDateTime": {
+      "oneOf": [
+        { "$ref": "#/$defs/dateTime" },
+        { "type": "null" }
+      ]
+    },
+    "nullableUrl": {
+      "oneOf": [
+        { "type": "string", "format": "uri", "pattern": "^https?://" },
+        { "type": "null" }
+      ]
+    },
+    "nullableCount": {
+      "oneOf": [
+        { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        { "type": "null" }
+      ]
+    },
+    "nullableNumber": {
+      "oneOf": [
+        { "type": "number" },
+        { "type": "null" }
+      ]
+    },
+    "nullableDecimal": {
+      "oneOf": [
+        { "type": "string", "pattern": "^\\d+(?:\\.\\d+)?$" },
+        { "type": "null" }
+      ]
+    },
+    "nullableMinorUnits": {
+      "oneOf": [
+        { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        { "type": "null" }
+      ]
+    },
+    "nullableCurrency": {
+      "oneOf": [
+        { "type": "string", "pattern": "^[A-Z]{3}$" },
+        { "type": "null" }
+      ],
+      "$comment": "Null means the source did not establish a currency. A three-letter shape is checked here; currency-code membership is not asserted."
+    },
+    "stringList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/text" }
+    },
+    "uniqueIdList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "receiptId": {
+      "type": "string",
+      "pattern": "^receipt:[a-f0-9]{24}$"
+    },
+    "fieldEvidenceId": {
+      "type": "string",
+      "pattern": "^evidence:[a-f0-9]{24}$"
+    },
+    "evidenceIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/fieldEvidenceId" }
+    },
+    "receiptIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/receiptId" }
+    },
+    "availability": {
+      "enum": ["in_stock", "out_of_stock", "preorder", "backorder", "unknown"]
+    },
+    "capabilityState": {
+      "enum": ["live_replay_verified", "blocked_or_not_observed", "not_observed"]
+    },
+    "capabilityStateMap": {
+      "type": "object",
+      "required": ["offerings", "variants", "prices", "ratings", "reviews"],
+      "properties": {
+        "offerings": { "$ref": "#/$defs/capabilityState" },
+        "variants": { "$ref": "#/$defs/capabilityState" },
+        "prices": { "$ref": "#/$defs/capabilityState" },
+        "ratings": { "$ref": "#/$defs/capabilityState" },
+        "reviews": { "$ref": "#/$defs/capabilityState" }
+      },
+      "additionalProperties": { "$ref": "#/$defs/capabilityState" }
+    },
+    "safeJson": {
+      "description": "JSON-safe metadata copied from discovery reports after the exporter's secret-key filtering.",
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string" },
+        { "type": "number" },
+        { "type": "boolean" },
+        { "type": "array", "items": { "$ref": "#/$defs/safeJson" } },
+        { "type": "object", "additionalProperties": { "$ref": "#/$defs/safeJson" } }
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "merchantCount",
+        "reportedMerchants",
+        "inspectedMerchants",
+        "dataMerchants",
+        "priceMerchants",
+        "ratingMerchants",
+        "reviewSampleMerchants",
+        "blockedMerchantsWithoutData",
+        "blockedEncounteredMerchants",
+        "unresolvedMerchants",
+        "quarantinedRecords",
+        "entityCounts"
+      ],
+      "properties": {
+        "merchantCount": { "type": "integer", "minimum": 0 },
+        "reportedMerchants": { "type": "integer", "minimum": 0 },
+        "inspectedMerchants": { "type": "integer", "minimum": 0 },
+        "dataMerchants": { "type": "integer", "minimum": 0 },
+        "priceMerchants": { "type": "integer", "minimum": 0 },
+        "ratingMerchants": { "type": "integer", "minimum": 0 },
+        "reviewSampleMerchants": { "type": "integer", "minimum": 0 },
+        "blockedMerchantsWithoutData": { "type": "integer", "minimum": 0 },
+        "blockedEncounteredMerchants": { "type": "integer", "minimum": 0 },
+        "unresolvedMerchants": { "type": "integer", "minimum": 0 },
+        "quarantinedRecords": { "type": "integer", "minimum": 0 },
+        "entityCounts": {
+          "type": "object",
+          "required": [
+            "affiliatePrograms",
+            "consumerSources",
+            "commercialOfferings",
+            "productVariants",
+            "offerObservations",
+            "ratingAggregates",
+            "reviewObservations",
+            "evidenceReceipts",
+            "fieldEvidence",
+            "capabilityAssessments"
+          ],
+          "properties": {
+            "affiliatePrograms": { "type": "integer", "minimum": 0 },
+            "consumerSources": { "type": "integer", "minimum": 0 },
+            "commercialOfferings": { "type": "integer", "minimum": 0 },
+            "productVariants": { "type": "integer", "minimum": 0 },
+            "offerObservations": { "type": "integer", "minimum": 0 },
+            "ratingAggregates": { "type": "integer", "minimum": 0 },
+            "reviewObservations": { "type": "integer", "minimum": 0 },
+            "evidenceReceipts": { "type": "integer", "minimum": 0 },
+            "fieldEvidence": { "type": "integer", "minimum": 0 },
+            "capabilityAssessments": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        }
+      },
+      "additionalProperties": true
+    },
+    "scope": {
+      "type": "object",
+      "required": [
+        "transport",
+        "browserRequired",
+        "credentialsRequired",
+        "catalogComplete",
+        "reviewsComplete",
+        "reviewBodyRetention",
+        "definition"
+      ],
+      "properties": {
+        "transport": { "enum": ["direct_public_http", "direct_http"] },
+        "browserRequired": { "const": false },
+        "credentialsRequired": { "type": "boolean" },
+        "catalogComplete": { "const": false },
+        "reviewsComplete": { "const": false },
+        "reviewBodyRetention": { "const": "omitted" },
+        "definition": { "$ref": "#/$defs/text" }
+      },
+      "additionalProperties": true
+    },
+    "entities": {
+      "type": "object",
+      "required": [
+        "affiliatePrograms",
+        "consumerSources",
+        "commercialOfferings",
+        "productVariants",
+        "offerObservations",
+        "ratingAggregates",
+        "reviewObservations",
+        "evidenceReceipts",
+        "fieldEvidence",
+        "capabilityAssessments"
+      ],
+      "properties": {
+        "affiliatePrograms": { "type": "array", "items": { "$ref": "#/$defs/affiliateProgram" } },
+        "consumerSources": { "type": "array", "items": { "$ref": "#/$defs/consumerSource" } },
+        "commercialOfferings": { "type": "array", "items": { "$ref": "#/$defs/commercialOffering" } },
+        "productVariants": { "type": "array", "items": { "$ref": "#/$defs/productVariant" } },
+        "offerObservations": { "type": "array", "items": { "$ref": "#/$defs/offerObservation" } },
+        "ratingAggregates": { "type": "array", "items": { "$ref": "#/$defs/ratingAggregate" } },
+        "reviewObservations": { "type": "array", "items": { "$ref": "#/$defs/reviewObservation" } },
+        "evidenceReceipts": { "type": "array", "items": { "$ref": "#/$defs/evidenceReceipt" } },
+        "fieldEvidence": { "type": "array", "items": { "$ref": "#/$defs/fieldEvidence" } },
+        "capabilityAssessments": { "type": "array", "items": { "$ref": "#/$defs/capabilityAssessment" } }
+      },
+      "additionalProperties": {
+        "type": "array",
+        "items": { "$ref": "#/$defs/genericEntity" }
+      }
+    },
+    "genericEntity": {
+      "type": "object",
+      "required": ["id", "type"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "$ref": "#/$defs/text" }
+      },
+      "additionalProperties": true
+    },
+    "affiliateProgram": {
+      "type": "object",
+      "required": ["id", "type", "networkId", "merchantId", "name", "siteUrl", "networkCategory", "observedAt", "verticalClassification"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "AffiliateProgram" },
+        "networkId": { "$ref": "#/$defs/text" },
+        "merchantId": { "$ref": "#/$defs/text" },
+        "name": { "$ref": "#/$defs/text" },
+        "siteUrl": { "type": "string", "format": "uri", "pattern": "^https?://" },
+        "networkCategory": {
+          "type": "object",
+          "required": ["category1Id", "category2Id", "cpsCategoryId"],
+          "properties": {
+            "category1Id": { "$ref": "#/$defs/text" },
+            "category2Id": { "$ref": "#/$defs/text" },
+            "cpsCategoryId": { "$ref": "#/$defs/text" }
+          },
+          "additionalProperties": true
+        },
+        "observedAt": { "$ref": "#/$defs/dateTime" },
+        "verticalClassification": { "$ref": "#/$defs/verticalClassification" }
+      },
+      "additionalProperties": true
+    },
+    "verticalClassification": {
+      "type": "object",
+      "required": ["hint", "basis", "confidence", "notes", "snapshotCheckedAt"],
+      "properties": {
+        "hint": { "$ref": "#/$defs/text" },
+        "basis": { "$ref": "#/$defs/text" },
+        "confidence": { "$ref": "#/$defs/text" },
+        "notes": { "$ref": "#/$defs/nullableText" },
+        "snapshotCheckedAt": { "$ref": "#/$defs/dateTime" }
+      },
+      "additionalProperties": true
+    },
+    "consumerSource": {
+      "type": "object",
+      "required": ["id", "type", "sourceId", "siteUrl", "mappingState", "classificationHint", "affiliateProgramIds", "contractEvidence"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "ConsumerSource" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "siteUrl": { "$ref": "#/$defs/nullableUrl" },
+        "mappingState": { "enum": ["explicit_merchant_id_crosswalk", "merchant_scoped_source_identity"] },
+        "classificationHint": {
+          "oneOf": [
+            { "$ref": "#/$defs/verticalClassification" },
+            { "type": "null" }
+          ]
+        },
+        "affiliateProgramIds": { "$ref": "#/$defs/uniqueIdList", "minItems": 1 },
+        "contractEvidence": { "$ref": "#/$defs/receiptIds" }
+      },
+      "additionalProperties": true
+    },
+    "commercialOffering": {
+      "type": "object",
+      "required": ["id", "type", "offeringType", "sourceId", "sourceLocalId", "title", "canonicalUrl", "brand", "description", "sourceSchemaType", "identifiers", "affiliateProgramIds", "evidenceIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "CommercialOffering" },
+        "offeringType": { "enum": ["RetailProduct", "TravelOffering", "ServiceOffering", "DigitalContent", "UnclassifiedOffering"] },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "sourceLocalId": { "$ref": "#/$defs/nullableText" },
+        "identityScope": { "enum": ["source_local_id", "source_url", "observation"] },
+        "title": { "$ref": "#/$defs/text" },
+        "canonicalUrl": { "$ref": "#/$defs/nullableUrl" },
+        "brand": { "$ref": "#/$defs/nullableText" },
+        "attributes": { "type": ["object", "array"] },
+        "description": { "type": ["string", "null"], "maxLength": 4000 },
+        "sourceSchemaType": { "$ref": "#/$defs/nullableText" },
+        "identifiers": { "type": "object", "additionalProperties": { "$ref": "#/$defs/text" } },
+        "affiliateProgramIds": { "$ref": "#/$defs/uniqueIdList", "minItems": 1 },
+        "evidenceIds": { "$ref": "#/$defs/evidenceIds" }
+      },
+      "additionalProperties": true
+    },
+    "productVariant": {
+      "type": "object",
+      "required": ["id", "type", "sourceId", "parentOfferingId", "variantLocalId", "title", "canonicalUrl", "attributes", "availability", "evidenceIds"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "ProductVariant" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "parentOfferingId": { "$ref": "#/$defs/id" },
+        "variantLocalId": { "$ref": "#/$defs/nullableText" },
+        "identityScope": { "enum": ["source_local_id", "source_url", "observed_option_label"] },
+        "title": { "$ref": "#/$defs/nullableText" },
+        "description": { "type": ["string", "null"], "maxLength": 4000 },
+        "canonicalUrl": { "$ref": "#/$defs/nullableUrl" },
+        "attributes": { "type": "object", "additionalProperties": { "type": ["string", "number"] } },
+        "availability": { "$ref": "#/$defs/availability" },
+        "evidenceIds": { "$ref": "#/$defs/evidenceIds" }
+      },
+      "additionalProperties": true
+    },
+    "offerObservation": {
+      "type": "object",
+      "required": [
+        "id", "type", "sourceId", "offeringId", "observedAt", "amount", "amountMinor", "currency", "priceText",
+        "lowAmount", "highAmount", "lowAmountMinor", "highAmountMinor", "priceKind", "billingPeriod", "discountCondition",
+        "listAmountMinor", "availability", "validUntil", "evidenceIds"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "OfferObservation" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "offeringId": { "$ref": "#/$defs/id" },
+        "variantId": { "$ref": "#/$defs/id", "$comment": "Present only when the observed price belongs to a ProductVariant." },
+        "observedAt": { "$ref": "#/$defs/dateTime" },
+        "amount": { "$ref": "#/$defs/nullableDecimal" },
+        "amountMinor": { "$ref": "#/$defs/nullableMinorUnits" },
+        "currency": { "$ref": "#/$defs/nullableCurrency" },
+        "priceText": { "$ref": "#/$defs/nullableText" },
+        "lowAmount": { "$ref": "#/$defs/nullableDecimal" },
+        "highAmount": { "$ref": "#/$defs/nullableDecimal" },
+        "lowAmountMinor": { "$ref": "#/$defs/nullableMinorUnits" },
+        "highAmountMinor": { "$ref": "#/$defs/nullableMinorUnits" },
+        "priceKind": { "$ref": "#/$defs/text" },
+        "sourceOfferType": { "$ref": "#/$defs/nullableText" },
+        "priceRole": { "enum": ["quoted_price", "reference", "adjustment", "source_secondary_price"] },
+        "billingPeriod": { "$ref": "#/$defs/nullableText" },
+        "discountCondition": { "$ref": "#/$defs/nullableText" },
+        "conditions": { "type": ["object", "array", "string", "number", "boolean", "null"] },
+        "listAmount": { "$ref": "#/$defs/nullableDecimal" },
+        "listAmountMinor": { "$ref": "#/$defs/nullableMinorUnits" },
+        "availability": { "$ref": "#/$defs/availability" },
+        "validUntil": { "type": ["string", "null"], "maxLength": 80 },
+        "evidenceIds": { "$ref": "#/$defs/evidenceIds" }
+      },
+      "additionalProperties": true
+    },
+    "ratingAggregate": {
+      "type": "object",
+      "required": ["id", "type", "sourceId", "offeringId", "observedAt", "evidenceIds", "ratingValue", "bestRating", "worstRating", "reviewCount", "ratingCount", "coverage"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "RatingAggregate" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "offeringId": { "$ref": "#/$defs/id" },
+        "observedAt": { "$ref": "#/$defs/dateTime" },
+        "evidenceIds": { "$ref": "#/$defs/evidenceIds" },
+        "ratingValue": { "$ref": "#/$defs/nullableNumber" },
+        "bestRating": { "$ref": "#/$defs/nullableNumber" },
+        "worstRating": { "$ref": "#/$defs/nullableNumber" },
+        "reviewCount": { "$ref": "#/$defs/nullableCount" },
+        "ratingCount": { "$ref": "#/$defs/nullableCount" },
+        "coverage": { "const": "aggregate_displayed" }
+      },
+      "additionalProperties": true
+    },
+    "reviewObservation": {
+      "type": "object",
+      "required": [
+        "id", "type", "sourceId", "offeringId", "observedAt", "evidenceIds", "ratingValue", "publishedAt", "title", "body",
+        "bodyAvailable", "reviewLocalId", "helpfulCount", "hasMedia", "sampleCompleteness", "reviewerIdentity"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "ReviewObservation" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "offeringId": { "$ref": "#/$defs/id" },
+        "observedAt": { "$ref": "#/$defs/dateTime" },
+        "evidenceIds": { "$ref": "#/$defs/evidenceIds" },
+        "ratingValue": { "$ref": "#/$defs/nullableNumber" },
+        "publishedAt": { "type": ["string", "null"], "maxLength": 80 },
+        "title": { "const": null },
+        "body": { "const": null },
+        "bodyAvailable": { "type": "boolean" },
+        "reviewLocalId": { "$ref": "#/$defs/nullableText" },
+        "helpfulCount": { "$ref": "#/$defs/nullableCount" },
+        "hasMedia": { "type": ["boolean", "null"] },
+        "sampleCompleteness": { "const": "partial" },
+        "reviewerIdentity": { "const": null }
+      },
+      "patternProperties": {
+        "^(reviewBody|reviewText|reviewerId|reviewerName|reviewerUrl|authorId|authorName|authorUrl|userId|userName|userUrl)$": { "type": "null" }
+      },
+      "additionalProperties": true,
+      "$comment": "Review body and reviewer identity are intentionally omitted. If a recognized alias is present it must also be null; bodyAvailable may indicate that source text existed without retaining it."
+    },
+    "evidenceReceipt": {
+      "type": "object",
+      "required": [
+        "id", "type", "sourceId", "originalId", "requestMethod", "requestUrl", "finalUrl", "responseStatus", "contentType",
+        "responseSha256", "responseBytes", "observedAt", "browserUsed", "cookiesSent", "authorizationSent", "secureTransport", "stopReason"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/receiptId" },
+        "type": { "const": "EvidenceReceipt" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "originalId": { "$ref": "#/$defs/text" },
+        "requestMethod": { "$ref": "#/$defs/text" },
+        "requestUrl": { "$ref": "#/$defs/nullableUrl" },
+        "finalUrl": { "$ref": "#/$defs/nullableUrl" },
+        "responseStatus": { "$ref": "#/$defs/nullableCount" },
+        "contentType": { "type": ["string", "null"], "maxLength": 200 },
+        "responseSha256": {
+          "oneOf": [
+            { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            { "type": "null" }
+          ]
+        },
+        "responseBytes": { "$ref": "#/$defs/nullableCount" },
+        "observedAt": { "$ref": "#/$defs/nullableDateTime" },
+        "browserUsed": { "type": ["boolean", "null"] },
+        "cookiesSent": { "type": ["boolean", "null"] },
+        "authorizationSent": { "type": ["boolean", "null"] },
+        "publicRequestTokenSent": { "type": ["boolean", "null"] },
+        "publicClientHeaderSent": { "type": ["boolean", "null"] },
+        "anonymousBootstrap": {
+          "oneOf": [
+            { "type": "object", "additionalProperties": { "$ref": "#/$defs/safeJson" } },
+            { "type": "null" }
+          ],
+          "$comment": "Optional sanitized anonymous-bootstrap metadata; credential and secret keys are filtered by the exporter."
+        },
+        "bootstrapReceiptId": {
+          "oneOf": [
+            { "$ref": "#/$defs/receiptId" },
+            { "type": "null" }
+          ],
+          "$comment": "Optional predecessor receipt reference for anonymous bootstrap evidence."
+        },
+        "publicClientConfigReceiptId": {
+          "oneOf": [
+            { "$ref": "#/$defs/receiptId" },
+            { "type": "null" }
+          ],
+          "$comment": "Optional predecessor receipt reference for public-client configuration evidence."
+        },
+        "secureTransport": { "type": ["boolean", "null"] },
+        "stopReason": { "type": ["string", "null"], "maxLength": 250 }
+      },
+      "additionalProperties": true
+    },
+    "fieldEvidence": {
+      "type": "object",
+      "required": ["id", "type", "offeringId", "sourceId", "receiptId", "locator", "fields", "observedAt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldEvidenceId" },
+        "type": { "const": "FieldEvidence" },
+        "offeringId": { "$ref": "#/$defs/id" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "receiptId": { "$ref": "#/$defs/receiptId" },
+        "locator": { "$ref": "#/$defs/text" },
+        "fields": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } },
+        "observedAt": { "$ref": "#/$defs/nullableDateTime" }
+      },
+      "additionalProperties": true
+    },
+    "capabilityAssessment": {
+      "type": "object",
+      "required": [
+        "id", "type", "merchantId", "sourceId", "status", "capabilities", "reportedOperations", "checkedAt", "reportedStatus",
+        "catalogComplete", "reviewsComplete", "frontier", "contracts", "receiptIds"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "const": "CapabilityAssessment" },
+        "merchantId": { "$ref": "#/$defs/text" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "status": { "enum": ["data_observed", "blocked", "reachable_without_offering_data", "attempt_without_response", "not_reverified"] },
+        "capabilities": { "$ref": "#/$defs/capabilityStateMap" },
+        "reportedOperations": { "$ref": "#/$defs/safeJson" },
+        "checkedAt": { "$ref": "#/$defs/nullableDateTime" },
+        "reportedStatus": { "$ref": "#/$defs/nullableText" },
+        "catalogComplete": { "const": false },
+        "reviewsComplete": { "const": false },
+        "frontier": { "$ref": "#/$defs/safeJson" },
+        "contracts": { "$ref": "#/$defs/safeJson" },
+        "receiptIds": { "$ref": "#/$defs/receiptIds" }
+      },
+      "additionalProperties": true
+    },
+    "relation": {
+      "type": "object",
+      "required": ["id", "subject", "predicate", "object"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^relation:[a-f0-9]{24}$" },
+        "subject": { "$ref": "#/$defs/id" },
+        "predicate": {
+          "enum": [
+            "targetsConsumerSource",
+            "offers",
+            "supportedBy",
+            "hasOfferObservation",
+            "hasRatingAggregate",
+            "hasVariant",
+            "hasReviewObservation",
+            "hasCapabilityAssessment",
+            "bootstrappedFrom",
+            "configuredFrom"
+          ]
+        },
+        "object": { "$ref": "#/$defs/id" }
+      },
+      "additionalProperties": true
+    },
+    "coverageCounts": {
+      "type": "object",
+      "required": ["offerings", "variants", "prices", "priceObservations", "ratings", "reviews", "rejectedRecords"],
+      "properties": {
+        "offerings": { "type": "integer", "minimum": 0 },
+        "variants": { "type": "integer", "minimum": 0 },
+        "prices": { "type": "integer", "minimum": 0 },
+        "priceObservations": { "type": "integer", "minimum": 0 },
+        "ratings": { "type": "integer", "minimum": 0 },
+        "reviews": { "type": "integer", "minimum": 0 },
+        "rejectedRecords": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "coverageRow": {
+      "type": "object",
+      "required": ["merchantId", "name", "sourceId", "batchId", "status", "inspected", "blockedEncountered", "counts", "receiptCount", "capabilities", "sourceReport"],
+      "properties": {
+        "merchantId": { "$ref": "#/$defs/text" },
+        "name": { "$ref": "#/$defs/text" },
+        "sourceId": { "$ref": "#/$defs/id" },
+        "batchId": { "$ref": "#/$defs/nullableText" },
+        "status": { "enum": ["data_observed", "blocked", "reachable_without_offering_data", "attempt_without_response", "not_reverified"] },
+        "inspected": { "type": "boolean" },
+        "blockedEncountered": { "type": "boolean" },
+        "counts": { "$ref": "#/$defs/coverageCounts" },
+        "receiptCount": { "type": "integer", "minimum": 0 },
+        "capabilities": { "$ref": "#/$defs/capabilityStateMap" },
+        "sourceReport": { "$ref": "#/$defs/nullableText" }
+      },
+      "additionalProperties": true
+    },
+    "quarantineRow": {
+      "type": "object",
+      "required": ["merchantId", "recordPosition", "title", "reason"],
+      "properties": {
+        "merchantId": { "$ref": "#/$defs/text" },
+        "recordPosition": { "type": "integer", "minimum": 0 },
+        "title": { "$ref": "#/$defs/nullableText" },
+        "reason": { "enum": ["title_missing", "identity_missing", "public_receipt_or_locator_missing"] }
+      },
+      "additionalProperties": true
+    }
+  }
+}

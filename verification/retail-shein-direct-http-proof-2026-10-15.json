@@ -1,0 +1,74 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "shein",
+  "capabilityId": "catalog.home_document",
+  "checkedAt": "2026-10-15T00:19:34.328Z",
+  "verifiedAt": "2026-10-15T00:20:19.147Z",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 10,
+  "request": {
+    "method": "GET",
+    "origin": "https://kr.shein.com",
+    "path": "/",
+    "checkedAt": "2026-10-15T00:19:32.960Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "queryFields": [],
+    "httpStatus": 200,
+    "mime": "text/html",
+    "responseBytes": 1093373,
+    "publicProjectionSha256": "8e5159e62160b6d76b9ea527fed0cf3912dd7e7e3bf19bc37d0543399e7f279d",
+    "schemaVerified": true,
+    "productCount": 10,
+    "navigationCount": 15,
+    "rawBodyPersisted": false
+  },
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "sourceURL": "https://kr.shein.com/",
+    "responseFormat": "html_document",
+    "projectionSha256": "48b99909b7c8d5fc5815c2fa7f1c3ef15caf17ac989daa1ca4df75482ca76b67",
+    "browserNetworkCaptured": false
+  },
+  "implementation": {
+    "lib/retail/shein.mjs": "8a565fb4ea1ae07514deec495285dec1287d75d8a97ea2c1066f3f9028a3d004",
+    "scripts/overseas-retail.mjs": "bc1435c2dc82fe354b13224905c67a7a017550bb5e993f72c1e62d501d5c1068",
+    "scripts/verify-overseas-retail.mjs": "3541373ff1e45a45eebcc50fdabcb3c44875c0eadb4271eb5442403f0759497e",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "package-lock.json": "5ce5b94ddbeca47d288e2f90dc51874e6f644e5c0d2a9870db76c515fb4bf092",
+    "verification/retail-shein-home-cli-2026-10-15-v2.json": "5c4e1771dd293b326883640b4da5f649b30763549c0aa129370fcc8bf86e300f"
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/overseas-retail.mjs",
+    "operation": "home",
+    "exitStatus": 0
+  },
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  },
+  "browserComparison": {
+    "kind": "rendered_dom_only",
+    "matched": 8,
+    "total": 10,
+    "browserTotal": 10,
+    "commonTitles": 8,
+    "completeMatch": false,
+    "note": "Separate dated requests may return different recommendation members. Only exact title-and-price matches count.",
+    "evidenceFile": "verification/retail-shein-browser-dom-2026-10-15.json",
+    "evidenceSha256": "27a16f3007a186c9dcd4e9310e227c4115d8b6efc73a268e62c0c171934fdc21",
+    "networkCaptured": false
+  },
+  "fullCatalogVerified": false
+}

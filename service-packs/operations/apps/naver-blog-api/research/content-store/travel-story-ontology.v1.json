@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "ontologyId": "acada:travel-story",
+  "label": "여행 스토리 온톨로지",
+  "purpose": "여행 영상과 여행 기록을 일정·장소·활동·비용·주장·근거로 분리해 블로그 기획에 재사용한다.",
+  "designPrinciples": [
+    "원본 미디어는 출처이고, 그 안의 발언은 검증 전까지 영상 속 주장으로만 취급한다.",
+    "창작자 경험·의견·편집자 추론·외부에서 확인한 사실은 서로 다른 유형으로 저장한다.",
+    "시간에 따라 바뀌는 요금·예약·운영시간·행사 일정은 작성일 기준 공식 출처 확인 전까지 게시 가능한 사실로 표시하지 않는다.",
+    "비용에는 금액뿐 아니라 통화·대상 범위·1인/일행 기준·관측 시점을 붙인다. 모르면 unknown으로 남긴다.",
+    "영상 내 타임코드는 주장마다 보존해 원문으로 되돌아갈 수 있게 한다.",
+    "대본의 고유명사 오류나 미확인 우회 동선은 정규화·실용 조언으로 승격하지 않는다."
+  ],
+  "classes": [
+    {
+      "id": "MediaSource",
+      "label": "미디어 출처",
+      "description": "영상, 게시물, 문서처럼 지식 추출의 출발점."
+    },
+    {
+      "id": "TranscriptSegment",
+      "label": "전사 구간",
+      "description": "미디어의 시간 구간과 요약된 발언."
+    },
+    {
+      "id": "TravelEpisode",
+      "label": "여행 에피소드",
+      "description": "하나의 매체에서 다룬 여행 경험."
+    },
+    {
+      "id": "Trip",
+      "label": "여행",
+      "description": "기간·목적·여행자·여행지의 집합."
+    },
+    {
+      "id": "ItineraryStop",
+      "label": "일정 지점",
+      "description": "영상 순서로 관측된 방문 또는 활동 단위."
+    },
+    {
+      "id": "Place",
+      "label": "장소",
+      "description": "도시, 관광지, 음식점, 교통 거점 또는 위치가 불명확한 장소."
+    },
+    {
+      "id": "Activity",
+      "label": "활동",
+      "description": "자전거 타기, 관람, 식사 등 여행 중 수행한 일."
+    },
+    {
+      "id": "ExpenseItem",
+      "label": "비용 항목",
+      "description": "항공·숙소·식비·교통·입장료 등 출처에 기록된 금액."
+    },
+    {
+      "id": "CostSummary",
+      "label": "비용 합계",
+      "description": "범위와 산출 기준이 명시된 비용 요약."
+    },
+    {
+      "id": "SourceClaim",
+      "label": "출처 주장",
+      "description": "영상에서 말하거나 보여 준 사실·경험·의견."
+    },
+    {
+      "id": "EvidenceSpan",
+      "label": "근거 구간",
+      "description": "미디어 출처와 시작·끝 타임코드로 특정하는 증거 위치."
+    },
+    {
+      "id": "ExternalVerification",
+      "label": "외부 검증",
+      "description": "공식·독립 출처로 확인한 내용과 확인 시점."
+    },
+    {
+      "id": "Recommendation",
+      "label": "추천 또는 경고",
+      "description": "창작자 경험이나 편집 판단에 근거한 독자 조언."
+    },
+    {
+      "id": "Participant",
+      "label": "참여자",
+      "description": "영상에 이름 또는 역할이 공개된 진행자·동행자·가이드."
+    }
+  ],
+  "relations": [
+    {
+      "id": "describesEpisode",
+      "domain": "MediaSource",
+      "range": "TravelEpisode",
+      "label": "에피소드를 담는다"
+    },
+    {
+      "id": "depictsTrip",
+      "domain": "TravelEpisode",
+      "range": "Trip",
+      "label": "여행을 보여 준다"
+    },
+    {
+      "id": "hasSegment",
+      "domain": "MediaSource",
+      "range": "TranscriptSegment",
+      "label": "전사 구간을 가진다"
+    },
+    {
+      "id": "supportsClaim",
+      "domain": "TranscriptSegment",
+      "range": "SourceClaim",
+      "label": "주장을 뒷받침한다"
+    },
+    {
+      "id": "hasEvidence",
+      "domain": "SourceClaim",
+      "range": "EvidenceSpan",
+      "label": "근거 구간을 가진다"
+    },
+    {
+      "id": "hasStop",
+      "domain": "Trip",
+      "range": "ItineraryStop",
+      "label": "일정 지점을 가진다"
+    },
+    {
+      "id": "visitsPlace",
+      "domain": "ItineraryStop",
+      "range": "Place",
+      "label": "장소를 방문한다"
+    },
+    {
+      "id": "performsActivity",
+      "domain": "ItineraryStop",
+      "range": "Activity",
+      "label": "활동을 수행한다"
+    },
+    {
+      "id": "precedes",
+      "domain": "ItineraryStop",
+      "range": "ItineraryStop",
+      "label": "서사 순서에서 앞선다"
+    },
+    {
+      "id": "hasExpense",
+      "domain": "Trip",
+      "range": "ExpenseItem",
+      "label": "비용 항목을 가진다"
+    },
+    {
+      "id": "summarizes",
+      "domain": "CostSummary",
+      "range": "ExpenseItem",
+      "label": "비용 항목을 합산한다"
+    },
+    {
+      "id": "involvesParticipant",
+      "domain": "Trip",
+      "range": "Participant",
+      "label": "참여자가 있다"
+    },
+    {
+      "id": "verifies",
+      "domain": "ExternalVerification",
+      "range": "SourceClaim",
+      "label": "출처 주장을 외부에서 검증한다"
+    },
+    {
+      "id": "recommendsFor",
+      "domain": "Recommendation",
+      "range": "Trip",
+      "label": "특정 여행 방식에 대한 조언이다"
+    }
+  ],
+  "properties": [
+    {
+      "id": "videoId",
+      "domain": "MediaSource",
+      "datatype": "string",
+      "required": true
+    },
+    {
+      "id": "sourceUrl",
+      "domain": "MediaSource",
+      "datatype": "uri",
+      "required": true
+    },
+    {
+      "id": "capturedAt",
+      "domain": "MediaSource",
+      "datatype": "date",
+      "required": true
+    },
+    {
+      "id": "captionLanguage",
+      "domain": "MediaSource",
+      "datatype": "language-tag",
+      "required": false
+    },
+    {
+      "id": "timeStart",
+      "domain": "EvidenceSpan",
+      "datatype": "video-timecode",
+      "required": true
+    },
+    {
+      "id": "timeEnd",
+      "domain": "EvidenceSpan",
+      "datatype": "video-timecode",
+      "required": true
+    },
+    {
+      "id": "claimType",
+      "domain": "SourceClaim",
+      "datatype": "enum",
+      "required": true
+    },
+    {
+      "id": "verificationStatus",
+      "domain": "SourceClaim",
+      "datatype": "enum",
+      "required": true
+    },
+    {
+      "id": "observedOrder",
+      "domain": "ItineraryStop",
+      "datatype": "integer",
+      "required": true
+    },
+    {
+      "id": "reportedNights",
+      "domain": "Trip",
+      "datatype": "integer",
+      "required": false
+    },
+    {
+      "id": "reportedDays",
+      "domain": "Trip",
+      "datatype": "integer",
+      "required": false
+    },
+    {
+      "id": "amount",
+      "domain": "ExpenseItem",
+      "datatype": "decimal",
+      "required": true
+    },
+    {
+      "id": "currency",
+      "domain": "ExpenseItem",
+      "datatype": "currency-code",
+      "required": true
+    },
+    {
+      "id": "amountBasis",
+      "domain": "ExpenseItem",
+      "datatype": "enum",
+      "required": true
+    },
+    {
+      "id": "priceObservedAt",
+      "domain": "ExpenseItem",
+      "datatype": "date-or-unknown",
+      "required": true
+    },
+    {
+      "id": "partySize",
+      "domain": "ExpenseItem",
+      "datatype": "integer-or-unknown",
+      "required": true
+    }
+  ],
+  "controlledValues": {
+    "claimType": [
+      "reported_event",
+      "reported_amount",
+      "creator_opinion",
+      "editorial_inference",
+      "time_sensitive_fact"
+    ],
+    "verificationStatus": [
+      "source_only",
+      "pending_entity_resolution",
+      "pending_official_verification",
+      "externally_verified",
+      "unknown"
+    ],
+    "amountBasis": [
+      "per_person",
+      "per_party",
+      "per_day",
+      "per_night",
+      "unknown"
+    ]
+  },
+  "validationRules": [
+    "모든 SourceClaim에는 하나 이상의 EvidenceSpan이 있어야 하며 videoId, timeStart, timeEnd를 갖는다.",
+    "creator_opinion은 외부 사실처럼 문장화하지 않고 발언자 의견으로 귀속한다.",
+    "reported_amount는 currency, amountBasis, partySize, priceObservedAt을 가진다. 모르는 값은 null과 unknown으로 남긴다.",
+    "CostSummary는 항목 합계와 영상에서 말한 총액을 각각 보존하고, 산술 일치만으로 영수증 검증을 주장하지 않는다.",
+    "예약·운영시간·요금·행사일은 외부 공식 출처와 확인 시각이 붙기 전 pending_official_verification 상태다.",
+    "자막만으로 확인되지 않은 상호·작품명·역명은 pending_entity_resolution 상태다.",
+    "보안·입장 통제·비공식 우회 경험은 공식 입장 안내를 대조하기 전 따라 하는 방법으로 게시하지 않는다.",
+    "영상 순서는 실제 이동 거리나 최적 경로를 뜻하지 않는다."
+  ],
+  "contentCatalogMapping": {
+    "MediaSource": "기존 sources/run_sources 계보의 원본 미디어 확장",
+    "SourceClaim": "기존 claims의 claimType, observedAt, sourceIds 확장",
+    "EvidenceSpan": "기존 카탈로그에 없는 claim_evidence 테이블 후보: runId, claimId, sourceId, timeStart, timeEnd",
+    "TravelEpisode": "article-brief.json의 briefId 및 candidateLedgerIds와 연결",
+    "Trip": "여행 장르 brief의 구조화된 주제 인스턴스",
+    "ExpenseItem": "claims 아래 원화 금액·관측일·금액 범위의 구조화 값",
+    "ArticleOutcome": "기존 article_runs, articles, post_stats 계보 사용"
+  },
+  "sources": [
+    {
+      "url": "https://schema.org/Trip",
+      "kind": "Schema.org",
+      "rule": "Provides a standard Trip type with itinerary-related properties for representing a journey.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://www.khanacademy.org/computing/pixar/storytelling",
+      "kind": "Storytelling framework",
+      "rule": "Pixar in a Box covers character goals, obstacles, stakes, and change as storytelling prompts.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/1311392",
+      "kind": "Official YouTube policy",
+      "rule": "Monetization policy distinguishes original content from reused or repetitive content.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/2490020?hl=en",
+      "kind": "Official YouTube policy",
+      "rule": "Monetized content must meet originality and commercial-use rights requirements.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://api.github.com/repos/schemaorg/schemaorg",
+      "kind": "GitHub REST API, schema.org vocabulary repository",
+      "stars": 6262,
+      "rule": "6,262 stars; last pushed 2026-09-24T08:52:55Z. Provides repository metadata for the widely used Schema.org vocabulary; it does not validate individual travel claims.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    }
+  ],
+  "sourcedAdditions": [
+    {
+      "path": "/validationRules/-",
+      "value": "Treat character goals, obstacles, stakes, and change as optional story prompts; record them as claims only when the source supports them.",
+      "sourceUrl": "https://www.khanacademy.org/computing/pixar/storytelling",
+      "why": "Adds a sourced narrative framework while preserving the file's rule against inferring facts from a video.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    },
+    {
+      "path": "/validationRules/-",
+      "value": "When representing a planned itinerary, preserve stop order explicitly and store it separately from the order of scenes in the source video.",
+      "sourceUrl": "https://schema.org/Trip",
+      "why": "Makes the distinction between itinerary structure and editorial sequence explicit.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    },
+    {
+      "path": "/designPrinciples/-",
+      "value": "A public source URL or timecode establishes provenance, not permission to reuse video or audio; record reuse rights separately.",
+      "sourceUrl": "https://support.google.com/youtube/answer/2490020?hl=en",
+      "why": "Adds a rights check grounded in YouTube's monetization guidance.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    }
+  ],
+  "reviewFlags": [
+    "Not verified: no live video was reprocessed against these rules. Windows curl.exe failed to reach api.github.com with Schannel SEC_E_NO_CREDENTIALS; repository star and push metadata were instead checked through a read-only GitHub REST response."
+  ]
+}

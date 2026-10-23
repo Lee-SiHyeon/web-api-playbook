@@ -18,23 +18,14 @@
             ]
           },
           {
-            "path": "lib/commerce/sephora-reviews.mjs",
+            "path": "lib/commerce/http.mjs",
             "exports": [
-              "createSephoraReviewsClient"
+              "commerceJsonRequest"
             ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
-          "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
+          "tests/commerce-sephora.test.mjs"
         ]
       },
       "evidence": [
@@ -52,10 +43,25 @@
             "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-sephora-2026-10-16/catalog-search.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
-      "note": "A fresh Node direct HTTP collection returned 164 products over 3 pages; the source product and SKU IDs, price text, and same-origin target URLs are validated."
+      "note": "Fresh anonymous pure-HTTP concealer search returned 140 of 140 products across 3 pages. All 140 rows carried normalized ratings, exact review counts, list prices and product URLs; 6 carried an explicit currentSku.salePrice and 139 had at least one validated image URL. One row had no valid image URL, retained with images=[]. This is the direct client response; the generic price-snapshot collector remains price-only and does not carry these display attributes."
     },
     {
       "id": "catalog.pagination",
@@ -72,23 +78,14 @@
             ]
           },
           {
-            "path": "lib/commerce/sephora-reviews.mjs",
+            "path": "lib/commerce/http.mjs",
             "exports": [
-              "createSephoraReviewsClient"
+              "commerceJsonRequest"
             ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
-          "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
+          "tests/commerce-sephora.test.mjs"
         ]
       },
       "evidence": [
@@ -106,10 +103,25 @@
             "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/api/v2/catalog/search/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-sephora-2026-10-16/catalog-pagination.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
-      "note": "Observed page counts are 60, 60, and 44, with 164 unique product IDs and no remaining page after page 3."
+      "note": "The fresh concealer replay verified page counts 60, 60, 20; 140 unique products matched totalProducts and page 3 terminated the search."
     },
     {
       "id": "catalog.product_detail",
@@ -126,34 +138,25 @@
             ]
           },
           {
-            "path": "lib/commerce/sephora-reviews.mjs",
+            "path": "lib/commerce/http.mjs",
             "exports": [
-              "createSephoraReviewsClient"
+              "commerceJsonRequest"
             ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
-          "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
+          "tests/commerce-sephora.test.mjs"
         ]
       },
       "evidence": [
         {
           "kind": "http-public-read-v1",
           "origin": "https://www.sephora.com",
-          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P281411/lite",
+          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P417985/lite",
           "method": "GET",
           "mime": "application/json",
           "files": [
-            "verification/commerce-sephora-product-live-2026-10-05.json"
+            "verification/remaining-sephora-2026-10-16/product-detail.json"
           ],
           "hashPaths": [
             "lib/commerce/sephora.mjs",
@@ -163,7 +166,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "The first-party product-service contract replays with credentials omitted and binds both productId and preferredSku to the response."
+      "note": "The observed product-lite contract requires preferredSku for the tested product. P417985 with preferredSku 2234219 returned matching identity, selected SKU, price and images. Product-specific description remains unreturned."
     },
     {
       "id": "catalog.variants",
@@ -180,34 +183,25 @@
             ]
           },
           {
-            "path": "lib/commerce/sephora-reviews.mjs",
+            "path": "lib/commerce/http.mjs",
             "exports": [
-              "createSephoraReviewsClient"
+              "commerceJsonRequest"
             ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
-          "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
+          "tests/commerce-sephora.test.mjs"
         ]
       },
       "evidence": [
         {
           "kind": "http-public-read-v1",
           "origin": "https://www.sephora.com",
-          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P281411/lite",
+          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P417985/lite",
           "method": "GET",
           "mime": "application/json",
           "files": [
-            "verification/commerce-sephora-variants-live-2026-10-05.json"
+            "verification/remaining-sephora-2026-10-16/product-variants.json"
           ],
           "hashPaths": [
             "lib/commerce/sephora.mjs",
@@ -217,7 +211,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "P281411 returned 50 regular color SKUs; P417985 returned 5 regular plus 2 sale SKUs. Every SKU is unique and bound to the requested product."
+      "note": "P417985 returned 6 unique variants; all 6 had option labels, prices, images, and mapped availability. One child SKU had an actual salePrice."
     },
     {
       "id": "catalog.sale_price",
@@ -234,23 +228,14 @@
             ]
           },
           {
-            "path": "lib/commerce/sephora-reviews.mjs",
+            "path": "lib/commerce/http.mjs",
             "exports": [
-              "createSephoraReviewsClient"
+              "commerceJsonRequest"
             ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
-          "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
+          "tests/commerce-sephora.test.mjs"
         ]
       },
       "evidence": [
@@ -268,10 +253,25 @@
             "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.sephora.com",
+          "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P417985/lite",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-sephora-2026-10-16/sale-price.json"
+          ],
+          "hashPaths": [
+            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
-      "note": "P417985 SKU 2234219 reports USD listPrice 15.00 and salePrice 7.50. replenishmentAdjusterPrice is not labelled as a sale price."
+      "note": "P417985 SKU 2234219 currently reports USD listPrice 15.00 and salePrice 7.50; only the explicit returned salePrice is classified as a sale."
     },
     {
       "id": "catalog.reviews.read",
@@ -282,29 +282,20 @@
       "implementation": {
         "files": [
           {
-            "path": "lib/commerce/sephora.mjs",
-            "exports": [
-              "createSephoraPublicClient"
-            ]
-          },
-          {
             "path": "lib/commerce/sephora-reviews.mjs",
             "exports": [
               "createSephoraReviewsClient"
             ]
+          },
+          {
+            "path": "lib/commerce/http.mjs",
+            "exports": [
+              "commerceJsonRequest"
+            ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
           "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
         ]
       },
       "evidence": [
@@ -318,7 +309,29 @@
             "verification/commerce-sephora-reviews-page1-live-2026-10-05.json"
           ],
           "hashPaths": [
-            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "publicKeyBootstrap",
+              "origin": "https://www.sephora.com",
+              "path": "/",
+              "method": "GET",
+              "mime": "text/html"
+            }
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.bazaarvoice.com",
+          "path": "/data/reviews.json",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-sephora-2026-10-16/reviews-page1.json"
+          ],
+          "hashPaths": [
             "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ],
@@ -334,7 +347,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "The publicly embedded Bazaarvoice passkey is obtained from Sephora’s anonymous homepage in memory only; it is not an account credential and is never persisted or returned. ProductId SKU rows are mapped through Includes.Products BV_FE_FAMILY before returning."
+      "note": "A fresh anonymous Bazaarvoice page for P417985 returned 100 family-bound review rows, all with review bodies. The public passkey was bootstrapped from Sephora home in memory and was not persisted."
     },
     {
       "id": "catalog.reviews.pagination",
@@ -345,29 +358,20 @@
       "implementation": {
         "files": [
           {
-            "path": "lib/commerce/sephora.mjs",
-            "exports": [
-              "createSephoraPublicClient"
-            ]
-          },
-          {
             "path": "lib/commerce/sephora-reviews.mjs",
             "exports": [
               "createSephoraReviewsClient"
             ]
+          },
+          {
+            "path": "lib/commerce/http.mjs",
+            "exports": [
+              "commerceJsonRequest"
+            ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
           "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
         ]
       },
       "evidence": [
@@ -381,7 +385,29 @@
             "verification/commerce-sephora-reviews-last-page-live-2026-10-05.json"
           ],
           "hashPaths": [
-            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "publicKeyBootstrap",
+              "origin": "https://www.sephora.com",
+              "path": "/",
+              "method": "GET",
+              "mime": "text/html"
+            }
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.bazaarvoice.com",
+          "path": "/data/reviews.json",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-sephora-2026-10-16/reviews-last-page.json"
+          ],
+          "hashPaths": [
             "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ],
@@ -397,7 +423,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "TotalResults=1773 at Limit=100; offset 1700 returns the final 73 family-bound entries with hasMore=false and nextPage=null."
+      "note": "For P417985, TotalResults was 1918. Offset 1900 returned the terminal 18 family-bound entries with hasMore=false and nextPage=null."
     },
     {
       "id": "catalog.reviews.variant_filter",
@@ -408,29 +434,20 @@
       "implementation": {
         "files": [
           {
-            "path": "lib/commerce/sephora.mjs",
-            "exports": [
-              "createSephoraPublicClient"
-            ]
-          },
-          {
             "path": "lib/commerce/sephora-reviews.mjs",
             "exports": [
               "createSephoraReviewsClient"
             ]
+          },
+          {
+            "path": "lib/commerce/http.mjs",
+            "exports": [
+              "commerceJsonRequest"
+            ]
           }
         ],
         "tests": [
-          "tests/commerce-sephora.test.mjs",
           "tests/commerce-sephora-reviews.test.mjs"
-        ],
-        "cli": [
-          {
-            "path": "scripts/commerce.mjs",
-            "tokens": [
-              "sephora"
-            ]
-          }
         ]
       },
       "evidence": [
@@ -444,7 +461,29 @@
             "verification/commerce-sephora-reviews-sku-live-2026-10-05.json"
           ],
           "hashPaths": [
-            "lib/commerce/sephora.mjs",
+            "lib/commerce/sephora-reviews.mjs",
+            "lib/commerce/http.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "publicKeyBootstrap",
+              "origin": "https://www.sephora.com",
+              "path": "/",
+              "method": "GET",
+              "mime": "text/html"
+            }
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.bazaarvoice.com",
+          "path": "/data/reviews.json",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-sephora-2026-10-16/reviews-sku-filter.json"
+          ],
+          "hashPaths": [
             "lib/commerce/sephora-reviews.mjs",
             "lib/commerce/http.mjs"
           ],
@@ -460,7 +499,7 @@
         }
       ],
       "sourceEvidence": [],
-      "note": "The source-supported ProductId:<skuId> plus ExcludeFamily=True filter returned only review rows mapped to the selected SKU."
+      "note": "An observed family review row supplied SKU 2234169. ProductId:2234169 with ExcludeFamily=True returned 20 rows, all mapped to that SKU."
     },
     {
       "id": "catalog.product_description",
@@ -469,12 +508,27 @@
       "applicability": "applicable",
       "requirement": "live",
       "implementation": {
-        "files": [],
-        "tests": []
+        "files": [
+          {
+            "path": "lib/commerce/sephora.mjs",
+            "exports": [
+              "createSephoraPublicClient"
+            ]
+          },
+          {
+            "path": "lib/commerce/http.mjs",
+            "exports": [
+              "commerceJsonRequest"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/commerce-sephora.test.mjs"
+        ]
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "The first-party product-lite endpoint returns productDetails with only productId, displayName and brand for the tested items. Sephora’s source-linked /api/content/pageProduct helper accepts only shared page path/language/country and its anonymous response contains generic comparison content, not product-specific copy. Product-page documents return 403, so description text and ingredients remain unavailable; none is fabricated."
+      "blocker": "The current anonymous product-lite replay for P417985 with preferredSku 2234219 returned HTTP 200 JSON, but productDetails contained only brand, displayName and productId. The in-memory shape inspection found no description or ingredient fields, and the maintained client reported not_returned_by_observed_product_api. The sanitized negative observation is verification/remaining-sephora-2026-10-16/product-description-shape.json; it records expectedResultVerified=false and is deliberately not registered as positive live capability evidence. Sephora’s source-linked /api/content/pageProduct helper returns generic rather than product-specific copy, and product-page documents returned 403 in prior bounded inspection; product description and ingredients remain unavailable and are not fabricated."
     },
     {
       "id": "storefront.localization",

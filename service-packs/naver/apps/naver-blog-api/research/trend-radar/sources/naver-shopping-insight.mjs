@@ -32,6 +32,14 @@ function cookiePair(line) {
   return /^[A-Za-z0-9_!#$%&'*+.^`|~-]+=[^\r\n;]*$/.test(pair) ? pair : null;
 }
 
+function isAllowedAnonymousCookieHeader(value) {
+  if (typeof value !== 'string') return false;
+  const pairs = value.split(';').map(pair => pair.trim());
+  if (!pairs.length || pairs.some(pair => !/^(?:NNB|BUC)=[^\s;\r\n]+$/.test(pair))) return false;
+  const names = pairs.map(pair => pair.slice(0, pair.indexOf('=')));
+  return names.includes('NNB') && new Set(names).size === names.length;
+}
+
 export async function bootstrapAnonymousNaverSession({ fetchImpl = globalThis.fetch } = {}) {
   const { response } = await fetchText('https://lcs.naver.com/m?u=https%3A%2F%2Fdatalab.naver.com%2F', {
     headers: {
@@ -43,17 +51,21 @@ export async function bootstrapAnonymousNaverSession({ fetchImpl = globalThis.fe
   });
   assertStatus(response);
   const pairs = setCookieLines(response.headers).map(cookiePair).filter(Boolean);
-  const names = pairs.map(pair => pair.slice(0, pair.indexOf('=')));
-  if (!names.includes('NNB') || !names.includes('BUC')) {
-    throw new TrendSourceError('SESSION_BOOTSTRAP', 'Naver anonymous trend session cookies were not issued', {
+  const names = [...new Set(pairs.map(pair => pair.slice(0, pair.indexOf('='))))].sort();
+  const nnbPair = pairs.findLast(pair => pair.startsWith('NNB='));
+  if (!nnbPair || nnbPair === 'NNB=') {
+    throw new TrendSourceError('SESSION_BOOTSTRAP', 'Naver anonymous bootstrap did not issue the required NNB cookie', {
       cookieNamesPresent: names,
     });
   }
   return {
-    cookieHeader: pairs.join('; '),
+    cookieHeader: nnbPair,
     evidence: {
       provider: 'naver_anonymous_cookie_bootstrap',
-      cookieNamesPresent: names.sort(),
+      cookieNamesPresent: names,
+      requiredCookieNames: ['NNB'],
+      cookieNamesSent: ['NNB'],
+      bucObserved: names.includes('BUC'),
       cookieValuesPersisted: false,
       browserUsed: false,
     },
@@ -109,8 +121,8 @@ export async function fetchShoppingRanks({
   if (!/^\d{8}$/.test(String(categoryId)) || !allowedUnits.has(timeUnit)) {
     throw new TrendSourceError('INPUT', 'Invalid Naver Shopping Insight category or time unit');
   }
-  if (typeof cookieHeader !== 'string' || !cookieHeader) {
-    throw new TrendSourceError('SESSION_MISSING', 'Naver anonymous trend session is required');
+  if (!isAllowedAnonymousCookieHeader(cookieHeader)) {
+    throw new TrendSourceError('SESSION_MISSING', 'A server-issued NNB cookie and no unapproved Naver cookies are required for ranking reads');
   }
   const url = new URL('https://datalab.naver.com/shoppingInsight/getKeywordRank.naver');
   url.searchParams.set('timeUnit', timeUnit);
@@ -157,9 +169,55 @@ export async function collectShoppingTrends({
   }
   const results = [];
   const failures = [];
-  let session = await bootstrapAnonymousNaverSession({ fetchImpl });
-  let bootstrapCount = 1;
-  for (const current of queue) {
+  let session;
+  let bootstrapCount = 0;
+  const safeErrorCode = error => {
+    const candidate = typeof error?.code === 'string' ? error.code
+      : typeof error?.name === 'string' ? error.name : 'ERROR';
+    return /^[A-Za-z][A-Za-z0-9_]{0,63}$/.test(candidate) ? candidate : 'ERROR';
+  };
+  const safeHttpStatus = error => Number.isInteger(error?.details?.httpStatus) &&
+    error.details.httpStatus >= 100 && error.details.httpStatus <= 599
+    ? error.details.httpStatus : null;
+  const safeCookieNames = error => Array.isArray(error?.details?.cookieNamesPresent)
+    ? error.details.cookieNamesPresent.filter(name => typeof name === 'string' && /^[A-Za-z0-9_!#$%&'*+.^`|~-]+$/.test(name))
+    : [];
+  try {
+    session = await bootstrapAnonymousNaverSession({ fetchImpl });
+    bootstrapCount = 1;
+  } catch (error) {
+    const code = safeErrorCode(error);
+    const httpStatus = safeHttpStatus(error);
+    const cookieNamesPresent = safeCookieNames(error);
+    for (const current of queue) {
+      failures.push({
+        categoryId: current.id,
+        categoryName: current.name,
+        timeUnit: current.timeUnit,
+        code,
+        httpStatus,
+      });
+    }
+    return {
+      sessionEvidence: {
+        provider: 'naver_anonymous_cookie_bootstrap',
+        cookieNamesPresent: [...new Set(cookieNamesPresent)].sort(),
+        requiredCookieNames: ['NNB'],
+        cookieNamesSent: [],
+        bucObserved: cookieNamesPresent.includes('BUC'),
+        cookieValuesPersisted: false,
+        browserUsed: false,
+        bootstrapCount,
+        bootstrapFailureCode: code,
+      },
+      requestedContracts: queue.length,
+      successfulContracts: 0,
+      failures,
+      results,
+    };
+  }
+  for (let queueIndex = 0; queueIndex < queue.length; queueIndex++) {
+    const current = queue[queueIndex];
     let completed = false;
     let lastError = null;
     for (let attempt = 0; attempt < 2 && !completed; attempt++) {
@@ -178,8 +236,52 @@ export async function collectShoppingTrends({
         if (attempt === 0 && refreshable) {
           session.cookieHeader = '';
           await new Promise(resolve => setTimeout(resolve, Math.max(1000, delayMs)));
-          session = await bootstrapAnonymousNaverSession({ fetchImpl });
-          bootstrapCount++;
+          try {
+            session = await bootstrapAnonymousNaverSession({ fetchImpl });
+            bootstrapCount++;
+          } catch (refreshError) {
+            const bootstrapFailureCode = safeErrorCode(refreshError);
+            const httpStatus = safeHttpStatus(refreshError);
+            const cookieNamesPresent = [...new Set([
+              ...(session?.evidence?.cookieNamesPresent || []),
+              ...safeCookieNames(refreshError),
+            ])].sort();
+            for (let failedIndex = queueIndex; failedIndex < queue.length; failedIndex++) {
+              const failedContract = queue[failedIndex];
+              const currentFailure = failedIndex === queueIndex;
+              failures.push({
+                categoryId: failedContract.id,
+                categoryName: failedContract.name,
+                timeUnit: failedContract.timeUnit,
+                code: 'SESSION_BOOTSTRAP',
+                httpStatus: currentFailure ? safeHttpStatus(lastError) : null,
+                bootstrapHttpStatus: httpStatus,
+                failureStage: currentFailure ? 'session_refresh' : 'session_unavailable_after_refresh_failure',
+                bootstrapFailureCode,
+                ...(currentFailure ? { rankFailureCode: safeErrorCode(lastError) } : {}),
+              });
+            }
+            const sessionEvidence = {
+              provider: 'naver_anonymous_cookie_bootstrap',
+              cookieNamesPresent,
+              requiredCookieNames: ['NNB'],
+              cookieNamesSent: ['NNB'],
+              bucObserved: cookieNamesPresent.includes('BUC'),
+              cookieValuesPersisted: false,
+              browserUsed: false,
+              bootstrapCount,
+              bootstrapFailureCode,
+              bootstrapFailureHttpStatus: httpStatus,
+            };
+            session.cookieHeader = '';
+            return {
+              sessionEvidence,
+              requestedContracts: queue.length,
+              successfulContracts: results.length,
+              failures,
+              results,
+            };
+          }
         }
       }
     }
@@ -188,8 +290,8 @@ export async function collectShoppingTrends({
         categoryId: current.id,
         categoryName: current.name,
         timeUnit: current.timeUnit,
-        code: lastError?.code || lastError?.name || 'ERROR',
-        httpStatus: Number.isInteger(lastError?.details?.httpStatus) ? lastError.details.httpStatus : null,
+        code: safeErrorCode(lastError),
+        httpStatus: safeHttpStatus(lastError),
       });
     }
     await new Promise(resolve => setTimeout(resolve, delayMs));

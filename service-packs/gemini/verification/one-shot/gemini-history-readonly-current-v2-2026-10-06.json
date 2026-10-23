@@ -1,0 +1,538 @@
+{
+  "schema": "gemini-history-readonly-canonical-v1",
+  "service": "gemini-web",
+  "operation": "history_list_search_detail",
+  "recordedAt": "2026-10-06T13:29:02.871644+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-settings-update-20261006",
+  "ownerProbe": {
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "expectedOwnerSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+    "expectedOwnerPersisted": false
+  },
+  "search": {
+    "querySha256": "de500bde39cd491a4331a92a406343459ad1b5d65f4eb7b6f6ec5b3e69ae01b3",
+    "expectedIntentSha256": "87bf3a9ecd11121c6864a91a36f3f07989021deaa2bdacb214b9e066aaca5117",
+    "queryPersisted": false,
+    "intentPersisted": false
+  },
+  "sourceBeforeImports": {
+    "history": {
+      "schema": "gemini-feature-source-scope-v1",
+      "featureId": "history",
+      "operationNames": [
+        "history_list",
+        "history_read",
+        "history_search"
+      ],
+      "authOperation": "identity",
+      "contractScopeSha256": "575359bd01eb594fda7fc4b7cfabd80eed0bd3dfbfe9d7a993ba84785504690b",
+      "implementationUnits": [
+        {
+          "path": "src/batch-response.mjs#__module__",
+          "sha256": "5b555e679b7e9597c613b31211ffc3760caca1e86263cfd1742f2bc8d794ef23"
+        },
+        {
+          "path": "src/cli.mjs#lifecycleReadMetadata",
+          "sha256": "725e91db00a0219359583dd5c5418fb3ba5eb6860a6773421d6f20d68c3d8fc6"
+        },
+        {
+          "path": "src/cli.mjs#runHistoryReadOnce",
+          "sha256": "554a6745d0512bd353f7b2754f9d8254da026eb2ef743e62004d9aa6cde98090"
+        },
+        {
+          "path": "src/cli.mjs#runLifecycleReadOnce",
+          "sha256": "1a016f4ddf3003daa502537f76d8e3652436578ffd5faf4e6e15243a5adf4d04"
+        },
+        {
+          "path": "src/client.mjs#listHistory",
+          "sha256": "d602da4b60d5f1124609c79f69dfb1d9d44f50a6d524319724a9927cd039ddd5"
+        },
+        {
+          "path": "src/client.mjs#read",
+          "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+        },
+        {
+          "path": "src/client.mjs#readHistoryDetail",
+          "sha256": "003f52c3c6b97cc847871e598f74c9ae211fd5c9d237896f555a9ec1eccdc6ae"
+        },
+        {
+          "path": "src/client.mjs#refreshSession",
+          "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+        },
+        {
+          "path": "src/client.mjs#searchHistory",
+          "sha256": "64b9e8475935ad4cf96508c365f9c642038e890a608861b7ffae66272c39c904"
+        },
+        {
+          "path": "src/client.mjs#verifyOwner",
+          "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+        },
+        {
+          "path": "src/constants.mjs#CREDENTIAL_NAME",
+          "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ID",
+          "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ORIGIN",
+          "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+        },
+        {
+          "path": "src/contract.mjs#requireCapturedOperation",
+          "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#bindRpcArgsTemplate",
+          "sha256": "1978ba94754b1180e2e441e9bd2228628f4b0121e985e0c3f2327fa9ca707577"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#buildReadRequest",
+          "sha256": "30c8ac57ea0105396a1f93905320d497ee184e664c63bd23fa9366f90b9219e1"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#countRpcPlaceholder",
+          "sha256": "7492b92286e9291d1c1b17feb08ed76e98d6b3cdd805fe8bc48b17713dfa36bc"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#decodeNestedJson",
+          "sha256": "d165366271668150e830c90521c6bee69d8f86c23f00d63bec91c1794343792b"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#executeReadRpc",
+          "sha256": "c4c45ffb78c91666a60571c43d82456a3061b3ae340f28f0c3b02919693b3ab4"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#extractConversationSummaries",
+          "sha256": "9a6573ec5d67cbafda8a985ce10be7aa7ca763366aaf3f6b20b8c9e2d8d26d93"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#fail",
+          "sha256": "ce0c40ed310b548b0038b7a408cff04c5165d2665bd3c60a2f5342612a65f27d"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#HISTORY_ID",
+          "sha256": "868cfaa4712c3f1f83a893bea2d395b588b9877043be1157e597702c36717e24"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#HISTORY_PATH",
+          "sha256": "cee6f12463aad50959e4263fc9e262f6c8d552029b82aff630394cfc16ec34c8"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#isRecord",
+          "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#matchesRpcArgsTemplate",
+          "sha256": "b9dee5de9d7e68e189427b4fdccab5550f536b7c37c7f1e0bfa86fd4137fc151"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#MAX_SEARCH_LENGTH",
+          "sha256": "30aa03dfbd918ce9207ffc4783f5427b9b0f65acc1d5e95b57a795a8d833cd0f"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#nextRequestId",
+          "sha256": "23486f89d2df62d34132f61d378e541d87431b23afc957f310c64981f1b42915"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#parseTimestamp",
+          "sha256": "3f4ab5ba689ea0a62a784f5aba446546e9079ac702897888f9254c00a57c4cde"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#requireClient",
+          "sha256": "99aec53f9d8fbe8cadfb67268cb2c8ba69521e71b8b418c65953a5a7a8a6e236"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#searchConversations",
+          "sha256": "420962e63bf265d04103fcc45bfdd7f06fa0804cb1e31aee115ca78888003440"
+        },
+        {
+          "path": "src/conversation-lifecycle.mjs#verifyOwner",
+          "sha256": "25fe1a770997cb61293c992d29bcb8bee9d52477a0cc8485136487add4cdefe1"
+        },
+        {
+          "path": "src/history-detail.mjs#__module__",
+          "sha256": "2605b37c565ab57fdd49a4c96e42191c1d35bc8a36a96882b667aa743aeb9374"
+        },
+        {
+          "path": "src/history-detail.mjs#GEMINI_API_CONVERSATION_ID_PATTERN",
+          "sha256": "842626a3339a57c5203266ad9204c8274e46fcccd2efd638ace30981406feb30"
+        },
+        {
+          "path": "src/history-detail.mjs#GEMINI_API_CONVERSATION_ID_TOKEN",
+          "sha256": "1571c40ac4321d16300eddaf9cf0eb3c1b9b3cf9c9f6e6e0e87eed1969b73a84"
+        },
+        {
+          "path": "src/history-detail.mjs#GEMINI_HISTORY_DETAIL_RPC",
+          "sha256": "deb8c68f39028cc4dfe050bdf819f0ca5a0b741d056147b964cea172c657d387"
+        },
+        {
+          "path": "src/history-detail.mjs#GEMINI_ROUTE_CONVERSATION_ID_PATTERN",
+          "sha256": "c7f22896e13458a2aa64cb2c613393240198a7e5d76c0ebd5f2e5b9df2af0821"
+        },
+        {
+          "path": "src/history-detail.mjs#MAX_DETAIL_RESPONSE_BYTES",
+          "sha256": "eb2113a5ba97d3b1f04674779fc00da8f7e9566f88d8656614c9638a062503b3"
+        },
+        {
+          "path": "src/history-detail.mjs#MAX_JSON_DEPTH",
+          "sha256": "fe8399a9a32a215f43cc179c1f588c509e9713f9bfa31a57dc1a4922e67368f2"
+        },
+        {
+          "path": "src/history-detail.mjs#MAX_JSON_NODES",
+          "sha256": "0878b7ef3516d06fd6beb63e0515b17cb3319594464320b5033aedfff6b39556"
+        },
+        {
+          "path": "src/history-detail.mjs#REQUIRED_QUERY_KEYS",
+          "sha256": "4871f81d3ef1daa0c68d6d7e2fe143384eb24c5bd5f6d58946ea9cb5dc491fb5"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+          "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#clearBody",
+          "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+          "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+          "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+          "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+          "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#isPlainObject",
+          "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+          "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#missingContext",
+          "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+          "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+          "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#requiredWizString",
+          "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+        },
+        {
+          "path": "src/http-transport.mjs#cancelResponseBody",
+          "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+        },
+        {
+          "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+          "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+        },
+        {
+          "path": "src/http-transport.mjs#mimeType",
+          "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+        },
+        {
+          "path": "src/http-transport.mjs#readBoundedBody",
+          "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+        },
+        {
+          "path": "src/http-transport.mjs#request",
+          "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+        },
+        {
+          "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+          "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+        },
+        {
+          "path": "src/http-transport.mjs#toBodyBuffer",
+          "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+        },
+        {
+          "path": "src/https-transport.mjs#countHeaderBytes",
+          "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+        },
+        {
+          "path": "src/https-transport.mjs#createHttpsFetch",
+          "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+        },
+        {
+          "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+          "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+        },
+        {
+          "path": "src/https-transport.mjs#incomingHeaders",
+          "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+        },
+        {
+          "path": "src/rpc-adapters.mjs#buildHistoryListRequest",
+          "sha256": "f247dbaad379b6d4e428b73e9f3e1336bb7942c76e9e910337832987c7a3a67b"
+        },
+        {
+          "path": "src/rpc-adapters.mjs#HISTORY_LIST_RPC",
+          "sha256": "366d4889d1807517a287d4bbb8766c4a139a20107e49ec770ebfcea32d7e979f"
+        },
+        {
+          "path": "src/rpc-adapters.mjs#historyListRpcId",
+          "sha256": "9d5b88dcc7deabb858758104d994daff8da1448711172029b90c76475d57499d"
+        },
+        {
+          "path": "src/session.mjs#assertValue",
+          "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+        },
+        {
+          "path": "src/session.mjs#isRecord",
+          "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+        },
+        {
+          "path": "src/session.mjs#makeCookieHeader",
+          "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+        },
+        {
+          "path": "src/session.mjs#readHistoryDetailEnvelopeFromStdin",
+          "sha256": "67f8eacab60a8843ca9e9cb8e23a945aaab3f95a506daa50d20d1370b6f4378d"
+        },
+        {
+          "path": "src/session.mjs#readLifecycleReadEnvelopeFromStdin",
+          "sha256": "1d494ac39937b3b05098436062e49b775f8db08207e96b755b27f5b28820dedb"
+        },
+        {
+          "path": "src/session.mjs#validateBatchContext",
+          "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+        },
+        {
+          "path": "src/session.mjs#validateRequestHeaders",
+          "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+        },
+        {
+          "path": "src/session.mjs#validateSessionBundle",
+          "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+        }
+      ],
+      "implementationScopeSha256": "43cee949c8efa0c448e612384db32a96a1e0f50a92a6e13cdbe90f5986727d7e"
+    },
+    "identity": {
+      "schema": "gemini-feature-source-scope-v1",
+      "featureId": "identity",
+      "operationNames": [
+        "identity"
+      ],
+      "authOperation": "identity",
+      "contractScopeSha256": "09a588ee41a57496011ef64b9fccfa328c14147a8bfc86e0ab8d5a48507f7ed2",
+      "implementationUnits": [
+        {
+          "path": "src/client.mjs#read",
+          "sha256": "3f9108edece592588dba6c9d7dcaad8397747bb41805e632ec9aaddfcc0697be"
+        },
+        {
+          "path": "src/client.mjs#refreshSession",
+          "sha256": "4ac1acc8510205d085180765bf7a71bf40dd92a09fcf7614a804613f2e84e10e"
+        },
+        {
+          "path": "src/client.mjs#verifyOwner",
+          "sha256": "b8b7fda9b40367eb9e4361cf67234805340e1d5cd6b0175e1cccac73fc2bd07a"
+        },
+        {
+          "path": "src/constants.mjs#CREDENTIAL_NAME",
+          "sha256": "4ed032642c34132e2de9a77f3207852c3de9ad32c3f53b8866a250828a589c1f"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ID",
+          "sha256": "8a0a5575302e08454f098eb01ae9420dcd780e30d4b7475b2da8eee12d96ab14"
+        },
+        {
+          "path": "src/constants.mjs#SERVICE_ORIGIN",
+          "sha256": "99ad19deea850ed2afd1524cee1837a2ccebadd018314e9819dd9983b83af915"
+        },
+        {
+          "path": "src/contract.mjs#requireCapturedOperation",
+          "sha256": "c8021f653b104538ed685a5b127bbbc64b81c8d19a07b762d9ee2d3fd316bd3c"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#capturedHistoryOperation",
+          "sha256": "336ab01e432daffeee5ca29b53a2bb0044176f1a659ca9d364c659ad72b217af"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#clearBody",
+          "sha256": "f68bdfec7734cebeaf50cf1364c7d2e984b4030c1280542f68ef28c19e90a8e2"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#geminiDocumentHasExpectedOwner",
+          "sha256": "13d6714794aecf43b55579d97da8c7d3485a91af640f0c996b1af6a209a22fa1"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#historyContextTemplate",
+          "sha256": "a31e5927fbcc957873bb496441aa18836528db37747311cb7a7e4377a7ed1135"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#htmlFromResponse",
+          "sha256": "c1e169ddc9b135c71c6a8a0f627547e8ae02f7f8b890774277040b1c0e4b4765"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#identityRequestSpec",
+          "sha256": "e70977036fb673fc23676207b6865d007e50cb0c67d1d843df251dcd4c5a312a"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#isPlainObject",
+          "sha256": "debf911cd00c7a534cec8af5706173f08b5d9228429d4fd793e78b935f547692"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#jsonObjectEnd",
+          "sha256": "85607074f1ca218e6f78902674a74386dfee8eca1a5a942aadd3a6d909d03fac"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#missingContext",
+          "sha256": "f1eff9da82acfe3b8aa10633b488e82c71583e2481ce527d0f6ca7caff098215"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#readWizGlobalData",
+          "sha256": "6b38ee4e9c4965d8db8022f17f1aa9e33d3e17233e9315dfa72390edf2c5621d"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#refreshGeminiHttpSession",
+          "sha256": "20a94a12d4dcbdafc0ba1fc345760c178d445ae92bdb014fa6fad6dc60a49ba3"
+        },
+        {
+          "path": "src/http-session-bootstrap.mjs#requiredWizString",
+          "sha256": "a9a4002626e3bdef25dddb968c02872d7b5a5258d8352146c2553da0ede5a0d4"
+        },
+        {
+          "path": "src/http-transport.mjs#cancelResponseBody",
+          "sha256": "4da0f96aeef6a8f1cf914c9c8f72882efe199ed1361d8421acbda4d73204eedf"
+        },
+        {
+          "path": "src/http-transport.mjs#MAX_RESPONSE_BYTES",
+          "sha256": "d8a2e2f3dc9b638af0b07d0afd4b4d4a3b7e7ce2b43c36f4c1f6a3a5e9454f14"
+        },
+        {
+          "path": "src/http-transport.mjs#mimeType",
+          "sha256": "eafa590bbb23c48bf52ddaa54e8f8c93d4e923987f5a2cd000dcff50c8ad9837"
+        },
+        {
+          "path": "src/http-transport.mjs#readBoundedBody",
+          "sha256": "74761c18163e8e9707730371a673487e0502f10b39e22e2f5b1de972fc30e1be"
+        },
+        {
+          "path": "src/http-transport.mjs#request",
+          "sha256": "0bc82d7c88967aed0c25fd02947c5cf691ab1994035c760af05a6975bfa4a5ef"
+        },
+        {
+          "path": "src/http-transport.mjs#STATIC_FORBIDDEN_HEADERS",
+          "sha256": "0f12cc4541ad9c2d5998c6edcda141cb70eed3a789580f4882a0165bea5a3273"
+        },
+        {
+          "path": "src/http-transport.mjs#toBodyBuffer",
+          "sha256": "ccef99d03d1fdc9e54b64507464b16fd62c47ac7b7dbd8ef3f5726de5a3378d0"
+        },
+        {
+          "path": "src/https-transport.mjs#countHeaderBytes",
+          "sha256": "19ce1d5c5d747fa665dca2dbf8399bcc22195325643395540b7fbcbea49c22b1"
+        },
+        {
+          "path": "src/https-transport.mjs#createHttpsFetch",
+          "sha256": "d60cf6537b41d5d03429028c563e83196673ed91beb170ef4dc9ab692ce3e306"
+        },
+        {
+          "path": "src/https-transport.mjs#DEFAULT_MAX_HEADER_BYTES",
+          "sha256": "6dfcd59de2d76fd6e6b9e2f76b7928dc871cc0ebbf3d83a49f8e2a7fc0706688"
+        },
+        {
+          "path": "src/https-transport.mjs#incomingHeaders",
+          "sha256": "14c20f7a3d640d079953c69088b230cc99b44bff4bef3cb34b90aa6259f3b449"
+        },
+        {
+          "path": "src/session.mjs#assertValue",
+          "sha256": "9cae3ac173bb2df713fa792e32c741d4bec78745dc045034df84146600032c59"
+        },
+        {
+          "path": "src/session.mjs#isRecord",
+          "sha256": "d4721e9e2b6e16ff8a6d98555d913fcf5955ee32c1c55297be14c0368f0a48c2"
+        },
+        {
+          "path": "src/session.mjs#makeCookieHeader",
+          "sha256": "b943d8fc73c2b41a0a852b78505e47be5b5a7a9144894671d6e7253c889201bf"
+        },
+        {
+          "path": "src/session.mjs#validateBatchContext",
+          "sha256": "03982d568315e9b00eaa3224412c73cccc8097f70f0bfd522cccaac95d7874f9"
+        },
+        {
+          "path": "src/session.mjs#validateRequestHeaders",
+          "sha256": "99cc1efa3ace6cda6549138a5ffbc903af41df6f23116b1ae2f53cca019f1d13"
+        },
+        {
+          "path": "src/session.mjs#validateSessionBundle",
+          "sha256": "f067e75f75b5d4078ac19ee9a27f606bbc64665b76a0ce53d01f479b7940d32c"
+        }
+      ],
+      "implementationScopeSha256": "785eadb2325c7bb332eafb7b09e847fae26f37f7e9982223f731f21204fb9152"
+    }
+  },
+  "sourceStableDuringExecution": true,
+  "listHttpStatus": 200,
+  "searchHttpStatus": 200,
+  "detailHttpStatus": 200,
+  "listedConversationCount": 28,
+  "uniqueTaskMatchCount": 1,
+  "identityEvidenceFresh": true,
+  "existingIdentityEvidencePreserved": true,
+  "currentIdentityEvidencePath": "verification/feature-evidence/identity--identity--history_owner.json",
+  "priorHistoryEvidenceBackupCount": 5,
+  "responseEvidence": {
+    "history_list": {
+      "status": 200,
+      "bytes": 6176,
+      "bodySha256": "0384eeb6d94e88b38255cbc2d2b5a301eafc9cbbba15b05555ad1441666b67d1",
+      "framing": "batchexecute"
+    },
+    "history_search": {
+      "status": 200,
+      "bytes": 572,
+      "bodySha256": "1c70a21cd545dc389b958b1aa41e08a4574072a5206cdbf71b8a8a266f35adfc",
+      "framing": "batchexecute"
+    },
+    "history_read": {
+      "status": 200,
+      "bytes": 1874,
+      "bodySha256": "06b4676e6c63917e1b4eff459ac449f97d6dcb83d30782449ad700ec69ad078e",
+      "framing": "batchexecute"
+    }
+  },
+  "browserCapture": {
+    "startupPreferenceWritesAborted": 9,
+    "startupPreferenceAbortAcknowledged": 9,
+    "browserBusinessWrites": 0
+  },
+  "canonicalReceipts": [
+    "verification/features/history.json"
+  ],
+  "persistence": {
+    "expectedOwnerPersisted": false,
+    "emailPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "queryPersisted": false,
+    "intentPersisted": false,
+    "conversationIdentifiersPersisted": false,
+    "titlesOrMessageContentPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false
+  }
+}

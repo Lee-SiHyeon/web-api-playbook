@@ -1,0 +1,150 @@
+{
+  "schema": "gemini-model-selection-pro-ui-hnvq-check-v1",
+  "service": "gemini-web",
+  "taskIntent": "gemini-model-selection-pro-20261006-v1",
+  "recordedAt": "2026-10-06T04:01:10.148093+00:00",
+  "outcome": "assistant_text_without_expected_answer_marker",
+  "taskBinding": {
+    "dispatchCount": 1,
+    "journalState": "response_received",
+    "historyCandidateCount": 1,
+    "candidateWindowSource": "journal_created_to_settled_outer_bound",
+    "exactPromptMatchedInPriorDetailReadback": true,
+    "apiConversationIdPersisted": false
+  },
+  "normalUiDetailRequest": {
+    "requestObserved": true,
+    "httpStatus": 200,
+    "rpcId": "hNvQHb",
+    "method": "POST",
+    "pathMatchesObserved": true,
+    "queryFieldOrderMatchesObserved": true,
+    "bodyFieldOrderMatchesObserved": true,
+    "callTailMatchesObserved": true,
+    "argumentsMatchObservedTemplateAfterApiIdBinding": true,
+    "argumentCount": 8,
+    "argumentTypeShape": {
+      "type": "array",
+      "length": 8,
+      "items": [
+        "string",
+        "number",
+        "null",
+        "number",
+        {
+          "type": "array",
+          "length": 1,
+          "items": [
+            "number"
+          ]
+        },
+        {
+          "type": "array",
+          "length": 1,
+          "items": [
+            "number"
+          ]
+        },
+        "null",
+        "number"
+      ]
+    },
+    "observedTemplateTypeShape": {
+      "type": "array",
+      "length": 8,
+      "items": [
+        "string",
+        "number",
+        "null",
+        "number",
+        {
+          "type": "array",
+          "length": 1,
+          "items": [
+            "number"
+          ]
+        },
+        {
+          "type": "array",
+          "length": 1,
+          "items": [
+            "number"
+          ]
+        },
+        "null",
+        "number"
+      ]
+    },
+    "capturedHeaderNameCount": 19,
+    "capturedSafeHeaderNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "capturedHeaderNamesAllObserved": true
+  },
+  "normalUiState": {
+    "assistantNodeCount": 3,
+    "assistantTextStringCount": 3,
+    "assistantTextLengths": [
+      71,
+      59,
+      59
+    ],
+    "assistantMarker42Found": false,
+    "userQueryNodeCount": 6,
+    "exactPromptEchoInUserQueryNode": false,
+    "exactPromptEchoInMainContent": true,
+    "ariaBusyTrueNodeCount": 0,
+    "progressNodeCount": 1,
+    "alertNodeCount": 0,
+    "errorAlertPresent": false,
+    "quotaAlertPresent": false,
+    "documentReadyState": "complete",
+    "routePathLooksBound": true,
+    "httpDetailRequestObserved": true,
+    "httpDetailResponseStatus": 200
+  },
+  "priorHnvDiagnostic": {
+    "boundedPollReceipt": "verification/one-shot/gemini-model-selection-pro-hnvq-diagnostic-2026-10-06.json",
+    "detailRoleTaggedAssistantTextCount": 0,
+    "detailAsciiUnicode42MarkerCount": 0,
+    "detailExactPromptMatched": true,
+    "explicitProgressOrErrorFieldsFound": false
+  },
+  "modelCaptureBinding": {
+    "proUiMatchedCapturedModeId": true,
+    "capturedModeCategoryCode": 3,
+    "capturedThinkingLevelCode": 1,
+    "directDispatchMetadataBinding": "not_inferred_from_current_source"
+  },
+  "guards": {
+    "pageWideBusinessPostsForwarded": 0,
+    "unlistedBusinessPostCountBlocked": 58,
+    "webSocketBusinessFramesForwarded": 0,
+    "onlySourceListedReadRpcBatchesForwarded": true,
+    "pageResetToAboutBlankBeforeDriverDisconnect": true
+  },
+  "persistence": {
+    "rawPromptOrResponsePersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "rawRequestBodiesPersisted": false,
+    "conversationIdentifiersPersisted": false
+  }
+}

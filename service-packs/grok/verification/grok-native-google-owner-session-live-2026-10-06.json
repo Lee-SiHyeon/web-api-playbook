@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T14:35:28.994311+00:00",
+  "serviceId": "grok-web",
+  "operationId": "auth.owner.read",
+  "method": "GET",
+  "path": "/api/auth/session",
+  "sourceHandler": {
+    "clientOperationId": "auth.owner.read",
+    "clientCall": "GrokWebClient.verifyOwner -> GrokWebClient.read",
+    "implementationFiles": {
+      "src/client.mjs": "d950bc9cccffda484bb37b50991022f6babe9de0ca49efe3822344ad82775c77",
+      "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+      "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b"
+    },
+    "contractEvidencePath": "contracts/grok-web.v1.json",
+    "sourceObservationPath": "verification/grok-core-http-reads-2026-10-06.json"
+  },
+  "httpStatus": 200,
+  "contentType": "application/json",
+  "responseBytes": 648,
+  "rawResponseSha256": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+  "requestDigest": "2edd8c980550840946ef3dd41ca5bd4d1f75bbaf0211ce26d26deb566c519f54",
+  "ownerVerified": true,
+  "normalizedOwnerDigestMatchedExpected": true,
+  "normalizedOwnerDigestPersisted": false,
+  "rawEmailPersisted": false,
+  "rawIdsPersisted": false,
+  "cookieValuesPersisted": false,
+  "responseBodyPersisted": false,
+  "sourceEndpoint": {
+    "method": "GET",
+    "path": "/api/auth/session",
+    "transport": "direct_http_client"
+  }
+}

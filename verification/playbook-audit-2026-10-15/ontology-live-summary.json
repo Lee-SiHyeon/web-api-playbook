@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-15T09:33:24.562Z",
+  "verifier": "scripts/verify-live.mjs",
+  "ok": false,
+  "operations": {
+    "molit-notices": {
+      "status": "skipped",
+      "count": 0,
+      "error": "MOLIT_PUBLIC_REDIRECT_BLOCKED",
+      "registeredBlocked": true,
+      "captured": false,
+      "client_exists": true,
+      "remnant_free": true,
+      "remnant_free_scope": "recurring_http_without_browser_engine",
+      "credential_propagated": "not_applicable_anonymous",
+      "live_replay": false
+    },
+    "policy-briefing": {
+      "status": "read",
+      "count": 12,
+      "error": null,
+      "registeredBlocked": false,
+      "captured": false,
+      "client_exists": true,
+      "remnant_free": true,
+      "remnant_free_scope": "recurring_http_without_browser_engine",
+      "credential_propagated": "not_applicable_anonymous",
+      "live_replay": true
+    },
+    "sh-notices": {
+      "status": "partial",
+      "count": 10,
+      "error": null,
+      "registeredBlocked": false,
+      "captured": false,
+      "client_exists": true,
+      "remnant_free": true,
+      "remnant_free_scope": "recurring_http_without_browser_engine",
+      "credential_propagated": "not_applicable_anonymous",
+      "live_replay": true
+    },
+    "publicNotices": {
+      "ok": true,
+      "snapshotComplete": false
+    },
+    "yanolja-search": {
+      "error": "YANOLJA_SEARCH_SCHEMA_INVALID",
+      "captured": false,
+      "client_exists": true,
+      "remnant_free": true,
+      "remnant_free_scope": "recurring_http_without_browser_engine",
+      "credential_propagated": "not_applicable_anonymous",
+      "live_replay": false
+    },
+    "modetour-packages": {
+      "verdict": "usable_limited",
+      "recommendationCount": 10,
+      "productCount": 1,
+      "detailCount": 1,
+      "requestCount": 3,
+      "requests": [
+        {
+          "method": "GET",
+          "origin": "https://www.modetour.com",
+          "pathname": "/package/overseas",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "origin": "https://b2c-api.modetour.com",
+          "pathname": "/Package/GetRecommendedProduct",
+          "status": 200
+        },
+        {
+          "method": "GET",
+          "origin": "https://b2c-api.modetour.com",
+          "pathname": "/Package/GetProductMasterByIds",
+          "status": 200
+        }
+      ],
+      "contractSourceObserved": true,
+      "anonymousSdkContextPropagated": true,
+      "captured": false,
+      "client_exists": true,
+      "remnant_free": true,
+      "remnant_free_scope": "recurring_http_without_browser_engine",
+      "credential_propagated": "not_applicable_anonymous",
+      "live_replay": true
+    }
+  },
+  "writesSubmitted": 0,
+  "browserUsed": false,
+  "accountCredentialsPersisted": false,
+  "scope": "Policy and SH one page/one detail, NOL first keyword page, Mode recommendation feed/one matching detail; no exhaustive coverage"
+}

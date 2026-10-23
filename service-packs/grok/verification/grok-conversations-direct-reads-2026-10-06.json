@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "verificationKind": "read_only_conversation_api_replay",
+  "observedAt": "2026-10-06T11:42:41.205Z",
+  "ownerVerified": true,
+  "sourceSnapshotStable": true,
+  "sourceSnapshotSha256": "2ee4107baf2d8e5f243d54057d25d620a0eb16513933c123983350bde99480bf",
+  "manifestRequirements": 48,
+  "operationIds": [
+    "auth.owner.read",
+    "conversation.list.read",
+    "conversation.read",
+    "history.response-nodes",
+    "history.load-responses"
+  ],
+  "readOnly": true,
+  "immutableRunReceiptDirectory": "verification/conversation-read-runs/2026-10-06T11-42-41-202Z-2ee4107baf2d8e5f",
+  "rawIdsPersisted": false,
+  "rawTitlesPersisted": false,
+  "rawMessagesPersisted": false,
+  "queryTextPersisted": false,
+  "operations": [
+    {
+      "operationId": "auth.owner.read",
+      "httpStatus": 200,
+      "responseBytes": 648
+    },
+    {
+      "operationId": "conversation.list.read",
+      "variant": "first_page",
+      "httpStatus": 200,
+      "responseBytes": 486,
+      "conversationCount": 1
+    },
+    {
+      "operationId": "conversation.list.read",
+      "variant": "next_page",
+      "httpStatus": 200,
+      "responseBytes": 494,
+      "conversationCount": 1
+    },
+    {
+      "operationId": "conversation.list.read",
+      "variant": "search",
+      "httpStatus": 200,
+      "responseBytes": 9354,
+      "conversationCount": 10,
+      "textSearchMatchCount": 10
+    },
+    {
+      "operationId": "conversation.read",
+      "httpStatus": 200,
+      "responseBytes": 425,
+      "viewerIsOwner": true
+    },
+    {
+      "operationId": "history.response-nodes",
+      "httpStatus": 200,
+      "responseBytes": 310,
+      "responseNodeCount": 2,
+      "inflightResponseCount": 0
+    },
+    {
+      "operationId": "history.load-responses",
+      "httpStatus": 200,
+      "responseBytes": 3096,
+      "loadedResponseCount": 2,
+      "responseIdsBoundInMemory": true
+    }
+  ]
+}

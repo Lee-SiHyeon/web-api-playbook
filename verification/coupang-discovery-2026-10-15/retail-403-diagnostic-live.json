@@ -1,0 +1,173 @@
+{
+  "schema": "coupang-retail-diagnostic-v1",
+  "checkedAt": "2026-10-15T02:14:17.197Z",
+  "executionMode": "pure_http_diagnostic",
+  "nativeNetwork": true,
+  "browserUsed": false,
+  "ownerCredentialUsed": false,
+  "visitorValuesPersisted": false,
+  "visitorContextCount": 1,
+  "rebootstrapAllowed": false,
+  "automaticRetry": false,
+  "explicitlyRequested403Comparison": true,
+  "writesSubmitted": 0,
+  "runs": [
+    {
+      "name": "offer_control_before",
+      "hypothesis": "Known public JSON control",
+      "ok": true,
+      "receipt": {
+        "checkedAt": "2026-10-15T02:14:17.200Z",
+        "operation": "offer_list",
+        "method": "GET",
+        "origin": "https://www.coupang.com",
+        "path": "/next-api/offer-list",
+        "query": {
+          "productId": "6247736560",
+          "itemId": "12646874013",
+          "selectedVendorItemId": "79914317500"
+        },
+        "status": 200,
+        "contentType": "application/json",
+        "bytes": 4407,
+        "bodyComplete": true,
+        "responseCookieHeadersAvailable": true,
+        "responseCookieCount": 7,
+        "retryAfterSeconds": null,
+        "durationMs": 710,
+        "execution": "pure_http",
+        "browserUsed": false,
+        "authenticationMode": "visitor",
+        "sessionProvider": "http_issued_memory_visitor",
+        "credentialSent": false,
+        "credentialPropagated": false,
+        "authenticatedOwnerVerified": false,
+        "applicationAuthenticated": null,
+        "cookieRotationApplied": false,
+        "cookieRotationPersisted": false,
+        "transport": "injected",
+        "retry": false,
+        "redirectsFollowed": false,
+        "ownerCredentialUsed": false,
+        "visitorCookiesSent": true,
+        "visitorCookieNames": [
+          "PCID",
+          "x-coupang-accept-language",
+          "x-coupang-target-market"
+        ],
+        "visitorBootstrap": {
+          "operation": "public_visitor_bootstrap",
+          "method": "GET",
+          "origin": "https://www.coupang.com",
+          "path": "/n-api/web-adapter/proxy",
+          "status": 200,
+          "execution": "pure_http",
+          "browserUsed": false,
+          "transport": "injected",
+          "ownerCredentialUsed": false,
+          "valuesPersisted": false,
+          "redirectsFollowed": false,
+          "retries": 0,
+          "challengeConfirmed": false,
+          "contentType": "text/html",
+          "bytes": 1735,
+          "responseSha256": "3eb0847506e760a9a04ebafeb5b016b612640c0e6fc29bd1c030ed9eaeaaf1b2",
+          "cookieNames": [
+            "PCID",
+            "x-coupang-accept-language",
+            "x-coupang-target-market"
+          ],
+          "botCookiesAccepted": false,
+          "accountCookiesAccepted": false
+        },
+        "visitorValuesPersisted": false,
+        "server": "envoy",
+        "dpopChallengePresent": false,
+        "responseSha256": "57a01b64ef843571448dc42579e299f148be0578599234aeeb619adee4aeb868",
+        "bodyError": null,
+        "challengeConfirmed": false,
+        "accessDeniedTitle": false,
+        "denialSignals": {
+          "requestBlocked": false,
+          "automatedAccess": false,
+          "permissionDenied": false,
+          "loginPage": false
+        },
+        "visitorCookieRotationApplied": false,
+        "applicationStatus": 200
+      },
+      "count": 1,
+      "price": {
+        "amount": 13200,
+        "currency": "KRW",
+        "priceKind": "offer_list_general_sale_price",
+        "basis": "public_offer_list"
+      },
+      "executionVerified": true
+    },
+    {
+      "name": "search_default",
+      "hypothesis": "Observed query with no sort or delivery filter",
+      "ok": false,
+      "code": "COUPANG_HTTP_403",
+      "receipt": {
+        "origin": "https://www.coupang.com",
+        "path": "/np/search",
+        "queryFields": [
+          "q",
+          "channel"
+        ],
+        "method": "GET",
+        "authenticationMode": "visitor",
+        "transport": "injected",
+        "cookieSent": true,
+        "credentialsUsed": false,
+        "browserUsed": false,
+        "httpStatus": 403,
+        "mime": "text/html",
+        "visitorCookieNames": [
+          "PCID",
+          "x-coupang-accept-language",
+          "x-coupang-target-market"
+        ],
+        "visitorBootstrap": null,
+        "visitorValuesPersisted": false,
+        "ownerCredentialUsed": false,
+        "server": "AkamaiGHost",
+        "responseCookieNames": [
+          "_abck",
+          "bm_s",
+          "bm_so",
+          "bm_sz"
+        ],
+        "retryAfterPresent": false,
+        "responseBytes": 534,
+        "responseSha256": "e7e0622a3da3f9063973459282f1f866444ac3fc09895a082180a5f7003b9ad8",
+        "accessDeniedTitle": true,
+        "edgeSupportLinkPresent": false,
+        "loginFormPresent": false,
+        "challengeConfirmed": true,
+        "challengeSignal": true
+      }
+    }
+  ],
+  "stopped": "search_default",
+  "unattempted": [
+    "search_sorted",
+    "search_free_delivery",
+    "search_home_referer",
+    "search_native_http2",
+    "category_default",
+    "category_page2",
+    "offer_control_after",
+    "review_json"
+  ],
+  "limitations": [
+    "No RSC input values or browser-cookie replay are inferred.",
+    "A Document 403 does not by itself establish a login requirement, quota, fingerprint cause or server cooldown."
+  ],
+  "networkRequests": 3,
+  "bootstrapRequests": 1,
+  "identityPreserved": true,
+  "endedAt": "2026-10-15T02:14:19.087Z"
+}

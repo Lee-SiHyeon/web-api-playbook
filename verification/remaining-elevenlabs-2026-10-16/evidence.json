@@ -1,0 +1,50 @@
+{
+  "schema": "elevenlabs-blocker-observation-v1",
+  "observedDate": "2026-10-16",
+  "timePrecision": "date-only; exact attempt timestamps were not supplied",
+  "source": "root agent report from the current authenticated Chromium session",
+  "scope": "speech synthesis UI and attempted CDP Network-domain capture",
+  "ui": {
+    "authenticatedTtsPageVisible": true,
+    "selectedVoiceLabel": "Adam",
+    "selectedModelLabel": "Eleven v4",
+    "visibleSettings": {
+      "stability": 0.5,
+      "similarity": 0.75
+    }
+  },
+  "capture": {
+    "networkEnableAttempted": true,
+    "attempts": "repeated",
+    "profiles": ["existing same-profile tab", "fresh same-profile tab"],
+    "result": "failed before a usable request capture",
+    "reportedFailureConditions": ["paused document response", "CDP debugger unattached"],
+    "httpStatus": null,
+    "responseMime": null,
+    "apiOrigin": null,
+    "apiPath": null,
+    "authHeaderCaptured": false,
+    "cookieBundleImported": false
+  },
+  "maintainedClient": {
+    "ownerRead": false,
+    "voiceOptionsRead": false,
+    "modelOptionsRead": false,
+    "settingsRequestReplayed": false,
+    "generationRequestsSubmitted": 0,
+    "audioArtifactReadback": false,
+    "historyReadback": false
+  },
+  "interpretation": {
+    "confirmed": [
+      "The authenticated web UI displayed the stated voice, model, and settings.",
+      "CDP Network.enable did not produce a usable capture on the two reported same-profile tabs."
+    ],
+    "notEstablished": [
+      "No ElevenLabs API endpoint, request schema, authentication header, cookie contract, or response MIME was observed.",
+      "The CDP attachment failure does not establish an ElevenLabs service failure or logout.",
+      "No voice option or TTS generation was replayed through the maintained HTTP client."
+    ]
+  },
+  "secretsOrPayloadsPersisted": false
+}

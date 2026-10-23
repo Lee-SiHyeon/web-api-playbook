@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "operationId": "conversation.files.task-cid-reconcile",
+  "recordedAt": "2026-10-06T13:22:04.847Z",
+  "status": "completed",
+  "ownerVerified": true,
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "conversationIdSha256": "02e9bdfd8bd1c531194d60cd154d0abb5097a39f6d96e5a8d2e30cfbc6d67aa6",
+  "createReceiptPath": "verification/grok-conversation-files-create-live-2026-10-06.json",
+  "cidRecoveryReceiptPath": "verification/grok-conversation-files-create-cid-reconcile-live-2026-10-06.json",
+  "expectedPromptSha256": "105aeefe4a091e9183d87f258d0a40edfa0ff94708922f5bf79ab25bc8ed931e",
+  "expectedPromptBytes": 347,
+  "expectedFileNameSha256": "59b573f9e2f2469477dd6a0372e0eaf9156fe58367f0eeaff29cd1354f1f5e3f",
+  "list": {
+    "status": 200,
+    "responseBytes": 23670,
+    "requestDigest": "73001a8d9e61fd085ba2b4d8d731dbd3242861d20c6032ba8f3183846a52e9f1",
+    "responseDigest": "89409e6501151ed76df0eec7a45a8761a5118a9f06361b10c399e6bac1582690",
+    "pageSize": 100,
+    "candidateCount": 60,
+    "exactHashMatchCount": 1
+  },
+  "detail": {
+    "status": 200,
+    "responseBytes": 503,
+    "requestDigest": "c25c3de8e715a364980353a46ac2e388fc86679686386e051be3dd9fb5d18cb0",
+    "responseDigest": "a22cb6250f5a762e434e3196a62f9edab500b3b15d1dae55ca0ab91216b4ef67",
+    "viewerIsOwner": true
+  },
+  "responseNodes": {
+    "status": 200,
+    "responseBytes": 310,
+    "requestDigest": "370ea1bab384a52d91ccc6f29dff76ea1cc0a5e8f30685348fb6f61fd793f7ac",
+    "responseDigest": "ba0424c4e90818267205eb0805949faa87fa83d00bff6ce81b52a74e42d71ed9",
+    "responseCount": 2,
+    "inflightCount": 0
+  },
+  "loadResponses": {
+    "status": 200,
+    "responseBytes": 5907,
+    "requestDigest": "981245753bfe35e345341fe128ae439608a77545529a4d316ac7665043476183",
+    "responseDigest": "edebb7ebd1cb889a6d5eae81591229de83865efe9fc2a199296bcb6a8be153be",
+    "responseCount": 2
+  },
+  "historySemanticSummary": {
+    "userResponseCount": 1,
+    "assistantResponseCount": 1,
+    "exactPromptUserResponseCount": 1,
+    "assistantChildOfExactPromptUserCount": 1,
+    "responses": [
+      {
+        "sender": "user",
+        "responseIdSha256": "8ca5a8abcd60b0b9d3657b1b9cd7abeb0a8f2722835506d753f991e2fffe0f24",
+        "parentResponseIdSha256": "15ba7fb7253e0f46d7d58d38eba5f58ce82fc89f11cf903e59470a12d237a8c9",
+        "messageSha256": "105aeefe4a091e9183d87f258d0a40edfa0ff94708922f5bf79ab25bc8ed931e",
+        "messageBytes": 347,
+        "exactTaskPromptMatched": true,
+        "taskFileNameMentioned": true,
+        "createdAt": "2026-10-06T13:01:48.550Z"
+      },
+      {
+        "sender": "assistant",
+        "responseIdSha256": "026afbbd5825853fa001e26758f3268b4c7e4a97b344efa4def9a18ddba8cee6",
+        "parentResponseIdSha256": "8ca5a8abcd60b0b9d3657b1b9cd7abeb0a8f2722835506d753f991e2fffe0f24",
+        "messageSha256": "7308cd27833955ef772030fd22fa060b8a6e5b881af9c9cfd5c7c92395b9dc8f",
+        "messageBytes": 283,
+        "exactTaskPromptMatched": false,
+        "taskFileNameMentioned": true,
+        "createdAt": "2026-10-06T13:01:48.562Z"
+      }
+    ],
+    "rawMessageBodiesPersisted": false,
+    "rawResponseIdsPersisted": false
+  },
+  "filesList": {
+    "status": null,
+    "errorCode": "CONVERSATION_FILE_LIST_SHAPE_INVALID",
+    "expectedFileMatchCount": null,
+    "fileCount": null,
+    "entryCount": null,
+    "fileNamesPersisted": false,
+    "filePathsPersisted": false
+  },
+  "sourceCodeSnapshotSha256": {
+    "continuation": "ae27ea690781e76fac3f6df3cca9d23a25d2a2ada805b55f891059551b43b5a4",
+    "fileClient": "8162db61d5349b5bdcf637e7ed1b15d47465d32c9bcef580f6533e1db66c57ab"
+  },
+  "persistenceAssertions": {
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "rawConversationIdsPersisted": false,
+    "rawResponseIdsPersisted": false,
+    "promptPersisted": false,
+    "assistantTextPersisted": false,
+    "fileNamesPersisted": false,
+    "filePathsPersisted": false
+  }
+}

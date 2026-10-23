@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-05T20:36:06.324357+00:00",
+  "intentId": "grok-protocol-session-verification-20261006-v1",
+  "operation": "chat.text.wss",
+  "promptSha256": "504c47d4f90a590d7198aa888dc65508f1e8947cdf59613ee6ef720db814b0c1",
+  "capture": {
+    "pageRoleVerified": true,
+    "browserOwnerMatched": true,
+    "newChatRouteVerified": true,
+    "submitControlCount": 1,
+    "submitControlEnabled": true,
+    "sockets": [
+      {
+        "scheme": "wss",
+        "host": "grok.com",
+        "path": "/ws/mgw/",
+        "queryKeys": [
+          "uid"
+        ],
+        "isTextTarget": true,
+        "pageEventTypes": [
+          "session.create",
+          "response.create",
+          "presence.update"
+        ],
+        "serverEventTypes": [
+          "conversation.live.snapshot",
+          "conversation.live.updated",
+          "session.created",
+          "conversation.attached",
+          "conversation.live.updated",
+          "conversation.live.updated",
+          "conversation.live.updated"
+        ]
+      }
+    ],
+    "normalControlForwarded": 1,
+    "controlRejectedAsNotNewChat": 0,
+    "controlSummary": {
+      "controlParsed": true,
+      "eventType": "session.create",
+      "topLevelFieldNames": [
+        "event"
+      ],
+      "controlSessionIdPresent": false,
+      "controlSessionIdType": "missing",
+      "eventFieldNames": [
+        "event_id",
+        "session",
+        "type"
+      ],
+      "sessionFieldNames": [
+        "model",
+        "x_grok"
+      ],
+      "modelType": "string",
+      "xGrokPresent": true,
+      "xGrokType": "object",
+      "xGrokFieldNames": [
+        "accept_interleaved_phases",
+        "client_side_toolsets",
+        "connector_ids",
+        "disable_artifact",
+        "disable_text_follow_ups",
+        "enable_image_generation",
+        "enable_side_by_side",
+        "force_concise",
+        "force_side_by_side",
+        "image_generation_count",
+        "protocol_capabilities",
+        "use_chunk"
+      ],
+      "unknownSessionFieldNames": [],
+      "unknownXGrokFieldNames": [],
+      "conversationIdPresent": false,
+      "conversationIdType": "null",
+      "conversationIdEmpty": true,
+      "conversationIdInBaseline": false,
+      "initialLoadIdPresent": false,
+      "initialLoadIdType": "null",
+      "initialLoadIdEmpty": true,
+      "initialLoadIdInBaseline": false,
+      "loadExistingPresent": false,
+      "loadExistingType": "missing",
+      "loadExistingFalse": false,
+      "loadExistingOmitted": true,
+      "connectorIdsPresent": true,
+      "connectorIdsType": "list",
+      "connectorIdCount": 3,
+      "connectorIdItemTypes": [
+        "str"
+      ],
+      "connectorIdsValidObservedShape": true,
+      "workspaceFieldNames": [],
+      "passesNewChatGate": true,
+      "controlVariant": "x_grok_observed_subset"
+    },
+    "browserSessionAcknowledgementObserved": true,
+    "responseFrameDiagnostics": [
+      {
+        "topLevelFieldNames": [
+          "event",
+          "session_id"
+        ],
+        "eventFieldNames": [
+          "castle_request_token",
+          "event_id",
+          "item",
+          "type"
+        ],
+        "itemType": "message",
+        "itemRole": "user",
+        "itemFieldNames": [
+          "role",
+          "type",
+          "x_grok"
+        ],
+        "xGrokFieldNames": [
+          "client_message_id",
+          "input_chunks"
+        ],
+        "inputChunksPresent": true,
+        "inputChunkCount": 1,
+        "inputChunkFieldNames": [
+          "text"
+        ],
+        "inputChunkTextLengths": [
+          44
+        ],
+        "inputChunkTextPaths": [
+          "text.text"
+        ],
+        "joinedPromptExactMatch": true,
+        "joinedPromptTrimmedExactMatch": true,
+        "joinedPromptContainsMatch": true,
+        "promptPresentInRawFrame": true,
+        "frameSessionMatchesControlSession": false,
+        "sdkSchemaSupported": true,
+        "textFieldHints": [
+          {
+            "path": "event.item.x_grok.input_chunks[0].text.text",
+            "length": 44,
+            "exactPromptMatch": true,
+            "trimmedExactPromptMatch": true,
+            "promptSubstringMatch": true,
+            "promptSha256Match": true
+          }
+        ]
+      }
+    ],
+    "capturedBusinessFrameCount": 1,
+    "capturedBusinessFrames": [
+      {
+        "bytes": 6175,
+        "promptExactAfterTrim": true,
+        "sdkSchemaSupported": true,
+        "delivery": "blocked_before_server"
+      }
+    ],
+    "browserBusinessFramesDelivered": 0,
+    "appChatHttpWrites": [],
+    "promptSuggestionsHttpWrites": [
+      {
+        "method": "POST",
+        "path": "/rest/suggestions/stream",
+        "queryKeys": [],
+        "headerNames": [
+          "accept",
+          "baggage",
+          "content-type",
+          "cookie",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-platform",
+          "sentry-trace",
+          "user-agent",
+          "x-statsig-id",
+          "x-xai-request-id"
+        ],
+        "contentType": "application/json",
+        "requestBytes": 2614,
+        "jsonFieldNames": [
+          "acceptedTypes",
+          "conversationHistory",
+          "query"
+        ],
+        "bodyIsJson": true,
+        "exactPromptMatch": true
+      }
+    ],
+    "otherRestWritesBlocked": 0,
+    "httpAbortErrors": 0,
+    "readOnlyPostRequestsAllowed": 8,
+    "noNewConversationInList": true
+  },
+  "directCli": {
+    "operation": "chat.text.wss",
+    "ownerVerified": true,
+    "state": "outcome_unknown",
+    "transport": "direct_ws",
+    "handshakeStatus": 101,
+    "normalControlFrameSent": true,
+    "serverSessionAcknowledgementObserved": true,
+    "businessFrameSent": true,
+    "businessFrameBoundToServerSession": true,
+    "terminalEventObserved": true,
+    "eventTypes": [
+      "conversation.attached",
+      "conversation.item.added",
+      "conversation.live.snapshot",
+      "conversation.live.updated",
+      "conversation.queue.updated",
+      "response.chunk",
+      "response.content_part.added",
+      "response.content_part.done",
+      "response.created",
+      "response.done",
+      "response.output_item.added",
+      "response.output_item.done",
+      "response.output_text.done",
+      "session.created"
+    ],
+    "readbackVerified": false
+  },
+  "assistantRegex": "^PROTOCOL42:\\s*42\\.?$",
+  "assistantRegexMatched": true,
+  "elapsedSeconds": 12.068,
+  "independentHistoryReadback": {
+    "ownerVerified": true,
+    "conversationListStatus": 200,
+    "recentCandidateCount": 1,
+    "candidatesSearched": 1,
+    "exactPromptMatchCount": 1,
+    "assistantRegexMatchCount": 1,
+    "historyReadStatuses": [
+      200,
+      200,
+      200
+    ],
+    "conversationCreateAgeSeconds": 10,
+    "journalReconciled": true,
+    "journalState": "completed",
+    "assistantResponsePersisted": false,
+    "conversationIdsPersisted": false,
+    "checkedAt": "2026-10-05T20:44:15.160512+00:00",
+    "exactPromptMatched": true,
+    "assistantRegexMatched": true
+  },
+  "directClientReadbackVerified": false,
+  "historyReadbackExactPromptVerified": true,
+  "finalOperationJournalState": "completed",
+  "verificationStatus": "completed"
+}

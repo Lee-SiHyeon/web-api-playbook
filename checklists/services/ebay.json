@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "ebay",
-  "description": "Anonymous, read-only eBay public XHR scope. Search suggestions and query-linked category hints are live-replayed. Product listings, item detail, category browsing and result pagination require a separate observed and independently replayed XHR contract; eBay's SSR pages do not satisfy the API-only gate.",
+  "description": "Anonymous, read-only eBay HTTP scope. Search suggestions have historical live receipts. Documents and SSR product data are eligible HTTP inputs, but listings, details, categories and pagination still need a verified parser and independent replay. The 2026-10-15 Electronics Document replay returned HTTP 403.",
   "capabilities": [
     {
       "id": "suggestions.read",
@@ -45,6 +45,21 @@
             "lib/cli.mjs",
             "verification/retail-ebay-suggest-cli-result-2026-10-05.json"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://autosug.ebay.com",
+          "path": "/autosug",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/ebay-suggestions-live.json"
+          ],
+          "hashPaths": [
+            "lib/retail/ebay.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs"
+          ],
+          "note": "Current anonymous autosug read returned 10 suggestions and 2 category hints. Listing, detail, and pagination remain unverified."
         }
       ],
       "sourceEvidence": [],
@@ -52,7 +67,7 @@
     },
     {
       "id": "search.listings",
-      "title": "Search product listings through an anonymous XHR endpoint",
+      "title": "Search product listings through an observed anonymous HTTP response",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -72,11 +87,11 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Current anonymous search page returns item listings in HTML; no independently replayed XHR listing endpoint observed."
+      "blocker": "Historical browser HTML contained listings. The current direct GET /sch/i.html returned 403 text/html with an Error Page and no product cards; see verification/remaining-consumer-2026-10-16/diagnosis.json. Suggestions remain a separate working contract."
     },
     {
       "id": "item.detail",
-      "title": "Read a listing-bound item identity and complete detail object through anonymous XHR",
+      "title": "Read a listing-bound item identity and complete detail object through anonymous HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -96,11 +111,11 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Observed item 306337924086 opened a sold-out ePID hub; 13 XHR/fetch requests supplied no product-detail JSON, and no direct replayable detail route was established."
+      "blocker": "Historical browser item 306337924086 opened a sold-out ePID hub without product-detail JSON. The current direct GET for the same item returned 403 text/html; see verification/remaining-consumer-2026-10-16/diagnosis.json. No successful maintained detail reader is established."
     },
     {
       "id": "item.price",
-      "title": "Read current listing price and currency through anonymous XHR",
+      "title": "Read current listing price and currency through anonymous HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -111,7 +126,7 @@
     },
     {
       "id": "item.description",
-      "title": "Read full listing description through anonymous XHR",
+      "title": "Read full listing description through anonymous HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -122,7 +137,7 @@
     },
     {
       "id": "item.images",
-      "title": "Read primary and secondary listing images through anonymous XHR",
+      "title": "Read primary and secondary listing images through anonymous HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -133,7 +148,7 @@
     },
     {
       "id": "item.options",
-      "title": "Read listing options and variant-specific selection data through anonymous XHR",
+      "title": "Read listing options and variant-specific selection data through anonymous HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -173,7 +188,7 @@
       "implementation": { "files": [], "cli": [], "tests": [] },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Review cards and text were in non-script HTML from a 200 document GET; the observed JSON component XHR contained no review fields. No review-data XHR was observed."
+      "blocker": "Historical review cards appeared in a 200 HTML Document. A reusable Document parser, product/review identity binding and independent readback remain unverified."
     },
     {
       "id": "reviews.photos",
@@ -195,11 +210,11 @@
       "implementation": { "files": [], "cli": [], "tests": [] },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "The sampled page linked pgn=1–7 as HTML documents; no review-data XHR pagination or terminal condition was verified."
+      "blocker": "Historical HTML linked pgn=1–7. Reusable HTTP traversal, deduplication and terminal-condition verification remain incomplete."
     },
     {
       "id": "categories.read",
-      "title": "Read browse categories through anonymous XHR",
+      "title": "Read browse categories through anonymous HTTP",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -223,7 +238,7 @@
     },
     {
       "id": "search.pagination",
-      "title": "Traverse search results with bounded XHR pagination",
+      "title": "Traverse search results with bounded HTTP pagination",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -243,7 +258,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "Search result pagination is currently a document route, not an observed XHR contract."
+      "blocker": "A Document pagination route is an eligible HTTP contract, but its inputs, parser and stopping condition have not been independently verified."
     },
     {
       "id": "images.enrich",

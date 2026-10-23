@@ -1,0 +1,577 @@
+{
+  "schema": "playbook-service-review-repair-runs-v1",
+  "runs": [
+    {
+      "schema": "playbook-service-verification-v1",
+      "checkedAt": "2026-10-19T15:50:38.045Z",
+      "scope": "Only the exact named read checks shown; no login, write or whole-site completeness proof",
+      "implementation": {
+        "scope": "Common runtime plus source files explicitly named by operation evidence; not every transitive dependency",
+        "sourceSha256": {
+          "lib/commerce/ably.mjs": "d586221bcae17297ccc5a22d0b81e173bfde18e1fb8b661d548e6402789eac26",
+          "lib/commerce/adpick-shoppingmate.mjs": "0e256257b9a6d9e386febf00aeb1698ef6a9a7526e89ad3d071d7cf650c863e8",
+          "lib/commerce/aliexpress-affiliate.mjs": "d412a9188e33ff87eda615c709c49aab57c604c4a69e62ac3ea3b0d7718b27ee",
+          "lib/commerce/amazon-creators.mjs": "2f7b08447bd0a2a8c1edde72cac37db252580b419481451163cf9c4a2c283f6c",
+          "lib/commerce/awin.mjs": "b467af052f3133c7d99c75814b33e7e85aad2d7b666c256e5b53e2f5f3ae920c",
+          "lib/commerce/banggood.mjs": "d288b257c39071ee1c4e36142c53dbce254fd5b3506d3621dced7bcd94feb88c",
+          "lib/commerce/brand-affiliates.mjs": "97516b0c01cee42402565b1455f43bf93c911c26ded800b1f9c19a3e13210a71",
+          "lib/commerce/catalog-readers.mjs": "990b08d4cab4ca6a755fe38ae7dd5f8c6c29d34da6a9b50e29c1d44f5050eb0c",
+          "lib/commerce/cjdropshipping.mjs": "181a0ecd3146f972380c841c34825d68b5a3dc58f3c845f6e611063980a7ecd3",
+          "lib/commerce/ebay-browse.mjs": "22367e4df286b52217108ff7f3288db53597c91724f349bfed07b89ace120c06",
+          "lib/commerce/impact.mjs": "a3721721b93e0fdd108c6648167001bf3f4e7da0b1a31968c5ac864632ab9ae6",
+          "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0",
+          "lib/commerce/oliveyoung-korea-public.mjs": "569eb70d6c760a153f75c1baf4a696a41509c30116b047b92abfd3c6b4df3f1c",
+          "lib/commerce/oliveyoung.mjs": "f894948fca0c10d61103547cbcb436e04eef7a60b2d9e08d3c245f3d8dff3029",
+          "lib/commerce/printful.mjs": "f41bf663590860d2245663e41fea09e92d5db9ed6049f15340dd1daa718806b2",
+          "lib/commerce/providers.mjs": "f8bce501a1aebe63d069fc884be41942712e7a961504ff836646ec7ebdb152f7",
+          "lib/commerce/rakuten-advertising.mjs": "cff815590b94db2380a63dcf9f3a6e2d5c5101cd49aad730fb5d8b22fbe897a4",
+          "lib/commerce/rakuten-ichiba-public.mjs": "707e2bb864e59889a715669b026cee406e9163ed060c881bfdecc8ea91f1a11f",
+          "lib/commerce/rakuten-ichiba.mjs": "9f04206db5ec8cb73a3c7bf4b3aef8d0324d1f4338eeb3827fb59ecfb11d30bb",
+          "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+          "lib/commerce/shopee-affiliate.mjs": "2115302b541c86cd2233843d1b87e62895610c1bed17c6b7cedfa1df09c229dd",
+          "lib/commerce/shopify-storefronts.mjs": "e50784065f0807c149e053f5bae32efbcd2ad3ee45d95f229318fcaf93b0ed2a",
+          "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622",
+          "lib/commerce/yahoo-shopping-jp.mjs": "566c8562875e7678f2f695dd1049b30c977d2eac68fb2a29b0ed666f716d5e75",
+          "lib/creator-promotions/youtube.mjs": "3c559b60c429a3c970a1dd2aa7d305d579555beda91050bbcf16104f895a0000",
+          "lib/elevenlabs-session.mjs": "a54bab3995f0848cc46ff83246557cec181f63d00e1806bcd122ab4006e8e9df",
+          "lib/gabia-dns.mjs": "6379f8df7f517fab01064bbe7481ee95988daf3c5a30f1c9eafa32af48d33636",
+          "lib/gabia-read.mjs": "a48b284272d76cf8da07c78c2ea1c8a353d9105e01983cb873d716818eeda6e2",
+          "lib/inpock-read.mjs": "65e1d4ecb96fcb365ab36144f65361a69e4eb126159eeff51f398e6c04ac9900",
+          "lib/operation-health.mjs": "ee8c80688e048144ef590d230208f7ee4f9acf53e775832564ba5179907c5cea",
+          "lib/operation-registry.mjs": "e63a3c61a97a934774f1d682a05229195200956ead92d995bf603e6f0fb1891e",
+          "lib/retail/aliexpress.mjs": "dc1a0f0f78ee3241d83d8258a6c226a96f18fc2a7eec09f8a5ea93532bf5cddc",
+          "lib/retail/amazon-crawl.mjs": "163a28bc10186825940b2ec62020d2bd51112d040beeed1f3ad37fbd409548e1",
+          "lib/retail/amazon-navigation.mjs": "584984d6c9d5d8658b6f1dbace09d8542f4cbc2c529a58c6178f4333ac950225",
+          "lib/retail/amazon-retail-session.mjs": "0b93c0d705a50f8337c22951707496c70a6d39b561d325d8001675547a62519b",
+          "lib/retail/amazon.mjs": "10d2cae2fb68bf41969448018883d4c606db5d514f7f1e4a18f1bd65d508abca",
+          "lib/retail/coupang-public.mjs": "5b015c93f896f6d3614a9bba07d1ef0a80614bfa6e4c9ae7e3265a33a42503f1",
+          "lib/retail/coupang-retail-session.mjs": "0111268fba73cd7cb0837aaa6ae97f88f6c9c3f6ba5df9ac1ea84f8559e0c3a4",
+          "lib/retail/ebay.mjs": "b948e6fd9fafab85d02e53f098833a3542ba12ce151b21cb535156ed1805eb55",
+          "lib/retail/japan-public.mjs": "e35adf61a785af12342b28fab9767f4c739699cdc6fbba179f74df5b3ce80ce2",
+          "lib/retail/overseas-sitemaps.mjs": "6252768904dad0485b6bbedfba7df35cc48a987a08a79803777ff66d81f31942",
+          "lib/retail/shein.mjs": "8a565fb4ea1ae07514deec495285dec1287d75d8a97ea2c1066f3f9028a3d004",
+          "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb",
+          "lib/retail/walmart.mjs": "7a26bd3a50c697d3d2ed7f96bc340592b1375705694eaee1d475fde0a7da19b8",
+          "lib/service-operations/commerce.mjs": "c3078d7cdd5c6bd41b6e8bf59519c6e6aaad6336da181ddd9a8c7135fd920cca",
+          "lib/service-operations/extras.mjs": "d766cebbbfb41e8c7b03a2c97b7303359917714f2f3f121dcd6269274edd6139",
+          "lib/service-operations/index.mjs": "8d52d489d6bc661eb5c4119adda0bfce10475864198e22a52874457a71790d03",
+          "lib/service-operations/native.mjs": "6c9c29450616ba857e4c565608118f448a54b29196e2856ee1371a9ca8faef32",
+          "lib/service-operations/retail.mjs": "0c869c5e60ac3b023d54bea8fe8395fed8a937c4b0ca8d7ea6bd911a351b18a3",
+          "lib/service-operations/travel.mjs": "17439b34ea01a19c3b58b2001ca898306aecba4fd397063352d8603f8381f7fe",
+          "lib/service-operations/verify.mjs": "206b94cbc2a282fa5d5cc34b31174f18c50e2c82fce8c7a791babfa20396b34d",
+          "lib/travel/agoda.mjs": "a3789897fddde6c3b18462123291d04f8fdd9aeddbe8c1c4d1e8d067957b4378",
+          "lib/video-sources/alibaba-1688.mjs": "981319c266a4afc0e6c80641e8a1edc21b061f57496e2ef61e0b80ba96646687",
+          "lib/video-sources/aliexpress-media.mjs": "0972b90b8103d9fdbdb7b6b2e8fec6500feb58a245aa8f169d17f494465ed39c",
+          "lib/video-sources/aliexpress-search.mjs": "297a350097e2bba86ab48d9e8c2fba93d554b440c392c206a206880da83e582d",
+          "lib/video-sources/amazon-media.mjs": "2e0c408d9cb5ab78d013d5f9e899102cc3d7c17b420a3178d185c4b291d8d282",
+          "lib/web-auth/brandconnect.mjs": "ffb28fd626d4616e4e09e46d577a59ba9ab2c7d621616a816c74203cb8711d79",
+          "lib/web-auth/inpock.mjs": "64e197fac3ad1e526ce7361bffd103bee6c192ff950495b66822b609e900fcc5",
+          "lib/web-auth/myrealtrip.mjs": "0af22763f87e813417eb4e4cc668c502b789940981d7ee3fd19d13645cc03443",
+          "lib/web-auth/toss.mjs": "1a421419e6e422eedfa8e0af53bc7e8c1be1506dfd4935c07edf92c953b19f84",
+          "lib/web-auth/toss/client-core.mjs": "827440fe5517941cc002e72787d0b58192ddb8991f156131eb733f9f43b67acd",
+          "lib/web-auth/x-read-client.mjs": "a6b75cae3831ab8495b0ead81a73e1f62c5cfdc5eee82e9c623760f2787e7b75",
+          "scripts/agoda.mjs": "36035ea65bc45ef13ec79ebea91974804213616fc4a4ff85af32961c4b24e819",
+          "scripts/coupang-public.mjs": "00b186e5f92a48eb9934ed9ac8ca92d7a0c24eb1eabb09198bcd34b681bd3bba",
+          "scripts/gabia-read.mjs": "87656466caf7bf07989ee83322012b12c24d6706455ffcad43f8b62654ab46c1",
+          "scripts/inpock.mjs": "3e31f7e4863e84345769d205277ab77b701ff6e8bbe769c7751445a1fff97745",
+          "scripts/japan-retail.mjs": "429ab5566f62755b225f272c68c3749ad48d172c3df425c4ddcd326844e0acf0",
+          "scripts/overseas-retail.mjs": "bc1435c2dc82fe354b13224905c67a7a017550bb5e993f72c1e62d501d5c1068",
+          "scripts/playbook.mjs": "7677c7dc583222be4d0173386b2185b7e3f557466c0d47c2b0cd6b78ea98a1cc",
+          "scripts/retail.mjs": "b406701b501f59af0420bd96f965029d93c7e16c0621cec53eaee04d591ca0ab",
+          "scripts/video-sources.mjs": "54d2a2bbf07c8901cd1fc1fa0ce42586f8d644e5820e7e656dc3370a85bff801",
+          "service-packs/affiliate/apps/affiliate-api-hub/adapters/myrealtrip-marketing.mjs": "89bb23c358b868315c858a314feed5228f12b725ee796a0fc1100f6b409e02c4",
+          "service-packs/affiliate/apps/affiliate-api-hub/adapters/partner-account-probes.mjs": "13d8c53e784e13351849e546a2b5c1c29321999c56757c70770e48537cbb5a44",
+          "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs": "dc7e9eebf84f07e4aca85f1c4328e4208167a31e6cd801f7263a4e49aff2a14b",
+          "service-packs/naver/apps/naver-blog-api/scripts/client.mjs": "e79545521b700a661f64a23a06d7bf38a5f53ee542b52522069960e2aad12338",
+          "service-packs/naver/apps/naver-blog-api/scripts/naver-session-health.mjs": "068119087ec8249680ca06d11034ecd4bed68a0cc79d4a05bfd5c5f9c15285fb",
+          "service-packs/ontology/src/travel-price/collect-live.mjs": "48f1d883ed7b99500e5750105b3c22a9890f1da51e494f490271ebdf9f58ea05",
+          "service-packs/ontology/src/travel-price/seller-adapters/modetour.mjs": "2e8060a37413d9cacf72307632ac4708d5e181a32fc68b5bcbf853409d558ec6",
+          "service-packs/ontology/src/travel-price/seller-adapters/naver-overseas-hotel.mjs": "9862b896c850bf6d7d7441a52b6a732980bcfb8b73788203fd70e4cda510e57e",
+          "service-packs/ontology/src/travel-price/seller-adapters/yanolja-search.mjs": "40f7ed92e40d7d36f6f91147b559e3e1689e9e115d364002e22f8d560a22d1b6",
+          "service-packs/social-x/src/client.mjs": "e3baf2dd4210d5350d627c9b712bec30a07c9c257fcd67e3993eecaba33e18f0",
+          "service-packs/social-x/src/conversation.mjs": "d4c87dc2e99ba1c9058c6dff514b8d58d26bbbe5068c7cbfd8d9b94ee716f3af",
+          "service-packs/social-x/src/provider.mjs": "0c42104f0ebe109cc4a0102d0f5d85e3dfdbebd74f492a98ac263eb817ab74e2",
+          "service-packs/social-x/src/reddit.mjs": "d2ad70ad88da6d27c3adff2f0efec770f30c105a1c59f060fe66b1698527e0ae",
+          "service-packs/threads/threads-public.mjs": "d73f5266b8f245ea99fde4c38bfc8613de152950b52fc1899b19df7658d5a336",
+          "service-packs/threads/threads-xhr.mjs": "3808c8796cf2b4c0f37aae362963dfc73a371d61dc32e46608d1fa47613a1205",
+          "service-packs/tistory/lib/auth.mjs": "7e225714c4711a7656f95e2de3d8ef0dae33bf8ab663ca5be881bd883772e51c",
+          "service-packs/tistory/scripts/client.mjs": "361369790d9529a822f406d659f5cac68da3206b6740e8a7677840d3b8d78a4f"
+        },
+        "unavailableSources": [
+          "lib/auth.mjs",
+          "scripts/session-client.mjs"
+        ],
+        "unchangedDuringRun": true
+      },
+      "results": [
+        {
+          "serviceId": "shopify-storefronts",
+          "requestedServiceId": "shopify-storefronts",
+          "startedAt": "2026-10-19T15:50:32.605Z",
+          "durationMs": 1584,
+          "verdict": "partial",
+          "checks": [
+            {
+              "operation": "search-native",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "product",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "reviews",
+              "outcome": "site_changed",
+              "code": "SHOPIFY_REVIEW_SCHEMA_INVALID",
+              "evidenceScope": "live_read"
+            }
+          ],
+          "observations": [
+            {
+              "operation": "search-native",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "products": 1
+                },
+                "sha256": "6ae8cd16913dd874c47370fa4834bcada06685975e1784e10f1b405022bcf0de"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "product",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "receipts": 2
+                },
+                "sha256": "be877b476b9834e86d4c9db7ef88cb41d89e5c9e52a2f78747947a1298419763"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            }
+          ],
+          "next": [
+            "review_operation_contract"
+          ]
+        },
+        {
+          "serviceId": "ulta",
+          "requestedServiceId": "ulta",
+          "startedAt": "2026-10-19T15:50:34.191Z",
+          "durationMs": 3832,
+          "verdict": "ok",
+          "checks": [
+            {
+              "operation": "search",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "product",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "reviews",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            }
+          ],
+          "observations": [
+            {
+              "operation": "search",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "offers": 1,
+                  "receipts": 1
+                },
+                "sha256": "2907c672c935ab06756468e77e16037ceb316011fffe5b65d6916cffbe804b62"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "product",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "receipts": 2,
+                  "data.receipts": 1
+                },
+                "sha256": "71b778fbc5c0b423470b8c3b2518f81ce463408a67c4122ae9ed12dc46c186c7"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "reviews",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "reviews": 1,
+                  "receipts": 1
+                },
+                "sha256": "6a097624ab5d6484f15b9fc2a5e02e34fd1733ba026d7060ee8369125adbb2e7"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            }
+          ],
+          "next": []
+        }
+      ],
+      "summary": {
+        "selected": 2,
+        "checked": 2,
+        "ok": 1,
+        "notFullyVerified": 1,
+        "liveReadChecksPassed": 5,
+        "noWritesExecuted": true
+      }
+    },
+    {
+      "schema": "playbook-service-verification-v1",
+      "checkedAt": "2026-10-19T15:52:40.335Z",
+      "scope": "Only the exact named read checks shown; no login, write or whole-site completeness proof",
+      "implementation": {
+        "scope": "Common runtime plus source files explicitly named by operation evidence; not every transitive dependency",
+        "sourceSha256": {
+          "lib/commerce/ably.mjs": "d586221bcae17297ccc5a22d0b81e173bfde18e1fb8b661d548e6402789eac26",
+          "lib/commerce/adpick-shoppingmate.mjs": "0e256257b9a6d9e386febf00aeb1698ef6a9a7526e89ad3d071d7cf650c863e8",
+          "lib/commerce/aliexpress-affiliate.mjs": "d412a9188e33ff87eda615c709c49aab57c604c4a69e62ac3ea3b0d7718b27ee",
+          "lib/commerce/amazon-creators.mjs": "2f7b08447bd0a2a8c1edde72cac37db252580b419481451163cf9c4a2c283f6c",
+          "lib/commerce/awin.mjs": "b467af052f3133c7d99c75814b33e7e85aad2d7b666c256e5b53e2f5f3ae920c",
+          "lib/commerce/banggood.mjs": "d288b257c39071ee1c4e36142c53dbce254fd5b3506d3621dced7bcd94feb88c",
+          "lib/commerce/brand-affiliates.mjs": "97516b0c01cee42402565b1455f43bf93c911c26ded800b1f9c19a3e13210a71",
+          "lib/commerce/catalog-readers.mjs": "990b08d4cab4ca6a755fe38ae7dd5f8c6c29d34da6a9b50e29c1d44f5050eb0c",
+          "lib/commerce/cjdropshipping.mjs": "181a0ecd3146f972380c841c34825d68b5a3dc58f3c845f6e611063980a7ecd3",
+          "lib/commerce/ebay-browse.mjs": "22367e4df286b52217108ff7f3288db53597c91724f349bfed07b89ace120c06",
+          "lib/commerce/impact.mjs": "a3721721b93e0fdd108c6648167001bf3f4e7da0b1a31968c5ac864632ab9ae6",
+          "lib/commerce/oliveyoung-global.mjs": "7ea4da0513d8158d203db21c3f7cb6c6316817a8f7ee7d112545eec8971e5ce0",
+          "lib/commerce/oliveyoung-korea-public.mjs": "569eb70d6c760a153f75c1baf4a696a41509c30116b047b92abfd3c6b4df3f1c",
+          "lib/commerce/oliveyoung.mjs": "f894948fca0c10d61103547cbcb436e04eef7a60b2d9e08d3c245f3d8dff3029",
+          "lib/commerce/printful.mjs": "f41bf663590860d2245663e41fea09e92d5db9ed6049f15340dd1daa718806b2",
+          "lib/commerce/providers.mjs": "f8bce501a1aebe63d069fc884be41942712e7a961504ff836646ec7ebdb152f7",
+          "lib/commerce/rakuten-advertising.mjs": "cff815590b94db2380a63dcf9f3a6e2d5c5101cd49aad730fb5d8b22fbe897a4",
+          "lib/commerce/rakuten-ichiba-public.mjs": "707e2bb864e59889a715669b026cee406e9163ed060c881bfdecc8ea91f1a11f",
+          "lib/commerce/rakuten-ichiba.mjs": "9f04206db5ec8cb73a3c7bf4b3aef8d0324d1f4338eeb3827fb59ecfb11d30bb",
+          "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+          "lib/commerce/shopee-affiliate.mjs": "2115302b541c86cd2233843d1b87e62895610c1bed17c6b7cedfa1df09c229dd",
+          "lib/commerce/shopify-storefronts.mjs": "e50784065f0807c149e053f5bae32efbcd2ad3ee45d95f229318fcaf93b0ed2a",
+          "lib/commerce/ulta.mjs": "5acfdf7144179dfd490823122f55cd93b5c4ab4f82c683a5d201ca4ecafbb622",
+          "lib/commerce/yahoo-shopping-jp.mjs": "566c8562875e7678f2f695dd1049b30c977d2eac68fb2a29b0ed666f716d5e75",
+          "lib/creator-promotions/youtube.mjs": "3c559b60c429a3c970a1dd2aa7d305d579555beda91050bbcf16104f895a0000",
+          "lib/elevenlabs-session.mjs": "a54bab3995f0848cc46ff83246557cec181f63d00e1806bcd122ab4006e8e9df",
+          "lib/gabia-dns.mjs": "6379f8df7f517fab01064bbe7481ee95988daf3c5a30f1c9eafa32af48d33636",
+          "lib/gabia-read.mjs": "a48b284272d76cf8da07c78c2ea1c8a353d9105e01983cb873d716818eeda6e2",
+          "lib/inpock-read.mjs": "65e1d4ecb96fcb365ab36144f65361a69e4eb126159eeff51f398e6c04ac9900",
+          "lib/operation-health.mjs": "ee8c80688e048144ef590d230208f7ee4f9acf53e775832564ba5179907c5cea",
+          "lib/operation-registry.mjs": "e63a3c61a97a934774f1d682a05229195200956ead92d995bf603e6f0fb1891e",
+          "lib/retail/aliexpress.mjs": "dc1a0f0f78ee3241d83d8258a6c226a96f18fc2a7eec09f8a5ea93532bf5cddc",
+          "lib/retail/amazon-crawl.mjs": "163a28bc10186825940b2ec62020d2bd51112d040beeed1f3ad37fbd409548e1",
+          "lib/retail/amazon-navigation.mjs": "584984d6c9d5d8658b6f1dbace09d8542f4cbc2c529a58c6178f4333ac950225",
+          "lib/retail/amazon-retail-session.mjs": "0b93c0d705a50f8337c22951707496c70a6d39b561d325d8001675547a62519b",
+          "lib/retail/amazon.mjs": "10d2cae2fb68bf41969448018883d4c606db5d514f7f1e4a18f1bd65d508abca",
+          "lib/retail/coupang-public.mjs": "5b015c93f896f6d3614a9bba07d1ef0a80614bfa6e4c9ae7e3265a33a42503f1",
+          "lib/retail/coupang-retail-session.mjs": "0111268fba73cd7cb0837aaa6ae97f88f6c9c3f6ba5df9ac1ea84f8559e0c3a4",
+          "lib/retail/ebay.mjs": "b948e6fd9fafab85d02e53f098833a3542ba12ce151b21cb535156ed1805eb55",
+          "lib/retail/japan-public.mjs": "e35adf61a785af12342b28fab9767f4c739699cdc6fbba179f74df5b3ce80ce2",
+          "lib/retail/overseas-sitemaps.mjs": "6252768904dad0485b6bbedfba7df35cc48a987a08a79803777ff66d81f31942",
+          "lib/retail/shein.mjs": "8a565fb4ea1ae07514deec495285dec1287d75d8a97ea2c1066f3f9028a3d004",
+          "lib/retail/shopify.mjs": "850cd360ae79674be7a30b805ad01d6dac43e61edd33101d2f2b839ac013c3eb",
+          "lib/retail/walmart.mjs": "7a26bd3a50c697d3d2ed7f96bc340592b1375705694eaee1d475fde0a7da19b8",
+          "lib/service-operations/commerce.mjs": "c3078d7cdd5c6bd41b6e8bf59519c6e6aaad6336da181ddd9a8c7135fd920cca",
+          "lib/service-operations/extras.mjs": "d766cebbbfb41e8c7b03a2c97b7303359917714f2f3f121dcd6269274edd6139",
+          "lib/service-operations/index.mjs": "8d52d489d6bc661eb5c4119adda0bfce10475864198e22a52874457a71790d03",
+          "lib/service-operations/native.mjs": "6c9c29450616ba857e4c565608118f448a54b29196e2856ee1371a9ca8faef32",
+          "lib/service-operations/retail.mjs": "0c869c5e60ac3b023d54bea8fe8395fed8a937c4b0ca8d7ea6bd911a351b18a3",
+          "lib/service-operations/travel.mjs": "17439b34ea01a19c3b58b2001ca898306aecba4fd397063352d8603f8381f7fe",
+          "lib/service-operations/verify.mjs": "206b94cbc2a282fa5d5cc34b31174f18c50e2c82fce8c7a791babfa20396b34d",
+          "lib/travel/agoda.mjs": "a3789897fddde6c3b18462123291d04f8fdd9aeddbe8c1c4d1e8d067957b4378",
+          "lib/video-sources/alibaba-1688.mjs": "981319c266a4afc0e6c80641e8a1edc21b061f57496e2ef61e0b80ba96646687",
+          "lib/video-sources/aliexpress-media.mjs": "0972b90b8103d9fdbdb7b6b2e8fec6500feb58a245aa8f169d17f494465ed39c",
+          "lib/video-sources/aliexpress-search.mjs": "297a350097e2bba86ab48d9e8c2fba93d554b440c392c206a206880da83e582d",
+          "lib/video-sources/amazon-media.mjs": "2e0c408d9cb5ab78d013d5f9e899102cc3d7c17b420a3178d185c4b291d8d282",
+          "lib/web-auth/brandconnect.mjs": "ffb28fd626d4616e4e09e46d577a59ba9ab2c7d621616a816c74203cb8711d79",
+          "lib/web-auth/inpock.mjs": "64e197fac3ad1e526ce7361bffd103bee6c192ff950495b66822b609e900fcc5",
+          "lib/web-auth/myrealtrip.mjs": "0af22763f87e813417eb4e4cc668c502b789940981d7ee3fd19d13645cc03443",
+          "lib/web-auth/toss.mjs": "1a421419e6e422eedfa8e0af53bc7e8c1be1506dfd4935c07edf92c953b19f84",
+          "lib/web-auth/toss/client-core.mjs": "827440fe5517941cc002e72787d0b58192ddb8991f156131eb733f9f43b67acd",
+          "lib/web-auth/x-read-client.mjs": "a6b75cae3831ab8495b0ead81a73e1f62c5cfdc5eee82e9c623760f2787e7b75",
+          "scripts/agoda.mjs": "36035ea65bc45ef13ec79ebea91974804213616fc4a4ff85af32961c4b24e819",
+          "scripts/coupang-public.mjs": "00b186e5f92a48eb9934ed9ac8ca92d7a0c24eb1eabb09198bcd34b681bd3bba",
+          "scripts/gabia-read.mjs": "87656466caf7bf07989ee83322012b12c24d6706455ffcad43f8b62654ab46c1",
+          "scripts/inpock.mjs": "3e31f7e4863e84345769d205277ab77b701ff6e8bbe769c7751445a1fff97745",
+          "scripts/japan-retail.mjs": "429ab5566f62755b225f272c68c3749ad48d172c3df425c4ddcd326844e0acf0",
+          "scripts/overseas-retail.mjs": "bc1435c2dc82fe354b13224905c67a7a017550bb5e993f72c1e62d501d5c1068",
+          "scripts/playbook.mjs": "7677c7dc583222be4d0173386b2185b7e3f557466c0d47c2b0cd6b78ea98a1cc",
+          "scripts/retail.mjs": "b406701b501f59af0420bd96f965029d93c7e16c0621cec53eaee04d591ca0ab",
+          "scripts/video-sources.mjs": "54d2a2bbf07c8901cd1fc1fa0ce42586f8d644e5820e7e656dc3370a85bff801",
+          "service-packs/affiliate/apps/affiliate-api-hub/adapters/myrealtrip-marketing.mjs": "89bb23c358b868315c858a314feed5228f12b725ee796a0fc1100f6b409e02c4",
+          "service-packs/affiliate/apps/affiliate-api-hub/adapters/partner-account-probes.mjs": "13d8c53e784e13351849e546a2b5c1c29321999c56757c70770e48537cbb5a44",
+          "service-packs/naver/apps/naver-blog-api/research/trend-radar/sources/google-trends-rss.mjs": "dc7e9eebf84f07e4aca85f1c4328e4208167a31e6cd801f7263a4e49aff2a14b",
+          "service-packs/naver/apps/naver-blog-api/scripts/client.mjs": "e79545521b700a661f64a23a06d7bf38a5f53ee542b52522069960e2aad12338",
+          "service-packs/naver/apps/naver-blog-api/scripts/naver-session-health.mjs": "068119087ec8249680ca06d11034ecd4bed68a0cc79d4a05bfd5c5f9c15285fb",
+          "service-packs/ontology/src/travel-price/collect-live.mjs": "48f1d883ed7b99500e5750105b3c22a9890f1da51e494f490271ebdf9f58ea05",
+          "service-packs/ontology/src/travel-price/seller-adapters/modetour.mjs": "2e8060a37413d9cacf72307632ac4708d5e181a32fc68b5bcbf853409d558ec6",
+          "service-packs/ontology/src/travel-price/seller-adapters/naver-overseas-hotel.mjs": "9862b896c850bf6d7d7441a52b6a732980bcfb8b73788203fd70e4cda510e57e",
+          "service-packs/ontology/src/travel-price/seller-adapters/yanolja-search.mjs": "40f7ed92e40d7d36f6f91147b559e3e1689e9e115d364002e22f8d560a22d1b6",
+          "service-packs/social-x/src/client.mjs": "e3baf2dd4210d5350d627c9b712bec30a07c9c257fcd67e3993eecaba33e18f0",
+          "service-packs/social-x/src/conversation.mjs": "d4c87dc2e99ba1c9058c6dff514b8d58d26bbbe5068c7cbfd8d9b94ee716f3af",
+          "service-packs/social-x/src/provider.mjs": "0c42104f0ebe109cc4a0102d0f5d85e3dfdbebd74f492a98ac263eb817ab74e2",
+          "service-packs/social-x/src/reddit.mjs": "d2ad70ad88da6d27c3adff2f0efec770f30c105a1c59f060fe66b1698527e0ae",
+          "service-packs/threads/threads-public.mjs": "d73f5266b8f245ea99fde4c38bfc8613de152950b52fc1899b19df7658d5a336",
+          "service-packs/threads/threads-xhr.mjs": "3808c8796cf2b4c0f37aae362963dfc73a371d61dc32e46608d1fa47613a1205",
+          "service-packs/tistory/lib/auth.mjs": "7e225714c4711a7656f95e2de3d8ef0dae33bf8ab663ca5be881bd883772e51c",
+          "service-packs/tistory/scripts/client.mjs": "361369790d9529a822f406d659f5cac68da3206b6740e8a7677840d3b8d78a4f"
+        },
+        "unavailableSources": [
+          "lib/auth.mjs",
+          "scripts/session-client.mjs"
+        ],
+        "unchangedDuringRun": true
+      },
+      "results": [
+        {
+          "serviceId": "ulta",
+          "requestedServiceId": "ulta",
+          "startedAt": "2026-10-19T15:52:33.290Z",
+          "durationMs": 3526,
+          "verdict": "ok",
+          "checks": [
+            {
+              "operation": "search",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "product",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "reviews",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            }
+          ],
+          "observations": [
+            {
+              "operation": "search",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "offers": 1,
+                  "receipts": 1
+                },
+                "sha256": "c7e1a750d8d28dedbef24d639808d21ba3db862d8a36fc40792f30f848ed3f7e"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "product",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "receipts": 2,
+                  "data.receipts": 1
+                },
+                "sha256": "ba2a6b81d8ac5a298a20ca79b68d9cd5e186a2e3b608d9134a1b9ce74cd6a4d3"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "reviews",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "reviews": 1,
+                  "receipts": 1
+                },
+                "sha256": "f723c31faddb8ed1f848ae476461a3f32bbe6640eb577d33b4b55010a30255da"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            }
+          ],
+          "next": []
+        },
+        {
+          "serviceId": "oliveyoung-global",
+          "requestedServiceId": "oliveyoung-global",
+          "startedAt": "2026-10-19T15:52:36.816Z",
+          "durationMs": 1472,
+          "verdict": "ok",
+          "checks": [
+            {
+              "operation": "best-sellers",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "product",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "reviews",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            }
+          ],
+          "observations": [
+            {
+              "operation": "best-sellers",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "receipts": 2,
+                  "data.products": 20
+                },
+                "sha256": "8b97a44429ec852be7b10e9d23cdcb79a12408b9f2754526a2848e8f5cc7e7e7"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "product",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "receipts": 4
+                },
+                "sha256": "1089e0f7a88aaba3b7793a38a761d21da263e02dfab6b10a41e2be0d796247d0"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "reviews",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "reviews": 1,
+                  "receipts": 1
+                },
+                "sha256": "49df0f3954b7e7f1a0ddabc4b5cd744f242d5621cea077be4439baf4f97d1fbb"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            }
+          ],
+          "next": []
+        },
+        {
+          "serviceId": "oliveyoung-public",
+          "requestedServiceId": "oliveyoung-public",
+          "startedAt": "2026-10-19T15:52:38.288Z",
+          "durationMs": 2019,
+          "verdict": "ok",
+          "checks": [
+            {
+              "operation": "search",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "reviews",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            },
+            {
+              "operation": "review-stats",
+              "outcome": "ok",
+              "evidenceScope": "live_read",
+              "liveReadVerified": true
+            }
+          ],
+          "observations": [
+            {
+              "operation": "search",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "offers": 1,
+                  "receipts": 1
+                },
+                "sha256": "7bea378754a958bb4c6215fa1fbab9ff807042ea1f3bd025d2bbf397473fa7d1"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "reviews",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "reviews": 1,
+                  "receipts": 1
+                },
+                "sha256": "0fbbfd4beba4762c8ddd4c53d00b1398d89ed49782104e11ff69c83e31d776df"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            },
+            {
+              "operation": "review-stats",
+              "data": {
+                "shape": "object",
+                "counts": {
+                  "ratingDistribution": 5,
+                  "satisfactionStats": 3,
+                  "receipts": 1
+                },
+                "sha256": "c70e7e5544051fd387ffb8c67d07e9cf1d0068967395c8582ece3c7d3958ef93"
+              },
+              "executionMode": "existing_adapter",
+              "networkUsed": true,
+              "browserUsed": false
+            }
+          ],
+          "next": []
+        }
+      ],
+      "summary": {
+        "selected": 3,
+        "checked": 3,
+        "ok": 3,
+        "notFullyVerified": 0,
+        "liveReadChecksPassed": 9,
+        "noWritesExecuted": true
+      }
+    }
+  ]
+}

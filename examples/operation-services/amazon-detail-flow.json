@@ -1,0 +1,14 @@
+{
+  "steps": [
+    {
+      "id": "search",
+      "operation": "search",
+      "input": { "query": { "query": "wireless mouse", "page": 1 } }
+    },
+    {
+      "id": "detail",
+      "operation": "product",
+      "input": { "path": { "asin": { "$result": { "step": "search", "pointer": "/items/0/asin" } } } }
+    }
+  ]
+}

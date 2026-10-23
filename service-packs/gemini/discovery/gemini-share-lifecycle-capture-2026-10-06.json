@@ -1,0 +1,176 @@
+{
+  "schema": "gemini-share-lifecycle-capture-v1",
+  "service": "gemini-web",
+  "feature": "share",
+  "operation": "share_create",
+  "outcome": "direct_response_without_link_handoff",
+  "verifiedAt": "2026-10-06T00:24:54.154233+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "sourceMapping": {
+    "sourceClass": "anonymous_google_first_party_web_client",
+    "rpcId": "fuVx7",
+    "operationName": "CreateSharedConversation"
+  },
+  "browserCapture": {
+    "requestCaptured": true,
+    "browserMutationReachedServer": false,
+    "browserAbortAcknowledged": true,
+    "request": {
+      "method": "POST",
+      "path": "/_/BardChatUi/data/batchexecute",
+      "rpcId": "fuVx7",
+      "queryKeys": [
+        "rpcids",
+        "source-path",
+        "bl",
+        "f.sid",
+        "hl",
+        "_reqid",
+        "rt"
+      ],
+      "headerNames": [
+        "accept",
+        "content-type",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-goog-ext-525001261-jspb",
+        "x-goog-ext-73010989-jspb",
+        "x-same-domain"
+      ],
+      "formFieldNames": [
+        "f.req",
+        "at"
+      ],
+      "contentType": "application/x-www-form-urlencoded;charset=utf-8",
+      "bodyBytes": 435,
+      "argsShape": {
+        "type": "array",
+        "length": 10,
+        "items": [
+          "null",
+          {
+            "type": "string",
+            "length": 18
+          },
+          "null",
+          {
+            "type": "string",
+            "length": 19
+          },
+          {
+            "type": "array",
+            "length": 8,
+            "items": [
+              "number",
+              {
+                "type": "string",
+                "length": 32
+              },
+              "null",
+              "null",
+              "null",
+              {
+                "type": "array",
+                "length": 3,
+                "items": [
+                  {
+                    "type": "string",
+                    "length": 0
+                  },
+                  {
+                    "type": "string",
+                    "length": 0
+                  },
+                  {
+                    "type": "string",
+                    "length": 0
+                  }
+                ]
+              },
+              "null",
+              {
+                "type": "array",
+                "length": 3,
+                "items": [
+                  "null",
+                  "null",
+                  {
+                    "type": "string",
+                    "length": 9
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "array",
+            "length": 1,
+            "items": [
+              {
+                "type": "string",
+                "length": 2
+              }
+            ]
+          },
+          "number",
+          "null"
+        ]
+      },
+      "rpcCallTailShape": {
+        "type": "array",
+        "length": 2,
+        "items": [
+          "null",
+          {
+            "type": "string",
+            "length": 7
+          }
+        ]
+      },
+      "rpcCallTailSafeToPersist": true
+    },
+    "rawArgsOrBodyPersisted": false
+  },
+  "directMutation": {
+    "transport": "main_client_https",
+    "rpcId": "fuVx7",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "preflightConversationIdMatched": true,
+    "preflightRouteBindingVerified": true,
+    "dispatchCount": 1,
+    "retryPolicy": "never",
+    "httpStatus": 200,
+    "responseBytes": 259,
+    "responseSha256": "e636b08cf7e034cca04466f87e6249dc7c61f22c876f9a3750d862130f5a4f63",
+    "responseRpcDecoded": false,
+    "shareLinkReturnedInMemory": false,
+    "shareLinkPersistedOrPrinted": false,
+    "journalState": "response_received_unreconciled",
+    "journalId": "27c2914e-308a-47b8-8d7a-765e96ab602a",
+    "intentKeyHash": "59724b999bae0be256553320d3ca2d0ace486e3a753edb55090de49a63914c34",
+    "wireBodyDigest": "94e42986b2fcc501f52c5d8f06e1ace1030bf7b2827b8a72bcf5de7e37efb93c"
+  },
+  "persistence": {
+    "cookiesPersisted": false,
+    "sessionValuesPersisted": false,
+    "requestValuesPersisted": false,
+    "responseValuesPersisted": false,
+    "shareLinkPersisted": false,
+    "targetConversationIdPersisted": false,
+    "rawRequestOrResponseBodyPersisted": false
+  }
+}

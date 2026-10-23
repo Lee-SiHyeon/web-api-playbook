@@ -1,0 +1,68 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:32:10.450Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/336471184/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 8785,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 0,
+      "countPerPage": 5,
+      "totalCount": 3,
+      "totalPages": 1,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "932540581",
+        "productId": "336471184",
+        "rating": 5,
+        "itemName": "[제주] 서귀포 다이브센터",
+        "reviewedAt": 1782517621000
+      },
+      {
+        "reviewId": "106810879",
+        "productId": "336471184",
+        "rating": 5,
+        "itemName": "[제주] 서귀포 다이브센터",
+        "reviewedAt": 1584543875000
+      },
+      {
+        "reviewId": "106810623",
+        "productId": "336471184",
+        "rating": 5,
+        "itemName": "[제주] 서귀포 다이브센터",
+        "reviewedAt": 1584543705000
+      }
+    ]
+  },
+  "projectionSha256": "d6637882e5c1d2d9eef1bdede2c69f1c31d9bf739db36a8442098d67040eebf5",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

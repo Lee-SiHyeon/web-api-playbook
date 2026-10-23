@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "operationId": "conversation.files.artifact-readback",
+  "recordedAt": "2026-10-06T13:34:53.443Z",
+  "status": "needs_review",
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "task": {
+    "conversationIdSha256": "02e9bdfd8bd1c531194d60cd154d0abb5097a39f6d96e5a8d2e30cfbc6d67aa6",
+    "exactTaskPromptSha256": "105aeefe4a091e9183d87f258d0a40edfa0ff94708922f5bf79ab25bc8ed931e",
+    "exactTaskPromptBytes": 347,
+    "fileNameSha256": "59b573f9e2f2469477dd6a0372e0eaf9156fe58367f0eeaff29cd1354f1f5e3f",
+    "fileNamePersisted": false,
+    "listExactFileCandidateCount": 1,
+    "sourceListRowCount": 1,
+    "sourceListShapeAccepted": true
+  },
+  "sourceReads": {
+    "filesList": {
+      "status": 200,
+      "responseBytes": 237,
+      "requestDigest": "6a3b2835b4b169edfc36628bb97f8e4402711d7f903ae610c016ffc12db07303",
+      "responseDigest": "1ae6949b4074a46d84779e01f15fede0c5000d84cfc666480aec6aed40dfd978",
+      "contentType": "application/json",
+      "responseShape": {
+        "type": "object",
+        "topLevelFieldNames": [
+          "files",
+          "nextPageToken",
+          "path"
+        ],
+        "fields": {
+          "files": {
+            "type": "array",
+            "count": 1,
+            "itemFieldNames": [
+              "isDirectory",
+              "mimeType",
+              "modifiedAt",
+              "name",
+              "path",
+              "size"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "nextPageToken": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "artifact": {
+    "status": "content_resolution_needs_review",
+    "errorCode": "CONVERSATION_FILE_CONTENT_SHAPE_INVALID",
+    "httpStatus": 200,
+    "responseShape": {
+      "type": "object",
+      "topLevelFieldNames": [
+        "dataUrl",
+        "downloadSignedUrl",
+        "isTruncated",
+        "mimeType",
+        "signedUrl",
+        "size"
+      ],
+      "fields": {
+        "dataUrl": {
+          "type": "string"
+        },
+        "mimeType": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "isTruncated": {
+          "type": "boolean"
+        },
+        "signedUrl": {
+          "type": "string"
+        },
+        "downloadSignedUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "contentType": "application/json",
+    "responseBytes": 2211,
+    "requestDigest": "4f63467247fe97fe9ac4a0669d152d158a87f63f56fc0dd2d1e3e7b68ea29471",
+    "responseDigest": "bed84a54c3b23a9d694ddf768192a51baf6313442dd24ba032801ffc6350ecb8",
+    "pathSha256": "84df293dee946da6399a4b0b7901cc8cc27f4441d4469883ad9b71fa25260cc4",
+    "retryCount": 0
+  },
+  "filesZip": {
+    "status": "not_attempted",
+    "reason": "exact_task_file_content_not_verified"
+  },
+  "workspaceZip": {
+    "status": "needs_review",
+    "errorCode": "CONVERSATION_WORKSPACE_ZIP_SHAPE_INVALID",
+    "httpStatus": null,
+    "retryCount": 0
+  },
+  "persistenceAssertions": {
+    "credentialsPersisted": false,
+    "cookiesPersisted": false,
+    "rawConversationIdsPersisted": false,
+    "rawResponseIdsPersisted": false,
+    "rawRequestBodiesPersisted": false,
+    "rawResponseBodiesPersisted": false,
+    "fileNamesPersisted": false,
+    "filePathsPersisted": false,
+    "signedUrlsPersisted": false,
+    "rawUrlsPersisted": false
+  }
+}

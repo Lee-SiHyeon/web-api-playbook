@@ -1,0 +1,1746 @@
+{
+  "schemaVersion": 1,
+  "ontologyId": "acada:hook",
+  "label": "훅(후킹) 온톨로지 — 왜 지금 읽어야 하는가를 제목과 첫 문단에 싣는 방법",
+  "createdAt": "2026-09-27",
+  "purpose": "이벤트 브리프가 \"요즘 X 검색이 늘어난 이유와 살 때 확인할 점\" 같은 템플릿 질문으로 끝나지 않게, (1) 왜 지금 뜨는지(WhyNow 트리거)를 먼저 찾고 (2) 근거가 있는 훅 패턴만 골라 (3) 채널별 제목·첫 문단 후보를 만든다. owner 2026-09-27: \"이런거 좀 진부하지않냐? … 후킹 및 사용자 이목끌 방안 탐색해\", \"후킹같은거 온톨로지 확장해놔\".",
+  "designPrinciples": [
+    "훅은 근거가 있을 때만 쓴다. 마감·단종·가격·인원 같은 긴급성 단어는 날짜가 있는 원문이 있어야 하고, 원문이 없으면 그 패턴은 후보에서 빠진다.",
+    "제목이 약속한 답은 첫 3문단 안에 준다(약속 이행). 훅으로 끌고 본문에서 돌려 말하지 않는다 — owner 스타일: 결론(픽)부터.",
+    "\"총정리\"는 훅이 아니다. 관측상 상위 3위와 7~10위의 사용률이 같다(28% vs 26%). 붙이더라도 뒤쪽 꼬리말로만 쓴다.",
+    "검색 제목은 키워드를 앞 15자 안에 둔다(관측 169개 중 147개). 훅은 키워드 뒤에 붙는다.",
+    "독자의 속마음 질문을 따옴표로 여는 것은 허용하되, 실존 인물·기관의 발언처럼 꾸미지 않는다. 내돈내산·N개월 사용 같은 체험 주장은 운영자가 실제로 쓴 경우에만.",
+    "채널마다 훅이 다르다: 네이버 블로그는 키워드+손실회피·대상 특정, 당근은 1인칭 질문·사연형, 스레드는 POV·짧은 첫 줄."
+  ],
+  "observations": {
+    "method": "GET search.naver.com 블로그 탭 상위 10개(검색어 17개, 5개 분야) + m.blog.naver.com/api/blogs 구독자 수; 당근 카페 80곳 최근 7일 글 3,179개 중 조회수 상위 40개. 모두 비로그인 공개 요청.",
+    "measuredAt": "2026-09-27T05:29:05.705Z",
+    "naverTitleStats": [
+      "{\"n\":169,\"medLen\":39,\"kwFound\":166,\"kwIn15\":147,\"num\":113,\"year\":33,\"won\":10,\"quote\":10,\"question\":16,\"bar\":45,\"vs\":3,\"total\":54,\"own\":21,\"segment\":34,\"loss\":8,\"scarcity\":2,\"top\":17}",
+      "loss top3 12% rank7-10 1%",
+      "quote top3 4% rank7-10 3%",
+      "segment top3 26% rank7-10 15%",
+      "won top3 4% rank7-10 4%",
+      "own top3 16% rank7-10 12%",
+      "total top3 28% rank7-10 26%",
+      "vs top3 4% rank7-10 0%"
+    ],
+    "findings": [
+      "손실회피형(놓치면·손해·막바지·마감)은 상위 1~3위 제목의 12%, 7~10위의 1% — 가장 큰 차이.",
+      "대상 특정형(4살·신생아·1인가구·직장인)은 26% vs 15%.",
+      "총정리 28% vs 26%, 인용부호 4% vs 3% — 순위 차이 없음(흔하거나 드묾).",
+      "제목 길이 중앙값 39자, 숫자 포함 67%, 연도 포함 20%.",
+      "당근 인기글 상위 40개는 대부분 1인칭 사연·질문(돈·가족·직장 갈등)이고 정보형 글은 드물다 — 당근 제목은 질문형이 맞다."
+    ],
+    "youtube": {
+      "measuredAt": "2026-09-27T06:03:34.810Z",
+      "method": "GET youtube.com/results (ytInitialData), anonymous",
+      "videos": 641,
+      "shorts": 397,
+      "summary": [
+        {
+          "pattern": "regret_aversion",
+          "format": "short",
+          "n": 4,
+          "medianViews": 920000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "curiosity_story",
+          "format": "short",
+          "n": 33,
+          "medianViews": 230000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "crowd_pick",
+          "format": "short",
+          "n": 20,
+          "medianViews": 98000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "timing_insight",
+          "format": "short",
+          "n": 2,
+          "medianViews": 93000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "community_question",
+          "format": "short",
+          "n": 16,
+          "medianViews": 91000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "(none)",
+          "format": "short",
+          "n": 230,
+          "medianViews": 71000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "own_use_proof",
+          "format": "short",
+          "n": 6,
+          "medianViews": 69000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "scarcity_discontinue",
+          "format": "short",
+          "n": 1,
+          "medianViews": 68000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "negative_warning",
+          "format": "short",
+          "n": 6,
+          "medianViews": 59000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "versus_choice",
+          "format": "short",
+          "n": 10,
+          "medianViews": 37000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "price_anchor",
+          "format": "short",
+          "n": 54,
+          "medianViews": 34000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "deadline_loss",
+          "format": "short",
+          "n": 10,
+          "medianViews": 29000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "reader_voice",
+          "format": "short",
+          "n": 3,
+          "medianViews": 24000,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "outcome_gain",
+          "format": "short",
+          "n": 7,
+          "medianViews": 9800,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "segment_specific",
+          "format": "short",
+          "n": 27,
+          "medianViews": 9200,
+          "medianViewsPerDay": null
+        },
+        {
+          "pattern": "own_use_proof",
+          "format": "video",
+          "n": 6,
+          "medianViews": 446456,
+          "medianViewsPerDay": 1654
+        },
+        {
+          "pattern": "community_question",
+          "format": "video",
+          "n": 18,
+          "medianViews": 136784,
+          "medianViewsPerDay": 1591
+        },
+        {
+          "pattern": "outcome_gain",
+          "format": "video",
+          "n": 2,
+          "medianViews": 135946,
+          "medianViewsPerDay": 3936
+        },
+        {
+          "pattern": "scarcity_discontinue",
+          "format": "video",
+          "n": 3,
+          "medianViews": 91142,
+          "medianViewsPerDay": 2318
+        },
+        {
+          "pattern": "regret_aversion",
+          "format": "video",
+          "n": 6,
+          "medianViews": 69526,
+          "medianViewsPerDay": 601
+        },
+        {
+          "pattern": "deadline_loss",
+          "format": "video",
+          "n": 11,
+          "medianViews": 69526,
+          "medianViewsPerDay": 275
+        },
+        {
+          "pattern": "curiosity_story",
+          "format": "video",
+          "n": 14,
+          "medianViews": 63440,
+          "medianViewsPerDay": 504
+        },
+        {
+          "pattern": "timing_insight",
+          "format": "video",
+          "n": 2,
+          "medianViews": 56879,
+          "medianViewsPerDay": 156
+        },
+        {
+          "pattern": "negative_warning",
+          "format": "video",
+          "n": 6,
+          "medianViews": 49916,
+          "medianViewsPerDay": 166
+        },
+        {
+          "pattern": "reader_voice",
+          "format": "video",
+          "n": 11,
+          "medianViews": 43714,
+          "medianViewsPerDay": 172
+        },
+        {
+          "pattern": "versus_choice",
+          "format": "video",
+          "n": 23,
+          "medianViews": 33811,
+          "medianViewsPerDay": 280
+        },
+        {
+          "pattern": "price_anchor",
+          "format": "video",
+          "n": 41,
+          "medianViews": 33375,
+          "medianViewsPerDay": 602
+        },
+        {
+          "pattern": "(none)",
+          "format": "video",
+          "n": 114,
+          "medianViews": 31649,
+          "medianViewsPerDay": 336
+        },
+        {
+          "pattern": "segment_specific",
+          "format": "video",
+          "n": 20,
+          "medianViews": 25181,
+          "medianViewsPerDay": 210
+        },
+        {
+          "pattern": "crowd_pick",
+          "format": "video",
+          "n": 22,
+          "medianViews": 22112,
+          "medianViewsPerDay": 162
+        }
+      ]
+    }
+  },
+  "classes": [
+    {
+      "id": "WhyNowTrigger",
+      "label": "왜 지금 트리거",
+      "description": "검색·관심이 오르는 원인 사건: 할인 행사, 신제품, 단종, 시즌 선물, 가격 변화, 리콜, 방송·바이럴, 품절, 제도 변경. 날짜와 원문 URL을 가진다."
+    },
+    {
+      "id": "HookPattern",
+      "label": "훅 패턴",
+      "description": "제목·첫 문단을 여는 방식. 필요한 근거(requires), 맞는 트리거·장르, 채널별 공식, 관측 예시, 금지 변형을 가진다."
+    },
+    {
+      "id": "AudienceSegment",
+      "label": "독자 세그먼트",
+      "description": "카테고리 안에서 훅을 좁히는 대상(연령·가구·상황). 제품 적합성 근거가 있어야 쓴다."
+    },
+    {
+      "id": "HookCandidate",
+      "label": "훅 후보",
+      "description": "이벤트 하나에 대해 패턴+트리거+세그먼트로 채운 제목·첫 문단 초안. 필요한 근거가 모두 있을 때만 생성."
+    },
+    {
+      "id": "Guardrail",
+      "label": "가드레일",
+      "description": "훅이 과장·허위가 되지 않게 하는 검사. 게이트(숫자·주장 원장)와 연결된다."
+    },
+    {
+      "id": "ChannelStyle",
+      "label": "채널 문체",
+      "description": "같은 훅을 채널(네이버·티스토리·당근·네이버카페·스레드)에 맞게 바꾸는 규칙."
+    }
+  ],
+  "relations": [
+    {
+      "id": "explains",
+      "from": "WhyNowTrigger",
+      "to": "HookCandidate",
+      "description": "트리거가 훅의 \"지금\" 근거가 된다."
+    },
+    {
+      "id": "requires",
+      "from": "HookPattern",
+      "to": "WhyNowTrigger",
+      "description": "패턴이 요구하는 트리거 종류(예: deadline_loss → 마감일이 있는 promotion)."
+    },
+    {
+      "id": "narrows",
+      "from": "AudienceSegment",
+      "to": "HookCandidate",
+      "description": "세그먼트가 훅 대상을 좁힌다."
+    },
+    {
+      "id": "checkedBy",
+      "from": "HookCandidate",
+      "to": "Guardrail",
+      "description": "후보는 가드레일을 통과해야 브리프에 실린다."
+    },
+    {
+      "id": "renderedAs",
+      "from": "HookCandidate",
+      "to": "ChannelStyle",
+      "description": "채널별 제목·첫 줄로 변환된다."
+    }
+  ],
+  "triggerKinds": [
+    {
+      "id": "promotion",
+      "label": "할인 행사",
+      "match": "할인|세일|특가|프로모션|행사|최대\\s?\\d+%|쿠폰",
+      "urgency": "deadline",
+      "note": "기간(예: 9월 11일부터 27일까지)과 최대 할인율을 원문에서 뽑는다. 마감이 지나면 브리프도 만료."
+    },
+    {
+      "id": "new_release",
+      "label": "신제품·출시",
+      "match": "출시|신제품|신상품|신상|론칭|런칭",
+      "urgency": "freshness"
+    },
+    {
+      "id": "discontinuation",
+      "label": "단종·판매 종료",
+      "match": "단종|판매\\s?종료|생산\\s?중단|마지막\\s?판매",
+      "urgency": "scarcity"
+    },
+    {
+      "id": "season_gift",
+      "label": "시즌·선물 수요",
+      "match": "추석|설날|명절|크리스마스|어린이날|블랙\\s?프라이데이|수능|졸업|입학|선물",
+      "urgency": "calendar"
+    },
+    {
+      "id": "price_change",
+      "label": "가격 변화",
+      "match": "가격\\s?인상|인상|인하|가격\\s?하락|오른다|내린다",
+      "urgency": "deadline"
+    },
+    {
+      "id": "recall_safety",
+      "label": "리콜·안전 이슈",
+      "match": "리콜|회수|결함|유해|안전\\s?경고|판매\\s?중지",
+      "urgency": "risk"
+    },
+    {
+      "id": "media_viral",
+      "label": "방송·바이럴",
+      "match": "화제|품절\\s?대란|난리|유행|인기\\s?폭발|SNS|틱톡|방송",
+      "urgency": "freshness"
+    },
+    {
+      "id": "stock_shortage",
+      "label": "품절·재입고",
+      "match": "품절|재입고|완판|매진",
+      "urgency": "scarcity"
+    },
+    {
+      "id": "policy_change",
+      "label": "제도·규정 변경",
+      "match": "개편|시행|도입|변경|신청\\s?기간|마감",
+      "urgency": "deadline"
+    }
+  ],
+  "hookPatterns": [
+    {
+      "id": "deadline_loss",
+      "label": "마감·손실회피",
+      "formula": {
+        "naver": "{키워드} {행사명} {마감일}까지｜{놓치면 잃는 것}",
+        "opening": "{행사}가 {마감일}에 끝납니다. {가장 이득인 선택 1개}부터 말하면 …"
+      },
+      "requires": [
+        "trigger.promotion.deadline|trigger.price_change.date|trigger.policy_change.deadline"
+      ],
+      "fits": [
+        "shopping_trend",
+        "deal_roundup",
+        "benefit_new",
+        "housing_schedule"
+      ],
+      "evidence": "상위 1~3위 12% vs 7~10위 1%",
+      "examples": [
+        {
+          "text": "레고 랜드 할인 ｜현장 구매하면 20% 놓칩니다, 방문 전 꼭 확인하세요",
+          "channel": "naver_blog",
+          "query": "레고 할인",
+          "rank": 1,
+          "subscribers": 164,
+          "url": "https://blog.naver.com/zipponet9/224409923818"
+        },
+        {
+          "text": "“9월 신청 놓쳤다고 끝난 거 아님” 근로 지원금, 아직 한 번 더 기회 남았다",
+          "channel": "naver_blog",
+          "query": "근로장려금 신청",
+          "rank": 1,
+          "subscribers": 12776,
+          "url": "https://blog.naver.com/editor_mumu/224417033237"
+        },
+        {
+          "text": "“나는 근로장려금 자동 신청 됐을까?”…그냥 기다렸다가 놓칠 수 있는 이유",
+          "channel": "naver_blog",
+          "query": "근로장려금 신청",
+          "rank": 2,
+          "subscribers": 5300,
+          "url": "https://blog.naver.com/myhi0303/224410213853"
+        },
+        {
+          "text": "코스트코 추석선물세트 막바지 할인 ! 9월4째주 할인 9월넷째주",
+          "channel": "naver_blog",
+          "query": "추석 선물세트 할인",
+          "rank": 3,
+          "subscribers": 1294,
+          "url": "https://blog.naver.com/miryungk/224415703220"
+        },
+        {
+          "text": "3월 근로장려금? l 놓치면 공짜 돈 날립니다",
+          "channel": "youtube_shorts",
+          "query": "근로장려금",
+          "rank": 16,
+          "views": 150000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/rQysb6abtwo"
+        },
+        {
+          "text": "🚀쿠팡 최저가 구매 꿀팁!(쿠팡 이거모르면 완전 손해) #쿠팡가격변동 #쿠팡최저가어플추천 #절약어플추천 #앱테크 #폴센트",
+          "channel": "youtube_shorts",
+          "query": "쿠팡 최저가",
+          "rank": 1,
+          "views": 58000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/s2AuJ6U52vI"
+        },
+        {
+          "text": "(긴급) 9월 1일부터 근로장려금 신청 시작! 또 바뀌는 근로장려금 기준을 모르고 신청하면 큰 손해 봅니다.",
+          "channel": "youtube",
+          "query": "근로장려금",
+          "rank": 7,
+          "views": 139187,
+          "viewsPerDay": 6628,
+          "url": "https://www.youtube.com/watch?v=AqkuZWxNM4w"
+        },
+        {
+          "text": "안 사면 손해라며 홀린 듯 담게 되는 일본 레고스토어 9월 신제품 현황",
+          "channel": "youtube",
+          "query": "레고 추천",
+          "rank": 8,
+          "views": 123200,
+          "viewsPerDay": 8800,
+          "url": "https://www.youtube.com/watch?v=3fXuCeDPweM"
+        }
+      ],
+      "forbidden": [
+        "원문 없는 \"오늘만\"·\"마지막 기회\"",
+        "마감이 지난 뒤의 긴급성 표현"
+      ],
+      "titleMatch": "놓치|손해|막바지|마감|끝나기 전|오늘까지|마지막 기회"
+    },
+    {
+      "id": "scarcity_discontinue",
+      "label": "단종·품절 희소성",
+      "formula": {
+        "naver": "{연도} 단종 예정 {키워드}｜{지금 사둘 만한 것 N개}",
+        "opening": "{세트/제품}은 {단종 시점}에 판매가 끝납니다."
+      },
+      "requires": [
+        "trigger.discontinuation|trigger.stock_shortage"
+      ],
+      "fits": [
+        "shopping_trend",
+        "deal_roundup"
+      ],
+      "examples": [
+        {
+          "text": "2026년 단종 예정 레고 추천 2027년 단종 레고 까지 테마별 총정리",
+          "channel": "naver_blog",
+          "query": "레고 추천",
+          "rank": 1,
+          "subscribers": 6811,
+          "url": "https://blog.naver.com/sounder2/224413244235"
+        },
+        {
+          "text": "인스타에서 완판된다는 '홍익쭈꾸미' 2팩 15,900원 핫딜 (feat.무료배송)",
+          "channel": "youtube_shorts",
+          "query": "핫딜",
+          "rank": 13,
+          "views": 68000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/nFPoiqy8h5Y"
+        },
+        {
+          "text": "레고 또 품절이야? 이 비밀 사이트 모르면 무조건 손해에요!",
+          "channel": "youtube",
+          "query": "레고 할인",
+          "rank": 6,
+          "views": 104677,
+          "viewsPerDay": 143,
+          "url": "https://www.youtube.com/watch?v=4t1eaWq33kE"
+        },
+        {
+          "text": "단종될까 봐 무서운 10만원 이하 가성비 레고 픽 TOP15",
+          "channel": "youtube",
+          "query": "레고 추천",
+          "rank": 14,
+          "views": 91142,
+          "viewsPerDay": 6510,
+          "url": "https://www.youtube.com/watch?v=h5DZvOpF16I"
+        }
+      ],
+      "forbidden": [
+        "단종 근거(공식·유통사 공지) 없는 \"곧 단종\""
+      ],
+      "titleMatch": "단종|품절|한정|완판|재입고"
+    },
+    {
+      "id": "price_anchor",
+      "label": "가격 앵커",
+      "formula": {
+        "naver": "{키워드} {가격대}로 {얻는 것}",
+        "opening": "{제품}은 {확인한 가격}({확인 시각})입니다."
+      },
+      "requires": [
+        "price.measured"
+      ],
+      "fits": [
+        "shopping_trend",
+        "deal_roundup",
+        "goldbox_lowest",
+        "travel_deals"
+      ],
+      "examples": [
+        {
+          "text": "무선청소기 추천 리뷰 20만 원대로 누리는 프리미엄급 성능!",
+          "channel": "naver_blog",
+          "query": "무선청소기 추천",
+          "rank": 1,
+          "subscribers": 30139,
+          "url": "https://blog.naver.com/pjmysm/224415237346"
+        },
+        {
+          "text": "2026 근로장려금 ·자녀 장려금 신청 자격 총정리: 단독·홑벌이·맞벌이 가구별 소득 기준 & 최대 330만원 국세청 기한 후 신청 및 환급 꿀팁",
+          "channel": "naver_blog",
+          "query": "근로장려금 신청",
+          "rank": 4,
+          "subscribers": 974,
+          "url": "https://blog.naver.com/daily_policy_1976/224409851403"
+        },
+        {
+          "text": "챗 GPT 200% 활용 방법",
+          "channel": "youtube_shorts",
+          "query": "챗GPT 활용법",
+          "rank": 19,
+          "views": 5240000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/fevn01oGy8o"
+        },
+        {
+          "text": "상위 0.1%들의 챗GPT 미친 사용법",
+          "channel": "youtube_shorts",
+          "query": "챗GPT 활용법",
+          "rank": 3,
+          "views": 3170000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/TIr6_Bo8zfg"
+        },
+        {
+          "text": "상위 1% 고수들만 안다는 챗GPT의 숨은 기능 '3가지'ㅣ지식인초대석 EP.34 (김덕진 교수 1부)",
+          "channel": "youtube",
+          "query": "챗GPT 활용법",
+          "rank": 6,
+          "views": 2675976,
+          "viewsPerDay": 7331,
+          "url": "https://www.youtube.com/watch?v=YPa1B7AJ_zI"
+        },
+        {
+          "text": "'코코볼 118개 3800원 판매' 3만 명 주문…쿠팡 측 입장은? / KNN",
+          "channel": "youtube",
+          "query": "쿠팡 최저가",
+          "rank": 6,
+          "views": 977148,
+          "viewsPerDay": 2677,
+          "url": "https://www.youtube.com/watch?v=GNwwPb3xTCQ"
+        }
+      ],
+      "forbidden": [
+        "\"최저가\"·\"역대급\"을 비교 근거 없이",
+        "쿠폰·회원가를 일반가처럼"
+      ],
+      "titleMatch": "\\d[\\d,.]*\\s?(만\\s?|천\\s?)?원|\\d+\\s?%"
+    },
+    {
+      "id": "segment_specific",
+      "label": "대상 특정",
+      "formula": {
+        "naver": "{세그먼트} {키워드} 추천｜{세그먼트에 맞는 이유}",
+        "opening": "{세그먼트}라면 {제품 라인}부터 보세요. 이유는 {적합성 근거}."
+      },
+      "requires": [
+        "segment.fit"
+      ],
+      "fits": [
+        "shopping_trend",
+        "deal_roundup",
+        "benefit_new",
+        "housing_schedule",
+        "ai_news"
+      ],
+      "evidence": "상위 1~3위 26% vs 7~10위 15%",
+      "examples": [
+        {
+          "text": "4살 여자아이 레고 추천 , 김포공항 롯데몰에서 첫 레고 고른 후기",
+          "channel": "naver_blog",
+          "query": "레고 추천",
+          "rank": 3,
+          "subscribers": 433,
+          "url": "https://blog.naver.com/josquin123/224422099726"
+        },
+        {
+          "text": "신생아 가습기 추천 · 고민 끝에 선택한 '케어팟 X50V'｜저온가열·자동살균 가습기 언박싱부터 세척·사용법까지",
+          "channel": "naver_blog",
+          "query": "가습기 추천",
+          "rank": 2,
+          "subscribers": 466,
+          "url": "https://blog.naver.com/slownest/224422046673"
+        },
+        {
+          "text": "1인가구 에프 추천 코스트코 긱 글라스 에어프라이어 5.5L 1달 사용후기",
+          "channel": "naver_blog",
+          "query": "에어프라이어 추천",
+          "rank": 2,
+          "subscribers": 147,
+          "url": "https://blog.naver.com/mukmoo/224409544096"
+        },
+        {
+          "text": "챗GPT 어디에 써요? 직장인이 바로 써먹는 활용법 5가지",
+          "channel": "naver_blog",
+          "query": "챗GPT 활용법",
+          "rank": 3,
+          "subscribers": 814,
+          "url": "https://blog.naver.com/pippy7777/224410301519"
+        },
+        {
+          "text": "신혼부부 집은 이렇게 사야합니다",
+          "channel": "youtube_shorts",
+          "query": "신혼부부 지원금",
+          "rank": 20,
+          "views": 310000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/yxHOiAjFQnk"
+        },
+        {
+          "text": "#광고 #5세대에어프라이어 스팀에어프라이어계의 최강자 #오넬리듀얼스팀에어프라이어 가 더 특별한 이유!",
+          "channel": "youtube_shorts",
+          "query": "에어프라이어 추천",
+          "rank": 32,
+          "views": 240000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/lF2b7QBZL7A"
+        },
+        {
+          "text": "(왕초보맞춤)K-장녀의 오사카 갓성비 가족여행 3박4일 총정리! - 본 콘도 난바 닛폰바시 숙소, 경비, 익스프레스 없이 유니버셜스튜디오 재팬 뽕뽑기, 간사이공항에서 난바가는 법",
+          "channel": "youtube",
+          "query": "오사카 여행 경비",
+          "rank": 37,
+          "views": 574422,
+          "viewsPerDay": 787,
+          "url": "https://www.youtube.com/watch?v=eXyQ4Ips-jI"
+        },
+        {
+          "text": "청약 전문가가 알려주는 2026년 청약 전략 “1인 가구, 신혼부부 이렇게 따라 하세요!”",
+          "channel": "youtube",
+          "query": "청약 일정",
+          "rank": 30,
+          "views": 128046,
+          "viewsPerDay": 534,
+          "url": "https://www.youtube.com/watch?v=f4S3Eq7rZ3Y"
+        }
+      ],
+      "forbidden": [
+        "연령 표기(권장 연령) 근거 없는 적합성 주장"
+      ],
+      "titleMatch": "\\d+\\s?(살|세|개월)|신생아|초등|초\\d|1인\\s?가구|신혼|아기|직장인|초보|입문|[2-5]0대|엄마|아빠"
+    },
+    {
+      "id": "reader_voice",
+      "label": "독자 속마음 질문",
+      "formula": {
+        "naver": "“{독자가 속으로 하는 질문}” {키워드} {답의 방향}",
+        "daangn": "{상황}인데 {질문}?",
+        "opening": "이 질문의 답은 {한 줄 결론}입니다."
+      },
+      "requires": [],
+      "fits": [
+        "*"
+      ],
+      "examples": [
+        {
+          "text": "“나는 근로장려금 자동 신청 됐을까?”…그냥 기다렸다가 놓칠 수 있는 이유",
+          "channel": "naver_blog",
+          "query": "근로장려금 신청",
+          "rank": 2,
+          "subscribers": 5300,
+          "url": "https://blog.naver.com/myhi0303/224410213853"
+        },
+        {
+          "text": "\"아무 때나 사면 손해라던데..\" 지후떡뻥 핫딜 열리는 타이밍",
+          "channel": "naver_blog",
+          "query": "핫딜",
+          "rank": 6,
+          "subscribers": 834,
+          "url": "https://blog.naver.com/blognas/224408769833"
+        },
+        {
+          "text": "[ 레고 추천 ] \"조립 손맛 끝판왕은?\" 레딧 유저들이 뽑은 역대급 레고 세트 TOP 3",
+          "channel": "naver_blog",
+          "query": "레고 추천",
+          "rank": 6,
+          "subscribers": 1284,
+          "url": "https://blog.naver.com/demilis/224371372227"
+        },
+        {
+          "text": "\"파리 여행 필수 코스! TOP 10 놓치면 후회!\" #파리여행 #프랑스 #여행추천 #꿀팁",
+          "channel": "youtube_shorts",
+          "query": "파리 여행",
+          "rank": 23,
+          "views": 29000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/UHCccTa864I"
+        },
+        {
+          "text": "\"근로장려금, 정확히 언제 들어오나요? 2025년 지급일 완전 정리\"",
+          "channel": "youtube_shorts",
+          "query": "근로장려금",
+          "rank": 29,
+          "views": 24000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/m3oPDPEx6rs"
+        },
+        {
+          "text": "\"이 3가지는 필수\" AI 20년 연구한 뇌과학자가 챗GPT 쓰는 법 (카이스트 김대식 교수)",
+          "channel": "youtube",
+          "query": "챗GPT 활용법",
+          "rank": 7,
+          "views": 2989173,
+          "viewsPerDay": 8190,
+          "url": "https://www.youtube.com/watch?v=vDZ0ryuiYfg"
+        },
+        {
+          "text": "\"퇴근이 2시간 빨라집니다\" 대부분 모르는 제미나이 활용법 10가지",
+          "channel": "youtube",
+          "query": "챗GPT 활용법",
+          "rank": 41,
+          "views": 546250,
+          "viewsPerDay": 3642,
+          "url": "https://www.youtube.com/watch?v=_QDQ4dmmJsM"
+        }
+      ],
+      "forbidden": [
+        "실존 인물·기관의 말처럼 꾸민 인용",
+        "답을 끝까지 미루는 낚시"
+      ],
+      "titleMatch": "^[“\"][^”\"]{3,}[”\"]"
+    },
+    {
+      "id": "versus_choice",
+      "label": "A vs B 선택",
+      "formula": {
+        "naver": "{A} vs {B}｜{선택 기준 한 줄}",
+        "opening": "{조건}이면 {A}, {조건}이면 {B}입니다."
+      },
+      "requires": [
+        "comparison.two_options"
+      ],
+      "fits": [
+        "shopping_trend",
+        "travel_deals",
+        "deal_roundup"
+      ],
+      "examples": [
+        {
+          "text": "초등학생 선물 추천 ! 레고 VS 포켓몬, 조카 추석 선물 고민 끝!",
+          "channel": "naver_blog",
+          "query": "레고 선물 추천",
+          "rank": 3,
+          "subscribers": 44,
+          "url": "https://blog.naver.com/momlogi/224414087684"
+        },
+        {
+          "text": "[2026 에어프라이어 추천 ] 대용량 vs 1인가구용, 바스켓형 vs 오븐형 고민 해결 가이드",
+          "channel": "naver_blog",
+          "query": "에어프라이어 추천",
+          "rank": 4,
+          "subscribers": 302,
+          "url": "https://blog.naver.com/dd00ming/224384437716"
+        },
+        {
+          "text": "베트남 다낭 자유여행 VS 패키지 여행 비교 추천",
+          "channel": "naver_blog",
+          "query": "다낭 패키지 추천",
+          "rank": 1,
+          "subscribers": 97,
+          "url": "https://blog.naver.com/babeblue_rina/224418046566"
+        },
+        {
+          "text": "런던 vs 파리 솔직히 어디가 더 좋냐면..",
+          "channel": "youtube_shorts",
+          "query": "파리 여행",
+          "rank": 24,
+          "views": 580000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/gwYpDgOMGk0"
+        },
+        {
+          "text": "베트남 다낭 패키지 VS 자유여행 가격비교!",
+          "channel": "youtube_shorts",
+          "query": "다낭 패키지",
+          "rank": 12,
+          "views": 560000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/IdzvIBkT20M"
+        },
+        {
+          "text": "10만 원대에 파는 무선청소기 진짜 괜찮은거 맞을까? 하나부터 열까지 직접 테스트 해 봤습니다 (청소성능, 사용시간, 사용편의성, 안전기능과 A/S까지 비교해 봄)",
+          "channel": "youtube",
+          "query": "무선청소기 추천",
+          "rank": 1,
+          "views": 740520,
+          "viewsPerDay": 74052,
+          "url": "https://www.youtube.com/watch?v=aP-HUlMs6mQ"
+        },
+        {
+          "text": "작년보다 더 싸짐 ㄷㄷ 10~20만원대 초가성비 스테이션 무선청소기 끝장비교(26년ver.)ㅣ내돈내산",
+          "channel": "youtube",
+          "query": "무선청소기 추천",
+          "rank": 8,
+          "views": 698257,
+          "viewsPerDay": 3325,
+          "url": "https://www.youtube.com/watch?v=rgULZyQKjzY"
+        }
+      ],
+      "titleMatch": "\\bvs\\b|대결|비교"
+    },
+    {
+      "id": "timing_insight",
+      "label": "언제 사야 하나",
+      "formula": {
+        "naver": "{키워드} {할인이 열리는 타이밍/지금 사도 되는가}",
+        "opening": "{기간 데이터}를 보면 {언제}가 가장 쌉니다."
+      },
+      "requires": [
+        "price.history|trigger.promotion.calendar"
+      ],
+      "fits": [
+        "shopping_trend",
+        "deal_roundup",
+        "goldbox_lowest"
+      ],
+      "examples": [
+        {
+          "text": "\"아무 때나 사면 손해라던데..\" 지후떡뻥 핫딜 열리는 타이밍",
+          "channel": "naver_blog",
+          "query": "핫딜",
+          "rank": 6,
+          "subscribers": 834,
+          "url": "https://blog.naver.com/blognas/224408769833"
+        },
+        {
+          "text": "브라운체온계 최저가 구매방법 ㅣ 어느정도면 싸게사는걸까? ㅣ IRT6525 핫딜 후기",
+          "channel": "naver_blog",
+          "query": "핫딜",
+          "rank": 4,
+          "subscribers": 1041,
+          "url": "https://blog.naver.com/ytksuj93/224385475100"
+        },
+        {
+          "text": "2026 근로장려금 신청시기 및 신청방법!",
+          "channel": "youtube_shorts",
+          "query": "근로장려금",
+          "rank": 22,
+          "views": 93000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/jDWFvGLXias"
+        },
+        {
+          "text": "달라지는 27년 결혼지원금 혼인신고 시기",
+          "channel": "youtube_shorts",
+          "query": "신혼부부 지원금",
+          "rank": 9,
+          "views": 1500,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/ZPcJgliIz6w"
+        },
+        {
+          "text": "레고 살 때 꿀팁 10가지 (꼭 혼자 몰래 보세요) 레고 공홈 프로모션, 레고공홈 문자, 꾸삐 문자, 꾸삐의 문자 알람 서비스",
+          "channel": "youtube",
+          "query": "레고 할인",
+          "rank": 7,
+          "views": 56879,
+          "viewsPerDay": 156,
+          "url": "https://www.youtube.com/watch?v=KQBLppwK7Po"
+        },
+        {
+          "text": "2026 근로장려금 지급기준·신청방법·지급시기 완벽 정리 (이 영상 하나면 끝) #근로장려금 #근로장려금신청 #근로장려금330만원 #근로장려금기준 #근로장려금신청방법",
+          "channel": "youtube",
+          "query": "근로장려금",
+          "rank": 38,
+          "views": 10042,
+          "viewsPerDay": 84,
+          "url": "https://www.youtube.com/watch?v=nHhN3H5-468"
+        }
+      ],
+      "titleMatch": "타이밍|언제 사|지금 사도|기다려야|살 때|시기"
+    },
+    {
+      "id": "crowd_pick",
+      "label": "다수가 고른 것",
+      "formula": {
+        "naver": "{집단}이 뽑은 {키워드} TOP {N}",
+        "opening": "{출처}에서 {지표}가 가장 높은 것은 {1위}입니다."
+      },
+      "requires": [
+        "ranking.sourced"
+      ],
+      "fits": [
+        "shopping_trend",
+        "ai_news",
+        "travel_deals"
+      ],
+      "examples": [
+        {
+          "text": "[ 레고 추천 ] \"조립 손맛 끝판왕은?\" 레딧 유저들이 뽑은 역대급 레고 세트 TOP 3",
+          "channel": "naver_blog",
+          "query": "레고 추천",
+          "rank": 6,
+          "subscribers": 1284,
+          "url": "https://blog.naver.com/demilis/224371372227"
+        },
+        {
+          "text": "제품으로 나와야하는 레고 TOP 3 | 레고 닌자고",
+          "channel": "youtube_shorts",
+          "query": "레고 추천",
+          "rank": 3,
+          "views": 870000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/ggN1-MLhS3g"
+        },
+        {
+          "text": "세상에서 부품수가 가장 많은 레고 제품 TOP5",
+          "channel": "youtube_shorts",
+          "query": "레고 추천",
+          "rank": 5,
+          "views": 600000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/tlOMse-Mbzs"
+        },
+        {
+          "text": "세상에서 제일 비싼 테크닉 TOP10 #레고 #꾸삐 #lego #오늘도한사람의블럭덕후가생긴다면성공",
+          "channel": "youtube",
+          "query": "레고 추천",
+          "rank": 12,
+          "views": 615983,
+          "viewsPerDay": 1688,
+          "url": "https://www.youtube.com/watch?v=Qyd2cUaLekI"
+        },
+        {
+          "text": "클래식 레고 자동차 TOP 3",
+          "channel": "youtube",
+          "query": "레고 추천",
+          "rank": 22,
+          "views": 205263,
+          "viewsPerDay": 281,
+          "url": "https://www.youtube.com/watch?v=TfhWGsD0Jg8"
+        }
+      ],
+      "forbidden": [
+        "출처 없는 순위"
+      ],
+      "titleMatch": "TOP\\s?\\d+|BEST\\s?\\d+|순위|뽑은|랭킹"
+    },
+    {
+      "id": "outcome_gain",
+      "label": "얻는 결과",
+      "formula": {
+        "naver": "{키워드}로 {측정 가능한 결과}",
+        "opening": "{방법} 하나로 {결과}가 됩니다."
+      },
+      "requires": [
+        "outcome.measured"
+      ],
+      "fits": [
+        "ai_news",
+        "benefit_new",
+        "shopping_trend"
+      ],
+      "examples": [
+        {
+          "text": "챗GPT 프롬프트 단어 10가지로 퇴근 시간 30분 줄인 실무 활용법",
+          "channel": "naver_blog",
+          "query": "챗GPT 활용법",
+          "rank": 2,
+          "subscribers": 2826,
+          "url": "https://blog.naver.com/1stheaven/224422275767"
+        },
+        {
+          "text": "프랑스 여행 시간 낭비 줄이는 파리 중심 코스 짜는 방법",
+          "channel": "naver_blog",
+          "query": "파리 여행 코스",
+          "rank": 5,
+          "subscribers": 3393,
+          "url": "https://blog.naver.com/viplife77/224423195106"
+        },
+        {
+          "text": "샤크 무선청소기 추천, 제발 돈 아끼세요!!",
+          "channel": "youtube_shorts",
+          "query": "무선청소기 추천",
+          "rank": 15,
+          "views": 140000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/PadXlueVDm8"
+        },
+        {
+          "text": "🚀쿠팡 최저가 구매 꿀팁!(쿠팡 이거모르면 완전 손해) #쿠팡가격변동 #쿠팡최저가어플추천 #절약어플추천 #앱테크 #폴센트",
+          "channel": "youtube_shorts",
+          "query": "쿠팡 최저가",
+          "rank": 1,
+          "views": 58000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/s2AuJ6U52vI"
+        },
+        {
+          "text": "🇻🇳 단돈 40만원 초저가 다낭 패키지… 싸다고 예약했다가 생기는 일 (15분 순삭ver..)",
+          "channel": "youtube",
+          "query": "다낭 패키지",
+          "rank": 31,
+          "views": 135946,
+          "viewsPerDay": 755,
+          "url": "https://www.youtube.com/watch?v=rSLdFaYGNIw"
+        },
+        {
+          "text": "광고❌2026 가습기, 제발 브랜드 말고 이 3가지만 보세요 돈 아끼는 법🔥가열식 가습기┃초음파 가습기┃아기 가습기┃복합식 가습기┃기화식 가습기┃조지루시┃에어메이드┃디디오랩┃벤타┃",
+          "channel": "youtube",
+          "query": "가습기 추천",
+          "rank": 6,
+          "views": 3936,
+          "viewsPerDay": 3936,
+          "url": "https://www.youtube.com/watch?v=7G_trU-kpMg"
+        }
+      ],
+      "titleMatch": "줄인|아끼|절약|벌었|늘린|순삭|절반"
+    },
+    {
+      "id": "demo_reveal",
+      "label": "해보니 이렇게 된다",
+      "formula": {
+        "naver": "{입력} 넣었더니 이렇게 됩니다｜{키워드}",
+        "opening": "{결과 이미지}부터 보세요."
+      },
+      "requires": [
+        "demo.own_media"
+      ],
+      "fits": [
+        "ai_news"
+      ],
+      "examples": [
+        {
+          "text": "사진 한 장 넣었더니 이렇게 됩니다｜요즘 뜨는 AI 이미지 만드는 법 5가지",
+          "channel": "naver_blog",
+          "query": "AI 이미지 만들기",
+          "rank": 1,
+          "subscribers": 871,
+          "url": "https://blog.naver.com/iron003/224411198696"
+        }
+      ],
+      "titleMatch": "넣었더니|해봤더니|해보니|만들어\\s?봤|직접 해"
+    },
+    {
+      "id": "own_use_proof",
+      "label": "직접 써본 증거",
+      "formula": {
+        "naver": "{제품} {기간} 실사용 {장단점}",
+        "opening": "{기간} 써보니 {결론}."
+      },
+      "requires": [
+        "owner.actually_used"
+      ],
+      "fits": [
+        "shopping_trend"
+      ],
+      "defaultAllowed": false,
+      "examples": [
+        {
+          "text": "에어프라이어 추천 오넬리 스팀에프 내돈내산 6개월 사용후기",
+          "channel": "naver_blog",
+          "query": "에어프라이어 추천",
+          "rank": 5,
+          "subscribers": 149,
+          "url": "https://blog.naver.com/zjel1136/224359473050"
+        },
+        {
+          "text": "초1 선물추천 레고 레고 시티 60316 경찰서 내돈내산후기",
+          "channel": "naver_blog",
+          "query": "레고 선물 추천",
+          "rank": 1,
+          "subscribers": 409,
+          "url": "https://blog.naver.com/tomato_0823/224415850834"
+        },
+        {
+          "text": "요즘 나온 스팀되는 에어프라이어 사용후기 #에어프라이어 #에어프라이어요리 #야채찜",
+          "channel": "youtube_shorts",
+          "query": "에어프라이어 추천",
+          "rank": 16,
+          "views": 300000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/Kd0VUrUMNsY"
+        },
+        {
+          "text": "가성비 좋은데 예쁜 무선 청소기 추천 #내돈내산 #shorts",
+          "channel": "youtube_shorts",
+          "query": "무선청소기 추천",
+          "rank": 25,
+          "views": 110000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/xf2Md0_vgKA"
+        },
+        {
+          "text": "에어프라이어 두번 사는 삽질 후 얻은 잘 사는 노하우 총정리! ㅣ내돈내산",
+          "channel": "youtube",
+          "query": "에어프라이어 추천",
+          "rank": 55,
+          "views": 985054,
+          "viewsPerDay": 540,
+          "url": "https://www.youtube.com/watch?v=PamfGS37UHI"
+        },
+        {
+          "text": "작년보다 더 싸짐 ㄷㄷ 10~20만원대 초가성비 스테이션 무선청소기 끝장비교(26년ver.)ㅣ내돈내산",
+          "channel": "youtube",
+          "query": "무선청소기 추천",
+          "rank": 8,
+          "views": 698257,
+          "viewsPerDay": 3325,
+          "url": "https://www.youtube.com/watch?v=rgULZyQKjzY"
+        }
+      ],
+      "forbidden": [
+        "운영자가 쓰지 않은 제품의 체험 주장(추천·보증 심사지침)"
+      ],
+      "titleMatch": "내돈내산|사용\\s?후기|실사용|써보니|개월 사용"
+    },
+    {
+      "id": "community_question",
+      "label": "당근형 1인칭 질문",
+      "formula": {
+        "daangn": "{상황·숫자}인데 {고민}?",
+        "opening": "{질문에 대한 답 한 줄}"
+      },
+      "requires": [],
+      "fits": [
+        "*"
+      ],
+      "channels": [
+        "daangn",
+        "naverCafe"
+      ],
+      "examples": [
+        {
+          "text": "27살 1.2억있는데 고민이 많습니다.",
+          "channel": "daangn",
+          "board": "경제/소비",
+          "views": 2861,
+          "viewsPerDay": 894,
+          "comments": 26,
+          "url": "https://cafe.daangn.com/jusigsijang/posts/27%EC%82%B4-12%EC%96%B5%EC%9E%88%EB%8A%94%EB%8D%B0-%EA%B3%A0%EB%AF%BC%EC%9D%B4-%EB%A7%8E%EC%8A%B5%EB%8B%88%EB%8B%A4-P12EYgzd"
+        },
+        {
+          "text": "택시에 폰 흘리고 받을때 기사님 사례금 얼마나줘요 ?",
+          "channel": "daangn",
+          "board": "고민/소통",
+          "views": 3151,
+          "viewsPerDay": 927,
+          "comments": 69,
+          "url": "https://cafe.daangn.com/gyeolhonsaenghw/posts/%ED%83%9D%EC%8B%9C%EC%97%90-%ED%8F%B0-%ED%9D%98%EB%A6%AC%EA%B3%A0-%EB%B0%9B%EC%9D%84%EB%95%8C-%EA%B8%B0%EC%82%AC%EB%8B%98-%EC%82%AC%EB%A1%80%EA%B8%88-%EC%96%BC%EB%A7%88%EB%82%98%EC%A4%98%EC%9A%94-A4QvO82P"
+        },
+        {
+          "text": "27살 드디어 6000을 모았습니다 다들 화이팅!!",
+          "channel": "daangn",
+          "board": "경제/소비",
+          "views": 1931,
+          "viewsPerDay": 402,
+          "comments": 20,
+          "url": "https://cafe.daangn.com/jusigsijang/posts/27%EC%82%B4-%EB%93%9C%EB%94%94%EC%96%B4-6000%EC%9D%84-%EB%AA%A8%EC%95%98%EC%8A%B5%EB%8B%88%EB%8B%A4-%EB%8B%A4%EB%93%A4-%ED%99%94%EC%9D%B4%ED%8C%85-d7LbR6nj"
+        },
+        {
+          "text": "호불호의 여행지 프랑스 파리?",
+          "channel": "youtube_shorts",
+          "query": "파리 여행",
+          "rank": 26,
+          "views": 640000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/cqiSMXmp84Q"
+        },
+        {
+          "text": "이거보다 좋은게 있음?",
+          "channel": "youtube_shorts",
+          "query": "가습기 추천",
+          "rank": 2,
+          "views": 470000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/vXbGlzNoyfo"
+        },
+        {
+          "text": "레고 자동차 전시 사기템??",
+          "channel": "youtube",
+          "query": "레고 추천",
+          "rank": 19,
+          "views": 2824067,
+          "viewsPerDay": 3869,
+          "url": "https://www.youtube.com/watch?v=4Vt_VnTX0WU"
+        },
+        {
+          "text": "여동생에게 초거대 레고만 추천해준다면?",
+          "channel": "youtube",
+          "query": "레고 추천",
+          "rank": 23,
+          "views": 1126276,
+          "viewsPerDay": 3086,
+          "url": "https://www.youtube.com/watch?v=cuCQE1jSh-Y"
+        }
+      ],
+      "forbidden": [
+        "타인의 사연을 지어내기 — 질문은 글이 답하는 질문이어야 한다"
+      ],
+      "titleMatch": "\\?$|까요\\??$"
+    },
+    {
+      "id": "negative_warning",
+      "label": "하지 마세요 경고",
+      "formula": {
+        "naver": "{키워드} {대상} 이거 사지 마세요｜{피해야 할 이유}",
+        "shorts": "{대상}은 {행동}하지 마세요",
+        "opening": "{흔한 실수}부터 피하세요. 이유는 {근거}."
+      },
+      "requires": [
+        "pitfall.sourced"
+      ],
+      "fits": [
+        "shopping_trend",
+        "deal_roundup",
+        "travel_deals",
+        "benefit_new"
+      ],
+      "examples": [
+        {
+          "text": "예뻐서 샀다가 큰 코 다친다는 레고",
+          "channel": "youtube_shorts",
+          "query": "레고 추천",
+          "rank": 4,
+          "views": 5100000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/UfhtcfuFY9s"
+        },
+        {
+          "text": "오사카 여행 이거 사지 마세요!",
+          "channel": "youtube_shorts",
+          "query": "오사카 여행 경비",
+          "rank": 11,
+          "views": 1350000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/2noYZPw2Avs"
+        },
+        {
+          "text": "미친레고 디즈니 콜라보 백설공주의집 #레고추천 #lego",
+          "channel": "youtube",
+          "query": "레고 추천",
+          "rank": 13,
+          "views": 122737,
+          "viewsPerDay": 168,
+          "url": "https://www.youtube.com/watch?v=WTL-vRZloI8"
+        },
+        {
+          "text": "닌자 크리스피, 이런 분들은 사지 마세요 | 유리용기 에어프라이어 장단점 모두 알려드립니다 | 공동구매 마감",
+          "channel": "youtube",
+          "query": "에어프라이어 추천",
+          "rank": 37,
+          "views": 80925,
+          "viewsPerDay": 2698,
+          "url": "https://www.youtube.com/watch?v=nH0-phs9MzU"
+        }
+      ],
+      "forbidden": [
+        "근거(후기 통계·리콜·스펙 비교) 없는 특정 제품 비방",
+        "경쟁 제품 허위 비교(표시광고법)"
+      ],
+      "titleMatch": "사지\\s?마|하지\\s?마|절대|주의|큰\\s?코|속지|함정|실수|아무거나"
+    },
+    {
+      "id": "curiosity_story",
+      "label": "결과가 궁금한 이야기",
+      "formula": {
+        "naver": "{행동} 해보면 생기는 일｜{키워드}",
+        "shorts": "{행동}하면 생기는 일",
+        "opening": "결과부터: {결과}."
+      },
+      "requires": [
+        "result.shown"
+      ],
+      "fits": [
+        "*"
+      ],
+      "examples": [
+        {
+          "text": "비싼 청소기가 필요없는 이유",
+          "channel": "youtube_shorts",
+          "query": "무선청소기 추천",
+          "rank": 23,
+          "views": 4210000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/MHgJ1D6z4dI"
+        },
+        {
+          "text": "파리에서 함부로 크루아상 먹으면 안 되는 이유(Feat.인종차별)",
+          "channel": "youtube_shorts",
+          "query": "파리 여행",
+          "rank": 11,
+          "views": 3520000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/_r4U_P4g6mo"
+        },
+        {
+          "text": "[이런뉴스] “부탁해요, 챗GPT” 공손함이 가져온 뜻밖의 결과는? / KBS 2025.04.22.",
+          "channel": "youtube",
+          "query": "챗GPT 활용법",
+          "rank": 39,
+          "views": 1899285,
+          "viewsPerDay": 5204,
+          "url": "https://www.youtube.com/watch?v=9yLZKa5m270"
+        },
+        {
+          "text": "망한 회사 물건들 싸게사서 1년반만에 14억 모은 이유",
+          "channel": "youtube",
+          "query": "핫딜",
+          "rank": 37,
+          "views": 371837,
+          "viewsPerDay": 2066,
+          "url": "https://www.youtube.com/watch?v=kHagbl1AoUU"
+        }
+      ],
+      "forbidden": [
+        "결과를 끝까지 숨기는 낚시",
+        "결과가 없는 \"충격\"·\"실화\""
+      ],
+      "titleMatch": "생기는 일|벌어진 일|결과는|이유|비밀|몰랐던|충격|실화|정체"
+    },
+    {
+      "id": "regret_aversion",
+      "label": "후회 회피",
+      "formula": {
+        "naver": "{키워드} 후회 안 하려면 {확인할 것}",
+        "shorts": "{대상} 사고 후회하는 이유",
+        "opening": "사고 나서 후회하는 이유는 대부분 {원인}입니다."
+      },
+      "requires": [],
+      "fits": [
+        "shopping_trend",
+        "deal_roundup",
+        "travel_deals"
+      ],
+      "examples": [
+        {
+          "text": "일본 오사카 여행갔다가 후회한 관광지",
+          "channel": "youtube_shorts",
+          "query": "오사카 여행 경비",
+          "rank": 16,
+          "views": 1760000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/RIQeXAFaexs"
+        },
+        {
+          "text": "안쓰면 후회하는 미친 AI 활용법 공개🔥",
+          "channel": "youtube_shorts",
+          "query": "챗GPT 활용법",
+          "rank": 28,
+          "views": 920000,
+          "viewsPerDay": null,
+          "url": "https://www.youtube.com/shorts/SSOcdCSCeyM"
+        },
+        {
+          "text": "후회하지 않을 2026년 서울 분양 아파트 Top 10 | 흥청망청",
+          "channel": "youtube",
+          "query": "청약 일정",
+          "rank": 37,
+          "views": 97001,
+          "viewsPerDay": 323,
+          "url": "https://www.youtube.com/watch?v=HxSAwdh8ZcU"
+        },
+        {
+          "text": "모르고 사면 후회하는 가습기! 100개 직접 써보고 정리해드립니다 (초음파식/가열식/복합식/기화식)",
+          "channel": "youtube",
+          "query": "가습기 추천",
+          "rank": 43,
+          "views": 93666,
+          "viewsPerDay": 347,
+          "url": "https://www.youtube.com/watch?v=sitPeJmv5FI"
+        }
+      ],
+      "forbidden": [
+        "근거 없는 \"평생 후회\""
+      ],
+      "titleMatch": "후회"
+    }
+  ],
+  "audienceSegments": [
+    {
+      "category": "출산/육아",
+      "id": "toddler_1_3",
+      "titleLabel": "두 돌 아기",
+      "label": "1~3세(두 돌 전후)",
+      "keywordPattern": "레고|블록|장난감|완구|퍼즐|인형|보드게임|자동차",
+      "fitCheck": "제조사 권장 연령(18개월+ 등)",
+      "fitRule": "제조사 권장 연령 18개월+ 등 원문 표기로만 매칭 (예: 레고 듀플로)"
+    },
+    {
+      "category": "출산/육아",
+      "id": "preschool_4_6",
+      "titleLabel": "4~6살 아이",
+      "label": "4~6세",
+      "keywordPattern": "레고|블록|장난감|완구|퍼즐|인형|보드게임",
+      "fitCheck": "권장 연령 4+ 표기",
+      "fitRule": "권장 연령 4+ 표기 (예: 레고 클래식·시티 4+)"
+    },
+    {
+      "category": "출산/육아",
+      "id": "school_7_12",
+      "titleLabel": "초등학생",
+      "label": "초등학생",
+      "keywordPattern": "레고|블록|장난감|완구|보드게임|학습|책가방",
+      "fitCheck": "권장 연령 6+~9+ 표기",
+      "fitRule": "권장 연령 6+~9+ 표기"
+    },
+    {
+      "category": "출산/육아",
+      "id": "newborn_room",
+      "titleLabel": "신생아 방",
+      "label": "신생아가 있는 집",
+      "keywordPattern": "가습기|공기청정기|소독기|유축기|온습도계|분유|젖병|기저귀",
+      "fitCheck": "소음(dB)·세척 구조·소재 표기",
+      "fitRule": "저소음·세척·소재를 제조사 표기로 확인 (관측: \"신생아 가습기 추천\" 2위)"
+    },
+    {
+      "category": "출산/육아",
+      "id": "gift_giver",
+      "titleLabel": "조카 선물용",
+      "label": "조카·손주 선물하는 어른",
+      "fitCheck": "가격대·포장·배송 마감",
+      "fitRule": "가격대·포장·배송 마감이 기준"
+    },
+    {
+      "category": "*",
+      "id": "single_household",
+      "titleLabel": "1인가구",
+      "label": "1인가구",
+      "keywordPattern": "에어프라이어|청소기|밥솥|세탁기|냉장고|전자레인지",
+      "fitCheck": "용량·크기",
+      "fitRule": "용량·크기 표기"
+    },
+    {
+      "category": "*",
+      "id": "newlywed",
+      "titleLabel": "신혼부부",
+      "label": "신혼부부",
+      "keywordPattern": "청약|대출|지원금|가전|혼수",
+      "fitCheck": "자격 조건",
+      "fitRule": "제도 자격 원문"
+    },
+    {
+      "category": "*",
+      "id": "office_worker",
+      "titleLabel": "직장인",
+      "label": "직장인",
+      "keywordPattern": "AI|챗GPT|GPT|엑셀|노트북|자동화",
+      "fitCheck": "줄어드는 시간",
+      "fitRule": "시간·비용 절감 근거"
+    }
+  ],
+  "guardrails": [
+    {
+      "id": "promise_kept",
+      "rule": "제목이 약속한 답(픽·가격·마감)을 첫 3문단 안에 쓴다.",
+      "check": "draft: title promise terms appear in blocks[0..2]"
+    },
+    {
+      "id": "sourced_urgency",
+      "rule": "마감·단종·품절·오늘만 표현은 날짜가 있는 원문 URL이 있어야 하고, 브리프 만료를 그 날짜로 맞춘다.",
+      "check": "hook.requires trigger with deadline + source url"
+    },
+    {
+      "id": "no_fake_voice",
+      "rule": "따옴표 질문은 독자의 질문이며 실존 인물·기관 발언으로 꾸미지 않는다. 체험 주장은 운영자가 실제로 쓴 경우만.",
+      "check": "own_use_proof defaultAllowed false"
+    },
+    {
+      "id": "numbers_in_document",
+      "rule": "제목·첫 문단의 숫자는 본문과 주장 원장에 있어야 한다.",
+      "check": "existing claim-ledger / 당근 number check"
+    },
+    {
+      "id": "no_overclaim",
+      "rule": "최저가·역대급·끝판왕은 비교 근거(다나와·여러 몰 비교)가 있을 때만.",
+      "check": "price.compared"
+    },
+    {
+      "id": "keyword_first",
+      "rule": "네이버·티스토리 제목은 검색 키워드를 앞 15자 안에.",
+      "check": "title.indexOf(keyword) < 15"
+    },
+    {
+      "id": "total_guide_suffix_only",
+      "rule": "\"총정리\"는 훅 자리에 쓰지 않는다(관측상 순위 효과 없음).",
+      "check": "title does not start the hook with 총정리"
+    }
+  ],
+  "channelStyles": [
+    {
+      "channel": "naver",
+      "title": "키워드 앞 15자 + 훅, 30~45자(관측 중앙값 39자), ｜로 훅과 보조 정보를 나눔",
+      "opening": "결론(픽) → 근거 숫자 → 마감/조건"
+    },
+    {
+      "channel": "tistory",
+      "title": "네이버와 같은 제목(미러)",
+      "opening": "같음"
+    },
+    {
+      "channel": "daangn",
+      "title": "50자 이하, 1인칭 질문·상황형(community_question, reader_voice)",
+      "opening": "한 줄 한 문단, 결론 먼저"
+    },
+    {
+      "channel": "naverCafe",
+      "title": "네이버 제목 그대로(미러), 첫 줄에 원문 링크",
+      "opening": "같음"
+    },
+    {
+      "channel": "threads",
+      "title": "첫 줄 30자 안팎, 이모지 1개 + POV/질문",
+      "opening": "3줄 이내"
+    }
+  ],
+  "selectionPolicy": {
+    "order": [
+      "트리거를 찾는다(probeWhyNow).",
+      "패턴마다 requires가 충족되는지 본다.",
+      "충족된 패턴을 트리거 긴급성(deadline > scarcity > risk > freshness > calendar)과 관측 효과(deadline_loss·segment_specific 우선)로 순위를 매긴다.",
+      "상위 3개를 후보로 브리프에 싣고, 초안 작성자는 1개를 골라 가드레일을 지킨다."
+    ],
+    "noTrigger": "트리거를 찾지 못하면 브리프 제목에 \"원인 미확인\"을 붙이고 segment_specific·versus_choice 같은 상시형 훅만 제안한다(시의성 주장 금지)."
+  },
+  "channelPreferences": {
+    "note": "lift = 패턴을 쓴 제목의 조회수 중앙값 ÷ 패턴 없는 제목의 중앙값 (n ≥ 5만). 검색형 채널과 피드형 채널의 순서가 다르다.",
+    "search": {
+      "channels": [
+        "naver",
+        "tistory",
+        "naverCafe",
+        "youtube"
+      ],
+      "prefer": [
+        "deadline_loss",
+        "segment_specific",
+        "scarcity_discontinue",
+        "community_question"
+      ],
+      "evidence": {
+        "naverTop3VsRank7to10": [
+          "손실회피형(놓치면·손해·막바지·마감)은 상위 1~3위 제목의 12%, 7~10위의 1% — 가장 큰 차이.",
+          "대상 특정형(4살·신생아·1인가구·직장인)은 26% vs 15%."
+        ],
+        "youtubeLongLift": [
+          {
+            "pattern": "own_use_proof",
+            "n": 6,
+            "lift": 14.11
+          },
+          {
+            "pattern": "community_question",
+            "n": 18,
+            "lift": 4.32
+          },
+          {
+            "pattern": "deadline_loss",
+            "n": 11,
+            "lift": 2.2
+          },
+          {
+            "pattern": "regret_aversion",
+            "n": 6,
+            "lift": 2.2
+          },
+          {
+            "pattern": "curiosity_story",
+            "n": 14,
+            "lift": 2
+          },
+          {
+            "pattern": "negative_warning",
+            "n": 6,
+            "lift": 1.58
+          },
+          {
+            "pattern": "reader_voice",
+            "n": 11,
+            "lift": 1.38
+          },
+          {
+            "pattern": "versus_choice",
+            "n": 23,
+            "lift": 1.07
+          },
+          {
+            "pattern": "price_anchor",
+            "n": 41,
+            "lift": 1.05
+          },
+          {
+            "pattern": "segment_specific",
+            "n": 20,
+            "lift": 0.8
+          },
+          {
+            "pattern": "crowd_pick",
+            "n": 22,
+            "lift": 0.7
+          }
+        ]
+      }
+    },
+    "feed": {
+      "channels": [
+        "youtube_shorts",
+        "tiktok",
+        "instagram_reels",
+        "instagram",
+        "threads",
+        "x"
+      ],
+      "prefer": [
+        "curiosity_story",
+        "crowd_pick",
+        "community_question",
+        "regret_aversion"
+      ],
+      "avoidAsOpener": [
+        "price_anchor",
+        "deadline_loss",
+        "segment_specific"
+      ],
+      "evidence": {
+        "youtubeShortsLift": [
+          {
+            "pattern": "curiosity_story",
+            "n": 33,
+            "lift": 3.24
+          },
+          {
+            "pattern": "crowd_pick",
+            "n": 20,
+            "lift": 1.38
+          },
+          {
+            "pattern": "community_question",
+            "n": 16,
+            "lift": 1.28
+          },
+          {
+            "pattern": "own_use_proof",
+            "n": 6,
+            "lift": 0.97
+          },
+          {
+            "pattern": "negative_warning",
+            "n": 6,
+            "lift": 0.83
+          },
+          {
+            "pattern": "versus_choice",
+            "n": 10,
+            "lift": 0.52
+          },
+          {
+            "pattern": "price_anchor",
+            "n": 54,
+            "lift": 0.48
+          },
+          {
+            "pattern": "deadline_loss",
+            "n": 10,
+            "lift": 0.41
+          },
+          {
+            "pattern": "outcome_gain",
+            "n": 7,
+            "lift": 0.14
+          },
+          {
+            "pattern": "segment_specific",
+            "n": 27,
+            "lift": 0.13
+          }
+        ]
+      },
+      "rule": "피드형(쇼츠·틱톡·릴스·스레드·X)의 첫 줄·첫 장면은 호기심·순위·질문으로 연다. 가격·마감은 둘째 줄 이후 근거로."
+    }
+  },
+  "ctaPatterns": [
+    {
+      "id": "comment_keyword_freebie",
+      "label": "댓글 키워드로 자료 받기",
+      "how": "14-second list short (N개 도구/스킬); the full list or prompt doc is promised in the comments or the bio link, and viewers comment a keyword such as \"문서\".",
+      "effect": "Inflates comment count (an engagement signal) and moves viewers to an owned page (lead capture).",
+      "observed": {
+        "url": "https://youtube.com/shorts/l_RB6lTTrKE",
+        "channel": "게으른빌더 (@lazyowenAI)",
+        "title": "3달만에 9만 달성하게 해 준 클로드 스킬 8개",
+        "note": "The creator comment points to lazyowen.com/guides; top comments are the keyword \"문서\" plus thanks. Checked 2026-10-04."
+      },
+      "useFor": [
+        "deal roundups: comment 최저가 for the full price table",
+        "AI tool tips"
+      ],
+      "rules": [
+        "Deliver what is promised: a real page or table, no bait-and-switch",
+        "No engagement-for-reward that violates platform spam rules (no \"comment to win\" without a real giveaway)",
+        "The affiliate disclosure still applies when the delivered page has partner links"
+      ]
+    }
+  ]
+}

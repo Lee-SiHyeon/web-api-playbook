@@ -1,0 +1,151 @@
+{
+  "schema": "aliexpress-historical-contract-reassessment-v1",
+  "recordedAt": "2026-10-16T00:39:15.671Z",
+  "source": "verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json",
+  "sourceSha256": "fbc33848b8818ba1bc73057b93f3a0754c733420099f7db34e43979165aaacec",
+  "sourceGeneratedAt": "2026-10-14T22:30:17.366Z",
+  "sourceCoverage": {
+    "entriesSeen": 1278,
+    "entriesSkipped": 12,
+    "keptContracts": 14
+  },
+  "detail": {
+    "method": "GET",
+    "origin": "https://acs.aliexpress.com",
+    "path": "/h5/mtop.aliexpress.pdp.pc.query/1.0/",
+    "queryFieldNames": [
+      "api",
+      "appKey",
+      "callback",
+      "data",
+      "dataType",
+      "jsv",
+      "sign",
+      "t",
+      "timeout",
+      "type",
+      "v"
+    ],
+    "observations": [
+      {
+        "sourceEntry": 15,
+        "observedAt": "2026-10-14T15:14:14.773Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 194676,
+        "responseSha256": "43987f8ce71db2c16d46ba3133323ec61cc8cf41b1dcab08c3c39db56d9c2420",
+        "storedSchemaState": "invalid_json"
+      },
+      {
+        "sourceEntry": 662,
+        "observedAt": "2026-10-14T15:14:35.312Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 253022,
+        "responseSha256": "6ead1ef784e23cb7881684c3a5bf17b797bdbc5fb7a68c875c8bac7df3a6e909",
+        "storedSchemaState": "invalid_json"
+      },
+      {
+        "sourceEntry": 991,
+        "observedAt": "2026-10-14T15:14:42.653Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 102908,
+        "responseSha256": "9f8ef49a4314fc048b9ce17728e6d86f734f0cc7c20494a4d60d24a3d9e28f8b",
+        "storedSchemaState": "invalid_json"
+      }
+    ],
+    "requestObserved": true,
+    "responseSchemaAccepted": false,
+    "businessOutcome": "unclassified",
+    "clientImplemented": false,
+    "independentHttpReplayVerified": false
+  },
+  "reviews": {
+    "method": "GET",
+    "origin": "https://acs.aliexpress.com",
+    "path": "/h5/mtop.aliexpress.review.pc.list/1.0/",
+    "queryFieldNames": [
+      "api",
+      "appKey",
+      "callback",
+      "data",
+      "dataType",
+      "jsv",
+      "sign",
+      "t",
+      "type",
+      "v"
+    ],
+    "observations": [
+      {
+        "sourceEntry": 206,
+        "observedAt": "2026-10-14T15:14:18.025Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 14700,
+        "responseSha256": "c9489cd233712ce037349f8f5ef380bc1ed5a398fb9c7d7e553df6cd0bfe251c",
+        "storedSchemaState": "invalid_json"
+      },
+      {
+        "sourceEntry": 207,
+        "observedAt": "2026-10-14T15:14:18.025Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 9534,
+        "responseSha256": "93ab48ae9c511ce46cc978c8d27aa831bcd1faaeef27fa3d915d97170c702bd6",
+        "storedSchemaState": "invalid_json"
+      },
+      {
+        "sourceEntry": 884,
+        "observedAt": "2026-10-14T15:14:37.411Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 12125,
+        "responseSha256": "7e037e3bac0596eb12a8a65f0df50690dbf2399968a55c6a80cf98ed13509407",
+        "storedSchemaState": "invalid_json"
+      },
+      {
+        "sourceEntry": 885,
+        "observedAt": "2026-10-14T15:14:37.411Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 8749,
+        "responseSha256": "9053a76eb1045c2df83fc55e4206b3fdd15f3acc3b969df9b647ab8508963111",
+        "storedSchemaState": "invalid_json"
+      },
+      {
+        "sourceEntry": 1091,
+        "observedAt": "2026-10-14T15:14:43.606Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 11735,
+        "responseSha256": "0fe66ad7b01491801bf383bfe31a5e3f7dd01f04ca153b6a02f9aea13867ce95",
+        "storedSchemaState": "invalid_json"
+      },
+      {
+        "sourceEntry": 1092,
+        "observedAt": "2026-10-14T15:14:43.606Z",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 8063,
+        "responseSha256": "f4a79dc841fc3993ca9f81f51e19c7a9db5c8faa684598c845c1a910ec2534e7",
+        "storedSchemaState": "invalid_json"
+      }
+    ],
+    "requestObserved": true,
+    "responseSchemaAccepted": false,
+    "businessOutcome": "unclassified",
+    "clientImplemented": false,
+    "independentHttpReplayVerified": false
+  },
+  "limitations": [
+    "Only the sanitized inventory was read; original bodies and callback values are unavailable here.",
+    "JSONP is a candidate explanation for invalid_json, not a verified decode of these historical responses.",
+    "HTTP 200 and response byte counts do not prove product, price, option or review data.",
+    "The six review requests do not establish paging semantics or six distinct pages."
+  ],
+  "networkRequests": 0,
+  "rawCaptureRead": false,
+  "valuesPersisted": false
+}

@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import { createOliveyoungKoreaPublicClient } from '../lib/commerce/oliveyoung-korea-public.mjs';
 
 const GOODS = 'A000000263510';
+const OBSERVED_EXTRA_BODY = JSON.parse(readFileSync(new URL('../verification/remaining-oliveyoung-2026-10-16/extra-observed-request.json', import.meta.url), 'utf8')).body;
 const json = (value, status = 200, mime = 'application/json; charset=utf-8') =>
   new Response(JSON.stringify(value), { status, headers: { 'content-type': mime } });
 
@@ -131,107 +133,124 @@ test('search preserves numeric prices and every comma-delimited display category
   assert.equal(result.products[0].listPrice.amount, '25000');
 });
 
-test('detail binds IDs, fetches source-backed description and extras, and strips active description content', async () => {
-  const goodsData = {
-    goodsNumber: GOODS,
-    goodsName: '라운드랩 자작나무 수분 선크림',
-    onlineBrandName: '라운드랩',
-    displayCategory: { leafCategoryName: '선크림', lowerCategoryName: '선케어' },
-    onlineBrand: 'B00001',
-    supplier: 'S00001',
-    tradeCode: 'TRADE',
-    leadTime: 0,
-    goodsTypeCode: '01',
-    deliveryFreeFlag: false,
-    orderableMinimumQuantity: 1,
-    goodsSectionCode: '10',
-    deliveryPolicyNumber: 'D1',
-    salePrice: 24500,
-    finalPrice: 24500,
-    maxBenefitPrice: 23000,
-    options: [{
-      optionNumber: '1',
-      standardCode: 'SKU-1',
-      brand: '라운드랩',
-      representFlag: true,
-      standardCategory: { lowerCategory: '10000010001' },
-      discountApplyFlag: true,
-      todayDeliveryFlag: false,
-      soldOutFlag: false,
-      reservationFlag: true,
-      unitInfo: { price: 24500, priceUnit: '50ml' },
-    }],
-  };
+test('product detail fails closed before sending the uncaptured /detail request', async () => {
+  const { client, calls } = createClient({});
+  await assert.rejects(client.getProduct({ goodsNumber: GOODS }),
+    { code: 'OLIVEYOUNG_KOREA_PUBLIC_PRODUCT_CONTRACT_UNAVAILABLE' });
+  assert.equal(calls.length, 0);
+});
+
+test('product options replay the captured source body unchanged and bind returned options to its product', async () => {
+  const id = OBSERVED_EXTRA_BODY.goodsNumber;
   const { client, calls } = createClient({
-    'GET https://www.oliveyoung.co.kr/goods/api/v1/detail': json({ data: goodsData }),
-    'GET https://www.oliveyoung.co.kr/goods/api/v1/description': json({
-      data: {
-        descriptionContents: '<p>보습 선크림</p><script>discard this</script><img src="https://image.oliveyoung.co.kr/detail.png">',
-        descriptionTypeCode: 'HTML',
-        goodsDetailImages: ['/goods/detail-a.png'],
-      },
-    }),
-    'POST https://www.oliveyoung.co.kr/goods/api/v1/extra': json({
-      data: {
-        goodsNumber: GOODS,
-        optionDetail: { goodsNumber: GOODS, allSoldOutFlag: false, optionList: [{
-          optionNumber: '1', standardCode: 'SKU-1', brand: '라운드랩',
-          representFlag: true, soldOutFlag: false, unitInfo: { price: 24500, priceUnit: '50ml' },
-        }] },
-        reviewInfoDto: { goodsNo: GOODS, reviewCnt: 100, reviewAvgScore: 4.8, photoReviews: [] },
-      },
-    }),
+    'POST https://www.oliveyoung.co.kr/goods/api/v1/extra': json({ data: {
+      goodsNumber: id,
+      optionDetail: { allSoldOutFlag: false, optionList: [
+        { optionNumber: '001', standardCode: '8800312067096', brand: '4435',
+          standardCategoryNumber: '010401', discountApplyFlag: true, todayDeliveryFlag: true, soldOutFlag: false },
+        { optionNumber: '002', standardCode: '8800312067102', brand: '4435',
+          standardCategoryNumber: '010401', discountApplyFlag: true, todayDeliveryFlag: true, soldOutFlag: false },
+      ] },
+    } }),
   });
 
-  const result = await client.getProduct({ goodsNumber: GOODS, displayCategoryNumber: '10000010001' });
-  assert.deepEqual(calls.map(call => call.url.pathname), [
-    '/goods/api/v1/detail', '/goods/api/v1/description', '/goods/api/v1/extra',
-  ]);
-  assert.equal(calls[0].url.searchParams.get('goodsNo'), GOODS);
-  assert.equal(calls[0].url.searchParams.get('dispCatNo'), '10000010001');
-  assert.equal(calls[0].url.searchParams.get('appFlag'), 'false');
-  assert.deepEqual(JSON.parse(calls[2].init.body), {
-    goodsNumber: GOODS, deliveryFreeFlag: false, leadTime: 0, goodsTypeCode: '01', tradeCode: 'TRADE',
-    supplier: 'S00001', onlineBrand: 'B00001', orderableMinimumQuantity: 1, deliveryPolicyNumber: 'D1',
-    todayDeliveryCheckedFlag: false, options: [{
-      optionNumber: '1', standardCode: 'SKU-1', brand: '라운드랩', representFlag: true,
-      lowerCategoryNumber: '10000010001', discountApplyFlag: true, todayDeliveryFlag: false,
-      soldOutFlag: false, reservationFlag: true,
-    }], goodsSectionCode: '10', appFlag: false,
-  });
-  assert.equal(result.productId, GOODS);
-  assert.equal(result.title, '라운드랩 자작나무 수분 선크림');
+  const result = await client.getProductOptions({ goodsNumber: id, observedRequestBody: OBSERVED_EXTRA_BODY });
+
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].url.pathname, '/goods/api/v1/extra');
+  assert.equal(calls[0].init.method, 'POST');
+  assert.equal(calls[0].init.headers.get('content-type'), 'application/json');
+  assert.equal(calls[0].init.headers.get('referer'),
+    'https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=' + id);
+  assert.equal(calls[0].init.body, JSON.stringify(OBSERVED_EXTRA_BODY));
+  assert.equal(Buffer.byteLength(calls[0].init.body), 722);
+  assert.equal(result.productId, id);
+  assert.equal(result.identityVerified, true);
   assert.equal(result.availability, 'available');
-  assert.equal(result.description, '보습 선크림');
-  assert.equal(result.description.includes('discard this'), false);
-  assert.equal(result.options[0].sku, 'SKU-1');
-  assert.equal(result.images.some(image => image.url === 'https://image.oliveyoung.co.kr/detail.png'), true);
-  assert.equal(result.reviewSummary.count, 100);
-  assert.equal(result.priceFields.displayMappingVerified, false);
+  assert.deepEqual(result.options.map(option => [option.optionId, option.sku, option.lowerCategoryNumber, option.availability]), [
+    ['001', '8800312067096', '010401', 'available'],
+    ['002', '8800312067102', '010401', 'available'],
+  ]);
+  assert.equal(result.receipts[0].request.responseProductMatched, true);
 });
 
-test('detail fails closed on a wrong identity and does not make dependent requests', async () => {
-  const { client, calls } = createClient({
-    'GET https://www.oliveyoung.co.kr/goods/api/v1/detail': json({
-      data: { goodsNumber: 'A000000000001', goodsName: 'wrong', options: [] },
-    }),
-  });
-  await assert.rejects(client.getProduct({ goodsNumber: GOODS }),
-    { code: 'OLIVEYOUNG_KOREA_PUBLIC_PRODUCT_SCHEMA_INVALID' });
-  assert.equal(calls.length, 1);
+test('product options reject unbound or extra caller fields before any request', async t => {
+  const cases = [
+    ['product mismatch', { ...OBSERVED_EXTRA_BODY, goodsNumber: 'A000000000001' }],
+    ['unobserved field', { ...OBSERVED_EXTRA_BODY, guessedFlag: false }],
+    ['malformed option flag', { ...OBSERVED_EXTRA_BODY, options: [
+      { ...OBSERVED_EXTRA_BODY.options[0], soldOutFlag: 'false' }, OBSERVED_EXTRA_BODY.options[1],
+    ] }],
+  ];
+  for (const [name, observedRequestBody] of cases) {
+    await t.test(name, async () => {
+      const { client, calls } = createClient({});
+      await assert.rejects(client.getProductOptions({
+        goodsNumber: OBSERVED_EXTRA_BODY.goodsNumber, observedRequestBody,
+      }), { code: 'OLIVEYOUNG_KOREA_PUBLIC_OPTIONS_CONTEXT_INVALID' });
+      assert.equal(calls.length, 0);
+    });
+  }
 });
 
-test('detail refuses to invent reservation context for limited options', async () => {
+test('product options reject a conflicting response product ID with a safe receipt', async () => {
   const { client, calls } = createClient({
-    'GET https://www.oliveyoung.co.kr/goods/api/v1/detail': json({
-      data: { goodsNumber: GOODS, goodsName: 'item', options: [{
-        optionNumber: '1', reservationFlag: false, limitedInfoDto: { sourceOnly: true },
-      }] },
-    }),
+    'POST https://www.oliveyoung.co.kr/goods/api/v1/extra': json({ data: {
+      goodsNumber: 'A000000000001', optionDetail: { optionList: [] },
+    } }),
   });
-  await assert.rejects(client.getProduct({ goodsNumber: GOODS }),
-    { code: 'OLIVEYOUNG_KOREA_PUBLIC_EXTRA_LIMIT_RULE_UNVERIFIED' });
+  await assert.rejects(client.getProductOptions({
+    goodsNumber: OBSERVED_EXTRA_BODY.goodsNumber, observedRequestBody: OBSERVED_EXTRA_BODY,
+  }), error => {
+    assert.equal(error.code, 'OLIVEYOUNG_KOREA_PUBLIC_PRODUCT_ID_MISMATCH');
+    assert.equal(error.receipt.request.httpStatus, 200);
+    assert.equal(error.receipt.request.mime, 'application/json');
+    assert.equal(typeof error.receipt.request.responseSha256, 'string');
+    assert.equal(error.receipt.request.responseProductMatched, false);
+    assert.equal(calls.length, 1);
+    return true;
+  });
+});
+
+test('product description and source images can be read independently while absent identity echo stays explicit', async () => {
+  const { client, calls } = createClient({
+    'GET https://www.oliveyoung.co.kr/goods/api/v1/description': json({ data: {
+      descriptionContents: '<p>보습 설명</p><script>drop this</script><img data-src="/images/one.jpg"><img src="https://image.oliveyoung.co.kr/two.jpg">',
+      goodsDetailImages: null,
+    } }),
+  });
+
+  const result = await client.getProductDescription({ goodsNumber: GOODS });
+
   assert.equal(calls.length, 1);
+  assert.equal(calls[0].url.origin, 'https://www.oliveyoung.co.kr');
+  assert.equal(calls[0].url.pathname, '/goods/api/v1/description');
+  assert.equal(calls[0].url.searchParams.get('goodsNumber'), GOODS);
+  assert.equal(calls[0].init.method, 'GET');
+  assert.equal(calls[0].init.headers.get('referer'),
+    'https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=' + GOODS);
+  assert.equal(result.requestedProductId, GOODS);
+  assert.equal(result.identityVerified, false);
+  assert.equal(result.description, '보습 설명');
+  assert.deepEqual(result.images, [{ path: '/images/one.jpg' }, { url: 'https://image.oliveyoung.co.kr/two.jpg' }]);
+  assert.equal(result.receipts[0].request.httpStatus, 200);
+});
+
+test('product description rejects a conflicting echoed goods number with its safe receipt', async () => {
+  const { client, calls } = createClient({
+    'GET https://www.oliveyoung.co.kr/goods/api/v1/description': json({ data: {
+      goodsNumber: 'A000000000001', descriptionContents: '<p>다른 상품</p>', goodsDetailImages: null,
+    } }),
+  });
+
+  await assert.rejects(client.getProductDescription({ goodsNumber: GOODS }), error => {
+    assert.equal(error.code, 'OLIVEYOUNG_KOREA_PUBLIC_PRODUCT_ID_MISMATCH');
+    assert.equal(error.receipt.request.httpStatus, 200);
+    assert.equal(error.receipt.request.mime, 'application/json');
+    assert.equal(typeof error.receipt.request.responseSha256, 'string');
+    assert.equal(calls.length, 1);
+    return true;
+  });
 });
 
 test('reviews use the observed first-page request and return an explicit cursor without reviewer identity', async () => {
@@ -385,6 +404,66 @@ test('photo reviews use zero-based API pages and verified last-page metadata', a
   assert.equal(result.reviews[0].photos[0].imagePath, '/photo.png');
   assert.equal(result.pagination.isLastPage, true);
   assert.equal(result.pagination.nextPage, null);
+  assert.equal(result.pagination.terminalityVerified, true);
+});
+
+test('photo-review rows survive a current response with no pagination object, with termination left unknown', async () => {
+  const { client, calls } = createClient({
+    'POST https://m.oliveyoung.co.kr/review/api/v2/reviews/photo-reviews': json({
+      code: 'SUCCESS', status: 'SUCCESS', totalCnt: null, pageData: null, pagination: null,
+      data: [{ reviewId: 'R2', createdDateTime: '2026-10-16T00:00:00Z',
+        photoReviewList: [{ imageSequence: 1, imagePath: '/photo-2.png' }] }],
+    }),
+  });
+
+  const result = await client.getPhotoReviews({ goodsNumber: GOODS, pageNumber: 2, pageSize: 10 });
+
+  assert.deepEqual(JSON.parse(calls[0].init.body), { goodsNumber: GOODS, page: 1, size: 10 });
+  assert.equal(result.reviews.length, 1);
+  assert.equal(result.reviews[0].photos[0].imagePath, '/photo-2.png');
+  assert.equal(result.pagination.isLastPage, null);
+  assert.equal(result.pagination.nextPage, null);
+  assert.equal(result.pagination.nextPageCandidate, 3);
+  assert.equal(result.pagination.terminalityVerified, false);
+  assert.equal(result.receipts[0].request.httpStatus, 200);
+});
+
+test('photo reviews fail closed on unsupported pageData or malformed pagination while retaining the safe HTTP receipt', async t => {
+  const cases = [
+    ['pageData object', { data: [], pageData: { totalPages: 1 }, pagination: null }],
+    ['pagination primitive', { data: [], pageData: null, pagination: 'last' }],
+    ['non-boolean terminal flag', { data: [], pageData: null, pagination: { isLastPage: 'true' } }],
+  ];
+  for (const [name, payload] of cases) {
+    await t.test(name, async () => {
+      const { client } = createClient({
+        'POST https://m.oliveyoung.co.kr/review/api/v2/reviews/photo-reviews': json(payload),
+      });
+      await assert.rejects(client.getPhotoReviews({ goodsNumber: GOODS, pageNumber: 1 }), error => {
+        assert.equal(error.code, 'OLIVEYOUNG_KOREA_PUBLIC_REVIEW_PHOTO_SCHEMA_INVALID');
+        assert.equal(error.receipt.request.httpStatus, 200);
+        assert.equal(error.receipt.request.mime, 'application/json');
+        assert.equal(typeof error.receipt.request.responseSha256, 'string');
+        return true;
+      });
+    });
+  }
+});
+
+test('photo reviews reject malformed photo entries instead of silently dropping image rows', async () => {
+  const { client } = createClient({
+    'POST https://m.oliveyoung.co.kr/review/api/v2/reviews/photo-reviews': json({
+      data: [{ reviewId: 'R3', photoReviewList: [{ imagePath: null }] }],
+      pageData: null,
+      pagination: null,
+    }),
+  });
+  await assert.rejects(client.getPhotoReviews({ goodsNumber: GOODS, pageNumber: 1 }), error => {
+    assert.equal(error.code, 'OLIVEYOUNG_KOREA_PUBLIC_REVIEW_PHOTO_SCHEMA_INVALID');
+    assert.equal(error.receipt.request.httpStatus, 200);
+    assert.equal(typeof error.receipt.request.responseSha256, 'string');
+    return true;
+  });
 });
 
 test('review stats and summaries bind to exact requested product IDs', async () => {
@@ -431,16 +510,12 @@ test('session cookies remain in memory and an HTML 403 is a transport blocker, n
   const secret = 'synthetic-cookie-value-should-never-escape';
   let capturedCookie;
   const { client } = createClient({
-    'GET https://www.oliveyoung.co.kr/goods/api/v1/detail': json({
-      data: { goodsNumber: GOODS, goodsName: 'item', options: [] },
-    }),
     'GET https://www.oliveyoung.co.kr/goods/api/v1/description': async ({ init }) => {
       capturedCookie = init.headers.get('cookie');
       return new Response('<html>blocked</html>', {
         status: 403, headers: { 'content-type': 'text/html; charset=utf-8' },
       });
     },
-    'POST https://www.oliveyoung.co.kr/goods/api/v1/extra': json({ data: {} }, 403, 'text/html'),
   }, {
     session: {
       userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/151.0.0.0 Safari/537.36',
@@ -448,7 +523,7 @@ test('session cookies remain in memory and an HTML 403 is a transport blocker, n
     },
   });
   let caught;
-  try { await client.getProduct({ goodsNumber: GOODS }); }
+  try { await client.getProductDescription({ goodsNumber: GOODS }); }
   catch (error) { caught = error; }
   assert.equal(capturedCookie, '__cf_bm=' + secret);
   assert.equal(caught.code, 'OLIVEYOUNG_KOREA_PUBLIC_HTTP_BLOCKED');

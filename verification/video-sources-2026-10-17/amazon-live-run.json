@@ -1,0 +1,57 @@
+{
+  "schema": "video-sources-live-run-v1",
+  "checkedAt": "2026-10-17T12:10:00Z",
+  "service": "video-sources",
+  "source": "amazon",
+  "transport": "browser_tab_fetch (Chrome Canary 158 automation profile :9333, no login)",
+  "search": {
+    "origin": "https://www.amazon.com",
+    "path": "/s",
+    "keyword": "folding piano keyboard",
+    "httpStatus": 200,
+    "asins": 52
+  },
+  "pdp": {
+    "origin": "https://www.amazon.com",
+    "path": "/dp/{ASIN}",
+    "resourceType": "Document",
+    "videosArray": "\"videos\":[...] (IB_G1); seller/vendor via aciContentId namespace",
+    "sampled": 6,
+    "withSellerVideo": 4
+  },
+  "download": "HLS master -> highest variant by short side <= 1080 -> ffmpeg -c copy; progressive MP4 exists only at 480p",
+  "results": [
+    {
+      "asin": "B0DS23X39K",
+      "videoId": "00c42fbcf8dd4a29857470d9d33bc004",
+      "contentNamespace": "amzn1.ive.seller.video",
+      "resolution": "1920x1080",
+      "bytes": 8491015,
+      "sha256": "2aaf36aea79021003048c8ff622656f5cd5a08dc084c3853b540ab8d09ee7176",
+      "downloadUrlHost": "m.media-amazon.com",
+      "rightsBasis": "seller_product_video_unverified"
+    },
+    {
+      "asin": "B0DS23X39K",
+      "videoId": "07469fc7b2784a66b336101c17ab1ab2",
+      "contentNamespace": "amzn1.ive.seller.video",
+      "resolution": "1080x1920",
+      "bytes": 28104315,
+      "sha256": "7d8cacb3d4ed700843882a5784ddbf04586fd238a043fa7b80b9788d097a80f4",
+      "downloadUrlHost": "m.media-amazon.com",
+      "rightsBasis": "seller_product_video_unverified"
+    },
+    {
+      "asin": "B0DS23X39K",
+      "videoId": "0f19b7e5c5f548a9ac6f075b9f6585fc",
+      "contentNamespace": "amzn1.ive.seller.video",
+      "resolution": "1920x1080",
+      "bytes": 13440535,
+      "sha256": "c592259cca94330483f3d8c768652fa12180e7f7a5724693fdfd4a0df2bc58df",
+      "downloadUrlHost": "m.media-amazon.com",
+      "rightsBasis": "seller_product_video_unverified"
+    }
+  ],
+  "secretsPersistedInEvidence": false,
+  "mediaPersistedInRepository": false
+}

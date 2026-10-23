@@ -1,0 +1,65 @@
+[
+  {
+    "service": "iherb",
+    "operation": "sitemap-products",
+    "actualRunner": "scripts/overseas-retail.mjs",
+    "exitCode": 0,
+    "ok": true,
+    "code": null,
+    "checkedAt": "2026-10-15T12:54:47.944Z",
+    "browserUsed": false,
+    "requests": [
+      {
+        "method": "GET",
+        "origin": "https://www.iherb.com",
+        "path": "/sitemap_index.xml",
+        "status": 200,
+        "mime": "text/xml",
+        "cookieSent": false
+      },
+      {
+        "method": "GET",
+        "origin": "https://www.iherb.com",
+        "path": "/sitemaps/products-0-www-0.xml",
+        "status": 200,
+        "mime": "text/xml",
+        "cookieSent": false
+      }
+    ],
+    "count": 10,
+    "coverage": "public_product_identity_and_lastmod_only",
+    "completeCatalog": false,
+    "sourceEvidence": "iherb-live.json"
+  },
+  {
+    "service": "shein",
+    "operation": "home",
+    "actualRunner": "scripts/overseas-retail.mjs",
+    "exitCode": 0,
+    "ok": true,
+    "code": null,
+    "checkedAt": "2026-10-15T12:54:42.471Z",
+    "browserUsed": false,
+    "requests": [
+      {
+        "method": "GET",
+        "origin": "https://kr.shein.com",
+        "path": "/",
+        "status": 200,
+        "mime": "text/html",
+        "cookieSent": false
+      }
+    ],
+    "count": 10,
+    "coverage": {
+      "scope": "initial_home_document_cards_and_category_menu",
+      "completeCatalog": false,
+      "detailVerified": false,
+      "optionsVerified": false,
+      "reviewsVerified": false,
+      "paginationVerified": false
+    },
+    "completeCatalog": false,
+    "sourceEvidence": "shein-live.json"
+  }
+]

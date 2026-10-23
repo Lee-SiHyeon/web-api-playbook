@@ -1,0 +1,52 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "amazon",
+  "capabilityId": "catalog.pagination",
+  "checkedAt": "2026-10-15T05:58:00.131Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "request": {
+    "method": "POST",
+    "origin": "https://www.amazon.com",
+    "path": "/s/query",
+    "httpStatus": 200,
+    "mime": "application/json-amazonui-streaming",
+    "responseBytes": 852214,
+    "responseSha256": "1315189b1ec372ec71eb7bb68b0fff6b0ad560cf072036b25f8e83d4ffbd2e6d",
+    "browserUsed": false,
+    "anonymous": true,
+    "cookieSent": false,
+    "readOnly": true,
+    "credentialsUsed": false,
+    "checkedAt": "2026-10-15T05:58:00.131Z",
+    "schemaVerified": true,
+    "expectedResultVerified": true,
+    "resultScope": "validated_main_search_cards",
+    "partial": true,
+    "allAsinsOnPageCovered": false
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.amazon.com/s/query"
+  },
+  "result": {
+    "query": "wireless mouse",
+    "page": 4,
+    "itemCount": 16,
+    "partial": true,
+    "pagination": {
+      "observed": true,
+      "hasNext": true,
+      "nextPage": 5,
+      "terminationVerified": false
+    }
+  },
+  "implementation": {
+    "lib/retail/amazon.mjs": "10d2cae2fb68bf41969448018883d4c606db5d514f7f1e4a18f1bd65d508abca",
+    "lib/retail/amazon-crawl.mjs": "163a28bc10186825940b2ec62020d2bd51112d040beeed1f3ad37fbd409548e1"
+  }
+}

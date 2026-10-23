@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "observedAt": "2026-10-05T17:53:34.129Z",
+  "ownerRead": {
+    "operationId": "auth.owner.read",
+    "status": 200,
+    "responseContentType": "application/json",
+    "ownerMatchedRegisteredChromePage": true,
+    "identityValuePersisted": false,
+    "receiptDigest": "aed21e9c214973399ee78f78dce8b0bda9808c94d8b5d4de4334bcdfdf3eba75"
+  },
+  "transport": {
+    "name": "curl_cffi direct HTTP",
+    "version": "0.16.3",
+    "impersonate": "chrome150",
+    "tlsVerified": true,
+    "trustEnv": false,
+    "explicitRetries": 0,
+    "cookieNames": [
+      "sso"
+    ],
+    "cookieValuesPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false
+  },
+  "reads": [
+    {
+      "operationId": "auth.owner.read",
+      "contractSha256": "2258d14b5e9b227c0267557fd66e70a2fb0cb8f13e3da9a68245fd45cbc2c24c",
+      "method": "GET",
+      "pathTemplate": "/api/auth/session",
+      "queryKeys": [],
+      "requestFieldNames": [],
+      "safeRequestValues": {
+        "ownerMatchedCurrentRegisteredPage": true
+      },
+      "requestBytes": 0,
+      "requestDigest": "a52367be7a8fef47cecfe8dbeb53cbe3281b1cbc7e32995bbd998d36d38404cc",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 648,
+      "responseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+      "responseShape": {
+        "topLevelFieldNames": [
+          "session",
+          "status"
+        ],
+        "status": "string",
+        "session": {
+          "type": "object",
+          "fieldNames": [
+            "createTime",
+            "email",
+            "emailConfirmed",
+            "emailDomain",
+            "familyName",
+            "givenName",
+            "googleEmail",
+            "hasPassword",
+            "isIntegrationSession",
+            "isOrgAdmin",
+            "organizationId",
+            "organizationKind",
+            "organizationRole",
+            "organizationType",
+            "profileImage",
+            "sessionId",
+            "signInMethod",
+            "userId",
+            "xSubscriptionType",
+            "xUserId"
+          ]
+        }
+      },
+      "handlerDispatchVerified": false,
+      "transport": "curl_cffi-0.16.3 / impersonate=chrome150 / TLS-verified / trust_env=false / explicit-retry=0",
+      "responseShapeMatchesCapture": true
+    },
+    {
+      "operationId": "conversation.list.read",
+      "contractSha256": "30d00963f927a17d19551cf5a8cd6ecc6523f3a2fc2d095b5bf3c4a6c6c443ec",
+      "method": "GET",
+      "pathTemplate": "/rest/app-chat/conversations",
+      "queryKeys": [
+        "pageSize"
+      ],
+      "requestFieldNames": [],
+      "safeRequestValues": {
+        "pageSize": 24
+      },
+      "requestBytes": 0,
+      "requestDigest": "22612c9ff256fb5cdefa694e3488d5e7d49d588d6596ca9432943ced8e05bad0",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 23648,
+      "responseDigest": "3bb3a8fbf5a275532f2f7721703f32ed24451693ca56bb0058ff32a24adf94d8",
+      "responseShape": {
+        "topLevelFieldNames": [
+          "conversations",
+          "nextPageToken",
+          "textSearchMatches"
+        ],
+        "conversations": {
+          "type": "array",
+          "count": 60,
+          "itemFieldNames": [
+            "conversationId",
+            "createTime",
+            "hasUnreadCheckin",
+            "kind",
+            "latestAssetMetadata",
+            "mediaTypes",
+            "modifyTime",
+            "starred",
+            "systemPromptName",
+            "taskResult",
+            "temporary",
+            "title",
+            "workspaces"
+          ]
+        },
+        "nextPageToken": "string",
+        "textSearchMatches": {
+          "type": "array",
+          "count": 0,
+          "itemFieldNames": []
+        }
+      },
+      "handlerDispatchVerified": false,
+      "transport": "curl_cffi-0.16.3 / impersonate=chrome150 / TLS-verified / trust_env=false / explicit-retry=0",
+      "responseShapeMatchesCapture": true
+    },
+    {
+      "operationId": "conversation.read",
+      "contractSha256": "5bfdd3ecc49d7ea7b133b44eb592a454804447f8edbfda7b9d576cf469fbe507",
+      "method": "GET",
+      "pathTemplate": "/rest/app-chat/conversations_v2/__grok_input_segment__",
+      "queryKeys": [
+        "includeTaskResult",
+        "includeWorkspaces"
+      ],
+      "requestFieldNames": [],
+      "safeRequestValues": {
+        "conversationIdFromCapturedBrowserRequest": true,
+        "responseIdMatchesRequest": false,
+        "includeTaskResult": true,
+        "includeWorkspaces": true
+      },
+      "requestBytes": 0,
+      "requestDigest": "fc7670f2298a55223ebcb51abf261ad515f877a9c75232a0112a1e44e31cf8cc",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 2,
+      "responseDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "responseShape": {
+        "topLevelFieldNames": []
+      },
+      "handlerDispatchVerified": false,
+      "transport": "curl_cffi-0.16.3 / impersonate=chrome150 / TLS-verified / trust_env=false / explicit-retry=0",
+      "responseShapeMatchesCapture": false
+    },
+    {
+      "operationId": "settings.read",
+      "contractSha256": "4a976fbf35aef93c5fb77b19107e754c5cdb49b994fbb47b83623718db1fd449",
+      "method": "GET",
+      "pathTemplate": "/rest/user-settings",
+      "queryKeys": [],
+      "requestFieldNames": [],
+      "safeRequestValues": {},
+      "requestBytes": 0,
+      "requestDigest": "03495782747fa2a1b26a7a01062b96ddc2d3d84375a87ca087eb9f2b60f8ca1a",
+      "responseStatus": 200,
+      "responseContentType": "application/json",
+      "responseBytes": 838,
+      "responseDigest": "a908aad9880046aee374dffdfaba1973281315ee2478c73007ad90ca77c09509",
+      "responseShape": {
+        "topLevelFieldNames": [
+          "agentCustomizations",
+          "allowAutoShare",
+          "allowCompanionNotifications",
+          "allowGrokFinishedNotification",
+          "allowShareIndexing",
+          "allowXPersonalization",
+          "audioRefConsent",
+          "enableMemory",
+          "excludeFromTraining",
+          "mutedBotPushAgentIds",
+          "preferences"
+        ],
+        "excludeFromTraining": "boolean",
+        "preferences": {
+          "type": "object",
+          "fieldNames": [
+            "autoWrapLongLinesCode",
+            "browserNotificationsEnabled",
+            "disableAutoScroll",
+            "disableVideoGenerationOnUpload",
+            "enableBrowserGeoLocation",
+            "enableColoredFileIcons",
+            "enableEarlyAccessModels",
+            "enableStarBackground",
+            "enableTiptapEditorForQueryBar",
+            "hideArtifacts",
+            "hideThinkingTrace",
+            "isAsyncChat",
+            "requireCmdEnterToSubmit",
+            "showActiveTabs",
+            "showConversationPreviews",
+            "useModelModeSelector3"
+          ]
+        },
+        "allowXPersonalization": "boolean",
+        "enableMemory": "boolean",
+        "allowShareIndexing": "boolean",
+        "allowCompanionNotifications": "boolean",
+        "allowAutoShare": "boolean",
+        "agentCustomizations": {
+          "type": "array",
+          "count": 0,
+          "itemFieldNames": []
+        },
+        "allowGrokFinishedNotification": "boolean",
+        "audioRefConsent": {
+          "type": "object",
+          "fieldNames": [
+            "acceptedAt",
+            "version"
+          ]
+        },
+        "mutedBotPushAgentIds": {
+          "type": "array",
+          "count": 0,
+          "itemFieldNames": []
+        }
+      },
+      "handlerDispatchVerified": false,
+      "transport": "curl_cffi-0.16.3 / impersonate=chrome150 / TLS-verified / trust_env=false / explicit-retry=0",
+      "responseShapeMatchesCapture": true
+    }
+  ],
+  "verificationState": "partial_direct_replays",
+  "incompleteOperationIds": [
+    "conversation.read",
+    "history.response-nodes",
+    "history.load-responses",
+    "conversation.share.read"
+  ],
+  "browserCapture": {
+    "pageReloaded": true,
+    "capturedReadOperationIds": [
+      "conversation.list.read",
+      "conversation.read",
+      "settings.read"
+    ],
+    "browserWriteRequestsBlocked": 23,
+    "browserBusinessFramesBlocked": 1,
+    "observedSessionControlFramesForwarded": 1,
+    "rawBrowserRequestValuesPersisted": false,
+    "serverWritesDelivered": 0
+  },
+  "clientDispatchVerified": false,
+  "notes": "These are direct HTTP replays of the captured operation shapes using the same owner-bound session. They do not verify dispatch through GrokWebClient/createAuthenticatedChromeFetch; no private feature receipt is implied."
+}

@@ -1,0 +1,60 @@
+{
+  "schema": "playbook-maintenance-local-test-results-v1",
+  "checkedDate": "2026-10-16",
+  "timeZone": "Asia/Seoul",
+  "liveReplayProvenByTheseTests": false,
+  "runs": [
+    {
+      "command": "npm test",
+      "phase": "initial",
+      "tests": 732,
+      "passed": 723,
+      "failed": 8,
+      "skipped": 1,
+      "failureCause": "Python helper tests selected the Windows python3 alias (exit 9009), instead of the installed repository virtual environment."
+    },
+    {
+      "command": "node --test tests/commerce-oliveyoung-http-transport.test.mjs tests/commerce-oliveyoung-anonymous-ranking-transport.test.mjs",
+      "phase": "after_interpreter_selection_fix",
+      "tests": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "npm test",
+      "phase": "final_source",
+      "tests": 737,
+      "passed": 736,
+      "failed": 0,
+      "skipped": 1,
+      "skipReason": "An existing non-Windows Toss test deliberately avoids querying the real Windows credential store."
+    },
+    {
+      "command": "node --test service-packs/naver/apps/naver-blog-api/tests/trend-radar.test.mjs",
+      "phase": "final_source",
+      "tests": 11,
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "command": "node --test service-packs/affiliate/apps/affiliate-api-hub/tests/coupang-partners-memory-provider.test.mjs",
+      "phase": "after_platform_assertion_fix",
+      "tests": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "boundary": "POSIX mode assertions run on POSIX hosts. Windows file existence and behavior are checked, but this fixture does not establish ACL security."
+    },
+    {
+      "command": "node --test tests/playbook-audit.test.mjs",
+      "phase": "after_virtualenv_inventory_exclusion",
+      "tests": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "doNotSumOverlappingRuns": true
+}

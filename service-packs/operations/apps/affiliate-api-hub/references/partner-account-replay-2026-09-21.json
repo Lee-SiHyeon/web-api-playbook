@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "host": "home Windows DESKTOP-TO2H6OD",
+  "credentialProvider": "supported_current_origin_Chrome_Canary",
+  "handoff": "memory_to_independent_Node_stdin_child",
+  "runner": "apps/affiliate-api-hub/scripts/partner-session-probe.mjs",
+  "secretPersistence": "none",
+  "rawAccountRecordsReturned": false,
+  "authenticatedLiveReplayCount": 2,
+  "services": {
+    "myrealtrip": {
+      "checkedAt": "2026-09-20T16:36:37.724Z",
+      "method": "GET",
+      "origin": "https://api3-backoffice.myrealtrip.com",
+      "path": "/partner/v1/partners",
+      "httpStatus": 200,
+      "applicationStatus": 200,
+      "responseBytes": 1403,
+      "identityFields": ["id", "email"],
+      "identityVerified": true,
+      "credentialPropagated": true,
+      "authenticated": true,
+      "browserUsedForHttpRequest": false
+    },
+    "brandconnect": {
+      "checkedAt": "2026-09-20T16:37:59.645Z",
+      "method": "GET",
+      "origin": "https://gw-brandconnect.naver.com",
+      "path": "/brand-connect/query/me",
+      "httpStatus": 200,
+      "responseBytes": 214,
+      "identityFields": ["loginId"],
+      "identityVerified": true,
+      "credentialPropagated": true,
+      "authenticated": true,
+      "browserUsedForHttpRequest": false,
+      "entitlement": {"partner": false, "creator": true, "accountAssigned": true}
+    }
+  },
+  "phases": {
+    "loginBootstrap": {"browserUsed": true, "mode": "existing_Canary_profile_and_official_ID_password_login"},
+    "credentialAcquisition": {"browserUsed": true, "scope": "current_site_request_header_or_current_origin_cookies"},
+    "accountRead": {"mode": "pure_http", "browserUsed": false, "remnantFree": true},
+    "engineFreeLogin": {"verified": false},
+    "automaticLoginRenewal": {"verified": false}
+  },
+  "scope": "Authenticated account reads only; link generation and other business operations are not verified"
+}

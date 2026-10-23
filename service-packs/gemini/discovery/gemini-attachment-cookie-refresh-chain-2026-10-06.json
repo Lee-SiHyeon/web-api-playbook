@@ -1,0 +1,480 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_chain",
+  "callerIntent": "gemini-attachment-cookie-refresh-chain-20261006-v1",
+  "messageCallerIntent": "gemini-attachment-cookie-refresh-message-20261006-v1",
+  "recordedAt": "2026-10-06T04:34:08.041238+00:00",
+  "outputStatus": "incomplete",
+  "failureCode": "ATTACHMENT_CHAIN_CHILD_ATTACHMENT_UPLOAD_CONTINUATION_TEMPLATE_MISMATCH",
+  "ownerDigestMatchedApproved": true,
+  "file": {
+    "name": "gemini-attachment-cookie-refresh-20261006.txt",
+    "mimeType": "text/plain",
+    "bytes": 12,
+    "sha256": "d9ce19c8f322caebc282b10a9bf2d71d453603c6a80c9c284c3cf1e6ead38d1c"
+  },
+  "directDispatchCount": 1,
+  "mutationJournal": {
+    "attachment_upload": {
+      "state": "response_received",
+      "dispatchCount": 1,
+      "httpStatus": 200
+    }
+  },
+  "childError": {
+    "errorCode": "ATTACHMENT_UPLOAD_CONTINUATION_TEMPLATE_MISMATCH",
+    "errorClass": "GeminiClientError",
+    "directDispatchCount": 1,
+    "startDispatchCount": 1,
+    "transferDispatchCount": 0,
+    "httpRequestCount": 2,
+    "httpStatus": 200,
+    "stage": "upload_request",
+    "queryReadback": {
+      "httpStatus": 200,
+      "uploadStatus": "active",
+      "sizeReceived": 0
+    }
+  },
+  "nativeStartObserved": true,
+  "nativeContinuationObserved": true,
+  "continuationCookieSnapshot": {
+    "currentCookieCount": 17,
+    "currentCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "currentCookieScopes": [
+      {
+        "name": "AEC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "APISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "HSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "NID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "SEARCH_SAMESITE",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": false
+      },
+      {
+        "name": "SSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-1PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PAPISID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSID",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDCC",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      },
+      {
+        "name": "__Secure-3PSIDTS",
+        "domain": ".google.com",
+        "path": "/",
+        "secure": true
+      }
+    ],
+    "nativeCookieNames": [
+      "AEC",
+      "APISID",
+      "HSID",
+      "NID",
+      "SAPISID",
+      "SEARCH_SAMESITE",
+      "SID",
+      "SIDCC",
+      "SSID",
+      "__Secure-1PAPISID",
+      "__Secure-1PSID",
+      "__Secure-1PSIDCC",
+      "__Secure-1PSIDTS",
+      "__Secure-3PAPISID",
+      "__Secure-3PSID",
+      "__Secure-3PSIDCC",
+      "__Secure-3PSIDTS"
+    ],
+    "rotatedCookieNamesSinceStart": [],
+    "cookieValuesPersisted": false
+  },
+  "nativeAttachmentMessageObserved": false,
+  "normalHistoryTemplate": {
+    "captured": true,
+    "rpcId": "MaZiqc",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "observedHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "directReadHistoryListArgs": [
+      28,
+      null,
+      [
+        0,
+        null,
+        1
+      ]
+    ],
+    "cursorAdjustedToCapturedFirstPageTemplate": false,
+    "canonicalFirstPageTemplateSource": "scripts/run-linux-text-smoke.py:FIRST_PAGE_HISTORY_ARGS",
+    "atPresentInMemory": true,
+    "rawQueryAndTokenValuesPersisted": false
+  },
+  "historyArgsMismatch": null,
+  "directStart": {
+    "httpStatus": 200,
+    "responseHeaderNames": [
+      "access-control-allow-credentials",
+      "access-control-allow-origin",
+      "access-control-expose-headers",
+      "content-type",
+      "x-goog-upload-chunk-granularity",
+      "x-goog-upload-control-url",
+      "x-goog-upload-status",
+      "x-goog-upload-url",
+      "x-guploader-uploadid"
+    ],
+    "contentType": "text/plain",
+    "responseBytes": 0,
+    "responseSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sessionUrlRef": {
+      "origin": "https://push.clients6.google.com",
+      "pathFamily": "/upload/",
+      "queryKeyNames": [
+        "upload_id",
+        "upload_protocol"
+      ]
+    }
+  },
+  "directTransferResponse": null,
+  "guardLifecycle": {
+    "registeredTargetIdMatched": true,
+    "resetQuietVerifiedThroughDisconnect": false,
+    "lateBlockedRequestCount": 0,
+    "browserClosed": false,
+    "contextClosed": false
+  },
+  "rawBodiesOrCredentialValuesPersisted": false,
+  "rawOwnerEmailPersisted": false,
+  "rawUploadSessionUrlPersisted": false,
+  "rawAttachmentReferencePersisted": false,
+  "rawPromptOrFileContentsPersisted": false,
+  "attemptCount": 1,
+  "attempts": [
+    {
+      "recordedAt": "2026-10-06T04:34:08.041238+00:00",
+      "outputStatus": "incomplete",
+      "failureCode": "ATTACHMENT_CHAIN_CHILD_ATTACHMENT_UPLOAD_CONTINUATION_TEMPLATE_MISMATCH",
+      "directDispatchCount": 1,
+      "nativeStartObserved": true,
+      "nativeContinuationObserved": true,
+      "nativeAttachmentMessageObserved": false,
+      "historyArgsMismatch": null,
+      "childError": {
+        "errorCode": "ATTACHMENT_UPLOAD_CONTINUATION_TEMPLATE_MISMATCH",
+        "errorClass": "GeminiClientError",
+        "directDispatchCount": 1,
+        "startDispatchCount": 1,
+        "transferDispatchCount": 0,
+        "httpRequestCount": 2,
+        "httpStatus": 200,
+        "stage": "upload_request",
+        "queryReadback": {
+          "httpStatus": 200,
+          "uploadStatus": "active",
+          "sizeReceived": 0
+        }
+      },
+      "continuationCookieSnapshot": {
+        "currentCookieCount": 17,
+        "currentCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "currentCookieScopes": [
+          {
+            "name": "AEC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "APISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "HSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "NID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "SAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "SEARCH_SAMESITE",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": false
+          },
+          {
+            "name": "SSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-1PSIDTS",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PAPISID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSID",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSIDCC",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          },
+          {
+            "name": "__Secure-3PSIDTS",
+            "domain": ".google.com",
+            "path": "/",
+            "secure": true
+          }
+        ],
+        "nativeCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "rotatedCookieNamesSinceStart": [],
+        "cookieValuesPersisted": false
+      },
+      "mutationJournal": {
+        "attachment_upload": {
+          "state": "response_received",
+          "dispatchCount": 1,
+          "httpStatus": 200
+        }
+      },
+      "guardLifecycle": {
+        "registeredTargetIdMatched": true,
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false
+      }
+    }
+  ],
+  "auditCorrection": {
+    "recordedAt": "2026-10-06T04:47:38.025238+00:00",
+    "directStartHttpStatus": 200,
+    "directStartRequestDispatchCount": 1,
+    "directTransferRequestDispatchCount": 0,
+    "directTransferReceivedBytes": 0,
+    "directQueryHttpStatus": 200,
+    "directQueryUploadStatus": "active",
+    "directQuerySizeReceived": 0,
+    "freshSameOwnerCookieGatePassed": true,
+    "freshCookieSnapshotNamesAndScopesMatched": true,
+    "rotatedCookieNameCount": 0,
+    "normalSdkContinuationCapturedAndAborted": true,
+    "normalSdkAttachmentMessageCaptured": false,
+    "directTextDispatchCount": 0,
+    "templateMismatchHeaderNameDiagnosticsPreserved": false,
+    "sessionUrlRetainedAfterProcessExit": false,
+    "sessionRecoveryOrCancellationAttempted": false,
+    "recoveryResetQuietVerifiedThroughFreshGuard": true,
+    "browserClosed": false,
+    "contextClosed": false,
+    "rawValuesPersisted": false
+  }
+}

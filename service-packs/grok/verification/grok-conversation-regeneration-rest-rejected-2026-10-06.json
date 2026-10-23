@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-05T23:01:04.909436Z",
+  "operationId": "conversation.regenerate",
+  "source": {
+    "sourceUrl": "https://cdn.grok.com/_next/static/chunks/27akar72ihacg.js",
+    "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+    "sourceFunctionName": "chatAddResponseRaw",
+    "method": "POST",
+    "pathTemplate": "/rest/app-chat/conversations/{conversationId}/responses"
+  },
+  "attempt": {
+    "sourceDiscoveryPermitUsed": true,
+    "attemptCount": 1,
+    "httpStatus": 403,
+    "clientErrorCode": "HTTP_STATUS_UNEXPECTED",
+    "responseBodyParsed": false,
+    "responseContentTypePersisted": false,
+    "responseBodyShape": "unavailable",
+    "rawRequestBodyPersisted": false,
+    "rawResponseBodyPersisted": false,
+    "requestDigestPersistedInJournal": true,
+    "intentDigestPersistedInJournal": true,
+    "automaticRetry": false
+  },
+  "browserGuards": {
+    "httpMutationAbortGuardInstalledBeforeReload": true,
+    "existingTaskWebSocketAttachGatePassed": true,
+    "serverSessionAcknowledgementObserved": true,
+    "browserBusinessFramesForwarded": 0,
+    "browserUiRegenerateClickCount": 0
+  },
+  "independentHistoryReadback": {
+    "status": 200,
+    "viewerIsOwner": true,
+    "exactPromptHashMatched": true,
+    "expectedAssistantPatternMatched": true,
+    "responseCountBefore": 4,
+    "responseCountAfter": 4,
+    "userResponseCount": 1,
+    "assistantResponseCount": 3,
+    "newAssistantResponseObserved": false,
+    "messageContentPersisted": false
+  },
+  "journal": {
+    "state": "failed",
+    "reasonCode": "HTTP_403_READBACK_NO_CHANGE",
+    "attemptCount": 1,
+    "terminalNoRetry": true
+  },
+  "classification": "source_rest_candidate_rejected; current_ui_regeneration_route_not_determined",
+  "verified": false
+}

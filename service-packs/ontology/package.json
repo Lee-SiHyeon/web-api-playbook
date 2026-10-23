@@ -1,0 +1,19 @@
+{
+  "name": "@web-api-playbook/ontology-public-readers",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "notices": "node src/rental-housing/public-notices.mjs",
+    "travel": "node src/travel-price/collect-live.mjs",
+    "modetour:document": "node scripts/modetour-document.mjs",
+    "verify:live": "node scripts/verify-live.mjs",
+    "test": "node --test src/rental-housing/rental-housing-notice-readers.test.mjs src/rental-housing/sh-notices.test.mjs src/travel-price/yanolja-search.test.mjs src/travel-price/yanolja-hotel.test.mjs src/travel-price/seller-adapters/modetour.test.mjs src/travel-price/modetour-document.test.mjs"
+  },
+  "dependencies": {
+    "parse5": "8.0.1",
+    "iconv-lite": "0.6.3",
+    "jsdom": "26.1.0"
+  }
+}

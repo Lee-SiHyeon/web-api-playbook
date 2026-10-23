@@ -1,0 +1,185 @@
+{
+  "schema": "gemini-model-selection-live-evidence-v1",
+  "service": "gemini-web",
+  "recordedAt": "2026-10-06T04:08:02Z",
+  "executionHost": "linux_worker",
+  "ownerMatched": true,
+  "evidenceMode": "guarded_native_model_menu_catalog_and_request_capture",
+  "pageRole": "codex-gemini-models-20261006",
+  "pageTargetBinding": "cdp_target_info_target_id_in_runtime_role_registry",
+  "sourceAssets": [
+    {
+      "origin": "https://gemini.google.com",
+      "moduleId": "LQaXg",
+      "sha256": "3137eb01bfe212ddc5b7df423acd9c9633537f528a0cd13a07c25e075495e7aa",
+      "functions": ["bardModeService.PEd", "per-mode thinking-level state", "qpEbW quota-read adapter"]
+    },
+    {
+      "origin": "https://gemini.google.com",
+      "moduleId": "HwBxOc",
+      "sha256": "d01b7d0af88adc4d498080b76ab1e1ff770dd9720b02d9f19f36ae69a6d6c364",
+      "functions": ["D2d.selectModel(category)", "pro/fast/auto category map"]
+    },
+    {
+      "origin": "https://gemini.google.com",
+      "moduleId": "OpU7Tc",
+      "sha256": "6d6fac08f2db2cb171b2714c67032f44f8b5314ac246abb77d7d69af5830a415",
+      "functions": ["getBardApplicationMetadataHeader", "getBardBidiSessionMetadata"]
+    },
+    {
+      "origin": "https://gemini.google.com",
+      "moduleId": "TRJwtb",
+      "sha256": "813451d8daabd1d9972ba4e7d4b277a59d6b7fc100863d27ff4e81c9a5ef57d1",
+      "functions": ["modeId/modelCategory menu mapping", "thinking-level enum mapping"]
+    }
+  ],
+  "catalogRead": {
+    "operationId": "model_list",
+    "rpcId": "otAQ7b",
+    "method": "POST",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "responseBytes": 13245,
+    "modelCount": 3,
+    "models": [
+      { "modelId": "8c46e95b1a07cecc", "displayName": "3.5 Flash-Lite", "category": "Flash-Lite" },
+      { "modelId": "56fdd199312815e2", "displayName": "3.8 Flash", "category": "Flash" },
+      { "modelId": "e6fa609c3fa255c0", "displayName": "3.1 Pro", "category": "Pro" }
+    ],
+    "modelIdsDerivedFromResponse": true,
+    "inventedModelIds": false,
+    "globalAccountStatusUsedAsPerModelEligibility": false
+  },
+  "uiChoices": [
+    {
+      "label": "3.5 Flash-Lite",
+      "role": "menuitem",
+      "enabledInCapturedUi": true,
+      "dataModeIdMatchesCatalogModelId": "8c46e95b1a07cecc",
+      "choiceKind": "model"
+    },
+    {
+      "label": "3.8 Flash",
+      "role": "menuitem",
+      "enabledInCapturedUi": true,
+      "dataModeIdMatchesCatalogModelId": "56fdd199312815e2",
+      "choiceKind": "model"
+    },
+    {
+      "label": "3.1 Pro",
+      "role": "menuitem",
+      "enabledInCapturedUi": true,
+      "dataModeIdMatchesCatalogModelId": "e6fa609c3fa255c0",
+      "choiceKind": "model"
+    },
+    {
+      "label": "Extended Thinking",
+      "uiLabel": "확장된 사고 모델",
+      "role": "menuitem",
+      "enabledInCapturedUi": true,
+      "dataModeIdPresent": false,
+      "choiceKind": "thinking_level",
+      "thinkingLevel": "THINKING_LEVEL_EXTENDED",
+      "modelId": null
+    }
+  ],
+  "modelSelectionControl": {
+    "setterCallsite": "D2d.selectModel(category)",
+    "selectorService": "bardModeService",
+    "localModeIdUpdateCallsite": "bardModeService.RD(modeId)",
+    "modeCategoryStrings": ["pro", "fast", "auto"],
+    "perRequestMetadataBuilder": "getBardApplicationMetadataHeader",
+    "perRequestMetadataFields": ["modeId", "modeCategory", "thinkingLevel", "isTemporaryChat"],
+    "localStorageModelKeyNames": [],
+    "localStorageModelStateRestored": true,
+    "selectionPersistence": "in_memory_service_state_observed",
+    "modeCategoryPerCatalogModel": "not exposed by otAQ7b rows or safe menu attributes",
+    "perRequestHeaderSerialization": "guarded native SDK text request captured and aborted; model ID, Pro category, and standard thinking matched the selected UI state; direct dispatch linkage is not established by this capture"
+  },
+  "nativeTextRequestCaptureAbort": {
+    "operation": "text",
+    "requestObserved": true,
+    "requestAbortAcknowledged": true,
+    "loadingFailedCount": 1,
+    "responseCount": 0,
+    "guardedNativeCaptureBusinessDispatchCount": 0,
+    "proSelectedInUi": true,
+    "capturedModelIdMatchedProUi": true,
+    "capturedModeCategoryCode": 3,
+    "capturedThinkingLevelCode": 1,
+    "metadataHeaderName": "x-goog-ext-525001261-jspb",
+    "modelIdFieldPath": "[4]",
+    "modeCategoryFieldPath": "[14]",
+    "thinkingLevelFieldPath": "[15]",
+    "preferenceWriteForwarded": false,
+    "rawPromptOrRequestBodyPersisted": false
+  },
+  "proTextDispatchReadback": {
+    "receipt": "verification/one-shot/gemini-model-selection-pro-text-readback-2026-10-06.json",
+    "directDispatchCount": 1,
+    "httpStatus": 200,
+    "uniqueHistoryCandidateWithinJournalOuterWindow": true,
+    "exactPromptMatchedInDetail": true,
+    "conversationIdEchoAndRouteBindingMatched": true,
+    "assistantAnswerMarkerMatched": false,
+    "journalReconciled": false,
+    "normalUiDetailRequestMatchesObservedHnvqTemplate": true,
+    "normalUiResponseNodeTextPresentWithoutExpectedMarker": true,
+    "normalUiResponseNodeLengthSummary": [71, 59],
+    "normalUiBusyOrErrorOrQuotaIndicator": false,
+    "normalUiProgressIndicatorCount": 1,
+    "normalUiEvidenceReceipt": "verification/one-shot/gemini-model-selection-pro-ui-node-diagnostic-2026-10-06.json",
+    "selectionMetadataToDispatchBinding": "not_established",
+    "outcome": "needs_review_assistant_text_without_expected_marker"
+  },
+  "quotaRead": {
+    "rpcId": "qpEbW",
+    "method": "POST",
+    "sourceMethod": "/BardFrontendService.CheckGeminiQuota",
+    "sourceClassification": "read_only_quota_check",
+    "requestContentType": "application/x-www-form-urlencoded",
+    "requestFieldNames": ["at", "f.req"],
+    "requestBodyBytes": 168,
+    "requestArgumentSchema": "repeated ddd{mode:number, action:number}",
+    "requestArgumentPairs": [[1, 4], [6, 6], [1, 15]],
+    "httpStatus": 200,
+    "responseContentType": "application/json",
+    "responseBytes": 215,
+    "matchingRpcPayloadCount": 1,
+    "responseShape": "repeated six-field quota entries plus a 16-character summary string",
+    "perModelAvailabilityDecoded": false,
+    "rawRequestOrResponseValuesPersisted": false
+  },
+  "selectionTrials": [
+    {
+      "baselineControlLabel": "Flash",
+      "selectedLabel": "3.1 Pro",
+      "postSelectionControlLabel": "Pro",
+      "restoredLabel": "Flash",
+      "restoredToBaseline": true
+    },
+    {
+      "baselineControlLabel": "Flash",
+      "selectedLabel": "3.5 Flash-Lite",
+      "postSelectionControlLabel": "Flash-Lite",
+      "restoredLabel": "Flash",
+      "restoredToBaseline": true
+    }
+  ],
+  "writeAndGenerationBoundary": {
+    "allUnlistedHttpPostRequestsAborted": true,
+    "sourceBackedQuotaReadOnlyPostAllowed": true,
+    "modelPreferenceWriteForwarded": false,
+    "chatOrMediaRequestForwarded": false,
+    "webSocketBusinessFramesForwarded": false,
+    "guardedNativeCaptureBusinessDispatchCount": 0,
+    "pageResetToAboutBlankBeforeDriverDisconnect": true
+  },
+  "availabilityInterpretation": {
+    "globalAccountStatusCanCompletePerModelEligibility": false,
+    "modelAvailability": "unknown_without_per_model_quota_decoder",
+    "extendedThinkingIsSeparateFromCatalogModelIds": true
+  },
+  "rawPromptsCredentialsCookiesSignedUrlsAndBodiesPersisted": false
+}

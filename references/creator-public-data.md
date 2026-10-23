@@ -9,6 +9,7 @@
 | TikTok Creative Center JP / US | 20:40:20, 각 JSON 4개 / 응답 total 100 | 익명 첫 페이지 preview, 광고 포함. 보고 기준일 10월 9일 | 웹 프로젝트의 `creator-tiktok.ts`; Playbook native adapter는 없음 |
 | Meta Newsroom | 20:38:57, JSON 20개 / 전체 2,626개, 132페이지 | 공식 발행 소식. 검증된 Facebook·Instagram·Threads 분류 중 적합한 3개 | 웹 프로젝트의 `creator-meta.ts`; Playbook native adapter는 없음 |
 | Threads `@threads` | 20:31:29, 별도 GraphQL JSON 5개 | 공식 공개 계정의 일부 게시물. 국가 트렌드·키워드 검색이 아님 | 기존 Threads pack의 `fetchThreadsXhr`; 별도 웹 port도 검증됨 |
+| NAVER Shopping Insight | 2026-10-15 16:37:43.804Z, fresh anonymous HTTP replay: LCS GET 200 `image/gif`; rank POST 200 `application/json`, 12 periods × 10 ranks | category `50000003` / `date` 한 조합만 확인. LCS 발급 세션 쿠키 중 NNB만 필요·전달되고 BUC는 선택사항. 실제 요청에는 category selector `_datalab_cid`도 포함 | 기존 Naver pack의 `bootstrapAnonymousNaverSession` → `fetchShoppingRanks`; [현재 replay](../verification/remaining-naver-insight-2026-10-16/ranking-replay.json) |
 
 이 표의 웹 client는 별도 `lifehackailab-web` 작업본에서 검증했다. Playbook의 runtime import 대상으로 연결하지 않으며 웹 배포·DB 저장·운영 cron까지 검증한 기록으로 확대하지 않는다.
 
@@ -34,6 +35,14 @@ RSS client는 Node HTTP와 상대 import만 사용하며 블로그 로그인·Wi
 Threads는 fresh 공개 프로필 HTTP bootstrap에서 서버가 발급한 익명 CSRF와 현재 Relay 계약을 준비한다. Linux에서는 같은 프로세스 메모리, Windows에서는 기존 protected store 정책을 사용한다. 계정 로그인이나 검색 권한이 아니다. 기존 client의 본문 상한은 3,000,000 bytes, 요청 timeout은 15초다. 계약·cookie/CSRF 짝이 맞지 않으면 실패하며 HTML 게시물로 자동 대체하지 않는다.
 
 ## 소스별 요청 계약
+
+### NAVER Shopping Insight (bounded anonymous replay)
+
+2026-10-15 16:37:43.804Z UTC에 fresh Node process에서 유지 client로 한 조합을 재생했다. `GET https://lcs.naver.com/m`는 계정·credential·브라우저 없이 HTTP 200 `image/gif`를 돌려주고 NNB와 BUC를 발급했다. 랭킹 요청에는 NNB만 LCS 세션 쿠키로 전달했다. client는 같은 요청에 해당 category를 지정하는 `_datalab_cid` selector cookie도 붙인다. `POST https://datalab.naver.com/shoppingInsight/getKeywordRank.naver?timeUnit=date&cid=50000003`는 HTTP 200 `application/json;charset=UTF-8`로 응답했고, schema validation 결과 12개 기간에 각 10개 rank가 있었다. 키워드 원문과 cookie 값은 증거에 기록하지 않았다.
+
+2026-10-15 16:22:57.981Z UTC의 별도 A/B 기록은 같은 NNB 값으로 BUC를 포함한 요청과 제외한 요청이 모두 동일한 200 JSON schema/byte count를 반환했음을 보여준다. [A/B 증거](../verification/remaining-naver-insight-2026-10-16/buc-ab-comparison-2026-10-15.json). 이는 BUC가 관측될 수는 있어도 필수 인증/세션 쿠키가 아님을 뒷받침한다. 현재 실행 증거는 `categoryId=50000003`, `timeUnit=date`에 한정되며 다른 category/timeUnit 조합은 별도 재생해야 한다.
+
+유지 client는 bootstrap 또는 전송 실패를 Shopping Insight 각 요청의 실패로 기록하고 결과를 반환한다. 그러면 상위 trend run은 해당 source를 실패로 표시하면서 autocomplete, RSS 등 다른 source를 계속 진행할 수 있다. 실패를 검색량 0이나 정상 빈 결과로 바꾸지 않는다. 체크리스트의 `recorded_live`도 이 bounded replay만 뜻한다.
 
 ### Google RSS
 
@@ -88,7 +97,7 @@ Threads는 fresh 공개 프로필 HTTP bootstrap에서 서버가 발급한 익�
 | TikTok video | first-party JS 계약 + HTTP; browser XHR 없음 | 웹 client 있음, native pack 없음 | not_applicable | true | 이전/최종 guard 웹 SHA 각각 성공 |
 | Meta publication | first-party API JSON 관측 | 웹 client 있음, native pack 없음 | not_applicable | true | 웹 SHA 20개 성공 |
 
-새 checklist는 `creator-google`, `creator-threads`, `creator-tiktok`, `creator-meta`, `creator-access-gaps`다. 이 저장소의 기존 automatic verifier가 bare observed RSS provenance와 익명 cookie bootstrap GraphQL을 지원하지 않아 native Google·Threads는 `pending_live`다. 이는 실제 HTTP 재생이 없었다는 뜻이 아니라 **typed automatic evidence gate가 아직 없다는 뜻**이며 sanitized 기록과 위 표를 함께 본다. cookie가 사용된 Threads를 cookie-free public receipt로 꾸미거나 RSS를 공식 문서 검증으로 올려 gate를 통과시키지 않는다.
+새 checklist는 `creator-google`, `creator-threads`, `creator-tiktok`, `creator-meta`, `creator-access-gaps`다. 이 저장소의 기존 automatic verifier가 bare observed RSS provenance와 익명 cookie bootstrap GraphQL을 지원하지 않아 native Google·Threads는 `pending_live`다. 이는 실제 HTTP 재생이 없었다는 뜻이 아니라 **typed automatic evidence gate가 아직 없다는 뜻**이며 sanitized 기록과 위 표를 함께 본다. `naver.shopping`에는 별도 typed anonymous-read verifier를 추가했고, 현재 receipt가 `recorded_live`인 범위는 위의 한 category/timeUnit replay뿐이다. cookie가 사용된 Threads를 cookie-free public receipt로 꾸미거나 RSS를 공식 문서 검증으로 올려 gate를 통과시키지 않는다.
 
 TikTok·Meta는 별도 웹 client가 있어도 package의 `implementation.files`에 외부 경로를 넣지 않으므로 `source_candidate`다. sourceEvidence는 계약 확인 재고이며 저장된 실행 기록을 자동 live gate로 승격하지 않는다. 웹 배포 확인은 별도 검증이다.
 
@@ -108,7 +117,7 @@ npm run checklist
 | 기능 | 확인한 계약 | 현재 부족한 부분 |
 |---|---|---|
 | YouTube chart | [videos.list](https://developers.google.com/youtube/v3/docs/videos/list), `GET /youtube/v3/videos`, API key·`chart=mostPopular`·`regionCode` | key provider/current replay 없음. 2025-07-21 이후 chart scope는 Music·Movies·Gaming이며 전 주제 trending으로 확대하지 않음 |
-| NAVER Shopping Insight | 기존 pack `bootstrapAnonymousNaverSession` → `fetchShoppingRanks` | 현재 bootstrap에서 NNB만 나오고 BUC가 없어 실패. HTML 200은 ranking JSON 성공이 아님. 이 공개 client의 문제를 Windows DPAPI로 설명하지 않음 |
+| NAVER Shopping Insight | 기존 pack `bootstrapAnonymousNaverSession` → `fetchShoppingRanks`; [fresh replay](../verification/remaining-naver-insight-2026-10-16/ranking-replay.json) | Anonymous LCS bootstrap에서 NNB와 선택적 BUC가 관측됐다. NNB 세션 쿠키만으로 category `50000003` / `date` rank request가 HTTP 200 JSON으로 검증됐다. HTML fallback은 여전히 실패다. Bootstrap 실패는 per-contract source failure이며 다른 trend sources는 계속된다. 다른 category/timeUnit은 미검증 |
 | NAVER DataLab | [공식 search API](https://developers.naver.com/docs/serviceapi/datalab/search/search.md), `POST /v1/datalab/search` | Developer credential/current replay 없음. 입력 keyword groups의 상대 관심도(max 100), keyword discovery·절대 검색량 아님 |
 | NAVER Creator Advisor | 관측된 `/api/v6/trend/category`, `/api/v6/trend/demo`, `/api/v6/trend/trend-contents`, `/api/v6/trend/search-inflow-trend` 후보 | 현재 owner session·서명·Linux native provider/replay 미확보. account analytics를 공개 aggregate로 사용하지 않음 |
 | X 공개 aggregate | 기존 social pack과 요청별 접근 경계를 먼저 확인 | 현재 국가별 aggregate collector/replay 없음. 로그인된 계정 timeline과 전체 국가 트렌드를 혼동하지 않음 |

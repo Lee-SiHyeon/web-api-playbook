@@ -1,0 +1,80 @@
+{
+  "schema": "web-api-commerce-collection-proof-v1",
+  "service": "commerce",
+  "capabilityId": "collection.public_feed",
+  "checkedAt": "2026-10-15T16:11:23.798Z",
+  "secretsPersistedInEvidence": false,
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "sourceRequest": {
+    "method": "GET",
+    "origin": "https://printful.s3.us-west-1.amazonaws.com",
+    "path": "/productExport/printful_products.zip",
+    "checkedAt": "2026-10-15T16:11:20.024Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "httpStatus": 200,
+    "mime": "application/zip",
+    "responseBytes": 452530,
+    "responseSha256": "4a9905b2a010504691adec3ce8e583ffe2b48c1267a00a4428960d7b82e32d22",
+    "lastModified": "Thu, 15 Oct 2026 00:10:11 GMT"
+  },
+  "sampleOfferCount": 20,
+  "fullOfferCount": 11524,
+  "csvDataRows": 11524,
+  "scalarPriceOfferCount": 11524,
+  "priceRangeOfferCount": 0,
+  "jsonReadbackMatched": true,
+  "csvReadbackMatched": true,
+  "fullJsonSha256": "5a0a5ed2398223302916926e36449234ff9893c9185f8dbed3a41981ef04824c",
+  "fullCsvSha256": "03628497f44e341b75b3169581b125be86349dffc2b6cd70d5fbfb63ff0e68fe",
+  "fullOutputs": {
+    "json": "verification/remaining-readcaps-2026-10-16/public-feed.json",
+    "csv": "verification/remaining-readcaps-2026-10-16/public-feed.csv"
+  },
+  "collection": {
+    "pagesRead": 1,
+    "rowsSeen": 11524,
+    "offersStored": 11524,
+    "maxPages": 1,
+    "maxOffers": 50000,
+    "coverage": "regional_feed",
+    "capHit": false,
+    "priceUnavailableCount": 0,
+    "currencyUnverifiedCount": 0,
+    "partialResponses": 0,
+    "sourceExhausted": true,
+    "complete": true
+  },
+  "actualRunner": {
+    "entrypoint": "scripts/commerce.mjs",
+    "arguments": [
+      "printful-feed",
+      "collect",
+      "--region=USA",
+      "--limit=50000",
+      "--max-pages=1",
+      "--output=verification/remaining-readcaps-2026-10-16/public-feed.json",
+      "--csv=verification/remaining-readcaps-2026-10-16/public-feed.csv"
+    ],
+    "exitStatus": 0
+  },
+  "implementation": {
+    "scripts/commerce.mjs": "0e5dc18975f1b895ee29467c978b3e0cf83dce19af691f48899df1fef4c22f65",
+    "lib/commerce/providers.mjs": "f8bce501a1aebe63d069fc884be41942712e7a961504ff836646ec7ebdb152f7",
+    "lib/commerce/snapshots.mjs": "f59158c31e1490e2124de595d68f5e5cc87cd020f73184d5046258144b45d659",
+    "lib/commerce/credential-output.mjs": "89b5f640422cf9dbf5a3d2679099842264ae6d30b6a924ad9308af6432e485db",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "lib/commerce/printful.mjs": "f41bf663590860d2245663e41fea09e92d5db9ed6049f15340dd1daa718806b2",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "independentReadback": {
+    "jsonOfferCount": 11524,
+    "csvDataRows": 11524,
+    "allRowsMatchedByOrderedFields": true,
+    "headerFieldCount": 24
+  }
+}

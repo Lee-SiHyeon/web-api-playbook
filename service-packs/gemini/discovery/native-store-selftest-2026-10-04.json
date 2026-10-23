@@ -1,0 +1,22 @@
+{
+  "service": "gemini-web",
+  "provider": "Windows DPAPI CurrentUser",
+  "operation": "npm run credential-selftest",
+  "reportedBy": "gemini_web_audit",
+  "recordedAt": "2026-10-03T16:12:04Z",
+  "execution": "one bounded native helper process; synthetic non-auth input in memory",
+  "performed": true,
+  "preexistingEntryPreserved": true,
+  "directoryDaclApplied": true,
+  "fileDaclApplied": true,
+  "dpapiRoundTripVerified": true,
+  "deletionVerified": true,
+  "passed": true,
+  "subsequentStatus": {
+    "credentialStoreCheckPassed": true,
+    "credentialStoreError": null,
+    "protectedCredentialPresent": false,
+    "authenticated": false
+  },
+  "limitation": "earlier checks using multiple native process launches timed out; no authenticated Gemini operation is verified"
+}

@@ -1,0 +1,458 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-09-20T11:55:00+09:00",
+  "purpose": "제휴 콘텐츠 운영자가 직접 가입·심사·정산정보 등록해야 하는 공식 사이트와 승인 후 연동 순서를 관리한다.",
+  "security": {
+    "neverCommit": [
+      "password",
+      "account_number",
+      "resident_id",
+      "id_document",
+      "api_key",
+      "cookie",
+      "session_token",
+      "authorization_header"
+    ],
+    "secretStorage": "각 서비스 공식 보안 화면 또는 Windows 자격증명 저장소·로컬 환경변수만 사용",
+    "statusOnlyInGit": true
+  },
+  "sites": [
+    {
+      "id": "coupang-partners",
+      "name": "쿠팡 파트너스",
+      "priority": "P0",
+      "market": "KR",
+      "programType": "direct_affiliate",
+      "officialUrls": {
+        "home": "https://partners.coupang.com/",
+        "login": "https://partners.coupang.com/"
+      },
+      "contentCoverage": [
+        "생활용품",
+        "가전",
+        "여행용품",
+        "식품",
+        "수납",
+        "모바일 액세서리"
+      ],
+      "operatorActions": [
+        "기존 계정 로그인 상태 확인",
+        "내 정보에서 개인·사업자 유형 확인",
+        "정산용 본인 또는 사업자 명의 계좌 등록 여부 확인",
+        "세금·본인확인 정보 누락 여부 확인"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "예금주 일치 계좌",
+          "본인·사업자 정보",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "existing",
+        "linkGeneration": "verified",
+        "payoutRegistration": "unverified",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "상품 검색",
+        "딥링크 생성",
+        "Sub ID",
+        "실적",
+        "수익",
+        "정산"
+      ],
+      "verification": "live_portal_and_link_generation_observed"
+    },
+    {
+      "id": "myrealtrip-marketing-partner",
+      "name": "마이리얼트립 마케팅 파트너",
+      "priority": "P0",
+      "market": "KR",
+      "programType": "direct_publisher_affiliate",
+      "officialUrls": {
+        "home": "https://partner.myrealtrip.com/",
+        "signup": "https://partner.myrealtrip.com/"
+      },
+      "contentCoverage": [
+        "항공권",
+        "숙소",
+        "투어",
+        "티켓",
+        "패키지",
+        "국내여행",
+        "해외여행"
+      ],
+      "operatorActions": [
+        "개인 또는 사업자 가입 유형 결정",
+        "네이버 블로그 등 운영 채널 제출",
+        "파트너 심사 완료",
+        "승인 후 정산·세금정보 등록",
+        "API 또는 인증키 메뉴 존재 여부 확인"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "정산 계좌",
+          "본인·사업자 정보",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "existing",
+        "review": "unverified",
+        "payoutRegistration": "required_information_incomplete",
+        "browserLogin": "verified",
+        "authenticatedHttpReplay": "account_and_10_marketing_operations_verified",
+        "updatedAt": "2026-09-20T17:09:32.891Z"
+      },
+      "integrationAfterApproval": [
+        "링크 생성",
+        "일반·항공 예약",
+        "수익 리포트",
+        "정산",
+        "세금 리포트",
+        "공식 API 키"
+      ],
+      "verification": "authenticated_independent_http_link_generation_and_reporting_verified",
+      "httpImplementation": {
+        "client": "adapters/myrealtrip-marketing.mjs",
+        "contracts": "references/myrealtrip-marketing-contracts.json",
+        "liveReplay": "references/myrealtrip-marketing-replay-2026-09-21.json",
+        "scope": "Offer links, round-trip economy flight links, airport/airline searches, reservation counts and sales summaries"
+      }
+    },
+    {
+      "id": "yeogi-marketing-partner",
+      "name": "여기어때 마케팅 파트너",
+      "priority": "P0",
+      "market": "KR",
+      "programType": "direct_publisher_affiliate",
+      "officialUrls": {
+        "home": "https://affiliate.yeogi.com/",
+        "signup": "https://affiliate.yeogi.com/"
+      },
+      "contentCoverage": [
+        "국내 숙소",
+        "해외 숙소",
+        "레저",
+        "티켓",
+        "패키지"
+      ],
+      "operatorActions": [
+        "마케팅 파트너 가입",
+        "블로그·SNS 채널 등록",
+        "파트너 심사 완료",
+        "승인 후 지급·세금정보 등록",
+        "숙소·레저 링크와 콘텐츠 등록 메뉴 확인"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "정산 계좌",
+          "본인·사업자 정보",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "not_joined",
+        "review": "not_started",
+        "payoutRegistration": "not_started",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "숙소 링크",
+        "레저·티켓 링크",
+        "콘텐츠 등록",
+        "실적",
+        "정산"
+      ],
+      "verification": "official_program_and_public_contract_metadata_confirmed"
+    },
+    {
+      "id": "linkprice-influencer",
+      "name": "링크프라이스 인플루언서",
+      "priority": "P0",
+      "market": "KR",
+      "programType": "affiliate_network",
+      "officialUrls": {
+        "home": "https://www.linkprice.com/",
+        "affiliate": "https://www.linkprice.com/affiliate/2022_index_02.html"
+      },
+      "contentCoverage": [
+        "여행 광고주 캠페인",
+        "숙박",
+        "쇼핑",
+        "커머스 캠페인"
+      ],
+      "operatorActions": [
+        "인플루언서 회원가입",
+        "네이버 블로그 매체 등록·심사",
+        "현재 여행 광고주 캠페인 조회",
+        "캠페인별 제휴 신청",
+        "지급·세금정보 등록"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "정산 계좌",
+          "본인·사업자 정보",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "not_joined",
+        "review": "not_started",
+        "payoutRegistration": "not_started",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "프로그램 목록",
+        "딥링크",
+        "거래",
+        "리포트",
+        "지급"
+      ],
+      "verification": "official_network_confirmed_campaign_availability_requires_login"
+    },
+    {
+      "id": "creatrip-affiliate",
+      "name": "Creatrip Affiliate",
+      "priority": "P1",
+      "market": "KR_INBOUND",
+      "programType": "direct_publisher_affiliate",
+      "officialUrls": {
+        "home": "https://affiliate.creatrip.com/",
+        "guide": "https://affiliate.creatrip.com/en/dashboard-guide"
+      },
+      "contentCoverage": [
+        "외국인 대상 한국 여행",
+        "체험",
+        "뷰티",
+        "클리닉",
+        "교통"
+      ],
+      "operatorActions": [
+        "가입·심사",
+        "계약서 서명",
+        "공식 화면에 신분·은행정보 등록"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "서명 계약서",
+          "신분확인",
+          "은행정보",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "not_joined",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "링크",
+        "거래",
+        "리포트",
+        "지급"
+      ],
+      "verification": "official_program_confirmed"
+    },
+    {
+      "id": "trazy-affiliate",
+      "name": "Trazy Affiliate",
+      "priority": "P1",
+      "market": "KR_INBOUND",
+      "programType": "direct_publisher_affiliate",
+      "officialUrls": {
+        "home": "https://www.trazy.com/affiliate",
+        "signup": "https://www.trazy.com/affiliate"
+      },
+      "contentCoverage": [
+        "외국인 대상 한국 투어",
+        "티켓",
+        "K-pop",
+        "스키",
+        "지역축제"
+      ],
+      "operatorActions": [
+        "Trazy 계정 가입",
+        "Affiliate 신청",
+        "승인 후 지급수단 등록"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "지급 계정",
+          "세금·신원정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "not_joined",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "링크",
+        "거래",
+        "리포트",
+        "지급"
+      ],
+      "verification": "official_program_confirmed"
+    },
+    {
+      "id": "travelpayouts",
+      "name": "Travelpayouts",
+      "priority": "P2",
+      "market": "GLOBAL",
+      "programType": "affiliate_network",
+      "officialUrls": {
+        "home": "https://www.travelpayouts.com/"
+      },
+      "contentCoverage": [
+        "항공",
+        "숙소",
+        "eSIM",
+        "교통",
+        "투어"
+      ],
+      "operatorActions": [
+        "국내 직접 제휴 P0 완료 후 가입",
+        "지급정보·세금정보 등록",
+        "프로그램별 승인 확인"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "지급수단",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "deferred",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "프로그램",
+        "링크",
+        "거래",
+        "리포트",
+        "지급"
+      ],
+      "verification": "official_platform_confirmed_deferred"
+    },
+    {
+      "id": "klook-affiliate",
+      "name": "Klook Affiliate",
+      "priority": "P2",
+      "market": "GLOBAL",
+      "programType": "direct_publisher_affiliate",
+      "officialUrls": {
+        "home": "https://affiliate.klook.com/"
+      },
+      "contentCoverage": [
+        "투어",
+        "티켓",
+        "교통패스",
+        "액티비티"
+      ],
+      "operatorActions": [
+        "국내 직접 제휴에 없는 재고가 필요할 때 가입",
+        "심사·지급정보 등록"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "지급수단",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "deferred",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "링크",
+        "상품 피드·API",
+        "거래",
+        "지급"
+      ],
+      "verification": "official_program_confirmed_deferred"
+    },
+    {
+      "id": "viator-partner",
+      "name": "Viator Partner",
+      "priority": "P2",
+      "market": "GLOBAL",
+      "programType": "direct_publisher_affiliate",
+      "officialUrls": {
+        "home": "https://partnerresources.viator.com/",
+        "docs": "https://docs.viator.com/partner-api/technical/"
+      },
+      "contentCoverage": [
+        "글로벌 투어",
+        "체험",
+        "티켓"
+      ],
+      "operatorActions": [
+        "글로벌 액티비티 API가 필요할 때 신청",
+        "파트너 유형·API 범위 확인",
+        "지급정보 등록"
+      ],
+      "payoutSetup": {
+        "required": true,
+        "verifyInPortal": true,
+        "expectedCategories": [
+          "지급수단",
+          "세금정보"
+        ]
+      },
+      "currentOperatorStatus": {
+        "account": "deferred",
+        "updatedAt": "2026-09-20T11:55:00+09:00"
+      },
+      "integrationAfterApproval": [
+        "상품 검색",
+        "예약",
+        "post-booking",
+        "리포트"
+      ],
+      "verification": "official_docs_confirmed_deferred"
+    }
+  ],
+  "excludedOrManualReview": [
+    {
+      "name": "NOL 파트너센터",
+      "url": "https://partner.yanolja.com/",
+      "reason": "숙박 공급자 운영 포털이며 블로그 퍼블리셔 제휴가 아님"
+    },
+    {
+      "name": "모두투어 B2B",
+      "url": "https://www.modetour.com/",
+      "reason": "기업·법인 여행 계약 중심으로 확인됨"
+    },
+    {
+      "name": "WAUG",
+      "url": "https://www.waug.com/ko",
+      "reason": "공개 셀프서비스 퍼블리셔 프로그램을 확인하기 전까지 개별 문의 후보"
+    },
+    {
+      "name": "투어비스",
+      "url": "https://tourvis.com/",
+      "reason": "공개 퍼블리셔 가입·정산 구조 확인 전까지 수동 검토"
+    },
+    {
+      "name": "하나투어",
+      "url": "https://www.hanatour.com/",
+      "reason": "여행사·공식예약센터와 블로그 퍼블리셔 프로그램을 구분 확인해야 함"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "web-api-playbook-audit-validation-v1",
+  "checkedAt": "2026-10-15T10:10:39.729Z",
+  "baseRevision": "2af4d895bbdc4dd0894d85f520a94ddf332938c5",
+  "rootRegression": {
+    "command": "npm test",
+    "exitCode": 0,
+    "tests": 682,
+    "passed": 681,
+    "failed": 0,
+    "skipped": 1,
+    "pythonOverride": "WEB_API_OLIVEYOUNG_PYTHON set to installed Codex bundled Python",
+    "outputSha256": "a7596b55864c494313a9a5618bf5060eea03fceff7d47ab6ff7e725050852fcc",
+    "skippedReason": "Legacy Toss test would query the real Windows credential store"
+  },
+  "newToolTests": {
+    "tests": 10,
+    "passed": 10,
+    "failed": 0
+  },
+  "declaredTestFiles": {
+    "total": 53,
+    "passed": 48,
+    "missing": 5,
+    "failed": 0
+  },
+  "earlierFindings": [
+    {
+      "kind": "windows_test_path",
+      "file": "tests/adpick-shoppingmate.test.mjs",
+      "resolution": "fileURLToPath used for child process path"
+    },
+    {
+      "kind": "python_alias_unavailable",
+      "failedTests": 8,
+      "resolution": "bundled Python override; focused 15 tests and full suite passed"
+    }
+  ],
+  "implementationHashes": {
+    "lib/playbook-audit.mjs": "40da2378f7d64c8ec6efe5bfb31c0fca74147745347b68d77d850208e848401e",
+    "lib/browser-evidence.mjs": "d521d76eae7deca1a5a12a50f575c45baac93d40bf8449a4e4bf51c228264981",
+    "scripts/audit-playbook.mjs": "084e0184d37f2d7be26a8255f1f3bbb05b5b185d0ddd8b64f7f24e35f4503980",
+    "scripts/browser-evidence.mjs": "204c2f7ecde47d212f379541ad5deb608bd647456d59e797b25160d9494daa7b",
+    "scripts/verify-browser-fixture.mjs": "6143e8dd719e4fb910a62459ef8525f96a75984d6f6dcbab778231593821587a",
+    "tests/browser-evidence.test.mjs": "96edf604139f764cf36d6463a120d79f1ad428bbcbd4c4038ca59f62c8537423",
+    "tests/playbook-audit.test.mjs": "c1f68a80b4eee7c6910c691830d3ae1edd9e609ac96e50a0d3cf92e399d9eeb0",
+    "tests/adpick-shoppingmate.test.mjs": "0eba79e4a77826f74e089e7b783743c163856f9e92e4b5f1828b81dcf3703013",
+    "package.json": "3e4d3ee5f4d6f848f4fa51f46aaef8edf22fbc7326e6ff1b6609ad497998022b"
+  },
+  "limitations": [
+    "test_network_activity_not_instrumented",
+    "rea_import_tested_with_synthetic_payloads_only",
+    "browser_fixture_runtime_blocked",
+    "live_samples_do_not_cover_all_capabilities"
+  ]
+}

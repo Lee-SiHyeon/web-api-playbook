@@ -20,6 +20,24 @@ The `examples/sanitized.har.json` file uses `example.invalid` and synthetic reda
 
 ## HAR to contract inventory
 
+Include Document, Fetch, XHR and other relevant HTTP resource types in the source
+capture; do not export only the browser's XHR filter. An initial HTML response can
+carry the usable catalog in embedded JSON even when a later UI click makes no
+request. Capture before navigation, drain bounded CDP buffers while it runs, and
+pair requests and responses before reducing them to this inventory. Missing or
+truncated events remain gaps; DOM text alone does not reconstruct a lost response.
+
+The [Modetour Document reader](../service-packs/ontology/README.md) provides a live
+example: the observed HTML GET contains ten recommendations in `__NEXT_DATA__`,
+independently parsed without running JavaScript or loading a browser session.
+
+The capability checklist accepts `browser_http_observed` provenance with the
+actual `resourceType`, paired request/response, non-truncated capture, observation
+time, sanitized evidence hash and exact source route. This includes Document and
+Fetch without mislabeling them as XHR. The independent replay still has to pass
+the configured status, MIME, response/schema checks and current-code hash check;
+a bare `ssr_document` label or DOM-only observation is insufficient.
+
 Read a local HAR and print the sanitized inventory:
 
 ```powershell
@@ -41,6 +59,17 @@ node scripts/har-to-contracts.mjs --input=.\examples\sanitized.har.json --output
 `--input` accepts one local file; if omitted, the CLI reads standard input. A UTF-8 BOM is accepted and removed before parsing. The input limit is 64 MiB. `--output` is optional; without it, sanitized JSON goes to standard output. A stored inventory has schema `xhr-contract-inventory-v1` and contains `contracts[]`; each contract has an identity over method, origin, normalized path, query/body field names, content encoding, and operation field names. Each `observations[]` entry records its HAR entry number, time, request/response MIME, response status, response bytes/hash, and response schema. Request bytes may be counted, but request-body hashes and values are not saved. JSON schemas omit values and redact dynamic object-map keys.
 
 `mutationCandidate` is a review hint for write-like HTTP methods. It is not proof of a mutation, and a POST may be a read. Conversely, a GET can still mutate. Do not replay a candidate until its semantics, actor scope, parameters, response behavior, and required authentication are independently established.
+
+For JSON/JavaScript responses with an observed `callback` query parameter, the
+inventory also supports a single JSONP wrapper whose simple identifier exactly
+matches that request parameter. It parses only the JSON argument with
+`JSON.parse`; it never evaluates scripts. Duplicate/mismatched callbacks,
+expressions, additional arguments and executable suffixes are rejected. Output
+records `responseFormat: json` or `jsonp`, never the callback value. Structured
+bodies over 4 MiB retain the size-limit gap. A parseable error envelope is still
+only a schema observation, not usable business data or a direct replay. Existing
+inventories containing `invalid_json` cannot be recovered without the original
+authorized body; do not relabel them as successfully parsed JSONP.
 
 ## Discover candidates from saved HTML
 

@@ -1,0 +1,391 @@
+{
+  "schema": "coupang-public-verification-v1",
+  "verifiedAt": "2026-10-15T04:18:57.624Z",
+  "networkUsed": false,
+  "verifier": "scripts/verify-coupang-public.mjs",
+  "records": [
+    {
+      "file": "verification/coupang-discovery-2026-10-15/categories-live.json",
+      "kind": "category_tree",
+      "count": 3228,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:12.823Z",
+      "sha256": "6e0ba11460c4472078d8604bb4f1e8b9d858115e1c17ce10e3029fd997e38f80"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-autocomplete-live.json",
+      "kind": "travel_autocomplete",
+      "count": null,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:31.107Z",
+      "sha256": "92fc6235e96a64f126c3978faae4b948d7cc97fd18ed5c4ccbb2b2db384a8394"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-page2-live.json",
+      "kind": "travel_listing",
+      "count": 24,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:12.903Z",
+      "sha256": "03a23772b4b4722838e26e7936eed83dcb5db3eb364916dcf6debbb3ce3872bf"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-rental-live.json",
+      "kind": "travel_listing",
+      "count": 25,
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:29:13.046Z",
+      "sha256": "90c61053fc5130360bd04c08890816a095e9d13105b96eddb8cbf6eaf8eba517"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-rooms-live.json",
+      "kind": "travel_rooms",
+      "count": 5,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:12.661Z",
+      "sha256": "638c4916db311a2fbbcde9be589e0bc05d67c6684a4d926bb67eb9be216e9131"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-ticket-options-live.json",
+      "kind": "travel_ticket_options",
+      "count": 3,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:24:23.273Z",
+      "sha256": "3bd4ef837dd2da531a7a9cc3934315a30e275c0a85eea404080d36ed57922791"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-ticket-reviews-live.json",
+      "kind": "travel_reviews",
+      "count": 5,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:31.177Z",
+      "sha256": "7427161585640f77487a6b21cecbdfb22a922f9a837a66f880d19a35dfc5f797"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-ticket-detail-live.json",
+      "kind": "travel_detail",
+      "count": null,
+      "states": {
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:18:31.685Z",
+      "sha256": "9f2e8ac0103944aa8fa3dff21b11567a9911a8521143d344ddd5cd742300a786"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/travel-rental-detail-context-live.json",
+      "kind": "travel_detail",
+      "count": null,
+      "states": {
+        "captured": false,
+        "client_exists": true,
+        "remnant_free": true,
+        "credential_propagated": "not_applicable_anonymous",
+        "live_replay": true,
+        "captureScope": "browser_document_request_not_paired"
+      },
+      "httpStatus": 200,
+      "checkedAt": "2026-10-15T01:47:26.806Z",
+      "sha256": "0645a343e559d23c23a572809aedd4be607bbb352048b0b2f9fc5d263d655f8a"
+    }
+  ],
+  "blocked": [
+    {
+      "file": "verification/coupang-discovery-2026-10-15/retail-search-live.json",
+      "checkedAt": "2026-10-15T01:46:50.496Z",
+      "httpStatus": 403,
+      "mode": "cookie_free",
+      "cause": "unknown",
+      "protectedSessionReplay": "unverified"
+    },
+    {
+      "file": "verification/coupang-discovery-2026-10-15/retail-category-live.json",
+      "checkedAt": "2026-10-15T01:24:23.359Z",
+      "httpStatus": 403,
+      "mode": "cookie_free",
+      "cause": "unknown",
+      "protectedSessionReplay": "unverified"
+    }
+  ],
+  "crawl": {
+    "receipts": 230,
+    "ok": 218,
+    "failed": 12,
+    "listingPages": 114,
+    "detailDocuments": 24,
+    "optionReads": 24,
+    "reviewReads": 46
+  },
+  "retailDiagnostics": {
+    "visitorReceipt": "verification/coupang-discovery-2026-10-15/retail-visitor-live.json",
+    "comparisonReceipt": "verification/coupang-discovery-2026-10-15/retail-403-variants-live.json",
+    "visitorBootstrapStatus": 200,
+    "publicOfferStatusBeforeAndAfter": [
+      200,
+      200
+    ],
+    "publicOfferGeneralPriceKrw": 13200,
+    "documentVariants": [
+      {
+        "name": "search_sorted",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "search_free_delivery",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "search_home_referer",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "search_native_http2",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "category_default",
+        "status": 403,
+        "server": "AkamaiGHost"
+      },
+      {
+        "name": "category_page2",
+        "status": 403,
+        "server": "AkamaiGHost"
+      }
+    ],
+    "reviewStatus": 403,
+    "rscCapture": {
+      "file": "verification/coupang-discovery-2026-10-15/retail-rsc-capture.json",
+      "status": 200,
+      "products": 60,
+      "exactDomMatches": 60
+    },
+    "rscReplays": [
+      {
+        "file": "verification/coupang-discovery-2026-10-15/retail-rsc-anonymous-replay.json",
+        "mode": "anonymous",
+        "status": 403,
+        "cookieSent": false
+      },
+      {
+        "file": "verification/coupang-discovery-2026-10-15/retail-rsc-visitor-replay.json",
+        "mode": "visitor",
+        "status": 403,
+        "cookieSent": true
+      }
+    ],
+    "browserCookieComparison": {
+      "file": "verification/coupang-discovery-2026-10-15/retail-browser-cookie-comparison-live.json",
+      "statuses": [
+        403,
+        403,
+        200
+      ],
+      "cookieCounts": [
+        3,
+        11,
+        33
+      ],
+      "exactCookieHeadersSent": true,
+      "products": 60,
+      "exactDomIdentityTitleAndPriceMatches": 60,
+      "wholeOperationBrowserIndependent": false
+    },
+    "browserFreeRenewal": {
+      "proofs": [
+        {
+          "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-expired-live.json",
+          "checkedAt": "2026-10-15T04:15:20.493Z",
+          "status": 200,
+          "products": 60,
+          "signatureRenewed": true,
+          "oldSignatureExpired": true,
+          "cookieNames": [
+            "x-coupang-target-market",
+            "x-coupang-accept-language",
+            "PCID",
+            "bm_mi",
+            "ak_bmsc",
+            "bm_sz",
+            "bm_so",
+            "bm_lso",
+            "_abck",
+            "bm_s",
+            "bm_sv",
+            "x-cp-s"
+          ]
+        },
+        {
+          "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-restart-live.json",
+          "checkedAt": "2026-10-15T04:15:27.153Z",
+          "status": 200,
+          "products": 60,
+          "signatureRenewed": false,
+          "oldSignatureExpired": false,
+          "cookieNames": [
+            "x-coupang-target-market",
+            "x-coupang-accept-language",
+            "PCID",
+            "bm_mi",
+            "ak_bmsc",
+            "bm_sz",
+            "bm_so",
+            "bm_lso",
+            "_abck",
+            "bm_s",
+            "bm_sv",
+            "x-cp-s"
+          ]
+        }
+      ],
+      "signatureRegenerationVerified": true,
+      "processRestartVerified": true,
+      "additionalQuery": {
+        "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-second-query-live.json",
+        "products": 54
+      },
+      "finalCodeLiveRead": {
+        "file": "verification/coupang-discovery-2026-10-15/retail-auto-renewal-final-live.json",
+        "products": 60
+      },
+      "missingCookieReissuance": {
+        "file": "verification/coupang-discovery-2026-10-15/retail-cookie-lifetime-dependency-live.json",
+        "cookieName": "bm_sz",
+        "verified": true,
+        "wholeSessionExpiryVerified": false
+      },
+      "opaqueContextRenewalVerified": false,
+      "completeAkamaiSessionRenewalVerified": false,
+      "initialBootstrapRequiresBrowser": true
+    },
+    "conclusions": [
+      "PCID bootstrap and public offer JSON work in the same identity before and after Document denials.",
+      "Cookie-free, HTTP-issued visitor and browser visitor-plus-Akamai RSC replays return 403; the exact full browser cookie header succeeds with 60 products.",
+      "All 60 original full-cookie HTTP products matched DOM identities, titles and displayed prices.",
+      "A verified 12-cookie subset plus locally regenerated x-cp-s and RSC inputs works after natural signature expiry and a fresh process. Long-lived opaque context and complete Akamai session reissuance remain unverified."
+    ]
+  },
+  "coverage": {
+    "complete": false,
+    "totalDenominator": "unknown",
+    "resourceNodes": 6700,
+    "edges": 9448,
+    "activeResourceNodes": 6650,
+    "supersededResources": 50,
+    "browserInspected": 35,
+    "directHttpVerified": 138,
+    "listingVerified": 103,
+    "optionsVerified": 24,
+    "reviewsVerified": 25,
+    "pending": 6511,
+    "blocked": 1,
+    "sharedBoundaryDeferred": 3221,
+    "pendingReadRoutes": 100,
+    "pendingNestedOperations": 1,
+    "blockedNestedOperations": 0,
+    "pendingReviewPages": 12,
+    "stages": {
+      "navigation": {
+        "discovered": 3504,
+        "verified": 46,
+        "pending": 3457,
+        "blocked": 1
+      },
+      "listing": {
+        "discovered": 161,
+        "verified": 67,
+        "pending": 94,
+        "blocked": 0
+      },
+      "product_detail": {
+        "discovered": 3035,
+        "verified": 25,
+        "pending": 2960,
+        "blocked": 0
+      }
+    }
+  },
+  "implementationAtVerification": {
+    "lib/retail/coupang-public.mjs": "5b015c93f896f6d3614a9bba07d1ef0a80614bfa6e4c9ae7e3265a33a42503f1",
+    "lib/retail/coupang-frontier.mjs": "fb3b970b90bd1a5e100a0e5708fb0b79dca8fafdc318ef62eb7b73170a6a1c3e",
+    "lib/retail/coupang-ontology.mjs": "b6dbc0a826b89b6184a9058122dee04dcbb2cf260cf95e0d3f3fca0501fc3f4f",
+    "scripts/coupang-public.mjs": "00b186e5f92a48eb9934ed9ac8ca92d7a0c24eb1eabb09198bcd34b681bd3bba",
+    "scripts/coupang-crawl.mjs": "6ee7fe1fd544b0a2ce728f1801781e6b12bda91e6378cf783440e4c9d26b1870",
+    "scripts/verify-coupang-public.mjs": "df8137fe03cff25af7e457f1fe5cf31cf615246977d274af7811db8e2833177f",
+    "tests/coupang-public.test.mjs": "123c955309c41214958f19fe2b6c6f1fc40a905c882cf87717e6cd7c5e028754",
+    "tests/coupang-frontier.test.mjs": "463f33827c800fa6a438caea3bb22828c62ce7278b63bfd3930a0d3ffd89e832",
+    "lib/retail/coupang-rsc.mjs": "da5ce379a9092d50daabaaf63ac3f4a22d4950ac1a4b569c9acf435536a92835",
+    "scripts/coupang-retail-diagnostic.mjs": "1d000b96d4d487632b3eb82adfcebc1a003dd4488d41fa551440c71b76c44a03",
+    "scripts/coupang-retail-visitor-check.mjs": "0ec2015b859e60602375935d159415db88c3ca961c03f701dc3391ced663ae6e",
+    "scripts/coupang-rsc-probe.mjs": "63f432f3d4d02f9a4f028732a84a52ac5c177f3204c911a8ea61559d221c7429",
+    "tests/coupang-retail-diagnostic.test.mjs": "34f634db57c168daf24a518c24ca5062cb6957d18e58652193c6559ebc7077b8",
+    "tests/coupang-retail-visitor.test.mjs": "0845bb3777326081ba3bd600f27764084a5c684bf240aef8373c30acb407e144",
+    "tests/coupang-rsc.test.mjs": "5d8d093ae71147e19804681eda225909e0dab4ed928b1a0532e1fd98e9127216",
+    "scripts/coupang-browser-cookie-probe.mjs": "12885aaf0a5e7d62879ba0648c1d613af537d95e649aa40574570b6676ee731b",
+    "tests/coupang-browser-cookie-probe.test.mjs": "8661c5b24fc674aa8ca59f99215555664ddadac1dd004d65238c72eb53530644",
+    "lib/retail/coupang-signature.mjs": "1a660b36ed45a7857434e36a6705b4f3889f1802f650f4ae543472a5de2a94dd",
+    "lib/retail/coupang-retail-session.mjs": "0e95a5a945c79eacda5364a874ad33dc4be2d0ca439e3e0288843165c744a278",
+    "scripts/coupang-retail-session.mjs": "e92778adf648231ecef661856003c9230b9c386760f4a46ea7b81e39d390cf08",
+    "tests/coupang-retail-session.test.mjs": "07b6bbe58a705589798efef294ba33eebb2b75fccd842794937140e3be48e5a7",
+    "service-packs/affiliate/apps/affiliate-api-hub/lib/coupang-visitor-context.mjs": "30cc1c74382118fcf7f5a7c6a7d1815e16fd6584e3fa9c7174c5e6562f8aaf2f"
+  },
+  "evidenceAudit": {
+    "jsonFiles": 268,
+    "runtimeIdentifierFindings": 0
+  },
+  "limitations": [
+    "Entire catalog is not complete. Pending resource and nested-operation frontiers are preserved.",
+    "General retail lowest-price RSC works with DPAPI cookies, locally generated inputs and signature renewal after expiry. Initial bootstrap, opaque device context reissuance and complete Akamai session expiry recovery remain separate and are not proven browser-free.",
+    "Flight iframe search is not verified. Membership prices are advertised values, not verified account checkout totals.",
+    "Early live receipts predate later metadata/parser repairs; implementation digests describe code at verification time."
+  ]
+}

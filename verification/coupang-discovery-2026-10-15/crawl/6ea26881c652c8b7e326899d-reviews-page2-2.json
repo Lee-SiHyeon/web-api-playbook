@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:36:09.031Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/10000000664169/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 26410,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 2,
+      "countPerPage": 5,
+      "totalCount": 20,
+      "totalPages": 4,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "872951388",
+        "productId": "10000000664169",
+        "rating": 5,
+        "itemName": "[남해] 노랑 고카트&카라반",
+        "reviewedAt": 1775661203000
+      },
+      {
+        "reviewId": "871401284",
+        "productId": "10000000664169",
+        "rating": 5,
+        "itemName": "[남해] 노랑 고카트&카라반",
+        "reviewedAt": 1775425222000
+      },
+      {
+        "reviewId": "869745558",
+        "productId": "10000000664169",
+        "rating": 5,
+        "itemName": "[남해] 노랑 고카트&카라반",
+        "reviewedAt": 1775131377000
+      },
+      {
+        "reviewId": "862623889",
+        "productId": "10000000664169",
+        "rating": 5,
+        "itemName": "[남해] 노랑 고카트&카라반",
+        "reviewedAt": 1773926297000
+      },
+      {
+        "reviewId": "862622454",
+        "productId": "10000000664169",
+        "rating": 5,
+        "itemName": "[남해] 노랑 고카트&카라반",
+        "reviewedAt": 1773926281000
+      }
+    ]
+  },
+  "projectionSha256": "d925518fa7ec958888538599801b9fcb936a8f5e59dbf803f1f82a3ec8fb3de9",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

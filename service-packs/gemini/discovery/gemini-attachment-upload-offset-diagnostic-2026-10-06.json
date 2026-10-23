@@ -1,0 +1,127 @@
+{
+  "schema": 1,
+  "service": "gemini-web",
+  "operation": "attachment_upload",
+  "callerIntent": "gemini-attachment-upload-offset-diagnostic-20261006-v1",
+  "purpose": "capture native finalize request after forwarding the actual direct start response",
+  "attemptCount": 1,
+  "directDispatchCount": 2,
+  "attempts": [
+    {
+      "recordedAt": "2026-10-06T01:58:09.498519+00:00",
+      "ownerDigestMatchedApproved": true,
+      "historicalOwnerEvidenceMatched": true,
+      "failureCode": "UPLOAD_DIAGNOSTIC_INCOMPLETE",
+      "file": {
+        "name": "api-offset-diagnostic.txt",
+        "mimeType": "text/plain",
+        "bytes": 11,
+        "sha256": "14bc55934f47f01897ac04261cd114349b9c06ef2f4b142aff75c52e8fb25671"
+      },
+      "nativeStart": {
+        "method": "POST",
+        "origin": "https://push.clients6.google.com",
+        "pathFamily": "/upload/",
+        "bodyBytes": 36,
+        "bodySha256": "3104e3ae75ae84cc9f074db67708427f3b4a2bb446b04928f7702eee0f9c2a69",
+        "headerNames": [],
+        "ordinaryCookieNames": [
+          "AEC",
+          "APISID",
+          "HSID",
+          "NID",
+          "SAPISID",
+          "SEARCH_SAMESITE",
+          "SID",
+          "SIDCC",
+          "SSID",
+          "__Secure-1PAPISID",
+          "__Secure-1PSID",
+          "__Secure-1PSIDCC",
+          "__Secure-1PSIDTS",
+          "__Secure-3PAPISID",
+          "__Secure-3PSID",
+          "__Secure-3PSIDCC",
+          "__Secure-3PSIDTS"
+        ],
+        "browserDispatchCount": 0,
+        "headerNameCountAtCapture": 23,
+        "headerNamesPersisted": false
+      },
+      "nativeContinuation": {
+        "headerNames": [],
+        "bodyBytes": 11,
+        "bodySha256": "14bc55934f47f01897ac04261cd114349b9c06ef2f4b142aff75c52e8fb25671",
+        "command": "upload, finalize",
+        "offset": "0",
+        "browserDispatchCount": 0,
+        "headerNameCountAtCapture": 22,
+        "headerNamesPersisted": false
+      },
+      "directApi": {
+        "status": "verified",
+        "directDispatchCount": 2,
+        "startDispatchCount": 1,
+        "transferDispatchCount": 1,
+        "httpRequestCount": 3,
+        "errorCode": null,
+        "stage": null,
+        "httpStatus": null,
+        "queryReadback": null,
+        "rawUploadUrlPersisted": false,
+        "rawResponseBodiesPersisted": false,
+        "cookieValuesPersisted": false
+      },
+      "mutationJournal": {
+        "attachment_upload": {
+          "state": "reconciled",
+          "dispatchCount": 1,
+          "httpStatus": null
+        },
+        "attachment_upload_transfer": {
+          "state": "reconciled",
+          "dispatchCount": 1,
+          "httpStatus": null
+        }
+      },
+      "guardLifecycle": {
+        "resetQuietVerifiedThroughDisconnect": false,
+        "lateBlockedRequestCount": 0,
+        "browserClosed": false,
+        "contextClosed": false,
+        "resetQuietStatus": "unverified",
+        "lateWriteStatus": "unverified",
+        "nativeContinuationAbortedBeforeDelivery": true,
+        "realDirectStartResponseForwarded": true
+      },
+      "cleanup": {
+        "cancelSupportedByObservedGeminiUiContract": false,
+        "cancelAttempted": false,
+        "conversationMessageSent": false
+      },
+      "rawBodiesOrCredentialValuesPersisted": false,
+      "rawOwnerEmailPersisted": false,
+      "rawUploadSessionUrlPersisted": false,
+      "directDispatchCount": 2,
+      "auditCorrection": {
+        "recordedAt": "2026-10-06T02:03:20.934276+00:00",
+        "basis": "existing safe client result and two reconciled phase journals",
+        "clientOutputStatus": "verified",
+        "startDispatchCount": 1,
+        "transferDispatchCount": 1,
+        "httpRequestCount": 3,
+        "bothPhaseJournalsReconciled": true,
+        "runnerFailureClass": "TypeError",
+        "runnerFailurePoint": "mutable-byte scrubbing after actual start response was forwarded",
+        "typedUploadAndQueryDetailsPersisted": false,
+        "resetQuietStatus": "unverified",
+        "lateWriteStatus": "unverified",
+        "ownedPageTargetRestored": false,
+        "rawValuesPersisted": false
+      }
+    }
+  ],
+  "rawBodiesOrCredentialValuesPersisted": false,
+  "rawOwnerEmailPersisted": false,
+  "rawUploadSessionUrlPersisted": false
+}

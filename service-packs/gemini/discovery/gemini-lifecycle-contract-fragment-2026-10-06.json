@@ -1,0 +1,518 @@
+{
+  "schema": "gemini-conversation-lifecycle-contract-fragment-v1",
+  "service": "gemini-web",
+  "origin": "https://gemini.google.com",
+  "capturedOn": "2026-10-06",
+  "executionHost": "linux_worker",
+  "browserRole": "codex-gemini-lifecycle-20261006",
+  "evidencePolicy": {
+    "requestAndResponseBodiesPersisted": false,
+    "cookiesOrSessionValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "searchQueryPersisted": false,
+    "accountIdentityPersisted": false,
+    "ownerBoundDirectReadRequires": [
+      "authenticated /app identity matched expected owner",
+      "anonymous /app control did not match owner"
+    ]
+  },
+  "sharedBatchTransport": {
+    "sourceOperation": "history_list",
+    "observation": "request_response_pair_in_discovery/observed-contract.json",
+    "method": "POST",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "formFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+    "responseContentType": "application/json",
+    "responseFraming": {
+      "kind": "batchexecute",
+      "lengthUnit": "utf16_code_units",
+      "lengthOverheadUnits": 2
+    }
+  },
+  "operations": {
+    "history_search": {
+      "operationName": "SearchConversations",
+      "rpcId": "unqWSc",
+      "effect": "read",
+      "basis": "normal_user_ui_request_response_capture",
+      "request": {
+        "method": "POST",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "formFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "rpcArgsTemplate": [
+          "{{searchQuery}}"
+        ],
+        "observedSearchArgument": {
+          "type": "string",
+          "length": 10
+        }
+      },
+      "normalUiCapture": {
+        "httpStatus": 200,
+        "responseContentType": "application/json",
+        "requestBytes": 145,
+        "responseBytes": 565,
+        "responseBodySha256": "999f3eb148720a12da0e479afb98bc9ed28a933db0ff688643a07f23cae387c5",
+        "responseFrameCount": 2,
+        "matchingRpcResponseCount": 1,
+        "resultCount": 1,
+        "utf16LengthFramingVerified": true
+      },
+      "directHttpReplay": {
+        "ownerMatched": true,
+        "anonymousOwnerAbsent": true,
+        "credentialPropagated": true,
+        "httpStatus": 200,
+        "responseBytes": 566,
+        "responseBodySha256": "6365b5724cc64cd32b95176cdc3a64eaa39c9b26855d45b0cff4090f832cfc9e",
+        "resultCount": 1,
+        "resultIdSetMatchedNormalUi": true,
+        "rawResultIdentifiersPersisted": false
+      }
+    },
+    "model_list": {
+      "operationName": "GetUserStatus",
+      "rpcId": "otAQ7b",
+      "effect": "read",
+      "basis": "published_maintainer_source_plus_normal_ui_request_and_direct_replay",
+      "source": {
+        "url": "https://github.com/HanaokaYuzu/Gemini-API/blob/8c5b1dcbf54ecf093551cc20bd25cef438190ba8/src/gemini_webapi/constants.py",
+        "enumLines": [
+          125,
+          126
+        ],
+        "fileSha256": "b445833aa7bc2b8acc9cb6b07223672ba74949e6f7829fc1fbfe57d1cce4bd77",
+        "publisherClass": "third_party_maintainer_source"
+      },
+      "request": {
+        "rpcArgs": []
+      },
+      "responseFieldsUsed": {
+        "accountStatus": 14,
+        "models": 15,
+        "tierFlags": 16,
+        "capabilityFlags": 17
+      },
+      "directHttpReplay": {
+        "ownerMatched": true,
+        "anonymousOwnerAbsent": true,
+        "credentialPropagated": true,
+        "httpStatus": 200,
+        "responseBytes": 13246,
+        "responseBodySha256": "e8da17e8a5ab167de277aa566eb48e9381d0af8f11b84958f0000eaf9f61b736",
+        "accountStatus": "available",
+        "modelCount": 3,
+        "modelNamesOrIdsPersisted": false
+      }
+    },
+    "settings_read": {
+      "operationName": "ReadUserPreferences",
+      "rpcId": "ESY5D",
+      "effect": "read",
+      "basis": "published_maintainer_source_plus_normal_ui_request_and_direct_replay",
+      "source": {
+        "url": "https://github.com/HanaokaYuzu/Gemini-API/blob/8c5b1dcbf54ecf093551cc20bd25cef438190ba8/src/gemini_webapi/constants.py",
+        "enumLines": [
+          131,
+          132
+        ],
+        "fileSha256": "b445833aa7bc2b8acc9cb6b07223672ba74949e6f7829fc1fbfe57d1cce4bd77",
+        "publisherClass": "third_party_maintainer_source"
+      },
+      "request": {
+        "rpcArgsTemplate": [
+          [
+            "{{allowlistedPreferenceKeys}}"
+          ]
+        ],
+        "allowlistedPreferenceKeys": [
+          "voice_language",
+          "voice_name",
+          "enable_advanced_mode",
+          "enable_memory",
+          "enable_personal_context",
+          "web_and_app_activity_enabled",
+          "side_nav_open_by_default"
+        ]
+      },
+      "normalUiCapture": {
+        "guardedCapturePasses": 3,
+        "successfulResponseCount": 6,
+        "successfulHttpStatus": 200,
+        "distinctResponseBytesObserved": [
+          166,
+          167,
+          4397,
+          4398
+        ],
+        "responseBodyPersisted": false
+      },
+      "directHttpReplay": {
+        "ownerMatched": true,
+        "anonymousOwnerAbsent": true,
+        "credentialPropagated": true,
+        "httpStatus": 200,
+        "responseBytes": 340,
+        "responseBodySha256": "f36efa0f288ce4a1709a3776d285a62821cd22425d1be2634a10912c1c03bdfc",
+        "requestedKeyCount": 7,
+        "typedValuesDecoded": 0,
+        "decodedValueState": "unreported",
+        "settingsValuesPersisted": false
+      }
+    },
+    "task_conversation_detail": {
+      "operationName": "ListConversationTurns",
+      "rpcId": "hNvQHb",
+      "effect": "read",
+      "basis": "existing_captured_contract_plus_direct_task_scoped_readback",
+      "directHttpReplay": {
+        "ownerMatched": true,
+        "anonymousOwnerAbsent": true,
+        "httpStatus": 200,
+        "responseBytes": 872,
+        "responseBodySha256": "722924d957c164d3352948831bc5b5046173c57767bceffacc535fa1f4c25a98",
+        "targetApiIdLength": 18,
+        "targetRouteIdLength": 16,
+        "apiConversationIdEchoed": true,
+        "routeBindingVerified": true,
+        "exactTaskPromptMatched": true,
+        "expectedTaskPromptSha256": "7ca5bae3af93dd9e20df4b42e1da5e9419ea4f6ba75ac672cabffc5102b11d99",
+        "assistantCandidatePresent": true,
+        "assistantTaskMarkerMatched": true,
+        "candidateResponseIdComparator": null,
+        "conversationIdsPersisted": false,
+        "messageBodiesPersisted": false
+      }
+    },
+    "conversation_rename": {
+      "operationName": "UpdateConversation",
+      "rpcId": "MUAZcd",
+      "effect": "mutation",
+      "basis": "normal_ui_request_capture_aborted_then_one_direct_journaled_dispatch",
+      "source": {
+        "url": "https://github.com/HanaokaYuzu/Gemini-API/blob/8c5b1dcbf54ecf093551cc20bd25cef438190ba8/src/gemini_webapi/constants.py",
+        "enumLine": 92,
+        "fileSha256": "b445833aa7bc2b8acc9cb6b07223672ba74949e6f7829fc1fbfe57d1cce4bd77",
+        "publisherClass": "third_party_maintainer_source"
+      },
+      "browserCapture": {
+        "requestCaptured": true,
+        "browserMutationReachedServer": false,
+        "httpMethod": "POST",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "formFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "requestBytes": 246,
+        "argsShape": {
+          "type": "array",
+          "length": 3,
+          "items": [
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    {
+                      "type": "string",
+                      "length": 5,
+                      "conversationIdMatched": false,
+                      "newTitleMatched": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                {
+                  "type": "string",
+                  "length": 18,
+                  "conversationIdMatched": true,
+                  "newTitleMatched": false
+                },
+                {
+                  "type": "string",
+                  "length": 27,
+                  "conversationIdMatched": false,
+                  "newTitleMatched": true
+                }
+              ]
+            }
+          ]
+        },
+        "targetAndNewTitleEachBoundExactlyOnce": true,
+        "requestValuesPersisted": false,
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "rpcCallTail": [
+          null,
+          "generic"
+        ],
+        "rawArgumentsPersisted": false,
+        "requestHeaderValuesPersisted": false,
+        "normalUiControlType": "dom_dialog",
+        "rpcArgsTemplateShape": {
+          "type": "array",
+          "length": 3,
+          "items": [
+            "null",
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "array",
+                  "length": 1,
+                  "items": [
+                    {
+                      "type": "string",
+                      "length": 5,
+                      "conversationIdMatched": false,
+                      "newTitleMatched": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "array",
+              "length": 2,
+              "items": [
+                {
+                  "type": "string",
+                  "length": 18,
+                  "conversationIdMatched": true,
+                  "newTitleMatched": false
+                },
+                {
+                  "type": "string",
+                  "length": 27,
+                  "conversationIdMatched": false,
+                  "newTitleMatched": true
+                }
+              ]
+            }
+          ]
+        },
+        "rpcArgsTemplatePersisted": false,
+        "rpcArgsTemplate": [
+          null,
+          [
+            [
+              {
+                "$literal": "title"
+              }
+            ]
+          ],
+          [
+            "{{conversationId}}",
+            "{{newTitle}}"
+          ]
+        ],
+        "staticArgumentInvariantAcrossTwoNormalCaptures": true,
+        "staticArgumentProofPath": "verification/one-shot/gemini-rename-static-argument-proof-2026-10-06.json"
+      },
+      "directMutation": {
+        "callerIntent": "lifecycle:rename:protocol42:20261006",
+        "ownerMatched": true,
+        "anonymousOwnerAbsent": true,
+        "sameIdDirectPreflightVerified": true,
+        "requestOnlyNoRetryContract": true,
+        "dispatchCount": 1,
+        "httpStatus": 200,
+        "responseBytes": 265,
+        "responseSha256": "3dfb22248959ce25603e1e864f00489d724da25848b4bb1f0f7030ca8e14b598",
+        "responseContractCaptured": false,
+        "mutationJournalState": "reconciled"
+      },
+      "independentReadback": {
+        "MaZiqcHttpStatus": 200,
+        "sameIdTitleMatched": true,
+        "titleLength": 32,
+        "hNvQHbHttpStatus": 200,
+        "sameIdEchoed": true,
+        "routeBindingVerified": true,
+        "promptAndAssistantContentRetained": true,
+        "remoteSearchByNewTitleResultCount": 0
+      },
+      "normalUiRequestCaptured": true,
+      "normalUiRequestResponseCaptured": false,
+      "status": "request_only_contract_installed_from_two_matching_normal_ui_captures_prior_direct_readback_verified"
+    },
+    "conversation_delete": {
+      "operationName": "DeleteConversation",
+      "rpcId": "GzXR5e",
+      "effect": "mutation",
+      "basis": "normal_ui_request_captured_and_browser_mutation_aborted; direct_delete_deferred_until_task_delete_last",
+      "source": {
+        "url": "https://github.com/HanaokaYuzu/Gemini-API/blob/8c5b1dcbf54ecf093551cc20bd25cef438190ba8/src/gemini_webapi/constants.py",
+        "enumLine": 91,
+        "fileSha256": "b445833aa7bc2b8acc9cb6b07223672ba74949e6f7829fc1fbfe57d1cce4bd77",
+        "publisherClass": "third_party_maintainer_source"
+      },
+      "clientRequestBuilderExists": true,
+      "normalUiRequestResponseCaptured": false,
+      "directMutationDispatched": false,
+      "readbackVerified": false,
+      "status": "request_captured_browser_abort_confirmed_direct_delete_deferred_until_last",
+      "browserCapture": {
+        "requestCaptured": true,
+        "browserMutationReachedServer": false,
+        "httpMethod": "POST",
+        "path": "/_/BardChatUi/data/batchexecute",
+        "queryKeys": [
+          "rpcids",
+          "source-path",
+          "bl",
+          "f.sid",
+          "hl",
+          "_reqid",
+          "rt"
+        ],
+        "headerNames": [
+          "accept",
+          "content-type",
+          "origin",
+          "referer",
+          "sec-ch-ua",
+          "sec-ch-ua-arch",
+          "sec-ch-ua-bitness",
+          "sec-ch-ua-form-factors",
+          "sec-ch-ua-full-version",
+          "sec-ch-ua-full-version-list",
+          "sec-ch-ua-mobile",
+          "sec-ch-ua-model",
+          "sec-ch-ua-platform",
+          "sec-ch-ua-platform-version",
+          "sec-ch-ua-wow64",
+          "user-agent",
+          "x-goog-ext-525001261-jspb",
+          "x-goog-ext-73010989-jspb",
+          "x-same-domain"
+        ],
+        "formFieldNames": [
+          "f.req",
+          "at"
+        ],
+        "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+        "bodyBytes": 153,
+        "argsTemplate": [
+          "{{conversationId}}"
+        ],
+        "argsShape": {
+          "type": "array",
+          "length": 1,
+          "items": [
+            {
+              "type": "string",
+              "length": 18,
+              "targetMatched": true
+            }
+          ]
+        },
+        "targetConversationOccurrenceCount": 1,
+        "rpcCallTail": [
+          null,
+          "generic"
+        ],
+        "rawArgumentsPersisted": false,
+        "requestHeaderValuesPersisted": false
+      },
+      "normalUiRequestCaptured": true
+    }
+  },
+  "clientImplementation": {
+    "module": "src/conversation-lifecycle.mjs",
+    "callableOneShotCli": "scripts/gemini-lifecycle-read-once.mjs",
+    "writesImplemented": false,
+    "localDetailSearch": {
+      "implemented": true,
+      "scope": "current history window; at most 40 detail reads",
+      "classification": "bounded local convenience, not remote full-text search"
+    },
+    "settingsValueDecoder": "allowlisted primitive typed parser; current direct response fields remain unreported"
+  }
+}

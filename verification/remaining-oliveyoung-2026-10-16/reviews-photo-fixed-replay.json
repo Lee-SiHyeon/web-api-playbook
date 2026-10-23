@@ -1,0 +1,93 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-public",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "executionMode": "pure_http",
+  "implementation": {
+    "lib/commerce/oliveyoung-korea-public.mjs": "569eb70d6c760a153f75c1baf4a696a41509c30116b047b92abfd3c6b4df3f1c",
+    "lib/commerce/oliveyoung-http-transport.mjs": "0371014feb8c17a491860654cbfe44749b9b8f93da9cf44ec1ad95d46ef9ffa9",
+    "scripts/oliveyoung-http-transport.py": "4a030089fa4061439a4d5462c5787a1f49190ae17fc060ada83240ba7eef2183"
+  },
+  "sourceMtimeNotAfterRead": true,
+  "requestCheckedAtBasis": "live_observation_time",
+  "capabilityId": "reviews.images",
+  "checkedAt": "2026-10-15T16:51:10.174Z",
+  "request": {
+    "method": "POST",
+    "origin": "https://m.oliveyoung.co.kr",
+    "path": "/review/api/v2/reviews/photo-reviews",
+    "bodyFieldNames": [
+      "goodsNumber",
+      "page",
+      "size"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 4855,
+    "responseSha256": "657735a23493bac43e52918bfe3c009e862660a822cd767e10187620214562be",
+    "checkedAt": "2026-10-15T16:51:10.174Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "secondPage": {
+    "method": "POST",
+    "origin": "https://m.oliveyoung.co.kr",
+    "path": "/review/api/v2/reviews/photo-reviews",
+    "bodyFieldNames": [
+      "goodsNumber",
+      "page",
+      "size"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 2765,
+    "responseSha256": "5d4695e92bbb331a7c00006979999902df1994e5460360df04d797c6483b1b8b",
+    "checkedAt": "2026-10-15T16:51:14.336Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://m.oliveyoung.co.kr/review/api/v2/reviews/photo-reviews"
+  },
+  "resultSummary": {
+    "productId": "A000000257097",
+    "firstPage": {
+      "photoReviewRows": 10,
+      "rowsWithPhotos": 10,
+      "totalPhotoReferences": 42,
+      "requestedPageSize": 10,
+      "totalCount": null,
+      "isLastPage": null,
+      "nextPage": null,
+      "nextPageCandidate": 2,
+      "terminalityVerified": false
+    },
+    "secondPage": {
+      "photoReviewRows": 10,
+      "rowsWithPhotos": 10,
+      "totalPhotoReferences": 20,
+      "requestedPageSize": 10,
+      "totalCount": null,
+      "isLastPage": null,
+      "nextPage": null,
+      "nextPageCandidate": 3,
+      "terminalityVerified": false
+    },
+    "rawReviewBodiesPersisted": false,
+    "rawPhotoPathsPersisted": false,
+    "sourceExhausted": false,
+    "complete": false
+  }
+}

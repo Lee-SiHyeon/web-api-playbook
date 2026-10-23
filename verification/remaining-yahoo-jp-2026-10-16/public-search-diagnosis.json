@@ -1,0 +1,140 @@
+{
+  "schema": "web-api-yahoo-public-search-diagnosis-v1",
+  "recordedAt": "2026-10-15T16:16:46.776Z",
+  "scope": {
+    "operation": "anonymous_consumer_search_document",
+    "publicOnly": true,
+    "browserUsed": false,
+    "credentialsUsed": false,
+    "cookiesSent": false,
+    "writesSubmitted": 0,
+    "requests": 2,
+    "rawBodiesPersisted": false,
+    "rawHeadersPersisted": false,
+    "responseBodyHandling": "bounded in-memory shape/hash only; body discarded after summary"
+  },
+  "sourceObservation": {
+    "request": {
+      "method": "GET",
+      "origin": "https://shopping.yahoo.co.jp",
+      "path": "/",
+      "queryFieldNames": []
+    },
+    "response": {
+      "checkedAt": "2026-10-15T16:16:45.162Z",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 2726670,
+      "bodySha256": "538d50a2b18a5622dcd74b5a8b7bc3029c2038d1a42a40d6162c5fe66e63dd5d",
+      "htmlDocument": true,
+      "titlePresent": true,
+      "hasNextDataScript": true,
+      "japaneseErrorTextPresent": true,
+      "accessDeniedTextPresent": false,
+      "standardServerErrorTextPresent": false,
+      "searchResultMarkerPresent": false
+    },
+    "searchForm": {
+      "method": "GET",
+      "origin": "https://shopping.yahoo.co.jp",
+      "path": "/search",
+      "fieldNames": [
+        "p",
+        "aq",
+        "oq",
+        "sc_i"
+      ],
+      "queryValueField": "p"
+    },
+    "searchAnchorsObserved": true,
+    "searchAnchorFieldNames": [
+      "p",
+      "sc_i"
+    ]
+  },
+  "currentReplay": {
+    "request": {
+      "method": "GET",
+      "origin": "https://shopping.yahoo.co.jp",
+      "path": "/search",
+      "queryFieldNames": [
+        "p",
+        "aq",
+        "oq",
+        "sc_i"
+      ],
+      "queryValue": "マウス",
+      "otherFormFieldValuesPersisted": false,
+      "acceptedHeaderProfile": "same Accept value as maintained japanDocument; no cookie, authorization, or browser headers"
+    },
+    "response": {
+      "checkedAt": "2026-10-15T16:16:46.327Z",
+      "httpStatus": 500,
+      "mime": "text/html",
+      "responseBytes": 4834,
+      "bodySha256": "6f8b988d80735b48e7b321a396eaf30bd8cacbbf3e1f863d7d76aefa15291988",
+      "htmlDocument": true,
+      "titlePresent": true,
+      "hasNextDataScript": false,
+      "japaneseErrorTextPresent": true,
+      "accessDeniedTextPresent": false,
+      "standardServerErrorTextPresent": false,
+      "searchResultMarkerPresent": false
+    },
+    "resultCount": null,
+    "parserInvoked": false,
+    "outcome": "blocked_http",
+    "independentProcess": true
+  },
+  "priorSameDayVariableChecks": [
+    {
+      "change": "baseline p only",
+      "httpStatus": 500,
+      "mime": "text/html",
+      "responseBytes": 4834
+    },
+    {
+      "change": "add observed sc_i only",
+      "httpStatus": 500,
+      "mime": "text/html",
+      "responseBytes": 4833
+    },
+    {
+      "change": "add empty observed aq to p+sc_i",
+      "httpStatus": 500,
+      "mime": "text/html",
+      "responseBytes": 4833
+    },
+    {
+      "change": "add empty observed oq to p+sc_i",
+      "httpStatus": 500,
+      "mime": "text/html",
+      "responseBytes": 4834
+    },
+    {
+      "change": "serialize all current observed form fields",
+      "httpStatus": 500,
+      "mime": "text/html",
+      "responseBytes": 4834
+    }
+  ],
+  "interpretation": {
+    "observedFormContractReplayed": true,
+    "queryFieldVariantsDidNotNormalizeHttp500": true,
+    "serverOrRequestEnvironmentFailureStillUnclassified": true,
+    "browserEquivalentNavigationUnverified": true,
+    "publicListingResponseContractVerified": false,
+    "clientSearchCapability": "unimplemented_until_successful_listing_document_is_observed"
+  },
+  "historicalFailureReference": {
+    "path": "verification/japan-retail-2026-10-15/yahoo-search-diagnostic.json",
+    "checkedAt": "2026-10-15T08:03:39.891Z",
+    "httpStatus": 500,
+    "unchanged": true
+  },
+  "limitations": [
+    "The public HTML error body is not persisted or quoted.",
+    "No browser or profile state was accessed; request-fingerprint differences remain possible.",
+    "No consumer result parser is claimed without a successful listing body."
+  ]
+}

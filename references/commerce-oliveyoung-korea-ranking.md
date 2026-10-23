@@ -26,6 +26,20 @@ python3 -m venv .venv-oliveyoung
 export WEB_API_OLIVEYOUNG_PYTHON="$PWD/.venv-oliveyoung/bin/python"
 ```
 
+On Windows, install Python for the current user and create the repository's
+automatically detected environment from PowerShell:
+
+```powershell
+py -3.13 -m venv .venv-oliveyoung
+.\.venv-oliveyoung\Scripts\python.exe -m pip install -r requirements/oliveyoung-http.txt
+.\.venv-oliveyoung\Scripts\python.exe --version
+```
+
+The transport and its tests discover this local `Scripts/python.exe`; they do
+not depend on the Windows Store `python3` alias. Reopen an existing terminal
+after the Python installer updates PATH. A different interpreter can still be
+selected explicitly through `WEB_API_OLIVEYOUNG_PYTHON`.
+
 On a host whose Python lacks `ensurepip`, install into the already created
 environment using an existing pip:
 

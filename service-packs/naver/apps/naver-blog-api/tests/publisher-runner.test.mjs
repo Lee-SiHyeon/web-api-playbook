@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { execFile, spawn } from "node:child_process";
 import { promisify } from "node:util";
 import { once } from "node:events";
-import { mkdtemp, rm, readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, rm, readFile, realpath, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import os from "node:os";
 import path from "node:path";
@@ -14,8 +14,12 @@ const script = (name) =>
   fileURLToPath(new URL(`../scripts/${name}`, import.meta.url));
 const save = (file, data) => writeFile(file, JSON.stringify(data));
 async function directory(t) {
-  const d = await mkdtemp(path.join(os.tmpdir(), "naver-runner-test-"));
-  t.after(() => rm(d, { recursive: true, force: true }));
+  const parent = await realpath(os.tmpdir());
+  const d = await realpath(await mkdtemp(path.join(parent, "naver-runner-test-")));
+  t.after(async () => {
+    if (path.dirname(d) !== parent || !path.basename(d).startsWith("naver-runner-test-")) throw Error("TEST_CLEANUP_SCOPE");
+    await rm(d, { recursive: true, force: true });
+  });
   return d;
 }
 
@@ -24,6 +28,7 @@ test("normal API process fails closed when credentials are not propagated", asyn
   const output = path.join(d, "observation.json");
   const env = { ...process.env };
   delete env.NAVER_COOKIE;
+  delete env.NAVER_SESSION_VAULT_MODULE;
   await assert.rejects(
     exec(
       process.execPath,
@@ -41,14 +46,26 @@ test("normal API process fails closed when credentials are not propagated", asyn
   await assert.rejects(readFile(output), { code: "ENOENT" });
 });
 
-test('an existing receipt aborts the runner before it can contact the network',async t=>{
+test('an existing receipt aborts the runner before credential loading or network access',async t=>{
   const d=await directory(t),output=path.join(d,'existing.json');
   await writeFile(output,'{"preserved":true}');
+  for (const credentials of [{}, {NAVER_COOKIE:'NID_AUT=synthetic-aut; NID_SES=synthetic-ses'},
+    {NAVER_SESSION_VAULT_MODULE:'invalid-provider-must-not-be-loaded'}]) {
+    await assert.rejects(exec(process.execPath,[script('api/publisher-cli.mjs'),'--command=upload-image',
+      '--blog-id=syntheticblog','--file=does-not-exist.png',`--output=${output}`],
+      {env:{SystemRoot:process.env.SystemRoot,...credentials},windowsHide:true}),
+      e=>e.code===2&&JSON.parse(e.stderr.trim()).code==='EEXIST');
+  }
+  assert.equal(await readFile(output,'utf8'),'{"preserved":true}');
+});
+
+test('a new receipt does not bypass mutation credential requirements or create an auth-failure artifact',async t=>{
+  const d=await directory(t),output=path.join(d,'new.json');
   await assert.rejects(exec(process.execPath,[script('api/publisher-cli.mjs'),'--command=upload-image',
     '--blog-id=syntheticblog','--file=does-not-exist.png',`--output=${output}`],
     {env:{SystemRoot:process.env.SystemRoot,NAVER_COOKIE:'NID_AUT=synthetic-aut; NID_SES=synthetic-ses'},windowsHide:true}),
-    e=>e.code===2&&JSON.parse(e.stderr.trim()).code==='EEXIST');
-  assert.equal(await readFile(output,'utf8'),'{"preserved":true}');
+    e=>e.code===2&&JSON.parse(e.stderr.trim()).code==='CREDENTIAL_PROVIDER_REQUIRED');
+  await assert.rejects(readFile(output),{code:'ENOENT'});
 });
 test("API authorization CLI binds reviewed bundle and real preflight before accepting a job", async (t) => {
   const d = await directory(t),

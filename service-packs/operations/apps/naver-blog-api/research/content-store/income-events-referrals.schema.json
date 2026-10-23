@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/income-events-referrals.schema.json",
+  "title": "Local income events referral registry",
+  "description": "Private referral codes belong in %LOCALAPPDATA%\\affiliate-content-operations\\income-events\\referrals.json. Never commit real owner codes or links.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "referrals"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "referrals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/referral" }
+    }
+  },
+  "$defs": {
+    "referral": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service",
+        "codeOrLink",
+        "officialProgramUrl",
+        "inviterReward",
+        "inviteeReward",
+        "publicPostingAllowed",
+        "publicPostingEvidenceUrls",
+        "validFrom",
+        "validUntil"
+      ],
+      "properties": {
+        "service": { "type": "string", "minLength": 1 },
+        "codeOrLink": { "type": "string", "minLength": 1, "description": "Owner-only value; store locally, never in repository." },
+        "officialProgramUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "inviterReward": { "type": ["string", "object"] },
+        "inviteeReward": { "type": ["string", "object"] },
+        "publicPostingAllowed": { "enum": ["allowed", "forbidden", "unknown"] },
+        "publicPostingEvidenceUrls": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri", "pattern": "^https://" }
+        },
+        "validFrom": { "type": ["string", "null"], "format": "date" },
+        "validUntil": { "type": ["string", "null"], "format": "date" },
+        "notes": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "publicPostingAllowed": { "const": "allowed" } }, "required": ["publicPostingAllowed"] },
+          "then": { "properties": { "publicPostingEvidenceUrls": { "minItems": 1 } } }
+        }
+      ]
+    }
+  }
+}

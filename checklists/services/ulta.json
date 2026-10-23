@@ -506,10 +506,29 @@
             "lib/commerce/ulta.mjs",
             "verification/catalog-price-ulta-sample-2026-10-05.csv"
           ]
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://www.ulta.com",
+          "path": "/dxl/graphql",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/ulta-common-collector-proof.json",
+            "verification/remaining-readcaps-2026-10-16/ulta-common-collector-sample.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/ulta.mjs"
+          ],
+          "note": "Current lipstick run reached 3 server-end pages (218 source rows, 212 stored offers) with JSON/CSV row-for-row readback. The first 20 normalized offers are preserved as the sample, including product-range rows; 13 product-range offers are retained in the full result. Provider coverage is limited and complete=false."
         }
       ],
       "sourceEvidence": [],
-      "note": "Current Node 24 CLI replay read four lipstick search pages and independently matched 255 deduplicated offer rows to JSON and CSV. Twenty native scalar USD offers are sampled; 13 product-range offers are retained in the full output. Provider coverage remains limited and complete=false."
+      "note": "Current Node 24 CLI replay read three lipstick search pages (218 source rows, 212 deduplicated offers) and independently matched all stored offer rows to JSON and CSV. The provider-limited collection has complete=false, so it is not full-catalog coverage."
     }
   ]
 }

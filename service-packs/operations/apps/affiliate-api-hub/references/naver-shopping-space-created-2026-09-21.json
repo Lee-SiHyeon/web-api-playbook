@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "host": "DESKTOP-TO2H6OD",
+  "checkedAt": "2026-09-20T17:17:10.000Z",
+  "scope": "Authorized creator space setup and saved-channel verification; separate affiliate activation pending",
+  "previousReceipt": "naver-shopping-readiness-2026-09-21.json",
+  "authorization": {
+    "existingChannelLinkAndSpaceCreation": "explicit_user_request",
+    "groupBuyingExperience": "none_explicit_user_answer",
+    "affiliateTerms": "action_time_confirmation_requested_not_received"
+  },
+  "browserSetup": {
+    "spaceCreated": true,
+    "creationExecutionMode": "browser_automation",
+    "observedRequest": {"method":"POST","origin":"https://gw-brandconnect.naver.com","path":"/brand-connect/command/creator-space","httpStatus":200},
+    "successDialogObserved": true,
+    "creationIndependentlyReplayed": false,
+    "genericCreationClientImplemented": false,
+    "savedProfileReadback": {"blogChannelLinked":true,"groupBuyingExperienceNone":true,"mainTopicLiving":true},
+    "settlementType": "individual",
+    "payoutDetailsSubmitted": false,
+    "existingPublicProfileImageReused": true
+  },
+  "httpAccountProbe": {
+    "checkedAt": "2026-09-20T17:10:55.231Z",
+    "httpStatus": 200,
+    "identityVerified": true,
+    "authenticated": true,
+    "credentialPropagated": true,
+    "responseBytes": 823,
+    "entitlement": {"creator":true,"partner":false,"accountAssigned":true},
+    "spaceStatus": {"observed":true,"activeSpaceCount":1,"spaceCount":1,"selectedSpaceAssigned":true,"waitingSpace":null},
+    "runner": "apps/affiliate-api-hub/scripts/partner-session-probe.mjs",
+    "browserUsedForHttpRequest": false,
+    "rawAccountReturned": false
+  },
+  "readiness": {
+    "checkedAt": "2026-09-20T17:10:55.276Z",
+    "status": "ready_for_scoped_discovery",
+    "accountRead": "verified",
+    "creator": "verified",
+    "space": "active_present",
+    "affiliateTerms": "unverified",
+    "productSearch": "unverified",
+    "productDetail": "unverified",
+    "linkIssue": "unverified",
+    "linkReadback": "unverified",
+    "outcomes": "unverified",
+    "readyForScopedDiscovery": true,
+    "commercialOperationsEnabled": false,
+    "publishingEnabled": false
+  },
+  "shoppingActivation": {
+    "separateAffiliateTermsDialogObserved": true,
+    "agreementSubmitted": false,
+    "productAndLinkMenusDisabled": true
+  },
+  "execution": {
+    "sessionBootstrap": "existing_Canary_current_origin",
+    "handoff": "memory_to_independent_Node_stdin_child",
+    "accountRead": "pure_http",
+    "credentialsPersisted": false,
+    "automaticLoginRenewal": "unverified"
+  }
+}

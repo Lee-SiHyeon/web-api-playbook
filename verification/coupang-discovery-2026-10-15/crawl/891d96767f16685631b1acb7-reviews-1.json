@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:31:36.914Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/178113301/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 20356,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 0,
+      "countPerPage": 5,
+      "totalCount": 308,
+      "totalPages": 62,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "998584014",
+        "productId": "178113301",
+        "rating": 3,
+        "itemName": "[제주] 우리승마장",
+        "reviewedAt": 1788675076000
+      },
+      {
+        "reviewId": "994359877",
+        "productId": "178113301",
+        "rating": 4,
+        "itemName": "[제주] 우리승마장",
+        "reviewedAt": 1788332000000
+      },
+      {
+        "reviewId": "886159121",
+        "productId": "178113301",
+        "rating": 3,
+        "itemName": "[제주] 우리승마장",
+        "reviewedAt": 1777475069000
+      },
+      {
+        "reviewId": "854134534",
+        "productId": "178113301",
+        "rating": 5,
+        "itemName": "[제주] 우리승마장",
+        "reviewedAt": 1772438793000
+      },
+      {
+        "reviewId": "564802191",
+        "productId": "178113301",
+        "rating": 5,
+        "itemName": "[제주] 우리승마장",
+        "reviewedAt": 1706374130000
+      }
+    ]
+  },
+  "projectionSha256": "107ae441895686b80ad2b2982c618bb5bca8e6731b44d259645acc3c962682ca",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

@@ -81,6 +81,26 @@
             "verification/catalog-price-printful-sample-2026-10-05.csv"
           ],
           "note": "Printful official USA regional feed replayed via current Node 24 CLI; 11,279 priced variants; regional-feed coverage."
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://printful.s3.us-west-1.amazonaws.com",
+          "path": "/productExport/printful_products.zip",
+          "mime": "application/zip",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/public-feed-proof.json",
+            "verification/remaining-readcaps-2026-10-16/public-feed-sample.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/printful.mjs",
+            "lib/commerce/http.mjs"
+          ],
+          "note": "Current USA feed yielded 11,524 rows with JSON/CSV row-for-row readback; regional-feed coverage is complete."
         }
       ],
       "sourceEvidence": []
@@ -184,6 +204,46 @@
             "verification/catalog-price-shopify-product-sample-2026-10-05.csv"
           ],
           "note": "Current CLI re-read the previously proven product handle and confirmed its USD variant price; evidence is scoped to this product."
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://colourpop.com",
+          "path": "/products/eeveelution-shadow-palette.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/shopify-storefront-product-proof.json",
+            "verification/remaining-readcaps-2026-10-16/shopify-storefront-product-sample.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs"
+          ],
+          "note": "Current public ColourPop product detail yielded one offer with JSON/CSV row-for-row readback; scope is this product."
+        },
+        {
+          "kind": "commerce-collection-v1",
+          "origin": "https://colourpop.com",
+          "path": "/search/suggest.json",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/shopify-storefront-search-proof.json",
+            "verification/remaining-readcaps-2026-10-16/shopify-storefront-search-sample.json"
+          ],
+          "hashPaths": [
+            "scripts/commerce.mjs",
+            "lib/commerce/providers.mjs",
+            "lib/commerce/snapshots.mjs",
+            "lib/commerce/credential-output.mjs",
+            "lib/cli.mjs",
+            "lib/commerce/shopify-storefronts.mjs",
+            "lib/retail/shopify.mjs"
+          ],
+          "note": "Current ColourPop predictive search yielded 10 offers with JSON/CSV readback; these are suggestions, not a complete storefront catalog."
         }
       ],
       "sourceEvidence": []

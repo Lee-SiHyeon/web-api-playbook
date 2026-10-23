@@ -4,6 +4,22 @@ import { ScopedSession } from '../lib/scoped-session.mjs';
 
 const origin = 'https://service.example.test';
 
+test('browser handoff preserves valid quoted cookie values through serialization and HTTP', async () => {
+  let sent;
+  const first = new ScopedSession({ allowedOrigins: [origin], cookieOrigins: [origin],
+    cookies: [{ name: 'preference', value: '"SYNTHETIC:KR"', domain: 'service.example.test', path: '/' }] });
+  const restored = ScopedSession.fromJSON(first.toJSON(), { fetchImpl: async (_url, init) => {
+    sent = new Headers(init.headers).get('cookie'); return new Response('ok');
+  } });
+  await restored.request(`${origin}/read`);
+  assert.equal(sent, 'preference="SYNTHETIC:KR"');
+  for (const value of ['"unterminated', 'a"b', '"a;b"', '"a,b"', '"a\\b"', '"a b"', '"a\r\nb"']) {
+    assert.throws(() => new ScopedSession({ allowedOrigins: [origin], cookieOrigins: [origin],
+      cookies: [{ name: 'bad', value, domain: 'service.example.test', path: '/' }] }),
+    { code: 'SCOPED_SESSION_COOKIES_INVALID' });
+  }
+});
+
 function session(fetchImpl, extra = {}) {
   return new ScopedSession({ allowedOrigins: [origin], cookieOrigins: [origin], fetchImpl, ...extra });
 }

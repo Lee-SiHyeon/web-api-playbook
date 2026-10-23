@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "service": "elevenlabs",
+  "description": "Protected-session handoff scaffold only. No ElevenLabs owner, voice/model/settings, synthesis, history, or audio readback contract has been replayed by the maintained client yet.",
+  "capabilities": [
+    {
+      "id": "auth.session_handoff",
+      "title": "Validate and store a caller-supplied scoped capture envelope in DPAPI",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          { "path": "lib/elevenlabs-session.mjs", "exports": ["importElevenLabsSession", "elevenLabsSessionStatus", "loadElevenLabsSession"] }
+        ],
+        "cli": [
+          { "path": "scripts/elevenlabs.mjs", "tokens": ["import-session", "status"] }
+        ],
+        "tests": ["tests/elevenlabs-session.test.mjs"]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "LOCAL_ONLY: import validates a caller-supplied envelope and stores scoped credentials through ProtectedStore; it does not independently establish browser-capture provenance or account ownership. This is not live evidence and must never be reported as recorded_live. Current CDP Network.enable failures prevented capture, so the importer has not been used. See verification/remaining-elevenlabs-2026-10-16/evidence.json."
+    },
+    {
+      "id": "auth.owner_read",
+      "title": "Read and bind the authenticated account owner before account-scoped operations",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The owner request and response contract has not been replayed by the maintained HTTP client."
+    },
+    {
+      "id": "voice.options",
+      "title": "Read available voices and their selectable metadata",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Voice-option endpoint, response schema, and account visibility have not been replayed by the maintained HTTP client."
+    },
+    {
+      "id": "model.options",
+      "title": "Read available synthesis models and supported output formats",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Model and output-format option contracts have not been replayed by the maintained HTTP client."
+    },
+    {
+      "id": "generation.settings",
+      "title": "Preserve the UI-selected voice and synthesis settings in the request contract",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed request fields and allowed settings have not been captured into the maintained client."
+    },
+    {
+      "id": "generation.create",
+      "title": "Generate speech once through the observed synthesis request and preserve the audio artifact",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The write endpoint, payload, response MIME, and audio artifact handling have not been replayed by the maintained HTTP client."
+    },
+    {
+      "id": "generation.history_readback",
+      "title": "Read back the generated item from history or detail independently after creation",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The history/detail read contract and generated-item matching fields have not been replayed by the maintained HTTP client."
+    },
+    {
+      "id": "generation.idempotency",
+      "title": "Journal each synthesis intent and reconcile uncertain outcomes before any retry",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Generation journaling and history-based reconciliation are not implemented."
+    }
+  ]
+}

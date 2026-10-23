@@ -1,0 +1,242 @@
+{
+  "checkedAt": "2026-10-15T13:25:07.540Z",
+  "tests": {
+    "verifiedAt": "2026-10-15T13:19:28.132Z",
+    "groups": [
+      {
+        "command": "node --test tests/recorded-evidence-provenance.test.mjs tests/overseas-recorded-evidence.test.mjs tests/public-read-checklist.test.mjs tests/amazon-session-checklist.test.mjs",
+        "exitCode": 0,
+        "tests": 20,
+        "passed": 20,
+        "failed": 0,
+        "mode": "local_mock_and_recorded_evidence"
+      },
+      {
+        "command": "node --test service-packs/social-x/test/client.test.mjs",
+        "exitCode": 0,
+        "tests": 12,
+        "passed": 12,
+        "failed": 0,
+        "mode": "local_mock_and_recorded_evidence"
+      },
+      {
+        "command": "node --test service-packs/ontology/src/travel-price/yanolja-search.test.mjs",
+        "exitCode": 0,
+        "tests": 8,
+        "passed": 8,
+        "failed": 0,
+        "mode": "local_mock_and_recorded_evidence"
+      },
+      {
+        "command": "node --test tests/commerce-sephora.test.mjs tests/commerce-providers.test.mjs",
+        "checkedAtUtc": "2026-10-15T13:23:23Z",
+        "tests": 22,
+        "passed": 22,
+        "failed": 0,
+        "skipped": 0,
+        "todo": 0,
+        "coverageNote": "Includes a synthetic 60+25=85 pagination request-size regression (requested sizes [10,60]), impossible 60-row response against totalProducts=10 rejection, and independent-client-query reuse regression. This does not establish live full-pagination success.",
+        "mode": "local_mock",
+        "evidence": "commerce-review.json#/method/localValidation"
+      }
+    ],
+    "totalTests": 62,
+    "allPassed": true,
+    "remoteWrites": 0
+  },
+  "offlineVerifiers": [
+    {
+      "command": "node scripts/verify-amazon-expansion.mjs",
+      "exitCode": 0,
+      "output": {
+        "ok": true,
+        "status": "historical_recorded_evidence_revalidated",
+        "schema": "web-api-amazon-expansion-verifier-v1",
+        "checkedAt": "2026-10-15T13:25:12.446Z",
+        "recordedAt": "2026-10-15T06:16:52.005Z",
+        "networkUsed": false,
+        "liveState": "not_checked",
+        "protectedStoreRead": false,
+        "runtimeImplementationHashesMatched": true,
+        "evidenceHashesMatched": true,
+        "currentEvidenceValidation": true,
+        "verificationToolProvenance": [
+          {
+            "path": "lib/capability-checklist.mjs",
+            "kind": "evidence_validator",
+            "recordedSha256": "879751d2cb02111606125901c358e98aadebab421776a5d2a788db2649df9576",
+            "currentSha256": "2fbdd26b1dc55d3e96a2996760eb4f8c90792a9bb4c0e10574b606c2e4f0dd15",
+            "status": "historical_tool_changed"
+          },
+          {
+            "path": "scripts/verify-amazon-expansion.mjs",
+            "kind": "offline_verifier",
+            "recordedSha256": "dee39efd5f4fb009b200d7def32b938a5f3453def2db5a44d60c16a66ed9f31c",
+            "currentSha256": "b285619b75d57a5370b5f10f851d3bbbb179787e1a052760f7b2127b44ad9f39",
+            "status": "historical_tool_changed"
+          }
+        ],
+        "counts": {
+          "searchPages": 4,
+          "uniqueSearchProducts": 60,
+          "productDetails": 3,
+          "offerings": 62,
+          "offerObservations": 47,
+          "variantEdges": 47,
+          "menus": 37,
+          "destinations": 342,
+          "pendingListings": 206,
+          "pendingProducts": 114
+        },
+        "historicallyVerifiedCapabilities": [
+          "catalog.navigation",
+          "catalog.search",
+          "catalog.pagination",
+          "catalog.product",
+          "catalog.description",
+          "catalog.options",
+          "catalog.observed_images",
+          "catalog.displayed_offer"
+        ],
+        "requiredGaps": [
+          "catalog.categories",
+          "catalog.pagination_termination",
+          "catalog.price_availability",
+          "catalog.photos",
+          "reviews.full_body",
+          "reviews.pagination",
+          "catalog.variant_offers"
+        ],
+        "evidenceJsonFilesChecked": 22,
+        "runtimeValueFindings": 0,
+        "completeCatalog": false,
+        "sessionRenewalVerified": false
+      }
+    },
+    {
+      "command": "node scripts/verify-japan-retail.mjs",
+      "exitCode": 0,
+      "output": {
+        "ok": true,
+        "status": "historical_recorded_evidence_revalidated",
+        "verifier": "japan-retail-recorded-evidence",
+        "checkedAt": "2026-10-15T13:25:22.598Z",
+        "recordedAt": "2026-10-15T08:03:40.504Z",
+        "networkUsed": false,
+        "liveState": "not_checked",
+        "runtimeImplementationHashesMatched": true,
+        "evidenceHashesMatched": true,
+        "currentEvidenceValidation": true,
+        "verificationToolProvenance": [
+          {
+            "path": "lib/capability-checklist.mjs",
+            "kind": "evidence_validator",
+            "recordedSha256": "879751d2cb02111606125901c358e98aadebab421776a5d2a788db2649df9576",
+            "currentSha256": "2fbdd26b1dc55d3e96a2996760eb4f8c90792a9bb4c0e10574b606c2e4f0dd15",
+            "status": "historical_tool_changed"
+          },
+          {
+            "path": "scripts/verify-japan-retail.mjs",
+            "kind": "offline_verifier",
+            "recordedSha256": "59155a9972d14565281ad14071f5c8bd4ec91d2f1726e73663944a1999ed25d8",
+            "currentSha256": "d16460baac8ab5432575f38e9f45c94831d7ac67e263a7e50c95201cc51db86a",
+            "status": "historical_tool_changed"
+          }
+        ],
+        "executions": 15,
+        "searchPages": 3,
+        "searchRows": 150,
+        "uniqueSearchProducts": 148,
+        "reviewCount": 60,
+        "frontierSummaries": [
+          {
+            "service": "rakuten",
+            "pagesReadThisRun": 2,
+            "verified": 5,
+            "pending": 948,
+            "blocked": 0,
+            "adapterPending": 0,
+            "frontierExhausted": false,
+            "completeCatalog": false,
+            "stopReason": "page_budget"
+          },
+          {
+            "service": "yahoo",
+            "pagesReadThisRun": 1,
+            "verified": 5,
+            "pending": 928,
+            "blocked": 0,
+            "adapterPending": 5,
+            "frontierExhausted": false,
+            "completeCatalog": false,
+            "stopReason": "page_budget"
+          }
+        ],
+        "recordedBoundaries": {
+          "browserCapture": false,
+          "publicDirectHttpReplay": true,
+          "officialCredentialedReplay": false,
+          "affiliateLinkVerified": false,
+          "completeCatalog": false
+        },
+        "affiliateLinksVerified": false,
+        "officialCredentialedReplay": false,
+        "completeCatalog": false
+      }
+    },
+    {
+      "command": "node scripts/verify-overseas-retail.mjs",
+      "exitCode": 0,
+      "output": {
+        "ok": true,
+        "verifier": "overseas-retail-recorded-evidence",
+        "verifiedAt": "2026-10-15T13:25:23.618Z",
+        "networkUsed": false,
+        "liveReplaysExecuted": 0,
+        "evidenceFilesWritten": 0,
+        "records": [
+          {
+            "service": "shein",
+            "capabilityId": "catalog.home_document",
+            "count": 10,
+            "proof": "verification/retail-shein-direct-http-proof-2026-10-15.json",
+            "recordedAt": "2026-10-15T00:19:34.328Z",
+            "status": "recorded_evidence_verified",
+            "browserCaptured": false,
+            "completeCatalog": false,
+            "runtimeImplementationHashesMatched": true,
+            "verificationToolProvenance": [
+              {
+                "path": "scripts/verify-overseas-retail.mjs",
+                "kind": "offline_evidence_verifier",
+                "recordedSha256": "3541373ff1e45a45eebcc50fdabcb3c44875c0eadb4271eb5442403f0759497e",
+                "currentSha256": "4d616110c4066381f7113c1a82dc44ebc4c865ad38639b2573a024133f5431b7",
+                "status": "historical_tool_changed"
+              }
+            ]
+          },
+          {
+            "service": "iherb",
+            "capabilityId": "catalog.sitemap_products",
+            "count": 100,
+            "proof": "verification/retail-iherb-direct-http-proof-2026-10-15.json",
+            "recordedAt": "2026-10-15T00:19:39.176Z",
+            "status": "recorded_evidence_verified",
+            "browserCaptured": false,
+            "completeCatalog": false,
+            "runtimeImplementationHashesMatched": true,
+            "verificationToolProvenance": [
+              {
+                "path": "scripts/verify-overseas-retail.mjs",
+                "kind": "offline_evidence_verifier",
+                "recordedSha256": "3541373ff1e45a45eebcc50fdabcb3c44875c0eadb4271eb5442403f0759497e",
+                "currentSha256": "4d616110c4066381f7113c1a82dc44ebc4c865ad38639b2573a024133f5431b7",
+                "status": "historical_tool_changed"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

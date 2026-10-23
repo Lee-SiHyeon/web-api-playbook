@@ -1,0 +1,75 @@
+{
+  "schema": "gemini-feature-pair-evidence-v1",
+  "service": "gemini-web",
+  "featureId": "settings",
+  "operationId": "settings_read",
+  "caseId": "after",
+  "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+  "clientCodeSha256": "e75369295ed69b40d9c8cba258c07548a33e0df7b8b8d47c48ca0ef9689b90a4",
+  "observedAt": "2026-10-06T11:57:06.944836+00:00",
+  "executionHost": "linux_worker",
+  "transport": "direct_http",
+  "evidenceClass": "direct_http_live",
+  "mocked": false,
+  "publicOnly": false,
+  "requestResponsePaired": true,
+  "authenticatedOwnerVerified": true,
+  "expectedOutcomeVerified": true,
+  "credentialPropagated": true,
+  "request": {
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "headerNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "valuesPersisted": false,
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+    "correlationId": "gemini-side-nav-settings-evidence-refresh-20261006-v3",
+    "rpcId": "ESY5D",
+    "preferenceFieldIds": [
+      41
+    ]
+  },
+  "response": {
+    "status": 200,
+    "contentType": "application/json",
+    "bytes": 159,
+    "bodySha256": "6db6a6744939cbbfd3cfac42349c17e8efa0ec19fe531b8900689a32931090ea",
+    "framing": "batchexecute"
+  },
+  "secretsPersisted": false,
+  "readbackOfOperation": "settings_update",
+  "readbackOfCaseId": "update"
+}

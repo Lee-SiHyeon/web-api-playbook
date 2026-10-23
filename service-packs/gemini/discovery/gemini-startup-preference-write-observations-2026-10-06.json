@@ -1,0 +1,90 @@
+{
+  "schema": "gemini-startup-preference-write-observation-v1",
+  "service": "gemini-web",
+  "observedOn": "2026-10-06",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "operationMapping": {
+    "rpcId": "L5adhe",
+    "operationName": "UPDATE_USER_PREFERENCES",
+    "sourceUrl": "https://github.com/HanaokaYuzu/Gemini-API/blob/8c5b1dcbf54ecf093551cc20bd25cef438190ba8/src/gemini_webapi/constants.py",
+    "sourceLines": [125, 132],
+    "sourceFileSha256": "b445833aa7bc2b8acc9cb6b07223672ba74949e6f7829fc1fbfe57d1cce4bd77",
+    "sourceClass": "third_party_maintainer_source",
+    "interpretationBoundary": "The wrapper maps the wire RPC literal to UPDATE_USER_PREFERENCES; this does not establish whether any particular app-startup payload changed saved settings."
+  },
+  "unguardedProbe": {
+    "context": "A read-only /app reload was attempted before the page-scoped write guard was installed.",
+    "observedMinimumHttp200Responses": 2,
+    "observedRequestBytes": [814, 827],
+    "requestAndResponseBodiesPersisted": false,
+    "exactRequestCount": null,
+    "payloadEffect": "unknown",
+    "rollbackAttempted": false,
+    "stateChangeAssumed": false
+  },
+  "guardedProbes": {
+    "pageScopedGuardInstalledBeforeReloadOrControlInteraction": true,
+    "allowPolicy": "only the captured/read-only Gemini batchexecute RPC allowlist could continue; every other non-GET request was aborted",
+    "updateRpcSentToServer": false,
+    "blockedUpdateCallCountInRecordedPass": 4,
+    "blockedUpdateCalls": [
+      {
+        "requestBytes": 869,
+        "topArrayLength": 100,
+        "nonNullLeafCount": 2,
+        "nonNullLeaves": [
+          {"path": [0, 99], "type": "string", "length": 16},
+          {"path": [2, 0], "type": "number"}
+        ]
+      },
+      {
+        "requestBytes": 1997,
+        "topArrayLength": 265,
+        "nonNullLeafCount": 2,
+        "nonNullLeaves": [
+          {"path": [0, 264], "type": "number"},
+          {"path": [2, 0], "type": "number"}
+        ]
+      },
+      {
+        "requestBytes": 814,
+        "topArrayLength": 94,
+        "nonNullLeafCount": 2,
+        "nonNullLeaves": [
+          {"path": [0, 93], "type": "string", "length": 4},
+          {"path": [2, 0], "type": "number"}
+        ]
+      },
+      {
+        "requestBytes": 827,
+        "topArrayLength": 94,
+        "nonNullLeafCount": 2,
+        "nonNullLeaves": [
+          {"path": [0, 93], "type": "string", "length": 17},
+          {"path": [2, 0], "type": "number"}
+        ]
+      }
+    ],
+    "fieldNamesResolvedToPreferenceKeys": false,
+    "requestValuesPersisted": false,
+    "responseValuesPersisted": false
+  },
+  "directPreferenceRead": {
+    "operation": "ESY5D",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "httpStatus": 200,
+    "responseBytes": 340,
+    "responseSha256": "f36efa0f288ce4a1709a3776d285a62821cd22425d1be2634a10912c1c03bdfc",
+    "requestedKeyCount": 7,
+    "typedKeysDecoded": 0,
+    "valuesPersisted": false
+  },
+  "conclusion": {
+    "currentUiCanEmitPreferenceUpdateRpcsDuringStartup": true,
+    "savedPreferenceChangeProven": false,
+    "noOpProven": false,
+    "rollbackSafe": false,
+    "nextEvidenceNeeded": "Map update argument positions to named preferences from first-party/source schema and compare only via a bounded read-only settings response; do not replay UPDATE_USER_PREFERENCES or roll back without a verified prior value."
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "coupang-search-path-recheck-v1",
+  "checkedAt": "2026-10-15T11:46:10.706Z",
+  "correction": "The original audit selected the anonymous Document diagnostic and omitted the maintained protected-session RSC client.",
+  "originalDiagnostic": {
+    "operation": "retail_search_document_anonymous",
+    "httpStatus": 403,
+    "cookieSent": false,
+    "evidence": "../playbook-audit-2026-10-15/live-samples.json",
+    "repeatedThisRun": false
+  },
+  "initialPreflight": {
+    "code": "COUPANG_RETAIL_CONTEXT_REBOOTSTRAP_REQUIRED",
+    "httpRequests": 0,
+    "reason": "local_six_hour_bound_not_a_server_403",
+    "serverContextTtlVerified": false
+  },
+  "bootstrap": {
+    "checkedAt": "2026-10-15T11:37:29.023Z",
+    "origin": "https://www.coupang.com",
+    "path": "/np/search",
+    "status": 200,
+    "mime": "text/x-component",
+    "protocol": "h2",
+    "action": "click_visible_low_price_label",
+    "browserUsed": true,
+    "selectedCookieCount": 11,
+    "bmMiPresent": false,
+    "credentialHandoff": "current_origin_CDP_to_existing_CLI_stdin_to_Windows_DPAPI",
+    "plaintextPersistence": false
+  },
+  "fix": {
+    "optionalBootstrapCookie": "bm_mi",
+    "otherRequiredCookieCount": 11,
+    "localContextLimitChanged": false
+  },
+  "runs": [
+    {
+      "evidence": "search.json",
+      "checkedAt": "2026-10-15T11:37:37.959Z",
+      "status": 200,
+      "mime": "text/x-component",
+      "products": 60,
+      "browserUsed": false,
+      "exactCookieHeaderSent": true,
+      "signatureRenewalVerified": false,
+      "oldSignatureExpired": false,
+      "requestCount": 1,
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": "recurring_read_and_signature_refresh_after_initial_bootstrap",
+        "credential_propagated": true,
+        "live_replay": true
+      }
+    },
+    {
+      "evidence": "signature-renewal.json",
+      "checkedAt": "2026-10-15T11:37:59.794Z",
+      "status": 200,
+      "mime": "text/x-component",
+      "products": 54,
+      "browserUsed": false,
+      "exactCookieHeaderSent": true,
+      "signatureRenewalVerified": true,
+      "oldSignatureExpired": false,
+      "requestCount": 1,
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": "recurring_read_and_signature_refresh_after_initial_bootstrap",
+        "credential_propagated": true,
+        "live_replay": true
+      }
+    },
+    {
+      "evidence": "expired-auto-renewal.json",
+      "checkedAt": "2026-10-15T11:44:39.019Z",
+      "status": 200,
+      "mime": "text/x-component",
+      "products": 60,
+      "browserUsed": false,
+      "exactCookieHeaderSent": true,
+      "signatureRenewalVerified": true,
+      "oldSignatureExpired": true,
+      "requestCount": 1,
+      "states": {
+        "captured": true,
+        "client_exists": true,
+        "remnant_free": "recurring_read_and_signature_refresh_after_initial_bootstrap",
+        "credential_propagated": true,
+        "live_replay": true
+      }
+    }
+  ],
+  "limits": {
+    "initialBootstrapBrowserDependent": true,
+    "opaqueContextRenewalVerified": false,
+    "localContextLimitMs": 21600000,
+    "fullCatalogVerified": false,
+    "accountPricingVerified": false
+  },
+  "writesSubmitted": 0,
+  "retries": 0,
+  "implementation": {
+    "scripts/coupang-retail-session.mjs": "e92778adf648231ecef661856003c9230b9c386760f4a46ea7b81e39d390cf08",
+    "lib/retail/coupang-retail-session.mjs": "5f363fd2a9676d1e3a9b74df7367a8d32088f8131234b695f48d09bce663a21a",
+    "lib/retail/coupang-rsc.mjs": "da5ce379a9092d50daabaaf63ac3f4a22d4950ac1a4b569c9acf435536a92835",
+    "lib/retail/coupang-signature.mjs": "1a660b36ed45a7857434e36a6705b4f3889f1802f650f4ae543472a5de2a94dd",
+    "lib/scoped-session.mjs": "75ccca7b5e6cedb7a088ee0caeb72c1aee23ec68f87c1b715d17c8851b0339f2"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "checkedAt": "2026-10-05T09:58:55.803Z",
+  "mode": "offline_only",
+  "generationPostCount": 0,
+  "networkRequestCount": 0,
+  "downloadCount": 0,
+  "fixture": "non-secret synthetic prompt and identifiers; no first-party input",
+  "checks": {
+    "formRoundtripPreservesNestedJson": true,
+    "unicodeNewlineReservedCharacterPromptPreserved": true,
+    "uniqueFormFieldCount": 2,
+    "formFieldsUnique": true,
+    "fullContextLength": 11,
+    "omittedContextLength": 10,
+    "omittedDeltaIsFinalContextSlotRemovalOnly": true
+  },
+  "passed": true,
+  "interpretation": "Checks native URLSearchParams encoder fidelity and the exact omission delta; does not establish server acceptance or valid-input HTTP generation."
+}

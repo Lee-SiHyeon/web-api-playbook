@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "observedAt": "2026-09-27T07:04:07.921Z",
+  "scope": {
+    "origin": "https://flow.google.com",
+    "projectId": "a8ae183d-74d6-4314-98f4-3e853539f22c",
+    "modelUi": "Omni 1.1 Flash",
+    "modelRequestKey": "abra_t2v_4s_360p",
+    "resolution": "360p",
+    "durationSeconds": 4,
+    "aspect": "16:9",
+    "outputCount": 1,
+    "flowCreditsConsumed": 4
+  },
+  "sequence": [
+    {
+      "step": "first_party_captcha_issuance",
+      "method": "POST",
+      "origin": "https://www.google.com",
+      "path": "/recaptcha/enterprise/reload",
+      "queryKeys": ["k"],
+      "status": 200,
+      "mime": "application/json",
+      "tokenReturned": true,
+      "tokenMatchesGenerationPayload": true,
+      "tokenValueRecorded": false
+    },
+    {
+      "step": "create_video",
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "YhhmEf",
+      "queryKeys": ["rpcids", "source-path", "bl", "f.sid", "hl", "_reqid", "rt"],
+      "formKeys": ["f.req", "at"],
+      "requestPayloadShape": [
+        [
+          [
+            [null, null, [[["<prompt>"]]]],
+            "abra_t2v_4s_360p",
+            2,
+            null,
+            [null, null, null, null, "<client-uuid-1>", "<client-uuid-2>"],
+            null,
+            null,
+            [4]
+          ]
+        ],
+        [null, 22, null, null, null, "<project-id>", null, null, null, null, ["<fresh-recaptcha-token>", 1]],
+        ["<request-uuid>", 2]
+      ],
+      "status": 200,
+      "mime": "application/json",
+      "responseIndexMap": {
+        "data[1]": "Flow credit balance after submission",
+        "data[2][0][0]": "scene id",
+        "data[2][0][3][4]": "media id",
+        "data[3][0][0]": "media id"
+      },
+      "sceneId": "953f1894-8ddb-480e-834e-e74a2af9f1c2",
+      "mediaId": "323f8940-e433-4a7e-bf71-383c4f8b8cfd",
+      "browserRequestCount": 1,
+      "directHttpReplay": false
+    },
+    {
+      "step": "poll_generation",
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "jwpduf",
+      "requestPayloadShape": "[null,null,[[mediaId]]]",
+      "responseIndexMap": {
+        "data[1]": "Flow credit balance when supplied",
+        "data[2][0][0]": "media id",
+        "data[2][0][5][8][0]": "numeric state code; meaning not inferred",
+        "data[2][0][5][13]": "video byte count when supplied"
+      },
+      "observedCalls": 6,
+      "observedStateCodes": [6, 2, 2, 2, 2, 3],
+      "finalReportedVideoBytes": 553769,
+      "directHttpReplay": true
+    },
+    {
+      "step": "get_media",
+      "method": "POST",
+      "origin": "https://flow.google.com",
+      "path": "/_/AiSandboxAngularFrontend/data/batchexecute",
+      "rpcId": "as29s",
+      "requestPayloadShape": "[mediaId]",
+      "signedVideoUrlReturned": true,
+      "directHttpReplay": true
+    },
+    {
+      "step": "preview_and_download",
+      "method": "GET",
+      "origin": "https://flow-content.google",
+      "path": "/video/323f8940-e433-4a7e-bf71-383c4f8b8cfd",
+      "browserDownloadStatus": 200,
+      "browserDownloadMime": "video/mp4",
+      "directHttpDownloadBytes": 553769,
+      "mp4SignatureVerified": true
+    }
+  ],
+  "auxiliaryBrowserTraffic": [
+    { "rpcId": "WuwhI", "role": "generation telemetry observed; not needed for media readback" },
+    { "path": "/recaptcha/enterprise/clr", "role": "reCAPTCHA follow-up request observed; no value recorded" }
+  ],
+  "readback": {
+    "projectMediaCountBefore": 2,
+    "projectMediaCountAfter": 3,
+    "flowCreditDelta": 4,
+    "directHttpPollStateCode": 3,
+    "directHttpVideoBytes": 553769,
+    "mediaProbe": { "durationSeconds": 4.01, "width": 640, "height": 360, "videoCodec": "h264", "audioCodec": "aac" }
+  },
+  "credentialHandling": {
+    "cookieOrTokenPersistedInEvidence": false,
+    "signedVideoUrlPersistedInEvidence": false,
+    "browserRequiredForFreshCaptchaToken": true
+  },
+  "fiveStates": {
+    "generation": { "captured": true, "client_exists": false, "remnant_free": false, "credential_propagated": null, "live_replay": false },
+    "pollGeneration": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true },
+    "getMediaAndDownload": { "captured": true, "client_exists": true, "remnant_free": true, "credential_propagated": true, "live_replay": true }
+  }
+}

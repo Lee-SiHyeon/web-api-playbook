@@ -1,0 +1,2268 @@
+{
+  "schema": "web-api-playbook-commerce-path-audit-v1",
+  "auditedAtUtc": "2026-10-15T13:23:23Z",
+  "repository": {
+    "head": "914e580cfe9edbea51ac320e8fce46d63759388c",
+    "workingTreeWasCleanAtStart": true
+  },
+  "scope": {
+    "manifestCount": 14,
+    "capabilityCount": 133.0,
+    "services": [
+      "oliveyoung",
+      "oliveyoung-public",
+      "oliveyoung-global",
+      "sephora",
+      "ulta",
+      "printful",
+      "printify",
+      "banggood",
+      "cjdropshipping",
+      "awin",
+      "impact",
+      "shopee-affiliate-id",
+      "catalog",
+      "commerce"
+    ],
+    "excludedByCoordination": [
+      "amazon",
+      "amazon-partner",
+      "rakuten-ichiba",
+      "rakuten-advertising",
+      "yahoo-shopping-jp",
+      "ebay",
+      "ebay-partner",
+      "shopify",
+      "shopify-storefronts"
+    ],
+    "readOnly": true
+  },
+  "method": {
+    "manifestAndReceiptReadback": "completed",
+    "currentCodeAndCLIPaths": "static inspection",
+    "serviceCLIsExecuted": 1,
+    "liveNetworkRequests": 7,
+    "browserCalls": 0,
+    "accountOrDPAPIReads": 0,
+    "cookiesIssuedOrModified": 0,
+    "testsExecutedByThisAgent": 22,
+    "secretValuesReadOrRecorded": false,
+    "publicClientOperationsExecuted": 5,
+    "liveNetworkRequestsBreakdown": {
+      "oliveyoung-global.best-sellers": 2,
+      "sephora.search": 5
+    },
+    "liveChecksAtUtc": [
+      "2026-10-15T13:12:19.962Z",
+      "2026-10-15T13:12:30.887Z",
+      "2026-10-15T13:15:37.442Z",
+      "2026-10-15T13:15:52.901Z",
+      "2026-10-15T13:17:51.589Z"
+    ],
+    "liveReadRawBodiesPersisted": false,
+    "externalServiceWrites": 0,
+    "reportArtifactsWritten": 1,
+    "localValidation": {
+      "command": "node --test tests/commerce-sephora.test.mjs tests/commerce-providers.test.mjs",
+      "checkedAtUtc": "2026-10-15T13:23:23Z",
+      "tests": 22,
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "todo": 0,
+      "coverageNote": "Includes a synthetic 60+25=85 pagination request-size regression (requested sizes [10,60]), impossible 60-row response against totalProducts=10 rejection, and independent-client-query reuse regression. This does not establish live full-pagination success."
+    }
+  },
+  "snapshotAudit": {
+    "path": "verification/playbook-audit-2026-10-15/audit.json",
+    "checkedAt": "10/15/2026 10:09:34",
+    "capturedManifestCount": 40,
+    "currentHeadManifestCount": 41,
+    "missingFromSnapshot": [
+      "coupang-retail"
+    ],
+    "all14ScopedServicesPresent": true,
+    "implication": "This is a dated historical snapshot difference, not a defect: the README explains the initial 40-service snapshot and the later coupang-retail/catalog.search registration. All 14 assigned manifests and their capability counts were present in that snapshot."
+  },
+  "latestHttpSample": {
+    "path": "verification/playbook-audit-2026-10-15/live-samples.json",
+    "operations": 11,
+    "passed": 10,
+    "blocked": 1,
+    "selectedServiceOverlap": [],
+    "checkedAtWindow": "2026-10-15 09:30-09:33 UTC per README",
+    "implication": "This 11-operation sample contains none of the 14 assigned services; it does not refresh their 10/05 receipts."
+  },
+  "evidenceSummary": {
+    "recordedLiveCapabilities": 28,
+    "needsReverificationCapabilities": 8,
+    "freshSelectedServiceHttpSamples": 0,
+    "latestServiceEvidenceDate": "2026-10-05",
+    "evidenceMeaning": "recorded_live means historical receipt matching declared source hashes, not current remote readiness"
+  },
+  "services": [
+    {
+      "service": "oliveyoung",
+      "manifestPath": "checklists/services/oliveyoung.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 11,
+      "auditSnapshotCapabilities": 11,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 2,
+        "not_applicable": 2,
+        "source_candidate": 2,
+        "unimplemented": 5
+      },
+      "capabilities": [
+        {
+          "id": "catalog.search_prices",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_images",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "source_candidate",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.body",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.images",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "curator.link_creation",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "program.commission_terms",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "source_candidate",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.customer_login",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "account.profile_payout",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/oliveyoung.mjs",
+        "scripts/commerce.mjs",
+        "service-packs/affiliate/apps/affiliate-api-hub/adapters/oliveyoung-curator.mjs"
+      ],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [
+        "references/commerce-oliveyoung-contracts.json"
+      ],
+      "interpretation": "session_gated_curator_api_no_session_supplied"
+    },
+    {
+      "service": "oliveyoung-public",
+      "manifestPath": "checklists/services/oliveyoung-public.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 14,
+      "auditSnapshotCapabilities": 14,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 7,
+        "needs_reverification": 5,
+        "not_applicable": 2
+      },
+      "capabilities": [
+        {
+          "id": "catalog.search_prices",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 07:09:58",
+              "files": [
+                "verification/oliveyoung-catalog-search_prices-checklist-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_description",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.options",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_images",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.summary",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.body",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 07:09:58",
+              "files": [
+                "verification/oliveyoung-reviews-body-checklist-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.images",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 07:09:58",
+              "files": [
+                "verification/oliveyoung-reviews-pagination-checklist-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "auth.customer_login",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.link_creation",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.search_pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 07:09:58",
+              "files": [
+                "verification/oliveyoung-catalog-search_pagination-checklist-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ranking.top_products",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 07:13:11",
+              "files": [
+                "verification/oliveyoung-ranking-top_products-checklist-2026-10-05.json"
+              ]
+            },
+            {
+              "kind": "http-anonymous-session-read-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 08:46:19",
+              "files": [
+                "verification/oliveyoung-ranking-anonymous-session-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ranking.category_filters",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/oliveyoung-korea-public.mjs",
+        "lib/commerce/oliveyoung-korea-ranking.mjs"
+      ],
+      "registeredEvidencePaths": [
+        "verification/oliveyoung-catalog-search_pagination-checklist-2026-10-05.json",
+        "verification/oliveyoung-catalog-search_prices-checklist-2026-10-05.json",
+        "verification/oliveyoung-ranking-anonymous-session-live-2026-10-05.json",
+        "verification/oliveyoung-ranking-top_products-checklist-2026-10-05.json",
+        "verification/oliveyoung-reviews-body-checklist-2026-10-05.json",
+        "verification/oliveyoung-reviews-pagination-checklist-2026-10-05.json"
+      ],
+      "sourceEvidencePaths": [
+        "references/commerce-oliveyoung-korea-public-contracts.json"
+      ],
+      "interpretation": "anonymous_consumer_api_old_receipts_stale_after_transport_change"
+    },
+    {
+      "service": "oliveyoung-global",
+      "manifestPath": "checklists/services/oliveyoung-global.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 16,
+      "auditSnapshotCapabilities": 16,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "not_applicable": 2,
+        "recorded_live": 13,
+        "unimplemented": 1
+      },
+      "capabilities": [
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:57",
+              "files": [
+                "verification/commerce-oliveyoung-global-product-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.product_description",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:57",
+              "files": [
+                "verification/commerce-oliveyoung-global-description-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.currency_context",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:57",
+              "files": [
+                "verification/commerce-oliveyoung-global-currency-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.product_images",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:57",
+              "files": [
+                "verification/commerce-oliveyoung-global-product-images-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.bestsellers",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:48:01",
+              "files": [
+                "verification/commerce-oliveyoung-global-bestsellers-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.category_products",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:48:02",
+              "files": [
+                "verification/commerce-oliveyoung-global-category-page1-2026-10-05.json",
+                "verification/commerce-oliveyoung-global-category-page2-2026-10-05.json",
+                "verification/commerce-oliveyoung-global-category-last-page-2026-10-05.json",
+                "verification/commerce-oliveyoung-global-category-after-last-page-2026-10-05.json",
+                "verification/commerce-oliveyoung-global-category-page-size-36-2026-10-05.json",
+                "verification/commerce-oliveyoung-global-category-page-size-48-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.keyword_search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "search.suggestions",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:48:01",
+              "files": [
+                "verification/commerce-oliveyoung-global-search-suggestions-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "search.popular_keywords",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:48:01",
+              "files": [
+                "verification/commerce-oliveyoung-global-popular-keywords-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.summary",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:58",
+              "files": [
+                "verification/commerce-oliveyoung-global-review-summary-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.body",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:58",
+              "files": [
+                "verification/commerce-oliveyoung-global-reviews-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:58",
+              "files": [
+                "verification/commerce-oliveyoung-global-review-pagination-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.images",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:59",
+              "files": [
+                "verification/commerce-oliveyoung-global-review-images-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.media_pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 05:47:59",
+              "files": [
+                "verification/commerce-oliveyoung-global-review-media-pagination-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "auth.customer_login",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.link_creation",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/oliveyoung-global.mjs"
+      ],
+      "registeredEvidencePaths": [
+        "verification/commerce-oliveyoung-global-bestsellers-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-category-after-last-page-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-category-last-page-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-category-page-size-36-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-category-page-size-48-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-category-page1-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-category-page2-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-currency-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-description-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-popular-keywords-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-product-images-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-product-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-review-images-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-review-media-pagination-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-review-pagination-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-review-summary-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-reviews-live-2026-10-05.json",
+        "verification/commerce-oliveyoung-global-search-suggestions-live-2026-10-05.json"
+      ],
+      "sourceEvidencePaths": [],
+      "interpretation": "anonymous_public_xhr_historical_receipts_match_client_hash"
+    },
+    {
+      "service": "sephora",
+      "manifestPath": "checklists/services/sephora.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 13,
+      "auditSnapshotCapabilities": 13,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "not_applicable": 2,
+        "recorded_live": 8,
+        "scope_unknown": 1,
+        "unimplemented": 2
+      },
+      "capabilities": [
+        {
+          "id": "catalog.search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:27",
+              "files": [
+                "verification/commerce-sephora-search-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:28",
+              "files": [
+                "verification/commerce-sephora-pagination-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:28",
+              "files": [
+                "verification/commerce-sephora-product-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.variants",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:28",
+              "files": [
+                "verification/commerce-sephora-variants-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.sale_price",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:29",
+              "files": [
+                "verification/commerce-sephora-sale-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.reviews.read",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:30",
+              "files": [
+                "verification/commerce-sephora-reviews-page1-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.reviews.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:30",
+              "files": [
+                "verification/commerce-sephora-reviews-last-page-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.reviews.variant_filter",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 02:49:30",
+              "files": [
+                "verification/commerce-sephora-reviews-sku-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.product_description",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "storefront.localization",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "partner_program.commission",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "scope_unknown",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.login",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "cart.write",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/sephora-reviews.mjs",
+        "lib/commerce/sephora.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [
+        "verification/commerce-sephora-pagination-live-2026-10-05.json",
+        "verification/commerce-sephora-product-live-2026-10-05.json",
+        "verification/commerce-sephora-reviews-last-page-live-2026-10-05.json",
+        "verification/commerce-sephora-reviews-page1-live-2026-10-05.json",
+        "verification/commerce-sephora-reviews-sku-live-2026-10-05.json",
+        "verification/commerce-sephora-sale-live-2026-10-05.json",
+        "verification/commerce-sephora-search-live-2026-10-05.json",
+        "verification/commerce-sephora-variants-live-2026-10-05.json"
+      ],
+      "sourceEvidencePaths": [],
+      "interpretation": "anonymous_public_api_historical_receipts_match_client_hash"
+    },
+    {
+      "service": "ulta",
+      "manifestPath": "checklists/services/ulta.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 11,
+      "auditSnapshotCapabilities": 11,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 1,
+        "needs_reverification": 1,
+        "not_applicable": 2,
+        "recorded_live": 6,
+        "scope_unknown": 1
+      },
+      "capabilities": [
+        {
+          "id": "catalog.search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 03:09:50",
+              "files": [
+                "verification/commerce-ulta-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 03:09:59",
+              "files": [
+                "verification/commerce-ulta-product-detail-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 03:09:58",
+              "files": [
+                "verification/commerce-ulta-pagination-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.sale_price",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 03:09:50",
+              "files": [
+                "verification/commerce-ulta-sale-price-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.read",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 03:09:59",
+              "files": [
+                "verification/commerce-ulta-reviews-live-2026-10-05.json"
+              ]
+            },
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 03:09:59",
+              "files": [
+                "verification/commerce-ulta-reviews-complete-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "reviews.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/05/2026 03:09:59",
+              "files": [
+                "verification/commerce-ulta-reviews-pagination-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "partner_program.commission",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "scope_unknown",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.login",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "cart.write",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.impact_brand_catalog",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.common_collector",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "commerce-collection-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/04/2026 22:31:06",
+              "files": [
+                "verification/affiliate-ulta-common-collector-live-2026-10-05.json",
+                "verification/affiliate-ulta-collection-sample-2026-10-05.json"
+              ]
+            },
+            {
+              "kind": "commerce-collection-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 03:11:05",
+              "files": [
+                "verification/catalog-price-ulta-live-2026-10-05.json",
+                "verification/catalog-price-ulta-sample-2026-10-05.json"
+              ]
+            }
+          ]
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/brand-affiliates.mjs",
+        "lib/commerce/catalog-readers.mjs",
+        "lib/commerce/impact.mjs",
+        "lib/commerce/providers.mjs",
+        "lib/commerce/ulta.mjs",
+        "scripts/catalog.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [
+        "verification/affiliate-ulta-collection-sample-2026-10-05.json",
+        "verification/affiliate-ulta-common-collector-live-2026-10-05.json",
+        "verification/catalog-price-ulta-live-2026-10-05.json",
+        "verification/catalog-price-ulta-sample-2026-10-05.json",
+        "verification/commerce-ulta-live-2026-10-05.json",
+        "verification/commerce-ulta-pagination-live-2026-10-05.json",
+        "verification/commerce-ulta-product-detail-live-2026-10-05.json",
+        "verification/commerce-ulta-reviews-complete-live-2026-10-05.json",
+        "verification/commerce-ulta-reviews-live-2026-10-05.json",
+        "verification/commerce-ulta-reviews-pagination-live-2026-10-05.json",
+        "verification/commerce-ulta-sale-price-live-2026-10-05.json"
+      ],
+      "sourceEvidencePaths": [],
+      "interpretation": "anonymous_public_api_historical_receipts_plus_stale_common_collector"
+    },
+    {
+      "service": "printful",
+      "manifestPath": "checklists/services/printful.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 7,
+      "auditSnapshotCapabilities": 7,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 5,
+        "not_applicable": 1,
+        "recorded_live": 1
+      },
+      "capabilities": [
+        {
+          "id": "catalog.public_price_feed",
+          "priority": "required",
+          "requirement": "live",
+          "status": "recorded_live",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "http-public-read-v1",
+              "state": "recorded_live",
+              "freshness": "current_code",
+              "checkedAt": "10/04/2026 20:12:53",
+              "files": [
+                "verification/printful-public-feed-live-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "catalog.api_search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.api_product_variants",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.api_production_prices",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.api_categories",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.api_credentials",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "account.orders.writes",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/printful.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [
+        "verification/printful-public-feed-live-2026-10-05.json"
+      ],
+      "sourceEvidencePaths": [],
+      "interpretation": "public_price_feed_verified_separately_from_credentialed_api"
+    },
+    {
+      "service": "printify",
+      "manifestPath": "checklists/services/printify.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 5,
+      "auditSnapshotCapabilities": 5,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "not_applicable": 1,
+        "unimplemented": 4
+      },
+      "capabilities": [
+        {
+          "id": "auth.catalog_read",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_variants",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.supplier_base_cost",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.shipping_prices",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "account.orders.writes",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [],
+      "interpretation": "no_maintained_client_implementation_found"
+    },
+    {
+      "service": "banggood",
+      "manifestPath": "checklists/services/banggood.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 11,
+      "auditSnapshotCapabilities": 11,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 5,
+        "not_applicable": 3,
+        "unimplemented": 3
+      },
+      "capabilities": [
+        {
+          "id": "catalog.product_search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "pricing.sale_window",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.categories",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.warehouse_stock",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "pricing.multicurrency",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.link_generation",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.consumer_login",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "profile.edit",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "commerce.order_write",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/banggood.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [],
+      "interpretation": "partner_api_key_and_secret_required_no_live_attempt"
+    },
+    {
+      "service": "cjdropshipping",
+      "manifestPath": "checklists/services/cjdropshipping.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 5,
+      "auditSnapshotCapabilities": 5,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 4,
+        "not_applicable": 1
+      },
+      "capabilities": [
+        {
+          "id": "auth.api_credentials",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_detail_variants",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.categories",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "cart.orders.writes",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/cjdropshipping.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [],
+      "interpretation": "partner_access_token_required_no_live_attempt"
+    },
+    {
+      "service": "awin",
+      "manifestPath": "checklists/services/awin.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 8,
+      "auditSnapshotCapabilities": 8,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 5,
+        "not_applicable": 3
+      },
+      "capabilities": [
+        {
+          "id": "catalog.search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.offer_price",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.pagination",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.taxonomy",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.login",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "supplier.wholesale_cost",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.link_generation",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/awin.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [
+        "verification/awin-feed-row-envelope-candidate-2026-10-05.json"
+      ],
+      "interpretation": "publisher_feed_entitlement_required_no_live_attempt"
+    },
+    {
+      "service": "impact",
+      "manifestPath": "checklists/services/impact.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 9,
+      "auditSnapshotCapabilities": 9,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 6,
+        "not_applicable": 3
+      },
+      "capabilities": [
+        {
+          "id": "catalog.search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.offer_price",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.list",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.taxonomy",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.login",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "supplier.wholesale_cost",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.program_write",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/impact.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [],
+      "interpretation": "partner_catalog_credentials_required_no_live_attempt"
+    },
+    {
+      "service": "shopee-affiliate-id",
+      "manifestPath": "checklists/services/shopee-affiliate-id.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 11,
+      "auditSnapshotCapabilities": 11,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 3,
+        "not_applicable": 1,
+        "scope_unknown": 1,
+        "unimplemented": 6
+      },
+      "capabilities": [
+        {
+          "id": "affiliate.catalog_search",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.product_lookup",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "affiliate.price_and_commission_fields",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.app_id_secret",
+          "priority": "required",
+          "requirement": "inventory",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "auth.user_session",
+          "priority": "optional",
+          "requirement": "live",
+          "status": "scope_unknown",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "storefront.anonymous_product_detail",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "account.login_or_writes",
+          "priority": "optional",
+          "requirement": "inventory",
+          "status": "not_applicable",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "storefront.product_description_and_images",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "storefront.item_options_sku_price_stock",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "storefront.review_bodies_and_pagination",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        },
+        {
+          "id": "storefront.review_photos",
+          "priority": "required",
+          "requirement": "live",
+          "status": "unimplemented",
+          "codeState": "missing",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/shopee-affiliate.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [],
+      "interpretation": "affiliate_credentials_missing_storefront_access_gate_unknown"
+    },
+    {
+      "service": "catalog",
+      "manifestPath": "checklists/services/catalog.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 5,
+      "auditSnapshotCapabilities": 5,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "verified_local": 5
+      },
+      "capabilities": [
+        {
+          "id": "catalog.full_detail_output",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.content_and_images",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.bounded_pagination",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "reviews.csv_readback",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "catalog.scope_excludes_affiliate_links",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/catalog-checklist-scope.mjs",
+        "lib/commerce/catalog-readers.mjs",
+        "lib/commerce/reviews.mjs",
+        "scripts/catalog.mjs",
+        "scripts/checklist.mjs"
+      ],
+      "registeredEvidencePaths": [],
+      "sourceEvidencePaths": [],
+      "interpretation": "local_reader_contracts_only_no_remote_claim"
+    },
+    {
+      "service": "commerce",
+      "manifestPath": "checklists/services/commerce.json",
+      "manifestPresent": true,
+      "manifestCapabilities": 7,
+      "auditSnapshotCapabilities": 7,
+      "allCapabilitiesMatched": true,
+      "statusCounts": {
+        "blocked": 1,
+        "needs_reverification": 2,
+        "verified_local": 4
+      },
+      "capabilities": [
+        {
+          "id": "collection.public_feed",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "commerce-collection-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/04/2026 20:34:26",
+              "files": [
+                "verification/commerce-collection-live-2026-10-05.json",
+                "verification/commerce-collection-sample-2026-10-05.json"
+              ]
+            },
+            {
+              "kind": "commerce-collection-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 03:05:02",
+              "files": [
+                "verification/catalog-price-printful-live-2026-10-05.json",
+                "verification/catalog-price-printful-sample-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "collection.public_storefront",
+          "priority": "required",
+          "requirement": "live",
+          "status": "needs_reverification",
+          "codeState": "present",
+          "evidenceGroups": [
+            {
+              "kind": "commerce-collection-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/04/2026 20:34:28",
+              "files": [
+                "verification/commerce-storefront-collection-live-2026-10-05.json",
+                "verification/commerce-storefront-sample-2026-10-05.json"
+              ]
+            },
+            {
+              "kind": "commerce-collection-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 03:05:08",
+              "files": [
+                "verification/catalog-price-shopify-search-live-2026-10-05.json",
+                "verification/catalog-price-shopify-search-sample-2026-10-05.json"
+              ]
+            },
+            {
+              "kind": "commerce-collection-v1",
+              "state": "historical",
+              "freshness": "stale",
+              "checkedAt": "10/05/2026 03:05:15",
+              "files": [
+                "verification/catalog-price-shopify-product-live-2026-10-05.json",
+                "verification/catalog-price-shopify-product-sample-2026-10-05.json"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "collection.pagination",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "collection.price_semantics",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "collection.history",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "collection.credentials",
+          "priority": "required",
+          "requirement": "local",
+          "status": "verified_local",
+          "codeState": "present",
+          "evidenceGroups": []
+        },
+        {
+          "id": "collection.private_prices",
+          "priority": "required",
+          "requirement": "live",
+          "status": "blocked",
+          "codeState": "present",
+          "evidenceGroups": []
+        }
+      ],
+      "clientAndCliPaths": [
+        "lib/commerce/providers.mjs",
+        "lib/commerce/snapshots.mjs",
+        "scripts/commerce.mjs"
+      ],
+      "registeredEvidencePaths": [
+        "verification/catalog-price-printful-live-2026-10-05.json",
+        "verification/catalog-price-printful-sample-2026-10-05.json",
+        "verification/catalog-price-shopify-product-live-2026-10-05.json",
+        "verification/catalog-price-shopify-product-sample-2026-10-05.json",
+        "verification/catalog-price-shopify-search-live-2026-10-05.json",
+        "verification/catalog-price-shopify-search-sample-2026-10-05.json",
+        "verification/commerce-collection-live-2026-10-05.json",
+        "verification/commerce-collection-sample-2026-10-05.json",
+        "verification/commerce-storefront-collection-live-2026-10-05.json",
+        "verification/commerce-storefront-sample-2026-10-05.json"
+      ],
+      "sourceEvidencePaths": [],
+      "interpretation": "aggregate_public_receipts_stale_private_prices_credential_gated"
+    }
+  ],
+  "findings": [
+    {
+      "id": "AUDIT_SNAPSHOT_SCOPE_DIFFERS_FROM_HEAD",
+      "severity": "informational",
+      "confirmedDefect": false,
+      "area": "historical_snapshot_scope",
+      "evidence": [
+        "verification/playbook-audit-2026-10-15/audit.json",
+        "checklists/services/coupang-retail.json"
+      ],
+      "detail": "The saved audit is a dated 40-service snapshot. Its README explains that coupang-retail/catalog.search was registered later, bringing HEAD to 41. This is a documented scope change, not a defect; all 14 assigned services and their capability counts were included."
+    },
+    {
+      "id": "OLIVEYOUNG_403_SCOPE_LIMIT",
+      "severity": "P3",
+      "confirmedDefect": false,
+      "area": "evidence_interpretation",
+      "evidence": [
+        "verification/commerce-oliveyoung-detail-live-2026-10-05.json",
+        "checklists/services/oliveyoung.json",
+        "checklists/services/oliveyoung-public.json",
+        "lib/commerce/oliveyoung-korea-public.mjs"
+      ],
+      "detail": "The old 403 receipt is service oliveyoung/catalog.product_detail and tests only the mobile document HTML path; it has no cookie or authorization and is tagged document_html_attempt_only. The oliveyoung-public manifest separately says its /goods/api/v1/detail contract is uncaptured and warns that 403 does not prove a customer-login requirement. Keep this as an HTML-path diagnostic, not proof that the public API or entire Oliveyoung service is down."
+    },
+    {
+      "id": "NO_FALSE_CREDENTIAL_BLOCK_CONFIRMED",
+      "severity": "informational",
+      "confirmedDefect": false,
+      "area": "partner_api_credentials",
+      "evidence": [
+        "checklists/services/banggood.json",
+        "checklists/services/cjdropshipping.json",
+        "checklists/services/awin.json",
+        "checklists/services/impact.json",
+        "checklists/services/shopee-affiliate-id.json",
+        "checklists/services/printful.json"
+      ],
+      "detail": "Partner API blocked states are tied to missing credential/entitlement prerequisites; this audit made no request for those endpoints, so they are not measured server 403/5xx failures. Public Printful feed and public consumer readers are separated from credentialed APIs."
+    },
+    {
+      "id": "HISTORICAL_PASS_SCOPE_IS_BOUNDED",
+      "severity": "informational",
+      "confirmedDefect": false,
+      "area": "old_live_receipts",
+      "evidence": [
+        "references/playbook-audit.md",
+        "verification/playbook-audit-2026-10-15/README.md"
+      ],
+      "detail": "Old public receipts are explicitly historical and tied to source hashes. Sample notes scope results to one query/product/category or bounded pages; Oliveyoung KR and aggregate commerce/Ulta common-collector receipts with changed hashes are needs_reverification rather than fresh PASS."
+    },
+    {
+      "id": "SEPHORA_SEARCH_FIXED_PAGE_WIDTH_DRIFT",
+      "severity": "P2",
+      "confirmedDefect": true,
+      "status": "fixed; one-page maintained CLI replay verified; full pagination remains offline-only",
+      "area": "public_search_contract_validation",
+      "evidence": [
+        "lib/commerce/sephora.mjs",
+        "lib/commerce/providers.mjs",
+        "tests/commerce-sephora.test.mjs",
+        "tests/commerce-providers.test.mjs",
+        "work/other-path-audit-commerce/report.json"
+      ],
+      "detail": "Initial request was HTTP 200 application/json with query serum and page-size hint 10, but the maintained client returned SEPHORA_SEARCH_SCHEMA_INVALID. In-memory diagnosis showed a matching keyword, valid normalized product rows, 60 products, and totalProducts=745. Root cause was a fixed 60-row source page despite the smaller hint, not a 403 or outage. The later maintained CLI replay succeeded for one page (60/745, maxPages=1, incomplete); continuation-size and independent-query reuse behavior are covered by 22 local tests only."
+    }
+  ],
+  "recommendations": [
+    {
+      "service": "oliveyoung-public",
+      "command": "node scripts/commerce.mjs oliveyoung-public search --query=<term> --page-size=10 --max-pages=1",
+      "purpose": "Refresh one anonymous consumer search page after separately verifying the transport remains cookie-free/stateless; not run in this audit."
+    },
+    {
+      "service": "oliveyoung-global",
+      "command": "node scripts/commerce.mjs oliveyoung-global best-sellers --max-pages=1",
+      "purpose": "Refresh one bounded anonymous public XHR operation; not run in this audit."
+    },
+    {
+      "service": "sephora",
+      "command": "node scripts/commerce.mjs sephora search --query=<term> --page-size=10 --max-pages=1",
+      "purpose": "Refresh one public API search page and validate result schema/content; not run in this audit."
+    },
+    {
+      "service": "ulta",
+      "command": "node scripts/commerce.mjs ulta search --query=<term> --page-size=10 --max-pages=1",
+      "purpose": "Refresh one public API search page; affiliate.impact_brand_catalog remains a separate credential-gated capability; not run in this audit."
+    },
+    {
+      "service": "printful",
+      "command": "node scripts/commerce.mjs printful-feed search --query=<term> --region=US --max-pages=1",
+      "purpose": "Refresh the public feed path only; do not infer credentialed Printful API access; not run in this audit."
+    },
+    {
+      "service": "banggood,cjdropshipping,awin,impact,shopee-affiliate-id,printful-api",
+      "command": "No live command until an authorized service credential/entitlement is supplied through the protected runtime input channel.",
+      "purpose": "Avoid confusing missing credentials with a remote rejection; credential values must not appear in args, logs, or this report."
+    },
+    {
+      "service": "printify",
+      "command": "No existing service reader; implement and test a bounded client before live verification.",
+      "purpose": "Current capabilities are unimplemented, not blocked by a measured server response."
+    },
+    {
+      "service": "catalog",
+      "command": "node --test tests/commerce-catalog.test.mjs",
+      "purpose": "Local parser/scope regression only; does not establish remote service success; not run in this audit."
+    }
+  ],
+  "currentPublicChecks": [
+    {
+      "execution": "maintained public client createOliveyoungGlobalClient().getBestSellers()",
+      "requests": [
+        {
+          "credentialsMode": "omit",
+          "cookieSent": false,
+          "method": "GET",
+          "credentialsUsed": false,
+          "mime": "application/json",
+          "httpStatus": 200,
+          "browserUsed": false,
+          "checkedAtUtc": "2026-10-15T13:12:19.962Z",
+          "path": "/display/product/best-seller/order-best"
+        },
+        {
+          "credentialsMode": "omit",
+          "cookieSent": false,
+          "method": "GET",
+          "credentialsUsed": false,
+          "mime": "text/html",
+          "httpStatus": 200,
+          "browserUsed": false,
+          "checkedAtUtc": "2026-10-15T13:12:20.257Z",
+          "path": "/product/detail"
+        }
+      ],
+      "page": {
+        "completeCatalog": false,
+        "type": "homepage_best_seller",
+        "continuation": null,
+        "limit": 20
+      },
+      "schemaVerified": true,
+      "checkedAtUtc": "2026-10-15T13:12:19.962Z",
+      "interpretation": "One fixed homepage bestseller response (20 rows), with a separate anonymous product-page read to verify displayed KR-delivery/USD context. This is not complete catalog coverage; shipping eligibility remains unverified.",
+      "outcome": "success",
+      "operation": "best-sellers",
+      "service": "oliveyoung-global",
+      "returnedProductCount": 20,
+      "marketContext": {
+        "shippingEligibility": "not_verified",
+        "currency": "USD",
+        "deliveryCountryCode": "1230",
+        "country": "KR",
+        "currencyVerified": true
+      },
+      "rawBodyPersisted": false,
+      "responseSchema": "web-api-public-read-receipt-v1",
+      "expectedResultVerified": true
+    },
+    {
+      "outcome": "client_schema_validation_failed",
+      "totalProductsReported": null,
+      "requestedPage": 1,
+      "expectedContract": [
+        "keyword",
+        "totalProducts",
+        "products with valid normalized rows"
+      ],
+      "returnedProductCount": null,
+      "browserUsed": false,
+      "credentialsUsed": false,
+      "httpStatus": 200,
+      "validationCode": "SEPHORA_SEARCH_SCHEMA_INVALID",
+      "credentialsMode": "omit",
+      "query": "serum",
+      "cookieSent": false,
+      "interpretation": "The endpoint returned HTTP 200 JSON but the current client could not validate it against its observed search contract. This does not establish a site outage or a product count.",
+      "checkedAtUtc": "2026-10-15T13:12:30.887Z",
+      "mime": "application/json",
+      "execution": "maintained public client createSephoraPublicClient().searchProducts()",
+      "requestedPageSize": 10,
+      "service": "sephora",
+      "rawBodyPersisted": false,
+      "operation": "search",
+      "schemaVerified": false,
+      "expectedResultVerified": false,
+      "pageCountReported": null
+    },
+    {
+      "service": "sephora",
+      "operation": "search response shape diagnosis",
+      "execution": "bounded in-memory diagnostics against the same anonymous public search contract; not a successful maintained-client validation",
+      "checkedAtUtc": "2026-10-15T13:15:52.901Z",
+      "query": "serum",
+      "requestedPage": 1,
+      "requestedPageSize": 10,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "credentialsMode": "omit",
+      "cookieSent": false,
+      "credentialsUsed": false,
+      "browserUsed": false,
+      "topLevelFieldTypes": {
+        "categories": "array",
+        "features": "object",
+        "keyword": "string",
+        "products": "array",
+        "refinements": "array",
+        "relatedSearches": "array",
+        "responseSource": "string",
+        "resultId": "string",
+        "totalProducts": "number",
+        "userSegment": "string"
+      },
+      "counts": {
+        "categories": 11,
+        "relatedSearches": 8,
+        "products": 60,
+        "refinements": 21
+      },
+      "totalProductsReported": 745,
+      "returnedKeywordMatchedQuery": true,
+      "observedPageWidth": 60,
+      "queryPageSizeHintIgnored": true,
+      "diagnosticPublicCalls": 3,
+      "diagnosticCaptureFailures": 1,
+      "diagnosticCaptureFailureAtUtc": "2026-10-15T13:15:37.442Z",
+      "rawBodyPersisted": false,
+      "interpretation": "Field shape, query echo, and normalized product-row contract were valid; the client rejected only because this endpoint returned 60 products despite the requested size hint 10. One diagnostic call had a local summary/capture error after the response; no raw response body was retained. This is schema/page-width drift, not HTTP 403."
+    },
+    {
+      "service": "sephora",
+      "operation": "search",
+      "execution": "maintained CLI, one-page public replay",
+      "command": "node scripts/commerce.mjs sephora search --query=serum --page-size=10 --max-pages=1",
+      "checkedAtUtc": "2026-10-15T13:17:51.589Z",
+      "outputCheckedAtUtc": "2026-10-15T13:17:52.943Z",
+      "query": "serum",
+      "requestedPage": 1,
+      "requestedPageSize": 10,
+      "responsePageSize": 60,
+      "returnedProductCount": 60,
+      "totalProductsReported": 745,
+      "pageCountReported": 13,
+      "maxPages": 1,
+      "sourceExhausted": false,
+      "complete": false,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "credentialsMode": "omit",
+      "cookieSent": false,
+      "credentialsUsed": false,
+      "browserUsed": false,
+      "rawBodyPersisted": false,
+      "outcome": "one_page_success",
+      "interpretation": "The maintained CLI replay verified one page of 60 normalized results against a reported 745 results. maxPages=1 made the run intentionally incomplete; this is not live evidence of complete pagination. This replay preceded the later continuation-only request-width refinements, which were validated locally without another remote request."
+    }
+  ],
+  "implementationChanges": {
+    "changedFiles": [
+      "lib/commerce/sephora.mjs",
+      "lib/commerce/providers.mjs",
+      "tests/commerce-sephora.test.mjs",
+      "tests/commerce-providers.test.mjs"
+    ],
+    "findingId": "SEPHORA_SEARCH_FIXED_PAGE_WIDTH_DRIFT",
+    "rootCause": "The anonymous search endpoint returned 60 products for a page-size hint of 10, while the client treated any row count above the hint as invalid. After accepting the observed 60-row first page, continuation also had to pass that actual width; otherwise a final short page could fail validation. A client-global remembered width was removed because it could contaminate a separate query on the same client.",
+    "fix": "Accept only a valid fixed 60-row response within the reported total, report both requested and actual width, use the actual width for page counts, pass the first response width into continuation requests, and keep the width scoped to each operation/query.",
+    "remoteReplayBoundary": "The 13:17:51Z maintained CLI live replay covered one page only and ran before pagination-only follow-up refinements. Those refinements have synthetic offline coverage; no post-refinement remote replay was made."
+  },
+  "evidenceChronology": [
+    {
+      "atUtc": "2026-10-15T13:12:30.887Z",
+      "phase": "initial_failure",
+      "result": "HTTP 200 application/json; SEPHORA_SEARCH_SCHEMA_INVALID at requestedPageSize=10; product count was unknown at this stage; not a 403."
+    },
+    {
+      "atUtc": "2026-10-15T13:15:52.901Z",
+      "phase": "in_memory_shape_diagnosis",
+      "result": "Same query/page showed keyword match, 60 products, totalProducts=745, valid row shape, top-level field types/counts; no raw body persisted."
+    },
+    {
+      "atUtc": "2026-10-15T13:17:51.589Z",
+      "phase": "maintained_cli_one_page_success",
+      "result": "One-page CLI replay returned 60 normalized products of 745; maxPages=1; sourceExhausted=false and complete=false."
+    },
+    {
+      "atUtc": "2026-10-15T13:23:23Z",
+      "phase": "pagination_only_followup_and_local_verification",
+      "result": "Continuation sizing and per-query width scoping validated by 22 synthetic/local tests; no further remote request."
+    }
+  ]
+}

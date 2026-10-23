@@ -1,0 +1,69 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "sephora",
+  "capabilityId": "catalog.variants",
+  "checkedAt": "2026-10-15T16:17:59.824Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://www.sephora.com/js/ufe/isomorphic/main.bundle.B22CoriginmasterD20260922192852.js",
+    "sourceSha256": "5c69df88c12e129005fb796a1067876bc3df65096aa0fdf6f457373513cf5763"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://www.sephora.com",
+    "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P417985/lite",
+    "checkedAt": "2026-10-15T16:17:59.824Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "addCurrentSkuToProductChildSkus",
+      "includeRegionsMap",
+      "showContent",
+      "includeConfigurableSku",
+      "channel",
+      "loc",
+      "countryCode",
+      "preferredSku",
+      "removePersonalizedData",
+      "includeReviewFilters",
+      "includeReviewImages"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 17516,
+    "schemaVerified": true
+  },
+  "implementation": {
+    "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+    "lib/commerce/sephora-reviews.mjs": "031a64aa4e98fbfb1ec9c638df0ddf96474c0bf92cc45eb9edad411678d2dc2f",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "accountCredentialsUsed": false,
+  "requestedProductId": "P417985",
+  "productIdMatched": true,
+  "requestedSkuId": "2234219",
+  "currentSkuMatched": true,
+  "matchedResult": {
+    "productId": "P417985",
+    "requestedProductId": "P417985",
+    "productIdMatched": true,
+    "currentSkuId": "2234219",
+    "variantCount": 6,
+    "uniqueSkuIds": 6,
+    "variantsWithOptionLabels": 6,
+    "variantsWithImages": 6,
+    "pricedVariants": 6,
+    "onSaleVariantCount": 1,
+    "allAvailabilityValuesMapped": true
+  }
+}

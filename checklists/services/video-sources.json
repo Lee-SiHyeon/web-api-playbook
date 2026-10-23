@@ -1,0 +1,552 @@
+{
+  "schemaVersion": 1,
+  "service": "video-sources",
+  "description": "Product video sources for shopping shorts: find a product seller/creator video, download it with a provenance sidecar (source, IDs, SHA-256, claimed rights basis), and map it back to a sellable product. AliExpress PDP media and 1688 search/offer media and Amazon search/seller videos work through a browser-tab transport on the user automation profile (no login). Douyin and Xiaohongshu search require a logged-in account; Taobao is not yet observed.",
+  "capabilities": [
+    {
+      "id": "aliexpress.product_media",
+      "title": "Read a product's seller video (id, play URL, poster), gallery images, title and store signals from mtop.aliexpress.pdp.pc.query",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/aliexpress-media.mjs",
+            "exports": [
+              "createAliExpressMediaClient",
+              "parseAliExpressPdpMedia",
+              "aliExpressBrowserTransport"
+            ]
+          },
+          {
+            "path": "lib/video-sources/mtop-h5.mjs",
+            "exports": [
+              "mtopSign",
+              "classifyMtopRet"
+            ]
+          },
+          {
+            "path": "lib/video-sources/cdp-cookies.mjs",
+            "exports": [
+              "createCdpPageFetcher"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "aliexpress",
+              "product-media"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/aliexpress-live-run.json",
+            "references/video-sources.md"
+          ]
+        }
+      ],
+      "blocker": "Live run on 2026-10-17 returned SUCCESS for 3/3 products through browser_tab_fetch and downloaded 2 seller videos (see sourceEvidence). No checklist evidence kind exists yet for a browser-tab transport without an owner account, so no live evidence entry is claimed."
+    },
+    {
+      "id": "aliexpress.session_http_replay",
+      "title": "Replay an imported browser cookie bundle from Node without a browser",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/aliexpress-media.mjs",
+            "exports": [
+              "aliExpressHttpTransport",
+              "importAliExpressSession"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "session-import",
+              "--transport"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/aliexpress-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Observed 2026-10-17: the first Node replay succeeded, the next ones returned FAIL_SYS_USER_VALIDATE / RGV587_ERROR (risk control). The client stops on that verdict and never solves a challenge, so plain HTTP is not a dependable transport."
+    },
+    {
+      "id": "media.download_with_provenance",
+      "title": "Download a media URL from allow-listed hosts with size/mime limits and write a provenance sidecar with a claimed rights basis",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/media-download.mjs",
+            "exports": [
+              "downloadMedia",
+              "RIGHTS_BASIS"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "--download"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/aliexpress-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live downloads recorded in sourceEvidence (6.28 MB 1280x1280 and 11.7 MB 720x1270 H.264). Media files stay in .runtime and are not committed."
+    },
+    {
+      "id": "aliexpress.video_search",
+      "title": "Find products that have a seller video for a keyword (search with has_video)",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/commerce/aliexpress-affiliate.mjs",
+            "exports": [
+              "createAliExpressAffiliateClient"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": [
+          "tests/commerce-aliexpress-affiliate.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "The official Affiliate API already supports has_video and product_video_url, but needs the user's AliExpress app_key/app_secret. Storefront search was only used to pick test IDs in the browser; no search reader is implemented in this pack."
+    },
+    {
+      "id": "douyin.search_and_video",
+      "title": "Search Douyin by Chinese product keyword and resolve a video's play URL and author",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17: the web search page opens a login modal (登录后即可搜索更多精彩视频) and sends no search request without login. Needs the user Douyin account (app QR scan or phone). Creator-owned content (rightsBasis creator_content_unlicensed)."
+    },
+    {
+      "id": "xiaohongshu.search_and_video",
+      "title": "Search Xiaohongshu notes by keyword and resolve note video URLs and author",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17: /api/sns/web/v1/search/* returns code -101 无登录信息 without login (x-s header is signed by the page). Needs the user Xiaohongshu account. Creator-owned content."
+    },
+    {
+      "id": "alibaba1688.search",
+      "title": "Search 1688 wholesale offers by Chinese keyword (60/page: id, title, CNY price, booked count, repurchase rate, image)",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/alibaba-1688.mjs",
+            "exports": [
+              "create1688Client",
+              "parse1688SearchItems"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "1688",
+              "search"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/1688-live-run.json",
+            "references/video-sources.md"
+          ]
+        }
+      ],
+      "blocker": "Live run 2026-10-17: mtop.relationrecommend.wirelessrecommend.recommend returned SUCCESS with 60 offers through browser_tab_fetch. No checklist evidence kind exists for that transport yet."
+    },
+    {
+      "id": "alibaba1688.offer_media",
+      "title": "Read a 1688 offer seller video (id, play URL, cover, title), main images and supplier identity from the detail Document",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/alibaba-1688.mjs",
+            "exports": [
+              "create1688Client",
+              "parse1688OfferDetail"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "1688",
+              "offer-media"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/1688-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live run 2026-10-17: 3 detail Documents via in-tab fetch (plain Node GET returns punish/x5sec); 2 seller videos downloaded via cloud.video.taobao.com -> caiyuanbao.alicdn.com (signed auth_key). Offers from the same seller can share one video; dedupe by videoId."
+    },
+    {
+      "id": "taobao.item_video",
+      "title": "Read Taobao item detail videos through the shared MTOP H5 signer",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/mtop-h5.mjs",
+            "exports": [
+              "mtopSign"
+            ]
+          }
+        ],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Not observed yet; Taobao item pages usually require login."
+    },
+    {
+      "id": "product_match.coupang",
+      "title": "Coupang product -> similar products abroad -> seller videos (manifest)",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/coupang-seed.mjs",
+            "exports": [
+              "createCoupangSeedClient",
+              "parseCoupangProductSeed"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-pipeline.mjs",
+            "tokens": [
+              "--coupang-url",
+              "--coupang-query"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-similar.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/video-sources.md"
+          ]
+        }
+      ],
+      "blocker": "Live 2026-10-17: Coupang product 8733070301 (plain Node GET of /np/search is 403; in-tab fetch 200) -> keywords via agy -> 3-source search -> Codex verdicts (0 same, 8 type: domestic brand) -> 4 Amazon seller videos downloaded with provenance in 63 s. No evidence kind for browser_tab_fetch yet."
+    },
+    {
+      "id": "amazon.search",
+      "title": "Search Amazon US by keyword and return result-card ASINs",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/amazon-media.mjs",
+            "exports": [
+              "createAmazonMediaClient",
+              "parseAmazonSearchAsins"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "amazon",
+              "search"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/amazon-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live run 2026-10-17: 52 ASINs through browser_tab_fetch; no evidence kind for that transport yet."
+    },
+    {
+      "id": "amazon.product_videos",
+      "title": "Read seller/brand product videos from an Amazon PDP (classified by aciContentId namespace) and download the best HLS variant up to 1080p",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/amazon-media.mjs",
+            "exports": [
+              "createAmazonMediaClient",
+              "parseAmazonPdpVideos",
+              "classifyAmazonVideo"
+            ]
+          },
+          {
+            "path": "lib/video-sources/media-download.mjs",
+            "exports": [
+              "downloadHlsMedia"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-sources.mjs",
+            "tokens": [
+              "amazon",
+              "product-videos"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-aliexpress.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/amazon-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live run 2026-10-17: 4 of 6 sampled PDPs had seller videos; 3 videos remuxed (1080x1920, 1920x1080 x2). Creator/customer videos are excluded unless --include-creator. Needs ffmpeg."
+    },
+    {
+      "id": "aliexpress.search",
+      "title": "Search AliExpress KR by keyword (60 cards: Korean title, KRW price, sold, rating, image) from the server-rendered wholesale Document",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/aliexpress-search.mjs",
+            "exports": [
+              "createAliExpressSearchClient",
+              "parseAliExpressSearchItems"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-similar.mjs",
+            "tokens": [
+              "--sources"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-similar.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/similar-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live 2026-10-17 via browser_tab_fetch (60 items); no evidence kind for that transport yet."
+    },
+    {
+      "id": "similar.cross_source_discovery",
+      "title": "Find similar products for a seed (title+image) across AliExpress KR, 1688 and Amazon: per-language keywords, dHash + title + model-code scoring, LLM verdicts (same/type/different), seller-video lookup",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/video-sources/similar.mjs",
+            "exports": [
+              "findSimilarProducts",
+              "scoreCandidate",
+              "modelCodes",
+              "applyVerdicts",
+              "imageDHash"
+            ]
+          },
+          {
+            "path": "lib/video-sources/llm.mjs",
+            "exports": [
+              "productKeywords",
+              "llmJudge",
+              "agyRunner"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/video-similar.mjs",
+            "tokens": [
+              "--title",
+              "--image",
+              "--judge",
+              "--videos"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/video-sources-similar.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/video-sources-2026-10-17/similar-live-run.json"
+          ]
+        }
+      ],
+      "blocker": "Live 2026-10-17: seed IRIN PJ88C -> both PJ88C listings (AliExpress, 1688 OEM) judged same and ranked first, with seller videos. LLM provider is the logged-in agy CLI; swap runPrompt for an AI Gateway/Jev client when a key exists."
+    },
+    {
+      "id": "alibaba1688.image_search",
+      "title": "1688 image search (upload -> imageId -> imageSimilarSearchV2)",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17: uploadBase64WithRequest returns an imageId (JPEG required; WebP fails), but imageSimilarSearchV2 returns params invalid and the KR AliTrading UI sends no search without login. Not implemented."
+    },
+    {
+      "id": "walmart.product_videos",
+      "title": "Read seller product videos from Walmart PDPs",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17 via in-tab fetch (no block): search /search?q= returns usItemIds; 4/4 sampled PDPs had \"videos\":null and only videoInfographics (VIG_* assets on vds.prod.walmartimages.com) = Walmart auto-generated image slideshows, not seller footage. Not implemented: low value for shorts."
+    },
+    {
+      "id": "shopify.product_media_videos",
+      "title": "Read product media videos from Shopify brand storefronts (/products/{handle}.js)",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Observed 2026-10-17: 5 brand stores x 12 products had no video media in product .js (videos live in page sections); 3 stores return 403 on /products.json. Per-brand storefronts are not a search source. Not implemented."
+    }
+  ]
+}

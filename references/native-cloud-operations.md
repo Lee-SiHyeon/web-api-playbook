@@ -9,7 +9,7 @@ Vercel·Supabase처럼 공식 CLI가 이미 인증돼 있는 서비스는 그 �
 | 확인 | 증명하는 것 | 추가로 필요한 확인 |
 |---|---|---|
 | CLI 설치·버전 | 실행기 존재 | 현재 실행 사용자의 인증 |
-| `vercel whoami` | 해당 CLI의 계정 인증 | 지정한 팀·기존 프로젝트 읽기 |
+| `vercel whoami`의 실제 계정 반환 | 해당 CLI의 계정 인증 | 지정한 팀·기존 프로젝트 읽기 |
 | CLI 프로젝트 조회 | 그 계정의 해당 프로젝트 접근 | Git repo·production branch·deployment SHA |
 | MCP OAuth 완료 | 해당 MCP client의 토큰 획득 | 인증된 팀 목록과 지정 프로젝트 조회 |
 | MCP 문서 검색 | 문서 조회 기능 | 계정·팀 권한은 증명하지 않음 |
@@ -23,7 +23,29 @@ MCP OAuth도 완료됐고 문서 검색과 `list_teams` 호출 자체는 성공�
 합치거나, CLI가 되는 이유만으로 MCP 권한을 주장하지 않는다. CLI 경로로 필요한 작업을
 진행할 수 있으면 MCP 장애 때문에 사용자의 완료된 로그인을 반복 요구하지 않는다.
 
+CLI 종료코드만 검사하지 않는다. 2026-10-17 Windows의 Vercel CLI 62.7.0에서
+`whoami`가 `Logged out`을 반환하면서 종료코드는 0이었다. 계정명이 확인되지 않으면
+인증되지 않은 상태다. Device Flow 만료는 완료로 취급하지 않으며 만료된 코드를 재사용하지 않는다.
+
 ## 공식 setup과 기존 설정 보존
+
+### 배포와 DB 장애를 수집 실패에서 분리
+
+- 프로젝트 목록의 `ACTIVE_HEALTHY`와 DB/REST/Auth/Storage의 실제 service health는
+  별도다. 2026-10-17에는 전자는 정상인데 네 서비스가 모두 unhealthy였고, 배포의
+  schema preflight와 여러 collector가 동시에 timeout/503/504로 실패했다.
+- 같은 실행기의 구조화된 오류 stdout와 stderr를 모두 분류한다. `Initialising login role...`
+  한 줄만 보이면 자격 부재로 단정하지 않는다. 실제 오류는 `DbConfigLoginRoleStatusError`
+  / HTTP 544 / DB 연결 timeout일 수 있다. 출력 전 토큰·원문 query·개인 데이터를 제거한다.
+- DB 계약 검사를 끄거나 `DATA_MODE=demo`로 바꿔 배포 성공을 만들지 않는다. 읽기 전용
+  service health/SQL/metrics를 대조하고, 확인된 대상의 제한적인 운영 복구 후 다시 검사한다.
+  restart ACK는 복구가 아니다. 상태와 실제 SQL/REST가 돌아왔는지 별도로 읽는다.
+- `vercel env run`도 production의 Secret 값을 내보내지 못할 수 있다. 임의 `.env` 작성이나
+  legacy key 재활성화로 해결하지 않는다. 이미 승인된 서비스의 native credential provider와
+  공식 API를 사용하는 경우에도 정확한 프로젝트·operation을 고정하고 자격은 process memory에만
+  두며 파일/로그/커맨드라인으로 내보내지 않는다. 다른 계정·credential target은 탐색하지 않는다.
+- 첫 실패 deployment, 복구 작업, 재배포, production SHA, Cron invocation, DB receipt 및
+  catalog readback을 각각 남긴다. 성공한 Partners/feed 수집을 실패한 일반몰 검색과 합치지 않는다.
 
 Vercel 작업은 현재 [get-started.md](https://vercel.com/get-started.md)를 먼저 읽는다.
 기존 CLI·전역 guidance·MCP entry를 조사하고, 필요한 항목만 추가한다. 최초 전역 setup만으로
@@ -42,6 +64,31 @@ Supabase는 [공식 login 문서](https://supabase.com/docs/reference/cli/supaba
 확인한다. 이미 준비된 native store를 평문으로 바꾸지 않는다. Management PAT,
 프로젝트 service-role key, anon key, DB password는 서로 다른 자격이며 바꿔 쓰지 않는다.
 CLI 로그인만으로 임의 프로젝트 SQL 접근이 증명되는 것도 아니다.
+
+### 2026-10-17 native CLI 적용에서 확인한 추가 경계
+
+- Supabase CLI 2.120.0의 `db query`는 이 환경에서 native 로그인 자격으로
+  Management API SQL을 실행했다. 명시적인 project ref를 사용할 때도 `--linked`가
+  필요했다. `db query --linked --project-ref <verified-ref> --file <reviewed.sql>`의
+  실제 결과를 확인하며, 이를 위해 DB 비밀번호나 PAT를 임의 파일로 추출하지 않는다.
+  다른 버전은 해당 실행기의 `--help`를 먼저 확인한다.
+- 마이그레이션은 기존 원격 이력·사용할 RPC 계약과 대조한 새 파일만 적용한다.
+  관련 없는 과거 pending 파일을 일괄 push하지 않는다. 적용과 migration history를
+  같은 transaction에 기록하고, 별도 읽기로 파일 hash·RPC grant·익명 접근 거부를 검증한다.
+  적용된 SQL 파일은 수정하지 않고 후속 변경은 별도 migration으로 남긴다.
+- Vercel CLI 62.7.0의 `link --yes`는 기존 프로젝트 연결과 함께 `.env.local`에
+  OIDC 값을 내려받기도 했다. 연결만 했다고 credential 파일이 없다고 가정하지 않는다.
+  값은 출력하지 않고 `.env*`와 `.vercel/`의 Git·배포 제외 여부를 확인한다.
+  native 파일을 일반 evidence나 portable skill로 복사하지 않는다.
+- `vercel crons run`의 triggered ACK는 수집 완료가 아니다. 저장된 start row, DB lease,
+  완료 receipt와 실제 catalog를 별도로 읽는다. 불확실한 ACK를 이유로 같은 작업을
+  즉시 다시 보내지 않는다. PC 관측 시간과 cloud/DB 실행 시간은 서로 기록한다.
+- GitHub Actions의 결제/사용 한도 때문에 job steps가 시작되지 않은 경우는 코드 검사
+  실패와 구분한다. 로컬 검사·Vercel build가 성공해도 GitHub CI가 통과했다고 쓰지 않는다.
+
+실제 반례는 [Coupang 일반몰 Vercel 기록](coupang-retail-vercel-2026-10-17.md)에 둔다.
+운영 배포와 native Cron dispatch가 성공해도 source 403, 상품 0개, 세션 없음이면
+`deployed / collection blocked`이며 이관 성공이 아니다.
 
 ## 원격 환경의 일회용 OAuth callback
 
@@ -75,6 +122,31 @@ DB query 결과·환경변수 조회 결과에는 인증값과 개인정보가 �
 변환해 넣을 필요는 없다. [credential propagation](runtime-credential-propagation.md)을 따른다.
 
 ## 배포와 데이터 수선의 완료 조건
+
+### 로컬 수집 검증에서 Vercel 세션 소비로 이관할 때
+
+- 로컬 probe는 일회성으로 실행하며 `runtime=local`, `dbWrites=0`을 기록한다.
+  가짜 DB가 반환한 accepted 수는 `simulatedAccepted`이지 persisted receipt가 아니다.
+  부분 실패·미구성·차단이 하나라도 있으면 비정상 종료코드와 소스별 오류를 유지한다.
+  정상적인 빈 목록은 오류와 다르게 기록하고 전체 목록을 읽었다는 뜻으로 바꾸지 않는다.
+  운영 orchestrator와 같은 수집기 목록을 참조해 Meta/Threads/TikTok 같은 추가 소스를
+  구버전 검사 목록에서 누락하지 않는다. 의도적으로 짧게 제한한 probe의 시간초과는
+  운영 runtime의 동일 장애가 입증된 것과 구분한다.
+- 패키지를 복사해도 DPAPI 세션은 이전되지 않는다. 현재 사용자의 정확한 store 이름과
+  provider 경로를 먼저 검사한다. `C:/Users/다른사용자/...` 하드코딩은 소비 경계 실패다.
+  운영 요청 전에 provider/저장 상태/자료 스키마를 검사하고, 준비되지 않았다면 0회 요청으로 끝낸다.
+- Lifehack의 `scripts/toss-session-handoff.mjs --check --playbook-root=<checkout>`은
+  수정 버전에서 값 읽기 없이 로컬 DPAPI 저장 유무를 확인한다. 실행할 checkout SHA를 함께 기록한다.
+  인증된 owner probe, 실제 서명 이관, Vercel의 독립된 다음 invocation 읽기는 각각 별도 증거다.
+  기존 ready 세션을 덮어쓰지 않는다. 웹 운영자 쿠키·서명키는 stdin/보호된 메모리로만 전달한다.
+  네이버는 `scripts/naver-health-probe.mts --check`와 `brandconnect-state`, 쿠팡은
+  서비스 adapter가 실제 사용하는 `coupang-web-state`를 확인한다. 추측한 다른 이름의
+  빈 저장 결과를 해당 서비스 전체의 인증 부재로 확대하지 않는다.
+- 반복 수집·세션 검증·갱신은 선택한 Vercel runtime에서 수행한다. local/PC 예약 작업을
+  새로 만들지 않는다. PC 담당 소스는 동일 범위의 cloud 저장 receipt를 확보한 뒤에만 퇴역시키며,
+  세션이 옮겨졌다는 이유만으로 PC-only 목록/대상 링크 추출까지 이관 완료로 보고하지 않는다.
+- provider MFA/승인 요구는 자동 갱신 성공과 구분한다. 2FA 필요 상태나 접근 차단을
+  조용한 재로그인으로 감추지 말고 기존 pending attempt와 사용자 승인 경계를 유지한다.
 
 코드 배포는 `tested local tree → main SHA → remote main SHA → READY deployment SHA
 → promoted alias → 실제 domain route/readback` 순서로 대조한다. CLI exit 0, Git push,

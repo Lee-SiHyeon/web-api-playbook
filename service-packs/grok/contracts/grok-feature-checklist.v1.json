@@ -1,0 +1,1966 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "checkedAt": "2026-10-06",
+  "receiptDirectory": "verification/grok-feature-live-receipts",
+  "publicReplayReceipt": "discovery/client-chrome-public-replay-2026-10-05.json",
+  "currentBlocker": {
+    "host": "Linux",
+    "browser": "normal native Chrome 154",
+    "loginPageStatus": null,
+    "classification": "Native Google sign-in and protected owner read are verified. One new-chat SDK text frame was captured in memory, its native control was forwarded once for acknowledgement, and its browser business frame was blocked. The direct WSS client sent one response.create frame after session.created; independent HTTP history readback matched the exact prompt and response. Later lifecycle edits changed recorded handler hashes, so the WSS and workspace receipts need re-verification against current code. The older core-text-smoke intent remains held outcome_unknown and was not retried.",
+    "privateXhrCaptures": 7,
+    "passwordSubmitted": false,
+    "accountOwnerVerified": true,
+    "ownerHttpReadStatus": 200,
+    "textWssOutcome": "completed",
+    "textWssEvidenceStatus": "needs_reverification",
+    "workspaceEvidenceStatus": "needs_reverification",
+    "olderTextIntentOutcome": "outcome_unknown",
+    "olderTextIntentRetried": false
+  },
+  "sourceAssets": {
+    "auth-sso-check": {
+      "origin": "https://accounts.x.ai",
+      "path": "/_next/static/chunks/1f-co9f_lhfa9.js",
+      "sha256": "62386da4f17c50f3d6faab65cd9cf7445585bd2eb900f2b0bc719ed427a9e538",
+      "checkedAt": "2026-10-05",
+      "classification": "public login-page source callsite; no authenticated contract"
+    },
+    "auth-castle-producer": {
+      "origin": "https://accounts.x.ai",
+      "path": "/_next/static/chunks/1pj7cj84weix5.js",
+      "sha256": "049b0203b08b83b7a235b75dcc76d91f3d8e4cdd31fb7e07f176d16c0307acd0",
+      "checkedAt": "2026-10-05",
+      "classification": "public login-page source producer; token value and auth success unverified"
+    },
+    "chat": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/27akar72ihacg.js",
+      "sha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+      "checkedAt": "2026-10-05",
+      "classification": "current public generated API client source"
+    },
+    "chat-mode-selection-store": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/0skqp8k76tn6n.js",
+      "sha256": "75825269a3d1759576d6c45cddca05ed2b86b19e836108804830e128f4a60ca7",
+      "checkedAt": "2026-10-06",
+      "classification": "first-party useModesStore selectedModeId setter and localStorage persistence"
+    },
+    "chat-mode-selection-chat-callsite": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/1y45wi3axgcyj.js",
+      "sha256": "45329e3d66f75f8fc878889390ffc06da965df3bc42876f52b82e56dfa673493",
+      "checkedAt": "2026-10-06",
+      "classification": "ChatInteraction maps selectedModeId through buildGatewayChatSession into native session.create.session.model"
+    },
+    "gateway-session": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/3myiqa38fkng_.js",
+      "sha256": "81ebd2a3d9da7b43c8884ffbf7a918b9fb2b0c4f3e4b920af8e585639e73f165",
+      "checkedAt": "2026-10-06",
+      "classification": "first-party GatewaySession sends session.create and consumes conversation.attached event.conversation.id"
+    },
+    "chat-regenerate-ui": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/1j2ho_pz_0gci.js",
+      "sha256": "3589d3596012d0d05552e9273c7c20c5f1c26f0df929e35952b8ff476b3561e1",
+      "checkedAt": "2026-10-06",
+      "classification": "current public UI source for the visible existing-task Regenerate action; the live WSS event shape is separately captured in memory under the task gate"
+    },
+    "chat-sharing-ui": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/10t97pb3h-x4o.js",
+      "sha256": "2f83492e1ffd8d59116a46395b8b5ef3fa3b4d32c311c8606beace91765167cd",
+      "checkedAt": "2026-10-06",
+      "classification": "current UI source distinguishes its indexed default Copy/Create Link helper from the share-dialog POST that sets allowIndexing false"
+    },
+    "media": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/1xpv0qochhbm7.js",
+      "sha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+      "checkedAt": "2026-10-05",
+      "classification": "current public generated API client source"
+    },
+    "models-public": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/35ntlely29ab3.js",
+      "sha256": "da50d0a6eedb65fa5f5ba402e96b3d9349e586855f07de34a3a21bf9b1b0f316",
+      "checkedAt": "2026-10-03",
+      "classification": "historical public models source; chunk is no longer referenced by the fresh homepage, while the October 5 anonymous direct replay is independently recorded"
+    },
+    "workspaces": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/1xpv0qochhbm7.js",
+      "sha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+      "checkedAt": "2026-10-06",
+      "classification": "first-party generated workspace repository contracts; browser write capture is false"
+    },
+    "user-settings": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/1xpv0qochhbm7.js",
+      "sha256": "e8048f895c456b5c4466878ec3f1a8a0ce03d2a8338d37e78f06d920cb262dd4",
+      "checkedAt": "2026-10-06",
+      "classification": "current generated user-settings GET/POST API source; the checked reversible preference setter uses preferences only"
+    },
+    "user-settings-ui": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/2qoe_1ry11ejg.js",
+      "sha256": "edfaa411d9720b0c97dfcf96ccb40ee4d682e9a8da8b71cffc95bd48a6ea32a5",
+      "checkedAt": "2026-10-06",
+      "classification": "current UI settings store maps the autoWrapLongLinesCode toggle through fetchSetPreference into the preferences-only setter"
+    },
+    "chat-soft-delete": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/0uf56-pwxogcp.js",
+      "sha256": "be4f8e3ba59be451e39f4f289b39706763028ef0b107335676dcc6fa2893b99a",
+      "checkedAt": "2026-10-06",
+      "classification": "current public generated API source for the observed conversation soft-delete route"
+    },
+    "attachment-upload-direct": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/1e3r6boa1v4lr.js",
+      "sha256": "0d8f5bd1ba17b16404c055b9fbcf854cf492e06784aaa9660753e2d9d1f2cc13",
+      "checkedAt": "2026-10-06",
+      "classification": "first-party generated uploadFileV2 direct asset-upload source; upload request and independent asset readback are separately evidenced"
+    },
+    "conversation-files-api": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/0-4zkotdeiwyn.js",
+      "sha256": "e35e094e479b298eb20c0510dcea9724e0ea0ef9d547b4a3db5e3f4abec473f8",
+      "classification": "first-party generated FilesService V2 list/content/ZIP request and response DTOs"
+    },
+    "conversation-files-query-ui": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/0skqp8k76tn6n.js",
+      "sha256": "75825269a3d1759576d6c45cddca05ed2b86b19e836108804830e128f4a60ca7",
+      "classification": "first-party file queries call FilesService V2 list and content APIs"
+    },
+    "conversation-files-zip-ui": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/0_gos2zzergk5.js",
+      "sha256": "7c3ad06212a5dec71a2b654330f7dfba14135ca8065ec3212586738aee9dcac2",
+      "classification": "first-party Download All button uses FilesService ZIP response downloadUrl"
+    },
+    "conversation-files-download-ui": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/4016hrlsoifk1.js",
+      "sha256": "b7c623d9630d274db6380143b14bb091265a57c90768edd97b7e45e2f994b99d",
+      "classification": "first-party file download selects downloadSignedUrl, signedUrl, or dataUrl; workspace-eligible path uses app workspace ZIP"
+    },
+    "conversation-workspace-download-adapter": {
+      "origin": "https://cdn.grok.com",
+      "path": "/_next/static/chunks/2-k05sa9g904_.js",
+      "sha256": "5c2319a0c5f3ec8293f26a2c936eeea71c6f037465ba76e805202b4d1e60e4d2",
+      "classification": "first-party app adapter calls chatDownloadAppWorkspace with the conversation and path"
+    },
+    "auth-google-oauth-provider": {
+      "origin": "https://accounts.x.ai",
+      "path": "/_next/static/chunks/0mxerue8pjpkz.js",
+      "sha256": "ad8912f86fed2279a72f0e18528e6abb1dd0c40432b9590795aa2cec5d7558a8",
+      "checkedAt": "2026-10-06",
+      "classification": "current public OAuth2Provider/Google method model; does not establish direct OAuth replay or callback success"
+    },
+    "auth-google-oauth-proto": {
+      "origin": "https://accounts.x.ai",
+      "path": "/_next/static/chunks/2rpn8en83hz7a.js",
+      "sha256": "9da9106cf6fc2f4cc0c37634084b30dc2a700c0eb0875238687b39f4327b2e19",
+      "checkedAt": "2026-10-06",
+      "classification": "current public auth protobuf exposes Google OAuth2 provider model; not a login request capture"
+    }
+  },
+  "handlerBindings": {
+    "client.read": {
+      "kind": "clientMethod",
+      "source": "src/client.mjs",
+      "owner": "GrokWebClient",
+      "member": "read",
+      "codeFiles": [
+        "src/client.mjs",
+        "src/transport.mjs"
+      ]
+    },
+    "client.verify-owner": {
+      "kind": "clientMethod",
+      "source": "src/client.mjs",
+      "owner": "GrokWebClient",
+      "member": "verifyOwner",
+      "codeFiles": [
+        "src/client.mjs",
+        "src/transport.mjs",
+        "src/session.mjs"
+      ]
+    },
+    "client.submit": {
+      "kind": "clientMethod",
+      "source": "src/client.mjs",
+      "owner": "GrokWebClient",
+      "member": "submit",
+      "codeFiles": [
+        "src/client.mjs",
+        "src/transport.mjs",
+        "src/journal.mjs"
+      ]
+    },
+    "client.download": {
+      "kind": "clientMethod",
+      "source": "src/client.mjs",
+      "owner": "GrokWebClient",
+      "member": "downloadArtifact",
+      "codeFiles": [
+        "src/client.mjs",
+        "src/transport.mjs",
+        "src/media.mjs"
+      ]
+    },
+    "auth.login": {
+      "kind": "clientMethod",
+      "source": "src/client.mjs",
+      "owner": "GrokWebClient",
+      "member": "login",
+      "codeFiles": [
+        "src/client.mjs"
+      ]
+    },
+    "auth.renew": {
+      "kind": "clientMethod",
+      "source": "src/client.mjs",
+      "owner": "GrokWebClient",
+      "member": "renewSession",
+      "codeFiles": [
+        "src/client.mjs",
+        "src/session.mjs",
+        "src/grok-session-renewal.mjs",
+        "src/transport.mjs",
+        "src/authenticated-chrome-fetch.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "public.models": {
+      "kind": "namedExport",
+      "source": "src/public-models.mjs",
+      "owner": null,
+      "member": "fetchPublicModels",
+      "codeFiles": [
+        "src/public-models.mjs",
+        "src/chrome-http-fetch.mjs",
+        "scripts/chrome-http-transport.py",
+        "src/cli.mjs"
+      ]
+    },
+    "chat.text-wss": {
+      "kind": "namedExport",
+      "source": "src/grok-text-websocket.mjs",
+      "owner": null,
+      "member": "submitCapturedGrokTextOnce",
+      "codeFiles": [
+        "src/grok-text-websocket.mjs",
+        "scripts/grok-text-websocket-transport.py",
+        "src/cli.mjs"
+      ]
+    },
+    "models.selected-mode-text": {
+      "kind": "namedExport",
+      "source": "src/grok-mode-selected-text.mjs",
+      "owner": null,
+      "member": "submitGrokTextInSelectedMode",
+      "codeFiles": [
+        "src/grok-mode-selected-text.mjs",
+        "src/grok-model-selection.mjs",
+        "src/grok-text-websocket.mjs",
+        "scripts/grok-text-websocket-transport.py",
+        "src/runtime.mjs",
+        "src/client.mjs",
+        "src/grok-session-renewal.mjs",
+        "src/session.mjs",
+        "src/journal.mjs",
+        "src/nonsecret-json-store.mjs",
+        "src/protected-json-store.mjs",
+        "src/contracts.mjs",
+        "src/transport.mjs",
+        "src/authenticated-chrome-fetch.mjs",
+        "scripts/authenticated-chrome-transport.py",
+        "src/cli.mjs",
+        "contracts/grok-web.v1.json"
+      ]
+    },
+    "chat.regenerate-wss": {
+      "kind": "namedExport",
+      "source": "src/grok-conversation-wss.mjs",
+      "owner": null,
+      "member": "submitGrokConversationRegenerationWssOnce",
+      "codeFiles": [
+        "src/grok-conversation-wss.mjs",
+        "scripts/grok-conversation-wss-transport.py",
+        "src/grok-castle-event-preparer.mjs",
+        "src/grok-conversations.mjs",
+        "src/cli.mjs",
+        "src/session.mjs",
+        "src/journal.mjs",
+        "src/nonsecret-json-store.mjs",
+        "src/authenticated-chrome-fetch.mjs"
+      ]
+    },
+    "workspaces.list": {
+      "kind": "namedExport",
+      "source": "src/grok-workspaces.mjs",
+      "owner": null,
+      "member": "createGrokWorkspaceClient",
+      "workspaceMethod": "list",
+      "codeFiles": [
+        "src/grok-workspaces.mjs",
+        "src/client.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "workspaces.shared-list": {
+      "kind": "namedExport",
+      "source": "src/grok-workspaces.mjs",
+      "owner": null,
+      "member": "createGrokWorkspaceClient",
+      "workspaceMethod": "listShared",
+      "codeFiles": [
+        "src/grok-workspaces.mjs",
+        "src/client.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "workspaces.read": {
+      "kind": "namedExport",
+      "source": "src/grok-workspaces.mjs",
+      "owner": null,
+      "member": "createGrokWorkspaceClient",
+      "workspaceMethod": "read",
+      "codeFiles": [
+        "src/grok-workspaces.mjs",
+        "src/client.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "workspaces.create": {
+      "kind": "namedExport",
+      "source": "src/grok-workspaces.mjs",
+      "owner": null,
+      "member": "createGrokWorkspaceClient",
+      "workspaceMethod": "create",
+      "codeFiles": [
+        "src/grok-workspaces.mjs",
+        "src/client.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "workspaces.update": {
+      "kind": "namedExport",
+      "source": "src/grok-workspaces.mjs",
+      "owner": null,
+      "member": "createGrokWorkspaceClient",
+      "workspaceMethod": "update",
+      "codeFiles": [
+        "src/grok-workspaces.mjs",
+        "src/client.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "workspaces.delete": {
+      "kind": "namedExport",
+      "source": "src/grok-workspaces.mjs",
+      "owner": null,
+      "member": "createGrokWorkspaceClient",
+      "workspaceMethod": "delete",
+      "codeFiles": [
+        "src/grok-workspaces.mjs",
+        "src/client.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "attachments.upload-direct": {
+      "kind": "namedExport",
+      "source": "src/grok-attachment-upload.mjs",
+      "owner": null,
+      "member": "createGrokAttachmentUploadClient",
+      "factoryMethod": "uploadDirect",
+      "codeFiles": [
+        "src/grok-attachment-upload.mjs",
+        "src/grok-attachment-asset-reader.mjs",
+        "src/client.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs",
+        "scripts/grok_attachment_asset_download.py"
+      ]
+    },
+    "media.image-wss": {
+      "kind": "namedExport",
+      "source": "src/grok-media-operations.mjs",
+      "owner": null,
+      "member": "submitGrokImagineImage",
+      "codeFiles": [
+        "src/grok-media-operations.mjs",
+        "src/grok-media-api.mjs",
+        "src/grok-media-websocket.mjs",
+        "src/grok-media-asset-reader.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "media.video-submit": {
+      "kind": "namedExport",
+      "source": "src/grok-media-operations.mjs",
+      "owner": null,
+      "member": "submitProvisionalCapturedGrokVideoOnce",
+      "codeFiles": [
+        "src/grok-media-operations.mjs",
+        "src/grok-media-api.mjs",
+        "src/grok-media-asset-reader.mjs",
+        "src/grok-media-video-transport.mjs",
+        "src/runtime.mjs",
+        "src/cli.mjs"
+      ]
+    },
+    "media.asset-download": {
+      "kind": "namedExport",
+      "source": "src/grok-media-api.mjs",
+      "owner": null,
+      "member": "createGrokMediaApi",
+      "factoryMethod": "downloadAssetToFile",
+      "codeFiles": [
+        "src/grok-media-api.mjs",
+        "src/grok-media-asset-reader.mjs",
+        "scripts/grok_media_asset_download.py",
+        "src/runtime.mjs",
+        "src/client.mjs",
+        "src/contracts.mjs",
+        "src/transport.mjs",
+        "src/session.mjs",
+        "src/journal.mjs",
+        "src/nonsecret-json-store.mjs",
+        "src/protected-json-store.mjs",
+        "src/authenticated-chrome-fetch.mjs",
+        "scripts/authenticated-chrome-transport.py"
+      ]
+    }
+  },
+  "protocolContracts": {
+    "chat.text.wss": {
+      "schemaVersion": 1,
+      "operationId": "chat.text.wss",
+      "transport": "wss",
+      "origin": "https://grok.com",
+      "path": "/ws/mgw/",
+      "queryKeyNames": [
+        "uid"
+      ],
+      "sourcePageRole": "codex-grok-core-20261006",
+      "sourceAsset": "chat",
+      "control": {
+        "eventType": "session.create",
+        "topLevelFieldNames": [
+          "event"
+        ],
+        "eventFieldNames": [
+          "event_id",
+          "session",
+          "type"
+        ],
+        "sessionFieldNames": [
+          "model",
+          "x_grok"
+        ],
+        "modelType": "string",
+        "sessionIdPresent": false,
+        "xGrokFieldNames": [
+          "accept_interleaved_phases",
+          "client_side_toolsets",
+          "connector_ids",
+          "disable_artifact",
+          "disable_text_follow_ups",
+          "enable_image_generation",
+          "enable_side_by_side",
+          "force_concise",
+          "force_side_by_side",
+          "image_generation_count",
+          "protocol_capabilities",
+          "use_chunk"
+        ],
+        "absentTargetFieldNames": [
+          "conversation_id",
+          "initial_load_id",
+          "load_existing"
+        ],
+        "workspaceFieldNames": [],
+        "connectorIdValuesPersisted": false
+      },
+      "business": {
+        "eventType": "response.create",
+        "itemType": "message",
+        "itemRole": "user",
+        "inputChunkTextPath": "event.item.x_grok.input_chunks[].text.text"
+      },
+      "promptSha256": "504c47d4f90a590d7198aa888dc65508f1e8947cdf59613ee6ef720db814b0c1",
+      "assistantRegex": "^PROTOCOL42:\\s*42\\.?$",
+      "readbackOperationIds": [
+        "conversation.list.read",
+        "conversation.read",
+        "history.response-nodes",
+        "history.load-responses"
+      ]
+    },
+    "chat.regenerate.wss": {
+      "schemaVersion": 1,
+      "operationId": "chat.regenerate.wss",
+      "protocolKind": "existing_task_regeneration",
+      "transport": "wss",
+      "origin": "https://grok.com",
+      "path": "/ws/mgw/",
+      "queryKeyNames": [
+        "uid"
+      ],
+      "sourcePageRole": "codex-grok-lifecycle-20261006",
+      "sourceAsset": "chat-regenerate-ui",
+      "control": {
+        "eventType": "session.create",
+        "allowedTopLevelFieldNames": [
+          [
+            "event"
+          ],
+          [
+            "event",
+            "session_id"
+          ]
+        ],
+        "eventFieldNames": [
+          "event_id",
+          "session",
+          "type"
+        ],
+        "sessionFieldNames": [
+          "model",
+          "x_grok"
+        ],
+        "sessionIdFieldPresent": false,
+        "requiredExistingTaskFields": [
+          "active_response_id",
+          "conversation_id",
+          "initial_leaf_id",
+          "load_existing"
+        ],
+        "loadExistingValue": true
+      },
+      "business": {
+        "eventType": "response.create",
+        "requiredEventFieldNames": [
+          "castle_request_token",
+          "event_id",
+          "parent_response_id",
+          "type"
+        ],
+        "parentResponseIdField": "parent_response_id",
+        "castleTokenField": "castle_request_token",
+        "rebindOuterSessionIdOnly": true
+      },
+      "history": {
+        "readbackOperationIds": [
+          "conversation.read",
+          "history.response-nodes",
+          "history.load-responses"
+        ],
+        "requireSameTask": true,
+        "requireNewAssistantWithSameParent": true,
+        "requireUnchangedUserResponseCount": true,
+        "requiredAddedAssistantCount": 1
+      },
+      "targetParentMessageSha256": "504c47d4f90a590d7198aa888dc65508f1e8947cdf59613ee6ef720db814b0c1",
+      "assistantRegex": "^PROTOCOL42:\\s*42\\.?$"
+    }
+  },
+  "mediaContracts": {
+    "image.generate.wss": {
+      "schemaVersion": 1,
+      "requirementId": "image.generate.wss",
+      "operationId": "media.image.create",
+      "mode": "image_wss_batch4",
+      "transport": "wss",
+      "origin": "wss://grok.com",
+      "path": "/ws/imagine/listen",
+      "requestEventType": "conversation.item.create",
+      "requestItemType": "message",
+      "requestContentType": "input_text",
+      "imageQuality": 2,
+      "imageBatch": 4,
+      "sourceEvidencePath": "verification/grok-media-contract-capture-2026-10-06.json",
+      "sourceEvidenceSha256": "6743034146200246f7eac64a8666f6c2726788d3e46e249d93c80fe33ba360c7",
+      "readbackOperationIds": [
+        "media.assets.list",
+        "conversation.read",
+        "history.response-nodes",
+        "history.load-responses"
+      ]
+    },
+    "video.text-to-video": {
+      "schemaVersion": 1,
+      "requirementId": "video.text-to-video",
+      "operationId": "media.video.create",
+      "mode": "textToVideo",
+      "transport": "http",
+      "origin": "https://grok.com",
+      "method": "POST",
+      "path": "/rest/app-chat/conversations/new",
+      "contentType": "application/json",
+      "requestFieldNames": [
+        "enableImageStreaming",
+        "enableSideBySide",
+        "kind",
+        "mediaGenInput",
+        "message",
+        "modelName",
+        "responseMetadata",
+        "sendFinalMetadata"
+      ],
+      "mediaInputFieldNames": [
+        "aspectRatio",
+        "duration",
+        "prompt",
+        "resolutionName",
+        "skipAudio"
+      ],
+      "profile": {
+        "aspectRatio": "2:3",
+        "duration": 6,
+        "resolutionName": "480p",
+        "skipAudio": true
+      },
+      "sourceEvidencePath": "verification/grok-media-contract-capture-2026-10-06.json",
+      "sourceEvidenceSha256": "6743034146200246f7eac64a8666f6c2726788d3e46e249d93c80fe33ba360c7"
+    },
+    "video.image-reference-to-video": {
+      "schemaVersion": 1,
+      "requirementId": "video.image-reference-to-video",
+      "operationId": "media.video.create",
+      "mode": "imageToVideo",
+      "transport": "http",
+      "origin": "https://grok.com",
+      "method": "POST",
+      "path": "/rest/app-chat/conversations/new",
+      "contentType": "application/json",
+      "requestFieldNames": [
+        "enableImageStreaming",
+        "enableSideBySide",
+        "kind",
+        "mediaGenInput",
+        "message",
+        "modelName",
+        "responseMetadata",
+        "sendFinalMetadata"
+      ],
+      "mediaInputFieldNames": [
+        "aspectRatio",
+        "duration",
+        "inputAssets",
+        "mode",
+        "prompt",
+        "resolutionName",
+        "skipAudio"
+      ],
+      "profile": {
+        "aspectRatio": "2:3",
+        "duration": 6,
+        "resolutionName": "480p",
+        "skipAudio": true
+      },
+      "referenceMustBePrivateGeneratedImage": true,
+      "sourceEvidencePath": "verification/grok-media-video-image-reference-capture-2026-10-06.json",
+      "sourceEvidenceSha256": "22c965a7d780d33d5d572bc251ba377e44af12d04add98f4aec3cd0f6225974f"
+    },
+    "artifact.image.download": {
+      "schemaVersion": 1,
+      "requirementId": "artifact.image.download",
+      "operationId": "media.asset.download",
+      "mode": "generated_image_asset",
+      "transport": "http",
+      "origin": "https://assets.grok.com",
+      "method": "GET",
+      "path": "/users/{owner}/generated/{assetKey}",
+      "urlBuilder": "getAssetUrl",
+      "requiredMimePrefix": "image/",
+      "requireMagicAndFileReadback": true,
+      "sourceEvidencePath": "verification/grok-media-contract-capture-2026-10-06.json",
+      "sourceEvidenceSha256": "6743034146200246f7eac64a8666f6c2726788d3e46e249d93c80fe33ba360c7",
+      "readbackOperationIds": [
+        "media.assets.list",
+        "conversation.read",
+        "history.response-nodes",
+        "history.load-responses"
+      ]
+    },
+    "artifact.video.download": {
+      "schemaVersion": 1,
+      "requirementId": "artifact.video.download",
+      "operationId": "media.asset.download",
+      "mode": "generated_video_asset",
+      "transport": "http",
+      "origin": "https://assets.grok.com",
+      "method": "GET",
+      "path": "/users/{owner}/generated/{assetKey}",
+      "urlBuilder": "getAssetUrl",
+      "requiredMime": "video/mp4",
+      "requireMagicAndFileReadback": true,
+      "sourceEvidencePath": "verification/grok-media-contract-capture-2026-10-06.json",
+      "sourceEvidenceSha256": "6743034146200246f7eac64a8666f6c2726788d3e46e249d93c80fe33ba360c7",
+      "readbackOperationIds": [
+        "media.assets.list",
+        "conversation.read",
+        "history.response-nodes",
+        "history.load-responses"
+      ]
+    }
+  },
+  "features": [
+    {
+      "id": "auth.login",
+      "required": true,
+      "applicability": "Required. The current owner-scoped account is Google-linked and has no password; native Google sign-in is the applicable path for this owner. Email/password remains an unverified global candidate.",
+      "requirements": [
+        {
+          "id": "auth.sso.email-check",
+          "operationId": "auth.sso.email-check",
+          "expectedKind": "submit",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "auth.login",
+          "expectedAuthMode": "any",
+          "requiresOwnerVerified": false,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://accounts.x.ai",
+            "method": "POST",
+            "path": "/api/auth/sso/check",
+            "fieldNames": [
+              "email",
+              "castleRequestToken"
+            ],
+            "sourceAsset": "auth-sso-check",
+            "notes": "The public login UI has a distinct email flow; its earlier request returned challenge 403. The current owner receipt shows Google email matches the owner and hasPassword=false, so this is not the applicable route for this account."
+          }
+        },
+        {
+          "id": "auth.password-submit",
+          "operationId": "auth.password-submit",
+          "expectedKind": "submit",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "auth.login",
+          "expectedAuthMode": "any",
+          "requiresOwnerVerified": false,
+          "candidate": {
+            "status": "unknown",
+            "origin": "https://accounts.x.ai",
+            "method": null,
+            "path": null,
+            "fieldNames": [
+              "email",
+              "clearTextPassword",
+              "turnstileToken",
+              "castleRequestToken"
+            ],
+            "sourceAsset": "auth-sso-check",
+            "notes": "Inputs are described by source but no successful password request is established. This owner account hasPassword=false and is Google-linked; account-specific password login is not applicable. The global password endpoint contract remains unknown."
+          }
+        },
+        {
+          "id": "auth.google.oauth-start",
+          "operationId": "auth.google.oauth.start",
+          "expectedKind": "submit",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "auth.login",
+          "expectedAuthMode": "any",
+          "requiresOwnerVerified": false,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://accounts.x.ai",
+            "method": "POST",
+            "path": "/api/auth/oauth/start",
+            "fieldNames": [
+              "castleRequestToken",
+              "provider"
+            ],
+            "sourceAsset": "auth-google-oauth-provider",
+            "notes": "A native Login with Google click produced this request shape in a separate latest attempt, which returned 403 text/html; that attempt did not reach Google. An earlier separate native click returned 200 and reached the Google identifier page, but its request field names and response bytes/hash were not retained. The attempts are kept separate. This route requires a fresh first-party Castle token and has no direct HTTP client readiness."
+          }
+        }
+      ]
+    },
+    {
+      "id": "auth.owner-identity",
+      "required": true,
+      "applicability": "required before private reads or writes",
+      "requirements": [
+        {
+          "id": "auth.owner.read",
+          "operationId": "auth.owner.read",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.verify-owner",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "unknown",
+            "origin": "https://grok.com",
+            "method": null,
+            "path": null,
+            "fieldNames": [],
+            "notes": "No account identity endpoint or successful identity read is installed."
+          }
+        }
+      ]
+    },
+    {
+      "id": "auth.session-renewal",
+      "required": true,
+      "applicability": "Conditional. Current same-owner session reads succeed and cookies have expiry metadata, but no expired server-session recovery is observed.",
+      "requirements": [
+        {
+          "id": "auth.session.renew",
+          "operationId": "auth.session.renew",
+          "expectedKind": "submit",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "auth.renew",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "unknown",
+            "origin": "https://grok.com",
+            "method": null,
+            "path": null,
+            "fieldNames": [],
+            "notes": "The only first-party session operation observed is GET /api/auth/session, which reads current auth state; its response did not rotate sso. A separate fresh same-owner handoff verified a direct owner read but did not change the credential. Cookie expiry metadata is about six months out; server expiry semantics and an expired-session Google callback remain unverified."
+          }
+        }
+      ],
+      "phaseClaims": [
+        {
+          "id": "auth.same-owner-handoff",
+          "status": "verified_phase_claim",
+          "receiptPath": "verification/grok-feature-live-receipts/models.selection-in-chat.json",
+          "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7"
+        },
+        {
+          "id": "auth.expired-provider-recovery",
+          "status": "unverified",
+          "receiptPath": "verification/grok-feature-live-receipts/models.selection-in-chat.json",
+          "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7"
+        }
+      ]
+    },
+    {
+      "id": "chat.text-generation",
+      "required": true,
+      "applicability": "required",
+      "requirements": [
+        {
+          "id": "chat.create-and-respond",
+          "operationId": "chat.text.wss",
+          "expectedKind": "submit",
+          "evidenceMode": "direct_wss_session_replay",
+          "handlerId": "chat.text-wss",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_wss_replay",
+            "origin": "https://grok.com",
+            "method": null,
+            "path": "/ws/mgw/",
+            "fieldNames": [
+              "session.create",
+              "response.create",
+              "input_chunks",
+              "text"
+            ],
+            "sourceAsset": "chat",
+            "notes": "Native SDK capture and direct WSS replay are recorded separately. One response.create frame followed session.created; exact prompt and assistant pattern were independently verified from HTTP history. The older core-text-smoke intent remains held outcome_unknown."
+          }
+        },
+        {
+          "id": "chat.respond",
+          "operationId": "chat.respond",
+          "expectedKind": "submit",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations/{conversationId}/user-responses",
+            "fieldNames": [
+              "message",
+              "parentResponseId"
+            ],
+            "sourceAsset": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "chat.regenerate",
+      "required": true,
+      "applicability": "required when the UI exposes regenerate",
+      "requirements": [
+        {
+          "id": "chat.regenerate.response",
+          "operationId": "chat.regenerate.wss",
+          "expectedKind": "submit",
+          "evidenceMode": "direct_wss_regeneration_replay",
+          "handlerId": "chat.regenerate-wss",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_wss_replay",
+            "origin": "https://grok.com",
+            "method": null,
+            "path": "/ws/mgw/",
+            "fieldNames": [
+              "session.create",
+              "response.create",
+              "parent_response_id",
+              "castle_request_token"
+            ],
+            "sourceAsset": "chat-regenerate-ui",
+            "notes": "Current UI emits an existing-task response.create over WSS after a session.created acknowledgement. The generated legacy REST candidate returned HTTP 403 with no history change. Positive completion still requires a direct fresh-token replay and independent same-task/new-assistant lineage readback."
+          }
+        }
+      ]
+    },
+    {
+      "id": "conversation.crud",
+      "required": true,
+      "applicability": "required",
+      "requirements": [
+        {
+          "id": "conversation.create",
+          "operationId": "conversation.create",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations",
+            "fieldNames": [
+              "systemPromptName",
+              "temporary"
+            ],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "conversation.read",
+          "operationId": "conversation.read",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/app-chat/conversations_v2/{conversationId}",
+            "fieldNames": [
+              "includeTaskResult",
+              "includeWorkspaces"
+            ],
+            "sourceAsset": "chat",
+            "notes": "The task-only CRUD receipt records an independent same-owner detail readback (HTTP 200, same ID, no media/workspaces/task result), but it does not retain per-read request/response digests; the normalized read replay remains separately evidenced."
+          }
+        },
+        {
+          "id": "conversation.title.update",
+          "operationId": "conversation.update",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "PUT",
+            "path": "/rest/app-chat/conversations/{conversationId}",
+            "fieldNames": [
+              "title",
+              "starred",
+              "botAgentId"
+            ],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "conversation.delete",
+          "operationId": "conversation.soft-delete",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "DELETE",
+            "path": "/rest/app-chat/conversations/soft/{conversationId}",
+            "fieldNames": [],
+            "sourceAsset": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "conversation.list",
+      "required": true,
+      "applicability": "required",
+      "requirements": [
+        {
+          "id": "conversation.list.read",
+          "operationId": "conversation.list.read",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/app-chat/conversations",
+            "fieldNames": [
+              "pageSize",
+              "excludeProjects",
+              "filterIsStarred",
+              "workspaceId"
+            ],
+            "sourceAsset": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "conversation.history",
+      "required": true,
+      "applicability": "required",
+      "requirements": [
+        {
+          "id": "history.response-nodes",
+          "operationId": "history.response-nodes",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/app-chat/conversations/{conversationId}/response-node",
+            "fieldNames": [],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "history.load-responses",
+          "operationId": "history.load-responses",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations/{conversationId}/load-responses",
+            "fieldNames": [
+              "responseIds"
+            ],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "history.task-responses",
+          "operationId": "history.task-responses",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/tasks/responses/{conversationId}",
+            "fieldNames": [],
+            "sourceAsset": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "conversation.sharing",
+      "required": true,
+      "applicability": "required; the current owner task showed share-link controls and the direct unindexed-share flow was exercised",
+      "requirements": [
+        {
+          "id": "conversation.share.set",
+          "operationId": "conversation.share.set",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations/{conversationId}/share",
+            "fieldNames": [
+              "responseId",
+              "allowIndexing"
+            ],
+            "sourceAsset": "chat",
+            "notes": "A same-owner neutral-task create uses the generated API's optional allowIndexing field with an explicit false value. The native Copy/Create Link helper defaults allowIndexing to true; the client preserves that caller choice. Team and user targets are not inferred."
+          }
+        },
+        {
+          "id": "conversation.share.read",
+          "operationId": "conversation.share.read",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/app-chat/conversations/{conversationId}/sharing",
+            "fieldNames": [],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "conversation.share.revoke",
+          "operationId": "conversation.share.revoke",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "DELETE",
+            "path": "/rest/app-chat/share_links/{shareLinkId}",
+            "fieldNames": [],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "conversation.share-link.read",
+          "operationId": "conversation.share.link.read",
+          "expectedKind": "read",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/app-chat/share_links_data/{shareLinkId}",
+            "fieldNames": [
+              "allowIndexing",
+              "isPublic",
+              "conversation",
+              "responses"
+            ],
+            "sourceAsset": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "conversation.uploads",
+      "required": true,
+      "applicability": "required; the observed direct asset-upload path is in scope, while resumable and conversation-association paths remain unresolved",
+      "requirements": [
+        {
+          "id": "upload.direct.asset",
+          "operationId": "attachment.upload.direct",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "attachments.upload-direct",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/http/upload-file-v2/direct",
+            "fieldNames": [
+              "file"
+            ],
+            "sourceAsset": "attachment-upload-direct",
+            "notes": "Current direct asset upload was independently run once with a 20-byte neutral file and metadata/byte readback. The saved run lacks the upload response byte count and its body digest, so it cannot satisfy a canonical operation receipt yet. This is a separate path from the resumable candidate operations below."
+          }
+        },
+        {
+          "id": "upload.attach-to-conversation",
+          "operationId": "conversation.attach-file",
+          "expectedKind": "submit",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "unknown",
+            "origin": null,
+            "method": null,
+            "path": null,
+            "fieldNames": [
+              "conversationId",
+              "fileMetadataId",
+              "message",
+              "parentResponseId"
+            ],
+            "notes": "Uploading a reusable asset does not prove association with a conversation. Capture and read back one existing-conversation attachment/message flow; a new-chat WSS request is not evidence for this continuation case."
+          }
+        },
+        {
+          "id": "upload.init",
+          "operationId": "attachment.upload.init",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/upload-file-v2/init",
+            "fieldNames": [
+              "fileName",
+              "fileMimeType",
+              "fileSource",
+              "thirdPartyFileId",
+              "sizeBytes",
+              "resumableSupported",
+              "multipartSupported"
+            ],
+            "sourceAsset": "chat",
+            "notes": "The installed source operation selects single-PUT or multipart from the response. This init operation does not replace the separate direct small-asset upload. No size threshold is inferred."
+          }
+        },
+        {
+          "id": "upload.patch",
+          "operationId": "attachment.upload.patch",
+          "expectedKind": "submit",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "PATCH",
+            "path": "/rest/app-chat/upload-file-v2/patch",
+            "fieldNames": [
+              "uploadId",
+              "completedParts"
+            ],
+            "sourceAsset": "chat",
+            "notes": "The generated SDK PATCH candidate remains uninstalled and unverified; preserve it as a distinct resumable/PATCH branch."
+          }
+        },
+        {
+          "id": "upload.complete",
+          "operationId": "attachment.upload.complete",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/upload-file-v2/complete",
+            "fieldNames": [
+              "presigned",
+              "directUpload"
+            ],
+            "sourceAsset": "chat",
+            "notes": "Single-PUT and multipart completion use distinct source-described shapes; multipart parts and ETags still need their own live replay evidence."
+          }
+        },
+        {
+          "id": "upload.status",
+          "operationId": "attachment.upload.status",
+          "expectedKind": "read",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/app-chat/upload-file-v2/status",
+            "fieldNames": [],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "upload.abort",
+          "operationId": "attachment.upload.abort",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/upload-file-v2/abort",
+            "fieldNames": [
+              "uploadId"
+            ],
+            "sourceAsset": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "models.public-catalog",
+      "required": true,
+      "applicability": "public metadata only; this cannot satisfy private model selection",
+      "requirements": [
+        {
+          "id": "models.public.read",
+          "operationId": "public.models",
+          "expectedKind": "read",
+          "evidenceMode": "public_direct_replay",
+          "handlerId": "public.models",
+          "expectedAuthMode": "none",
+          "requiresOwnerVerified": false,
+          "candidate": {
+            "status": "direct_public_replay",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/models",
+            "fieldNames": [
+              "locale"
+            ],
+            "sourceAsset": "models-public",
+            "notes": "May pass only this anonymous public metadata capability."
+          }
+        }
+      ]
+    },
+    {
+      "id": "models.private-selection",
+      "required": true,
+      "applicability": "required for an authenticated user's actual model choices",
+      "requirements": [
+        {
+          "id": "models.imagine-overrides",
+          "operationId": "models.imagine-overrides",
+          "expectedKind": "read",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/models/imagine/overrides",
+            "fieldNames": [],
+            "sourceAsset": "media",
+            "notes": "Current first-party SDK read, empty-object request and owner-bound HTTP200 replay; no account override entries. This does not prove private chat mode selection."
+          }
+        },
+        {
+          "id": "models.selection-in-chat",
+          "operationId": "chat.text.wss",
+          "expectedKind": "submit",
+          "evidenceMode": "source_native_model_selection",
+          "handlerId": "models.selected-mode-text",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_wss_replay",
+            "origin": "https://grok.com",
+            "method": null,
+            "path": "/ws/mgw/",
+            "fieldNames": [
+              "session.create",
+              "session.model",
+              "response.create",
+              "input_chunks"
+            ],
+            "sourceAsset": "chat-mode-selection-chat-callsite",
+            "notes": "User selection is local useModesStore state and localStorage; the native SDK maps selectedModeId to session.create.session.model. The direct Fast request was server-acknowledged and exact history readback verified; no preference endpoint is asserted. Backend model version was not reported."
+          }
+        }
+      ],
+      "phaseClaims": [
+        {
+          "id": "models.fast-selected-text",
+          "status": "verified_phase_claim",
+          "receiptPath": "verification/grok-feature-live-receipts/models.selection-in-chat.json",
+          "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7"
+        }
+      ]
+    },
+    {
+      "id": "user-settings",
+      "required": true,
+      "applicability": "conditional for UI settings; one reversible visual preference has a source-identified setter",
+      "requirements": [
+        {
+          "id": "settings.read",
+          "operationId": "settings.read",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/user-settings",
+            "fieldNames": [],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "settings.update",
+          "operationId": "settings.update",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_sdk_direct_replay",
+          "handlerId": "client.submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/user-settings",
+            "fieldNames": [
+              "preferences"
+            ],
+            "sourceAsset": "user-settings",
+            "notes": "The visible autoWrapLongLinesCode setting calls fetchSetPreference; the generated settings setter updates only the preferences object. The client restricts this path to that reversible visual preference and preserves the rest of the current preferences."
+          }
+        }
+      ]
+    },
+    {
+      "id": "image-generation",
+      "required": true,
+      "applicability": "required; the authenticated quota read enabled the native Imagine image mode and a task-bound four-image replay is recorded",
+      "requirements": [
+        {
+          "id": "image.generate.wss",
+          "operationId": "media.image.create",
+          "expectedKind": "submit",
+          "evidenceMode": "direct_media_wss_replay",
+          "handlerId": "media.image-wss",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_wss_replay",
+            "origin": "https://grok.com",
+            "method": null,
+            "path": "/ws/imagine/listen",
+            "fieldNames": [
+              "conversation.item.create",
+              "item",
+              "type",
+              "input_text",
+              "properties",
+              "num_generations"
+            ],
+            "sourceAsset": "media",
+            "notes": "Current image UI uses one native WSS image frame with Quality 2 and batch 4. Acceptance requires a fresh canonical receipt tied to the current handler hashes and exact task-bound asset readback."
+          }
+        },
+        {
+          "id": "image.history.list",
+          "operationId": "media.assets.list",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/assets",
+            "fieldNames": [
+              "includeImagineFiles",
+              "isLatest",
+              "orderBy",
+              "pageSize",
+              "pageToken",
+              "source"
+            ],
+            "sourceAsset": "media",
+            "notes": "The current Imagine asset history is listed by the owner-bound paginated /rest/assets contract, filtered to generated assets; the source-only /image-generations route is retained as an alternate below."
+          }
+        }
+      ],
+      "unverifiedAlternates": [
+        {
+          "id": "image.http-conversation-create",
+          "operationId": "image.generate.chat",
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations/new",
+            "fieldNames": [
+              "enableImageGeneration",
+              "imageGenerationCount",
+              "imageEditUri",
+              "imageEditUris",
+              "imagineCanvasContext",
+              "mediaGenInput"
+            ],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "image.http-pipeline",
+          "operationId": "image.generate.pipeline",
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/media/pipeline/run",
+            "fieldNames": [
+              "templateId",
+              "inputs",
+              "specJson",
+              "redoPostId",
+              "redoAppendsContainer",
+              "containerId",
+              "paramsDefaults",
+              "isKidsMode",
+              "enableNsfw"
+            ],
+            "sourceAsset": "media"
+          }
+        }
+      ]
+    },
+    {
+      "id": "video-generation",
+      "required": true,
+      "applicability": "required; the authenticated video quota read enabled text-to-video and the owned UI exposes image-reference-to-video",
+      "requirements": [
+        {
+          "id": "video.text-to-video",
+          "operationId": "media.video.create",
+          "expectedKind": "submit",
+          "evidenceMode": "direct_media_http_replay",
+          "handlerId": "media.video-submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_media_capture",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations/new",
+            "fieldNames": [
+              "enableImageStreaming",
+              "enableSideBySide",
+              "kind",
+              "mediaGenInput.textToVideo",
+              "message",
+              "modelName",
+              "responseMetadata",
+              "sendFinalMetadata"
+            ],
+            "sourceAsset": "chat",
+            "notes": "Current text-to-video uses mediaGenInput.textToVideo; the old video-sequence REST route is retained below as an unverified alternate. Direct replay, task readback, and MP4 MIME/magic/file readback are required."
+          }
+        },
+        {
+          "id": "video.image-reference-to-video",
+          "operationId": "media.video.create",
+          "expectedKind": "submit",
+          "evidenceMode": "direct_media_http_replay",
+          "handlerId": "media.video-submit",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_media_capture",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations/new",
+            "fieldNames": [
+              "enableImageStreaming",
+              "enableSideBySide",
+              "kind",
+              "mediaGenInput.imageToVideo",
+              "message",
+              "modelName",
+              "responseMetadata",
+              "sendFinalMetadata"
+            ],
+            "sourceAsset": "chat",
+            "notes": "The current image-reference path consumes one independently verified private generated image. Its previous dispatch outcome is unknown and remains unverified; no retry is implied."
+          }
+        }
+      ],
+      "unverifiedAlternates": [
+        {
+          "id": "video.sequence.create.http-candidate",
+          "operationId": "video.sequence.create",
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/media/video-sequence/create",
+            "fieldNames": [
+              "clips",
+              "aspectRatio",
+              "resolutionName",
+              "options"
+            ],
+            "sourceAsset": "media"
+          }
+        },
+        {
+          "id": "video.pipeline.http-candidate",
+          "operationId": "video.generation.pipeline",
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/media/pipeline/run",
+            "fieldNames": [
+              "templateId",
+              "inputs",
+              "specJson",
+              "redoPostId",
+              "redoAppendsContainer",
+              "containerId",
+              "paramsDefaults",
+              "isKidsMode",
+              "enableNsfw"
+            ],
+            "sourceAsset": "media"
+          }
+        }
+      ]
+    },
+    {
+      "id": "task-polling",
+      "required": true,
+      "applicability": "required for accepted asynchronous generation jobs",
+      "requirements": [
+        {
+          "id": "task.by-conversation",
+          "operationId": "conversation.read",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/app-chat/conversations_v2/{conversationId}",
+            "fieldNames": [
+              "conversationId"
+            ],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "task.results",
+          "operationId": "history.load-responses",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/app-chat/conversations/{conversationId}/load-responses",
+            "fieldNames": [
+              "conversationId",
+              "responseIds"
+            ],
+            "sourceAsset": "chat"
+          }
+        },
+        {
+          "id": "task.latest-results",
+          "operationId": "history.task-responses",
+          "expectedKind": "read",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/tasks/responses/{conversationId}",
+            "fieldNames": [
+              "conversationId"
+            ],
+            "sourceAsset": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "id": "artifact-download",
+      "required": true,
+      "applicability": "required for generated outputs and uploaded/downloadable conversation files",
+      "requirements": [
+        {
+          "id": "artifact.image.download",
+          "operationId": "media.asset.download",
+          "expectedKind": "download",
+          "evidenceMode": "direct_media_asset_download",
+          "handlerId": "media.asset-download",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_media_capture",
+            "origin": "https://assets.grok.com",
+            "method": "GET",
+            "path": "/users/{owner}/generated/{assetKey}",
+            "fieldNames": [
+              "assetKey",
+              "sourceConversationId",
+              "responseId"
+            ],
+            "notes": "Current getAssetUrl builds generated-media downloads from owner-scoped asset keys; acceptance requires task binding, same-owner transport, MIME/signature, and independent saved-file readback."
+          }
+        },
+        {
+          "id": "artifact.video.download",
+          "operationId": "media.asset.download",
+          "expectedKind": "download",
+          "evidenceMode": "direct_media_asset_download",
+          "handlerId": "media.asset-download",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "direct_media_capture",
+            "origin": "https://assets.grok.com",
+            "method": "GET",
+            "path": "/users/{owner}/generated/{assetKey}",
+            "fieldNames": [
+              "assetKey",
+              "sourceConversationId",
+              "responseId"
+            ],
+            "notes": "Video download shares the owner-scoped asset-key builder but remains a separate video/mp4 and MP4-magic requirement."
+          }
+        },
+        {
+          "id": "artifact.conversation-file.download",
+          "operationId": "artifact.conversation-file.download",
+          "expectedKind": "download",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.download",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/conversations/files/content",
+            "fieldNames": [
+              "conversationId",
+              "path",
+              "isDownload"
+            ],
+            "sourceAsset": "conversation-files-api",
+            "notes": "The current FilesService V2 SDK source and UI callsite support GET content metadata with isDownload=true; response chooses downloadSignedUrl, signedUrl, or dataUrl. Direct signed-URL host, redirects, MIME/magic, and saved bytes still require an owned task read; this requirement remains source-only."
+          }
+        },
+        {
+          "id": "artifact.conversation-files.zip",
+          "operationId": "artifact.conversation-files.zip",
+          "expectedKind": "download",
+          "evidenceMode": "captured_session_replay",
+          "handlerId": "client.download",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "source_candidate_only",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/conversations/files/download-zip",
+            "fieldNames": [
+              "conversationId",
+              "path"
+            ],
+            "sourceAsset": "conversation-files-api",
+            "notes": "The current FilesService SDK/UI support a ZIP resolver returning downloadUrl,fileCount,totalSize. The UI switches to POST download-workspace for live-sandbox-eligible owner conversations. Returned URL host, redirects, ZIP bytes, and extracted entry hashes remain unverified."
+          }
+        }
+      ]
+    },
+    {
+      "id": "workspaces",
+      "required": true,
+      "applicability": "required for private workspace listing, inspection, creation, rename, and deletion",
+      "requirements": [
+        {
+          "id": "workspace.list",
+          "operationId": "workspaces.list",
+          "expectedKind": "read",
+          "evidenceMode": "first_party_bundle_direct_replay",
+          "handlerId": "workspaces.list",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/workspaces",
+            "fieldNames": [
+              "query",
+              "pageSize",
+              "pageToken",
+              "orderBy",
+              "kind"
+            ],
+            "sourceAsset": "workspaces"
+          }
+        },
+        {
+          "id": "workspace.shared-list",
+          "operationId": "workspaces.shared.list",
+          "expectedKind": "read",
+          "evidenceMode": "first_party_bundle_direct_replay",
+          "handlerId": "workspaces.shared-list",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/workspaces/shared",
+            "fieldNames": [
+              "pageSize",
+              "pageToken",
+              "orderBy"
+            ],
+            "sourceAsset": "workspaces"
+          }
+        },
+        {
+          "id": "workspace.read",
+          "operationId": "workspaces.read",
+          "expectedKind": "read",
+          "evidenceMode": "first_party_bundle_direct_replay",
+          "handlerId": "workspaces.read",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "GET",
+            "path": "/rest/workspaces/{workspaceId}",
+            "fieldNames": [
+              "workspaceId"
+            ],
+            "sourceAsset": "workspaces"
+          }
+        },
+        {
+          "id": "workspace.create",
+          "operationId": "workspaces.create",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_bundle_direct_replay",
+          "handlerId": "workspaces.create",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "POST",
+            "path": "/rest/workspaces",
+            "fieldNames": [
+              "name",
+              "kind"
+            ],
+            "sourceAsset": "workspaces"
+          }
+        },
+        {
+          "id": "workspace.update",
+          "operationId": "workspaces.update",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_bundle_direct_replay",
+          "handlerId": "workspaces.update",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "PUT",
+            "path": "/rest/workspaces/{workspaceId}",
+            "fieldNames": [
+              "workspaceId",
+              "name"
+            ],
+            "sourceAsset": "workspaces"
+          }
+        },
+        {
+          "id": "workspace.delete",
+          "operationId": "workspaces.delete",
+          "expectedKind": "submit",
+          "evidenceMode": "first_party_bundle_direct_replay",
+          "handlerId": "workspaces.delete",
+          "expectedAuthMode": "session",
+          "requiresOwnerVerified": true,
+          "candidate": {
+            "status": "first_party_direct_replay",
+            "origin": "https://grok.com",
+            "method": "DELETE",
+            "path": "/rest/workspaces/{workspaceId}",
+            "fieldNames": [
+              "workspaceId"
+            ],
+            "sourceAsset": "workspaces"
+          }
+        }
+      ]
+    }
+  ]
+}

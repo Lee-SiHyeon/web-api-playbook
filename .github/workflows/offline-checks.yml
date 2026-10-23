@@ -3,6 +3,8 @@ name: Offline Node checks
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -27,5 +29,7 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npm run doctor
       - run: npm test
+      - run: npm run test:client-packs
+      - run: npm run audit:consolidation
       - name: MyRealTrip pack compatibility
         run: node --test service-packs/affiliate/apps/affiliate-api-hub/tests/myrealtrip-marketing.test.mjs

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-16T01:39:32+09:00",
+  "scope": {
+    "site": "oliveyoung.co.kr",
+    "browser": "Chrome Canary",
+    "browserId": "1",
+    "tabId": "2085880529",
+    "loginPerformed": false
+  },
+  "document": {
+    "url": "https://www.oliveyoung.co.kr/store/goods/getGoodsDetail.do?goodsNo=A000000257097",
+    "method": "GET",
+    "status": 200,
+    "mimeType": "text/html",
+    "detailPageRendered": true
+  },
+  "requestedRoute": {
+    "path": "/goods/api/v1/detail",
+    "matchingRequestsObserved": 0,
+    "limit": "not observed during this document load only"
+  },
+  "observedProductJsonRoutes": [
+    {
+      "path": "/goods/api/v1/description",
+      "method": "GET",
+      "queryParameterNames": ["goodsNumber"],
+      "status": 200,
+      "mimeType": "application/json",
+      "schema": {
+        "data": {
+          "descriptionTypeCode": "string",
+          "descriptionContents": "string; length 22203",
+          "goodsDetailImages": "null"
+        },
+        "pagination": "null",
+        "status": "string",
+        "code": "number",
+        "message": "string",
+        "isSuccess": "boolean"
+      }
+    },
+    {
+      "path": "/goods/api/v1/extra",
+      "method": "POST",
+      "contentType": "application/json",
+      "requestBodyBytes": 722,
+      "requestBodySchema": {
+        "goodsNumber": "string length 13",
+        "deliveryFreeFlag": "boolean",
+        "leadTime": "number",
+        "goodsTypeCode": "string length 2",
+        "tradeCode": "string length 1",
+        "supplier": "string length 6",
+        "onlineBrand": "string length 7",
+        "orderableMinimumQuantity": "number",
+        "deliveryPolicyNumber": "string length 1",
+        "goodsSectionCode": "string length 2",
+        "todayDeliveryCheckedFlag": "boolean",
+        "options": "array length 2 of objects with optionNumber:string length 3, standardCode:string length 13, brand:string length 4, representFlag:boolean, lowerCategoryNumber:string length 6, discountApplyFlag:boolean, todayDeliveryFlag:boolean, soldOutFlag:boolean, reservationFlag:boolean",
+        "appFlag": "boolean"
+      },
+      "requestBodyEvidence": "extra-observed-request.json",
+      "status": 200,
+      "mimeType": "application/json",
+      "responseSchemaSummary": {
+        "dataAreas": [
+          "goodsNumber",
+          "bannerList",
+          "reviewInfoDto",
+          "deliveryFee",
+          "optionDetail",
+          "delivery and pickup flags",
+          "displayGoodsFlag",
+          "couponInfo",
+          "promotion lists",
+          "brandBasketCoupon",
+          "todayDeliveryFeeText"
+        ],
+        "optionCount": 2,
+        "photoReviewCount": 3
+      },
+      "responseSummaryEvidence": "extra-response-summary.json"
+    },
+    {
+      "path": "/goods/api/v1/payment-popup",
+      "method": "GET",
+      "queryParameterNames": ["salePrc", "pntMbrGradeCd", "goodsNumber", "itemNumber"],
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "path": "/goods/api/v1/payment-benefit",
+      "method": "GET",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "path": "/goods/api/v1/grade-popup",
+      "method": "GET",
+      "status": 200,
+      "mimeType": "application/json"
+    },
+    {
+      "path": "/goods/api/v1/gift-promotion",
+      "method": "POST",
+      "status": 200,
+      "mimeType": "application/json",
+      "requestBodyFields": "unknown; not captured"
+    }
+  ],
+  "limits": [
+    "one page load",
+    "request postData retrieved only for the observed extra request",
+    "no authentication or write",
+    "response fixture is limited to product options, delivery fees, and aggregate review numbers; no user review text or identity, personalized coupon values, cookie values, or raw headers saved"
+  ]
+}

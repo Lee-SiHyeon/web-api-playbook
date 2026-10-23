@@ -1,0 +1,92 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "sephora",
+  "capabilityId": "catalog.reviews.variant_filter",
+  "checkedAt": "2026-10-15T16:18:01.483Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "contractProvenance": {
+    "kind": "first_party_bundle_contract",
+    "sourceURL": "https://www.sephora.com/js/ufe/isomorphic/commons.chunk.B22CoriginmasterD20260922192852.js",
+    "sourceSha256": "42da169b63c165086d4a6203752123dca4bee1db30b76a6f208c19bcfb3bec42"
+  },
+  "request": {
+    "method": "GET",
+    "origin": "https://api.bazaarvoice.com",
+    "path": "/data/reviews.json",
+    "checkedAt": "2026-10-15T16:18:01.483Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "queryFields": [
+      "Filter",
+      "Limit",
+      "Offset",
+      "Include",
+      "Stats",
+      "ExcludeFamily",
+      "passkey",
+      "apiversion",
+      "Locale"
+    ],
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 67098,
+    "schemaVerified": true
+  },
+  "implementation": {
+    "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+    "lib/commerce/sephora-reviews.mjs": "031a64aa4e98fbfb1ec9c638df0ddf96474c0bf92cc45eb9edad411678d2dc2f",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  },
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "accountCredentialsUsed": false,
+  "publicApiKeyUsed": true,
+  "publicApiKeyPersisted": false,
+  "productIdMatched": true,
+  "sourceFilter": "ProductId:2234169;ExcludeFamily:True",
+  "pagination": {
+    "page": 1,
+    "pageSize": 20,
+    "offset": 0,
+    "totalReviews": 149,
+    "hasMore": true,
+    "nextPage": 2,
+    "verified": true
+  },
+  "publicKeyBootstrap": {
+    "method": "GET",
+    "origin": "https://www.sephora.com",
+    "path": "/",
+    "checkedAt": "2026-10-15T16:18:00.780Z",
+    "httpStatus": 200,
+    "mime": "text/html",
+    "browserUsed": false,
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "responseBytes": 925692,
+    "schemaVerified": true
+  },
+  "matchedResult": {
+    "productId": "P417985",
+    "requestedProductId": "P417985",
+    "productIdMatched": true,
+    "skuId": "2234169",
+    "requestedSkuId": "2234169",
+    "sourceFilter": "ProductId:2234169;ExcludeFamily:True",
+    "page": 1,
+    "pageSize": 20,
+    "totalReviews": 149,
+    "returned": 20,
+    "allVariantIdsMatched": true,
+    "uniqueReviewIds": 20,
+    "verified": true
+  }
+}

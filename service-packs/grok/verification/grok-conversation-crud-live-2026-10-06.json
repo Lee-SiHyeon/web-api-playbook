@@ -1,0 +1,293 @@
+{
+  "schemaVersion": 1,
+  "operationId": "conversation.crud",
+  "status": "verified",
+  "ownerVerified": true,
+  "createSourceContract": {
+    "sourceMode": "first_party_sdk_contract",
+    "normalUiRequestObserved": false,
+    "normalUiAdapterMatched": true,
+    "sourceFunctionName": "chatCreateConversationRaw",
+    "sourceSha256": "8dcfb562e2b3f83f866c23c82f73503c52a409620c8830697d6cade848644759",
+    "method": "POST",
+    "pathTemplate": "/rest/app-chat/conversations",
+    "bodyFieldNames": [
+      "systemPromptName",
+      "temporary"
+    ],
+    "systemPromptNameEmpty": true,
+    "temporaryFalse": true,
+    "requestBodyPersisted": false,
+    "sourceBodySha256": "6388f40ce2bd7dd541e3251be12cc1c6fbef75a7a7cb416cef35183b14ac0981",
+    "browserBusinessWriteDelivered": false
+  },
+  "task": {
+    "titleLength": 38,
+    "titleSha256": "902d8f8e5604fa32ad1cecfc504ad1997ea17044de3883ac6d84816237b5b090",
+    "conversationIdPersisted": false,
+    "originalOwnerDataChanged": false,
+    "textGenerationRequested": false,
+    "attachmentOrMediaPresent": false,
+    "sharingEnabled": false,
+    "conversationIdSha256": "dacc0dafb1e381f4b807672f7e30e3b17ddcf7ddb7e248cef334eb32e72df62f"
+  },
+  "operations": {
+    "create": {
+      "state": "completed",
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseBytes": 375,
+      "responseDigest": "dff611ed7f132da539a9728424eecca2080a99ad7f15198571e1a70119208acd",
+      "responseDigestPersisted": true,
+      "responseDigestKind": "raw_http_body",
+      "responseFieldNames": [
+        "conversationId",
+        "createTime",
+        "kind",
+        "latestAssetMetadata",
+        "mediaTypes",
+        "modifyTime",
+        "starred",
+        "systemPromptName",
+        "taskResult",
+        "temporary",
+        "title",
+        "viewerIsOwner",
+        "workspaces"
+      ],
+      "responseContentType": "application/json",
+      "requestHeaderNames": [
+        "content-type",
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "httpVersion": "h2",
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "requestDigest": "1be19b45bdf469f53bd8569a969e4d9f1ddbbc76479e875bda23706853789a3f",
+      "intentDigest": "0c1247b36a5e4acd1563b54fd7e6bbf29e330846bb5bda7dfbb1e5dfcdadc978",
+      "serviceJobIdObserved": true,
+      "retryCount": 0,
+      "verified": true,
+      "readbackStatus": 200,
+      "sourceFunctionName": "chatCreateConversationRaw",
+      "method": "POST",
+      "pathTemplate": "/rest/app-chat/conversations",
+      "journalState": "completed",
+      "conversationIdPersisted": false
+    },
+    "update": {
+      "state": "completed",
+      "httpStatus": 200,
+      "responseBytes": 375,
+      "responseDigest": "35443648d12eabcdaa2fd9f97be39d048010ac9f29c3d27f9c446d8feed56bcb",
+      "responseDigestPersisted": true,
+      "responseDigestKind": "raw_http_body",
+      "responseFieldNames": [
+        "conversationId",
+        "createTime",
+        "kind",
+        "latestAssetMetadata",
+        "mediaTypes",
+        "modifyTime",
+        "starred",
+        "systemPromptName",
+        "taskResult",
+        "temporary",
+        "title",
+        "workspaces"
+      ],
+      "responseContentType": "application/json",
+      "requestDigest": "792ef1b55c64e9131c402fc6bc4ad99c948fa64c86990d8f3febfa9420127d77",
+      "intentDigest": "e8a0622c47e6bdd913801c56fe5b829ebe1225af682aae62f96558d62d53ad65",
+      "requestHeaderNames": [
+        "content-type",
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "retryCount": 0,
+      "verified": true,
+      "readbackStatus": 200,
+      "sourceFunctionName": null,
+      "method": null,
+      "pathTemplate": null,
+      "serviceJobIdObserved": false,
+      "journalState": "completed"
+    },
+    "delete": {
+      "state": "completed",
+      "httpStatus": 200,
+      "responseBytes": 2,
+      "responseDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "responseDigestPersisted": true,
+      "responseDigestKind": "raw_http_body",
+      "responseFieldNames": [],
+      "responseContentType": "application/json",
+      "requestDigest": "f5bf0372b4699b0180b934072470f1d6358e2840a60ceb6e2332bf63ec147bd0",
+      "intentDigest": "c2a7f9796f95c4820e1ee491d389f122fdefe9877d7e2aad1c2ba5e15e515638",
+      "requestHeaderNames": [
+        "cookie"
+      ],
+      "cookieNames": [
+        "sso"
+      ],
+      "tlsVerified": true,
+      "trustEnv": false,
+      "redirectsFollowed": false,
+      "explicitRetries": 0,
+      "attemptCount": 1,
+      "ownerVerified": true,
+      "retryCount": 0,
+      "verified": true,
+      "readbackStatus": 200,
+      "sourceFunctionName": null,
+      "method": null,
+      "pathTemplate": null,
+      "serviceJobIdObserved": false,
+      "journalState": "completed"
+    }
+  },
+  "readback": {
+    "baselineStatus": 200,
+    "baselinePageCount": 3,
+    "baselineConversationCount": 171,
+    "baselineConversationIdSetSha256": "d33d6dd53b3257097b1d6d8aedb170829e9a0ae308b53d4934e0ddcabf4df4a8",
+    "exactTitleSearchStatus": 200,
+    "exactTitleCollision": false,
+    "create": {
+      "status": 200,
+      "sameConversationId": true,
+      "conversationIdSha256": "dacc0dafb1e381f4b807672f7e30e3b17ddcf7ddb7e248cef334eb32e72df62f",
+      "viewerIsOwner": true,
+      "mediaTypeCount": 0,
+      "workspaceCount": 0,
+      "taskResultPresent": false,
+      "responseNodesStatus": 200,
+      "responseNodeCount": 0,
+      "inflightResponseCount": 0,
+      "listStatus": 200,
+      "listPageCount": 3,
+      "listConversationIdSetSha256": "095eb01d0e7968e525fc6a11af2bf9fcebbc939d0ddb6895caf84ed4bb2aa644",
+      "unrelatedConversationIdSetMatchesBaseline": true,
+      "exactlyOneNewConversation": true
+    },
+    "titleUpdate": {
+      "status": 200,
+      "sameConversationId": true,
+      "conversationIdSha256": "dacc0dafb1e381f4b807672f7e30e3b17ddcf7ddb7e248cef334eb32e72df62f",
+      "viewerIsOwner": true,
+      "exactTitleMatched": true,
+      "titleSha256": "902d8f8e5604fa32ad1cecfc504ad1997ea17044de3883ac6d84816237b5b090",
+      "titleLength": 38,
+      "listStatus": 200,
+      "listConversationIdSetSha256": "095eb01d0e7968e525fc6a11af2bf9fcebbc939d0ddb6895caf84ed4bb2aa644",
+      "conversationIdSetUnchanged": true
+    },
+    "delete": {
+      "listStatus": 200,
+      "listPageCount": 3,
+      "conversationCount": 171,
+      "completePaginatedListReadback": true,
+      "targetAbsent": true,
+      "unrelatedConversationSetPreserved": true,
+      "baselineConversationIdSetSha256": "d33d6dd53b3257097b1d6d8aedb170829e9a0ae308b53d4934e0ddcabf4df4a8",
+      "currentConversationIdSetSha256": "d33d6dd53b3257097b1d6d8aedb170829e9a0ae308b53d4934e0ddcabf4df4a8",
+      "conversationIdSetMatchesBaseline": true,
+      "conversationIdSha256": "dacc0dafb1e381f4b807672f7e30e3b17ddcf7ddb7e248cef334eb32e72df62f",
+      "softDeleteContractReadback": "complete_owner_history_list_absence"
+    }
+  },
+  "persistenceAssertions": {
+    "rawConversationIdsPersisted": false,
+    "rawTitlesPersisted": false,
+    "rawRequestBodiesPersisted": false,
+    "rawResponseBodiesPersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "messageBodiesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "callerIntentsPersisted": false,
+    "cookieValuesPersisted": false
+  },
+  "observedAt": "2026-10-06T09:52:11.251Z",
+  "ownerScopeDigest": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "createSourceReceiptSha256": "cfe0fd344e282842c029d5b2f1435a4a84dc95122ca3b48992a8c2894a251b8a",
+  "nativeUiAttemptReceiptSha256": "13defd61c942c58e0b5fb889a7af66a18a87dffb578e74c1cca10508f5b5ffd7",
+  "pageRole": "codex-grok-conversation-crud-20261006",
+  "sourceCodeSnapshotSha256": {
+    "src/client.mjs": "cb62a2424ef2db9446b26107083f20136ad9913f731b16d1e3c6901f103d8d7a",
+    "src/contracts.mjs": "87868f727378363187e79650b7bed4abf1aa74774772bae7ef045fd066e2f27e",
+    "src/transport.mjs": "f4b0c6c5bb4e38cc1490d83f6a6d2e7e61ddbc87adb9f5f0cf2c28a6160df6b1",
+    "src/grok-conversations.mjs": "843535830536347ea89c3c297733d52f5e1bd98ffe7f5fbfb814c26304a53456",
+    "src/grok-conversation-crud-once.mjs": "deb98bb6dd3e362229a65462ec95968bf1dc1e4c294dfaa903b252e35dae0fa3",
+    "scripts/grok-conversation-crud-once.mjs": "8f10d7ada04cd55b8ab3ad07b629bfa994e0799a1318ddab7402c5a4054291ce",
+    "src/cli.mjs": "07e0ac082f5ed7135649e1afc5a37da722895ff9e3ee6f3cd988d3523464627e",
+    "contracts/grok-web.v1.json": "a2f8be65b4b12757e8380a90afad93d223d8ab2993239a2a4f0814124c17c4b0"
+  },
+  "sourceCodeSnapshotStable": true,
+  "sourceCodeSnapshotAfterSha256": {
+    "src/client.mjs": "cb62a2424ef2db9446b26107083f20136ad9913f731b16d1e3c6901f103d8d7a",
+    "src/contracts.mjs": "87868f727378363187e79650b7bed4abf1aa74774772bae7ef045fd066e2f27e",
+    "src/transport.mjs": "f4b0c6c5bb4e38cc1490d83f6a6d2e7e61ddbc87adb9f5f0cf2c28a6160df6b1",
+    "src/grok-conversations.mjs": "843535830536347ea89c3c297733d52f5e1bd98ffe7f5fbfb814c26304a53456",
+    "src/grok-conversation-crud-once.mjs": "deb98bb6dd3e362229a65462ec95968bf1dc1e4c294dfaa903b252e35dae0fa3",
+    "scripts/grok-conversation-crud-once.mjs": "8f10d7ada04cd55b8ab3ad07b629bfa994e0799a1318ddab7402c5a4054291ce",
+    "src/cli.mjs": "07e0ac082f5ed7135649e1afc5a37da722895ff9e3ee6f3cd988d3523464627e",
+    "contracts/grok-web.v1.json": "a2f8be65b4b12757e8380a90afad93d223d8ab2993239a2a4f0814124c17c4b0"
+  },
+  "localRunDigest": "2d9c17c3e64d0a0c56ac84de9834f6c80a95b204c8c5058d882d7bfc33b1a201",
+  "normalizedContractCreated": true,
+  "mainRegistryCreateReady": true,
+  "browserGuardAndReset": {
+    "httpGuardInstalledBeforeDirectWriter": true,
+    "webSocketGuardInstalledBeforeDirectWriter": true,
+    "httpAbortCount": 7,
+    "blockedHttpOperationCounts": {
+      "POST /cdn-cgi/challenge-platform/h/b/jsd/oneshot/d76008a69eab/0.883698538811128:1791277519:euHGtWIXRO_Oc3LRrGyO-jDgB536DWjaySg6lsNTpew/a463c5676b83d1ea": 1,
+      "POST /monitoring": 3,
+      "POST /cdn-cgi/rum": 1,
+      "POST /grok_api_v2.GrokBuildBilling/GetGrokCreditsConfig": 2
+    },
+    "allowedReadPostCount": 5,
+    "websocketInterceptCount": 0,
+    "browserBusinessFrameCount": 0,
+    "browserBusinessFramesDelivered": 0,
+    "blockedFrameTypeCounts": {},
+    "sameTargetResetToBlank": true,
+    "sameMarkerPreserved": true,
+    "quietWaitMs": 2000,
+    "browserClosed": false,
+    "contextClosed": false
+  },
+  "auxiliaryDiagnostics": {
+    "softDeleteDetailProbe": {
+      "errorCode": "CONVERSATION_DELETE_DETAIL_ABSENCE_UNVERIFIED",
+      "statusPersisted": false,
+      "absenceVerified": false,
+      "requiredBySoftDeleteContract": false,
+      "usedForFinalClassification": false
+    },
+    "historyReconciliationReceipt": "verification/grok-conversation-crud-history-reconciliation-2026-10-06.json",
+    "historyReconciliationReceiptSha256": "1c6bd80728ed9d15416a6b6bf687ab095f833e3b766751217d1bf9e03f39490c"
+  },
+  "contractIntegrationSha256": {
+    "mainRegistrySha256": "19db92e0095b1e0029a21e729cbf38dff33d96990158c5a0134f64610e2bee3f",
+    "sourceFragmentSha256": "60da1bd36eb3909bd9f4d60c3308de80a00850770c2747e8f2c78969cb1d43a9",
+    "workflowFragmentSha256": "084e3211d50ed6c06b8819f65c2c118620bf88fa271ffbbc583dd886ba454cfe",
+    "checklistSha256": "d2da21322a3b83d711daad2854c1ae0eabfd5c3328e6557935f15c216f27ba8b"
+  }
+}

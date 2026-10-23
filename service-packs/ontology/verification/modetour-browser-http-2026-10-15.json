@@ -1,0 +1,1078 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-14T23:43:51.203Z",
+  "source": "Chrome Canary supported CDP event stream",
+  "scope": "Modetour overseas landing page reload; all HTTP resource types collected; product endpoints are not inferred from UI text",
+  "page": "https://www.modetour.com/package/overseas",
+  "action": "reload",
+  "capture": {
+    "eventCount": 629,
+    "pagesRead": 76,
+    "truncated": false,
+    "resourceTypes": [
+      "Document",
+      "Fetch",
+      "Font",
+      "Image",
+      "Media",
+      "Other",
+      "Ping",
+      "Preflight",
+      "Script",
+      "Stylesheet",
+      "XHR"
+    ],
+    "resourceCounts": {
+      "Document": 7,
+      "Script": 54,
+      "Stylesheet": 6,
+      "Font": 6,
+      "Image": 69,
+      "Fetch": 13,
+      "Preflight": 9,
+      "XHR": 22,
+      "Ping": 2,
+      "Media": 16,
+      "Other": 2
+    }
+  },
+  "contracts": [
+    {
+      "id": "http-1",
+      "type": "Document",
+      "method": "GET",
+      "origin": "https://www.modetour.com",
+      "path": "/package/overseas",
+      "queryFields": [],
+      "status": 200,
+      "mimeType": "text/html",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Upgrade-Insecure-Requests",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform"
+      ],
+      "responseHeaderNames": [
+        "access-control-allow-headers",
+        "access-control-allow-methods",
+        "access-control-allow-origin",
+        "access-control-expose-headers",
+        "cache-control",
+        "content-encoding",
+        "content-type",
+        "date",
+        "etag",
+        "expires",
+        "pragma",
+        "server-timing",
+        "vary",
+        "x-akamai-transformed",
+        "x-incomming-pathname",
+        "x-queueit-connector",
+        "x-via-nscopi"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "other",
+        "frames": []
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-2",
+      "type": "Fetch",
+      "method": "GET",
+      "origin": "https://auth.modetour.com",
+      "path": "/.well-known/openid-configuration",
+      "queryFields": [],
+      "status": 200,
+      "mimeType": "application/json",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Accept",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform"
+      ],
+      "responseHeaderNames": [
+        "access-control-allow-origin",
+        "content-length",
+        "content-type",
+        "date",
+        "referrer-policy",
+        "strict-transport-security",
+        "vary",
+        "x-end-time",
+        "x-processing-time-ms",
+        "x-start-time"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 0,
+            "columnNumber": 11488
+          },
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "window.fetch",
+            "lineNumber": 0,
+            "columnNumber": 11439
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "fetchWithTimeout",
+            "lineNumber": 11,
+            "columnNumber": 2239974
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "getJson",
+            "lineNumber": 11,
+            "columnNumber": 2240517
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "getMetadata",
+            "lineNumber": 11,
+            "columnNumber": 2243905
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "_getMetadataProperty",
+            "lineNumber": 11,
+            "columnNumber": 2244889
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "getAuthorizationEndpoint",
+            "lineNumber": 11,
+            "columnNumber": 2244261
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "createSigninRequest",
+            "lineNumber": 11,
+            "columnNumber": 2265674
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-3",
+      "type": "XHR",
+      "method": "GET",
+      "origin": "https://b2c-api.modetour.com",
+      "path": "/BannerContent/GetBannerSet",
+      "queryFields": [
+        "websiteType",
+        "webPageType",
+        "webTemplateAreaType",
+        "webTemplateType"
+      ],
+      "status": 200,
+      "mimeType": "application/json",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Accept",
+        "ModeWebApiReqHeader",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "x-incomming-pathname"
+      ],
+      "responseHeaderNames": [
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+        "Date",
+        "Transfer-Encoding",
+        "Vary",
+        "X-End-Time",
+        "X-Processing-Time-ms",
+        "X-Start-Time"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "XMLHttpRequest.send",
+            "lineNumber": 0,
+            "columnNumber": 10428
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2528011
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "xhr",
+            "lineNumber": 11,
+            "columnNumber": 2526025
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "t6",
+            "lineNumber": 11,
+            "columnNumber": 2536473
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "_request",
+            "lineNumber": 11,
+            "columnNumber": 2540084
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "request",
+            "lineNumber": 11,
+            "columnNumber": 2538053
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2501119
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "v",
+            "lineNumber": 14,
+            "columnNumber": 1448214
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-4",
+      "type": "XHR",
+      "method": "GET",
+      "origin": "https://b2c-api.modetour.com",
+      "path": "/BannerContent/GetBannerSet",
+      "queryFields": [
+        "websiteType",
+        "webPageType",
+        "webTemplateAreaType",
+        "webTemplateType"
+      ],
+      "status": 200,
+      "mimeType": "application/json",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Accept",
+        "ModeWebApiReqHeader",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "x-incomming-pathname"
+      ],
+      "responseHeaderNames": [
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+        "Date",
+        "Transfer-Encoding",
+        "Vary",
+        "X-End-Time",
+        "X-Processing-Time-ms",
+        "X-Start-Time"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "XMLHttpRequest.send",
+            "lineNumber": 0,
+            "columnNumber": 10428
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2528011
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "xhr",
+            "lineNumber": 11,
+            "columnNumber": 2526025
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "t6",
+            "lineNumber": 11,
+            "columnNumber": 2536473
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "_request",
+            "lineNumber": 11,
+            "columnNumber": 2540084
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "request",
+            "lineNumber": 11,
+            "columnNumber": 2538053
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2501119
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "v",
+            "lineNumber": 14,
+            "columnNumber": 1448214
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-5",
+      "type": "XHR",
+      "method": "GET",
+      "origin": "https://b2c-api.modetour.com",
+      "path": "/Common/GetFooter",
+      "queryFields": [],
+      "status": 200,
+      "mimeType": "application/json",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Accept",
+        "ModeWebApiReqHeader",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "x-incomming-pathname"
+      ],
+      "responseHeaderNames": [
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+        "Date",
+        "Transfer-Encoding",
+        "Vary",
+        "X-End-Time",
+        "X-Processing-Time-ms",
+        "X-Start-Time"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "XMLHttpRequest.send",
+            "lineNumber": 0,
+            "columnNumber": 10428
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2528011
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "xhr",
+            "lineNumber": 11,
+            "columnNumber": 2526025
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "t6",
+            "lineNumber": 11,
+            "columnNumber": 2536473
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "_request",
+            "lineNumber": 11,
+            "columnNumber": 2540084
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "request",
+            "lineNumber": 11,
+            "columnNumber": 2538053
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2501119
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "v",
+            "lineNumber": 14,
+            "columnNumber": 1448214
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-6",
+      "type": "XHR",
+      "method": "GET",
+      "origin": "https://b2c-api.modetour.com",
+      "path": "/BannerContent/GetBannerSet",
+      "queryFields": [
+        "websiteType",
+        "webPageType",
+        "webTemplateAreaType",
+        "webTemplateType"
+      ],
+      "status": 200,
+      "mimeType": "application/json",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Accept",
+        "ModeWebApiReqHeader",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "x-incomming-pathname"
+      ],
+      "responseHeaderNames": [
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+        "Date",
+        "Transfer-Encoding",
+        "Vary",
+        "X-End-Time",
+        "X-Processing-Time-ms",
+        "X-Start-Time"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "XMLHttpRequest.send",
+            "lineNumber": 0,
+            "columnNumber": 10428
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2528011
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "xhr",
+            "lineNumber": 11,
+            "columnNumber": 2526025
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "t6",
+            "lineNumber": 11,
+            "columnNumber": 2536473
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "_request",
+            "lineNumber": 11,
+            "columnNumber": 2540084
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "request",
+            "lineNumber": 11,
+            "columnNumber": 2538053
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2501119
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "v",
+            "lineNumber": 14,
+            "columnNumber": 1448214
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-7",
+      "type": "XHR",
+      "method": "GET",
+      "origin": "https://b2c-api.modetour.com",
+      "path": "/BannerContent/GetBannerSet",
+      "queryFields": [
+        "websiteType",
+        "webPageType",
+        "webTemplateAreaType",
+        "webTemplateType"
+      ],
+      "status": 200,
+      "mimeType": "application/json",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Accept",
+        "ModeWebApiReqHeader",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "x-incomming-pathname"
+      ],
+      "responseHeaderNames": [
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+        "Date",
+        "Transfer-Encoding",
+        "Vary",
+        "X-End-Time",
+        "X-Processing-Time-ms",
+        "X-Start-Time"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "XMLHttpRequest.send",
+            "lineNumber": 0,
+            "columnNumber": 10428
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2528011
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "xhr",
+            "lineNumber": 11,
+            "columnNumber": 2526025
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "t6",
+            "lineNumber": 11,
+            "columnNumber": 2536473
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "_request",
+            "lineNumber": 11,
+            "columnNumber": 2540084
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "request",
+            "lineNumber": 11,
+            "columnNumber": 2538053
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2501119
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "v",
+            "lineNumber": 14,
+            "columnNumber": 1448214
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-8",
+      "type": "Fetch",
+      "method": "GET",
+      "origin": "https://b2c-api.modetour.com",
+      "path": "/Common/GetGnb",
+      "queryFields": [],
+      "status": 200,
+      "mimeType": "application/json",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Content-Type",
+        "ModeWebApiReqHeader",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform"
+      ],
+      "responseHeaderNames": [
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+        "Date",
+        "Transfer-Encoding",
+        "Vary",
+        "X-End-Time",
+        "X-Processing-Time-ms",
+        "X-Start-Time"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 0,
+            "columnNumber": 11488
+          },
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "window.fetch",
+            "lineNumber": 0,
+            "columnNumber": 11439
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "b",
+            "lineNumber": 14,
+            "columnNumber": 1241450
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-9",
+      "type": "Fetch",
+      "method": "GET",
+      "origin": "https://www.modetour.com",
+      "path": "/api/htmlRenderer",
+      "queryFields": [
+        "url"
+      ],
+      "status": 200,
+      "mimeType": "text/html",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform"
+      ],
+      "responseHeaderNames": [
+        "access-control-allow-headers",
+        "access-control-allow-methods",
+        "access-control-allow-origin",
+        "access-control-expose-headers",
+        "cache-control",
+        "content-encoding",
+        "content-length",
+        "content-type",
+        "date",
+        "expires",
+        "pragma",
+        "server-timing",
+        "vary",
+        "x-akamai-transformed",
+        "x-queueit-connector",
+        "x-via-nscopi"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 0,
+            "columnNumber": 11488
+          },
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "window.fetch",
+            "lineNumber": 0,
+            "columnNumber": 11439
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2352244
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": null,
+            "lineNumber": 11,
+            "columnNumber": 2352868
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/framework-e3f58fdefc53cc80.js",
+            "queryFields": [],
+            "functionName": "o2",
+            "lineNumber": 0,
+            "columnNumber": 89935
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/framework-e3f58fdefc53cc80.js",
+            "queryFields": [],
+            "functionName": "iz",
+            "lineNumber": 0,
+            "columnNumber": 105823
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/framework-e3f58fdefc53cc80.js",
+            "queryFields": [],
+            "functionName": "i_",
+            "lineNumber": 0,
+            "columnNumber": 105707
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/framework-e3f58fdefc53cc80.js",
+            "queryFields": [],
+            "functionName": "iz",
+            "lineNumber": 0,
+            "columnNumber": 105868
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-10",
+      "type": "Document",
+      "method": "GET",
+      "origin": "https://www.modetour.com",
+      "path": "/auth/callback/silent",
+      "queryFields": [
+        "error",
+        "error_description",
+        "error_uri",
+        "state",
+        "iss"
+      ],
+      "status": 200,
+      "mimeType": "text/html",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Referer",
+        "Upgrade-Insecure-Requests",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform"
+      ],
+      "responseHeaderNames": [
+        "access-control-allow-headers",
+        "access-control-allow-methods",
+        "access-control-allow-origin",
+        "access-control-expose-headers",
+        "cache-control",
+        "content-encoding",
+        "content-length",
+        "content-type",
+        "date",
+        "etag",
+        "expires",
+        "pragma",
+        "server-timing",
+        "vary",
+        "x-akamai-transformed",
+        "x-queueit-connector",
+        "x-via-nscopi"
+      ],
+      "requestBodyPresent": false,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "navigate",
+            "lineNumber": 11,
+            "columnNumber": 2275055
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "navigate",
+            "lineNumber": 11,
+            "columnNumber": 2278994
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/_next/static/chunks/pages/_app-98d62f1ff040caef.js",
+            "queryFields": [],
+            "functionName": "_signinStart",
+            "lineNumber": 11,
+            "columnNumber": 2291697
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    },
+    {
+      "id": "http-11",
+      "type": "XHR",
+      "method": "POST",
+      "origin": "https://www.modetour.com",
+      "path": "/clm10",
+      "queryFields": [],
+      "status": 204,
+      "mimeType": "text/plain",
+      "paired": true,
+      "fromDiskCache": false,
+      "fromServiceWorker": false,
+      "requestHeaderNames": [
+        "Content-Type",
+        "Referer",
+        "User-Agent",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform"
+      ],
+      "responseHeaderNames": [
+        "access-control-allow-headers",
+        "access-control-allow-methods",
+        "access-control-allow-origin",
+        "access-control-expose-headers",
+        "cache-control",
+        "content-length",
+        "date",
+        "expires",
+        "pragma",
+        "server-timing",
+        "x-queueit-connector"
+      ],
+      "requestBodyPresent": true,
+      "initiator": {
+        "type": "script",
+        "frames": [
+          {
+            "origin": "https://d-collect.jennifersoft.com",
+            "path": "/ec45ef58/demian.js",
+            "queryFields": [],
+            "functionName": "XMLHttpRequest.send",
+            "lineNumber": 0,
+            "columnNumber": 10428
+          },
+          {
+            "origin": "https://www.modetour.com",
+            "path": "/package/overseas",
+            "queryFields": [],
+            "functionName": "sendTimingInfo",
+            "lineNumber": 109,
+            "columnNumber": 287875
+          }
+        ]
+      },
+      "responseBodyInspected": false
+    }
+  ],
+  "bodyCapture": {
+    "status": "unavailable_runtime_document_response_pending",
+    "note": "Network.getResponseBody was unavailable while Browser Use resolved a paused document response. This does not invalidate paired HTTP request/status/MIME observations, and no browser body hash is claimed."
+  },
+  "secretsPersisted": false,
+  "rawEventsPersisted": false,
+  "accountAuthenticationVerified": false,
+  "renderedRecommendations": [
+    {
+      "text": "해외여행 [다낭/호이안/바나힐] 패키지 4/5/6일 ★럭셔리체인스파UP #참스파90분(팁포함) #허브자쿠지포함 #미슐랭특식1회 #무제한삼겹살 329,000원 ~"
+    },
+    {
+      "text": "해외여행 [동유럽] 3국 7일 (체코/오스트리아/헝가리) #인솔자동행 #아시아나항공 #전일정4성 #2대 야경투어 #2대궁전 내부 2,049,000원 ~"
+    },
+    {
+      "text": "해외여행 [장사/장가계] 패키지 4~6일 ★초저가 가성비 #가을최적기여행 #힐튼 #원가계 #윈덤 499,000원 ~"
+    },
+    {
+      "text": "해외여행 [시드니] 6/7일 ★베스트셀러 #NO유류할증료 #기간한정특가 #블루마운틴 #저비스베이 #돌핀크루즈 1,299,000원 ~"
+    },
+    {
+      "text": "해외여행 [후쿠오카/유후인/벳부] 3/4일 ★출발확정 #전일정관광 #온천호텔 #특식 #다자이후 #선착순특가 599,000원 ~"
+    },
+    {
+      "text": "해외여행 [대만/단수이/예류/스펀/지우펀] 3/4/5일 ★특가vs노쇼핑 #국립고궁박물관 #스펀 천등체험 #서문정 #야시장 579,900원 ~"
+    },
+    {
+      "text": "해외여행 [비에이/북해도] 4일 ★가을/겨울 추천 #온천2박 #대게뷔페 #술음료무제한 #도야 #삿포로눈축제 1,139,000원 ~"
+    },
+    {
+      "text": "해외여행 [서유럽] 스위스/이탈리아 2국 또는 이탈리아 일주 #트리니티항공 #로마직항 #베스트셀러 2,499,000원 ~"
+    },
+    {
+      "text": "해외여행 [가고시마 골프] 4일 ★2인출발가능/온천♨ #사츠마 #가고시마 #일본골프 #규슈골프 #큐슈골프 #교세라 1,279,900원 ~"
+    },
+    {
+      "text": "해외여행 [부산/대구출발] 계림 특가패키지 5/6일 #이강유람 #계림 #직항 #양삭 #망산 299,900원 ~"
+    }
+  ],
+  "renderedCheckedAt": "2026-10-14T23:46:06.409Z"
+}

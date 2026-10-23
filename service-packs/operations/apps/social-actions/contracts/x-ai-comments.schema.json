@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "comments": {
+      "type": "array", "minItems": 1,
+      "items": { "type": "object", "properties": { "id": { "type": "string" }, "comment": { "type": "string", "minLength": 1, "maxLength": 80 } }, "required": ["id", "comment"], "additionalProperties": false }
+    }
+  },
+  "required": ["comments"], "additionalProperties": false
+}

@@ -1,0 +1,141 @@
+{
+  "schema": "gemini-settings-read-verification-v1",
+  "service": "gemini-web",
+  "feature": "settings",
+  "operation": "settings_read",
+  "outcome": "verified",
+  "verifiedAt": "2026-10-05T22:55:38.437870+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "sourceEvidence": {
+    "sourceClass": "anonymous_google_first_party_web_client",
+    "moduleId": "LQaXg",
+    "bundleSha256": "f08ffc021617bdc00b5a302a5da9be569dfec3e8837152af7c3f6bd5be0db804",
+    "preferenceMapByteOffset": 1017753,
+    "preferenceMapByteLength": 10497,
+    "preferenceMapEntryCount": 247,
+    "selectedFieldIds": {
+      "voice_language": 62,
+      "voice_name": 61,
+      "enable_advanced_mode": 39,
+      "enable_memory": 25,
+      "enable_personal_context": 77,
+      "web_and_app_activity_enabled": 93,
+      "side_nav_open_by_default": 41
+    }
+  },
+  "normalUiPair": {
+    "pageScopedGuard": "allow ESY5D numeric preference read and captured baseline reads; abort other POSTs",
+    "requestReachedServer": true,
+    "request": {
+      "method": "POST",
+      "path": "/_/BardChatUi/data/batchexecute",
+      "rpcId": "ESY5D",
+      "queryKeys": [
+        "rpcids",
+        "source-path",
+        "bl",
+        "f.sid",
+        "hl",
+        "_reqid",
+        "rt"
+      ],
+      "headerNames": [
+        "accept",
+        "content-type",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-goog-ext-525001261-jspb",
+        "x-goog-ext-73010989-jspb",
+        "x-same-domain"
+      ],
+      "formFieldNames": [
+        "f.req",
+        "at"
+      ],
+      "bodyBytes": 1189,
+      "selectorCount": 188,
+      "selectedFieldPresent": true,
+      "rawRequestValuesPersisted": false
+    },
+    "response": {
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseBytes": 4397,
+      "responseSha256": "5a672f8a9c8d358706631b6a0533bd8201bbb5c968e6e3a493443ae290c09461",
+      "matchingRpcDecoded": true
+    },
+    "typedRead": {
+      "keys": [
+        "voice_language",
+        "voice_name",
+        "enable_advanced_mode",
+        "enable_memory",
+        "enable_personal_context",
+        "web_and_app_activity_enabled",
+        "side_nav_open_by_default"
+      ],
+      "reportedKeys": [
+        "enable_advanced_mode",
+        "enable_memory",
+        "enable_personal_context",
+        "voice_name"
+      ],
+      "reportedTypes": {
+        "enable_advanced_mode": "boolean",
+        "enable_memory": "boolean",
+        "enable_personal_context": "boolean",
+        "voice_name": "string"
+      },
+      "valuePersisted": false
+    }
+  },
+  "directHttpReplay": {
+    "clientEntryPoint": "src/cli.mjs settings",
+    "transport": "main_cli_direct_https",
+    "rpcId": "ESY5D",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "credentialPropagated": true,
+    "httpStatus": 200,
+    "responseBytes": 4397,
+    "responseSha256": "4b4bad4e5e487d53dcbb563adf7fcecde77bb28575c95dddd86430952e489075",
+    "requestedKeyCount": 7,
+    "reportedKeyCount": 4,
+    "typedValuesMatchNormalUi": true,
+    "reportedKeys": [
+      "enable_advanced_mode",
+      "enable_memory",
+      "enable_personal_context",
+      "voice_name"
+    ],
+    "reportedTypes": {
+      "enable_advanced_mode": "boolean",
+      "enable_memory": "boolean",
+      "enable_personal_context": "boolean",
+      "voice_name": "string"
+    },
+    "valuesPersisted": false
+  },
+  "persistence": {
+    "cookiesPersisted": false,
+    "sessionValuesPersisted": false,
+    "requestValuesPersisted": false,
+    "responseValuesPersisted": false,
+    "settingsValuesPersisted": false,
+    "expectedOwnerPersisted": false,
+    "rawRequestOrResponseBodyPersisted": false
+  }
+}

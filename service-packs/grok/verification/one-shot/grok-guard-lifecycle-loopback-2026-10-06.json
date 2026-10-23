@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "operationId": "capture-guard-lifecycle.loopback-regression",
+  "recordedAt": "2026-10-06T14:14:42Z",
+  "state": "loopback_fixture_pass",
+  "environment": {
+    "browserVersion": "151.0.7922.34",
+    "transport": "127.0.0.1 only",
+    "userChromeTouched": false,
+    "userAccountUsed": false,
+    "disposableProfileRemoved": true,
+    "disposableBrowserContextClosed": true
+  },
+  "guardedResetCase": {
+    "httpAndWebSocketGuardsInstalledBeforeQueuedAction": true,
+    "queuedWebSocketFrameCapturedAndDropped": true,
+    "queuedHttpRequestBlocked": true,
+    "pageNavigatedToAboutBlankBeforeGuardRelease": true,
+    "markerVerified": true,
+    "serverHttpBusinessMessagesReceived": 0,
+    "serverWebSocketBusinessMessagesReceived": 0
+  },
+  "livePageRemovalControl": {
+    "pageRemainedLiveWhenHttpRouteWasRemoved": true,
+    "webSocketGuardReleasedWhilePageWasLive": true,
+    "serverHttpBusinessMessagesReceived": 1,
+    "serverWebSocketBusinessMessagesReceived": 1
+  },
+  "pairedFirstPartySource": {
+    "origin": "https://cdn.grok.com",
+    "pathClass": "/_next/static/chunks/3myiqa38fkng_.js",
+    "httpStatus": 200,
+    "bytes": 95605,
+    "sha256": "81ebd2a3d9da7b43c8884ffbf7a918b9fb2b0c4f3e4b920af8e585639e73f165",
+    "gatewaySessionQueueFlushObservedInSource": true,
+    "sourceBodyPersisted": false
+  },
+  "testHarness": {
+    "pathClass": "home-nad-scratch-tmp",
+    "sha256": "c55690ef728a9d60106c145daccafd4cb7016099b9f58bddd1e472b0a062c13f",
+    "rawLoopbackBodiesPersisted": false,
+    "cookiesPersisted": false
+  },
+  "claimBoundary": {
+    "productionCaptureHelperValidated": false,
+    "productionAccountCauseProven": false,
+    "productionConversationWritePerformed": false
+  }
+}

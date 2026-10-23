@@ -1,0 +1,96 @@
+{
+  "schema": "gemini-attachment-v8-hnv-readonly-v1",
+  "service": "gemini-web",
+  "operation": "attachment_chain_hNv_readback",
+  "recordedAt": "2026-10-06T14:20:31.679997+00:00",
+  "purpose": "fresh direct hNvQHb read of the already-dispatched v8 attachment task; no mutation replay",
+  "sourceSnapshotBefore": {
+    "files": [
+      {
+        "path": "discovery/observed-contract.json",
+        "bytes": 39297,
+        "sha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239"
+      },
+      {
+        "path": "src/history-turn-response.mjs",
+        "bytes": 12176,
+        "sha256": "1669d8f814a669ba354bf4cb65755107be6a7b95ba7a98602e3a82938ee6ebf7"
+      },
+      {
+        "path": "src/attachment-chain.mjs",
+        "bytes": 53454,
+        "sha256": "dbed2637b4ff5222e015b6f08202f734938d4a1538ed6f5c45ce108fec8a7fe5"
+      },
+      {
+        "path": "src/history-detail.mjs",
+        "bytes": 13856,
+        "sha256": "2605b37c565ab57fdd49a4c96e42191c1d35bc8a36a96882b667aa743aeb9374"
+      },
+      {
+        "path": "src/client.mjs",
+        "bytes": 38001,
+        "sha256": "daa7b48d6b022dbe69777d6be2546e1804ae0cc26487da66a97c8ea71639bc2f"
+      }
+    ],
+    "aggregateSha256": "815c75b87882121ddfcd0680e296797f7f40f4004db18e418a1946e391ef1c21"
+  },
+  "sourceSnapshotStableThroughRead": true,
+  "browserSessionBootstrap": {
+    "resetQuietVerified": true,
+    "browserClosed": false,
+    "contextClosed": false,
+    "browserBusinessWriteDispatchCount": 0,
+    "blockedPostCount": 60
+  },
+  "directRead": {
+    "schema": "gemini-attachment-v8-hnv-readonly-v1",
+    "ownerMatched": true,
+    "anonymousOwnerAbsent": true,
+    "listHttpStatus": 200,
+    "listResponseBytes": 6177,
+    "listResponseSha256": "706b221807584a22c1ff4c37988c08962b613959cfc327a34330f9f930c96a8c",
+    "searchHttpStatus": 200,
+    "searchResponseBytes": 997,
+    "searchResponseSha256": "a4d2588e7fd3aca877900d4fb8ba42f07c945f686276fa2a01b309fe0a21ddd5",
+    "searchCandidateCount": 2,
+    "searchCandidatesMatchedOwnerListCount": 2,
+    "exactTaskMatchCount": 2,
+    "exactTask": null,
+    "oldV8Receipt": {
+      "path": "discovery/gemini-attachment-v8-final-chain-2026-10-06.json",
+      "outputStatus": "needs_review_unverified_attachment_chain",
+      "textJournalState": "response_received",
+      "textJournalDispatchCount": 1,
+      "textJournalReconciled": false,
+      "directResponseIdPersisted": false,
+      "responseIdReclassifiedFromFreshRead": false,
+      "journalUpdated": false
+    },
+    "rawOwnerEmailPersisted": false,
+    "rawPromptOrFileTextPersisted": false,
+    "rawConversationOrResponseIdentifiersPersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "responseBodiesPersisted": false,
+    "journalReconciled": false
+  },
+  "oldV8OutcomePreserved": {
+    "receiptPath": "discovery/gemini-attachment-v8-final-chain-2026-10-06.json",
+    "outputStatus": "needs_review_unverified_attachment_chain",
+    "textJournalState": "response_received",
+    "textJournalDispatchCount": 1,
+    "textJournalReconciledBeforeRead": false,
+    "oldRawStreamResponseIdAvailable": false,
+    "oldStreamResponseIdBindingInferred": false,
+    "journalUpdatedByThisRead": false
+  },
+  "persistence": {
+    "ownerEmailPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "promptPersisted": false,
+    "fileTextPersisted": false,
+    "conversationIdentifiersPersisted": false,
+    "turnOrDraftIdentifiersPersisted": false,
+    "responseBodiesPersisted": false
+  }
+}

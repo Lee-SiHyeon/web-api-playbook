@@ -1,0 +1,71 @@
+{
+  "kind": "linkprice-cps-consumer-search-live-replay",
+  "checkedDate": "2026-09-27",
+  "client": "scripts/linkprice-cps-commerce.mjs",
+  "query": "삼겹살",
+  "method": "direct Node.js HTTP replay of existing consumer-search requests",
+  "browserUsed": false,
+  "cookiesSent": false,
+  "authorizationSent": false,
+  "replays": [
+    {
+      "merchantId": "11st",
+      "consumerSourceId": "elevenst",
+      "requestMethod": "GET",
+      "requestUrl": "https://apis.11st.co.kr/search/api/tab?kwd=REDACTED&tabId=TOTAL_SEARCH&_=1790500661141",
+      "responseStatus": 200,
+      "contentType": "application/json",
+      "observedAt": "2026-09-27T09:17:41.418Z",
+      "responseSha256": null,
+      "sourceRead": { "listed": 5, "total": 63424, "groups": 22 },
+      "normalizedMatchingOffers": 3,
+      "pagination": { "pagesRead": 1, "complete": false, "stopReason": "first_page_search" }
+    },
+    {
+      "merchantId": "emart",
+      "consumerSourceId": "ssg",
+      "requestMethod": "POST",
+      "requestUrl": "https://search.ssg.com/api/item/all",
+      "responseStatus": 200,
+      "contentType": "application/json",
+      "observedAt": "2026-09-27T09:18:05.419Z",
+      "responseSha256": null,
+      "sourceRead": { "listed": 5, "total": 1136, "page": 1, "sort": "prcasc" },
+      "normalizedMatchingOffers": 4,
+      "pagination": { "pagesRead": 1, "complete": false, "stopReason": "first_page_search" }
+    },
+    {
+      "merchantId": "kurly",
+      "consumerSourceId": "kurly",
+      "requestMethod": "GET",
+      "requestUrl": "https://api.kurly.com/search/v4/sites/market/normal-search?keyword=REDACTED&sortType=4&page=1&isFirstOrder=true",
+      "responseStatus": 200,
+      "contentType": "application/json",
+      "observedAt": "2026-09-27T09:18:08.578Z",
+      "responseSha256": null,
+      "sourceRead": { "listed": 5, "detailed": 0 },
+      "normalizedMatchingOffers": 5,
+      "pagination": { "pagesRead": 1, "complete": false, "stopReason": "first_page_search" }
+    },
+    {
+      "merchantId": "lotteon",
+      "consumerSourceId": "lotteon",
+      "requestMethod": "GET",
+      "requestUrl": "https://www.lotteon.com/csearch/search/search?&u2=0&u3=5&u16=ranking.desc&u37=true&u39=4&render=qapi&platform=pc&collection_id=9&q=REDACTED",
+      "responseStatus": 200,
+      "contentType": "application/json; charset=UTF-8",
+      "observedAt": "2026-09-27T09:18:12.066Z",
+      "responseSha256": null,
+      "sourceRead": { "listed": 5, "total": 10638 },
+      "normalizedMatchingOffers": 1,
+      "pagination": { "pagesRead": 1, "complete": false, "stopReason": "first_page_search" }
+    }
+  ],
+  "limits": [
+    "Four mapped public-search programs were read once for one keyword; this does not cover their complete catalogs or other CPS programs.",
+    "Counts are the local first-page parser output, not total catalog sizes.",
+    "No standalone review-list endpoint was read in this replay. Search response ratings and review counts are aggregates only.",
+    "The Kurly product-detail option page was intentionally not requested in this replay.",
+    "No response bodies were persisted; current receipts have no response SHA-256."
+  ]
+}

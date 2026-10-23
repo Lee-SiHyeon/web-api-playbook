@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "observedAt": "2026-10-06T14:05:12.281Z",
+  "recordedAt": "2026-10-06T14:05:52.229Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  },
+  "featureId": "user-settings",
+  "requirementId": "settings.read",
+  "operationId": "settings.read",
+  "ownerProofPath": "verification/owner-proofs/0849150a649456fcb5fc638a1f5a94dcfcac515dd518c00070b689b0b598f201.json",
+  "ownerProofSha256": "0849150a649456fcb5fc638a1f5a94dcfcac515dd518c00070b689b0b598f201",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 838,
+  "requestDigest": "5db425117fb59b04a830b9816ce02a2d297f34af4734b89faa75abf65b7aaf37",
+  "responseDigest": "a908aad9880046aee374dffdfaba1973281315ee2478c73007ad90ca77c09509",
+  "responseDigestKind": "raw_http_body",
+  "capturedOperationSha256": "4a976fbf35aef93c5fb77b19107e754c5cdb49b994fbb47b83623718db1fd449",
+  "handlerId": "client.read",
+  "dispatchBinding": {
+    "handlerId": "client.read",
+    "operationId": "settings.read",
+    "operationKind": "read",
+    "mode": "validated_registry_generic"
+  },
+  "codeSha256": {
+    "src/client.mjs": "d950bc9cccffda484bb37b50991022f6babe9de0ca49efe3822344ad82775c77",
+    "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+    "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+    "src/grok-conversations.mjs": "97b5896c9413bc961d09938b12041e70bbd6c731d1b875e1de1a3e32239f0a17"
+  }
+}

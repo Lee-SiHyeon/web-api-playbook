@@ -1,0 +1,147 @@
+{
+  "schema": "remaining-consumer-public-read-diagnosis-v1",
+  "scope": ["ebay consumer catalog", "temu storefront catalog", "walmart storefront catalog"],
+  "updatedAtUtc": "2026-10-15T16:30:00Z",
+  "executionMode": "pure_http_public_documents",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "rawBodiesPersisted": false,
+  "eBay": {
+    "search": {
+      "method": "GET",
+      "url": "https://www.ebay.com/sch/i.html?_nkw=wireless%20earbuds&_sacat=0",
+      "finalPath": "/sch/i.html",
+      "httpStatus": 403,
+      "mime": "text/html",
+      "responseBytes": 1830,
+      "documentTitle": "Error Page | eBay",
+      "parsedSearchCards": 0,
+      "catalogData": false,
+      "result": "ACCESS_BLOCKED_IN_THIS_DIRECT_HTTP_CONTEXT"
+    },
+    "detail": {
+      "method": "GET",
+      "url": "https://www.ebay.com/itm/306337924086",
+      "finalPath": "/itm/306337924086",
+      "httpStatus": 403,
+      "mime": "text/html",
+      "responseBytes": 1830,
+      "documentTitle": "Error Page | eBay",
+      "productJsonLdCount": 0,
+      "titlePriceImageSelectors": 0,
+      "catalogData": false,
+      "result": "ACCESS_BLOCKED_IN_THIS_DIRECT_HTTP_CONTEXT"
+    },
+    "priorBrowserEvidence": "The 2026-10-05 browser search Document rendered 1,849,276 bytes and the sampled review route had review cards in HTML; direct search replay previously returned 403. The current direct read matches that 403 boundary. A current browser-backed body is needed before an HTML parser can be implemented and live-verified.",
+    "notAttempted": ["official Browse API", "account login", "challenge bypass", "proxy rotation"]
+  },
+  "temu": {
+    "bestSellersDocument": {
+      "method": "GET",
+      "url": "https://www.temu.com/kr/channel/best-sellers.html",
+      "finalPath": "/kr/channel/best-sellers.html",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 2922,
+      "documentTitle": "",
+      "anchorCount": 0,
+      "productLikeLinkCount": 0,
+      "jsonLdCount": 0,
+      "productIdentityPriceMarkers": 0,
+      "catalogData": false,
+      "result": "EMPTY_CLIENT_SHELL"
+    },
+    "homeDocument": {
+      "method": "GET",
+      "url": "https://www.temu.com/kr/",
+      "finalPath": "/kr/",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 2889,
+      "documentTitle": "",
+      "anchorCount": 0,
+      "productLikeLinkCount": 0,
+      "jsonLdCount": 0,
+      "productIdentityPriceMarkers": 0,
+      "catalogData": false,
+      "result": "EMPTY_CLIENT_SHELL"
+    },
+    "priorBrowserEvidence": "The browser homepage visually displayed products, but network capture was blocked_runtime and the earlier best-sellers Document replay was the same 2,922-byte empty HTML shell.",
+    "nextRequiredEvidence": "A normal browser search action and one product open with paired request/response metadata; no client should infer catalog endpoints from shell HTML."
+  },
+  "walmart": {
+    "directResponseWithExplicitChromeLikeUserAgent": {
+      "method": "GET",
+      "url": "https://www.walmart.com/search?q=wireless%20earbuds",
+      "finalPath": "/search",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "explicitHeadersSent": {
+        "accept": "text/html,application/xhtml+xml",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+      },
+      "responseBytes": 1591246,
+      "documentTitle": "wireless earbuds - Walmart.com",
+      "productLinkCount": 10,
+      "productItemIdNodeCount": 13,
+      "productAutomationNodeCount": 17,
+      "challenge": false,
+      "productTitleNodes": 13,
+      "productPriceNodes": 4,
+      "productImages": 49,
+      "result": "DIRECT_HTTP_PRODUCT_DOCUMENT_CAPTURED_NOT_BROWSER_CONFIRMED",
+      "reason": "This 200 HTML response is accepted as direct HTTP evidence for a bounded Document parser and is implemented below. It remains distinct from browser-confirmed behavior because no current browser request capture was paired with it."
+    },
+    "implementedSearchClient": {
+      "files": [
+        "lib/retail/walmart.mjs",
+        "scripts/retail.mjs",
+        "tests/retail-walmart.test.mjs",
+        "tests/fixtures/walmart-search-observed.html"
+      ],
+      "operation": "walmart search --query=wireless earbuds",
+      "sourceShape": "Observed /search HTML Document with [data-item-id], [data-automation-id=product-title], product-price labels, title anchors, and Walmart image hosts; no JSON or pagination contract claimed.",
+      "coverage": "One returned Document only. Pagination remains unobserved. A card may omit displayed price or image; partial coverage is surfaced.",
+      "verification": "Focused parser/client/CLI header-contract test passed. The fixture is sanitized and contains no response script or session data.",
+      "liveReplay": {
+        "source": "verification/remaining-consumer-2026-10-16/walmart-search-cli-live.json",
+        "method": "GET",
+        "requestPath": "/search",
+        "explicitHeadersSent": {
+          "accept": "text/html,application/xhtml+xml",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
+        },
+        "httpStatus": 200,
+        "mime": "text/html",
+        "responseRedirected": true,
+        "finalPath": "/blocked",
+        "browserUsed": false,
+        "credentialsUsed": false,
+        "result": "BLOCKED_FINAL_ROUTE_BODY_NOT_RECORDED_IN_INITIAL_REPLAY",
+        "note": "This first CLI replay used the exact explicit header pair above, but the earlier client classified any unexpected route as challenge before recording its body. Updated code now hashes the bounded body and requires a visible challenge marker before using the challenge classification. No repeat request was made."
+      }
+    },
+    "directResponseWithNodeDefaultUserAgent": {
+      "method": "GET",
+      "url": "https://www.walmart.com/search?q=wireless%20earbuds",
+      "httpStatus": 307,
+      "mime": "text/plain",
+      "responseBytes": 21,
+      "responseSha256": "b453a9d9853a4f7d8959bf3a4666be5d1553cbbe364016fce3f6dd85aa317b43",
+      "locationOrigin": "https://www.walmart.com",
+      "locationPath": "/blocked",
+      "locationQueryFields": ["url", "uuid", "vid", "g"],
+      "bodyMarker": "blocked - redirecting",
+      "result": "BLOCKED_ROUTE"
+    },
+    "historicalObservedBoundary": "The existing 2026-10-04 browser contract inventory records /search redirecting to /blocked with a 'Robot or human?' challenge. A fresh Node-default request also reached /blocked (307); a prior explicit-UA direct HTTP request returned product HTML (200) and is the parser source. A later exact-header CLI replay ended at /blocked (200 final HTML). These outcomes are kept distinct; no browser-confirmed replay is claimed.",
+    "followup": "The bounded public search parser/client is implemented for the observed HTML contract. Current direct replay is not live-successful because it reached /blocked, and the first CLI receipt did not capture that final body's title/hash. Product detail and pagination remain outside this implementation."
+  },
+  "codeChanged": true,
+  "testsRun": true,
+  "resolution": {
+    "ebay": "No implementation or evidence freshness claim is justified until a current normal browser session supplies a usable public document/request and response for paired HTTP replay.",
+    "temu": "No client can be implemented from the empty Document shells; current browser network action capture is the missing input.",
+    "walmart": "Implemented a read-only search client and CLI for the previously observed product HTML. Focused fixture-backed tests pass. The prior capture proves direct HTTP Document availability for one run, while a fresh exact-header CLI replay reached /blocked; live replay currently remains partial and browser behavior is unconfirmed. The separate Node-default request returned 307 text/plain /blocked."
+  }
+}

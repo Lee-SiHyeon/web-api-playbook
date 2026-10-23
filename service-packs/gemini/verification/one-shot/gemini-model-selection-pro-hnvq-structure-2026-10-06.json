@@ -1,0 +1,332 @@
+{
+  "schema": "gemini-model-selection-pro-text-readback-v1",
+  "service": "gemini-web",
+  "taskIntent": "gemini-model-selection-pro-20261006-v1",
+  "recordedAt": "2026-10-06T03:52:15.278142+00:00",
+  "outcome": "needs_review",
+  "dispatch": {
+    "count": 1,
+    "retryCount": 0,
+    "httpStatus": 200,
+    "responseBytes": null,
+    "responseSha256": null,
+    "checkpointFieldsComplete": false,
+    "checkpointStateBeforeReadback": "response_received",
+    "journalDispatchCount": 1,
+    "createdAt": "2026-10-06T03:30:57.127Z",
+    "settledAt": "2026-10-06T03:31:06.269Z",
+    "dispatchSourceBinding": "not_inferred_from_current_source"
+  },
+  "readback": {
+    "historyListHttpStatus": 200,
+    "historyListResponseBytes": 6211,
+    "historyListResponseSha256": "4f9468e355be97a614e4b008d0e6b68857187652f920279d741e2a633c624124",
+    "candidateCount": 1,
+    "candidateWindowSource": "journal_created_to_settled_outer_bound",
+    "detailOperation": "history_read",
+    "detailRpc": "hNvQHb",
+    "diagnosticOutcome": "pending_no_assistant_text",
+    "boundedPollLimit": 0,
+    "attempts": [
+      {
+        "httpStatus": 200,
+        "responseBytes": 959,
+        "responseSha256": "f1414e27e947a2b01fb0893a191a18d04722025d67684084835ef2756fc7e3b4",
+        "rpcMatchCount": 1,
+        "exactPromptValueCount": 1,
+        "promptMatchedBySourceInspector": true,
+        "apiConversationIdMatched": true,
+        "routeBindingMatched": true,
+        "roleNodeCounts": {
+          "user": 0,
+          "human": 0,
+          "assistant": 0,
+          "model": 0,
+          "system": 0,
+          "tool": 0
+        },
+        "assistantTextStringCount": 0,
+        "assistantTextLengthMin": null,
+        "assistantTextLengthMax": null,
+        "allTextStringCount": 14,
+        "allTextStringLengthMin": 2,
+        "allTextStringLengthMax": 59,
+        "markerCounts": {
+          "asciiStandaloneCount": 0,
+          "correctWordBoundaryCount": 0,
+          "unicodeDecimalStandaloneCount": 0,
+          "nfkcWordBoundaryCount": 0
+        },
+        "assistantMarkerCounts": {
+          "asciiStandaloneCount": 0,
+          "correctWordBoundaryCount": 0,
+          "unicodeDecimalStandaloneCount": 0,
+          "nfkcWordBoundaryCount": 0
+        },
+        "nestedJsonDecodeCount": 0,
+        "requestLabelFound": true,
+        "relevantFieldNameCounts": {},
+        "serviceErrorCodeCounts": {},
+        "stateCodeCounts": {},
+        "smallIntegerCodeCounts": {
+          "0": 1,
+          "1": 2,
+          "2": 2,
+          "3": 1
+        },
+        "hNvPayloadTypeShape": [
+          {
+            "type": "array",
+            "length": 4,
+            "items": [
+              {
+                "type": "array",
+                "length": 1,
+                "items": [
+                  {
+                    "type": "array",
+                    "length": 5,
+                    "items": [
+                      {
+                        "type": "array",
+                        "length": 2,
+                        "items": [
+                          "string",
+                          "string"
+                        ]
+                      },
+                      "null",
+                      {
+                        "type": "array",
+                        "length": 11,
+                        "items": [
+                          {
+                            "type": "array",
+                            "length": 5,
+                            "items": [
+                              "string",
+                              "null",
+                              "null",
+                              "null",
+                              {
+                                "type": "array",
+                                "length": 1,
+                                "items": [
+                                  {
+                                    "type": "array",
+                                    "length": 0,
+                                    "items": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "number",
+                          "null",
+                          "number",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          "boolean",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 0,
+                            "items": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 32,
+                        "items": [
+                          {
+                            "type": "array",
+                            "length": 1,
+                            "items": [
+                              {
+                                "type": "array",
+                                "length": 29,
+                                "items": [
+                                  "string",
+                                  {
+                                    "type": "array",
+                                    "length": 1,
+                                    "items": [
+                                      "string"
+                                    ]
+                                  },
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  {
+                                    "type": "array",
+                                    "length": 1,
+                                    "items": [
+                                      "number"
+                                    ]
+                                  },
+                                  "string",
+                                  "null",
+                                  "null",
+                                  {
+                                    "type": "array",
+                                    "length": 8,
+                                    "items": [
+                                      "null",
+                                      "null",
+                                      "null",
+                                      "null",
+                                      "null",
+                                      "null",
+                                      "null",
+                                      {
+                                        "type": "array",
+                                        "length": 0,
+                                        "items": []
+                                      }
+                                    ]
+                                  },
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  "null",
+                                  {
+                                    "type": "array",
+                                    "length": 0,
+                                    "items": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "null",
+                          "null",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          "null",
+                          "string",
+                          "boolean",
+                          "null",
+                          "null",
+                          {
+                            "type": "array",
+                            "length": 1,
+                            "items": [
+                              {
+                                "type": "array",
+                                "length": 1,
+                                "items": [
+                                  {
+                                    "type": "array",
+                                    "length": 1,
+                                    "items": [
+                                      {
+                                        "type": "array",
+                                        "length": 2,
+                                        "items": [
+                                          "null",
+                                          {
+                                            "type": "array",
+                                            "length": 3,
+                                            "items": [
+                                              "null",
+                                              "number",
+                                              "string"
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          "null",
+                          "string",
+                          "null",
+                          "null",
+                          "string",
+                          "null",
+                          "null",
+                          "null",
+                          "string",
+                          "null",
+                          "null",
+                          "number",
+                          "number",
+                          "null",
+                          "null",
+                          "null",
+                          "null",
+                          "null",
+                          "string"
+                        ]
+                      },
+                      {
+                        "type": "array",
+                        "length": 2,
+                        "items": [
+                          "number",
+                          "number"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "null",
+              "null",
+              {
+                "type": "array",
+                "length": 0,
+                "items": []
+              }
+            ]
+          }
+        ],
+        "sourceBoundaryRegexSelfTest": true,
+        "literalEscapedRegexWouldMatchLiteralEscapeOnly": true,
+        "literalEscapedRegexMatchesAnswer": false
+      }
+    ],
+    "journalReconciled": false,
+    "journalStateAfterReadback": "response_received",
+    "verified": false
+  },
+  "modelSelection": {
+    "proUiSelectedAndNativeMetadataCaptured": true,
+    "capturedProCategoryCode": true,
+    "capturedStandardThinkingCode": true,
+    "directDispatchMetadataBinding": "not_inferred_from_current_source"
+  },
+  "guards": {
+    "browserBusinessPostsForwarded": 0,
+    "webSocketBusinessFramesForwarded": 0,
+    "readOnlyRpcCaptureObserved": true
+  },
+  "persistence": {
+    "promptOrResponsePersisted": false,
+    "cookiesOrTokensPersisted": false,
+    "rawBodiesPersisted": false,
+    "conversationIdentifiersPersisted": false
+  }
+}

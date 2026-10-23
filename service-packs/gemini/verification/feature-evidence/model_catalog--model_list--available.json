@@ -1,0 +1,69 @@
+{
+  "schema": "gemini-feature-pair-evidence-v1",
+  "service": "gemini-web",
+  "featureId": "model_catalog",
+  "operationId": "model_list",
+  "caseId": "available",
+  "contractSha256": "7e9feb0b89a3d8fa7d5177e0f777bd528d1b3c98bd4fcb3223c54b39ccfcd239",
+  "clientCodeSha256": "3ed8a5fba8d3ffc1d7ae63da3f5ceedde3b3a92d2a7dde84f128ff68bc5a3be7",
+  "observedAt": "2026-10-06T13:34:08.540018+00:00",
+  "executionHost": "linux_worker",
+  "transport": "direct_http",
+  "evidenceClass": "direct_http_live",
+  "mocked": false,
+  "publicOnly": false,
+  "requestResponsePaired": true,
+  "authenticatedOwnerVerified": true,
+  "expectedOutcomeVerified": true,
+  "credentialPropagated": true,
+  "request": {
+    "method": "POST",
+    "origin": "https://gemini.google.com",
+    "path": "/_/BardChatUi/data/batchexecute",
+    "queryKeys": [
+      "rpcids",
+      "source-path",
+      "bl",
+      "f.sid",
+      "hl",
+      "_reqid",
+      "rt"
+    ],
+    "headerNames": [
+      "accept",
+      "content-type",
+      "origin",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-arch",
+      "sec-ch-ua-bitness",
+      "sec-ch-ua-form-factors",
+      "sec-ch-ua-full-version",
+      "sec-ch-ua-full-version-list",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-model",
+      "sec-ch-ua-platform",
+      "sec-ch-ua-platform-version",
+      "sec-ch-ua-wow64",
+      "user-agent",
+      "x-goog-ext-525001261-jspb",
+      "x-goog-ext-73010989-jspb",
+      "x-same-domain"
+    ],
+    "valuesPersisted": false,
+    "bodyFieldNames": [
+      "f.req",
+      "at"
+    ],
+    "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+    "rpcId": "otAQ7b"
+  },
+  "response": {
+    "status": 200,
+    "contentType": "application/json",
+    "bytes": 13248,
+    "bodySha256": "fc410de46fac12b155bac4c4dd09aa2358dc183a73f034026693e891b1fbc871",
+    "framing": "batchexecute"
+  },
+  "secretsPersisted": false
+}

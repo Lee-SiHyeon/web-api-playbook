@@ -1,0 +1,508 @@
+{
+  "schemaVersion": 1,
+  "id": "acada:deep-discount-sources",
+  "label": "리퍼·반품·임박 떨이 / 중고 시세 수집원 레지스트리",
+  "createdAt": "2026-10-05",
+  "styleOf": "apps/naver-blog-api/research/content-store/shopping-sources.v1.json",
+  "purpose": "리퍼·전시·반품·임박·마감 떨이 상품과 중고 호가 시세를 어느 사이트에서 어떤 기능으로 읽어도 되는지 한 곳에서 정한다. 2026-10-05 비한국 egress에서 익명 GET으로 직접 확인한 결과만 적는다.",
+  "policy": [
+    "공개 JSON·XHR 또는 SSR에 내장된 JSON만 쓴다. HTML만 있는 페이지는 Document-GET 파서와 fixture를 둔다.",
+    "익명 읽기만. CAPTCHA·WAF·봇 확인(Akamai·Incapsula 포함) 우회, 로그인, 계정 전용 호출은 쓰지 않는다.",
+    "robots.txt에서 AI 에이전트를 명시 차단한 사이트(당근)는 자동 수집을 끈다.",
+    "한국 사이트가 비한국 egress를 막은 것으로 보이면 reason=geo_blocked_non_kr_suspected로 기록한다. 봇 차단과 구분되지 않으면 확정이라 쓰지 않는다.",
+    "막힌 사이트는 글에서 더 싸다/비싸다고 쓰지 않고 비교 범위에서 빠졌다고만 쓴다."
+  ],
+  "controlledValues": {
+    "capability": [
+      "search",
+      "promotion_products",
+      "sold_listings",
+      "robots"
+    ],
+    "access": [
+      "public_http",
+      "html_only",
+      "observed_envelope_only",
+      "blocked"
+    ],
+    "decision": [
+      "use",
+      "manual_url_only",
+      "exclude"
+    ],
+    "reason": [
+      "observed_public_http",
+      "allowed_public",
+      "no_api_contract",
+      "bot_challenge",
+      "geo_blocked_non_kr_suspected",
+      "egress_unreachable",
+      "not_available",
+      "not_verified",
+      "robots_ai_disallow"
+    ],
+    "group": [
+      "deep_discount",
+      "convenience_promo",
+      "used_price"
+    ],
+    "partnerPath": [
+      "coupang_partners",
+      "linkprice",
+      "naver_connect",
+      "none"
+    ]
+  },
+  "sites": [
+    {
+      "id": "coupang_return_market",
+      "label": "쿠팡 반품마켓",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "blocked",
+          "endpoint": "GET https://www.coupang.com/np/search?q=반품마켓",
+          "decision": "exclude",
+          "reason": "bot_challenge",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 403 Akamai 'Access Denied' (387B). 2026-10 자체 진단과 같음. 우회하지 않는다."
+        },
+        {
+          "capability": "promotion_products",
+          "access": "observed_envelope_only",
+          "endpoint": "쿠팡 파트너스 Open API(HMAC) products/search",
+          "decision": "exclude",
+          "reason": "no_api_contract",
+          "evidence": "공개 문서상 응답 항목은 상품명·가격·URL·로켓배송 여부 등이며 상품 상태(반품·리퍼) 필드를 가진다는 근거를 찾지 못했다. 키가 없어 이 세션에서 호출 검증 못 함(documented_unverified)."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "파트너스 검색에서 반품마켓 상품을 가려낼 필드가 없다. 글에 '쿠팡 반품마켓'이라고 쓰고 파트너스 링크를 붙이지 않는다.",
+        "ruleRef": "R10_partner_link_gate"
+      },
+      "note": "AFFILIATE(quick-fact.mjs)의 coupang_partners 링크는 새상품 딜 전용으로 유지."
+    },
+    {
+      "id": "lotteon_refurb",
+      "label": "롯데온 리퍼·전시 코너",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "blocked",
+          "endpoint": "GET https://www.lotteon.com/",
+          "decision": "exclude",
+          "reason": "geo_blocked_non_kr_suspected",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 403 Incapsula incident 응답(885B). 비한국 IP 차단인지 봇 차단인지 구분 못 함. 우회하지 않음. 한국 egress에서 재확인 필요."
+        }
+      ],
+      "partnerPath": {
+        "path": "linkprice",
+        "why": "lotteon은 링크프라이스 APR 승인(2026-09-27).",
+        "merchantId": "lotteon",
+        "approved": true,
+        "source": "apps/affiliate-api-hub/scripts/linkprice-links.mjs MERCHANTS"
+      }
+    },
+    {
+      "id": "elevenst_refurb",
+      "label": "11번가 리퍼·전시 코너",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "html_only",
+          "endpoint": "GET https://www.11st.co.kr/",
+          "decision": "manual_url_only",
+          "reason": "no_api_contract",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200이지만 11KB 셸(제목 '11번가')뿐이고 상품 JSON 없음. 이미 repo의 eleventh-street-deals.mjs가 쓰는 계약은 별도."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "linkprice 11st는 크로스워크에는 있으나 MERCHANTS(APR) 목록에 없다('11번가는 적용하지 않음').",
+        "merchantId": "11st",
+        "approved": false
+      }
+    },
+    {
+      "id": "ssg_emart_refurb",
+      "label": "SSG·이마트몰 리퍼·전시 코너",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "blocked",
+          "endpoint": "GET https://www.ssg.com/",
+          "decision": "exclude",
+          "reason": "bot_challenge",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 403 '비정상적인 접근 또는 자동화된 환경(봇) 감지' 페이지. 우회하지 않음."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "크로스워크 emart→ssg.com 매핑은 있으나 MERCHANTS(APR)에 없다.",
+        "merchantId": "emart",
+        "approved": false
+      }
+    },
+    {
+      "id": "himart_refurb",
+      "label": "롯데하이마트 리퍼",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "html_only",
+          "endpoint": "GET https://www.e-himart.co.kr/",
+          "decision": "manual_url_only",
+          "reason": "no_api_contract",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200, 1KB JS 셸. 추측한 리퍼 카테고리 URL은 404. 상품 JSON 계약 미발견."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "cps-reverify에 himart(하이마트쇼핑몰) 데이터는 있으나 MERCHANTS(APR)에 없다.",
+        "merchantId": "himart",
+        "approved": false
+      }
+    },
+    {
+      "id": "refurlab",
+      "label": "리퍼연구소 (중고·리퍼 노트북 전문몰)",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "html_only",
+          "endpoint": "GET https://www.refurlab.com/",
+          "decision": "manual_url_only",
+          "reason": "no_api_contract",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200 SSR HTML 99KB. 판매처 등급 표기 'S급,A+급' 확인. 서버 렌더링된 숫자 가격은 0건이라 상품 목록 파서는 만들지 않음(fixture 없음).",
+          "fields": [
+            "vendorGradeRaw",
+            "warrantyText"
+          ]
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "cps-reverify batch-01에 refurlab 존재, MERCHANTS(APR)에 없다.",
+        "merchantId": "refurlab",
+        "approved": false
+      }
+    },
+    {
+      "id": "samsung_official_refurb",
+      "label": "삼성닷컴 리퍼·전시",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "html_only",
+          "endpoint": "https://www.samsung.com/sec/(추측한 outlet·certified-re-newed 경로는 404)",
+          "decision": "exclude",
+          "reason": "not_verified",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: 추측 경로 2개가 404. 공식 리퍼 URL을 확인하지 못함 → 확인된 것만 쓴다."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "공식몰 링크 제휴 경로 확인 못 함. 네이버 브랜드스토어 경유 쇼핑 커넥트 가능성은 미검증."
+      }
+    },
+    {
+      "id": "lg_official_refurb",
+      "label": "LG전자 리퍼·전시",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "html_only",
+          "endpoint": "https://www.lge.co.kr/care-solutions(200, 케어 서비스 페이지) · /care-solutions/refurbish(404)",
+          "decision": "exclude",
+          "reason": "not_verified",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: 리퍼 판매 페이지 URL을 확인하지 못함."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "공식몰 링크 제휴 경로 확인 못 함."
+      }
+    },
+    {
+      "id": "near_expiry_malls",
+      "label": "유통기한 임박몰 (임박몰·떨이몰·이유몰·리우스 등)",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "blocked",
+          "endpoint": "imbakmall.com, eusemall.com, riuse.co.kr, ddeolmall.com (호스트명은 추정이라 미확인)",
+          "decision": "exclude",
+          "reason": "egress_unreachable",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: 프록시가 CONNECT 502로 거부(호스트 허용 목록 밖이거나 존재하지 않음). 호스트 자체가 추정이므로 사이트 판정이 아니다. 한국 egress·실제 URL 확인 후 재조사."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "제휴 경로 미확인."
+      }
+    },
+    {
+      "id": "lastorder",
+      "label": "라스트오더 (마감할인 앱)",
+      "group": "deep_discount",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "blocked",
+          "endpoint": "https://lastorder.in/ (추정)",
+          "decision": "exclude",
+          "reason": "egress_unreachable",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: CONNECT 실패. 앱 전용 서비스일 수 있어 공개 JSON 계약 없음으로 본다."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "앱 서비스, 제휴 경로 없음."
+      }
+    },
+    {
+      "id": "emart24_event",
+      "label": "이마트24 행사상품 (1+1·2+1)",
+      "group": "convenience_promo",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "promotion_products",
+          "access": "html_only",
+          "endpoint": "GET https://emart24.co.kr/goods/event",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200 SSR HTML, itemWrap 20개, 행사 배지('2 + 1') 와 가격 표기. parseEmart24Events()가 fixture로 검증. 페이지당 20개, 첫 페이지 1회만.",
+          "limits": "첫 페이지 1회. 목록에 종료일·재고 없음.",
+          "fields": [
+            "title",
+            "price",
+            "promoType"
+          ]
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "편의점 행사는 제휴 링크 없음. 새상품 행사이므로 '떨이'로 쓰지 않는다."
+      }
+    },
+    {
+      "id": "cu_event",
+      "label": "CU 행사상품",
+      "group": "convenience_promo",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "promotion_products",
+          "access": "html_only",
+          "endpoint": "GET https://cu.bgfretail.com/event/plus.do",
+          "decision": "manual_url_only",
+          "reason": "no_api_contract",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200 HTML 30KB, 목록 자리에 상품 항목 없음(행사 문구 2건뿐). 목록은 별도 XHR로 불러오는 것으로 보이나 이 세션에서 계약을 확인하지 못함."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "제휴 경로 없음."
+      }
+    },
+    {
+      "id": "gs25_event",
+      "label": "GS25 행사상품",
+      "group": "convenience_promo",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "promotion_products",
+          "access": "html_only",
+          "endpoint": "https://gs25.gsretail.com/gscvs/ko/products/event-goods",
+          "decision": "manual_url_only",
+          "reason": "no_api_contract",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: 301 → https://www.gsretail.com/brand/gs25 (906B SPA 셸). 추측한 POST 목록 엔드포인트도 같은 셸을 돌려줌. 계약 미확인."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "제휴 경로 없음."
+      }
+    },
+    {
+      "id": "seven_event",
+      "label": "세븐일레븐 행사상품",
+      "group": "convenience_promo",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "promotion_products",
+          "access": "blocked",
+          "endpoint": "https://www.7-eleven.co.kr/product/presentList.asp",
+          "decision": "exclude",
+          "reason": "egress_unreachable",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: connection reset. 한국 egress에서 재확인."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "제휴 경로 없음."
+      }
+    },
+    {
+      "id": "bunjang",
+      "label": "번개장터",
+      "group": "used_price",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "GET https://api.bunjang.co.kr/api/1/find_v2.json?q=<q>&order=date&page=0&n=30&req_ref=search&stat_device=w&version=4",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200 application/json, list 30건·num_found 7712. 필드 pid,name,price(문자열),status('0'=판매중),update_time(초),used(1|2),category_id,bizseller. robots.txt 기준 /api 허용 기록 없음(404 응답).",
+          "limits": "질의당 1페이지(n≤30)·1회. 광고(ad)·bizseller 표시.",
+          "fields": [
+            "pid",
+            "name",
+            "price",
+            "status",
+            "update_time",
+            "used"
+          ]
+        },
+        {
+          "capability": "sold_listings",
+          "access": "public_http",
+          "endpoint": "find_v2.json &status=sold 등",
+          "decision": "exclude",
+          "reason": "not_available",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: status=sold를 붙여도 응답이 바이트 단위로 같음(30427B). 판매완료 목록은 익명 공개 계약에서 얻지 못함 → 호가만."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "시세 통계용. 링크 없음."
+      }
+    },
+    {
+      "id": "joongna",
+      "label": "중고나라",
+      "group": "used_price",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "GET https://web.joongna.com/search/<q> (RSC self.__next_f 안의 items JSON)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200 HTML 510KB. items[].{seq,price,title,state,sortDate,wishCount} 50건, totalSize 5792. __NEXT_DATA__ 없음(React Server Components 스트림). parseJoongnaSearch()가 fixture로 검증.",
+          "limits": "질의당 1페이지 1회.",
+          "fields": [
+            "seq",
+            "price",
+            "title",
+            "state",
+            "sortDate"
+          ]
+        },
+        {
+          "capability": "sold_listings",
+          "access": "public_http",
+          "endpoint": "?saleYn=SALE_Y / ?saleYn=ALL",
+          "decision": "exclude",
+          "reason": "not_available",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: 파라미터를 바꿔도 반환 50건 모두 state=0(판매중). 판매완료는 얻지 못함. 추측한 POST search-api.joongna.com은 404."
+        },
+        {
+          "capability": "robots",
+          "access": "public_http",
+          "endpoint": "https://web.joongna.com/robots.txt",
+          "decision": "use",
+          "reason": "allowed_public",
+          "evidence": "Disallow: /my-account, /signin, /product/form 등 사용자 영역만; 검색 경로 허용."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "시세 통계용. 링크 없음."
+      }
+    },
+    {
+      "id": "hellomarket",
+      "label": "헬로마켓",
+      "group": "used_price",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "public_http",
+          "endpoint": "GET https://www.hellomarket.com/search?q=<q> (__NEXT_DATA__ props.initialState.searchData.itemData)",
+          "decision": "use",
+          "reason": "observed_public_http",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200 SSR 174KB. itemData 30건 {itemIdx,title,price,sellState{code},usedType{code,name},timestamp}, 모두 sellState=ForSale. usedType('거의 새상품' 등) 있음. parseHellomarketSearch()가 fixture로 검증.",
+          "limits": "질의당 1페이지 1회.",
+          "fields": [
+            "itemIdx",
+            "title",
+            "price",
+            "sellState",
+            "usedType",
+            "timestamp"
+          ]
+        },
+        {
+          "capability": "sold_listings",
+          "access": "public_http",
+          "endpoint": "?sellState=Sold",
+          "decision": "exclude",
+          "reason": "not_available",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: 파라미터 무시(30건 모두 ForSale). 판매완료 미확보."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "시세 통계용. 링크 없음."
+      }
+    },
+    {
+      "id": "daangn_buy_sell",
+      "label": "당근 중고거래 웹 검색",
+      "group": "used_price",
+      "checkedOn": "2026-10-05",
+      "capabilities": [
+        {
+          "capability": "search",
+          "access": "html_only",
+          "endpoint": "GET https://www.daangn.com/kr/buy-sell/?search=<q> → 301 /kr/search/buy-sell/?q=<q> (schema.org JSON-LD ItemList)",
+          "decision": "manual_url_only",
+          "reason": "robots_ai_disallow",
+          "evidence": "2026-10-05 비한국 egress 익명 GET: HTTP 200 HTML 719KB. JSON-LD ItemList에 Product 목록: name,description,url,offers{price,itemCondition,availability}. parseDaangnSearch()가 fixture로 검증. 그러나 robots.txt가 OAI-SearchBot·ChatGPT-User·Claude-SearchBot·Claude-User·PerplexityBot·xAI-Grok 등 AI 에이전트에 Disallow: / (예외 /kr/local-profile/)를 둔다. 자동 수집 기본값을 끄고(manual_url_only) 사람이 연 페이지를 저장한 HTML만 파싱하는 경로로 둔다.",
+          "limits": "자동 호출 안 함. fetchUsedListings()는 includeDaangn=true를 명시해야만 호출."
+        }
+      ],
+      "partnerPath": {
+        "path": "none",
+        "why": "시세 통계용. 링크 없음. 당근 채널은 제휴 링크 글 게시를 이미 건너뜀(quick-fact.mjs daangnSkipReason)."
+      }
+    }
+  ]
+}

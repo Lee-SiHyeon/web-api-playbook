@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "operationId": "conversation.history.fast-task-readback",
+  "recordedAt": "2026-10-06T14:56:25.342Z",
+  "status": "completed",
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "ownerBootstrap": {
+    "status": 200,
+    "method": "GET",
+    "path": "/api/auth/session",
+    "contentType": "application/json",
+    "responseBytes": 648,
+    "rawResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+    "cookieNames": [
+      "sso"
+    ],
+    "redirectsFollowed": false
+  },
+  "privateTaskCacheVerified": true,
+  "task": {
+    "conversationIdSha256": "0cadb1e23ddbe14255578ea88b6fb40dcb4d2538c422aa152656f395afeba016",
+    "assistantResponseIdSha256": "70a87c26204ec55856384f78d6204f2bb2599ff5634f3317172214f44f8b217e",
+    "expectedPromptSha256": "87022acfad1ae0916ed351a0b720967217ebdb9b6c25194f5a32ca4777ab0ede",
+    "expectedAssistantTextSha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049",
+    "taskCacheSha256": "5b0bb026962bbd4ef8287f4fba5f826f2a75253e36ac5764f85100c5b5a2e1e2"
+  },
+  "reads": {
+    "ownerAndList": {
+      "operationId": "conversation.list.read",
+      "ownerVerified": true,
+      "ownerIdentityRead": {
+        "status": 200,
+        "contentType": "application/json",
+        "responseBytes": 648,
+        "requestDigest": "2edd8c980550840946ef3dd41ca5bd4d1f75bbaf0211ce26d26deb566c519f54",
+        "rawResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+        "rawResponseDigestKind": "raw_http_body",
+        "parsedResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3"
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 23657,
+      "requestDigest": "73001a8d9e61fd085ba2b4d8d731dbd3242861d20c6032ba8f3183846a52e9f1",
+      "rawResponseDigest": "b84d138a09f25ea56ee6dd0019f122a85d1a98b1bcf707ca8e9475c34f37c6e4",
+      "rawResponseDigestKind": "raw_http_body",
+      "parsedResponseDigest": "b3c91d921f24fa3ff000e253dfa7991bb11e550b3a6cd6bc1f70dc0fcb4f1af0",
+      "responseShape": {
+        "type": "object",
+        "topLevelFieldNames": [
+          "conversations",
+          "nextPageToken",
+          "textSearchMatches"
+        ],
+        "fields": {
+          "conversations": {
+            "type": "array",
+            "count": 60,
+            "itemFieldNames": [
+              "conversationId",
+              "createTime",
+              "hasUnreadCheckin",
+              "kind",
+              "latestAssetMetadata",
+              "mediaTypes",
+              "modifyTime",
+              "starred",
+              "systemPromptName",
+              "taskResult",
+              "temporary",
+              "title",
+              "workspaces"
+            ]
+          },
+          "nextPageToken": {
+            "type": "string"
+          },
+          "textSearchMatches": {
+            "type": "array",
+            "count": 0,
+            "itemFieldNames": []
+          }
+        }
+      },
+      "pageRows": 60,
+      "exactTaskMatchCount": 1,
+      "nextPagePresent": false
+    },
+    "detail": {
+      "operationId": "conversation.read",
+      "ownerVerified": true,
+      "ownerIdentityRead": {
+        "status": 200,
+        "contentType": "application/json",
+        "responseBytes": 648,
+        "requestDigest": "2edd8c980550840946ef3dd41ca5bd4d1f75bbaf0211ce26d26deb566c519f54",
+        "rawResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+        "rawResponseDigestKind": "raw_http_body",
+        "parsedResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3"
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 425,
+      "requestDigest": "1bfa300e0f573127ca2c29485b58c05b09af9b27979edda51db85319bbc182a1",
+      "rawResponseDigest": "eb339dd6f029cddb8f0e6afa31cacaf9ab19a1c0d4a1b3e67b8370fafefbf898",
+      "rawResponseDigestKind": "raw_http_body",
+      "parsedResponseDigest": "9f2090dec75fbd7c9197cdd4d201138c22c00fad82b1b0457f5b9e80d70057c8",
+      "responseShape": {
+        "type": "object",
+        "topLevelFieldNames": [
+          "conversation"
+        ],
+        "fields": {
+          "conversation": {
+            "type": "object",
+            "fieldNames": [
+              "conversationId",
+              "createTime",
+              "hasUnreadCheckin",
+              "kind",
+              "latestAssetMetadata",
+              "mediaTypes",
+              "modifyTime",
+              "starred",
+              "systemPromptName",
+              "taskResult",
+              "temporary",
+              "title",
+              "viewerIsOwner",
+              "workspaces"
+            ]
+          }
+        }
+      },
+      "conversationIdMatched": true,
+      "viewerIsOwner": true,
+      "readonly": false,
+      "accessLevelOwner": true
+    },
+    "responseNodes": {
+      "operationId": "history.response-nodes",
+      "ownerVerified": true,
+      "ownerIdentityRead": {
+        "status": 200,
+        "contentType": "application/json",
+        "responseBytes": 648,
+        "requestDigest": "2edd8c980550840946ef3dd41ca5bd4d1f75bbaf0211ce26d26deb566c519f54",
+        "rawResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+        "rawResponseDigestKind": "raw_http_body",
+        "parsedResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3"
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 310,
+      "requestDigest": "9d50188b6df23fa29fbd29db95ab0f5d10e35963ed0a6843ed8a514d45dfa6ba",
+      "rawResponseDigest": "02ba953047059a2ee901757e3be96ebb3191b960d1019d0e449c6c70a9fcab67",
+      "rawResponseDigestKind": "raw_http_body",
+      "parsedResponseDigest": "1b7d41d454a874aee8eb2e15c515f329f48463e75ad7b1f30eabb30d691bbcd8",
+      "responseShape": {
+        "type": "object",
+        "topLevelFieldNames": [
+          "inflightResponses",
+          "responseNodes"
+        ],
+        "fields": {
+          "responseNodes": {
+            "type": "array",
+            "count": 2,
+            "itemFieldNames": [
+              "parentResponseId",
+              "responseId",
+              "sender"
+            ]
+          },
+          "inflightResponses": {
+            "type": "array",
+            "count": 0,
+            "itemFieldNames": []
+          }
+        }
+      },
+      "nodeCount": 2,
+      "inflightCount": 0,
+      "userNodeCount": 1,
+      "assistantNodeCount": 1,
+      "cachedAssistantNodeCount": 1,
+      "parentUserNodeCount": 0,
+      "userNodeIdSha256": "5427a8727ad864a700d1c18b337e06cd32dc5f25ee0402b10e8b5ab094355037",
+      "assistantNodeParentResponseIdSha256": null,
+      "assistantNodeParentFieldType": "missing",
+      "parentBindingObserved": false
+    },
+    "loadResponses": {
+      "operationId": "history.load-responses",
+      "ownerVerified": true,
+      "ownerIdentityRead": {
+        "status": 200,
+        "contentType": "application/json",
+        "responseBytes": 648,
+        "requestDigest": "2edd8c980550840946ef3dd41ca5bd4d1f75bbaf0211ce26d26deb566c519f54",
+        "rawResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3",
+        "rawResponseDigestKind": "raw_http_body",
+        "parsedResponseDigest": "8556dc21cfbf15d0d16d859d1530c2bf50783dd303ae481e7763adae41809aa3"
+      },
+      "status": 200,
+      "contentType": "application/json",
+      "responseBytes": 3096,
+      "requestDigest": "f9431d13db783c426a543c118fd026cda1d42f2208d7e46f2486d152dae0eb98",
+      "rawResponseDigest": "78e224432fbe29d374bac325712883a4da8646786dd2c10829818763db3982df",
+      "rawResponseDigestKind": "raw_http_body",
+      "parsedResponseDigest": "2096e49c3d00c793b36ab15299126e0bd49cc477dac537f4129033bde5bc061b",
+      "responseShape": {
+        "type": "object",
+        "topLevelFieldNames": [
+          "responses"
+        ],
+        "fields": {
+          "responses": {
+            "type": "array",
+            "count": 2,
+            "itemFieldNames": [
+              "cardAttachmentsJson",
+              "citedCollectionSearchResults",
+              "citedConnectorSearchResults",
+              "citedRagResults",
+              "citedWebSearchResults",
+              "citedXposts",
+              "collectionSearchResults",
+              "connectorSearchResults",
+              "createTime",
+              "fileAttachmentAssetMetadata",
+              "fileAttachments",
+              "fileAttachmentsMetadata",
+              "fileIds",
+              "fileUris",
+              "generatedImageUrls",
+              "imageAttachments",
+              "imageEditUris",
+              "inputChunks",
+              "isControl",
+              "manual",
+              "mediaTypes",
+              "message",
+              "metadata",
+              "model",
+              "outputChunks",
+              "parentResponseId",
+              "partial",
+              "query",
+              "queryType",
+              "ragResults",
+              "responseId",
+              "searchProductResults",
+              "sender",
+              "shared",
+              "steps",
+              "streamErrors",
+              "toolResponses",
+              "webSearchResults",
+              "webpageUrls",
+              "xpostIds",
+              "xposts"
+            ]
+          }
+        }
+      },
+      "responseCount": 2,
+      "exactRequestedIdSetMatched": true,
+      "exactPromptHashMatched": true,
+      "exactAssistantHashMatched": true,
+      "userResponseIdSha256": "5427a8727ad864a700d1c18b337e06cd32dc5f25ee0402b10e8b5ab094355037",
+      "assistantResponseIdSha256": "70a87c26204ec55856384f78d6204f2bb2599ff5634f3317172214f44f8b217e",
+      "assistantParentFieldType": "missing",
+      "assistantParentRelationship": "not_observed",
+      "assistantParentMatched": false
+    },
+    "listVariants": {
+      "status": "captured",
+      "variants": [
+        {
+          "name": "first_page",
+          "requestDigest": "81e7a2a35a3ba93803c97bdc50ab450a592005aefde4bafccd041a3cb62db87a",
+          "responseDigest": "d4a0261a37cec569788817f9eed24f5d000039f8817f3dc1ecb4a9ecd5424506",
+          "httpStatus": 200,
+          "responseBytes": 7969,
+          "requestFieldNames": [
+            "pageSize"
+          ],
+          "conversationCount": 20,
+          "nextPageTokenPresent": true
+        },
+        {
+          "name": "next_page",
+          "requestDigest": "74643596f4677a17015455b6db37884726cdb3270c4b902720b08835a5e304c3",
+          "responseDigest": "65895a6533b9988bccb6e6dce2e7cc332bb4527473141e2bb75c40a4198fdcab",
+          "httpStatus": 200,
+          "responseBytes": 8016,
+          "requestFieldNames": [
+            "pageSize",
+            "pageToken"
+          ],
+          "conversationCount": 20,
+          "nextPageTokenPresent": true
+        },
+        {
+          "name": "search",
+          "requestDigest": "aa061fb8e276625da290571b948441866d16ec0273a88525b95119dbb36a1428",
+          "responseDigest": "503e712ed0e1f5caf3843f05c4e515b15351e6ecf3d6e157a660e97e6726d5bc",
+          "httpStatus": 200,
+          "responseBytes": 9449,
+          "requestFieldNames": [
+            "pageSize",
+            "searchQuery"
+          ],
+          "conversationCount": 10,
+          "nextPageTokenPresent": false,
+          "searchQuerySha256": "bb2d25d390096d1ae2199607679dea92e42007b008e1438ca108b1990179c737",
+          "textSearchMatchCount": 10,
+          "targetConversationMatched": true
+        }
+      ],
+      "exactTaskSearchMatched": true
+    }
+  },
+  "sourceSnapshot": {
+    "before": {
+      "capturedAt": "2026-10-06T14:56:14.066Z",
+      "identityOperationId": "auth.owner.read",
+      "operationIds": [
+        "conversation.list.read",
+        "conversation.read",
+        "history.response-nodes",
+        "history.load-responses"
+      ],
+      "codeSha256": {
+        "src/cli.mjs": "497b1ac9367b9b78545bcbc95dc763b0a25d78659e3980ed9767cd748c4e7353",
+        "src/runtime.mjs": "fed69ea52dd61ec36a468f66446d8cbc1e98fdb28dec08f9ee0216cb921e32b1",
+        "src/client.mjs": "eb386cf62e7d168a147b59ee9132b40875f952907987883faf6eaecce86dfc64",
+        "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+        "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b",
+        "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+        "src/protected-json-store.mjs": "bf0b397609efb94bbb06dbbb43d476a97ec4854ba00ec58c4a3962c34e61351e",
+        "src/grok-conversations.mjs": "97b5896c9413bc961d09938b12041e70bbd6c731d1b875e1de1a3e32239f0a17",
+        "src/authenticated-chrome-fetch.mjs": "b4db2f6cb2d601f40526bd0690d63b165b1ad3f8c26f32c2e5c386717213bf34",
+        "scripts/authenticated-chrome-transport.py": "fd538ac05d96585630bee2ff3e243ddbed2f4b1f0dc0f0868e658a252e9a8a58",
+        "scripts/grok-fast-task-readonly-cli-once.mjs": "c4e5535279dde2e3557b3d10e70e31734245fc1450cf4cb85b001dc4d0ad142c",
+        "scripts/grok-fast-task-readonly-live-once.py": "726f66f37eafb1c4355b50b73d0a290ac31df1353654a9902d2279fc87aa2dcb"
+      },
+      "contractOperationSha256": {
+        "auth.owner.read": "2258d14b5e9b227c0267557fd66e70a2fb0cb8f13e3da9a68245fd45cbc2c24c",
+        "conversation.list.read": "3e80dfecd3e088c5a147e02e96822bedb55f14a1ebb8de2e5dac36dd9e3ba66e",
+        "conversation.read": "76e8c5a715c15940b8eb99cfdd9257b146323ace6f02c696cda7b84a3d739a4d",
+        "history.response-nodes": "8bd75ddf3e1733d5364c8f1c4f506b1b3aeae45102c2c209776fa879eb75663d",
+        "history.load-responses": "972828abfef74060553cc565dd43c3098ef8035bdac3aaeb5144b49e3431dee2"
+      }
+    },
+    "after": {
+      "capturedAt": "2026-10-06T14:56:25.342Z",
+      "identityOperationId": "auth.owner.read",
+      "operationIds": [
+        "conversation.list.read",
+        "conversation.read",
+        "history.response-nodes",
+        "history.load-responses"
+      ],
+      "codeSha256": {
+        "src/cli.mjs": "497b1ac9367b9b78545bcbc95dc763b0a25d78659e3980ed9767cd748c4e7353",
+        "src/runtime.mjs": "fed69ea52dd61ec36a468f66446d8cbc1e98fdb28dec08f9ee0216cb921e32b1",
+        "src/client.mjs": "eb386cf62e7d168a147b59ee9132b40875f952907987883faf6eaecce86dfc64",
+        "src/transport.mjs": "5000fb6a49b7f595ece556045867d301859398c6b6258f6d6e037f7f74302a94",
+        "src/contracts.mjs": "ea7ab0e4e1cc230b1357fceb2c9ae2659e179de7523d802544016d16a860df9b",
+        "src/session.mjs": "3bac3a0238821c1ac92a6268195bef559048bc4b6d0df1b8e14392c220ca9de7",
+        "src/protected-json-store.mjs": "bf0b397609efb94bbb06dbbb43d476a97ec4854ba00ec58c4a3962c34e61351e",
+        "src/grok-conversations.mjs": "97b5896c9413bc961d09938b12041e70bbd6c731d1b875e1de1a3e32239f0a17",
+        "src/authenticated-chrome-fetch.mjs": "b4db2f6cb2d601f40526bd0690d63b165b1ad3f8c26f32c2e5c386717213bf34",
+        "scripts/authenticated-chrome-transport.py": "fd538ac05d96585630bee2ff3e243ddbed2f4b1f0dc0f0868e658a252e9a8a58",
+        "scripts/grok-fast-task-readonly-cli-once.mjs": "c4e5535279dde2e3557b3d10e70e31734245fc1450cf4cb85b001dc4d0ad142c",
+        "scripts/grok-fast-task-readonly-live-once.py": "726f66f37eafb1c4355b50b73d0a290ac31df1353654a9902d2279fc87aa2dcb"
+      },
+      "contractOperationSha256": {
+        "auth.owner.read": "2258d14b5e9b227c0267557fd66e70a2fb0cb8f13e3da9a68245fd45cbc2c24c",
+        "conversation.list.read": "3e80dfecd3e088c5a147e02e96822bedb55f14a1ebb8de2e5dac36dd9e3ba66e",
+        "conversation.read": "76e8c5a715c15940b8eb99cfdd9257b146323ace6f02c696cda7b84a3d739a4d",
+        "history.response-nodes": "8bd75ddf3e1733d5364c8f1c4f506b1b3aeae45102c2c209776fa879eb75663d",
+        "history.load-responses": "972828abfef74060553cc565dd43c3098ef8035bdac3aaeb5144b49e3431dee2"
+      }
+    },
+    "stable": true
+  },
+  "persistenceAssertions": {
+    "rawConversationIdsPersisted": false,
+    "rawResponseIdsPersisted": false,
+    "rawTitlesPersisted": false,
+    "rawMessagesPersisted": false,
+    "rawRequestBodiesPersisted": false,
+    "rawResponseBodiesPersisted": false,
+    "credentialsPersisted": false
+  }
+}

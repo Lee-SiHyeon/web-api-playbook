@@ -1,0 +1,31 @@
+{
+  "schema": "grok-settings-current-source-journal-independent-v1",
+  "observedAt": "2026-10-06T14:15:12.704503+00:00",
+  "sourceProofPath": "verification/one-shot/grok-settings-current-source-canonical-v3-2026-10-06.json",
+  "sourceProofSha256": "7c5368855e733e78d69ccc9fec3cef0cd9160c2d9c818211e8c694ad96a8675a",
+  "proofOutcome": "verified",
+  "ownerScopeSha256": "23e57131977ce522bacf6649eb27538770828a890f7a65589ec4f0960a84b3d7",
+  "operations": [
+    {
+      "phase": "apply",
+      "state": "completed",
+      "httpStatus": 200,
+      "attemptCount": 1,
+      "requestDigestMatched": true,
+      "intentDigestMatched": true,
+      "reconciledBy": "settings.read"
+    },
+    {
+      "phase": "restore",
+      "state": "completed",
+      "httpStatus": 200,
+      "attemptCount": 1,
+      "requestDigestMatched": true,
+      "intentDigestMatched": true,
+      "reconciledBy": "settings.read"
+    }
+  ],
+  "newWireAttempts": 0,
+  "rawJournalIdentifiersPersisted": false,
+  "source": "read_only_durable_journal_comparison"
+}

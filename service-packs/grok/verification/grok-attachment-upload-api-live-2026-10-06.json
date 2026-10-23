@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-06T02:51:36.491Z",
+  "operation": "attachment.upload.direct",
+  "state": "completed",
+  "ownerVerified": true,
+  "source": {
+    "functionName": "uploadFileV2",
+    "url": "https://cdn.grok.com/_next/static/chunks/1e3r6boa1v4lr.js",
+    "sha256": "0d8f5bd1ba17b16404c055b9fbcf854cf492e06784aaa9660753e2d9d1f2cc13",
+    "browserCaptureOperation": "POST /http/upload-file-v2/direct",
+    "browserWriteDelivered": false
+  },
+  "nativeCapture": {
+    "role": "codex-grok-uploads-20261006",
+    "targetIdRegisteredUnderLock": true,
+    "guardInstalledBeforeNavigation": true,
+    "uploadRequestCount": 1,
+    "method": "POST",
+    "path": "/http/upload-file-v2/direct",
+    "contentType": "multipart/form-data",
+    "fieldNames": [
+      "file"
+    ],
+    "fileNameMatched": true,
+    "fileBytes": 14,
+    "fileSha256": "ea625e61c345553c8460eb993d5cb6b9758e4b7768fc348a7f28580eb5c4bd4c",
+    "fileSourceFieldPresent": false,
+    "sourceConversationIdPresent": false,
+    "initialFailRequestAcknowledged": true,
+    "browserUploadDelivered": false
+  },
+  "preflight": {
+    "uniqueAssetNameAbsentBeforeUpload": true,
+    "sourceOperation": "attachment.assets.search",
+    "selectionRule": "one exact native marker match blocks the direct upload; complete bounded search required"
+  },
+  "directReplay": {
+    "status": 200,
+    "requestDigest": "bcf809fae7f3872e1e8a0e3387bc1e97c53f7a6a6720feb93a4c91a5a1a3324b",
+    "intentDigest": "90bb840f1fb0832c5495f47f8e5d870417300230571fbadee0707e76a49e9bc9",
+    "attemptCount": 1,
+    "uploadIdObserved": true,
+    "transport": "curl_cffi-0.16.3",
+    "tlsVerified": true,
+    "trustEnv": false,
+    "redirectsFollowed": false,
+    "explicitRetries": 0,
+    "credentialCookieNames": [
+      "sso"
+    ],
+    "requestHeaderNames": [
+      "content-type",
+      "cookie",
+      "origin",
+      "referer"
+    ],
+    "requestHeaderNamesEvidence": "derived from the exact installed operation and authenticated transport preparation",
+    "responseContentType": "application/json",
+    "responseParsed": true,
+    "responseFieldNamesObserved": [
+      "uploadId"
+    ],
+    "responseFieldNamesComplete": false,
+    "responseByteCountRecorded": false,
+    "responseDigestPersisted": false
+  },
+  "taskFile": {
+    "name": "codex-grok-upload-14b-20261006.txt",
+    "mimeType": "text/plain",
+    "bytes": 14,
+    "sha256": "ea625e61c345553c8460eb993d5cb6b9758e4b7768fc348a7f28580eb5c4bd4c"
+  },
+  "metadataAndDownload": {
+    "metadataMatchesTaskMarker": true,
+    "assetOrigin": "https://assets.grok.com",
+    "environmentSource": "current owned Grok EnvironmentProvider",
+    "ssoDomain": ".grok.com",
+    "ssoPath": "/",
+    "downloadVerified": true,
+    "httpStatus": 200,
+    "mimeType": "text/plain",
+    "bodyBytes": 14,
+    "sha256": "ea625e61c345553c8460eb993d5cb6b9758e4b7768fc348a7f28580eb5c4bd4c",
+    "byteEqualityVerified": true,
+    "statusEvidence": "the operation reached the journal success reason only when the independent CFFI reader returned verified=true",
+    "artifactPath": "/home/worker/artifacts/grok-attachments-20261006/upload-roundtrip-14b.txt",
+    "artifactMode": "0o600"
+  },
+  "taskCleanup": {
+    "method": "DELETE /rest/assets/{assetId}",
+    "httpStatus": 200,
+    "requestDigest": "1fb9ebe4a338394ac5dbb780b74df712bf8e3f0860f1bd6d1dc44e14dcf66a25",
+    "intentDigest": "2b9748ebf29733a987a7b997d37cc678617445e307a45f9a8778d8cd14502d25",
+    "attemptCount": 1,
+    "exactTaskAssetOnly": true,
+    "cleanupReadbackVerified": true,
+    "postDeleteExactNameSearchStatus": 200,
+    "postDeleteExactNameMatches": 0,
+    "postDeleteSearchRequestDigest": "00bfcaf99b175811c0aab9180f297bb06a7c59577bb0c2733b952114127c01a4",
+    "postDeleteSearchBytes": 13
+  },
+  "auditPersistence": {
+    "liveSafeCallbackFailedAfterOperationCompletion": true,
+    "errorCode": "INTERNAL_ERROR",
+    "reconstructedFromNonsecretJournalAndVerifiedArtifact": true,
+    "responseByteCountOmitted": true
+  },
+  "priorGuardContext": {
+    "initialUploadRequestAcknowledged": true,
+    "laterCumulativeWriteAttempts": 127,
+    "laterCumulativeFailRequestAcknowledgements": 96,
+    "unacknowledgedOrDetachedAttempts": 31,
+    "networkResponseCorroboration": "unavailable"
+  },
+  "safety": {
+    "chatMessageSent": false,
+    "generationRequested": false,
+    "paymentRequested": false,
+    "sharingOrTeamMutation": false,
+    "rawServerIdsPersisted": false,
+    "signedAssetUrlsPersisted": false,
+    "cookiesPersisted": false,
+    "operationJournalStoresOnlyIdDigest": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "@affiliate-content-operations/google-flow-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "jsdom": "26.1.0",
+    "parse5": "7.3.0"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "flow": "node src/cli.mjs",
+    "verify": "node src/verify.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}

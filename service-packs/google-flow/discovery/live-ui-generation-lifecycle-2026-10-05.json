@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "observedDate": "2026-10-05",
+  "executionMode": "browser_ui_observation_then_independent_http_download",
+  "userRequestedActualUiLifecycle": true,
+  "generationClicks": 1,
+  "generationPostAttempts": 1,
+  "uiOptions": {
+    "model": "Omni 1.1 Flash",
+    "modelKey": "abra_t2v_8s",
+    "resolution": "720p",
+    "durationSeconds": 8,
+    "aspect": "16:9",
+    "aspectCode": 2,
+    "count": 1,
+    "displayedCredits": 12,
+    "optionsActuallyClicked": [
+      "model",
+      "720p",
+      "8 seconds",
+      "x1"
+    ],
+    "promptEntered": true
+  },
+  "normalBrowserInput": {
+    "present": true,
+    "mode": 1,
+    "producer": "first_party_recaptcha_enterprise_sdk",
+    "reload": {
+      "status": 200,
+      "mime": "application/json"
+    },
+    "clear": {
+      "status": 200,
+      "mime": "application/binary"
+    },
+    "inputStored": false,
+    "inputReplayed": false
+  },
+  "create": {
+    "rpc": "YhhmEf",
+    "requestAt": "2026-10-05T07:57:51.238Z",
+    "httpStatus": 200,
+    "responseBytes": 1464,
+    "mediaIdReturned": true,
+    "status": "CAE",
+    "creditsBefore": 1050,
+    "creditsAfter": 1038
+  },
+  "processing": {
+    "rpc": "jwpduf",
+    "observedStateSequence": [
+      6,
+      2,
+      3
+    ],
+    "pollIntervalApproximatelySeconds": 5,
+    "completeResponseAt": "2026-10-05T07:58:30.863Z",
+    "completeResponseAfterCreateSeconds": 39.625,
+    "completedVideoBytes": 4385072,
+    "uiProgressObserved": true,
+    "uiCompletedThumbnailObserved": true,
+    "stateMeaningScope": "code 3 corresponds to completed video in this observed run only"
+  },
+  "media": {
+    "rpc": "as29s",
+    "signedVideoAvailableAt": "2026-10-05T07:58:34.383Z",
+    "afterCreateSeconds": 43.145,
+    "signedUrlStored": false
+  },
+  "readback": {
+    "mode": "independent_http",
+    "projectMediaBefore": 35,
+    "projectMediaAfter": 36,
+    "newMediaPresent": true,
+    "exactSceneProjectMatch": true,
+    "exactSceneRequestIdMatch": true,
+    "sceneRequestCorrelationPath": "scene[3][5] matches submission payload[2][0]",
+    "sceneMediaPath": "scene[3][4]",
+    "previousWrongMatch": "two UUIDs in request[4] are not the persisted scene request UUID",
+    "newGenerationResent": false
+  },
+  "uiCompletion": {
+    "playerDurationSeconds": 8,
+    "downloadOptions": [
+      "270p GIF",
+      "720p original",
+      "1080p upscaled",
+      "4K upscaled disabled"
+    ],
+    "originalDownloadClicked": true,
+    "uiDownloadCompletionConfirmed": false,
+    "observationProblem": "CUA tab id replacement followed by snapshot timeouts"
+  },
+  "httpDownload": {
+    "completed": true,
+    "bytes": 4385072,
+    "mp4SignatureVerified": true,
+    "rawSignedUrlStored": false
+  },
+  "nativeArtifact": {
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": 8,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "bytes": 4385072,
+    "verifiedBy": "ffprobe"
+  },
+  "finalArtifact": {
+    "width": 854,
+    "height": 480,
+    "durationSeconds": 8,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "bytes": 1682551,
+    "conversion": "ffmpeg from new 720p original",
+    "verifiedBy": "ffprobe",
+    "threeFrameVisualInspection": true,
+    "committedToGit": false
+  },
+  "journal": {
+    "executionMode": "browser_ui_observation",
+    "state": "downloaded",
+    "generationFenceReleased": true
+  },
+  "httpOnlyBoundary": {
+    "generationSucceeded": false,
+    "normalBrowserReferenceSucceeded": true,
+    "protectedReadsAndDownloadsSucceeded": true,
+    "verifiedHttpGenerationInputIssuerAvailable": false
+  },
+  "sensitiveData": {
+    "credentialValuesRecorded": false,
+    "rawBodiesRecorded": false,
+    "signedUrlsRecorded": false,
+    "promptBodyRecorded": false
+  },
+  "correctedClientLiveVerification": {
+    "checkedAt": "2026-10-05T08:19:33.238Z",
+    "executionFrom": "clean integration checkout",
+    "exactSceneRequestMatch": true,
+    "documentHttpStatus": 200,
+    "projectRpcHttpStatus": 200,
+    "existingDownloadedFileReconciled": true,
+    "generationPosts": 0,
+    "mediaDownloads": 0
+  },
+  "offlineTests": {
+    "passed": 64,
+    "total": 64
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-10-14",
+  "origin": "https://www.threads.com",
+  "note": "Metadata only. No cookies, tokens, or request bodies. States describe THIS repository; upstreamEvidence points at the source repo records the code was ported from. live_replay is false for every operation here because no live call was made from this repository.",
+  "operations": {
+    "BarcelonaProfileThreadsTabDirectQuery": {
+      "kind": "read", "method": "POST", "path": "/api/graphql", "encoding": "application/x-www-form-urlencoded",
+      "docId": "discovered at runtime from the public profile document preload",
+      "auth": "anonymous csrftoken + LSD from a fresh public profile GET",
+      "executionMode": "pure_http",
+      "states": {"captured": true, "client_exists": true, "credential_propagated": "anonymous_only", "remnant_free": true, "live_replay": false},
+      "upstreamEvidence": "web-api-playbook/service-packs/threads (Linux Node live replay of @threads public 5 posts, 2026-10-11, verification/creator-public-data-2026-10-11.json)"
+    },
+    "BarcelonaPostViewCountQuery": {
+      "kind": "read", "method": "POST", "path": "/graphql/query", "encoding": "application/x-www-form-urlencoded",
+      "docId": "26985031937839290", "variableFields": ["postID"],
+      "executionMode": "pure_http",
+      "states": {"captured": true, "client_exists": true, "credential_propagated": "anonymous_only", "remnant_free": true, "live_replay": false},
+      "notes": "impression_count may be null; null is never coerced to 0.",
+      "upstreamEvidence": "web-api-playbook/service-packs/threads/threads-xhr.mjs probeThreadsViews"
+    },
+    "configure_text_only_post": {
+      "kind": "write", "method": "POST", "path": "/api/v1/media/configure_text_only_post/", "encoding": "application/x-www-form-urlencoded;charset=UTF-8",
+      "fields": ["audience", "barcelona_source_reply_id", "caption", "chain_id", "chain_index", "chain_length", "creator_geo_gating_info", "internal_features", "should_include_permalink", "text_post_app_info", "web_session_id", "is_threads", "is_upload_type_override_allowed", "publish_mode", "upload_id"],
+      "textPostAppInfoKeys": ["community_flair_id", "entry_point", "excluded_inline_media_ids", "fediverse_composer_enabled", "gif_media_id", "is_genai_invocation_post", "is_reply_approval_enabled", "is_spoiler_media", "link_attachment_url", "link_preview_default_render_style", "quoted_post_id", "ranking_info_token", "reply_control", "reply_id", "self_thread_context_id", "snippet_attachment", "special_effects_enabled_str", "tag_header", "text_with_entities"],
+      "authHeaders": ["cookie(sessionid,csrftoken,ds_user_id)", "X-CSRFToken", "X-IG-App-ID", "X-FB-LSD", "X-ASBD-ID?", "X-Web-Session-ID?"],
+      "responseId": "media.pk | posts[0].* | medias[0].*; posts[0].status PENDING => post_client_id (not polled here)",
+      "executionMode": "pure_http (session acquisition is outside this repo)",
+      "states": {"captured": true, "client_exists": true, "credential_propagated": false, "remnant_free": true, "live_replay": false},
+      "upstreamEvidence": "affiliate-content-operations docs/sns-posting-contracts/writers.md (logged-in excerpt keys configure_text_only_post, function f(e){); apps/social-actions/THREADS-OPERATIONS.md records one live external text reply with owner readback (different client)."
+    },
+    "rupload_igphoto": {
+      "kind": "write_upload_only", "method": "POST", "pathPattern": "/rupload_igphoto/fb_uploader_<upload_id>",
+      "executionMode": "pure_http", "wiredIntoCli": false,
+      "states": {"captured": true, "client_exists": "request_builder_only", "credential_propagated": false, "remnant_free": true, "live_replay": false},
+      "upstreamEvidence": "apps/social-actions/evidence/threads-media-upload-live-2026-09-28.json (upload-only HTTP 200, no configure)"
+    },
+    "rupload_igvideo": {
+      "kind": "write_upload_only", "method": "POST", "pathPattern": "/rupload_igvideo/fb_uploader_<numeric upload_id>",
+      "executionMode": "pure_http", "wiredIntoCli": false,
+      "states": {"captured": true, "client_exists": "request_builder_only", "credential_propagated": false, "remnant_free": true, "live_replay": false},
+      "upstreamEvidence": "apps/social-actions/evidence/threads-media-upload-live-2026-09-28.json"
+    },
+    "configure_text_post_app_feed / configure_text_post_app_sidecar (image post)": {
+      "kind": "write", "states": {"captured": "field_names_from_bundle_only", "client_exists": false, "credential_propagated": false, "remnant_free": "unknown", "live_replay": false},
+      "notes": "Upstream image configure answered 200 with a post not visible on the owner profile (2026-09-29) and 'Missing info.' elsewhere; not ported."
+    },
+    "video post configure": {"kind": "write", "states": {"captured": false, "client_exists": false, "credential_propagated": false, "remnant_free": "unknown", "live_replay": false}}
+  }
+}

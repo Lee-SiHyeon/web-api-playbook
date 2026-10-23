@@ -1,0 +1,120 @@
+{
+  "schema": "oliveyoung-remaining-supplemental-live-v1",
+  "checkedAt": "2026-10-15T16:16:47.840Z",
+  "productId": "A000000257097",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "anonymous": true,
+  "cookieSent": false,
+  "credentialsUsed": false,
+  "operations": {
+    "reviewStats": {
+      "ok": true,
+      "reviewCount": 2553,
+      "averageRating": 4.7,
+      "ratingBucketCount": 5,
+      "satisfactionBucketCount": 3,
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "reviews.summary",
+        "checkedAt": "2026-10-15T16:16:47.904Z",
+        "request": {
+          "method": "GET",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/A000000257097/stats",
+          "queryFields": [],
+          "bodyFieldNames": [],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 1685,
+          "responseSha256": "71b8db91edf0943903d9239c904d98d8d450579531dd64e3962db59424125966",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    },
+    "reviewOptionCounts": {
+      "ok": true,
+      "skinFilterAvailable": true,
+      "optionCount": 2,
+      "relatedProductCount": 0,
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "reviews.option_counts",
+        "checkedAt": "2026-10-15T16:16:52.095Z",
+        "request": {
+          "method": "GET",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v2/reviews/options/A000000257097/count",
+          "queryFields": [],
+          "bodyFieldNames": [],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 545,
+          "responseSha256": "83ada9f63fc84e93b8aeb53dd4bf33500c513c38ff164d4bb32874b028a573bd",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    },
+    "reviewSummary": {
+      "ok": true,
+      "featureCount": 3,
+      "positiveRatio": 82,
+      "negativeRatio": 18,
+      "receipt": {
+        "schema": "commerce-api-read-receipt-v1",
+        "service": "oliveyoung-public",
+        "capabilityId": "reviews.summary",
+        "checkedAt": "2026-10-15T16:16:55.753Z",
+        "request": {
+          "method": "GET",
+          "origin": "https://m.oliveyoung.co.kr",
+          "path": "/review/api/v1/reviews/A000000257097/summary",
+          "queryFields": [],
+          "bodyFieldNames": [],
+          "browserUsed": false,
+          "sessionUsed": false,
+          "cookieNamesSent": [],
+          "userAgentSupplied": false,
+          "accountAuthentication": "not_used",
+          "httpStatus": 200,
+          "mime": "application/json",
+          "responseBytes": 786,
+          "responseSha256": "1c222137c45839b9b8e4da0dba2c7ade0f359e4aea81f1ade178eddc50b64ffe",
+          "responseProductMatched": null
+        },
+        "secretsPersistedInEvidence": false
+      }
+    },
+    "photoReviews": {
+      "ok": false,
+      "code": "OLIVEYOUNG_KOREA_PUBLIC_REVIEW_PHOTO_SCHEMA_INVALID",
+      "receipt": {}
+    },
+    "productDescription": {
+      "ok": true,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 22910,
+      "responseSha256": "71934c2987fa0e58e138b5d659775b4c0e458c2b317542c7462a41d66a05e96c",
+      "requestedProductId": "A000000257097",
+      "returnedProductId": null,
+      "productIdentityEchoed": false,
+      "descriptionTextLength": 0,
+      "imageReferenceCount": 57
+    }
+  }
+}

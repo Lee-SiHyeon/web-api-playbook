@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-public",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "executionMode": "pure_http",
+  "implementation": {
+    "lib/commerce/oliveyoung-korea-public.mjs": "569eb70d6c760a153f75c1baf4a696a41509c30116b047b92abfd3c6b4df3f1c",
+    "lib/commerce/oliveyoung-http-transport.mjs": "0371014feb8c17a491860654cbfe44749b9b8f93da9cf44ec1ad95d46ef9ffa9",
+    "scripts/oliveyoung-http-transport.py": "4a030089fa4061439a4d5462c5787a1f49190ae17fc060ada83240ba7eef2183"
+  },
+  "sourceMtimeNotAfterRead": true,
+  "requestCheckedAtBasis": "live_observation_time",
+  "capabilityId": "reviews.summary",
+  "checkedAt": "2026-10-15T16:50:51.695Z",
+  "request": {
+    "method": "GET",
+    "origin": "https://m.oliveyoung.co.kr",
+    "path": "/review/api/v2/reviews/A000000257097/stats",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 1685,
+    "responseSha256": "d372c99948fe07b52d320e146a8183c723583dfc206cb06e7446f3e02d48a223",
+    "checkedAt": "2026-10-15T16:50:51.695Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "optionCounts": {
+    "method": "GET",
+    "origin": "https://m.oliveyoung.co.kr",
+    "path": "/review/api/v2/reviews/options/A000000257097/count",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 545,
+    "responseSha256": "83ada9f63fc84e93b8aeb53dd4bf33500c513c38ff164d4bb32874b028a573bd",
+    "checkedAt": "2026-10-15T16:50:56.412Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "reviewSummary": {
+    "method": "GET",
+    "origin": "https://m.oliveyoung.co.kr",
+    "path": "/review/api/v1/reviews/A000000257097/summary",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 786,
+    "responseSha256": "1c222137c45839b9b8e4da0dba2c7ade0f359e4aea81f1ade178eddc50b64ffe",
+    "checkedAt": "2026-10-15T16:51:01.346Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false,
+    "responseProductMatched": null
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://m.oliveyoung.co.kr/review/api/v2/reviews/A000000257097/stats"
+  },
+  "resultSummary": {
+    "productId": "A000000257097",
+    "reviewCount": 2562,
+    "averageRating": 4.7,
+    "ratingBucketCount": 5,
+    "satisfactionBucketCount": 3,
+    "optionCountRead": true,
+    "optionCountRows": 2,
+    "relatedProductCountRows": 0,
+    "summaryRead": true,
+    "summaryFeatureCount": 3,
+    "rawReviewTextPersisted": false
+  }
+}

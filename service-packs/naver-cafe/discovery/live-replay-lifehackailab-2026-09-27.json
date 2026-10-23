@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-27T04:27:50.769Z",
+  "scope": {
+    "cafeName": "생활이득AI연구소",
+    "cafeId": "31796283",
+    "cafeSlug": "lifehackailab",
+    "writes": false,
+    "readCoverage": ["member", "menus", "list page 1", "article 1", "comments for article 1"]
+  },
+  "mode": "pure_http_stored_session",
+  "browserPhases": {
+    "targetIdentification": "existing Naver Cafe home listing",
+    "sessionBootstrap": "pure HTTP using the protected Naver SSO session",
+    "recurringReads": false,
+    "browserUsedForHttpRequests": false
+  },
+  "authentication": {
+    "provider": "windows_dpapi_current_user",
+    "sameAccountAsExistingVerifiedCafeSession": true,
+    "cafeMember": true,
+    "memberLevelName": "카페매니저",
+    "newProcessAfterBootstrap": true,
+    "separateCafeScopedCredential": true,
+    "secretValuesIncluded": false
+  },
+  "operations": [
+    {
+      "operation": "member",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/CafeMemberInfo.json",
+      "queryFields": ["cafeId"],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 517,
+      "sha256": "442390aef4268f645e75c514b8fd5493d07fbfe5e114751612005cb8fd93044e",
+      "checkedAt": "2026-09-27T04:27:45.075Z",
+      "browserUsedForHTTPRequest": false,
+      "cafeMember": true,
+      "memberLevelName": "카페매니저"
+    },
+    {
+      "operation": "menus",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/SideMenuList",
+      "queryFields": ["cafeId"],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 784,
+      "sha256": "43d369db997fc018e0685a74f99dc38c0c054dadfac0961b55f4386aeb31d8b5",
+      "checkedAt": "2026-09-27T04:27:46.364Z",
+      "browserUsedForHTTPRequest": false,
+      "menuCount": 1,
+      "menus": [{"id": "1", "name": "자유게시판", "menuType": "B", "boardType": "L"}]
+    },
+    {
+      "operation": "list",
+      "method": "GET",
+      "origin": "https://apis.naver.com",
+      "path": "/cafe-web/cafe2/ArticleListV3dot1.json",
+      "queryFields": ["search.clubid", "search.page", "search.perPage", "search.queryType"],
+      "httpStatus": 200,
+      "applicationStatus": "200",
+      "mime": "application/json",
+      "bytes": 2465,
+      "sha256": "eeb04e659051db9d39262dc419cb6d8f2cc4a334c03eedb06698eaf821505d6d",
+      "checkedAt": "2026-09-27T04:27:47.412Z",
+      "browserUsedForHTTPRequest": false,
+      "articleCount": 1,
+      "hasNext": false,
+      "firstArticle": {"articleId": "1", "menuId": "1", "subject": "생활이득AI연구소 카페를 시작합니다."}
+    },
+    {
+      "operation": "article",
+      "method": "GET",
+      "origin": "https://article.cafe.naver.com",
+      "path": "/gw/v4/cafes/:cafeSlug/articles/:articleId",
+      "queryFields": ["useCafeId"],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "bytes": 5151,
+      "sha256": "2eff2d185c5e0c20b258e0b5eeae3e714d71020c82b7c01fe8ba1c30a08a1b29",
+      "checkedAt": "2026-09-27T04:27:48.612Z",
+      "browserUsedForHTTPRequest": false,
+      "articleId": "1",
+      "readable": true,
+      "textCharacters": 184,
+      "commentCount": 0,
+      "contentHtmlSha256": "3dd8b6d2f2f2838bd6e718aee8a4f7757e9ceeeb5434b92559b485dbe5d80e04"
+    },
+    {
+      "operation": "comments",
+      "method": "GET",
+      "origin": "https://article.cafe.naver.com",
+      "path": "/gw/v4/cafes/:cafeId/articles/:articleId/comments",
+      "queryFields": ["fromPopular", "orderBy", "requestFrom"],
+      "httpStatus": 200,
+      "mime": "application/json",
+      "bytes": 2796,
+      "sha256": "a44af0b7f3a73577e9e6aa0cf39b33d649c72a41899d3d4851c5872d63e6ff8d",
+      "checkedAt": "2026-09-27T04:27:49.842Z",
+      "browserUsedForHTTPRequest": false,
+      "articleId": "1",
+      "commentsReturned": 0,
+      "displayCommentCount": 0,
+      "hasNext": false,
+      "hasPrev": false
+    }
+  ],
+  "scopeIsolation": {
+    "existingCafeId": "31714934",
+    "existingCafeSlug": "serenacademmy",
+    "membershipReadVerifiedAfterChange": true,
+    "storedSeparateCredential": true,
+    "publicWrites": 0
+  },
+  "contracts": {
+    "sharedNaverCafeReadContractsCaptured": true,
+    "sourceCapture": "observed-contracts-2026-09-26.json",
+    "targetSpecificBrowserNetworkCapture": false,
+    "targetSpecificDirectReplay": true
+  },
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "remnantFreeScope": "recurring protected HTTP reads; excludes target URL discovery and first session bootstrap",
+    "credential_propagated": true,
+    "live_replay": true
+  },
+  "writeSupport": {
+    "implemented": false,
+    "articleCreateRequests": 0,
+    "commentCreateRequests": 0,
+    "editRequests": 0,
+    "deleteRequests": 0
+  },
+  "renewal": {
+    "automaticExpiryRecovery": "not_verified",
+    "rejectedSession": "reauth_required",
+    "restartBoundary": "new Node process, same Windows user and host"
+  }
+}

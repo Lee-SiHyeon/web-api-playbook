@@ -1,0 +1,696 @@
+{
+  "schemaVersion": 1,
+  "id": "shopping-shorts-ontology",
+  "updatedAt": "2026-09-28",
+  "purpose": "Korean shopping/product-recommendation Shorts (owner 2026-09-28 '쇼핑쇼츠들 분석하고 온톨로지에 원본영상 데이터 수집가능하게 확장해놔'): what format and hooks earn views, how they are monetized, and where their footage comes from (the original video, when it can be found publicly). Used to plan OUR shorts, never to reuse other creators' footage.",
+  "policy": {
+    "stored": "public metadata (title, description links, hashtags, counts, dates), creator-authored comment links, storyboard frame dHashes (64-bit), provenance edges with evidence",
+    "notStored": "video/audio files, full frames, commenter identities or comment text of viewers",
+    "reuse": "footage found here is a technique/provenance reference only; our videos use own footage, licensed/official assets with permission, stock with a commercial license, or AI generation (shorts-production-guide.v1.json)",
+    "access": "anonymous public YouTube web (results, channel shorts tab, watch page, storyboard images, youtubei/v1/next comments continuation). Douyin, TikTok and Instagram need a login or redirect to a shell anonymously: their originals are recorded as notCollectable with the cue that points there, or added by hand as a URL (manualCandidate).",
+    "rate": "sequential requests with a delay (default 1.2 s); stop on a consent/challenge page (YOUTUBE_CHALLENGE)"
+  },
+  "classes": [
+    {
+      "id": "ShoppingShort",
+      "label": "쇼핑 쇼츠",
+      "description": "A ≤180 s vertical video that recommends or demonstrates a buyable product."
+    },
+    {
+      "id": "Channel",
+      "label": "채널",
+      "description": "Uploader; role = curator_repost | brand_official | reviewer_own_footage | seller | unknown."
+    },
+    {
+      "id": "Product",
+      "label": "상품",
+      "description": "The item shown; productTerms from hashtags/description, brand when named."
+    },
+    {
+      "id": "Brand",
+      "label": "브랜드/제조사",
+      "description": "Maker; may own an official channel whose videos are candidate originals."
+    },
+    {
+      "id": "SourceVideo",
+      "label": "원본 후보 영상",
+      "description": "A publicly reachable video that shares frames with the Short or is its likely origin."
+    },
+    {
+      "id": "ProvenanceEvidence",
+      "label": "출처 증거",
+      "description": "A cue (frame hash match, text, locale, label) supporting a derivedFrom edge or a sourceKind hypothesis."
+    },
+    {
+      "id": "MonetizationLink",
+      "label": "수익화 링크",
+      "description": "Affiliate/shop link in the description or a creator comment."
+    },
+    {
+      "id": "TitleFormula",
+      "label": "제목 공식",
+      "description": "Recurring title pattern of shopping Shorts."
+    }
+  ],
+  "relations": [
+    {
+      "id": "uploadedBy",
+      "domain": "ShoppingShort",
+      "range": "Channel"
+    },
+    {
+      "id": "shows",
+      "domain": "ShoppingShort",
+      "range": "Product"
+    },
+    {
+      "id": "madeBy",
+      "domain": "Product",
+      "range": "Brand"
+    },
+    {
+      "id": "derivedFrom",
+      "domain": "ShoppingShort",
+      "range": "SourceVideo",
+      "description": "Frames match an earlier public video (relation: manufacturer_original | earlier_upload)."
+    },
+    {
+      "id": "siblingOf",
+      "domain": "ShoppingShort",
+      "range": "SourceVideo",
+      "description": "Frames match a video uploaded later or by another curator (same footage pool)."
+    },
+    {
+      "id": "monetizedBy",
+      "domain": "ShoppingShort",
+      "range": "MonetizationLink"
+    },
+    {
+      "id": "usesFormula",
+      "domain": "ShoppingShort",
+      "range": "TitleFormula"
+    },
+    {
+      "id": "supportedBy",
+      "domain": "derivedFrom|sourceKind",
+      "range": "ProvenanceEvidence"
+    }
+  ],
+  "sourceKinds": [
+    {
+      "id": "manufacturer_official",
+      "label": "제조사 공식 영상",
+      "collectable": "youtube",
+      "reuseRisk": "permission needed; often granted for sales promotion"
+    },
+    {
+      "id": "seller_supplied",
+      "label": "판매자·수입사 제공(광고)",
+      "collectable": "no (private delivery)",
+      "reuseRisk": "contract"
+    },
+    {
+      "id": "marketplace_listing",
+      "label": "1688·타오바오·알리 상품 영상",
+      "collectable": "no (login/app)",
+      "reuseRisk": "unclear rights; watermark removal common"
+    },
+    {
+      "id": "xiaohongshu_note",
+      "label": "샤오홍슈 노트 영상",
+      "collectable": "no (login wall); trace public YouTube re-uploads with the Chinese product name (--origin-queries)",
+      "reuseRisk": "copyright infringement without permission; 숏템메이커 knowhow: main origin of Korean shopping Shorts footage"
+    },
+    {
+      "id": "douyin_tiktok_creator",
+      "label": "도우인·틱톡 크리에이터",
+      "collectable": "no (login/redirect)",
+      "reuseRisk": "copyright infringement without permission"
+    },
+    {
+      "id": "instagram_reel",
+      "label": "인스타 릴스",
+      "collectable": "no (login wall)",
+      "reuseRisk": "copyright infringement without permission"
+    },
+    {
+      "id": "curator_repost",
+      "label": "다른 큐레이터 재업로드",
+      "collectable": "youtube",
+      "reuseRisk": "infringement chain"
+    },
+    {
+      "id": "own_footage",
+      "label": "직접 촬영",
+      "collectable": "n/a",
+      "reuseRisk": "none"
+    },
+    {
+      "id": "stock_or_ai",
+      "label": "스톡·AI 생성",
+      "collectable": "n/a",
+      "reuseRisk": "license dependent"
+    },
+    {
+      "id": "unknown",
+      "label": "미상",
+      "collectable": "n/a",
+      "reuseRisk": "unknown"
+    }
+  ],
+  "provenanceCues": [
+    {
+      "id": "frame_match_older",
+      "kind": "frame",
+      "points": "derivedFrom",
+      "weight": 3,
+      "description": "≥2 storyboard frames within Hamming ≤10 of an older public video."
+    },
+    {
+      "id": "shared_footage_cluster",
+      "kind": "frame",
+      "points": "not own_footage",
+      "weight": 2,
+      "description": "The same frames appear in Shorts of other channels in one scan (footageClusters): footage from a common outside source."
+    },
+    {
+      "id": "frame_match_newer",
+      "kind": "frame",
+      "points": "siblingOf",
+      "weight": 1
+    },
+    {
+      "id": "foreign_origin_text",
+      "kind": "text",
+      "points": "not own_footage",
+      "weight": 1,
+      "match": "일본|중국|독일|미국|대만|일제|日本|made in",
+      "description": "Description/title names a foreign maker country (sites are usually filmed there)."
+    },
+    {
+      "id": "foreign_hashtag",
+      "kind": "text",
+      "points": "manufacturer_official|douyin_tiktok_creator",
+      "weight": 1,
+      "match": "#[A-Za-z][A-Za-z0-9]{3,}|#[\\u3040-\\u30ff\\u4e00-\\u9fff]{2,}",
+      "description": "Latin/Japanese/Chinese product hashtag: the search term of the origin market."
+    },
+    {
+      "id": "curiosity_formula_title",
+      "kind": "text",
+      "points": "curator_repost",
+      "weight": 1,
+      "description": "Aggregator title formulas (천재가 만든, 신박한, 미친) with no own-use wording."
+    },
+    {
+      "id": "own_use_wording",
+      "kind": "text",
+      "points": "own_footage",
+      "weight": 2,
+      "match": "직접 써|써봤|사용해봤|내돈내산|구매했|리뷰해",
+      "description": "First-person use claims."
+    },
+    {
+      "id": "ad_label",
+      "kind": "label",
+      "points": "seller_supplied",
+      "weight": 2,
+      "match": "광고|유료 광고|협찬|제작 지원|sponsored",
+      "description": "Paid promotion disclosure (description, title, or YouTube paid-promotion flag)."
+    },
+    {
+      "id": "no_monetization_link",
+      "kind": "link",
+      "points": "curator_repost",
+      "weight": 0,
+      "description": "Neutral; views-only channels (Shorts fund / later sponsorship)."
+    }
+  ],
+  "titleFormulas": [
+    {
+      "id": "angry_genius",
+      "label": "○○하다 빡친 천재가 만든 공구",
+      "match": "빡친|빡쳐서|열받은",
+      "family": "curiosity_origin_story"
+    },
+    {
+      "id": "genius_invention",
+      "label": "천재적인/신박한/신개념 공구",
+      "match": "천재|신박|신개념|발명",
+      "family": "curiosity_novelty"
+    },
+    {
+      "id": "country_craft",
+      "label": "일본 장인이/미국이 작정하고 만든",
+      "match": "(일본|독일|미국|중국)\\S*\\s*(장인|기술|각잡고|작정)",
+      "family": "authority_origin"
+    },
+    {
+      "id": "impossible_made_possible",
+      "label": "불가능한 작업을 가능하게 하는",
+      "match": "불가능|안 되던|못 하던|한방에|1초만에|두부 자르듯",
+      "family": "transformation"
+    },
+    {
+      "id": "everyone_switched",
+      "label": "다 갈아탄 이유 / 필수템",
+      "match": "갈아탄|필수템|국룰|다들 쓰는",
+      "family": "social_proof"
+    },
+    {
+      "id": "why_reason",
+      "label": "~하는 이유",
+      "match": "이유$|이유\\b",
+      "family": "curiosity_reason"
+    },
+    {
+      "id": "price_hook",
+      "label": "가격·할인",
+      "match": "\\d[\\d,]*원|최저가|할인|반값|다이소",
+      "family": "price"
+    },
+    {
+      "id": "ranking",
+      "label": "TOP·추천 N선",
+      "match": "TOP|top|베스트|\\d+선|\\d+가지",
+      "family": "ranking"
+    }
+  ],
+  "monetizationLinks": [
+    {
+      "id": "youtube_shopping_affiliate",
+      "source": "watch page productListItemRenderer with affiliateDisclaimerText ('수수료 지급')",
+      "note": "YouTube 쇼핑 제휴 태그: product title, price and merchant (e.g. '쿠팡!') attached to the Short; the dominant model in Korean shopping Shorts (observed 2026-09-28)"
+    },
+    {
+      "id": "youtube_shopping_tag",
+      "source": "productListItemRenderer without an affiliate disclaimer",
+      "note": "own store/brand products tagged"
+    },
+    {
+      "id": "coupang_partners",
+      "host": "link\\.coupang\\.com|coupa\\.ng|coupang\\.com",
+      "disclosure": "쿠팡 ?파트너스"
+    },
+    {
+      "id": "linkprice",
+      "host": "click\\.linkprice\\.com"
+    },
+    {
+      "id": "naver_smartstore",
+      "host": "smartstore\\.naver\\.com|brand\\.naver\\.com|naver\\.me"
+    },
+    {
+      "id": "naver_shopping_connect",
+      "host": "link\\.naver\\.com|shoppingconnect"
+    },
+    {
+      "id": "toss_sharelink",
+      "host": "toss\\.im|tossshopping|sharelink\\.toss"
+    },
+    {
+      "id": "aliexpress",
+      "host": "s\\.click\\.aliexpress\\.com|aliexpress\\.com|a\\.aliexpress"
+    },
+    {
+      "id": "amazon",
+      "host": "amzn\\.to|amazon\\."
+    },
+    {
+      "id": "link_in_bio",
+      "text": "프로필 링크|고정 ?댓글|더보기|링크는 댓글"
+    },
+    {
+      "id": "other_link",
+      "host": "."
+    }
+  ],
+  "genericHashtags": [
+    "shorts",
+    "쇼츠",
+    "공구추천",
+    "공구",
+    "추천템",
+    "꿀템",
+    "살림템",
+    "살림꿀팁",
+    "생활꿀팁",
+    "리뷰",
+    "추천",
+    "쿠팡",
+    "쿠팡추천",
+    "다이소",
+    "신박템",
+    "아이디어상품",
+    "발명품",
+    "정비공구",
+    "공구리뷰",
+    "캠핑용품",
+    "주방템",
+    "자취템",
+    "육아템"
+  ],
+  "knownBrands": [
+    {
+      "id": "anex",
+      "names": [
+        "ANEX",
+        "아넥스",
+        "アネックス",
+        "兼古"
+      ],
+      "officialChannelId": "UCRmVxAkAxrwuIrsMVdxJO7Q",
+      "country": "JP"
+    },
+    {
+      "id": "vessel",
+      "names": [
+        "VESSEL",
+        "베셀",
+        "ベッセル"
+      ],
+      "country": "JP"
+    },
+    {
+      "id": "knipex",
+      "names": [
+        "KNIPEX",
+        "크니펙스"
+      ],
+      "country": "DE"
+    },
+    {
+      "id": "wera",
+      "names": [
+        "Wera",
+        "베라"
+      ],
+      "country": "DE"
+    },
+    {
+      "id": "milwaukee",
+      "names": [
+        "Milwaukee",
+        "밀워키"
+      ],
+      "country": "US"
+    },
+    {
+      "id": "makita",
+      "names": [
+        "Makita",
+        "마끼다",
+        "마키타"
+      ],
+      "country": "JP"
+    },
+    {
+      "id": "dewalt",
+      "names": [
+        "DEWALT",
+        "디월트"
+      ],
+      "country": "US"
+    },
+    {
+      "id": "xiaomi",
+      "names": [
+        "Xiaomi",
+        "샤오미",
+        "小米"
+      ],
+      "country": "CN"
+    },
+    {
+      "id": "daiso",
+      "names": [
+        "다이소",
+        "Daiso"
+      ],
+      "country": "KR"
+    }
+  ],
+  "seeds": {
+    "queries": [
+      "공구 추천 쇼츠",
+      "신박한 공구",
+      "살림템 추천",
+      "주방 꿀템",
+      "다이소 꿀템",
+      "쿠팡 추천템",
+      "자취 꿀템",
+      "캠핑 용품 추천",
+      "차량 용품 추천",
+      "신박한 발명품",
+      "육아템 추천",
+      "청소 꿀템",
+      "화장품 추천 쇼츠",
+      "올리브영 추천템",
+      "외국인 한국 화장품 리뷰",
+      "K뷰티 리뷰"
+    ],
+    "channels": [
+      {
+        "handle": "@기어log",
+        "why": "공구 큐레이션, '빡친 천재가 만든 공구' 공식, 2026-09-28 분석 사례 (g5imPCYepno: ANEX 오프셋 어댑터, 일본 현장 영상, [광고])"
+      }
+    ]
+  },
+  "rankingSignals": {
+    "note": "숏템메이커 레퍼런스 랭킹(속도·가속도·참여 밀도, 48시간, 자동 태그)을 공개 유튜브 데이터로 옮긴 것 (knowhow shorttem-maker-pipeline, 2026-09-28). 임계값은 첫 추정치이고, 같은 영상을 두 번 이상 재조회한 가속도로 보정한다 (task t2).",
+    "windowHours": 48,
+    "metrics": [
+      {
+        "id": "viewsPerHour",
+        "label": "조회 속도",
+        "formula": "views / 게시 후 경과 시간(h)"
+      },
+      {
+        "id": "commentsPerThousandViews",
+        "label": "참여 밀도",
+        "formula": "댓글 수 / 조회 × 1000 (댓글 패널 헤더의 총계)"
+      },
+      {
+        "id": "viewsPerSubscriber",
+        "label": "작은 채널 돌파",
+        "formula": "조회 / 채널 구독자"
+      },
+      {
+        "id": "acceleration",
+        "label": "가속도",
+        "formula": "Δ(viewsPerHour) / Δt, 스냅샷 2회 이상 필요",
+        "status": "planned"
+      }
+    ],
+    "tags": {
+      "rising": {
+        "label": "급상승",
+        "minViewsPerHour": 1000,
+        "requires": "게시 48시간 이내"
+      },
+      "reactive": {
+        "label": "반응 좋음",
+        "minCommentsPerThousandViews": 2
+      },
+      "efficient": {
+        "label": "작은 채널 돌파",
+        "minViewsPerSubscriber": 10
+      },
+      "must_watch": {
+        "label": "꼭 볼 영상",
+        "minOtherTags": 2
+      }
+    },
+    "notCollected": "인스타·틱톡·샤오홍슈 순위는 로그인·챌린지 뒤라 수집하지 않는다 (bot_defense). 원본 영상 자동 수집도 하지 않는다 (copyright·재사용 정책)."
+  },
+  "methodReferences": [
+    {
+      "id": "faceless_kbeauty_shopping_shorts",
+      "knowhowId": "faceless-kbeauty-shopping-shorts",
+      "url": "https://www.youtube.com/watch?v=EQ9oOsJpyjU",
+      "channel": "뉴머니",
+      "publishDate": "2026-09-27",
+      "lengthSeconds": 1483,
+      "claims": [
+        "쇼츠 3개로 1억 1,300만 원 (interviewee's claim, unverified)",
+        "촬영·얼굴 공개 없음",
+        "외국인이 한국 화장품을 리뷰하는 영상 소스 + 쇼핑 태그(제휴)",
+        "AI 대본 + 캡컷 템플릿, 편집 하루 1시간",
+        "조회수 수익보다 제휴(쇼핑 태그·쿠팡 파트너스) 수익이 핵심",
+        "2027 유튜브 수익 창출 기준 변경 언급"
+      ],
+      "chapters": [
+        "01:47 수익 구조",
+        "02:36 2027 수익 창출 기준",
+        "04:21 제휴 수익",
+        "06:32 외국인 화장품 쇼츠가 터지는 이유",
+        "09:47 뷰티 영상 소스 찾는 법",
+        "12:21 AI 대본·캡컷 템플릿",
+        "18:45 쇼핑 태그 위치·업로드 주의"
+      ],
+      "sourceKind": "douyin_tiktok_creator|instagram_reel (foreign reviewers' UGC)",
+      "monetization": [
+        "youtube_shopping_affiliate",
+        "coupang_partners"
+      ],
+      "ourUse": "format/monetization reference only: the footage model reuses other creators' reviews (copyright + YouTube reused-content risk, and 3rd-party review use is banned by 토스 쉐어링크 policy). Our equivalent: own footage or brand-permitted assets + shopping tag.",
+      "evidenceLimit": "description and chapters only; the transcript endpoint needs a token that anonymous requests do not have (timedtext empty, get_transcript 400)",
+      "checkedAt": "2026-09-28"
+    },
+    {
+      "id": "shorttem_maker_pipeline",
+      "knowhowId": "shorttem-maker-pipeline",
+      "url": "https://youtu.be/hrgJYsXFSoQ",
+      "channel": "숏템메이커 쇼핑쇼츠",
+      "publishDate": "2026-08-12",
+      "lengthSeconds": 742,
+      "claims": [
+        "레퍼런스 랭킹: 속도·가속도·참여 밀도, 48시간 이내 댓글 많은 순, 작은 채널 돌파 자동 태그",
+        "장면 분석 → 훅·스토리라인·CTA 대본 → TTS → 자막 → 썸네일 → 플랫폼별 제목·본문·해시태그 → 렌더",
+        "새벽 0~4시 터짐 22% (주장, 미검증)"
+      ],
+      "adopted": [
+        "rankingSignals",
+        "shorts 장면 역할(hook/story/proof/cta) — task"
+      ],
+      "rejected": [
+        "동일 원본 영상 자동 수집",
+        "로그인 플랫폼 크롤링",
+        "외부 SaaS 계정 연결"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "videoId": "g5imPCYepno",
+      "channel": "기어로그",
+      "title": "불가능한 작업을 가능하게 해주는 공구",
+      "views": 880949,
+      "lengthSeconds": 29,
+      "product": "ANEX 오프셋 어댑터 AOA-19",
+      "sourceKindHypothesis": "seller_supplied|manufacturer_official",
+      "evidence": [
+        "일본 현장(실외기·배관) 세로 영상",
+        "원본 자막 가림 띠",
+        "[광고] 표기",
+        "설명에 '일본기술과 일본제조'",
+        "해시태그 #OffsetAdapter"
+      ],
+      "originFound": false,
+      "checkedAt": "2026-09-28"
+    }
+  ],
+  "videoFormats": [
+    {
+      "id": "price_gap_reveal",
+      "label": "가격 차이 공개",
+      "titleFamily": "curiosity_reason",
+      "hookExample": "이 롤케이크, 11번가보다 왜 이렇게 싸지?",
+      "beats": [
+        "hook (letter_fly_through)",
+        "bars: seller prices incl. shipping",
+        "gap callout (circle_pop_transition)",
+        "social proof",
+        "그래서 line",
+        "end card: check time"
+      ],
+      "needs": [
+        "two or more seller prices",
+        "shipping per seller"
+      ],
+      "length": "18-25s",
+      "aspect": "1080x1920",
+      "disclosure": "top safe area first to last frame + spoken in first 3 s (KFTC; docs/shop-video-platform-rules-2026-10-03.md)",
+      "evidence": "every number from the deal file; no first-person use claims; no unproven superlatives (역대 최저, 제일 쌀 때)"
+    },
+    {
+      "id": "why_everyone_buys",
+      "label": "다들 사는 이유",
+      "titleFamily": "social_proof",
+      "hookExample": "한 달에 8,000명이 이 롤케이크를 사는 이유",
+      "beats": [
+        "hook with buyer count (text_sandwich)",
+        "reason 1: price vs rivals",
+        "reason 2: review count/rating",
+        "reason 3: delivery (rocket fresh)",
+        "그래서 line",
+        "end card"
+      ],
+      "needs": [
+        "monthly buyers or review count from the listing"
+      ],
+      "length": "18-25s",
+      "aspect": "1080x1920",
+      "disclosure": "top safe area first to last frame + spoken in first 3 s (KFTC; docs/shop-video-platform-rules-2026-10-03.md)",
+      "evidence": "every number from the deal file; no first-person use claims; no unproven superlatives (역대 최저, 제일 쌀 때)"
+    },
+    {
+      "id": "membership_math",
+      "label": "멤버십 계산기",
+      "titleFamily": "curiosity_reason",
+      "hookExample": "와우 회원이면 이 롤케이크 얼마나 싸질까?",
+      "beats": [
+        "hook (screen_dive into a calculator UI)",
+        "general price + shipping",
+        "member price + free shipping",
+        "difference ticker",
+        "vs rival seller",
+        "그래서 line",
+        "end card"
+      ],
+      "needs": [
+        "member price evidence",
+        "general price and shipping"
+      ],
+      "length": "18-25s",
+      "aspect": "1080x1920",
+      "disclosure": "top safe area first to last frame + spoken in first 3 s (KFTC; docs/shop-video-platform-rules-2026-10-03.md)",
+      "evidence": "every number from the deal file; no first-person use claims; no unproven superlatives (역대 최저, 제일 쌀 때)"
+    },
+    {
+      "id": "guess_the_price",
+      "label": "가격 맞히기 퀴즈",
+      "titleFamily": "curiosity_reason",
+      "hookExample": "11번가 24,030원짜리 롤케이크, 쿠팡에선 얼마일까?",
+      "beats": [
+        "hook with the rival price",
+        "3-2-1 countdown (pixel_dissolve)",
+        "reveal the deal price",
+        "gap callout",
+        "comment prompt (어디서 사세요?)",
+        "end card"
+      ],
+      "needs": [
+        "rival price",
+        "deal price"
+      ],
+      "replyAngle": "ask viewers where they buy",
+      "length": "18-25s",
+      "aspect": "1080x1920",
+      "disclosure": "top safe area first to last frame + spoken in first 3 s (KFTC; docs/shop-video-platform-rules-2026-10-03.md)",
+      "evidence": "every number from the deal file; no first-person use claims; no unproven superlatives (역대 최저, 제일 쌀 때)"
+    },
+    {
+      "id": "loss_aversion",
+      "label": "모르면 손해",
+      "titleFamily": "price",
+      "hookExample": "같은 롤케이크인데 12,830원 더 내고 있다면?",
+      "beats": [
+        "hook: the loss amount (letter_fly_through)",
+        "side-by-side same product, two prices",
+        "why: shipping/membership",
+        "그래서 line",
+        "end card"
+      ],
+      "needs": [
+        "gap computed from verified prices"
+      ],
+      "note": "price numbers in line 1 are allowed here only because the loss number is the hook; feed hook rule says price openers are weaker, test it",
+      "length": "18-25s",
+      "aspect": "1080x1920",
+      "disclosure": "top safe area first to last frame + spoken in first 3 s (KFTC; docs/shop-video-platform-rules-2026-10-03.md)",
+      "evidence": "every number from the deal file; no first-person use claims; no unproven superlatives (역대 최저, 제일 쌀 때)"
+    }
+  ],
+  "videoFormatsSource": "owner 2026-10-04 \"다른 쇼핑 영상들 포맷들부터 온톨로지 반영해서 여러 버전으로 만들어봐\"; families from titleFormulas, hooks from hook-ontology, motion names from code-video-references namedMotionTechniques"
+}

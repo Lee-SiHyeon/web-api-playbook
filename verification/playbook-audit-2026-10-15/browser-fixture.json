@@ -1,0 +1,89 @@
+{
+  "schema": "web-api-browser-adoption-audit-v1",
+  "state": "blocked_runtime",
+  "agentBrowserVersion": "0.39.1",
+  "versionMeasuredBy": "agent-browser --version",
+  "nativeBinarySha256": "af1ff5f2afd5c187fb50ac3bbc1e7114baadc180d67cef63f644af9031be5049",
+  "installation": "npm --prefix work/browser-tools --no-save --ignore-scripts agent-browser@0.39.1",
+  "productionSitesTested": 0,
+  "completedScenarioSteps": 0,
+  "existingUserProfileUsed": false,
+  "rustCompiledLocally": false,
+  "reaRuntimeExecuted": false,
+  "attempts": [
+    {
+      "channel": "canary",
+      "browserVersion": "158.0.8105.0",
+      "report": {
+        "schema": "web-api-browser-fixture-v1",
+        "checkedAt": "2026-10-15T09:38:56.925Z",
+        "scope": "isolated_local_synthetic_fixture",
+        "ok": false,
+        "code": "FIXTURE_BROWSER_COMMAND_FAILED",
+        "completedSteps": [],
+        "commands": [
+          {
+            "command": "open",
+            "exitCode": 1,
+            "success": false
+          },
+          {
+            "command": "close",
+            "exitCode": 1,
+            "success": false
+          }
+        ],
+        "cleanupSucceeded": false,
+        "productionSitesTested": 0
+      }
+    },
+    {
+      "channel": "stable",
+      "browserVersion": "155.0.8059.79",
+      "report": {
+        "schema": "web-api-browser-fixture-v1",
+        "checkedAt": "2026-10-15T09:50:57.535Z",
+        "scope": "isolated_local_synthetic_fixture",
+        "ok": false,
+        "code": "FIXTURE_BROWSER_COMMAND_FAILED",
+        "completedSteps": [],
+        "commands": [
+          {
+            "command": "open",
+            "exitCode": 1,
+            "success": false,
+            "code": "outcome_unknown"
+          },
+          {
+            "command": "close",
+            "exitCode": 1,
+            "success": false,
+            "code": "outcome_unknown"
+          }
+        ],
+        "cleanupSucceeded": false,
+        "productionSitesTested": 0
+      }
+    }
+  ],
+  "additionalCanaryDiagnostic": {
+    "command": "open about:blank",
+    "code": "outcome_unknown",
+    "socketError": 10060,
+    "automaticRetry": false,
+    "close": {
+      "code": "outcome_unknown",
+      "socketError": 10060,
+      "exitCode": 1
+    }
+  },
+  "cleanup": {
+    "runnerCloseConfirmed": false,
+    "laterMatchingProfileProcessesObserved": 0,
+    "temporaryDirectoriesRemoved": false,
+    "temporaryDirectoryCount": 3,
+    "manualCleanupBlockedByAutomaticApprovalReview": true
+  },
+  "finalRunnerLiveVerified": false,
+  "attemptsUsedEarlierDiagnosticWrapper": true
+}

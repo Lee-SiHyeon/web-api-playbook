@@ -1,0 +1,85 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "oliveyoung-public",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "authenticated": false,
+  "secretsPersistedInEvidence": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "executionMode": "pure_http",
+  "implementation": {
+    "lib/commerce/oliveyoung-korea-public.mjs": "4397ce4e35dca93218eebf007d5d219e1617dc3cec7437d65b406e20c391b894",
+    "lib/commerce/oliveyoung-http-transport.mjs": "0371014feb8c17a491860654cbfe44749b9b8f93da9cf44ec1ad95d46ef9ffa9",
+    "scripts/oliveyoung-http-transport.py": "4a030089fa4061439a4d5462c5787a1f49190ae17fc060ada83240ba7eef2183"
+  },
+  "sourceMtimeNotAfterRead": true,
+  "requestCheckedAtBasis": "live_observation_time",
+  "capabilityId": "catalog.search_pagination",
+  "checkedAt": "2026-10-15T16:12:20.656Z",
+  "request": {
+    "method": "POST",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/search/NewMainSearchApi.do",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 13219,
+    "responseSha256": "907d52f97dcf11c5c6d46a81a23c53d53b6f2ef0addff0136a1259a9aa2a549f",
+    "checkedAt": "2026-10-15T16:12:20.656Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false
+  },
+  "secondPage": {
+    "method": "POST",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/search/NewMainSearchApi.do",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 13155,
+    "responseSha256": "94216c1aaf8d49c217859157bf961dede2958d4cc24a577eab287e841cce9186",
+    "checkedAt": "2026-10-15T16:12:26.340Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false
+  },
+  "lastPage": {
+    "method": "POST",
+    "origin": "https://www.oliveyoung.co.kr",
+    "path": "/store/search/NewMainSearchApi.do",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 7584,
+    "responseSha256": "db70c62f01c0672a0192b07965f9eef0896b723b95978ace1fcc6447c93b7caf",
+    "checkedAt": "2026-10-15T16:12:31.497Z",
+    "anonymous": true,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "browserUsed": false
+  },
+  "contractProvenance": {
+    "kind": "browser_xhr_observed",
+    "sourceURL": "https://www.oliveyoung.co.kr/store/search/NewMainSearchApi.do"
+  },
+  "resultSummary": {
+    "pageSize": 10,
+    "pagesSampled": [
+      1,
+      2,
+      62
+    ],
+    "offsets": [
+      0,
+      10,
+      610
+    ],
+    "totalProducts": 615,
+    "lastPageProducts": 5,
+    "terminalHasNext": false,
+    "sourceExhausted": false,
+    "complete": false,
+    "coverage": "sampled_offsets_not_full_walk"
+  }
+}

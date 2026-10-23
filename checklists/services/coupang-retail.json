@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "service": "coupang-retail",
+  "description": "Observed low-price RSC product search with a DPAPI-protected public browsing session. This manifest covers search only; whole-context browserless bootstrap and renewal remain unverified.",
+  "capabilities": [
+    {
+      "id": "catalog.search",
+      "title": "Search main product cards through the maintained protected-session RSC HTTP client",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/coupang-retail-session.mjs",
+            "exports": [
+              "searchCoupangRetail",
+              "importCoupangRetailSession",
+              "coupangRetailStatus"
+            ]
+          },
+          {
+            "path": "lib/retail/coupang-rsc.mjs",
+            "exports": [
+              "buildCoupangRscInput",
+              "parseCoupangRsc"
+            ]
+          },
+          {
+            "path": "lib/retail/coupang-signature.mjs",
+            "exports": [
+              "renewCoupangSignature"
+            ]
+          },
+          {
+            "path": "lib/retail/coupang-response.mjs",
+            "exports": [
+              "inspectCoupangResponse"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/coupang-retail-session.mjs",
+            "tokens": [
+              "searchCoupangRetail",
+              "search",
+              "renew"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/coupang-retail-session.test.mjs",
+          "tests/coupang-rsc.test.mjs",
+          "tests/coupang-retail-checklist.test.mjs",
+          "tests/coupang-retail-response-analysis.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "coupang-retail-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.coupang.com",
+          "path": "/np/search",
+          "mime": "text/x-component",
+          "files": [
+            "verification/coupang-recheck-2026-10-15/search-proof.json",
+            "verification/coupang-recheck-2026-10-15/search.json"
+          ],
+          "hashPaths": [
+            "scripts/coupang-retail-session.mjs",
+            "lib/retail/coupang-retail-session.mjs",
+            "lib/retail/coupang-rsc.mjs",
+            "lib/retail/coupang-signature.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        },
+        {
+          "kind": "coupang-retail-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.coupang.com",
+          "path": "/np/search",
+          "mime": "text/x-component",
+          "files": [
+            "verification/remaining-coupang-2026-10-16/search-after-handoff-proof-20261015T162439Z.json",
+            "verification/remaining-coupang-2026-10-16/search-after-handoff-20261015T1623Z.json"
+          ],
+          "hashPaths": [
+            "scripts/coupang-retail-session.mjs",
+            "lib/retail/coupang-retail-session.mjs",
+            "lib/retail/coupang-rsc.mjs",
+            "lib/retail/coupang-signature.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        },
+        {
+          "kind": "coupang-retail-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.coupang.com",
+          "path": "/np/search",
+          "mime": "text/x-component",
+          "files": [
+            "verification/remaining-coupang-2026-10-16/forced-renew-after-handoff-proof-20261015T163929Z.json",
+            "verification/remaining-coupang-2026-10-16/renew-after-handoff-20261015T1625Z.json"
+          ],
+          "hashPaths": [
+            "scripts/coupang-retail-session.mjs",
+            "lib/retail/coupang-retail-session.mjs",
+            "lib/retail/coupang-rsc.mjs",
+            "lib/retail/coupang-signature.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        },
+        {
+          "kind": "coupang-retail-session-read-v1",
+          "method": "GET",
+          "readOnly": true,
+          "origin": "https://www.coupang.com",
+          "path": "/np/search",
+          "mime": "text/x-component",
+          "files": [
+            "verification/remaining-coupang-2026-10-16/search-after-cookie-scope-fix-proof-20261015T164322Z.json",
+            "verification/remaining-coupang-2026-10-16/search-after-cookie-scope-fix-20261015T1643Z.json"
+          ],
+          "hashPaths": [
+            "scripts/coupang-retail-session.mjs",
+            "lib/retail/coupang-retail-session.mjs",
+            "lib/retail/coupang-rsc.mjs",
+            "lib/retail/coupang-signature.mjs",
+            "lib/scoped-session.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Use coupang-retail-session search, not coupang-public retail-search --anonymous, for this capability. Session preflight failures are not HTTP 403. Initial/rebootstrap uses the authorized browser; recurring reads and x-cp-s refresh use HTTP. The local six-hour bound remains; opaque context expiry recovery, full catalog pagination, account pricing and product detail are outside this proof. 2026-10-17 revalidation: HTML/JSON/Flight inspection and URL-scoped full-cookie import are implemented with offline regressions. Prior live evidence remains historical after code changes; no new successful Vercel business read or durable full-context renewal is claimed. Observed DOM-card price extraction has offline fixture proof; current live HTML business success remains unverified."
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# 세션·토큰 갱신 (허용된 경로만)
+
+확인일: 2026-10-14. 인증 수명주기는 [client-reliability.md](client-reliability.md)와 [browserless-login-flow.md](browserless-login-flow.md)를 따른다. 이 문서는 해외 커머스에 맞춰 **허용된 갱신만** 요약한다.
+
+## 허용
+
+| 종류 | 방법 | 예 |
+|---|---|---|
+| OAuth client credentials | 문서화된 token 엔드포인트로 client id/secret → access token, 만료 전 재발급 | Amazon Creators API LwA (`api.amazon.com/auth/o2/token` 등) |
+| 서명된 앱 호출 | AppKey/AppSecret으로 매 요청 서명 (세션 쿠키 없음) | AliExpress Affiliate TOP/IOP |
+| 네트워크 publisher 토큰 | Awin/Impact/Rakuten Advertising이 발급한 토큰을 메모리/stdin으로 주입 | 기존 `lib/commerce/awin.mjs`, `impact.mjs` |
+| 서버 Set-Cookie 회전 | **이미 허용된 origin**에서 응답이 내려준 쿠키를 같은 jar에 갱신 | 검증된 공개 세션 부트스트랩에 한함 |
+
+갱신 성공 후 **안전한 GET 한 번**만 재시도한다. 쓰기는 재시도하지 않는다.
+
+## 금지
+
+- 스토어프런트 로그인 폼을 헤드리스로 돌리거나, 이메일 OTP·SMS를 자동화해 “세션을 새로 뽑기”.
+- 다른 서비스·다른 계정의 쿠키를 origin에 붙이기.
+- refresh를 실패할 때마다 무한 반복하기. 한 번 실패하면 `reauth_required`로 남기고 사람에게 정상 로그인을 요청한다.
+
+## 기록
+
+비밀 값을 남기지 말고 `provider`, `lastAuthenticatedCheckAt`, `expiresAt`(알 때), `reauthRequired`만 남긴다.

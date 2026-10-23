@@ -1,0 +1,13 @@
+{
+  "operation": "search",
+  "input": { "query": { "q": "example", "page": 1 } },
+  "pagination": {
+    "kind": "page",
+    "inputPath": "/query/page",
+    "itemsPointer": "/items",
+    "nextPointer": "/nextPage",
+    "idPointer": "/id",
+    "start": 1
+  },
+  "budget": { "maxPages": 5, "maxItems": 100, "deadlineMs": 20000 }
+}

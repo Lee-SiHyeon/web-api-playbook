@@ -1,0 +1,104 @@
+{
+  "observedAt": "2026-09-30T01:50:32.961Z",
+  "complete": true,
+  "scope": "default_promotion_page_AUTO_SORT_PRODUCT_layouts",
+  "productCount": 70,
+  "pricedCount": 70,
+  "statusCounts": {
+    "listed_active": 66,
+    "sold_out": 4
+  },
+  "layouts": [
+    {
+      "layoutId": "I_6abc658be7fb2313fb2f2022",
+      "title": "스페셜딜",
+      "startAt": "2026-09-29T02:00:00.000Z",
+      "endAt": "2026-09-30T01:59:59.000Z",
+      "pages": 4,
+      "returnedItems": 70,
+      "complete": true,
+      "stopReason": "hasNext_false"
+    }
+  ],
+  "travelTitleCandidateCount": 0,
+  "travelTitleCandidates": [],
+  "travelClassificationVerified": false,
+  "receipts": [
+    {
+      "method": "GET",
+      "origin": "https://shopping.naver.com",
+      "path": "/promotion",
+      "queryFields": [],
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "bytes": 107046,
+      "sha256": "fd28119a2595416cb3eb2f3f767fd52cbe88af4f42f0a3bb691556778076b366",
+      "checkedAt": "2026-09-30T01:50:28.629Z"
+    },
+    {
+      "method": "GET",
+      "origin": "https://vertical-api.shopping.naver.com",
+      "path": "/v1/waffle-maker/layouts/I_6abc658be7fb2313fb2f2022/auto-sort-products",
+      "queryFields": [
+        "first",
+        "page",
+        "type"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "bytes": 46386,
+      "sha256": "e56306ed4585cf1cb44128dfb2174b366b40b3a218df5bd7ae669b5ea06d383b",
+      "checkedAt": "2026-09-30T01:50:29.807Z"
+    },
+    {
+      "method": "GET",
+      "origin": "https://vertical-api.shopping.naver.com",
+      "path": "/v1/waffle-maker/layouts/I_6abc658be7fb2313fb2f2022/auto-sort-products",
+      "queryFields": [
+        "page",
+        "type"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "bytes": 47061,
+      "sha256": "bbd2733eee35927e3e508f608f2bd338e31f3c85d77d05a7728d8633b145eacc",
+      "checkedAt": "2026-09-30T01:50:30.861Z"
+    },
+    {
+      "method": "GET",
+      "origin": "https://vertical-api.shopping.naver.com",
+      "path": "/v1/waffle-maker/layouts/I_6abc658be7fb2313fb2f2022/auto-sort-products",
+      "queryFields": [
+        "page",
+        "type"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "bytes": 47106,
+      "sha256": "da3690ce93ee9578164f08e32b9552c278b5fb7049661a1a44078715d51e66dd",
+      "checkedAt": "2026-09-30T01:50:31.912Z"
+    },
+    {
+      "method": "GET",
+      "origin": "https://vertical-api.shopping.naver.com",
+      "path": "/v1/waffle-maker/layouts/I_6abc658be7fb2313fb2f2022/auto-sort-products",
+      "queryFields": [
+        "page",
+        "type"
+      ],
+      "status": 200,
+      "contentType": "application/json",
+      "bytes": 23976,
+      "sha256": "2e3bfccf344e869e3f3540098146df629b058bafd82c557092598985e4e68fb3",
+      "checkedAt": "2026-09-30T01:50:32.961Z"
+    }
+  ],
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "checkoutPriceVerified": false,
+  "historicalLowVerified": false,
+  "runtime": "Node.js 24",
+  "sourceHashes": {
+    "adapters/naver-shopping-deals.mjs": "bcb21b914fa56d1712747b37a8680b9d165b8bfc48469a824d2492a7cd8ef37c"
+  }
+}

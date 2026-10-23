@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "id": "place-ontology",
+  "updatedAt": "2026-09-28",
+  "purpose": "국내 여행·맛집 추천 (owner 2026-09-27 '국내 여행 맛집추천관련 온톨로지 수집 데이터가 있나'): places, menus, ratings and review samples from the verified place readers, joined to the travel-story ontology (Place/ItineraryStop) and to 맛집 유튜버 따라가기 video graphs, so 맛집 posts cite checked facts and a map.",
+  "classes": [
+    {
+      "id": "Place",
+      "label": "장소",
+      "description": "A restaurant/cafe/attraction; identity = (source, sourcePlaceId). Same place across Kakao/Naver is linked by sameAs only when name + coordinates (≤50 m) + address agree."
+    },
+    {
+      "id": "Area",
+      "label": "지역",
+      "description": "시/구/동 or a named area (성수, 을지로) used in search queries and titles."
+    },
+    {
+      "id": "MenuItem",
+      "label": "메뉴",
+      "description": "Name and price as displayed by the source at observedAt; prices are observations, never current guarantees."
+    },
+    {
+      "id": "RatingAggregate",
+      "label": "평점 집계",
+      "description": "Rating value and count per source; Kakao and Naver scales are kept separate."
+    },
+    {
+      "id": "ReviewSample",
+      "label": "리뷰 표본",
+      "description": "First page only; no author identity, contact data redacted; used for themes (웨이팅, 양, 주차) not quotes with names."
+    },
+    {
+      "id": "OpeningHours",
+      "label": "영업시간",
+      "description": "As displayed; holidays/break times kept verbatim."
+    },
+    {
+      "id": "VideoMention",
+      "label": "영상 언급",
+      "description": "A place shown in a public video (맛집 유튜버) with timestamp; from video-story graphs."
+    },
+    {
+      "id": "Offer",
+      "label": "예약·상품",
+      "description": "Bookable product near/at the place (마이리얼트립 국내 투어·숙소, 캐치테이블 등) — monetization, verified separately."
+    }
+  ],
+  "relations": [
+    {
+      "id": "locatedIn",
+      "domain": "Place",
+      "range": "Area"
+    },
+    {
+      "id": "serves",
+      "domain": "Place",
+      "range": "MenuItem"
+    },
+    {
+      "id": "ratedBy",
+      "domain": "Place",
+      "range": "RatingAggregate"
+    },
+    {
+      "id": "sampledReview",
+      "domain": "Place",
+      "range": "ReviewSample"
+    },
+    {
+      "id": "opens",
+      "domain": "Place",
+      "range": "OpeningHours"
+    },
+    {
+      "id": "sameAs",
+      "domain": "Place",
+      "range": "Place"
+    },
+    {
+      "id": "mentionedIn",
+      "domain": "Place",
+      "range": "VideoMention"
+    },
+    {
+      "id": "near",
+      "domain": "Place",
+      "range": "Offer"
+    },
+    {
+      "id": "isStop",
+      "domain": "Place",
+      "range": "travel-story-ontology ItineraryStop"
+    }
+  ],
+  "sources": [
+    {
+      "id": "kakao_map",
+      "capability": "service-capabilities place_kakao_map",
+      "reader": "npm run places:read -- kakao-search --query \"<지역> 맛집\" | kakao-place --id <id>",
+      "provides": [
+        "search (first 15)",
+        "detail: address, category, coordinates, phone, homepage, hours, menu, ratings, review counts",
+        "visitor reviews first page (20) when allowed"
+      ]
+    },
+    {
+      "id": "naver_place",
+      "capability": "service-capabilities place_naver",
+      "reader": "npm run places:read -- naver-summary --id <placeId>",
+      "provides": [
+        "summary by known Place ID: name, category, coordinates, hours, visitor rating/count, blog-review total"
+      ],
+      "missing": [
+        "search",
+        "review text"
+      ]
+    },
+    {
+      "id": "youtube_food_creators",
+      "capability": "video-story graphs (youtuber-follow)",
+      "provides": [
+        "places shown in public videos with timestamps"
+      ],
+      "note": "맛집 유튜버 따라가기: 성시경 먹을텐데, 풍자 또간집 등 — public metadata/captions only"
+    }
+  ],
+  "dataPolicy": [
+    "Store only what the verified readers return; no review author identities, profile IDs or images; contact data in review text is redacted by the reader.",
+    "Menu prices and hours are dated observations; a post says '(2026-09-28 기준)'.",
+    "Ratings are shown with source and count ('카카오맵 4.3, 리뷰 812개'); Kakao and Naver scores are never averaged together.",
+    "No pagination beyond what the reader implements; no gate tokens or captcha headers."
+  ],
+  "contentUse": {
+    "postFormat": "format-references.v1.json 맛집: 소제목 뒤 사진 2~3장 나란히(imageStrip), 짧은 가운데 정렬 문장, 지도(placesMap), 예약·상품은 링크 카드 2~4개",
+    "requiredFacts": [
+      "address",
+      "hours",
+      "at least one menu price with date",
+      "rating with source and count"
+    ],
+    "hooks": [
+      "지역+상황 (성수 데이트, 을지로 혼밥)",
+      "유튜버가 간 곳 따라가기",
+      "웨이팅 없이 가는 시간대 (review themes)"
+    ],
+    "monetization": [
+      "마이리얼트립 국내 투어·숙소 (links need owner approval)",
+      "애드포스트"
+    ]
+  },
+  "seeds": {
+    "areas": [
+      "성수",
+      "을지로",
+      "용산",
+      "연남",
+      "익선동",
+      "부산 해운대",
+      "제주 애월",
+      "강릉",
+      "전주 한옥마을",
+      "경주 황리단길"
+    ]
+  },
+  "gaps": [
+    {
+      "id": "naver_search",
+      "note": "Naver Place search XHR not captured; use Kakao search to find candidates, then Naver summary by ID when known"
+    },
+    {
+      "id": "collector",
+      "note": "no batch collector/brief yet — next: place-brief.mjs (area → Kakao top 15 → details → review themes → brief)"
+    },
+    {
+      "id": "uncommitted_reader",
+      "note": "place-info adapter is Codex's uncommitted work; commit before scheduled use"
+    }
+  ],
+  "externalSources": [
+    {
+      "url": "https://schema.org/Place",
+      "kind": "Schema.org",
+      "rule": "Defines the Place type and identity-related properties such as sameAs.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://schema.org/TouristAttraction",
+      "kind": "Schema.org",
+      "rule": "Provides a standard type for a tourist attraction as a kind of place.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://schema.org/AggregateRating",
+      "kind": "Schema.org",
+      "rule": "Models an aggregate rating and review count; it does not require every place record to have a rating.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://schema.org/Offer",
+      "kind": "Schema.org",
+      "rule": "Provides fields for offer price, currency, and availability.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    },
+    {
+      "url": "https://developers.kakao.com/docs/ko/local/dev-guide",
+      "kind": "Official Kakao developer documentation",
+      "rule": "Documents Local API search/detail fields including place ID, name, category, phone, address, coordinates, and place URL.",
+      "checkedAt": "2026-09-29",
+      "linkStatus": 200
+    }
+  ],
+  "sourcedAdditions": [
+    {
+      "path": "/sources/kakao_map/url",
+      "value": "https://developers.kakao.com/docs/ko/local/dev-guide",
+      "sourceUrl": "https://developers.kakao.com/docs/ko/local/dev-guide",
+      "why": "Links the existing Kakao source entry to the official Local API documentation.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    },
+    {
+      "path": "/dataPolicy/-",
+      "value": "Treat the 50 m coordinate cutoff as a local candidate-matching heuristic, not a standard; assert sameAs only after an unambiguous identity match.",
+      "sourceUrl": "https://schema.org/Place",
+      "why": "Schema.org defines identity links but no geographic-distance threshold. This makes the existing cutoff's status explicit.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    },
+    {
+      "path": "/contentUse/requiredFacts/3",
+      "value": "Rating with its source and count when available; otherwise omit the rating.",
+      "sourceUrl": "https://schema.org/AggregateRating",
+      "why": "Avoids requiring a rating when no supported rating record exists.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    },
+    {
+      "path": "/dataPolicy/-",
+      "value": "For an Offer, retain the source, currency, availability or validity, and observation time; do not present an expired or undated offer as current.",
+      "sourceUrl": "https://schema.org/Offer",
+      "why": "Adds provenance and freshness requirements for price or booking offers.",
+      "proposedBy": "codex research 2026-09-29 (owner: 온톨로지 보강)",
+      "status": "proposed_review"
+    }
+  ],
+  "reviewFlags": [
+    "Lines 7–15: the 50 m cutoff is an internal heuristic; no cited standard supports that exact threshold.",
+    "Lines 28–31: the Kakao source description includes hours, menu, ratings, and reviews, but the official Local API guide documents core place fields rather than those additional fields. Keep those capabilities attributed only to a separately verified reader if applicable.",
+    "Not verified: no live Kakao or Naver place record was read; any separate page-reader implementation was not checked."
+  ]
+}

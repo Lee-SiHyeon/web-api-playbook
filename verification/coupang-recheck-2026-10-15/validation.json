@@ -1,0 +1,62 @@
+{
+  "schema": "coupang-recheck-validation-v1",
+  "checkedAt": "2026-10-15T11:49:07.022Z",
+  "offlineRegression": {
+    "command": "node --import ./scripts/coupang-offline-guard.mjs --test tests/coupang-retail-session.test.mjs tests/coupang-rsc.test.mjs tests/coupang-retail-checklist.test.mjs tests/capability-checklist.test.mjs tests/playbook-audit.test.mjs",
+    "tests": 26,
+    "passed": 26,
+    "failed": 0,
+    "skipped": 0,
+    "guard": "global fetch and real DPAPI calls denied in regression process"
+  },
+  "sourceHashReadback": {
+    "files": 5,
+    "allMatched": true
+  },
+  "executionReadback": [
+    {
+      "name": "search",
+      "status": 200,
+      "products": 60,
+      "projectionHashMatched": true,
+      "wireCookieMatched": true
+    },
+    {
+      "name": "signature-renewal",
+      "status": 200,
+      "products": 54,
+      "projectionHashMatched": true,
+      "wireCookieMatched": true
+    },
+    {
+      "name": "expired-auto-renewal",
+      "status": 200,
+      "products": 60,
+      "projectionHashMatched": true,
+      "wireCookieMatched": true
+    }
+  ],
+  "inventory": {
+    "registeredServices": 41,
+    "registeredCapabilities": 379,
+    "maintainedSearchCli": {
+      "path": "scripts/coupang-retail-session.mjs",
+      "declaredInManifest": true,
+      "implementationReferenced": false
+    }
+  },
+  "checklist": {
+    "service": "coupang-retail",
+    "status": "recorded_live",
+    "strictPassed": true,
+    "currentRemoteStateRecheckedByChecklist": false
+  },
+  "independentReview": {
+    "completed": true,
+    "followupFixed": "require DPAPI persistence and reject raw credential fields in the Coupang evidence validator"
+  },
+  "auditImplementation": {
+    "lib/capability-checklist.mjs": "2fbdd26b1dc55d3e96a2996760eb4f8c90792a9bb4c0e10574b606c2e4f0dd15",
+    "tests/coupang-retail-checklist.test.mjs": "ec13216e2f49eaea07fc9af109c59c083e6a1276dc358a1e18c6866a69dd7495"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema": "web-api-coupang-public-result-v1",
+  "ok": true,
+  "checkedAt": "2026-10-15T01:31:23.903Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "anonymous": true,
+  "writesSubmitted": 0,
+  "request": {
+    "origin": "https://trip.coupang.com",
+    "path": "/api/review/web/products/178103674/reviews",
+    "queryFields": [
+      "page",
+      "sortBy"
+    ],
+    "method": "GET",
+    "cookieSent": false,
+    "credentialsUsed": false,
+    "browserUsed": false,
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 23285,
+    "challengeSignal": false
+  },
+  "data": {
+    "kind": "travel_reviews",
+    "pagination": {
+      "page": 0,
+      "countPerPage": 5,
+      "totalCount": 26,
+      "totalPages": 6,
+      "hasNext": null,
+      "hasPrevious": null
+    },
+    "reviews": [
+      {
+        "reviewId": "929311272",
+        "productId": "178103674",
+        "rating": 5,
+        "itemName": "[제주] 상효원 입장권",
+        "reviewedAt": 1782190532000
+      },
+      {
+        "reviewId": "901582061",
+        "productId": "178103674",
+        "rating": 5,
+        "itemName": "[제주] 상효원 입장권",
+        "reviewedAt": 1779677790000
+      },
+      {
+        "reviewId": "889229185",
+        "productId": "178103674",
+        "rating": 5,
+        "itemName": "[제주] 상효원 입장권",
+        "reviewedAt": 1777933467000
+      },
+      {
+        "reviewId": "889229170",
+        "productId": "178103674",
+        "rating": 5,
+        "itemName": "[제주] 상효원 입장권",
+        "reviewedAt": 1777933463000
+      },
+      {
+        "reviewId": "871234855",
+        "productId": "178103674",
+        "rating": 4,
+        "itemName": "[제주] 상효원 입장권",
+        "reviewedAt": 1775390605000
+      }
+    ]
+  },
+  "projectionSha256": "e8ed1d3cec77db565e862306d7c83a81a8619535a6f2ac61af1808b00232d8a9",
+  "states": {
+    "captured": true,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable_anonymous",
+    "live_replay": true
+  }
+}

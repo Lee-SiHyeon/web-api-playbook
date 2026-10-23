@@ -1,0 +1,100 @@
+{
+  "schema": "grok-retained-attachment-independent-readback-v1",
+  "observedAt": "2026-10-06T10:09:39Z",
+  "operation": "attachment.resolve-retained.verify",
+  "state": "verified",
+  "ownerVerified": true,
+  "registeredPageRole": {
+    "role": "codex-grok-uploads-20261006",
+    "targetMatched": true,
+    "businessBrowserWrites": 0
+  },
+  "sourceRetentionReceipt": {
+    "path": "verification/grok-attachment-default-retention-live-2026-10-07.json",
+    "sha256": "5e70460eec6e8a69af8353dabf4e721871aaa6194d3b65e7b65733888838ff1c",
+    "originalState": "completed",
+    "retainedForReuse": true,
+    "cleanupRequested": false,
+    "expectedBytes": 20,
+    "expectedSha256": "ea16634bdedacb0115b413cdb78cc31b7fcbd04bd15b80e0a49c9e52195bbf3f"
+  },
+  "retainedAsset": {
+    "fileName": "codex-attachment-retain-20261007.txt",
+    "uniqueExactNameMatch": true,
+    "assetSearch": {
+      "operationId": "attachment.assets.search",
+      "httpStatus": 200,
+      "responseBytes": 823,
+      "assetCount": 1,
+      "exactNameMatches": 1,
+      "nextPagePresent": false
+    },
+    "assetMetadata": {
+      "operationId": "attachment.asset.read",
+      "httpStatus": 200,
+      "fileNameMatched": true,
+      "mimeTypeMatched": true,
+      "resourceIdMatched": true,
+      "sizeBytes": 20,
+      "notDeleted": true
+    },
+    "fileMetadata": {
+      "operationId": "attachment.file-metadata.read",
+      "httpStatus": 200,
+      "responseBytes": 339,
+      "fileNameMatched": true,
+      "mimeTypeMatched": true,
+      "resourceIdMatched": true,
+      "sizeBytesFieldPresent": false
+    },
+    "assetDownload": {
+      "httpStatus": 200,
+      "mimeType": "text/plain",
+      "bodyBytes": 20,
+      "sha256": "ea16634bdedacb0115b413cdb78cc31b7fcbd04bd15b80e0a49c9e52195bbf3f",
+      "bytesMatch": true,
+      "verified": true,
+      "transport": "curl_cffi-0.16.3-chrome150",
+      "cookieNamesUsed": ["sso"],
+      "requestHeaderNames": [
+        "accept",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ]
+    }
+  },
+  "localArtifacts": [
+    {
+      "path": "/home/worker/artifacts/grok-attachments-20261006/a5ed2ef269cf4bda-codex-attachment-retain-20261007.txt",
+      "bytes": 20,
+      "sha256": "ea16634bdedacb0115b413cdb78cc31b7fcbd04bd15b80e0a49c9e52195bbf3f",
+      "mode": "0600",
+      "matchesSourceReceipt": true
+    },
+    {
+      "path": "/home/worker/artifacts/grok-attachments-20261006/grok-retained-20b-api-readback-20261006.bin",
+      "bytes": 20,
+      "sha256": "ea16634bdedacb0115b413cdb78cc31b7fcbd04bd15b80e0a49c9e52195bbf3f",
+      "mode": "0600",
+      "matchesSourceReceipt": true
+    }
+  ],
+  "continuationReadiness": {
+    "ownerBoundReferenceReadbackVerified": true,
+    "chatAttachmentFrameCaptured": false,
+    "chatAttachmentBindingVerified": false,
+    "textMessageSent": false
+  },
+  "safety": {
+    "businessWritesPerformed": 0,
+    "conversationHistoryModified": false,
+    "rawResourceIdentifiersPersisted": false,
+    "assetUriPersisted": false,
+    "cookiesPersisted": false,
+    "fileContentEmbeddedInReceipt": false
+  }
+}

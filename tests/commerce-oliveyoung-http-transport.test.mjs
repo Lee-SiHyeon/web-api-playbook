@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { oliveyoungTestPython } from './helpers/oliveyoung-python.mjs';
 import {
   createOliveyoungHttpFetch,
   OliveyoungHttpTransportError,
@@ -10,7 +11,7 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const helper = path.join(root, 'scripts/oliveyoung-http-transport.py');
-const pythonPath = process.env.WEB_API_OLIVEYOUNG_PYTHON ?? 'python3';
+const pythonPath = oliveyoungTestPython;
 const rankUrl = 'https://www.oliveyoung.co.kr/store/main/getBestList.do';
 const request = overrides => ({
   protocolVersion: 1,

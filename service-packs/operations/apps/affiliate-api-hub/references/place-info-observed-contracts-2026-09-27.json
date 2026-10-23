@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "place-xhr-contracts-v1",
+  "capturedAt": "2026-09-27",
+  "providerInterpretation": {
+    "userLabel": "네이버 마켓플레이스",
+    "implementedProvider": "Naver Place",
+    "reason": "The request paired Naver with Kakao Map for restaurant information."
+  },
+  "security": {
+    "browserIdentityReused": false,
+    "cookiesPersisted": false,
+    "captchaOrGateValuesPersisted": false,
+    "browserFingerprintHeadersReplayed": false,
+    "challengeBypassAttempted": false,
+    "clientsSendCookies": false,
+    "clientsSendCaptchaTokens": false
+  },
+  "providers": {
+    "naver-place": {
+      "search": {
+        "capturedAsXhr": false,
+        "status": "not_implemented",
+        "observation": "Search results rendered in the map UI; per-place summary XHRs were observed, but no query-to-place search XHR was captured."
+      },
+      "summary": {
+        "captured": true,
+        "method": "GET",
+        "origin": "https://map.naver.com",
+        "path": "/p/api/place/summary/{placeId}",
+        "queryFields": [],
+        "responseMimeType": "application/json",
+        "browserResponseStatus": 200,
+        "browserCookieHeaderPresent": false,
+        "directReplay": [
+          {
+            "headers": ["Accept"],
+            "status": 403,
+            "responseMimeType": "text/html"
+          },
+          {
+            "headers": ["Accept", "Referer: https://map.naver.com/"],
+            "status": 200,
+            "responseMimeType": "application/json"
+          }
+        ],
+        "credentialPropagated": false,
+        "observedFields": [
+          "id",
+          "name",
+          "businessType",
+          "coordinate.latitude",
+          "coordinate.longitude",
+          "category.category",
+          "address.address",
+          "address.roadAddress",
+          "address.formattedAddress",
+          "businessHours.description",
+          "visitorReviews.score",
+          "visitorReviews.displayText",
+          "blogReviews.total"
+        ],
+        "reviewText": "not_present_in_captured_summary"
+      }
+    },
+    "kakao-map": {
+      "search": {
+        "captured": true,
+        "method": "GET",
+        "origin": "https://map.kakao.com",
+        "path": "/api/v1/mapsearch/map",
+        "browserQueryFields": ["center", "msFlag", "q", "sort"],
+        "directReplayQueryFields": ["msFlag", "q", "sort"],
+        "responseMimeType": "application/json",
+        "browserResponseStatus": 200,
+        "browserCaptchaHeaderObserved": true,
+        "gateTokenEndpointObserved": true,
+        "directReplayWithoutCaptchaToken": {
+          "status": 200,
+          "responseMimeType": "application/json",
+          "placeCount": 15
+        },
+        "credentialPropagated": false,
+        "observedFields": [
+          "place[].confirmid",
+          "place[].name",
+          "place[].lat",
+          "place[].lon",
+          "place[].tel",
+          "place[].address_disp",
+          "place[].new_address_disp",
+          "place[].last_cate_name",
+          "place[].rating_average",
+          "place[].rating_count",
+          "place[].reviewCount",
+          "place[].homepage",
+          "place_totalcount"
+        ],
+        "returnedPageSize": 15
+      },
+      "detail": {
+        "captured": true,
+        "method": "GET",
+        "origin": "https://place.map.kakao.com",
+        "path": "/places/panel3/{placeId}",
+        "responseMimeType": "application/json",
+        "browserResponseStatus": 200,
+        "browserCookieHeaderPresent": false,
+        "directReplay": {
+          "status": 200,
+          "responseMimeType": "application/json",
+          "credentialPropagated": false
+        },
+        "observedFields": [
+          "summary.name",
+          "summary.category",
+          "summary.address",
+          "summary.point",
+          "summary.phone_numbers",
+          "summary.homepages",
+          "open_hours",
+          "menu.menus.items",
+          "kakaomap_review.score_set",
+          "blog_review.review_count",
+          "restrict.review_read.is_restrict"
+        ]
+      },
+      "reviewMeta": {
+        "captured": true,
+        "method": "GET",
+        "path": "/places/reviews/kakaomap/meta/{placeId}",
+        "responseMimeType": "application/json",
+        "browserResponseStatus": 200,
+        "directReplayStatus": 200,
+        "observedFields": ["place", "restrict.is_restrict", "strength_description"]
+      },
+      "reviews": {
+        "captured": true,
+        "method": "GET",
+        "path": "/places/tab/reviews/kakaomap/{placeId}",
+        "queryFields": ["only_photo_review", "order"],
+        "observedQuery": {
+          "only_photo_review": "false",
+          "order": "RECOMMENDED"
+        },
+        "responseMimeType": "application/json",
+        "browserResponseStatus": 200,
+        "directReplayStatus": 200,
+        "directReplayReviewCount": 20,
+        "directReplayHasNext": true,
+        "paginationImplemented": false,
+        "reviewerIdentityFieldsPersisted": false,
+        "reviewTextPIIRedaction": ["email", "phone", "URL"]
+      }
+    }
+  },
+  "clientState": {
+    "captured": true,
+    "clientExists": true,
+    "credentialPropagated": false,
+    "browserlessReplay": {
+      "naverPlaceSummary": true,
+      "kakaoMapSearch": true,
+      "kakaoPlaceDetail": true,
+      "kakaoPlaceReviewsFirstPage": true
+    }
+  }
+}

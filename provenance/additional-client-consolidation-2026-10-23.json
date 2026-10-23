@@ -1,0 +1,390 @@
+{
+  "schema": "playbook-repository-consolidation-v1",
+  "scope": "Whisk SDK wrapper, native creator helpers and portable app reader/protocol modules; no account state or business writes executed",
+  "sources": [
+    {
+      "id": "whisk",
+      "repository": "Lee-SiHyeon/youtube-shorts-pipeline",
+      "commit": "014709d8a5657e9fcc90c010fab38076358d72ed",
+      "files": [
+        {
+          "sourcePath": "packages/image-generator-whisk/src/client/WhiskClient.ts",
+          "path": "service-packs/whisk/src/WhiskClient.ts",
+          "sourceSha256": "3ab480eaeaffb9c19a16c6e85a8c6dd9fe70ad1716baca6f3215f452f2782e0e",
+          "sha256": "3ab480eaeaffb9c19a16c6e85a8c6dd9fe70ad1716baca6f3215f452f2782e0e"
+        }
+      ],
+      "liveReplayThisMigration": false,
+      "fileCount": 1,
+      "migrationStatus": "copied_with_offline_validation"
+    },
+    {
+      "id": "creator-tools",
+      "repository": "Lee-SiHyeon/shorts-anatomy",
+      "commit": "7bcce12055034e606267b4ec4fc8fc603b074d39",
+      "files": [
+        {
+          "sourcePath": "tools/gemini-tts.mjs",
+          "path": "service-packs/creator-tools/tools/gemini-tts.mjs",
+          "sourceSha256": "d42eddd852b83b489300c5a43eb14fe7c58349eb2324f5a4505c9c3173e5fe3c",
+          "sha256": "8005d035f09462602f0c7c7120c142d4deaf5b31648efd6723ac6b4bde98e6db"
+        },
+        {
+          "sourcePath": "tools/el-api.mjs",
+          "path": "service-packs/creator-tools/tools/el-api.mjs",
+          "sourceSha256": "6631e8d49b43663c307338d31f99e7178f3e4b02be8c70596fc015641de4dc30",
+          "sha256": "4f6f6a316d9b96c1195435d95f0fb3870c3264d6e7c9d84145d5971a33d76e52"
+        },
+        {
+          "sourcePath": "tools/mrt-search.mjs",
+          "path": "service-packs/creator-tools/tools/mrt-search.mjs",
+          "sourceSha256": "fb396f1e49089b3b3c2db2e86500ad857671eaec5223c93d07beb62bb919884e",
+          "sha256": "18a3e7f243cbd18ad5d7a635a6a74b770f49077fd79b34460f3f2f5f5cf90410"
+        },
+        {
+          "sourcePath": "tools/mrt-product.mjs",
+          "path": "service-packs/creator-tools/tools/mrt-product.mjs",
+          "sourceSha256": "b1fe8b2b0c902ddd4fd3ae74061aa4d9f217515c37a18a562be9464ee99b8bca",
+          "sha256": "485dd1dafdd0a2ae6a7236ba045b7cefe95e55924cccbb3d3dbcdc90a797bdc2"
+        },
+        {
+          "sourcePath": "tools/mrt-hotel-find.mjs",
+          "path": "service-packs/creator-tools/tools/mrt-hotel-find.mjs",
+          "sourceSha256": "3cfd1d3db71cf1bba1a8c5b9a5e2c10424e4c198d4bd78565f169b6d75386a10",
+          "sha256": "e422613d2aedf3605cdff4f326f7d1d4492964a674ad9dfa75997a4b0c47b516"
+        },
+        {
+          "sourcePath": "aihost/lib/grok.mjs",
+          "path": "service-packs/creator-tools/aihost/lib/grok.mjs",
+          "sourceSha256": "b9ad1b64152a1060cceed273fac23886d78a04493dc68ffd182b85fc19556e8d",
+          "sha256": "b9ad1b64152a1060cceed273fac23886d78a04493dc68ffd182b85fc19556e8d"
+        },
+        {
+          "sourcePath": "aihost/lib/grok-quota.mjs",
+          "path": "service-packs/creator-tools/aihost/lib/grok-quota.mjs",
+          "sourceSha256": "606099a83e5a98d7f4233ebef025cd1b54a49d4fae4734ea322baf1e6e455f4c",
+          "sha256": "ed2428422266a63ca6816cb3db28ed846eba5cee152322cee5f4f3bcf89845bc"
+        },
+        {
+          "sourcePath": "aihost/lib/flow-accounts.mjs",
+          "path": "service-packs/creator-tools/aihost/lib/flow-accounts.mjs",
+          "sourceSha256": "516c98f226b55441eb926d1011991ab946e10cdf547d88470edc8586846e3aea",
+          "sha256": "516c98f226b55441eb926d1011991ab946e10cdf547d88470edc8586846e3aea"
+        }
+      ],
+      "liveReplayThisMigration": false,
+      "fileCount": 8,
+      "migrationStatus": "copied_with_offline_validation"
+    },
+    {
+      "id": "lifehack-readers",
+      "repository": "Lee-SiHyeon/lifehackailab-web",
+      "commit": "c6e74e9739dbd30c40d7d4eb788429513b55d17a",
+      "files": [
+        {
+          "sourcePath": "scripts/collectors/danawa.mjs",
+          "path": "service-packs/lifehack-readers/scripts/collectors/danawa.mjs",
+          "sourceSha256": "8f7cf8a03a85387532767c70a2608243a7cb46647770d87241b894f9a229f3f6",
+          "sha256": "8f7cf8a03a85387532767c70a2608243a7cb46647770d87241b894f9a229f3f6"
+        },
+        {
+          "sourcePath": "src/lib/adpick-service-core.ts",
+          "path": "service-packs/lifehack-readers/src/lib/adpick-service-core.ts",
+          "sourceSha256": "28914f37f2ce17f735d86d32249a789f837898d369db55f2b7ae5f1d92928912",
+          "sha256": "28914f37f2ce17f735d86d32249a789f837898d369db55f2b7ae5f1d92928912"
+        },
+        {
+          "sourcePath": "src/lib/collectors/danawa-discovery.mjs",
+          "path": "service-packs/lifehack-readers/src/lib/collectors/danawa-discovery.mjs",
+          "sourceSha256": "874e32907a70cec216963c86574af121db75ce73011d00078fc2d071fc6abcf3",
+          "sha256": "874e32907a70cec216963c86574af121db75ce73011d00078fc2d071fc6abcf3"
+        },
+        {
+          "sourcePath": "src/lib/collectors/danawa.mjs",
+          "path": "service-packs/lifehack-readers/src/lib/collectors/danawa.mjs",
+          "sourceSha256": "db16a4f39ae58e504c0c56e2490148c364ba1440581e3f31726d2c330f9c2931",
+          "sha256": "db16a4f39ae58e504c0c56e2490148c364ba1440581e3f31726d2c330f9c2931"
+        },
+        {
+          "sourcePath": "src/lib/coupang-openapi.ts",
+          "path": "service-packs/lifehack-readers/src/lib/coupang-openapi.ts",
+          "sourceSha256": "342dde9489986066835dc592c203c73fc1efec22361749e15cc8cb9cab8ecc18",
+          "sha256": "ff6a6d27b3615595ccd2a08df7b9c348b66514b12f47a30b27577e561f27cd50"
+        },
+        {
+          "sourcePath": "src/lib/coupang-partner-link-issue-core.ts",
+          "path": "service-packs/lifehack-readers/src/lib/coupang-partner-link-issue-core.ts",
+          "sourceSha256": "8c60fc3b3c305740ef8d58cfc5b68ea21a65d067781a7069dcbc1a017907a525",
+          "sha256": "8c60fc3b3c305740ef8d58cfc5b68ea21a65d067781a7069dcbc1a017907a525"
+        },
+        {
+          "sourcePath": "src/lib/creator-data/model.ts",
+          "path": "service-packs/lifehack-readers/src/lib/creator-data/model.ts",
+          "sourceSha256": "7315bb0cb866942ab849911f542d898ece35b169c9fbf936153c7e0adbf5aa97",
+          "sha256": "7315bb0cb866942ab849911f542d898ece35b169c9fbf936153c7e0adbf5aa97"
+        },
+        {
+          "sourcePath": "src/lib/hub/card-deals/types.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/card-deals/types.ts",
+          "sourceSha256": "f9ce6d3dee1bdaf89df12401d83c64bd051580059842be12d0a651ea31dbf144",
+          "sha256": "f9ce6d3dee1bdaf89df12401d83c64bd051580059842be12d0a651ea31dbf144"
+        },
+        {
+          "sourcePath": "src/lib/hub/category.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/category.ts",
+          "sourceSha256": "6becda5cbf68f7b2b2b1c14adc5210457fecebec89f0f1fdfe19e40ff0af428f",
+          "sha256": "6becda5cbf68f7b2b2b1c14adc5210457fecebec89f0f1fdfe19e40ff0af428f"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/adpick.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/adpick.ts",
+          "sourceSha256": "a62b60c8ea06f20a7dfd43daf8989dad2f0b82341670b6e6a7ff7c5dc0836527",
+          "sha256": "a62b60c8ea06f20a7dfd43daf8989dad2f0b82341670b6e6a7ff7c5dc0836527"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/community-target.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/community-target.ts",
+          "sourceSha256": "575c1a9f49296759ec589689af9446e17eaf9ac463ce9a022aac81e971b73616",
+          "sha256": "575c1a9f49296759ec589689af9446e17eaf9ac463ce9a022aac81e971b73616"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/coupang-hub-links.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/coupang-hub-links.ts",
+          "sourceSha256": "83bdb348bbbd3ba9b5ed89a2e45b7eafd729243efd520b001db0e9f1eb48c7be",
+          "sha256": "83bdb348bbbd3ba9b5ed89a2e45b7eafd729243efd520b001db0e9f1eb48c7be"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/coupang-issued-links.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/coupang-issued-links.ts",
+          "sourceSha256": "b60b48ab7f8e033c9b48f139660c245f64bdfd96304ced5d41c75ffa812752da",
+          "sha256": "b60b48ab7f8e033c9b48f139660c245f64bdfd96304ced5d41c75ffa812752da"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/coupang-partners-best.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/coupang-partners-best.ts",
+          "sourceSha256": "45b5677255301f72559731c53bcdc47e0e3e3bc9db8535ea195f16a14f109e59",
+          "sha256": "45b5677255301f72559731c53bcdc47e0e3e3bc9db8535ea195f16a14f109e59"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/eleventh.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/eleventh.ts",
+          "sourceSha256": "c02e72454e81d5135eae4d39b0b92fc902602587dc122f2e4a9af743fee77979",
+          "sha256": "c02e72454e81d5135eae4d39b0b92fc902602587dc122f2e4a9af743fee77979"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/fetch-response.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/fetch-response.ts",
+          "sourceSha256": "bfbbb5ec318b188ce52e52cde95077caece4ce8942c17f63e9be683fe67d2556",
+          "sha256": "bfbbb5ec318b188ce52e52cde95077caece4ce8942c17f63e9be683fe67d2556"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/naver-shopping.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/naver-shopping.ts",
+          "sourceSha256": "4b7245f68e28868a001c753837fce8d47c89a1fc8ca43363954f8fc0f3f9d3c8",
+          "sha256": "4b7245f68e28868a001c753837fce8d47c89a1fc8ca43363954f8fc0f3f9d3c8"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/parse-deal-title.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/parse-deal-title.ts",
+          "sourceSha256": "7fa12adf2ff75da64a29d62cb953ad7688028f1bbecbe72a388609e363c74e59",
+          "sha256": "7fa12adf2ff75da64a29d62cb953ad7688028f1bbecbe72a388609e363c74e59"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/rss.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/rss.ts",
+          "sourceSha256": "43824c44831ec680d722b516eec74b86121eb6a3b007aa7c2efe25b6d39ea608",
+          "sha256": "43824c44831ec680d722b516eec74b86121eb6a3b007aa7c2efe25b6d39ea608"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/sources.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/sources.ts",
+          "sourceSha256": "55d0dfc5562d9302968fb69f57c4c13402a3e80da2547ef2b99cb8553d655627",
+          "sha256": "55d0dfc5562d9302968fb69f57c4c13402a3e80da2547ef2b99cb8553d655627"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/toss-run.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/toss-run.ts",
+          "sourceSha256": "17e74746e1160a997734524059e71a4384457166fd4274449811d2df3a07b9db",
+          "sha256": "17e74746e1160a997734524059e71a4384457166fd4274449811d2df3a07b9db"
+        },
+        {
+          "sourcePath": "src/lib/hub/collectors/toss-sharelink.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/collectors/toss-sharelink.ts",
+          "sourceSha256": "3fc82b596dba67e39c1e5e01da0c1a1dc65505ec814848676940986ca80bab50",
+          "sha256": "3fc82b596dba67e39c1e5e01da0c1a1dc65505ec814848676940986ca80bab50"
+        },
+        {
+          "sourcePath": "src/lib/hub/row.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/row.ts",
+          "sourceSha256": "4a4813171b7d91df8198d884e7bcb6259802123231d1dce6bcffac8608fcb42c",
+          "sha256": "4a4813171b7d91df8198d884e7bcb6259802123231d1dce6bcffac8608fcb42c"
+        },
+        {
+          "sourcePath": "src/lib/hub/types.ts",
+          "path": "service-packs/lifehack-readers/src/lib/hub/types.ts",
+          "sourceSha256": "23d067288672a28ef27058f574d627031bb83f1d0ac06fde16da365cdd7bdcab",
+          "sha256": "23d067288672a28ef27058f574d627031bb83f1d0ac06fde16da365cdd7bdcab"
+        },
+        {
+          "sourcePath": "src/lib/native-handoff-envelope.ts",
+          "path": "service-packs/lifehack-readers/src/lib/native-handoff-envelope.ts",
+          "sourceSha256": "ace19c45d9f1e40b56a8ebb267fed11fb31cfcf292e1ce283ae5eb4ee2006c81",
+          "sha256": "ace19c45d9f1e40b56a8ebb267fed11fb31cfcf292e1ce283ae5eb4ee2006c81"
+        },
+        {
+          "sourcePath": "src/lib/naver-native-session-handoff.ts",
+          "path": "service-packs/lifehack-readers/src/lib/naver-native-session-handoff.ts",
+          "sourceSha256": "408b71452edf0954955ba996bec5d08e91ee24bcd7dc74639ca5cd3091548ef3",
+          "sha256": "408b71452edf0954955ba996bec5d08e91ee24bcd7dc74639ca5cd3091548ef3"
+        },
+        {
+          "sourcePath": "src/lib/naver-session-health.ts",
+          "path": "service-packs/lifehack-readers/src/lib/naver-session-health.ts",
+          "sourceSha256": "a6e18a639d39d87b8e0db929d87866dd55640af1f5a7ff3401d6f49c14966303",
+          "sha256": "a6e18a639d39d87b8e0db929d87866dd55640af1f5a7ff3401d6f49c14966303"
+        },
+        {
+          "sourcePath": "src/lib/partner-native-session-runtime.ts",
+          "path": "service-packs/lifehack-readers/src/lib/partner-native-session-runtime.ts",
+          "sourceSha256": "5cb7bb06a8bc358cfa7f1cc3952fa0b6c0ea4907ea50783a5207fdb59713ecd7",
+          "sha256": "49d48acafc2a03b1cb6e450278090baf5f6d8715ed6101b5d2c8b4078b209058"
+        },
+        {
+          "sourcePath": "src/lib/product-discovery-core.ts",
+          "path": "service-packs/lifehack-readers/src/lib/product-discovery-core.ts",
+          "sourceSha256": "459cbea6d6383a181136ae871e170a2247019b33ff196dbf3608202161d5f3a3",
+          "sha256": "459cbea6d6383a181136ae871e170a2247019b33ff196dbf3608202161d5f3a3"
+        },
+        {
+          "sourcePath": "src/lib/providers/coupang/scoped-session.mjs",
+          "path": "service-packs/lifehack-readers/src/lib/providers/coupang/scoped-session.mjs",
+          "sourceSha256": "b63014bd3bc88221aa108248c4f3d538216b2ca330b774c8d423db423f3d2dda",
+          "sha256": "b63014bd3bc88221aa108248c4f3d538216b2ca330b774c8d423db423f3d2dda"
+        },
+        {
+          "sourcePath": "src/lib/service-session-crypto.ts",
+          "path": "service-packs/lifehack-readers/src/lib/service-session-crypto.ts",
+          "sourceSha256": "86ec89549dd560f7490286647177df45115085d316d3658c9a9d6f31caf11e18",
+          "sha256": "86ec89549dd560f7490286647177df45115085d316d3658c9a9d6f31caf11e18"
+        },
+        {
+          "sourcePath": "src/lib/service-session-store.ts",
+          "path": "service-packs/lifehack-readers/src/lib/service-session-store.ts",
+          "sourceSha256": "59348b49f2db6ffb02b752a0c4696b03d7bd9c180e6462a3f5b932182c75ec47",
+          "sha256": "cd00e40b506f03deff5e7bd894ee377be44e7d1cf60abf9370d4c144531de5c8"
+        },
+        {
+          "sourcePath": "src/lib/source-destination.ts",
+          "path": "service-packs/lifehack-readers/src/lib/source-destination.ts",
+          "sourceSha256": "7b948dbd38fed3472d9eb53af86c65482f36f7bb40ee9ccce7b80f9f92cab0d6",
+          "sha256": "7b948dbd38fed3472d9eb53af86c65482f36f7bb40ee9ccce7b80f9f92cab0d6"
+        },
+        {
+          "sourcePath": "src/lib/supabase/admin.ts",
+          "path": "service-packs/lifehack-readers/src/lib/supabase/admin.ts",
+          "sourceSha256": "631025c9a0975d7a2a320e2d22953cceeabb23891ceafb36b18d5940eaf11ed7",
+          "sha256": "29628b38bc5d1fdd6b16df5b41395b545bfd39425650fe5eecae6af1b12985c6"
+        },
+        {
+          "sourcePath": "src/lib/toss-automatic-reauth.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-automatic-reauth.ts",
+          "sourceSha256": "9cc74b441e0897132639e0d178357da6e01c529015e6daaf7a4ef46738c7faa5",
+          "sha256": "a18c47e0eb3e828fe88f46db88272a891525597677e93f245017c219ba7e0689"
+        },
+        {
+          "sourcePath": "src/lib/toss-collector-service.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-collector-service.ts",
+          "sourceSha256": "413298e07448cdcdab4843e0901b55550aae106e1e3e13981905a2f9a82a4164",
+          "sha256": "1969a1c23a2ab6d9c391cf065b7d4204653e281b18d0724c2d25c3abb321c289"
+        },
+        {
+          "sourcePath": "src/lib/toss-cookie-jar.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-cookie-jar.ts",
+          "sourceSha256": "0296554124eb40037c9e7ebabbc9dc6f5ef3253b03090756ebf3be13a957a61e",
+          "sha256": "0296554124eb40037c9e7ebabbc9dc6f5ef3253b03090756ebf3be13a957a61e"
+        },
+        {
+          "sourcePath": "src/lib/toss-direct-http.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-direct-http.ts",
+          "sourceSha256": "064123db2f524cf41c427daa269acc309b5195b18f56a76e82414528f72f4b60",
+          "sha256": "064123db2f524cf41c427daa269acc309b5195b18f56a76e82414528f72f4b60"
+        },
+        {
+          "sourcePath": "src/lib/toss-http-login-core.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-http-login-core.ts",
+          "sourceSha256": "425a32e1b539ae4dea76df0427944bfd0cf6e75cbbe520e1afb2583a8773edf9",
+          "sha256": "425a32e1b539ae4dea76df0427944bfd0cf6e75cbbe520e1afb2583a8773edf9"
+        },
+        {
+          "sourcePath": "src/lib/toss-login-journal.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-login-journal.ts",
+          "sourceSha256": "0009ca7378c3d3c9264334501b3f7905b3d340d25be86f222d7161c69797d0a6",
+          "sha256": "b0d8b5fba9f42c44926c320747e3c394e58d1d9ed748443ffcc1f4a4c0d7c3fd"
+        },
+        {
+          "sourcePath": "src/lib/toss-session-core.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-session-core.ts",
+          "sourceSha256": "0d8dc2fa786d79edce6e60224edf98a673f111d2b43020ceb868b705ecefcfae",
+          "sha256": "0d8dc2fa786d79edce6e60224edf98a673f111d2b43020ceb868b705ecefcfae"
+        },
+        {
+          "sourcePath": "src/lib/toss-session-recovery.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-session-recovery.ts",
+          "sourceSha256": "1c3370af6be207dae732fe95f206322e6e4c03d133c9f68315639849e090daed",
+          "sha256": "8c5f02101afe5d1e2613e747c64608aabb2ffdadb81228b7ba2edff915476f63"
+        },
+        {
+          "sourcePath": "src/lib/toss-session-renewal.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-session-renewal.ts",
+          "sourceSha256": "0bdf18c254edace7d904e9cd70f4ef9c342bcd483edbde66ed7a660ef641ffe0",
+          "sha256": "0bdf18c254edace7d904e9cd70f4ef9c342bcd483edbde66ed7a660ef641ffe0"
+        },
+        {
+          "sourcePath": "src/lib/toss-session-runtime.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-session-runtime.ts",
+          "sourceSha256": "a3ea99fcf997bcbcfe6b1757b74f177585318bfa71b1fba94df8f4daa4475e18",
+          "sha256": "d2f61558c09683435a90517386bf3004f959534e343602a396adee4b06b36cdd"
+        },
+        {
+          "sourcePath": "src/lib/toss-sharelink-health.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-sharelink-health.ts",
+          "sourceSha256": "a3cb32f52b24c3954bcbadbe637b84a4176b82ceeb17472af24dba70727c78fb",
+          "sha256": "a3cb32f52b24c3954bcbadbe637b84a4176b82ceeb17472af24dba70727c78fb"
+        },
+        {
+          "sourcePath": "src/lib/toss-web-session-diagnostics.ts",
+          "path": "service-packs/lifehack-readers/src/lib/toss-web-session-diagnostics.ts",
+          "sourceSha256": "074539c865e9c5c6a1958666ebea4d25f0075bc9204b478946abad35dbf11122",
+          "sha256": "074539c865e9c5c6a1958666ebea4d25f0075bc9204b478946abad35dbf11122"
+        },
+        {
+          "sourcePath": "tests/coupang-openapi.test.ts",
+          "path": "service-packs/lifehack-readers/tests/coupang-openapi.test.ts",
+          "sourceSha256": "fe236733056bb3cefab80aa3307b57f7516f210b1752c60247bd5df6bfb591cd",
+          "sha256": "fe236733056bb3cefab80aa3307b57f7516f210b1752c60247bd5df6bfb591cd"
+        },
+        {
+          "sourcePath": "tests/danawa-collector.test.mjs",
+          "path": "service-packs/lifehack-readers/tests/danawa-collector.test.mjs",
+          "sourceSha256": "040b550c24ffd98a800d9e90b40ba95426543df0f46b8c4359bd04f4f62335c8",
+          "sha256": "040b550c24ffd98a800d9e90b40ba95426543df0f46b8c4359bd04f4f62335c8"
+        },
+        {
+          "sourcePath": "tests/danawa-discovery.test.ts",
+          "path": "service-packs/lifehack-readers/tests/danawa-discovery.test.ts",
+          "sourceSha256": "3a08e5296a01f6638df8fd1efe8878ceabddccd2597834a37e063d5e3b39e6ac",
+          "sha256": "3a08e5296a01f6638df8fd1efe8878ceabddccd2597834a37e063d5e3b39e6ac"
+        },
+        {
+          "sourcePath": "tests/fixtures/coupang-openapi-client-regression.mjs",
+          "path": "service-packs/lifehack-readers/tests/fixtures/coupang-openapi-client-regression.mjs",
+          "sourceSha256": "5636d447feda9ea67fe7a1e7d028a15bb4fc7c3d40a2157f4534386883abf0ac",
+          "sha256": "5636d447feda9ea67fe7a1e7d028a15bb4fc7c3d40a2157f4534386883abf0ac"
+        }
+      ],
+      "liveReplayThisMigration": false,
+      "fileCount": 50,
+      "migrationStatus": "copied_with_offline_validation"
+    }
+  ]
+}

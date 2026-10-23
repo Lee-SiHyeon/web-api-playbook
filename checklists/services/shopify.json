@@ -54,6 +54,29 @@
               "mime": "text/javascript"
             }
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.allbirds.com",
+          "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+          "mime": "text/javascript",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/shopify-product-live.json"
+          ],
+          "hashPaths": [
+            "lib/retail/shopify.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://www.allbirds.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ],
+          "note": "Current anonymous Allbirds product detail returned 13 variants; /cart.js independently reported USD. Scope remains the named product and default storefront."
         }
       ],
       "sourceEvidence": [],
@@ -110,6 +133,29 @@
               "mime": "text/javascript"
             }
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://www.allbirds.com",
+          "path": "/search/suggest.json",
+          "mime": "application/json",
+          "files": [
+            "verification/remaining-readcaps-2026-10-16/shopify-predictive-search-live.json"
+          ],
+          "hashPaths": [
+            "lib/retail/shopify.mjs",
+            "scripts/retail.mjs",
+            "lib/cli.mjs"
+          ],
+          "companionReads": [
+            {
+              "key": "currencyRequest",
+              "origin": "https://www.allbirds.com",
+              "path": "/cart.js",
+              "mime": "text/javascript"
+            }
+          ],
+          "note": "Current anonymous predictive search returned 10 suggestions; this is not full search, pagination, or catalog coverage."
         }
       ],
       "sourceEvidence": [],

@@ -3,11 +3,12 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { oliveyoungTestPython } from './helpers/oliveyoung-python.mjs';
 import { createOliveyoungAnonymousRankingFetch } from '../lib/commerce/oliveyoung-anonymous-ranking-transport.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const HELPER = path.join(ROOT, 'scripts/oliveyoung-anonymous-ranking-session.py');
-const PYTHON = process.env.WEB_API_OLIVEYOUNG_PYTHON ?? 'python3';
+const PYTHON = oliveyoungTestPython;
 const ACCEPT = 'text/html,application/xhtml+xml';
 const RANK_URL = 'https://www.oliveyoung.co.kr/store/main/getBestList.do';
 

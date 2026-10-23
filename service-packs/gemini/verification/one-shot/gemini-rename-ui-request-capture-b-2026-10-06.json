@@ -1,0 +1,211 @@
+{
+  "schema": "gemini-rename-ui-request-capture-v1",
+  "service": "gemini-web",
+  "feature": "edit",
+  "operation": "edit",
+  "outcome": "normal_ui_request_captured_browser_mutation_aborted",
+  "capturedAt": "2026-10-06T04:44:48.534193+00:00",
+  "executionHost": "linux_worker",
+  "pageRole": "codex-gemini-lifecycle-20261006",
+  "captureVariant": "b",
+  "sourceMapping": {
+    "rpcId": "MUAZcd",
+    "operationName": "UpdateConversation",
+    "mappingClass": "normal_ui_capture_plus_first_party_batch_request"
+  },
+  "normalUiControl": {
+    "type": "dom_dialog",
+    "prefillMatchedTaskTitle": true
+  },
+  "targetBinding": {
+    "ownerMatched": true,
+    "exactTaskTitleSelectedOnce": true,
+    "taskPromptMarkerPreviouslyVerified": true,
+    "apiConversationIdBoundToRoute": true,
+    "conversationIdSha256": "56001f5b3651a2f93620c149182f23de554f4a17d57a9d1ff8b57ef978b56de8",
+    "conversationIdOccurrenceCount": 1,
+    "newTitleOccurrenceCount": 1,
+    "rawConversationIdPersisted": false,
+    "newTitlePersisted": false
+  },
+  "request": {
+    "rpcId": "MUAZcd",
+    "request": {
+      "method": "POST",
+      "origin": "https://gemini.google.com",
+      "path": "/_/BardChatUi/data/batchexecute",
+      "queryKeys": [
+        "rpcids",
+        "source-path",
+        "bl",
+        "f.sid",
+        "hl",
+        "_reqid",
+        "rt"
+      ],
+      "headerNames": [
+        "accept",
+        "content-type",
+        "origin",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-arch",
+        "sec-ch-ua-bitness",
+        "sec-ch-ua-form-factors",
+        "sec-ch-ua-full-version",
+        "sec-ch-ua-full-version-list",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-model",
+        "sec-ch-ua-platform",
+        "sec-ch-ua-platform-version",
+        "sec-ch-ua-wow64",
+        "user-agent",
+        "x-goog-ext-525001261-jspb",
+        "x-goog-ext-73010989-jspb",
+        "x-same-domain"
+      ],
+      "contentType": "application/x-www-form-urlencoded;charset=UTF-8",
+      "formFieldNames": [
+        "f.req",
+        "at"
+      ]
+    },
+    "rpcCallTail": [
+      null,
+      "generic"
+    ],
+    "argsShape": {
+      "type": "array",
+      "length": 3,
+      "items": [
+        "null",
+        {
+          "type": "array",
+          "length": 1,
+          "items": [
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "string",
+                  "length": 5,
+                  "conversationIdMatched": false,
+                  "newTitleMatched": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "length": 2,
+          "items": [
+            {
+              "type": "string",
+              "length": 18,
+              "conversationIdMatched": true,
+              "newTitleMatched": false
+            },
+            {
+              "type": "string",
+              "length": 29,
+              "conversationIdMatched": false,
+              "newTitleMatched": true
+            }
+          ]
+        }
+      ]
+    },
+    "rpcArgsTemplateShape": {
+      "type": "array",
+      "length": 3,
+      "items": [
+        "null",
+        {
+          "type": "array",
+          "length": 1,
+          "items": [
+            {
+              "type": "array",
+              "length": 1,
+              "items": [
+                {
+                  "type": "object",
+                  "fieldCount": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "array",
+          "length": 2,
+          "items": [
+            {
+              "type": "string",
+              "length": 18,
+              "conversationIdMatched": false,
+              "newTitleMatched": false
+            },
+            {
+              "type": "string",
+              "length": 12,
+              "conversationIdMatched": false,
+              "newTitleMatched": false
+            }
+          ]
+        }
+      ]
+    },
+    "staticArgumentFingerprints": [
+      {
+        "path": [
+          1,
+          0,
+          0
+        ],
+        "length": 5,
+        "sha256": "aaf2320646108059a87ab5017a86aee454f5378ed95003dbb2e12f4ca5266e0e"
+      }
+    ],
+    "argsSha256": "11f7c314ad6800fdaf3088b11d55a0cfbebd60dc64e8f6791b5a73d0a5f444c4",
+    "conversationIdOccurrenceCount": 1,
+    "newTitleOccurrenceCount": 1,
+    "requestBytes": 250,
+    "requestHeaderValuesPersisted": false,
+    "rpcArgsTemplatePersisted": false,
+    "rawArgumentsPersisted": false
+  },
+  "guard": {
+    "browserRenameRequestReachedServer": false,
+    "browserAbortAcknowledged": true,
+    "targetRequestCaptureCount": 1,
+    "blockedNonReadRequestCount": 67,
+    "guardParseFailureCount": 0,
+    "allowedReadRequestCount": 6
+  },
+  "postAbortReadback": {
+    "sameApiConversationIdBoundToHistoryTitle": true,
+    "originalTitleVisible": true,
+    "serverMutationObserved": false
+  },
+  "browserPageRestored": true,
+  "directMutation": {
+    "dispatchCount": 0,
+    "priorDirectRenameUnchanged": true
+  },
+  "persistence": {
+    "requestHeaderValuesPersisted": false,
+    "rawArgumentsPersisted": false,
+    "cookiesPersisted": false,
+    "sessionValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "promptOrAssistantTextPersisted": false,
+    "rawRequestOrResponseBodyPersisted": false,
+    "temporaryTitlePersisted": false
+  },
+  "staticArgumentInvariantAcrossCaptures": true,
+  "staticArgumentProofPath": "verification/one-shot/gemini-rename-static-argument-proof-2026-10-06.json",
+  "normalizedContractTemplateInstalled": true
+}

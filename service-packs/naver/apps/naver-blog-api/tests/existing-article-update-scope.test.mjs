@@ -36,8 +36,8 @@ test('allowlisted affiliate updates still require all existing commercial and at
 async function fixture(t){const dir=await mkdtemp(path.join(os.tmpdir(),'existing-ai-update-'));t.after(()=>rm(dir,{recursive:true,force:true}));const job=await aiResearchFixture(dir);job.target={type:'update',logNo:'224419004923'};job.inputProvider='independent_http';job.publicationBundle.document.logNo=job.target.logNo;job.preflight.sourceConfigurationFingerprint='a'.repeat(64);job.preflight.sourcePopulationMetaFingerprint='b'.repeat(64);bind(job);return {dir,job};}
 test('AI update admission still executes source, category, commercial exclusion and independent review contracts',async t=>{
  const {job}=await fixture(t);assert.equal(evaluateAiResearchArticle(job,{now:NOW}).passed,true);
- for(const [mutate,key] of [[j=>j.publicationBundle.research.sources=[],'researchPrimarySourceLinks'],[j=>j.publishSettings.categoryId=10,'researchCategoryScope'],[j=>j.affiliate={url:'https://link.coupang.com/a/foreign'},'researchNoCommercePayload'],[j=>j.publicationBundle.qualityReview.provenance.method='self_review','researchIndependentReview']]){
-  const bad=structuredClone(job);mutate(bad);const r=evaluateAiResearchArticle(bad,{now:NOW});assert.equal(r.passed,false);assert.equal(r.checks[key],false);
+ for(const [mutate,key] of [[j=>j.publicationBundle.research.sources=[],'researchPrimarySourceLinks'],[j=>j.publishSettings.categoryId=10,'researchCategoryScope'],[j=>j.affiliate={url:'https://link.coupang.com/a/foreign'},'researchNoCommercePayload'],[j=>j.publicationBundle.qualityReview.provenance.method='self_review','researchEditorialReviewProvenance']]){
+  const bad=structuredClone(job);mutate(bad);const r=evaluateAiResearchArticle(bad,{now:NOW});assert.equal(r.passed,false);assert.equal(r.checks[key],false,key);assert.ok(r.failedChecks.includes(key),r.failedChecks.join(','));
  }
 });
 test('AI update authorization fingerprint binds source settings and category metadata',async t=>{

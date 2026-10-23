@@ -105,6 +105,39 @@ test('Sephora product-level ranges do not pretend to be a selected-SKU scalar qu
   assert.equal(result.offers[0].priceRange.min.kind,'retail_list');assert.equal(result.offers[0].context.priceBasis,'product_range');
 });
 
+test('Sephora collector carries the observed 60-item page size into its next request', async () => {
+  const inputs = [];
+  const loadPage = await createCommerceReader({ provider: 'sephora', args: { query: 'serum', pageSize: 10 },
+    factories: { sephora: () => ({ searchProducts: async input => {
+      inputs.push({ page: input.page, pageSize: input.pageSize });
+      const count = input.page === 1 ? 60 : 25;
+      const start = input.page === 1 ? 0 : 60;
+      return {
+        page: input.page,
+        pageSize: 60,
+        totalProducts: 85,
+        products: Array.from({ length: count }, (_, index) => ({
+          productId: `P${60000 + start + index}`,
+          variantId: String(500000 + start + index),
+          brandName: 'Fixture Brand',
+          productName: `Serum ${start + index}`,
+          productUrl: `https://www.sephora.com/product/fixture-${60000 + start + index}`,
+          price: { amount: '1.00', currency: 'USD' },
+          priceRange: null,
+          priceScope: 'current_sku',
+        })),
+        receipt,
+      };
+    } }) } });
+
+  const result = await collectOfferSnapshot({ provider: 'sephora', loadPage, maxPages: 2, maxOffers: 100 });
+
+  assert.deepEqual(inputs, [{ page: 1, pageSize: 10 }, { page: 2, pageSize: 60 }]);
+  assert.equal(result.offers.length, 85);
+  assert.equal(result.collection.rowsSeen, 85);
+  assert.equal(result.collection.complete, true);
+});
+
 test('Ulta traverses upstream pages without discarding sponsored cards through a local result cap',async()=>{
   const inputs=[];
   const loadPage=await createCommerceReader({provider:'ulta',args:{query:'lipstick',pageSize:20},factories:{ulta:()=>({searchProducts:async input=>{

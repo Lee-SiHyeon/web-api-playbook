@@ -22,7 +22,7 @@ export function decode(instructions,handle) {
     let text=t.note_tweet?.note_tweet_results?.result?.text??t.legacy?.full_text;
     if(typeof text!=='string')return;
     text=text.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
-    for(const link of t.legacy?.entities?.urls??[])if(typeof link.url==='string'&&typeof link.expanded_url==='string')text=text.split(link.url).join(link.expanded_url);
+    for(const link of [...(t.note_tweet?.note_tweet_results?.result?.entity_set?.urls??[]),...(t.legacy?.entities?.urls??[])])if(typeof link.url==='string'&&typeof link.expanded_url==='string')text=text.split(link.url).join(link.expanded_url);
     const metric=v => v!==null&&v!==undefined&&/^\d+$/.test(String(v))&&Number.isSafeInteger(Number(v))?Number(v):null;
     items.set(t.rest_id,{id:t.rest_id,author:name,text,url:`https://x.com/${name}/status/${t.rest_id}`,createdAt:t.legacy.created_at??null,
       metrics:{likes:metric(t.legacy.favorite_count),replies:metric(t.legacy.reply_count),reposts:metric(t.legacy.retweet_count),views:metric(t.views?.count)}});
@@ -34,8 +34,10 @@ export function decode(instructions,handle) {
   return {items:[...items.values()],cursor};
 }
 export class XClient {
-  constructor({authToken,csrfToken,bearerToken,contracts,fetchImpl=fetch,transactionProvider,clientHeaders={}}) {
+  constructor({authToken,csrfToken,bearerToken,contracts,fetchImpl=fetch,transactionProvider,clientHeaders={},requestTimeouts={read:90_000,write:120_000}}) {
     for(const value of [authToken,csrfToken,bearerToken])if(typeof value!=='string'||!value||value.length>4096||!/^\S+$/.test(value)||/[;\r\n]/.test(value))throw new XError('SESSION_INVALID');
+    if(['read','write'].some(key=>!Number.isSafeInteger(requestTimeouts?.[key])||requestTimeouts[key]<1||requestTimeouts[key]>600_000))throw new XError('REQUEST_TIMEOUT_INVALID');
+    this.requestTimeouts={read:requestTimeouts.read,write:requestTimeouts.write};
     this.headers={authorization:`Bearer ${bearerToken}`,cookie:`auth_token=${authToken}; ct0=${csrfToken}`,'x-csrf-token':csrfToken,'x-twitter-auth-type':'OAuth2Session','x-twitter-active-user':'yes','x-twitter-client-language':'en','content-type':'application/json'};
     for(const key of ['user-agent','sec-ch-ua','sec-ch-ua-mobile','sec-ch-ua-platform'])if(clientHeaders[key]){if(typeof clientHeaders[key]!=='string'||/[\r\n]/.test(clientHeaders[key]))throw new XError('HEADER_INVALID');this.headers[key]=clientHeaders[key];}
     this.contracts=contracts.operations;this.fetch=fetchImpl;this.transactionProvider=transactionProvider;this.closed=false;
@@ -43,24 +45,29 @@ export class XClient {
   close(){this.headers={};this.closed=true;}
   async request(operation,variables) {
     if(this.closed)throw new XError('CLIENT_CLOSED');
-    if(!['UserByScreenName','UserOriginalsTimeline','TweetDetail','CreateTweet'].includes(operation))throw new XError('OPERATION_DENIED');
+    if(!['UserByScreenName','UserOriginalsTimeline','TweetDetail','CreateTweet','CreateNoteTweet'].includes(operation))throw new XError('OPERATION_DENIED');
     const c=this.contracts[operation];if(!c||!/^[\w-]+$/.test(c.queryId))throw new XError('CONTRACT_INVALID');
-    const method=operation==='CreateTweet'?'POST':'GET';
-    const url=new URL(`https://x.com/i/api/graphql/${c.queryId}/${operation}`);
+    const method=['CreateTweet','CreateNoteTweet'].includes(operation)?'POST':'GET';
+    const url=new URL(`https://api.x.com/graphql/${c.queryId}/${operation}`); // web app base since 2026-09 (x.com/i/api returned 404 for CreateTweet 2026-09-28)
     const payload={variables,features:c.features,...Object.keys(c.fieldToggles??{}).length?{fieldToggles:c.fieldToggles}:{}};
     if(method==='GET')for(const [k,v] of Object.entries(payload))url.searchParams.set(k,JSON.stringify(v));
     const headers={...this.headers};
     if(this.transactionProvider){const value=await this.transactionProvider({method,path:url.pathname});if(typeof value!=='string'||!value||value.length>4096||!/^[\x21-\x7e]+$/.test(value))throw new XError('TRANSACTION_INVALID');headers['x-client-transaction-id']=value;}
     let response,text;
     try {
-      response=await this.fetch(url,{method,headers,redirect:'error',signal:AbortSignal.timeout(20000),...(method==='POST'?{body:JSON.stringify({...payload,queryId:c.queryId})}:{})});
+      response=await this.fetch(url,{method,headers,redirect:'error',signal:AbortSignal.timeout(method==='POST'?this.requestTimeouts.write:this.requestTimeouts.read),...(method==='POST'?{body:JSON.stringify({...payload,queryId:c.queryId})}:{})});
       let bytes=0;const chunks=[];for await(const chunk of response.body){bytes+=chunk.length;if(bytes>4_000_000)throw Error('size');chunks.push(chunk);}text=Buffer.concat(chunks).toString('utf8');
     }catch{throw new XError(method==='POST'?'WRITE_UNKNOWN':'TRANSPORT');}
-    const receipt={operation,method,path:url.pathname,status:response.status,bytes:Buffer.byteLength(text),sha256:hash(text),checkedAt:new Date().toISOString(),mode:'pure_http'};
-    if(!response.ok)throw new XError(response.status===429?'RATE_LIMITED':[401,403].includes(response.status)?'AUTH_REJECTED':'HTTP_ERROR',receipt);
-    if(!response.headers.get('content-type')?.includes('json'))throw new XError('NOT_JSON',receipt);
+    const mime=response.headers.get('content-type');
+    const receipt={operation,method,origin:url.origin,path:url.pathname,status:response.status,mime:mime??null,bytes:Buffer.byteLength(text),sha256:hash(text),checkedAt:new Date().toISOString(),mode:'pure_http',transactionProvided:!!headers['x-client-transaction-id']};
+    if(!response.ok)throw new XError(response.status===429?'RATE_LIMITED':response.status===401?'AUTH_REJECTED':response.status===403?'ACCESS_BLOCKED':'HTTP_ERROR',receipt);
+    if(!mime?.includes('json'))throw new XError('NOT_JSON',receipt);
     let result;try{result=JSON.parse(text);}catch{throw new XError('NOT_JSON',receipt);}
-    if(result.errors?.length||!result.data)throw new XError('SERVICE_ERROR',receipt);
+    if(result.errors?.length||!result.data){
+      // Numeric codes only (e.g. 344 daily limit, 226 automation): callers pause writes on them.
+      receipt.serviceErrorCodes=(Array.isArray(result.errors)?result.errors:[]).map(e=>e?.code).filter(Number.isInteger);
+      throw new XError('SERVICE_ERROR',receipt);
+    }
     return {data:result.data,receipt};
   }
   async profile(handle){
@@ -110,7 +117,13 @@ export class XClient {
       const readback=await this.detail(postId,expectedHandle);
       if(readback.item.text!==text)throw new XError('READBACK_MISMATCH');
       state.state='verified';state.readbackReceipt=readback.receipt;await writeFile(file,JSON.stringify(state,null,2));return {item:readback.item,receipt,readbackReceipt:readback.receipt,verified:true};
-    }catch(e){state.state=state.postId?'created_needs_review':'unknown_needs_review';state.error=e instanceof XError?e.code:'LOCAL_ERROR';await writeFile(file,JSON.stringify(state,null,2));throw new XError(state.state,{jobId,postId:state.postId});}
+    }catch(e){
+      state.state=state.postId?'created_needs_review':'unknown_needs_review';state.error=e instanceof XError?e.code:'LOCAL_ERROR';
+      const responseReceipt=e instanceof XError&&Number.isInteger(e.receipt?.status)?e.receipt:undefined;
+      if(responseReceipt)state.responseReceipt=responseReceipt;
+      await writeFile(file,JSON.stringify(state,null,2));
+      throw new XError(state.state,{jobId,postId:state.postId,...responseReceipt?{responseReceipt}: {}});
+    }
   }
 }
 export const loadContracts=async()=>JSON.parse(await readFile(new URL('../contracts/x.json',import.meta.url),'utf8'));

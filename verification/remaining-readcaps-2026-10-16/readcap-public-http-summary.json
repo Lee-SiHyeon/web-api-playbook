@@ -1,0 +1,169 @@
+{
+  "schema": "remaining-public-readcaps-v1",
+  "checkedAt": "2026-10-15T16:35:39.564Z",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "secretsPersistedInEvidence": false,
+  "operations": [
+    {
+      "capabilityId": "catalog.product_detail",
+      "checkedAt": "2026-10-15T16:11:21.268Z",
+      "request": {
+        "origin": "https://www.allbirds.com",
+        "path": "/products/mens-runner-nz-slip-on-mushroom.js",
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "responseBytes": 12210
+      },
+      "count": 1,
+      "proof": "verification/remaining-readcaps-2026-10-16/shopify-product-live.json"
+    },
+    {
+      "capabilityId": "catalog.predictive_search",
+      "checkedAt": "2026-10-15T16:11:21.237Z",
+      "request": {
+        "origin": "https://www.allbirds.com",
+        "path": "/search/suggest.json",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 18405
+      },
+      "count": 10,
+      "proof": "verification/remaining-readcaps-2026-10-16/shopify-predictive-search-live.json"
+    },
+    {
+      "capabilityId": "suggestions.read",
+      "checkedAt": "2026-10-15T16:11:21.294Z",
+      "request": {
+        "origin": "https://autosug.ebay.com",
+        "path": "/autosug",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 822
+      },
+      "count": 10,
+      "categoryHintCount": 2,
+      "proof": "verification/remaining-readcaps-2026-10-16/ebay-suggestions-live.json"
+    },
+    {
+      "capabilityId": "collection.public_feed",
+      "checkedAt": "2026-10-15T16:11:23.798Z",
+      "request": {
+        "origin": "https://printful.s3.us-west-1.amazonaws.com",
+        "path": "/productExport/printful_products.zip",
+        "httpStatus": 200,
+        "mime": "application/zip",
+        "responseBytes": 452530
+      },
+      "rows": 11524,
+      "collection": {
+        "pagesRead": 1,
+        "rowsSeen": 11524,
+        "offersStored": 11524,
+        "maxPages": 1,
+        "maxOffers": 50000,
+        "coverage": "regional_feed",
+        "capHit": false,
+        "priceUnavailableCount": 0,
+        "currencyUnverifiedCount": 0,
+        "partialResponses": 0,
+        "sourceExhausted": true,
+        "complete": true
+      },
+      "jsonReadbackMatched": true,
+      "csvReadbackMatched": true,
+      "proof": "verification/remaining-readcaps-2026-10-16/public-feed-proof.json",
+      "sample": "verification/remaining-readcaps-2026-10-16/public-feed-sample.json"
+    },
+    {
+      "capabilityId": "collection.public_storefront",
+      "checkedAt": "2026-10-15T16:11:20.625Z",
+      "request": {
+        "origin": "https://colourpop.com",
+        "path": "/products/eeveelution-shadow-palette.js",
+        "httpStatus": 200,
+        "mime": "text/javascript",
+        "responseBytes": 9205
+      },
+      "rows": 1,
+      "collection": {
+        "pagesRead": 1,
+        "rowsSeen": 1,
+        "offersStored": 1,
+        "maxPages": 1,
+        "maxOffers": 100,
+        "coverage": "product_detail",
+        "capHit": false,
+        "priceUnavailableCount": 0,
+        "currencyUnverifiedCount": 0,
+        "partialResponses": 0,
+        "sourceExhausted": true,
+        "complete": true
+      },
+      "jsonReadbackMatched": true,
+      "csvReadbackMatched": true,
+      "proof": "verification/remaining-readcaps-2026-10-16/shopify-storefront-product-proof.json",
+      "sample": "verification/remaining-readcaps-2026-10-16/shopify-storefront-product-sample.json"
+    },
+    {
+      "capabilityId": "collection.public_storefront",
+      "checkedAt": "2026-10-15T16:18:12.812Z",
+      "request": {
+        "origin": "https://colourpop.com",
+        "path": "/search/suggest.json",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 23050
+      },
+      "rows": 10,
+      "collection": {
+        "pagesRead": 1,
+        "rowsSeen": 10,
+        "offersStored": 10,
+        "maxPages": 1,
+        "maxOffers": 10,
+        "coverage": "predictive_sample",
+        "capHit": false,
+        "priceUnavailableCount": 0,
+        "currencyUnverifiedCount": 0,
+        "partialResponses": 0,
+        "sourceExhausted": true,
+        "complete": false
+      },
+      "jsonReadbackMatched": true,
+      "csvReadbackMatched": true,
+      "proof": "verification/remaining-readcaps-2026-10-16/shopify-storefront-search-proof.json",
+      "sample": "verification/remaining-readcaps-2026-10-16/shopify-storefront-search-sample.json"
+    },
+    {
+      "capabilityId": "catalog.common_collector",
+      "checkedAt": "2026-10-15T16:11:33.313Z",
+      "request": {
+        "origin": "https://www.ulta.com",
+        "path": "/dxl/graphql",
+        "httpStatus": 200,
+        "mime": "application/json",
+        "responseBytes": 912391
+      },
+      "rows": 212,
+      "collection": {
+        "pagesRead": 3,
+        "rowsSeen": 218,
+        "offersStored": 212,
+        "maxPages": 10,
+        "maxOffers": 50000,
+        "coverage": "provider_limited",
+        "capHit": false,
+        "priceUnavailableCount": 0,
+        "currencyUnverifiedCount": 0,
+        "partialResponses": 0,
+        "sourceExhausted": true,
+        "complete": false
+      },
+      "jsonReadbackMatched": true,
+      "csvReadbackMatched": true,
+      "proof": "verification/remaining-readcaps-2026-10-16/ulta-common-collector-proof.json",
+      "sample": "verification/remaining-readcaps-2026-10-16/ulta-common-collector-sample.json"
+    }
+  ]
+}

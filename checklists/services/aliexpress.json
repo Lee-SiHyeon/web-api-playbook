@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "aliexpress",
-  "description": "익명 공개 상품 카탈로그의 직접 HTTP 조회. SEO 제목·설명만 독립 재생 완료. 상품 검색은 현재 HTML 문서만 확인됐고, 상세 MTop 요청은 reCAPTCHA에 막혀 있으며 리뷰 API 계약은 관찰되지 않아 필수 미완료로 둔다.",
+  "description": "알리 재개 요청 반영. 2026-10-16 Canary에서 구글 일반 검색 결과를 클릭해 알리 탭 주소·제목까지 확인했으나 페이지 관찰은 도구 사이트 정책이 차단했다. 알리 HTTP 오류로 판정하지 않으며 직접 HTTP 호출은 0회다. SEO·sitemap은 기존 클라이언트, 검색·상세·가격·옵션·리뷰는 현재 라이브 미완료다.",
   "capabilities": [
     {
       "id": "catalog.product_seo",
@@ -64,8 +64,14 @@
           ]
         }
       ],
-      "sourceEvidence": [],
-      "note": "상품 ID만으로 조회 가능하다. 화면 XHR의 공개 제목 subject는 독립 HTTP 재생에서 생략 가능함을 확인했다. 가격·재고는 포함하지 않는다."
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/overseas-keyless-probe-2026-10-14.md"
+          ]
+        }
+      ],
+      "note": "상품 ID만으로 조회 가능하다. 화면 XHR의 공개 제목 subject는 독립 HTTP 재생에서 생략 가능함을 확인했다. 가격·재고는 포함하지 않는다. 2026-10-16 도구 정책 차단으로 현재 재생은 수행하지 않았고 과거 증거의 최신 코드 불일치는 해소되지 않았다. 별도 upstream main의 2026-10-16 재점검 문서는 sitemap 604개 shard/첫 shard 31,999개 ID와 SEO 설명·빈 제목 응답을 보고했다. 해당 결과는 이번 도구 차단 실행의 재생 증거가 아니며 구조화된 현재 검증 영수증으로 승격하지 않는다."
     },
     {
       "id": "catalog.product_detail",
@@ -84,13 +90,20 @@
           "files": [
             "verification/retail-aliexpress-detail-source-candidate-2026-10-05.json"
           ]
+        },
+        {
+          "files": [
+            "verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json",
+            "verification/aliexpress-reassessment-2026-10-16/historical-contracts.json",
+            "verification/aliexpress-reassessment-2026-10-16/browser-attempt.json"
+          ]
         }
       ],
-      "blocker": "현재 검색 HTML에서 얻은 상품 ID 3개의 PDP 문서는 HTTP 200이었으나 상품 데이터가 렌더링되지 않았다. 첫 ID `1005011667478296`에서 first-party GET MTop `mtop.aliexpress.pdp.pc.query/1.0` 브라우저 요청을 확인했고, 익명 HTTP 재생은 200 JSON `data/dialogSize/ret` 봉투만 돌려주고 상품 데이터를 주지 않았다. 브라우저는 `_____tmd_____/punish`와 reCAPTCHA 화면으로 전환됐다. 익명 HTML 부트스트랩에 `_m_h5_tk`가 없었다. Captcha 해결이나 우회는 하지 않았다."
+      "blocker": "2026-10-05 익명 HTTP 상세 요청은 200 challenge 봉투만 반환했다. 이후 2026-10-14 브라우저 HAR에는 상세 요청 3건(200, 약 103~253KB)이 있으나 저장된 스키마는 invalid_json이다. 원문과 유효 상품 스키마, 현재 직접 재생은 미확인이다. 2026-10-16 재시도는 페이지 관찰 단계에서 도구 정책이 차단했으며 사이트 HTTP 상태는 알 수 없다."
     },
     {
       "id": "catalog.search",
-      "title": "키워드 검색 상품 목록 XHR 조회",
+      "title": "키워드 검색 상품 목록 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -100,12 +113,19 @@
         "tests": []
       },
       "evidence": [],
-      "sourceEvidence": [],
-      "blocker": "현재 검색 URL의 익명 HTTP 응답은 상품 링크 60개가 든 `text/html` 문서다. 이를 검색 API로 표시하지 않는다. 상품 목록 JSON XHR 및 순위·필터 계약은 미확인이다."
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/retail-aliexpress-detail-review-discovery-2026-10-05.json",
+            "verification/aliexpress-reassessment-2026-10-16/browser-attempt.json"
+          ]
+        }
+      ],
+      "blocker": "2026-10-05 검색 Document의 상품 링크 60개는 과거 관측이다. 현재 원문 fixture, 목록 파서와 독립 결과 검증이 없다. 2026-10-16 구글 링크 클릭 후 알리 검색 탭 주소·제목은 확인했으나 페이지 관찰은 도구 정책에 차단됐다. 현재 상품 표시나 HTTP 상태는 확인하지 못했다."
     },
     {
       "id": "catalog.offer_price",
-      "title": "상품 가격·통화·재고 XHR 조회",
+      "title": "상품 가격·통화·재고 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -115,12 +135,20 @@
         "tests": []
       },
       "evidence": [],
-      "sourceEvidence": [],
-      "blocker": "가격은 first-party MTop 상세 응답에서 받을 수 있는지 확인해야 하나 현재 요청이 reCAPTCHA에 막혀 상품 JSON이 오지 않았다. SEO 응답은 가격·통화·재고를 반환하지 않는다."
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json",
+            "verification/aliexpress-reassessment-2026-10-16/historical-contracts.json",
+            "verification/aliexpress-reassessment-2026-10-16/browser-attempt.json"
+          ]
+        }
+      ],
+      "blocker": "2026-10-14 상세 응답의 200 전송 기록은 있으나 원문·필드·통화·상품 ID 결합을 검증하지 못했다. SEO는 가격·재고를 포함하지 않는다. 2026-10-16 페이지 관찰 도구 정책 차단으로 가격 직접 재생은 수행하지 않았다."
     },
     {
       "id": "catalog.categories",
-      "title": "카테고리 목록·상품 분류 XHR 조회",
+      "title": "카테고리 목록·상품 분류 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -131,11 +159,11 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "관찰한 익명 화면에서 분류 데이터 XHR 계약을 확인하지 못했다."
+      "blocker": "카테고리 Document/Fetch/XHR의 구조와 독립 HTTP 재현이 아직 검증되지 않았다."
     },
     {
       "id": "catalog.pagination",
-      "title": "검색·분류 결과 페이지네이션 XHR 조회",
+      "title": "검색·분류 결과 페이지네이션 HTTP 조회",
       "priority": "required",
       "applicability": "applicable",
       "requirement": "live",
@@ -146,7 +174,7 @@
       },
       "evidence": [],
       "sourceEvidence": [],
-      "blocker": "검색 결과 문서에는 상품 링크 60개가 있었지만 페이지 이동 API, 다음 페이지 입력, 종료 조건은 확인하지 못했다."
+      "blocker": "과거 검색 Document의 링크 60개는 부분 관측이다. 다음 페이지 입력, 중복 제거 및 종료 조건은 아직 검증되지 않았다."
     },
     {
       "id": "catalog.reviews",
@@ -160,8 +188,16 @@
         "tests": []
       },
       "evidence": [],
-      "sourceEvidence": [],
-      "blocker": "상품 상세 렌더러가 reCAPTCHA 화면으로 막혀 리뷰 섹션과 리뷰 요청이 로드되지 않았다. 확인한 HTML의 `/reviews.html`은 사이트 공통 푸터 링크이고 상품 리뷰 링크가 아니다. 현재 PDP 번들은 평점·리뷰 수 요약과 `#nav-review` UI만 제공하며, 리뷰 본문·사진·작성일·페이지 입력을 반환하는 요청/응답은 관찰하지 못했다."
+      "sourceEvidence": [
+        {
+          "files": [
+            "verification/retail-aliexpress-browser-capture-firstparty-2026-10-15.json",
+            "verification/aliexpress-reassessment-2026-10-16/historical-contracts.json",
+            "verification/aliexpress-reassessment-2026-10-16/browser-attempt.json"
+          ]
+        }
+      ],
+      "blocker": "리뷰 미관측이라는 기존 기록을 정정한다. 2026-10-14 GET /h5/mtop.aliexpress.review.pc.list/1.0/ 응답 6건은 모두 HTTP 200이며 8,063~14,700바이트다. 저장된 스키마는 invalid_json이고 원문이 없어 JSONP 해석이나 리뷰 본문·사진·날짜·페이지 입력은 검증하지 못했다. 현재 리뷰 클라이언트·독립 HTTP 재생은 없다."
     },
     {
       "id": "auth.login",
@@ -222,6 +258,47 @@
       },
       "evidence": [],
       "sourceEvidence": []
+    },
+    {
+      "id": "catalog.sitemap_products",
+      "title": "기존 관측 XML sitemap 상품 ID 수집과 해시 기반 재개",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/overseas-sitemaps.mjs",
+            "exports": [
+              "createOverseasSitemapClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/overseas-retail.mjs",
+            "tokens": [
+              "aliexpress",
+              "sitemap-products"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-overseas-sitemaps.test.mjs",
+          "tests/overseas-retail-cli.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "files": [
+            "references/overseas-keyless-probe-2026-10-14.md"
+          ]
+        }
+      ],
+      "blocker": "기존 계약에 대한 오프라인 구현 검증만 완료. 2026-10-16 재시도도 페이지 관찰의 도구 정책 차단으로 알리 HTTP 호출 0회이며 현재 라이브 재현은 없다.",
+      "discoveryFrontier": "references/overseas-retail-frontier.json",
+      "note": "별도 upstream main의 2026-10-16 재점검 문서는 sitemap 604개 shard/첫 shard 31,999개 ID와 SEO 설명·빈 제목 응답을 보고했다. 해당 결과는 이번 도구 차단 실행의 재생 증거가 아니며 구조화된 현재 검증 영수증으로 승격하지 않는다."
     }
   ]
 }

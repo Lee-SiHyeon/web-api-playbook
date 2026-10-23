@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "source": "AGY neighboring-session Naver price engine",
+  "capturedOn": "2026-09-30",
+  "sourceFiles": [
+    {
+      "file": "naver_price_engine.py",
+      "sha256": "926dd7bd39e8f337aa4e9d7c9e4827acc12da2d326c2c2223258bf72cbd02e9a",
+      "bytes": 11014
+    },
+    {
+      "file": "price_compare.py",
+      "sha256": "f1d38d4347af30b04f17d5b247866d553ee762f74dda60974c72b42698bfa7f7",
+      "bytes": 3198
+    },
+    {
+      "file": "test_price_engine.py",
+      "sha256": "7b738963a5e39a448658daa662591fb6ddf0c79cd900ec0437ed386bdabfad5a",
+      "bytes": 3392
+    }
+  ],
+  "originalUnitTests": {
+    "count": 3,
+    "passed": 3
+  },
+  "acceptedCapabilities": [
+    "Nexearch public shopping-card product observations",
+    "Price sorting and descriptive min/max/mean of returned observations",
+    "Catalog seller count and review aggregation fields when observed",
+    "Local include/exclude regex filters and displayed-price bounds"
+  ],
+  "correctedBehavior": [
+    "Use current displayed price row instead of first/list price.",
+    "Keep conditional coupon price separate from current listing price.",
+    "Preserve source order separately from price order.",
+    "Do not invent seller count, rating or review count.",
+    "Preserve abbreviated review count precision.",
+    "Raise HTTP/schema errors instead of returning empty zero-price reports."
+  ],
+  "excludedPaths": [
+    "Retired openapi.naver.com/v1/search/shop.json credential fallback",
+    "Unverified Next.js build-id search route",
+    "Unproven stable access via proxy/cookie"
+  ],
+  "executionRoute": "Existing bounded Naver HTTP client plus Node DOM parser; no browser in normal execution",
+  "localRegexBoundary": {
+    "maximumCharacters": 160,
+    "maximumGroups": 4,
+    "maximumGroupDepth": 2,
+    "maximumAlternatives": 8,
+    "maximumDotStarWildcards": 1,
+    "otherRepetitionLookaroundAndBackreferences": false
+  },
+  "sameDocumentRegression": {
+    "scope": "same_HTTP_document_parser_comparison",
+    "httpStatus": 200,
+    "responseBytes": 1452071,
+    "responseSha256": "d855061cb7405e07e19f546ce7add4542e98a2274088d94ccb30c2ed08c64009",
+    "htmlPersisted": false,
+    "pairs": [
+      {
+        "productId": "88693886707",
+        "originalPriceKrw": 1440000,
+        "correctedListingPriceKrw": 798000,
+        "listPriceKrw": 1440000,
+        "conditionalCouponPriceKrw": 797000
+      },
+      {
+        "productId": "84417974537",
+        "originalPriceKrw": 959000,
+        "correctedListingPriceKrw": 598000,
+        "listPriceKrw": 959000,
+        "conditionalCouponPriceKrw": 597000
+      },
+      {
+        "productId": "52631236642",
+        "originalPriceKrw": 1257970,
+        "correctedListingPriceKrw": 1257970,
+        "listPriceKrw": null,
+        "conditionalCouponPriceKrw": null
+      }
+    ]
+  }
+}

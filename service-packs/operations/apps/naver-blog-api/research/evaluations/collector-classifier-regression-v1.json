@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "evalId": "collector-classifier-regression",
+  "split": "regression",
+  "version": 1,
+  "purpose": "Check deterministic safety and provenance behavior; this is not a semantic accuracy or revenue benchmark.",
+  "cases": {
+    "shadowSuggestion": {
+      "title": "Hotel itinerary planning",
+      "summary": "Compare lodging options for a trip",
+      "url": "https://example.com/travel/hotels",
+      "fallback": "unknown",
+      "remoteChoice": "travel",
+      "confidence": 0.99,
+      "expectedAdopted": "unknown",
+      "expectedSuggestion": "travel",
+      "expectedDisposition": "needs_research"
+    },
+    "sourceLimit": {
+      "contentIdeaCount": 20,
+      "trendHeadlineCount": 4,
+      "limit": 8,
+      "expectedContentIdeas": 4,
+      "expectedTrendHeadlines": 4
+    },
+    "crossFieldDedup": {
+      "title": "Cross-field article",
+      "url": "https://news.example/item",
+      "sources": [
+        { "id": "news-ai", "field": "ai" },
+        { "id": "news-travel", "field": "travel" }
+      ],
+      "expectedFields": ["ai", "travel"],
+      "expectedSourceIds": ["news-ai", "news-travel"]
+    },
+    "confidenceRejection": {
+      "invalidValues": [1.01, -0.01, "Infinity", null]
+    },
+    "sourceConfigAllowlist": {
+      "rejectedKeys": ["authToken", "apiKey"]
+    }
+  }
+}

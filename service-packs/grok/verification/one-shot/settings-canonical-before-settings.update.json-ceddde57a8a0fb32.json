@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "serviceId": "grok-web",
+  "featureId": "user-settings",
+  "requirementId": "settings.update",
+  "operationId": "settings.update",
+  "observedAt": "2026-10-06T02:05:29.068915Z",
+  "recordedAt": "2026-10-06T02:56:03.557Z",
+  "execution": "direct_http_client",
+  "liveReplay": true,
+  "liveReplayRecorded": true,
+  "mocked": false,
+  "ownerVerified": true,
+  "sameAuthenticatedOwner": true,
+  "evidenceScope": "same_authenticated_owner",
+  "ownerIdentityReceiptSha256": "1842d536e5ccf06f1d1ce249ee821ac145d6c8149057a15f173f8189f8e4f501",
+  "httpStatus": 200,
+  "responseMime": "application/json",
+  "responseBytes": 837,
+  "capturedOperationSha256": "85d9f1bb1d2debf8e556a37a36b572e8213c1221a5ce305908dad3f2eea94443",
+  "requestDigest": "2dfc34b1bcd343ff60248fb5773428ffc83331e5f8c9d4b9dd17ea92bb938bf7",
+  "intentDigest": "ebc74819aecae68a4942902761a32f959a4f05884b1cd9ae902310ef7db5e005",
+  "responseDigest": "239ff85ff9c9287c3fd0bb87f18c224705a839cef14e906546ce2bb10425a831",
+  "responseDigestKind": "parsed_json_data",
+  "handlerId": "client.submit",
+  "dispatchBinding": {
+    "handlerId": "client.submit",
+    "operationId": "settings.update",
+    "operationKind": "submit",
+    "mode": "validated_registry_generic"
+  },
+  "readinessAssertions": {
+    "handlerDispatchVerified": true,
+    "ownerScopeBound": true
+  },
+  "semanticReadback": {
+    "readbackVerified": true,
+    "readbackStatus": 200,
+    "preferenceName": "autoWrapLongLinesCode",
+    "beforeValue": false,
+    "afterValue": true,
+    "otherPreferencesUnchanged": true,
+    "otherSettingsUnchanged": true,
+    "restoreVerified": true,
+    "restoreStatus": 200,
+    "restoreBeforeValue": true,
+    "restoreAfterValue": false,
+    "restoreOtherPreferencesUnchanged": true
+  },
+  "restoreReplay": {
+    "httpStatus": 200,
+    "readbackStatus": 200,
+    "requestDigest": "a49f739ca6d6378d71c874e6f23c47b10b84f93a472774ecfb44d004bcc494b4",
+    "intentDigest": "7d00b4aafa24b4d12e5ea4b8c5a724e54b6b0306c6eb1f4de759beddd0384e33",
+    "readbackVerified": true,
+    "otherPreferencesUnchanged": true,
+    "otherSettingsUnchanged": true
+  },
+  "sourceProofPath": "verification/grok-user-settings-update-live-2026-10-06.json",
+  "sourceProofSha256": "4a3ef696332c5d279dba9afa4aa7d2cc2d46e86bc52a1c5decc34a9184c28351",
+  "codeHashCapturedAtExecution": false,
+  "codeSha256": {
+    "src/client.mjs": "51c2768d8d0beb52427988d1f5d48e8c78b36f67d6ec60a1fb2ac57e688764e7",
+    "src/transport.mjs": "4cd42d32e99173500464d2d98a6a76bc203cd279ebdcc6ab0883924cfa786588",
+    "src/journal.mjs": "465edfb90d5fbe53f0bb7a7bdd12790a0f9de0e7091f3aaf3c487949921fa094",
+    "src/grok-conversations.mjs": "c47236d4627702b9743214b04e64d2c7960bf30e82ad9b708ac4d1eda8e64979",
+    "src/runtime.mjs": "8eadd374ac0c450cb10e6489b15b86775b82ccad5bf1e1827aaade27eff21a8f"
+  },
+  "persistenceAssertions": {
+    "credentialValuesPersisted": false,
+    "cookiesPersisted": false,
+    "tokensPersisted": false,
+    "requestBodiesPersisted": false,
+    "responseBodiesPersisted": false,
+    "signedUrlValuesPersisted": false,
+    "passwordValuesPersisted": false,
+    "conversationIdsPersisted": false,
+    "conversationTitlesPersisted": false,
+    "responseIdsPersisted": false,
+    "messageBodiesPersisted": false
+  }
+}

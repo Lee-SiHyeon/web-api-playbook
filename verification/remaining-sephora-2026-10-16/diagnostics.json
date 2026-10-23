@@ -1,0 +1,131 @@
+{
+  "schema": "sephora-live-diagnostics-v1",
+  "updatedAt": "2026-10-15T16:18:09.213Z",
+  "executionMode": "pure_http",
+  "browserUsed": false,
+  "credentialsUsed": false,
+  "cookieSent": false,
+  "externalWrites": 0,
+  "rawBodiesPersisted": false,
+  "sensitiveValuesPersisted": false,
+  "observations": [
+    {
+      "operation": "catalog.search",
+      "query": "concealer",
+      "page": 1,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "topLevelFieldTypes": {
+        "keyword": "string",
+        "products": "array",
+        "totalProducts": "number"
+      },
+      "productFieldCounts": {
+        "rating": 60,
+        "reviews": 60,
+        "heroImage": 60,
+        "image450": 60,
+        "currentSku.salePrice": 1
+      },
+      "ratingFormatCounts": {
+        "plainDecimal": 10,
+        "numericDecimalWithMoreThanThreeFractionDigits": 50
+      },
+      "diagnosticFailure": "The first normalizer rejected 50 numeric rating strings because its fractional precision ceiling was too small. These were numeric strings with a finite 0-5 value; the normalizer now accepts bounded numeric text and converts it to a number.",
+      "rawValuesPersisted": false
+    },
+    {
+      "operation": "catalog.search",
+      "query": "concealer",
+      "paginationPage": 3,
+      "httpStatus": 200,
+      "mime": "application/json",
+      "rowCount": 20,
+      "invalidRowCount": 1,
+      "invalidField": "No validated same-origin product image among heroImage/image450/image250/image135/altImage",
+      "resolution": "Preserve the valid product row and emit images=[] when the source supplies no validated image. The final proof reports image coverage 139 of 140; it does not claim every product has an image.",
+      "rawValuesPersisted": false
+    },
+    {
+      "operation": "catalog.product_detail",
+      "productId": "P281411",
+      "preferredSkuSent": false,
+      "method": "GET",
+      "origin": "https://www.sephora.com",
+      "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P281411/lite",
+      "httpStatus": 404,
+      "mime": "application/json",
+      "checkedAt": "2026-10-15T16:07:36.579Z",
+      "interpretation": "The no-preferredSku request failed. It does not establish that P281411 is discontinued; the tested product-lite request shape requires a preferredSku."
+    },
+    {
+      "operation": "catalog.product_detail",
+      "productId": "P417985",
+      "preferredSkuSent": false,
+      "method": "GET",
+      "origin": "https://www.sephora.com",
+      "path": "/gway/v1/dotcom/productservice/v3/catalog/products/P417985/lite",
+      "httpStatus": 404,
+      "mime": "application/json",
+      "checkedAt": "2026-10-15T16:08:30.833Z",
+      "interpretation": "The same product returned HTTP 200 when requested with observed preferredSku 2234219. Use and report the successful observed shape; do not classify the no-SKU attempt as product unavailability."
+    }
+  ],
+  "executionLedger": [
+    {
+      "checkedAt": "2026-10-15T16:17:57.950Z",
+      "phase": "final_proof_generation",
+      "nodeProcess": "collect-live.mjs",
+      "directHttpRequests": 9,
+      "breakdown": {
+        "searchPages": 3,
+        "productDetail": 2,
+        "reviewBootstrap": 1,
+        "familyReviewPages": 2,
+        "skuReviewPage": 1
+      },
+      "capabilitiesVerified": 8,
+      "rawBodiesPersisted": false
+    },
+    {
+      "checkedAt": "2026-10-15T16:18:09.213Z",
+      "phase": "independent_live_readback",
+      "nodeProcess": "verify-independent-live.mjs",
+      "directHttpRequests": 8,
+      "breakdown": {
+        "searchPages": 3,
+        "productDetail": 1,
+        "reviewBootstrap": 1,
+        "familyReviewPages": 2,
+        "skuReviewPage": 1
+      },
+      "capabilitiesVerified": 8,
+      "rawBodiesPersisted": false
+    }
+  ],
+  "earlierProofGenerationAttempts": [
+    {
+      "checkedAt": "2026-10-15T16:07:33.703Z",
+      "directHttpRequests": 5,
+      "result": "Search/pagination and preferred-SKU detail succeeded; P281411 no-SKU detail returned 404, so review checks did not run."
+    },
+    {
+      "checkedAt": "2026-10-15T16:08:28.647Z",
+      "directHttpRequests": 5,
+      "result": "Search/pagination and preferred-SKU detail succeeded; P417985 no-SKU detail returned 404, so review checks did not run."
+    },
+    {
+      "checkedAt": "2026-10-15T16:15:01.535Z",
+      "result": "Search rejected the current endpoint page due the first rating parser; the other product and review calls succeeded."
+    },
+    {
+      "checkedAt": "2026-10-15T16:16:55.384Z",
+      "result": "Search rejected concealer page 3 because one row had no valid image; product and review calls succeeded."
+    }
+  ],
+  "finalRuntimeHashes": {
+    "lib/commerce/sephora.mjs": "c2559874a4742cc6e59b401f8d60e7a82ae4ecdf4528dc2398ec4110f0532415",
+    "lib/commerce/sephora-reviews.mjs": "031a64aa4e98fbfb1ec9c638df0ddf96474c0bf92cc45eb9edad411678d2dc2f",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61"
+  }
+}

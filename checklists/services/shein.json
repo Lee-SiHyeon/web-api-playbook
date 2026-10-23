@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "service": "shein",
+  "description": "SHEIN affiliate via Awin (and historically other networks). Prefer Awin product feed and deeplink APIs; reuse lib/commerce/awin.mjs after an approved advertiser join. Checked 2026-10-14. 2026-10-15: storefront HTTP expansion is applicable; see references/overseas-retail-frontier.json. Affiliate approval remains independent.",
+  "capabilities": [
+    {
+      "id": "affiliate.awin_join",
+      "title": "Approved join to SHEIN programme on Awin for the target country",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Requires publisher approval on the country programme (US advertiser id 15920: https://ui.awin.com/merchant-profile/15920 ; UK 15919). Commission/cookie values change; do not hard-code."
+    },
+    {
+      "id": "catalog.awin_product_feed",
+      "title": "Read SHEIN product feed rows with currency through Awin",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Await approved Awin relationship and feed access. Implementation candidate: lib/commerce/awin.mjs. Do not scrape us.shein.com."
+    },
+    {
+      "id": "affiliate.deeplink",
+      "title": "Generate tracking deeplinks for SHEIN product URLs via Awin",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Same approval dependency as feed. Never click tracking links to verify."
+    },
+    {
+      "id": "catalog.storefront_anonymous",
+      "title": "Anonymous shein storefront catalog through observed HTTP Documents, Fetch or XHR",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Home cards are verified separately. Category Document redirected to /risk/challenge on 2026-10-15; category products, details, options, reviews and pagination remain unverified.",
+      "discoveryFrontier": "references/overseas-retail-frontier.json"
+    },
+    {
+      "id": "auth.customer_login",
+      "title": "Customer account login",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Affiliate feed scope only."
+    },
+    {
+      "id": "checkout.write",
+      "title": "Cart or checkout writes",
+      "priority": "optional",
+      "applicability": "not_applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "applicabilityReason": "Read-only affiliate scope."
+    },
+    {
+      "id": "catalog.home_document",
+      "title": "KR homepage Document product cards, displayed prices and observed category menu",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/retail/shein.mjs",
+            "exports": [
+              "createSheinPublicClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/overseas-retail.mjs",
+            "tokens": [
+              "shein",
+              "home"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/retail-shein.test.mjs",
+          "tests/overseas-retail-cli.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://kr.shein.com",
+          "path": "/",
+          "method": "GET",
+          "mime": "text/html",
+          "files": [
+            "verification/retail-shein-direct-http-proof-2026-10-15.json",
+            "verification/retail-shein-home-cli-2026-10-15-v2.json"
+          ],
+          "hashPaths": [
+            "lib/retail/shein.mjs",
+            "scripts/overseas-retail.mjs",
+            "lib/cli.mjs",
+            "package-lock.json",
+            "verification/retail-shein-home-cli-2026-10-15-v2.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "10 home cards and 15 menu links; 8 exact title-and-price matches across separate 10-card browser/HTTP samples. No complete catalog, variants, stock or reviews.",
+      "discoveryFrontier": "references/overseas-retail-frontier.json"
+    }
+  ]
+}

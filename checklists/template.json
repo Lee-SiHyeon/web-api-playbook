@@ -24,6 +24,45 @@
       "sourceEvidence": []
     },
     {
+      "id": "auth.login_flow_captured",
+      "title": "Capture the login flow: form fields, password encryption, token/cookie issuance, redirects and challenge signals (references/login-flow-first.md)",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": []
+    },
+    {
+      "id": "auth.session_persist",
+      "title": "Persist the session in a protected store after an owner read and reuse it across processes",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": [],
+      "note": "Required when the service needs login; see references/login-flow-first.md."
+    },
+    {
+      "id": "auth.reauth_policy",
+      "title": "Detect expiry, apply re-login cooldown and lockout, and stop at 2FA/captcha/account-protection hand-off points",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": [],
+      "note": "Required when the service needs login; see references/login-flow-first.md."
+    },
+    {
+      "id": "auth.attempt_pacing",
+      "title": "Limit automatic login attempts and stop on 403 or bot-check pages without retrying",
+      "priority": "conditional",
+      "applicability": "unknown",
+      "requirement": "live",
+      "implementation": { "files": [], "cli": [], "tests": [] },
+      "evidence": [], "sourceEvidence": [],
+      "note": "Required when the service needs login; see references/login-flow-first.md."
+    },
+    {
       "id": "profile.read",
       "title": "Read the owner's profile",
       "priority": "required",

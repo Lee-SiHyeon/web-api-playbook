@@ -1,0 +1,354 @@
+{
+  "schema": "web-api-repository-consolidation-offline-verification-v1",
+  "checkedAt": "2026-10-23T04:07:57.946959+00:00",
+  "targetRepository": "Lee-SiHyeon/web-api-playbook",
+  "baseCommit": "cf5e7876fc271ca1f019fddd1a547b6f9f7b21cc",
+  "checkedCodeCommit": "4c88a9a028a963a49f601cf365f0afe05066e01f",
+  "environment": {
+    "platform": "linux",
+    "node": "24.21.0",
+    "freshClone": true,
+    "cloneMode": "git clone --no-local into a separate directory, then fast-forward of reviewed portability fixes",
+    "installCommand": "npm ci --ignore-scripts",
+    "installExitCode": 0,
+    "externalDonorCheckoutRequired": false,
+    "clientTestTemporaryStorage": "Fresh owner-only directory under the user home scratch; also verified with a caller TMPDIR having mode 0755"
+  },
+  "inventory": {
+    "ownerRepositoriesEnumerated": 44,
+    "relatedTrackedTreesReviewed": 21,
+    "sourceRepositoriesInByteManifests": 14,
+    "manifestedFiles": 1853,
+    "clientCatalogEntries": 23
+  },
+  "checks": {
+    "doctor": {
+      "ok": true,
+      "credentialsRead": false,
+      "serviceSessionVerified": false
+    },
+    "rootTests": {
+      "results": [
+        {
+          "client": "root",
+          "tests": 1281,
+          "pass": 1281,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "total": {
+        "tests": 1281,
+        "pass": 1281,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "logSha256": "bb356a4a9654a1284478dbb54ded95bd60af6fcb4c05baea217d6885aca32eca",
+      "lastExecutedCodeCommit": "dc3961289da3fa65f4e0809bdef1bdba4d050491",
+      "note": "Subsequent code changes affect only two Grok fixture directories; root runtime and tests are unchanged."
+    },
+    "clientPackTests": {
+      "results": [
+        {
+          "client": "gemini",
+          "tests": 247,
+          "pass": 247,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "grok",
+          "tests": 349,
+          "pass": 349,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "chatgpt",
+          "tests": 29,
+          "pass": 28,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 1,
+          "todo": 0
+        },
+        {
+          "client": "google-flow",
+          "tests": 182,
+          "pass": 182,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "gemini-bridge",
+          "tests": 11,
+          "pass": 11,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "grok-public-modes",
+          "tests": 6,
+          "pass": 6,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "adpick",
+          "tests": 20,
+          "pass": 20,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "threads-actions",
+          "tests": 15,
+          "pass": 15,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "naver-shopping",
+          "tests": 32,
+          "pass": 32,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "naver-cafe",
+          "tests": 9,
+          "pass": 9,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "social-actions",
+          "tests": 1651,
+          "pass": 1650,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 1,
+          "todo": 0
+        },
+        {
+          "client": "automation",
+          "tests": 37,
+          "pass": 37,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "lifehack-readers",
+          "tests": 15,
+          "pass": 15,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "naver-blog",
+          "tests": 152,
+          "pass": 152,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "tistory",
+          "tests": 59,
+          "pass": 59,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "blogger",
+          "tests": 10,
+          "pass": 10,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        },
+        {
+          "client": "social-x",
+          "tests": 23,
+          "pass": 23,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "total": {
+        "tests": 2847,
+        "pass": 2845,
+        "fail": 0,
+        "skipped": 2,
+        "cancelled": 0
+      },
+      "logSha256": "1e2e4f4bdb8422e8a4be1965c8c10735536a23d3bd967f0d2a826bc1cb562dcc"
+    },
+    "myrealtripCompatibilityTests": {
+      "results": [
+        {
+          "client": "myrealtrip",
+          "tests": 14,
+          "pass": 14,
+          "fail": 0,
+          "cancelled": 0,
+          "skipped": 0,
+          "todo": 0
+        }
+      ],
+      "total": {
+        "tests": 14,
+        "pass": 14,
+        "fail": 0,
+        "skipped": 0,
+        "cancelled": 0
+      },
+      "logSha256": "fed1352f7565861a0497e5fd1f729e3b1f6da9205e1bc96be7e026905c660f11"
+    },
+    "skippedTestNames": [
+      "DPAPI helper preserves exact current-user-only ACLs and repairs extra and inherited principals (0.871346ms)",
+      "rejected cached Threads session fails once and invalidates cache (0.169115ms)"
+    ],
+    "byteAudit": {
+      "schema": "playbook-consolidation-audit-v1",
+      "ok": true,
+      "files": 1853,
+      "repositories": [
+        "Lee-SiHyeon/adpick-api",
+        "Lee-SiHyeon/affiliate-content-automation",
+        "Lee-SiHyeon/affiliate-content-operations",
+        "Lee-SiHyeon/chatgpt-web-xhr-client",
+        "Lee-SiHyeon/coupang-shopping-crawler",
+        "Lee-SiHyeon/gemini-web-xhr-client",
+        "Lee-SiHyeon/google-flow-xhr-client",
+        "Lee-SiHyeon/grok-web-xhr-client",
+        "Lee-SiHyeon/lifehackailab-web",
+        "Lee-SiHyeon/naver-shopping-travel-crawler",
+        "Lee-SiHyeon/shorts-anatomy",
+        "Lee-SiHyeon/sns-X",
+        "Lee-SiHyeon/sns-threads",
+        "Lee-SiHyeon/youtube-shorts-pipeline"
+      ],
+      "manifests": 6,
+      "errors": [],
+      "evidenceScope": "packaged_bytes_only",
+      "currentAuthenticationVerified": false,
+      "liveReplayVerified": false
+    },
+    "syntax": {
+      "javascriptFiles": 1108,
+      "pythonFiles": 61,
+      "failures": [],
+      "scope": "transferred and integration code, syntax only",
+      "followupCheckedFiles": [
+        "scripts/test-client-packs.mjs",
+        "service-packs/grok/test/feature-checklist.test.mjs",
+        "service-packs/grok/test/grok-upload-reference-store.test.mjs",
+        "service-packs/grok/test/grok-attachment-presigned-upload.test.mjs"
+      ]
+    },
+    "literalScan": {
+      "scope": "changed tracked files relative to original main",
+      "files": 2003,
+      "patternKinds": [
+        "github_token",
+        "google_api_key",
+        "private_key",
+        "openai_key",
+        "jwt_literal"
+      ],
+      "findings": [],
+      "limit": "High confidence literal patterns only; not proof of absence of every possible secret"
+    },
+    "whiskSdkImport": {
+      "WhiskClient": "function",
+      "businessAction": false
+    },
+    "storedAiReceiptAudit": {
+      "evidenceScope": "stored_receipt_consistency",
+      "currentNetworkVerified": false,
+      "strictPass": false,
+      "providers": [
+        {
+          "provider": "gemini",
+          "sourceStatus": "incomplete",
+          "strictPass": false,
+          "accepted": 0,
+          "required": 16,
+          "unresolved": 16
+        },
+        {
+          "provider": "grok",
+          "sourceStatus": "incomplete",
+          "strictPass": false,
+          "accepted": 2,
+          "required": 18,
+          "unresolved": 16
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "No current business-service authentication, owner proof, generation, upload, link issuance or publication was performed during migration.",
+    "Ten originally skipped checks were reduced to two by explicitly connecting the bundled Playbook and X peers. Remaining native-store tests are not verified on Linux.",
+    "Naver coverage is the 152 focused session, login, media and trend tests listed in the catalog, not its full historical suite.",
+    "Whisk, creator helpers, Flow extension bridge and some small readers have no original offline suite; import, help, syntax and byte checks have narrower scopes.",
+    "Stored Gemini/Grok receipts remain incomplete; historical SHEIN/iHerb receipts remain stale for the updated dependency lock.",
+    "Inherited upstream whitespace was preserved; this migration does not claim a whitespace lint pass.",
+    "GitHub Actions results must be read separately after the PR is created."
+  ],
+  "ciPortabilityCorrections": {
+    "initialRun": "https://github.com/Lee-SiHyeon/web-api-playbook/actions/runs/39897886295",
+    "initialConclusion": "failure",
+    "causes": [
+      "Grok test read a historical receipt from an original absolute checkout path.",
+      "Fresh CI scratch directory permissions did not meet exact owner-only native helper checks.",
+      "Two reference-store fixtures included a shared tmp ancestor that can preexist with mode 0755; the store deliberately requires every checked ancestor to be owner-only."
+    ],
+    "changes": [
+      "Test reads the existing bundled verification artifact by filename; historical receipts and production proof rules are unchanged.",
+      "Offline harness creates an owner-only home scratch root and a separate private directory for each run.",
+      "Reference-store fixtures now own their entire checked directory path directly below home scratch; no global scratch permissions or production guards are relaxed."
+    ],
+    "localRecheck": {
+      "rootPassed": 1281,
+      "clientTestsPassed": 2845,
+      "clientTestsSkipped": 2,
+      "grokPrivateScratchTestsPassed": 349
+    },
+    "remoteRerunResult": "Read GitHub Actions for the final PR head; this document does not pre-claim its outcome.",
+    "additionalRun": "https://github.com/Lee-SiHyeon/web-api-playbook/actions/runs/39898408914",
+    "additionalConclusion": "failure"
+  }
+}
