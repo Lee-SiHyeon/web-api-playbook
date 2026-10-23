@@ -7,6 +7,7 @@
 | Naver DataLab Shopping Insight | 카테고리별 일·주·월 인기 쇼핑 검색어 | 익명 LCS bootstrap 후 rank XHR을 독립 HTTP로 재생; LCS 발급 세션 쿠키는 NNB 필수, BUC 선택 |
 | Naver Search autocomplete | 롱테일·구매 질문·문제 의도 확장 | 관측 JSONP를 독립 HTTP로 호출 |
 | Google Trends RSS | 대한민국 현재 급상승 검색어 | 공개 RSS 직접 호출 |
+| Exploding Topics | 해외(주로 미국)에서 막 뜨는 주제·제품의 검색량·증가율 (국내 유입 전 신호) | 공개 `/topic` 목록 HTML 직접 호출, `--no-exploding`으로 끔 |
 | Naver Search Trend Open API | 후보군 상대 검색 추이·성별·연령·기기 비교 | Client ID/Secret 설정 시 직접 호출 |
 | Naver Blog search | 콘텐츠 공급과 상위 글 구조 | 기존 `topic_brief.py` 사용 |
 | Coupang Partners | 실제 상품·가격·제휴 링크 | `affiliate-api-hub` 비교 파이프라인 사용 |

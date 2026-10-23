@@ -1,14 +1,18 @@
 import { createDecipheriv, generateKeyPairSync, privateDecrypt, constants } from 'node:crypto';
 import { createInterface } from 'node:readline';
 import http from 'node:http';
-import { normalizeNaverCookies, normalizeNaverUserAgent, naverCookieHeaderFor, storeNaverCookies } from '../../scripts/session-vault.mjs';
+import { normalizeNaverCookies, normalizeNaverUserAgent, naverCookieHeaderFor } from '../../scripts/session-vault.mjs';
+import { SessionClient } from '../../scripts/session-client.mjs';
+import { acquireNaverSessionLock } from '../../scripts/naver-session-lock.mjs';
+import { recordLoginSuccess } from '../../scripts/naver-login-state.mjs';
+import { persistVerifiedNaverHandoff } from '../../scripts/naver-handoff-persistence.mjs';
+import { createNaverHandoffWindow, safeNaverHandoffCode } from '../../scripts/naver-handoff-options.mjs';
 
 // One-use, in-memory bridge from an authorized browser tab to the Windows DPAPI store.
 // Only the public key and sanitized status leave this process. Ciphertext arrives on stdin.
 const actor = 'aicandoanything';
 const target = `https://admin.blog.naver.com/${actor}`;
 const startedAt = Date.now();
-const expiresAt = startedAt + 120000;
 const { publicKey, privateKey } = generateKeyPairSync('rsa', {
   modulusLength: 3072,
   publicKeyEncoding: { type: 'spki', format: 'pem' },
@@ -49,15 +53,17 @@ function decryptEnvelope(envelope) {
 }
 
 async function main() {
-  const timeout = setTimeout(() => { process.stderr.write('HANDOFF_TIMEOUT\n'); process.exit(2); }, 120000);
+  const { localForm, maxWaitMs, expiresAt } = createNaverHandoffWindow(startedAt, process.argv.slice(2));
+  const timeout = setTimeout(() => { process.stderr.write('HANDOFF_TIMEOUT\n'); process.exit(2); }, maxWaitMs);
   try {
-    if (process.argv.includes('--local-form')) { await serveLocalForm(); return; }
+    if (localForm) { await serveLocalForm(expiresAt, () => clearTimeout(timeout)); return; }
     console.log(JSON.stringify({ ready: true, service: 'naver-blog', actor, publicKey: rsaPublic.export({ format: 'jwk' }), expiresAt }));
     const lines = createInterface({ input: process.stdin, terminal: false });
     let received = false;
     for await (const line of lines) {
       if (received || Buffer.byteLength(line) > 262144 || Date.now() > expiresAt) throw new Error('HANDOFF_EXPIRED_OR_OVERSIZED');
       received = true;
+      clearTimeout(timeout);
       let bundle;
       try { bundle = decryptEnvelope(JSON.parse(line)); }
       catch { throw new Error('HANDOFF_DECRYPT_FAILED'); }
@@ -68,9 +74,15 @@ async function main() {
       }
       const cookies = normalizeNaverCookies(bundle.cookies);
       naverCookieHeaderFor(cookies, target);
-      await storeNaverCookies(cookies, { userAgent: normalizeNaverUserAgent(bundle.userAgent) });
-      console.log(JSON.stringify({ stored: true, provider: 'windows_dpapi_current_user', actor,
-        cookieCount: cookies.length, credentialValuesReturned: false, plaintextPersisted: false }));
+      const userAgent = normalizeNaverUserAgent(bundle.userAgent);
+      const persisted = await persistVerifiedNaverHandoff({ cookies, userAgent,
+        createSessionClient: options => new SessionClient(options),
+        acquireSessionLock: acquireNaverSessionLock, recordLoginSuccess });
+      const result = { ...persisted, provider: 'windows_dpapi_current_user', actor,
+        cookieCount: cookies.length, userAgentStored: true,
+        credentialValuesReturned: false, plaintextPersisted: false };
+      console.log(JSON.stringify(result));
+      if (!result.stored || !result.protectedOwnerRead || !result.loginControlStored) process.exitCode = 2;
       lines.close();
       return;
     }
@@ -78,7 +90,7 @@ async function main() {
   } finally { clearTimeout(timeout); }
 }
 
-async function serveLocalForm() {
+async function serveLocalForm(expiresAt, clearWaitTimeout) {
   let received = false;
   const server = http.createServer(async (request, response) => {
     const localOrigin = `http://127.0.0.1:${server.address().port}`;
@@ -96,13 +108,14 @@ async function serveLocalForm() {
       response.writeHead(404); response.end(); return;
     }
     received = true;
-    let client; let result;
+    let result;
     try {
       let body = '';
       for await (const chunk of request) {
         body += chunk.toString('utf8');
         if (Buffer.byteLength(body) > 262144) throw new Error('HANDOFF_OVERSIZED');
       }
+      clearWaitTimeout();
       const fields = new URLSearchParams(body);
       if ([...fields.keys()].length !== 1 || !fields.has('envelope')) throw new Error('HANDOFF_INPUT_MISSING');
       const bundle = decryptEnvelope(JSON.parse(fields.get('envelope')));
@@ -110,19 +123,20 @@ async function serveLocalForm() {
         || !Number.isFinite(bundle.capturedAt) || bundle.capturedAt < startedAt - 10000
         || bundle.capturedAt > Date.now() + 10000) throw new Error('HANDOFF_SCOPE_INVALID');
       const cookies = normalizeNaverCookies(bundle.cookies);
-      const { SessionClient } = await import('../../scripts/session-client.mjs');
       const userAgent = normalizeNaverUserAgent(bundle.userAgent);
-      client = new SessionClient({ cookies, ownerBlogId: actor, persistRotation: false,
-        defaultHeaders: userAgent ? { 'user-agent': userAgent } : {} });
-      await client.persistVerifiedSession();
-      result = { stored: true, protectedOwnerRead: true, provider: 'windows_dpapi_current_user', actor,
-        cookieCount: cookies.length, userAgentStored: !!userAgent, credentialValuesReturned: false, plaintextPersisted: false };
+      result = { ...(await persistVerifiedNaverHandoff({ cookies, userAgent,
+        createSessionClient: options => new SessionClient(options),
+        acquireSessionLock: acquireNaverSessionLock, recordLoginSuccess })),
+        provider: 'windows_dpapi_current_user', actor, cookieCount: cookies.length,
+        userAgentStored: true, credentialValuesReturned: false, plaintextPersisted: false };
+      if (!result.stored || !result.protectedOwnerRead || !result.loginControlStored) process.exitCode = 2;
     } catch (error) {
-      result = { stored: false, protectedOwnerRead: false, code: /^[A-Z_]+$/.test(error?.message || '') ? error.message : 'HANDOFF_FAILED' };
+      result = { stored: false, protectedOwnerRead: false, code: safeNaverHandoffCode(error) };
       process.exitCode = 2;
-    } finally { client?.clear(); }
+    }
     console.log(JSON.stringify(result));
-    response.writeHead(result.stored ? 200 : 422, { 'content-type': 'application/json' });
+    response.writeHead(result.stored && result.protectedOwnerRead && result.loginControlStored ? 200 : 422,
+      { 'content-type': 'application/json' });
     response.once('finish', () => server.closeIdleConnections());
     response.end(JSON.stringify(result));
     server.close();
@@ -134,7 +148,7 @@ async function serveLocalForm() {
 }
 
 main().catch(error => {
-  const code = /^HANDOFF_[A-Z_]+$/.test(error?.message || '') ? error.message : 'HANDOFF_FAILED';
+  const code = safeNaverHandoffCode(error);
   console.error(code);
   process.exitCode = 2;
 });

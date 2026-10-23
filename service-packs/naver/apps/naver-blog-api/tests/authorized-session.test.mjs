@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { authorizedSession } from '../tools/discovery/authorized-session.mjs';
+import { loadNaverCookies } from '../scripts/session-vault.mjs';
 import { resetTestCredentialStore } from '../scripts/secure-credential-store.mjs';
 
 test.beforeEach(resetTestCredentialStore);
@@ -35,6 +36,9 @@ test('session environment path never reads a profile or imports a browser; clear
   assert.equal(session.provider, 'runtime_environment');
   assert.equal(session.cookieFor('https://blog.naver.com/4053103'), synthetic);
   assert.ok(!JSON.stringify(session).includes('synthetic-session'));
+  const saved = await loadNaverCookies({ env: {} });
+  assert.equal(saved.provider, null);
+  assert.equal(saved.persisted, false);
   session.clear();
   assert.throws(() => session.cookieFor('https://blog.naver.com/4053103'), failsWith('AUTH_MISSING'));
 });

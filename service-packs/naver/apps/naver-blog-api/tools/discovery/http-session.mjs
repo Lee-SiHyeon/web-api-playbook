@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import { read as readApi, resolveRequest } from '../../scripts/client.mjs';
 import { loadNaverCookies, storeNaverCookies } from '../../scripts/session-vault.mjs';
+import { acceptAndPersistNaverCookies } from './http-session-rotation.mjs';
 import { observedReadPages } from './read-pages.mjs';
 const repo=fileURLToPath(new URL('../../',import.meta.url)).replace(/[\\/]$/,'');
 const parser=fileURLToPath(new URL('./parse-html.py',import.meta.url));
@@ -60,20 +61,6 @@ function cookieHeader(url){
  const u=new URL(url);const now=Date.now()/1000;
  return jar.filter(c=>{const domain=c.domain.replace(/^\./,'');return(u.hostname===domain||(c.domain.startsWith('.')&&u.hostname.endsWith('.'+domain)))&&u.pathname.startsWith(c.path||'/')&&(!c.secure||u.protocol==='https:')&&(c.expires===-1||c.expires>now);}).sort((a,b)=>(b.path?.length||0)-(a.path?.length||0)).map(c=>c.name+'='+c.value).join('; ');
 }
-function acceptCookies(response,url){
- const u=new URL(url);
- let changed=false;
- for(const header of response.headers.getSetCookie()){
-  const pieces=header.split(';');const first=pieces.shift();const equal=first.indexOf('=');if(equal<1)continue;
-  const c={name:first.slice(0,equal).trim(),value:first.slice(equal+1),domain:u.hostname,path:u.pathname.slice(0,u.pathname.lastIndexOf('/')+1)||'/',secure:false,expires:-1};
-  let maxAge=null;
-  for(const piece of pieces){const p=piece.trim();const i=p.indexOf('=');const k=(i<0?p:p.slice(0,i)).toLowerCase();const v=i<0?'':p.slice(i+1);if(k==='domain')c.domain=v.startsWith('.')?v:'.'+v;if(k==='path')c.path=v;if(k==='secure')c.secure=true;if(k==='expires'&&Number.isFinite(Date.parse(v)))c.expires=Date.parse(v)/1000;if(k==='max-age'&&/^-?\d+$/.test(v))maxAge=Number(v);}
-  if(maxAge!==null)c.expires=maxAge<=0?0:Date.now()/1000+maxAge;
-  const domain=c.domain.replace(/^\./,'');if(u.hostname!==domain&&!u.hostname.endsWith('.'+domain))continue;
-  const old=jar.findIndex(x=>x.name===c.name&&x.domain===c.domain&&x.path===c.path);if(old>=0){jar.splice(old,1);changed=true;}if(c.expires===-1||c.expires>Date.now()/1000){jar.push(c);changed=true;}
- }
- return changed;
-}
 async function fetchRead(url){
  if(!ready)throw Error('In-memory authenticated session not initialized');
  const u=new URL(url);if(u.protocol!=='https:'||u.username||u.password)throw Error('Unsupported target URL');
@@ -81,7 +68,7 @@ async function fetchRead(url){
  if(!isApp&&!resources.has(url))throw Error('Asset URL was not observed');
  if(isApp&&u.searchParams.has('blogId')&&u.searchParams.getAll('blogId').some(v=>v!=='4053103'))throw Error('Different blog actor');
  const response=await fetch(url,{method:'GET',redirect:'manual',headers:{accept:'text/html,application/json,application/javascript;q=0.9,*/*;q=0.1',...(isApp&&cookieHeader(url)?{cookie:cookieHeader(url),...(sessionUserAgent?{'user-agent':sessionUserAgent}:{})}:{}),referer:'https://admin.blog.naver.com/4053103'},signal:AbortSignal.timeout(20000)});
- if(isApp&&acceptCookies(response,url)){try{await storeNaverCookies(jar,{allowIncomplete:true,userAgent:sessionUserAgent});}catch{jar.length=0;ready=false;throw Error('DPAPI session rotation storage failed');}}
+ if(isApp){try{await acceptAndPersistNaverCookies(jar,response,url,{userAgent:sessionUserAgent});}catch(error){jar.length=0;ready=false;const code=error?.code||error?.message||'';throw Error(code==='NAVER_AUTH_COOKIES_MISSING'?code:'DPAPI_SESSION_ROTATION_STORAGE_FAILED');}}
  const chunks=[];let size=0;
  for await(const chunk of response.body){size+=chunk.length;if(size>4*1024*1024)throw Error('Response exceeds read budget');chunks.push(chunk);}
  const bytes=Buffer.concat(chunks);const mime=response.headers.get('content-type')||'';
