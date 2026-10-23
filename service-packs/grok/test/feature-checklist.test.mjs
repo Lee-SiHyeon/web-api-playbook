@@ -779,7 +779,9 @@ test('direct asset upload stays incomplete when the 20-byte run lacks upload res
   const sourceProof = await json(sourceProofPath);
   const sourceProofSha256 = await digestFile(sourceProofPath);
   const apiAuditPath = sourceProof.apiResult.apiAuditPath;
-  const apiAuditRelativePath = path.relative(ROOT, apiAuditPath);
+  // The historical receipt retains its original host path. Read the bundled
+  // artifact with the same filename without requiring that old checkout.
+  const apiAuditRelativePath = path.join('verification', path.posix.basename(apiAuditPath.replaceAll('\\', '/')));
   const apiProof = await json(apiAuditRelativePath);
   const apiProofSha256 = await digestFile(apiAuditRelativePath);
   const receipt = {

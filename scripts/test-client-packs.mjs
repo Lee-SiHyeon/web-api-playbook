@@ -11,7 +11,7 @@ if (args.length > 1 || args.length === 1 && !/^--service=[a-z][a-z0-9-]*$/.test(
 const selected = args[0]?.slice('--service='.length);
 const all = await clientPacks();
 const scratch = process.env.TMPDIR || path.join(homedir(), '.nad-scratch', 'tmp');
-await mkdir(scratch, { recursive: true });
+await mkdir(scratch, { recursive: true, mode: 0o700 });
 if (selected && !all.some(client => client.id === selected)) throw Error('CLIENT_PACK_UNKNOWN');
 let failed = false, tested = 0;
 for (const client of all.filter(client => !selected || client.id === selected)) {
