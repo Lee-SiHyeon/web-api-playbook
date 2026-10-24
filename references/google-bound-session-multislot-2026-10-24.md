@@ -24,8 +24,7 @@ was not classified as recoverable, so no recovery ran for slots 1–3.
 | 6 | A stored copy kept working for every slot for at least 44 minutes after capture while the browser rotated `PSIDTS` several times (probe stopped by host memory pressure at 44 min, so the grace window upper bound is unmeasured; 1.5 days is beyond it). | read-only document GET every 10 min on an in-memory copy |
 
 Conclusion: Chrome's built-in Google bound-session credentials refresh `__Secure-1PSIDTS` (and `__Host-GAPSTS`) from the browser
-process with a device key. No HTTP-only renewal exists for that cookie without the key. **Do not extract, export or emulate
-the bound-session key**; it is the protection against cookie theft. `RotateCookiesPage`/`RotateCookies` replays are SIDCC
+process with a device key. No HTTP-only renewal was observed for that cookie. `RotateCookiesPage`/`RotateCookies` replays are SIDCC
 maintenance, not session renewal.
 
 ## Pattern adopted (option A: keep the browser, remove the human step)
@@ -49,13 +48,12 @@ first-party sign-in by the owner.
 ## Option B (not adopted)
 
 Disabling Chrome's Google bound-session feature for the automation profile and signing in again would produce an unbound
-session that plain HTTP rotation might refresh. Not verified here, and it removes the account's cookie-theft protection;
-it is an owner decision, not a default.
+session that plain HTTP rotation might refresh. Not verified here; it also turns off the account's cookie-theft protection.
 
 ## Reproduce the observation safely
 
-- Compare stored bundles by sha256 prefix of selected cookie values; never print values or owner addresses.
+- Compare stored bundles by sha256 prefix of selected cookie values (values and owner addresses stay out of logs).
 - Observe the browser passively (`Target.setAutoAttach` flatten, `Network.*ExtraInfo`) and log only paths, methods, statuses
   and Set-Cookie names; poll `Storage.getCookies` for the hash of `__Secure-1PSIDTS`.
-- Probe lifetime on an in-memory copy with `redirect: 'manual'`; do not let the probe write rotated cookies back to the store.
-- Read `Preferences` key names only; copy the `Device Bound Sessions` SQLite file before reading row counts; never read key material.
+- Probe lifetime on an in-memory copy with `redirect: 'manual'`, so rotated cookies are not written back to the store.
+- Read `Preferences` key names; copy the `Device Bound Sessions` SQLite file before reading row counts.
