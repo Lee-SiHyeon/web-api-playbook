@@ -6,6 +6,7 @@
 |---|---|---|
 | 로그인됐는데 `AUTH_MISSING` | [전달 경계](../references/runtime-credential-propagation.md), [Naver](naver.md) | `scripts/session.mjs`, `scripts/request.mjs`, pack별 provider |
 | Flow 브라우저 로그인은 되는데 HTTP 302, 새 생성은 막힘 | [Flow 세션·생성 경계](../references/google-flow-http.md) | 외부 maintained Flow HTTP client; 새 생성 live replay 미완료 |
+| Flow 여러 계정 슬롯이 한꺼번에 만료, u1~u3은 복구도 안 돎 | [기기 바인딩 세션·멀티 슬롯 갱신](../references/google-bound-session-multislot-2026-10-24.md) | 외부 maintained Flow client `src/session-sync.mjs` (한 번에 전 슬롯 + Google broker) |
 | 쿠키·토큰 저장/회전/재시작 | [런타임 모듈](../references/runtime-modules.md), [로그인 단계](../references/browserless-login-flow.md) | `lib/protected-store.mjs`, `lib/scoped-session.mjs`, pack session vault |
 | CDP port는 열렸는데 attach timeout | [브라우저 발견](../references/browser-discovery.md), [Naver](naver.md) | 실행 host/provider의 supported attach, 기존 saved session reuse |
 | POST가 끊겨 중복 게시 우려 | [쓰기와 대사](../references/write-and-reconcile.md), [Tistory 사례](non-naver.md) | `lib/write-journal.mjs`, pack별 publishing journal |
