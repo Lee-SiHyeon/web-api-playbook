@@ -1,11 +1,15 @@
 // Threads / X post through their own web composer in the logged-in automation Canary (CDP 9333); own tab, closed at the end.
 // 2026-10-23 (kwak Macau): the HTTP clients (sns-threads, sns-X) have no verified media publish, so promo posts with media go
 // through the web UI here. Media goes straight into the composer's <input type=file> (DOM.setFileInputFiles), no chooser.
-//   node scripts/sns-web-post.mjs threads|x <text.txt> [media1,media2] [--dry] [--shots=<dir>]
+//   node scripts/sns-web-post.mjs threads|x <text.txt> [media1,media2] [--dry] [--shots=<dir>] [--schedule=<time>]
+// --schedule: native scheduled publishing (lib/sns-schedule.mjs); <time> like 2026-10-29T15:07+09:00 or "2026-10-29 15:07"
+// (browser local time), >= 10 min ahead. The composer's own confirmation line is checked before Schedule is pressed; prints
+// {scheduled, scheduledFor, line} instead of a post URL (a scheduled post has none until it goes out).
 // --dry stops before the post button; --keep leaves the tab open. X: if the composer is still open 90 s after the CDP click, Post is pressed once with a real OS click through
 // a Windows desktop MCP (lib/desktop-click.mjs). Threads: the tab stays open until "게시 중" ends. Prints {posted, account, url, osClick?}.
 import fs from 'node:fs';
 import path from 'node:path';
+import { parseScheduleTime, applySchedule } from '../lib/sns-schedule.mjs';
 
 const CDP = process.env.SNS_CDP || 'http://127.0.0.1:9333';
 const [site, textFile, mediaArg, ...rest] = process.argv.slice(2);
@@ -13,12 +17,13 @@ const opt = Object.fromEntries([mediaArg, ...rest].filter((a) => a && a.startsWi
 const media = mediaArg && !mediaArg.startsWith('--') ? mediaArg.split(',').map((f) => path.resolve(f)) : [];
 if (!['threads', 'x'].includes(site) || !textFile) { console.error('usage: sns-web-post.mjs threads|x <text.txt> [media,...] [--dry] [--shots=dir]'); process.exit(2); }
 const text = fs.readFileSync(textFile, 'utf8').replace(/\r/g, '').trim();
+const when = opt.schedule ? parseScheduleTime(opt.schedule) : null; // validated before any browser work
 const shots = opt.shots || path.join(path.dirname(path.resolve(textFile)), `${site}-shots`); fs.mkdirSync(shots, { recursive: true });
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const SITE = {
   threads: { url: 'https://www.threads.com/', // the feed's "새로운 소식을 공유해보세요" line does not open the dialog; the left nav "새로운 스레드" does
     open: `[...document.querySelectorAll('a, [role=button], [role=link]')].find((x) => /^(새로운 스레드|Create)$/.test((x.innerText || x.getAttribute('aria-label') || '').trim()) && x.getBoundingClientRect().width)`,
-    editor: '[role=dialog] [contenteditable=true]', file: '[role=dialog] input[type=file]', post: /^(게시|Post)$/, scope: '[role=dialog]' },
+    editor: '[role=dialog] [contenteditable=true]', file: '[role=dialog] input[type=file]', post: /^(게시|Post|예약|Schedule)$/, /* 예약: the same button once a schedule is set */ scope: '[role=dialog]' },
   x: { url: 'https://x.com/compose/post', open: null, editor: '[data-testid="tweetTextarea_0"]', file: 'input[data-testid="fileInput"], input[type=file]', post: null, postSel: '[data-testid="tweetButton"]', scope: 'body' },
 }[site];
 
@@ -76,6 +81,12 @@ try {
       if (await ev(`(() => { const b = document.querySelector(${JSON.stringify(SITE.postSel)}); if (!b) return false; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!e && b.contains(e); })()`)) break;
     }
   }
+  if (when) {
+    const io = { sleep, click: clickAt, key: (t) => send('Input.insertText', { text: t }),
+      selectAll: async () => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'a', code: 'KeyA', modifiers: 2, windowsVirtualKeyCode: 65 }); },
+      call: (fn, ...a) => ev(`(${fn})(...${JSON.stringify(a)})`) };
+    Object.assign(out, await applySchedule(site, when, io));
+  }
   out.typed = await ev(`(document.querySelector(${JSON.stringify(SITE.editor)})?.innerText || '').length`);
   await shot(`${site}-1-filled`);
   if (opt.dry) {
@@ -110,8 +121,9 @@ try {
     for (let i = 0; i < 80 && site === 'threads'; i++) { if (!/게시 중|Posting/.test(await ev('document.body.innerText'))) break; await sleep(3000); }
     await sleep(4000); await shot(`${site}-2-posted`);
     out.posted = closed; if (!closed) throw new Error('COMPOSER_STILL_OPEN');
+    if (when) out.scheduled = true; // a scheduled post has no link until it goes out: skip the lookup
     // the post link: only one of the logged-in account's own posts (feeds show other people's posts first)
-    const me = await ev(`(() => { const a = [...document.querySelectorAll('a[href^="/@"], a[data-testid="AppTabBar_Profile_Link"]')].find((x) => /프로필|Profile/.test(x.getAttribute('aria-label') || x.innerText || '') || x.dataset.testid === 'AppTabBar_Profile_Link'); return a ? a.getAttribute('href').replace(/^\\//, '') : null; })()`);
+    const me = when ? null : await ev(`(() => { const a = [...document.querySelectorAll('a[href^="/@"], a[data-testid="AppTabBar_Profile_Link"]')].find((x) => /프로필|Profile/.test(x.getAttribute('aria-label') || x.innerText || '') || x.dataset.testid === 'AppTabBar_Profile_Link'); return a ? a.getAttribute('href').replace(/^\\//, '') : null; })()`);
     out.account = me;
     out.url = me ? await ev(`(() => { const a = [...document.querySelectorAll('a[href*="/post/"], a[href*="/status/"]')].map((x) => x.href).find((h) => h.includes('/${me}/') && /\\/(post|status)\\/[\\w-]+$/.test(h)); return a || null; })()`) : null;
   }
