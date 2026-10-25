@@ -145,17 +145,25 @@ for (const { s, i } of list) {
     const r = run('facebook-web.mjs', ['post', videoOf(s), write(`${s.id}.facebook.txt`, s.facebookText || socialText(s))], 900000);
     x.facebook = { ok: !!r.last?.posted || !!r.dry, aiLabel: r.last?.aiLabel, actor: r.last?.actor }; save(); log({ id: s.id, ch: 'facebook', ...x.facebook });
   }
+  // native scheduled publishing on X and Threads: a short whose spacing slot (x.slotAt, written by the caller's pacing, e.g.
+  // shorts-anatomy shorts-publish) is >= 10 min away is scheduled for that slot in the site's own composer (sns-web-post
+  // --schedule) instead of posted now; the record says scheduled + scheduledFor (no URL exists before it goes out)
+  const slot = x.slotAt && new Date(x.slotAt).getTime() >= Date.now() + 10 * 60e3 ? x.slotAt : null;
   if (channels.includes('threads') && !x.threads?.ok) {
-    const r = run('sns-web-post.mjs', ['threads', write(`${s.id}.threads.txt`, cut(s.threadsText || socialText(s), 500)), videoOf(s)], 900000);
-    x.threads = { ok: !!(r.last?.posted && (r.last?.url || '').includes('/' + (r.last?.account || '@?') + '/')) || !!r.dry, url: r.last?.url, account: r.last?.account, error: r.last?.error }; save(); log({ id: s.id, ch: 'threads', ...x.threads });
+    const r = run('sns-web-post.mjs', ['threads', write(`${s.id}.threads.txt`, cut(s.threadsText || socialText(s), 500)), videoOf(s), ...(slot ? [`--schedule=${slot}`] : [])], 900000);
+    x.threads = slot ? { ok: !!r.last?.scheduled || !!r.dry, scheduled: true, scheduledFor: r.last?.scheduledFor || slot, line: r.last?.line, error: r.last?.error }
+      : { ok: !!(r.last?.posted && (r.last?.url || '').includes('/' + (r.last?.account || '@?') + '/')) || !!r.dry, url: r.last?.url, account: r.last?.account, error: r.last?.error };
+    save(); log({ id: s.id, ch: 'threads', ...x.threads });
   }
   if (channels.includes('x') && !x.x?.ok) {
     // never auto-retry X: a "failed" run has posted before (the composer closed late) and the retry made a duplicate
     if (x.x?.attempted && !opt['retry-x']) log({ id: s.id, ch: 'x', skipped: 'an earlier attempt did not confirm; check the profile, then rerun with --retry-x' });
     else {
       x.x = { attempted: new Date().toISOString() }; save();
-      const r = run('sns-web-post.mjs', ['x', write(`${s.id}.x.txt`, s.xText || xText(s)), videoOf(s)], 900000);
-      x.x = { ...x.x, ok: !!r.last?.posted || !!r.dry, url: r.last?.url, osClick: r.last?.osClick, error: r.last?.error }; save(); log({ id: s.id, ch: 'x', ...x.x });
+      const r = run('sns-web-post.mjs', ['x', write(`${s.id}.x.txt`, s.xText || xText(s)), videoOf(s), ...(slot ? [`--schedule=${slot}`] : [])], 900000);
+      x.x = slot ? { ...x.x, ok: !!r.last?.scheduled || !!r.dry, scheduled: true, scheduledFor: r.last?.scheduledFor || slot, line: r.last?.line, error: r.last?.error }
+        : { ...x.x, ok: !!r.last?.posted || !!r.dry, url: r.last?.url, osClick: r.last?.osClick, error: r.last?.error };
+      save(); log({ id: s.id, ch: 'x', ...x.x });
     }
   }
 }
