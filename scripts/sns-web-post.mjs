@@ -86,7 +86,12 @@ try {
     const pb = await center(SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`);
     if (!pb) throw new Error('NO_POST_BUTTON');
     const postExpr = SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`;
-    const composerOpen = () => ev(`!!document.querySelector(${JSON.stringify(SITE.editor)})`);
+    // X: after a successful post the modal closes and Home loads, whose inline composer has the same tweetTextarea_0 test id,
+    // so "editor present" stayed true and every successful post was reported COMPOSER_STILL_OPEN (and earlier retried into
+    // duplicates). Only the compose modal counts (CDP-observed 2026-10-26).
+    const composerOpen = () => ev(site === 'x'
+      ? `location.pathname.startsWith('/compose/') || !!document.querySelector('[role=dialog] ${SITE.editor}')`
+      : `!!document.querySelector(${JSON.stringify(SITE.editor)})`);
     // the click lands only if Post itself is the topmost element at its centre (an open dropdown mask covers it invisibly)
     const onTop = await ev(`(() => { const b = ${postExpr}; if (!b) return false; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!e && b.contains(e); })()`);
     if (!onTop) { out.cover = await ev(`(() => { const b = ${postExpr}; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return e ? e.tagName + ' ' + (e.parentElement?.innerText || '').slice(0, 80) : null; })()`); throw new Error('POST_BUTTON_COVERED'); }
