@@ -56,20 +56,40 @@ try {
     for (let i = 0; i < 120; i++) {
       const ready = await ev(SITE.postSel ? `(() => { const b = document.querySelector(${JSON.stringify(SITE.postSel)}); return !!b && b.getAttribute('aria-disabled') !== 'true' && !b.disabled; })()`
         : `(() => { const b = [...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].find((x) => ${SITE.post}.test((x.innerText || '').trim())); return !!b && b.getAttribute('aria-disabled') !== 'true'; })()`);
-      // X shows a circular progress ring (role=progressbar) while the video uploads; Post stays clickable but does nothing
-      const busy = await ev(`!!document.querySelector('[role=progressbar], [data-testid="progressBar"]') || /업로드 중|Uploading|처리 중|Processing/.test(document.body.innerText)`);
+      // X: the upload ring lives inside [data-testid=attachments]; the composer's character counters are role=progressbar too
+      // (always present), so a page-wide progressbar check never cleared and the loop always ran its full 6 minutes (2026-10-26)
+      const busy = await ev(`(() => { const a = document.querySelector('[data-testid="attachments"]') || document.querySelector(${JSON.stringify(SITE.scope)});
+        return !!a?.querySelector('[role=progressbar], [data-testid="progressBar"]') || /업로드 중|Uploading|처리 중|Processing/.test(a?.innerText || ''); })()`);
       if (ready && !busy) break;
       await sleep(3000);
     }
   }
+  // X: text ending in a #hashtag leaves the hashtag typeahead open, and its transparent full-viewport mask sits over Post,
+  // so every click (CDP and OS) only dismissed the dropdown: the cause of every COMPOSER_STILL_OPEN (CDP-observed 2026-10-26;
+  // with the mask gone, one CDP click sends CreateTweet with the video media_id). The listbox can already be gone while its
+  // empty mask stays, so don't key on the listbox: always type a trailing space (it closes the typeahead and removes the mask),
+  // after the media upload so a late typeahead re-render cannot bring it back.
+  if (site === 'x') {
+    await send('Input.insertText', { text: ' ' });
+    for (let i = 0; i < 10; i++) {
+      await sleep(500);
+      if (await ev(`(() => { const b = document.querySelector(${JSON.stringify(SITE.postSel)}); if (!b) return false; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!e && b.contains(e); })()`)) break;
+    }
+  }
   out.typed = await ev(`(document.querySelector(${JSON.stringify(SITE.editor)})?.innerText || '').length`);
   await shot(`${site}-1-filled`);
-  if (opt.dry) { out.dry = true; }
+  if (opt.dry) {
+    out.dry = true;
+    if (SITE.postSel) out.postOnTop = await ev(`(() => { const b = document.querySelector(${JSON.stringify(SITE.postSel)}); if (!b) return false; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!e && b.contains(e); })()`);
+  }
   else {
     const pb = await center(SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`);
     if (!pb) throw new Error('NO_POST_BUTTON');
     const postExpr = SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`;
     const composerOpen = () => ev(`!!document.querySelector(${JSON.stringify(SITE.editor)})`);
+    // the click lands only if Post itself is the topmost element at its centre (an open dropdown mask covers it invisibly)
+    const onTop = await ev(`(() => { const b = ${postExpr}; if (!b) return false; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!e && b.contains(e); })()`);
+    if (!onTop) { out.cover = await ev(`(() => { const b = ${postExpr}; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return e ? e.tagName + ' ' + (e.parentElement?.innerText || '').slice(0, 80) : null; })()`); throw new Error('POST_BUTTON_COVERED'); }
     await clickAt(pb);
     // A CDP click on X's Post works, but with a video the composer can take 20-60 s to close; earlier runs read that as "click
     // ignored" and the retry made a duplicate. Wait up to 90 s; only if the composer is still open and the Post button is still
