@@ -25,6 +25,8 @@ The sample Kmong gig ID and category slugs are examples: use a visible gig ID or
 
 ## 크몽
 
+로그인한 본인의 계정 조회와 Windows 암호화 세션 재사용은 별도 [인증 가이드](kmong-auth.md)의 `scripts/kmong-account.mjs`를 사용합니다. 아래 명령은 공개 조회용입니다.
+
 `createKmongClient()`는 홈페이지에서 확인한 링크로 제한된 서비스 목록과 카테고리를 읽고, first-party bundle에서 확인한 keyword-search 계약으로 한 페이지(40건)를 읽습니다. 호출자가 정확한 `/gig/{id}`를 지정하면 그 상세 페이지에 바인딩된 공개 가격 구조를 반환합니다. `gig.pricingType`은 `package_table`, `single_price_card`, `unknown` 중 하나입니다. 3단계 상품은 기존 `gig.packages` 목록을 유지하며 각 `packages[].price.basis`는 `listed_package_price`입니다. 단일 가격 카드에서는 실제 SSR 카드에 가격 문자가 없을 수 있으므로 화면 가격을 만들어 내지 않습니다. SKU가 일치하는 Product JSON-LD `AggregateOffer`가 있으면 `gig.pricing.priceRange`에 `aggregate_offer_range`와 KRW 통화를 보존하고, `aggregateOfferCount`는 별도 집계 필드로 둡니다. 범위의 최소·최대값이 같아도 최종 결제액 검증으로 바뀌지 않으며 `finalCheckoutAmountVerified`는 `false`입니다. 구조가 없거나 읽히지 않는 가격은 0원이나 가짜 패키지가 아니라 `null`/`unknown`으로 남습니다.
 
 리뷰 조회는 가격 표 해석에 의존하지 않습니다. 정확한 `/gig/{id}` 응답의 Product SKU로 서비스를 바인딩하고, 응답에 삽입된 해당 ID의 first-party 리뷰 API 주소만 사용합니다. 상세 결과는 `reviewSourceAvailability`를 `observed` 또는 `not_observed`로 표시하며, 주소가 관측되지 않으면 `reviews` 요청은 `KMONG_REVIEW_LINK_NOT_OBSERVED`로 끝납니다. 한 번의 `reviews` 호출은 한 페이지(현재 5개), `reviews-collect`는 호출당 최대 5페이지를 읽습니다. 응답의 전체 리뷰 수가 있더라도 전체 리뷰 수집을 뜻하지 않습니다.

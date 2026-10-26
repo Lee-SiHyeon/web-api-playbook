@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "kmong",
-  "description": "Public Kmong home/category/search, exact package or single-card detail, and bounded resumable search/review reads. Source prices and page-window limits remain explicit. No account, orders, messages, quotes, or payment implementation.",
+  "description": "Public Kmong home/category/search, exact package or single-card detail, and bounded resumable search/review reads. A separate protected current-user owner check reuses the Kmong session cookie issued after normal Google sign-in through Windows DPAPI. Automated Google OAuth, refresh, orders, messages, quotes, and payment are not implemented.",
   "capabilities": [
     {
       "id": "catalog.categories",
@@ -714,6 +714,174 @@
       ],
       "sourceEvidence": [],
       "note": "One to five pages per invocation; duplicate rows, pagination drift and access errors stop collection. Imported state is caller-supplied and never by itself proves a fresh read. Completion is scoped to the returned source window."
+    },
+    {
+      "id": "auth.browser_bootstrap",
+      "title": "Manual Google browser sign-in and one-cookie session handoff",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/kmong.mjs",
+            "exports": [
+              "validateKmongSessionImport",
+              "createKmongAuth"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/kmong-account.mjs",
+            "tokens": [
+              "session-import",
+              "persist",
+              "stdinJsonNoEcho"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/kmong-account.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The manual Google UI, OAuth return, optional browser owner-probe, and buyer-signup phases are summarized in verification/kmong-auth-2026-10-26/kmong-auth-bootstrap-context.json. This is manual browser evidence only; the repository does not automate Google OAuth or phone KYC. The handoff imports only x-kmong-authorization through hidden stdin."
+    },
+    {
+      "id": "auth.owner",
+      "title": "Read the protected current-user endpoint and match the pinned owner",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/kmong.mjs",
+            "exports": [
+              "createKmongAuth"
+            ]
+          },
+          {
+            "path": "lib/protected-store.mjs",
+            "exports": [
+              "ProtectedStore"
+            ]
+          },
+          {
+            "path": "lib/scoped-session.mjs",
+            "exports": [
+              "ScopedSession"
+            ]
+          },
+          {
+            "path": "lib/session-lock.mjs",
+            "exports": [
+              "withSessionLock"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/kmong-account.mjs",
+            "tokens": [
+              "owner",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/kmong-account.test.mjs",
+          "tests/verify-kmong-auth.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://kmong.com",
+          "path": "/api/user/v3/me",
+          "files": [
+            "verification/kmong-auth-2026-10-26/kmong-auth-owner-proof.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/kmong.mjs",
+            "scripts/kmong-account.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/session-lock.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The GET must return a valid current-user schema and match the expected email plus pinned USERID before verification succeeds. Evidence keeps identity values and cookie bytes out."
+    },
+    {
+      "id": "auth.reuse",
+      "title": "Reuse the DPAPI-protected owner session in a fresh process",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/kmong.mjs",
+            "exports": [
+              "createKmongAuth"
+            ]
+          },
+          {
+            "path": "lib/protected-store.mjs",
+            "exports": [
+              "ProtectedStore"
+            ]
+          },
+          {
+            "path": "lib/scoped-session.mjs",
+            "exports": [
+              "ScopedSession"
+            ]
+          },
+          {
+            "path": "lib/session-lock.mjs",
+            "exports": [
+              "withSessionLock"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/kmong-account.mjs",
+            "tokens": [
+              "verify",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/kmong-account.test.mjs",
+          "tests/verify-kmong-auth.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://kmong.com",
+          "path": "/api/user/v3/me",
+          "files": [
+            "verification/kmong-auth-2026-10-26/kmong-auth-reuse-proof.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/kmong.mjs",
+            "scripts/kmong-account.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/session-lock.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The outer generic receipt binds the final protected GET. The standalone dated verifier additionally requires two distinct fresh process IDs, Windows DPAPI CurrentUser persistence, the same pinned owner, and zero login/import operations during reuse. Automatic refresh remains unimplemented."
     }
   ]
 }

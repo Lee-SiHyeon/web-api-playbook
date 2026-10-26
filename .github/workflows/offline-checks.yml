@@ -30,6 +30,7 @@ jobs:
       - run: npm run doctor
       - run: npm test
       - run: npm run verify:jobs-freelance
+      - run: node scripts/verify-kmong-auth.mjs
       - run: npm run test:client-packs
       - run: npm run audit:consolidation
       - name: MyRealTrip pack compatibility

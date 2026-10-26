@@ -1,0 +1,76 @@
+{
+  "schema": "web-api-kmong-bootstrap-context-v1",
+  "service": "kmong",
+  "recordedAt": "2026-10-26T06:05:57.883540+00:00",
+  "host": "10.157.140.228",
+  "secretsPersistedInEvidence": false,
+  "phases": [
+    {
+      "name": "google_login",
+      "mode": "browser_automation",
+      "provider": "Google",
+      "outcome": "completed"
+    },
+    {
+      "name": "google_2fa",
+      "mode": "browser_automation",
+      "outcome": "completed",
+      "ownerAssisted": true
+    },
+    {
+      "name": "kmong_oauth_return",
+      "mode": "browser_automation",
+      "outcome": "completed"
+    },
+    {
+      "name": "buyer_signup",
+      "mode": "browser_automation",
+      "outcome": "completed",
+      "optionalPrivacyConsent": false,
+      "optionalMarketingConsent": false,
+      "phoneKycPerformed": false,
+      "submissionCount": 1
+    },
+    {
+      "name": "browser_owner_probe",
+      "mode": "browser_automation",
+      "outcome": "completed",
+      "method": "GET",
+      "origin": "https://kmong.com",
+      "path": "/api/user/v3/me",
+      "statuses": [
+        204,
+        200
+      ],
+      "ownerMatched": true
+    }
+  ],
+  "browserUsedForRecordedCliReads": false,
+  "automaticOAuthImplemented": false,
+  "automaticRefreshImplemented": false,
+  "phoneVerificationComplete": false,
+  "preliminaryAnonymousControl": {
+    "mode": "pure_http",
+    "checkedAt": "2026-10-26T05:44:43.620Z",
+    "origin": "https://kmong.com",
+    "path": "/api/user/v3/me",
+    "httpStatus": 204,
+    "credentialsUsed": false,
+    "browserUsed": false
+  },
+  "sessionImport": {
+    "processId": 34200,
+    "checkedAt": "2026-10-26T05:56:59.093Z",
+    "importedCredentialCount": 1,
+    "credentialProvider": "Windows DPAPI CurrentUser",
+    "persistent": true,
+    "ownerVerified": true,
+    "sourceResultSha256": "1b5b3d54d8beafcf0d46c7dd6950183d2947c3d26a18eaeb1167fbf6e4bd2b91"
+  },
+  "localStatus": {
+    "configured": true,
+    "currentAuthentication": "not_checked",
+    "requestCount": 0,
+    "sourceResultSha256": "a42c2dca9014cf32af5a612bce16d61453001f8a254fcf2eba66cce421bd7054"
+  }
+}
