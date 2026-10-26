@@ -83,6 +83,13 @@ test('search parser binds the returned page and does not confuse an empty shape 
   assert.equal(lastPage.pagination.endReached, true);
   assert.equal(lastPage.pagination.nextPage, null);
   assert.equal(lastPage.pagination.complete, false);
+  const missingSearchPrice = structuredClone(body);
+  missingSearchPrice.gigs[0].price = null;
+  const sourceReceipt = { httpStatus: 200, mime: 'application/json', responseSha256: 'b'.repeat(64) };
+  assert.throws(() => parseKmongSearch(missingSearchPrice, {
+    keyword: '상세페이지', requests: [sourceReceipt],
+  }), error => error instanceof KmongReadError && error.code === 'KMONG_SEARCH_ROW_SCHEMA_INVALID' &&
+    error.receipt.httpStatus === 200);
 });
 
 test('detail parser binds ID and extracts exact package data and aggregate rating separately', async () => {
@@ -96,6 +103,8 @@ test('detail parser binds ID and extracts exact package data and aggregate ratin
   assert.deepEqual(result.gig.offerRange, {
     minimumAmount: 50_000, maximumAmount: 150_000, currency: 'KRW', basis: 'aggregate_offer_range',
   });
+  assert.equal(result.gig.pricingType, 'package_table');
+  assert.deepEqual(result.gig.pricing, { type: 'package_table' });
   assert.deepEqual(result.gig.packages.map(row => row.price.amount), [50_000, 90_000, 150_000]);
   assert.deepEqual(result.gig.packages.map(row => row.deliveryTime), ['2일', '3일', '5일']);
   assert.deepEqual(result.gig.packages.map(row => row.revisionLimit), ['1회', '3회', '5회']);
@@ -105,9 +114,68 @@ test('detail parser binds ID and extracts exact package data and aggregate ratin
   assert.equal(result.contractProvenance.kind, 'first_party_document');
 });
 
+test('detail parser exposes observed single-price card and keeps price basis and terms explicit', async () => {
+  const body = await fixture('kmong-detail-single.html');
+  const receipt = {
+    method: 'GET', origin: 'https://kmong.com', path: '/gig/70003', httpStatus: 200,
+    mime: 'text/html', responseBytes: Buffer.byteLength(body), responseSha256: 'a'.repeat(64),
+    observedAt: new Date(NOW).toISOString(), readOnly: true, credentialsUsed: false, cookiesSent: false,
+  };
+  const result = parseKmongDetail(body, { id: '70003', requests: [receipt] });
+  assert.equal(result.gig.id, '70003');
+  assert.equal(result.gig.pricingType, 'single_price_card');
+  assert.deepEqual(result.gig.offerRange, {
+    minimumAmount: 5_000, maximumAmount: 5_000, currency: 'KRW', basis: 'aggregate_offer_range',
+  });
+  assert.deepEqual(result.gig.pricing, {
+    type: 'single_price_card',
+    priceRange: result.gig.offerRange,
+    aggregateOfferCount: 1,
+    finalCheckoutAmountVerified: false,
+    deliveryTime: '1일',
+    revisionLimit: '2회',
+  });
+  assert.deepEqual(result.gig.packages, []);
+  assert.match(result.reviewSource.url, /\/gigs\/70003\?page=1&perPage=5&sortType=CREATED_AT_DESC$/);
+
+  const noStructuredPrice = body.replace(/"offers":\{[^}]+\},?/, '');
+  const unknown = parseKmongDetail(noStructuredPrice, { id: '70003', requests: [receipt] });
+  assert.equal(unknown.gig.pricingType, 'single_price_card');
+  assert.equal(unknown.gig.offerRange, null);
+  assert.deepEqual(unknown.gig.pricing, {
+    type: 'single_price_card', priceRange: null, aggregateOfferCount: null,
+    finalCheckoutAmountVerified: false,
+    deliveryTime: '1일', revisionLimit: '2회',
+  });
+  assert.deepEqual(unknown.gig.packages, []);
+  const nullPrice = parseKmongDetail(body.replace('"lowPrice":5000', '"lowPrice":null'), { id: '70003' });
+  assert.equal(nullPrice.gig.offerRange, null);
+  const zeroPrice = parseKmongDetail(body
+    .replace('"lowPrice":5000', '"lowPrice":0')
+    .replace('"highPrice":5000', '"highPrice":0'), { id: '70003' });
+  assert.equal(zeroPrice.gig.offerRange.minimumAmount, 0);
+  assert.equal(zeroPrice.gig.offerRange.maximumAmount, 0);
+
+  const withoutReviewSource = body.replace(/<script id="first-party-detail-data">[\s\S]*?<\/script>/, '');
+  const detailWithoutReviews = parseKmongDetail(withoutReviewSource, { id: '70003', requests: [receipt] });
+  assert.equal(detailWithoutReviews.reviewSource, null);
+  assert.equal(detailWithoutReviews.reviewSourceAvailability, 'not_observed');
+
+  const withoutCanonical = body.replace(/<link rel="canonical"[^>]*>/, '');
+  const exactUrlAndSku = parseKmongDetail(withoutCanonical, {
+    id: '70003', url: 'https://kmong.com/gig/70003', requests: [receipt],
+  });
+  assert.equal(exactUrlAndSku.gig.id, '70003');
+});
+
 test('detail parser rejects mismatched SKU, unverified URL origins, and absent package schema', async () => {
   const body = await fixture('kmong-detail.html');
   assert.throws(() => parseKmongDetail(body, { id: '70002' }), error =>
+    error instanceof KmongReadError && error.code === 'KMONG_DETAIL_IDENTITY_MISMATCH');
+  const canonicalMatchesButSkuDoesNot = body.replace(
+    'href="https://kmong.com/gig/70001"', 'href="https://kmong.com/gig/70002"',
+  );
+  assert.throws(() => parseKmongDetail(canonicalMatchesButSkuDoesNot, { id: '70002' }), error =>
     error instanceof KmongReadError && error.code === 'KMONG_DETAIL_IDENTITY_MISMATCH');
   assert.throws(() => parseKmongDetail(body, { id: '70001', url: 'https://evil.example/gig/70001' }), error =>
     error instanceof KmongReadError && error.code === 'KMONG_URL_ORIGIN_REJECTED');
@@ -157,12 +225,82 @@ test('review parser binds requested page and gig ID and drops reviewer, seller, 
     error instanceof KmongReadError && error.code === 'KMONG_REVIEW_GIG_IDENTITY_MISMATCH');
   assert.throws(() => parseKmongReviews(body, { id: '70001', page: 2 }), error =>
     error instanceof KmongReadError && error.code === 'KMONG_REVIEWS_PAGE_BINDING_INVALID');
+  assert.throws(() => parseKmongReviews({
+    reviewPage: {
+      currentPage: 1, lastPage: 1, perPage: 5, totalItemCount: 1,
+      items: [{ buyerReview: { score: null, comment: 'ok' }, orderDetail: { gigId: 70001 } }],
+    },
+  }, { id: '70001' }), error => error instanceof KmongReadError && error.code === 'KMONG_REVIEW_RATING_INVALID');
+  const emptyReviews = parseKmongReviews({
+    reviewPage: { currentPage: 1, lastPage: 0, perPage: 5, totalItemCount: 0, items: [] },
+  }, { id: '70001' });
+  assert.deepEqual(emptyReviews.items, []);
+  assert.equal(emptyReviews.pagination.complete, true);
+  assert.throws(() => parseKmongReviews({
+    reviewPage: { currentPage: 1, lastPage: 1, perPage: 5, totalItemCount: null, items: [] },
+  }, { id: '70001' }), error => error instanceof KmongReadError && error.code === 'KMONG_REVIEWS_PAGE_BINDING_INVALID');
   const lastReviewPage = parseKmongReviews({
     reviewPage: { ...body.reviewPage, currentPage: 3, lastPage: 3, items: body.reviewPage.items.slice(0, 2) },
   }, { id: '70001', page: 3 });
   assert.equal(lastReviewPage.pagination.endReached, true);
   assert.equal(lastReviewPage.pagination.nextPage, null);
   assert.equal(lastReviewPage.pagination.complete, false);
+});
+
+test('reviews resolve from detail identity and observed route without parsing package pricing', async () => {
+  const body = await fixture('kmong-detail-single.html');
+  const noStructuredPrice = body.replace(/"offers":\{[^}]+\},?/, '');
+  const reviewPayload = JSON.parse(await fixture('kmong-reviews-page1.json'));
+  const singleGigReviews = structuredClone(reviewPayload);
+  for (const item of singleGigReviews.reviewPage.items) item.orderDetail.gigId = 70003;
+  const calls = [];
+  const client = createKmongClient({
+    now: () => NOW,
+    fetchImpl: async (url, options) => {
+      calls.push({ url: String(url), options });
+      return new URL(url).origin === 'https://kmong.com'
+        ? htmlResponse(noStructuredPrice)
+        : jsonResponse(singleGigReviews);
+    },
+  });
+  const result = await client.reviews({ id: '70003' });
+  assert.equal(result.gigId, '70003');
+  assert.equal(result.aggregateRating.average, 4.8);
+  assert.equal(result.items.length, 2);
+  assert.equal(calls.length, 2);
+  assert.match(calls[1].url, /\/gigs\/70003\?page=1&perPage=5&sortType=CREATED_AT_DESC$/);
+  assert.equal(calls[0].options.credentials, 'omit');
+  assert.equal(calls[1].options.credentials, 'omit');
+  assert.equal(result.requests[0].httpStatus, 200);
+  assert.equal(result.requests[1].httpStatus, 200);
+});
+
+test('review URL mismatch and challenge parsing failures retain the real detail receipt', async () => {
+  const body = await fixture('kmong-detail-single.html');
+  const wrongReviewId = body.replaceAll('/gigs/70003?', '/gigs/70004?');
+  const mismatchClient = createKmongClient({
+    now: () => NOW,
+    fetchImpl: async () => htmlResponse(wrongReviewId),
+  });
+  await assert.rejects(mismatchClient.reviews({ id: '70003' }), error =>
+    error instanceof KmongReadError && error.code === 'KMONG_REVIEW_LINK_NOT_OBSERVED' &&
+    error.receipt.httpStatus === 200 && /^[a-f0-9]{64}$/.test(error.receipt.responseSha256));
+
+  const noRouteClient = createKmongClient({
+    now: () => NOW,
+    fetchImpl: async () => htmlResponse(body.replace(/<script id="first-party-detail-data">[\s\S]*?<\/script>/, '')),
+  });
+  await assert.rejects(noRouteClient.reviews({ id: '70003' }), error =>
+    error instanceof KmongReadError && error.code === 'KMONG_REVIEW_LINK_NOT_OBSERVED' &&
+    error.receipt.httpStatus === 200 && error.receipt.readOnly === true);
+
+  const challengeClient = createKmongClient({
+    now: () => NOW,
+    fetchImpl: async () => htmlResponse('<html><title>보안 확인</title></html>'),
+  });
+  await assert.rejects(challengeClient.reviews({ id: '70003' }), error =>
+    error instanceof KmongReadError && error.code === 'KMONG_LOGIN_OR_CHALLENGE_PAGE' &&
+    error.receipt.httpStatus === 200 && error.receipt.mime === 'text/html');
 });
 
 test('client sends bounded anonymous reads to observed same-origin routes only', async () => {

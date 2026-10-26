@@ -1,0 +1,211 @@
+{
+  "schema": "web-api-jobs-freelance-verification-v1",
+  "recordedAt": "2026-10-26T05:08:52.057730+00:00",
+  "baseCommit": "5ee49359498c8c341507c5e9ca4749fcb97f725a",
+  "implementation": {
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "lib/freelance/kmong-collection.mjs": "6907d4a279b3e4ff651cc8db94ff76e31319f434962c6d7743f567d3b3610063",
+    "lib/freelance/kmong.mjs": "393cb13105d201e83b83be4f933b4ea3a8d60bbc457a2d8b5ea133441a5760cc",
+    "lib/freelance/soomgo.mjs": "6ca3189197c7fc837bc0b9b62e65501fbf926e95a726aec4c683087015cb447a",
+    "lib/freelance/upwork.mjs": "66314e8d73f0c0c645b30e60880cc44bd6a22b611134392f71b1fedd366faea7",
+    "lib/jobs/boards.mjs": "af27dc37f558c75aee067417f7a9ab41b3ea082b290b339039c64d4943ffa6a9",
+    "lib/jobs/japan.mjs": "ea9e0e211e10668de4bb1cdbe5989c4a5eb991283fbf65aa078c05a0204de9bd",
+    "lib/jobs/model.mjs": "fa60e7477f92a121b81b44d904db5dedb39a45560903c39fe13f339f0909e15a",
+    "lib/jobs/providers.mjs": "937559d228854181e48dbb0512c22abeaaec3917cd3dc54542adea9ad0c0feed",
+    "lib/jobs/snapshots.mjs": "463891d804ef6265bbf6fd022c692d57b6500839c2405df8ee08656b2698658a",
+    "lib/operation-mcp.mjs": "7abbaa91bf5a87bb87d146c6ab296300b4c55def4f082f0c49cd1b90dcb2e3d8",
+    "lib/operation-registry.mjs": "e63a3c61a97a934774f1d682a05229195200956ead92d995bf603e6f0fb1891e",
+    "lib/service-operations/freelance.mjs": "317107f3988f6bb28d83c77d826c273103007890fef0ef5c4f7ee596a7d5fab6",
+    "lib/service-operations/index.mjs": "46389e65cab7ed6e7ba31585ee4029fe55aa782bf0062b7424ed2b6a9651336c",
+    "package-lock.json": "1473991dd35b4b20cc0e7b25abcceebb79b3f6945dff329b244a3276cc70c6ce",
+    "package.json": "113d54f2d1a215ffc4d73d2a86efbc9ab3d787e71dccb503d47cf94238c31627",
+    "scripts/freelance.mjs": "cde31f2d92088afb6445333ff1a4751e79ead8ae30e3d3e0625db3793a0f64f9",
+    "scripts/jobs.mjs": "138c8ea8a006a57a415b1f38c9e232070b62bddb4ec511278d1108f446cc4290",
+    "scripts/playbook.mjs": "584d9590e9a997e3765bee4bee6f3db8c7af0a251a464dbb1aa74678a44c073d",
+    "scripts/verify-jobs-freelance.mjs": "7816e3083719c53ce6617768e50eec7f19fb5074d3bb8a2a2c42e9f4fdfcaa64",
+    "lib/capability-checklist.mjs": "f5df8116662abfaab68d511d5837ec47f14f41d4b8e8cb61ed30938683489bf7"
+  },
+  "artifacts": {
+    "common-cli-verification.json": "52ead8420699bcecf025fae9f010920aa1e50cff54563c39fa3205feaed6afdb",
+    "kmong-categories-catalog-categories-proof.json": "9937fcf8932d4a80b4a655f1bf6426baafa62dfd47483efd7512dcbc7c6c0f58",
+    "kmong-categories-result.json": "5bf5ebb561e519aab9e675b599254e6068dd9a59074d8e5aef91a7e6439a0a94",
+    "kmong-detail-package-result.json": "318910c073e891357288a8962bbcc12eeab72183eac00f89b684154a38f25b55",
+    "kmong-detail-package-service-detail-proof.json": "209902eed66f4dbae2958db0440ab65e85b532be7dbe24a522cad9bc75daacc2",
+    "kmong-detail-single-result.json": "7a15e8043448a9f2501266c78b9a3d1b73f44b319e8bd77d46ed84b53cb55985",
+    "kmong-detail-single-service-detail-single_price-proof.json": "77d895c2dde833790c1ef90e8b34b4234e1c70775a41b15527ba2594b2fb68e8",
+    "kmong-home-catalog-home-proof.json": "aedb9424ad7065602fa8e6881a178a139d59d7788a7ced2d2a1cb3e15facac01",
+    "kmong-home-result.json": "1683a2fff886c898fe52664ffbb085099e86bd409752b7d3403593217fded0e2",
+    "kmong-reviews-collect-first-result.json": "2ed24f7a64af03ba084dda549db54b0345b37ae3095a8427d60d59e73b69d86c",
+    "kmong-reviews-collect-first-reviews-collect-proof.json": "36f853202d7f0fdbf5213dd86e7e1e625583afdb41161222881ff25d1ae10b00",
+    "kmong-reviews-collect-resume-result.json": "90efbf249d9433d7dc2fc0019f6e5ea9246f3bb349510f81d1b38fdf7a84cb8d",
+    "kmong-reviews-collect-resume-reviews-collect-proof.json": "8774fd76ede4d18cd5978c444f27b4f6874cad06cc5ca9adbb138b1c5d3bfa78",
+    "kmong-reviews-package-result.json": "9bf9a26dc274ff0e1d65c3bc597589087cf9fb42c41e199f41c61289a1e635d9",
+    "kmong-reviews-package-reviews-page-proof.json": "526d7dc7117b9de34b75fb3b31901a856a13e33a1e3e2c36fbc9d4c4aa97b140",
+    "kmong-reviews-single-result.json": "05784a85d33ec843a211e93958f770d053686ee477b3c0360ce460e849e48aac",
+    "kmong-reviews-single-reviews-page-proof.json": "88e9f424b7eff3674cc75d4c229b5a4f85777a28254997b75149d7c353b52fe9",
+    "kmong-search-catalog-keyword_search-proof.json": "2a91dbfffaa8d845a18cf5177340d225249ab0ddf18796ae88451d71d682cb5e",
+    "kmong-search-collect-first-catalog-keyword_collect-proof.json": "15e1818769733925d97307794f1fbf86e8d24023cfb0b5908fb2a4676709d2a9",
+    "kmong-search-collect-first-result.json": "e65690c2dd427e81f9aea5264def34ff284f1363b48ba64f13466e292f0217e0",
+    "kmong-search-collect-resume-catalog-keyword_collect-proof.json": "024364fb6f512b5662526e3745118ed4b4b10d37ebc9d4a123496848071a659a",
+    "kmong-search-collect-resume-result.json": "be46a71eca065008e37ee82b103fed72d8fee692484d0ff23a4d4eaa137e4dc4",
+    "kmong-search-result.json": "653bced78c61b50f053ccadf6250ed272d4a150f5b600e8db31ce9501bd31c3e",
+    "local-validation.json": "e69788925c614e2fce0a5b36bbd75d587b1e5376ec942d18678ffb65d5961d5f",
+    "soomgo-categories-categories-top-proof.json": "cb9f146df664c6a1c549dd2328502b434f9bc635486fe46a8f2c01bf3088ae09",
+    "soomgo-categories-result.json": "8c14435c7c073e1cb320e1f03ed21381aea5a71752599a0f7a12901c4c7153f2",
+    "soomgo-collect-providers-collect-proof.json": "f4ed1f02764b1247338ada15ff9892bf857c1f9f7ac13b1c0c36fd9ceffbdabf",
+    "soomgo-collect-result.json": "fd7a4d3b2067c6752b457596e579873d51fea1ee6261f5e797142cca81d038ce",
+    "soomgo-search-providers-search-proof.json": "9916da11f910187f896c823d8eeb5c48f14315a8ee934e059d86102b074c9cca",
+    "soomgo-search-result.json": "43731908f25f213dea44d8d61f7945786557f29d391f3384bd3d0c374d6c2e9c",
+    "soomgo-subcategories-categories-sub-proof.json": "d4683cf41411563b9340d96ad73a3c3fb91bd1376d63931f89bf836a3cbfb89c",
+    "soomgo-subcategories-result.json": "1306c40c2db551d59c579c18f2b1d4a075291ede5a1f93961eab662cdb237404"
+  },
+  "executions": [
+    {
+      "name": "kmong-home",
+      "file": "kmong-home-result.json",
+      "service": "kmong",
+      "resultCount": 12
+    },
+    {
+      "name": "kmong-categories",
+      "file": "kmong-categories-result.json",
+      "service": "kmong",
+      "resultCount": 35
+    },
+    {
+      "name": "kmong-search",
+      "file": "kmong-search-result.json",
+      "service": "kmong",
+      "resultCount": 40
+    },
+    {
+      "name": "kmong-detail-single",
+      "file": "kmong-detail-single-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "kmong-detail-package",
+      "file": "kmong-detail-package-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "kmong-reviews-single",
+      "file": "kmong-reviews-single-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "kmong-reviews-package",
+      "file": "kmong-reviews-package-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "kmong-search-collect-first",
+      "file": "kmong-search-collect-first-result.json",
+      "service": "kmong",
+      "resultCount": 40
+    },
+    {
+      "name": "kmong-search-collect-resume",
+      "file": "kmong-search-collect-resume-result.json",
+      "service": "kmong",
+      "resultCount": 40
+    },
+    {
+      "name": "kmong-reviews-collect-first",
+      "file": "kmong-reviews-collect-first-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "kmong-reviews-collect-resume",
+      "file": "kmong-reviews-collect-resume-result.json",
+      "service": "kmong",
+      "resultCount": 1
+    },
+    {
+      "name": "soomgo-categories",
+      "file": "soomgo-categories-result.json",
+      "service": "soomgo",
+      "resultCount": 11
+    },
+    {
+      "name": "soomgo-subcategories",
+      "file": "soomgo-subcategories-result.json",
+      "service": "soomgo",
+      "resultCount": 6
+    },
+    {
+      "name": "soomgo-search",
+      "file": "soomgo-search-result.json",
+      "service": "soomgo",
+      "resultCount": 5
+    },
+    {
+      "name": "soomgo-collect",
+      "file": "soomgo-collect-result.json",
+      "service": "soomgo",
+      "resultCount": 5
+    }
+  ],
+  "identityReadbacks": [
+    {
+      "list": "kmong-search",
+      "detail": "kmong-detail-single"
+    }
+  ],
+  "recordedCapabilities": {
+    "kmong": [
+      "catalog.home",
+      "catalog.categories",
+      "catalog.keyword_search",
+      "service.detail.single_price",
+      "service.detail",
+      "reviews.page",
+      "catalog.keyword_collect",
+      "reviews.collect"
+    ],
+    "soomgo": [
+      "categories.top",
+      "categories.sub",
+      "providers.search",
+      "providers.collect"
+    ]
+  },
+  "executionEnvironment": {
+    "hostAlias": "140.228",
+    "platform": "win32",
+    "nodeVersion": "v24.22.1",
+    "nativeStartedAt": "2026-10-26T05:04:07.249Z",
+    "nativeFinishedAt": "2026-10-26T05:04:16.584Z",
+    "browserUsed": false,
+    "credentialsUsed": false
+  },
+  "offlineImplementation": {
+    "lib/jobs/japan.mjs": "ea9e0e211e10668de4bb1cdbe5989c4a5eb991283fbf65aa078c05a0204de9bd"
+  },
+  "carriedForwardOfflineEvidence": {
+    "local-validation.json": {
+      "source": "verification/jobs-freelance-2026-10-23/local-validation.json",
+      "sourceSha256": "e69788925c614e2fce0a5b36bbd75d587b1e5376ec942d18678ffb65d5961d5f",
+      "checkedAt": "2026-10-23T11:14:54.771683+00:00",
+      "note": "Unmodified historical offline TokyoDev/snapshot/tool checks. No new TokyoDev or job-provider live request in this Kmong-focused verification."
+    }
+  },
+  "boundaries": {
+    "privateCandidateStatus": false,
+    "accountReadVerified": false,
+    "businessWritesSubmitted": 0,
+    "reviewBodiesPersisted": false,
+    "reviewFingerprints": "local sanitized-content hashes; not global review identities",
+    "collectionSemantics": "One to five pages per call; source window only. New projections contain only pages fetched in that invocation. Imported checkpoint is caller supplied, not authenticated evidence.",
+    "commonRegistryLimits": "30 search pages or 100 review pages; reaching the limit is explicit and the native checkpoint remains available.",
+    "jobsSources": "Not rechecked here; unchanged provider-specific evidence remains dated 2026-10-23.",
+    "reed": "approved API key/live replay unavailable",
+    "upwork": "approved OAuth token/live replay unavailable"
+  }
+}

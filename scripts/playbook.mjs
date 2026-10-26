@@ -1,8 +1,9 @@
 import { readFile, rename, writeFile, unlink } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
+import { pathToFileURL } from 'node:url';
 import { options, jsonFile, safeError, stdinJsonNoEcho } from '../lib/cli.mjs';
 import { createOperationRegistry } from '../lib/operation-registry.mjs';
-import { serveOperationMcp } from '../lib/operation-mcp.mjs';
+import { readOnlyCollectionPartialResult, serveOperationMcp } from '../lib/operation-mcp.mjs';
 import { checkOperations } from '../lib/operation-health.mjs';
 import { runOperationFlow, collectOperationPages } from '../lib/operation-flow.mjs';
 import { createServiceRegistry, listServiceOperations } from '../lib/service-operations/index.mjs';
@@ -29,6 +30,28 @@ async function saveCheckpoint(file, value) {
   try { await writeFile(temporary, `${JSON.stringify(value)}\n`, { flag: 'wx', mode: 0o600 }); await rename(temporary, file); }
   catch (error) { await unlink(temporary).catch(() => {}); throw error; }
 }
+
+export function partialCollectionRunFailure(error) {
+  const partialResult = readOnlyCollectionPartialResult(error);
+  if (!partialResult) return null;
+  return { exitCode: 1, payload: { ok: false, code: safeError(error), partialResult } };
+}
+
+export async function writePartialCollectionRunFailure(error, { output, stdout = process.stdout } = {}) {
+  const failure = partialCollectionRunFailure(error);
+  if (!failure) return null;
+  const serialized = `${JSON.stringify(failure.payload, null, 2)}\n`;
+  if (output) {
+    await writeFile(output, serialized, { flag: 'wx', mode: 0o600 });
+    const data = failure.payload.partialResult.data;
+    stdout.write(`${JSON.stringify({ ok: false, code: failure.payload.code,
+      operation: data.operation, status: data.status, output, pagination: data.pagination })}\n`);
+  } else {
+    stdout.write(serialized);
+  }
+  return failure.exitCode;
+}
+
 async function main() {
   const [command, ...rest] = process.argv.slice(2);
   if (!command || command === '--help' || command === 'help') { console.log(JSON.stringify(usage, null, 2)); return; }
@@ -98,7 +121,14 @@ async function main() {
   if (command === 'tools') result = { tools: registry.tools() };
   if (command === 'run') {
     if (!args.operation) fail('OPERATION_REQUIRED');
-    result = await registry.execute(args.operation, args.input ? await jsonFile(args.input) : {}, { signal });
+    try {
+      result = await registry.execute(args.operation, args.input ? await jsonFile(args.input) : {}, { signal });
+    } catch (error) {
+      const exitCode = await writePartialCollectionRunFailure(error, { output: args.output });
+      if (exitCode === null) throw error;
+      process.exitCode = exitCode;
+      return;
+    }
   }
   if (command === 'check') {
     const checks = args.plan ? await jsonFile(args.plan) : undefined;
@@ -118,4 +148,6 @@ async function main() {
   process.stdout.write(text);
   } finally { await registry?.close?.(); }
 }
-main().catch(error => { console.error(JSON.stringify({ ok: false, code: safeError(error) })); process.exitCode = 1; });
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(error => { console.error(JSON.stringify({ ok: false, code: safeError(error) })); process.exitCode = 1; });
+}

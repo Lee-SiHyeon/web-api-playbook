@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "kmong",
-  "description": "Public Kmong homepage/category/detail and one-page review reads. Review references/coverage remain bounded. No order, quote, contact, seller update, payment, or authorization claim. See references/freelance-public-apis.md.",
+  "description": "Public Kmong home/category/search, exact package or single-card detail, and bounded resumable search/review reads. Source prices and page-window limits remain explicit. No account, orders, messages, quotes, or payment implementation.",
   "capabilities": [
     {
       "id": "catalog.categories",
@@ -42,6 +42,39 @@
           "hashPaths": [
             "lib/freelance/kmong.mjs",
             "scripts/freelance.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://kmong.com",
+          "path": "/",
+          "method": "GET",
+          "mime": "text/html",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-categories-catalog-categories-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-categories-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
           ]
         }
       ],
@@ -87,6 +120,39 @@
           "hashPaths": [
             "lib/freelance/kmong.mjs",
             "scripts/freelance.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://kmong.com",
+          "path": "/",
+          "method": "GET",
+          "mime": "text/html",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-home-catalog-home-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-home-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
           ]
         }
       ],
@@ -138,6 +204,39 @@
             "lib/freelance/kmong.mjs",
             "scripts/freelance.mjs"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.kmong.com",
+          "path": "/gig-app/gig/v2/gigs/search",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-search-catalog-keyword_search-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-search-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
@@ -183,6 +282,72 @@
           "hashPaths": [
             "lib/freelance/kmong.mjs",
             "scripts/freelance.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.kmong.com",
+          "path": "/order-app/order/v1/reviews/gigs/466087",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-single-reviews-page-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-single-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.kmong.com",
+          "path": "/order-app/order/v1/reviews/gigs/705123",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-package-reviews-page-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-package-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
           ]
         }
       ],
@@ -230,10 +395,325 @@
             "lib/freelance/kmong.mjs",
             "scripts/freelance.mjs"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://kmong.com",
+          "path": "/gig/705123",
+          "method": "GET",
+          "mime": "text/html",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-detail-package-service-detail-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-detail-package-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
       "note": "Displayed package/start price is not verified checkout price. One caller-supplied ID does not imply catalog coverage."
+    },
+    {
+      "id": "service.detail.single_price",
+      "title": "Read exact single-card service terms and source AggregateOffer range",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/kmong.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "kmong",
+              "detail",
+              "--id"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-kmong.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://kmong.com",
+          "path": "/gig/466087",
+          "method": "GET",
+          "mime": "text/html",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-detail-single-service-detail-single_price-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-detail-single-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Single-card numeric SSR price may be absent. JSON-LD range and offer count are separate source facts; final checkout amount remains unverified."
+    },
+    {
+      "id": "catalog.keyword_collect",
+      "title": "Walk a bounded keyword-search window and resume a matching checkpoint",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/kmong.mjs"
+          },
+          {
+            "path": "lib/freelance/kmong-collection.mjs",
+            "exports": [
+              "createKmongCollector"
+            ]
+          },
+          {
+            "path": "lib/service-operations/freelance.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "kmong",
+              "search-collect",
+              "--input",
+              "--max-pages"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-kmong-collection.test.mjs",
+          "tests/freelance-cli.test.mjs",
+          "tests/service-freelance.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.kmong.com",
+          "path": "/gig-app/gig/v2/gigs/search",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-search-collect-first-catalog-keyword_collect-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-search-collect-first-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.kmong.com",
+          "path": "/gig-app/gig/v2/gigs/search",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-search-collect-resume-catalog-keyword_collect-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-search-collect-resume-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "One to five pages per invocation; duplicate rows, pagination drift and access errors stop collection. Imported state is caller-supplied and never by itself proves a fresh read. Completion is scoped to the returned source window."
+    },
+    {
+      "id": "reviews.collect",
+      "title": "Walk bounded exact-gig review pages and resume a matching checkpoint",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/kmong.mjs"
+          },
+          {
+            "path": "lib/freelance/kmong-collection.mjs",
+            "exports": [
+              "createKmongCollector"
+            ]
+          },
+          {
+            "path": "lib/service-operations/freelance.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "kmong",
+              "reviews-collect",
+              "--input",
+              "--max-pages"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-kmong-collection.test.mjs",
+          "tests/freelance-cli.test.mjs",
+          "tests/service-freelance.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.kmong.com",
+          "path": "/order-app/order/v1/reviews/gigs/466087",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-collect-first-reviews-collect-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-collect-first-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.kmong.com",
+          "path": "/order-app/order/v1/reviews/gigs/466087",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-collect-resume-reviews-collect-proof.json",
+            "verification/jobs-freelance-2026-10-26/kmong-reviews-collect-resume-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "One to five pages per invocation; duplicate rows, pagination drift and access errors stop collection. Imported state is caller-supplied and never by itself proves a fresh read. Completion is scoped to the returned source window."
     }
   ]
 }

@@ -7,7 +7,9 @@ import { lstat, mkdtemp, readFile, realpath, readdir, rm, writeFile } from 'node
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { createInterface } from 'node:readline';
+import { Writable } from 'node:stream';
 import { fileURLToPath } from 'node:url';
+import { partialCollectionRunFailure, writePartialCollectionRunFailure } from '../scripts/playbook.mjs';
 
 // Deliberately exercise the shipped entry point, not imported CLI/leaf functions.
 // Each test owns an ephemeral loopback listener, profile, plans and checkpoints.
@@ -18,6 +20,62 @@ const TEST_OPTIONS = { timeout: 60000 };
 const FIRST = { id: 'sku-1', title: 'One' };
 const SECOND = { id: 'sku-2', title: 'Two' };
 const THIRD = { id: 'sku-3', title: 'Three' };
+
+test('common CLI keeps a validated read-only collection checkpoint on error and retains exit 1', async t => {
+  const scope = { keyword: 'synthetic', pageSize: 40 };
+  const state = {
+    schemaVersion: 1, service: 'kmong', operation: 'search', scope,
+    items: [], pages: [], requests: [],
+    attempts: [{ page: 1, code: 'KMONG_HTTP_TIMEOUT', observedAt: '2026-10-26T08:00:00.000Z', requestIndexes: [] }],
+    issues: [], nextPage: 1, totalItemCount: null, lastPage: null, complete: false, resumeAllowed: true,
+  };
+  const partialResult = {
+    kind: 'kmong_read_only_collection', operation: 'kmong-search-collect',
+    data: {
+      schemaVersion: 1, service: 'kmong', operation: 'search', status: 'partial',
+      observedAt: null, checkpointProvenance: 'collector_created', checkpointAuthenticated: false,
+      networkUsed: true, scope, items: [], pages: [], newPages: [],
+      pagination: { page: null, pageSize: 40, pagesWalked: 0, totalItemCount: null, lastPage: null,
+        complete: false, sourceWindowComplete: false, completeCatalog: false, nextPage: 1,
+        pageWalked: true, resumable: true },
+      state, attempts: state.attempts, issues: [], requests: [], currentRequests: [],
+      error: { code: 'KMONG_HTTP_TIMEOUT', requestIndexes: [] }, limitations: [],
+      contractProvenance: { kind: 'first_party_bundle' },
+    },
+  };
+  const error = Object.assign(new Error('private error text'), {
+    code: 'KMONG_HTTP_TIMEOUT', receipt: { secret: 'do not serialize' }, partialResult,
+  });
+  const failure = partialCollectionRunFailure(error);
+  assert.equal(failure.exitCode, 1);
+  assert.equal(failure.payload.ok, false);
+  assert.equal(failure.payload.code, 'KMONG_HTTP_TIMEOUT');
+  assert.equal(failure.payload.partialResult.data.state.nextPage, 1);
+  assert.equal(JSON.stringify(failure).includes('do not serialize'), false);
+  assert.equal(JSON.stringify(failure).includes('private error text'), false);
+
+  const output = path.join(tmpdir(), `playbook-partial-${randomUUID()}.json`);
+  const existingOutput = path.join(tmpdir(), `playbook-existing-${randomUUID()}.json`);
+  t.after(async () => { await Promise.all([rm(output, { force: true }), rm(existingOutput, { force: true })]); });
+  const stdoutChunks = [];
+  const stdout = new Writable({ write(chunk, _encoding, done) { stdoutChunks.push(chunk.toString()); done(); } });
+  assert.equal(await writePartialCollectionRunFailure(error, { output, stdout }), 1);
+  const saved = JSON.parse(await readFile(output, 'utf8'));
+  assert.equal(saved.ok, false);
+  assert.equal(saved.partialResult.data.state.nextPage, 1);
+  const summary = JSON.parse(stdoutChunks.join(''));
+  assert.equal(summary.ok, false);
+  assert.equal(summary.status, 'partial');
+  assert.equal(Object.hasOwn(summary, 'partialResult'), false);
+
+  await writeFile(existingOutput, 'keep', { flag: 'wx' });
+  await assert.rejects(writePartialCollectionRunFailure(error, { output: existingOutput, stdout }), { code: 'EEXIST' });
+  assert.equal(await readFile(existingOutput, 'utf8'), 'keep');
+
+  const ordinaryError = Object.assign(new Error('ordinary failure'), { code: 'KMONG_HTTP_TIMEOUT', receipt: partialResult });
+  assert.equal(partialCollectionRunFailure(ordinaryError), null);
+  assert.equal(await writePartialCollectionRunFailure(ordinaryError, { stdout }), null);
+});
 
 function makeProfile(origin) {
   const read = (route, extra = {}) => ({ origin, path: route, method: 'GET', semantics: 'read',

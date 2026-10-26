@@ -1,0 +1,119 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "kmong",
+  "provider": "kmong",
+  "operation": "reviews",
+  "checkedAt": "2026-10-26T05:04:10.467Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "466087",
+        "page": 1,
+        "reviewCount": 5,
+        "aggregateRating": {
+          "average": 4.99,
+          "count": 1526,
+          "source": "product_json_ld_aggregate"
+        },
+        "reviews": [
+          {
+            "id": "kmong-review-fb80790574aba98bd9ef5506f7e414e2c06a4dad35508231f1b2cf069ea25146",
+            "rating": 5,
+            "createdAt": "2026-10-24 00:25:26",
+            "bodySha256": "d03f7997d7a8cc5249bff0ed4f70b04b991aa235a15c839470da5c5a55c35c67"
+          },
+          {
+            "id": "kmong-review-1f5279eb2dd8edd30e06ccd3fb001281007147d4149046223544cdc8a84e4155",
+            "rating": 5,
+            "createdAt": "2026-10-24 00:25:10",
+            "bodySha256": "d03f7997d7a8cc5249bff0ed4f70b04b991aa235a15c839470da5c5a55c35c67"
+          },
+          {
+            "id": "kmong-review-8bfceb539edcde220c6442654e8d8c4d38304d45c5056583c0ed59f97a76d525",
+            "rating": 5,
+            "createdAt": "2026-10-24 00:24:52",
+            "bodySha256": "d03f7997d7a8cc5249bff0ed4f70b04b991aa235a15c839470da5c5a55c35c67"
+          },
+          {
+            "id": "kmong-review-62c9e10d6e5b8647f677a17178149fbbd310a9910a3c038183d9608ca0d1f758",
+            "rating": 5,
+            "createdAt": "2026-10-24 00:24:09",
+            "bodySha256": "d03f7997d7a8cc5249bff0ed4f70b04b991aa235a15c839470da5c5a55c35c67"
+          },
+          {
+            "id": "kmong-review-84c971ca6a6ca12df44dbc9e15ca0b28da93ba9b875a20350a8f0b5ce94a69b9",
+            "rating": 5,
+            "createdAt": "2026-10-22 16:15:34",
+            "bodySha256": "72ba6fa252e0d1ba69d253f6fda040355b458cf802460980abd38a940fdeb2b8"
+          }
+        ]
+      }
+    ]
+  },
+  "dataSha256": "9ea5476b739f6bdd4ad995967e61923c15c3e05908c78f13b8259d21a67b4ff4",
+  "coverage": {
+    "page": 1,
+    "pageSize": 5,
+    "totalItemCount": 1526,
+    "lastPage": 306,
+    "complete": false,
+    "endReached": false,
+    "pageWalked": false,
+    "nextPage": 2,
+    "reason": "bounded_selected_review_page"
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://kmong.com",
+      "path": "/gig/466087",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 355569,
+      "responseSha256": "402f8b2ee315e575d5220982a5ad81a39df04551d677a6b3e5ae27ac18dba170",
+      "checkedAt": "2026-10-26T05:04:10.467Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": []
+    },
+    {
+      "method": "GET",
+      "origin": "https://api.kmong.com",
+      "path": "/order-app/order/v1/reviews/gigs/466087",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 5168,
+      "responseSha256": "d5045b43946161ed74480f0c3bf66ae0a39dc390a5ed848c74e3f61d0e9b7556",
+      "checkedAt": "2026-10-26T05:04:10.467Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "page",
+        "perPage",
+        "sortType"
+      ]
+    }
+  ],
+  "runner": "scripts/freelance.mjs",
+  "sourceResultSha256": "9948a10751e24b956d61afea0f964bf7f6755c5fc13aff4557613abb225166ca"
+}

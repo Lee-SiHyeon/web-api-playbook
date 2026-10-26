@@ -4,17 +4,49 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { stdinJsonNoEcho, safeError } from '../lib/cli.mjs';
 import { createKmongClient } from '../lib/freelance/kmong.mjs';
+import { createKmongCollector } from '../lib/freelance/kmong-collection.mjs';
 
 const HELP = `Freelance service readers\n\n` +
   `  freelance kmong home|categories\n` +
   `  freelance kmong search --keyword=TEXT [--page=N --per-page=40]\n` +
   `  freelance kmong detail --id=GIG_ID\n` +
   `  freelance kmong reviews --id=GIG_ID [--page=N]\n` +
+  `  freelance kmong search-collect --keyword=TEXT [--max-pages=1..5 --input=CHECKPOINT.json]\n` +
+  `  freelance kmong reviews-collect --id=GIG_ID [--max-pages=1..5 --input=CHECKPOINT.json]\n` +
   `  freelance soomgo categories|subcategories --category-1=SLUG\n` +
   `  freelance soomgo search|collect [service/location filters] [--max-pages=N]\n` +
   `  freelance upwork search|detail|collect --credentials-stdin\n\n` +
   `Upwork credentials are tagged JSON on hidden stdin: {"provider":"upwork","accessToken":"..."}.\n` +
-  `All outputs preserve source prices and incomplete page coverage. These commands do not place orders or send requests.\n`;
+  `All outputs preserve source prices and incomplete page coverage. These commands do not place orders or contact sellers.\n`;
+
+async function readCheckpoint(file) {
+  if (file === undefined) return undefined;
+  const limit = 32 * 1024 * 1024;
+  const handle = await open(path.resolve(file), 'r');
+  try {
+    const info = await handle.stat();
+    if (!info.isFile() || info.size > limit) fail('KMONG_COLLECTION_INPUT_TOO_LARGE');
+    // Bound the read too, in case another process changes the file after stat.
+    const buffer = Buffer.alloc(Math.min(info.size + 1, limit + 1));
+    let used = 0;
+    while (used < buffer.length) {
+      const { bytesRead } = await handle.read(buffer, used, buffer.length - used, null);
+      if (!bytesRead) break;
+      used += bytesRead;
+    }
+    if (used > info.size || used > limit) fail('KMONG_COLLECTION_INPUT_CHANGED');
+    let value;
+    try { value = JSON.parse(buffer.subarray(0, used).toString('utf8')); }
+    catch { fail('KMONG_COLLECTION_INPUT_INVALID'); }
+    if (!value || typeof value !== 'object' || Array.isArray(value)) fail('KMONG_COLLECTION_INPUT_INVALID');
+    if (Object.hasOwn(value, 'state')) {
+      if (value.schemaVersion !== 1 || value.service !== 'kmong' || !value.state ||
+          typeof value.state !== 'object' || Array.isArray(value.state)) fail('KMONG_COLLECTION_INPUT_INVALID');
+      return value.state;
+    }
+    return value;
+  } finally { await handle.close(); }
+}
 
 function fail(code) { throw Object.assign(new Error(code), { code }); }
 function cliErrorCode(error) {
@@ -47,20 +79,32 @@ export async function runFreelanceCommand(argv, { fetchImpl = globalThis.fetch, 
   if (argv.length === 0 || argv.length === 1 && ['help', '-h', '--help'].includes(argv[0])) return { help: HELP };
   const [service, operation, ...tail] = argv;
   if (service === 'kmong') {
-    if (!['home', 'categories', 'search', 'detail', 'reviews'].includes(operation)) fail('OPERATION_INVALID');
-    const args = parseFlags(tail, operation === 'search' ? { keyword: text, page: integer(1000), 'per-page': integer(40), output: text }
+    if (!['home', 'categories', 'search', 'detail', 'reviews', 'search-collect', 'reviews-collect'].includes(operation)) fail('OPERATION_INVALID');
+    const collecting = operation.endsWith('-collect');
+    const args = parseFlags(tail, collecting ? {
+      [operation === 'search-collect' ? 'keyword' : 'id']: text,
+      'max-pages': integer(5), input: text, output: text,
+    } : operation === 'search' ? { keyword: text, page: integer(1000), 'per-page': integer(40), output: text }
       : operation === 'detail' ? { id: text, output: text }
         : operation === 'reviews' ? { id: text, page: integer(100_000), output: text }
           : { output: text });
-    if (['detail', 'reviews'].includes(operation) !== Boolean(args.id)
-      || operation === 'search' && !args.keyword) fail('ARGUMENT_INVALID');
+    if (['detail', 'reviews', 'reviews-collect'].includes(operation) !== Boolean(args.id)
+      || ['search', 'search-collect'].includes(operation) && !args.keyword) fail('ARGUMENT_INVALID');
     const client = createKmongClient({ fetchImpl, now });
-    const result = operation === 'home' ? await client.home()
+    const state = collecting ? await readCheckpoint(args.input) : undefined;
+    const collector = collecting ? createKmongCollector({ client, now }) : null;
+    const result = operation === 'search-collect'
+      ? await collector.collectSearch({ keyword: args.keyword, maxPages: args['max-pages'] ?? 1, state })
+      : operation === 'reviews-collect'
+        ? await collector.collectReviews({ id: args.id, maxPages: args['max-pages'] ?? 1, state })
+      : operation === 'home' ? await client.home()
       : operation === 'categories' ? await client.categories()
         : operation === 'search' ? await client.search({ keyword: args.keyword, page: args.page ?? 1, perPage: args['per-page'] ?? 40 })
         : operation === 'detail' ? await client.detail({ id: args.id })
           : await client.reviews({ id: args.id, ...(args.page === undefined ? {} : { page: args.page }) });
-    return { result, output: args.output === undefined ? null : path.resolve(args.output) };
+    const failed = collecting && (Boolean(result.error) || result.status === 'unstable');
+    return { result: collecting ? { ...result, ok: !failed } : result,
+      exitCode: failed ? 1 : 0, output: args.output === undefined ? null : path.resolve(args.output) };
   }
 
   if (service === 'soomgo') {
@@ -121,11 +165,12 @@ export async function runFreelanceCli(argv = process.argv.slice(2), context = {}
     const serialized = JSON.stringify(parsed.result, null, 2) + '\n';
     if (handle) { await handle.writeFile(serialized); await handle.sync(); }
     (context.stdout ?? process.stdout).write(handle
-      ? JSON.stringify({ ok: true, output: reservedPath, service: parsed.result.service,
+      ? JSON.stringify({ ok: parsed.exitCode !== 1, output: reservedPath, service: parsed.result.service,
         operation: parsed.result.operation, items: parsed.result.items?.length ?? parsed.result.categories?.length ?? (parsed.result.gig ? 1 : null),
-        pagination: parsed.result.pagination ?? null }) + '\n'
+        pagination: parsed.result.pagination ?? null,
+        ...(parsed.result.status ? { status: parsed.result.status, error: parsed.result.error, issues: parsed.result.issues } : {}) }) + '\n'
       : serialized);
-    return 0;
+    return parsed.exitCode ?? 0;
   } catch (error) {
     (context.stdout ?? process.stdout).write(JSON.stringify({ ok: false, code: cliErrorCode(error),
       httpStatus: error?.receipt?.httpStatus ?? null, origin: error?.receipt?.origin ?? null,
