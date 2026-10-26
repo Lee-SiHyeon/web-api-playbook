@@ -142,3 +142,12 @@ npm run video:pipeline -- --coupang-query "접이식 피아노" --pick 3 --out .
 SKY 베라 피지 흡입기(7728282851) 실측: 기존 same 0·영상 0 → 검색 범위 확장 후 후보 288개, same 12, 영상 4. 그러나 영상 4개 중 2개는
 공장 영상과 민트색 다른 모델이었다. 영상 단계 검증을 넣은 실행에서는 후보 328개를 전부 판정해 same 8, 받은 영상 7개가 모두 다른 모델이나
 공장 영상이라 걸러졌다.
+
+## 판매자 영상 자막 제거 (2026-10-26)
+
+| 경로 | 상태 |
+|---|---|
+| `scripts/vmake-subtitle-remove.mjs` (Vmake 웹, 무료 5초 미리보기를 4.8초 조각마다 받아 원본 길이에 맞춰 잇고 원본 소리를 깖) | **사용 중.** Canary에 Vmake 무료 Google 로그인 필요. 37초 영상 8조각, 실패 0, 약 5분. 미리보기에 워터마크 없음. 유료 기능을 조각으로 받는 방식이라 계정 정지 위험은 소유자가 수용함 |
+| `scripts/subtitle-remove.mjs` (PiAPI `Qubico/video-toolkit` `remove-subtitle`, $0.006/초, 키는 보호 저장소 `piapi-api-key`) | 2026-10-26 기준 실패. 1688 주소, litterbox 임시 주소, 웹 플레이그라운드 직접 업로드 모두 작업 생성 후 `Internal error`(10000), 무료 크레딧 $0.50은 차감 안 됨. 작업 ID 2b49984f…, 11a12395…, c654b382…, 65dfcfee… |
+| `shorts-anatomy/removal/erase.py` (RapidOCR + MI-GAN, CPU) | 이 PC에서 37초 영상에 38분 넘게 걸리고 Canary를 멈추게 해 중단. 쓰지 않음 |
+| ffmpeg delogo / 크롭 | 자막 위치가 고정이면 0원·즉시. 덮을 자막 띠가 같은 자리에 오면 충분 |
