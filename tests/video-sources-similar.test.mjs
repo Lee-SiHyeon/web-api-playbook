@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { applyVerdicts, dHashFromGray9x8, findSimilarProducts, hammingHex, scoreCandidate, titleSimilarity } from '../lib/video-sources/similar.mjs';
+import { applyVerdicts, dHashFromGray9x8, findSimilarProducts, hammingHex, interleaveBySource, keywordList, scoreCandidate, titleSimilarity } from '../lib/video-sources/similar.mjs';
 import { parseAliExpressSearchItems } from '../lib/video-sources/aliexpress-search.mjs';
 import { extractJson, productKeywords } from '../lib/video-sources/llm.mjs';
 
@@ -81,4 +81,40 @@ test('Coupang product seed: og:title without site suffix, protocol-relative og:i
   assert.equal(s.productId, '8733070301');
   const evil = parseCoupangProductSeed(html.replace('//thumbnail.coupangcdn.com', 'https://evil.example'), 'https://www.coupang.com/vp/products/1');
   assert.equal(evil.image, null);
+});
+
+test('coverage: every keyword variant and page is searched, judging is batched across sources, unjudged count is reported', async () => {
+  assert.deepEqual(keywordList({ zh: '吸黑头仪', zhAlt: ['电动吸黑头仪 白色', '吸黑头仪', ' '] }, 'zh'), ['吸黑头仪', '电动吸黑头仪 白色']);
+  assert.deepEqual(interleaveBySource([{ source: 'a', score: 0.9 }, { source: 'a', score: 0.8 }, { source: 'b', score: 0.1 }]).map(c => c.source), ['a', 'b', 'a']);
+  const calls = [];
+  const mk = (prefix, n) => Array.from({ length: n }, (_, i) => ({ offerId: `${prefix}${String(i).padStart(9, '0')}`, title: `t${i}`, imageUrl: 'y' }));
+  const clients = {
+    1688: { search: async ({ keyword, page = 1 }) => { calls.push(['1688', keyword, page]); return { items: mk(`${keyword.length}${page}`, 60) }; } },
+    amazon: { search: async ({ keyword }) => { calls.push(['amazon', keyword]); return { items: [{ asin: 'B000000001', title: 'x', imageUrl: 'z' }] }; } },
+  };
+  const batches = [];
+  // the "same" listing is the 1688 page-2 result of the specific keyword: invisible to a single generic top-30 search
+  const target = `${'电动吸黑头仪 白色'.length}2000000005`;
+  const judge = async ({ candidates }) => { batches.push(candidates.length); return { verdicts: candidates.map(c => ({ id: c.id, source: c.source, verdict: c.id === target ? 'same' : 'different' })) }; };
+  const r = await findSimilarProducts({ seed: { title: 's', image: null }, keywords: { zh: '吸黑头仪', zhAlt: ['电动吸黑头仪 白色'], en: 'blackhead vacuum' },
+    clients, perSource: 300, pages: { 1688: 2 }, judge, judgeTop: 300, judgeBatch: 10, hash: async () => null });
+  assert.deepEqual(calls.filter(c => c[0] === '1688').map(c => c.slice(1)), [['吸黑头仪', 1], ['吸黑头仪', 2], ['电动吸黑头仪 白色', 1], ['电动吸黑头仪 白色', 2]]);
+  assert.equal(r.candidates.find(c => c.id === target)?.verdict, 'same');
+  assert.ok(batches.every(n => n <= 10));
+  assert.equal(r.coverage['1688'].used, 240); assert.equal(r.coverage['1688'].unjudged, 0); assert.equal(r.coverage['1688'].same, 1);
+  // a capped judge leaves candidates unjudged, and the funnel says so
+  const capped = await findSimilarProducts({ seed: { title: 's' }, keywords: { zh: '吸黑头仪' }, clients, perSource: 60, judge, judgeTop: 20, hash: async () => null });
+  assert.equal(capped.coverage['1688'].judged, 20); assert.equal(capped.coverage['1688'].unjudged, 40);
+});
+
+test('productKeywords keeps valid alternates and drops bad ones without failing', async () => {
+  const k = await productKeywords({ title: '진공 피지 흡입기', runPrompt: async () => '{"ko":"피지 흡입기","zh":"吸黑头仪","en":"blackhead vacuum","zhAlt":["电动吸黑头仪 白色",7,""],"enAlt":"x"}' });
+  assert.deepEqual(k.zhAlt, ['电动吸黑头仪 白色']); assert.deepEqual(k.enAlt, []); assert.deepEqual(k.koAlt, []);
+});
+
+test('the per-source cap is shared rank by rank across queries, so the first query cannot take every slot', async () => {
+  const mk = (p) => Array.from({ length: 60 }, (_, i) => ({ offerId: `${p}${String(i).padStart(9, '0')}`, title: 't', imageUrl: 'y' }));
+  const clients = { 1688: { search: async ({ keyword, page = 1 }) => ({ items: mk(`${keyword === 'a' ? 1 : 2}${page}`) }) } };
+  const r = await findSimilarProducts({ seed: { title: 's' }, keywords: { zh: 'a', zhAlt: ['b'] }, clients, perSource: 60, pages: { 1688: 2 }, hash: async () => null });
+  assert.deepEqual(r.sources['1688'].queries.map(q => q.added), [15, 15, 15, 15]);
 });
