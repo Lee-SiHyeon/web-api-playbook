@@ -89,6 +89,18 @@ test('future slots are reclassified using the current time after an earlier soci
   assert.equal(planShortSlot(slot, NOW + 12 * 60_000).mode, 'immediate');
 });
 
+test('immediate success requires an exact own-platform post URL, not a flag or owner substring', () => {
+  const plan = planShortSlot(undefined, NOW);
+  const context = { channel: 'x', plan, attemptedAt: '2026-10-26T00:00:01Z' };
+  assert.equal(snsOutcomeRecord({ status: 0, last: { posted: true } }, context).status, 'needs_reconciliation');
+  assert.equal(snsOutcomeRecord({ status: 0, last: { posted: true, account: 'owner',
+    url: 'https://x.com/owner/status/12345' } }, context).status, 'posted');
+  assert.equal(snsOutcomeRecord({ status: 0, last: { posted: true, account: '@owner',
+    url: 'https://evil.invalid/@owner/post/abc' } }, { ...context, channel: 'threads' }).status, 'needs_reconciliation');
+  assert.equal(snsOutcomeRecord({ status: 0, last: { posted: true, account: '@owner',
+    url: 'https://www.threads.com/@owner/post/abc' } }, { ...context, channel: 'threads' }).status, 'posted');
+});
+
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DISTRIBUTE = path.join(REPO, 'scripts/shorts-distribute.mjs');
 async function tempDirectory(t) {

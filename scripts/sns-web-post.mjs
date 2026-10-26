@@ -2,14 +2,14 @@
 // 2026-10-23 (kwak Macau): the HTTP clients (sns-threads, sns-X) have no verified media publish, so promo posts with media go
 // through the web UI here. Media goes straight into the composer's <input type=file> (DOM.setFileInputFiles), no chooser.
 //   node scripts/sns-web-post.mjs threads|x <text.txt> [media1,media2] [--dry] [--shots=<dir>] [--schedule=<time>]
-// --schedule: native scheduled publishing (lib/sns-schedule.mjs); <time> like 2026-10-29T15:07+09:00 or "2026-10-29 15:07"
-// (browser local time), >= 10 min ahead. The composer's own confirmation line is checked before Schedule is pressed; prints
-// {scheduled, scheduledFor, line} instead of a post URL (a scheduled post has none until it goes out).
-// --dry stops before the post button; --keep leaves the tab open. X: if the composer is still open 90 s after the CDP click, Post is pressed once with a real OS click through
-// a Windows desktop MCP (lib/desktop-click.mjs). Threads: the tab stays open until "게시 중" ends. Prints {posted, account, url, osClick?}.
+// --schedule accepts offset ISO or Node-local time (the browser offset must match for local input).
+// Only a confirmed numeric date/time is submitted. Schedule submission remains unconfirmed until
+// the account's Scheduled list is read back; it is never labeled published or automatically retried.
+// --dry stops before submission. Uncertain results preserve the task tab for reconciliation.
 import fs from 'node:fs';
 import path from 'node:path';
-import { parseScheduleTime, applySchedule } from '../lib/sns-schedule.mjs';
+import { parseScheduleTime, applySchedule, xReadLine, thCheckLine } from '../lib/sns-schedule.mjs';
+import { submitOnce, verifyOwnPostReadback } from '../lib/sns-submit.mjs';
 
 const CDP = process.env.SNS_CDP || 'http://127.0.0.1:9333';
 const [site, textFile, mediaArg, ...rest] = process.argv.slice(2);
@@ -36,7 +36,10 @@ const ev = async (e) => (await send('Runtime.evaluate', { expression: e, returnB
 const shot = async (name) => { const s = await send('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(shots, `${name}.png`), Buffer.from(s.result.data, 'base64')); };
 const clickAt = async ([x, y]) => { await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x, y }); for (const type of ['mousePressed', 'mouseReleased']) await send('Input.dispatchMouseEvent', { type, x, y, button: 'left', clickCount: 1 }); };
 const center = (expr) => ev(`(() => { const e = ${expr}; if (!e) return null; const r = e.getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; })()`);
-const out = { site };
+const out = { site, submissionAttempted: false, outcomeUnknown: false, needsReconciliation: false, ...(when ? { scheduled: false, scheduleRequestedFor: when.toISOString() } : {}) };
+const scheduleIO = { sleep, click: clickAt, key: value => send('Input.insertText', { text: value }),
+  selectAll: async () => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'a', code: 'KeyA', modifiers: 2, windowsVirtualKeyCode: 65 }); },
+  call: (fn, ...args) => ev(`(${fn})(...${JSON.stringify(args)})`) };
 try {
   // Threads collapses its left menu to unlabeled icons below ~1400 px (the create icon has no aria-label): keep it wide
   await send('Emulation.setDeviceMetricsOverride', { width: site === 'threads' ? 1600 : 1300, height: 950, deviceScaleFactor: 1, mobile: false });
@@ -82,10 +85,10 @@ try {
     }
   }
   if (when) {
-    const io = { sleep, click: clickAt, key: (t) => send('Input.insertText', { text: t }),
-      selectAll: async () => { for (const type of ['keyDown', 'keyUp']) await send('Input.dispatchKeyEvent', { type, key: 'a', code: 'KeyA', modifiers: 2, windowsVirtualKeyCode: 65 }); },
-      call: (fn, ...a) => ev(`(${fn})(...${JSON.stringify(a)})`) };
-    Object.assign(out, await applySchedule(site, when, io));
+    parseScheduleTime(when.getTime()); // media preparation may have consumed the minimum lead time
+    const selected = await applySchedule(site, when, scheduleIO);
+    out.scheduleConfirmationLine = selected.line;
+    out.schedulePrepared = true;
   }
   out.typed = await ev(`(document.querySelector(${JSON.stringify(SITE.editor)})?.innerText || '').length`);
   await shot(`${site}-1-filled`);
@@ -97,35 +100,100 @@ try {
     const pb = await center(SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`);
     if (!pb) throw new Error('NO_POST_BUTTON');
     const postExpr = SITE.postSel ? `document.querySelector(${JSON.stringify(SITE.postSel)})` : `[...document.querySelectorAll(${JSON.stringify(SITE.scope + ' [role=button]')})].filter((x) => ${SITE.post}.test((x.innerText || '').trim())).pop()`;
-    // X: after a successful post the modal closes and Home loads, whose inline composer has the same tweetTextarea_0 test id,
-    // so "editor present" stayed true and every successful post was reported COMPOSER_STILL_OPEN (and earlier retried into
-    // duplicates). Only the compose modal counts (CDP-observed 2026-10-26).
-    const composerOpen = () => ev(site === 'x'
-      ? `location.pathname.startsWith('/compose/') || !!document.querySelector('[role=dialog] ${SITE.editor}')`
-      : `!!document.querySelector(${JSON.stringify(SITE.editor)})`);
-    // the click lands only if Post itself is the topmost element at its centre (an open dropdown mask covers it invisibly)
-    const onTop = await ev(`(() => { const b = ${postExpr}; if (!b) return false; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!e && b.contains(e); })()`);
-    if (!onTop) { out.cover = await ev(`(() => { const b = ${postExpr}; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return e ? e.tagName + ' ' + (e.parentElement?.innerText || '').slice(0, 80) : null; })()`); throw new Error('POST_BUTTON_COVERED'); }
-    await clickAt(pb);
-    // A CDP click on X's Post works, but with a video the composer can take 20-60 s to close; earlier runs read that as "click
-    // ignored" and the retry made a duplicate. Wait up to 90 s; only if the composer is still open and the Post button is still
-    // there, press it once with a real OS click through the desktop MCP. No Ctrl+Enter retry.
-    let closed = false; for (let i = 0; i < 45 && !closed; i++) { await sleep(2000); closed = !(await composerOpen()); }
-    if (!closed && site === 'x' && !opt['no-os-click'] && await ev(`!!(${postExpr})`)) {
-      const { osClickElement } = await import('../lib/desktop-click.mjs');
-      out.osClick = await osClickElement(send, ev, postExpr).catch((e) => e.message);
+    const activeAccount = `(() => { const a = [...document.querySelectorAll('a[href^="/@"], a[data-testid="AppTabBar_Profile_Link"]')].find((x) => /프로필|Profile/.test(x.getAttribute('aria-label') || x.innerText || '') || x.dataset.testid === 'AppTabBar_Profile_Link'); return a ? a.getAttribute('href').replace(/^\\//, '') : null; })()`;
+    const accountBeforeClick = await ev(activeAccount);
+    if (!accountBeforeClick) {
+      throw new Error('POST_ACCOUNT_UNVERIFIED');
     }
-    // success = the composer closed (a toast alone is not proof; the first X run reported posted while the video was still uploading)
-    for (let i = 0; i < 60 && !closed; i++) { await sleep(3000); closed = !(await composerOpen()); }
-    // Threads keeps uploading the video after the composer closes ("게시 중..."); closing the tab then cancels the post
-    for (let i = 0; i < 80 && site === 'threads'; i++) { if (!/게시 중|Posting/.test(await ev('document.body.innerText'))) break; await sleep(3000); }
-    await sleep(4000); await shot(`${site}-2-posted`);
-    out.posted = closed; if (!closed) throw new Error('COMPOSER_STILL_OPEN');
-    if (when) out.scheduled = true; // a scheduled post has no link until it goes out: skip the lookup
-    // the post link: only one of the logged-in account's own posts (feeds show other people's posts first)
-    const me = when ? null : await ev(`(() => { const a = [...document.querySelectorAll('a[href^="/@"], a[data-testid="AppTabBar_Profile_Link"]')].find((x) => /프로필|Profile/.test(x.getAttribute('aria-label') || x.innerText || '') || x.dataset.testid === 'AppTabBar_Profile_Link'); return a ? a.getAttribute('href').replace(/^\\//, '') : null; })()`);
-    out.account = me;
-    out.url = me ? await ev(`(() => { const a = [...document.querySelectorAll('a[href*="/post/"], a[href*="/status/"]')].map((x) => x.href).find((h) => h.includes('/${me}/') && /\\/(post|status)\\/[\\w-]+$/.test(h)); return a || null; })()`) : null;
+    const expectedTextLiteral = JSON.stringify(text);
+    const candidatesExpr = site === 'x'
+      ? `(() => [...document.querySelectorAll('article')].flatMap(article => {
+          const body = [...article.querySelectorAll('[data-testid="tweetText"]')].map(x => x.innerText).filter(Boolean).join('\\n');
+          const links = [...new Set([...article.querySelectorAll('a[href*="/status/"]')].map(x => x.href).filter(Boolean))];
+          const time = article.querySelector('time[datetime]')?.getAttribute('datetime') || null;
+          return links.map(url => ({ url, text: body, createdAt: time }));
+        }))()`
+      : `(() => [...document.querySelectorAll('article,[role="article"]')].flatMap(article => {
+          const body = [...article.querySelectorAll('[dir="auto"]')].map(x => x.innerText)
+            .find(x => typeof x === 'string' && x.trim() === ${expectedTextLiteral});
+          if (!body) return [];
+          const links = [...new Set([...article.querySelectorAll('a[href*="/post/"]')].map(x => x.href).filter(Boolean))];
+          const time = article.querySelector('time[datetime]')?.getAttribute('datetime') || null;
+          return links.map(url => ({ url, text: body, createdAt: time }));
+        }))()`;
+    // Snapshot visible own-post URLs before sending. The new readback excludes
+    // these so an older identical post cannot be mistaken for this submission.
+    const beforeCandidates = when ? [] : await ev(candidatesExpr);
+    if (!Array.isArray(beforeCandidates) || beforeCandidates.length > 500) {
+      out.outcome = 'not_submitted';
+      throw new Error('POST_READBACK_BASELINE_UNAVAILABLE');
+    }
+    const beforeUrls = beforeCandidates.map(row => row?.url).filter(url => typeof url === 'string');
+    const attemptedAt = Date.now();
+    const outcome = await submitOnce({
+      state: out,
+      preflight: async () => {
+        if (when) {
+          parseScheduleTime(when.getTime());
+          const label = await ev(`(${postExpr})?.innerText?.trim()`);
+          if (!/^(Schedule|예약)$/.test(label || '')) return { ok: false, reason: 'SCHEDULE_BUTTON_NOT_READY' };
+          const confirmed = site === 'x'
+            ? await scheduleIO.call(xReadLine) === when.getTime()
+            : (await scheduleIO.call(thCheckLine, when.getTime()))?.ok === true;
+          if (!confirmed) return { ok: false, reason: 'SCHEDULE_SELECTION_CHANGED' };
+        }
+        const onTop = await ev(`(() => { const b = ${postExpr}; if (!b || b.disabled || b.getAttribute('aria-disabled') === 'true') return false; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return !!e && b.contains(e); })()`);
+        if (onTop) return true;
+        out.cover = await ev(`(() => { const b = ${postExpr}; if (!b) return null; const r = b.getBoundingClientRect(); const e = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2); return e ? e.tagName + ' ' + (e.parentElement?.innerText || '').slice(0, 80) : null; })()`);
+        return { ok: false, reason: 'POST_BUTTON_COVERED' };
+      },
+      submit: async () => clickAt(pb), // exactly one submit action; ambiguous CDP results are never replayed
+      readback: async () => {
+        // No verified Scheduled-list reader is available here. Keep the intent
+        // unresolved rather than mistaking a closed composer for persistence.
+        if (when) return { outcome: 'outcome_unknown', reason: 'SCHEDULE_QUEUE_READBACK_REQUIRED' };
+        const open = site === 'x'
+          ? await ev(`location.pathname.startsWith('/compose/') || !!document.querySelector('[role=dialog] ${SITE.editor}')`)
+          : await ev(`!!document.querySelector(${JSON.stringify(SITE.editor)})`);
+        if (open) return { outcome: 'outcome_unknown', reason: 'COMPOSER_STILL_OPEN' };
+        // Threads continues video processing after the dialog closes. Keep waiting for
+        // a post row instead of treating the closed dialog as a successful publish.
+        if (site === 'threads' && /게시 중|Posting/.test(await ev('document.body.innerText'))) {
+          return { outcome: 'outcome_unknown', reason: 'THREADS_POST_PROCESSING' };
+        }
+        const visiblePosts = await ev(candidatesExpr);
+        return verifyOwnPostReadback({ site, account: accountBeforeClick, expectedText: text,
+          attemptedAt, checkedAt: Date.now(), beforeUrls,
+          candidates: Array.isArray(visiblePosts) ? visiblePosts : [] });
+      },
+      wait: async () => sleep(site === 'threads' ? 3000 : 2000),
+      maxPolls: when ? 1 : site === 'threads' ? 80 : 45,
+    });
+    out.outcome = outcome.outcome;
+    out.submissionAttempted = outcome.submissionAttempted === true;
+    if (when) out.scheduleSubmissionAttempted = out.submissionAttempted;
+    out.needsReconciliation = outcome.needsReconciliation === true;
+    if (outcome.outcome === 'verified') {
+      out.posted = true;
+      out.account = site === 'threads' ? `@${outcome.account}` : outcome.account;
+      out.url = outcome.url;
+      out.postReadback = { status: 'exact_own_post_verified', checkedAt: new Date().toISOString(),
+        textMatched: true, createdAt: outcome.createdAt };
+      await shot(`${site}-2-posted-verified`);
+    } else if (outcome.outcome === 'rejected') {
+      out.posted = false; out.submissionAttempted = true;
+      throw new Error(outcome.reason || 'POST_REJECTED');
+    } else if (outcome.outcome === 'not_submitted') {
+      out.posted = false; out.submissionAttempted = false;
+      out.outcomeUnknown = false; out.needsReconciliation = false;
+      throw new Error(outcome.reason || 'POST_PREFLIGHT_REJECTED');
+    } else {
+      out.posted = false; out.outcomeUnknown = true; out.needsReconciliation = true;
+      out.reconciliationReason = when ? 'SCHEDULE_QUEUE_READBACK_REQUIRED' : outcome.reason || 'POST_READBACK_NOT_FOUND';
+      await shot(`${site}-2-outcome-unknown`);
+      throw new Error(when ? 'SCHEDULE_OUTCOME_UNKNOWN' : 'POST_OUTCOME_UNKNOWN');
+    }
+
   }
 } catch (e) { out.error = e.message; await shot(`${site}-error`).catch(() => {}); process.exitCode = 1; }
-finally { if (opt.keep) out.tab = t.id; console.log(JSON.stringify(out)); ws.close(); if (!opt.keep) await fetch(`${CDP}/json/close/${t.id}`).catch(() => {}); }
+finally { const preserve = opt.keep || out.needsReconciliation === true; if (preserve) out.tab = t.id; console.log(JSON.stringify(out)); ws.close(); if (!preserve) await fetch(`${CDP}/json/close/${t.id}`).catch(() => {}); }
