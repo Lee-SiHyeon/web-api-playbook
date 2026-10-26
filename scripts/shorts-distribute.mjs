@@ -1,5 +1,5 @@
 // Distribute a set of finished vertical Shorts to every channel from ONE manifest; resumable (state file next to it).
-//   node scripts/shorts-distribute.mjs <distribute.json> [--channels=youtube,youtube-pin,naver-clip,tiktok,instagram,facebook,threads,x] [--only=s1,s2] [--dry] [--retry-x]
+//   node scripts/shorts-distribute.mjs <distribute.json> [--channels=youtube,youtube-pin,naver-clip,tiktok,instagram,facebook,threads,x] [--only=s1,s2] [--dry] [--retry-x] [--retry-threads]
 // Default channels: all. Re-running skips what the state file already records, so the daily follow-up is the same command:
 //   - youtube      upload (s1 public now, the rest scheduled one per day), then thumbnail + related long video (youtube-studio-edit)
 //   - youtube-pin  post + pin the comment on every uploaded short; scheduled ones go through youtube-prepin.mjs (they take no
@@ -19,8 +19,10 @@
 //   "common": { "footer": "…", "tags": ["…"], "affiliateDisclosure": "[제휴] …", "category": "여행/이벤트", "socialNote": "…" },
 //   "shorts": [ { "id": "s1", "title": "…", "desc": "…", "question": "…", "hashtags": "#a #b", "links": [{ "label": "…", "url": "…" }] } ] }
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { hasUnconfirmedAttempt, planShortSlot, snsAttemptRecord, snsOutcomeRecord } from '../lib/shorts-sns-dispatch.mjs';
 const HERE = path.dirname(new URL(import.meta.url).pathname.replace(/^\/([A-Z]:)/, '$1'));
 const [manFile, ...flags] = process.argv.slice(2);
 const opt = Object.fromEntries(flags.map((f) => { const i = f.indexOf('='); return i < 0 ? [f.slice(2), true] : [f.slice(2, i), f.slice(i + 1)]; }));
@@ -94,6 +96,21 @@ const publishAt = (i) => { // [Date, studio date string]
 
 
 const list = M.shorts.map((s, i) => ({ s, i })).filter(({ s }) => !only || only.includes(s.id));
+// Validate every slot that could be dispatched before another channel starts
+// publishing. This prevents a malformed timestamp on a later Short from
+// silently turning that Short's scheduled social post into an immediate one.
+const slotPlans = new Map();
+if (channels.includes('threads') || channels.includes('x')) {
+  const preflightNow = Date.now();
+  for (const { s } of list) {
+    const x = st(s.id);
+    const threadsEligible = channels.includes('threads') && !x.threads?.ok
+      && (!hasUnconfirmedAttempt(x.threads) || opt['retry-threads']);
+    const xEligible = channels.includes('x') && !x.x?.ok
+      && (!hasUnconfirmedAttempt(x.x) || opt['retry-x']);
+    if (threadsEligible || xEligible) slotPlans.set(s.id, planShortSlot(x.slotAt, preflightNow));
+  }
+}
 for (const { s, i } of list) {
   const x = st(s.id);
   if (channels.includes('youtube') && !x.youtube?.videoId) {
@@ -145,25 +162,47 @@ for (const { s, i } of list) {
     const r = run('facebook-web.mjs', ['post', videoOf(s), write(`${s.id}.facebook.txt`, s.facebookText || socialText(s))], 900000);
     x.facebook = { ok: !!r.last?.posted || !!r.dry, aiLabel: r.last?.aiLabel, actor: r.last?.actor }; save(); log({ id: s.id, ch: 'facebook', ...x.facebook });
   }
-  // native scheduled publishing on X and Threads: a short whose spacing slot (x.slotAt, written by the caller's pacing, e.g.
-  // shorts-anatomy shorts-publish) is >= 10 min away is scheduled for that slot in the site's own composer (sns-web-post
-  // --schedule) instead of posted now; the record says scheduled + scheduledFor (no URL exists before it goes out)
-  const slot = x.slotAt && new Date(x.slotAt).getTime() >= Date.now() + 10 * 60e3 ? x.slotAt : null;
+  // A near-future slot waits for a later run; a due slot posts now. Recalculate
+  // before each channel because Threads can take time and age the shared slot.
   if (channels.includes('threads') && !x.threads?.ok) {
-    const r = run('sns-web-post.mjs', ['threads', write(`${s.id}.threads.txt`, cut(s.threadsText || socialText(s), 500)), videoOf(s), ...(slot ? [`--schedule=${slot}`] : [])], 900000);
-    x.threads = slot ? { ok: !!r.last?.scheduled || !!r.dry, scheduled: true, scheduledFor: r.last?.scheduledFor || slot, line: r.last?.line, error: r.last?.error }
-      : { ok: !!(r.last?.posted && (r.last?.url || '').includes('/' + (r.last?.account || '@?') + '/')) || !!r.dry, url: r.last?.url, account: r.last?.account, error: r.last?.error };
-    save(); log({ id: s.id, ch: 'threads', ...x.threads });
+    if (hasUnconfirmedAttempt(x.threads) && !opt['retry-threads']) {
+      log({ id: s.id, ch: 'threads', skipped: 'previous result is unconfirmed; inspect Threads, then rerun with --retry-threads' });
+    } else if (!slotPlans.has(s.id)) {
+      throw Object.assign(new Error('SHORTS_SLOT_PREFLIGHT_MISSING'), { code: 'SHORTS_SLOT_PREFLIGHT_MISSING' });
+    } else {
+      const plan = planShortSlot(x.slotAt, Date.now());
+      if (plan.deferred) {
+        x.threads = { ok: false, status: 'deferred', deferred: true, requestedSchedule: plan.scheduledFor, reason: plan.reason };
+        save(); log({ id: s.id, ch: 'threads', ...x.threads });
+      } else {
+        const attemptedAt = new Date().toISOString();
+        x.threads = snsAttemptRecord(attemptedAt, plan); save();
+        const r = run('sns-web-post.mjs', ['threads', write(`${s.id}.threads.txt`, cut(s.threadsText || socialText(s), 500)), videoOf(s),
+          ...(plan.mode === 'schedule' ? [`--schedule=${plan.scheduledFor}`] : [])], 900000);
+        x.threads = snsOutcomeRecord(r, { channel: 'threads', plan, attemptedAt });
+        save(); log({ id: s.id, ch: 'threads', ...x.threads });
+      }
+    }
   }
   if (channels.includes('x') && !x.x?.ok) {
-    // never auto-retry X: a "failed" run has posted before (the composer closed late) and the retry made a duplicate
-    if (x.x?.attempted && !opt['retry-x']) log({ id: s.id, ch: 'x', skipped: 'an earlier attempt did not confirm; check the profile, then rerun with --retry-x' });
-    else {
-      x.x = { attempted: new Date().toISOString() }; save();
-      const r = run('sns-web-post.mjs', ['x', write(`${s.id}.x.txt`, s.xText || xText(s)), videoOf(s), ...(slot ? [`--schedule=${slot}`] : [])], 900000);
-      x.x = slot ? { ...x.x, ok: !!r.last?.scheduled || !!r.dry, scheduled: true, scheduledFor: r.last?.scheduledFor || slot, line: r.last?.line, error: r.last?.error }
-        : { ...x.x, ok: !!r.last?.posted || !!r.dry, url: r.last?.url, osClick: r.last?.osClick, error: r.last?.error };
-      save(); log({ id: s.id, ch: 'x', ...x.x });
+    // Never resend an unconfirmed post/schedule without an explicit reconciliation override.
+    if (hasUnconfirmedAttempt(x.x) && !opt['retry-x']) {
+      log({ id: s.id, ch: 'x', skipped: 'previous result is unconfirmed; inspect X, then rerun with --retry-x' });
+    } else if (!slotPlans.has(s.id)) {
+      throw Object.assign(new Error('SHORTS_SLOT_PREFLIGHT_MISSING'), { code: 'SHORTS_SLOT_PREFLIGHT_MISSING' });
+    } else {
+      const plan = planShortSlot(x.slotAt, Date.now());
+      if (plan.deferred) {
+        x.x = { ok: false, status: 'deferred', deferred: true, requestedSchedule: plan.scheduledFor, reason: plan.reason };
+        save(); log({ id: s.id, ch: 'x', ...x.x });
+      } else {
+        const attemptedAt = new Date().toISOString();
+        x.x = snsAttemptRecord(attemptedAt, plan); save();
+        const r = run('sns-web-post.mjs', ['x', write(`${s.id}.x.txt`, s.xText || xText(s)), videoOf(s),
+          ...(plan.mode === 'schedule' ? [`--schedule=${plan.scheduledFor}`] : [])], 900000);
+        x.x = snsOutcomeRecord(r, { channel: 'x', plan, attemptedAt });
+        save(); log({ id: s.id, ch: 'x', ...x.x });
+      }
     }
   }
 }
