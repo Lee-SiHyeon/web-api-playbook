@@ -1,0 +1,52 @@
+{
+  "schema": "web-api-capability-receipt-v1",
+  "service": "kmong",
+  "capabilityId": "auth.owner",
+  "checkedAt": "2026-10-26T05:57:41.081Z",
+  "secretsPersistedInEvidence": false,
+  "authenticated": true,
+  "ownerVerified": true,
+  "ownerIdPinned": true,
+  "expectedEmailMatched": true,
+  "credentialProvider": "Windows DPAPI CurrentUser",
+  "persistent": true,
+  "bootstrapMode": "manual_browser_cookie_import",
+  "readMode": "pure_http",
+  "browserUsed": false,
+  "automatedLoginPosts": 0,
+  "renewal": "not_implemented",
+  "command": "owner",
+  "request": {
+    "method": "GET",
+    "origin": "https://kmong.com",
+    "path": "/api/user/v3/me",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 758,
+    "checkedAt": "2026-10-26T05:57:41.081Z",
+    "browserUsed": false,
+    "authenticated": true,
+    "credentialsUsed": true,
+    "cookiesSent": true,
+    "readOnly": true,
+    "operation": "owner",
+    "ownerVerified": true,
+    "ownerMatched": true
+  },
+  "implementation": {
+    "lib/web-auth/kmong.mjs": "ab44cdab1daabf6e509e26a6da327f95016b697c8413ac58928f47fe182830cf",
+    "scripts/kmong-account.mjs": "7a0727bc3255a9695e2b39b225b8f236c803b473e4ba22253c4a4f156c6aeba5",
+    "lib/protected-store.mjs": "d0b70fb85a21fc983b7a9faf6a9c6fe64f75def8cef64a249371eea29c235bd2",
+    "lib/scoped-session.mjs": "da79ad41014475f285adde4bf00532789adef94f8f2f9c526814d68281b39475",
+    "lib/session-lock.mjs": "94de05aa582b6b22ee2683ddeea000695f1c029bcfbbee305638a20f3b66429a"
+  },
+  "execution": {
+    "processId": 22004,
+    "startedAt": "2026-10-26T05:57:40.530Z",
+    "finishedAt": "2026-10-26T05:57:41.704Z",
+    "platform": "win32",
+    "nodeVersion": "v24.22.1",
+    "sourceResultSha256": "a23b1bcc98c93c69e9c7a0b95a43be49d99cc2a1f3022ee8e2e8e85295a221fc",
+    "implementationStableDuringRun": true
+  }
+}

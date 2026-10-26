@@ -34,6 +34,8 @@ Real implementations built this way. Scope and limits differ per service and are
 | Jobs | [Public job boards](references/jobs-public-apis.md): Greenhouse, Lever, Ashby, Remotive, caller-key Reed search, TokyoDev document parsing, snapshots and field-level changes |
 | Freelance services | [Kmong, Soomgo and Upwork](references/freelance-public-apis.md): public search, detail pricing types, reviews, bounded collection, provider search and approved-token Upwork reads |
 
+For protected Kmong account verification and encrypted Windows session reuse after sign-in, see the [Kmong authentication guide](references/kmong-auth.md).
+
 See the full list in the [detailed guide](docs/guide.md#무엇이-들어-있나) (Korean) or run `npm run services`.
 
 ## Consolidated clients
