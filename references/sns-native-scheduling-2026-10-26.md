@@ -34,3 +34,17 @@ Validation during review was offline: strict-date, timezone, active-dialog,
 ambiguous-confirmation and one-submit regression tests. No new posts or schedules
 were created. Earlier author observations of the native UI are historical
 contract context, not fresh verification of this stricter implementation.
+
+## Distributor state
+
+`shorts-distribute.mjs` validates selected SNS slots before channel work. Invalid
+slots stop the run; a future slot inside the ten-minute minimum waits for a later
+run instead of publishing early. The slot is checked again before each channel.
+Both X and Threads reserve an attempt before starting the non-idempotent child
+command, and an unknown result remains `needs_reconciliation`. The current SNS
+helper's unverified schedule attempt therefore does not become `ok:true` here.
+
+`--retry-x` or `--retry-threads` is an explicit resend after checking the account,
+not automatic recovery. Distributor `--dry` does not change the persisted state.
+The slot producer in another application is outside this repository; callers must
+write the intended `shorts[id].slotAt` value into the existing state file.
