@@ -8,6 +8,8 @@
 
 **Tools and know-how for calling websites that have no official API as if they did, so you can automate them.**
 
+> ⭐ If this project is useful to you, please [give it a star](https://github.com/Lee-SiHyeon/web-api-playbook)! It motivates us to add more services and automation examples.
+
 Observe the requests a browser makes behind the page (XHR, Fetch, Document), then turn them into
 HTTP operations you can replay without a browser. Sessions are stored and reused safely, and results
 are confirmed by reading back the real state, not by trusting an HTTP 200.
