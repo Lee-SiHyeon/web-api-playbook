@@ -32,7 +32,7 @@ Real implementations built this way. Scope and limits differ per service and are
 | Social & creators | [X / Reddit](service-packs/social-x/README.md), [Threads](service-packs/threads/README.md), Inpock profile and cards, YouTube Studio upload |
 | Operations | Gabia domain and DNS reads |
 | Jobs | [Public job boards](references/jobs-public-apis.md): Greenhouse, Lever, Ashby, Remotive, caller-key Reed search, TokyoDev document parsing, snapshots and field-level changes |
-| Freelance services | [Kmong, Soomgo and Upwork](references/freelance-public-apis.md): service search, package prices, reviews, provider search and approved-token Upwork reads |
+| Freelance services | [Kmong, Soomgo and Upwork](references/freelance-public-apis.md): public search, detail pricing types, reviews, bounded collection, provider search and approved-token Upwork reads |
 
 See the full list in the [detailed guide](docs/guide.md#무엇이-들어-있나) (Korean) or run `npm run services`.
 
@@ -77,6 +77,7 @@ node scripts/playbook.mjs run --service=ably --operation=categories
 ```
 
 For per-service login and commands, see the [service CLI guide](references/service-cli.md) and the [service-pack index](service-packs/README.md).
+Kmong collection CLI and common-registry operations are wired in this checkout. The latest 140.228 replay and its bounded scope are recorded in the [2026-10-26 verification](verification/jobs-freelance-2026-10-26/README.md); remote-main merge remains a separate Git readback. See the [freelance guide](references/freelance-public-apis.md) for commands and boundaries.
 To use it from an AI agent (Codex and others), have it read [SKILL.md](SKILL.md) or install it with `npm run install:skill`.
 
 ## Session storage

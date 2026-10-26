@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, rm, stat } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -180,4 +180,71 @@ test('Kmong challenge response keeps a provider error code and removes the newly
   assert.match(stdout, /KMONG_HTTP_STATUS_INVALID/);
   assert.equal(stdout.includes('Access denied'), false);
   await assert.rejects(stat(output), { code: 'ENOENT' });
+});
+
+test('Kmong collection resumes only the matching keyword and keeps complete imported checkpoints offline', async t => {
+  const directory = await tempDirectory(t);
+  const template = JSON.parse(await fixture('kmong-search-page1.json'));
+  const calls = [];
+  const context = { now: () => NOW, fetchImpl: async target => {
+    const page = Number(new URL(target).searchParams.get('page'));
+    calls.push(page);
+    return response(JSON.stringify({ ...template, currentPage: page, totalItemCount: 41, lastPage: 2,
+      gigs: Array.from({ length: page === 1 ? 40 : 1 }, (_, i) => ({ ...template.gigs[0], gigId: 1000 + (page - 1) * 40 + i })),
+    }), 'application/json');
+  } };
+  const first = (await runFreelanceCommand(['kmong', 'search-collect', '--keyword=상세페이지'], context)).result;
+  assert.equal(first.status, 'partial');
+  assert.equal(first.ok, true);
+  assert.equal(first.pagination.nextPage, 2);
+  const checkpoint = path.join(directory, 'checkpoint.json');
+  await writeFile(checkpoint, JSON.stringify(first));
+  await assert.rejects(runFreelanceCommand(['kmong', 'search-collect', '--keyword=다른검색', `--input=${checkpoint}`], context),
+    { code: 'KMONG_COLLECTION_STATE_SCOPE_MISMATCH' });
+  const second = (await runFreelanceCommand(['kmong', 'search-collect', '--keyword=상세페이지', `--input=${checkpoint}`], context)).result;
+  assert.deepEqual(calls, [1, 2]);
+  assert.equal(second.status, 'complete');
+  assert.equal(second.items.length, 41);
+  assert.equal(second.pagination.completeCatalog, false);
+  await writeFile(checkpoint, JSON.stringify(second.state));
+  const cached = (await runFreelanceCommand(['kmong', 'search-collect', '--keyword=상세페이지', `--input=${checkpoint}`], context)).result;
+  assert.deepEqual(calls, [1, 2]);
+  assert.equal(cached.networkUsed, false);
+  assert.equal(cached.observedAt, null);
+  assert.equal(cached.checkpointProvenance, 'caller_supplied');
+});
+
+test('Kmong collection errors keep a checkpoint but return nonzero and disable challenge retries', async t => {
+  const directory = await tempDirectory(t);
+  const output = path.join(directory, 'partial.json');
+  let stdout = '';
+  const context = { now: () => NOW,
+    stdout: new Writable({ write(chunk, _encoding, callback) { stdout += chunk.toString(); callback(); } }),
+    fetchImpl: async () => response('Access denied', 'text/html', 403),
+  };
+  const exit = await runFreelanceCli(['kmong', 'search-collect', '--keyword=번역', `--output=${output}`], context);
+  assert.equal(exit, 1);
+  assert.equal(JSON.parse(stdout).ok, false);
+  const result = JSON.parse(await readFile(output, 'utf8'));
+  assert.equal(result.error.code, 'KMONG_HTTP_STATUS_INVALID');
+  assert.equal(result.state.resumeAllowed, false);
+  assert.equal(result.state.nextPage, 1);
+  assert.equal(JSON.stringify(result).includes('Access denied'), false);
+  await assert.rejects(runFreelanceCommand(['kmong', 'search-collect', '--keyword=번역', `--input=${output}`], context),
+    { code: 'KMONG_COLLECTION_RESUME_DISABLED' });
+});
+
+test('Kmong malformed checkpoints and invalid page bounds fail before transport', async t => {
+  const directory = await tempDirectory(t);
+  const checkpoint = path.join(directory, 'malformed.json');
+  let calls = 0;
+  const context = { fetchImpl: async () => { calls++; throw new Error('unexpected request'); } };
+  await writeFile(checkpoint, JSON.stringify({ schemaVersion: 1, service: 'kmong', state: null }));
+  await assert.rejects(runFreelanceCommand(['kmong', 'reviews-collect', '--id=466087', `--input=${checkpoint}`], context),
+    { code: 'KMONG_COLLECTION_INPUT_INVALID' });
+  await assert.rejects(runFreelanceCommand(['kmong', 'search-collect', '--keyword=번역', '--max-pages=0'], context),
+    { code: 'KMONG_COLLECTION_MAX_PAGES_INVALID' });
+  await assert.rejects(runFreelanceCommand(['kmong', 'reviews-collect', '--id=466087', '--max-pages=6'], context),
+    { code: 'ARGUMENT_INVALID' });
+  assert.equal(calls, 0);
 });

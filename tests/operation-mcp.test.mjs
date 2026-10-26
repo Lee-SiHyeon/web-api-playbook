@@ -41,6 +41,56 @@ test('MCP distinguishes protocol failures from execution errors without leaking 
   assert.equal(JSON.stringify(await unexpected(request(5, 'tools/call', { name: 'fixture__echo', arguments: { query: { text: 'x' } } }))).includes('private'), false);
 });
 
+test('MCP preserves only an explicit safe Kmong collection partial result and keeps it an error', async () => {
+  const scope = { keyword: 'synthetic', pageSize: 40 };
+  const state = {
+    schemaVersion: 1, service: 'kmong', operation: 'search', scope,
+    items: [], pages: [], requests: [],
+    attempts: [{ page: 1, code: 'KMONG_HTTP_TIMEOUT', observedAt: '2026-10-26T08:00:00.000Z', requestIndexes: [] }],
+    issues: [], nextPage: 1, totalItemCount: null, lastPage: null, complete: false, resumeAllowed: true,
+  };
+  const partialResult = {
+    kind: 'kmong_read_only_collection', operation: 'kmong-search-collect',
+    data: {
+      schemaVersion: 1, service: 'kmong', operation: 'search', status: 'partial',
+      observedAt: null, checkpointProvenance: 'collector_created', checkpointAuthenticated: false,
+      networkUsed: true, scope, items: [], pages: [], newPages: [],
+      pagination: { page: null, pageSize: 40, pagesWalked: 0, totalItemCount: null, lastPage: null,
+        complete: false, sourceWindowComplete: false, completeCatalog: false, nextPage: 1,
+        pageWalked: true, resumable: true },
+      state, attempts: state.attempts, issues: [], requests: [], currentRequests: [],
+      error: { code: 'KMONG_HTTP_TIMEOUT', requestIndexes: [] }, limitations: [],
+      contractProvenance: { kind: 'first_party_bundle' },
+    },
+  };
+  const safePartial = registry(async () => {
+    const error = new Error('do not expose arbitrary error text');
+    error.code = 'KMONG_HTTP_TIMEOUT';
+    error.receipt = { private: 'arbitrary receipt must stay hidden' };
+    error.partialResult = partialResult;
+    throw error;
+  });
+  const handle = createOperationMcpHandler(safePartial); await initialize(handle);
+  const result = await handle(request(9, 'tools/call', { name: 'fixture__echo', arguments: { query: { text: 'x' } } }));
+  assert.equal(result.result.isError, true);
+  assert.deepEqual(result.result.structuredContent, { ok: false, code: 'KMONG_HTTP_TIMEOUT', partialResult });
+  assert.deepEqual(JSON.parse(result.result.content[0].text), result.result.structuredContent);
+  assert.equal(JSON.stringify(result).includes('arbitrary receipt'), false);
+  assert.equal(JSON.stringify(result).includes('do not expose arbitrary'), false);
+
+  const generic = createOperationMcpHandler(registry(async () => {
+    const error = new Error('ordinary error');
+    error.code = 'KMONG_HTTP_TIMEOUT';
+    error.receipt = { arbitrary: 'must remain private' };
+    throw error;
+  }));
+  await initialize(generic);
+  const genericResult = await generic(request(10, 'tools/call', { name: 'fixture__echo', arguments: { query: { text: 'x' } } }));
+  assert.deepEqual(JSON.parse(genericResult.result.content[0].text), { ok: false, code: 'KMONG_HTTP_TIMEOUT' });
+  assert.equal(Object.hasOwn(genericResult.result, 'structuredContent'), false);
+  assert.equal(JSON.stringify(genericResult).includes('must remain private'), false);
+});
+
 test('MCP cancellation propagates to the in-flight adapter', async () => {
   let started;
   const ready = new Promise(resolve => { started = resolve; });

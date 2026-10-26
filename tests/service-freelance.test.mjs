@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { createServiceRegistry, listServiceOperations } from '../lib/service-operations/index.mjs';
+import { createKmongCollector } from '../lib/freelance/kmong-collection.mjs';
 
 const at = Date.parse('2026-10-23T10:00:00Z');
 const fixture = name => readFile(fileURLToPath(new URL(`./fixtures/freelance/${name}`, import.meta.url)), 'utf8');
@@ -17,7 +18,8 @@ test('freelance operations are in the inventory without fetching or prompting fo
   const service = listing.services.find(item => item.id === 'freelance-public');
   assert.ok(service);
   assert.deepEqual(service.operations.sort(), [
-    'kmong-categories', 'kmong-detail', 'kmong-home', 'kmong-reviews', 'kmong-search',
+    'kmong-categories', 'kmong-detail', 'kmong-home', 'kmong-reviews', 'kmong-reviews-collect',
+    'kmong-search', 'kmong-search-collect',
     'soomgo-categories', 'soomgo-pro-collect', 'soomgo-pro-search', 'soomgo-subcategories',
     'upwork-collect', 'upwork-job', 'upwork-search',
   ]);
@@ -84,6 +86,444 @@ test('Kmong search keeps source price basis, exact IDs and one-page pagination',
     assert.equal(result.receipt.networkUsed, false);
     assert.equal(called, 1);
   } finally { await registry.close(); }
+});
+
+function searchGig(gigId) {
+  return {
+    gigId, title: '페이지 디자인 ' + gigId, price: 50_000,
+    review: { reviewAverage: 4.9, reviewCount: 12 },
+    isPrime: false, isQualityGuaranteed: false, hasPackages: true, hasVideos: false,
+  };
+}
+
+function searchPayload(page, gigs, { lastPage = 2, totalItemCount = 41, keyword = '상세페이지' } = {}) {
+  return { keyword, currentPage: page, perPage: 40, lastPage, totalItemCount, gigs };
+}
+
+function reviewsPayload(id, page, items, { lastPage = 2, totalItemCount = 6 } = {}) {
+  return { reviewPage: { currentPage: page, lastPage, perPage: 5, totalItemCount, items: items.map((comment, index) => ({
+    buyerReview: { score: 5, comment, createdDateTime: `2026-10-${String(20 - page).padStart(2, '0')} 10:0${index}:00` },
+    orderDetail: { gigId: Number(id), orderId: 9_000 + page * 10 + index },
+  })) } };
+}
+
+test('Kmong collectors are bounded in the input schema and preserve checkpoint metadata across registry roundtrip', async () => {
+  const searchCalls = [];
+  let checkpoint;
+  const createRegistry = () => createServiceRegistry('freelance-public', {
+    now: () => at,
+    sleepImpl: async () => {},
+    fetchImpl: async (url, init) => {
+      const target = new URL(String(url));
+      assert.equal(init.method, 'GET');
+      assert.equal(init.credentials, 'omit');
+      if (target.pathname === '/gig-app/gig/v2/gigs/search') {
+        const page = Number(target.searchParams.get('page'));
+        const keyword = target.searchParams.get('keyword');
+        searchCalls.push(page);
+        const payload = page === 1
+          ? searchPayload(1, Array.from({ length: 40 }, (_, index) => searchGig(10_000 + index)), { keyword })
+          : searchPayload(2, [searchGig(20_000)], { keyword });
+        return json(payload);
+      }
+      throw new Error('unexpected path: ' + target.pathname);
+    },
+  });
+
+  const registry = await createRegistry();
+  try {
+    const searchSchema = registry.describe('kmong-search-collect').inputSchema;
+    assert.deepEqual(searchSchema.properties.query.required, ['keyword']);
+    assert.equal(searchSchema.properties.query.properties.maxPages.default, 1);
+    assert.equal(searchSchema.properties.query.properties.maxPages.maximum, 5);
+    const stateSchema = searchSchema.properties.body.properties.state;
+    assert.equal(stateSchema.additionalProperties, false);
+    assert.equal(stateSchema.properties.items.maxItems, 1_240, 'schema allows one over-bound checkpoint for a specific runtime error');
+    assert.equal(stateSchema.properties.pages.maxItems, 31);
+    assert.match(stateSchema.description, /stops at 30 pages/);
+
+    const first = await registry.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지', maxPages: 1 },
+    });
+    checkpoint = JSON.parse(JSON.stringify(first.data.state));
+    assert.equal(first.data.status, 'partial');
+    assert.equal(first.data.pagination.nextPage, 2);
+    assert.equal(first.data.networkUsed, true, 'the injected transport was called');
+    assert.equal(first.receipt.networkUsed, false, 'an injected fixture is not live external proof');
+    assert.equal(first.receipt.currentRequests.length, 1);
+    assert.equal(first.receipt.requests, undefined);
+    assert.equal(first.data.state.requests[0].cookiesSent, false, 'safe false cookie metadata survives the registry');
+
+    const extraStateField = { ...JSON.parse(JSON.stringify(first.data.state)), unexpected: true };
+    await assert.rejects(registry.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지' }, body: { state: extraStateField },
+    }), { code: 'OPERATION_INPUT_INVALID' });
+  } finally { await registry.close(); }
+
+  const resumedRegistry = await createRegistry();
+  try {
+    const resumed = await resumedRegistry.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지', maxPages: 1 },
+      body: { state: checkpoint },
+    });
+    assert.equal(resumed.data.status, 'complete');
+    assert.equal(resumed.data.items.length, 41);
+    assert.equal(resumed.data.newPages.length, 1);
+    assert.equal(resumed.data.networkUsed, true);
+    assert.equal(resumed.receipt.currentRequests.length, 1);
+    assert.equal(resumed.data.state.requests.every(request => request.cookiesSent === false), true);
+  } finally { await resumedRegistry.close(); }
+  assert.deepEqual(searchCalls, [1, 2]);
+
+  const omittedKeyword = await createRegistry();
+  try {
+    await assert.rejects(omittedKeyword.execute('kmong-search-collect', { query: { maxPages: 1 } }),
+      { code: 'OPERATION_INPUT_REQUIRED' });
+  } finally { await omittedKeyword.close(); }
+
+  const omittedId = await createServiceRegistry('freelance-public', { fetchImpl: async () => assert.fail('must validate before fetch') });
+  try {
+    await assert.rejects(omittedId.execute('kmong-reviews-collect', { query: { maxPages: 1 } }),
+      { code: 'OPERATION_INPUT_REQUIRED' });
+    await assert.rejects(omittedId.execute('kmong-reviews-collect', { path: { id: '70001' }, query: { maxPages: 6 } }),
+      { code: 'OPERATION_INPUT_INVALID' });
+  } finally { await omittedId.close(); }
+});
+
+test('Kmong review collector resumes through the registry without losing checkpoint receipt flags', async () => {
+  const detail = await fixture('kmong-detail.html');
+  let calls = 0;
+  const mockFetch = async url => {
+    const target = new URL(String(url));
+    calls++;
+    if (target.origin === 'https://kmong.com' && target.pathname === '/gig/70001') return html(detail);
+    if (target.pathname === '/order-app/order/v1/reviews/gigs/70001') {
+      const page = Number(target.searchParams.get('page'));
+      const comments = page === 1
+        ? ['review one', 'review two', 'review three', 'review four', 'review five']
+        : ['review six'];
+      return json(reviewsPayload('70001', page, comments));
+    }
+    throw new Error('unexpected route: ' + target.href);
+  };
+  const firstRegistry = await createServiceRegistry('freelance-public', { now: () => at, sleepImpl: async () => {}, fetchImpl: mockFetch });
+  let checkpoint;
+  try {
+    const first = await firstRegistry.execute('kmong-reviews-collect', {
+      path: { id: '70001' }, query: { maxPages: 1 },
+    });
+    checkpoint = JSON.parse(JSON.stringify(first.data.state));
+    assert.equal(first.data.items.length, 5);
+    assert.equal(first.data.status, 'partial');
+    assert.equal(first.receipt.currentRequests.length, 2);
+    assert.equal(first.data.state.requests.every(request => request.cookiesSent === false), true);
+  } finally { await firstRegistry.close(); }
+
+  const beforeResume = calls;
+  const secondRegistry = await createServiceRegistry('freelance-public', { now: () => at, sleepImpl: async () => {}, fetchImpl: mockFetch });
+  try {
+    const second = await secondRegistry.execute('kmong-reviews-collect', {
+      path: { id: '70001' }, query: { maxPages: 1 }, body: { state: checkpoint },
+    });
+    assert.equal(second.data.status, 'complete');
+    assert.equal(second.data.items.length, 6);
+    assert.equal(second.data.newPages.length, 1);
+    assert.equal(second.receipt.currentRequests.length, 2);
+    assert.equal(second.receipt.networkUsed, false);
+  } finally { await secondRegistry.close(); }
+  assert.equal(calls - beforeResume, 2);
+
+});
+
+test('a completed caller-supplied collector checkpoint does not claim a new read', async () => {
+  const firstRegistry = await createServiceRegistry('freelance-public', {
+    now: () => at, sleepImpl: async () => {},
+    fetchImpl: async () => json(searchPayload(1, [searchGig(40_001)], { lastPage: 1, totalItemCount: 1 })),
+  });
+  let checkpoint;
+  try {
+    const first = await firstRegistry.execute('kmong-search-collect', { query: { keyword: '상세페이지' } });
+    assert.equal(first.data.status, 'complete');
+    checkpoint = JSON.parse(JSON.stringify(first.data.state));
+  } finally { await firstRegistry.close(); }
+
+  let unexpectedCalls = 0;
+  const importedRegistry = await createServiceRegistry('freelance-public', {
+    fetchImpl: async () => { unexpectedCalls++; throw new Error('completed checkpoint should not fetch'); },
+  });
+  try {
+    const imported = await importedRegistry.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지' }, body: { state: checkpoint },
+    });
+    assert.equal(unexpectedCalls, 0);
+    assert.equal(imported.data.status, 'complete');
+    assert.equal(imported.data.observedAt, null);
+    assert.equal(imported.data.networkUsed, false);
+    assert.equal(imported.data.checkpointProvenance, 'caller_supplied');
+    assert.equal(imported.data.checkpointAuthenticated, false);
+    assert.deepEqual(imported.data.newPages, []);
+    assert.deepEqual(imported.receipt.currentRequests, []);
+    assert.equal(imported.receipt.requests, undefined);
+    assert.equal(imported.receipt.httpStatus, undefined);
+    assert.equal(imported.receipt.networkUsed, false);
+  } finally { await importedRegistry.close(); }
+});
+
+test('a no-response timeout checkpoint survives the common registry and resumes without inventing HTTP status', async () => {
+  const firstFetch = async url => {
+    const page = Number(new URL(String(url)).searchParams.get('page'));
+    if (page === 1) return json(searchPayload(1,
+      Array.from({ length: 40 }, (_, index) => searchGig(50_000 + index))));
+    throw Object.assign(new Error('fixture timeout'), { name: 'TimeoutError' });
+  };
+  const firstRegistry = await createServiceRegistry('freelance-public', { now: () => at, fetchImpl: firstFetch });
+  let checkpoint;
+  try {
+    await assert.rejects(firstRegistry.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지', maxPages: 2 },
+    }), error => {
+      assert.equal(error.code, 'KMONG_HTTP_TIMEOUT');
+      checkpoint = JSON.parse(JSON.stringify(error.receipt.collection.state));
+      const failedReceipt = checkpoint.requests.at(-1);
+      assert.equal(failedReceipt.cookiesSent, false);
+      assert.equal(failedReceipt.browserUsed, false);
+      assert.equal(failedReceipt.redirectFollowed, null);
+      assert.equal(Object.hasOwn(failedReceipt, 'httpStatus'), false);
+      assert.equal(error.receipt.networkUsed, false, 'injected transport is not live external proof');
+      assert.equal(error.receipt.collection.networkUsed, true, 'the collector did attempt the failed page');
+      assert.equal(error.receipt.collection.currentRequests.length, 2);
+      assert.equal(checkpoint.resumeAllowed, true);
+      return true;
+    });
+  } finally { await firstRegistry.close(); }
+
+  let resumedCalls = 0;
+  const resumedRegistry = await createServiceRegistry('freelance-public', {
+    now: () => at, fetchImpl: async url => {
+      resumedCalls++;
+      const page = Number(new URL(String(url)).searchParams.get('page'));
+      return json(searchPayload(page, [searchGig(60_000)]));
+    },
+  });
+  try {
+    const resumed = await resumedRegistry.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지' }, body: { state: checkpoint },
+    });
+    assert.equal(resumedCalls, 1);
+    assert.equal(resumed.data.status, 'complete');
+    assert.equal(resumed.data.items.length, 41);
+    assert.equal(resumed.data.requests.length, 3);
+    assert.equal(resumed.receipt.currentRequests.length, 1);
+  } finally { await resumedRegistry.close(); }
+});
+
+test('common collectors stop at cumulative page caps and return native-only checkpoints without fetching past them', async () => {
+  const collectedSearchGig = id => ({
+    id: String(id), title: 'Gig ' + id, url: `https://kmong.com/gig/${id}`,
+    startingPrice: { amount: 50_000, currency: 'KRW', basis: 'displayed_starting_price', exactCheckoutAmount: false },
+    reviewSummary: { average: 5, count: 1, source: 'search_gig_review_summary' },
+    isPrime: false, isQualityGuaranteed: false, hasPackages: true, hasVideos: false,
+  });
+  const collectedReview = (page, index) => ({
+    rating: 5, body: `review-${page}-${index}`, createdAt: '2026-10-20',
+  });
+  const nativeCollector = createKmongCollector({
+    now: () => at, sleepImpl: async () => {},
+    client: {
+      search: async ({ keyword, page }) => {
+        const lastPage = 31;
+        const items = page === lastPage ? [collectedSearchGig(90_000)]
+          : Array.from({ length: 40 }, (_, index) => collectedSearchGig(1_000 + (page - 1) * 40 + index));
+        return {
+          service: 'kmong', operation: 'search', keyword, observedAt: new Date(at + page * 1_000).toISOString(), items,
+          pagination: { page, pageSize: 40, totalItemCount: 1_201, lastPage, complete: false,
+            endReached: page === lastPage, nextPage: page === lastPage ? null : page + 1 }, requests: [],
+        };
+      },
+      reviews: async ({ id, page }) => {
+        const lastPage = 101;
+        const items = page === lastPage ? [collectedReview(page, 0)]
+          : Array.from({ length: 5 }, (_, index) => collectedReview(page, index));
+        return {
+          service: 'kmong', operation: 'reviews', gigId: id, observedAt: new Date(at + page * 1_000).toISOString(), items,
+          pagination: { page, pageSize: 5, totalItemCount: 501, lastPage, complete: false,
+            endReached: page === lastPage, nextPage: page === lastPage ? null : page + 1 }, requests: [],
+        };
+      },
+    },
+  });
+  async function stateAt(operation, targetPages, collector = nativeCollector) {
+    let state;
+    while ((state?.pages.length ?? 0) < targetPages) {
+      const count = targetPages - (state?.pages.length ?? 0);
+      const result = operation === 'search'
+        ? await collector.collectSearch({ keyword: '상세페이지', maxPages: Math.min(5, count), ...(state ? { state } : {}) })
+        : await collector.collectReviews({ id: '70001', maxPages: Math.min(5, count), ...(state ? { state } : {}) });
+      state = result.state;
+    }
+    return state;
+  }
+
+  const detail = await fixture('kmong-detail.html');
+  const reviewCheckpoint = await stateAt('reviews', 99);
+  let reviewPageCalls = [];
+  const reviewLimitRegistry = await createServiceRegistry('freelance-public', {
+    now: () => at, sleepImpl: async () => {}, fetchImpl: async url => {
+      const target = new URL(String(url));
+      if (target.origin === 'https://kmong.com' && target.pathname === '/gig/70001') return html(detail);
+      if (target.pathname === '/order-app/order/v1/reviews/gigs/70001') {
+        const page = Number(target.searchParams.get('page'));
+        reviewPageCalls.push(page);
+        return json(reviewsPayload('70001', page,
+          Array.from({ length: 5 }, (_, index) => `source-review-${page}-${index}`),
+          { lastPage: 101, totalItemCount: 501 }));
+      }
+      throw new Error('unexpected review path');
+    },
+  });
+  let reviewLimitState;
+  try {
+    await assert.rejects(reviewLimitRegistry.execute('kmong-reviews-collect', {
+      path: { id: '70001' }, query: { maxPages: 2 }, body: { state: reviewCheckpoint },
+    }), error => {
+      assert.equal(error.code, 'KMONG_COLLECTION_COMMON_PAGE_LIMIT_REACHED');
+      assert.equal(error.partialResult.kind, 'kmong_read_only_collection');
+      assert.equal(error.partialResult.operation, 'kmong-reviews-collect');
+      assert.equal(error.partialResult.data.status, 'partial');
+      assert.equal(error.partialResult.data.state.pages.length, 100);
+      assert.equal(error.partialResult.data.pagination.nextPage, 101);
+      assert.equal(error.partialResult.data.pagination.canResumeInCommonRegistry, false);
+      assert.equal(error.partialResult.data.pagination.nativeCheckpointResumable, true);
+      assert.equal(error.partialResult.data.networkUsed, true);
+      assert.equal(error.partialResult.data.currentRequests.length, 2);
+      reviewLimitState = JSON.parse(JSON.stringify(error.partialResult.data.state));
+      return true;
+    });
+  } finally { await reviewLimitRegistry.close(); }
+  assert.deepEqual(reviewPageCalls, [100], '99 pages plus maxPages 2 must fetch only page 100');
+
+  let commonPastLimitFetches = 0;
+  const atLimitRegistry = await createServiceRegistry('freelance-public', {
+    fetchImpl: async () => { commonPastLimitFetches++; throw new Error('common cap must stop before fetch'); },
+  });
+  try {
+    await assert.rejects(atLimitRegistry.execute('kmong-reviews-collect', {
+      path: { id: '70001' }, query: { maxPages: 1 }, body: { state: reviewLimitState },
+    }), error => {
+      assert.equal(error.code, 'KMONG_COLLECTION_COMMON_PAGE_LIMIT_REACHED');
+      assert.equal(error.partialResult.data.networkUsed, false);
+      assert.deepEqual(error.partialResult.data.currentRequests, []);
+      assert.equal(error.partialResult.data.state.resumeAllowed, true, 'native checkpoint remains resumable');
+      assert.equal(error.partialResult.data.pagination.canResumeInCommonRegistry, false);
+      return true;
+    });
+  } finally { await atLimitRegistry.close(); }
+  assert.equal(commonPastLimitFetches, 0);
+
+  const nativeFinishedReviews = await nativeCollector.collectReviews({ id: '70001', maxPages: 1, state: reviewLimitState });
+  assert.equal(nativeFinishedReviews.status, 'complete', 'the same checkpoint remains usable by the native collector');
+
+  const over100Collector = createKmongCollector({
+    now: () => at, sleepImpl: async () => {},
+    client: {
+      search: async () => assert.fail('unexpected search request'),
+      reviews: async ({ id, page }) => {
+        const items = page === 102 ? [collectedReview(page, 0)]
+          : Array.from({ length: 5 }, (_, index) => collectedReview(page, index));
+        return {
+          service: 'kmong', operation: 'reviews', gigId: id, observedAt: new Date(at + page * 1_000).toISOString(), items,
+          pagination: { page, pageSize: 5, totalItemCount: 506, lastPage: 102, complete: false,
+            endReached: page === 102, nextPage: page === 102 ? null : page + 1 }, requests: [],
+        };
+      },
+    },
+  });
+  const over100State = await stateAt('reviews', 101, over100Collector);
+  let over100CommonFetches = 0;
+  const over100CommonRegistry = await createServiceRegistry('freelance-public', {
+    fetchImpl: async () => { over100CommonFetches++; throw new Error('oversized common checkpoint must not fetch'); },
+  });
+  try {
+    await assert.rejects(over100CommonRegistry.execute('kmong-reviews-collect', {
+      path: { id: '70001' }, query: { maxPages: 1 }, body: { state: over100State },
+    }), error => {
+      assert.equal(error.code, 'KMONG_COLLECTION_COMMON_PAGE_LIMIT_REACHED');
+      assert.equal(error.partialResult.data.state.pages.length, 101);
+      assert.equal(error.partialResult.data.canResumeInCommonRegistry, false);
+      assert.equal(error.partialResult.data.nativeCheckpointResumable, true);
+      assert.equal(error.partialResult.data.networkUsed, false);
+      return true;
+    });
+  } finally { await over100CommonRegistry.close(); }
+  assert.equal(over100CommonFetches, 0);
+  assert.equal((await over100Collector.collectReviews({ id: '70001', maxPages: 1, state: over100State })).status, 'complete');
+
+  const searchCheckpoint = await stateAt('search', 29);
+  let searchPageCalls = [];
+  const searchLimitRegistry = await createServiceRegistry('freelance-public', {
+    now: () => at, sleepImpl: async () => {}, fetchImpl: async url => {
+      const target = new URL(String(url));
+      const page = Number(target.searchParams.get('page'));
+      searchPageCalls.push(page);
+      return json(searchPayload(page, Array.from({ length: 40 }, (_, index) => searchGig(70_000 + index)),
+        { lastPage: 31, totalItemCount: 1_201 }));
+    },
+  });
+  let searchLimitState;
+  try {
+    await assert.rejects(searchLimitRegistry.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지', maxPages: 5 }, body: { state: searchCheckpoint },
+    }), error => {
+      assert.equal(error.code, 'KMONG_COLLECTION_COMMON_PAGE_LIMIT_REACHED');
+      assert.equal(error.partialResult.data.state.pages.length, 30);
+      assert.equal(error.partialResult.data.pagination.nextPage, 31);
+      assert.equal(error.partialResult.data.pagination.canResumeInCommonRegistry, false);
+      assert.equal(error.partialResult.data.pagination.nativeCheckpointResumable, true);
+      searchLimitState = JSON.parse(JSON.stringify(error.partialResult.data.state));
+      return true;
+    });
+  } finally { await searchLimitRegistry.close(); }
+  assert.deepEqual(searchPageCalls, [30], '29 pages plus maxPages 5 must fetch only page 30');
+  const nativeFinishedSearch = await nativeCollector.collectSearch({ keyword: '상세페이지', maxPages: 1, state: searchLimitState });
+  assert.equal(nativeFinishedSearch.status, 'complete');
+});
+
+test('Kmong collection errors and unstable results do not return success and retain a checkpoint receipt', async () => {
+  const denied = await createServiceRegistry('freelance-public', {
+    fetchImpl: async () => new Response('denied', { status: 403, headers: { 'content-type': 'text/html' } }),
+  });
+  try {
+    await assert.rejects(denied.execute('kmong-search-collect', { query: { keyword: '상세페이지' } }), error => {
+      assert.equal(error.code, 'KMONG_HTTP_STATUS_INVALID');
+      assert.equal(error.receipt.networkUsed, false, 'the injected 403 is not live external proof');
+      assert.equal(error.receipt.collection.status, 'partial');
+      assert.equal(error.receipt.collection.state.resumeAllowed, false);
+      assert.equal(error.receipt.collection.currentRequests[0].httpStatus, 403);
+      assert.equal(error.receipt.collection.checkpointAuthenticated, false);
+      return true;
+    });
+  } finally { await denied.close(); }
+
+  const duplicateFetch = async url => {
+    const page = Number(new URL(String(url)).searchParams.get('page'));
+    const gigs = page === 1
+      ? Array.from({ length: 40 }, (_, index) => searchGig(30_000 + index))
+      : [searchGig(30_000)];
+    return json(searchPayload(page, gigs));
+  };
+  const unstable = await createServiceRegistry('freelance-public', { sleepImpl: async () => {}, fetchImpl: duplicateFetch });
+  try {
+    await assert.rejects(unstable.execute('kmong-search-collect', {
+      query: { keyword: '상세페이지', maxPages: 2 },
+    }), error => {
+      assert.equal(error.code, 'KMONG_COLLECTION_UNSTABLE');
+      assert.equal(error.receipt.collection.status, 'unstable');
+      assert.equal(error.receipt.collection.pagination.complete, false);
+      assert.equal(error.receipt.collection.state.resumeAllowed, false);
+      assert.equal(error.receipt.collection.currentRequests.length, 2);
+      return true;
+    });
+  } finally { await unstable.close(); }
 });
 
 test('Soomgo category and public pro-search operations use fixed origins and preserve partial search coverage', async () => {
