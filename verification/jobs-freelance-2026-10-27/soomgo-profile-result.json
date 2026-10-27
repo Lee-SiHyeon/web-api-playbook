@@ -1,0 +1,129 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "soomgo",
+  "provider": "soomgo",
+  "operation": "profile",
+  "checkedAt": "2026-10-27T07:14:56.918Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "993707",
+        "role": "provider",
+        "displayNameHash": {
+          "sha256": "c99d8c68bcd964da3ed662c40da5a24ccd675dcec8efa48e0f654926b6b480ff",
+          "length": 25
+        },
+        "introductionHash": {
+          "sha256": "4675fc20dcd55819173372088ed3e20d2b5a7df2c2caa911980816fcc7e772cc",
+          "length": 76
+        },
+        "serviceDescriptionHash": {
+          "sha256": "9c28c1af7401219573518bda7515824bfa36b6a56ff3f8c8e23ce681a9c125ed",
+          "length": 140
+        },
+        "mainService": {
+          "id": "682",
+          "name": "용달/화물 운송",
+          "slug": null
+        },
+        "services": [
+          {
+            "id": "670",
+            "name": "국내 이사",
+            "slug": "국내-이사"
+          },
+          {
+            "id": "682",
+            "name": "용달/화물 운송",
+            "slug": "용달-운송"
+          },
+          {
+            "id": "728",
+            "name": "원룸/소형 이사",
+            "slug": "원룸-소형-이사"
+          },
+          {
+            "id": "729",
+            "name": "가정이사(투룸 이상)",
+            "slug": "가정-이사-투룸-쓰리룸"
+          },
+          {
+            "id": "730",
+            "name": "사무실/상업공간 이사",
+            "slug": "사무실-상업공간-이사"
+          },
+          {
+            "id": "928",
+            "name": "무진동차량/냉동차량/냉장차량",
+            "slug": "무진동차량-냉동차량-냉장차량"
+          },
+          {
+            "id": "1452",
+            "name": "소형물건 배달 심부름",
+            "slug": "소형-물건-배달-심부름"
+          }
+        ],
+        "avgResponseTimeSeconds": 2256,
+        "reviewCount": 2921,
+        "reviewTotalRatingSourceValue": 4.8,
+        "hireCount": 3760,
+        "recentHireCount": 56,
+        "hasApprovedLicenseBadge": false,
+        "identityBinding": {
+          "pathBound": true,
+          "expectedProviderIdSupplied": true,
+          "providerMatchVerified": true,
+          "authenticated": false,
+          "ownerVerified": false
+        }
+      }
+    ],
+    "coverage": {
+      "complete": true,
+      "reason": "single_public_profile_summary"
+    }
+  },
+  "dataSha256": "25812d6922836103f4a73e04b434cbf044428b073e16798494ba0175d4a61480",
+  "coverage": {
+    "complete": true,
+    "reason": "single_public_profile_summary"
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://api.soomgo.com",
+      "path": "/v2/user/7847767/profile",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 11616,
+      "responseSha256": "5b9997bcb9673af026313d024e9168bae5b63e331748b5a2bb3de054e46461fe",
+      "checkedAt": "2026-10-27T07:14:56.918Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "role"
+      ]
+    }
+  ],
+  "runner": "scripts/freelance.mjs",
+  "sourceResultSha256": "f4ab489f3f64af9429565819fd7aeca2e4f987f612284cbbde393e860b6b8183"
+}

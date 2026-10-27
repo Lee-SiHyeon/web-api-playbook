@@ -15,6 +15,15 @@ const HELP = `Freelance service readers\n\n` +
   `  freelance kmong reviews-collect --id=GIG_ID [--max-pages=1..5 --input=CHECKPOINT.json]\n` +
   `  freelance soomgo categories|subcategories --category-1=SLUG\n` +
   `  freelance soomgo search|collect [service/location filters] [--max-pages=N]\n` +
+  `  freelance soomgo profile --user-id=ID [--expected-provider-id=ID]\n` +
+  `  freelance soomgo profile-contents --user-id=ID\n` +
+  `  freelance soomgo profile-reviews --user-id=ID [--next-cursor=CURSOR]\n` +
+  `  freelance soomgo profile-reviews-collect --user-id=ID [--max-pages=1..5 --next-cursor=CURSOR]\n` +
+  `  freelance soomgo portfolio --user-id=ID [--size=4|8 --next-cursor=CURSOR]\n` +
+  `  freelance soomgo portfolio-collect --user-id=ID [--size=4|8 --max-pages=1..5 --next-cursor=CURSOR]\n` +
+  `  freelance soomgo request-form --service-id=ID --service-slug=SLUG --service-name=NAME\n` +
+  `  freelance soomgo address-options [--depth=3]\n` +
+  `  freelance soomgo request-prepare --form=FORM.json [--answers=ANSWERS.json --addresses=ADDRESSES.json]\n` +
   `  freelance upwork search|detail|collect --credentials-stdin\n\n` +
   `Upwork credentials are tagged JSON on hidden stdin: {"provider":"upwork","accessToken":"..."}.\n` +
   `All outputs preserve source prices and incomplete page coverage. These commands do not place orders or contact sellers.\n`;
@@ -56,6 +65,49 @@ function cliErrorCode(error) {
 
 const text = { type: 'text', max: 2000 };
 const integer = maxValue => ({ type: 'int', maxValue });
+
+async function readLocalJson(file, code, maxBytes = 4 * 1024 * 1024, tooLargeCode = code) {
+  if (typeof file !== 'string' || !file) fail(code);
+  let handle;
+  let buffer;
+  try { handle = await open(path.resolve(file), 'r'); }
+  catch { fail(code); }
+  try {
+    const info = await handle.stat();
+    if (!info.isFile()) fail(code);
+    if (info.size > maxBytes) fail(tooLargeCode);
+    buffer = Buffer.alloc(Math.min(info.size + 1, maxBytes + 1));
+    let used = 0;
+    while (used < buffer.length) {
+      const { bytesRead } = await handle.read(buffer, used, buffer.length - used, null);
+      if (!bytesRead) break;
+      used += bytesRead;
+    }
+    if (used > info.size || used > maxBytes) fail(tooLargeCode);
+    try { return JSON.parse(buffer.subarray(0, used).toString('utf8').replace(/^\uFEFF/, '')); }
+    catch { fail(code); }
+  } catch (error) {
+    if (error?.code === code || error?.code === tooLargeCode) throw error;
+    fail(code);
+  }
+  finally { buffer?.fill(0); await handle?.close().catch(() => {}); }
+}
+
+function clearObjectStrings(value, seen = new Set()) {
+  if (!value || typeof value !== 'object' || seen.has(value)) return;
+  seen.add(value);
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index++) {
+      if (typeof value[index] === 'string') value[index] = '';
+      else clearObjectStrings(value[index], seen);
+    }
+  } else {
+    for (const key of Object.keys(value)) {
+      if (typeof value[key] === 'string') value[key] = '';
+      else clearObjectStrings(value[key], seen);
+    }
+  }
+}
 
 function parseFlags(args, spec) {
   const out = {};
@@ -108,16 +160,88 @@ export async function runFreelanceCommand(argv, { fetchImpl = globalThis.fetch, 
   }
 
   if (service === 'soomgo') {
-    if (!['categories', 'subcategories', 'search', 'collect'].includes(operation)) fail('OPERATION_INVALID');
-    const args = parseFlags(tail, {
+    if (!['categories', 'subcategories', 'search', 'collect', 'request-form', 'address-options', 'request-prepare',
+      'profile', 'profile-contents', 'profile-reviews', 'profile-reviews-collect', 'portfolio', 'portfolio-collect'].includes(operation)) fail('OPERATION_INVALID');
+    const spec = operation === 'request-form' ? {
+      'service-id': integer(2_147_483_647), 'service-slug': { ...text, max: 200 }, 'service-name': { ...text, max: 200 }, output: text,
+    } : operation === 'address-options' ? { depth: integer(3), output: text }
+      : operation === 'request-prepare' ? { form: text, answers: text, addresses: text, output: text }
+      : ['profile', 'profile-contents', 'profile-reviews', 'profile-reviews-collect', 'portfolio', 'portfolio-collect'].includes(operation) ? {
+        'user-id': { ...text, max: 20 },
+        ...(operation === 'profile' ? { 'expected-provider-id': { ...text, max: 20 } } : {}),
+        ...(['profile-reviews', 'profile-reviews-collect', 'portfolio', 'portfolio-collect'].includes(operation)
+          ? { 'next-cursor': { ...text, max: 500 } } : {}),
+        ...(['profile-reviews-collect', 'portfolio-collect'].includes(operation) ? { 'max-pages': integer(5) } : {}),
+        ...(['portfolio', 'portfolio-collect'].includes(operation) ? { size: integer(8) } : {}), output: text,
+      } : {
       'category-1': text, 'category-2': text, 'service-slug': text,
       address1: text, address2: text, keyword: text, sort: text, cursor: { ...text, max: 4096 },
       limit: integer(100), 'max-pages': integer(5), output: text,
-    });
+    };
+    const args = parseFlags(tail, spec);
+    if (operation === 'request-form' && (!args['service-id'] || !args['service-slug'] || !args['service-name']) ||
+        operation === 'request-prepare' && !args.form ||
+        operation === 'address-options' && (Object.keys(args).some(key => !['depth', 'output'].includes(key)) ||
+          args.depth !== undefined && args.depth !== 3) ||
+        ['profile', 'profile-contents', 'profile-reviews', 'profile-reviews-collect', 'portfolio', 'portfolio-collect'].includes(operation) && !args['user-id']) fail('ARGUMENT_INVALID');
     if (operation === 'categories' && Object.keys(args).some(key => key !== 'output')
       || operation === 'subcategories' && (!args['category-1'] || Object.keys(args).some(key => !['category-1', 'output'].includes(key)))
       || operation === 'search' && args['max-pages'] !== undefined
-      || operation !== 'collect' && args['max-pages'] !== undefined) fail('ARGUMENT_INVALID');
+      || !['collect', 'profile-reviews-collect', 'portfolio-collect'].includes(operation) && args['max-pages'] !== undefined) fail('ARGUMENT_INVALID');
+    if (['profile', 'profile-contents', 'profile-reviews', 'profile-reviews-collect', 'portfolio', 'portfolio-collect'].includes(operation)) {
+      const { createSoomgoProfileClient } = await import('../lib/freelance/soomgo-profile.mjs');
+      const client = createSoomgoProfileClient({ fetchImpl, now });
+      const userId = args['user-id'];
+      const result = operation === 'profile'
+        ? await client.getProfile({ userId, ...(args['expected-provider-id'] === undefined ? {} : { expectedProviderId: args['expected-provider-id'] }) })
+        : operation === 'profile-contents' ? await client.getProfileContents({ userId })
+          : operation === 'profile-reviews' ? await client.getProfileReviews({ userId,
+            ...(args['next-cursor'] === undefined ? {} : { nextCursor: args['next-cursor'] }) })
+            : operation === 'profile-reviews-collect' ? await client.collectProfileReviews({ userId,
+              maxPages: args['max-pages'] ?? 1, ...(args['next-cursor'] === undefined ? {} : { nextCursor: args['next-cursor'] }) })
+              : operation === 'portfolio-collect' ? await client.collectProfilePortfolios({ userId,
+                size: args.size ?? 8, maxPages: args['max-pages'] ?? 1,
+                ...(args['next-cursor'] === undefined ? {} : { nextCursor: args['next-cursor'] }) })
+                : await client.getProfilePortfolios({ userId, size: args.size ?? 8,
+                  ...(args['next-cursor'] === undefined ? {} : { nextCursor: args['next-cursor'] }) });
+      return { result, output: args.output === undefined ? null : path.resolve(args.output) };
+    }
+    if (['request-form', 'address-options', 'request-prepare'].includes(operation)) {
+      if (operation === 'request-form') {
+        const { createSoomgoRequestClient } = await import('../lib/freelance/soomgo-request.mjs');
+        const client = createSoomgoRequestClient({ fetchImpl, now });
+        const result = await client.getServiceForm({ service: {
+          id: args['service-id'], slug: args['service-slug'], name: args['service-name'],
+        } });
+        return { result, output: args.output === undefined ? null : path.resolve(args.output) };
+      }
+      if (operation === 'address-options') {
+        const { createSoomgoRequestClient } = await import('../lib/freelance/soomgo-request.mjs');
+        const client = createSoomgoRequestClient({ fetchImpl, now });
+        const result = await client.listAddressOptions({ areaDepth: args.depth ?? 3 });
+        return { result, output: args.output === undefined ? null : path.resolve(args.output) };
+      }
+      const form = await readLocalJson(args.form, 'SOOMGO_REQUEST_FORM_INPUT_INVALID', 1024 * 1024);
+      let answers = {};
+      let addresses;
+      try {
+        if (args.answers !== undefined) answers = await readLocalJson(args.answers,
+          'SOOMGO_REQUEST_ANSWERS_INPUT_INVALID', 128 * 1024, 'SOOMGO_REQUEST_INPUT_TOO_LARGE');
+        if (args.addresses !== undefined) addresses = await readLocalJson(args.addresses, 'SOOMGO_REQUEST_ADDRESSES_INPUT_INVALID', 2 * 1024 * 1024);
+        const { prepareSoomgoRequest } = await import('../lib/freelance/soomgo-request.mjs');
+        const prepared = prepareSoomgoRequest(form, {
+          answersByItemId: answers,
+          ...(addresses === undefined ? {} : { addressOptions: addresses }),
+          now,
+        });
+        return { result: { ...prepared, networkUsed: false, writesSubmitted: 0, readOnly: true },
+          output: args.output === undefined ? null : path.resolve(args.output) };
+      } finally {
+        clearObjectStrings(answers);
+        clearObjectStrings(form);
+        if (addresses !== undefined) clearObjectStrings(addresses);
+      }
+    }
     const { createSoomgoClient } = await import('../lib/freelance/soomgo.mjs');
     const client = createSoomgoClient({ fetchImpl, now });
     const input = {

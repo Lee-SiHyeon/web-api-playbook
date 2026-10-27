@@ -1,0 +1,83 @@
+{
+  "schema": "web-api-public-read-receipt-v1",
+  "service": "soomgo",
+  "capabilityId": "profile.portfolios",
+  "checkedAt": "2026-10-27T07:14:58.299Z",
+  "secretsPersistedInEvidence": false,
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "schemaVerified": true,
+  "expectedResultVerified": true,
+  "resultCount": 8,
+  "request": {
+    "method": "GET",
+    "origin": "https://api.soomgo.com",
+    "path": "/v2/users/10083068/portfolios",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 19476,
+    "responseSha256": "d8bdbed5927187f307027fe6c94db7d9ea32c792eb406ea06e1f0b7a44ee858b",
+    "checkedAt": "2026-10-27T07:14:58.299Z",
+    "browserUsed": false,
+    "anonymous": true,
+    "authenticated": false,
+    "credentialsUsed": false,
+    "cookieSent": false,
+    "cookiesSent": false,
+    "queryFields": [
+      "size"
+    ]
+  },
+  "contractProvenance": {
+    "kind": "direct_http_observed",
+    "sourceURL": "https://api.soomgo.com/v2/users/10083068/portfolios",
+    "responseFormat": "json_response",
+    "sourceSha256": "d8bdbed5927187f307027fe6c94db7d9ea32c792eb406ea06e1f0b7a44ee858b",
+    "projectionSha256": "9bc4e08aafa9db0c6716e0bc02d6ac01123ac5ffc574f8f6a8d83942019cca9f"
+  },
+  "implementation": {
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "lib/commerce/http.mjs": "4afd0677f52777e61f31693ff12be38214816ba9470157ed4350fc4bc8827d61",
+    "lib/freelance/kmong-collection.mjs": "6907d4a279b3e4ff651cc8db94ff76e31319f434962c6d7743f567d3b3610063",
+    "lib/freelance/kmong.mjs": "393cb13105d201e83b83be4f933b4ea3a8d60bbc457a2d8b5ea133441a5760cc",
+    "lib/freelance/soomgo-profile.mjs": "a9050392bcf8b53c28d21413c18cd5e4a099ca8b6846729bf0b71d01e9bb062c",
+    "lib/freelance/soomgo-request.mjs": "86d893e10afe2014735d1a610e243b64555f60a8915b8ce4f70943299b505ed4",
+    "lib/freelance/soomgo.mjs": "ea5494cfa4bf38eb2752ba5b7134d375dc8db43228bdbc08bc4d49205e7caf14",
+    "lib/freelance/upwork.mjs": "66314e8d73f0c0c645b30e60880cc44bd6a22b611134392f71b1fedd366faea7",
+    "lib/jobs/boards.mjs": "af27dc37f558c75aee067417f7a9ab41b3ea082b290b339039c64d4943ffa6a9",
+    "lib/jobs/japan.mjs": "ea9e0e211e10668de4bb1cdbe5989c4a5eb991283fbf65aa078c05a0204de9bd",
+    "lib/jobs/model.mjs": "fa60e7477f92a121b81b44d904db5dedb39a45560903c39fe13f339f0909e15a",
+    "lib/jobs/providers.mjs": "937559d228854181e48dbb0512c22abeaaec3917cd3dc54542adea9ad0c0feed",
+    "lib/jobs/snapshots.mjs": "463891d804ef6265bbf6fd022c692d57b6500839c2405df8ee08656b2698658a",
+    "lib/operation-mcp.mjs": "7abbaa91bf5a87bb87d146c6ab296300b4c55def4f082f0c49cd1b90dcb2e3d8",
+    "lib/operation-registry.mjs": "e63a3c61a97a934774f1d682a05229195200956ead92d995bf603e6f0fb1891e",
+    "lib/service-operations/freelance.mjs": "db359bbecd52d99ea0e3b81f1c444546fac750b053cf6c25f7609315b400e6f6",
+    "lib/service-operations/index.mjs": "46389e65cab7ed6e7ba31585ee4029fe55aa782bf0062b7424ed2b6a9651336c",
+    "package-lock.json": "1473991dd35b4b20cc0e7b25abcceebb79b3f6945dff329b244a3276cc70c6ce",
+    "package.json": "113d54f2d1a215ffc4d73d2a86efbc9ab3d787e71dccb503d47cf94238c31627",
+    "scripts/freelance.mjs": "593ca8d9e52465b133119f3da4e617d3996f0244ca30771504bb31a69d97aab3",
+    "scripts/jobs.mjs": "138c8ea8a006a57a415b1f38c9e232070b62bddb4ec511278d1108f446cc4290",
+    "scripts/playbook.mjs": "584d9590e9a997e3765bee4bee6f3db8c7af0a251a464dbb1aa74678a44c073d",
+    "scripts/verify-jobs-freelance.mjs": "b210d8694b90a7524e1424baffd7bf7b6b4ca6783379e461a852ebe0ac043798",
+    "lib/capability-checklist.mjs": "f5df8116662abfaab68d511d5837ec47f14f41d4b8e8cb61ed30938683489bf7"
+  },
+  "scope": {
+    "operation": "profile_portfolios",
+    "pathBoundIdentity": true,
+    "providerMatchVerified": false,
+    "authenticated": false,
+    "ownerVerified": false
+  },
+  "sourceResultSha256": "6972efd1509ebb94cf41777b733e8a6f54505f593aff32fd0d75a8c46b4e4409",
+  "rawResultSha256": "52beee8de07551c1c63e28a66a10fb87777cd5f452e90c74190a626f481b1a7f",
+  "implementationStableDuringRun": true,
+  "sourceRequests": [
+    {
+      "origin": "https://api.soomgo.com",
+      "path": "/v2/users/10083068/portfolios",
+      "checkedAt": "2026-10-27T07:14:58.299Z",
+      "responseSha256": "d8bdbed5927187f307027fe6c94db7d9ea32c792eb406ea06e1f0b7a44ee858b"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema": "web-api-capability-receipt-v1",
+  "service": "soomgo",
+  "capabilityId": "account.requests.opened",
+  "checkedAt": "2026-10-27T07:12:00.547Z",
+  "secretsPersistedInEvidence": false,
+  "authenticated": true,
+  "ownerVerified": true,
+  "ownerIdPinned": true,
+  "expectedEmailMatched": true,
+  "credentialProvider": "Windows DPAPI CurrentUser",
+  "persistent": true,
+  "bootstrapMode": "manual_browser_token_import",
+  "readMode": "pure_http",
+  "browserUsed": false,
+  "automatedLoginPosts": 0,
+  "renewal": "not_implemented",
+  "command": "requests",
+  "request": {
+    "method": "GET",
+    "origin": "https://api.soomgo.com",
+    "path": "/v1/me/requests/sent",
+    "authorizationScheme": "Bearer",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 213,
+    "checkedAt": "2026-10-27T07:12:00.547Z",
+    "browserUsed": false,
+    "authenticated": true,
+    "credentialsUsed": true,
+    "cookiesSent": false,
+    "readOnly": true,
+    "operation": "requests",
+    "ownerVerified": true,
+    "page": 1,
+    "query": {
+      "status": "opened",
+      "limit": 15,
+      "afterPresent": false
+    },
+    "itemCount": 0,
+    "pagination": {
+      "count": 0,
+      "limit": 15,
+      "beforePresent": false,
+      "afterPresent": false
+    },
+    "legacyExisting": false,
+    "ownerMatched": true
+  },
+  "execution": {
+    "processId": 41836,
+    "startedAt": "2026-10-27T07:12:00.057Z",
+    "finishedAt": "2026-10-27T07:12:00.970Z",
+    "platform": "win32",
+    "hostLabel": "140.228",
+    "nodeVersion": "v24.22.1",
+    "sourceCommit": "bbee4f82c64041b5748e75af68eeeb8606a4c8bb",
+    "storeScopeId": "fb8a7b02-8ad7-5e14-af3c-3a89ec165634",
+    "storeBindingEvidence": "harness_invocation_metadata",
+    "sourceResultSha256": "ea8b40eb26d4ed24f34b86d22c7c3dd1a37e38730f970836cb9d94d252229d91",
+    "implementationStableDuringRun": true,
+    "sourceRecord": "soomgo-auth-requests-opened.json"
+  },
+  "sourceRecord": "soomgo-auth-requests-opened.json",
+  "sourceRecordSha256": "1360b66c7fe4fe7ea737dfb233650cf866c9779e428f38e1f943377c37b10cd8",
+  "sourceResultSha256": "ea8b40eb26d4ed24f34b86d22c7c3dd1a37e38730f970836cb9d94d252229d91",
+  "implementation": {
+    "lib/web-auth/soomgo.mjs": "72c83b06cdc30580865edc039adb198b96c6791188f917c01e4f96c2f063dae2",
+    "scripts/soomgo-account.mjs": "418efc9f6e38fe3f229ae0f980d70f76c2bd908e76c226635bcd069ee49b724f",
+    "lib/protected-store.mjs": "d0b70fb85a21fc983b7a9faf6a9c6fe64f75def8cef64a249371eea29c235bd2",
+    "lib/scoped-session.mjs": "da79ad41014475f285adde4bf00532789adef94f8f2f9c526814d68281b39475",
+    "lib/session-lock.mjs": "94de05aa582b6b22ee2683ddeea000695f1c029bcfbbee305638a20f3b66429a",
+    "scripts/dpapi-store.ps1": "fe7eec1b96332683bff50d96d8b0e0273ea430dd3ab1b494097133a4d0c472d6",
+    "lib/cli.mjs": "8e82f66e2ea7d1087beecd86b14dd5bb23855dca664b47a495617f865f83f190",
+    "package.json": "113d54f2d1a215ffc4d73d2a86efbc9ab3d787e71dccb503d47cf94238c31627",
+    "package-lock.json": "1473991dd35b4b20cc0e7b25abcceebb79b3f6945dff329b244a3276cc70c6ce"
+  },
+  "projection": {
+    "status": "complete",
+    "statusFilter": "opened",
+    "sourceStatus": "opened",
+    "pageCount": 1,
+    "completeForSelectedStatus": true,
+    "rowCount": 0,
+    "sourceCountReconciliation": {
+      "returnedRows": 0,
+      "comparator": "equals_totalOpenedCount",
+      "expectedCount": 0,
+      "consistent": true
+    },
+    "projectedFields": [
+      "id",
+      "service",
+      "status",
+      "progressStatus",
+      "startedAt",
+      "endedAt",
+      "quoteCount",
+      "unreadQuoteCnt"
+    ]
+  }
+}

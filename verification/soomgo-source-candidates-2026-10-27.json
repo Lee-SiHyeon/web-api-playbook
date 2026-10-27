@@ -1,0 +1,464 @@
+{
+  "schema": "web-api-source-candidate-v1",
+  "classification": "source_candidate",
+  "service": "soomgo",
+  "observedWithoutAuthentication": true,
+  "liveReplay": false,
+  "sourceObservations": [
+    {
+      "id": "current-next-login-chunk",
+      "kind": "first_party_page_bundle",
+      "sourceUrl": "https://assets.cdn.soomgo.com/next/cf10966/_next/static/chunks/pages/login-4390e6cb543b4ec6.js",
+      "sourceSha256": "3a1eaf5d220ac39da15b9ac78612f5f04c22407a1fccb22f85a4f1480b902c9a",
+      "loadedFrom": "current public homepage build manifest",
+      "observedLoginMethods": [
+        "email",
+        "apple",
+        "kakao",
+        "naver"
+      ],
+      "googleLoginObserved": false
+    },
+    {
+      "id": "current-next-app-chunk",
+      "kind": "first_party_app_bundle",
+      "sourceUrl": "https://assets.cdn.soomgo.com/next/cf10966/_next/static/chunks/pages/_app-e0d1c064326ee297.js",
+      "sourceSha256": "b4ee8f531f184afa29468f4c52616d75b4d5de40aaf6d0dc573b223e5b46c526",
+      "loadedFrom": "current public homepage script list",
+      "currentDeploymentMatch": true,
+      "authorizationSchemes": {
+        "APICore": "Authorization: Token <authToken>",
+        "APIBase": "Authorization: Bearer <authToken>"
+      }
+    },
+    {
+      "id": "current-received-quotes-page-chunk",
+      "kind": "first_party_page_bundle",
+      "sourceUrl": "https://assets.cdn.soomgo.com/next/cf10966/_next/static/chunks/pages/received/quotes-5fe7a8b705268629.js",
+      "sourceSha256": "7d18b2443a7a8436c29245b521a87ba0a29d16bbcf18001ad0673c7b323b50a",
+      "loadedFrom": "current public build manifest route /received/quotes",
+      "currentDeploymentMatch": true
+    },
+    {
+      "id": "current-received-quote-detail-page-chunk",
+      "kind": "first_party_page_bundle",
+      "sourceUrl": "https://assets.cdn.soomgo.com/next/cf10966/_next/static/chunks/pages/received/quotes/[requestId]-9ef319332c115c8d.js",
+      "sourceSha256": "ff0a6a274a130f5f66582ff47dc06a2c28d05027b1c85151360e47dd0d6c9df4",
+      "loadedFrom": "current public build manifest route /received/quotes/[requestId]",
+      "currentDeploymentMatch": true
+    },
+    {
+      "id": "current-provider-quotes-page-chunk",
+      "kind": "first_party_page_bundle",
+      "sourceUrl": "https://assets.cdn.soomgo.com/next/cf10966/_next/static/chunks/pages/pro/quotes/[[...quoteId]]-c0a2445bc7d9c5e7.js",
+      "sourceSha256": "9e0ca9861dcab1a171ab8d1b71f58fb43146ef024824e65c9eccc8b3676ded5c",
+      "loadedFrom": "current public build manifest route /pro/quotes/[[...quoteId]]",
+      "currentDeploymentMatch": true
+    },
+    {
+      "id": "older-vite-client-bundle",
+      "kind": "first_party_client_bundle",
+      "sourceUrl": "https://assets.cdn.soomgo.com/vite/ef0d619/assets/client-bundle.cqVbIhyw.js",
+      "sourceSha256": "f104e06ba62e83b3ecaa5857dc8975f222b4232a6cf9c8b29b115c8e32227729",
+      "currentDeploymentMatch": false
+    },
+    {
+      "id": "older-vite-profile-page-bundle",
+      "kind": "first_party_page_bundle",
+      "sourceUrl": "https://assets.cdn.soomgo.com/vite/ef0d619/assets/client-bundle.BDHliGL-.js",
+      "sourceSha256": "d5a51a8b02c81e31e9d8388b32c4237447adcc6c9003a248266576cc6c6dd331",
+      "currentDeploymentMatch": false
+    }
+  ],
+  "contracts": [
+    {
+      "id": "account.current_user",
+      "method": "GET",
+      "path": "/api2/users/me/",
+      "sourceObservation": "current-next-login-chunk",
+      "access": "protected owner read",
+      "authorizationClient": "APICore",
+      "authorizationScheme": "Token",
+      "replayStatus": "recorded_live_2026-10-27_owner_matched"
+    },
+    {
+      "id": "requests.sent.list_with_received_quote_counts",
+      "method": "GET",
+      "path": "/v1/me/requests/sent",
+      "sourceObservation": "current-received-quotes-page-chunk",
+      "access": "protected owner request list read",
+      "authorizationClient": "APIBase",
+      "authorizationScheme": "Bearer",
+      "query": {
+        "status": "comma_joined",
+        "limit": 15,
+        "after": "optional_cursor"
+      },
+      "responseShape": {
+        "items": "array",
+        "pagination.after": "nullable_cursor"
+      },
+      "replayStatus": "recorded_live_2026-10-27_opened_and_closed_expired_empty"
+    },
+    {
+      "id": "quotes.sent.list.current",
+      "method": "GET",
+      "path": "/v1/chats/quotes-sent",
+      "sourceObservation": "current-provider-quotes-page-chunk",
+      "access": "protected list candidate",
+      "authorizationClient": "APICore",
+      "authorizationScheme": "Token",
+      "query": {
+        "filters": [
+          "service_id",
+          "start_date",
+          "end_date",
+          "quote_type",
+          "hire_status",
+          "is_read_quote",
+          "is_favorite"
+        ],
+        "cursor": "optional_cursor"
+      },
+      "responseShape": {
+        "results": "array",
+        "cursor": "nullable_cursor"
+      },
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "quotes.sent.detail.current",
+      "method": "GET",
+      "path": "/v1/chats/quotes-sent/{quoteId}",
+      "sourceObservation": "current-provider-quotes-page-chunk",
+      "access": "protected detail candidate",
+      "authorizationClient": "APICore",
+      "authorizationScheme": "Token",
+      "responseShape": {
+        "response": "quote object"
+      },
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "requests.received.detail.current",
+      "method": "GET",
+      "path": "/v2/requests/received/{requestId}",
+      "sourceObservation": "current-provider-quotes-page-chunk",
+      "access": "protected detail candidate",
+      "authorizationClient": "APICore",
+      "authorizationScheme": "Token",
+      "responseShape": {
+        "response": "request object"
+      },
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "chats.detail.current",
+      "method": "GET",
+      "path": "/api/v2.4/chats/{chatId}/",
+      "sourceObservation": "current-received-quote-detail-page-chunk",
+      "access": "protected chat detail candidate",
+      "authorizationClient": "APICore",
+      "authorizationScheme": "Token",
+      "responseShape": "not fully established from source",
+      "replayStatus": "list_route_native_verified_140228; detail_route_not_replayed"
+    },
+    {
+      "id": "chats.messages.current",
+      "method": "GET",
+      "path": "/api/v2.2/chats/{chatId}/messages/",
+      "sourceObservation": "current-received-quote-detail-page-chunk",
+      "access": "protected paginated message candidate",
+      "authorizationClient": "APICore",
+      "authorizationScheme": "Token",
+      "query": {
+        "next": "optional_cursor"
+      },
+      "responseShape": {
+        "next": "nullable_cursor",
+        "messages": "items shape not fully established from source"
+      },
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "profile.summary",
+      "method": "GET",
+      "path": "/v2/user/{userId}/profile",
+      "sourceObservation": "older-vite-profile-page-bundle",
+      "access": "public provider-profile candidate",
+      "replayStatus": "recorded_live_2026-10-27_anonymous_read"
+    },
+    {
+      "id": "profile.contents",
+      "method": "GET",
+      "path": "/v1/providers/{userId}/profile-contents",
+      "sourceObservation": "older-vite-profile-page-bundle",
+      "access": "public provider-profile candidate",
+      "replayStatus": "recorded_live_2026-10-27_anonymous_read"
+    },
+    {
+      "id": "profile.portfolios",
+      "method": "GET",
+      "path": "/v2/users/{userId}/portfolios",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "public provider-profile candidate",
+      "replayStatus": "recorded_live_2026-10-27_anonymous_read"
+    },
+    {
+      "id": "profile.reviews",
+      "method": "GET",
+      "path": "/v3/users/{userId}/reviews/received",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "public provider-profile candidate",
+      "replayStatus": "recorded_live_2026-10-27_anonymous_read"
+    },
+    {
+      "id": "request.form",
+      "method": "GET",
+      "path": "/v2/services/{slug}/form",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "public schema candidate",
+      "replayStatus": "recorded_live_2026-10-27_13_question_read"
+    },
+    {
+      "id": "request.addresses",
+      "method": "GET",
+      "path": "/v1/requests/forms/addresses",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "public schema candidate",
+      "replayStatus": "recorded_live_2026-10-27_6045_rows_incomplete_list"
+    },
+    {
+      "id": "requests.received.list",
+      "method": "GET",
+      "path": "/v3/requests/received",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected list candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "requests.received.detail",
+      "method": "GET",
+      "path": "/v2/requests/received/{id}",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected detail candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "requests.sent.list",
+      "method": "GET",
+      "path": "/v1/me/requests/sent",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected list candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "requests.sent.detail",
+      "method": "GET",
+      "path": "/v2/me/requests/sent/{id}",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected detail candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "quotes.sent.list",
+      "method": "GET",
+      "path": "/v1/me/quotes/sent",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected list candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "campaigns.list",
+      "method": "GET",
+      "path": "/v1/campaigns",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected list candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "campaigns.detail",
+      "method": "GET",
+      "path": "/v1/campaigns/{id}",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected detail candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "campaigns.quotes.list",
+      "method": "GET",
+      "path": "/v1/campaigns/{id}/quotes",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "protected list candidate",
+      "replayStatus": "not_replayed"
+    },
+    {
+      "id": "requests.create",
+      "method": "POST",
+      "path": "/v1/requests",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "business write candidate",
+      "replayStatus": "not_replayed",
+      "implementationStatus": "not_implemented",
+      "requiresRealUserPayloadAndExplicitConsent": true
+    },
+    {
+      "id": "requests.collection_create",
+      "method": "POST",
+      "path": "/v1/requests/collection",
+      "sourceObservation": "older-vite-client-bundle",
+      "access": "business write candidate",
+      "replayStatus": "not_replayed",
+      "implementationStatus": "not_implemented",
+      "requiresRealUserPayloadAndExplicitConsent": true
+    },
+    {
+      "id": "chats.list.customer.current",
+      "method": "GET",
+      "path": "/api/v2.4/chats/",
+      "sourceObservation": "current-next-app-chunk",
+      "access": "protected owner customer-chat list read",
+      "authorizationClient": "APICore",
+      "authorizationScheme": "Token",
+      "query": {
+        "role": "customer",
+        "cursor": "optional_cursor",
+        "search": "optional_search_and_filters"
+      },
+      "responseShape": {
+        "results": "array",
+        "cursor": "nullable_cursor"
+      },
+      "replayStatus": "recorded_live_2026-10-27_empty_first_page"
+    }
+  ],
+  "boundary": "This file is a source inventory, not a live capability receipt. Authenticated execution receipts are in verification/soomgo-auth-2026-10-27/manifest.json; public execution receipts are in verification/jobs-freelance-2026-10-27/manifest.json. No credential values or owner identifiers are included. The local request-form answer mapping is UI state only and does not establish accepted wire JSON or a submitted request.",
+  "nativeReplaySummary": {
+    "productionCliProofPending": false,
+    "anonymousOwnerProbe": {
+      "method": "GET",
+      "path": "/api2/users/me/",
+      "httpStatus": 401
+    },
+    "owner": {
+      "method": "GET",
+      "path": "/api2/users/me/",
+      "authorizationScheme": "Token",
+      "httpStatus": 200,
+      "ssrOwnerMatched": true
+    },
+    "requestLists": [
+      {
+        "method": "GET",
+        "path": "/v1/me/requests/sent",
+        "authorizationScheme": "Bearer",
+        "query": {
+          "status": "opened",
+          "limit": 15
+        },
+        "httpStatus": 200,
+        "itemCount": 0
+      },
+      {
+        "method": "GET",
+        "path": "/v1/me/requests/sent",
+        "authorizationScheme": "Bearer",
+        "query": {
+          "status": "closed,expired",
+          "limit": 15
+        },
+        "httpStatus": 200,
+        "itemCount": 0
+      }
+    ],
+    "chats": {
+      "method": "GET",
+      "path": "/api/v2.4/chats/",
+      "authorizationScheme": "Token",
+      "query": {
+        "role": "customer"
+      },
+      "httpStatus": 200,
+      "resultCount": 0
+    },
+    "accountConsents": {
+      "allow_use_marketing": false,
+      "allow_use_select_info": false,
+      "allow_news_letters": false,
+      "is_certify_name": false
+    },
+    "executionContext": "140.228 direct HTTP and production CLI execution records"
+  },
+  "localRequestUiMapping": {
+    "status": "observed_ui_state_only",
+    "captureMode": "isolated_incognito_normal_hiring_ui",
+    "sourceFiles": [
+      "/home/worker/.nad-scratch/soomgo-20261027/form-ui-address-mapping.json",
+      "/home/worker/.nad-scratch/soomgo-20261027/form-ui-structure.json"
+    ],
+    "mapping": {
+      "item4": {
+        "label": "move service",
+        "answerId": 1
+      },
+      "item5": {
+        "type": "date",
+        "answerId": 1
+      },
+      "item6": {
+        "type": "three_level_address",
+        "answerIds": [
+          1,
+          2,
+          3
+        ],
+        "extraValue": ""
+      }
+    },
+    "wireBodyAcceptance": "not_verified",
+    "requestPostAttempted": false,
+    "serverReadback": "not_attempted",
+    "remainingGaps": [
+      "conditional question inclusion",
+      "type 3 text field",
+      "type 7 address field",
+      "other service-specific answer types"
+    ]
+  },
+  "publicReplaySummary": {
+    "executionContext": "140.228 native and common CLI execution records",
+    "nativeCli": {
+      "successCount": 24,
+      "totalCount": 24
+    },
+    "commonCli": {
+      "successCount": 5,
+      "totalCount": 5
+    },
+    "proofFilesPending": false,
+    "profiles": {
+      "summary": "HTTP 200 verified",
+      "contents": "HTTP 200 verified",
+      "portfolios": {
+        "rows": 20,
+        "pages": 3,
+        "completeForProfile": true
+      },
+      "reviews": {
+        "rows": 6,
+        "pages": 2,
+        "complete": false
+      }
+    },
+    "requestForm": {
+      "httpStatus": 200,
+      "questionCount": 13
+    },
+    "addressOptions": {
+      "httpStatus": 200,
+      "itemCount": 6045,
+      "complete": false
+    },
+    "publicManifestPath": "verification/jobs-freelance-2026-10-27/manifest.json"
+  }
+}

@@ -4,7 +4,7 @@ import { DEFAULT_MANIFEST_PATH, selectManifestPath } from '../scripts/verify-job
 
 test('freelance evidence verifier defaults to the fresh dated manifest', () => {
   assert.equal(selectManifestPath(), DEFAULT_MANIFEST_PATH);
-  assert.equal(DEFAULT_MANIFEST_PATH, 'verification/jobs-freelance-2026-10-26/manifest.json');
+  assert.equal(DEFAULT_MANIFEST_PATH, 'verification/jobs-freelance-2026-10-27/manifest.json');
 });
 
 test('freelance evidence verifier accepts only dated manifest paths under its verification family', () => {
@@ -12,6 +12,8 @@ test('freelance evidence verifier accepts only dated manifest paths under its ve
     'verification/jobs-freelance-2026-10-23/manifest.json');
   assert.equal(selectManifestPath(['--manifest=verification/jobs-freelance-2026-10-26/manifest.json']),
     'verification/jobs-freelance-2026-10-26/manifest.json');
+  assert.equal(selectManifestPath(['--manifest=verification/jobs-freelance-2026-10-27/manifest.json']),
+    'verification/jobs-freelance-2026-10-27/manifest.json');
 });
 
 test('freelance evidence verifier rejects extra arguments, traversal, and invalid dates', () => {

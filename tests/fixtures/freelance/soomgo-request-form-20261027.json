@@ -1,0 +1,463 @@
+{
+  "fixtureVersion": 1,
+  "provenance": {
+    "sourceBundle": "https://assets.cdn.soomgo.com/vite/8ac8a9e/assets/client-bundle.DU0XyXHr.js",
+    "sourceBundleSha256": "8f68069b2e77d53071cd60699c6f94babaea1cb089425bd1912a476ee1ae3f3e",
+    "method": "GET",
+    "origin": "https://api.soomgo.com",
+    "path": "/v2/services/%EA%B0%80%EC%A0%95-%EC%9D%B4%EC%82%AC-%ED%88%AC%EB%A3%B8-%EC%93%B0%EB%A6%AC%EB%A3%B8/form",
+    "checkedAt": "2026-10-27T04:24:10.384832+00:00",
+    "httpStatus": 200,
+    "mime": "application/json",
+    "responseBytes": 7766,
+    "responseSha256": "b75a4d40c11dfa78d834b2b14dad3fb2b4acb19da60bc6efd3dd1a389f8d2ab7",
+    "credentialsUsed": false,
+    "cookiesSent": false,
+    "browserUsed": false
+  },
+  "form": {
+    "id": "67bc352e8980cc4b1952edfe",
+    "name": "가정이사 (투룸 이상) #11 (IM/안전거래X)_수정2",
+    "description": "",
+    "serviceId": 729,
+    "updatedAt": "2026-09-10T14:40:42.042000",
+    "service": {
+      "id": 729,
+      "slug": "가정-이사-투룸-쓰리룸",
+      "name": "가정이사(투룸 이상)"
+    },
+    "items": [
+      {
+        "subType": 1,
+        "answerSchema": [
+          {
+            "extra": null,
+            "id": 1,
+            "validation": null,
+            "description": "고수가 전부 포장 및 정리/귀중품 제외",
+            "text": "포장이사",
+            "imageUrl": ""
+          },
+          {
+            "extra": null,
+            "id": 2,
+            "validation": null,
+            "description": "고수와 함께 포장/고수는 큰 짐 배치만",
+            "text": "반포장이사",
+            "imageUrl": ""
+          },
+          {
+            "extra": null,
+            "id": 3,
+            "validation": null,
+            "description": "고객이 전부 포장 및 정리/고수는 짐 운반만",
+            "text": "일반이사",
+            "imageUrl": ""
+          },
+          {
+            "extra": null,
+            "id": 4,
+            "validation": null,
+            "description": "이삿짐 보관 후 입주일에 맞춰 운반",
+            "text": "보관이사",
+            "imageUrl": ""
+          }
+        ],
+        "type": 1,
+        "required": true,
+        "description": "",
+        "id": 4,
+        "instantMatch": true,
+        "question": "어떤 서비스를 원하시나요?",
+        "name": "checkbox",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": null,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": {
+              "input": "datetime",
+              "rangeFromToday": [
+                0,
+                365
+              ]
+            },
+            "description": "고수가 전부 포장 및 정리/귀중품 제외",
+            "text": "네."
+          }
+        ],
+        "type": 5,
+        "required": true,
+        "description": "",
+        "id": 5,
+        "instantMatch": false,
+        "question": "이사 날짜를 선택해주세요.",
+        "name": "datepicker",
+        "isDefaultInfo": true
+      },
+      {
+        "subType": null,
+        "answerSchema": [
+          {
+            "extra": null,
+            "id": 1,
+            "validation": null
+          },
+          {
+            "extra": null,
+            "id": 2,
+            "validation": null
+          },
+          {
+            "extra": null,
+            "id": 3,
+            "validation": null
+          }
+        ],
+        "type": 6,
+        "required": true,
+        "description": "",
+        "id": 6,
+        "instantMatch": false,
+        "question": "출발 지역을 선택해주세요.\t",
+        "name": "address3",
+        "isDefaultInfo": true
+      },
+      {
+        "subType": null,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null,
+            "placeholder": "ex. 10층"
+          }
+        ],
+        "type": 3,
+        "required": true,
+        "description": "",
+        "id": 7,
+        "instantMatch": false,
+        "question": "출발지 층수를 입력해주세요.\t",
+        "name": "text",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": null,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null,
+            "placeholder": "ex. 15평 / 2명"
+          }
+        ],
+        "type": 3,
+        "required": true,
+        "description": "",
+        "id": 19,
+        "instantMatch": false,
+        "question": "출발지 실평수와 거주 인원수를 알려주세요.",
+        "name": "text",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": 1,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null,
+            "text": "네."
+          },
+          {
+            "id": 2,
+            "validation": null,
+            "text": "아니요."
+          }
+        ],
+        "type": 2,
+        "required": false,
+        "description": "",
+        "id": 8,
+        "instantMatch": true,
+        "question": "출발지에 엘리베이터가 있나요?\t",
+        "name": "radio",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": 1,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null,
+            "text": "없음"
+          },
+          {
+            "extra": null,
+            "id": 2,
+            "validation": null,
+            "description": "",
+            "text": "냉장고",
+            "imageUrl": ""
+          },
+          {
+            "id": 3,
+            "validation": null,
+            "text": "김치냉장고"
+          },
+          {
+            "id": 5,
+            "validation": null,
+            "text": "에어컨"
+          },
+          {
+            "id": 6,
+            "validation": null,
+            "text": "TV/모니터"
+          },
+          {
+            "id": 7,
+            "validation": null,
+            "text": "PC/노트북"
+          },
+          {
+            "id": 8,
+            "validation": null,
+            "text": "전자레인지"
+          },
+          {
+            "id": 9,
+            "validation": null,
+            "text": "정수기"
+          },
+          {
+            "id": 10,
+            "validation": null,
+            "text": "비데"
+          },
+          {
+            "extra": {
+              "type": 1,
+              "placeholder": "ex. 청소기, 공기청정기, 스타일러",
+              "validation": {
+                "input": "string",
+                "maxLength": 255
+              }
+            },
+            "id": 11,
+            "validation": null,
+            "text": "기타"
+          }
+        ],
+        "type": 1,
+        "required": false,
+        "description": "내용과 다르면 비용이 추가될 수 있어요.\t",
+        "id": 9,
+        "instantMatch": false,
+        "question": "옮길 가전 제품을 선택해주세요.\t",
+        "name": "checkbox",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": 1,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null,
+            "text": "없음"
+          },
+          {
+            "extra": null,
+            "id": 2,
+            "validation": null,
+            "description": "",
+            "text": "침대",
+            "imageUrl": ""
+          },
+          {
+            "id": 3,
+            "validation": null,
+            "text": "소파"
+          },
+          {
+            "id": 5,
+            "validation": null,
+            "text": "의자"
+          },
+          {
+            "id": 6,
+            "validation": null,
+            "text": "수납장"
+          },
+          {
+            "id": 7,
+            "validation": null,
+            "text": "책장"
+          },
+          {
+            "id": 8,
+            "validation": null,
+            "text": "진열장"
+          },
+          {
+            "id": 9,
+            "validation": null,
+            "text": "옷장"
+          },
+          {
+            "id": 10,
+            "validation": null,
+            "text": "화장대"
+          },
+          {
+            "id": 11,
+            "validation": null,
+            "text": "피아노"
+          },
+          {
+            "extra": {
+              "type": 1,
+              "placeholder": "ex. 행거, 헬스 기구, 돌침대",
+              "validation": {
+                "input": "string",
+                "maxLength": 255
+              }
+            },
+            "id": 12,
+            "validation": null,
+            "text": "기타"
+          }
+        ],
+        "type": 1,
+        "required": false,
+        "description": "내용과 다르면 비용이 추가될 수 있어요.\t",
+        "id": 10,
+        "instantMatch": false,
+        "question": "옮길 가구를 선택해주세요.\t",
+        "name": "checkbox",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": null,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null
+          }
+        ],
+        "type": 9,
+        "required": false,
+        "description": "더 정확한 견적을 받을 수 있어요.\t",
+        "id": 11,
+        "instantMatch": false,
+        "question": "이삿짐 사진이 있으면 첨부해주세요.\t",
+        "name": "image",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": null,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null
+          },
+          {
+            "id": 2,
+            "validation": null
+          },
+          {
+            "id": 3,
+            "validation": null
+          }
+        ],
+        "type": 6,
+        "required": true,
+        "description": "",
+        "id": 12,
+        "instantMatch": false,
+        "question": "도착 지역을 선택해주세요.\t",
+        "name": "address3",
+        "isDefaultInfo": true
+      },
+      {
+        "subType": null,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null,
+            "placeholder": "ex. 15층"
+          }
+        ],
+        "type": 3,
+        "required": true,
+        "description": "",
+        "id": 13,
+        "instantMatch": false,
+        "question": "도착지 층수를 입력해주세요.\t",
+        "name": "text",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": 1,
+        "answerSchema": [
+          {
+            "id": 1,
+            "validation": null,
+            "text": "네."
+          },
+          {
+            "id": 2,
+            "validation": null,
+            "text": "아니요."
+          }
+        ],
+        "type": 2,
+        "required": false,
+        "description": "",
+        "id": 14,
+        "instantMatch": true,
+        "question": "도착지에 엘리베이터가 있나요?\t",
+        "name": "radio",
+        "isDefaultInfo": false
+      },
+      {
+        "subType": 1,
+        "answerSchema": [
+          {
+            "extra": null,
+            "id": 1,
+            "validation": null,
+            "description": "",
+            "text": "고수와 상담 시 논의할게요",
+            "imageUrl": ""
+          },
+          {
+            "extra": {
+              "type": 1,
+              "name": "text",
+              "placeholder": "세부 짐 항목, 특별 요청 등 자유롭게 남겨주세요.",
+              "description": "",
+              "validation": {
+                "input": "string",
+                "maxLength": 255
+              }
+            },
+            "id": 2,
+            "validation": null,
+            "description": "",
+            "text": "지금 작성할게요",
+            "imageUrl": ""
+          }
+        ],
+        "type": 2,
+        "required": true,
+        "description": "",
+        "id": 15,
+        "instantMatch": false,
+        "question": "이사 관련 요청사항을 알려주세요!\t",
+        "name": "radio",
+        "isDefaultInfo": false
+      }
+    ]
+  }
+}

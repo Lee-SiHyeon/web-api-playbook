@@ -1,0 +1,157 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "kmong",
+  "provider": "kmong",
+  "operation": "reviews",
+  "checkedAt": "2026-10-27T07:14:53.290Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "466087",
+        "newReviewCount": 5,
+        "newReviews": [
+          {
+            "id": "local-review-01db9c0231f3d83eda6c3b2b43654d34a047054769331c8bf754ecdacf51b6a0",
+            "row": 1,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-27 12:17:29",
+            "bodySha256": "5f5afed147730809447eae0ec475b21126136a333c5b9b153256908bc219e4c8",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-6c0ab9aaee508056bd3c9d6e6a5f32241c5a8afc9d19a1417628bec2c913249e",
+            "row": 2,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-27 12:16:50",
+            "bodySha256": "441be02e7960a08eb16d8ed7f077f38557c92350b60f2eb27a7261e5a0e22017",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-52e8bba93a82c6ea95f99efdf22497a7412411993b4d457e5f821908fcfa254d",
+            "row": 3,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-26 14:59:07",
+            "bodySha256": "b1287b76772f37f175f420898938276424e58dd994ffe23d8a9a57543a6d8870",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-f8cec987cc5457c33e04368e9aeb72d22dcf4ad0e824a8fcdf1cdd50f9680cd5",
+            "row": 4,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-26 14:58:30",
+            "bodySha256": "474532d500f2463a5facb44e162a97d2de07d1bc3c39db95949a7c7ce24409e3",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-ff3cd68e70889d03b601c5ebe0e4af553b485491b6d3f56e78905ca138f39c25",
+            "row": 5,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-24 00:25:26",
+            "bodySha256": "d03f7997d7a8cc5249bff0ed4f70b04b991aa235a15c839470da5c5a55c35c67",
+            "sellerResponse": null
+          }
+        ],
+        "pages": [
+          {
+            "page": 1,
+            "pageSize": 5,
+            "itemCount": 5,
+            "observedAt": "2026-10-27T07:14:53.290Z"
+          }
+        ],
+        "nextCursorAvailable": false
+      }
+    ],
+    "coverage": {
+      "page": 1,
+      "pageSize": 5,
+      "totalItemCount": 1530,
+      "lastPage": 306,
+      "pagesWalked": 1,
+      "complete": false,
+      "pageWalked": true,
+      "sourceWindowComplete": false,
+      "resumable": true,
+      "reason": "bounded_resumable_window",
+      "completeCatalog": false,
+      "projectionScope": "new_pages_only"
+    }
+  },
+  "dataSha256": "d6a1c8a565573dfaf1edf78783df61f6039314fe3ce0807df732b6421270cac0",
+  "coverage": {
+    "page": 1,
+    "pageSize": 5,
+    "totalItemCount": 1530,
+    "lastPage": 306,
+    "pagesWalked": 1,
+    "complete": false,
+    "pageWalked": true,
+    "sourceWindowComplete": false,
+    "resumable": true,
+    "reason": "bounded_resumable_window",
+    "completeCatalog": false,
+    "projectionScope": "new_pages_only"
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://kmong.com",
+      "path": "/gig/466087",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 359628,
+      "responseSha256": "64b14b10fa0867a3c4a9070f1757c4427d9b8638329cab28c14e8b3690828f97",
+      "checkedAt": "2026-10-27T07:14:53.290Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": []
+    },
+    {
+      "method": "GET",
+      "origin": "https://api.kmong.com",
+      "path": "/order-app/order/v1/reviews/gigs/466087",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 6643,
+      "responseSha256": "ab0643a0555ddc224639f9f8a6decd1c2ee020e11cfb5df14917d8a0c3294186",
+      "checkedAt": "2026-10-27T07:14:53.290Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "page",
+        "perPage",
+        "sortType"
+      ]
+    }
+  ],
+  "runner": "scripts/freelance.mjs",
+  "sourceResultSha256": "434553cf9fb24c310a90d56655b573211f480a248e2142dbe349470dfa1eb0f3"
+}

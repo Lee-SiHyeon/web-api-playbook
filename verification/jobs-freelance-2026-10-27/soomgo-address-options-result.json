@@ -1,0 +1,73 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "soomgo",
+  "provider": "soomgo",
+  "operation": "address_options",
+  "checkedAt": "2026-10-27T07:14:59.292Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "address-options-area3",
+        "depth": 3,
+        "recordCount": 6045,
+        "recordFields": [
+          "addressRowid",
+          "addr1",
+          "addr2",
+          "addr3",
+          "address"
+        ],
+        "recordsSha256": "fd8e7e49c627209fb236c2232a007d6db6cee119c3380e12737d48dea743e445"
+      }
+    ],
+    "coverage": {
+      "returned": 6045,
+      "complete": false,
+      "reason": "provider_does_not_report_address_total_or_pagination"
+    }
+  },
+  "dataSha256": "fc6114aec70f58bf5c1e3fc2248a9a9df25fd97d497a383789138787ec9092c6",
+  "coverage": {
+    "returned": 6045,
+    "complete": false,
+    "reason": "provider_does_not_report_address_total_or_pagination"
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://api.soomgo.com",
+      "path": "/v1/requests/forms/addresses",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 801296,
+      "responseSha256": "e84421fdafac85d547e67fc927fa9c98ed85ddd893cfe462a57c7cb01be1fbea",
+      "checkedAt": "2026-10-27T07:14:59.292Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "depth"
+      ]
+    }
+  ],
+  "runner": "scripts/freelance.mjs",
+  "sourceResultSha256": "cd469e1cf2862712fe203b5acf303ec1fa98e0775ff3456f2a7f8c10801f510f"
+}

@@ -37,7 +37,7 @@
 | 채용·구직 | [공개 채용공고](references/jobs-public-apis.md): Greenhouse·Lever·Ashby·Remotive, Reed 키 기반 검색, TokyoDev 문서 파서, 공고 스냅샷·변경 비교 |
 | 프리랜서·외주 | [크몽·숨고·Upwork](references/freelance-public-apis.md): 공개 검색·상세 가격 유형·리뷰·제한 수집, 전문가 검색, 승인 토큰 기반 Upwork 읽기 |
 
-크몽 로그인 후 계정 조회와 Windows 암호화 세션 재사용은 별도 [크몽 인증 가이드](references/kmong-auth.md)를 참고하세요.
+로그인 후 계정 조회와 Windows 암호화 세션 재사용은 [크몽 인증 가이드](references/kmong-auth.md)와 [숨고 기능·인증 가이드](references/soomgo-frontier.md)를 참고하세요. 숨고는 전문가 프로필·리뷰·포트폴리오, 요청서 양식, 내 요청·채팅 목록 조회를 지원합니다.
 
 전체 목록은 [상세 가이드](docs/guide.md#무엇이-들어-있나)와 `npm run services`로 볼 수 있습니다.
 다른 저장소에서 옮긴 클라이언트와 고정 버전·실행 경계는 [통합 현황](references/repository-consolidation.md)에 있습니다.

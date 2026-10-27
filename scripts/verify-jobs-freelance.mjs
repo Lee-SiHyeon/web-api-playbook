@@ -8,7 +8,7 @@ import { auditCapabilityChecklist, safeRelativePath } from '../lib/capability-ch
 import { verifyManifestImplementation } from '../lib/recorded-evidence-provenance.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-export const DEFAULT_MANIFEST_PATH = 'verification/jobs-freelance-2026-10-26/manifest.json';
+export const DEFAULT_MANIFEST_PATH = 'verification/jobs-freelance-2026-10-27/manifest.json';
 const MANIFEST_PATH_PATTERN = /^verification\/jobs-freelance-(\d{4}-\d{2}-\d{2})\/manifest\.json$/;
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const fail = (code, message = code) => { throw Object.assign(new Error(message), { code }); };

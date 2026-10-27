@@ -1,0 +1,49 @@
+{
+  "schema": "web-api-soomgo-bootstrap-context-v1",
+  "service": "soomgo",
+  "recordedAt": "2026-10-27T05:54:21.538Z",
+  "hostLabel": "140.228",
+  "loginProvider": "Naver",
+  "bootstrapMode": "normal_browser_oauth",
+  "userApprovedRequiredConsent": true,
+  "optionalConsentSelected": false,
+  "loginSucceeded": true,
+  "newDeviceRegistrationSelected": false,
+  "secretsPersistedInEvidence": false,
+  "automaticOAuthImplemented": false,
+  "automaticRefreshImplemented": false,
+  "browserUsedForNativeReads": false,
+  "nameCertificationVerified": false,
+  "consentReadback": {
+    "allow_use_marketing": false,
+    "allow_use_select_info": false,
+    "allow_news_letters": false
+  },
+  "ownerControl": [
+    {
+      "checkedAt": "2026-10-27T05:54:21.418Z",
+      "method": "GET",
+      "origin": "https://api.soomgo.com",
+      "path": "/api2/users/me/",
+      "httpStatus": 401,
+      "responseBytes": 115,
+      "browserUsedForRequest": false,
+      "authorizationSent": false,
+      "authorizationScheme": null,
+      "ownerMatched": false
+    },
+    {
+      "checkedAt": "2026-10-27T05:54:21.538Z",
+      "method": "GET",
+      "origin": "https://api.soomgo.com",
+      "path": "/api2/users/me/",
+      "httpStatus": 200,
+      "responseBytes": 1153,
+      "browserUsedForRequest": false,
+      "authorizationSent": true,
+      "authorizationScheme": "Token",
+      "ownerMatched": true
+    }
+  ],
+  "businessWritesSubmitted": 0
+}

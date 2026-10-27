@@ -62,7 +62,7 @@ node scripts/freelance.mjs kmong reviews-collect --id=466087 --max-pages=1 --inp
 
 사용 가능한 CLI 필터는 `--category-1`, `--category-2`, `--service-slug`, `--address1`, `--address2`, `--keyword`, `--sort`, `--cursor`, `--limit`입니다. 컬렉션은 `--max-pages`로 상한을 둡니다.
 
-클라이언트에서 사용한 `api.soomgo.com` 계약은 배포된 자사 JS 번들 SHA-256으로 식별합니다. 상위/하위 카테고리와 서비스 목록을 읽은 뒤, 그 응답에서 받은 서비스 slug와 지역·정렬 조건으로 공개 전문가 요약 검색을 합니다. 검색 결과에는 전체 개수와 이어받을 cursor가 있을 수 있습니다. 수집은 작은 페이지 수로 제한되며 미완료 cursor가 남으면 `complete=false`입니다. 서비스 견적·요청, 사용자 연락처, 메시지, 예약·결제는 실행하지 않습니다. 이 API 계약은 공급자의 일반 공개 API 문서가 아니며 first-party bundle 관측에 근거합니다. 프로필 상세 경로는 별도 정확한 read contract와 신원 바인딩을 확인하기 전까지 읽기 기능으로 가정하지 않습니다.
+`api.soomgo.com` 공개 카테고리와 전문가 검색은 2026-10-26에 직접 재생됐습니다. 2026-10-27에는 140.228에서 native CLI 24/24, common CLI 5/5가 종료 코드 0으로 끝났습니다. 익명 프로필·폼·주소 조회와 Naver 로그인 후 소유자·요청·채팅 읽기를 확인했으며, portfolio walk는 선택 프로필의 20/20개를 3페이지에서 완료했고 review walk는 6개/2페이지로 부분 범위를 유지했습니다. 요청 준비는 로컬 전용이며 실제 서비스 요청, 견적 발송, 메시지, 예약·결제는 보내지 않았습니다. 세부 상태와 증거 경계는 [숨고 capability frontier](soomgo-frontier.md)와 [2026-10-27 실행 기록](../verification/jobs-freelance-2026-10-27/README.md)에 있습니다.
 
 ## Upwork
 
@@ -70,6 +70,6 @@ node scripts/freelance.mjs kmong reviews-collect --id=466087 --max-pages=1 --inp
 
 ## 기록·보호 범위
 
-프리랜서 서비스 정보는 호출자가 정한 작은 페이지 예산으로 제한합니다. 리뷰의 이름·연락처·주문 식별자 같은 개인정보는 표준화 결과에 싣지 않습니다. 화면에 표시된 시작가·패키지 가격·견적형 가격은 서로 다른 값입니다. 공급자 응답이 최종 가격을 확정하지 않으면 결제 총액으로 취급하지 않습니다. [2026-10-23 실행 기록](../verification/jobs-freelance-2026-10-23/README.md)은 이전 코드 해시의 역사 자료입니다. [2026-10-26 검증 기록](../verification/jobs-freelance-2026-10-26/README.md)은 이 날짜의 현재 검증 범위를 기록합니다. 기본 `npm run verify:jobs-freelance`는 2026-10-26 manifest를 오프라인 재검증하며, 현재 원격 상태를 새로 조회하지 않습니다.
+프리랜서 서비스 정보는 호출자가 정한 작은 페이지 예산으로 제한합니다. 리뷰의 이름·연락처·주문 식별자 같은 개인정보는 표준화 결과에 싣지 않습니다. 화면에 표시된 시작가·패키지 가격·견적형 가격은 서로 다른 값입니다. 공급자 응답이 최종 가격을 확정하지 않으면 결제 총액으로 취급하지 않습니다. [2026-10-23 실행 기록](../verification/jobs-freelance-2026-10-23/README.md)은 이전 코드 해시의 역사 자료입니다. [2026-10-26 검증 기록](../verification/jobs-freelance-2026-10-26/README.md)은 이 날짜의 검증 범위를 기록합니다. 기본 `npm run verify:jobs-freelance`는 2026-10-27 manifest를 오프라인 재검증하며, 현재 원격 상태를 새로 조회하지 않습니다.
 
 Fiverr와 LinkedIn은 이번 변경에서 서비스 클라이언트를 만들지 않았습니다. Fiverr의 약관과 LinkedIn의 자동화 제한에 대한 조사만 진행했으며, 이번에 구현한 프리랜서·채용 공고 읽기와 동일한 허가를 가정하지 않습니다.

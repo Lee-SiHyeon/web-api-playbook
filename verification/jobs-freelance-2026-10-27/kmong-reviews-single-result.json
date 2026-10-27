@@ -1,0 +1,144 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "kmong",
+  "provider": "kmong",
+  "operation": "reviews",
+  "checkedAt": "2026-10-27T07:14:50.548Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "466087",
+        "page": 1,
+        "reviewCount": 5,
+        "aggregateRating": {
+          "average": 4.99,
+          "count": 1528,
+          "source": "product_json_ld_aggregate"
+        },
+        "reviews": [
+          {
+            "id": "local-review-01db9c0231f3d83eda6c3b2b43654d34a047054769331c8bf754ecdacf51b6a0",
+            "row": 1,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-27 12:17:29",
+            "bodySha256": "5f5afed147730809447eae0ec475b21126136a333c5b9b153256908bc219e4c8",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-6c0ab9aaee508056bd3c9d6e6a5f32241c5a8afc9d19a1417628bec2c913249e",
+            "row": 2,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-27 12:16:50",
+            "bodySha256": "441be02e7960a08eb16d8ed7f077f38557c92350b60f2eb27a7261e5a0e22017",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-52e8bba93a82c6ea95f99efdf22497a7412411993b4d457e5f821908fcfa254d",
+            "row": 3,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-26 14:59:07",
+            "bodySha256": "b1287b76772f37f175f420898938276424e58dd994ffe23d8a9a57543a6d8870",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-f8cec987cc5457c33e04368e9aeb72d22dcf4ad0e824a8fcdf1cdd50f9680cd5",
+            "row": 4,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-26 14:58:30",
+            "bodySha256": "474532d500f2463a5facb44e162a97d2de07d1bc3c39db95949a7c7ce24409e3",
+            "sellerResponse": null
+          },
+          {
+            "id": "local-review-ff3cd68e70889d03b601c5ebe0e4af553b485491b6d3f56e78905ca138f39c25",
+            "row": 5,
+            "page": 1,
+            "rating": 5,
+            "createdAt": "2026-10-24 00:25:26",
+            "bodySha256": "d03f7997d7a8cc5249bff0ed4f70b04b991aa235a15c839470da5c5a55c35c67",
+            "sellerResponse": null
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "page": 1,
+      "pageSize": 5,
+      "totalItemCount": 1530,
+      "lastPage": 306,
+      "complete": false,
+      "endReached": false,
+      "pageWalked": false
+    }
+  },
+  "dataSha256": "79886693b8a1a20b88a5dd735280f7de9fadd8aa7ed3b57b3d8a4072dac6099e",
+  "coverage": {
+    "page": 1,
+    "pageSize": 5,
+    "totalItemCount": 1530,
+    "lastPage": 306,
+    "complete": false,
+    "endReached": false,
+    "pageWalked": false
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://kmong.com",
+      "path": "/gig/466087",
+      "httpStatus": 200,
+      "mime": "text/html",
+      "responseBytes": 359629,
+      "responseSha256": "52e9daf8407514be504b4b82d02a503d74f303d5e4105ee97fe409ad6df6c6d5",
+      "checkedAt": "2026-10-27T07:14:50.548Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": []
+    },
+    {
+      "method": "GET",
+      "origin": "https://api.kmong.com",
+      "path": "/order-app/order/v1/reviews/gigs/466087",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 6643,
+      "responseSha256": "ab0643a0555ddc224639f9f8a6decd1c2ee020e11cfb5df14917d8a0c3294186",
+      "checkedAt": "2026-10-27T07:14:50.548Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "page",
+        "perPage",
+        "sortType"
+      ]
+    }
+  ],
+  "runner": "scripts/freelance.mjs",
+  "sourceResultSha256": "5187cadd2afa06c4e9a0223233035577b253d68e1e349bb776aa37779dd6de8d"
+}
