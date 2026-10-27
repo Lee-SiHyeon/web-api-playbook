@@ -1,10 +1,18 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
+  verifyKmongAuthEvidence,
   validateKmongAuthOwnerProof,
   validateKmongAuthReuseProof,
   validateKmongBootstrapContext,
 } from '../scripts/verify-kmong-auth.mjs';
+
+const SOURCE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const EVIDENCE_DIR = 'verification/kmong-auth-2026-10-26';
 
 const implementation = Object.fromEntries([
   'lib/web-auth/kmong.mjs',
@@ -128,6 +136,33 @@ function bootstrapContext() {
   };
 }
 
+async function isolatedVerifierRoot(t) {
+  const temporaryRoot = process.env.TMPDIR || path.join(os.homedir(), '.nad-scratch/tmp');
+  await mkdir(temporaryRoot, { recursive: true });
+  const root = await mkdtemp(path.join(temporaryRoot, 'kmong-auth-verifier-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const manifestPath = path.join(SOURCE_ROOT, EVIDENCE_DIR, 'manifest.json');
+  const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
+  const files = new Set([
+    `${EVIDENCE_DIR}/manifest.json`,
+    ...Object.keys(manifest.implementation),
+    ...Object.keys(manifest.artifacts).map(name => `${EVIDENCE_DIR}/${name}`),
+    'tests/kmong-account.test.mjs',
+    'tests/verify-kmong-auth.test.mjs',
+  ]);
+  for (const relative of files) {
+    const destination = path.join(root, relative);
+    await mkdir(path.dirname(destination), { recursive: true });
+    await writeFile(destination, await readFile(path.join(SOURCE_ROOT, relative)));
+  }
+  return root;
+}
+
+async function readChecklist(root) {
+  const file = path.join(root, 'checklists/services/kmong.json');
+  return { file, checklist: JSON.parse(await readFile(file, 'utf8')) };
+}
+
 test('Kmong owner proof accepts one exact protected owner GET without identity values', () => {
   assert.equal(validateKmongAuthOwnerProof(genericProof('auth.owner', '2026-10-26T12:00:00.000Z')).ownerVerified, true);
 
@@ -176,4 +211,49 @@ test('Kmong bootstrap context keeps manual Google phases and no phone KYC explic
   const leakedCookie = structuredClone(context);
   leakedCookie.cookie = 'secret';
   assert.throws(() => validateKmongBootstrapContext(leakedCookie), /Sensitive field/);
+});
+
+test('historical verifier rejects changes to any pinned authentication runtime file', async t => {
+  const root = await isolatedVerifierRoot(t);
+  const runtime = path.join(root, 'lib/web-auth/kmong.mjs');
+  await writeFile(runtime, `${await readFile(runtime, 'utf8')}\n// changed authentication runtime\n`);
+  await assert.rejects(verifyKmongAuthEvidence({ root }), { code: 'RECORDED_RUNTIME_IMPLEMENTATION_CHANGED' });
+});
+
+test('public checklist additions are reported as metadata drift while auth proofs remain recorded_live', async t => {
+  const root = await isolatedVerifierRoot(t);
+  const { file, checklist } = await readChecklist(root);
+  checklist.capabilities.push({
+    id: 'public.sample',
+    title: 'Additional public capability inventory',
+    priority: 'optional',
+    applicability: 'applicable',
+    requirement: 'inventory',
+    implementation: { files: [], tests: [] },
+    evidence: [],
+    sourceEvidence: [],
+  });
+  await writeFile(file, JSON.stringify(checklist, null, 2) + '\n');
+
+  const result = await verifyKmongAuthEvidence({ root });
+  assert.equal(result.ok, true);
+  assert.equal(result.liveCheckedNow, false);
+  assert.equal(result.runtimeImplementationHashesMatched, true);
+  assert.equal(result.verification, 'historical_kmong_auth_evidence_revalidated_offline');
+  const metadata = new Map(result.verificationMetadataProvenance.map(item => [item.path, item]));
+  assert.equal(metadata.get('checklists/services/kmong.json').kind, 'checklist_metadata');
+  assert.equal(metadata.get('checklists/services/kmong.json').status, 'historical_tool_changed');
+  assert.equal(metadata.get('scripts/verify-kmong-auth.mjs').kind, 'offline_verifier');
+  assert.equal(metadata.get('scripts/verify-kmong-auth.mjs').status, 'historical_tool_changed');
+  assert.equal(result.capabilities.owner, 'recorded_live');
+  assert.equal(result.capabilities.reuse, 'recorded_live');
+});
+
+test('historical verifier rejects a changed auth.owner proof binding in the checklist', async t => {
+  const root = await isolatedVerifierRoot(t);
+  const { file, checklist } = await readChecklist(root);
+  const owner = checklist.capabilities.find(capability => capability.id === 'auth.owner');
+  owner.evidence[0].files[0] = `${EVIDENCE_DIR}/kmong-auth-reuse-proof.json`;
+  await writeFile(file, JSON.stringify(checklist, null, 2) + '\n');
+  await assert.rejects(verifyKmongAuthEvidence({ root }), { code: 'KMONG_AUTH_CHECKLIST_BINDING_INVALID' });
 });

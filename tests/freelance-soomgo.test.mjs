@@ -35,6 +35,42 @@ function searchResponse(results, { totalCount = results.length, cursor = '' } = 
   return { code: 0, reason: '', request: '', response: { cursor, results, sortBy: 'review_count', totalCount } };
 }
 
+test('public provider missing-value sentinels do not invalidate a search page', async () => {
+  const client = createSoomgoClient({ fetchImpl: async () => json(searchResponse([
+    { ...provider(1234), address: '', avgResponseTime: -1 }, provider(1235),
+  ])) });
+  const result = await client.searchPros();
+  assert.equal(result.items.length, 2);
+  assert.equal(result.items[0].location, null);
+  assert.equal(result.items[0].avgResponseTimeSeconds, null);
+  assert.equal(result.items[1].avgResponseTimeSeconds, 300);
+});
+
+test('a missing cursor field cannot turn malformed search JSON into complete results', async () => {
+  const source = searchResponse([provider(1234)]);
+  delete source.response.cursor;
+  const client = createSoomgoClient({ fetchImpl: async () => json(source) });
+  await assert.rejects(client.searchPros(), { code: 'SOOMGO_SEARCH_SCHEMA_INVALID' });
+});
+
+test('a resumed collection detects its input cursor repeating without another fetch', async () => {
+  let calls = 0;
+  const client = createSoomgoClient({ fetchImpl: async () => {
+    calls++; return json(searchResponse([provider(1234)], { totalCount: 20, cursor: 'resume-cursor' }));
+  } });
+  await assert.rejects(client.collectPros({ cursor: 'resume-cursor', limit: 1 }, { maxPages: 3 }),
+    { code: 'SOOMGO_CURSOR_REPEATED' });
+  assert.equal(calls, 1);
+});
+
+test('a terminal resumed collection does not claim that the earlier pages were read', async () => {
+  const client = createSoomgoClient({ fetchImpl: async () => json(searchResponse([provider(1234)])) });
+  const result = await client.collectPros({ cursor: 'resume-cursor' });
+  assert.equal(result.pagination.nextCursor, null);
+  assert.equal(result.pagination.complete, false);
+  assert.equal(result.pagination.reason, 'resumed_window_only');
+});
+
 test('listCategories validates and projects the anonymous first-party catalog response', async () => {
   let calls = 0;
   const client = createSoomgoClient({

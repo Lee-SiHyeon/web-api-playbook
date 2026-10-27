@@ -1,0 +1,229 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "soomgo",
+  "provider": "soomgo",
+  "operation": "profile_reviews_collect",
+  "checkedAt": "2026-10-27T07:14:58.069Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "provider-reviews-7847767",
+        "reviewCount": 6,
+        "reviews": [
+          {
+            "id": "page-1-row-1",
+            "rating": 5,
+            "createdAt": "2026-10-26T12:04:37.958000",
+            "reviewTextHash": {
+              "sha256": "ab4e412f7433feb4d7e47c5adfed46da990cb9efe5aceeaadfdc5674d7e1fea0",
+              "length": 36
+            },
+            "service": {
+              "id": "682",
+              "name": "용달/화물 운송",
+              "slug": "용달-운송"
+            },
+            "verifiedPayment": {
+              "soomgoPay": false,
+              "singleMatch": false
+            },
+            "imageCount": 0
+          },
+          {
+            "id": "page-1-row-2",
+            "rating": 5,
+            "createdAt": "2026-10-25T08:28:57.979000",
+            "reviewTextHash": {
+              "sha256": "7e9e8b35d134eb110d4d7911226bc25276d117ae40fe0cbb10e21e31d9c1e660",
+              "length": 17
+            },
+            "service": {
+              "id": "682",
+              "name": "용달/화물 운송",
+              "slug": "용달-운송"
+            },
+            "verifiedPayment": {
+              "soomgoPay": false,
+              "singleMatch": false
+            },
+            "imageCount": 0
+          },
+          {
+            "id": "page-1-row-3",
+            "rating": 5,
+            "createdAt": "2026-10-23T15:06:19.943000",
+            "reviewTextHash": {
+              "sha256": "4eaf703a9fad5bbd488dfa9ad13b9f15f8d3422236b3345fd986ec75192432f5",
+              "length": 40
+            },
+            "service": {
+              "id": "682",
+              "name": "용달/화물 운송",
+              "slug": "용달-운송"
+            },
+            "verifiedPayment": {
+              "soomgoPay": false,
+              "singleMatch": false
+            },
+            "imageCount": 0
+          },
+          {
+            "id": "page-1-row-4",
+            "rating": 5,
+            "createdAt": "2026-10-23T12:00:06.949000",
+            "reviewTextHash": {
+              "sha256": "ca79de4943b36fecaaa306a83b411516858449ecdd32e98c959aeed829bde50d",
+              "length": 68
+            },
+            "service": {
+              "id": "682",
+              "name": "용달/화물 운송",
+              "slug": "용달-운송"
+            },
+            "verifiedPayment": {
+              "soomgoPay": false,
+              "singleMatch": false
+            },
+            "imageCount": 0
+          },
+          {
+            "id": "page-1-row-5",
+            "rating": 5,
+            "createdAt": "2026-10-22T09:16:55.437000",
+            "reviewTextHash": {
+              "sha256": "b67954f992a41d1796528bb5b487cc1963ee50f5ce27cfcfe72fe2fa8823f8cf",
+              "length": 28
+            },
+            "service": {
+              "id": "682",
+              "name": "용달/화물 운송",
+              "slug": "용달-운송"
+            },
+            "verifiedPayment": {
+              "soomgoPay": false,
+              "singleMatch": false
+            },
+            "imageCount": 0
+          },
+          {
+            "id": "page-1-row-6",
+            "rating": 5,
+            "createdAt": "2026-10-21T13:47:30.941000",
+            "reviewTextHash": {
+              "sha256": "b36de0b79b03bd9c51822fd47a55f7c13bf63bb9f42902a30005c52d118cd993",
+              "length": 66
+            },
+            "service": {
+              "id": "682",
+              "name": "용달/화물 운송",
+              "slug": "용달-운송"
+            },
+            "verifiedPayment": {
+              "soomgoPay": false,
+              "singleMatch": false
+            },
+            "imageCount": 0
+          }
+        ],
+        "pages": [
+          {
+            "page": 1,
+            "returned": 3,
+            "cursorUsed": false,
+            "hasNextPage": true
+          },
+          {
+            "page": 2,
+            "returned": 3,
+            "cursorUsed": true,
+            "hasNextPage": true
+          }
+        ],
+        "complete": false,
+        "nextCursorAvailable": true
+      }
+    ],
+    "coverage": {
+      "returned": 6,
+      "pages": 2,
+      "complete": false,
+      "nextCursorAvailable": true,
+      "hasNextPage": true,
+      "resumedFromCursor": false,
+      "reason": "page_limit_reached"
+    }
+  },
+  "dataSha256": "4ffbc195ddc58ddbbe2c68a14089ee45c0a23b9b3c1f69d48708be6a6d544e95",
+  "coverage": {
+    "returned": 6,
+    "pages": 2,
+    "complete": false,
+    "nextCursorAvailable": true,
+    "hasNextPage": true,
+    "resumedFromCursor": false,
+    "reason": "page_limit_reached"
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://api.soomgo.com",
+      "path": "/v3/users/7847767/reviews/received",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 4429,
+      "responseSha256": "1a68a321ee9f5a2b1103c05a4a62b4e045e387c84f20a39442b1e1eb3344dd60",
+      "checkedAt": "2026-10-27T07:14:57.882Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "role",
+        "size"
+      ]
+    },
+    {
+      "method": "GET",
+      "origin": "https://api.soomgo.com",
+      "path": "/v3/users/7847767/reviews/received",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 4998,
+      "responseSha256": "bbeec3d7f9af81c8d223119a6e99eccf7d1f5b18bb1c54b62facf1eea63590a1",
+      "checkedAt": "2026-10-27T07:14:58.069Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "is_pay_verified",
+        "is_photo_review",
+        "next_cursor",
+        "role",
+        "size",
+        "sort_type"
+      ]
+    }
+  ],
+  "runner": "scripts/freelance.mjs",
+  "sourceResultSha256": "e1fc6c55d247d4536e7a9e8c588987b1a24b19e9f2dea44d2983907e9a7da6f9"
+}

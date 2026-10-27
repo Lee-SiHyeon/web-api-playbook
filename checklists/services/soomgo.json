@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "service": "soomgo",
-  "description": "Read-only public category and provider-summary search through a current first-party bundle contract. Detailed profile reads, quote requests, contact, reservation, payment, and account writes are outside the verified scope. See references/freelance-public-apis.md.",
+  "description": "Anonymous public Soomgo reads, public profile readers, and local request preparation are tracked separately from authenticated owner/account reads. Naver UI sign-in and direct owner/list reads succeeded on 140.228; the dated production CLI/DPAPI receipts are being finalized. Business request, quote, message, reservation, and payment writes remain disabled.",
   "capabilities": [
     {
       "id": "categories.top",
@@ -76,6 +76,43 @@
             "scripts/freelance.mjs",
             "scripts/jobs.mjs",
             "scripts/playbook.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/api2/categories/",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-categories-categories-top-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-categories-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
           ]
         }
       ],
@@ -157,6 +194,43 @@
             "scripts/jobs.mjs",
             "scripts/playbook.mjs"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/api2/categories/%EC%9D%B4%EC%82%AC-%EC%B2%AD%EC%86%8CA",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-subcategories-categories-sub-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-subcategories-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
         }
       ],
       "sourceEvidence": []
@@ -235,6 +309,43 @@
             "scripts/freelance.mjs",
             "scripts/jobs.mjs",
             "scripts/playbook.mjs"
+          ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/search/pro",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-search-providers-search-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-search-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
           ]
         }
       ],
@@ -316,10 +427,1151 @@
             "scripts/jobs.mjs",
             "scripts/playbook.mjs"
           ]
+        },
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/search/pro",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-collect-providers-collect-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-collect-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
         }
       ],
       "sourceEvidence": [],
       "note": "Bounded collection. A provider omitted from one result is not considered inactive or closed."
+    },
+    {
+      "id": "profile.summary",
+      "title": "Read a public provider profile summary bound to an exact user and optional expected provider ID",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-profile.mjs",
+            "exports": [
+              "createSoomgoProfileClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "profile",
+              "--user-id"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo-profile.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/user/7847767/profile",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-profile-summary-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "A path/provider match is public identity binding only; authenticated=false and ownerVerified=false."
+    },
+    {
+      "id": "profile.contents",
+      "title": "Read public profile content metadata without retaining media URLs",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-profile.mjs",
+            "exports": [
+              "createSoomgoProfileClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "profile-contents",
+              "--user-id"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo-profile.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v1/providers/7847767/profile-contents",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-contents-profile-contents-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-contents-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Content rows expose presence/type/sequence only; completeness is limited to the returned response."
+    },
+    {
+      "id": "profile.portfolios",
+      "title": "Read a bounded public portfolio page with incomplete-pagination semantics",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-profile.mjs",
+            "exports": [
+              "createSoomgoProfileClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "portfolio",
+              "--user-id"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo-profile.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/users/10083068/portfolios",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-portfolios-profile-portfolios-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-portfolios-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Single-page public portfolio metadata. The separate bounded collector handles observed cursor continuation and source-count reconciliation."
+    },
+    {
+      "id": "profile.portfolios.collect",
+      "title": "Collect bounded public portfolio pages with cursor and source-count checks",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-profile.mjs",
+            "exports": [
+              "createSoomgoProfileClient"
+            ]
+          },
+          {
+            "path": "lib/service-operations/freelance.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "portfolio-collect",
+              "--user-id",
+              "--max-pages"
+            ]
+          },
+          {
+            "path": "lib/service-operations/freelance.mjs",
+            "tokens": [
+              "soomgo-profile-portfolios-collect"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo-profile.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/users/10083068/portfolios",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-portfolios-collect-profile-portfolios-collect-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-portfolios-collect-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The 140.228 run returned 20 portfolio rows over 3 pages, matching source total 20 with hasNextPage=false. This is complete only for the selected public profile; cursor values and media URLs are omitted."
+    },
+    {
+      "id": "profile.reviews",
+      "title": "Read one public review page with redacted text and no reviewer identity",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-profile.mjs",
+            "exports": [
+              "createSoomgoProfileClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "profile-reviews",
+              "--user-id"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo-profile.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v3/users/7847767/reviews/received",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-reviews-profile-reviews-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-reviews-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Normalized reviewText is redacted. The committed public proof projection retains review-text hashes and lengths only; reviewer identities and provider review IDs are omitted. The one-page reader does not verify later-page continuation."
+    },
+    {
+      "id": "profile.reviews.collect",
+      "title": "Collect bounded public review metadata pages with cursor continuation",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-profile.mjs",
+            "exports": [
+              "createSoomgoProfileClient"
+            ]
+          },
+          {
+            "path": "lib/service-operations/freelance.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "profile-reviews-collect",
+              "--user-id",
+              "--max-pages"
+            ]
+          },
+          {
+            "path": "lib/service-operations/freelance.mjs",
+            "tokens": [
+              "soomgo-profile-reviews-collect"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/freelance-soomgo-profile.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v3/users/7847767/reviews/received",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-reviews-collect-profile-reviews-collect-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-profile-reviews-collect-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The 140.228 run returned 6 rows over 2 pages; source total was unknown and hasNextPage remained true, so collection is partial. Normalized reviewText is redacted; committed evidence stores hashes and lengths only, without reviewer identities or cursor values."
+    },
+    {
+      "id": "request.form",
+      "title": "Read a catalog-selected request questionnaire schema",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-request.mjs",
+            "exports": [
+              "createSoomgoRequestClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "request-form",
+              "--service-id"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-request.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v2/services/%EA%B0%80%EC%A0%95-%EC%9D%B4%EC%82%AC-%ED%88%AC%EB%A3%B8-%EC%93%B0%EB%A6%AC%EB%A3%B8/form",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-request-form-request-form-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-request-form-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Conditional coverage can remain incomplete; form read does not dispatch a request."
+    },
+    {
+      "id": "request.addresses",
+      "title": "Read a bounded area-3 address option list for local questionnaire preparation",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-request.mjs",
+            "exports": [
+              "createSoomgoRequestClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "address-options",
+              "--depth"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-request.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-public-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v1/requests/forms/addresses",
+          "method": "GET",
+          "mime": "application/json",
+          "files": [
+            "verification/jobs-freelance-2026-10-27/soomgo-address-options-request-addresses-proof.json",
+            "verification/jobs-freelance-2026-10-27/soomgo-address-options-result.json"
+          ],
+          "hashPaths": [
+            "lib/cli.mjs",
+            "lib/commerce/http.mjs",
+            "lib/freelance/kmong-collection.mjs",
+            "lib/freelance/kmong.mjs",
+            "lib/freelance/soomgo-profile.mjs",
+            "lib/freelance/soomgo-request.mjs",
+            "lib/freelance/soomgo.mjs",
+            "lib/freelance/upwork.mjs",
+            "lib/jobs/boards.mjs",
+            "lib/jobs/japan.mjs",
+            "lib/jobs/model.mjs",
+            "lib/jobs/providers.mjs",
+            "lib/jobs/snapshots.mjs",
+            "lib/operation-mcp.mjs",
+            "lib/operation-registry.mjs",
+            "lib/service-operations/freelance.mjs",
+            "lib/service-operations/index.mjs",
+            "package-lock.json",
+            "package.json",
+            "scripts/freelance.mjs",
+            "scripts/jobs.mjs",
+            "scripts/playbook.mjs",
+            "scripts/verify-jobs-freelance.mjs",
+            "lib/capability-checklist.mjs"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The upstream response exposes no total or pagination; output remains incomplete."
+    },
+    {
+      "id": "request.prepare",
+      "title": "Prepare and validate a local request draft without sending it",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/freelance/soomgo-request.mjs",
+            "exports": [
+              "prepareSoomgoRequest"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/freelance.mjs",
+            "tokens": [
+              "soomgo",
+              "request-prepare",
+              "--form"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-request.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Local-only. An isolated hiring-UI capture observed answer IDs for one checkbox, date, and three-level address example; wireMappingVerified remains false because no POST body was accepted or read back. Auth, phone, account-details, terms, and privacy gates remain unverified.",
+      "blocker": "This operation does not submit a request, contact a provider, create a quote, or confirm server acceptance."
+    },
+    {
+      "id": "business.request_dispatch",
+      "title": "Submit a genuine service request to a user-selected provider",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "title": "First-party source candidates only; no request was replayed",
+          "files": [
+            "verification/soomgo-source-candidates-2026-10-27.json"
+          ]
+        }
+      ],
+      "note": "No request is submitted by request-prepare. A real target, user-authored payload, required verification, consent, and independent read-back are separate gates.",
+      "blocker": "No dispatch implementation or live proof. Synthetic/fabricated leads are prohibited."
+    },
+    {
+      "id": "auth.bootstrap",
+      "title": "Record the normal Naver browser bootstrap and consent state",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "inventory",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/soomgo.mjs",
+            "exports": [
+              "createSoomgoAuth"
+            ]
+          },
+          {
+            "path": "scripts/soomgo-account.mjs"
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/soomgo-account.mjs",
+            "tokens": [
+              "session-import",
+              "persist",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Manual normal-browser Naver bootstrap only. Sanitized context: verification/soomgo-auth-2026-10-27/soomgo-auth-bootstrap-context.json. Required consent was approved; optional consent readbacks are false; name certification is unverified. This is not automated OAuth or refresh evidence."
+    },
+    {
+      "id": "auth.owner",
+      "title": "Read /api2/users/me and match the returned owner to the pinned session",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/soomgo.mjs",
+            "exports": [
+              "createSoomgoAuth"
+            ]
+          },
+          {
+            "path": "lib/protected-store.mjs",
+            "exports": [
+              "ProtectedStore"
+            ]
+          },
+          {
+            "path": "lib/scoped-session.mjs",
+            "exports": [
+              "ScopedSession"
+            ]
+          },
+          {
+            "path": "lib/session-lock.mjs",
+            "exports": [
+              "withSessionLock"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/soomgo-account.mjs",
+            "tokens": [
+              "owner",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-account.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/api2/users/me/",
+          "files": [
+            "verification/soomgo-auth-2026-10-27/soomgo-auth-owner-proof.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/soomgo.mjs",
+            "scripts/soomgo-account.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/session-lock.mjs",
+            "scripts/dpapi-store.ps1",
+            "lib/cli.mjs",
+            "package.json",
+            "package-lock.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The Token-authenticated GET matched the owner pinned during manual Naver browser bootstrap; the anonymous control returned 401. Identity values are omitted. See verification/soomgo-auth-2026-10-27/manifest.json."
+    },
+    {
+      "id": "auth.reuse",
+      "title": "Reuse the owner session from a separate process through the persistent credential store",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/soomgo.mjs",
+            "exports": [
+              "createSoomgoAuth"
+            ]
+          },
+          {
+            "path": "lib/protected-store.mjs",
+            "exports": [
+              "ProtectedStore"
+            ]
+          },
+          {
+            "path": "lib/scoped-session.mjs",
+            "exports": [
+              "ScopedSession"
+            ]
+          },
+          {
+            "path": "lib/session-lock.mjs",
+            "exports": [
+              "withSessionLock"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/soomgo-account.mjs",
+            "tokens": [
+              "verify",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-account.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/api2/users/me/",
+          "files": [
+            "verification/soomgo-auth-2026-10-27/soomgo-auth-owner-reuse-proof.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/soomgo.mjs",
+            "scripts/soomgo-account.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/session-lock.mjs",
+            "scripts/dpapi-store.ps1",
+            "lib/cli.mjs",
+            "package.json",
+            "package-lock.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "Two distinct fresh processes reused the same Windows DPAPI CurrentUser store and matched the pinned owner. No login/import was sent during reuse; automatic refresh remains unimplemented."
+    },
+    {
+      "id": "account.requests.opened",
+      "title": "Read the owner-bound opened request list",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/soomgo.mjs",
+            "exports": [
+              "createSoomgoAuth"
+            ]
+          },
+          {
+            "path": "lib/protected-store.mjs",
+            "exports": [
+              "ProtectedStore"
+            ]
+          },
+          {
+            "path": "lib/scoped-session.mjs",
+            "exports": [
+              "ScopedSession"
+            ]
+          },
+          {
+            "path": "lib/session-lock.mjs",
+            "exports": [
+              "withSessionLock"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/soomgo-account.mjs",
+            "tokens": [
+              "requests",
+              "status",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-account.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v1/me/requests/sent",
+          "files": [
+            "verification/soomgo-auth-2026-10-27/soomgo-auth-requests-opened-proof.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/soomgo.mjs",
+            "scripts/soomgo-account.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/session-lock.mjs",
+            "scripts/dpapi-store.ps1",
+            "lib/cli.mjs",
+            "package.json",
+            "package-lock.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The Bearer read with status=opened and limit=15 returned 200 and zero rows. Empty is a valid current result, not proof of future absence."
+    },
+    {
+      "id": "account.requests.closed-expired",
+      "title": "Read the owner-bound closed and expired request list",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/soomgo.mjs",
+            "exports": [
+              "createSoomgoAuth"
+            ]
+          },
+          {
+            "path": "lib/protected-store.mjs",
+            "exports": [
+              "ProtectedStore"
+            ]
+          },
+          {
+            "path": "lib/scoped-session.mjs",
+            "exports": [
+              "ScopedSession"
+            ]
+          },
+          {
+            "path": "lib/session-lock.mjs",
+            "exports": [
+              "withSessionLock"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/soomgo-account.mjs",
+            "tokens": [
+              "requests",
+              "status",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-account.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/v1/me/requests/sent",
+          "files": [
+            "verification/soomgo-auth-2026-10-27/soomgo-auth-requests-closed-expired-proof.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/soomgo.mjs",
+            "scripts/soomgo-account.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/session-lock.mjs",
+            "scripts/dpapi-store.ps1",
+            "lib/cli.mjs",
+            "package.json",
+            "package-lock.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The Bearer read with status=closed,expired and limit=15 returned 200 and zero rows. Empty is a valid current result, not proof of future absence."
+    },
+    {
+      "id": "account.chats-read",
+      "title": "Read the owner-bound customer chat list",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/web-auth/soomgo.mjs",
+            "exports": [
+              "createSoomgoAuth"
+            ]
+          },
+          {
+            "path": "lib/protected-store.mjs",
+            "exports": [
+              "ProtectedStore"
+            ]
+          },
+          {
+            "path": "lib/scoped-session.mjs",
+            "exports": [
+              "ScopedSession"
+            ]
+          },
+          {
+            "path": "lib/session-lock.mjs",
+            "exports": [
+              "withSessionLock"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/soomgo-account.mjs",
+            "tokens": [
+              "chats",
+              "store-dir"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/soomgo-account.test.mjs"
+        ]
+      },
+      "evidence": [
+        {
+          "kind": "http-read-v1",
+          "origin": "https://api.soomgo.com",
+          "path": "/api/v2.4/chats/",
+          "files": [
+            "verification/soomgo-auth-2026-10-27/soomgo-auth-chats-proof.json"
+          ],
+          "hashPaths": [
+            "lib/web-auth/soomgo.mjs",
+            "scripts/soomgo-account.mjs",
+            "lib/protected-store.mjs",
+            "lib/scoped-session.mjs",
+            "lib/session-lock.mjs",
+            "scripts/dpapi-store.ps1",
+            "lib/cli.mjs",
+            "package.json",
+            "package-lock.json"
+          ]
+        }
+      ],
+      "sourceEvidence": [],
+      "note": "The Token read with role=customer returned 200 and zero results on the first page. Pagination was not followed; complete=false."
+    },
+    {
+      "id": "account.quotes_read",
+      "title": "Read owner-bound sent-quote lists and quote details",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "title": "Current or first-party source route only; no protected replay or write was performed",
+          "files": [
+            "verification/soomgo-source-candidates-2026-10-27.json"
+          ]
+        }
+      ],
+      "note": "Current Next source exposes provider quote list/detail routes using APICore Token. No authenticated replay of these routes is present in the 2026-10-27 manifest.",
+      "blocker": "Authenticated owner binding, current response schema, filters, and pagination need direct replay before implementation."
+    },
+    {
+      "id": "account.chat_messages_read",
+      "title": "Read an individual chat and paginated message history",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [
+        {
+          "title": "Current or first-party source route only; no protected replay or write was performed",
+          "files": [
+            "verification/soomgo-source-candidates-2026-10-27.json"
+          ]
+        }
+      ],
+      "note": "Current Next source exposes chat detail/message read routes, but the 2026-10-27 manifest contains no authenticated detail or message-item replay.",
+      "blocker": "No authenticated detail/message replay or verified message-item schema is recorded."
+    },
+    {
+      "id": "business.quote_send",
+      "title": "Send a genuine provider quote to a user-selected request",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "No exact quote-send route or accepted write schema has been established.",
+      "blocker": "No genuine target/payload exists; do not invent a quote or submit a synthetic business action."
+    },
+    {
+      "id": "business.message_send",
+      "title": "Send a genuine message to a user-selected chat recipient",
+      "priority": "conditional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "The implementation supports read-only customer chat-list access only; message read/write contracts are incomplete.",
+      "blocker": "No genuine chat recipient or user-authored message is available; no message write is implemented or authorized."
     }
   ]
 }

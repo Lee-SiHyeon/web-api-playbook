@@ -130,6 +130,237 @@ test('Soomgo input and pagination limit errors are rejected before transport', a
   assert.equal(calls, 0);
 });
 
+test('Soomgo form and address reads use the observed API; request preparation stays local', async t => {
+  const formFixture = JSON.parse(await fixture('soomgo-request-form-20261027.json'));
+  const addressFixture = JSON.parse(await fixture('soomgo-addresses-area3-first-record.json'));
+  const directory = await tempDirectory(t);
+  const formPath = path.join(directory, 'form.json');
+  await writeFile(formPath, JSON.stringify({
+    schemaVersion: 1, service: 'soomgo', operation: 'service_request_form',
+    form: formFixture.form,
+  }));
+  const requests = [];
+  const fetchImpl = async (url, init) => {
+    const target = new URL(String(url));
+    requests.push({ target, init });
+    assert.equal(target.origin, 'https://api.soomgo.com');
+    assert.equal(init.method, 'GET');
+    assert.equal(init.credentials, 'omit');
+    assert.equal(new Headers(init.headers).get('cookie'), null);
+    if (target.pathname === '/v2/services/%EA%B0%80%EC%A0%95-%EC%9D%B4%EC%82%AC-%ED%88%AC%EB%A3%B8-%EC%93%B0%EB%A6%AC%EB%A3%B8/form') {
+      return new Response(JSON.stringify({ code: 0, response: formFixture.form }), {
+        status: 200, headers: { 'content-type': 'application/json; charset=utf-8' },
+      });
+    }
+    if (target.pathname === '/v1/requests/forms/addresses') {
+      assert.equal(target.searchParams.get('depth'), 'area3');
+      return new Response(JSON.stringify({ code: 0, response: { addresses: addressFixture.items } }), {
+        status: 200, headers: { 'content-type': 'application/json; charset=utf-8' },
+      });
+    }
+    throw new Error('unexpected Soomgo route');
+  };
+
+  const formResult = await runFreelanceCommand([
+    'soomgo', 'request-form', '--service-id=729', '--service-slug=가정-이사-투룸-쓰리룸', '--service-name=가정이사(투룸 이상)',
+  ], { fetchImpl, now: () => NOW });
+  assert.equal(formResult.result.operation, 'service_request_form');
+  assert.equal(formResult.result.form.id, formFixture.form.id);
+  assert.equal(formResult.result.dispatch.supported, false);
+  assert.equal(requests.length, 1);
+
+  const addressesResult = await runFreelanceCommand(['soomgo', 'address-options', '--depth=3'], {
+    fetchImpl, now: () => NOW,
+  });
+  assert.equal(addressesResult.result.operation, 'address_options');
+  assert.equal(addressesResult.result.items[0].addressRowid, 3);
+  assert.equal(requests.length, 2);
+  await assert.rejects(runFreelanceCommand(['soomgo', 'address-options', '--depth=2'], {
+    fetchImpl: async () => assert.fail('unobserved address depth must fail before fetch'),
+  }), { code: 'ARGUMENT_INVALID' });
+
+  const prepared = await runFreelanceCommand(['soomgo', 'request-prepare', `--form=${formPath}`], {
+    fetchImpl: async () => { throw new Error('local preparation must not call the provider'); },
+    now: () => NOW,
+  });
+  assert.equal(prepared.result.status, 'prepared_only');
+  assert.equal(prepared.result.gates.requestSent, false);
+  assert.equal(prepared.result.gates.externallySubmitted, false);
+  assert.equal(prepared.result.networkUsed, false);
+  assert.equal(prepared.result.writesSubmitted, 0);
+  assert.equal(prepared.result.gates.dispatchSupported, false);
+
+  const oversizedAnswers = path.join(directory, 'oversized-answers.json');
+  await writeFile(oversizedAnswers, Buffer.alloc(128 * 1024 + 1, 0x20));
+  await assert.rejects(runFreelanceCommand([
+    'soomgo', 'request-prepare', `--form=${formPath}`, `--answers=${oversizedAnswers}`,
+  ], { fetchImpl: async () => assert.fail('local preparation must not fetch'), now: () => NOW }), {
+    code: 'SOOMGO_REQUEST_INPUT_TOO_LARGE',
+  });
+
+  await assert.rejects(runFreelanceCommand(['soomgo', 'request-form', '--service-id=729'], {
+    fetchImpl: async () => assert.fail('incomplete service identity must fail before fetch'),
+  }), { code: 'ARGUMENT_INVALID' });
+});
+
+test('Soomgo profile and portfolio CLI commands map to the new read-only profile client', async () => {
+  const source = JSON.parse(await fixture('soomgo-profile.json'));
+  const calls = [];
+  const fetchImpl = async (url, init) => {
+    const target = new URL(String(url));
+    calls.push(target);
+    assert.equal(target.origin, 'https://api.soomgo.com');
+    assert.equal(init.method, 'GET');
+    assert.equal(init.credentials, 'omit');
+    const response = target.pathname.endsWith('/profile') ? source.profile
+      : target.pathname.endsWith('/profile-contents') ? source.contents
+        : target.pathname.endsWith('/portfolios') ? source.portfolios : source.reviews;
+    return new Response(JSON.stringify({ code: 0, reason: '', request: '', response }), {
+      status: 200, headers: { 'content-type': 'application/json; charset=utf-8' },
+    });
+  };
+  const profile = await runFreelanceCommand(['soomgo', 'profile', '--user-id=7847767', '--expected-provider-id=993707'], {
+    fetchImpl, now: () => NOW,
+  });
+  assert.equal(profile.result.identity.providerMatchVerified, true);
+  assert.equal(profile.result.identity.ownerVerified, false);
+  const portfolio = await runFreelanceCommand(['soomgo', 'portfolio', '--user-id=7847767', '--size=8'], {
+    fetchImpl, now: () => NOW,
+  });
+  assert.equal(portfolio.result.operation, 'profile_portfolios');
+  const contents = await runFreelanceCommand(['soomgo', 'profile-contents', '--user-id=7847767'], {
+    fetchImpl, now: () => NOW,
+  });
+  assert.equal(contents.result.operation, 'profile_contents');
+  const reviews = await runFreelanceCommand(['soomgo', 'profile-reviews', '--user-id=7847767'], {
+    fetchImpl, now: () => NOW,
+  });
+  assert.equal(reviews.result.operation, 'profile_reviews');
+  assert.deepEqual(calls.map(call => call.pathname), [
+    '/v2/user/7847767/profile', '/v2/users/7847767/portfolios',
+    '/v1/providers/7847767/profile-contents', '/v3/users/7847767/reviews/received',
+  ]);
+  await assert.rejects(runFreelanceCommand(['soomgo', 'portfolio', '--user-id=7847767', '--size=6'], {
+    fetchImpl: async () => assert.fail('unsupported portfolio size must not fetch'),
+  }), { code: 'SOOMGO_PROFILE_PORTFOLIO_SIZE_INVALID' });
+});
+
+test('Soomgo profile review CLI accepts only the observed cursor continuation and respects five-page cap', async () => {
+  const source = JSON.parse(await fixture('soomgo-profile.json'));
+  const requests = [];
+  const fetchImpl = async (url, init) => {
+    const target = new URL(String(url));
+    requests.push(target);
+    assert.equal(target.origin, 'https://api.soomgo.com');
+    assert.equal(target.pathname, '/v3/users/7847767/reviews/received');
+    assert.equal(init.method, 'GET');
+    assert.equal(init.credentials, 'omit');
+    const cursor = target.searchParams.get('next_cursor');
+    if (cursor !== null) {
+      assert.deepEqual([...target.searchParams], [
+        ['next_cursor', 'fixture-cursor'], ['is_photo_review', 'false'], ['is_pay_verified', 'false'],
+        ['sort_type', 'latest'], ['size', '3'], ['role', 'provider'],
+      ]);
+    } else assert.deepEqual([...target.searchParams], [['size', '3'], ['role', 'provider']]);
+    const page = cursor === null ? 1 : 2;
+    const response = structuredClone(source.reviews);
+    response.items = Array.from({ length: 3 }, (_, index) => ({ ...structuredClone(source.reviews.items[0]),
+      id: `cli-review-${page}-${index}` }));
+    response.pagination = { ...response.pagination, currentCount: page * 3, totalCount: 6,
+      hasNextPage: page === 1, nextCursor: page === 1 ? 'fixture-cursor' : '' };
+    return new Response(JSON.stringify({ code: 0, response }), {
+      status: 200, headers: { 'content-type': 'application/json; charset=utf-8' },
+    });
+  };
+  const direct = await runFreelanceCommand(['soomgo', 'profile-reviews', '--user-id=7847767', '--next-cursor=fixture-cursor'], {
+    fetchImpl, now: () => NOW,
+  });
+  assert.equal(direct.result.pagination.resumedFromCursor, true);
+  assert.equal(requests.length, 1);
+
+  const collected = await runFreelanceCommand(['soomgo', 'profile-reviews-collect', '--user-id=7847767', '--max-pages=2'], {
+    fetchImpl, now: () => NOW,
+  });
+  assert.equal(collected.result.operation, 'profile_reviews_collect');
+  assert.equal(collected.result.pagination.pages, 2);
+  assert.equal(collected.result.pagination.complete, true);
+  assert.equal(requests.length, 3);
+
+  await assert.rejects(runFreelanceCommand(['soomgo', 'profile-reviews-collect', '--user-id=7847767', '--max-pages=6'], {
+    fetchImpl: async () => assert.fail('page limit must fail before a request'),
+  }), { code: 'ARGUMENT_INVALID' });
+});
+
+test('Soomgo portfolio CLI passes only the observed size-8 cursor and collects within five pages', async () => {
+  const source = JSON.parse(await fixture('soomgo-profile.json'));
+  const requests = [];
+  let collectionActive = false;
+  const pageFor = pageNumber => {
+    const page = structuredClone(source.portfolios);
+    const returned = pageNumber === 3 ? 4 : 8;
+    page.items = Array.from({ length: returned }, (_, index) => ({
+      ...structuredClone(source.portfolios.items[0]), id: `cli-portfolio-${pageNumber}-${index}`,
+    }));
+    page.pagination = {
+      ...page.pagination,
+      size: 8,
+      currentCount: Math.min(pageNumber * 8, 20),
+      totalCount: 20,
+      hasNextPage: pageNumber < 3,
+      hasPrevPage: pageNumber > 1,
+      nextCursor: pageNumber < 3 ? `cli-portfolio-page-${pageNumber + 1}` : '',
+    };
+    return page;
+  };
+  const fetchImpl = async (url, init) => {
+    const target = new URL(String(url));
+    requests.push(target);
+    assert.equal(target.origin, 'https://api.soomgo.com');
+    assert.equal(target.pathname, '/v2/users/7847767/portfolios');
+    assert.equal(init.method, 'GET');
+    assert.equal(init.credentials, 'omit');
+    assert.equal(target.searchParams.get('size'), '8');
+    const cursor = target.searchParams.get('next_cursor');
+    if (!collectionActive) {
+      assert.equal(cursor, 'cli-direct-cursor');
+      return new Response(JSON.stringify({ code: 0, reason: '', request: '', response: source.portfolios }), {
+        status: 200, headers: { 'content-type': 'application/json; charset=utf-8' },
+      });
+    }
+    const pageNumber = cursor === null ? 1 : cursor === 'cli-portfolio-page-2' ? 2 : 3;
+    if (cursor !== null) assert.deepEqual([...target.searchParams].map(([key]) => key), ['size', 'next_cursor']);
+    return new Response(JSON.stringify({ code: 0, reason: '', request: '', response: pageFor(pageNumber) }), {
+      status: 200, headers: { 'content-type': 'application/json; charset=utf-8' },
+    });
+  };
+
+  const direct = await runFreelanceCommand([
+    'soomgo', 'portfolio', '--user-id=7847767', '--size=8', '--next-cursor=cli-direct-cursor',
+  ], { fetchImpl, now: () => NOW });
+  assert.equal(direct.result.pagination.resumedFromCursor, true);
+  assert.deepEqual([...requests[0].searchParams], [['size', '8'], ['next_cursor', 'cli-direct-cursor']]);
+
+  collectionActive = true;
+  const collected = await runFreelanceCommand([
+    'soomgo', 'portfolio-collect', '--user-id=7847767', '--size=8', '--max-pages=3',
+  ], { fetchImpl, now: () => NOW });
+  assert.equal(collected.result.operation, 'profile_portfolios_collect');
+  assert.equal(collected.result.items.length, 20);
+  assert.equal(collected.result.pagination.pages, 3);
+  assert.equal(collected.result.pagination.complete, true);
+  assert.deepEqual([...requests[1].searchParams], [['size', '8']]);
+  assert.equal(requests.length, 4, 'one direct continuation plus three collected pages');
+
+  await assert.rejects(runFreelanceCommand([
+    'soomgo', 'portfolio-collect', '--user-id=7847767', '--max-pages=6',
+  ], { fetchImpl: async () => assert.fail('page cap must reject before transport') }), { code: 'ARGUMENT_INVALID' });
+  await assert.rejects(runFreelanceCommand([
+    'soomgo', 'portfolio-collect', '--user-id=7847767', '--size=4', '--max-pages=2',
+  ], { fetchImpl: async () => assert.fail('unobserved size-4 continuation must reject before transport') }), {
+    code: 'SOOMGO_PROFILE_PORTFOLIO_CONTINUATION_UNVERIFIED',
+  });
+});
+
 test('Upwork can only run with a caller-tagged OAuth token, kept out of its output', async () => {
   const secret = 'oauth2v2_fixture-token-never-persist';
   const fixtureValue = JSON.parse(await fixture('upwork-search.json'));

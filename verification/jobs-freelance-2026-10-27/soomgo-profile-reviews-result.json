@@ -1,0 +1,126 @@
+{
+  "schema": "web-api-public-document-result-v1",
+  "service": "soomgo",
+  "provider": "soomgo",
+  "operation": "profile_reviews",
+  "checkedAt": "2026-10-27T07:14:57.557Z",
+  "ok": true,
+  "executionMode": "pure_http",
+  "anonymous": true,
+  "authenticated": false,
+  "credentialsUsed": false,
+  "browserUsed": false,
+  "writesSubmitted": 0,
+  "completeCatalog": false,
+  "fiveStates": {
+    "captured": false,
+    "client_exists": true,
+    "remnant_free": true,
+    "credential_propagated": "not_applicable",
+    "live_replay": true
+  },
+  "data": {
+    "items": [
+      {
+        "id": "page-1-row-1",
+        "rating": 5,
+        "createdAt": "2026-10-26T12:04:37.958000",
+        "reviewTextHash": {
+          "sha256": "ab4e412f7433feb4d7e47c5adfed46da990cb9efe5aceeaadfdc5674d7e1fea0",
+          "length": 36
+        },
+        "service": {
+          "id": "682",
+          "name": "용달/화물 운송",
+          "slug": "용달-운송"
+        },
+        "verifiedPayment": {
+          "soomgoPay": false,
+          "singleMatch": false
+        },
+        "imageCount": 0
+      },
+      {
+        "id": "page-1-row-2",
+        "rating": 5,
+        "createdAt": "2026-10-25T08:28:57.979000",
+        "reviewTextHash": {
+          "sha256": "7e9e8b35d134eb110d4d7911226bc25276d117ae40fe0cbb10e21e31d9c1e660",
+          "length": 17
+        },
+        "service": {
+          "id": "682",
+          "name": "용달/화물 운송",
+          "slug": "용달-운송"
+        },
+        "verifiedPayment": {
+          "soomgoPay": false,
+          "singleMatch": false
+        },
+        "imageCount": 0
+      },
+      {
+        "id": "page-1-row-3",
+        "rating": 5,
+        "createdAt": "2026-10-23T15:06:19.943000",
+        "reviewTextHash": {
+          "sha256": "4eaf703a9fad5bbd488dfa9ad13b9f15f8d3422236b3345fd986ec75192432f5",
+          "length": 40
+        },
+        "service": {
+          "id": "682",
+          "name": "용달/화물 운송",
+          "slug": "용달-운송"
+        },
+        "verifiedPayment": {
+          "soomgoPay": false,
+          "singleMatch": false
+        },
+        "imageCount": 0
+      }
+    ],
+    "coverage": {
+      "returned": 3,
+      "complete": false,
+      "nextCursorAvailable": true,
+      "hasNextPage": true,
+      "hasPrevPage": false,
+      "resumedFromCursor": false,
+      "reason": "more_pages_available"
+    }
+  },
+  "dataSha256": "1826920c1e6a4cde92e02995951c80e1fe4794eb2c33f5381d6fb6e1c61889b1",
+  "coverage": {
+    "returned": 3,
+    "complete": false,
+    "nextCursorAvailable": true,
+    "hasNextPage": true,
+    "hasPrevPage": false,
+    "resumedFromCursor": false,
+    "reason": "more_pages_available"
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "origin": "https://api.soomgo.com",
+      "path": "/v3/users/7847767/reviews/received",
+      "httpStatus": 200,
+      "mime": "application/json",
+      "responseBytes": 4429,
+      "responseSha256": "1a68a321ee9f5a2b1103c05a4a62b4e045e387c84f20a39442b1e1eb3344dd60",
+      "checkedAt": "2026-10-27T07:14:57.557Z",
+      "browserUsed": false,
+      "anonymous": true,
+      "authenticated": false,
+      "credentialsUsed": false,
+      "cookieSent": false,
+      "cookiesSent": false,
+      "queryFields": [
+        "role",
+        "size"
+      ]
+    }
+  ],
+  "runner": "scripts/freelance.mjs",
+  "sourceResultSha256": "caeeda049d8639775c547885106ed364df5908c77224e4efd7cb093631bb6ff3"
+}

@@ -20,7 +20,10 @@ test('freelance operations are in the inventory without fetching or prompting fo
   assert.deepEqual(service.operations.sort(), [
     'kmong-categories', 'kmong-detail', 'kmong-home', 'kmong-reviews', 'kmong-reviews-collect',
     'kmong-search', 'kmong-search-collect',
-    'soomgo-categories', 'soomgo-pro-collect', 'soomgo-pro-search', 'soomgo-subcategories',
+    'soomgo-address-options', 'soomgo-categories', 'soomgo-pro-collect', 'soomgo-pro-search',
+    'soomgo-profile', 'soomgo-profile-contents', 'soomgo-profile-portfolios', 'soomgo-profile-portfolios-collect', 'soomgo-profile-reviews',
+    'soomgo-profile-reviews-collect',
+    'soomgo-request-form', 'soomgo-request-prepare', 'soomgo-subcategories',
     'upwork-collect', 'upwork-job', 'upwork-search',
   ]);
   const metadata = await createServiceRegistry('freelance-public', {
@@ -561,6 +564,238 @@ test('Soomgo category and public pro-search operations use fixed origins and pre
     assert.equal(result.receipt.networkUsed, false);
     assert.equal(requests.length, 3);
     assert.equal(new URL(requests[2].url).searchParams.get('service_slug'), 'logo');
+  } finally { await registry.close(); }
+});
+
+test('Soomgo common request-form reads are bounded first-party GETs and preparation sends no request', async () => {
+  const formFixture = JSON.parse(await fixture('soomgo-request-form-20261027.json'));
+  const addressFixture = JSON.parse(await fixture('soomgo-addresses-area3-first-record.json'));
+  const requests = [];
+  const registry = await createServiceRegistry('freelance-public', { now: () => at,
+    fetchImpl: async (url, init) => {
+      const target = new URL(String(url));
+      requests.push({ url: target.href, init });
+      assert.equal(target.origin, 'https://api.soomgo.com');
+      assert.equal(init.method, 'GET');
+      assert.equal(init.credentials, 'omit');
+      assert.equal(new Headers(init.headers).get('cookie'), null);
+      if (target.pathname === '/v2/services/%EA%B0%80%EC%A0%95-%EC%9D%B4%EC%82%AC-%ED%88%AC%EB%A3%B8-%EC%93%B0%EB%A6%AC%EB%A3%B8/form') {
+        assert.equal(target.search, '');
+        return json({ code: 0, reason: '', request: '', response: formFixture.form });
+      }
+      if (target.pathname === '/v1/requests/forms/addresses') {
+        assert.deepEqual([...target.searchParams], [['depth', 'area3']]);
+        return json({ code: 0, reason: '', request: '', response: { addresses: addressFixture.items } });
+      }
+      throw new Error('unexpected Soomgo request route');
+    } });
+  try {
+    const depthSchema = registry.describe('soomgo-address-options').inputSchema.properties.query.properties.areaDepth;
+    assert.deepEqual(depthSchema.enum, [3]);
+    assert.equal(depthSchema.default, 3);
+    const form = await registry.execute('soomgo-request-form', { query: {
+      serviceId: 729, serviceSlug: '가정-이사-투룸-쓰리룸', serviceName: '가정이사(투룸 이상)',
+    } });
+    assert.equal(form.data.operation, 'service_request_form');
+    assert.equal(form.data.form.serviceId, 729);
+    assert.equal(form.data.dispatch.supported, false);
+    assert.equal(form.receipt.networkUsed, false);
+    assert.equal(form.receipt.writesSubmitted, 0);
+
+    const addressOptions = await registry.execute('soomgo-address-options', { query: { areaDepth: 3 } });
+    assert.equal(addressOptions.data.operation, 'address_options');
+    assert.equal(addressOptions.data.items[0].addressRowid, 3);
+    assert.equal(addressOptions.data.coverage.complete, false);
+    const afterDepthThree = requests.length;
+    await assert.rejects(registry.execute('soomgo-address-options', { query: { areaDepth: 2 } }),
+      { code: 'OPERATION_INPUT_INVALID' });
+    assert.equal(requests.length, afterDepthThree, 'unobserved address depths stop before transport');
+
+    const beforePrepare = requests.length;
+    const prepared = await registry.execute('soomgo-request-prepare', { body: { form: form.data } });
+    assert.equal(requests.length, beforePrepare, 'preparation is local and never dispatches the service form');
+    assert.equal(prepared.data.operation, 'prepare_request');
+    assert.equal(prepared.data.status, 'prepared_only');
+    assert.equal(prepared.data.networkUsed, false);
+    assert.equal(prepared.data.writesSubmitted, 0);
+    assert.equal(prepared.data.gates.dispatchSupported, false);
+    assert.equal(prepared.data.gates.requestSent, false);
+    assert.equal(prepared.data.gates.externallySubmitted, false);
+    assert.equal(prepared.receipt.networkUsed, false);
+    assert.equal(prepared.receipt.writesSubmitted, 0);
+    assert.equal(prepared.receipt.httpStatus, undefined, 'the local preparation receipt has no provider HTTP status');
+    assert.equal(requests.length, 2);
+  } finally { await registry.close(); }
+});
+
+test('Soomgo profile, review and portfolio reads bind IDs, sanitize public text and omit reviewer details', async () => {
+  const source = JSON.parse(await fixture('soomgo-profile.json'));
+  const calls = [];
+  const registry = await createServiceRegistry('freelance-public', { now: () => at,
+    fetchImpl: async (url, init) => {
+      const target = new URL(String(url));
+      calls.push(target);
+      assert.equal(target.origin, 'https://api.soomgo.com');
+      assert.equal(init.method, 'GET');
+      assert.equal(init.credentials, 'omit');
+      assert.equal(new Headers(init.headers).get('cookie'), null);
+      assert.equal(new Headers(init.headers).get('authorization'), null);
+      let response = target.pathname.endsWith('/profile') ? source.profile
+        : target.pathname.endsWith('/profile-contents') ? source.contents
+          : target.pathname.endsWith('/portfolios') ? source.portfolios : source.reviews;
+      if (target.pathname.endsWith('/reviews/received')) {
+        const cursor = target.searchParams.get('next_cursor');
+        if (cursor !== null) {
+          assert.deepEqual([...target.searchParams], [
+            ['next_cursor', 'fixture-public-review-cursor'],
+            ['is_photo_review', 'false'], ['is_pay_verified', 'false'], ['sort_type', 'latest'],
+            ['size', '3'], ['role', 'provider'],
+          ]);
+        } else assert.deepEqual([...target.searchParams], [['size', '3'], ['role', 'provider']]);
+        const page = cursor === null ? 1 : 2;
+        response = structuredClone(source.reviews);
+        response.items = Array.from({ length: 3 }, (_, index) => ({
+          ...structuredClone(source.reviews.items[0]), id: `fixture-review-${page}-${index}`,
+        }));
+        response.pagination = {
+          ...response.pagination, currentCount: page * 3, totalCount: 6,
+          hasNextPage: page === 1, nextCursor: page === 1 ? 'fixture-public-review-cursor' : '',
+        };
+      }
+      return json({ code: 0, reason: '', request: '', response });
+    } });
+  try {
+    const profile = await registry.execute('soomgo-profile', { query: { userId: '7847767', expectedProviderId: '993707' } });
+    assert.equal(profile.data.identity.userId, '7847767');
+    assert.equal(profile.data.identity.providerId, '993707');
+    assert.equal(profile.data.identity.providerMatchVerified, true);
+    assert.equal(profile.data.identity.ownerVerified, false);
+    assert.equal(profile.receipt.networkUsed, false);
+
+    const contents = await registry.execute('soomgo-profile-contents', { query: { userId: '7847767' } });
+    assert.equal(contents.data.operation, 'profile_contents');
+    assert.equal(contents.data.items[0].hasContent, true);
+    assert.equal(JSON.stringify(contents).includes('cdn.example.invalid'), false);
+
+    const portfolio = await registry.execute('soomgo-profile-portfolios', { query: { userId: '7847767', size: 8 } });
+    assert.equal(portfolio.data.operation, 'profile_portfolios');
+    assert.equal(portfolio.data.items.length, 1);
+    assert.equal(portfolio.data.pagination.complete, false);
+
+    const reviews = await registry.execute('soomgo-profile-reviews', { query: { userId: '7847767' } });
+    assert.equal(reviews.data.operation, 'profile_reviews');
+    assert.equal(reviews.data.items.length, 3);
+    assert.equal(reviews.data.pagination.nextCursor, 'fixture-public-review-cursor');
+    const reviewSchema = registry.describe('soomgo-profile-reviews-collect').inputSchema.properties.query.properties;
+    assert.equal(reviewSchema.maxPages.default, 1);
+    assert.equal(reviewSchema.maxPages.maximum, 5);
+    assert.equal(reviewSchema.nextCursor.type, 'string');
+    const collectedReviews = await registry.execute('soomgo-profile-reviews-collect', {
+      query: { userId: '7847767', maxPages: 2 },
+    });
+    assert.equal(collectedReviews.data.items.length, 6);
+    assert.equal(collectedReviews.data.pagination.pages, 2);
+    assert.equal(collectedReviews.data.pagination.complete, true);
+    assert.equal(collectedReviews.data.pagination.nextCursor, null);
+    assert.equal(collectedReviews.receipt.networkUsed, false);
+    const beforeInvalidCap = calls.length;
+    await assert.rejects(registry.execute('soomgo-profile-reviews-collect', {
+      query: { userId: '7847767', maxPages: 6 },
+    }), { code: 'OPERATION_INPUT_INVALID' });
+    assert.equal(calls.length, beforeInvalidCap);
+    const serialized = JSON.stringify({ profile, contents, portfolio, reviews, collectedReviews });
+    for (const privateValue of [
+      'PRIVATE_PROVIDER_SENTINEL', 'PRIVATE_CONTACT_SENTINEL', 'PRIVATE_PORTFOLIO_TEXT_SENTINEL',
+      'REVIEWER_NAME_SENTINEL', 'reviewer@example.invalid', 'sample@example.invalid',
+      '010-1111-2222', '+44 (0)20 7946 0958', '415-555-0100',
+      'Private Exact Address', 'FINANCIAL_DATA_SENTINEL',
+      'cdn.example.invalid/private-image',
+    ]) assert.equal(serialized.includes(privateValue), false);
+    assert.equal(portfolio.data.pagination.nextCursor, 'OPAQUE_PORTFOLIO_CURSOR_SENTINEL');
+    assert.equal(JSON.stringify(portfolio.receipt).includes('OPAQUE_PORTFOLIO_CURSOR_SENTINEL'), false);
+    assert.equal(serialized.includes('REVIEW_BODY_SENTINEL [redacted]'), true,
+      'the public review body is retained after contact details are redacted');
+    assert.deepEqual(calls.map(call => call.pathname), [
+      '/v2/user/7847767/profile', '/v1/providers/7847767/profile-contents',
+      '/v2/users/7847767/portfolios', '/v3/users/7847767/reviews/received',
+      '/v3/users/7847767/reviews/received', '/v3/users/7847767/reviews/received',
+    ]);
+  } finally { await registry.close(); }
+});
+
+test('Soomgo portfolio operations replay size-8 next_cursor and collect at most five pages', async () => {
+  const source = JSON.parse(await fixture('soomgo-profile.json'));
+  const calls = [];
+  let collectionActive = false;
+  const pageFor = pageNumber => {
+    const response = structuredClone(source.portfolios);
+    const returned = pageNumber === 3 ? 4 : 8;
+    response.items = Array.from({ length: returned }, (_, index) => ({
+      ...structuredClone(source.portfolios.items[0]), id: `portfolio-${pageNumber}-${index}`,
+    }));
+    response.pagination = {
+      ...response.pagination,
+      currentCount: Math.min(pageNumber * 8, 20),
+      size: 8,
+      totalCount: 20,
+      hasNextPage: pageNumber < 3,
+      hasPrevPage: pageNumber > 1,
+      nextCursor: pageNumber < 3 ? `portfolio-page-${pageNumber + 1}` : '',
+    };
+    return response;
+  };
+  const registry = await createServiceRegistry('freelance-public', { now: () => at,
+    fetchImpl: async (url, init) => {
+      const target = new URL(String(url));
+      calls.push(target);
+      assert.equal(target.origin, 'https://api.soomgo.com');
+      assert.equal(target.pathname, '/v2/users/7847767/portfolios');
+      assert.equal(init.method, 'GET');
+      assert.equal(init.credentials, 'omit');
+      assert.equal(new Headers(init.headers).get('cookie'), null);
+      const cursor = target.searchParams.get('next_cursor');
+      assert.equal(target.searchParams.get('size'), '8');
+      if (!collectionActive) {
+        assert.equal(cursor, 'direct-portfolio-cursor');
+        return json({ code: 0, reason: '', request: '', response: source.portfolios });
+      }
+      if (cursor === null) return json({ code: 0, reason: '', request: '', response: pageFor(1) });
+      assert.equal([...target.searchParams][1][0], 'next_cursor');
+      if (cursor === 'portfolio-page-2') return json({ code: 0, reason: '', request: '', response: pageFor(2) });
+      assert.equal(cursor, 'portfolio-page-3');
+      return json({ code: 0, reason: '', request: '', response: pageFor(3) });
+    } });
+  try {
+    const directSchema = registry.describe('soomgo-profile-portfolios').inputSchema.properties.query.properties;
+    assert.equal(directSchema.nextCursor.type, 'string');
+    const direct = await registry.execute('soomgo-profile-portfolios', {
+      query: { userId: '7847767', size: 8, nextCursor: 'direct-portfolio-cursor' },
+    });
+    assert.equal(direct.data.pagination.resumedFromCursor, true);
+    assert.deepEqual([...calls[0].searchParams], [['size', '8'], ['next_cursor', 'direct-portfolio-cursor']]);
+
+    collectionActive = true;
+    const collectSchema = registry.describe('soomgo-profile-portfolios-collect').inputSchema.properties.query.properties;
+    assert.equal(collectSchema.maxPages.default, 1);
+    assert.equal(collectSchema.maxPages.maximum, 5);
+    assert.deepEqual(collectSchema.size.enum, [4, 8]);
+    const collected = await registry.execute('soomgo-profile-portfolios-collect', {
+      query: { userId: '7847767', size: 8, maxPages: 3 },
+    });
+    assert.equal(collected.data.operation, 'profile_portfolios_collect');
+    assert.equal(collected.data.items.length, 20);
+    assert.equal(collected.data.pagination.pages, 3);
+    assert.equal(collected.data.pagination.complete, true);
+    assert.equal(collected.data.pagination.nextCursor, null);
+    assert.equal(collected.receipt.networkUsed, false);
+    const beforeInvalid = calls.length;
+    await assert.rejects(registry.execute('soomgo-profile-portfolios-collect', {
+      query: { userId: '7847767', size: 8, maxPages: 6 },
+    }), { code: 'OPERATION_INPUT_INVALID' });
+    await assert.rejects(registry.execute('soomgo-profile-portfolios-collect', {
+      query: { userId: '7847767', size: 4, maxPages: 2 },
+    }), { code: 'SOOMGO_PROFILE_PORTFOLIO_CONTINUATION_UNVERIFIED' });
+    assert.equal(calls.length, beforeInvalid, 'invalid limits and unverified size-4 continuation stop before transport');
   } finally { await registry.close(); }
 });
 

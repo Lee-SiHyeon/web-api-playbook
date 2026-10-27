@@ -5,6 +5,7 @@ import { readFile, realpath, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { auditCapabilityChecklist, safeRelativePath } from '../lib/capability-checklist.mjs';
+import { verifyManifestImplementation } from '../lib/recorded-evidence-provenance.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const EVIDENCE_DIR = 'verification/kmong-auth-2026-10-26/';
@@ -13,14 +14,25 @@ const REQUIRED_ARTIFACTS = [
   'kmong-auth-reuse-proof.json',
   'kmong-auth-bootstrap-context.json',
 ];
-const REQUIRED_IMPLEMENTATION = [
+const AUTH_RUNTIME_PATHS = [
   'lib/web-auth/kmong.mjs',
   'scripts/kmong-account.mjs',
   'lib/protected-store.mjs',
   'lib/scoped-session.mjs',
   'lib/session-lock.mjs',
-  'lib/capability-checklist.mjs',
-  'checklists/services/kmong.json',
+  'lib/cli.mjs',
+  'scripts/dpapi-store.ps1',
+  'package.json',
+  'package-lock.json',
+];
+const VERIFICATION_METADATA_PATHS = Object.freeze({
+  'scripts/verify-kmong-auth.mjs': 'offline_verifier',
+  'lib/capability-checklist.mjs': 'evidence_validator',
+  'checklists/services/kmong.json': 'checklist_metadata',
+});
+const REQUIRED_IMPLEMENTATION = [
+  ...AUTH_RUNTIME_PATHS,
+  ...Object.keys(VERIFICATION_METADATA_PATHS),
 ];
 const AUTH_HASH_PATHS = [
   'lib/web-auth/kmong.mjs',
@@ -29,6 +41,12 @@ const AUTH_HASH_PATHS = [
   'lib/scoped-session.mjs',
   'lib/session-lock.mjs',
 ];
+const CHECKLIST_BINDINGS = Object.freeze({
+  'auth.owner': 'kmong-auth-owner-proof.json',
+  'auth.reuse': 'kmong-auth-reuse-proof.json',
+});
+const OWNER_READ_ORIGIN = 'https://kmong.com';
+const OWNER_READ_PATH = '/api/user/v3/me';
 const SHA256 = /^[a-f0-9]{64}$/;
 const ISO = value => typeof value === 'string' && Number.isFinite(Date.parse(value));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -98,6 +116,8 @@ function validateGenericOwnerProof(proof, capabilityId) {
   validateOwnerRequest(proof.request, `${capabilityId}.request`);
   assert.ok(Date.parse(proof.checkedAt) >= Date.parse(proof.request.checkedAt));
   exactObject(proof.implementation, `${capabilityId}.implementation`);
+  assert.deepEqual(Object.keys(proof.implementation).sort(), [...AUTH_HASH_PATHS].sort(),
+    `${capabilityId} implementation paths must exactly match the recorded owner proof`);
   for (const relative of AUTH_HASH_PATHS) assert.match(proof.implementation[relative] ?? '', SHA256,
     `${capabilityId} missing implementation hash: ${relative}`);
   assertNoSecrets(proof, capabilityId);
@@ -214,6 +234,33 @@ function relativeToEvidence(name) {
   return EVIDENCE_DIR + name;
 }
 
+function assertAuthChecklistBindings(manifest) {
+  exactObject(manifest, 'checklist manifest');
+  assert.equal(manifest.service, 'kmong');
+  assert.ok(Array.isArray(manifest.capabilities));
+  for (const [capabilityId, artifact] of Object.entries(CHECKLIST_BINDINGS)) {
+    const matching = manifest.capabilities.filter(capability => capability?.id === capabilityId);
+    if (matching.length !== 1) fail('KMONG_AUTH_CHECKLIST_BINDING_INVALID', `${capabilityId} must appear once`);
+    const capability = matching[0];
+    const expected = [{
+      kind: 'http-read-v1',
+      origin: OWNER_READ_ORIGIN,
+      path: OWNER_READ_PATH,
+      files: [EVIDENCE_DIR + artifact],
+      hashPaths: AUTH_HASH_PATHS,
+    }];
+    try {
+      assert.equal(capability.requirement, 'live');
+      assert.equal(capability.applicability, 'applicable');
+      assert.deepEqual(capability.evidence, expected);
+      assert.deepEqual(capability.sourceEvidence, []);
+    } catch {
+      fail('KMONG_AUTH_CHECKLIST_BINDING_INVALID', `${capabilityId} must retain its exact recorded proof and hash paths`);
+    }
+  }
+  return manifest;
+}
+
 export async function verifyKmongAuthEvidence({ root = ROOT } = {}) {
   const { value: manifest } = await readJson(root, EVIDENCE_DIR + 'manifest.json');
   exactObject(manifest, 'auth manifest');
@@ -222,16 +269,18 @@ export async function verifyKmongAuthEvidence({ root = ROOT } = {}) {
   assert.match(manifest.baseCommit ?? '', /^[a-f0-9]{40}$/);
   exactObject(manifest.implementation, 'manifest.implementation');
   exactObject(manifest.artifacts, 'manifest.artifacts');
+  assert.deepEqual(Object.keys(manifest.implementation).sort(), [...REQUIRED_IMPLEMENTATION].sort(),
+    'Historical manifest implementation paths must retain the exact runtime and metadata inventory');
   for (const relative of REQUIRED_IMPLEMENTATION) assert.match(manifest.implementation[relative] ?? '', SHA256,
     `Manifest missing implementation hash: ${relative}`);
   for (const name of REQUIRED_ARTIFACTS) assert.match(manifest.artifacts[name] ?? '', SHA256,
     `Manifest missing artifact hash: ${name}`);
-  for (const [relative, expected] of Object.entries(manifest.implementation)) {
-    assert.ok(safeRelativePath(relative));
-    assert.match(expected, SHA256);
-    assert.equal(sha(await readSafe(root, relative, 64 * 1024 * 1024)), expected,
-      `Implementation changed: ${relative}`);
-  }
+  const implementation = await verifyManifestImplementation({
+    implementation: manifest.implementation,
+    readFile: relative => readSafe(root, relative, 64 * 1024 * 1024),
+    sha256: sha,
+    verificationToolKinds: VERIFICATION_METADATA_PATHS,
+  });
 
   const artifacts = {};
   const digests = {};
@@ -246,6 +295,8 @@ export async function verifyKmongAuthEvidence({ root = ROOT } = {}) {
   const owner = validateKmongAuthOwnerProof(artifacts['kmong-auth-owner-proof.json']);
   const reuse = validateKmongAuthReuseProof(artifacts['kmong-auth-reuse-proof.json']);
   const bootstrap = validateKmongBootstrapContext(artifacts['kmong-auth-bootstrap-context.json']);
+  const checklistFile = await readJson(root, 'checklists/services/kmong.json');
+  const checklistManifest = assertAuthChecklistBindings(checklistFile.value);
   for (const proof of [owner, reuse]) {
     for (const [relative, hash] of Object.entries(proof.implementation ?? {})) {
       assert.equal(manifest.implementation[relative], hash, `Proof/runtime hash mismatch: ${relative}`);
@@ -256,9 +307,10 @@ export async function verifyKmongAuthEvidence({ root = ROOT } = {}) {
   assert.equal(statusOf('auth.owner'), 'recorded_live');
   assert.equal(statusOf('auth.reuse'), 'recorded_live');
   assert.equal(statusOf('auth.browser_bootstrap'), 'code_inventory');
+  assertAuthChecklistBindings(checklistManifest);
   return {
     ok: true,
-    verification: 'kmong_auth_evidence_revalidated',
+    verification: 'historical_kmong_auth_evidence_revalidated_offline',
     recordedAt: manifest.recordedAt,
     checkedAt: new Date().toISOString(),
     networkUsed: false,
@@ -277,6 +329,8 @@ export async function verifyKmongAuthEvidence({ root = ROOT } = {}) {
       persistent: reuse.reuse.persistent,
       loginPosts: reuse.reuse.automatedLoginPosts,
     },
+    runtimeImplementationHashesMatched: implementation.runtimeImplementationHashesMatched,
+    verificationMetadataProvenance: implementation.verificationToolProvenance,
     bootstrap: {
       provider: 'Google',
       phases: bootstrap.phases.map(phase => phase.name),
