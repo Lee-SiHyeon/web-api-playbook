@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, mkdir, mkdtemp, writeFile, rm, stat } from 'node:fs/promises';
 import path from 'node:path';
+import { homedir } from 'node:os';
 import {
   createSoomgoRequestClient,
   dispatchSoomgoRequest,
@@ -360,7 +361,7 @@ test('6045-row address catalog flows from CLI GET to local preparation without a
     }
     assert.fail(`unobserved route: ${url.pathname}`);
   };
-  const scratchRoot = '/home/worker/.nad-scratch/tmp';
+  const scratchRoot = process.env.TMPDIR || path.join(homedir(), '.nad-scratch', 'tmp');
   await mkdir(scratchRoot, { recursive: true });
   const scratch = await mkdtemp(path.join(scratchRoot, 'soomgo-address-cli-test-'));
   t.after(() => rm(scratch, { recursive: true, force: true }));
@@ -400,7 +401,7 @@ test('6045-row address catalog flows from CLI GET to local preparation without a
 
 test('CLI rejects an address catalog over 2 MiB while direct answers stay bounded at 128 KiB', async t => {
   const formCapture = await readJson('./fixtures/freelance/soomgo-request-form-20261027.json');
-  const scratchRoot = '/home/worker/.nad-scratch/tmp';
+  const scratchRoot = process.env.TMPDIR || path.join(homedir(), '.nad-scratch', 'tmp');
   await mkdir(scratchRoot, { recursive: true });
   const scratch = await mkdtemp(path.join(scratchRoot, 'soomgo-request-size-test-'));
   t.after(() => rm(scratch, { recursive: true, force: true }));
