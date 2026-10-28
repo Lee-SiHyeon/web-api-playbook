@@ -98,7 +98,7 @@ npm run video:similar -- --title "IRIN PJ88C 접이식 디지털 피아노 88키
 |---|---|---|
 | Walmart | 탭 fetch로 검색·PDP 정상. 표본 4개 모두 `"videos":null`, `videoInfographics`(VIG_*)만 있음 = 월마트가 상품 이미지로 자동 생성한 슬라이드 | 판매자 실촬영이 아니라 쇼츠 소재 가치 낮음 |
 | Shopify 브랜드 스토어 | 5개 브랜드 × 12상품의 `/products/{handle}.js` 미디어에 영상 0개, 3곳은 `/products.json` 403 | 브랜드별 스토어라 검색 소스가 아님 |
-| 1688 이미지 검색 | 업로드(`uploadBase64WithRequest`, JPEG 필수) → imageId까지 성공, `imageSimilarSearchV2`는 params invalid | 로그인 또는 추가 파라미터 필요 |
+| 1688 이미지 검색 | 업로드(`uploadBase64WithRequest`, JPEG 필수) → imageId까지 성공, `imageSimilarSearchV2`는 params invalid. 2026-10-26 재확인: 같은 탭에서 업로드 직후 `getOfferList`에 `tab=imageSearch, imageId, imageIdList`를 넣으면 `searchScene=pcOfferSearch`는 이미지와 무관한 일반 추천 60개, `pcImageSearch`는 0개. 결과 화면 `s.1688.com/youyuan/index.htm`은 슬라이더 인증(punish), `similar_search.html?imageAddress=`는 검색 호출 자체가 없음 | 비로그인으로는 쓸 수 없음. 자동화 Canary에 1688 로그인 후 재확인 |
 | 더우인 / 샤오홍슈 | 검색에 로그인 필요 | 작업용 계정이 생기면 추가 |
 
 ## 판정기(judge) 선택 — 2026-10-17 실측
@@ -124,3 +124,30 @@ npm run video:pipeline -- --coupang-query "접이식 피아노" --pick 3 --out .
 - 쿠팡 검색·상품 Document는 Node 직접 GET이 403이라 탭 전송으로 읽는다. 상품 페이지의 `og:title`, `og:image`(640x640)가 기준.
 - 결과: `<out>/coupang-<productId>/manifest.json`(기준 상품, 키워드, same/type 매칭과 사유, 영상 상태) + 영상 파일과 `.provenance.json`(매칭된 쿠팡 상품 ID·판정 포함).
 - 2026-10-17: 토이게이트 88건반(국내 브랜드) → same 0, type 8, 아마존 판매자 영상 4개, 63초. 국내 브랜드 상품은 same이 없을 수 있어 `--include-type`으로 같은 종류 영상을 쓴다.
+
+### 탐색 누락 방지 (2026-10-26)
+
+소유자 지시: "판매자 영상이 있는데 못찾는 누락이 발생하지 않게". 쿠팡 상품 네 개(SKY 베라 피지 흡입기, 88그로스 욕실 청소기, 지티스
+접이식 전기포트, APEXSO 디스펜서)가 모두 same 0이었고, 원인은 탐색 범위였다.
+
+| 원인 | 수정 |
+|---|---|
+| 소스마다 검색어 1개(일반명사)만 사용 | `productKeywords`가 `koAlt/zhAlt/enAlt`(더 구체적인 표현, 판매자 관용어)를 함께 반환하고 모두 검색 |
+| 1688 첫 페이지 상위 30개만 사용 | 1688 2페이지(`--pages-1688`), 소스당 최대 60개(`--per-source`), 키워드 간 중복 제거 |
+| dHash 상위 10개만 판정(카탈로그 썸네일은 배경이 달라 dHash 순위가 약하고, 한 소스가 10칸을 다 차지) | 소스별로 번갈아 섞은 순서로 10개씩 배치 판정, `--judge-max`(기본 60)까지. same이 영상 목표의 2배 나오면 중단 |
+| "0개"가 실제로 없는 것인지 판정 못 한 것인지 구분 불가 | manifest `coverage`(소스별 검색 수·후보·판정·same·type·미판정·오류)와 `possibleMiss`(same 0인데 미판정이나 검색 오류가 있으면 사유 목록). `possibleMiss`가 있으면 "없음"으로 결론 내리지 않는다 |
+| 같은 상품 판매 페이지라도 영상은 공장 투어이거나 다른 색·모델 | 받은 영상에서 6프레임을 뽑아 기준 상품 사진과 Codex로 비교(`codexVideoCheck`). `match: same`만 목표 개수에 넣고, 나머지는 `rejected/`로 옮긴 뒤 `videoStatus: rejected:<match>/<content>`로 기록. 끄려면 `--no-video-check` |
+| 실행마다 LLM 검색어가 달라 앞서 찾은 같은 상품이 다음 후보군에서 빠짐 | 쿠팡 상품별 캐시 `%LOCALAPPDATA%\web-api-playbook\video-pipeline\coupang-<id>.json`에 same 판정을 누적하고, 매 실행 후보에 다시 넣는다(`carried: true`) |
+
+SKY 베라 피지 흡입기(7728282851) 실측: 기존 same 0·영상 0 → 검색 범위 확장 후 후보 288개, same 12, 영상 4. 그러나 영상 4개 중 2개는
+공장 영상과 민트색 다른 모델이었다. 영상 단계 검증을 넣은 실행에서는 후보 328개를 전부 판정해 same 8, 받은 영상 7개가 모두 다른 모델이나
+공장 영상이라 걸러졌다.
+
+## 판매자 영상 자막 제거 (2026-10-26)
+
+| 경로 | 상태 |
+|---|---|
+| `scripts/vmake-subtitle-remove.mjs` (Vmake 웹, 무료 5초 미리보기를 4.8초 조각마다 받아 원본 길이에 맞춰 잇고 원본 소리를 깖) | **사용 중.** Canary에 Vmake 무료 Google 로그인 필요. 37초 영상 8조각, 실패 0, 약 5분. 미리보기에 워터마크 없음. 유료 기능을 조각으로 받는 방식이라 계정 정지 위험은 소유자가 수용함 |
+| `scripts/subtitle-remove.mjs` (PiAPI `Qubico/video-toolkit` `remove-subtitle`, $0.006/초, 키는 보호 저장소 `piapi-api-key`) | 2026-10-26 기준 실패. 1688 주소, litterbox 임시 주소, 웹 플레이그라운드 직접 업로드 모두 작업 생성 후 `Internal error`(10000), 무료 크레딧 $0.50은 차감 안 됨. 작업 ID 2b49984f…, 11a12395…, c654b382…, 65dfcfee… |
+| `shorts-anatomy/removal/erase.py` (RapidOCR + MI-GAN, CPU) | 이 PC에서 37초 영상에 38분 넘게 걸리고 Canary를 멈추게 해 중단. 쓰지 않음 |
+| ffmpeg delogo / 크롭 | 자막 위치가 고정이면 0원·즉시. 덮을 자막 띠가 같은 자리에 오면 충분 |
