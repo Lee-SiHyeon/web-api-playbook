@@ -13,9 +13,11 @@ test('generic status never claims an operation-specific ChatGPT client or live r
   const client = new ChatGPTWebClient({ registry, sessionProvider: syntheticSessionProvider });
   const status = await client.status();
   assert.equal(status.genericInfrastructureReady, true);
-  assert.equal(status.contractState, 'CONTRACT_NOT_CAPTURED');
+  assert.equal(status.contractState, 'partially_captured');
+  assert.equal(status.operations.history.captured, true);
+  assert.equal(status.operations.image.captured, true);
+  assert.equal(status.operations.text.captured, false);
   for (const operation of Object.values(status.operations)) {
-    assert.equal(operation.captured, false);
     assert.equal(operation.clientExists, false);
     assert.equal(operation.credentialPropagated, false);
     assert.equal(operation.liveReplay, false);

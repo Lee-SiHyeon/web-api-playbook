@@ -2,10 +2,100 @@
   "schemaVersion": 1,
   "service": "chatgpt-web",
   "primaryOrigin": "https://chatgpt.com",
-  "captured": false,
-  "captureReference": null,
+  "captured": true,
+  "captureReference": "discovery/xhr-capture-2026-10-29.json",
   "allowedOrigins": [
     "https://chatgpt.com"
   ],
-  "operations": []
+  "operations": [
+    {
+      "id": "history.conversation.read",
+      "family": "history",
+      "kind": "read",
+      "captured": true,
+      "observedAt": "2026-10-29T00:00:00.000Z",
+      "evidence": {
+        "requestRef": "discovery/xhr-capture-2026-10-29.json#/captures/1/requests/11",
+        "responseRef": "discovery/xhr-capture-2026-10-29.json#/captures/1/requests/11"
+      },
+      "origin": "https://chatgpt.com",
+      "method": "GET",
+      "auth": "chatgpt-session",
+      "inputSchema": {
+        "conversation_id": { "type": "string", "required": true, "maxLength": 128 }
+      },
+      "pathTemplate": "/backend-api/conversations/{conversation_id}",
+      "request": { "encoding": "none" },
+      "response": {
+        "kind": "json",
+        "contentTypes": ["application/json"],
+        "successStatuses": [200],
+        "maxBytes": 20000000
+      }
+    },
+    {
+      "id": "image.conversation.init",
+      "family": "image",
+      "kind": "read",
+      "captured": true,
+      "observedAt": "2026-10-29T00:00:00.000Z",
+      "evidence": {
+        "requestRef": "discovery/xhr-capture-2026-10-29.json#/captures/1/requests/4",
+        "responseRef": "discovery/xhr-capture-2026-10-29.json#/captures/1/requests/4"
+      },
+      "origin": "https://chatgpt.com",
+      "method": "POST",
+      "auth": "chatgpt-session",
+      "inputSchema": {},
+      "pathTemplate": "/backend-api/conversation/init",
+      "request": {
+        "encoding": "json",
+        "template": {
+          "conversation_id": null,
+          "conversation_origin": null,
+          "gizmo_id": null,
+          "requested_default_model": null,
+          "system_hints": null,
+          "timezone": "Asia/Seoul",
+          "timezone_offset_min": -540
+        }
+      },
+      "response": {
+        "kind": "json",
+        "contentTypes": ["application/json"],
+        "successStatuses": [200],
+        "maxBytes": 2000000
+      }
+    },
+    {
+      "id": "image.file.download",
+      "family": "image",
+      "kind": "read",
+      "captured": true,
+      "observedAt": "2026-10-29T00:00:00.000Z",
+      "evidence": {
+        "requestRef": "discovery/xhr-capture-2026-10-29.json#/captures/1/requests/14",
+        "responseRef": "discovery/xhr-capture-2026-10-29.json#/captures/1/requests/14"
+      },
+      "origin": "https://chatgpt.com",
+      "method": "GET",
+      "auth": "chatgpt-session",
+      "inputSchema": {
+        "file_id": { "type": "string", "required": true, "maxLength": 128 },
+        "conversation_id": { "type": "string", "required": true, "maxLength": 128 }
+      },
+      "pathTemplate": "/backend-api/files/download/{file_id}",
+      "queryTemplate": [
+        { "name": "conversation_id", "input": "conversation_id" },
+        { "name": "inline", "value": "false" }
+      ],
+      "request": { "encoding": "none" },
+      "response": {
+        "kind": "json",
+        "contentTypes": ["application/json"],
+        "successStatuses": [200],
+        "maxBytes": 2000000
+      }
+    }
+  ]
 }

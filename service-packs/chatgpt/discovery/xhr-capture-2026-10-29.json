@@ -1,0 +1,1175 @@
+{
+ "schema": "chatgpt-web-xhr-shape-capture-v1",
+ "observedAt": "2026-10-29",
+ "device": "Android phone Chrome 155 via adb CDP",
+ "note": "Header NAMES only; token/cookie/proof/turnstile values redacted; prompts truncated; ids replaced.",
+ "captures": [
+  {
+   "scenario": "open existing image conversation",
+   "requests": [
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/me",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/models",
+     "query": [
+      "iim",
+      "include_icons",
+      "is_gizmo"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/conversations/<uuid>",
+     "query": [
+      "num_turns",
+      "include_has_versions"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/conversation/init",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Content-Type",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "conversation_id": "<uuid>",
+      "conversation_origin": null,
+      "gizmo_id": null,
+      "requested_default_model": null,
+      "system_hints": null,
+      "timezone": "Asia/Seoul",
+      "timezone_offset_min": -540
+     }
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/sentinel/chat-requirements/prepare",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "content-length",
+      "content-type",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "origin",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "p": "<redacted>"
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/files/download/file_<id>",
+     "query": [
+      "conversation_id",
+      "download_intent",
+      "inline",
+      "include_library_file_state"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/conversations/<uuid>",
+     "query": [
+      "num_turns",
+      "include_has_versions"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/sentinel/chat-requirements/finalize",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "content-length",
+      "content-type",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "origin",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "prepare_token": "<redacted>",
+      "proofofwork": "<redacted>",
+      "turnstile": "<redacted>"
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/estuary/content",
+     "query": [
+      "id",
+      "ts",
+      "p",
+      "cid",
+      "sig",
+      "v"
+     ],
+     "mime": "image/png",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "if-modified-since",
+      "if-none-match",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/files/download/file_<id>",
+     "query": [
+      "conversation_id",
+      "download_intent",
+      "inline"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/files/download/file_<id>",
+     "query": [
+      "download_intent",
+      "inline"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/estuary/content",
+     "query": [
+      "id",
+      "ts",
+      "p",
+      "cid",
+      "sig",
+      "v"
+     ],
+     "mime": "image/png",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Referer",
+      "User-Agent",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/estuary/content",
+     "query": [
+      "id",
+      "ts",
+      "p",
+      "cid",
+      "sig",
+      "v"
+     ],
+     "mime": "image/png",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Referer",
+      "User-Agent",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform"
+     ],
+     "body": null
+    }
+   ]
+  },
+  {
+   "scenario": "send text prompt that triggers image generation",
+   "requests": [
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/models",
+     "query": [
+      "iim",
+      "include_icons",
+      "is_gizmo"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/sentinel/chat-requirements/prepare",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "content-length",
+      "content-type",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "origin",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "p": "<redacted>"
+     },
+     "response": {
+      "persona": "chatgpt-paid",
+      "prepare_token": "<redacted>",
+      "turnstile": "<redacted>",
+      "proofofwork": "<redacted>",
+      "so": {
+       "required": true,
+       "collector_dx": "<redacted>",
+       "snapshot_dx": "<redacted>"
+      }
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/me",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/sentinel/chat-requirements/finalize",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "content-length",
+      "content-type",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "origin",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "prepare_token": "<redacted>",
+      "proofofwork": "<redacted>",
+      "turnstile": "<redacted>"
+     },
+     "response": {
+      "persona": "chatgpt-paid",
+      "token": "<redacted>",
+      "expire_after": 540,
+      "expire_at": 1793232554
+     }
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/conversation/init",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Content-Type",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "conversation_id": null,
+      "conversation_origin": null,
+      "gizmo_id": null,
+      "requested_default_model": null,
+      "system_hints": null,
+      "timezone": "Asia/Seoul",
+      "timezone_offset_min": -540
+     },
+     "response": {
+      "type": "conversation_detail_metadata",
+      "banner_info": null,
+      "blocked_features": [],
+      "model_limits": [],
+      "limits_progress": [
+       {
+        "feature_name": "deep_research",
+        "remaining": 250,
+        "reset_after": "2026-11-28T00:00:14.419782+00:00"
+       },
+       {
+        "feature_name": "image_gen",
+        "remaining": 1000,
+        "reset_after": "2026-10-30T00:00:14.419800+00:00"
+       }
+      ],
+      "default_model_slug": "gpt-6",
+      "intended_default_model_slug": "gpt-6",
+      "atlas_mode_enabled": null
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/files/download/file_<id>",
+     "query": [
+      "download_intent",
+      "inline"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null,
+     "response": {
+      "status": "success",
+      "download_url": "https://chatgpt.com/backend-api/estuary/content?id=file_0000…",
+      "metadata": null,
+      "file_name": null,
+      "creation_time": null,
+      "no_auth_user_upload": null,
+      "mime_type": null,
+      "file_size_bytes": null
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/estuary/content",
+     "query": [
+      "id",
+      "ts",
+      "p",
+      "cid",
+      "sig",
+      "v"
+     ],
+     "mime": "image/png",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>"
+     ],
+     "body": null
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/f/conversation/prepare",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Content-Type",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "oai-genui-client-actions",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-oai-mcp-form-version",
+      "x-oai-turn-trace-id",
+      "x-openai-beacon-google-auth",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "client_prepare_state": "sent",
+      "action": "next",
+      "model": "gpt-6",
+      "parent_message_id": "client-created-root",
+      "timezone": "Asia/Seoul",
+      "timezone_offset_min": -540,
+      "is_do_not_remember": false,
+      "local_function_names": [
+       "local.continue_in_work"
+      ],
+      "partial_query": {
+       "author": {
+        "role": "user"
+       },
+       "content": {
+        "content_type": "text",
+        "parts": [
+         "Create an image: a small simple green shopping bag icon on a…"
+        ]
+       },
+       "id": "<uuid>"
+      },
+      "client_prepare_dispatch": "debounced",
+      "client_prepare_source": "composer_editor_state"
+     },
+     "response": {
+      "status": "ok",
+      "conduit_token": "<redacted>"
+     }
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/f/conversation",
+     "query": [],
+     "mime": "text/event-stream",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Content-Type",
+      "OAI-Device-Id",
+      "OAI-Echo-Logs",
+      "OAI-Language",
+      "OpenAI-Sentinel-Chat-Requirements-Token",
+      "OpenAI-Sentinel-Proof-Token",
+      "OpenAI-Sentinel-Turnstile-Token",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "oai-genui-client-actions",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-conduit-token",
+      "x-oai-mcp-form-version",
+      "x-oai-turn-trace-id",
+      "x-openai-beacon-google-auth",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend",
+      "x-openai-web-sse-compression"
+     ],
+     "body": {
+      "turn_attribution": {
+       "turn_trigger": "composer"
+      },
+      "action": "next",
+      "model": "gpt-6",
+      "parent_message_id": "client-created-root",
+      "timezone": "Asia/Seoul",
+      "timezone_offset_min": -540,
+      "is_do_not_remember": false,
+      "client_contextual_info": {
+       "app_name": "chatgpt.com",
+       "app_surface": "codex_browser",
+       "has_web_push_capabilities": true,
+       "web_push_notification_permission": "default"
+      },
+      "local_function_names": [
+       "local.continue_in_work"
+      ],
+      "messages": [
+       {
+        "author": {
+         "metadata": {},
+         "name": null,
+         "role": "user"
+        },
+        "channel": null,
+        "content": {
+         "content_type": "text",
+         "parts": [
+          "Create an image: a small simple green shopping bag icon on a…"
+         ]
+        },
+        "create_time": 1793232023.185,
+        "end_turn": null,
+        "id": "<uuid>",
+        "metadata": {
+         "automation_creation_attribution": {
+          "origin": "conversation",
+          "flow_id": "<uuid>"
+         }
+        },
+        "recipient": "all",
+        "status": "finished_successfully",
+        "update_time": null,
+        "weight": 1
+       }
+      ],
+      "supported_encodings": [
+       "v1"
+      ],
+      "genui_state_snapshots": [],
+      "client_prepare_state": "success"
+     }
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/sentinel/chat-requirements/prepare",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Content-Type",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "p": "<redacted>"
+     },
+     "response": {
+      "persona": "chatgpt-paid",
+      "prepare_token": "<redacted>",
+      "turnstile": "<redacted>",
+      "proofofwork": "<redacted>",
+      "so": {
+       "required": true,
+       "collector_dx": "<redacted>",
+       "snapshot_dx": "<redacted>"
+      }
+     }
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/sentinel/chat-requirements/finalize",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "content-length",
+      "content-type",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "origin",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "prepare_token": "<redacted>",
+      "proofofwork": "<redacted>",
+      "turnstile": "<redacted>"
+     },
+     "response": {
+      "persona": "chatgpt-paid",
+      "token": "<redacted>",
+      "expire_after": 540,
+      "expire_at": 1793232565
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/conversations/<uuid>",
+     "query": [
+      "num_turns",
+      "include_has_versions"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/conversations/<uuid>",
+     "query": [
+      "num_turns",
+      "include_has_versions"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null
+    },
+    {
+     "method": "POST",
+     "status": 200,
+     "path": "/backend-api/f/conversation/prepare",
+     "query": [],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "Content-Type",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "oai-genui-client-actions",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-oai-mcp-form-version",
+      "x-oai-turn-trace-id",
+      "x-openai-beacon-google-auth",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": {
+      "client_prepare_state": "sent",
+      "conversation_id": "<uuid>",
+      "action": "next",
+      "model": "gpt-6",
+      "parent_message_id": "<uuid>",
+      "timezone": "Asia/Seoul",
+      "timezone_offset_min": -540,
+      "is_do_not_remember": false,
+      "local_function_names": [
+       "local.continue_in_work"
+      ],
+      "client_prepare_dispatch": "immediate",
+      "client_prepare_source": "context_change"
+     },
+     "response": "<0 bytes>"
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/files/download/file_<id>",
+     "query": [
+      "conversation_id",
+      "download_intent",
+      "inline",
+      "include_library_file_state"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "Authorization",
+      "ChatGPT-Account-Id",
+      "OAI-Device-Id",
+      "OAI-Language",
+      "Referer",
+      "User-Agent",
+      "oai-did",
+      "originator",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null,
+     "response": {
+      "status": "success",
+      "download_url": "https://chatgpt.com/backend-api/estuary/content?id=file_0000…",
+      "metadata": null,
+      "file_name": "user-<id>/c9e0bd5e-b4e9-4fa1-80d7-50f73a…",
+      "creation_time": null,
+      "no_auth_user_upload": null,
+      "mime_type": null,
+      "file_size_bytes": 1042248
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/estuary/content",
+     "query": [
+      "id",
+      "ts",
+      "p",
+      "cid",
+      "sig",
+      "v"
+     ],
+     "mime": "image/png",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>"
+     ],
+     "body": null
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/files/download/file_<id>",
+     "query": [
+      "conversation_id",
+      "download_intent",
+      "inline"
+     ],
+     "mime": "application/json",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "oai-device-id",
+      "oai-did",
+      "oai-language",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>",
+      "x-openai-codex-window-type",
+      "x-openai-rate-limit-join-workspace",
+      "x-openai-web-frontend"
+     ],
+     "body": null,
+     "response": {
+      "status": "success",
+      "download_url": "https://chatgpt.com/backend-api/estuary/content?id=file_0000…",
+      "metadata": null,
+      "file_name": "user-<id>/c9e0bd5e-b4e9-4fa1-80d7-50f73a…",
+      "creation_time": null,
+      "no_auth_user_upload": null,
+      "mime_type": null,
+      "file_size_bytes": 1042248
+     }
+    },
+    {
+     "method": "GET",
+     "status": 200,
+     "path": "/backend-api/estuary/content",
+     "query": [
+      "id",
+      "ts",
+      "p",
+      "cid",
+      "sig",
+      "v"
+     ],
+     "mime": "image/png",
+     "headerNames": [
+      "accept",
+      "accept-encoding",
+      "accept-language",
+      "authorization",
+      "chatgpt-account-id",
+      "cookie",
+      "if-modified-since",
+      "if-none-match",
+      "originator",
+      "priority",
+      "referer",
+      "sec-ch-ua",
+      "sec-ch-ua-mobile",
+      "sec-ch-ua-platform",
+      "sec-fetch-dest",
+      "sec-fetch-mode",
+      "sec-fetch-site",
+      "user-<id>"
+     ],
+     "body": null
+    }
+   ]
+  }
+ ]
+}
