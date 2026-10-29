@@ -4,10 +4,15 @@ import { getOperation, loadRegistry, materializeRequest, PRIMARY_ORIGIN, validat
 import { ChatGPTWebError } from '../src/errors.mjs';
 import { syntheticOperation, syntheticRegistry } from './helpers.mjs';
 
-test('the checked-in registry blocks every unobserved operation explicitly', async () => {
+test('the checked-in registry holds only the captured read operations and blocks everything else explicitly', async () => {
   const registry = await loadRegistry();
-  assert.equal(registry.operations.length, 0);
+  assert.deepEqual(registry.operations.map((operation) => operation.id).sort(),
+    ['history.conversation.read', 'image.conversation.init', 'image.file.download']);
+  assert.ok(registry.operations.every((operation) => operation.kind === 'read'));
+  // the send call is recorded in discovery/ only, never registered for replay
+  assert.equal(registry.operations.some((operation) => operation.pathTemplate.includes('/f/conversation')), false);
   assert.throws(() => getOperation(registry, 'text.send'), (error) => error.code === 'CONTRACT_NOT_CAPTURED');
+  assert.throws(() => getOperation(registry, 'text.history'), (error) => error.code === 'CONTRACT_NOT_CAPTURED');
 });
 
 test('captured contracts bind named inputs without accepting arbitrary paths or origins', () => {
