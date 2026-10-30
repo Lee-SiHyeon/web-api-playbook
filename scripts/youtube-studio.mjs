@@ -209,6 +209,8 @@ try {
 
   if (cmd === 'captions') {
     if (!job.videoId) fail('JOB_FIELD', { k: 'videoId' });
+    // another channel's video shows an empty translations page (2026-10-30: 5 caption runs failed NOT_FOUND 자막 수정)
+    if (job.channelId) await ensureChannel(job);
     const page = `https://studio.youtube.com/video/${job.videoId}/translations`;
     const go = async () => { await send('Page.navigate', { url: page }); await waitFor(`!!document.body && /언어 추가/.test(document.body.innerText)`, 30000); await sleep(1500); };
     const uploadInEditor = async (srt) => {
@@ -222,9 +224,26 @@ try {
       }
       fail('CAPTION_UPLOAD', { srt });
     };
+    // Unified 자막 page (seen 2026-10-30 on 챱츄/보수/진보/경제, not 생활이득): no "자막 수정" button; each row's captions cell shows
+    // icon buttons only on hover (#captions-edit "복사 및 수정", #captions-delete, #captions-more-options, or 추가 on an empty row).
+    const hoverButtons = async (label) => {
+      const xy = await ev(`(() => { const r = [...document.querySelectorAll('ytgn-video-translation-row')].find(r => (r.querySelector('.tablecell-language')?.innerText || '').trim() === ${JSON.stringify(label)});
+        const c = r && r.querySelector('.tablecell-captions'); if (!c) return null; c.scrollIntoView({ block: 'center' }); const b = c.getBoundingClientRect(); return [b.left + 30, b.top + b.height / 2]; })()`);
+      if (!xy) return null;
+      await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: xy[0] - 200, y: xy[1] }); await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: xy[0], y: xy[1] }); await sleep(800);
+      return ev(`(() => { const r = [...document.querySelectorAll('ytgn-video-translation-row')].find(r => (r.querySelector('.tablecell-language')?.innerText || '').trim() === ${JSON.stringify(label)});
+        return [...r.querySelector('.tablecell-captions').querySelectorAll('ytcp-icon-button, ytcp-button, button')].map(e => { const b = e.getBoundingClientRect(); return b.width ? { id: e.id, label: (e.getAttribute('aria-label') || e.innerText || '').trim(), xy: [b.x + b.width / 2, b.y + b.height / 2] } : null; }).filter(Boolean); })()`);
+    };
+    const unified = async () => !!(await ev(`!!document.querySelector('ytgn-video-translation-row[unified]')`));
     await go();
     if (job.captions?.original && !('skip-original' in opt)) { // --skip-original: only the localized tracks
-      await clickText('자막 수정'); await sleep(3000);
+      if (await unified()) {
+        const ko = await ev(`([...document.querySelectorAll('ytgn-video-translation-row')].map(r => (r.querySelector('.tablecell-language')?.innerText || '').trim()).find(s => /동영상 언어/.test(s))) || null`);
+        const b = ko && (await hoverButtons(ko))?.find((x) => x.id === 'captions-edit' || /수정/.test(x.label));
+        if (!b) fail('NO_CAPTIONS_EDIT', { row: ko });
+        await click(b.xy); await sleep(2000);
+        if (await pointOfText('트랙 덮어쓰기')) { await clickText('계속'); await sleep(3000); } // replaces the auto track
+      } else { await clickText('자막 수정'); await sleep(3000); }
       // ⋮ menu sits right of "텍스트로 편집"
       let p = null; for (let k = 0; k < 60 && !p; k++) { p = await pointOfText('텍스트로 편집'); if (!p) await sleep(500); } if (!p) fail('NO_EDITOR');
       const more = await ev(`(() => { const {vis} = ${H}; const b = [...document.querySelectorAll('ytcp-icon-button, yt-icon-button, button')].map(e => [e, vis(e)]).filter(x => x[1] && Math.abs(x[1][1] - ${p[1]}) < 20 && x[1][0] > ${p[0]}); b.sort((a, c) => a[1][0] - c[1][0]); return b[0] ? b[0][1] : null; })()`);
@@ -268,6 +287,23 @@ try {
       await clickText('언어 추가'); await sleep(1200);
       if (!(await pickMenuItem(tr.label))) fail('NO_LANG', { label: tr.label });
       await sleep(2500);
+      if (await unified() && !(await pointOfText('수동 자막'))) {
+        // unified page: 언어 추가 only adds the row (title/description locked "요건 미충족") → the row's hover 추가 opens the caption flow
+        const hb = await hoverButtons(tr.label); const b = hb?.find((x) => /추가|add/i.test(`${x.id} ${x.label}`));
+        if (!b) fail('NO_ROW_CAPTION_ADD', { label: tr.label, unified: true });
+        await click(b.xy); await sleep(2000);
+        if (await pointOfText('파일 업로드')) await clickText('파일 업로드'); await sleep(1200);
+        let ok = false;
+        for (let attempt = 1; attempt <= 3 && !ok; attempt++) {
+          const c = await pointOfText('계속'); if (!c) break; await viaChooser(c, tr.srt); await sleep(4000);
+          ok = (await ev(`[...document.querySelectorAll('textarea')].filter(e => e.offsetParent).length`)) > 0;
+        }
+        if (!ok) fail('CAPTION_UPLOAD', { srt: tr.srt, unified: true });
+        await shot(tr.label); await clickText('게시'); await sleep(4000); await go();
+        const row = await ev(`[...document.querySelectorAll('ytgn-video-translation-row')].map(e => e.innerText.replace(/\\s+/g, ' ').trim()).find(t => t.startsWith(${JSON.stringify(tr.label)})) || ''`);
+        log({ step: 'track', label: tr.label, row, unified: true });
+        continue;
+      }
       if (tr.title) await fillEditable(0, tr.title);
       if (tr.description) await fillEditable(1, tr.description);
       // "수동 자막 · 추가" — the 추가 on the same row as 수동 자막
