@@ -3,11 +3,11 @@ import { FlowHttpTransport } from './http-transport.mjs';
 import { parseFlowDocument } from './document-diagnostics.mjs';
 import { buildProjectMediaRequest, RPC } from './protocol.mjs';
 import { validateFlowSessionBundle } from './session-bundle.mjs';
-import { FLOW_CREDENTIAL } from './session-name.mjs';
+import { FLOW_CREDENTIAL, FLOW_ACCOUNT } from './session-name.mjs';
 
 const FLOW_ORIGIN = 'https://flow.google.com';
 const ACCOUNTS_ORIGIN = 'https://accounts.google.com';
-export const GOOGLE_FLOW_AUTH_CREDENTIAL = 'google-flow-google-auth-v1';
+export const GOOGLE_FLOW_AUTH_CREDENTIAL = FLOW_ACCOUNT ? `google-flow-google-auth-v1-u${FLOW_ACCOUNT}` : 'google-flow-google-auth-v1';
 const PROJECT_ID = /^[a-f0-9-]{16,64}$/i;
 const COOKIE_NAME = /^[A-Za-z0-9_][A-Za-z0-9_-]{0,100}$/;
 const COOKIE_VALUE = /^(?:[\x21\x23-\x2B\x2D-\x3A\x3C-\x5B\x5D-\x7E])*$/;

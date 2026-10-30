@@ -5,6 +5,7 @@ export const RPC = Object.freeze({
   pollGeneration: 'jwpduf',
   getMedia: 'as29s',
   projectMedia: 'Zzl0ze',
+  credits: 'nzlxg', // read-only: [remaining, ?, ?, ?, null, daily, [resetEpochSec, nanos]] (observed 2026-10-30, request "[]")
 });
 export const CAPTCHA_SLOT = '__CAPTCHA__';
 

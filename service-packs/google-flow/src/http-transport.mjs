@@ -1,11 +1,11 @@
 import { randomInt } from 'node:crypto';
 import { readCredential, writeCredential } from './secure-credential-store.mjs';
-import { FLOW_CREDENTIAL } from './session-name.mjs';
+import { FLOW_CREDENTIAL, FLOW_PATH_PREFIX } from './session-name.mjs';
 import { getBatchPayload, FlowProtocolError, isFlowErrorCandidateReason } from './protocol.mjs';
 import { createFlowDocumentDiagnostics, createFlowDocumentError, parseFlowDocument } from './document-diagnostics.mjs';
 
 const FLOW_ORIGIN = 'https://flow.google.com';
-const BATCH_PATH = '/_/AiSandboxAngularFrontend/data/batchexecute';
+const BATCH_PATH = `${FLOW_PATH_PREFIX}/_/AiSandboxAngularFrontend/data/batchexecute`;
 const PROJECT_ID = /^[a-f0-9-]{16,64}$/i;
 const MAX_BODY = 5 * 1024 * 1024;
 const COOKIE_NAME = /^[A-Za-z0-9_][A-Za-z0-9_-]{0,100}$/;
@@ -23,7 +23,7 @@ export function classifyFlowRedirect(location, requestUrl = FLOW_ORIGIN) {
       return 'accounts_login';
     }
     if (target.origin === FLOW_ORIGIN) {
-      if (/^\/project\/[A-Fa-f0-9-]{16,64}\/?$/.test(target.pathname)) return 'flow_project';
+      if (/^(?:\/u\/\d)?\/project\/[A-Fa-f0-9-]{16,64}\/?$/.test(target.pathname)) return 'flow_project';
       if (target.pathname === '/' || /^\/(?:home|home\/)$/i.test(target.pathname)) return 'flow_root';
     }
   } catch { /* Never include the raw Location value in diagnostics. */ }
@@ -328,7 +328,7 @@ export class FlowHttpTransport {
 
   async refreshDocument() {
     if (!this.bundle) throw new FlowProtocolError('Flow session is not loaded.');
-    const sourcePath = `/project/${this.bundle.projectId}`;
+    const sourcePath = `${FLOW_PATH_PREFIX}/project/${this.bundle.projectId}`;
     const url = new URL(sourcePath, FLOW_ORIGIN);
     let response;
     try {
@@ -400,7 +400,7 @@ export class FlowHttpTransport {
   }
 
   async rpc(rpcId, freq, { timeoutMs = 60_000 } = {}) {
-    if (!['Zzl0ze', 'as29s', 'jwpduf'].includes(rpcId)) throw new FlowProtocolError('RPC is not in the browser-free read catalog.', { rpcId });
+    if (!['Zzl0ze', 'as29s', 'jwpduf', 'nzlxg'].includes(rpcId)) throw new FlowProtocolError('RPC is not in the browser-free read catalog.', { rpcId });
     return this.sendRpc(rpcId, freq, { timeoutMs });
   }
 
@@ -415,7 +415,7 @@ export class FlowHttpTransport {
 
   async sendRpc(rpcId, freq, { timeoutMs = 60_000, generation = false, inputMode = 'verified_pure_http' } = {}) {
     if (!this.bundle || !this.document) throw new FlowProtocolError('Flow session is not ready.');
-    if (generation ? rpcId !== 'YhhmEf' : !['Zzl0ze', 'as29s', 'jwpduf'].includes(rpcId)) {
+    if (generation ? rpcId !== 'YhhmEf' : !['Zzl0ze', 'as29s', 'jwpduf', 'nzlxg'].includes(rpcId)) {
       throw new FlowProtocolError('RPC is not in the observed Flow HTTP catalog.', { rpcId });
     }
     if (generation && !validateGenerationFrequency(freq, this.bundle.projectId, inputMode)) {

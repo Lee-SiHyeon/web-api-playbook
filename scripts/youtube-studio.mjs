@@ -8,7 +8,7 @@
 //
 // job.json (paths are local Windows paths):
 // {
-//   "channelId": "UC...", "video": "C:\\...\\final.mp4", "videoId": "(set after upload, for captions)",
+//   "channelId": "UC...", "channelName": "생활이득AI연구소 (switch target in Studio's 계정 전환 when another channel is active)", "video": "C:\\...\\final.mp4", "videoId": "(set after upload, for captions)",
 //   "title": "...", "description": "...", "tags": ["a","b"], "category": "여행/이벤트", "language": "한국어",
 //   "thumbnail": "C:\\...\\a.jpg",                                   // or use abTest
 //   "abTest": [{"thumbnail": "C:\\a.jpg", "title": "..."}, {"thumbnail": "C:\\b.jpg", "title": "..."}],  // 2-3 variants, 제목과 썸네일
@@ -35,6 +35,10 @@ const CDP = process.env.YT_STUDIO_CDP || 'http://127.0.0.1:9333';
 const [cmd, jobPath, ...flags] = process.argv.slice(2);
 const opt = Object.fromEntries(flags.map((f) => f.replace(/^--/, '').split('=')));
 if (!['upload', 'captions'].includes(cmd) || !jobPath) { console.error('usage: youtube-studio.mjs upload|captions <job.json> [--shots=dir]'); process.exit(2); }
+// shorts-anatomy publish gate (2026-10-29): episodes under shorts-anatomy/work must pass tools/publish-gate.mjs first (exit 3 otherwise)
+const { requireGate } = await import('file:///C:/Users/sihyeon/dev/shorts-anatomy/tools/gate-check.mjs').catch((e) => { console.log(JSON.stringify({ ok: false, code: 'PUBLISH_GATE_UNAVAILABLE', error: e.message })); process.exit(3); });
+if (cmd === 'upload') requireGate(jobPath);
+let uploadedId = null; // set when an upload completes; with job.captions the captions command runs right after (ko+en default, 2026-10-30)
 const job = JSON.parse(fs.readFileSync(jobPath, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -107,10 +111,32 @@ const uploadDone = async () => {
   fail('UPLOAD_TIMEOUT');
 };
 
+// Make job.channelId the active Studio identity. Observed 2026-10-25: the Canary holds several Google accounts, each with
+// several channels; when another account's channel was last active, /channel/<id>/videos/upload shows "이 페이지를 볼 권한이
+// 없습니다" and the upload timed out. Studio's own switcher (avatar -> 계정 전환) lists every channel by name (no ids), so the
+// job names it: job.channelName. The active channel is read back from ytcfg CHANNEL_ID.
+const activeChannel = () => ev(`(window.ytcfg && ytcfg.get && ytcfg.get('CHANNEL_ID')) || null`);
+async function ensureChannel(job) {
+  await send('Page.navigate', { url: 'https://studio.youtube.com/' }); await sleep(8000);
+  const before = await activeChannel();
+  if (before === job.channelId) { log({ step: 'channel', active: before }); return; }
+  if (!job.channelName) fail('CHANNEL_MISMATCH', { active: before, want: job.channelId, hint: 'set job.channelName to switch automatically' });
+  await waitFor(`(() => { const b = document.querySelector('#avatar-btn'); if (!b) return false; b.click(); return true; })()`, 15000); await sleep(2000);
+  await waitFor(`(() => { const b = [...document.querySelectorAll('tp-yt-paper-item, ytd-compact-link-renderer, [role=menuitem]')].find((x) => /계정 전환/.test(x.innerText || '')); if (!b) return false; b.click(); return true; })()`, 10000); await sleep(3000);
+  const names = await ev(`[...document.querySelectorAll('ytd-account-item-renderer')].map((x) => (x.innerText || '').trim().split('\\n')[0])`);
+  const ok = await ev(`(() => { const b = [...document.querySelectorAll('ytd-account-item-renderer')].find((x) => (x.innerText || '').trim().split('\\n')[0] === ${JSON.stringify(job.channelName)}); if (!b) return false; (b.querySelector('tp-yt-paper-icon-item, a, [role=link]') || b).click(); return true; })()`);
+  if (!ok) fail('CHANNEL_NOT_IN_SWITCHER', { want: job.channelName, names });
+  await sleep(9000); await send('Page.navigate', { url: 'https://studio.youtube.com/' }); await sleep(8000);
+  const after = await activeChannel();
+  if (after !== job.channelId) fail('CHANNEL_SWITCH_FAILED', { before, after, want: job.channelId });
+  log({ step: 'channel', switchedFrom: before, active: after });
+}
+
 try {
   if (cmd === 'upload') {
     for (const k of ['channelId', 'video', 'title']) if (!job[k]) fail('JOB_FIELD', { k });
     if ([job.title, ...(job.abTest || []).map((v) => v.title)].some((s) => s && [...s].length > 100)) fail('TITLE_OVER_100');
+    await ensureChannel(job);
     await send('Page.navigate', { url: `https://studio.youtube.com/channel/${job.channelId}/videos/upload?d=ud` });
     await waitFor(`!!document.querySelector('input[type=file]')`, 30000);
     await setFiles('input[type=file]', 0, job.video); uploadPending = true;
@@ -178,7 +204,7 @@ try {
     await ev(`(document.querySelector('#done-button').click(), 1)`);
     const confirm = await waitFor(`(() => { const m = document.body.innerText.match(/(\\d{4}년 \\d+월 \\d+일 [\\d:]+)에 동영상이 공개|동영상 저장됨|동영상 게시됨|동영상 처리 중/); return m ? m[0] : null; })()`, 30000).catch(() => null); // confirm text is not reliable; the upload itself is verified below
     log({ step: 'done', videoId, confirm, url: `https://youtu.be/${videoId}` }); await shot('done');
-    await uploadDone(); uploadPending = false; log({ step: 'upload-complete', videoId });
+    await uploadDone(); uploadPending = false; log({ step: 'upload-complete', videoId }); uploadedId = videoId;
   }
 
   if (cmd === 'captions') {
@@ -264,4 +290,13 @@ try {
   // the tab is only closed once the upload is confirmed complete; otherwise it stays open so the upload is not interrupted
   if (uploadPending) log({ step: 'tab-kept-open', reason: 'upload not confirmed complete; close this tab manually after Studio shows it finished' });
   else await fetch(`${CDP}/json/close/${t.id}`).catch(() => {});
+}
+// ko+en default (owner 2026-10-30): an upload whose job carries captions gets them published immediately in a fresh tab
+if (cmd === 'upload' && uploadedId && job.captions) {
+  job.videoId = uploadedId; fs.writeFileSync(jobPath, JSON.stringify(job, null, 1));
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync('node', [process.argv[1], 'captions', jobPath, ...process.argv.slice(4)], { encoding: 'utf8', timeout: 900000 });
+  const last = (r.stdout || '').trim().split(/\r?\n/).filter(Boolean).slice(-3);
+  for (const l of last) console.log(l);
+  if (r.status !== 0) log({ step: 'captions-failed', videoId: uploadedId, retry: `node scripts/youtube-studio.mjs captions ${jobPath}` });
 }

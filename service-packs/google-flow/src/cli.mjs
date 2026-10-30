@@ -2,6 +2,7 @@ import path from 'node:path';
 import { readFile } from 'node:fs/promises';
 import { FlowClient } from './client.mjs';
 import { FlowHttpTransport } from './http-transport.mjs';
+import { FLOW_ACCOUNT } from './session-name.mjs';
 import { createNodeRecaptchaProvider } from './node-recaptcha-issuer.mjs';
 import { isFlowErrorCandidateReason } from './protocol.mjs';
 import { renewFlowGoogleCookies } from './cookie-rotation.mjs';
@@ -183,7 +184,8 @@ async function main() {
     if (command === 'status') {
       const context = await client.getContext();
       const listing = await client.getProjectMedia(context.projectId);
-      console.log(JSON.stringify({ mode: 'pure_http', session: 'authenticated',
+      const credits = await client.getCredits().catch(() => null);
+      console.log(JSON.stringify({ mode: 'pure_http', session: 'authenticated', account: FLOW_ACCOUNT, ...(credits ?? {}),
         projectId: context.projectId, documentCheckedAt: context.documentCheckedAt,
         projectMediaCount: Array.isArray(listing?.[1]) ? listing[1].length : null }));
       return;

@@ -1,7 +1,7 @@
 import { FlowProtocolError } from './protocol.mjs';
 
 const FLOW_ORIGIN = 'https://flow.google.com';
-const PROJECT_PATH = /^\/project\/([A-Fa-f0-9-]{16,64})\/?$/;
+const PROJECT_PATH = /^(?:\/u\/\d)?\/project\/([A-Fa-f0-9-]{16,64})\/?$/;
 const REQUIRED_MARKERS = Object.freeze(['SNlM0e', 'FdrFJe', 'cfb2h']);
 const OPTIONAL_MARKERS = Object.freeze(['xZbWve']);
 const ALL_MARKERS = Object.freeze([...REQUIRED_MARKERS, ...OPTIONAL_MARKERS]);
