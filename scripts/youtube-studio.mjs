@@ -236,7 +236,14 @@ try {
     };
     const unified = async () => !!(await ev(`!!document.querySelector('ytgn-video-translation-row[unified]')`));
     await go();
-    if (job.captions?.original && !('skip-original' in opt)) { // --skip-original: only the localized tracks
+    let originalViaAdd = false; // name kept: true = skip the original track
+    if (job.captions?.original && !('skip-original' in opt) && await unified()) {
+      // a video without speech (card video, 2026-10-30) has no editable 동영상 언어 track: skip the original, the burned-in Korean is on screen
+      const ko = await ev(`([...document.querySelectorAll('ytgn-video-translation-row')].map(r => (r.querySelector('.tablecell-language')?.innerText || '').trim()).find(s => /동영상 언어/.test(s))) || null`);
+      const hb = ko ? await hoverButtons(ko) : null;
+      if (!hb?.some((x) => x.id === 'captions-edit' || /수정/.test(x.label))) { originalViaAdd = true; log({ step: 'original', skipped: 'no editable 동영상 언어 track (no speech)' }); }
+    }
+    if (job.captions?.original && !('skip-original' in opt) && !originalViaAdd) { // --skip-original: only the localized tracks
       if (await unified()) {
         const ko = await ev(`([...document.querySelectorAll('ytgn-video-translation-row')].map(r => (r.querySelector('.tablecell-language')?.innerText || '').trim()).find(s => /동영상 언어/.test(s))) || null`);
         const b = ko && (await hoverButtons(ko))?.find((x) => x.id === 'captions-edit' || /수정/.test(x.label));
