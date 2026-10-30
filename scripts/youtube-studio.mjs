@@ -326,6 +326,8 @@ try {
   }
 } catch (e) {
   await shot('error').catch(() => {});
+  // unverified channels hit 일일 업로드 한도 (2026-10-30 챱츄, 여친수집소): report it instead of a bare TIMEOUT so the cycle queues a retry
+  if (await ev(`/일일 업로드 한도|daily upload limit/i.test(document.body.innerText)`).catch(() => false)) e.code = 'DAILY_UPLOAD_LIMIT';
   log({ ok: false, code: e.code || 'ERROR', message: e.message, ...(e.text ? { text: e.text } : {}) });
   process.exitCode = 2;
 } finally {
