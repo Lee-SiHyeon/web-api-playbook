@@ -1,0 +1,139 @@
+{
+  "schema": "google-maps-live-summary-v1",
+  "recordedAt": "2026-11-01T18:31:18.706Z",
+  "implementationHashes": {
+    "lib/google-maps.mjs": "51b1142a7ca551a0191053788e13c083dcfe675b7c4abe5f61b5d313af60f995",
+    "scripts/google-maps.mjs": "a3c2d07b4000829ea0b54d1d37756fea18969031049e9a39d6ff2c46db8155d6",
+    "scripts/google-maps-bootstrap.mjs": "5fc435639bbf1c89c29bdbab03ec3823892e3ce050ed6d740b07390beb4199ad",
+    "tests/google-maps.test.mjs": "b7edc74897e1a73ce54f7f8aea9212ccb2abb85eedbced400b288210e5a06bb6"
+  },
+  "authentication": {
+    "activeBrowserOwnerMatched": true,
+    "backendListOwnerMatched": true,
+    "storage": "Linux AES-256-GCM file",
+    "freshProcessReuseVerified": true,
+    "passwordLoginVerified": false,
+    "expiredLoginRenewalVerified": false
+  },
+  "phases": {
+    "loginAcquisition": "existing_owner_browser_session",
+    "inputPreparation": "explicit_cdp_bootstrap",
+    "listCreation": "browser_automation",
+    "featureSave": "pure_http",
+    "coordinateSave": "browser_automation",
+    "featureAndCoordinateNoteUpdate": "pure_http",
+    "readback": "pure_http"
+  },
+  "finalReadback": {
+    "complete": true,
+    "privateInBrowserVerified": true,
+    "totalItems": 57,
+    "featureItems": 56,
+    "coordinateItems": 1,
+    "itemsWithNotes": 57
+  },
+  "operations": [
+    {
+      "id": "search",
+      "method": "GET",
+      "path": "/s",
+      "semantics": "read",
+      "state": "replay_verified",
+      "scope": "autocomplete_predictions"
+    },
+    {
+      "id": "list-detail",
+      "method": "GET",
+      "path": "/maps/preview/entitylist/getlist",
+      "semantics": "read",
+      "state": "replay_verified"
+    },
+    {
+      "id": "save-feature",
+      "method": "GET",
+      "path": "/maps/preview/entitylist/createitem",
+      "semantics": "write",
+      "state": "replay_verified",
+      "independentHttpAndReadbackVerified": true,
+      "browserRequestCancelledBeforeFirstIndependentReplay": true
+    },
+    {
+      "id": "update-note",
+      "method": "GET",
+      "path": "/maps/preview/entitylist/updateitem",
+      "semantics": "write",
+      "state": "replay_verified",
+      "separateActionToken": true,
+      "featureAndCoordinateIdentityVerified": true
+    },
+    {
+      "id": "create-list",
+      "state": "browser_verified",
+      "httpAdapter": "not_implemented"
+    },
+    {
+      "id": "create-coordinate-pin",
+      "method": "GET",
+      "path": "/maps/preview/entitylist/createitem",
+      "state": "request_observed",
+      "browserWriteAndIndependentReadbackVerified": true,
+      "httpAdapter": "not_implemented"
+    },
+    {
+      "id": "rename-list",
+      "method": "GET",
+      "path": "/maps/preview/entitylist/update",
+      "state": "request_observed",
+      "httpAdapter": "not_implemented"
+    },
+    {
+      "id": "expired-session-renewal",
+      "state": "unverified",
+      "reason": "Only current owner-browser context import and fresh-process HTTP reuse were verified."
+    },
+    {
+      "id": "pagination-beyond-500",
+      "state": "unimplemented",
+      "reason": "Mutation requires complete getlist count and returned rows; unobserved pagination is not synthesized."
+    }
+  ],
+  "evidence": {
+    "sanitizedMetadataOnly": true,
+    "privateDataAndCredentialsExcluded": true,
+    "recordedHttpRequestCounts": {
+      "/maps/preview/entitylist/getlist": 230,
+      "/maps/preview/entitylist/updateitem": 57,
+      "/s": 1
+    },
+    "finalReadbackRequests": [
+      {
+        "method": "GET",
+        "origin": "https://www.google.com",
+        "path": "/maps/preview/entitylist/getlist",
+        "httpStatus": 200,
+        "semantics": "read",
+        "mime": "application/json",
+        "responseBytes": 36563,
+        "checkedAt": "2026-11-01T18:31:18.558Z",
+        "browserUsed": false
+      },
+      {
+        "method": "GET",
+        "origin": "https://www.google.com",
+        "path": "/s",
+        "httpStatus": 200,
+        "semantics": "read",
+        "mime": "application/json",
+        "responseBytes": 2105,
+        "checkedAt": "2026-11-01T18:31:18.704Z",
+        "browserUsed": false
+      }
+    ]
+  },
+  "boundaries": {
+    "listAndCoordinateCreationStillUseBrowser": true,
+    "completeEngineFreeLogin": false,
+    "publicSharingPerformed": false,
+    "otherSavedListsChanged": false
+  }
+}

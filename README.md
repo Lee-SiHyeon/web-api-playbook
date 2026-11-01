@@ -31,6 +31,7 @@
 | 쇼핑·가격 수집 | 쿠팡, 아마존, 라쿠텐·야후쇼핑, 알리익스프레스, 에이블리, 올리브영 검색·상세·옵션·리뷰 |
 | 제휴 링크 | 쿠팡 파트너스, 네이버 브랜드커넥트, 마이리얼트립, 애드픽, 링크프라이스 상품 검색·링크 발급 |
 | 여행 | 아고다 날짜별 요금·행사, 쿠팡 트래블, 마이리얼트립 투어·티켓 검색 |
+| 지도·방문장소 | [Google Maps](references/google-maps.md) 본인 비공개 목록 조회·장소 검색·저장·메모, 독립 HTTP readback |
 | SNS·크리에이터 | [X·Reddit](service-packs/social-x/README.md), [Threads](service-packs/threads/README.md), 인포크 프로필·카드 발행, YouTube Studio 업로드 |
 | AI 웹 클라이언트 | [Gemini](service-packs/gemini/README.md), [Grok](service-packs/grok/README.md), [ChatGPT](service-packs/chatgpt/README.md), [Flow](service-packs/google-flow/README.md), [Whisk](service-packs/whisk/README.md) |
 | 운영 | Gabia 도메인·DNS 조회 |
