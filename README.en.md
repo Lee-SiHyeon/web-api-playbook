@@ -132,3 +132,7 @@ npm test   # full regression; also needs Python 3
 [MIT](LICENSE): use, modify and redistribute it freely, for personal or commercial work. Keep the copyright notice. You use it at your own risk.
 
 Third-party libraries installed through npm, and outside material whose source is recorded in [provenance](provenance/README.md), stay under their own licenses. Check the terms of service of each site you automate. See [NOTICE](NOTICE.md).
+
+## Google Maps saved places
+
+See [the Google Maps guide](references/google-maps.md) for owner-bound private-list reads, autocomplete, exact-feature saves and note updates over independent HTTP. Bootstrap and new-list creation use the owner’s existing first-party browser; automatic expired-login renewal remains unverified.
