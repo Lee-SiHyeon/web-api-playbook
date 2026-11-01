@@ -312,7 +312,8 @@ test('persistent CLI import is verified before storage and a fresh process healt
   assert.equal(output.ownerVerified, true);
   assert.equal(output.persistent, true);
   for (const secret of [COOKIE_VALUE, EMAIL, USERNAME]) assert.equal(health.stdout.includes(secret), false);
-  const storedFile = path.join(directory, `${KMONG_ACCOUNT_STORE}.sealed`);
+  // Windows always seals with DPAPI (<name>.dpapi) regardless of PROTECTED_STORE_PROVIDER; other hosts use the file provider.
+  const storedFile = path.join(directory, `${KMONG_ACCOUNT_STORE}.${process.platform === 'win32' ? 'dpapi' : 'sealed'}`);
   const sealed = await readFile(storedFile, 'utf8');
   assert.equal(sealed.includes(COOKIE_VALUE), false);
   assert.equal(sealed.includes(EMAIL), false);

@@ -630,6 +630,7 @@ test('CLI hides stdin import, labels memory as nonpersistent, and supports prote
   assert.equal(JSON.parse(chats.stdout).status, 'first_page_only');
   assert.equal(JSON.parse(chats.stdout).requestCount, 2);
 
-  const sealed = await readFile(path.join(directory, `${SOOMGO_ACCOUNT_STORE}.sealed`), 'utf8');
+  // Windows always seals with DPAPI (<name>.dpapi) regardless of PROTECTED_STORE_PROVIDER; other hosts use the file provider.
+  const sealed = await readFile(path.join(directory, `${SOOMGO_ACCOUNT_STORE}.${process.platform === 'win32' ? 'dpapi' : 'sealed'}`), 'utf8');
   for (const secret of [TOKEN, EMAIL]) assert.equal(sealed.includes(secret), false);
 });

@@ -9,4 +9,4 @@ const localPython = process.platform === 'win32'
 
 // Match the maintained transport's interpreter selection for its Python tests.
 export const oliveyoungTestPython = process.env.WEB_API_OLIVEYOUNG_PYTHON
-  ?? (existsSync(localPython) ? localPython : 'python3');
+  ?? (existsSync(localPython) ? localPython : (process.platform === 'win32' ? 'python' : 'python3')); // on Windows 'python3' is the Store stub (exit 9009)

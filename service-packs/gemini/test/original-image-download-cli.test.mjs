@@ -9,7 +9,7 @@ test('original-image-download CLI requires one in-memory envelope and owner', ()
     '--envelope-stdin', '--expect-owner', 'owner@example.test',
   ]), {
     envelopeStdin: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwner: 'owner@example.test',
   });
 });

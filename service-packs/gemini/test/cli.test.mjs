@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import {
   parseCoreOptions, parseHistoryReadOptions, parseLifecycleReadOptions, parseLifecycleMutationOptions,
@@ -11,7 +12,7 @@ test('history CLI defaults to metadata and supports explicit JSON business outpu
   const base = ['list', '--session-stdin', '--expect-owner', 'owner@example.com'];
   assert.deepEqual(parseCoreOptions(base), {
     sessionStdin: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwner: 'owner@example.com',
     output: 'metadata',
   });
@@ -24,7 +25,7 @@ test('text CLI requires a one-shot envelope, explicit owner, stable intent, and 
   assert.deepEqual(parseTextOptions(base), {
     envelopeStdin: true,
     confirmed: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwner: 'owner@example.com',
     callerIntent: 'protocol-check-v1',
     modelChoiceId: undefined,
@@ -48,7 +49,7 @@ test('text-action CLI requires a guarded envelope, expected-owner hash, fresh in
   assert.deepEqual(parseTextActionOptions(base), {
     envelopeStdin: true,
     confirmed: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwnerSha256: 'a'.repeat(64),
     callerIntent: 'text-edit-action-v1',
   });
@@ -75,7 +76,7 @@ test('read-only lifecycle CLI requires a stdin envelope and explicit owner with 
   const base = ['--envelope-stdin', '--expect-owner', 'owner@example.com'];
   assert.deepEqual(parseLifecycleReadOptions(base), {
     envelopeStdin: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwner: 'owner@example.com',
     output: 'metadata',
   });
@@ -88,7 +89,7 @@ test('public shared-conversation CLI requires only a bounded stdin envelope and 
   const base = ['--envelope-stdin'];
   assert.deepEqual(parsePublicShareReadOptions(base), {
     envelopeStdin: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     output: 'metadata',
   });
   assert.equal(parsePublicShareReadOptions([...base, '--output=json']).output, 'json');
@@ -100,7 +101,7 @@ test('lifecycle mutation CLI requires one envelope, an owner gate, and explicit 
   assert.deepEqual(parseLifecycleMutationOptions(base), {
     envelopeStdin: true,
     confirmed: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwner: 'owner@example.com',
     output: 'metadata',
   });
@@ -116,7 +117,7 @@ test('model-choice CLI keeps selection local and separates model and thinking ch
   const base = ['--envelope-stdin', '--expect-owner', 'owner@example.com'];
   assert.deepEqual(parseModelChoiceOptions(base), {
     envelopeStdin: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwner: 'owner@example.com',
     selectedChoiceId: undefined,
     thinkingChoiceId: undefined,
@@ -145,7 +146,7 @@ test('attachment-chain CLI requires separate upload and message intents plus one
   assert.deepEqual(parseAttachmentChainOptions(args), {
     envelopeStdin: true,
     confirmed: true,
-    contractPath: new URL('../discovery/observed-contract.json', import.meta.url).pathname,
+    contractPath: fileURLToPath(new URL('../discovery/observed-contract.json', import.meta.url)),
     expectedOwner: 'owner@example.com',
     uploadCallerIntent: 'upload-v1',
     messageCallerIntent: 'message-v1',

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -156,7 +157,7 @@ test('checked-in CFFI helper accepts the source-shaped image-to-video body befor
     url: 'https://grok.com/rest/app-chat/conversations/new',
   };
   const result = spawnSync('python3', ['scripts/grok_media_video_submit.py'], {
-    cwd: path.resolve(path.dirname(new URL(import.meta.url).pathname), '..'),
+    cwd: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'),
     input: JSON.stringify(packet), encoding: 'utf8',
     env: { PATH: process.env.PATH ?? '', HOME: homedir(), PYTHONDONTWRITEBYTECODE: '1' },
     timeout: 15_000, maxBuffer: 1024 * 1024,
@@ -193,7 +194,7 @@ test('CFFI helper identifies session-construction failure before any request sta
     url: 'https://grok.com/rest/app-chat/conversations/new',
   };
   const result = spawnSync('python3', ['scripts/grok_media_video_submit.py'], {
-    cwd: path.resolve(path.dirname(new URL(import.meta.url).pathname), '..'),
+    cwd: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'),
     input: JSON.stringify(packet), encoding: 'utf8',
     env: { PATH: process.env.PATH ?? '', HOME: homedir(), TMPDIR: path.join(homedir(), '.nad-scratch', 'tmp'),
       PYTHONPATH: packageRoot, PYTHONDONTWRITEBYTECODE: '1' },
@@ -226,7 +227,7 @@ test('Node default timeout matches the real Python packet validator and fails be
   const context = assetRequestContext();
   const fetchImpl = createGrokCffiVideoFetch({
     pythonExecutable: pythonShim,
-    scriptPath: path.resolve(path.dirname(new URL(import.meta.url).pathname), '../scripts/grok_media_video_submit.py'),
+    scriptPath: path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../scripts/grok_media_video_submit.py'),
     assetRequestContext: context,
     expectedOwnerIdentityDigest: context.ownerIdentityDigest,
   });

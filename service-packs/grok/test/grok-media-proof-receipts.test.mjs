@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
@@ -19,7 +20,7 @@ import {
 } from '../src/grok-media-proof-receipts.mjs';
 import { runMediaProofProducer } from '../scripts/emit-grok-media-proof.mjs';
 
-const SOURCE_ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
+const SOURCE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const FALSE_PERSISTENCE_FIELDS = [
   'credentialValuesPersisted', 'cookiesPersisted', 'tokensPersisted', 'requestBodiesPersisted',
   'responseBodiesPersisted', 'signedUrlValuesPersisted', 'passwordValuesPersisted',
