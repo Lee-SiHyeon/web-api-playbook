@@ -23,6 +23,15 @@ const pos = args.filter((a) => !a.startsWith('--'));
 const [mode, ...rest] = pos;
 const usage = 'usage: grok-imagine.mjs video <image> <out.mp4> --prompt=... [--ratio=16:9] [--dur=6] [--res=720p] [--audio=on|off]\n       grok-imagine.mjs image <out.jpg> --prompt=... [--ref=<image>]';
 if (!['video', 'image'].includes(mode) || !flags.prompt) { console.error(usage); process.exit(2); }
+// Video prompt detail gate (owner 2026-11-01, reference https://x.com/beizhi606/status/2116546724382789884): same check as the Flow CLI,
+// run before a tab is opened. --prompt may be the text or @<file>. Lint lives in shorts-anatomy/tools/video-prompt-lint.mjs.
+if (mode === 'video') {
+  const text = String(flags.prompt).startsWith('@') ? (await import('node:fs')).readFileSync(String(flags.prompt).slice(1), 'utf8') : String(flags.prompt);
+  const { lintVideoPrompt } = await import('file:///C:/Users/sihyeon/dev/shorts-anatomy/tools/video-prompt-lint.mjs').catch(() => ({}));
+  const r = lintVideoPrompt ? lintVideoPrompt(text, { duration: flags.dur }) : { ok: false, fails: ['video-prompt-lint unavailable'] };
+  if (!r.ok) { console.error('PROMPT_DETAIL_FAIL (nothing generated):\n  ' + r.fails.join('\n  ')); process.exit(3); }
+  flags.prompt = text;
+}
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (m) => process.stderr.write(`[grok-imagine] ${m}\n`);
 
