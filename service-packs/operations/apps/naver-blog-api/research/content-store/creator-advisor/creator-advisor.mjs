@@ -28,6 +28,11 @@ export const ENDPOINTS = Object.freeze({
   popularDemoKeyword: ({ service = 'naver_blog', channelId, date }) => ['/home/popular-demo-keyword', { service, channelId, date }],
   soaringContents: ({ service = 'naver_blog', channelId, interval = 'day', date }) => ['/home/soaring-contents', { service, channelId, interval, date }],
   yesterdaySummary: ({ service = 'naver_blog', channelId, date }) => ['/home/yesterday-summary', { date, service, channelId }],
+  // Observed 2026-11-01 on the channel home page: today's live numbers (the daily stats above stop at yesterday).
+  // realtime-summary -> data.metricRanks[] { metricType: cv|search_inflow|main_inflow, metricValue (today total), rank[] (per post {title,contentId,metricValue} or per query {query,metricValue}) }
+  // realtime-summary-histogram -> data[] { datetime (30-minute buckets, KST), metric }
+  realtimeSummary: ({ service = 'naver_blog', channelId, date }) => ['/home/realtime-summary', { channelId, date, service }],
+  realtimeHistogram: ({ service = 'naver_blog', channelId, date, metricType = 'cv' }) => ['/home/realtime-summary-histogram', { channelId, date, metricType, service }],
   // Owner browser GET observed 2026-10-05: ct is not a wire parameter here.
   // Legacy callers may still pass ct; omit it. Adding ct=text returned 400, removing only ct returned 200.
   referrerQueryRank: ({ service = 'naver_blog', channelId, metric = 'cv', interval = 'day', date, limit = 20 }) =>

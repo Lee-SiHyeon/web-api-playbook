@@ -309,6 +309,8 @@ One episode, every channel (all browser-assisted, each resumable and verified by
 | Shorts cut, render kit | `longform-to-shorts.mjs` |
 | Shorts to YouTube (+thumbnail, related video, pin), Naver Clip, TikTok, Instagram | `shorts-distribute.mjs` |
 | Pinned comment; long link lists as replies (one 41-link comment was silently dropped) | `youtube-pin-comment.mjs`, `youtube-reply-comment.mjs` |
+| After publishing: per-video Studio analytics the Data API lacks — Shorts feed "viewed vs swiped" rate, average watch time, retention curve points, traffic sources (reads the page's own `yta_web/get_cards`; switches channel per group; data lags up to 2 days). Run it before any performance report or improvement proposal | `youtube-studio-analytics.mjs --in=videos.json` |
+| Naver blog today-so-far views/search/home inflow per post (daily stats stop at yesterday) | Creator Advisor `ENDPOINTS.realtimeSummary` / `realtimeHistogram` (operations pack) |
 | Facebook Page: login with checkpoint, post/reel with AI label | `facebook-web.mjs` |
 | Facebook Page: SRT caption tracks on a published video/Reel, one per language (`name.en_US.srt`) | `facebook-captions.mjs` |
 | Owner's own footage from Google Photos (phone backups are there, not in Drive): list videos, search, shot date/place/file, download originals one by one or in bulk by date range/search (resumable). Read-only; ask before publishing personal media | `google-photos-web.mjs` |
