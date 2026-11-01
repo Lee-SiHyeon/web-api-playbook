@@ -104,6 +104,14 @@ export class FlowClient {
     return (await this.transport.rpc(rpcId, freq, { timeoutMs })).payload;
   }
 
+  // remaining Flow credits of this account and when they reset (multi-account rotation in shorts-anatomy/tools/flow-gen.mjs)
+  async getCredits() {
+    const payload = await this.batchRpc(RPC.credits, JSON.stringify([[[RPC.credits, '[]', null, 'generic']]]));
+    if (!Number.isInteger(payload?.[0])) throw new FlowProtocolError('Flow credits response has an unexpected schema.', { code: 'FLOW_CREDITS_SCHEMA_CHANGED', rpcId: RPC.credits });
+    const reset = payload?.[6]?.[0];
+    return { credits: payload[0], daily: Number.isInteger(payload?.[5]) ? payload[5] : null, resetsAt: Number.isInteger(reset) ? new Date(reset * 1000).toISOString() : null };
+  }
+
   async getMedia(mediaId) {
     await this.assertProjectMedia(mediaId);
     return this.batchRpc(RPC.getMedia, buildGetMediaRequest(mediaId));

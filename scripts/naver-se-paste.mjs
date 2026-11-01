@@ -90,12 +90,15 @@ try {
   } else if (cmd === 'publish') {
     const [blogId] = args;
     const T = await tab('about:blank', (u) => u.startsWith(`https://blog.naver.com/${blogId}/postwrite`));
+    // 대표이미지 required (owner 2026-10-30 "메인이미지 왜없음"): a post with no uploaded image has no thumbnail in lists/search
+    const imgs = await T.ev(`[...document.querySelectorAll('.se-component.se-image img')].filter(i => /pstatic\.net/.test(i.src)).length`);
+    if (!imgs && !opt['no-image-ok']) throw new Error('NO_MAIN_IMAGE: run node scripts/naver-se-cover.mjs <blogId> current <cover.jpg> first');
     const pub = await T.ev(centerOf(`[...document.querySelectorAll('button')].find(b => b.offsetParent && b.innerText.trim().startsWith('발행'))`));
     await T.click(...pub); await sleep(2000);
     if (opt.category) {
       const dd = await T.ev(centerOf(`[...document.querySelectorAll('button')].find(b => b.offsetParent && b.closest('[class*=publish]') && /카테고리|category/i.test(b.getAttribute('aria-label') || b.className))`));
       if (dd) { await T.click(...dd); await sleep(1000); }
-      const ok = await T.ev(`(() => { const want = ${JSON.stringify(opt.category)}; const norm = (t) => t.split(String.fromCharCode(10)).pop().replace('ㄴ', '').trim(); const c = [...document.querySelectorAll('label, span, li, button')].filter(e => e.offsetParent && norm(e.innerText.trim()) === want);
+      const ok = await T.ev(`(() => { const want = ${JSON.stringify(opt.category)}; const norm = (t) => t.split(String.fromCharCode(10)).pop().replace('ㄴ', '').split(String.fromCharCode(160)).join(' ').trim(); const c = [...document.querySelectorAll('label, span, li, button')].filter(e => e.offsetParent && norm(e.innerText.trim()) === want);
         c.sort((a, b) => a.querySelectorAll('*').length - b.querySelectorAll('*').length); const t = c[0]; if (!t) return false; (t.closest('label') || t).click(); return true; })()`);
       if (!ok) throw new Error('CATEGORY_NOT_FOUND');
     }

@@ -8,7 +8,7 @@
 //
 // job.json (paths are local Windows paths):
 // {
-//   "channelId": "UC...", "video": "C:\\...\\final.mp4", "videoId": "(set after upload, for captions)",
+//   "channelId": "UC...", "channelName": "생활이득AI연구소 (switch target in Studio's 계정 전환 when another channel is active)", "video": "C:\\...\\final.mp4", "videoId": "(set after upload, for captions)",
 //   "title": "...", "description": "...", "tags": ["a","b"], "category": "여행/이벤트", "language": "한국어",
 //   "thumbnail": "C:\\...\\a.jpg",                                   // or use abTest
 //   "abTest": [{"thumbnail": "C:\\a.jpg", "title": "..."}, {"thumbnail": "C:\\b.jpg", "title": "..."}],  // 2-3 variants, 제목과 썸네일
@@ -35,6 +35,10 @@ const CDP = process.env.YT_STUDIO_CDP || 'http://127.0.0.1:9333';
 const [cmd, jobPath, ...flags] = process.argv.slice(2);
 const opt = Object.fromEntries(flags.map((f) => f.replace(/^--/, '').split('=')));
 if (!['upload', 'captions'].includes(cmd) || !jobPath) { console.error('usage: youtube-studio.mjs upload|captions <job.json> [--shots=dir]'); process.exit(2); }
+// shorts-anatomy publish gate (2026-10-29): episodes under shorts-anatomy/work must pass tools/publish-gate.mjs first (exit 3 otherwise)
+const { requireGate } = await import('file:///C:/Users/sihyeon/dev/shorts-anatomy/tools/gate-check.mjs').catch((e) => { console.log(JSON.stringify({ ok: false, code: 'PUBLISH_GATE_UNAVAILABLE', error: e.message })); process.exit(3); });
+if (cmd === 'upload') requireGate(jobPath);
+let uploadedId = null; // set when an upload completes; with job.captions the captions command runs right after (ko+en default, 2026-10-30)
 const job = JSON.parse(fs.readFileSync(jobPath, 'utf8'));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -107,10 +111,32 @@ const uploadDone = async () => {
   fail('UPLOAD_TIMEOUT');
 };
 
+// Make job.channelId the active Studio identity. Observed 2026-10-25: the Canary holds several Google accounts, each with
+// several channels; when another account's channel was last active, /channel/<id>/videos/upload shows "이 페이지를 볼 권한이
+// 없습니다" and the upload timed out. Studio's own switcher (avatar -> 계정 전환) lists every channel by name (no ids), so the
+// job names it: job.channelName. The active channel is read back from ytcfg CHANNEL_ID.
+const activeChannel = () => ev(`(window.ytcfg && ytcfg.get && ytcfg.get('CHANNEL_ID')) || null`);
+async function ensureChannel(job) {
+  await send('Page.navigate', { url: 'https://studio.youtube.com/' }); await sleep(8000);
+  const before = await activeChannel();
+  if (before === job.channelId) { log({ step: 'channel', active: before }); return; }
+  if (!job.channelName) fail('CHANNEL_MISMATCH', { active: before, want: job.channelId, hint: 'set job.channelName to switch automatically' });
+  await waitFor(`(() => { const b = document.querySelector('#avatar-btn'); if (!b) return false; b.click(); return true; })()`, 15000); await sleep(2000);
+  await waitFor(`(() => { const b = [...document.querySelectorAll('tp-yt-paper-item, ytd-compact-link-renderer, [role=menuitem]')].find((x) => /계정 전환/.test(x.innerText || '')); if (!b) return false; b.click(); return true; })()`, 10000); await sleep(3000);
+  const names = await ev(`[...document.querySelectorAll('ytd-account-item-renderer')].map((x) => (x.innerText || '').trim().split('\\n')[0])`);
+  const ok = await ev(`(() => { const b = [...document.querySelectorAll('ytd-account-item-renderer')].find((x) => (x.innerText || '').trim().split('\\n')[0] === ${JSON.stringify(job.channelName)}); if (!b) return false; (b.querySelector('tp-yt-paper-icon-item, a, [role=link]') || b).click(); return true; })()`);
+  if (!ok) fail('CHANNEL_NOT_IN_SWITCHER', { want: job.channelName, names });
+  await sleep(9000); await send('Page.navigate', { url: 'https://studio.youtube.com/' }); await sleep(8000);
+  const after = await activeChannel();
+  if (after !== job.channelId) fail('CHANNEL_SWITCH_FAILED', { before, after, want: job.channelId });
+  log({ step: 'channel', switchedFrom: before, active: after });
+}
+
 try {
   if (cmd === 'upload') {
     for (const k of ['channelId', 'video', 'title']) if (!job[k]) fail('JOB_FIELD', { k });
     if ([job.title, ...(job.abTest || []).map((v) => v.title)].some((s) => s && [...s].length > 100)) fail('TITLE_OVER_100');
+    await ensureChannel(job);
     await send('Page.navigate', { url: `https://studio.youtube.com/channel/${job.channelId}/videos/upload?d=ud` });
     await waitFor(`!!document.querySelector('input[type=file]')`, 30000);
     await setFiles('input[type=file]', 0, job.video); uploadPending = true;
@@ -178,11 +204,13 @@ try {
     await ev(`(document.querySelector('#done-button').click(), 1)`);
     const confirm = await waitFor(`(() => { const m = document.body.innerText.match(/(\\d{4}년 \\d+월 \\d+일 [\\d:]+)에 동영상이 공개|동영상 저장됨|동영상 게시됨|동영상 처리 중/); return m ? m[0] : null; })()`, 30000).catch(() => null); // confirm text is not reliable; the upload itself is verified below
     log({ step: 'done', videoId, confirm, url: `https://youtu.be/${videoId}` }); await shot('done');
-    await uploadDone(); uploadPending = false; log({ step: 'upload-complete', videoId });
+    await uploadDone(); uploadPending = false; log({ step: 'upload-complete', videoId }); uploadedId = videoId;
   }
 
   if (cmd === 'captions') {
     if (!job.videoId) fail('JOB_FIELD', { k: 'videoId' });
+    // another channel's video shows an empty translations page (2026-10-30: 5 caption runs failed NOT_FOUND 자막 수정)
+    if (job.channelId) await ensureChannel(job);
     const page = `https://studio.youtube.com/video/${job.videoId}/translations`;
     const go = async () => { await send('Page.navigate', { url: page }); await waitFor(`!!document.body && /언어 추가/.test(document.body.innerText)`, 30000); await sleep(1500); };
     const uploadInEditor = async (srt) => {
@@ -196,9 +224,33 @@ try {
       }
       fail('CAPTION_UPLOAD', { srt });
     };
+    // Unified 자막 page (seen 2026-10-30 on 챱츄/보수/진보/경제, not 생활이득): no "자막 수정" button; each row's captions cell shows
+    // icon buttons only on hover (#captions-edit "복사 및 수정", #captions-delete, #captions-more-options, or 추가 on an empty row).
+    const hoverButtons = async (label) => {
+      const xy = await ev(`(() => { const r = [...document.querySelectorAll('ytgn-video-translation-row')].find(r => (r.querySelector('.tablecell-language')?.innerText || '').trim() === ${JSON.stringify(label)});
+        const c = r && r.querySelector('.tablecell-captions'); if (!c) return null; c.scrollIntoView({ block: 'center' }); const b = c.getBoundingClientRect(); return [b.left + 30, b.top + b.height / 2]; })()`);
+      if (!xy) return null;
+      await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: xy[0] - 200, y: xy[1] }); await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: xy[0], y: xy[1] }); await sleep(800);
+      return ev(`(() => { const r = [...document.querySelectorAll('ytgn-video-translation-row')].find(r => (r.querySelector('.tablecell-language')?.innerText || '').trim() === ${JSON.stringify(label)});
+        return [...r.querySelector('.tablecell-captions').querySelectorAll('ytcp-icon-button, ytcp-button, button')].map(e => { const b = e.getBoundingClientRect(); return b.width ? { id: e.id, label: (e.getAttribute('aria-label') || e.innerText || '').trim(), xy: [b.x + b.width / 2, b.y + b.height / 2] } : null; }).filter(Boolean); })()`);
+    };
+    const unified = async () => !!(await ev(`!!document.querySelector('ytgn-video-translation-row[unified]')`));
     await go();
-    if (job.captions?.original && !('skip-original' in opt)) { // --skip-original: only the localized tracks
-      await clickText('자막 수정'); await sleep(3000);
+    let originalViaAdd = false; // name kept: true = skip the original track
+    if (job.captions?.original && !('skip-original' in opt) && await unified()) {
+      // a video without speech (card video, 2026-10-30) has no editable 동영상 언어 track: skip the original, the burned-in Korean is on screen
+      const ko = await ev(`([...document.querySelectorAll('ytgn-video-translation-row')].map(r => (r.querySelector('.tablecell-language')?.innerText || '').trim()).find(s => /동영상 언어/.test(s))) || null`);
+      const hb = ko ? await hoverButtons(ko) : null;
+      if (!hb?.some((x) => x.id === 'captions-edit' || /수정/.test(x.label))) { originalViaAdd = true; log({ step: 'original', skipped: 'no editable 동영상 언어 track (no speech)' }); }
+    }
+    if (job.captions?.original && !('skip-original' in opt) && !originalViaAdd) { // --skip-original: only the localized tracks
+      if (await unified()) {
+        const ko = await ev(`([...document.querySelectorAll('ytgn-video-translation-row')].map(r => (r.querySelector('.tablecell-language')?.innerText || '').trim()).find(s => /동영상 언어/.test(s))) || null`);
+        const b = ko && (await hoverButtons(ko))?.find((x) => x.id === 'captions-edit' || /수정/.test(x.label));
+        if (!b) fail('NO_CAPTIONS_EDIT', { row: ko });
+        await click(b.xy); await sleep(2000);
+        if (await pointOfText('트랙 덮어쓰기')) { await clickText('계속'); await sleep(3000); } // replaces the auto track
+      } else { await clickText('자막 수정'); await sleep(3000); }
       // ⋮ menu sits right of "텍스트로 편집"
       let p = null; for (let k = 0; k < 60 && !p; k++) { p = await pointOfText('텍스트로 편집'); if (!p) await sleep(500); } if (!p) fail('NO_EDITOR');
       const more = await ev(`(() => { const {vis} = ${H}; const b = [...document.querySelectorAll('ytcp-icon-button, yt-icon-button, button')].map(e => [e, vis(e)]).filter(x => x[1] && Math.abs(x[1][1] - ${p[1]}) < 20 && x[1][0] > ${p[0]}); b.sort((a, c) => a[1][0] - c[1][0]); return b[0] ? b[0][1] : null; })()`);
@@ -242,6 +294,23 @@ try {
       await clickText('언어 추가'); await sleep(1200);
       if (!(await pickMenuItem(tr.label))) fail('NO_LANG', { label: tr.label });
       await sleep(2500);
+      if (await unified() && !(await pointOfText('수동 자막'))) {
+        // unified page: 언어 추가 only adds the row (title/description locked "요건 미충족") → the row's hover 추가 opens the caption flow
+        const hb = await hoverButtons(tr.label); const b = hb?.find((x) => /추가|add/i.test(`${x.id} ${x.label}`));
+        if (!b) fail('NO_ROW_CAPTION_ADD', { label: tr.label, unified: true });
+        await click(b.xy); await sleep(2000);
+        if (await pointOfText('파일 업로드')) await clickText('파일 업로드'); await sleep(1200);
+        let ok = false;
+        for (let attempt = 1; attempt <= 3 && !ok; attempt++) {
+          const c = await pointOfText('계속'); if (!c) break; await viaChooser(c, tr.srt); await sleep(4000);
+          ok = (await ev(`[...document.querySelectorAll('textarea')].filter(e => e.offsetParent).length`)) > 0;
+        }
+        if (!ok) fail('CAPTION_UPLOAD', { srt: tr.srt, unified: true });
+        await shot(tr.label); await clickText('게시'); await sleep(4000); await go();
+        const row = await ev(`[...document.querySelectorAll('ytgn-video-translation-row')].map(e => e.innerText.replace(/\\s+/g, ' ').trim()).find(t => t.startsWith(${JSON.stringify(tr.label)})) || ''`);
+        log({ step: 'track', label: tr.label, row, unified: true });
+        continue;
+      }
       if (tr.title) await fillEditable(0, tr.title);
       if (tr.description) await fillEditable(1, tr.description);
       // "수동 자막 · 추가" — the 추가 on the same row as 수동 자막
@@ -257,6 +326,8 @@ try {
   }
 } catch (e) {
   await shot('error').catch(() => {});
+  // unverified channels hit 일일 업로드 한도 (2026-10-30 챱츄, 여친수집소): report it instead of a bare TIMEOUT so the cycle queues a retry
+  if (await ev(`/일일 업로드 한도|daily upload limit/i.test(document.body.innerText)`).catch(() => false)) e.code = 'DAILY_UPLOAD_LIMIT';
   log({ ok: false, code: e.code || 'ERROR', message: e.message, ...(e.text ? { text: e.text } : {}) });
   process.exitCode = 2;
 } finally {
@@ -264,4 +335,13 @@ try {
   // the tab is only closed once the upload is confirmed complete; otherwise it stays open so the upload is not interrupted
   if (uploadPending) log({ step: 'tab-kept-open', reason: 'upload not confirmed complete; close this tab manually after Studio shows it finished' });
   else await fetch(`${CDP}/json/close/${t.id}`).catch(() => {});
+}
+// ko+en default (owner 2026-10-30): an upload whose job carries captions gets them published immediately in a fresh tab
+if (cmd === 'upload' && uploadedId && job.captions) {
+  job.videoId = uploadedId; fs.writeFileSync(jobPath, JSON.stringify(job, null, 1));
+  const { spawnSync } = await import('node:child_process');
+  const r = spawnSync('node', [process.argv[1], 'captions', jobPath, ...process.argv.slice(4)], { encoding: 'utf8', timeout: 900000 });
+  const last = (r.stdout || '').trim().split(/\r?\n/).filter(Boolean).slice(-3);
+  for (const l of last) console.log(l);
+  if (r.status !== 0) log({ step: 'captions-failed', videoId: uploadedId, retry: `node scripts/youtube-studio.mjs captions ${jobPath}` });
 }
