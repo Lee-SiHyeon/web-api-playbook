@@ -27,10 +27,10 @@ if (!['video', 'image'].includes(mode) || !flags.prompt) { console.error(usage);
 // run before a tab is opened. --prompt may be the text or @<file>. Lint lives in shorts-anatomy/tools/video-prompt-lint.mjs.
 if (mode === 'video') {
   const text = String(flags.prompt).startsWith('@') ? (await import('node:fs')).readFileSync(String(flags.prompt).slice(1), 'utf8') : String(flags.prompt);
-  const { lintVideoPrompt } = await import('file:///C:/Users/sihyeon/dev/shorts-anatomy/tools/video-prompt-lint.mjs').catch(() => ({}));
+  const { lintVideoPrompt, stripForModel } = await import('file:///C:/Users/sihyeon/dev/shorts-anatomy/tools/video-prompt-lint.mjs').catch(() => ({}));
   const r = lintVideoPrompt ? lintVideoPrompt(text, { duration: flags.dur }) : { ok: false, fails: ['video-prompt-lint unavailable'] };
   if (!r.ok) { console.error('PROMPT_DETAIL_FAIL (nothing generated):\n  ' + r.fails.join('\n  ')); process.exit(3); }
-  flags.prompt = text;
+  flags.prompt = stripForModel(text); // REF line / # comments are for us, not for the model
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (m) => process.stderr.write(`[grok-imagine] ${m}\n`);
