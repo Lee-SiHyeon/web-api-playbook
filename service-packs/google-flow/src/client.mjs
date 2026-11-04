@@ -141,6 +141,9 @@ export class FlowClient {
   async getProjectMedia(projectId) {
     await this.assertActiveProject(projectId);
     const listing = await this.batchRpc(RPC.projectMedia, buildProjectMediaRequest(projectId));
+    // 2026-11-04 observed: an EMPTY project now answers [null, null, null, [voice catalog]] (slots 1/2 null, not []); a project with
+    // media still answers arrays (browser trace, 260 items). Treat null as empty instead of FLOW_PROJECT_SCHEMA_CHANGED.
+    if (Array.isArray(listing) && listing[1] === null && listing[2] === null) { listing[1] = []; listing[2] = []; } // both null only; one null stays an error
     if (!Array.isArray(listing?.[1]) || !Array.isArray(listing?.[2])) {
       throw new FlowProtocolError('Flow project response has an unexpected media schema.', {
         code: 'FLOW_PROJECT_SCHEMA_CHANGED', rpcId: RPC.projectMedia,

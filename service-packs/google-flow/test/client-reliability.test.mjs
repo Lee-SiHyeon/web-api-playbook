@@ -158,3 +158,8 @@ test('reconcile accepts an already completed valid MP4 without media RPCs', asyn
   assert.equal((await loadJournal(job.jobPath)).state, 'downloaded');
   assert.deepEqual(calls, []);
 }));
+
+test('an empty project answered as [null, null, null, catalog] lists zero media (observed 2026-11-04)', async () => {
+  const { client } = makeClient({ responses: { [RPC.projectMedia]: [null, null, null, [['achernar', 3, 'Achernar']]] } });
+  assert.deepEqual(await client.listMediaIds(), []);
+});
