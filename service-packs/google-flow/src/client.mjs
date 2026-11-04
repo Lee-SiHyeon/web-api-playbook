@@ -107,6 +107,8 @@ export class FlowClient {
   // remaining Flow credits of this account and when they reset (multi-account rotation in shorts-anatomy/tools/flow-gen.mjs)
   async getCredits() {
     const payload = await this.batchRpc(RPC.credits, JSON.stringify([[[RPC.credits, '[]', null, 'generic']]]));
+    // 2026-11-04 observed (u1): a spent balance is omitted -> [null,3,8,1,null,null,[resetSec,nanos]]; null + a reset time = 0 credits.
+    if (Array.isArray(payload) && payload[0] === null && Number.isInteger(payload?.[6]?.[0])) { payload[0] = 0; if (payload[5] === null) payload[5] = 0; }
     if (!Number.isInteger(payload?.[0])) throw new FlowProtocolError('Flow credits response has an unexpected schema.', { code: 'FLOW_CREDITS_SCHEMA_CHANGED', rpcId: RPC.credits });
     const reset = payload?.[6]?.[0];
     return { credits: payload[0], daily: Number.isInteger(payload?.[5]) ? payload[5] : null, resetsAt: Number.isInteger(reset) ? new Date(reset * 1000).toISOString() : null };
