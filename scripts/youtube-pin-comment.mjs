@@ -1,7 +1,14 @@
 // Post a comment as the channel on a watch/Shorts page and pin it (own Canary tab, closed at the end). 2026-10-21.
-//   node scripts/youtube-pin-comment.mjs <videoId> <comment.txt> <shotDir> [--shorts] [--replace]
+//   node scripts/youtube-pin-comment.mjs <videoId> <comment.txt> <shotDir> [--shorts] [--replace] [--channel=UC…] [--check-only]
 // Newlines go in with execCommand(insertLineBreak) (plain Enter submits). --replace deletes our previous top comment first.
 // Only public videos take comments: scheduled Shorts are pinned after they go live (shorts-distribute.mjs --channels=youtube-pin).
+// CHANNEL GUARD (2026-11-08, ops-improve 15th loop): refuses to type unless the active identity == the video's owner channel
+// (or --channel=<UC…>). Exit 4 WRONG_CHANNEL / CHANNEL_UNVERIFIED, nothing posted. Why: link comments went out under the wrong
+// channel 2026-10-28 (사이다극장 on 생활이득), 11-07 (지름 link as @lifehack__ailab), 11-08 (@bangguseok-world on unu1ab-_vtI)
+// because the "studiosw after==target" rule lived only in ops/kit/pin.sh and the runbook, and cycles called this script directly.
+// PRIOR-ART: shorts-anatomy/tools/yt-switch-channel.mjs (copied: compare the active identity id with the target, stop on mismatch)
+//   + https://github.com/yt-dlp/yt-dlp/blob/master/yt_dlp/extractor/youtube/_video.py (copied: owner = player videoDetails.channelId)
+//   + YouTube web client /getAccountSwitcherEndpoint (accountItem.isSelected → channelHandle; probed live 2026-11-08 on :9333).
 import fs from 'node:fs';
 import path from 'node:path';
 const [vid, file, shotDir] = process.argv.slice(2);
@@ -17,9 +24,28 @@ const ev = async (x) => { const m = await send('Runtime.evaluate', { expression:
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const shot = async (n) => { fs.mkdirSync(shotDir, { recursive: true }); const s = await send('Page.captureScreenshot', { format: 'png' }); fs.writeFileSync(path.join(shotDir, n + '.png'), Buffer.from(s.result.data, 'base64')); };
 const waitFor = async (expr, ms = 30000) => { const end = Date.now() + ms; while (Date.now() < end) { const v = await ev(expr); if (v) return v; await sleep(700); } return null; };
+const CHANNEL_STOP = () => process.exitCode === 4 || process.argv.includes('--check-only');
+const CH = (process.argv.find((a) => a.startsWith('--channel=')) || '').slice(10) || null;
+async function whoAmI(videoId) { // runs in the page (same-origin fetch with the tab's own login)
+  const c = (k) => window.ytcfg?.get?.(k);
+  let owner = null;
+  try { const pl = await (await fetch('/youtubei/v1/player?prettyPrint=false', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ context: c('INNERTUBE_CONTEXT'), videoId }) })).json(); owner = pl?.videoDetails?.channelId || null; } catch {}
+  const s0 = await (await fetch('/getAccountSwitcherEndpoint', { credentials: 'include' })).text();
+  const sel = []; const walk = (o) => { if (!o || typeof o !== 'object') return; if (o.accountItem && o.accountItem.isSelected) sel.push(o.accountItem); for (const k in o) walk(o[k]); };
+  walk(JSON.parse(s0.slice(s0.indexOf('{'))));
+  const handle = sel[0]?.channelHandle?.simpleText || null; let active = null;
+  if (handle) { const pg = await (await fetch('/' + encodeURI(handle), { credentials: 'include' })).text(); active = (pg.match(/"externalId":"(UC[\w-]{22})"/) || pg.match(/youtube\.com\/channel\/(UC[\w-]{22})"/) || [])[1] || null; }
+  return { owner, handle, name: sel[0]?.accountName?.simpleText || null, active };
+}
 try {
   await send('Page.enable'); await send('Emulation.setDeviceMetricsOverride', { width: 1400, height: 1000, deviceScaleFactor: 1, mobile: false });
   await sleep(6000);
+  const who = await ev(`(${whoAmI.toString()})(${JSON.stringify(vid)})`);
+  const want = CH || who?.owner;
+  console.log(JSON.stringify({ channelGuard: { want, active: who?.active, handle: who?.handle, owner: who?.owner } }));
+  if (!who || typeof who !== 'object' || !want || !who.active) { console.log(JSON.stringify({ ok: false, error: 'CHANNEL_UNVERIFIED', detail: typeof who === 'string' ? who.slice(0, 200) : null })); process.exitCode = 4; throw new Error('CHANNEL_UNVERIFIED'); }
+  if (who.active !== want) { console.log(JSON.stringify({ ok: false, error: 'WRONG_CHANNEL', want, active: who.active, handle: who.handle })); process.exitCode = 4; throw new Error('WRONG_CHANNEL'); }
+  if (process.argv.includes('--check-only')) { console.log(JSON.stringify({ ok: true, checkOnly: true })); process.exitCode = 0; throw new Error('CHECK_ONLY'); }
   if (SHORTS) { // open the comments panel of the short
     await ev(`(()=>{const b=[...document.querySelectorAll('button,yt-button-shape button')].find(x=>/댓글/.test(x.getAttribute('aria-label')||''));b&&b.click();return !!b})()`); await sleep(3000);
   } else { for (let i = 0; i < 6; i++) { await ev('window.scrollBy(0, 700)'); await sleep(1200); } }
@@ -54,4 +80,4 @@ try {
   await sleep(4000); await shot('4-pinned');
   const badge = await ev(`(()=>{const th=document.querySelector('ytd-comment-thread-renderer');return th?(th.querySelector('#pinned-comment-badge')?.innerText||th.innerText.slice(0,80)):null})()`);
   console.log(JSON.stringify({ pinItem: pin, confirm: conf, badge }));
-} finally { ws.close(); await fetch(CDP + '/json/close/' + t.id).catch(() => {}); }
+} finally { ws.close(); await fetch(CDP + '/json/close/' + t.id).catch(() => {}); if (CHANNEL_STOP()) process.exit(process.exitCode); }

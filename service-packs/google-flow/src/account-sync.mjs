@@ -27,6 +27,8 @@ let out;
 try {
   await send('Network.enable');
   await send('Page.navigate', { url: `https://flow.google.com${U}/` }); await sleep(8000);
+  // 2026-11-04: the project grid now renders late (empty at 8 s, filled by ~15 s) -> FLOW_ACCOUNT_NO_PROJECT on accounts that have projects; wait up to 30 s.
+  for (let i = 0; i < 44 && !(await ev(`document.querySelectorAll('a[href*="/project/"]').length`)); i++) await sleep(500);
   const page = await ev(`(() => { const m = document.documentElement.innerHTML.match(/"oPEP7c"\\s*:\\s*"([^"]+)"/);
     return { host: location.hostname, path: location.pathname, owner: m ? JSON.parse('"' + m[1] + '"') : null,
       projects: [...document.querySelectorAll('a[href*="/project/"]')].map(a => a.getAttribute('href')) }; })()`);

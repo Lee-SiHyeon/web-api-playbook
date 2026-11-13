@@ -107,6 +107,8 @@ export class FlowClient {
   // remaining Flow credits of this account and when they reset (multi-account rotation in shorts-anatomy/tools/flow-gen.mjs)
   async getCredits() {
     const payload = await this.batchRpc(RPC.credits, JSON.stringify([[[RPC.credits, '[]', null, 'generic']]]));
+    // 2026-11-04 observed (u1): a spent balance is omitted -> [null,3,8,1,null,null,[resetSec,nanos]]; null + a reset time = 0 credits.
+    if (Array.isArray(payload) && payload[0] === null && Number.isInteger(payload?.[6]?.[0])) { payload[0] = 0; if (payload[5] === null) payload[5] = 0; }
     if (!Number.isInteger(payload?.[0])) throw new FlowProtocolError('Flow credits response has an unexpected schema.', { code: 'FLOW_CREDITS_SCHEMA_CHANGED', rpcId: RPC.credits });
     const reset = payload?.[6]?.[0];
     return { credits: payload[0], daily: Number.isInteger(payload?.[5]) ? payload[5] : null, resetsAt: Number.isInteger(reset) ? new Date(reset * 1000).toISOString() : null };
@@ -141,6 +143,9 @@ export class FlowClient {
   async getProjectMedia(projectId) {
     await this.assertActiveProject(projectId);
     const listing = await this.batchRpc(RPC.projectMedia, buildProjectMediaRequest(projectId));
+    // 2026-11-04 observed: an EMPTY project now answers [null, null, null, [voice catalog]] (slots 1/2 null, not []); a project with
+    // media still answers arrays (browser trace, 260 items). Treat null as empty instead of FLOW_PROJECT_SCHEMA_CHANGED.
+    if (Array.isArray(listing) && listing[1] === null && listing[2] === null) { listing[1] = []; listing[2] = []; } // both null only; one null stays an error
     if (!Array.isArray(listing?.[1]) || !Array.isArray(listing?.[2])) {
       throw new FlowProtocolError('Flow project response has an unexpected media schema.', {
         code: 'FLOW_PROJECT_SCHEMA_CHANGED', rpcId: RPC.projectMedia,

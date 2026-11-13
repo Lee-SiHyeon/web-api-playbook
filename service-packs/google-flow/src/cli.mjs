@@ -141,10 +141,18 @@ async function main() {
   try {
     await start(client);
     if (command === 'generate') {
-      const prompt = options['prompt-file']
+      let prompt = options['prompt-file']
         ? await readFile(path.resolve(options['prompt-file']), 'utf8')
         : options.prompt;
       if (!prompt?.trim()) throw new Error('Provide --prompt or --prompt-file for generate.');
+      // Video prompt detail gate (owner 2026-11-02 "구체적인 디테일이 있는지 게이팅"; 2026-11-04 "영상생성할때 게이트 지켰나"):
+      // same gate as affiliate-content-operations/apps/google-flow-api. Fails before any credit is spent; the model gets the prompt
+      // without the REF/comment lines.
+      const { lintVideoPrompt, stripForModel } = await import('file:///C:/Users/sihyeon/dev/shorts-anatomy/tools/video-prompt-lint.mjs');
+      const gate = lintVideoPrompt(prompt, { duration: options.duration });
+      if (!gate.ok) throw Object.assign(new Error('PROMPT_DETAIL_FAIL (no credits spent):\n  ' + gate.fails.join('\n  ')
+        + '\n  gallery: node C:/Users/sihyeon/dev/shorts-anatomy/tools/video-prompt-gallery.mjs search <words>'), { code: 'PROMPT_DETAIL_FAIL' });
+      prompt = stripForModel(prompt);
       const activeContext = await client.getContext();
       const targetProjectId = options['project-id'] ?? activeContext.projectId;
       if (gflowMode) {
