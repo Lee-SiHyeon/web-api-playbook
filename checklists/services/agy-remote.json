@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "service": "agy-remote",
+  "description": "Offline implementation gates; dated POST RPC replay proof is independently validated by verify-agy-remote-evidence.mjs and the normal test suite.",
+  "capabilities": [
+    {
+      "id": "auth.owner",
+      "title": "Verify the current owner on each selected remote",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "auth.session_persist",
+      "title": "Reuse owner-protected credentials across Node processes",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote-bootstrap.mjs",
+            "exports": [
+              "bootstrapAgyRemote"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "auth.cookie_maintenance",
+      "title": "Refresh native browser-bound cookies without navigation or automatic login",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote-bootstrap.mjs",
+            "exports": [
+              "refreshAgyRemoteSession"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "remotes.list",
+      "title": "List instances and retain offline status",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "projects.list",
+      "title": "Read existing projects on the selected remote",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "models.list",
+      "title": "Read models available on the selected remote",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "conversations.list",
+      "title": "Merge persisted history batches with loaded trajectories",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "conversations.read",
+      "title": "Read a conversation belonging to the selected remote",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "conversations.create",
+      "title": "Create a new conversation and verify its resource ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "conversations.rename",
+      "title": "Rename a conversation and read back its title",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "conversations.cancel",
+      "title": "Cancel an observed running conversation and verify idle state",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "conversations.delete",
+      "title": "Delete a task-owned fixture and verify its absence",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "messages.send",
+      "title": "Send a text message with a reserved journal and client message ID",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "messages.followup",
+      "title": "Continue the same conversation and retain previous-turn context",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "messages.wait",
+      "title": "Wait/read without resubmitting and distinguish failed terminal states",
+      "priority": "required",
+      "applicability": "applicable",
+      "requirement": "local",
+      "implementation": {
+        "files": [
+          {
+            "path": "lib/agy-remote.mjs",
+            "exports": [
+              "createAgyRemoteClient"
+            ]
+          }
+        ],
+        "cli": [
+          {
+            "path": "scripts/agy-remote.mjs",
+            "tokens": [
+              "pure_http"
+            ]
+          }
+        ],
+        "tests": [
+          "tests/agy-remote.test.mjs",
+          "tests/agy-remote-evidence.test.mjs"
+        ]
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "note": "Replay verified in sanitizedverification/agy-remote-live-2026-11-13.json. The shared checklist remains an offline gate; the service-specific verifier binds the real POST RPC and independent native readback without claiming generic GET evidence."
+    },
+    {
+      "id": "auth.google_login",
+      "title": "Automatic Google re-login",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Google passwords and interactive challenges are outside this adapter; the owner signs in through the normal browser."
+    },
+    {
+      "id": "media.attachments",
+      "title": "Conversation image/file attachments",
+      "priority": "optional",
+      "applicability": "applicable",
+      "requirement": "live",
+      "implementation": {
+        "files": [],
+        "cli": [],
+        "tests": []
+      },
+      "evidence": [],
+      "sourceEvidence": [],
+      "blocker": "Only text submission is implemented and live-verified; no attachment upload or media writer is claimed."
+    }
+  ]
+}

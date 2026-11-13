@@ -1,0 +1,419 @@
+{
+  "schema": "web-api-agy-remote-live-v1",
+  "service": "agy-remote",
+  "checkedAt": "2026-11-13T00:11:47.390203+00:00",
+  "secretsPersistedInEvidence": false,
+  "ownerVerified": true,
+  "businessMode": "pure_http",
+  "engineFreeWorkflow": false,
+  "clientPlatform": "linux",
+  "offlineInstancesObserved": 1,
+  "offlineInstanceOperational": false,
+  "crossRemoteRejected": "AGY_CONVERSATION_NOT_IN_REMOTE",
+  "offlineRejected": "AGY_REMOTE_OFFLINE",
+  "implementation": {
+    "lib/agy-remote.mjs": "d3cc93756a1e497f3de6bf4348aaea1da47fc4412980a79a498fd6708879a7d4",
+    "lib/agy-remote-stream.mjs": "8e7414cf7718e47ba69b420b45e2bbe0b1e80e7ce25a676b9b6a340721927581",
+    "lib/agy-remote-runtime.mjs": "fd15919af77f3df960c5b710f2e75c5b2084a678956689e9ac9b0a49cd7b2f3a",
+    "lib/agy-remote-bootstrap.mjs": "c20e6f2bd05d5472bd4e93bb8334f11d40181c62cf72fcba443b0adbb2d05d60",
+    "lib/service-operations/agy-remote.mjs": "9993d2f0fc48fa19ca61683206774723f5f3b0186ee1bca7245548b6a7f5b75d",
+    "lib/service-operations/extras.mjs": "e556a8f59714072052766ad2a634409eda3c65744b797a8fdb98a3acfbc463a6",
+    "scripts/agy-remote.mjs": "2a54b0892031b9155e455d060eb0a46fdb270e2f66ab59b4cb2267b9a43089c4",
+    "scripts/agy-remote-bootstrap.mjs": "573c8f1f98bdda847d8ec1d68f0738d55b8460c4b836111fe9b0abb114a28d37"
+  },
+  "validationPhases": {
+    "business_lifecycle": {
+      "verified": true,
+      "checkedAt": "2026-11-12T23:54:50.553Z",
+      "implementation": {
+        "lib/agy-remote.mjs": "d3cc93756a1e497f3de6bf4348aaea1da47fc4412980a79a498fd6708879a7d4",
+        "lib/agy-remote-stream.mjs": "8e7414cf7718e47ba69b420b45e2bbe0b1e80e7ce25a676b9b6a340721927581",
+        "lib/agy-remote-runtime.mjs": "fd15919af77f3df960c5b710f2e75c5b2084a678956689e9ac9b0a49cd7b2f3a",
+        "scripts/agy-remote.mjs": "2a54b0892031b9155e455d060eb0a46fdb270e2f66ab59b4cb2267b9a43089c4",
+        "scripts/agy-remote-bootstrap.mjs": "573c8f1f98bdda847d8ec1d68f0738d55b8460c4b836111fe9b0abb114a28d37"
+      }
+    },
+    "owner_cookie_maintenance": {
+      "verified": true,
+      "checkedAt": "2026-11-13T00:10:38.475Z",
+      "implementation": {
+        "lib/agy-remote-bootstrap.mjs": "c20e6f2bd05d5472bd4e93bb8334f11d40181c62cf72fcba443b0adbb2d05d60"
+      }
+    },
+    "common_registry": {
+      "verified": true,
+      "implementation": {
+        "lib/service-operations/agy-remote.mjs": "9993d2f0fc48fa19ca61683206774723f5f3b0186ee1bca7245548b6a7f5b75d",
+        "lib/service-operations/extras.mjs": "e556a8f59714072052766ad2a634409eda3c65744b797a8fdb98a3acfbc463a6"
+      }
+    },
+    "native_command_tool": {
+      "verified": true,
+      "checkedAt": "2026-11-13T00:19:37.812Z",
+      "implementation": {
+        "lib/agy-remote.mjs": "d3cc93756a1e497f3de6bf4348aaea1da47fc4412980a79a498fd6708879a7d4",
+        "lib/agy-remote-stream.mjs": "8e7414cf7718e47ba69b420b45e2bbe0b1e80e7ce25a676b9b6a340721927581",
+        "lib/agy-remote-runtime.mjs": "fd15919af77f3df960c5b710f2e75c5b2084a678956689e9ac9b0a49cd7b2f3a",
+        "lib/agy-remote-bootstrap.mjs": "c20e6f2bd05d5472bd4e93bb8334f11d40181c62cf72fcba443b0adbb2d05d60",
+        "lib/service-operations/agy-remote.mjs": "9993d2f0fc48fa19ca61683206774723f5f3b0186ee1bca7245548b6a7f5b75d",
+        "lib/service-operations/extras.mjs": "e556a8f59714072052766ad2a634409eda3c65744b797a8fdb98a3acfbc463a6",
+        "scripts/agy-remote.mjs": "2a54b0892031b9155e455d060eb0a46fdb270e2f66ab59b4cb2267b9a43089c4",
+        "scripts/agy-remote-bootstrap.mjs": "573c8f1f98bdda847d8ec1d68f0738d55b8460c4b836111fe9b0abb114a28d37"
+      }
+    }
+  },
+  "authenticationPhases": {
+    "initialLogin": "interactive_google_ui_with_owner_phone_verification",
+    "bootstrap": "existing_authenticated_browser_cdp",
+    "business": "pure_http_node_fetch",
+    "readback": "pure_http_node_fetch",
+    "cookieMaintenance": "owner_checked_browser_cookie_sync",
+    "automaticGoogleLogin": false,
+    "agePolicyClockAdvancedForMaintenanceTest": true
+  },
+  "sourceProvenance": [
+    {
+      "kind": "browser_http_observed",
+      "origin": "https://antigravity.google.com",
+      "paths": [
+        "/$rpc/devtools_jetski_boq_api_proto.ApiService/ListInstances",
+        "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "/$rpc/devtools_jetski_boq_api_proto.ApiService/StreamProxyCommand"
+      ]
+    },
+    {
+      "kind": "first_party_shipped_javascript",
+      "url": "https://antigravity.static.usercontent.goog/web/cli-1.5.7/main.js",
+      "sha256": "79e3a333de32b36a6eaa9265685aa99b7cb276692b825ff2a5dd9ae84cd95d8f"
+    }
+  ],
+  "capabilities": {
+    "auth.owner": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetUserStatus",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      }
+    },
+    "auth.session_persist": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetUserStatus",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      }
+    },
+    "auth.cookie_maintenance": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetUserStatus",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "browserRequired": true,
+      "navigated": false,
+      "agePolicyClockAdvancedForTest": true,
+      "automaticGoogleLogin": false
+    },
+    "remotes.list": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ListInstances",
+        "nativeMethod": null,
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      }
+    },
+    "projects.list": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "ReadProjects",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      }
+    },
+    "models.list": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeModelConfigData",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      }
+    },
+    "conversations.list": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/StreamProxyCommand",
+        "nativeMethod": "JetboxSubscribeToSummaries",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "nativeSnapshotComplete": false,
+      "multipleBatchesVerified": true,
+      "scope": "quiescent local-history subscription plus loaded trajectories"
+    },
+    "conversations.read": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeTrajectory",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      }
+    },
+    "conversations.create": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "StartCascade",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "writeSent": true,
+      "journalReserved": true,
+      "independentReadback": true,
+      "readback": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeTrajectory",
+        "httpStatus": 200,
+        "expectedMatched": true
+      }
+    },
+    "conversations.rename": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "UpdateConversationAnnotations",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "writeSent": true,
+      "journalReserved": true,
+      "independentReadback": true,
+      "readback": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeTrajectory",
+        "httpStatus": 200,
+        "expectedMatched": true
+      }
+    },
+    "conversations.cancel": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "CancelCascadeInvocation",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "writeSent": true,
+      "journalReserved": true,
+      "independentReadback": true,
+      "readback": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeTrajectory",
+        "httpStatus": 200,
+        "expectedMatched": true
+      },
+      "runningBeforeCancellation": true
+    },
+    "conversations.delete": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "DeleteCascadeTrajectory",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "writeSent": true,
+      "journalReserved": true,
+      "independentReadback": true,
+      "readback": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/StreamProxyCommand",
+        "nativeMethod": "JetboxSubscribeToSummaries",
+        "httpStatus": 200,
+        "expectedMatched": true
+      }
+    },
+    "messages.send": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "SendUserCascadeMessage",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "writeSent": true,
+      "journalReserved": true,
+      "independentReadback": true,
+      "readback": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeTrajectory",
+        "httpStatus": 200,
+        "expectedMatched": true
+      },
+      "agentCommandToolVerified": true
+    },
+    "messages.followup": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "SendUserCascadeMessage",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      },
+      "writeSent": true,
+      "journalReserved": true,
+      "independentReadback": true,
+      "readback": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeTrajectory",
+        "httpStatus": 200,
+        "expectedMatched": true
+      },
+      "sameConversation": true,
+      "previousResponseRetained": true
+    },
+    "messages.wait": {
+      "status": "replay_verified",
+      "verified": true,
+      "request": {
+        "method": "POST",
+        "origin": "https://antigravity.google.com",
+        "path": "/$rpc/devtools_jetski_boq_api_proto.ApiService/ProxyCommand",
+        "nativeMethod": "GetCascadeTrajectory",
+        "httpStatus": 200,
+        "mime": "application/json+protobuf"
+      }
+    }
+  },
+  "remotes": [
+    {
+      "alias": "remote-1",
+      "platform": "linux",
+      "platformMapping": "owner-provided device mapping",
+      "ownerMatched": true,
+      "observedConversations": 423,
+      "historyBatches": 5,
+      "nativeSnapshotComplete": false,
+      "uiFollowupReadback": true,
+      "modelCount": 19,
+      "projectCount": 3,
+      "capabilities": {
+        "auth.owner": true,
+        "auth.session_persist": true,
+        "auth.cookie_maintenance": true,
+        "remotes.list": true,
+        "projects.list": true,
+        "models.list": true,
+        "conversations.list": true,
+        "conversations.read": true,
+        "conversations.create": true,
+        "conversations.rename": true,
+        "conversations.cancel": true,
+        "conversations.delete": true,
+        "messages.send": true,
+        "messages.followup": true,
+        "messages.wait": true
+      },
+      "commandToolVerified": true,
+      "commandToolSuccessfulExitCode": 0,
+      "commandToolOutputMatched": true,
+      "commandToolAttempts": 1,
+      "nativeSandboxFailuresRecovered": 0
+    },
+    {
+      "alias": "remote-2",
+      "platform": "windows",
+      "platformMapping": "owner-provided device mapping",
+      "ownerMatched": true,
+      "observedConversations": 86,
+      "historyBatches": 1,
+      "nativeSnapshotComplete": false,
+      "uiFollowupReadback": true,
+      "modelCount": 19,
+      "projectCount": 2,
+      "capabilities": {
+        "auth.owner": true,
+        "auth.session_persist": true,
+        "auth.cookie_maintenance": true,
+        "remotes.list": true,
+        "projects.list": true,
+        "models.list": true,
+        "conversations.list": true,
+        "conversations.read": true,
+        "conversations.create": true,
+        "conversations.rename": true,
+        "conversations.cancel": true,
+        "conversations.delete": true,
+        "messages.send": true,
+        "messages.followup": true,
+        "messages.wait": true
+      },
+      "commandToolVerified": true,
+      "commandToolSuccessfulExitCode": 0,
+      "commandToolOutputMatched": true,
+      "commandToolAttempts": 3,
+      "nativeSandboxFailuresRecovered": 2
+    }
+  ]
+}

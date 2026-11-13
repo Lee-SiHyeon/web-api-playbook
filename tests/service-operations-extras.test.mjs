@@ -107,7 +107,7 @@ function brandFetch(calls, { loginId = 'fixture-owner-login', catalogue = { item
 }
 
 test('extras definitions are lazy read-only v2 profiles with honest verification kinds and no commerce collisions', () => {
-  assert.deepEqual(definitions.map(definition => definition.id), ['elevenlabs', 'toss-sharelink', 'creator-youtube', 'creator-google', 'brandconnect']);
+  assert.deepEqual(definitions.map(definition => definition.id), ['elevenlabs', 'toss-sharelink', 'creator-youtube', 'creator-google', 'brandconnect', 'agy-remote']);
   validateServiceDefinitions(definitions);
   for (const definition of definitions) {
     validateOperationProfile(definition.profile);

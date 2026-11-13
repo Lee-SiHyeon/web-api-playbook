@@ -110,6 +110,14 @@ Reserve its owner/source journal before sending, never resend an uncertain inten
 and require full owner plus cookie-free public readback. Reuse the observed
 `{block:{id,...}}` ACK contract; separate actual POST evidence, readback-derived IDs,
 and anonymous web rendering. Update/hide/upload operations remain unverified.
+For Antigravity Remote Control, use [the owner-bound remote guide](references/agy-remote.md).
+Select every machine explicitly; verify the native owner and conversation membership
+before operations. Use `scripts/agy-remote.mjs` for journaled text conversations,
+follow-ups, cancellation and deletion; the common `agy-remote` registry admits reads
+only. Persisted history is a bounded multi-batch subscription snapshot and has no
+native completeness barrier. Google request signatures and device-bound cookies
+are separate: optional trusted-store CDP cookie maintenance depends on the signed-in
+browser; it is not automatic Google login or an engine-free complete workflow.
 For Google/Grok/ChatGPT/Flow gates, consult
 [the dated diagnostics](references/provider-login-diagnostics.md). Capture actual
 blocker screenshots when requested, record whether a password was submitted,

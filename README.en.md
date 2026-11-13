@@ -133,6 +133,14 @@ npm test   # full regression; also needs Python 3
 
 Third-party libraries installed through npm, and outside material whose source is recorded in [provenance](provenance/README.md), stay under their own licenses. Check the terms of service of each site you automate. See [NOTICE](NOTICE.md).
 
+## Antigravity Remote Control
+
+See [the remote-control guide](references/agy-remote.md) for exact remote selection,
+owner-bound projects/history, conversation creation, follow-up messages, waiting,
+renaming, cancellation and deletion. Business operations use independent HTTP.
+Initial sign-in and optional device-bound-cookie maintenance require the owner's
+signed-in browser. Common-registry reads and journaled native writers remain separate.
+
 ## Google Maps saved places
 
 See [the Google Maps guide](references/google-maps.md) for owner-bound private-list reads, autocomplete, exact-feature saves and note updates over independent HTTP. Bootstrap and new-list creation use the owner’s existing first-party browser; automatic expired-login renewal remains unverified.
