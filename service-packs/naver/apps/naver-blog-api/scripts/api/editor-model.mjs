@@ -7,14 +7,12 @@ import {
   tableRows,
 } from "../gates/publication-document.mjs";
 import {
+  blockParagraphs,
   cellTextAlign,
-  inlineRuns,
   mergeNodeStyle,
   nodeStyle,
-  paragraphAlign,
   paragraphStyle,
   quotationLayout,
-  styleFields,
   tableAlign,
 } from "../gates/editor-style-contract.mjs";
 
@@ -38,12 +36,12 @@ const paragraphs = (values) => values.map(paragraph);
 // Authored presentation for one text block: inline runs, a paragraph-wide
 // default style, paragraph alignment and the heading bold. Blocks that author
 // none of it compile to exactly the paragraph this adapter has always emitted.
-function styledParagraphs(block, { bold = false } = {}) {
-  const runs = inlineRuns(block), base = styleFields(block.style);
-  const style = paragraphStyle(paragraphAlign(block));
+function styledParagraphs(specs, { bold = false } = {}) {
   const force = bold ? { bold: true } : null;
-  if (!runs) return [paragraphOf([textNode(block.text, nodeStyle(mergeNodeStyle(base, force)))], style)];
-  return [paragraphOf(runs.map((run) => textNode(run.text, nodeStyle(mergeNodeStyle(base, run.style, force)))), style)];
+  return (Array.isArray(specs) ? specs : [specs]).map((spec) => paragraphOf(
+    (spec.runs || [{ text: spec.text, style: null }]).map((run) =>
+      textNode(run.text, nodeStyle(mergeNodeStyle(spec.style, run.style, force)))),
+    paragraphStyle(spec.align)));
 }
 const plain = (values) =>
   (values || [])
@@ -140,9 +138,9 @@ export function compileEditorModel(freshModel, document, { uploadedComponents = 
       // The disclosure panel owns its whole presentation; an authored style
       // there would be silently overwritten, so it fails closed instead.
       const noticePanel = block.type === 'notice' && block.presentation === 'panel';
-      if (noticePanel && (block.runs || block.style || block.align))
+      if (noticePanel && (block.runs || block.style || block.align || block.paragraphs))
         throw new Error("NOTICE_PRESENTATION_FIXED");
-      const value = styledParagraphs(block, { bold: block.type === 'heading' });
+      const value = styledParagraphs(blockParagraphs(block), { bold: block.type === 'heading' });
       if (noticePanel)
         value[0].nodes[0].style = { '@ctype':'nodeStyle', fontColor:'#666666', fontSizeCode:'fs13', italic:false, bold:false };
       if(noticePanel){
@@ -201,7 +199,7 @@ export function compileEditorModel(freshModel, document, { uploadedComponents = 
       const captionBlock = document.blocks[blockIndex + 1];
       if (captionBlock?.type === "paragraph" && captionBlock.presentation === "caption") {
         if (!text(captionBlock.text)) throw new Error("EMPTY_IMAGE_CAPTION");
-        image.caption = styledParagraphs(captionBlock);
+        image.caption = styledParagraphs(blockParagraphs(captionBlock));
         blockIndex++;
       } else image.caption = [];
       components.push(image);

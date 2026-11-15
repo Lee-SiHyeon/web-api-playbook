@@ -137,6 +137,29 @@ export function inlineRuns(block, code = 'INVALID_INLINE_RUNS') {
   return runs;
 }
 
+// One text block may carry several paragraphs (a summary box). `text` still
+// holds the whole text, so every gate that reads block.text is unchanged; the
+// paragraphs only decide how the text is split inside the component.
+export function blockParagraphs(block, code = 'INVALID_BLOCK_PARAGRAPHS') {
+  if (block?.paragraphs == null)
+    return [{ text: block?.text, runs: inlineRuns(block), style: styleFields(block?.style), align: paragraphAlign(block) }];
+  if (!Array.isArray(block.paragraphs) || !block.paragraphs.length) throw failure(code);
+  // Block-level style/alignment are the default for every paragraph in the box;
+  // a paragraph that sets its own value wins.
+  const blockStyle = styleFields(block.style), blockAlign = paragraphAlign(block);
+  const entries = block.paragraphs.map((entry) => {
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) throw failure(code);
+    for (const field of Object.keys(entry)) if (!['text', 'runs', 'style', 'align'].includes(field)) throw failure(code, { field });
+    return { text: entry.text,
+      runs: inlineRuns({ text: entry.text, runs: entry.runs }, 'INVALID_INLINE_RUNS'),
+      style: mergeNodeStyle(blockStyle, styleFields(entry.style, 'INVALID_INLINE_STYLE')),
+      align: paragraphAlign(entry) || blockAlign };
+  });
+  if (typeof block.text !== 'string' || text(block.text) !== text(entries.map((entry) => entry.text || '').join(' ')))
+    throw failure('BLOCK_PARAGRAPHS_TEXT_MISMATCH');
+  return entries;
+}
+
 // Native style objects. A style is omitted rather than written as null: the
 // app compiler rejects `style: null` at the same server boundary.
 export function nodeStyle(fields) {
@@ -198,14 +221,16 @@ function requestedParagraphs(document) {
   for (let index = 0; index < blocks.length; index++) {
     const block = blocks[index];
     if (!['paragraph', 'heading', 'quote'].includes(block?.type)) continue;
-    const align = paragraphAlign(block), runs = inlineRuns(block), style = styleFields(block.style);
-    if (block.presentation === 'caption' && ['image', 'video'].includes(blocks[index - 1]?.type)) {
-      if (!runs && !style && !align) continue;
-      requests.push(paragraphRecord(align, runs || [{ text: text(block.text), style }]));
-      continue;
+    const specs = blockParagraphs(block);
+    for (const spec of specs) {
+      if (block.presentation === 'caption' && ['image', 'video'].includes(blocks[index - 1]?.type)) {
+        if (!spec.runs && !spec.style && !spec.align) continue;
+        requests.push(paragraphRecord(spec.align, spec.runs || [{ text: text(spec.text), style: spec.style }]));
+        continue;
+      }
+      requests.push({ ...paragraphRecord(spec.align, spec.runs || [{ text: text(spec.text), style: spec.style }]),
+        quotation: block.type === 'quote' || (block.type === 'heading' && block.presentation === 'quotation') });
     }
-    requests.push({ ...paragraphRecord(align, runs || [{ text: text(block.text), style }]),
-      quotation: block.type === 'quote' || (block.type === 'heading' && block.presentation === 'quotation') });
   }
   return requests;
 }

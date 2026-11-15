@@ -160,6 +160,30 @@ test('a document that authors no presentation compiles to the same shapes as bef
   assert.deepEqual(presentationDifferences(document, model), []);
 });
 
+test('a quotation can hold several paragraphs while block.text keeps the whole text', () => {
+  const lines = ['한눈에 보기', '휘발유 1,784원·경유 1,773원, 12월 11일까지예요', '손실보전 예비비는 4조2,000억원이에요'];
+  const document = { title: '한눈에 보기 상자', blocks: [
+    { type: 'quote', text: lines.join(' '), layout: 'default', align: 'center',
+      style: { fontColor: '#777777', fontSizeCode: 'fs15' },
+      paragraphs: [
+        { text: lines[0], runs: [{ text: lines[0], bold: true }] },
+        { text: lines[1] },
+        { text: lines[2] },
+      ] },
+  ] };
+  const component = body(compileEditorModel(fresh(), document))[0];
+  assert.equal(component['@ctype'], 'quotation');
+  assert.equal(component.value.length, 3);
+  assert.deepEqual(paragraphs(component).map((paragraph) => paragraph.style),
+    lines.map(() => ({ '@ctype': 'paragraphStyle', align: 'center' })));
+  assert.deepEqual(runsOf(paragraphs(component)[0]), [{ text: lines[0],
+    style: { '@ctype': 'nodeStyle', fontColor: '#777777', fontSizeCode: 'fs15', bold: true } }]);
+  assert.deepEqual(inspectEditorModel(compileEditorModel(fresh(), document)).units, renderUnits(document));
+  assert.throws(() => compileEditorModel(fresh(), { title: '불일치 확인 상자', blocks: [
+    { type: 'quote', text: '다른 텍스트', paragraphs: [{ text: lines[0] }, { text: lines[1] }] },
+  ] }), { message: 'BLOCK_PARAGRAPHS_TEXT_MISMATCH' });
+});
+
 test('a style the editor model lost is reported, not treated as applied', async () => {
   const document = { title: '되읽기 확인', blocks: [
     { type: 'paragraph', text: '가운데 정렬', align: 'center',

@@ -53,6 +53,10 @@ Document block fields (`scripts/gates/editor-style-contract.mjs`):
 
 - `paragraph` / `heading` / `quote` / caption paragraph: `runs: [{text, bold, italic, underline, strikeThrough, fontColor, fontSizeCode}]`,
   `style: {bold, italic, underline, strikeThrough, fontColor, fontSizeCode}`, `align`.
+- `paragraph` / `heading` / `quote`: `paragraphs: [{text, runs?, style?, align?}]` — one
+  quotation or text component with several paragraphs (a summary box). `block.text`
+  must still hold the whole text; block-level `style`/`align` are the default for
+  every paragraph in the box.
 - `quote` and `heading` with `presentation:"quotation"`: `layout`.
 - `table`: `cellAlign` (every cell), `align` (the table component).
 - `image`: `ai` — accepted only when `rights.basis === "generated"`.
@@ -60,8 +64,10 @@ Document block fields (`scripts/gates/editor-style-contract.mjs`):
 Rules that keep every existing gate working:
 
 1. `runs` must reproduce `block.text` after whitespace normalization
-   (`INLINE_RUNS_TEXT_MISMATCH`), so `blockTextUnits`, paragraph counts,
-   markers, publication review and `documentUnits` are untouched.
+   (`INLINE_RUNS_TEXT_MISMATCH`), and `paragraphs` must reproduce it too
+   (`BLOCK_PARAGRAPHS_TEXT_MISMATCH`), so `blockTextUnits`, paragraph counts,
+   markers, publication review and `documentUnits` are untouched. `documentUnits`
+   yields one unit per paragraph, which is what the public readback reports.
 2. `align:"left"` is accepted and **not written** — the native default, as on
    the device path.
 3. A style is omitted, never written as `null`: the app-side boundary rejects
@@ -69,7 +75,7 @@ Rules that keep every existing gate working:
 4. Unknown fields, colors that are not `#rrggbb`, and sizes outside the list
    fail closed (`INVALID_INLINE_RUNS`, `INVALID_INLINE_STYLE`,
    `INVALID_PARAGRAPH_ALIGN`, `INVALID_TABLE_ALIGN`,
-   `INVALID_QUOTATION_LAYOUT`).
+   `INVALID_QUOTATION_LAYOUT`, `INVALID_BLOCK_PARAGRAPHS`).
 5. The disclosure panel keeps its fixed presentation; a style on it fails
    (`NOTICE_PRESENTATION_FIXED`) rather than being silently overwritten.
 
