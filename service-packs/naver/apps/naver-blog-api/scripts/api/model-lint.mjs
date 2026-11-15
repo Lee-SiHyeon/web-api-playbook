@@ -1,5 +1,6 @@
 import { fingerprint } from '../../../../packages/contracts/src/index.mjs';
 import { text, imageIdentity, renderUnits } from '../gates/publication-document.mjs';
+import { presentationDifferences } from '../gates/editor-style-contract.mjs';
 import { inspectEditorModel, editorPresentationFingerprint } from './editor-model.mjs';
 
 // Browser-free review of an HTTP-compiled editor model. It checks everything
@@ -26,6 +27,10 @@ export async function lintCompiledModel({ model, document, fetchImpl = globalThi
   const observed = inspectEditorModel(model);
   checks.titleMatches = observed.title === text(document.title);
   checks.unitsMatch = fingerprint(observed.units) === fingerprint(renderUnits(document));
+  // Only the presentation the author actually asked for is compared, so a
+  // theme default cannot look like a lost style.
+  const presentationGaps = presentationDifferences(document, model);
+  checks.presentationApplied = presentationGaps.length === 0;
 
   const blocks = document.blocks || [];
   // Walk blocks and components together; captions fold into their media component.
@@ -93,7 +98,7 @@ export async function lintCompiledModel({ model, document, fetchImpl = globalThi
   const failedChecks = Object.keys(checks).filter(k => checks[k] !== true);
   return {
     schemaVersion: 1, source: 'compiled_model_http', browserUsed: false, checkedAt: new Date().toISOString(),
-    passed: failedChecks.length === 0, checks, failedChecks,
+    passed: failedChecks.length === 0, checks, failedChecks, presentationGaps,
     layoutRisk: riskFactors.length ? 'needs_native_preview' : 'low', riskFactors, media,
     compiledPresentationFingerprint: editorPresentationFingerprint(model),
     renderUnitsFingerprint: fingerprint(renderUnits(document)),
