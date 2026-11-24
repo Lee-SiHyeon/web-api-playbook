@@ -35,6 +35,7 @@
 | SNS·크리에이터 | [X·Reddit](service-packs/social-x/README.md), [Threads](service-packs/threads/README.md), 인포크 프로필·카드 발행, YouTube Studio 업로드 |
 | AI 웹 클라이언트 | [Gemini](service-packs/gemini/README.md), [Grok](service-packs/grok/README.md), [ChatGPT](service-packs/chatgpt/README.md), [Flow](service-packs/google-flow/README.md), [Whisk](service-packs/whisk/README.md) |
 | AI 원격 작업 | [Antigravity Remote Control](references/agy-remote.md): 리모트별 대화 생성·후속 메시지·결과 조회·이름 변경·취소·삭제, HTTP readback |
+| 이미지·영상 워크플로 | [ComfyUI](references/comfyui.md): Comfy Hub 공개 워크플로 검색·쪽 넘김, 그래프를 받아 로컬 코어/유료 API/커스텀 노드 판정과 모델 라이선스 확인, 내 ComfyUI 서버 상태·노드 목록 |
 | 운영 | Gabia 도메인·DNS 조회 |
 | 채용·구직 | [공개 채용공고](references/jobs-public-apis.md): Greenhouse·Lever·Ashby·Remotive, Reed 키 기반 검색, TokyoDev 문서 파서, 공고 스냅샷·변경 비교 |
 | 프리랜서·외주 | [크몽·숨고·Upwork](references/freelance-public-apis.md): 공개 검색·상세 가격 유형·리뷰·제한 수집, 전문가 검색, 승인 토큰 기반 Upwork 읽기 |

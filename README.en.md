@@ -133,6 +133,10 @@ npm test   # full regression; also needs Python 3
 
 Third-party libraries installed through npm, and outside material whose source is recorded in [provenance](provenance/README.md), stay under their own licenses. Check the terms of service of each site you automate. See [NOTICE](NOTICE.md).
 
+## ComfyUI
+
+Read-only Comfy Hub workflow search (cursor paging), workflow-graph inspection that classifies every node as local core, paid API or custom pack and checks model licences on Hugging Face, plus status and node inventory of your own loopback ComfyUI server. See [references/comfyui.md](references/comfyui.md); CLI `node scripts/comfyui.mjs`.
+
 ## Antigravity Remote Control
 
 See [the remote-control guide](references/agy-remote.md) for exact remote selection,
