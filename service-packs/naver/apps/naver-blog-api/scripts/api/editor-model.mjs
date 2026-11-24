@@ -6,15 +6,43 @@ import {
   renderUnits,
   tableRows,
 } from "../gates/publication-document.mjs";
+import {
+  blockParagraphs,
+  cellTextAlign,
+  mergeNodeStyle,
+  nodeStyle,
+  paragraphStyle,
+  quotationLayout,
+  tableAlign,
+} from "../gates/editor-style-contract.mjs";
 
 const id = () => `SE-${randomUUID()}`;
 const httpsLink = value => {let u;try{u=new URL(value);}catch{throw Error('INVALID_CLICKABLE_LINK');}if(u.protocol!=='https:'||u.username||u.password)throw Error('INVALID_CLICKABLE_LINK');return value;};
-const paragraph = (value) => ({
+const textNode = (value, style) => ({
   id: id(),
-  nodes: [{ id: id(), value: String(value), "@ctype": "textNode" }],
+  value: String(value),
+  ...(style ? { style } : {}),
+  "@ctype": "textNode",
+});
+const paragraphOf = (nodes, style) => ({
+  id: id(),
+  ...(style ? { style } : {}),
+  nodes,
   "@ctype": "paragraph",
 });
+const paragraph = (value) => paragraphOf([textNode(value)], null);
 const paragraphs = (values) => values.map(paragraph);
+
+// Authored presentation for one text block: inline runs, a paragraph-wide
+// default style, paragraph alignment and the heading bold. Blocks that author
+// none of it compile to exactly the paragraph this adapter has always emitted.
+function styledParagraphs(specs, { bold = false } = {}) {
+  const force = bold ? { bold: true } : null;
+  return (Array.isArray(specs) ? specs : [specs]).map((spec) => paragraphOf(
+    (spec.runs || [{ text: spec.text, style: null }]).map((run) =>
+      textNode(run.text, nodeStyle(mergeNodeStyle(spec.style, run.style, force)))),
+    paragraphStyle(spec.align)));
+}
 const plain = (values) =>
   (values || [])
     .map((p) => {
@@ -33,6 +61,7 @@ export function editorPresentationFingerprint(model) {
     nodes:(p.nodes || []).map(n => ({value:n.value || '',style:n.style || null,link:n.link?.url || null}))}));
   return fingerprint(model.document.components.map(c => ({type:c['@ctype'],layout:c.layout,
     title:ps(c.title),value:ps(c.value),caption:ps(c.caption),src:c.src ? imageIdentity(c.src) : null,link:c.link || null,
+    ...(c['@ctype']==='image'?{ai:c.ai===true}:{}),
     ...(c['@ctype']==='video'?{vid:c.vid,thumbnail:c.thumbnail,mediaMeta:c.mediaMeta,playTime:c.playTime,width:c.width,height:c.height,ai:c.ai}:{}),
     ...(c['@ctype']==='table'?{width:c.width,borderInlineStyle:c.borderInlineStyle,rows:c.rows.map(r=>r.cells.map(cell=>({backgroundColor:cell.backgroundColor,width:cell.width,height:cell.height,borderInlineStyle:cell.borderInlineStyle,value:ps(cell.value)})))}:{})})));
 }
@@ -97,23 +126,21 @@ export function compileEditorModel(freshModel, document, { uploadedComponents = 
   for (let blockIndex = 0; blockIndex < document.blocks.length; blockIndex++) {
     const block = document.blocks[blockIndex];
     if(block.type==='table') {
-      const matrix=tableRows(block),count=block.columns.length;
-      components.push({id:id(),'@ctype':'table',layout:'default',width:100,columnCount:count,align:'left',borderStyleName:'thinLine',borderInlineStyle:'border-color: #d8dde5;',
+      const matrix=tableRows(block),count=block.columns.length,textAlign=cellTextAlign(block),align=tableAlign(block);
+      components.push({id:id(),'@ctype':'table',layout:'default',width:100,columnCount:count,align,borderStyleName:'thinLine',borderInlineStyle:'border-color: #d8dde5;',
         rows:matrix.map((row,r)=>({id:id(),'@ctype':'tableRow',cells:row.map((cell,c)=>{
           const value=paragraphs([cell]);
           value[0].nodes[0].style={'@ctype':'nodeStyle',fontSizeCode:'fs13',fontColor:'#222222',bold:r===0};
-          return {id:id(),'@ctype':'tableCell',colSpan:1,rowSpan:1,width:block.columnWidths?.[c]??100/count,height:42,backgroundColor:r===0?'#edf1f5':'#ffffff',borderInlineStyle:'border-color: #d8dde5;',textAlign:'left',value};
+          return {id:id(),'@ctype':'tableCell',colSpan:1,rowSpan:1,width:block.columnWidths?.[c]??100/count,height:42,backgroundColor:r===0?'#edf1f5':'#ffffff',borderInlineStyle:'border-color: #d8dde5;',textAlign,value};
         })}))});
     } else if (["notice", "heading", "paragraph", "quote"].includes(block.type)) {
       if (block.type === "paragraph" && block.presentation === "caption") throw new Error("ORPHAN_IMAGE_CAPTION");
-      const value = paragraphs([block.text]);
-      // nodeStyle.bold was observed in the protected owner model. Preserve the
-      // heading's visible hierarchy instead of flattening it to ordinary prose.
-      if (block.type === 'heading') value[0].nodes[0].style = { '@ctype':'nodeStyle', bold:true };
-      // Native table/tableRow/tableCell fields and percentage widths are
-      // observed in editor 1.78.1. A shaded one-cell table provides a full
-      // disclosure panel; inline highlighting is not a substitute.
+      // The disclosure panel owns its whole presentation; an authored style
+      // there would be silently overwritten, so it fails closed instead.
       const noticePanel = block.type === 'notice' && block.presentation === 'panel';
+      if (noticePanel && (block.runs || block.style || block.align || block.paragraphs))
+        throw new Error("NOTICE_PRESENTATION_FIXED");
+      const value = styledParagraphs(blockParagraphs(block), { bold: block.type === 'heading' });
       if (noticePanel)
         value[0].nodes[0].style = { '@ctype':'nodeStyle', fontColor:'#666666', fontSizeCode:'fs13', italic:false, bold:false };
       if(noticePanel){
@@ -121,11 +148,12 @@ export function compileEditorModel(freshModel, document, { uploadedComponents = 
           rows:[{id:id(),'@ctype':'tableRow',cells:[{id:id(),'@ctype':'tableCell',colSpan:1,rowSpan:1,width:100,height:70,backgroundColor:'#f2f2f2',borderInlineStyle:'border-color: #f2f2f2;',textAlign:'left',value}]}]});
         continue;
       }
+      const quotation = block.type === "quote" || block.type === 'heading' && block.presentation === 'quotation';
       components.push({
         id: id(),
-        layout: "default",
+        layout: quotation ? quotationLayout(block) : "default",
         value,
-        "@ctype": block.type === "quote" || block.type === 'heading' && block.presentation === 'quotation' ? "quotation" : "text",
+        "@ctype": quotation ? "quotation" : "text",
       });
     } else if (["list", "numbered"].includes(block.type)) {
       components.push({
@@ -162,10 +190,16 @@ export function compileEditorModel(freshModel, document, { uploadedComponents = 
       // serializes link:this.link. Captured from first-party SDK on 2026-09-21.
       const image=structuredClone(asset);
       image.link=block.href?httpsLink(block.href):null;
+      // The editor exposes `ai` (default false) as the generated-image mark.
+      // Only an image whose rights are recorded as generated may claim it.
+      if (block.ai === true) {
+        if (block.rights?.basis !== 'generated') throw new Error("AI_MARK_REQUIRES_GENERATED_RIGHTS");
+        image.ai = true;
+      }
       const captionBlock = document.blocks[blockIndex + 1];
       if (captionBlock?.type === "paragraph" && captionBlock.presentation === "caption") {
         if (!text(captionBlock.text)) throw new Error("EMPTY_IMAGE_CAPTION");
-        image.caption = paragraphs([captionBlock.text]);
+        image.caption = styledParagraphs(blockParagraphs(captionBlock));
         blockIndex++;
       } else image.caption = [];
       components.push(image);

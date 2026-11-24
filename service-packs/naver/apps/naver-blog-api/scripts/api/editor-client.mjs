@@ -4,6 +4,7 @@ import { fingerprint } from "../../../../packages/contracts/src/index.mjs";
 import { parsePublicDocument } from "./public-document.mjs";
 import { verifyAffiliateRedirect, AFFILIATE_ACCOUNTS } from '../gates/affiliate-link-gate.mjs';
 import { compileEditorModel, inspectEditorModel, editorPresentationFingerprint } from "./editor-model.mjs";
+import { presentationDifferences } from '../gates/editor-style-contract.mjs';
 import { uploadPng, verifiedUploadComponent } from "./media-upload.mjs";
 import { createSeedDocument, validateCreateEnvelope, createJournalKey } from './create-envelope.mjs';
 import { auditPost } from './post-audit.mjs';
@@ -532,6 +533,8 @@ export class NaverEditorClient {
       )
         throw new EditorApiError("DRAFT_READBACK_MISMATCH");
       await this.#journal.finish(key, "verified", { logNo: draftLogNo, accepted });
+      // Saving verifies text; a style the server drops is reported, not hidden.
+      const presentationGaps = presentationDifferences(document, readback.model);
       return {
         operation: "saveDraft",
         source: "independent_http",
@@ -539,6 +542,8 @@ export class NaverEditorClient {
         logNo: draftLogNo,
         accepted,
         readbackVerified: true,
+        presentationVerified: presentationGaps.length === 0,
+        presentationGaps,
       };
     } catch (e) {
       await this.#journal.finish(key, "submitted_unknown", {
@@ -557,12 +562,14 @@ export class NaverEditorClient {
     const observation = inspectEditorModel(current.model);
     const expected = { title: text(job.document.title), units: renderUnits(job.document) };
     const readbackVerified = fingerprint(observation) === fingerprint(expected);
+    const presentationGaps = presentationDifferences(job.document, current.model);
     if (readbackVerified && this.#journal) {
       const key = this.#journal.key('saveDraft', { blogId: this.#blogId, logNo: job.draftLogNo }, expected);
       await this.#journal.finish(key, 'verified', { logNo: job.draftLogNo, reconciled: true });
     }
     return { source: 'independent_http', operation: 'saveDraft', readOnly: true,
-      published: false, readbackVerified, observation };
+      published: false, readbackVerified, presentationVerified: presentationGaps.length === 0,
+      presentationGaps, observation };
   }
   #wire(model, population) {
     return {

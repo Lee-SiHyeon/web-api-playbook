@@ -35,13 +35,13 @@ export function documentUnits(document) {
   return (document?.blocks || [])
     .flatMap((block) => {
       if(block.type==='table')return tableRows(block).flatMap(row=>row.map(value=>({type:'text',value})));
-      if (["notice", "heading", "paragraph", "quote"].includes(block.type))
-        return [
-          {
-            type: block.type === "quote" || block.type === 'heading' && block.presentation === 'quotation' ? "quote" : "text",
-            value: text(block.text),
-          },
-        ];
+      if (["notice", "heading", "paragraph", "quote"].includes(block.type)) {
+        const type = block.type === "quote" || block.type === 'heading' && block.presentation === 'quotation' ? "quote" : "text";
+        // A block may carry several paragraphs (a summary box); each one is a
+        // separate unit, exactly as the public readback reports it.
+        if (Array.isArray(block.paragraphs)) return block.paragraphs.map((entry) => ({ type, value: text(entry?.text) }));
+        return [{ type, value: text(block.text) }];
+      }
       if (["list", "numbered"].includes(block.type))
         return (block.items || []).map((value, index) => ({
           type: "text",
